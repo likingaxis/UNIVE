@@ -206,6 +206,10 @@ restituisci(azione)
 
 Ogni agente, indipendentemente dalla sua architettura, può **migliorare nel tempo attraverso l’apprendimento**, diventando progressivamente più razionale e adattivo.
 
+
+
+
+
 ## DIVERSI TIPI DI AGENTE
 - studiare le funzioni degli agenti!
 - AGENTE BASATO SU TABELLA

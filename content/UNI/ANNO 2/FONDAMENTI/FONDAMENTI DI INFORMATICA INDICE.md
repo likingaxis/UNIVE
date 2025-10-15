@@ -1,4 +1,4 @@
-[sito appunti](http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=0&cdl=0&id=FO)
+[sito appunti](http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2024&cdl=0&id=FO)
 # [[FONDAMENTI LEZ.1]]
 # [[FONDAMENTI LEZ.2]]
 # [[FONDAMENTI LEZ.3]]
