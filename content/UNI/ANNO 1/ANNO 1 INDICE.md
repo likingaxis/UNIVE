@@ -1,24 +1,24 @@
-## Analisi
+## Analisi📈
 ecco qua:[[ANALISI 1 INDICE]]
 - riassunti❌
 - esercizi❌
-## Programmazione
+## Programmazione💻
 eccoci qua:[[Programmazione INDICE]]
 - riassunti ✅
 - esercizi ❌
-## Discreta 
+## Discreta 🔢
 eccoci qua:[[Discreta INDICE]]
 - riassunti❌
 - esercizi ❌
-## Logica e Reti Logiche
+## Logica e Reti Logiche💡
 eccolo qui:[[Logica INDICE]]
 - riassunti ✅
 - esercizi ❌
-## Architettura dei sistemi di elaborazione
+## Architettura dei sistemi di elaborazione⚙️
 eccolo qua:[[Architettura INDICE]]
 - riassunti ✅
 - esercizi ✅
-## Geometria 
+## Geometria 📐
 esercizi meccanici:[[GEOMETRIA INDICE]]
 - riassunti❌
 - esercizi ✅
