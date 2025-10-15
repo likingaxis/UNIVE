@@ -12,7 +12,11 @@
 #### [[LINGUAGGI LEZ.12]]
 #### [[LINGUAGGI LEZ.13]]
 #### [[LINGUAGGI LEZ.14]]
+
+[[Orale Java]]
 # LEZIONI PROLOG
 ### [[PROLOG LEZ.1]]
 ### [[PROLOG LEZ.2]]
 ### [[PROLOG LEZ.3]]
+
+[[PROLOG ORALE]]
