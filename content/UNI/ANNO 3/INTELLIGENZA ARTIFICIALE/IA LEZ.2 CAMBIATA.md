@@ -157,3 +157,254 @@ L’ambiente richiede la simulazione attraverso uno strumento software che si oc
 - aggiornare il proprio stato
 - attivare altri processi implicati dal cambiamento effettuato
 - valutare le prestazioni degli agenti
+#### Esempio di simulatore
+![[Pasted image 20251016140906.jpg]]
+
+## STRUTTURA DI UN AGENTE
+$$ AGENTE=ARCHITETTURA + PROGRAMMA$$
+### Funzione agente
+- citata in precedenza rappresenta l'implementazione pratica di quello che chiama un programma Agente
+- `Agent()`
+$$Agent:Percezioni \rightarrow Azioni$$ 
+##### Pseudo programma agente
+![[Pasted image 20251016141848.jpg]]
+
+# Diverse architetture di agenti
+
+## 🤖 Agente basato su tabella
+La scelta di una azione (per volta) corrisponde ad un accesso a una **tabella che associa un'azione ad ogni possibile sequenza di percezioni**.  
+> Tutti gli algoritmi che abbiamo visto si basano su questo.  
+
+In ambito IA è **molto difficile da costruire**, e soprattutto NON é autonomo.
+
+## Schema di agenti reattivi semplici
+
+![[Pasted image 20251016143808.jpg]]
+
+Partendo dall'ambiente, l'agente
+- riceve delle percezioni tramite i sensori
+	- capisce lo stato dell'ambiente
+- guarda nella sua tabella (percezioni -> azioni)
+	- esegue l'azione  
+
+
+## Programma agenti reattivi
+![[Pasted image 20251016144146.jpg]]
+
+>[!tip]- Esempio col Wumpus
+>![[Pasted image 20251016144405.jpg]]
+>IL WUMPUS GENERA Il puzzo mentre il buco genera il venticello
+>![[Pasted image 20251016144415.jpg]]
+
+
+# 🧠 Agenti basati sul modello
+Gli **agenti basati su modello** hanno una **memoria interna** che gli permette di rappresentare il mondo in cui si trovano.  
+A differenza di quelli reattivi semplici (che agiscono solo in base alla percezione immediata), questi **mantengono e aggiornano uno stato interno** che descrive _cosa credono che stia succedendo_ 
+
+## Struttura logica
+![[Pasted image 20251016144855.jpg]]
+
+L’agente riceve le **percezioni dai sensori** e aggiorna il proprio **stato interno** in base a:
+- la percezione attuale,
+- la conoscenza di come **il mondo evolve** nel tempo,
+- e di **come le proprie azioni** modificano l’ambiente.
+Con queste informazioni l’agente costruisce un modello di “**come il mondo è adesso**” (_what the world is like now_).  
+
+Su questo modello applica poi le **regole condizione–azione** per decidere **che cosa fare ora** (_what action I should do now_).
+
+Le azioni vengono infine inviate agli **attuatori**, che le eseguono nell’ambiente.
+
+## Codice
+
+![[Pasted image 20251016145402.jpg]]
+
+
+- l’agente **ricorda cosa è successo prima**,
+- **aggiorna il suo stato interno** dopo ogni azione,
+- **cerca la regola** corrispondente a quello stato
+- e **decide l’azione successiva** in base alla nuova conoscenza del mondo.
+
+
+---
+
+# 🎯 Agenti con obiettivo
+Gli **agenti basati su obiettivo** sono un’evoluzione degli agenti basati su modello.  
+Come loro, **mantengono uno stato interno** del mondo (memoria e conoscenza di come si evolve), 
+ma in più **hanno un obiettivo da raggiungere (goal)** che guida la scelta delle azioni.
+
+>[!tip] **NOTA BENE:**  Gli **obiettivi del task** (cioè quelli definiti dal progettista) e quelli **dell’agente** (cioè come l’agente li rappresenta internamente) possono non coincidere perfettamente, ma l’importante è che **l’agente li conosca e li interpreti correttamente**.
+>
+In generale, i _goals_ sono una **rappresentazione o approssimazione** dell’obiettivo reale da raggiungere.
+
+
+## Struttura logica
+![[Pasted image 20251016145830.jpg]]
+
+- **Percepiscono** l’ambiente tramite i sensori,  
+    aggiornano lo **stato interno** (cioè cosa credono che stia succedendo).
+- Usano il modello del mondo per **prevedere cosa succederebbe** se eseguissero una certa azione  
+    → _“What it will be like if I do action A”_.
+    
+- Confrontano il risultato previsto con il **goal**  
+    → scelgono l’azione che **avvicina di più** all’obiettivo.
+    
+- L’azione scelta viene inviata agli **attuatori** e quindi eseguita.
+
+## Caratteristiche principali
+- **Guidati da un obiettivo:** l’agente non si limita a reagire, ma agisce per _raggiungere_ qualcosa.  
+    → Esempio: “arrivare a destinazione”, “raggiungere la temperatura ideale”.
+    
+- **Pianificano** una sequenza di azioni per arrivare allo stato desiderato.  
+    → Non si fermano alla singola mossa, ma valutano più passi avanti.
+    
+- **Più flessibili** degli agenti reattivi, ma anche **meno efficienti**:  
+    richiedono più calcolo, tempo e memoria.
+
+
+---
+
+# ⚖️ Agenti con valutazioni di utilità
+Gli **agenti con valutazione di utilità** sono un’estensione degli agenti basati su obiettivo.  
+Anziché limitarsi a _raggiungere un goal_, valutano **quanto è “buono” o vantaggioso** ciascun possibile stato del mondo.
+
+## Obiettivi alternativi
+L’agente può avere **più obiettivi possibili** e deve scegliere verso quale muoversi.  
+→ serve una **funzione di utilità** per valutare quale stato finale offre il miglior compromesso.
+#### Funzione di utilità
+È una **funzione che assegna a ogni stato un valore numerico** → rappresenta **quanto l’agente è soddisfatto** in quello stato (“quanto sarò felice se arrivo lì”).
+$$U(s) = \text{grado di utilità dello stato }$$
+- **Più alto è il valore**, più quello stato è desiderabile.
+- Permette di **confrontare obiettivi diversi** e scegliere quello migliore.
+
+>[!tip]- Esempio  
+Un’auto autonoma deve decidere se andare per la strada più **breve ma trafficata**, o per quella **più lunga ma più sicura** → la funzione di utilità combina tempo, rischio, comfort e sceglie la soluzione _più vantaggiosa complessiva_.
+
+
+## Obiettivi con probabilità diverse
+La funzione di utilità considera anche la **probabilità di successo**:
+> un obiettivo molto buono ma difficilissimo può avere meno valore atteso di uno più facile da raggiungere.
+
+
+>[!lemma] Più il modello è ricco, **più l’utilità migliora**.  
+
+
+>[!tip] Bisogna distinguere tra:
+>  - **autovalutazione dell’agente**
+>  - **valutazione dell’ambiente**  
+  (non combaciano mai perfettamente)
+
+
+
+---
+
+# 📈 Agenti che apprendono
+Questi agenti sono in grado di **migliorare il proprio comportamento nel tempo**, grazie a un meccanismo di apprendimento interno.
+
+## Struttura logica
+![[Pasted image 20251016150117.jpg]]
+
+
+###### **Performance Element**
+- È **l’elemento esecutivo**, cioè il **programma agente**.
+- Interagisce direttamente con l’ambiente: riceve le percezioni dai sensori e compie azioni tramite gli attuatori.
+- Rappresenta **“ciò che l’agente sa fare”** in un dato momento.
+
+###### **Performance Standard**
+- Fornisce **informazioni esterne di riferimento**, cioè una misura delle prestazioni dell’agente.
+- Serve a capire **quanto bene** l’agente sta eseguendo il compito.
+    - Es: il sensore rileva che si sta avvicinando un muro.
+    - Se la previsione è errata (ho colpito il muro) → interviene il performance standard.
+###### **Critic**
+- Analizza i risultati e **interpreta il comportamento dell’agente**.
+- Fornisce **feedback** al modulo di apprendimento (positivo o negativo).
+    - Es: l’agente sbatte contro un muro → feedback negativo.
+- Serve per valutare quanto le azioni passate siano state efficaci.
+
+###### **Learning Element**
+- Riceve i feedback dal critic e **capisce cosa cambiare** nel comportamento dell’agente.
+- Produce **modifiche** al programma agente (performance element).
+- È la parte che **apprende dai propri errori o successi**.
+
+###### **Problem Generator**
+- Suggerisce **nuove situazioni da esplorare**.
+- Crea **problemi o scenari ipotetici** per migliorare l’apprendimento.
+- Genera nuovi dati o esperienze utili per aggiornare il modello interno.
+
+
+## 🔄 Meccanismo di apprendimento
+1. Il **performance element** agisce nell’ambiente reale.    
+2. I risultati vengono analizzati dal **critic** e confrontati con il **performance standard**.
+3. Gli errori o i successi vengono passati al **learning element**, che li usa per migliorare il comportamento.
+    - LAVORA IN UN AMBIENTE SIMULATO
+4. Il **problem generator** fornisce nuovi stimoli per continuare l’apprendimento.
+5. Il **learning element** aggiorna il **performance element**, che poi verrà riutilizzato nel mondo reale.
+
+
+---
+
+# 💻 Implicazioni computazionali
+
+## Tipi di rappresentazione
+Quando un agente deve ragionare o apprendere, ha bisogno di **una rappresentazione interna dello stato del mondo**.  
+Questa rappresentazione può essere più o meno complessa a seconda del tipo di informazione che deve gestire.
+
+##### 1. Rappresentazione atomica
+![[Pasted image 20251016150129.jpg]]
+
+- Ogni **stato** o **situazione** è considerato come un **blocco unico e indivisibile**.
+- L’agente conosce solo _che quello stato esiste_, ma **non ha informazioni sulla sua struttura interna**.
+- È il modello più semplice:
+	→ **stati finiti**, **transizioni semplici**, a volte con **probabilità associate** (se stocastico).
+
+
+##### 2. Rappresentazione fattorizzata
+![[Pasted image 20251016150349.jpg]]
+
+- Ogni stato è **descritto tramite un insieme di variabili (fattori)**.
+- Invece di trattare tutto come un unico blocco, l’agente **rappresenta le caratteristiche principali** dello stato (es. posizione, temperatura, velocità, ecc.).
+- Queste variabili possono essere viste come **dimensioni in uno spazio vettoriale**.
+
+
+##### 3. Rappresentazione strutturata
+![[Pasted image 20251016150400.jpg]]
+
+- È la più **ricca e complessa**.
+- Gli oggetti non sono solo elenchi di valori, ma **entità con relazioni tra loro** (come in un grafo o in un linguaggio logico).
+- Permette di descrivere **relazioni, gerarchie e dipendenze**.
+
+>[!tip]- Digressione su Semantic Embedding (Wordspace)
+>
+>![[Pasted image 20251016150450.jpg]]
+>![[Pasted image 20251016150513.jpg]]
+>
+>Queste slide mostrano un esempio pratico di **rappresentazione strutturata basata sul linguaggio**.
+>
+>- “Wordspace” è un **modello semantico** che rappresenta le **parole come vettori in uno spazio multidimensionale**, in base al contesto in cui compaiono.
+>    
+>- Parole con significati simili → **vettori vicini** nello spazio.
+>    
+>- Serve per **capire le relazioni semantiche** tra concetti in modo automatico (embedding linguistico).
+>
+>Esempio:
+>
+>- La parola “Parma” è collegata a “culatello”, “Langhirano”, “salame”…
+>    
+>- Questo perché compaiono spesso negli stessi contesti → l’algoritmo li percepisce come _semanticamente correlati_.
+>
+> In pratica, è un modo per tradurre la **rappresentazione strutturata** (relazioni concettuali) in **una forma numerica continua** usata nelle reti neurali.
+
+
+
+---
+
+## 🎯 Desiderata di un agente
+I sistemi di **Intelligenza Artificiale** (e gli agenti in particolare) sono **complessi da progettare e implementare**, perché devono operare in ambienti reali e dinamici.  
+Per questo la progettazione e il rilascio sono **costosi** e richiedono molta cura.
+
+#### ⚙️ Sfide principali
+- **Accuratezza:** prestazioni vicine a quelle umane o di esperti.
+- **Generalità:** capacità di adattarsi a **domini e compiti diversi** (portabilità).
+- **Sostenibilità:** deve poter **evolvere nel tempo** con costi contenuti di manutenzione.
+- **Modularità:** i componenti devono essere **riutilizzabili** e facilmente aggiornabili.
+- **Trasparenza:** deve essere chiaro **come e perché** l’agente prende certe decisioni.
+- **Scalabilità:** deve funzionare bene anche **con molti dati o utenti**.
