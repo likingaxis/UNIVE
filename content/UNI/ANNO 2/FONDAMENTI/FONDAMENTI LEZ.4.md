@@ -12,7 +12,7 @@ e si dimostra che <font color="#c0504d">“tutto quello che riusciamo a fare con
 Sia T una macchina a 2 nastri con testine indipendenti una sua quintupla è 
 $< q1 , (a,b), (c,d), q2 , (m1,m2) >$dove $m1$ è il movimento della testina sul primo nastro e $m2$ è il movimento della testina sul secondo nastro 
 Trasformiamo questa quintupla in una serie di quintuple che possono funzionare su più nastri con una macchina con testine solide
-la serie di quintuple ci riporta a voler shiftare prima un nastro poi l'altro della direzione desiderata per poi rimettere le testine in modo correndo usando un terzo nastro per il pinning
+la serie di quintuple ci riporta a voler shiftare prima un nastro poi l'altro della direzione desiderata per poi rimettere le testine in modo corretto usando un terzo nastro per il pinning
 
 ![[Pasted image 20250313174900.png]]
 In questo caso stiamo parlando di una simulazione a scatola aperta

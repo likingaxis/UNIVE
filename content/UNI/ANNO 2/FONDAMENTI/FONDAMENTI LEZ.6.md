@@ -1,7 +1,7 @@
 # Cosa è una macchina di Turing
 $T=<\Sigma,Q,q0,Qf,P>$
 caratterizzata principalmente dagli ultimi 3
-Al livello più teorico possiamo dire che è la descrizione di un procedimento per risolvere un problema descritto con le quintuple
+*Al livello più teorico possiamo dire che è la descrizione di un procedimento per risolvere un problema descritto con le quintuple*
 #### Definiamo una macchina T
 che ha come parola ovvero l'input dato i vari stati separati da un - e tutte le varie quintuple una di seguito all'altra
 questa parola in input definisce completamente una macchina T

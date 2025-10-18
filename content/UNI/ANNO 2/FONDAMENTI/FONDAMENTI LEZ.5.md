@@ -12,8 +12,8 @@ Quando non abbiamo una istruzione possono crearsi dei problemi e non basta ferma
 - creare una Funzione totale con tutte le istruzioni possibili
 - sono cavoli di chi usa l'input che non deve mettere roba sbagliata
 ##### Con i RICONOSCITORI
-Con i riconoscitori abbiamo lo stesso problema ma dobbiamo definire bene gli stati perchè lo stato di rigetto non può essere usato come stato di errore di computazione quindi in questo caso dobbiamo definire un errore in scrittura come E oppure rendiamo la procedura in modo che dia un unico output corretto e tutti gli altri sono l'opposto
-Anzichè scrivere pari o dispari qa qr scrivo pari oppure tutto il resto
+Con i riconoscitori abbiamo lo stesso problema ma dobbiamo definire bene gli stati perché lo stato di rigetto non può essere usato come stato di errore di computazione quindi in questo caso dobbiamo definire un errore in scrittura come E oppure rendiamo la procedura in modo che dia un unico output corretto e tutti gli altri sono l'opposto
+Anziché scrivere pari o dispari $q_a$ $q_r$ scrivo pari oppure tutto il resto
 ### E se P non corrisponde a una sola funzione?
 mettiamo caso di avere P che corrisponde a più funzioni avremo quindi definito una funzione di transizione di tipo multiplo
 ![[Pasted image 20250314163234.jpg]]
