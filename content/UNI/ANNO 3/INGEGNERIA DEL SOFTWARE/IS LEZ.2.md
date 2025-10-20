@@ -183,3 +183,4 @@ Il progesso di risk management si divide in 4 fasi differenti
 	- se non posso attuare nessuna delle due -> contingency plans
 	- 
 - risk monitoring
+
