@@ -113,3 +113,73 @@ invece lo stadio di dismissione non ho scritto cosa fa
 ### Programmazione Visuale
 - tipo drag and drop senza codici
 - posso creare prototipi velocemente
+- strumenti CASE (Computer Aided Software Engineering)
+##### Problemi della programmazione visuale
+- difficolta nel coordinare il team
+- non ci sono esplicite architetture software, perché il codice non é scritto alla base bensi é una cosa fatta dal generatore di codice
+- problemi di manutenzione dovuto al problema superiore
+#### Modello waterfall con Process Iteration
+- nasce dal fatto che i requisiti si evolvono sempre anche nel corso del processo di realizzazione del progetto
+- si divide in 2 approcci
+	- incremental development
+	- spiral development
+
+### Incremental development
+normalmente il prodotto software é sviluppato in fasi (quei quadratini)
+- con questo approccio invece si vuole avere un approccio incrementale
+- si sviluppa ogni fase in modo incrementale, e poi vengono unite
+	- ad ogni iterazione aggiungiamo un po di lavoro a ogni fase
+	- ogni volta si raggiunge una fase finale del prodotto ma non finita, che però sia funzionante
+	- ogni fase del prodotto ogni volta viene diciamo reso visibile in modo che siano funzionanti separatamente
+- questi incrementi si chiamano build
+FOTO MODELLO INCREMENTALE
+## VERSIONE CON O SENZA OVERALL ARCHITECTURE
+- breve spiegazione di cosa é
+- foto con overall architecture
+	- le prime 3 fasi non vengono partizionate
+	- la fase di design non é solo come abbiamo visto nel modello rapido bensi si divide in 2 fasi distinte
+	- architectural design -> si vuole creare la architettura software
+	- non ho capito le altre
+- senza overall architecture
+	- non ho questa divisione in 3 fasi
+	- maggiormente sostenibile per una gestione in parallelo
+	- più rischiosa, poiche non ho una architecture che ci consente di avere una coordinazione dei team
+- approccio incrementale più vantaggioso di quello waterfall!
+### Impatto sui costi del software in base al numero delle build
+- foto grafico
+- dobbiamo sommare i costi di integrazione e costo dei build
+	- costo di integrazione è...
+	- costo dei build è...
+- ottenendo il costo totale che presenta una regione di costo minimo
+### Confronto waterfall vs incrementale
+trasforma in tabella la foto della slide 29
+### Modello a spirale
+- si parte dal centro e si va verso l'esterno
+- dimensione radiale=costi
+- la dimensione angolare= tempo
+- ogni ciclo della spirale viene vista come una reiterazione
+- divisione in settori 
+- risk analysis porta anche a una chiusura di esso se non sostenibile
+- ogni ciclo= una nuova build possiamo dire
+- si applica al software interno perché cliente e organizzatore sono sotto la stessa ala
+- foto modello a spirale semplificato(linearizzato)
+- la rappresentazione originale ha un modello full spiral
+	- foto
+	- i prototipi non sono quelli rapidi ma sono usati per fare analisi dei rischi
+### Processo di Risk management
+- riguarda TUTTI I TIPI DI MODELLO E DI PROGETTO
+- per rischio si intende la probabilità che una qualche circostanza avversa possa intaccare il progetto
+##### Categoria di rischio
+tabella
+
+Il progesso di risk management si divide in 4 fasi differenti
+- risk identification
+- risk analysis
+- risk planning
+	- avoidance strategies
+		- probabilita che una occorrenza cresca
+	- minimisation strategies
+		- si punta a minimizzare una cosa già alta
+	- se non posso attuare nessuna delle due -> contingency plans
+	- 
+- risk monitoring
