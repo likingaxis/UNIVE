@@ -50,12 +50,201 @@ L'agente passa dalla simulazione all'azione nel **mondo reale**.
 
 - **Azione Sequenziale:** L'agente esegue le azioni specificate nella soluzione, una alla volta, fino a completare il piano e raggiungere l'obiettivo.
 
-
+### Formulazione dei problemi(quello della fase 2)
+- un problema può essere definito in modo formale mediante cinque componenti:
+	- 1. Stato iniziale, stato in cui si trova l'agente inizialmente
+	- 2. Azioni possibili in s:Azioni(s)
+		- Azioni(s) restituisce un insieme finito di azioni che può svolgere quell'agente 
+	- 3. insieme di stati obiettivo
+	- 4. Modello di transizione, descrive ciò che fa ogni azione
+		- Risultato:stato x azione $\rightarrow$ stato
+		- Risultato(s,a)=s' è detto stato successore
+		- es: Risultato(Arad,VersoZerind)=Zerind
+	- 5. Una funzione di costo per le azioni di un certo cammino
+		- $C(s,a,s')$ sempre positivo
+- una soluzione è un cammino che porta dallo stato iniziale a uno stato obiettivo
+- una soluzione ottima è quella con C minore tra tutte
+	- Lo spazio degli stati, ovvero un insieme con tutti i possibili stati dell'ambiente è un grafo
+- formulare un problema tipo raggiungere una certa città rappresenta un *modello*, una descrizione matematica astratta
+	- il processo di rimozione dei dettagli da una rappresentazione si dice *astrazione* 
+	- una astrazione si dice valida se prendendo ogni soluzione astratta possiamo espanderla in una soluzione del mondo piu dettagliato 
+		- molto utile per semplificare un problema
 ### Algoritmi di ricerca
-### Ricerca della soluzione
-- un piano rappresenta il risalire per ricostruire la soluzione svolta
-### I nodi dell'albero di ricerca
-- g(n) costo del passato
-### Struttura dati per la frontiera
-### Diversi tipi di strategie
+- gli algoritmi di ricerca prendono in input un problema e restituiscono un cammino soluzione
+- Misura delle prestazioni
+	- Trovare una soluzione ha un costo
+	- Costo totale= costo della ricerca+costo del cammino soluzione
+### Esempio
+![[Pasted image 20251021123557.jpg]]
+![[Pasted image 20251021123607.jpg]]
+
+
+## 🧩 Problemi Esemplificativi: Standardizzati vs. Reali  
+
+​La distinzione tra queste due categorie di problemi è fondamentale per illustrare come i principi di risoluzione vengano prima testati in ambienti controllati (standardizzati) e poi applicati a contesti complessi (reali).
+### 1. Problemi esemplificativi
+​Questi problemi sono astratti, semplici da definire e vengono utilizzati per illustrare o mettere alla prova diversi metodi di risoluzione.
+![[Pasted image 20251021125057.jpg]]
+![[Pasted image 20251021125109.jpg]]
+​
+- Scopo: Mettere alla prova algoritmi di ricerca e ottimizzazione di base.  
+- Stati: Uno stato indica la posizione dell'agente e la presenza di sporco in ogni cella.  
+	- La dimensione dello spazio degli stati è limitata e calcolabile: $\text{n} \times 2^\text{n}$ stati (es. 8 stati per 2 celle).  
+- Stato Iniziale: Qualsiasi stato può essere designato come iniziale.  
+- Azioni: Sinistra, Destra, e Aspira (nel mondo a due celle).  
+- Modello di Transizione: L'azione Aspira rimuove lo sporco dalla cella
+	- lo Spostamento muove l'agente a meno che non incontri un muro.  
+- Stati Obiettivo: Qualsiasi stato in cui ogni cella è pulita.  
+- Costo di Azione: Costo uniforme (ogni azione costa 1).  
+- Spazio degli Stati: Il grafo è relativamente piccolo e gestibile (es. un grafo con 8 nodi).
+## Altri esempi
+Dai frammenti di immagine che hai caricato, posso analizzare e spiegare la formulazione di due problemi classici utilizzati per illustrare le tecniche di ricerca nello spazio degli stati: il Puzzle dell'Otto e il problema delle Otto Regine.
+#### 🧩 1. Puzzle dell'Otto: Formulazione Standard
+![[Pasted image 20251021132649.jpg]]
+
+Il Puzzle dell'Otto è un classico problema standardizzato utilizzato per testare algoritmi di ricerca . È un esempio di problema con costo di cammino non nullo.
+ * Stati: Tutte le possibili configurazioni della scacchiera $3 \times 3$  con i numeri da 1 a 8 e la casella vuota (lo spazio).
+ * Stato Iniziale: Una configurazione specifica da cui si inizia.
+ * Obiettivo: Una configurazione specifica (spesso i numeri in ordine, con lo spazio in basso a destra).
+ * Goal-Test: Verificare se lo stato corrente corrisponde allo stato obiettivo.
+ * Azioni: Le mosse della casella bianca (vuota): 
+ * su $(\uparrow)$, 
+ * giù $(\downarrow)$, 
+ * a destra $(\rightarrow)$, 
+ * a sinistra $(\leftarrow)$.
+ * Costo Cammino: Ogni passo costa 1 (costo uniforme).
+ * Spazio degli Stati: È un grafo in cui si possono verificare cicli.
+#### 👑 2. Il Problema delle Otto Regine: 
+![[Pasted image 20251021132907.jpg]]
+
+- Formulazioni
+	- L'obiettivo è collocare 8 regine su una scacchiera $8 \times$
+	- 8 in modo tale che nessuna regina sia attaccata (ovvero, nessuna è sulla stessa riga, colonna o diagonale di un'altra).
+- Questo problema viene spesso utilizzato per confrontare diverse strategie di formulazione e l'impatto della formulazione sull'efficienza della ricerca.
+- Formulazione Incrementale 1 (La Meno Efficiente)
+Questa è la formulazione più semplice, ma ha un enorme spazio di stati da esplorare.
+ * Stati: Scacchiere con un numero di regine compreso tra 0 e 8.
+ * Goal-Test: Ci sono 8 regine sulla scacchiera e nessuna è sotto scacco.
+ * Azioni: Aggiungi una regina in una qualsiasi delle 64 caselle.
+ * Costo Cammino: Zero (Il perché? è perché l'obiettivo è solo raggiungere uno stato finale valido, non il numero di mosse necessarie. Il costo è irrilevante/nullo in questo tipo di problema di "soddisfacimento di vincoli").
+ * Spazio di Ricerca: Il numero di sequenze da considerare è altissimo, circa 1$.8 \times 10^{14} (64 \times 63 \times \dots \times 57$ posizionamenti distinti).
+Formulazione Incrementale 2 (Migliorata)
+Questa formulazione riduce drasticamente lo spazio di ricerca introducendo un vincolo implicito nelle azioni.
+ * Stati: Scacchiere con un numero di regine compreso tra 0 e 8, con l'aggiunta di un vincolo implicito: nessuna minacciata (se questo vincolo viene applicato durante la ricerca).
+ * Goal-Test: Ci sono 8 regine sulla scacchiera e nessuna è minacciata.
+ * Azioni: Aggiungi una regina nella colonna vuota più a destra in modo che non sia sotto scacco con le regine già presenti.
+ * Costo Cammino: Zero.
+ * Spazio di Ricerca: L'uso del vincolo riduce le sequenze da considerare a solo 2057, rendendo il problema gestibile con algoritmi di backtracking.
+Formulazione a Stato Completo (Completa)
+Questa formulazione non "aggiunge" regine, ma parte da una configurazione completa e cerca di migliorarla. È spesso usata con algoritmi di ricerca locale (come Hill-Climbing).
+ * Stati: Scacchiere che hanno 8 regine, una per colonna.
+ * Goal-Test: Ci sono 8 regine sulla scacchiera e nessuna è minacciata.
+ * Azioni: Sposta una regina nella sua colonna in un'altra riga, se minacciata.
+ * Costo Cammino: Zero (il costo è focalizzato sul miglioramento della qualità dello stato, non sul conteggio dei passi).
+ * Logica: L'agente parte da una configurazione qualsiasi (spesso casuale) e cerca di ridurre il numero di attacchi reciproci ad ogni mossa, fino a raggiungere lo stato obiettivo.
+#### Problemi del Mondo Reale (Real-World Problems)  
+ Questi problemi hanno soluzioni effettivamente utili alle persone, ma la loro formulazione è specifica, complessa e non standardizzata, catturando la ricchezza di dettagli dell'ambiente.  
+- Esempio: Il Problema di Ricerca dell'Itinerario Aereo ✈️
+### Dimostrazione di teoremi, il problema
+- si vuole rappresentare un problema dove si vogliono dimostrare i teoremi
+- Dato un insieme di formule logiche (le premesse 
+- Dalle premesse (formule logiche):
+	- Si vuole dimostrare la proposizione p.
+- La Regola di Inferenza
+- Nel calcolo proposizionale, per dimostrare nuovi teoremi a partire dalle premesse, è sufficiente utilizzare un'unica regola fondamentale, il Modus Ponens (MP)
+![[Pasted image 20251021134751.jpg]]
+
+🔍 Formulazione come Problema di Ricerca
+Per far sì che un agente risolva il problema, lo si modella in termini di stati, obiettivo e operatori:
+ * Stati:
+   * Sono definiti come insiemi di formule proposizionali. Ogni stato rappresenta la collezione di proposizioni che sono state dimostrate come vere fino a quel punto della ricerca.
+ * Stato Iniziale:
+   * È l'insieme iniziale di formule proposizionali fornite, ovvero le premesse.
+   * Esempio: Lo stato iniziale è $S_{iniziale} = \{s, t, q \Rightarrow p, r \Rightarrow p, v \Rightarrow q, t \Rightarrow r, s \Rightarrow v\}$.
+ * Stato Obiettivo:
+   * È un qualsiasi stato (insieme di formule) che contiene il teorema da dimostrare.
+   * Esempio: Se si vuole dimostrare p, lo stato obiettivo è un insieme $S_{obiettivo}$ tale che $p \in S_{obiettivo}$ 
+ * Operatori (Azioni):
+   * Sono l'applicazione della regola del Modus Ponens (MP).
+   * Un operatore prende due formule (es.$A \ e \ A \Rightarrow B$) da uno stato e aggiunge la formula risultante (B) a quel set, creando un nuovo stato.
+###### Logica della Ricerca
+- L'agente inizia con lo stato iniziale (le premesse) e applica ripetutamente l'operatore Modus Ponens in tutte le combinazioni possibili fino a quando non genera uno stato che contiene la proposizione obiettivo p.
+- La soluzione è la sequenza di applicazioni del Modus Ponens che parte dalle premesse e conduce a p.
+#### Spazio degli stati
+![[Pasted image 20251021135104.jpg]]
+
+#### I problemi applicativi sono quelli reali
+
+#### Ricerca della soluzione
+
+![[Pasted image 20251021140538.jpg]]
+#### Ricerca ad albero
+- prima voglio specificare che:
+	- frontiera: lista dei nodi in attesa di essere espansi(foglie dell'albero di ricerca)
+	- implementata come una coda con operazioni
+		- vuota?(coda)
+		- POP(coda) estrae il primo elemento
+		- inserisci (elemento, coda)
+	- l'albero di ricerca è composto da nodi:
+		- un nodo n composto da:
+			- uno stato n.stato
+			- un padre n.padre
+			- una azione per generarlo n.azione
+		- costo del cammino dal nodo iniziale al nodo n.costo-cammino indicato come $g(n)$ 
+#### Pseudocodice
+![[Pasted image 20251021140935.jpg]]
+
+### Ricerca in profondità
+![[Pasted image 20251021141804.jpg]]
+
+##### Diversi tipi di strategie
+- FIFO
+- LIFO
+- Coda con priorità
+	- viene estratto quello con priorità più alta in base a una funzione di ordinamento
+#### Strategie non informate che conosciamo
+- Ricerca in ampiezza
+• Ricerca di costo uniforme
+• Ricerca in profondità
+• Ricerca in profondità limitata
+• Ricerca con approfondimento iterativo
+##### Strategie informate
+• Strategie di Ricerca Euristica (o informata)
+- fanno uso di informazioni riguardo alla distanza
+stimata dalla soluzione
 ### Valutazione di una strategia
+i quattro criteri fondamentali utilizzati per valutare l'efficacia e l'efficienza di qualsiasi Algoritmo di Ricerca (AdR) nello spazio degli stati
+• Completezza: 
+-  se la soluzione esiste l’Algoritmo di Ricerca riesce 
+a trovarla
+• Ottimalità (ammissibilità): 
+-  l’AdR trova la soluzione migliore, quella cioè con 
+costo minore
+• Complessità nel tempo: 
+-  tempo richiesto affinché l’AdR trovi la soluzione
+• Complessità nello spazio: 
+-  quanta memoria viene richiesta dal completamento di una elaborazione completa dell’AdR
+##### Ricerca in ampiezza
+![[Pasted image 20251021142331.jpg]]
+##### Pseudo
+![[Pasted image 20251021142416.jpg]]
+##### Complessità e analisi
+- b= numero max di successori detto anche fattore di ramificazione
+- d= profondità del nodo obiettivo più superficiale
+- m= lunghezza massima dei cammini nello spazio di ricerca
+se gli operatori hanno tutti costo k ovvero $g(n)=k*depth(n)$
+- complessità temporale
+	- $T(b,d)=b+b^2+...+b^d \ \rightarrow O(b^d)$
+### Una miglioria: Ricerca di costo uniforme
+- tipo dijkstra
+![[Pasted image 20251021142933.jpg]]
+
+#### PSEUDOCODICE
+
+![[Pasted image 20251021143052.jpg]]
+
+#### Analisi dei costi e ottimalità
+- se il costo degli archi è $\epsilon>0$ l'algoritmo è ottimo e completo  
+- $C^*$ è il costo della soluzione ottima
+![[Pasted image 20251021143529.jpg]]
+
