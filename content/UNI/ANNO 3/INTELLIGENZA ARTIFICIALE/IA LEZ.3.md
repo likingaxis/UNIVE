@@ -66,9 +66,10 @@ L'agente passa dalla simulazione all'azione nel **mondo reale**.
 - una soluzione ottima è quella con C minore tra tutte
 	- Lo spazio degli stati, ovvero un insieme con tutti i possibili stati dell'ambiente è un grafo
 - formulare un problema tipo raggiungere una certa città rappresenta un *modello*, una descrizione matematica astratta
-	- il processo di rimozione dei dettagli da una rappresentazione si dice *astrazione* 
-	- una astrazione si dice valida se prendendo ogni soluzione astratta possiamo espanderla in una soluzione del mondo piu dettagliato 
+	- il processo di rimozione dei dettagli da una rappresentazione si dice *astrazione*
+	- **Astrazione Valida:** Si può espandere ogni soluzione astratta in una soluzione nel mondo più dettagliato.
 		- molto utile per semplificare un problema
+	- **Astrazione Utile:** Eseguire ogni azione nella soluzione è più facile che nel problema originale.
 ### Algoritmi di ricerca
 - gli algoritmi di ricerca prendono in input un problema e restituiscono un cammino soluzione
 - Misura delle prestazioni
@@ -194,7 +195,7 @@ Per far sì che un agente risolva il problema, lo si modella in termini di stati
 #### Pseudocodice
 ![[Pasted image 20251021140935.jpg]]
 
-### Ricerca in profondità
+### Ricerca X 
 ![[Pasted image 20251021141804.jpg]]
 
 ##### Diversi tipi di strategie
@@ -215,11 +216,9 @@ stimata dalla soluzione
 ### Valutazione di una strategia
 i quattro criteri fondamentali utilizzati per valutare l'efficacia e l'efficienza di qualsiasi Algoritmo di Ricerca (AdR) nello spazio degli stati
 • Completezza: 
--  se la soluzione esiste l’Algoritmo di Ricerca riesce 
-a trovarla
+-  se la soluzione esiste l’Algoritmo di Ricerca riesce a trovarla
 • Ottimalità (ammissibilità): 
--  l’AdR trova la soluzione migliore, quella cioè con 
-costo minore
+-  l’AdR trova la soluzione migliore, quella cioè con costo minore
 • Complessità nel tempo: 
 -  tempo richiesto affinché l’AdR trovi la soluzione
 • Complessità nello spazio: 
@@ -247,4 +246,86 @@ se gli operatori hanno tutti costo k ovvero $g(n)=k*depth(n)$
 - se il costo degli archi è $\epsilon>0$ l'algoritmo è ottimo e completo  
 - $C^*$ è il costo della soluzione ottima
 ![[Pasted image 20251021143529.jpg]]
+
+Aggiungendo $1$, si tiene conto del fatto che si sta contando il **numero totale di livelli** (o passi) espansi, **compreso il livello zero** (la radice stessa).
+- L'esponente $\left(1 + \lfloor C^*/\epsilon \rfloor\right)$ può essere interpretato come la **profondità massima** dell'albero di ricerca che deve essere esplorato per garantire che il nodo obiettivo con costo $C^*$ venga trovato per primo, assicurando l'**ottimalità**.
+### Ricerca in profondità
+![[Pasted image 20251021151954.png]]
+
+#### Analisi costi
+
+• Se m distanza massima della soluzione nello spazio di ricerca 
+• b fattore di diramazione 
+	• Allora la complessità temporale è: $O(b^{m+1})$
+
+profondità usa meno memoria di ampiezza
+
+
+### Ricerca in profondità limitata
+La Ricerca in Profondità Limitata è una strategia di ricerca non informata che esegue la ricerca in profondità fino a un livello massimo predefinito, chiamato **limite di profondità ($\ell$)**.
+- **Principio Operativo:** La ricerca procede in profondità, espandendo il nodo più recente, ma si ferma non appena si raggiunge il livello $\ell$.
+- **Limite $\ell$:** Questo valore predefinito agisce come un "muro" o un vincolo; i nodi al livello $\ell$ non vengono espansi, evitando così che la ricerca si perda indefinitamente in rami profondi o cicli.
+- **Esempio di Utilizzo:** È utile per problemi in cui si conosce un **limite superiore** per la profondità della soluzione (es. in un problema di _Route-finding_ tra $N$ città, la soluzione più lunga non può superare $\text{N}-1$ mosse).
+• Complessità tempo: $O(b^d)$
+- Spazio: $O(b*d)$
+![[Pasted image 20251021152344.png]]
+![[Pasted image 20251021152421.png]]
+
+### Direzione di una ricerca
+da quale punto dello spazio degli stati si inizia l'esplorazione: 
+- ricerca in avanti o guidata dai dati: si esplora lo spazio di ricerca dallo stato iniziale allo stato obiettivo
+-  ricerca all’indietro o guidata dall’obiettivo: si esplora lo spazio di ricerca a partire da uno stato goal e riconducendosi a sotto-goal fino a trovare uno stato iniziale
+#### # 🎯 Quando Scegliere l'una o l'altra Direzione
+
+La strategia ottimale è solitamente quella che mantiene il **fattore di diramazione minore** (cioè, l'esplorazione del grafo più stretta e focalizzata).
+###### Indietro
+Si preferisce la ricerca *all'indietro* quando la **diramazione dall'obiettivo è minore** o quando l'obiettivo è ben definito.
+
+- **Obiettivo Definito:** L'obiettivo è chiaro e circoscritto, permettendo di formulare una **serie limitata di ipotesi** su come arrivarci (es. nella **dimostrazione di teoremi**).
+- **Dati Ignorati o Non Noti:** I dati di partenza (stato iniziale) non sono noti o la loro acquisizione può essere **guidata dall'obiettivo** (si cercano solo i dati che sono rilevanti per il _goal_).
+###### avanti
+Si preferisce la ricerca *in avanti* quando la **diramazione dallo stato iniziale è minore** o quando l'obiettivo è ampio.
+
+- **Obiettivi Multipli:** Ci sono **molti obiettivi possibili** da raggiungere o l'obiettivo è meno specifico (tipico nei problemi di _design_ o _planning_).
+- **Dati come Punto di Partenza:** Si ha una **serie di dati ben definiti da cui partire** (lo stato iniziale) e l'esplorazione è necessaria per capire dove portano quei dati (es. una _funzione costo_ da minimizzare).
+
+##### Ricerca bidirezionale
+Si procede nelle due direzioni fino ad incontrarsi
+![[Pasted image 20251021154403.png]]
+- Complessità tempo: $O(b^ {d/2})$ (test intersezione in tempo costante, es. hash table) 
+- Complessità spazio: $O(b^ {d/2})$ (almeno tutti i nodi in una direzione in memoria, 
+
+es. usando BF) NOTA: non sempre applicabile, es. predecessori non definiti, troppi stati obiettivo …
+
+#### TUTTE LE STRATEGIE A CONFRONTO
+![[Pasted image 20251021154529.png]]
+
+### Cosa comporta dei cicli in generale?
+- Avere un grafo con dei cicli
+![[Pasted image 20251021154647.png]]
+
+- Su spazi di stati a grafo si generano più volte gli stessi nodi nella ricerca, anche in assenza di cicli.
+![[Pasted image 20251021154713.png]]
+
+- pure nelle griglie
+![[Pasted image 20251021154739.png]]
+
+
+#### Soluzione:
+• Ricordare gli stati già visitati occupa spazio ma ci consente di evitare di visitarli di nuovo 
+• Gli algoritmi che dimenticano la propria storia sono destinati a ripeterla!
+##### Tre soluzioni pratiche
+![[Pasted image 20251021154940.png]]
+
+##### Esempio di soluzione con i grafi
+![[Pasted image 20251021155035.png]]
+
+### Fix della ricerca-grafo in ampiezza
+![[Pasted image 20251021155104.png]]
+### Fix della ricerca-grafo con costo uniforme UC
+![[Pasted image 20251021155139.png]]
+
+## Ripasso da sapere assolutamente
+![[Pasted image 20251021155242.png]]
+![[Pasted image 20251021155252.png]]
 
