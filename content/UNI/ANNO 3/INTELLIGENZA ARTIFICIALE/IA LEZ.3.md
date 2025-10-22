@@ -234,7 +234,7 @@ i quattro criteri fondamentali utilizzati per valutare l'efficacia e l'efficienz
 se gli operatori hanno tutti costo k ovvero $g(n)=k*depth(n)$
 - complessità temporale
 	- $T(b,d)=b+b^2+...+b^d \ \rightarrow O(b^d)$
-### Una miglioria: Ricerca di costo uniforme
+### Una miglioria: Ricerca di costo uniforme (UC) oppure Best-First
 - tipo dijkstra
 ![[Pasted image 20251021142933.jpg]]
 
