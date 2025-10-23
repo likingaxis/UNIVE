@@ -172,7 +172,7 @@ trasforma in tabella la foto della slide 29
 ##### Categoria di rischio
 tabella
 
-Il progesso di risk management si divide in 4 fasi differenti
+Il processo di risk management si divide in 4 fasi differenti
 - risk identification
 - risk analysis
 - risk planning
@@ -183,4 +183,59 @@ Il progesso di risk management si divide in 4 fasi differenti
 	- se non posso attuare nessuna delle due -> contingency plans
 	- 
 - risk monitoring
+	- avviene a intervalli regolari
+	- SAL(Riunioni dove ci si aggiorna sullo stato dei lavori)
+		- Stato di avanzamento dei lavori
+### Lista con altri modelli
+#### Modello object-oriented(a fontana)
+- ogni fase é un cerchio
+	- possiamo notare che tra le fasi è presente un overlap
+	- paradigma object-oriented
+	- solo una fase ha un diametro differente
+		- quello di Maintenance
+			- ha un effort inferiore poiché si vuole evidenziare il fatto che se seguo questo paradigma, dovrò fare meno maintenance
+#### Modello di Ingegneria concorrente
+- ha come obiettivo quello di ridurre tempi e costi di sviluppo
+- si applica a team largamente distribuiti, favoriva un approccio concorrente
+- fasi di sviluppo coesistevano, anziché essere eseguite in sequenza
 
+#### Modello basato su metodi formali
+- si usa soprattutto con un software critico
+- si chiamano formali
+	- la specifica non usa linguaggi informali bensì linguaggi formali basati su linguaggi matematici
+- Es:
+	- cleanroom software engineering
+		- software che cerca di ridurre a zero eventuali difetti
+		- 5 step
+			- modelli a stati finiti
+			- sviluppo incrementale del prodotto secondo la priorità accordata assieme al cliente
+			- codifica
+			- verificato staticamente
+			- testing statistico
+				- x stimare affidabilità del prodotto
+### Modello Microsoft
+- approccio iterativo, incrementale e concorrente
+- approccio dal nome synchronize-and-stabilize
+	- sincronizzazione quotidiana produzione di una daily build
+	- stabilizzazione periodica del prodotto in incrementi(milestone)
+		- successivi durante l'avanzamento del progetto
+#### 3 fasi di sviluppo
+- Planning phase
+	- 
+- Development phase
+	- 
+- Stabilization phase
+### Strategie e principi
+
+
+##### Esempio di metriche di collezione
+- resolved = identificato
+- fixed = risolto
+
+#### 3 sottoprogetti milestone
+- buffer time
+	- tempo a disposizione per sviluppare il prodotto in più a quello già definito
+- UI FREEZE
+	-  una volta testata una interfaccia essa non si modifica più
+
+#### Tabella waterfall vs synch-and-stabilize
