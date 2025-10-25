@@ -1,4 +1,4 @@
-
++
 ### Introduzione al labirinto​
 - Una principessa è stata rinchiusa e legata in una grotta insieme ad un drago che le fa da guardia.​
     
