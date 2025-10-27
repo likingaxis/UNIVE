@@ -83,7 +83,7 @@ Sostanzialmente posso sempre modificare l'input per facilitare le cose senza far
 se ho una macchina che vuole vedere Palindromia per 1 e 2 posso sfruttare quella di ab semplicemente mettendo che una volta ricevuto l'input ab esso viene modificato in 12 direttamente sul nastro
 ![[Pasted image 20250324193309.png]]
 
-## RIDUZIONI MANY-to-ONE
+## RIDUZIONI MANY-to-ONE(Da sapere a memoria)
 Abbiamo progettato una funzione $f : \{1,2\}^* → \{a,b\}^*$ tale che
 ### 1) **f è totale e calcolabile** – ossia:
 
