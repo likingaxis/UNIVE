@@ -51,7 +51,7 @@ end;
 - `return`
 
 ### Vogliamo dimostrare che questo modello di calcolo è Turing equivalente
-In particolare, viene mostriamo come “trasformare” un programma in PascalMinimo in una macchina di Turing di tipo trasduttore
+In particolare, viene mostrato come “trasformare” un programma in PascalMinimo in una macchina di Turing di tipo trasduttore
 
 abbiamo una macchina $P \ in \ PM \rightarrow T \in \tau$
 andiamo a trasformare le istruzioni che non ci piacciono per far si che ci piacciano sulla Macchina di Turing quindi andiamo a:
