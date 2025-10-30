@@ -164,15 +164,434 @@ Dato che l'Hill Climbing di base è inaffidabile, sono state sviluppate diverse 
 #### 3. Hill Climbing Casuale con Prima Scelta 👆
 - **L'idea**: Combina la casualità con l'efficienza. Invece di valutare tutti i vicini, li genera in ordine casuale e si sposta sul **primo** che trova che sia migliore dello stato attuale.
 	- **Efficacia**: È molto utile quando il numero di successori è enorme. Invece di perdere tempo a calcolare il valore di tutti, si "accontenta" del primo miglioramento che trova, accelerando il processo.
-### ✨ La Soluzione Definitiva: Hill Climbing con Riavvio Casuale (Random Restart)
-Questa è la strategia più potente ed efficace per risolvere i problemi dell'Hill Climbing.
-- **L'idea**: È brutalmente semplice. Se l'algoritmo Hill Climbing si blocca in un massimo locale, **non arrenderti**. **Ricomincia da capo** da un nuovo punto di partenza completamente casuale.
-- **Come funziona**: Si continua a eseguire l'Hill Climbing da punti iniziali diversi fino a quando non si trova una soluzione (o si esaurisce il tempo).
-#### Perché è così Efficace?
+#### 4. Hill climbing con riavvio casuale
+- Se si blocca, RIPARTE DA UN NUOVO STATO INIZIALE CASUALE
+	- Ripete questo processo più volte finché non trova una soluzione ottimale.
+	- TENDENZIALMENTE è **completo** (basta ripetere!!)
+	- Il funzionamento **non dipende molto dalla forma** del paesaggio, perché il riavvio consente di "saltare" in zone nuove.
 
-- **Completezza**: Se una soluzione esiste, prima o poi un riavvio casuale ci farà partire da un punto dal quale l'Hill Climbing riuscirà a raggiungerla. Per questo si dice che è **tendenzialmente completo**: basta insistere.
-- **Probabilità**: Se la probabilità p che una singola esecuzione di Hill Climbing abbia successo è, ad esempio, del 14% (p=0.14), ci aspettiamo di dover fare in media 1/p (cioè 1/0.14 ≈ 7) tentativi per trovare la soluzione.
-- **Prestazioni**: Per il problema delle 8 regine, questo approccio è incredibilmente veloce. Riesce a trovare una soluzione in **meno di un minuto** analizzando milioni di configurazioni, semplicemente riavviando un algoritmo molto semplice.
-### 🔥 Simulated Annealing (Tempra Simulata): L'Alpinista Saggio
+## Simulated Annealing (Tempra simulata)
+È una combinazione tra:
+- **Hill Climbing**, che cerca sempre di migliorare lo stato,
+- e una **scelta stocastica controllata**, che _a volte_ accetta anche stati peggiori.
 
-Abbiamo visto che l'Hill Climbing è un alpinista "ingordo" che si blocca sulla prima collina che trova. Il **Simulated Annealing (SA)** è un approccio molto più intelligente. È come un alpinista saggio che sa che a volte, per raggiungere la vetta più alta, è necessario **scendere da una collina per poterne scalare una più grande**.
+Questo serve a **scappare dai massimi locali**:  
+accettare temporaneamente un peggioramento può permettere di uscire da una “collina” e raggiungere un picco più alto (la soluzione globale).
+
+#### Il ruolo della temperatura
+La temperatura `T` controlla quanto l’algoritmo è disposto ad accettare peggioramenti:
+- all’inizio `T` è alta → le mosse peggiori vengono accettate spesso (esplorazione ampia);
+- col tempo `T` scende → il comportamento diventa più “rigido”, simile all’Hill Climbing.
+
+👉 Quando la temperatura è molto bassa, l’algoritmo si comporta come un normale Hill Climbing deterministico.
+
+
+#### Funzionamento effettivo
+A ogni iterazione, l’algoritmo sceglie **un successore a caso** dello stato corrente (cioè una nuova possibile soluzione vicina).  
+Poi decide **se accettarlo o no**, secondo queste regole:
+1. ***CASO 1***: il successore è migliore della soluzione attuale
+	- Se il nuovo stato `n'` ha un valore migliore di quello attuale `n` -> viene accettato subito (hill climbing classico)
+	
+2. ***CASO 2***: il successore è peggiore
+	- se `n'` è peggiore (cioè $\Delta E = f(n^{'}) - f(n) < 0$) -> l'algoritmo può **accettarlo comunque**, ma con una **certa probabilità** $$p = e^{\Delta E/T}$$dove
+		- $\Delta E$ è il peggioramento 
+		- $T$ è la tempra corrente
+		Poiché $\Delta E < 0$, il valore di $e^{\Delta E/T}$ sarà compreso tra `0` e `1`
+	
+	👉 Quindi, l’algoritmo **genera un numero casuale tra 0 e 1** e **accetta il nuovo stato** solo se il numero casuale è **minore di p**.  
+	In pratica: più la mossa è “poco peggiore”, più è probabile che venga accettata.
+
+##### Ruolo della temperatura `T`
+La temperatura **controlla la probabilità di accettare peggioramenti**:
+- Quando `T` è **alta**, anche stati peggiori vengono accettati spesso → grande esplorazione.
+- Quando `T` **scende**, la probabilità diminuisce → il comportamento diventa più “rigido”, simile a Hill Climbing.
+
+Man mano che l’algoritmo avanza, `T` **decresce gradualmente** secondo un piano definito (chiamato _cooling schedule_), ad esempio: $$T_{k+1} = \alpha \cdot T_{k} \ \ \  \ \ \text{con 0} < \alpha \ \text{< 1}$$
+#### Altre caratteristiche
+- p è **inversamente proporzionale al peggioramento**: se una mossa peggiora molto, sarà accettata con una probabilità più bassa.
+- Col passare del tempo, `T` si riduce → anche `p` si riduce → l’algoritmo diventa sempre più selettivo.
+- Alla fine, quando `T` è molto bassa, il comportamento converge a un **Hill Climbing deterministico**.
+
+### Algoritmo
+![[Pasted image 20251029193033.png]]![[Pasted image 20251029193044.png]]
+
+# Ricerca local beam
+L’idea della **ricerca local beam** nasce per affrontare i limiti di memoria della ricerca locale tradizionale, che di solito mantiene un solo stato alla volta (come nell’Hill Climbing).  
+In questo caso, invece, **vengono mantenuti contemporaneamente `k` stati**.
+
+### Funzionamento
+1. L’algoritmo inizia con `k` stati generati casualmente.
+2. A ogni passo:
+    - Si generano **tutti i successori** di questi `k` stati.
+    - Se uno dei successori è una **soluzione**, l’algoritmo termina.
+    - Altrimenti, si **selezionano i `k` migliori successori** (in base alla funzione di valutazione) e si ripete il processo.
+
+### Differenza con la ricerca a riavvio casuale
+A prima vista, la local beam può sembrare semplicemente **una versione parallela** della ricerca con riavvio casuale (che esegue più ricerche indipendenti).  
+
+In realtà, **non è così**:
+- Nella **ricerca a riavvio casuale**, ogni ricerca procede indipendentemente.
+- Nella **local beam**, invece, **le ricerche comunicano tra loro**:
+    - le informazioni sui migliori stati trovati vengono condivise,
+    - e le risorse si concentrano dove i progressi sono più promettenti.
+
+In questo modo, l’algoritmo **abbandona rapidamente** le direzioni poco fruttuose e continua a esplorare quelle più promettenti.
+
+### ⚠️ Problema principale
+Con il tempo, i `k` stati possono **convergere tutti nella stessa zona** dello spazio delle soluzioni (formando un _cluster_).  
+Questo riduce la diversità della ricerca e la rende **simile a un Hill Climbing moltiplicato per `k`** — quindi più lenta ma non necessariamente più efficace.
+
+### 🎲 Variante: Ricerca Beam Stocastica
+Per evitare questa mancanza di diversificazione, esiste una variante chiamata **ricerca beam stocastica**:
+- invece di scegliere sempre i migliori `k` successori,
+- si scelgono **in modo probabilistico**, con una probabilità **proporzionale al loro valore euristico**.
+
+Così si bilancia **esplorazione e sfruttamento**, evitando che tutti i cammini si concentrino sugli stessi stati promettenti.
+
+
+---
+
+# Ricerca con azioni non deterministiche
+### 🧩 Contesto di partenza
+Negli algoritmi di ricerca classici, si assume che:
+- l’ambiente sia **completamente osservabile** (cioè l’agente sa sempre dove si trova);
+- e che sia **deterministico**, quindi ogni azione ha **un solo risultato prevedibile**.
+
+In questo caso, il piano è semplicemente una **sequenza di azioni** fisse, decise in anticipo (_offline_), e le percezioni servono solo **all’inizio** per determinare lo stato iniziale.
+
+### ⚙️ Quando l’ambiente non è deterministico
+In un ambiente **non deterministico** o **parzialmente osservabile**, la situazione cambia:
+- l’agente **non conosce esattamente lo stato attuale** in cui si trova;
+- e non può sapere **in quale stato arriverà** dopo aver eseguito un’azione.
+
+Per gestire questa incertezza, l’agente mantiene un **insieme di stati possibili**, detto **stato-credenza** (_belief state_), cioè l’insieme di tutte le situazioni che ritiene plausibili.
+
+
+### 🧠 Piani condizionali
+In questi ambienti, una semplice sequenza di azioni non basta.  
+Serve un **piano condizionale** (o _piano di contingenza_), cioè una **strategia** che specifica:
+> “cosa fare in base a ciò che l’agente percepisce lungo il percorso”.
+
+In pratica, il piano si adatta **alle percezioni e agli eventi imprevisti** durante l’esecuzione.
+
+
+>[!tip]- 🧹 Esempio: Il mondo dell’aspirapolvere erratico
+In questo ambiente:
+>
+>- Se l’azione **Aspira** è eseguita su un riquadro **sporco**, può:
+>    
+>    - pulirlo normalmente,
+>        
+>    - **e a volte pulire anche un riquadro adiacente**.
+>        
+>- Se invece è eseguita su un riquadro **già pulito**, può **sporcarlo di nuovo** in modo casuale.
+>    
+>
+>Quindi l’ambiente è **non deterministico**, perché lo stesso comando può produrre **risultati diversi**.
+
+
+### 🔄 Generalizzazione del modello di transizione
+Per modellare questo comportamento, si passa:
+- da una funzione classica **Risultato(s, a)** → _ritorna un solo stato_,
+- a una nuova funzione **Risultati(s, a)** → _ritorna un insieme di stati possibili_.
+
+In questo modo possiamo rappresentare tutti gli esiti che un’azione può produrre.
+
+
+---
+
+# Alberi di ricerca AND-OR
+Quando ci troviamo in **ambienti non deterministici**, l’albero di ricerca classico (quello usato negli ambienti deterministici) **non basta più**.  
+In questi casi si utilizza una struttura chiamata **albero AND–OR**, che rappresenta sia **le scelte dell’agente** sia **le incertezze dell’ambiente**.
+
+### 🧠Differenza tra nodi OR e nodi AND
+- **Nodi OR** → rappresentano **le scelte dell’agente**  
+    Esempio: “Posso muovermi a destra oppure aspirare”.  
+    L’agente sceglie **una sola** delle azioni disponibili.
+    
+- **Nodi AND** → rappresentano **le diverse conseguenze possibili di una stessa azione**, causate dall’ambiente non deterministico.  
+    Esempio: “Se aspiro, potrei ottenere due risultati diversi: il pavimento resta sporco oppure si pulisce”.
+
+Questi due tipi di nodi **si alternano** nell’albero:
+- ai nodi OR corrispondono le decisioni dell’agente,
+- ai nodi AND corrispondono i possibili risultati dell’ambiente.
+
+Il risultato è un **albero di ricerca AND–OR**, dove la ricerca deve tener conto sia delle proprie scelte che delle reazioni dell’ambiente.
+
+![[Pasted image 20251029193155.png]]
+- NODI OR -> cerchio singolo
+- NODI AND -> cerchio singolo + semicerchio
+
+
+### ✅ Soluzione di un problema AND–OR
+Una **soluzione** non è una semplice sequenza di azioni (come nei problemi deterministici), ma un **sottoalbero** dell’albero di ricerca che rispetta tre condizioni:
+1. Ogni **foglia** del sottoalbero è un **nodo obiettivo**.
+2. In ogni **nodo OR**, è specificata **una sola azione** da eseguire.
+3. In ogni **nodo AND**, **tutti i rami** devono essere inclusi, perché rappresentano i diversi possibili risultati dell’ambiente.
+
+
+### Pseudocodice
+![[Pasted image 20251029193206.png]]
+
+
+## Soluzioni cicliche per problemi non deterministici
+Pensiamo al **mondo dell’aspirapolvere scivoloso**, una variante del classico problema dell’aspirapolvere in cui:
+- le azioni di movimento (**Sinistra**, **Destra**) **a volte falliscono**,
+- e quindi l’agente può **rimanere fermo** anche se ha tentato di spostarsi.
+
+### 🧩 Problema
+A causa di questo comportamento **non deterministico**, non esiste una **soluzione aciclica** che porti sempre con certezza allo stato obiettivo.  
+Se usassimo la normale ricerca AND–OR, l’algoritmo **fallirebbe**, perché non troverebbe un piano che garantisca il successo in tutti i casi.
+
+### 🔁 Soluzione ciclica
+Esiste però una **soluzione ciclica**, che consiste nel **ripetere un’azione finché non riesce**.  
+Per esempio:
+> “Continua a provare **Destra** finché non ti sposti davvero a destra”.
+
+In pseudocodice, questa soluzione si esprimerebbe con un costrutto simile a:
+```scss
+while (non sei nel riquadro destro)
+    esegui Destra
+```
+
+### Esempio visivo
+![[Pasted image 20251029193219.png]]
+
+### ⚙️ Condizioni di correttezza
+Perché un piano ciclico sia valido, devono valere due condizioni:
+1. **Ogni foglia** (cioè ogni possibile esito del piano) deve essere uno **stato obiettivo**;
+2. Da **ogni punto del piano**, deve esserci **almeno un percorso** che porta a una foglia obiettivo.
+
+In altre parole, qualunque cosa accada, esiste sempre una sequenza di azioni che **prima o poi** porta alla soluzione.
+
+>[!danger] ATTENZIONE: l'ultima frase di prima è vera SE E SOLO SE il fallimento è dovuto a una casualità; se invece il fallimento è dovuto a una condizione fissa e non osservata, ripetere non cambierà nulla. 
+
+
+---
+
+# Ricerca con osservazioni parziali
+Quando l’agente si trova in un ambiente **parzialmente osservabile**, le sue percezioni **non bastano per sapere con certezza in quale stato si trova**.  
+In questi casi, l’agente deve **gestire l’incertezza**, e a volte alcune delle sue azioni servono **non tanto a raggiungere un obiettivo**, ma a **raccogliere informazioni** e ridurre il dubbio sul proprio stato attuale.
+
+### 🧠 Ricerca in assenza di osservazioni (problema senza sensori)
+Se l’agente **non riceve nessuna informazione** dal mondo (cioè non ha sensori), si parla di **problema senza sensori** o **problema conformante**.
+
+In questo tipo di problema:
+- L’agente non sa dove si trova né lo stato esatto del mondo.
+- Tuttavia, può comunque **ragionare su un insieme di stati possibili**, chiamato **stato-credenza (belief state)**.
+
+
+>[!tip]- 🧩 Esempio: il mondo dell’aspirapolvere senza sensori
+Immaginiamo il mondo dell’aspirapolvere deterministico, ma:
+>- l’agente **conosce la mappa** del suo ambiente (sa che ci sono due stanze, ad esempio),
+>- però **non sa dove si trova né quali riquadri sono sporchi**.
+>
+>Il suo stato iniziale, quindi, non è un singolo stato fisico, ma **l’insieme di tutti gli stati possibili**:
+>
+> {1, 2, 3, 4, 5, 6, 7, 8}
+>
+>Questo insieme rappresenta il **suo stato-credenza iniziale**.
+
+
+### ⚙️ Come si svolge la ricerca
+In questo caso, la ricerca non si svolge nello spazio degli stati reali, ma nello **spazio degli stati-credenza**.  
+Ogni stato-credenza rappresenta **tutte le situazioni fisiche possibili** in cui l’agente potrebbe trovarsi.
+
+In questo nuovo spazio:
+- il problema diventa **completamente osservabile**,  
+    perché l’agente conosce sempre **il proprio stato-credenza**, anche se non sa quale stato fisico specifico sta vivendo.
+
+
+### 🧩 Componenti del problema di stati-credenza
+1. **Stati:**  
+    Ogni stato-credenza è un sottoinsieme degli stati fisici originali.  
+    Se il problema `P` ha **`N` stati fisici**, allora il nuovo problema può avere fino a **2ⁿ stati-credenza**, anche se non tutti sono effettivamente raggiungibili.
+    
+2. **Stato iniziale:**  
+    Di solito è l’insieme di **tutti gli stati fisici possibili**, ma può essere ridotto se l’agente ha informazioni parziali.
+    
+3. **Azioni:**  
+    Sono l’insieme di tutte le azioni possibili nei vari stati fisici inclusi nello stato-credenza.  
+    In pratica:
+    - se un’azione è lecita in almeno uno degli stati, può essere considerata;
+    - ma se è pericolosa o dannosa in certi stati, conviene includere solo quelle **sicure in tutti**.
+    
+4. **Modello di transizione:**  
+    L’effetto di un’azione su uno stato-credenza è l’**unione** di tutti gli stati ottenibili applicando quell’azione a ciascuno degli stati possibili del belief state.
+    
+5. **Test obiettivo:**  
+    Uno stato-credenza soddisfa l’obiettivo se **almeno uno dei suoi stati fisici** soddisfa la condizione obiettivo.
+    
+6. **Costo dell’azione:**  
+    Se un’azione ha **costi diversi** nei vari stati, il costo nel belief state può essere:
+    - il **valore medio** dei costi possibili,
+    - oppure una **stima prudente** (es. il massimo), in base all’approccio adottato.
+
+
+### Come vengono aggiornati gli stati credenza (versione deterministica e non)
+![[Pasted image 20251029193235.png]]
+
+### Spazio degli stati completo
+![[Pasted image 20251029193247.png]]
+Quando si lavora con stati-credenza, lo spazio cresce esponenzialmente: nel caso dell’aspirapolvere con 8 stati fisici si avrebbero 2⁸ = 256 stati-credenza, ma solo 12 realmente raggiungibili.  
+Per evitare esplorazioni inutili si usa una **ricerca su grafo**, ignorando gli stati già visitati.  
+
+Si può anche **potare** in modo più efficiente:
+- se uno stato già incontrato `s'` è contenuto in `s` (`s'⊂s`), `s` è inutile e si scarta;
+- se `s` è contenuto in `s'` (`s⊂s'`) e da `s'` esiste una soluzione, anche `s` si può scartare.
+
+Poiché rappresentare tutti gli stati è costoso, si può applicare una **ricerca incrementale**:  
+si trova una soluzione per un singolo stato, poi si verifica se funziona anche per gli altri.  
+Questo approccio riduce i fallimenti precoci e mira a ottenere **una sola soluzione valida per tutti gli stati possibili**.
+
+
+---
+
+# Ricerca in ambienti parzialmente osservabili
+In molti casi, un agente **non può risolvere un problema senza sensori**, perché non saprebbe mai in quale stato si trova.  
+
+Per gestire questo tipo di situazioni, nella definizione del problema si introduce una funzione chiamata **Percezione(s)**, che restituisce la percezione che l’agente riceve quando si trova nello stato `s`.
+
+Se i sensori sono **non deterministici**, la funzione diventa **Percezioni(s)**, e restituisce **un insieme di percezioni possibili**.
+- Nei problemi **completamente osservabili**, vale **Percezione(s) = s**, perché l’agente conosce lo stato con certezza.
+- Nei problemi **senza sensori**, invece, **Percezione(s) = null**, poiché l’agente non riceve alcuna informazione.
+
+### 🧠 Transizione in ambienti parzialmente osservabili
+Quando l’agente esegue un’azione, il passaggio da uno stato-credenza al successivo avviene in **tre fasi distinte**:
+1. **Fase di predizione**  
+    Si calcola lo **stato-credenza previsto** dopo aver eseguito un’azione, esattamente come nel caso senza sensori.  
+    
+2. **Fase delle percezioni possibili**  
+    A partire dallo stato-credenza previsto, si calcola l’insieme di **tutte le percezioni** che l’agente potrebbe osservare.  
+    Questa fase serve a stimare che tipo di informazioni i sensori potranno fornire.
+    
+3. **Fase di aggiornamento**  
+    Per ogni possibile percezione, si calcola il nuovo **stato-credenza aggiornato**, che contiene solo gli stati coerenti con quella percezione.  
+    In altre parole, si eliminano gli stati incompatibili con ciò che l’agente ha percepito.
+
+Mettendo insieme le tre fasi (predizione → percezioni → aggiornamento), si ottiene l’insieme **dei possibili stati-credenza** che possono risultare da una data azione, tenendo conto anche delle percezioni future.
+
+Durante la pianificazione, l’agente **non conosce ancora le percezioni future** che riceverà, ma deve comunque tenerne conto.  
+
+
+---
+
+# Agenti per ricerca online e ambienti sconosciuti
+Finora abbiamo parlato di agenti che usano **ricerca offline**, cioè che **calcolano tutto il piano d’azione prima di iniziare ad agire**.  
+
+Negli **ambienti reali**, però, questo approccio non sempre è possibile:  
+l’ambiente può cambiare, le informazioni possono essere incomplete o il tempo per pianificare può essere limitato.  
+In questi casi entra in gioco la **ricerca online**.
+
+### 🧠 Cos’è la ricerca online
+Nella **ricerca online**, l’agente **non pianifica tutto in anticipo**, ma alterna continuamente:
+1. **Azione** – esegue un passo nell’ambiente;
+2. **Osservazione** – percepisce il nuovo stato o le conseguenze dell’azione;
+3. **Aggiornamento** – decide la prossima mossa in base a ciò che ha imparato.
+
+La ricerca online è particolarmente efficace in:
+- **ambienti dinamici o semidinamici**, dove lo stato del mondo cambia rapidamente e non c’è tempo per calcolare tutto in anticipo;
+- **ambienti non deterministici**, dove le azioni possono produrre risultati diversi, e l’agente deve reagire alle situazioni reali che si verificano, invece di pianificare per tutte le possibilità teoriche.
+
+
+>[!tip] PIANIFICAZIONE vs AZIONE
+>C’è un compromesso importante: più un agente pianifica in anticipo, meno rischia di trovarsi in difficoltà; ma più pianifica, più tempo impiega prima di agire.
+>
+>Un buon agente deve quindi **bilanciare** il tempo speso a pianificare e quello speso ad agire.
+
+
+### In ambienti sconosciuti
+In un **ambiente sconosciuto**, l’agente **non conosce gli stati né gli effetti delle azioni**.  
+Deve quindi imparare tutto **sperimentando**:
+- ogni azione diventa un **test**,
+- le osservazioni raccolte servono per **costruire progressivamente un modello** dell’ambiente.
+
+Un esempio tipico è il **problema della costruzione di mappe**:  
+un robot esplora un ambiente che non conosce, registrando passo dopo passo la posizione degli ostacoli e aggiornando la sua mappa interna.
+
+
+### Problemi di ricerca online
+Un **problema di ricerca online** si risolve attraverso tre attività fondamentali: **elaborazione, percezione e azione**.  
+A differenza della ricerca offline, l’agente **non può conoscere in anticipo** il risultato di un’azione:  
+non può cioè determinare **Risultato(s, a)** se non **trovandosi effettivamente nello stato `s` ed eseguendo l’azione `a`**.
+
+In alcuni casi, l’agente può disporre di una **funzione euristica ammissibile h(s)**, che fornisce una stima della distanza tra lo stato corrente e uno stato obiettivo.
+
+#### 🧩 Assunzioni per un problema di esplorazione
+Nel contesto della ricerca online, si assumono le seguenti condizioni:
+- Solo **lo stato corrente** è osservabile, mentre l’ambiente è **ignoto**.
+- Non si conoscono **gli effetti** delle azioni né il **loro costo**.
+- Gli **stati futuri** e le **azioni possibili** non sono noti a priori.
+- L’agente deve eseguire **azioni esplorative** come parte della risoluzione del problema.
+
+#### 🧠 Conoscenze dell’agente online nello stato s
+Quando l’agente si trova in uno stato `s`, le sue conoscenze sono limitate a:
+- le **azioni legali** nello stato attuale;
+- il risultato **Risultato(s, a)**, ma solo **dopo aver eseguito l’azione `a`**;
+- il **costo della mossa** $c(s, a, s^{'})$, anch’esso noto solo dopo l’esecuzione;
+- il **Goal-Test(s)**, per verificare se lo stato è un obiettivo;
+- la **stima della distanza** dal goal fornita dalla funzione euristica `h(s)`.
+
+#### ⚙️ Obiettivo e costo della ricerca
+Generalmente, lo scopo dell’agente è **raggiungere uno stato obiettivo minimizzando il costo complessivo del percorso**.  
+Questo costo rappresenta **la somma effettiva dei costi delle azioni realmente eseguite**.
+
+È prassi comune confrontare questo costo con quello che l’agente **avrebbe sostenuto conoscendo già l’intero spazio di ricerca** (cioè il cammino ottimo in un ambiente noto).  
+Il rapporto tra questi due valori è chiamato **rapporto di competitività (competitive ratio)**, e idealmente dovrebbe essere **il più piccolo possibile**.
+
+#### ⚠️ Limiti e problemi della ricerca online
+Gli agenti di ricerca online sono **vulnerabili ai vicoli ciechi**, ossia a stati dai quali **non è più possibile raggiungere l’obiettivo**.  
+Se l’agente **non conosce il significato delle azioni**, può compiere scelte che lo portano in situazioni **irreversibili** o da cui non può più uscire.
+
+In generale, **nessun algoritmo può evitare i vicoli ciechi in tutti gli spazi degli stati**.  
+Gli ambienti sono **esplorabili in modo sicuro** solo se:
+- **non esistono azioni irreversibili**, e
+- **lo stato obiettivo è sempre raggiungibile**.
+
+Tuttavia, anche in questi casi, **non è garantito un rapporto di competitività limitato**, quindi la ricerca online può risultare comunque meno efficiente rispetto a una pianificazione offline completa.
+
+
+## Agenti per ricerca online
+Gli agenti online ad ogni passo decidono l'**azione da fare** (non il piano) e la eseguono.
+La ricerca in profondità online consiste nell’esplorazione sistematica delle alternative, è
+necessario ricordarsi ciò che si è scoperto. 
+Il backtracking significa appunto tornare sui propri passi.
+
+
+### Ricerca locale online
+Nella **ricerca online**, il valore della **funzione euristica** è conosciuto **solo dopo aver esplorato effettivamente uno stato**.  
+Come la ricerca in profondità, anche la **ricerca Hill Climbing** è locale: infatti espande solo gli stati vicini e **mantiene in memoria un solo stato per volta**.  
+Per questo motivo, l’Hill Climbing può essere considerato **un algoritmo già online**.
+
+
+### ⚠️ Limiti dell’Hill Climbing
+Nonostante la sua natura locale, l’Hill Climbing **non è efficace per l’esplorazione**, perché:
+- può **bloccarsi in un massimo locale**;
+- non può utilizzare **riavvii casuali** come nella versione offline, poiché l’agente non ha la possibilità di “teletrasportarsi” in un nuovo stato iniziale.
+
+
+### 🧩 Alternative ai riavvii casuali
+Per superare questi limiti, si possono usare due varianti:
+1. **Random Walk**  
+    L’agente, in alcuni casi, sceglie **casualmente una delle azioni possibili** nello stato corrente.  
+    Questo introduce una componente di casualità che può aiutarlo a uscire da massimi locali.
+    
+2. __Apprendimento Real-Time (LRTA)__  
+    In alternativa, si può rendere l’Hill Climbing **più intelligente** aggiungendo **memoria e apprendimento** anziché casualità.  
+    L’agente **aggiorna i valori euristici** man mano che esplora, rendendoli progressivamente più realistici.  
+    Questo approccio è chiamato **LRTA*** (_Learning Real-Time A*_).
+
+
+### ⚙️ Funzionamento di LRTA
+L’algoritmo LRTA* simula il comportamento di A*, ma **in tempo reale** e **in modo locale**:
+- aggiorna la **stima del costo** dello stato appena lasciato;
+- poi sceglie la **mossa apparentemente migliore** in base alle stime correnti della funzione euristica `H`.  
+    In questo modo l’agente impara progressivamente a valutare meglio i costi reali del percorso.
+![[Pasted image 20251030112816.png]]
+![[Pasted image 20251030112825.png]]
+
+
+### 📊 Proprietà di LRTA
+- È **completo** negli spazi **esplorabili in modo sicuro** (cioè senza azioni irreversibili).
+- Nel **caso peggiore**, visita **ogni stato due volte**, ma in media è **più efficiente della ricerca in profondità online**.
+- **Non è ottimale**, a meno che l’agente non disponga di **un’euristica perfetta**.
