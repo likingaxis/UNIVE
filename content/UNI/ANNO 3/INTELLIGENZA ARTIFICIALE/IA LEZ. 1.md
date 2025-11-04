@@ -18,43 +18,17 @@ L’**Intelligenza Artificiale (IA)** si occupa della:
 - **Agenti** = entità autonome che percepiscono l’ambiente e agiscono su di esso.
     
 - Il termine “IA” può riferirsi a un singolo agente, ma spesso parliamo di **agenti intelligenti** (più sistemi cooperanti).
-    
-
----
-
-### 🔸 Definizioni storiche di IA
-
-Alcune definizioni importanti:
-
-- **Bellman (1978):** automazione delle attività associate al pensiero umano (decisione, apprendimento, risoluzione di problemi).
-    
-- **Charniak & McDermott (1985):** studio delle facoltà mentali tramite modelli computazionali.
-    
-- **Kurzweil (1990):** arte di creare macchine che svolgono funzioni che richiedono intelligenza quando eseguite da esseri umani.
-    
-- **Luger-Stubblefield (1993):** automazione del comportamento intelligente.
-    
-- **Ginsberg (1993):** impresa di costruire artefatti intelligenti.
-    
-
----
-
 ## ⚙️ APPROCCI ALL’IA
 
 ### 🧩 IA forte (psicologia cognitiva)
-
-**Obiettivo:** comprendere l’intelligenza umana.  
-**Metodo:** costruzione di modelli computazionali del comportamento umano.  
-**Criterio di successo:** risolvere problemi con **gli stessi processi** usati dall’uomo.  
-**Caratteristiche:** enfasi sulla **verifica sperimentale** in rapporto all’uomo.
+- Una **IA forte** mira a **ragionare e comportarsi in modo razionale come un essere umano**.  
+    Non si limita a produrre l’output corretto, ma **ripercorre i passaggi cognitivi** che portano alla soluzione, simulando il pensiero umano.,
 
 ---
 
 ### ⚙️ IA debole (ingegneristica)
 
-**Obiettivo:** costruire sistemi dotati di razionalità.  
-**Metodo:** codifica del pensiero razionale e progettazione di processi simulativi.  
-**Criterio di successo:** misure di successo (%) nelle decisioni che richiedono intelligenza.
+- Una **IA debole**, invece, è progettata per **risolvere problemi specifici** senza “capire” davvero come lo fa (es. riconoscere volti, tradurre testi, ecc.).
 
 ---
 
@@ -71,22 +45,6 @@ Alcune definizioni importanti:
 
 > 👉 Umanità e razionalità sono **dimensioni complementari**, non opposte.
 
----
-
-## 💬 ESEMPI DI IA: CHATGPT
-
-### 🔹 Cosa fa ChatGPT
-
-- Dialoga in linguaggio naturale
-    
-- Risponde a domande (Question Answering)
-    
-- Risolve problemi di matematica o logica
-    
-- Fornisce consigli e spiegazioni
-    
-- Opera in più lingue e anche su immagini e testi
-    
 
 ---
 
@@ -172,45 +130,3 @@ L’IA nasce dall’integrazione di più discipline:
     
 
 ---
-
-## 💡 CAPACITÀ CHIAVE DI UN’IA
-
-- Simulare il comportamento umano
-    
-- Ragionare logicamente
-    
-- Mostrare competenze da esperto
-    
-- Avere senso comune
-    
-- Interagire con un ambiente
-    
-- Comunicare e coordinarsi socialmente
-    
-- Comprendere (ed eventualmente esprimere) emozioni
-    
-
----
-
-## 🖼️ ESEMPIO: IMAGE CAPTIONING
-
-- Descrizione automatica di immagini in linguaggio naturale.
-    
-- Si basa su **reti neurali** che imparano:
-    
-    1. a **riconoscere oggetti e relazioni visive**,
-        
-    2. a **generare frasi** coerenti e semanticamente corrette.
-        
-
-> È un task “data-driven” che unisce visione e linguaggio.
-
----
-
-## 🧭 CONCLUSIONI
-
-- L’IA è un **campo interdisciplinare** che unisce logica, apprendimento e linguaggio.
-    
-- Il successo di un sistema si misura **rispetto alle capacità umane**, ma l’obiettivo non è imitarci perfettamente, bensì **raggiungere comportamenti razionali** e utili.
-    
-- L’IA evolve continuamente, spostando il confine tra ciò che è “intelligente” e ciò che è semplicemente “tecnologia”.

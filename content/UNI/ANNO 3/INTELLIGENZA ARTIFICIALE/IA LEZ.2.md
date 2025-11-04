@@ -2,7 +2,7 @@
 - **Software Tradizionale** è tipicamente un programma che esegue una serie fissa e predefinita di istruzioni per elaborare un input e produrre un output, lavorando spesso in isolamento.
 
 - Il **Software AI (Agente AI)**, al contrario, non lavora in isolamento. È progettato per operare in un **ambiente** con un certo grado di **autonomia**, ricevendo segnali da esso e rispondendo con azioni.
-
+ 
 
 ## Definizione e ciclo di un agente intelligente
 
@@ -159,6 +159,8 @@ L’ambiente richiede la simulazione attraverso uno strumento software che si oc
 - valutare le prestazioni degli agenti
 #### Esempio di simulatore
 ![[Pasted image 20251016140906.jpg]]
+
+--- 
 
 ## STRUTTURA DI UN AGENTE
 $$ AGENTE=ARCHITETTURA + PROGRAMMA$$
