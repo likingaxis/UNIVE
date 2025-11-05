@@ -179,7 +179,7 @@ La scelta di una azione (per volta) corrisponde ad un accesso a una **tabella ch
 
 In ambito IA è **molto difficile da costruire**, e soprattutto NON é autonomo.
 
-## Schema di agenti reattivi semplici
+## Un esempio: Schema di agenti reattivi semplici
 
 ![[Pasted image 20251016143808.jpg]]
 
