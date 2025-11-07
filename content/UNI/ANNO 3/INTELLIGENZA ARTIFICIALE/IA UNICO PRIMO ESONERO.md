@@ -1,0 +1,285 @@
+## Definizione di IA
+L’**Intelligenza Artificiale (IA)** è la disciplina che studia **come creare sistemi capaci di osservare, comprendere e riprodurre comportamenti intelligenti**.  
+In altre parole, mira a costruire macchine in grado di **percepire l’ambiente**, **ragionare sulle informazioni ricevute** e **agire in modo autonomo** per raggiungere un obiettivo.
+## Definizione di Agente
+Nel linguaggio dell’IA, un **agente** è un’entità autonoma capace di **percepire l’ambiente** (attraverso percettori) e **intervenire su di esso** attraverso le proprie azioni con gli attuatori.  
+Un singolo sistema può essere considerato un agente, ma in molti casi si parla di **sistemi multi-agente**, in cui più entità collaborano o competono per raggiungere determinati obiettivi.
+## IA FORTE VS DEBOLE
+L’IA può essere studiata e progettata da diverse prospettive. Le due principali sono:
+- **IA FORTE**
+	- **L’IA forte** si pone l’obiettivo ambizioso di *riprodurre il ragionamento umano*.
+	- Non si limita quindi a fornire risposte corrette, ma cerca di *simulare i processi cognitivi* che portano un essere umano a elaborarle.
+- **IA DEBOLE**
+	- L’**IA debole**, al contrario, punta a *risolvere problemi pratici specifici*, senza preoccuparsi di replicare il pensiero umano.  
+	- L’obiettivo è ottenere *prestazioni efficaci*, anche se il sistema non “comprende” davvero ciò che fa.  
+
+## UMANITÀ O RAZIONALITÀ
+![[Pasted image 20251013184910.png]]
+L’IA può essere progettata per ispirarsi a due diversi principi:
+
+- il **comportamento umano**, che riflette come le persone pensano e agiscono nella realtà;
+- la **razionalità pura**, cioè l’ottimizzazione logica delle decisioni.
+## Problem Solving
+Una delle funzioni centrali dell’IA è il **problem solving**, ossia la capacità di risolvere problemi complessi partendo da informazioni incomplete o ambigue.
+
+## Instruction Tuning
+L’**Instruction Tuning** è una tecnica di addestramento in cui il modello impara a **seguire istruzioni testuali** in modo coerente.  
+L’input è spesso costituito da una *premessa* seguita da una *domanda*, che attiva un processo di ragionamento iterativo.
+
+## Prompt
+Il **prompt** rappresenta la **base di comunicazione tra l’utente e il modello**.  
+È una combinazione di tre elementi:
+- *premessa*, contesto o introduzione al compito da eseguire
+- *domanda*, ciò che si chiede al modello
+- *contesto*, informazioni aggiuntive
+
+## Il Test di Turing
+
+Nel 1950, **Alan Turing** propose un esperimento per stabilire se una macchina potesse essere considerata intelligente.
+
+> “Un sistema è intelligente se un osservatore umano, dialogando con esso, non riesce a distinguere se sta parlando con una persona o con una macchina.”
+
+## L’Effetto IA
+Ogni volta che una tecnologia basata sull’IA diventa di uso comune, **smettiamo di percepirla come intelligenza artificiale**.  
+È il fenomeno noto come **Effetto IA**.
+
+
+## Ciclo di un agente intelligente
+- Ciclo dell'agente
+	- *percepire una azione mediante i sensori*
+		- riceve dei dati
+	- *decido*
+		- elabora la percezione ed effettua la sua funzione agente
+	- *agisco con una azione*
+		- esegue l'azione scelta anche mediante gli effettori
+	- *si aggiorna*
+		- aggiorna l'ambiente contando l'azione appena eseguita
+![[Pasted image 20251013185628.png]]
+## Percezioni e Azioni dell'agente
+- come abbiamo detto l'agente riceve *percezioni* ,ovvero l'**input ricevuto dai sensori** dell'agente
+	- l'insieme di tutte le percezioni passate rappresentano la *Sequenza Percettiva*
+- La *Funzione Agente* serve per definire le azioni che esso può eseguire
+	- Definisce l'**azione da compiere per ogni possibile sequenza percettiva**
+	    - È una **descrizione matematica astratta** del comportamento dell'agente: $f: P^* \to A$ 
+		    - (dove $P^*$ è l'insieme delle sequenze percettive e $A$ è l'insieme delle azioni)
+- Il *programma Agente* è l'**implementazione concreta** della funzione agente, in esecuzione all'interno di un sistema fisico (l'architettura dell'agente)
+## Struttura di un Agente con Ambiente
+![[Pasted image 20251016085815.png]]
+
+## Agenti Razionali
+- quando si parla di *agente intelligente* si intende proprio *agente razionale*
+	- **Razionalità $\neq$ Onniscienza:** Un agente razionale non è necessariamente **onnisciente** o addirittura *onnipotente*
+- L'agente Razionale è colui che per ogni possibile sequenza di percezioni, cerca di scegliere un'azione che **massimizzi il valore atteso della sua misura di prestazione**, considerando le sue percezioni passate e le sue capacità. 
+	- Per **Misura di Prestazione** si intende un criterio volto a valutare l'efficacia di una azione scelta dall'agente 
+		- Per costruire una misura di prestazione utile, bisogna considerare **due aspetti fondamentali**:
+			- *Natura* della misura esterna
+				- La misura deve essere **esterna all’agente**, cioè guardare **agli effetti che le sue azioni producono sull’ambiente**, non ai processi interni.
+			- *Scopo* della misura → “Criterio del progettista”
+				- La misura della prestazione è quindi uno strumento per **definire la razionalità** del comportamento: ossia, cosa significa “agire bene” in quel contesto.
+				- questo è demandato al progettista
+
+## 4 fattori della razionalità
+La scelta razionale di un agente in un dato momento dipende da quattro elementi chiave:
+- *Misura di prestazione*
+	- Un'azione è razionale solo se contribuisce positivamente al raggiungimento degli obiettivi stabiliti da questa misura
+- *Conoscenza pregressa*
+	- La conoscenza pregressa (come ad esempio le regole della fisica o la mappa di un'area) aiuta l'agente a **prevedere le conseguenze** delle sue azioni
+- *Percezioni presenti e passate*
+	- Tutta la storia delle percezioni ricevute dai sensori.
+- *Capacità dell'agente*
+	- Un'azione è razionale solo se rientra nelle **possibilità di esecuzione** dell'agente.
+## Agenti autonomi
+Un agente è definito *autonomo* nella misura in cui il suo comportamento dipende dalla sua esperienza (cioè, dalle percezioni passate e dall'apprendimento che ne deriva). 
+## Definizione di Ambiente Operativo e PEAS
+- Il **problema P** di un agente, ovvero la sua attività principale, è definito dalla **caratterizzazione adeguata dell'ambiente operativo**.
+- La progettazione di un **agente razionale** corrisponde alla **soluzione** per questo problema.
+
+Il framework **PEAS** fornisce un metodo sistematico per specificare *l'ambiente operativo*, identificando i quattro fattori cruciali che influenzano la progettazione dell'agente:
+##### **P**erformance (Prestazioni)
+- **Definizione:** La **misura di prestazione** che definisce il **criterio del successo**. Valuta la sequenza di stati dell'ambiente per determinare la desiderabilità del comportamento dell'agente.
+- _Esempio: Autista di taxi automatico:_ Sicurezza, velocità, legalità, massimizzazione dei profitti.
+##### **E**nvironment (Ambiente)
+- **Definizione:** La **parte dell'universo** di cui ci interessa lo stato quando progettiamo l'agente — la parte che influenza ciò che l'agente percepisce e sulla quale influiscono le sue azioni.
+- _Esempio: Autista di taxi automatico:_ Strade, altri veicoli nel traffico, pedoni, clienti, tempo atmosferico.
+##### **A**ctuators (Attuatori)
+- **Definizione:** I **mezzi** che l'agente utilizza per **agire sull'ambiente**.
+- _Esempio: Autista di taxi automatico:_ Sterzo, acceleratore, freni, clacson.
+##### **S**ensors (Sensori)
+- **Definizione:** I **dispositivi** attraverso i quali l'agente **percepisce** il suo ambiente. Il dato percepito è chiamato **percezione** (_percept_).
+- _Esempio: Autista di taxi automatico:_ Telecamere, radar, tachimetro, GPS.
+#### Esempio con Chat GPT
+![[Pasted image 20251016093738.png]]
+## Proprietà dell’ambiente e del problema
+I diversi ambienti di lavoro di un agente si caratterizzano lungo alcune dimensioni che ne influenzano la complessità e la progettazione.
+### Osservabilità
+- **Completamente Osservabile**
+	- L'agente ha accesso allo **stato completo** dell'ambiente in ogni momento, attraverso i suoi sensori. È sufficiente che i sensori misurino tutti gli aspetti _rilevanti_ per la scelta dell'azione.
+
+- **Parzialmente Osservabile**
+	- L'agente non può vedere l'intero stato dell'ambiente a causa di sensori rumorosi, inaccurati o incompleti. Se l'agente non ha sensori, l'ambiente è **inosservabile**.
+### Numero di agenti
+- **Agente Singolo**
+	- L'ambiente contiene solo un agente che opera e le "altre" entità possono essere trattate come semplici oggetti che si comportano secondo le leggi della fisica.
+
+- **Multi-Agente**
+	- L'ambiente contiene **più agenti**, e la distinzione chiave è se il comportamento di un'altra entità può essere descritto come il tentativo di **massimizzare una misura di prestazione** il cui valore dipende dalle azioni del tuo agente.
+
+### Prevedibilità del Modello di Transizione
+- **Deterministico**
+	- Lo stato successivo dell'ambiente è **completamente determinato** dallo stato corrente e dall'azione dell'agente (o degli agenti).
+- **Stocastico**
+	- Il modello dell'ambiente è associato esplicitamente a **probabilità** per i risultati delle azioni (es. "c'è una probabilità del 25% che domani piova").
+
+- **Non Deterministico**
+	- Lo stato successivo non è completamente determinato, e le varie possibilità di risultato sono elencate **senza essere quantificate** (es. "c'è la possibilità che domani piova").
+### Struttura del Ciclo di Interazione
+- **Episodico**
+	- L'esperienza dell'agente è divisa in episodi atomici. Ogni decisione è **indipendente** dalle azioni intraprese negli episodi precedenti.
+
+- **Sequenziale**
+	- Ogni decisione può **influenzare tutte le decisioni successive**. Le azioni a breve termine hanno conseguenze a lungo termine (es. gli scacchi, guidare).
+### Cambiamento Temporale
+- **Statico**
+	- L'ambiente **non cambia** mentre l'agente sta decidendo come agire.
+
+- **Dinamico**
+	- L'ambiente **può cambiare** mentre l'agente sta decidendo. Richiede che l'agente osservi continuamente e risponda rapidamente (es. un taxi autonomo).
+
+- **Semi-Dinamico**
+	- L'ambiente in sé **non cambia** col tempo, ma la **misura di prestazione** (la valutazione) dell'agente sì (es. scacchi giocati con l'orologio).
+### Natura delle Variabili
+- **Discreto**
+	- Lo stato dell'ambiente, la gestione del tempo, le percezioni e le azioni sono rappresentabili con un **numero finito** di valori (es. le caselle su una scacchiera, input digitali).
+
+- **Continuo**
+	- Le variabili (stato, tempo, azioni) sono descritte da **numeri reali** e possono assumere un numero infinito di valori (es. la velocità di un'auto, l'angolo di sterzo).
+### Visibilità
+- **Ambiente Noto (Known)**
+	- L'agente (o il suo progettista) **conosce le regole del gioco**. Sono noti i risultati (o le probabilità di risultato, se l'ambiente è stocastico) per tutte le azioni.
+	- L'agente può eseguire una **ricerca _offline_** (pianificazione) per calcolare la sequenza di azioni ottimali prima di agire.
+
+- **Ambiente Ignoto (Unknown)**
+	- L'agente **non conosce le regole del gioco**. L'agente non sa come l'ambiente reagirà alle sue azioni.
+	- L'agente **dovrà apprendere come funziona** l'ambiente. Dovrà compiere **azioni esplorative** (sperimentazione) per acquisire la conoscenza dinamica necessaria a prendere buone decisioni.
+#### ESEMPI
+![[Pasted image 20251016094914.png]]
+
+## Ambiente simulato
+In un sistema automatizzato o simulato, l’ambiente **non è reale**, ma **modellato da un software** che ne gestisce gli stati e le regole di funzionamento.
+Il software che simula l’ambiente deve ricreare l’intero **ciclo percezione–azione–valutazione**.  
+Per farlo, svolge una serie di funzioni fondamentali:
+- generare stimoli per gli agenti
+- raccogliere le azioni in risposta
+- aggiornare il proprio stato
+- attivare altri processi implicati dal cambiamento effettuato
+- valutare le prestazioni degli agenti
+#### Esempio di **ambiente di simulazione** che serve per valutare uno o più **agenti**.
+![[Pasted image 20251016140906.jpg]]
+## STRUTTURA DI UN AGENTE
+$$ AGENTE=ARCHITETTURA + PROGRAMMA$$
+- l'agente ha una sua funzione ( come spiegato in precedenza)
+- `Agent()`
+$$Agent:Percezioni \rightarrow Azioni$$
+##### Pseudo programma agente
+![[Pasted image 20251016141848.jpg]]
+
+# Diverse architetture di agenti
+- <u><font color="#4bacc6">Basata su tabella</font></u>
+	- Ogni azione dell'agente viene decisa in base a una **tabella che associa un'azione ad ogni possibile sequenza di percezioni**.  
+	- gli *agenti reattivi semplici* usano questo tipo di architettura
+![[Pasted image 20251016143808.jpg]]
+Partendo dall'ambiente, l'agente
+- riceve delle percezioni tramite i sensori
+	- capisce lo stato dell'ambiente
+- guarda nella sua tabella (percezioni -> azioni)
+	- esegue l'azione  
+![[Pasted image 20251016144146.jpg]]
+
+
+- <u><font color="#4bacc6">Basata su modello</font></u>
+- Gli agenti che usano questa architettura hanno una **memoria interna** che gli permette di rappresentare il mondo in cui si trovano. questi **mantengono e aggiornano uno stato interno** che descrive _cosa credono che stia succedendo_ 
+![[Pasted image 20251016144855.jpg]]
+🔹 1️⃣ Percezione e costruzione del modello del mondo
+L’agente:
+- **riceve le percezioni** dall’ambiente attraverso i **sensori**;
+- elabora da queste informazioni la rappresentazione di **“what the world is like now”**, cioè com’è il mondo in questo momento;
+- **aggiorna lo stato interno** (la sua memoria) combinando:
+    - le percezioni **attuali**,
+    - le **percezioni passate**,
+    - la conoscenza di **come il mondo evolve naturalmente** nel tempo (“how the world evolves”),
+    - e la conoscenza di **come le proprie azioni influenzano il mondo** (“what my actions do”).
+🔹 2️⃣ Predizione e decisione
+Una volta aggiornato il proprio stato interno, l’agente:
+- utilizza il modello del mondo per **prevedere** cosa accadrà dopo e per valutare le possibili conseguenze delle sue azioni;
+- decide **“what action I should do now”**, ossia l’azione più opportuna da eseguire in base:
+    - al proprio stato interno aggiornato,
+    - alle **regole condizionali azione–condizione** (_condition–action rules_),
+    - e alla **misura di prestazione** (il criterio con cui il progettista valuta l’efficacia del comportamento).
+🔹 3️⃣ Esecuzione dell’azione
+Infine:
+- l’agente invia l’azione scelta agli **attuatori**,
+- che la eseguono sull’ambiente, modificandone lo stato.
+
+👉 A questo punto il ciclo ricomincia: l’ambiente cambia, genera nuove percezioni e l’agente aggiorna di nuovo il proprio modello interno.
+
+![[Pasted image 20251016145402.jpg]]
+
+
+- <u><font color="#4bacc6">Basata su obiettivo</font></u>
+	- Gli **agenti basati su obiettivo** sono un’evoluzione degli agenti basati su modello.  
+	- Come loro, **mantengono uno stato interno** del mondo (memoria e conoscenza di come si evolve), 
+	- ma in più **hanno un obiettivo da raggiungere (goal)** che guida la scelta delle azioni.
+![[Pasted image 20251016145830.jpg]]
+L’**agente basato su obiettivo**, **va oltre**:  
+→ non si limita a prevedere _cosa succederà_, ma **decide cosa vuole che succeda**, e **sceglie le azioni** per raggiungere un _goal_ (obiettivo) desiderato.
+
+- <u><font color="#4bacc6">Basato su utilità</font></u>
+Gli **agenti con valutazione di utilità** sono un’estensione degli agenti basati su obiettivo.  
+Anziché limitarsi a _raggiungere un goal_, valutano **quanto è “buono” o vantaggioso** ciascun possibile stato del mondo.
+- utilizzano una funzione di utilità
+	- È una **funzione che assegna a ogni stato un valore numerico** → rappresenta **quanto l’agente è soddisfatto** in quello stato (“quanto sarò felice se arrivo lì”).
+$$U(s) = \text{grado di utilità dello stato }$$
+
+- <u><font color="#4bacc6">Basata su apprendimento</font></u>
+	- Questi agenti sono in grado di **migliorare il proprio comportamento nel tempo**, grazie a un meccanismo di apprendimento interno.
+![[Pasted image 20251016150117.jpg]]
+- 🔹 **Performance Element**
+	- È il **cuore operativo** dell’agente:
+	- Riceve **le percezioni** dai sensori.
+	- Sceglie **le azioni** da eseguire tramite gli attuatori.
+	- È la parte che determina **“come si comporta l’agente ora”**.
+
+- 🔹 **Critic**
+	- Valuta la qualità delle azioni dell’agente.
+	- Confronta le prestazioni osservate con un **performance standard** (criterio di riferimento) e fornisce **feedback**.
+	- Usa le percezioni ricevute dai sensori per osservare gli effetti delle azioni.
+	- Produce un segnale di feedback (positivo o negativo) che dice all’agente quanto bene ha agito.
+
+- 🔹 **Learning Element**
+	- Il **modulo di apprendimento** utilizza il feedback del _critic_ per **migliorare il comportamento futuro** dell’agente.
+	- Aggiorna il _performance element_ (cioè modifica il modo in cui l’agente prende decisioni).
+
+- 🔹 **Problem Generator**
+	- Suggerisce **nuove azioni da provare** per ottenere esperienze utili all’apprendimento.
+
+## Rappresentazione degli stati
+Quando un agente deve ragionare o apprendere, ha bisogno di **una rappresentazione interna dello stato del mondo**.  
+
+##### 1. Rappresentazione atomica
+![[Pasted image 20251016150129.jpg]]
+- Ogni **stato** o **situazione** è considerato come un **blocco unico e indivisibile**.
+- L’agente conosce solo _che quello stato esiste_, ma **non ha informazioni sulla sua struttura interna**.
+- È il modello più semplice:
+	→ **stati finiti**, **transizioni semplici**, a volte con **probabilità associate** (se stocastico).
+
+##### 2. Rappresentazione fattorizzata
+![[Pasted image 20251016150349.jpg]]
+- Ogni stato è **descritto tramite un insieme di variabili (fattori)**.
+- Invece di trattare tutto come un unico blocco, l’agente **rappresenta le caratteristiche principali** dello stato (es. posizione, temperatura, velocità, ecc.).
+- Queste variabili possono essere viste come **dimensioni in uno spazio vettoriale**.
+
+##### 3. Rappresentazione strutturata
+![[Pasted image 20251016150400.jpg]]
+- È la più **ricca e complessa**.
+- Gli oggetti non sono solo elenchi di valori, ma **entità con relazioni tra loro** (come in un grafo o in un linguaggio logico).
+- Permette di descrivere **relazioni, gerarchie e dipendenze**.
