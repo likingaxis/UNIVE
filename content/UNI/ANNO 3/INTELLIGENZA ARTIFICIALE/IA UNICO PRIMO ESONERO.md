@@ -283,3 +283,86 @@ Quando un agente deve ragionare o apprendere, ha bisogno di **una rappresentazio
 - È la più **ricca e complessa**.
 - Gli oggetti non sono solo elenchi di valori, ma **entità con relazioni tra loro** (come in un grafo o in un linguaggio logico).
 - Permette di descrivere **relazioni, gerarchie e dipendenze**.
+
+## AGENTI RISOLUTORI DI PROBLEMI
+- si basano sull'architettura basata sui goal
+	- Tipologia di agenti che puntano a risolvere un problema attraverso un algoritmo ben definito
+		- Di solito usano algoritmi di ricerca
+			- che possono essere di tipo:
+				- *informato*
+					- L’agente stima quanto è vicino al goal, riducendo la ricerca
+						- Greedy Search, A*
+				- *non informato*
+					- L’agente non conosce la distanza dal goal, esplora tutto lo spazio
+						- BFS, DFS, Uniform Cost
+	- l’agente risolutore di problemi **costruisce prima un piano completo di azioni**, tramite un **processo di ricerca interna**.
+#### 🧩 Rappresentazione e categorie
+- Gli agenti risolutori di problemi utilizzano rappresentazioni **atomiche**,  
+    dove gli **stati del mondo** sono **entità indivisibili** (nodi di un grafo) **senza struttura interna visibile**.
+- Gli agenti che invece utilizzano **rappresentazioni fattorizzate o strutturate** (cioè con sottocomponenti interne agli stati) sono detti **agenti pianificatori**.
+- Il **ragionamento dell’agente atomico** è puramente **algoritmico** e basato su **modelli di grafo** (stati = nodi, azioni = archi).
+Gli agenti risolutori di problemi operano in ambienti **semplici e controllabili**, tipicamente:
+- Episodici
+- A singolo agente
+- **Completamente osservabili**
+- **Deterministici**
+- **Statici** (non cambiano mentre l’agente pensa)
+- **Discreti** (stati e azioni finite)
+- **Noti** (modello di transizione conosciuto)
+####  Esecuzione: anello aperto vs anello chiuso
+- In un **ambiente completamente osservabile, deterministico e noto**, la soluzione è una **sequenza fissa di azioni**.  
+    → L’agente può **ignorare le percezioni durante l’esecuzione**:  
+    si parla di **sistema ad anello aperto (open-loop)**.
+- Se invece:
+    - il modello può essere impreciso, oppure
+    - l’ambiente non è deterministico,  
+        → l’agente deve **monitorare le percezioni e riadattarsi**,  
+        quindi lavora in **anello chiuso (closed-loop)**.
+#### ⚙️  Le quattro fasi principali del processo di risoluzione
+
+| Fase                               | Descrizione                                         |
+| ---------------------------------- | --------------------------------------------------- |
+| **1. Formulazione dell’obiettivo** | L’agente decide cosa vuole raggiungere              |
+| **2. Formulazione del problema**   | Definisce stati, azioni, transizioni e costi        |
+| **3. Ricerca (Search)**            | Calcola una sequenza ottimale di azioni nel modello |
+| **4. Esecuzione (Execution)**      | Esegue il piano nel mondo reale                     |
+
+📌 Durante la **ricerca**, l’agente non agisce fisicamente: pensa, simula e valuta internamente.
+## DEFINIZIONE FORMALE DEL PROBLEMA DI RICERCA
+Un **problema di ricerca** è una **descrizione astratta** di una situazione in cui un agente deve **trovare una sequenza di azioni** che porti dallo **stato iniziale** a uno **stato obiettivo**.
+$$\text{Problema di ricerca} = \langle S, S_0, A, Result, Goal, C \rangle$$
+Un problema di ricerca è definito da **cinque elementi principali**:
+
+|#|Componente|Descrizione|
+|---|---|---|
+|**1️⃣**|**Stato iniziale**|È lo stato in cui si trova l’agente all’inizio del problema.|
+|**2️⃣**|**Azioni possibili**|La funzione **Azioni(s)** restituisce l’insieme finito di azioni eseguibili nello stato `s`. Ogni azione è _applicabile_ in `s`.  <br>Es: `Azioni(Arad) = {VersoSibiu, VersoTimisoara, VersoZerind}`|
+|**3️⃣**|**Modello di transizione**|Descrive come le azioni modificano lo stato del mondo.  <br>Formalmente: `Risultato(s, a) = s′` indica lo stato successivo ottenuto eseguendo l’azione `a` nello stato `s`.  <br>Es: `Risultato(Arad, VersoZerind) = Zerind`|
+|**4️⃣**|**Insieme di stati obiettivo**|Contiene uno o più stati che soddisfano il goal dell’agente (le condizioni di successo).|
+|**5️⃣**|**Funzione di costo**|La funzione `CostoAzione(s, a, s′)` (o `c(s, a, s′)`) assegna un valore numerico positivo al costo di eseguire `a` in `s` per raggiungere `s′`.  <br>Serve per confrontare soluzioni e trovare quella più economica.|
+- Una **sequenza di azioni** forma un **cammino** (_path_) attraverso lo spazio degli stati.
+- Una **soluzione** è un cammino che parte dallo stato iniziale e arriva a uno stato obiettivo.
+- Una **soluzione ottima** è quella con **costo totale minimo**, rispetto alla funzione di costo definita.
+- Lo **spazio degli stati** può essere rappresentato come un **grafo**:
+    - i **nodi** (vertici) rappresentano gli **stati**;
+    - gli **archi orientati** rappresentano le **azioni** e le **transizioni**;
+    - i **pesi degli archi** rappresentano i **costi delle azioni**.
+#### Modello e Tipi di astrazione
+Quando formuliamo un problema (es. “**raggiungere una certa città**”), stiamo creando un **modello**,  
+cioè una **descrizione matematica astratta** della realtà.  
+Non rappresentiamo il mondo in tutti i suoi dettagli, ma solo gli aspetti **rilevanti per la risoluzione del problema**.
+Il processo con cui **semplifichiamo una rappresentazione** eliminando dettagli non essenziali  
+è chiamato **astrazione**.
+
+
+|Tipo di astrazione|Definizione|Utilità|
+|---|---|---|
+|**Astrazione Valida**|Ogni soluzione trovata nel modello astratto può essere **espansa** in una soluzione valida nel mondo reale più dettagliato.|Garantisce che la soluzione “astratta” sia **corretta e applicabile** nella realtà.|
+|**Astrazione Utile**|Le azioni nella soluzione astratta sono **più facili o più economiche** da eseguire rispetto a quelle nel problema reale.|Permette di **semplificare la ricerca** e ridurre il costo computazionale.|
+
+📌 Una buona astrazione è **sia valida che utile**.
+### Algoritmi di ricerca
+- gli algoritmi di ricerca prendono in input un problema e restituiscono un cammino soluzione
+- Misura delle prestazioni
+	- Trovare una soluzione ha un costo
+	- Costo totale= costo della ricerca+costo del cammino soluzione
