@@ -361,8 +361,220 @@ Il processo con cui **semplifichiamo una rappresentazione** eliminando dettagli 
 |**Astrazione Utile**|Le azioni nella soluzione astratta sono **più facili o più economiche** da eseguire rispetto a quelle nel problema reale.|Permette di **semplificare la ricerca** e ridurre il costo computazionale.|
 
 📌 Una buona astrazione è **sia valida che utile**.
-### Algoritmi di ricerca
-- gli algoritmi di ricerca prendono in input un problema e restituiscono un cammino soluzione
-- Misura delle prestazioni
-	- Trovare una soluzione ha un costo
-	- Costo totale= costo della ricerca+costo del cammino soluzione
+
+
+
+### PROBLEMI ESEMPLIFICATIVI E REALI
+Lo studio dei **problemi di ricerca** avviene partendo da **problemi esemplificativi (standardizzati)**,  
+che servono a **testare metodi di risoluzione**, per poi passare a **problemi reali**,  
+più complessi e legati a contesti pratici.
+
+- I problemi **esemplificativi**:
+	- Servono per **illustrare o mettere alla prova diversi metodi di risoluzione** (ricerca, ottimizzazione, pianificazione, ecc.).
+	- Sono **astratti**, **semplificati** e **standardizzati**, cioè formulati in modo generico per poter essere applicati a diversi algoritmi.
+- Invece, i **problemi reali**:
+    - Hanno una formulazione specifica e non standard,
+    - e le soluzioni trovate hanno **utilità pratica**.
+###### 🔸 Problemi ESEMPLIFICATIVI
+###### 🧹 Esempio: Mondo dell’Aspirapolvere
+Uno dei problemi classici su griglia, usato per testare gli algoritmi di ricerca di base.
+![[Pasted image 20251021125057.jpg]]
+![[Pasted image 20251021125109.jpg]]
+
+
+|Elemento|Descrizione|
+|---|---|
+|**Stati**|Ogni stato indica la posizione dell’agente e la presenza o assenza di sporco in ogni cella.  <br>In un mondo con `n` celle, ci sono `n × 2ⁿ` stati possibili.|
+|**Stato iniziale**|Può essere qualunque configurazione iniziale di agente e sporco.|
+|**Azioni**|`Sinistra`, `Destra`, `Aspira` (nel mondo a due celle).|
+|**Modello di transizione**|`Aspira` rimuove lo sporco dalla cella; `Sinistra` e `Destra` spostano l’agente (se non ci sono muri).|
+|**Stati obiettivo**|Stati in cui **tutte le celle sono pulite**.|
+|**Costo di azione**|Tutte le azioni hanno **costo uniforme = 1**.|
+
+📌 Lo **spazio degli stati** è un piccolo grafo, gestibile, utile per illustrare i concetti di esplorazione e soluzione ottimale.
+
+---
+
+###### 🧩 Puzzle dell’Otto
+
+Un classico problema di ricerca usato per confrontare algoritmi come A*, BFS, DFS, ecc.
+![[Pasted image 20251021132649.jpg]]
+
+|Elemento|Descrizione|
+|---|---|
+|**Stati**|Tutte le possibili configurazioni della scacchiera 3×3 con i numeri da 1 a 8 e una casella vuota.|
+|**Stato iniziale**|Una configurazione specifica del puzzle.|
+|**Obiettivo**|Configurazione ordinata (numeri da 1 a 8, casella vuota in basso a destra).|
+|**Azioni**|Spostare la casella vuota **su, giù, destra, sinistra**.|
+|**Goal test**|Verificare se la configurazione corrente corrisponde allo stato obiettivo.|
+|**Costo del cammino**|Costo uniforme (ogni mossa = 1).|
+|**Spazio degli stati**|Molto ampio, può contenere cicli; adatto a testare efficienza degli algoritmi.|
+
+###### 👑 Problema delle Otto Regine
+![[Pasted image 20251021132907.jpg]]
+
+Un altro problema classico per testare **formulazioni diverse** e strategie di ricerca.
+
+|Formulazione|Descrizione|Spazio di ricerca|
+|---|---|---|
+|**Incrementale 1 (base)**|Si aggiungono regine una per volta su qualunque casella.|~1.8 × 10¹⁴ sequenze (molto grande).|
+|**Incrementale 2 (migliorata)**|Si aggiunge una regina per colonna, assicurandosi che non minacci le precedenti.|Solo 2057 stati (molto più efficiente).|
+|**A stato completo**|La scacchiera contiene 8 regine (una per colonna) e si spostano finché non sono tutte non minacciate.|Usata in algoritmi di ricerca locale (es. _Hill Climbing_).|
+
+📌 Questo problema mostra come **la formulazione influenza l’efficienza della ricerca**:  
+più il modello è compatto e vincolato, più facile sarà trovare una soluzione.
+
+
+######  Problemi del mondo reale
+
+I problemi reali sono molto più **complessi** dei modelli astratti e le loro soluzioni sono **praticamente utili**.  
+Spesso la loro formulazione è **specifica e non standardizzata**.
+✈️ Esempio: Problema di ricerca dell’itinerario aereo
+
+| Elemento                   | Descrizione                                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Stati**                  | Includono posizione (aeroporto), ora corrente e altre informazioni storiche (es. tratte, tariffe, voli precedenti). |
+| **Stato iniziale**         | L’aeroporto di partenza dell’utente.                                                                                |
+| **Azioni**                 | Prendere un volo disponibile dopo l’ora corrente, rispettando i tempi di trasferimento.                             |
+| **Modello di transizione** | Lo stato successivo aggiorna la posizione e l’orario di arrivo del volo.                                            |
+| **Stato obiettivo**        | Aeroporto di destinazione desiderato.                                                                               |
+| **Costo dell’azione**      | Combinazione di fattori: costo del biglietto, tempo, durata, coincidenze, dogane, qualità del posto, ecc.           |
+
+# 🔎 Algoritmi di Ricerca
+
+Un **algoritmo di ricerca** riceve in input un **problema di ricerca** e restituisce una **soluzione** (un cammino verso lo stato obiettivo) o un **fallimento**.
+- Gli algoritmi costruiscono un **albero di ricerca** sul **grafo dello spazio degli stati**.
+- Ogni **nodo** rappresenta uno **stato**, ogni **ramo** un’**azione**.
+- **nodo** dell’albero contiene:
+	- `n.stato` → lo stato rappresentato
+	- `n.padre` → il nodo da cui è stato generato
+	- `n.azione` → l’azione che ha portato a questo stato
+	- `n.costo-cammino = g(n)` → costo totale dal nodo iniziale fino a `n`
+- La **radice** corrisponde allo stato iniziale.
+	- Espandere un nodo = generare i **nodi figli** applicando le azioni possibili (`Risultato(s, a)`).
+
+📌 **Distinzione chiave:**
+
+- **Spazio degli stati** → tutti i possibili stati del mondo.
+
+- **Albero di ricerca** → cammini esplorati dall’agente durante la ricerca.
+
+- La **frontiera** è l’insieme dei nodi generati ma non ancora espansi.
+	- Separa gli **stati esplorati** (interni) da quelli **ancora da esplorare** (esterni).
+	- È implementata come una **coda**(FIFO,LIFO,PRIOR) , con le operazioni:
+		- `VUOTA?(coda)` → verifica se la frontiera è vuota
+		- `POP(coda)` → estrae un nodo dalla frontiera
+		- `INSERISCI(elemento, coda)` → aggiunge nuovi nodi (figli)
+- La **strategia di scelta del nodo da espandere** determina il tipo di algoritmo (BFS, DFS, A*, ecc.).
+- *tipi di misura di prestazioni: *
+
+|Criterio|Descrizione|
+|---|---|
+|**Completezza**|Trova una soluzione se esiste.|
+|**Ottimalità**|Restituisce la soluzione di costo minimo.|
+|**Tempo**|Numero di nodi generati.|
+|**Spazio**|Memoria richiesta.|
+
+$$\text{Costo totale} = \text{Costo della ricerca} + \text{Costo del cammino soluzione}$$
+
+L’obiettivo è **minimizzare il costo complessivo**: trovare una soluzione **valida e conveniente** con il minor sforzo possibile.
+
+#### 🧮 Tipi di Gestione della Frontiera (strategie)
+
+|Strategia|Struttura dati|Comportamento|
+|---|---|---|
+|**FIFO**|Coda|Ricerca in ampiezza (Breadth-First Search)|
+|**LIFO**|Pila|Ricerca in profondità (Depth-First Search)|
+|**Coda con priorità**|Ordinata da una funzione di costo o euristica|Ricerca di costo uniforme, Greedy, A*|
+
+##### 🔹 Tipi di strategie
+
+###### 🔸 Non informate (cieche)
+
+- Non usano informazioni sul goal.  
+    Esempi:
+    - **Ricerca in ampiezza (BFS)**
+    - **Ricerca di costo uniforme (UCS)**
+    - **Ricerca in profondità (DFS)**
+    - **Profondità limitata**
+    - **Approfondimento iterativo**
+###### 🔸 Informate (euristiche)
+- Usano una **funzione euristica** `h(n)` che stima la distanza dal goal.  
+    Esempi:
+    - **Greedy Search**
+    - **A*** (ricerca ottimale euristica)
+
+📌 Ogni strategia cerca un equilibrio tra **tempo**, **spazio**, **completezza** e **ottimalità**.
+
+#### Pseudocodice generico di ricerca albero
+![[Pasted image 20251021140935.jpg]]
+
+#### Pseudocodice più dettagliato
+![[Pasted image 20251021141804.jpg]]
+
+
+#### Ricerca in ampiezza
+![[Pasted image 20251021142331.jpg]]
+##### Pseudo
+![[Pasted image 20251021142416.jpg]]
+- È una **ricerca non informata** e **sistematica**, completa anche su spazi di stati infiniti (se ogni stato ha un numero finito di successori).
+- Usa una **coda FIFO**: i nuovi nodi vengono aggiunti in fondo, e quelli più vecchi vengono espansi per primi.
+
+| Aspetto            | Descrizione                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| **Frontiera**      | Implementata come coda FIFO                                                              |
+| **Test obiettivo** | Può essere effettuato subito dopo la generazione di un nodo (“anticipato”)               |
+| **Raggiunti**      | Insieme degli stati già visitati, per evitare di riespandere stati già esplorati         |
+| **Espansione**     | Tutti i nodi di profondità $d$ vengono generati **prima** di quelli a profondità $d + 1$ |
+
+#####  Proprietà della BFS
+
+| Proprietà                        | Valore                                                   |
+| -------------------------------- | -------------------------------------------------------- |
+| **Completezza**                  | ✅ Sempre completa (trova una soluzione se esiste)        |
+| **Ottimalità**                   | ✅ Ottimale se **tutti i costi delle azioni sono uguali** |
+| **Tempo**                        | $O(b^d)$                                                 |
+| **Spazio**                       | $O(b^d)$                                                 |
+| **Fattore di ramificazione (b)** | Numero massimo di successori di un nodo                  |
+| **Profondità (d)**               | Profondità della soluzione più superficiale              |
+| **Cammino massimo (m)**          | Lunghezza massima di un cammino nello spazio di ricerca  |
+##### Complessità
+Se tutti gli operatori hanno costo costante $k$:
+$g(n) = k \times \text{profondità}$
+- **Complessità temporale:**
+    $$T(b, d) = b + b^2 + \dots + b^d = O(b^d)$$
+- **Complessità spaziale:**  
+    Anch’essa $$O(b^d)$$ poiché tutti i nodi devono essere mantenuti in memoria.
+📌 Entrambe le complessità sono **esponenziali**, quindi la BFS è praticabile solo per problemi di piccola scala.
+#### Ricerca a Costo Uniforme (Uniform-Cost Search, UC)
+- È una **generalizzazione della ricerca in ampiezza**, usata quando **le azioni hanno costi diversi**
+- L’idea è di **espandere sempre il nodo con costo di cammino minimo** $g(n)$
+- Usa una **coda con priorità** come frontiera (invece della coda FIFO della BFS).
+- Espande i nodi **in ordine di costo crescente**
+- Si comporta come l’**algoritmo di Dijkstra**: la ricerca si “espande a onde” di costo uniforme
+![[Pasted image 20251021143052.jpg]]
+## Proprietà
+
+| Proprietà       | Descrizione                                                                 |
+| --------------- | --------------------------------------------------------------------------- |
+| **Completezza** | ✅ Completa se $\varepsilon > 0$ (cioè se ogni azione ha un costo positivo). |
+| **Ottimalità**  | ✅ Ottimale rispetto al costo del cammino.                                   |
+| **Tempo**       | $O(b^{1 + \lfloor C^*/\varepsilon \rfloor})O$                               |
+| **Spazio**      | $O(b^{1 + \lfloor C^*/\varepsilon \rfloor})O$                               |
+
+dove:
+
+- $C^*$ = costo della soluzione ottima
+- $\varepsilon$ = costo minimo possibile per un’azione
+
+📌 L’esponente $1 + \lfloor C^*/\varepsilon \rfloor$rappresenta la **profondità massima** che deve essere esplorata per garantire l’ottimalità, includendo anche il livello iniziale.
+##### 💡 Confronto con la Ricerca in Ampiezza
+
+|Caso|Comportamento|
+|---|---|
+|**Tutti i costi uguali**|UC ≡ BFS (stesse prestazioni e soluzione minima in numero di azioni).|
+|**Costi diversi**|UC esplora prima i cammini a costo minore, garantendo la soluzione più economica.|
+
+##### ⚠️ Complessità e limiti
+- Complessità temporale e spaziale: **esponenziale** in $$b^{1 + \lfloor C^*/\varepsilon \rfloor}$$
+- Può diventare **molto più costosa della BFS** se ci sono **molti cammini a basso costo** che non portano al goal.
