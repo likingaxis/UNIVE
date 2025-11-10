@@ -625,3 +625,164 @@ fino a far **incontrare le due ricerche** in un punto intermedio dello spazio de
 ### Fix della ricerca-grafo con costo uniforme UC
 ![[Pasted image 20251021155139.png]]
 
+# Ricerca esaustiva
+Nella ricerca **non informata**, come BFS o UC, l’agente esplora tutto lo spazio degli stati “alla cieca”, senza sapere quale strada lo avvicina davvero alla soluzione.  
+	→ Questo è **impraticabile** quando il numero di stati cresce in modo **esponenziale**.
+- si cerca quindi di applicare della euristica
+	- Una **euristica** è una _stima intelligente_ della distanza (o del costo) che manca per raggiungere l’obiettivo.
+		- deriva da **esperienza o conoscenza del dominio**
+		- esplora prima i nodi più promettenti.
+		- non garantisce l’ottimo assoluto, ma una **buona soluzione in tempi accettabili**.
+- Funzione di valutazione euristica
+	- La conoscenza euristica si formalizza in una **funzione**:
+$$f: n \rightarrow \mathbb{R}
+$$
+	- Questa associa a ogni **nodo n** (che rappresenta uno stato) un **valore numerico** che misura “quanto sembra promettente” quel nodo.
+		- $f(n)$ è un **numero reale**;
+		- si calcola **a partire dallo stato del nodo (`n.Stato`)**, non dalla sua storia.
+
+### Ricerca Best-First
+![[Pasted image 20251025113910.png]]
+Ad ogni passo viene scelto il **nodo più promettente**, ossia quello con il **valore di f(n) più basso** (in caso di costi o distanze).
+- “Migliore = minore”, perché un f(n) piccolo indica “più vicino” al goal.
+- L’implementazione usa una **coda con priorità**, ordinata in base al valore di f(n).
+- Quindi tutto dipende da **come definiamo f(n)**
+	- in quello classico lo definiamo uguale a $g(n)$
+#### CLASSICO
+![[Pasted image 20251025111757.png]]
+- **g(n)** = costo reale del cammino dall’inizio al nodo n.
+- Nessuna euristica: usiamo solo il costo accumulato finora.
+In questo caso, la “Best-First” **coincide esattamente con la Ricerca di Costo Uniforme (Uniform-Cost Search)**.
+- **`Goal-Test`** è una funzione fornita dalla definizione del problema:  
+	- prende come input lo **stato** di un nodo e restituisce **vero** se quello stato è uno degli **stati obiettivo** (cioè soddisfa la condizione del goal), oppure **falso** in caso contrario.
+Infatti:
+- l’algoritmo sceglie sempre il nodo con il **costo cumulativo minore** (`lowest-cost node in frontier`),
+- e continua ad espandere fino a trovare il goal con costo minimo.
+#### Greedy Best-First
+![[Pasted image 20251025112102.png]]
+![[Pasted image 20251025111949.png]]
+- sfrutta **h(n)**
+	- **h(n)** = stima del costo _dal nodo n al goal_ (quanto “manca”).
+		- non è proprio euristica perché vede solo il passato
+- L’algoritmo ignora completamente il costo già speso **(g(n))**, guarda solo _chi sembra più vicino alla meta_.
+**Vantaggi:**
+- molto più veloce, perché guida subito verso il goal.  
+**Svantaggi:**
+- non è ottimale (può trovare percorsi più costosi).   
+- non è garantito che sia completa se ci sono cicli o stime sbagliate.
+
+# A* search
+L'idea principale è cercare un equilibrio tra:
+- **arrivare al goal** (come Greedy),
+- **risparmiare sul costo fatto finora** (come Uniform Cost),  
+Quindi l'alg, vuole **trovare il percorso totale più economico possibile**, stimando il costo complessivo.
+### La funzione di valutazione
+A usa:$$
+f(n)=g(n)+h(n)$$
+dove:
+- **g(n)** = costo _reale_ per arrivare fino al nodo `n` (già percorso);
+- **h(n)** = stima _euristica_ del costo rimanente per arrivare al goal;
+- quindi **f(n)** = stima del costo _totale_ del cammino passando per n.
+
+In altre parole:
+> A valuta ogni nodo come “quanto ho speso finora + quanto (credo) manchi ancora”.
+
+- se vogliamo che un algoritmo A sia completo 
+Condizione sufficiente: ogni passo deve costare almeno **ε > 0**, cioè
+$$g(n) ≥ d(n)·ε$$
+→ garantisce che l’algoritmo non resti bloccato in cicli o cammini infiniti a costo zero.
+####  L’algoritmo A*
+- per fare chiarezza, quando si parla di A, si intende la famiglia di algoritmi che usa la funzione di valutazione f(n)=g(n)+h(n)
+- quando si parla di A* si intende
+L’**$A^*$** è un **caso particolare di A**, in cui si **impone una condizione precisa sull’euristica h(n)** per fare in modo che sia completo e ottimale:  
+
+| Proprietà                  | Significato                                                         | Effetto                                              |
+| -------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------- |
+| **h(goal)=0**              | al goal il costo mancante è 0                                       | condizione base                                      |
+| **h(n) ≥ 0**               | nessuna stima negativa                                              | realismo                                             |
+| **Ammissibile**            | non sovrastima mai il costo reale: $h(n) ≤ h^*(n)h$                 | garantisce ottimalità                                |
+| **Consistente (Monotona)** | $h(n) ≤ c(n,a,n') + h(n')$           dove $n'$ è un successore di n | evita ri-espansioni, assicura $f(n)$ non decrescente |
+##### CODICE A*
+##### Complessità e Limiti di A*
+
+- **Tempo:** esponenziale $O(b^d)$
+- **Spazio:** molto elevato $O(b^{d+1})$
+- **Problema principale:** memoria → A* mantiene tutta la frontiera.
+
+#### Migliorare l'occupazione in memoria di A*
+
+#### Mediante Beam Search
+Invece di tenere in memoria TUTTI I NODI, l'idea è quella di ricordare solo i *k nodi più promettenti*, dove `k` è detto **ampiezza del raggio (beam)**.
+
+>[!tip] LA BEAM SEARCH ***NON* È COMPLETA**
+
+### Idea e pseudocodice
+![[Pasted image 20251025193001.jpg]]
+
+![[Pasted image 20251025193007.jpg]]
+
+
+>[!tip]- Esempio
+>![[Pasted image 20251025193059.jpg]]
+#### IDA*
+L'algoritmo IDA* combina
+- A*
+- ricerca in profondità iterativa(con limite) (ID)
+Più precisamente, combina i vantaggi di entrambe
+- come A*: usa la funzione di valutazione $$f(n) = g(n) + h(n)$$
+- come ID: esplora **in profondità**, ma **con un limite**.
+- il limite non sulla profondità ma sul valore del nodo
+	- Si imposta un limite iniziale $f_{limit}$ ;
+	- Si esplora in profondità solo i nodi con $f(n) ≤ f_{limit}$
+	- Se non si trova la soluzione, si aumenta $f_{limit}$ e si ricomincia.
+
+**Tempo**❌ esponenziale (come A*)
+**Spazio**✅ lineare, $O(b·d)$
+## ⚙️ Valutazione delle Funzioni Euristiche
+
+### 🔹 Definizione
+
+Una **funzione euristica** $h(n)$ stima il **costo rimanente** per raggiungere il goal da un nodo $n$.
+
+> A parità di ammissibilità, un’euristica è **più efficiente** quanto più è **informata**, cioè quanto più i suoi valori si avvicinano al costo reale $h^∗(n)$.
+
+---
+
+### 🔹 Livello di informazione
+
+| Caso                | Descrizione                          | Tipo di ricerca    |
+| ------------------- | ------------------------------------ | ------------------ |
+| $h(n) = 0$          | Nessuna informazione → esplora tutto | BFS / Uniform Cost |
+| $0 < h(n) < h^*(n)$ | Euristica ammissibile, ma parziale   | A*                 |
+| $h(n) = h^*(n)$     | Conoscenza perfetta (oracolo)        | Ottimo immediato   |
+
+Condizione generale per le euristiche **ammissibili**:
+$0 \le h(n) \le h^*(n)$
+#### Teorema di dominanza
+
+> Se $h_1(n) \le h_2(n)$per ogni nodo $n$:
+> 
+> - i nodi espansi da **A*** con $h_2$​ sono **un sottoinsieme** di quelli espansi con $h_1$;
+>     
+> - quindi **A*** con $h_2$​ è **almeno efficiente quanto** con $h_1$​.
+>     
+
+📌 In sintesi:
+> Più l’euristica è **vicina a $h^∗$, meno nodi vengono esplorati → più efficiente.
+
+##### Compromesso: costo dell’euristica vs costo della ricerca
+- Un’euristica **semplice** è veloce da calcolare ma fa esplorare molti nodi.
+- Un’euristica **precisa** riduce la ricerca ma può essere costosa da valutare.
+> L’obiettivo è trovare un equilibrio tra **qualità della stima** e **costo computazionale**
+![[Pasted image 20251025193638.jpg]]
+##### Misurare l’efficacia: Fattore di diramazione effettivo $b^*$
+Per misurare quanto è “forte” o efficace un’euristica possiamo utilizzare un valore chiamato **fattore di diramazione effettivo (`b*`)**.
+
+Rappresenta **il numero medio di nodi generati per livello** dalla ricerca.
+
+$N + 1 = 1 + b^* + (b^*)^2 + \dots + (b^*)^d$
+
+Dove:
+- $N$: numero totale di nodi generati
+- $d$: profondità della soluzione
+💡 Più $b^*$ è vicino a **1**, più l’euristica è **efficace**.
