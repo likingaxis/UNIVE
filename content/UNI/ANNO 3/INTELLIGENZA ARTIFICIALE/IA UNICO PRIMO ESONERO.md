@@ -575,6 +575,53 @@ dove:
 |**Tutti i costi uguali**|UC ≡ BFS (stesse prestazioni e soluzione minima in numero di azioni).|
 |**Costi diversi**|UC esplora prima i cammini a costo minore, garantendo la soluzione più economica.|
 
-##### ⚠️ Complessità e limiti
-- Complessità temporale e spaziale: **esponenziale** in $$b^{1 + \lfloor C^*/\varepsilon \rfloor}$$
-- Può diventare **molto più costosa della BFS** se ci sono **molti cammini a basso costo** che non portano al goal.
+#### Ricerca in profondità DFS
+![[Pasted image 20251021151954.png]]
+#### Analisi costi
+• Se m distanza massima della soluzione nello spazio di ricerca 
+• b fattore di diramazione 
+	• Allora la complessità temporale è: $O(b^{m+1})$
+profondità usa meno memoria di ampiezza
+### Ricerca in profondità limitata
+La Ricerca in Profondità Limitata è una strategia di ricerca non informata che esegue la ricerca in profondità fino a un livello massimo predefinito, chiamato **limite di profondità ($\ell$)**.
+- **Principio Operativo:** La ricerca procede in profondità, espandendo il nodo più recente, ma si ferma non appena si raggiunge il livello $\ell$.
+- **Limite $\ell$:** Questo valore predefinito agisce come un "muro" o un vincolo; i nodi al livello $\ell$ non vengono espansi, evitando così che la ricerca si perda indefinitamente in rami profondi o cicli.
+- **Esempio di Utilizzo:** È utile per problemi in cui si conosce un **limite superiore** per la profondità della soluzione (es. in un problema di _Route-finding_ tra $N$ città, la soluzione più lunga non può superare $\text{N}-1$ mosse).
+• Complessità tempo: $O(b^d)$
+- Spazio: $O(b*d)$
+![[Pasted image 20251021152344.png]]
+![[Pasted image 20251021152421.png]]
+
+#### Ricerca Bidirezionale
+
+La **ricerca bidirezionale** esplora simultaneamente:
+- **In avanti** dallo **stato iniziale**, e
+- **All’indietro** dallo **stato obiettivo**,
+fino a far **incontrare le due ricerche** in un punto intermedio dello spazio degli stati.
+- Invece di esplorare $O(b^d)$ nodi, ne esplora circa:
+    $O(b^{d/2} + b^{d/2}) \approx O(b^{d/2})$
+- Questo riduce drasticamente il numero di nodi da analizzare, **a parità di profondità** $d$.
+📌 Funziona bene solo se:
+- È possibile **ragionare all’indietro** (cioè generare predecessori),
+- E lo **stato obiettivo** è **ben definito**.
+- Mantiene **due frontiere** (una per ogni direzione) e due insiemi di **stati raggiunti**.
+- Espande **il nodo con costo minore** tra i due lati (strategia best-first).
+- Se la funzione di valutazione è il **costo di cammino**, otteniamo una **ricerca bidirezionale a costo uniforme**, ottimale come UC.
+- Nessun nodo con costo >$C^*/2$ (dove $C^∗$ è il costo ottimo) viene espanso.
+![[Pasted image 20251021154403.png]]
+
+#### TUTTE LE STRATEGIE A CONFRONTO
+![[Pasted image 20251021154529.png]]
+
+#### PROBLEMA DEI CICLI
+##### Tre soluzioni pratiche
+![[Pasted image 20251021154940.png]]
+
+##### Esempio di soluzione con i grafi
+![[Pasted image 20251021155035.png]]
+
+### Fix della ricerca-grafo in ampiezza
+![[Pasted image 20251021155104.png]]
+### Fix della ricerca-grafo con costo uniforme UC
+![[Pasted image 20251021155139.png]]
+
