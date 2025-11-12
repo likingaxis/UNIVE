@@ -1,3 +1,30 @@
+#### Equivalenza logica
+Due formule sono **equivalenti logicamente** se esprimono la stessa verità in ogni modello:
+A≡B  ⟺  (A⊨B) e (B⊨A)A ≡ B \iff (A ⊨ B) \text{ e } (B ⊨ A)A≡B⟺(A⊨B) e (B⊨A)
+Esempi:
+- $A∧B≡B∧A$ (commutatività)
+    
+- $¬(A∧B)≡¬A∨¬B$ (De Morgan)
+    
+- $¬(A∨B)≡¬A∧¬B$ (De Morgan)
+##### Validità e Soddisfacibilità
+
+- Una formula $A$ è **valida** se è **vera in tutte le interpretazioni** (tautologia).
+- È **soddisfacibile** se esiste **almeno un modello** che la rende vera.
+- È **insoddisfacibile** se non esiste alcun modello che la renda vera.
+    > $A$ è valida ⟺ $¬A$ è insoddisfacibile.
+##### Inferenza nella logica proposizionale
+- Il **model checking** è un metodo di **inferenza diretta** nella logica proposizionale per verificare se una formula (o una conclusione) è **conseguenza logica** di una base di conoscenza.
+	- $KB ⊨ α$ 
+- **Algoritmi di soddisfacibilità (SAT):**
+    $KB ⊨ α \iff (KB ∧ ¬α) \text{ è insoddisfacibile}$ 
+    → cioè, **α è conseguenza logica** di KB se non può esistere un modello dove KB è vera e α è falsa.
+
+
+![[Pasted image 20251112153428.png]]
+![[Pasted image 20251112153518.png]]
+
+
 
 ### Logica Proposizionale (PROP)
 ### Sintassi
