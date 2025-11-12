@@ -702,6 +702,26 @@ L’**$A^*$** è un **caso particolare di A**, in cui si **impone una condizione
 | **h(n) ≥ 0**               | nessuna stima negativa                                              | realismo                                             |
 | **Ammissibile**            | non sovrastima mai il costo reale: $h(n) ≤ h^*(n)h$                 | garantisce ottimalità                                |
 | **Consistente (Monotona)** | $h(n) ≤ c(n,a,n') + h(n')$           dove $n'$ è un successore di n | evita ri-espansioni, assicura $f(n)$ non decrescente |
+###### PSEUDOCODICE
+
+```scss
+function A* (problem) returns a solution or failure
+nodo <- nodo con stato = problem.initialstate
+frontiera <- coda di priorità ordinata in base a f(n) con all'inizio solo nodo "nodo"
+esplorati <- insieme dei nodi esplorati inizialmente vuoto
+loop do
+    if frontiera is empty? then return failure
+    nodo <- POP(frontiera)
+    if problem.GOALTEST(nodo.state) then return SOLUTION(nodo)
+    add nodo.state to esplorati
+    for each action in problem.ACTIONS(nodo.state) do
+        child <- CHILD-NODE(problem, nodo, action)
+        if child.state non in frontiera or esplorati then
+            frontiera <- INSERT(child.state)
+        else if child.state is in frontiera con f(n) più alto allora
+            replace that frontier node with child
+```
+
 ##### CODICE A*
 ##### Complessità e Limiti di A*
 
@@ -786,3 +806,317 @@ Dove:
 - $N$: numero totale di nodi generati
 - $d$: profondità della soluzione
 💡 Più $b^*$ è vicino a **1**, più l’euristica è **efficace**.
+
+#### Come inventare una euristica
+- **Rilassamento del problema:** togli vincoli per ottenere un problema più semplice → la sua soluzione dà una _sottostima_ ammissibile.
+- **Massimizzazione:** se hai più euristiche ammissibili, prendi il _massimo_ → resta ammissibile e più informata.
+- **Sottoproblemi / Pattern database:** pre-calcola i costi di sottoproblemi; se _disgiunti_, puoi sommare le euristiche.
+- **Apprendimento:** l’euristica può essere appresa automaticamente dai dati (ma non sempre ammissibile).
+- **Combinazione lineare:** somma pesata di più euristiche, con coefficienti scelti o appresi.
+
+## Agenti classici
+Gli agenti classici assumono che l'ambiente sia:
+- **Completamente Osservabile:** L'agente conosce tutto ciò che è rilevante per la sua decisione in ogni momento. Non ci sono informazioni nascoste.
+- **Deterministico:** Ogni azione ha un unico risultato, certo e prevedibile. Se un robot decide di andare avanti, andrà avanti, senza possibilità di scivolare o deviare.
+**La conseguenza di queste due assunzioni è potentissima:**
+- **Pianificazione Offline:** L'agente può calcolare l'intera sequenza di azioni per raggiungere l'obiettivo prima ancora di muovere un solo passo.
+- **Esecuzione senza sorprese:** Una volta creato, il piano può essere eseguito a occhi chiusi, perché si è certi che il mondo non cambierà in modi imprevisti.
+### RICERCA LOCALE
+il **mondo reale è raramente** così semplice e prevedibile. Questo ci spinge a riconsiderare le nostre assunzioni e a cercare approcci più flessibili e realistici.
+Mentre gli algoritmi classici cercano un **cammino soluzione** (una sequenza di azioni per arrivare al goal),
+- Si usa quando interessa **solo lo stato finale**, non il cammino
+##### Come Funziona la Ricerca Locale?
+Le sue caratteristiche principali sono:
+- **Non è sistematica**: 
+	- Non garantisce di esplorare tutte le possibilità.
+- **Mantiene solo lo stato corrente**: 
+	- A differenza degli algoritmi classici che memorizzano un'intera frontiera di nodi, la ricerca locale tiene traccia solo della posizione attuale (il **nodo corrente**).
+- **Si muove tra nodi adiacenti**: 
+	- Ad ogni passo, valuta gli stati vicini e si sposta in uno di essi, sperando di migliorare la situazione.
+- **Memoria super efficiente**: 
+	- Non tenendo traccia dei cammini passati, consuma una quantità di memoria minima e costante.
+- **Ideale per problemi di ottimizzazione**: 
+	- È perfetta per trovare lo stato "migliore" secondo una **funzione obiettivo** (che vogliamo massimizzare) o lo stato a **costo minore** (che vogliamo minimizzare).
+
+Per comprendere il funzionamento della **ricerca locale**, possiamo immaginare lo **spazio degli stati** come un vero e proprio **paesaggio tridimensionale** dove:
+- ogni **punto** del paesaggio rappresenta **uno stato possibile** del problema;
+- la **quota (altezza)** del punto rappresenta il **valore della funzione obiettivo**, cioè quanto quello stato è buono o conveniente.
+
+L'obiettivo finale è trovare il punto migliore dell'intera mappa.
+- **Ottimo Globale (global maximum)**: È il picco più alto in assoluto, ovvero la **migliore soluzione possibile**.
+Tuttavia, il paesaggio è complesso e pieno di "trappole" che possono ingannare un algoritmo semplice.
+- **Ottimo Locale (local maximum) ⛰️**:
+    - **Cos'è**: Un picco che è più alto di tutti i suoi vicini, ma **non è il picco più alto** dell'intera mappa.
+- **Altopiano (shoulder o plateau) 🏜️**:
+    - **Cos'è**: Una zona piatta dove tutti i vicini hanno la stessa altezza.
+
+![[Pasted image 20251028154347.png]]
+
+#### ALGORITMO HILL CLIMBING
+L’**Hill Climbing** è l’algoritmo di **ricerca locale** più semplice e intuitivo.  
+a ogni passo, sceglie la direzione che porta **più in alto possibile**, cioè verso uno stato migliore, ma **senza pianificare a lungo termine**.
+👉 È quindi un approccio **greedy (ingordo)** — sceglie sempre la soluzione migliore **nell’immediato**, senza preoccuparsi del futuro.
+1. **Inizializzazione** – si parte da uno stato casuale (stato corrente).
+2. **Generazione** – si producono tutti gli stati vicini (successori).
+3. **Valutazione** – si valuta la funzione obiettivo di ogni successore.
+4. **Spostamento** – si passa al vicino con valore migliore.
+5. **Iterazione** – il nuovo stato diventa corrente e il ciclo ricomincia.
+🧠 L’algoritmo **non memorizza** gli stati passati
+
+![[Pasted image 20251028160108.png]]
+
+#### 🔁 Varianti Principali
+
+|Variante|Descrizione|Vantaggi|
+|---|---|---|
+|**Steepest-Ascent (salita più ripida)**|Sceglie il **miglior vicino in assoluto**|Converge rapidamente|
+|**Stocastico**|Sceglie **a caso** tra i vicini migliori|Evita alcuni massimi locali|
+|**Prima Scelta**|Genera vicini casualmente e accetta il **primo migliore**|Molto efficiente quando i vicini sono numerosi|
+|**Con Mosse Laterali**|Consente passi con **valore uguale** al corrente per uscire da plateau|Evita blocchi su superfici piatte|
+|**Con Riavvio Casuale**|Se si blocca, **riparte da un nuovo stato casuale**|Completo con probabilità 1 (prima o poi trova il massimo globale)|
+#### ⚠️ Problemi Tipici: Le “Trappole” del Paesaggio
+
+| Tipo di trappola            | Descrizione                                                | Effetto sull’algoritmo                                  |
+| --------------------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
+| **Massimo Locale(collina)** | Punto più alto dei vicini, ma inferiore al massimo globale | L’agente si ferma troppo presto                         |
+| **Altipiani (Plateau)**     | Area piatta dove tutti i vicini hanno lo stesso valore     | L’agente si muove a caso o si blocca                    |
+| **Crinali (Ridge)**         | Serie di massimi locali separati da discese laterali       | L’agente non riesce a “girare” verso la salita corretta |
+![[Pasted image 20251028162118.png]]
+![[Pasted image 20251028162130.png]]
+![[Pasted image 20251028162157.png]]
+
+📉 In questi casi, l’algoritmo può **fermarsi prematuramente** o “girare in tondo” senza mai raggiungere la soluzione ottimale.
+
+#### ALGORITMO SIMULATED ANNEALING
+È una **combinazione tra:**
+- **Hill Climbing**, che tende sempre a migliorare lo stato (approccio _greedy_),
+- e una **scelta stocastica controllata**, che _a volte accetta stati peggiori_.
+👉 Questo serve a **sfuggire dai massimi locali**:  
+accettando temporaneamente un peggioramento, l’algoritmo può “scendere” da una collina minore per poi risalire verso un picco più alto (il **massimo globale**).
+La **temperatura** regola quanto l’algoritmo è disposto ad accettare peggioramenti:
+- **Alta `T`** → accetta spesso anche mosse peggiori → ampia esplorazione;
+- **Bassa `T`** → accetta solo miglioramenti → comportamento simile a Hill Climbing.
+Man mano che il processo procede, la temperatura **decresce gradualmente** secondo un _cooling schedule_, ad esempio:
+$$T_{k+1} = \alpha \cdot T_k \quad \text{con } 0<α<1$$
+### Funzionamento dell’algoritmo
+1. **Inizializzazione:** scegli uno stato iniziale casuale e imposta una temperatura iniziale `T₀`.
+2. **Genera un successore casuale** dello stato corrente.
+3. **Valuta la differenza di energia (o costo):**
+    $\Delta E = f(n') - f(n)$
+4. **Decidi se accettarlo:**
+    - Se la mossa **migliora** la soluzione ($ΔE < 0$) → **accettala sempre**.
+    - Se **peggiora** la soluzione ($ΔE > 0$) → **accettala con probabilità**
+        $p = e^{-\Delta E/T}$
+        (poiché $ΔE > 0$, il valore è compreso tra 0 e 1).  
+        In pratica:
+        - più la mossa è “poco peggiore” → più probabile accettarla;
+        - più è “molto peggiore” → meno probabile.  
+            L’algoritmo genera un numero casuale in$[0,1]$ e accetta la mossa se è $< p$.
+5. **Aggiorna la temperatura:** riduci `T` secondo il piano di raffreddamento.
+6. **Ripeti** finché `T` è prossima a 0. 
+### Algoritmo
+![[Pasted image 20251029193033.png]]
+
+####  Ricerca Local Beam
+È una ricerca locale che mantiene **k stati alla volta** (anziché uno solo, come nell’Hill Climbing).  
+A ogni passo:
+1. genera tutti i successori dei `k` stati;
+2. se uno è il goal, termina;
+3. altrimenti seleziona i **k migliori** e ripete.
+👉 A differenza del riavvio casuale, le ricerche **collaborano**, condividendo i migliori risultati.  
+⚠️ Rischia di perdere **diversità** (tutti i cammini si concentrano nella stessa zona).  
+🎲 Variante: **Beam stocastica**, che sceglie i successori con probabilità proporzionale al valore → più esplorazione.
+### ALBERI AND-OR
+Quando ci troviamo in **ambienti non deterministici**, l’albero di ricerca classico (quello usato negli ambienti deterministici) **non basta più**.  
+- si utilizza una struttura chiamata **albero AND–OR**
+![[Pasted image 20251029193155.png]]
+- NODI OR -> cerchio singolo
+- NODI AND -> cerchio singolo + semicerchio
+- Ogni **foglia** del sottoalbero è un **nodo obiettivo**.
+### Pseudocodice
+![[Pasted image 20251029193206.png]]
+#### Gestione dei cicli
+- immaginando una situazione non deterministica 
+	- il robot casualmente potrebbe fallire nelle sue azioni
+- si può incorrere in situazioni cicliche 
+	- Esiste però una **soluzione ciclica**, che consiste nel **ripetere un’azione finché non riesce**.  
+- Per esempio:
+> “Continua a provare **Destra** finché non ti sposti davvero a destra”.
+```scss
+while (non sei nel riquadro destro)
+    esegui Destra
+```
+![[Pasted image 20251029193219.png]]
+#### Ricerca con Osservazioni Parziali
+Quando l’agente si trova in un ambiente **parzialmente osservabile**, le sue percezioni **non bastano per sapere con certezza in quale stato si trova**.  
+Deve quindi **gestire l’incertezza**, mantenendo una **rappresentazione interna** di ciò che _potrebbe_ essere vero.
+- perciò ora l'obiettivo è quello di raccogliere più informazioni possibili
+
+#### Ricerca sensor-less
+- Se l’agente **non riceve alcuna informazione** durante l’esecuzione → si parla di **problema senza sensori** o **problema conformante**.
+	- La ricerca non avviene più sugli **stati fisici**, ma sugli **stati-credenza**
+	- Ogni stato-credenza rappresenta **tutte le situazioni fisiche possibili** in cui l’agente potrebbe trovarsi.
+- Questo rende il problema **completamente osservabile** nel nuovo spazio, perché l’agente conosce sempre il proprio stato-credenza.
+	- La ricerca non avviene più sugli **stati fisici**, ma sugli **stati-credenza**, cioè insiemi di stati.
+**Componenti principali:**
+
+|Elemento|Descrizione|
+|---|---|
+|**Stati**|Ogni belief state è un sottoinsieme degli stati fisici possibili (fino a 2ⁿ).|
+|**Stato iniziale**|Insieme di tutti gli stati compatibili con le informazioni note.|
+|**Azioni**|Ammissibili se sicure in tutti gli stati del belief state.|
+|**Transizioni**|Il nuovo belief state è l’unione dei risultati dell’azione su ciascuno stato possibile.|
+|**Test obiettivo**|È raggiunto se almeno uno stato del belief state soddisfa l’obiettivo.|
+|**Costo**|Può essere medio o prudente (es. il massimo).|
+
+###### Come vengono aggiornati gli stati credenza (versione deterministica e non)
+![[Pasted image 20251029193235.png]]
+###### Spazio degli stati completo
+![[Pasted image 20251029193247.png]]
+Quando l’agente agisce in un ambiente parzialmente osservabile, il passaggio tra stati-credenza avviene in **tre fasi principali**:
+
+1. **🔸 Predizione**
+    - Si calcola lo **stato-credenza previsto** dopo aver eseguito un’azione, esattamente come nel caso senza sensori.
+    - In questa fase si considerano **tutti i possibili risultati** dell’azione.
+2. **🔸 Percezioni possibili**
+    - Dallo stato-credenza previsto si determinano **tutte le percezioni** che l’agente _potrebbe_ ricevere in base ai sensori.
+    - Serve per stimare **quali informazioni** saranno disponibili dopo l’azione.
+3. **🔸 Aggiornamento (filtraggio)**
+    - Per ogni percezione ricevuta, si costruisce un **nuovo stato-credenza** che include **solo gli stati compatibili** con quella percezione.
+    - Tutti gli stati non coerenti vengono eliminati → l’agente **riduce l’incertezza**.
+#### Agenti per ricerca online
+Finora abbiamo visto **ricerche offline**, dove l’agente pianifica **tutto il percorso prima di agire**.  
+Negli ambienti **reali, dinamici o ignoti**, questo non è sempre possibile: perciò si usa la **ricerca online**, che alterna **azione → osservazione → decisione**.
+- nella ricerca online l’agente **non calcola un piano completo**, ma decide passo dopo passo:
+1. **Agisce** → esegue un’azione.
+2. **Osserva** → percepisce il nuovo stato.
+3. **Aggiorna** → sceglie la prossima mossa in base a ciò che ha appreso.
+📍 È utile in:
+- **ambienti dinamici** (che cambiano nel tempo);
+- **ambienti non deterministici** (le azioni non hanno sempre lo stesso effetto);
+- **ambienti sconosciuti**, dove deve imparare gli effetti delle proprie azioni.
+#### Ambienti sconosciuti
+In un ambiente ignoto, l’agente **non conosce**:
+- gli stati,
+- gli effetti delle azioni,
+- né i costi associati.
+Deve **sperimentare** e costruire **un modello dell’ambiente** (es. costruzione di mappe).  
+Ogni azione serve sia per agire sia per **imparare**.
+####  Problemi di ricerca online
+Un problema di ricerca online coinvolge tre attività: **elaborazione, percezione e azione**.
+L’agente:
+- conosce **solo lo stato attuale**;
+- scopre **Risultato(s, a)** e **costo c(s,a,s′)** solo dopo aver agito;
+- può usare una **funzione euristica h(s)** come stima della distanza dal goal.
+###### Obiettivo: raggiungere l’obiettivo **minimizzando il costo totale effettivo**.  
+Il **rapporto di competitività** confronta questo costo con quello della soluzione ottima in un ambiente noto (più è basso, meglio è).
+⚠️ **Limiti**:
+- rischio di **vicoli ciechi** (stati da cui non si può più uscire);
+- **nessun algoritmo** può evitarli in tutti i casi;
+- ambienti esplorabili in sicurezza solo se **non esistono azioni irreversibili**.
+####  Agenti Online
+Gli agenti **non pianificano**, ma decidono **una sola azione alla volta**.  
+Devono ricordare le informazioni acquisite → usano **backtracking** per tornare indietro.
+#### Ricerca Locale Online
+Come nella ricerca Hill Climbing:
+- l’agente conosce `h(s)` solo dopo aver esplorato `s`;
+- mantiene **un solo stato in memoria** → è già un algoritmo **online**.
+⚠️ Tuttavia, può bloccarsi in un massimo locale e **non può usare riavvii casuali**, perché non può “teletrasportarsi”.
+#### Strategie Alternative
+1. **Random Walk** → l’agente sceglie casualmente una delle azioni possibili per uscire da massimi locali.
+2. **LRTA*** (_Learning Real-Time A*_) → l’agente impara durante la ricerca, aggiornando la propria euristica.
+#### 💡 LRTA* — Learning Real-Time A*
+Algoritmo che simula A*, ma **in tempo reale** e **localmente**:
+- aggiorna il valore `H(s)` dello stato appena lasciato;
+- poi sceglie la **mossa migliore** in base alle nuove stime.
+
+![[Pasted image 20251030112816.png]]
+![[Pasted image 20251030112825.png]]
+###### 📊 Proprietà
+
+|Proprietà|Descrizione|
+|---|---|
+|**Completezza**|Sì, in spazi esplorabili in sicurezza.|
+|**Efficienza**|Nel caso peggiore visita ogni stato 2 volte, ma mediamente è più rapido della profondità online.|
+|**Ottimalità**|Non garantita, salvo euristica perfetta.|
+### Agenti basati sulla conoscenza
+
+Gli **agenti basati sulla conoscenza (Knowledge-Based Agents)** sono sistemi che **ragionano sul mondo attraverso formule logiche**.  
+L’elemento fondamentale è la **Base di Conoscenza (KB)**, cioè un insieme di **fatti e regole** che descrivono il mondo in modo simbolico.
+La **KB** contiene un insieme di **formule logiche** (proposizioni o predicati) che rappresentano asserzioni sul mondo.
+- Quando una formula è accettata come vera **senza essere derivata**, si chiama **assioma**.
+- Le formule possono essere **aggiunte**, **rimosse** o **interrogate** attraverso operazioni logiche:
+	- **TELL(KB, φ)** → inserisce nella KB una nuova formula (nuovo fatto o regola).
+	- **ASK(KB, α)** → interroga la KB per verificare se α è una **conseguenza logica** delle informazioni memorizzate.
+	- **RETRACT(KB, φ)** → facoltativo, rimuove una formula
+	- dove:
+	-  **α** = singolo fatto (formula)
+	- **Φ** = insieme di fatti e regole (base di conoscenza)
+![[Pasted image 20251112115048.png]]
+#### Requisito fondamentale
+> Ogni risposta dell’agente deve essere **una conseguenza logica** di ciò che gli è stato detto in precedenza.  
+> In simboli: se **KB ⊨ α**, allora α è logicamente conseguente da KB.
+#### PSEUDOCODICE DEL PROGRAMMA AGENTE CON KB
+Un agente di questo tipo alterna **percezione, inferenza e azione**, aggiornando continuamente la KB.
+![[Pasted image 20251112114302.png]]
+L’agente quindi:
+1. **Osserva** l’ambiente (percezioni → formule logiche);
+2. **Ragiona** deducendo nuove informazioni (inferenza logica);
+3. **Agisce** nel mondo e aggiorna la KB.
+un agente basato su conoscenza può essere
+- **Dichiarativo:** si “dice” all’agente _cosa sapere_ (formule logiche esplicite).  
+    ➜ più **modulare**, **manutenibile**, **spiegabile**.
+- **Procedurale:** si “programma” direttamente il comportamento con codice.  
+    ➜ meno flessibile e più difficile da modificare.
+#### Componenti fondamentali della rappresentazione logica
+- **Sintassi**
+	- Definisce i simboli e le regole per costruire frasi logiche.
+- **Semantica**
+	- Stabilisce la corrispondenza tra formule e fatti del mondo (quando una formula è vera).
+- **Inferenza**
+	- Insieme di regole che permettono di derivare nuove formule vere da quelle note.
+
+> Una KB può essere vista come l’insieme di formule, oppure come una singola formula che le implica tutte.
+#### Grounding (Radicamento)
+È il legame tra **rappresentazione logica** e **mondo reale**.
+- Le **percezioni sensoriali** producono formule vere nella KB (es. “Odore percepito → Odore(2,3)”).
+- Le **regole generali** derivano da **apprendimento induttivo**, che può essere fallibile.
+> In sostanza, il grounding collega le **formule** (mondo simbolico) con **gli stati reali del mondo** (mondo fisico).
+### Rappresentazione e mondo
+- La **rappresentazione logica** produce **nuovi fatti** (inferenze) coerenti con la realtà.
+- La **semantica** collega formule e mondo:
+    - “verso il basso” → formule → fatti reali (interpretazione);
+    - “verso l’alto” → nuovi fatti logici → nuovi aspetti veri del mondo.
+![[Pasted image 20251112112059.png]]
+
+Un’**interpretazione** I stabilisce la corrispondenza tra simboli e elementi reali.  
+Una formula **A** è **conseguenza logica** di KB se:  
+$$KB ⊨ A \ \text{⇔}\ M(KB) ⊆ M(A)$$
+cioè: tutti i modelli che rendono vera KB rendono vera anche A.
+-  per M(qualcosa) si intende **l'insieme di tutti i modelli** (cioè le interpretazioni del mondo) in cui **tutte le formule di quel qualcosa sono vere**.
+>[!tip] per capire meglio
+>Ora passiamo alla semantica:
+>
+> - $M(p)$ = tutti i mondi in cui **p è vero**
+>     
+> - $M(q)$= tutti i mondi in cui **q è vero**
+>     
+> - $M(KB) = M(p \land q) = M(p) \cap M(q)$
+> Cioè: l’insieme dei mondi che rendono **vera la KB** è l’intersezione dei mondi che rendono veri **tutti** i fatti in KB.
+> 👉 Quindi **più formule ci sono in KB, meno modelli soddisfano tutto**.  
+> KB più grande → M(KB) **più piccolo**.
+
+
+![[Pasted image 20251112124104.png]]
+
+### Ragionamento non monotono
+Nella **logica classica** vale la **monotonia**: se $KB ⊨ α$, allora anche $KB ∪ \{β\} ⊨ α$ 
+- Se aggiungo una nuova informazione non modifico ciò che prima era vero
+Nel ragionamento umano, invece, **nuove informazioni possono invalidare** conclusioni precedenti → **ragionamento non monotòno**.
+
+> Esempio: “Gli uccelli volano; Tweety è un uccello ⟹ vola.”  
+> Aggiungo: “Tweety è un pinguino” ⟹ la conclusione non vale più.  
+> È tipico del **ragionamento per default** e dell’**assunzione di mondo chiuso**.
+
+
+[[IA LEZ.7  DI LOGICA]]
