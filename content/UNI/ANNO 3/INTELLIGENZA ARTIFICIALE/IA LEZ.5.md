@@ -303,7 +303,6 @@ In questo modo possiamo rappresentare tutti gli esiti che un’azione può produ
 # Alberi di ricerca AND-OR
 Quando ci troviamo in **ambienti non deterministici**, l’albero di ricerca classico (quello usato negli ambienti deterministici) **non basta più**.  
 In questi casi si utilizza una struttura chiamata **albero AND–OR**, che rappresenta sia **le scelte dell’agente** sia **le incertezze dell’ambiente**.
-
 ### 🧠Differenza tra nodi OR e nodi AND
 - **Nodi OR** → rappresentano **le scelte dell’agente**  
     Esempio: “Posso muovermi a destra oppure aspirare”.  
