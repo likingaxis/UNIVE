@@ -57,4 +57,3 @@ La FOL estende la logica proposizionale introducendo:
 |**Raffinabilità**|È possibile aggiungere nuove regole o credenze.|
 |**Manutenibilità**|Cambiare un fatto richiede modifiche locali.|
 |**Trasparenza epistemologica**|Il sistema può spiegare perché conclude qualcosa.|
-

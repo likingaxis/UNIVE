@@ -39,6 +39,9 @@ Nel 1950, **Alan Turing** propose un esperimento per stabilire se una macchina p
 
 > “Un sistema è intelligente se un osservatore umano, dialogando con esso, non riesce a distinguere se sta parlando con una persona o con una macchina.”
 
+LEZ 2 -> 
+
+---  
 ## L’Effetto IA
 Ogni volta che una tecnologia basata sull’IA diventa di uso comune, **smettiamo di percepirla come intelligenza artificiale**.  
 È il fenomeno noto come **Effetto IA**.
@@ -284,6 +287,9 @@ Quando un agente deve ragionare o apprendere, ha bisogno di **una rappresentazio
 - Gli oggetti non sono solo elenchi di valori, ma **entità con relazioni tra loro** (come in un grafo o in un linguaggio logico).
 - Permette di descrivere **relazioni, gerarchie e dipendenze**.
 
+LEZ.3 -> 
+
+---
 ## AGENTI RISOLUTORI DI PROBLEMI
 - si basano sull'architettura basata sui goal
 	- Tipologia di agenti che puntano a risolvere un problema attraverso un algoritmo ben definito
@@ -361,9 +367,7 @@ Il processo con cui **semplifichiamo una rappresentazione** eliminando dettagli 
 |**Astrazione Utile**|Le azioni nella soluzione astratta sono **più facili o più economiche** da eseguire rispetto a quelle nel problema reale.|Permette di **semplificare la ricerca** e ridurre il costo computazionale.|
 
 📌 Una buona astrazione è **sia valida che utile**.
-
-
-
+ 
 ### PROBLEMI ESEMPLIFICATIVI E REALI
 Lo studio dei **problemi di ricerca** avviene partendo da **problemi esemplificativi (standardizzati)**,  
 che servono a **testare metodi di risoluzione**, per poi passare a **problemi reali**,  
@@ -671,6 +675,9 @@ Infatti:
 - non è ottimale (può trovare percorsi più costosi).   
 - non è garantito che sia completa se ci sono cicli o stime sbagliate.
 
+
+LEZ.4 ->
+---
 # A* search
 L'idea principale è cercare un equilibrio tra:
 - **arrivare al goal** (come Greedy),
@@ -692,7 +699,7 @@ Condizione sufficiente: ogni passo deve costare almeno **ε > 0**, cioè
 $$g(n) ≥ d(n)·ε$$
 → garantisce che l’algoritmo non resti bloccato in cicli o cammini infiniti a costo zero.
 ####  L’algoritmo A*
-- per fare chiarezza, quando si parla di A, si intende la famiglia di algoritmi che usa la funzione di valutazione f(n)=g(n)+h(n)
+- per fare chiarezza, quando si parla di A, si intende la famiglia di algoritmi che usa la funzione di valutazione $f(n)=g(n)+h(n)$
 - quando si parla di A* si intende
 L’**$A^*$** è un **caso particolare di A**, in cui si **impone una condizione precisa sull’euristica h(n)** per fare in modo che sia completo e ottimale:  
 
