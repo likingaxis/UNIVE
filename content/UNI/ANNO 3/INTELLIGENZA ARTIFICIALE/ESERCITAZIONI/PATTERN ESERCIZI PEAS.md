@@ -1,6 +1,10 @@
 ### P E A S
 - P le prestazioni dell'agente
 - E 
+- A le azioni
+- S i sensori
+### MODELLO AMBIENTE
+
 >[!tip]- ### Osservabilità
 > - **Completamente Osservabile**
 > 	- L'agente ha accesso allo **stato completo** dell'ambiente in ogni momento, attraverso i suoi sensori. È sufficiente che i sensori misurino tutti gli aspetti _rilevanti_ per la scelta dell'azione.
@@ -51,20 +55,34 @@
 > - **Ambiente Ignoto (Unknown)**
 > 	- L'agente **non conosce le regole del gioco**. L'agente non sa come l'ambiente reagirà alle sue azioni.
 > 	- L'agente **dovrà apprendere come funziona** l'ambiente. Dovrà compiere **azioni esplorative** (sperimentazione) per acquisire la conoscenza dinamica necessaria a prendere buone decisioni.
-- A le azioni
-- S i sensori
-### MODELLO AMBIENTE
 
+e i costi
+### TIPO DI ARCHITETTURA AGENTE
+- goal modello ecc...
 ### DEFINIZIONE STATI
+- stato del mondo
+- spazio degli stati
+	- la sua cardinalità
+- differenza tra stato del mondo e stato del processo di ricerca
 - stato
 - stato iniziale
 - stato finale
-- azioni
+- azioni possibili e in base a cosa vengono scelte
 - modello di transizione
 - costo
 ### CICLO DI VITA DELL'AMBIENTE
 
 ### CICLO DI VITA DELL'AGENTE
 ### EURISTICA da inventare
-
+- se si parla di A* puoi usare manhattan distance che è
+	- ammissibile
+		- non sovrastima mai la distanza $h(n)\leq h^*(n)$ 
+	- monotona
+		- la funzione nella sua esecuzione non decresce mai poichè
+			- i costi sono $\geq 0$ 
+	- $h(n) \geq 0$ 
+	- $h(goal)=0$ 
+#### MISURA DI PRESTAZIONE
+- quanto costa una singola azione?
+- score= somma totale del percorso da eseguire
 ### algoritmo DI RICERCA
