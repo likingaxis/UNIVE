@@ -85,4 +85,11 @@ e i costi
 #### MISURA DI PRESTAZIONE
 - quanto costa una singola azione?
 - score= somma totale del percorso da eseguire
+- confronto applicando algoritmi diversi, si va a vedere
+- Costo della soluzione
+	- Lo score finale (lunghezza totale del percorso).
+- Tempo di calcolo
+	- Numero di nodi espansi, tempo reale, profondità.
+- Memoria utilizzata
+	- Dimensione massima della frontiera.
 ### algoritmo DI RICERCA
