@@ -1,3 +1,0 @@
-- gioco delle 9 regine e dell'8 e vacuum cleaner
-- FOL ma cmq l'ultima parte
-- ripasso generale
