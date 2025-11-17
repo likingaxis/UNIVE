@@ -66,6 +66,8 @@ e i costi
 - spazio degli stati
 	- la sua cardinalità
 - differenza tra stato del mondo e stato del processo di ricerca
+-  **Lo stato dello spazio di ricerca**
+	è **una descrizione astratta e minimale** di una configurazione possibile del mondo, così come usata dall’algoritmo di ricerca (A*, BFS, DFS…).
 - stato
 - stato iniziale
 - stato finale
