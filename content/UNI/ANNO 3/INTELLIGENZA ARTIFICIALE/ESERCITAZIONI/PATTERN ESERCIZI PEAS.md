@@ -56,9 +56,11 @@
 > 	- L'agente **non conosce le regole del gioco**. L'agente non sa come l'ambiente reagirà alle sue azioni.
 > 	- L'agente **dovrà apprendere come funziona** l'ambiente. Dovrà compiere **azioni esplorative** (sperimentazione) per acquisire la conoscenza dinamica necessaria a prendere buone decisioni.
 
+
 e i costi
 ### TIPO DI ARCHITETTURA AGENTE
 - goal modello ecc...
+- pianificatore non pianificatore
 ### DEFINIZIONE STATI
 - stato del mondo
 - spazio degli stati

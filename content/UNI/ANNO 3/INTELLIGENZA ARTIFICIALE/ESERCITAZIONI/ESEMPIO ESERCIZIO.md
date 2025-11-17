@@ -158,36 +158,55 @@ Arresta quando:
     
 - In un compito d’esame, spesso vogliono proprio questo numero (o il **percorso** se lo memorizzi).
 
-
-
-
 ## ⚙️ Codice (ripulito e riscritto)
 
 ```scss
-
 function CV-PROGRAM(percept) returns action
-persistent:
-    plan     % sequenza di azioni, inizialmente vuota
-    state    % stato corrente del mondo
-    goal     % nodo goal
-    problem  % problema corrente
+    persistent:
+        plan      % sequenza di azioni
+        state     % stato interno stimato (posizioni ecc.)
+        goal      % goal corrente (es. "raggiungi principessa" / "torna all'uscita")
+        problem   % problema di ricerca corrente
 
-if plan is EMPTY then
-    NG ← FORMULATE-GOAL(EXPOS, DPOS, PRPOS)
-    problem ← FORMULATE-PROBLEM(DPOS, EXPOS, CVPOS, PRPOS, NG)
-    plan ← SEARCH(problem)        % es. A* con f(n) = g(n) + h(n)
-    if plan = failure then
-        return null-action
-else
-    if CVPOS = PRPOS then
-        catch                    % ha raggiunto la principessa, cambia goal e cambia il piano
-    else if CVPOS = EXPOS then
-        exit                     % ha completato il secondo obiettivo
-end if
+    (CVpos, Dpos, PRpos, EXpos, MAZE, hasPrincess) ← percept
+    state ← (CVpos, Dpos, PRpos, EXpos, MAZE, hasPrincess)
 
-action ← FIRST(plan)
-plan ← REST(plan)
-return action
+    % 1. Gestione cambi di goal
+
+    % 1a. Se ha appena raggiunto la principessa, cambia goal
+    if (CVpos = PRpos) and (hasPrincess = false) then
+        hasPrincess ← true
+        goal ← "torna_all_uscita"
+        plan ← EMPTY          % forza una nuova pianificazione
+    end if
+
+    % 1b. Se ha la principessa ed è all’uscita, ha finito
+    if (hasPrincess = true) and (CVpos = EXpos) then
+        return exit           % oppure null-action e TERM(state) nell’ambiente
+    end if
+
+    % 2. Se non c’è un piano, formula goal e problema e pianifica
+    if plan = EMPTY then
+
+        if hasPrincess = false then
+            goal ← PRpos      % primo goal: raggiungi principessa
+        else
+            goal ← EXpos      % secondo goal: torna all’uscita
+        end if
+
+        problem ← FORMULATE-PROBLEM(state, goal)
+        plan    ← SEARCH(problem)   % es. A* su MAZE evitando Dpos
+
+        if plan = failure then
+            return null-action
+        end if
+    end if
+
+    % 3. Esegui la prossima azione del piano
+    action ← FIRST(plan)
+    plan   ← REST(plan)
+    return action
+end function
 
 ```
 
