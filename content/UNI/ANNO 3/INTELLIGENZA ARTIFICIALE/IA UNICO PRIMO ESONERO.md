@@ -39,6 +39,7 @@ Nel 1950, **Alan Turing** propose un esperimento per stabilire se una macchina p
 
 > “Un sistema è intelligente se un osservatore umano, dialogando con esso, non riesce a distinguere se sta parlando con una persona o con una macchina.”
 
+
 LEZ 2 -> 
 
 ---  
