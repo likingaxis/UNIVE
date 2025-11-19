@@ -47,7 +47,6 @@ LEZ 2 ->
 Ogni volta che una tecnologia basata sull’IA diventa di uso comune, **smettiamo di percepirla come intelligenza artificiale**.  
 È il fenomeno noto come **Effetto IA**.
 
-
 ## Ciclo di un agente intelligente
 - Ciclo dell'agente
 	- *percepire una azione mediante i sensori*
@@ -95,7 +94,7 @@ La scelta razionale di un agente in un dato momento dipende da quattro elementi 
 ## Agenti autonomi
 Un agente è definito *autonomo* nella misura in cui il suo comportamento dipende dalla sua esperienza (cioè, dalle percezioni passate e dall'apprendimento che ne deriva). 
 ## Definizione di Ambiente Operativo e PEAS
-- Il **problema P** di un agente, ovvero la sua attività principale, è definito dalla **caratterizzazione adeguata dell'ambiente operativo**.
+- Il **problema P** di un agente, ovvero la sua attività principale, è definita dalla **caratterizzazione adeguata dell'ambiente operativo**.
 - La progettazione di un **agente razionale** corrisponde alla **soluzione** per questo problema.
 
 Il framework **PEAS** fornisce un metodo sistematico per specificare *l'ambiente operativo*, identificando i quattro fattori cruciali che influenzano la progettazione dell'agente:
@@ -471,14 +470,14 @@ Un **algoritmo di ricerca** riceve in input un **problema di ricerca** e restitu
 		- `POP(coda)` → estrae un nodo dalla frontiera
 		- `INSERISCI(elemento, coda)` → aggiunge nuovi nodi (figli)
 - La **strategia di scelta del nodo da espandere** determina il tipo di algoritmo (BFS, DFS, A*, ecc.).
-- *tipi di misura di prestazioni: *
+- *tipi di misura di prestazioni:*
 
-|Criterio|Descrizione|
-|---|---|
-|**Completezza**|Trova una soluzione se esiste.|
-|**Ottimalità**|Restituisce la soluzione di costo minimo.|
-|**Tempo**|Numero di nodi generati.|
-|**Spazio**|Memoria richiesta.|
+| Criterio        | Descrizione                               |
+| --------------- | ----------------------------------------- |
+| **Completezza** | Trova una soluzione se esiste.            |
+| **Ottimalità**  | Restituisce la soluzione di costo minimo. |
+| **Tempo**       | Numero di nodi generati.                  |
+| **Spazio**      | Memoria richiesta.                        |
 
 $$\text{Costo totale} = \text{Costo della ricerca} + \text{Costo del cammino soluzione}$$
 
