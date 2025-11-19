@@ -763,7 +763,6 @@ Più precisamente, combina i vantaggi di entrambe
 	- Si imposta un limite iniziale $f_{limit}$ ;
 	- Si esplora in profondità solo i nodi con $f(n) ≤ f_{limit}$
 	- Se non si trova la soluzione, si aumenta $f_{limit}$ e si ricomincia.
-
 **Tempo**❌ esponenziale (come A*)
 **Spazio**✅ lineare, $O(b·d)$
 ## ⚙️ Valutazione delle Funzioni Euristiche
@@ -1086,6 +1085,7 @@ un agente basato su conoscenza può essere
 
 > Una KB può essere vista come l’insieme di formule, oppure come una singola formula che le implica tutte.
 #### Grounding (Radicamento)
+- È un processo
 È il legame tra **rappresentazione logica** e **mondo reale**.
 - Le **percezioni sensoriali** producono formule vere nella KB (es. “Odore percepito → Odore(2,3)”).
 - Le **regole generali** derivano da **apprendimento induttivo**, che può essere fallibile.
