@@ -75,8 +75,65 @@ e i costi
 - modello di transizione
 - costo
 ### CICLO DI VITA DELL'AMBIENTE
+>[!tip]-  
+> 
+> ```scss
+> function RUN-EVAL-ENVIR (state, UPDATE-FN, agent, PERFORMANCE-FN) returns score
+>   local variables  score   % inizialmente 0
+> 
+>   repeat
+>       (NWpos, Dpos, PRpos, EXpos) ← GET-PERCEPT(agent, state)
+> 
+>       Action ← CV-PROG(NWpos, Dpos, PRpos, EXpos)
+> 
+>       state  ← UPDATE-FN(state, Action)
+> 
+>       score     ← PERFORMANCE-FN(state, score)
+> 
+>   until TERMINATION(state)
+> 
+>   return score
+> ```
+> 
 
 ### CICLO DI VITA DELL'AGENTE
+
+>[!tip]- 
+> 
+> ```scss
+> function agent-PROGRAM(percept) returns action
+>     persistent:
+>         plan      % sequenza di azioni
+>         state     % stato interno stimato (posizioni ecc.)
+>         goal      % goal corrente
+> 	    problem 
+> 
+>     if (CVpos = PRpos) and (hasPrincess = false) then
+>         hasPrincess ← true
+>         goal ← "torna_all_uscita"
+>         plan ← EMPTY          % forza una nuova pianificazione
+>     if (hasPrincess = true) and (CVpos = EXpos) then
+>         return exit           % oppure null-action e TERM(state) nell’ambiente
+>     if plan = EMPTY then
+>         if hasPrincess = false then
+>             goal ← PRpos      % primo goal: raggiungi principessa
+>         else
+>             goal ← EXpos      % secondo goal: torna all’uscita
+>         end if
+>         problem ← FORMULATE-PROBLEM(perception, goal)
+>         plan    ← SEARCH(problem)   % es. A* su MAZE evitando Dpos
+>         if plan = failure then
+>             return null-action
+>         end if
+>     end if
+>     % 3. Esegui la prossima azione del piano
+>     action ← FIRST(plan)
+>     plan   ← REST(plan)
+>     return action
+> end function
+> ```
+> 
+
 ### EURISTICA da inventare
 - se si parla di A* puoi usare manhattan distance che è
 	- ammissibile
@@ -97,3 +154,42 @@ e i costi
 - Memoria utilizzata
 	- Dimensione massima della frontiera.
 ### algoritmo DI RICERCA
+
+```scss
+function A* (problem) returns a solution or failure
+nodo <- nodo con stato = problem.initialstate
+frontiera <- coda di priorità ordinata in base a f(n) con all'inizio solo nodo "nodo"
+esplorati <- insieme dei nodi esplorati inizialmente vuoto
+loop do
+    if frontiera is empty? then return failure
+    nodo <- POP(frontiera)
+    if problem.GOALTEST(nodo.state) then return SOLUTION(nodo)
+    add nodo.state to esplorati
+    for each action in problem.ACTIONS(nodo.state) do
+        child <- CHILD-NODE(problem, nodo, action)
+        if child.state non in frontiera or esplorati then
+            frontiera <- INSERT(child.state)
+        else if child.state is in frontiera con f(n) più alto allora
+            replace that frontier node with child
+```
+🔹 `problem.initialstate`
+Stato iniziale del problema: da dove parte la ricerca.
+🔹 `frontiera` (priority queue su f(n))
+Insieme dei nodi “da esplorare dopo”, ordinati per **f(n) = g(n) + h(n)**.  
+`POP(frontiera)` prende il nodo con f più piccolo.
+🔹 `esplorati`
+Insieme degli **stati già espansi**: serve per non riesplorare gli stessi stati.
+
+🔹 `problem.GOALTEST(nodo.state)`
+Test logico: controlla se lo stato del nodo corrente è un **goal**.  
+Se sì → ricostruisce e ritorna la soluzione (`SOLUTION(nodo)` seguendo i parent).
+🔹 `problem.ACTIONS(nodo.state)`
+Restituisce l’insieme delle **azioni applicabili** in quello stato (es. {su, giù, dx, sx}).
+🔹 `CHILD-NODE(problem, nodo, action)`
+Crea il **nodo figlio**:
+- calcola il nuovo stato con il modello di transizione
+- aggiorna g(n), h(n), f(n)
+- mette il `parent` = `nodo` e l’azione usata.
+🔹 Test su `frontiera` / `esplorati`
+- se lo stato del figlio non è mai stato visto → lo inserisce in `frontiera`
+- se è già in `frontiera` ma con f peggiore → lo **sostituisce** con la versione migliore
