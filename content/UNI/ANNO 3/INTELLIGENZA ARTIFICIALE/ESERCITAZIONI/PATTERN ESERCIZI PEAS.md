@@ -155,6 +155,9 @@ e i costi
 	- Dimensione massima della frontiera.
 ### algoritmo DI RICERCA
 
+- completo poiché ogni passo costa $\epsilon >0$ con $g(n) \geq d(n)* \epsilon$ 
+- ottimo perché A* espande prima i nodi di costo minore dei percorsi disponibili
+
 ```scss
 function A* (problem) returns a solution or failure
 nodo <- nodo con stato = problem.initialstate
@@ -172,6 +175,13 @@ loop do
         else if child.state is in frontiera con f(n) più alto allora
             replace that frontier node with child
 ```
+
+##### NODO
+- il nodo utilizzato nell'algoritmo di ricerca è strutturato con le seguenti proprietà:
+	- stato, tutte le informazioni del singolo stato
+	- f(n) associato
+	- tutti i possibili archi del nodo
+
 🔹 `problem.initialstate`
 Stato iniziale del problema: da dove parte la ricerca.
 🔹 `frontiera` (priority queue su f(n))
