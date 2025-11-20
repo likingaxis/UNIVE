@@ -56,7 +56,6 @@
 > 	- L'agente **non conosce le regole del gioco**. L'agente non sa come l'ambiente reagirà alle sue azioni.
 > 	- L'agente **dovrà apprendere come funziona** l'ambiente. Dovrà compiere **azioni esplorative** (sperimentazione) per acquisire la conoscenza dinamica necessaria a prendere buone decisioni.
 
-
 e i costi
 ### TIPO DI ARCHITETTURA AGENTE
 - goal modello ecc...
@@ -81,7 +80,7 @@ e i costi
 > function RUN-EVAL-ENVIR (state, UPDATE-FN, agent, PERFORMANCE-FN) returns score
 >   local variables  score   % inizialmente 0
 > 
->   repeat
+>   loop do
 >       (NWpos, Dpos, PRpos, EXpos) ← GET-PERCEPT(agent, state)
 > 
 >       Action ← CV-PROG(NWpos, Dpos, PRpos, EXpos)
