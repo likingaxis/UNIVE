@@ -60,19 +60,28 @@ e i costi
 ### TIPO DI ARCHITETTURA AGENTE
 - goal modello ecc...
 - pianificatore non pianificatore
+- offline oppure online
+
 ### DEFINIZIONE STATI
 - stato del mondo
-- spazio degli stati
+- spazio degli stati di ricerca
 	- la sua cardinalità
 - differenza tra stato del mondo e stato del processo di ricerca
 -  **Lo stato dello spazio di ricerca**
 	è **una descrizione astratta e minimale** di una configurazione possibile del mondo, così come usata dall’algoritmo di ricerca (A*, BFS, DFS…).
 - stato
 - stato iniziale
+- stato obiettivo
 - stato finale
 - azioni possibili e in base a cosa vengono scelte
 - modello di transizione
 - costo
+- misura delle prestazioni
+##### NODO
+- il nodo utilizzato nell'algoritmo di ricerca è strutturato con le seguenti proprietà:
+	- stato, tutte le informazioni del singolo stato
+	- f(n) associato
+	- tutti i possibili archi del nodo
 ### CICLO DI VITA DELL'AMBIENTE
 >[!tip]-  
 > 
@@ -81,7 +90,7 @@ e i costi
 >   local variables  score   % inizialmente 0
 > 
 >   loop do
->       (NWpos, Dpos, PRpos, EXpos) ← GET-PERCEPT(agent, state)
+>       GET-PERCEPT ← (NWpos, Dpos, PRpos, EXpos) ← GET- PERCEPT(agent, state)
 > 
 >       Action ← CV-PROG(NWpos, Dpos, PRpos, EXpos)
 > 
@@ -129,19 +138,9 @@ e i costi
 >     action ← FIRST(plan)
 >     plan   ← REST(plan)
 >     return action
-> end function
 > ```
 > 
 
-### EURISTICA da inventare
-- se si parla di A* puoi usare manhattan distance che è
-	- ammissibile
-		- non sovrastima mai la distanza $h(n)\leq h^*(n)$ 
-	- monotona
-		- la funzione nella sua esecuzione non decresce mai poichè
-			- i costi sono $\geq 0$ 
-	- $h(n) \geq 0$ 
-	- $h(goal)=0$ 
 #### MISURA DI PRESTAZIONE
 - quanto costa una singola azione?
 - score= somma totale del percorso da eseguire
@@ -154,8 +153,18 @@ e i costi
 	- Dimensione massima della frontiera.
 ### algoritmo DI RICERCA
 
-- completo poiché ogni passo costa $\epsilon >0$ con $g(n) \geq d(n)* \epsilon$ 
-- ottimo perché A* espande prima i nodi di costo minore dei percorsi disponibili
+- se si parla di A* puoi usare Manhattan distance che è
+	- ammissibile
+		- non sovrastima mai la distanza $h(n)\leq h^*(n)$ 
+	- monotona
+		- la funzione nella sua esecuzione non decresce mai poiché
+			- i costi sono $\geq 0$ 
+			- $h(n) \leq c(n,n')+ h(n')$ 
+	- $h(n) \geq 0$ 
+	- $h(goal)=0$ 
+- A* è
+	- completo poiché ogni passo costa $\epsilon >0$ con $g(n) \geq d(n)* \epsilon$ 
+	- ottimo perché A* espande prima i nodi di costo minore dei percorsi disponibili
 
 ```scss
 function A* (problem) returns a solution or failure
@@ -169,17 +178,12 @@ loop do
     add nodo.state to esplorati
     for each action in problem.ACTIONS(nodo.state) do
         child <- CHILD-NODE(problem, nodo, action)
-        if child.state non in frontiera or esplorati then
+        if child.state non in frontiera and esplorati then
             frontiera <- INSERT(child.state)
         else if child.state is in frontiera con f(n) più alto allora
             replace that frontier node with child
 ```
 
-##### NODO
-- il nodo utilizzato nell'algoritmo di ricerca è strutturato con le seguenti proprietà:
-	- stato, tutte le informazioni del singolo stato
-	- f(n) associato
-	- tutti i possibili archi del nodo
 
 🔹 `problem.initialstate`
 Stato iniziale del problema: da dove parte la ricerca.
