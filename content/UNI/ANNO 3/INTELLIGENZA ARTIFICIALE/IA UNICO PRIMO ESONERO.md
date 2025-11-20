@@ -585,6 +585,7 @@ dove:
 • Se m distanza massima della soluzione nello spazio di ricerca 
 • b fattore di diramazione 
 	• Allora la complessità temporale è: $O(b^{m+1})$
+	- spazio $O(b*m+1)$ 
 profondità usa meno memoria di ampiezza
 ### Ricerca in profondità limitata
 La Ricerca in Profondità Limitata è una strategia di ricerca non informata che esegue la ricerca in profondità fino a un livello massimo predefinito, chiamato **limite di profondità ($\ell$)**.
