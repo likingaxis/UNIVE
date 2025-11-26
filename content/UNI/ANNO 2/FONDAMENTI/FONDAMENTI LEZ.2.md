@@ -24,7 +24,6 @@ che ci porta ad avere una azione con
 - un <font color="#f79646">dato in scrittura</font> insieme di $\Sigma$
 - uno <font color="#f79646">stato aggiornato</font> che verrà eseguito al <font color="#f79646">prossimo step</font>
 - uno <font color="#f79646">spostamento</font> della <font color="#f79646">testina</font> da qualche parte o un fermo
-
 ### quando può terminare?
 La macchina può terminare se <font color="#f79646">non ha quintuple</font> da eseguire oppure se <font color="#f79646">deve terminare</font> a prescindere
 
