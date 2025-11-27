@@ -111,35 +111,63 @@ Connettivi (richiamo):
 - `¬(P ∨ Q) ≡ (¬P ∧ ¬Q)`
 - `P ∧ Q ≡ ¬(¬P ∨ ¬Q)`
 - `P ∨ Q ≡ ¬(¬P ∧ ¬Q)`
-# **Usare la logica del primo ordine**
-
+### Usare la logica del primo ordine
 - Le **variabili** denotano solo **oggetti** del dominio.
-    
 - Non possono denotare: predicati, funzioni o formule.
-    
 - Funzioni e predicati possono appartenere al dominio come oggetti, ma **non** possono essere usati _come_ simboli di funzione/predicato.
-    
-
----
-
-# **Tell e Ask (asserzioni e query)**
-
-### **Tell(KB, …)**
-
+### Tell e Ask (asserzioni e query)
+**Tell(KB, …)**
 Aggiunge formule alla base di conoscenza.  
 Esempi:
-
 - `Tell(KB, Re(Giovanni))`
-    
 - `Tell(KB, Persona(Riccardo))`
-    
 - `Tell(KB, ∀x (Re(x) ⇒ Persona(x)))`
-    
-
-### **Ask(KB, …)**
-
+**Ask(KB, …)**
 Interroga la base di conoscenza.  
 Esempio:
-
 - `Ask(KB, Re(Giovanni))`  
     → Risposta possibile: `{x/Giovanni}`, `{x/Riccardo}` (legami che soddisfano la query).
+
+### Inferenza FOL vs proposizionale
+- La FOL può essere ridotta (parzialmente) a inferenza proposizionale.
+- Serve per eliminare i quantificatori tramite istanziazione.
+### Regole di inferenza sui quantificatori
+
+### Istanziazione universale (∀-eliminazione)
+Da: `∀x A(x)` → si può derivare: `A(g)`  
+dove **g** è un termine **ground**.
+Esempi:  
+`∀x King(x) ∧ Greedy(x) ⇒ Evil(x)`  
+⇒ `King(John) ∧ Greedy(John) ⇒ Evil(John)`  
+⇒ `King(Father(John)) ∧ Greedy(Father(John)) ⇒ Evil(Father(John))`
+### Istanziazione esistenziale (∃-eliminazione)
+Da: `∃x A(x)` → `A(k)`  
+dove **k** è una **costante di Skolem** nuova (se non dipende da ∀).
+Se ∃ è nell’ambito di ∀ → serve **funzione di Skolem**:
+Esempi:
+- `∃x Padre(x, G)` → `Padre(k, G)`
+- `∀x ∃y Padre(y, x)` → `∀x Padre(p(x), x)` (non `∀x Padre(k,x)`!)
+### Proposizionalizzazione
+Procedura:
+1. Istanziare le formule ∀ con tutte le costanti note.
+2. Sostituire ∃ con costanti/funzioni di Skolem.
+3. Ottenuto ciò, la KB diventa proposizionale.
+**Problema:**  
+se ci sono funzioni → numero di istanze potenzialmente **infinito**  
+(es. `John`, `Padre(John)`, `Padre(Padre(John))`, …)
+### Teorema di Herbrand
+Se `KB |= A`, allora esiste una dimostrazione che usa **solo un sottoinsieme finito** delle istanze generate.
+Procedura incrementale:
+1. istanze con costanti
+2. poi un livello di annidamento
+3. poi due livelli …
+Se `KB ⊭ A`, il processo **non termina** → inferenza FOL è **semidecidibile**.
+### Clausole e forma a clausole
+- Una **clausola** è un insieme di **letterali**, interpretati come una disgiunzione.  
+    Esempio: `{¬P, Q, R}` ≡ `¬P ∨ Q ∨ R`.
+- Una **KB in FOL** = insieme di clausole.
+### Forma normale implicativa (intuitiva):
+`P₁ ∧ … ∧ Pk ⇒ Q₁ ∨ … ∨ Qn`  
+Caso particolare: un solo letterale positivo  
+`P₁ ∧ … ∧ Pk ⇒ Q`  
+→ forma a regole (logica e basi deduttive)
