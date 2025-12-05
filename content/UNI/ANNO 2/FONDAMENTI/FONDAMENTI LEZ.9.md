@@ -14,7 +14,7 @@ Creiamo una macchina che sostanzialmente accetta il linguaggio ma non lo decide
 #### In teoria dovrebbe funzionare anche con la diagonale
 ![[Pasted image 20250324184614.png]]
 ##### Creazione macchina $T^*$
-Creiamo una macchina $T*(i)$ che lavora con un solo input in modo che il risultato sia uguale a $T''(i,i)$ 
+Creiamo una macchina $T^*(i)$ che lavora con un solo input in modo che il risultato sia uguale a $T''(i,i)$ 
 Ossia, se $i$ è la codifica di una macchina di Turing, allora
 -  $T*( i )$ accetta se ( i, i ) ∉ LH , ossia se Ti ( i ) non termina 
 - $T*( i )$ non termina se ( i, i ) ∈ LH , ossia se Ti ( i ) termina

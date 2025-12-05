@@ -31,19 +31,38 @@ Allora
 ![[Pasted image 20250321101758.png]]
 
 ![[Pasted image 20250321101810.png]]
-L'output sono le singole celle con 1 e 0.
 
-$M$ rappresenta TUTTI i linguaggi ACCETTATI dalle Macchine di Turing 
-	perché tutte le macchine di Turing sono rappresentate in M!
+##### ✅ **RICAPITOLAZIONE CHIARA DELLA DIAGONALIZZAZIONE**
 
-Ad esempio, gli 1 sulla riga uno rappresentano il linguaggio $L_{1}$ accettato da $T_{h_{1}}$, ossia $$L_{1} = \{x_{1}, x_{4}, ...\}$$
-Prendiamo ora la diagonale (quella evidenziata in giallo).
-Di per sè quella è un linguaggio $L$.
-Ora scriviamo $\overline{L}$, ossia il complementare di $L$ e formalmente $$L = \{k : T_{h_{k}}(k) \ non \ accetta\}$$Questo vuol dire che il linguaggio $\overline{L}$ non è accettato da NESSUNA macchina di Turing che compare nella matrice e quindi non esiste nessuna $T$ che accetta $\overline{L}$.
-	Qui l'idea è quella di prendere la diagonale, e scrivere in $\overline{L}$ tutte le celle hanno output 0 (quindi nella foto $\overline{L} = \{x_{2,}...\}$).
-	Ora, do questo linguaggio a TUTTE le macchine (quindi tento di sovrascrivere $\overline{L}$ al posto delle singole righe). 
-	Esiste una riga che è ESATTAMENTE IDENTICA a $\overline{L}$? NO, perché almeno un output (quello corrispondente alla diagonale in questo caso) sarà l'opposto rispetto alla matrice originale.
-	Es. nella matrice originale $T_{h_2}(2)$ NON ACCETTA ma in $\overline{L}$ $T_{h_2}(2)$ è accettato: QUESTA COSA È IMPOSSIBILE.
+###### **1️⃣ Creo la matrice M**
+- Le **righe** rappresentano _tutte_ le macchine di Turing $(T_{h_1}, T_{h_2}, \dots)$
+- Le **colonne** rappresentano _tutte_ le parole $(x_1, x_2, x_3, \dots)$
+In ogni cella metto:
+o:
+$M[i,j] = \begin{cases} 1 & \text{se } T_{h_i}(x_j) \text{ accetta} \\ 0 & \text{altrimenti} \end{cases}$
+
+👉 Ogni riga è esattamente il **linguaggio accettato dalla macchina di quella riga**.
+
+##### **2️⃣ Costruisco un nuovo linguaggio L usando la diagonale**
+Guardo le celle:
+$(1,1), (2,2), (3,3), \dots$
+e definisco:
+$L = { k \mid T_{h_k}(x_k) \text{ NON accetta} }$  
+cioè **inverto** il valore della diagonale:
+- se $M[k,k] = 1 → L[k] = 0$
+- se $M[k,k] = 0 → L[k] = 1$
+Questo produce una **nuova sequenza di 0/1**, cioè un nuovo linguaggio.
+
+###### **3️⃣ Perché nessuna macchina accetta L?**
+Prendi una qualsiasi riga $(k)$, cioè la macchina $(T_{h_k}).$
+Per essere la macchina che accetta L, la sua riga dovrebbe coincidere con la sequenza di L.
+Ma alla posizione ((k,k))  
+— cioè al **punto che definisce L** —
+$L[k] = 1 - M[k,k]$
+Quindi:
+- se L dice che _k è dentro_, la macchina lo _rifiuta_
+- se L dice che _k è fuori_, la macchina lo _accetta_
+👉 **C’è sempre almeno un punto (quello diagonale) in cui la riga k e L differiscono.**
 
 QUINDI, $\overline{L}$ **è un linguaggio NON accettabile.**
 

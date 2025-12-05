@@ -6,10 +6,10 @@ Possiamo dire che un linguaggio L è <font color="#f79646">deciso</font> da una 
 - per ogni $x ∉ L$, la computazione $T(x)$ termina in $q_R$
 #### Esempio Linguaggio di una macchina $T_{RPPAL}$
 ![[Pasted image 20250319184614.png]]
-Ebbene, TRPPAL decide(accetta?) il linguaggio LPPAL (Pari e PALindrome) seguente: $$L_{PPAL} = { x_1x_2… x_{2n} ∈\{a,b\}^*: n ∈ ℕ ∧ ∀ i ∈ {1, 2, ... , n} [ x_i = x_{2n-i+1} ] }$$
+Ebbene, TRPPAL decide il linguaggio LPPAL (Pari e PALindrome) seguente: $$L_{PPAL} = { x_1x_2… x_{2n} ∈\{a,b\}^*: n ∈ ℕ ∧ ∀ i ∈ {1, 2, ... , n} [ x_i = x_{2n-i+1} ] }$$
 $x_{2n}$ con 2 perché indica che l'ultima parola deve essere pari
-
-Il problema qui è che con certezza possiamo dire che se x appartiene a L allora termina e termina in $q_A$ 
+#### Linguaggio accettabile
+Il problema qui sotto con la macchina $T_{PAL1}$  è che con certezza possiamo dire che se x appartiene a L allora termina e termina in $q_A$ 
 ma, se x non appartiene ad L, non è detto che T(x) termini in $q_R$ potrebbe anche non terminare
 - quindi non posso dire con certezza che nella computazione di quella parola essa non appartenga a L
 ![[Pasted image 20250319190506.png]]
