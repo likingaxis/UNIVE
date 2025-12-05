@@ -6,7 +6,7 @@ Possiamo dire che un linguaggio L è <font color="#f79646">deciso</font> da una 
 - per ogni $x ∉ L$, la computazione $T(x)$ termina in $q_R$
 #### Esempio Linguaggio di una macchina $T_{RPPAL}$
 ![[Pasted image 20250319184614.png]]
-Ebbene, TRPPAL decide il linguaggio LPPAL (Pari e PALindrome) seguente: $$L_{PPAL} = { x_1x_2… x_{2n} ∈\{a,b\}^*: n ∈ ℕ ∧ ∀ i ∈ {1, 2, ... , n} [ x_i = x_{2n-i+1} ] }$$
+Ebbene, TRPPAL decide(accetta?) il linguaggio LPPAL (Pari e PALindrome) seguente: $$L_{PPAL} = { x_1x_2… x_{2n} ∈\{a,b\}^*: n ∈ ℕ ∧ ∀ i ∈ {1, 2, ... , n} [ x_i = x_{2n-i+1} ] }$$
 $x_{2n}$ con 2 perché indica che l'ultima parola deve essere pari
 
 Il problema qui è che con certezza possiamo dire che se x appartiene a L allora termina e termina in $q_A$ 
@@ -75,7 +75,7 @@ il problema è quando una funzione non ha soluzioni tipo
 $f(n)=\frac{1}{n-4}$
 Per calcolo di funzione intanto definiamo così la cosa
 considerando funzioni ”discrete” – ossia, dati due alfabeti finiti Σ1 e Σ2, noi consideriamo funzioni:
-$$f : Σ1* → Σ2^*$$  
+$$f : Σ1^* → Σ2^*$$  
 - ossia, funzioni che trasformano parole in altre parole
 visto che questa funzione con $n=4$ non si può svolgere noi dividiamo le funzioni calcolabili in 2 tipi
 1) funzione classica dove calcoliamo nei punti definiti
