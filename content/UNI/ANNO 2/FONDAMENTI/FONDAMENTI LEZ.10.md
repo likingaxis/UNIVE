@@ -51,9 +51,10 @@ end;
 - `return`
 
 ### Vogliamo dimostrare che questo modello di calcolo è Turing equivalente
+### TEOREMA 3.5
+Per ogni programma scritto in accordo con il linguaggio di programmazione PascalMinimo, esiste una macchina di Turing T di tipo trasduttore che scrive sul nastro di output lo stesso valore fornito in output dal programma. 
+Ossia $$P \ in \ PM \rightarrow T \in \tau$$
 In particolare, viene mostrato come “trasformare” un programma in PascalMinimo in una macchina di Turing di tipo trasduttore
-
-abbiamo una macchina $P \ in \ PM \rightarrow T \in \tau$
 andiamo a trasformare le istruzioni che non ci piacciono per far si che ci piacciano sulla Macchina di Turing quindi andiamo a:
 
 1) Eliminare array dalle condizioni
