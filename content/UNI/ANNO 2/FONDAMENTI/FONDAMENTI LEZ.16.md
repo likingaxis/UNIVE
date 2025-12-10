@@ -120,7 +120,7 @@ e quindi possiamo dire che questa macchina  $NT^1$
 ### COROLLARIO per finire
 
 **L’insieme dei linguaggi di tipo 1 è un sottoinsieme dei linguaggi decidibili** o **ricorsivi**
-- decidibili e ricorsivi so la stessa coda
+- decidibili e ricorsivi so la stessa cosa
 ##### **OSSERVAZIONE**
 Mentre i teoremi **G.4** e **G.5** implicano che un linguaggio è accettabile se e solo se esso è generato da una grammatica (ossia, **gli insiemi dei linguaggi decidibili e l’insieme dei linguaggi generati da grammatiche coincidono**), il **teorema G.6** dimostra soltanto che **tutti i linguaggi generati da grammatiche di tipo 1 sono decidibili**, ma **non il viceversa**!
 
