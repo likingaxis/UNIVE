@@ -10,7 +10,7 @@ iniziamo a precisare che non si può fare fin dall'inizio $S \rightarrow X$ poic
 andiamo però a fare n produzioni di tipo 
 ![[Pasted image 20250403193135.png]]
 quello che poi possiamo fare è slidare le lettere dell'alfabeto oppure togliere la X,(puoi vederlo nella lezione scorsa)
-una volta fatti i vari swap ecc... appena arrivo alla sitauzione
+una volta fatti i vari swap ecc... appena arrivo alla situazione
 ![[Pasted image 20250403194659.png]]
 Sull'ultimo devo utilizzare una tra le due produzioni
 - $U_{x1}X \rightarrow x1$
@@ -18,7 +18,7 @@ Sull'ultimo devo utilizzare una tra le due produzioni
 ## Grammatiche e macchine di Turing
 Due definizioni importanti
 ###### GRAMMATICA
-La grammatica è un modello di calcolo e descrivere come si possono generare le parole appartenenti a un insieme di parole
+La grammatica è un modello di calcolo e descrive come si possono generare le parole appartenenti a un insieme di parole
 ###### MACCHINA DI TURING
 La Macchina di Turing è un modello di calcolo e una macchina di Turing descrive come si fa a riconoscere le parole appartenenti a un insieme di parole.
 
@@ -74,7 +74,7 @@ Ora l'idea è quella di fare una simulazione del comportamento di T con la gramm
 Cerchiamo di generare una parola formata da:
 $$a \ Q_{0} \ x$$dove 
 	- $x \in \{0,1\}^{*}$ è l'input
-	- $q_{0}$ è lo stato iniziale
+	- $Q_{0}$ è lo stato iniziale
 	- $a$ è un marcatore/ancora che divide la parte "di sinistra" (simulazione) da quella "di destra",
 ###### FASE 2
 Andiamo a simulare la computazione di $T$ su $x$ 
@@ -93,7 +93,7 @@ Per generare quanto detto creiamo le seguenti produzioni
 > 
 > - Questa regola serve per iniziare la costruzione della stringa:
 >     
->     - `S → 0 U₀ A ◻` significa: se il primo simbolo è `0`, mettilo e attacca `U₀` (un marcatore che ricorda che il simbolo era un `0`) e continua con A.
+>     - `S → 0 U₀ A ◻` significa: se il primo simbolo è `0`, mettilo e attacca `U₀` (un marcatore che ricorda che il simbolo era uno `0`) e continua con A.
 >         
 >     - `S → 1 U₁ A ◻` simile ma per il `1`
 >         
