@@ -14,15 +14,16 @@ con $$L3 ⊆ L2 ⊆ L1⊆ L0$$
 ### Definiamo le varie grammatiche
 - Di tipo 0 sono illimitate senza vincoli come quelle viste finora
 - Di tipo 1 se 
-	- per ogni proiezione tipo $\alpha \rightarrow \beta$ abbiamo che $\alpha \leq \beta$ 
+	- per ogni proiezione tipo $\alpha \rightarrow \beta$ abbiamo che $|\alpha| \leq |\beta|$ 
 	- tipo $aBA → c$ non è ammessa in una grammatica di tipo 1
+	- perché si passa da una grandezza maggiore a una minore
 - Di tipo 2 se
 	- la parte sinistra della produzione è un solo carattere non terminale
 	- quindi abbiamo una forma $A \rightarrow \alpha$ con $A \in V_N \ e \ \alpha \in (V_T \cup V_N)*$
 	- $aB → cd$ non è ammesso
 	- questa grammatica si dice context-free
 - Di tipo 3 se
-	- la parte sinistra è un solo simbolo non terminale e quella destra un solo simbolo terminale
+	- la parte sinistra è un solo carattere non terminale e quella destra un solo carattere terminale e di seguito solo 0 o 1 non terminali
 	- ossia, le produzioni di una grammatica di tipo 3 hanno tutte la forma A → a oppure $A \rightarrow aB$ con $A,B \in V_N \ e \  a\in V_T$  
 	- viene detta grammatica regolare
 		- in poche parole:
@@ -35,6 +36,10 @@ Tuttavia possiamo comunque prendere le grammatiche >0 e estenderle per generare 
 aggiungiamo quindi un nuovo non terminale $S’$ che assumerà il ruolo di assioma (e, dunque il vecchio assioma $S$ non sarà più assioma perché $S'$ lo subentra ) 
 inseriamo poi la produzione S’ → $\epsilon$ inseriamo la produzione$S’ \rightarrow S$
 procediamo a dimostrare 
+
+L’**assioma** è il punto di partenza da cui generi tutte le stringhe del linguaggio:
+$S \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \dots \Rightarrow w$
+
 ### Teorema per G1
 ![[Pasted image 20250402194448.png]]
 Una epsilon produzione è quando abbiamo una produzione nella forma $\alpha \rightarrow \epsilon$ 
