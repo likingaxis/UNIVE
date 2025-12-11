@@ -130,7 +130,11 @@ Il **significato di una parola** deriva dal **ruolo** che essa svolge in un fram
 Esempio: nel frame _KILLING_ ci sono ruoli come **KILLER**, **VICTIM**, **INSTRUMENT**, ecc.
 - comprendere strutture di significato,
 - analizzare ruoli semantici nelle frasi,
-- costruire sistemi NLP più intelligenti.
+- costruire sistemi NLP(Natural Language Processing) più intelligenti.
+#### Tipizzazione dei frame
+**📌 Identificare e raggruppare i frame secondo caratteristiche comuni**
+**📌 Organizzare i frame in una sorta di gerarchia o sistema concettuale**
+**📌 Associare parole (lexical units) ai frame**
 ##### Google Knowledge Graph (GKG)
 È un enorme **grafo di conoscenza** con entità collegate da relazioni semantiche.
 - Migliora la ricerca Google
@@ -154,6 +158,8 @@ Le KB di larga scala possono essere costruite in diversi modi:
 6. **Estrazione automatica da dati non strutturati**  
     (testi, immagini, video → DeepDive, OpenIE).
 📌 **Nota:** Le KB non sono mai complete → l’AI cerca di **estenderle automaticamente**.
+- **KB** = insieme delle conoscenze
+- **KG** = rappresentazione a grafo di quelle conoscenze
 Un **Knowledge Graph (KG)** rappresenta i fatti del mondo come **triple**:
 `(head, relation, tail)`
 - **head** = entità di partenza
@@ -164,7 +170,7 @@ Un **Knowledge Graph (KG)** rappresenta i fatti del mondo come **triple**:
 - (Einstein, _haScoperto_, Relatività)
 KG famosi: **WordNet**, **Wikidata**.
 
-➡️ Un KG è quindi un **grafo di entità collegate da relazioni semantiche**.
+➡️ Una KG è quindi un **grafo di entità collegate da relazioni semantiche**.
 Nei modelli di machine learning:
 - **entità** e **relazioni** sono trasformate in **vettori**.
 - Il modello impara una regola del tipo:
@@ -174,3 +180,12 @@ Cioè:
 👉 Questo permette di **predire relazioni mancanti** e **completare automaticamente** il grafo.
 
 ![[Pasted image 20251203183730.png]]
+![[Pasted image 20251211111519.png]]
+- a sx
+	- abbiamo due concetti
+	- entrambi sono collegati a un concetto generale
+		- attraverso una relazione $r$ 
+- a dx
+	- il concetto s3 è collegato al concetto generale diverso 
+		- ma non attraverso la relazione $r$ bensì con un'altra relazione
+		- infatti $s_3 + r ≠ α$ 

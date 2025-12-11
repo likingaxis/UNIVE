@@ -1,16 +1,15 @@
 
 | Materia                     | Appello Gennaio-Febbraio | Appello Giugno-Luglio | Appello Settembre |
 | --------------------------- | ------------------------ | --------------------- | ----------------- |
-| LING 1                      | ✅                        |                       |                   |
-| LING 2                      | ✅                        |                       |                   |
+| LING                        | ✅                        |                       |                   |
 | FOND.                       | ✅                        |                       |                   |
-| GEOMETRIA                   |                          |                       | ✅                 |
+| GEOMETRIA                   | ✅                        |                       |                   |
 | INTELLIGENZA ARTIFICIALE    | ✅                        |                       |                   |
 | INGEGNERIA DEL SOFTWARE     |                          | ✅                     |                   |
-| ALGORITMI PER I BIG DATA    | ✅                        |                       |                   |
+| ALGORITMI PER I BIG DATA    |                          | ✅                     |                   |
 | JAVA PER DISPOSITIVI MOBILI |                          | ✅                     |                   |
-| PROGRAMMAZIONE WEB          |                          | ✅                     |                   |
+| PROGRAMMAZIONE WEB          |                          |                       | ✅                 |
 | INFORMATION RETRIEVAL       |                          | ✅                     |                   |
-| FISICA/CALCOLO/CRITTO       |                          |                       | ✅                 |
+| CALCOLO                     |                          |                       | ✅                 |
 
 DAMMI LA PAZIENZA 
