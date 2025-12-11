@@ -82,8 +82,6 @@ Siano $L^{1}, L^{2} \in G_{2}$
 >![[Pasted image 20250413161734.png]]
 >semplicemente genera una grammatica con l'unione dei vari stati non terminali e terminali e le varie produzioni ecc...
 
-
-
 ###### INTERSEZIONE
 >[!question] Possiamo dire che 
 > $$L^{1} \cap L^{2} \in G_{2}$$
