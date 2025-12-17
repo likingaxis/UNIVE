@@ -30,7 +30,7 @@ Le riduzioni sono un argomento vecchio ma che ci può tornare utile
 Ricapitolando cosa erano:
 Dati due linguaggi $L_1 \subseteq \Sigma_1^*$ e $L_2 \subseteq \Sigma_2^*$, diciamo che  
 **$L_1$ è riducibile a $L_2$**, e scriviamo: $L1 ≼ L2$ 
-se **esiste una funzione** $f : \Sigma_1^* \to \Sigma_2^*$ tale che:  ^c0c563
+se **esiste una funzione** $f : \Sigma_1^* \to \Sigma_2^*$ tale che: 
 1. **$f$ è totale e calcolabile**
 	- $f(x)$ è definita per ogni $x \in \Sigma_1^*$.
 	- Esiste una macchina di Turing $T_f$ tale che, per ogni $x$, $T_f$ termina con $f(x)$ scritto sul nastro di output.
@@ -244,15 +244,12 @@ nella fase 2 abbiamo detto che impiega $f(|y|)$
 - Poiché $T_f(x)$ impiega $O(|x|^c)$ per calcolare $y$
 - e scrivere la simulazione sul secondo nastro di $T_1$ richiede almeno tanti passi quanto al lunghezza di $y$ 
 Quindi la lunghezza $|y|$ è **al massimo** $O(|x|^c)$
-
+![[Pasted image 20251217163043.png|300]]
 Si fa la somma dei due e quindi
 il tempo che impiega $T_1$ a decidere $L_1$ è
 $$O(∣x∣^c+f(∣x∣^c))$$
 e si scrive anche come:
 $$L1​∈DTIME[n^c+f(n^c)]$$
-### Conclusione su questa parte
-
-RICAPITOLIAMO: abbiamo due linguaggi, $L_{1} ⊆ Σ_{1}^{*}$ e $L{2} ⊆ Σ{2}^{*}$, e sappiamo che $L_{1} ≼ L_{2}$
 ### Conclusione su questa parte
 RICAPITOLIAMO: abbiamo due linguaggi, $L_{1} ⊆ Σ_{1}^{*}$  e $L_{2} ⊆ Σ_{2}^{*}$,  e sappiamo che $L_{1} ≼ L_{2}$
 
