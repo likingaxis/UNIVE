@@ -1,5 +1,5 @@
 ## Questa lezione parte da un problema
-Arriverà sempre qualcuno che dimostrerà che un linguaggio è decidibile in un tempo o spazio inferiore a quello che abbiamo deciso f(n), magari in f(n/3) o f(n/k)
+Arriverà sempre qualcuno che dimostrerà che un linguaggio è decidibile in un tempo o spazio inferiore a quello che abbiamo deciso $f(n)$, magari in $f(n/3)$ o $f(n/k)$
 
 per definire ciò andiamo ad applicare dei teoremi
 ### Teorema di accelerazione lineare
@@ -180,7 +180,7 @@ E lo stesso vale anche nel caso **non deterministico**.
 
 🧠 **Cosa significa?**
 
-Significa che **ogni linguaggio decidibile in tempo deterministico f(n)f(n)f(n)** ha **complemento** decidibile nello **stesso tempo deterministico f(n)f(n)f(n)**. Lo stesso vale per lo spazio.
+Significa che **ogni linguaggio decidibile in tempo deterministico $f(n)$** ha **complemento** decidibile nello **stesso tempo deterministico $f(n)$**. Lo stesso vale per lo spazio.
 
 > ✳️ In altre parole: **le classi deterministiche sono chiuse per complemento.**
 

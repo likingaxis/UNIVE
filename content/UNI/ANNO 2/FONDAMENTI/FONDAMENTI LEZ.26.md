@@ -153,7 +153,7 @@ Descrizione
 - Quindi: **verifica che sia un vero cammino** da s a t di lunghezza k.
 
 ##### ESEMPIO 2
-![[Pasted image 20250509171613.png]]
+![[Pasted image 20251217181948.png]]
 Qui detta molto in breve
 - ho un insieme di variabili booleane $x_{0}, x_{1}, ... , x_{n}$
 - ho poi un predicato $f$ costituito da
@@ -168,16 +168,16 @@ Qui detta molto in breve
 ---
 
 ## Da problema a linguaggio
-![[Pasted image 20250509172043.png]]
+![[Pasted image 20251217182003.png]]
 
 
 ### Codifica
 Riprendendo l'esempio 2 che abbiamo visto poco fa
-![[Pasted image 20250509172439.png]]
+![[Pasted image 20251217182013.png]]
 Questo esempio, che è generale, viene definito ***SAT***
 
 Prendiamo in considerazione un suo caso particolare: ***3SAT***
-![[Pasted image 20250509172622.png]]
+![[Pasted image 20251217182021.png]]
 In pratica, abbiamo un SAT ma 
 - ogni ***clausola*** (ossia le parentesi, che noi chiamiamo $c_{j}$) è l'or (`∨`) di tre ***letterali*** (variabili / variabili negate).
 
@@ -236,20 +236,20 @@ Codifica:
 0 001     ← x₃
 ```
 ###### ✅ Risultato finale
-![[Pasted image 20250509181522.png]]
+![[Pasted image 20251217182035.png]]
 
 ### Codifica $\chi_{2}$: codifichiamo il SIGNIFICATO di `f`
 Sappiamo che possiamo **rappresentare completamente f** dicendo che valore restituisce in **ogni possibile combinazione di input** → questa è la **tavola di verità**.
 
 Dato che la `f` della nostra istanza $\langle \ X, \ f \ \rangle$ di 3SAT è definita su $$\text{\{vero, falso\}}^{|X|}$$e poiché `X` è un insieme finito -> allora possiamo codificare `f` in ***forma esplicita*** e la sua <u>tabella di verità sarà finita</u>.
 
-Per esempio: ![[Pasted image 20250509181251.png]]
+Per esempio: ![[Pasted image 20251217182045.png]]
 Codificando 
 - vero con ‘`1`’ 
 - falso con ‘`0`’
 e scrivendo le righe della tavola una di seguito all’altra, separate da ‘`2`’
 Otteniamo:
-![[Pasted image 20250509181622.png]]
+![[Pasted image 20251217182054.png]]
 
 
 ### Perfetto, ora ci manca solo fornire una risposta al problema
@@ -272,11 +272,11 @@ consideriamo il seguente algoritmo:
 
 #### Utilizzando $\chi_{1}$
 ##### FASE 1
-![[Pasted image 20250509184510.png]]![[Pasted image 20250509184519.png|center|500]]
-![[Pasted image 20250509184526.png|center|500]]
+![[Pasted image 20251217182117.png]]
+![[Pasted image 20251217182127.png]]
 
 ###### FASE 2
-![[Pasted image 20250509184731.png]]
+![[Pasted image 20251217182135.png]]
 Quindi in pratica, 
 - legge tutte le assegnazioni (ogni singolo blocco prima di un `5`)
 - applica ciascuna assegnazione dentro `f`
@@ -284,14 +284,14 @@ Quindi in pratica,
 - se NESSUNA restituisce `1` -> rigetta
 
 ##### Quanto è $dtime(T_{1}, \ \chi_{1}(X, f))$?
-![[Pasted image 20250509185210.png]]
+![[Pasted image 20251217182144.png]]
 Sono solo calcoli, però l'importante è capire che con questa codifica, `dtime` è <u>POLINOMIALE</u> in `n` 
 
 
 #### Utilizzando $\chi_{2}$
-![[Pasted image 20250509185341.png]]
+![[Pasted image 20251217182154.png]]
 ##### Quando è $dtime(T_{2}, \ \chi_{2}(X, f))?$
-![[Pasted image 20250509185431.png]]
+![[Pasted image 20251217182205.png]]
 Quindi in questo caso `dtime` è <u>LINEARE</u> in `n`!
 
 
@@ -304,7 +304,7 @@ Ora, ricordando che un linguaggio è nella classe $P$ se *esiste una macchina di
 
 Se io prendo $\chi_{1}$ so che l'algoritmo, data una istanza `x`, impiega tempo <u>POLINOMIALE</u>.
 Ora, se io prendo la stessa istanza ma la allungo IRRAGIONEVOLMENTE di lunghezza polinomiale e do tutto questo in pasto all'algoritmo, mi sembrerà di aver utilizzato tempo <u>LINEARE</u>!
-	Ma in realtà non è così, perché ho incrementato in maniera insensata l'input![[Pasted image 20250509191736.png]]
+	Ma in realtà non è così, perché ho incrementato in maniera insensata l'input![[Pasted image 20251217182221.png]]
 
 Se invece prendo $\chi_{2}$, l'algoritmo, data una istanza `x`, impiega tempo <u>LINEARE</u>.
 <font color="#ff0000">Però l'istanza cos'è?</font> Letteralmente la codifica della tabella di verità.
@@ -352,7 +352,7 @@ Quindi:
 
 
 ### Codifiche ragionevoli
-![[Pasted image 20250509195217.png]]
+![[Pasted image 20251217182236.png]]
 Qui in poche parole ti dice
 - date due codifiche $\chi$ e $\chi^{'}$
 - $\chi$ può anche essere più grande di $\chi^{'}$
@@ -366,4 +366,4 @@ Qui in poche parole ti dice
 - Se $\chi$ è al più _polinomialmente_ più lunga di $\chi^{'}$ → $\chi$ è _ragionevole_
 
 
-![[Pasted image 20250509195818.png]]
+![[Pasted image 20251217182246.png]]
