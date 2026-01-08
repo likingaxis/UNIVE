@@ -107,10 +107,10 @@ Ogni nodo è:
 Le distanze **non sono casuali**.
 # Reti neurali
 ## Linear Classification
-Un modello di classificazione lineare calcola: $$\hat y = w^T x + b$$dove
+Un modello di classificazione lineare calcola: (stima)$$\hat y = w^T x + b$$dove
 - L’input `x` è un vettore di feature.
 - I pesi (`w`) e il bias (`b`) sono i parametri da imparare.
-
+- T cosa é?
 In pratica:
 - il modello cerca una **retta** (in 2D) o un **iperpiano** (in dimensioni più alte)
 - che separi i dati o li approssimi nel modo migliore possibile.
@@ -130,11 +130,14 @@ Altri problemi:
 - il vincolo di linearità è rigido
 - con dati rumorosi o sovrapposti il confine è poco affidabile
 - pochi parametri → poca espressività
+
+Hard,data separability,lack of expressivness
 #### Esempio di classificazione lineare
 ![[Pasted image 20260105115540.png]]
 ![[Pasted image 20260105115620.png]]
 
 #### Tentare di minimizzare l'errore
+Modellare gli errori
 L’idea è sempre questa:
 1. **Scegli un modello**
     - una funzione con dei parametri
@@ -162,6 +165,9 @@ L’idea è sempre questa:
 
 >[!tip] SCHEMA PRINCIPALE
 >Modello -> Loss -> Derivate -> Aggiornamento
+
+
+BATCH LEARNING N LEARNING DA AGGIUNGERE
 
 
 ## Perceptron
@@ -209,7 +215,7 @@ Una rete neurale profonda impara automaticamente rappresentazioni sempre più as
 
 ## Networks and Information Flow
 ![[Pasted image 20260105115652.png]]
-
+Miglioramento del percettrone
 Una rete neurale non è altro che una grande funzione composta, fatta da tante somme pesate e non linearità collegate in catena.
 
 ## Learning multiple components
@@ -259,4 +265,7 @@ La formula è $$h^{(1)}(x)=g^{(1)}(W^{(1)}x+b^{(1)})$$
 >- confini non lineari
 >    
 >- maggiore espressività
+
+# SGD
+
 
