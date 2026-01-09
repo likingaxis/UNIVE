@@ -264,7 +264,6 @@ $$
 
 In questa parola almeno uno tra `a`, `b`, `c` compare meno di $p_L$ volte,
 mentre almeno uno degli altri compare ancora $p_L$ volte.
-
 I conteggi non sono più uguali.
 ##### Contraddizione
 
