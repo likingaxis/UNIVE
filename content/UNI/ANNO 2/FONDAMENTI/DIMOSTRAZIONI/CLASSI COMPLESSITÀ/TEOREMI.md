@@ -104,19 +104,13 @@ posso risolverlo **anche** con le risorse di $C2$
 - Ne segue: $L \in \mathrm{DTIME}[g(n)]$
 
 #### time constructible 
-Definizione 6.1: Una funzione totale calcolabile f : N → N `e time-constructible se esiste una macchina di Turing T
-di tipo trasduttore che, preso in input un intero n espresso in notazione unaria (ossia, come sequenza di n ‘1’), scrive
-sul nastro output il valore f (n) in unario e impiega  dtime(T, n) ∈ O( f (n)), lo stesso tempo del risultato f(n) .
+**Definizione 6.1**
+Una funzione totale calcolabile $f : \mathbb{N} \to \mathbb{N}$ è _time-constructible_ se esiste una macchina di Turing $T$ di tipo trasduttore che, preso in input un intero $n$ espresso in notazione unaria (ossia come sequenza di $n$ simboli `1`), scrive sul nastro di output il valore $f(n)$ in unario e impiega  $dtime(T,n) \in O(f(n))$, cioè lo stesso ordine di tempo del risultato $f(n)$.
 
-Definizione 6.2: Una funzione totale calcolabile f : N → N `e space-constructible se esiste una macchina di Turing T
-di tipo trasduttore che, preso in input il valore n espresso in notazione unaria, scrive sul nastro output il valore f (n) in
-unario e dspace(T, n) ∈ O( f (n)).
+**Definizione 6.2**
+Una funzione totale calcolabile $f : \mathbb{N} \to \mathbb{N}$ è _space-constructible_ se esiste una macchina di Turing $T$ di tipo trasduttore che, preso in input il valore $n$ espresso in notazione unaria, scrive sul nastro di output il valore $f(n)$ in unario e  $dspace(T,n) \in O(f(n))$.
 
 ![[Pasted image 20260110175952.png]]
-
-
-
-
 
 ![[Pasted image 20260110183219.png]]
 
@@ -150,4 +144,4 @@ Se un linguaggio è accettato da una MT non deterministica in tempo $f(n)$ (con 
 	- e simulare ciascun ramo costa $O(f(|x|))$. Quindi:
 		- $dtime(T,x) \in O(f(|x|) \cdot k^{h f(|x|)}) \subseteq 2^{O(f(|x|))}.$
 	- Conclusione:
-		- $L \in DTIME(2^{O(f(n))}).$
+		- $L \in DTIME(2^{O(f(n))})$
