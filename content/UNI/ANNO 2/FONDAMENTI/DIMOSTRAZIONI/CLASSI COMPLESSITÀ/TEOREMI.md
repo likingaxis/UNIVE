@@ -145,3 +145,192 @@ Se un linguaggio è accettato da una MT non deterministica in tempo $f(n)$ (con 
 		- $dtime(T,x) \in O(f(|x|) \cdot k^{h f(|x|)}) \subseteq 2^{O(f(|x|))}.$
 	- Conclusione:
 		- $L \in DTIME(2^{O(f(n))})$
+### P,NP,PSPACE,NPSPACE,EXPTIME,NEXPTIME
+### Classi di complessità
+
+- **$P = \bigcup_{k \in \mathbb{N}} \mathrm{DTIME}(n^k)$**  
+    è la classe dei linguaggi decidibili in **tempo deterministico polinomiale**.
+    
+- **$NP = \bigcup_{k \in \mathbb{N}} \mathrm{NTIME}(n^k)$**  
+    è la classe dei linguaggi accettabili in **tempo non deterministico polinomiale**.
+    
+- **$PSPACE = \bigcup_{k \in \mathbb{N}} \mathrm{DSPACE}(n^k)$**  
+    è la classe dei linguaggi decidibili in **spazio deterministico polinomiale**.
+    
+- **$NPSPACE = \bigcup_{k \in \mathbb{N}} \mathrm{NSPACE}(n^k)$**  
+    è la classe dei linguaggi accettabili in **spazio non deterministico polinomiale**.
+    
+- **$EXPTIME = \bigcup_{k \in \mathbb{N}} \mathrm{DTIME}(2^{n^k})$**  
+    è la classe dei linguaggi decidibili in **tempo deterministico esponenziale**,  
+    dove l’esponente che descrive la funzione limite è un **polinomio**.
+    
+- **$NEXPTIME = \bigcup_{k \in \mathbb{N}} \mathrm{NTIME}(2^{n^k})$**  
+    è la classe dei linguaggi accettabili in **tempo non deterministico esponenziale**,  
+    dove l’esponente che descrive la funzione limite è un **polinomio**.
+##### Osservazioni
+- Tutte queste classi sono **time constructible**; quindi, per il **Teorema 6.16**,  
+    le corrispondenti classi **non deterministiche sono decidibili**.
+### Classi complementari
+
+$$
+\mathrm{coP} = \{\, L \subseteq \Sigma^* \mid \Sigma \text{ è un alfabeto finito e } L^c \in P \,\}
+$$
+
+$$
+\mathrm{coNP} = \{\, L \subseteq \Sigma^* \mid \Sigma \text{ è un alfabeto finito e } L^c \in NP \,\}
+$$
+
+#### Classe di funzioni 
+$$
+\mathrm{FP}
+=
+\bigcup_{k \in \mathbb{N}}
+\left\{
+f : \Sigma_1^* \to \Sigma_2^*
+:\;
+\exists \text{ una macchina di Turing deterministica } T \text{ che calcola } f
+\ \text{e}\
+\forall x \in \Sigma_1^*
+\bigl[
+\mathrm{dtime}(T,x) \in O(n^k)
+\bigr]
+\right\}.
+$$
+
+
+#### Relazioni tra classi di complessità
+$P ⊆ NP$ e $PSPACE ⊆ NPSPACE$ (6.2)
+$P ⊆ PSPACE$ e $NP ⊆ NPSPACE$ (6.3)
+$PSPACE ⊆ EXPTIME$ e $NPSPACE ⊆ NEXPTIME$ (6.4)
+$NP ⊆ EXPTIME$ (6.5)
+$coP = P$ 
+
+## RIDUZIONI TRA CLASSI DI COMPLESSITÀ
+- date due classi C e C' possiamo dire che esse sono distinte se troviamo un linguaggio L che le separa quindi che appartiene a una ma non all'altra
+	- data una riduzione che soddisfa un predicato $\pi$ abbiamo che $L1\preceq_\pi L2$
+	- le riduzioni ci serviranno per definire una cosa particolare con le C completezze
+##### Definizione 6.3:
+Sia $\mathcal{C}$ una classe di complessità di linguaggi e sia $\preceq_\pi$ una generica $\pi$-riduzione.
+Un linguaggio $L \subseteq \Sigma^*$ è $\mathcal{C}$-completo rispetto alla $\pi$-riducibilità se:
+a) $L \in \mathcal{C}$ e
+b) per ogni $L' \in \mathcal{C}$ vale $L' \preceq_\pi L$.
+- un linguaggio che è C completo ci serve per separare le classi di complessità e definire se un linguaggio appartiene o meno a una certa classe C chiusa
+
+##### Definizione 6.4:
+Una classe di complessità $\mathcal{C}$ è chiusa rispetto a una generica $\pi$-riduzione se,
+per ogni coppia di linguaggi $L_1$ e $L_2$ tali che
+$L_1 \preceq_\pi L_2$ e $L_2 \in \mathcal{C}$, si ha garantito che $L_1 \in \mathcal{C}$.
+
+##### Teorema 6.20:
+Siano $\mathcal{C}$ e $\mathcal{C}'$ due classi di complessità tali che
+$\mathcal{C}' \subseteq \mathcal{C}$
+- Se $\mathcal{C}'$ è chiusa rispetto a una $\pi$-riduzione
+- allora, per ogni linguaggio $L$ che sia $\mathcal{C}$-completo rispetto a tale $\pi$-riduzione, vale che
+	- $L \in \mathcal{C}' \ \text{se e solo se} \ \mathcal{C} = \mathcal{C}'$
+Banalmente, se $\mathcal{C} = \mathcal{C}'$ allora $L \in \mathcal{C}'$.
+- Viceversa, supponiamo che $L \in \mathcal{C}'$. Poiché $L$ è $\mathcal{C}$-completo rispetto alla $\pi$-riducibilità, allora, per ogni linguaggio $L' \in \mathcal{C}$, vale che
+	- $L' \preceq_\pi L$
+- Poiché $\mathcal{C}'$ è chiusa rispetto alla $\pi$-riduzione, questo implica che, per ogni $L' \in \mathcal{C}$, risulta
+	- $L' \in \mathcal{C}'$
+		- Quindi $\mathcal{C} = \mathcal{C}'$.
+![[Pasted image 20260111153027.png]]
+
+## TEOREMA 6.21
+>[!lemma] La classe `P` è chiusa rispetto alla riducibilità polinomiale.
+###### DIMOSTRAZIONE
+Siano $L_{1} \subseteq \Sigma_{1}^{*}$ e $L_{2} \subseteq \Sigma_{2}^{*}$ due linguaggi tali che $$L_{1} \le L_{2} \ \ \ e \ \ \ L_{2}\in P$$Indichiamo con $f: \Sigma_{1} \rightarrow \Sigma_{2}$ la funzione in **FP** che riduce $L_{1}$ a $L_{2}$ e siano 
+- $T_{f}$ la macchina di turing (trasduttore) che calcola `f` in tempo polinomiale
+	- ha 2 nastri e su $N_{2}$ scrive l'output
+- $T_{2}$ la macchina deterministica (riconoscitore) che decide $L_{2}$ in tempo polinomiale
+	- ha un nastro
+
+Poiché $T_{f}$ e $T_{2}$ operano in tempo polinomiale, esistono $h, k \in N$ tali che, per ogni $x \in \Sigma_{1}^{*}$ e per ogni $y \in \Sigma_{2}^{*}$, $$dtime(T_{f}) \le |x|^{h} \ \ \ e \ \ \ dtime(T_{2}, y) \le |y|^{k}$$
+Creiamo ora una nuova macchina $T_{1}$ che simula $T_{f}$ e $T_{2}$ e che decide $L_{1}$.
+$T_{1}$ dispone di due nastri
+- su $N_{1}$ è scritto l'input $x \in \Sigma_{1}$
+$T_{1}$ opera in due fasi
+1) Simula $T_{f}(x)$ e scrive l'output ($f(x))$ su $N_{2}$
+2) Simula $T_{2}(f(x))$ su $N_{2}$
+	- SE $T_{2}(f(x))$ ACCETTA -> $T_{1}(x)$ ACCETTA
+	- SE $T_{2}(f(x))$ RIGETTA -> $T_{1}(x)$ RIGETTA
+
+Dato che $f$ è una riduzione da $L_{1}$ a $L_{2}$, allora $$f(x) \in L_{2} \iff x \in L_{1}$$e visto che $T_{1}$ termina su ogni input (perché $T_2$ termina sempre) -> $T_{1}$ DECIDE il linguaggio.
+
+###### COSTO
+- $T_{f}(x)$ richiede $dtime(T_{f}, x) \le |x|^{h}$ passi
+- $T_{2}(x)$ richiede $dtime(T_{2}, f(x)) \le |f(x)^{k}|$
+- QUINDI $$dtime(T_{1}, x) \le |x|^{h} + |f(x)|^{k}$$
+Dato che $dtime(T_{f}, x) \le |x|^{h}$e $T_{f}$ deve almeno scrivere il suo output $f(x)$, allora $$|f(x)| \le |x|^{h}$$e quindi $$dtime(T_{1}, x) \le |x|^{h} + |f(x)|^{k} \le |x|^{h} + (|x|^{h})^{k} = |x|^{h} + |x|^{hk}$$e poiché `h` e `k` sono costanti, questo prova che $$L_{1} \in P$$
+##### Teorema 6.22
+Se dovessi riscrivere la dimostrazione del Teorema 6.21 per il Teorema 6.22, devi:
+1. Sostituire “macchina deterministica” con:
+    - non deterministica (per NP, NEXPTIME)
+2. Sostituire il bound:
+    - da polinomiale
+    - a polinomiale / spazio polinomiale / esponenziale
+3. Rifare **l’ultimo conto delle risorse** (tempo o spazio)
+4. Lasciare **immutata**:
+    - la costruzione
+    - l’argomento sulla lunghezza di $f(x)$
+#### Corollario 6.4
+![[Pasted image 20260111164357.png]]
+
+
+
+### Teorema 6.23
+Se $coNP \neq NP$, allora $P 6 \neq NP$
+- dimostrazione in realtà questa è la seconda congettura e non si sanno risposte effettive
+
+### Teorema 6.24
+La classe $coNP$ è chiusa rispetto alla riducibilità polinomiale.
+- dimostrazione come 6.22
+- se so che $L\in NP \iff L^c \in NP$ 
+	- riporto tutto a NP e poi svolgo come 6.22
+
+### Teorema 6.25
+Un linguaggio L è NP-completo se e soltanto se $L^c$ è coNP-completo
+
+Siano $L_{1} \preceq L_{2}$ e sia $L_{2} \in coNP$.
+Complementiamo $L_{1}$ e $L_{2}$ (così che sicuramente $L_{2} \in NP$) e utilizziamo la stessa dimostrazione per `NP`.
+###### DIMOSTRAZIONE
+(=>)
+1) Passo 1 -- appartenenza
+	- (L) è NP-completo ⇒ ($L \in NP$)
+	- quindi ($L^c \in coNP$)
+
+2) Passo 2 -- difficoltà (completezza)
+	Prendi **un qualunque** linguaggio ($L' \in coNP$).  
+	Allora:
+	- ($L'^c \in NP$)
+	
+	Poiché (L) è NP-completo: $$L'^c \le_p L$$cioè esiste una funzione polinomiale (f) tale che:  $$  
+x \in L'^c \iff f(x) \in L  
+$$
+	Ora complementi entrambi i lati:  $$  
+x \in L' \iff f(x) \in L^c  
+$$
+	Quindi:  
+$$  
+L' \preceq_p L^c  
+$$
+Vale per ogni ($L' \in coNP$).  
+Conclusione:
+- ($L^c$) è **coNP-completo**.
+
+(=>) È IDENTICA
+
+#### Teorema 6.26:
+Se esiste un linguaggio $L$ NP-completo tale che $L ∈ NP ∩ coNP$, allora $NP=coNP$
+
+Supponiamo che esista un linguaggio $L$ NP-completo con $L \in NP \cap coNP$
+
+Poiché $L \in coNP$, il suo complemento $L^c$ appartiene a $NP$. Inoltre, dal Teorema 6.25, essendo L NP-completo, segue che $L^C$ è **coNP-completo**. Pertanto, per ogni linguaggio $L' \in coNP$, vale $L' \preceq_p L^c$. 
+Poiché NP è chiusa rispetto alle riduzioni polinomiali e $L^c \in NP$, segue che $L' \in NP$.
+Dunque:
+- $coNP \subseteq NP$
+Per l’inclusione opposta, poiché $L$ è NP-completo, 
+- per ogni $L'' \in NP$ vale $L'' \preceq_p L$ Essendo $L \in coNP$ e 
+- poiché $coNP$è chiusa rispetto alle riduzioni polinomiali, segue che $L'' \in coNP$ Quindi:
+- $NP \subseteq coNP$
+Le due inclusioni implicano:
+- $NP=coNP$
