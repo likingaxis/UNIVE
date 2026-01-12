@@ -2,9 +2,11 @@
 >[!lemma]  
 >Un linguaggio $L \subseteq \Sigma^*$ è decidibile se e soltanto se $L$ e $L^c$ sono accettabili.
 
-- Mi creo una macchina di Turing `T'` basata sulla macchina che decide $L$, chiamata `T`.
+- verso dx Mi creo una macchina di Turing `T'` basata sulla macchina che decide $L$, chiamata `T`.
 - Questa macchina `T'` estende gli stati di `T` invertendoli.
-- Creo due macchine di Turing `T_1` e `T_2`:
+	- quindi posso dire che T e T' non accettano mai insieme
+	- uno accetta $L$ l'altro accetta $L^c$ 
+- verso sx Creo due macchine di Turing `T_1` e `T_2`:
   - una accetta $L$
   - l’altra accetta $L^c$
 - Eseguo in alternanza le due macchine e sono certo che una delle due prima o poi accetterà, quindi $L$ è decidibile.
