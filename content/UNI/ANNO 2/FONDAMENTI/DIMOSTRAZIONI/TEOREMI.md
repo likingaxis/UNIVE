@@ -185,8 +185,6 @@ Quindi $f$ è **calcolabile (parziale)** ma **non totale**.
 >$q_F \in \{q_A, q_R\}$  
 >allora il programma con input `x` restituisce $q_F$.
 
-# HALTING PRONBLEM E RIDUZIONI
-
 # DISPENSA 5
 
 ## TEOREMA 5.1
@@ -242,7 +240,7 @@ Se $\Sigma$ è un alfabeto finito, allora l’insieme $L_\Sigma$ non è numerabi
 ## COROLLARIO 5.1
 Esiste un linguaggio non accettabile.
 
-
+# HALTING PROBLEM E RIDUZIONI
 
 ---
 
@@ -258,9 +256,6 @@ $$
 
 ## TEOREMA 5.4
 $L_H$ è un linguaggio accettabile.
-## Teorema 5.4 — Versione da esame
-$L_H$ è un linguaggio accettabile.
-
 ### Idea della dimostrazione
 Dobbiamo mostrare che esiste una macchina di Turing $T$ tale che
 $$
@@ -279,15 +274,12 @@ Si costruisce una macchina $T$ come **modifica della macchina universale** $U$.
   - elimina la cifra iniziale `2`;
   - traduce $i$ nell’alfabeto di lavoro di $U$;
   - simula $U(i,x)$.
-
 ### Comportamento
 - Se $U(i,x)$ **termina** (sia in accettazione che in rigetto), allora $T(i,x)$ **accetta**.
 - Se $i$ non codifica una macchina di Turing, oppure $T_i(x)$ non termina, allora $U(i,x)$ non termina e quindi $T(i,x)$ non accetta.
-
 ### Correttezza
 - Se $(i,x) \in L_H$, allora $T_i(x)$ termina ⇒ $U(i,x)$ termina ⇒ $T(i,x)$ accetta.
 - Se $T(i,x)$ accetta, allora $U(i,x)$ termina ⇒ $i$ codifica una MT e $T_i(x)$ termina ⇒ $(i,x) \in L_H$.
-
 ### Conclusione
 Esiste una macchina di Turing che accetta esattamente $L_H$, quindi
 $$
@@ -388,6 +380,10 @@ Un linguaggio $L \subseteq \{0,1\}^*$ è decidibile se e soltanto se $L$ è acce
   Quindi $T$ decide $L$.
 
 ---
+## COROLLARIO 5.2
+
+>[!tip] Un linguaggio $L \subseteq \{0,1\}^{*}$ è decidibile se e solo se $L^{C}$ è decidibile
+
 
 ## DEFINIZIONE 5.3
 Siano $L_1 \subseteq \{0,1\}^*$ e $L_2 \subseteq \{0,1\}^*$ due linguaggi; diciamo che $L_1$ è *(many to one)* riducibile ad $L_2$ se esiste una funzione totale e calcolabile
@@ -417,7 +413,7 @@ La relazione $\le_m$ gode delle proprietà **riflessiva** e **transitiva**, ossi
   $L_1 \le_m L_2 \land L_2 \le_m L_3 \Rightarrow L_1 \le_m L_3$ *(proprietà transitiva)*
 
 ---
-
+#### RIDUZIONI UTILI
 Sia $L_1$ un linguaggio **non decidibile** e sia $L_2$ un secondo linguaggio tale che $L_1 \le_m L_2$; allora $L_2$ non è decidibile.
 
 Indichiamo con $f_{1,2}$ la funzione che riduce $L_1$ ad $L_2$. Se $L_2$ fosse decidibile, allora potremmo decidere se $x \in L_1$ nel modo seguente:
@@ -451,13 +447,13 @@ $G3 ⊂ G2 ⊂ G1 ⊆ \mathscr{D} ⊂ G0 = \mathscr{A}$
 		- posso avere in una sola grammatica un solo pattern
 		- $A \rightarrow aB$ 
 - Teoremi
-	- TEOREMA G1
+	- TEOREMA G.1
 		- sia G una grammatica di tipo t > 0 e sia G’ la grammatica ottenuta
 		- aggiungendo a G un nuovo non terminale S’ che sarà l’assioma in G’ ´ inserendo la produzione S’ → 𝜀  inserendo la produzione S’ → S. 
 		- Allora, L(G’) = L(G) ∪ {𝜀}
-	- TEOREMA G2
+	- TEOREMA G.2
 		- data una grammatica G di tipo t>1 allora aggiungendo 𝜀 produzioni a G' riusciamo a ottenere L(G')= L(G) ∪ {𝜀}
-	- TEOREMA G3
+	- TEOREMA G.3
 		- Per ogni grammatica $G$ di tipo 0 esiste una grammatica $G′$ di tipo 1,  
 		- ottenuta aggiungendo opportune ε-produzioni, tale che:
 			- $L(G) = L(G')$
@@ -508,7 +504,6 @@ chiusura: Applicando quell’operazione a linguaggi della classe, **il risultato
 - TEOREMA G.7: l’insieme dei linguaggi context-free è chiusa rispetto all’unione
 - TEOREMA G.8: l’insieme dei linguaggi context-free non è chiusa rispetto all’intersezione
 - TEOREMA G.9: l’insieme dei linguaggi context-free non è chiusa rispetto al complemento
-
 ### PDA
 - I linguaggi context-free sono decidibili perché sono un sottoinsieme dei linguaggi di tipo 1; tuttavia, gli automi a pila non sono decisori in generale, ma accettano esattamente la classe dei linguaggi context-free.
 
@@ -634,7 +629,7 @@ Anche qui si utilizza il Pumping lemma per dimostrare se un linguaggio NON è di
 
 CONDIZIONE NECESSARIA MA NON SUFFICIENTE.
 
-## TEOREMA $G_{14}$
+## TEOREMA G.14
 
 >[!lemma] Per ogni ASFD >$$A = \langle \Sigma, Q, q_{0}, Q_{F}, \delta \rangle$$ esiste una grammatica $$G_{A} = \langle V_{T}, V_{N}, P, S \rangle$$tale che $$L(A) = L(G_{A})$$
 
@@ -785,6 +780,10 @@ Costruiamo un PDA $$〈 {a,b}, \ {Z_{0}, A, B}, \ Z_{0} , \ {q_{0} , q_{1} } , \
 Ora, costruiamo un PDA $$〈 {a,b}, \ {Z_{0}, A, B}, \ Z_{0} , \ {q_{0} , q_{1}, q_{2} } , \ {q_{2}}, \ q_{0} , \ δ 〉$$che riconosce **PER STATO FINALE** ($q_{2}$) il linguaggio $L_{PPAL}$ delle parole palindrome pari sull'alfabeto ${a,b}$ Qui la costruzione è identica a prima, con alcune cosa modificate
 ![[Pasted image 20260109183035.png]]
 
+
+### ASFD 
+![[Screenshot_2026-01-13-13-09-52-41_45415775811cea13943236d9369df411.jpg]]
+
 #### MISURA DI COMPLESSITÀ
 è una funzione che associa ad ogni macchina di Turing un valore numerico che corrisponde al costo
 
@@ -817,7 +816,7 @@ Se andiamo a punti
 1) $\text{dspace(T,x)} \le \text{dtime(T,x)}$ -> perché se la macchina utilizza `dspace(T, x)` celle di memoria allora le ha dovute quantomeno leggere 
 2) $\text{dtime(T,x)} \le \text{dspace(T,x)} \cdot |Q| \cdot (|\Sigma| + 1)^{\text{dspace(T,x)}}$ -> il tempo impiegato non può mai essere maggiore rispetto AL NUMERO MASSIMO DI STATI GLOBALI Perché se lo fosse, vuol dire che siamo entrati in un loop (e quindi la macchina non termina, COSA CHE NON PUÒ ACCADERE PER GLI ASSIOMI.) 
 ![[Pasted image 20250423205449.png]]
-
+- per non determinismo uguale
 
 >[!tip] Teorema 6.2
 > 
@@ -847,7 +846,7 @@ Essa rappresenta l’insieme dei linguaggi **decidibili o accettabili** da una m
 **ogni linguaggio** che posso risolvere con le risorse di $C1$
 posso risolverlo **anche** con le risorse di $C2$
 
->[!tip] Teorema 6.2
+>[!tip] Teorema 6.8
 > Sia $f:\mathbb{N}\to\mathbb{N}$ una funzione **totale calcolabile**. Allora:
 > $\mathrm{DTIME}[f(n)] \subseteq \mathrm{NTIME}[f(n)] \qquad\text{e}\qquad \mathrm{DSPACE}[f(n)] \subseteq \mathrm{NSPACE}[f(n)]$
 
@@ -889,7 +888,8 @@ posso risolverlo **anche** con le risorse di $C2$
     $O(f(|x|)) \subseteq O(g(|x|))$
 - Quindi la **stessa macchina $T$** decide $L$ anche in tempo $O(g(∣x∣))$.
 - Ne segue: $L \in \mathrm{DTIME}[g(n)]$
-
+>[!tip] Teorema 6.13
+>![[Pasted image 20250425125730.png]]
 #### time constructible 
 **Definizione 6.1**
 Una funzione totale calcolabile $f : \mathbb{N} \to \mathbb{N}$ è _time-constructible_ se esiste una macchina di Turing $T$ di tipo trasduttore che, preso in input un intero $n$ espresso in notazione unaria (ossia come sequenza di $n$ simboli `1`), scrive sul nastro di output il valore $f(n)$ in unario e impiega  $dtime(T,n) \in O(f(n))$, cioè lo stesso ordine di tempo del risultato $f(n)$.
@@ -1008,6 +1008,10 @@ Una classe di complessità $\mathcal{C}$ è chiusa rispetto a una generica $\pi$
 per ogni coppia di linguaggi $L_1$ e $L_2$ tali che
 $L_1 \preceq_\pi L_2$ e $L_2 \in \mathcal{C}$, si ha garantito che $L_1 \in \mathcal{C}$.
 
+>[!lemma] Teorema 6.18 >$$\text{P} \subset \text{EXPTIME}$$ 
+>
+
+>[!lemma] Teorema 6.19 >$$\text{PSPACE} = \text{NPSPACE}$$
 ##### Teorema 6.20:
 Siano $\mathcal{C}$ e $\mathcal{C}'$ due classi di complessità tali che
 $\mathcal{C}' \subseteq \mathcal{C}$
@@ -1049,6 +1053,7 @@ Dato che $f$ è una riduzione da $L_{1}$ a $L_{2}$, allora $$f(x) \in L_{2} \iff
 - QUINDI $$dtime(T_{1}, x) \le |x|^{h} + |f(x)|^{k}$$
 Dato che $dtime(T_{f}, x) \le |x|^{h}$e $T_{f}$ deve almeno scrivere il suo output $f(x)$, allora $$|f(x)| \le |x|^{h}$$e quindi $$dtime(T_{1}, x) \le |x|^{h} + |f(x)|^{k} \le |x|^{h} + (|x|^{h})^{k} = |x|^{h} + |x|^{hk}$$e poiché `h` e `k` sono costanti, questo prova che $$L_{1} \in P$$
 ##### Teorema 6.22
+- sono chiusi anche NP, NEXPTIME,EXPTIME e spazio
 Se dovessi riscrivere la dimostrazione del Teorema 6.21 per il Teorema 6.22, devi:
 1. Sostituire “macchina deterministica” con:
     - non deterministica (per NP, NEXPTIME)
@@ -1061,8 +1066,6 @@ Se dovessi riscrivere la dimostrazione del Teorema 6.21 per il Teorema 6.22, dev
     - l’argomento sulla lunghezza di $f(x)$
 #### Corollario 6.4
 ![[Pasted image 20260111164357.png]]
-
-
 
 ### Teorema 6.23
 Se $coNP \neq NP$, allora $P 6 \neq NP$
@@ -1121,3 +1124,5 @@ Per l’inclusione opposta, poiché $L$ è NP-completo,
 - $NP \subseteq coNP$
 Le due inclusioni implicano:
 - $NP=coNP$
+
+[[TUTTE LE RIDUZIONI DA FARE]]
