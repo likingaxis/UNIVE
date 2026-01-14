@@ -1,18 +1,16 @@
 ## 📘 Linguaggi decidibili e calcolabilità
-- [ ] Teorema 3.1 – Linguaggi decidibili ⇔ linguaggio e complemento accettabili
-- [ ] Definizione 3.5 – Funzione (parziale) calcolabile tramite MT trasduttore
-- [ ] Teorema 3.2 – Linguaggio decidibile ⇔ funzione caratteristica calcolabile
-- [ ] Teorema 3.3 – Funzione totale calcolabile ⇒ linguaggio L_f decidibile
+- [x] Teorema 3.1 – Linguaggi decidibili ⇔ linguaggio e complemento accettabili
+- [x] Definizione 3.5 – Funzione (parziale) calcolabile tramite MT trasduttore
+- [x] Teorema 3.2 – Linguaggio decidibile ⇔ funzione caratteristica calcolabile
+- [x] Teorema 3.3 – Funzione totale calcolabile ⇒ linguaggio L_f decidibile
 - [ ] Teorema 3.4 – Linguaggio L_f decidibile ⇒ funzione calcolabile (parziale)
-- [ ] Teorema 3.5 – Programmi PASCALMINIMO simulabili da MT trasduttore
-- [ ] Teorema 3.6 – MT riconoscitore simulabile in PASCALMINIMO
 ## ⛔ Halting Problem e numerabilità
-- [ ] Teorema 5.1 – Σ* è numerabile
-- [ ] Teorema 5.2 – Insieme delle MT su {0,1} è numerabile
+- [x] Teorema 5.1 – Σ* è numerabile
+- [x] Teorema 5.2 – Insieme delle MT su {0,1} è numerabile
 - [ ] Teorema 5.3 – Insieme dei linguaggi su Σ non numerabile
-- [ ] Corollario 5.1 – Esiste un linguaggio non accettabile
+- [x] Corollario 5.1 – Esiste un linguaggio non accettabile
 - [ ] Definizione – Linguaggio di Halting $L_H$
-- [ ] Teorema 5.4 – Halting Problem accettabile
+- [x] Teorema 5.4 – Halting Problem accettabile
 - [ ] Teorema 5.5 – Halting Problem non decidibile
 - [ ] Teorema 5.6 – Decidibilità ⇔ accettabilità di L e del complemento
 - [ ] Corollario 5.2 – Linguaggio decidibile ⇔ complemento decidibile
@@ -26,7 +24,7 @@
 - [ ] Teorema G5 – Da grammatica a macchina di Turing accettante
 - [ ] Teorema G6 – Grammatiche tipo 1 ⇒ linguaggi decidibili
 - [ ] MACCHINA DI TURING NTG1
-- [ ] Pumping Lemma – Linguaggi context-free
+- [x] Pumping Lemma – Linguaggi context-free
 - [ ] Teorema G7 – CFL chiusi rispetto all’unione
 - [ ] Teorema G8 – CFL non chiusi rispetto all’intersezione
 - [ ] Teorema G9 – CFL non chiusi rispetto al complemento
@@ -34,7 +32,7 @@
 - [ ] Teorema G11 – Linguaggio context-free ⇔ esiste un PDA
 - [ ] Teorema G12 – DPDA ⊂ CFL
 - [ ] Teorema G13 – Ambiguità delle grammatiche CFL non decidibile
-- [ ] Pumping Lemma – Linguaggi regolari
+- [x] Pumping Lemma – Linguaggi regolari
 - [ ] Teorema G14 – ASFD ⇔ grammatica regolare
 ## ⏱️ Complessità
 - [ ] Definizione – dtime, dspace, ntime, nspace

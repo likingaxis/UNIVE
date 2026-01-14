@@ -125,7 +125,7 @@ Poiché $f(x)$ è totale, `T(x)` termina sempre.
 
 ## TEOREMA 3.4
 >[!lemma]  
->Sia $f : \Sigma^* \rightarrow \Sigma_1^*$ una funzione.  
+>Sia $f : \Sigma^* \rightarrow \Sigma_1^*$ una funzione calcolabile parziale.  
 >Se il linguaggio
 >
 >$$

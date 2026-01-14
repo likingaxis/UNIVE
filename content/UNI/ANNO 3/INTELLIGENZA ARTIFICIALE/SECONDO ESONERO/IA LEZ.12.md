@@ -143,12 +143,7 @@ Ogni input:
 	- un piano (in 3D) un iperpiano (in dimensioni maggiori)
 - divide lo spazio in due regioni
 	- ogni punto è classificato in base al lato in cui cade
-##### Ottimizzazione di w
-- asse x: valori possibili di $w_1$
-- asse y: **errore (MSE sul training set)**
-	- Errore Quadratico Medio
-- prendiamo il minimo
-![[Pasted image 20260105114805.png]]
+
 #### Funzione di decisione
 - La funzione lineare produce un valore continuo. 
 - Per ottenere una classe, si applica una funzione di decisione:
@@ -214,6 +209,18 @@ L’idea è sempre questa:
 6. **Aggiorni i parametri nella direzione giusta**
     - se una scelta aumenta l’errore → vai dall’altra parte
     - questo è il principio del **gradient descent**
+
+
+#### REGRESSIONE LINEARE
+
+![[Pasted image 20260105114805.png]]
+- La y rappresenta subito una soluzione qua perché è la retta, prima andava comunque definita da h(x)
+- $\hat y$​ è **direttamente il valore predetto**
+##### Ottimizzazione di w
+- asse x: valori possibili di $w_1$
+- asse y: **errore (MSE sul training set)**
+	- Errore Quadratico Medio
+- prendiamo il minimo
 
 ### N TRAINING
 - effettuo un aggiornamento in batch dei pesi
@@ -374,7 +381,7 @@ L’ipotesi ha una forma fissata, ad esempio:
 - $\theta$ (o $w$) = **pesi**
 - $b$ = **bias**
 
-👉 **Imparare $h**$ non significa cambiare la formula,  
+👉 **Imparare $h$**non significa cambiare la formula,  
 ma **trovare i valori migliori di $\theta$ e $b$**.
 ## 2️⃣ Perché guardiamo i dati passati (training data)
 
