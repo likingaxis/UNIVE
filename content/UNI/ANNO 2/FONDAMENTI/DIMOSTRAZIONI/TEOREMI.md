@@ -153,8 +153,8 @@ Costruiamo `T'`, trasduttore a **4 nastri**, che con input $x \in \Sigma^*$:
 2. enumera tutte le stringhe $y \in \Sigma_1^*$ con $|y| = i$ simulando `T(x,y)`
 
    <font color="#4f81bd">a)</font> scrive la prima `y` non ancora testata su $N_2$  
-   <font color="#548dd4">b)</font> simula `T(x,y)` su $N_3$  
-   - se `T(x,y)` termina in $q_A$, scrive `y` su $N_4`
+   <font color="#548dd4">b)</font> simula `T(x,y)` prendendo solo le y con quella i su $N_3$  
+   - se `T(x,y)` termina in $q_A$, scrive `y` su $N_4$ 
    - altrimenti continua (incrementando `i` se necessario)
 
 >[!example]- Schema
@@ -360,7 +360,6 @@ $$
 Un linguaggio $L \subseteq \{0,1\}^*$ è decidibile se e soltanto se $L$ è accettabile e $L^c$ è accettabile.
 
 **Dimostrazione (doppia implicazione)**
-
 - **Verso destra**  
   Creo una macchina $T'$ che ha stati invertiti:
   - la mia macchina $T'$ accetta $L^c$
@@ -629,16 +628,6 @@ Anche qui si utilizza il Pumping lemma per dimostrare se un linguaggio NON è di
 
 CONDIZIONE NECESSARIA MA NON SUFFICIENTE.
 
-## TEOREMA G.14
-
->[!lemma] Per ogni ASFD >$$A = \langle \Sigma, Q, q_{0}, Q_{F}, \delta \rangle$$ esiste una grammatica $$G_{A} = \langle V_{T}, V_{N}, P, S \rangle$$tale che $$L(A) = L(G_{A})$$
-
-- 2 pda asfd
-- iniziamo dspace dtime ecc
-- classe P
-- classe NP
-- la codifica di sat e' da studiare.
-- fine
 ### Dimostrazione che $L_{a=b=c}$ non è context-free
 
 ### Linguaggio
@@ -783,6 +772,9 @@ Ora, costruiamo un PDA $$〈 {a,b}, \ {Z_{0}, A, B}, \ Z_{0} , \ {q_{0} , q_{1},
 
 ### ASFD 
 ![[Screenshot_2026-01-13-13-09-52-41_45415775811cea13943236d9369df411.jpg]]
+## TEOREMA G.14
+
+>[!lemma] Per ogni ASFD >$$A = \langle \Sigma, Q, q_{0}, Q_{F}, \delta \rangle$$ esiste una grammatica $$G_{A} = \langle V_{T}, V_{N}, P, S \rangle$$tale che $$L(A) = L(G_{A})$$
 
 #### MISURA DI COMPLESSITÀ
 è una funzione che associa ad ogni macchina di Turing un valore numerico che corrisponde al costo
