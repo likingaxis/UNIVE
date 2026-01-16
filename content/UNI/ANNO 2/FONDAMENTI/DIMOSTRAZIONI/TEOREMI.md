@@ -1005,11 +1005,13 @@ $L_1 \preceq_\pi L_2$ e $L_2 \in \mathcal{C}$, si ha garantito che $L_1 \in \mat
 
 >[!lemma] Teorema 6.19 >$$\text{PSPACE} = \text{NPSPACE}$$
 ##### Teorema 6.20:
+
 Siano $\mathcal{C}$ e $\mathcal{C}'$ due classi di complessità tali che
 $\mathcal{C}' \subseteq \mathcal{C}$
 - Se $\mathcal{C}'$ è chiusa rispetto a una $\pi$-riduzione
 - allora, per ogni linguaggio $L$ che sia $\mathcal{C}$-completo rispetto a tale $\pi$-riduzione, vale che
 	- $L \in \mathcal{C}' \ \text{se e solo se} \ \mathcal{C} = \mathcal{C}'$
+
 Banalmente, se $\mathcal{C} = \mathcal{C}'$ allora $L \in \mathcal{C}'$.
 - Viceversa, supponiamo che $L \in \mathcal{C}'$. Poiché $L$ è $\mathcal{C}$-completo rispetto alla $\pi$-riducibilità, allora, per ogni linguaggio $L' \in \mathcal{C}$, vale che
 	- $L' \preceq_\pi L$
