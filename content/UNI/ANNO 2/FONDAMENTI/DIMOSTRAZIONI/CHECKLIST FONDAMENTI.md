@@ -58,26 +58,26 @@
 - [x] Teorema 6.16 – f time constructible L è decidibile in NTIME DIMOSTRAZIONE
 - [x] Teorema 6.17 – Relazioni tra classi temporali/spaziali
 ## 🧠 Classi di complessità
-- [ ] P
-- [ ] NP
-- [ ] coP
-- [ ] coNP
-- [ ] PSPACE
-- [ ] NPSPACE
-- [ ] EXPTIME
-- [ ] NEXPTIME
-- [ ] FP
-- [ ] Definizione 6.3 
-- [ ] Definizione 6.4
-- [ ] Teorema 6.18 – P ⊂ EXPTIME
-- [ ] Teorema 6.19 – PSPACE = NPSPACE
-- [ ] Teorema 6.20 – Completezza e riduzioni
+- [x] P
+- [x] NP
+- [x] coP
+- [x] coNP
+- [x] PSPACE
+- [x] NPSPACE
+- [x] EXPTIME
+- [x] NEXPTIME
+- [x] FP
+- [x] Definizione 6.3 
+- [x] Definizione 6.4
+- [x] Teorema 6.18 – P ⊂ EXPTIME
+- [x] Teorema 6.19 – PSPACE = NPSPACE
+- [x] Teorema 6.20 – Completezza e riduzioni
 - [ ] Teorema 6.21 – P chiusa per riduzioni polinomiali
 - [ ] Teorema 6.22 – Chiusura di NP, EXPTIME, NEXPTIME
 - [ ] Corollario 6.4 – Se P ≠ NP allora NP-completi ∉ P
 - [ ] Teorema 6.23 – Se coNP ≠ NP allora P ≠ NP
 - [ ] Teorema 6.24 – coNP chiusa per riduzioni polinomiali
-- [ ] Teorema 6.25 – NP-completezza ⇔ coNP-completezza del complemento
+- [x] Teorema 6.25 – NP-completezza ⇔ coNP-completezza del complemento
 - [ ] Teorema 6.26 – NP ∩ coNP con completo ⇒ NP = coNP
 ## 🛎️ RIDUZIONI
 - [ ] Riduzione 3-SAT ≤ SAT 
