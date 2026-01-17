@@ -1062,13 +1062,13 @@ Se dovessi riscrivere la dimostrazione del Teorema 6.21 per il Teorema 6.22, dev
 ![[Pasted image 20260111164357.png]]
 
 ### Teorema 6.23
-Se $coNP \neq NP$, allora $P 6 \neq NP$
+Se $coNP \neq NP$, allora $P  \neq NP$
 - dimostrazione in realtà questa è la seconda congettura e non si sanno risposte effettive
 
 ### Teorema 6.24
 La classe $coNP$ è chiusa rispetto alla riducibilità polinomiale.
 - dimostrazione come 6.22
-- se so che $L\in NP \iff L^c \in NP$ 
+- se so che $L\in coNP \iff L^c \in NP$ 
 	- riporto tutto a NP e poi svolgo come 6.22
 
 ### Teorema 6.25

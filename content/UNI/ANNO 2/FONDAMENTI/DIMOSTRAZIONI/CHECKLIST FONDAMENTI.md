@@ -72,20 +72,20 @@
 - [x] Teorema 6.18 – P ⊂ EXPTIME
 - [x] Teorema 6.19 – PSPACE = NPSPACE
 - [x] Teorema 6.20 – Completezza e riduzioni
-- [ ] Teorema 6.21 – P chiusa per riduzioni polinomiali
-- [ ] Teorema 6.22 – Chiusura di NP, EXPTIME, NEXPTIME
-- [ ] Corollario 6.4 – Se P ≠ NP allora NP-completi ∉ P
-- [ ] Teorema 6.23 – Se coNP ≠ NP allora P ≠ NP
-- [ ] Teorema 6.24 – coNP chiusa per riduzioni polinomiali
+- [x] Teorema 6.21 – P chiusa per riduzioni polinomiali
+- [x] Teorema 6.22 – Chiusura di NP, EXPTIME, NEXPTIME
+- [x] Corollario 6.4 – Se P ≠ NP allora NP-completi ∉ P
+- [x] Teorema 6.23 – Se coNP ≠ NP allora P ≠ NP
+- [x] Teorema 6.24 – coNP chiusa per riduzioni polinomiali
 - [x] Teorema 6.25 – NP-completezza ⇔ coNP-completezza del complemento
-- [ ] Teorema 6.26 – NP ∩ coNP con completo ⇒ NP = coNP
+- [x] Teorema 6.26 – NP ∩ coNP con completo ⇒ NP = coNP
 ## 🛎️ RIDUZIONI
-- [ ] Riduzione 3-SAT ≤ SAT 
+- [x] Riduzione 3-SAT ≤ SAT 
 - [ ] Riduzione VERTEX COVER ≤ 3-SAT 
 - [ ] Riduzione INDEPENDENT SET ≤ VERTEX COVER 
 - [ ] Riduzione CLIQUE ≤ INDEPENDENT SET 
 - [ ] Riduzione DOMINATING SET ≤ VERTEX COVER 
-- [ ] Riduzione 3-SAT ≤ 3-COLORABILITÀ 
+- [x] Riduzione 3-SAT ≤ 3-COLORABILITÀ 
 - [ ] Riduzione VERTEX COVER ≤ CICLO HAMILTONIANO 
 - [ ] Riduzione CICLO HAMILTONIANO ≤ PERCORSO HAMILTONIANO 
 - [ ] Riduzione PERCORSO HAMILTONIANO ≤ LONG PATH
