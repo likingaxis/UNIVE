@@ -21,7 +21,7 @@ cioè tutte le assegnazioni di verità alle variabili.
 * **Predicato di accettazione**
 
 $$
-\pi_{3SAT}(f,S_{3SAT}) \equiv \exists (b_1,\dots,b_n) \in \{vero,falso\}^n : f(b_1,\dots,b_n) = vero,
+\pi_{3SAT}(f,S_{3SAT}) \equiv \exists (b_1,\dots,b_n) \in S_{3SAT}(f) : f(b_1,\dots,b_n) = vero,
 $$
 
 ossia esiste un’assegnazione che rende vera la formula (sostituendo $(x_i \mapsto b_i)$ e $(\neg x_i \mapsto \neg b_i)$).
