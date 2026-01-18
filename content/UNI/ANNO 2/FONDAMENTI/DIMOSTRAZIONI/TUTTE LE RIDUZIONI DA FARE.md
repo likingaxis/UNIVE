@@ -8,7 +8,7 @@ TUTTE LE DIMOSTRAZIONI SONO NEL PDF `D09`
 - metà pag 16 - inizio pag 18 -> 2 PAGINE
 [[Vertex_Cover_NP_completezza]]
 
-# INDIPENDENT SET $\le$ VERTEX COVER
+#  VERTEX COVER $\le$ INDIPENDENT SET
 - metà pag 18 -> MEZZA PAGINA
 [[Independent_Set_NP_completezza]]
 
@@ -16,7 +16,7 @@ TUTTE LE DIMOSTRAZIONI SONO NEL PDF `D09`
 - fine pag 18 - metà pag 19 -> MEZZA PAGINA
 [[Clique_NP_completezza]]
 
-# DOMINATING SET $\le$ VERTEX COVER
+# VERTEX COVER  $\le$ DOMINATING SET
 - metà pag 19 - inizio pag 21 -> 2 PAGINE
 [[Dominating_Set_NP_completezza]]
 
