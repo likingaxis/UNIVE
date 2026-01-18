@@ -80,13 +80,23 @@
 - [x] Teorema 6.25 – NP-completezza ⇔ coNP-completezza del complemento
 - [x] Teorema 6.26 – NP ∩ coNP con completo ⇒ NP = coNP
 ## 🛎️ RIDUZIONI
-- [x] Riduzione 3-SAT ≤ SAT 
-- [ ] Riduzione VERTEX COVER ≤ 3-SAT 
-- [ ] Riduzione INDEPENDENT SET ≤ VERTEX COVER 
-- [ ] Riduzione CLIQUE ≤ INDEPENDENT SET 
-- [ ] Riduzione DOMINATING SET ≤ VERTEX COVER 
-- [x] Riduzione 3-SAT ≤ 3-COLORABILITÀ 
-- [ ] Riduzione VERTEX COVER ≤ CICLO HAMILTONIANO 
-- [ ] Riduzione CICLO HAMILTONIANO ≤ PERCORSO HAMILTONIANO 
-- [ ] Riduzione PERCORSO HAMILTONIANO ≤ LONG PATH
-- [ ] Riduzione CICLO HAMILTONIANO ≤ COMMESSO VIAGGIATORE (TSP) 
+- [x] Riduzione 3-SAT ≤ SAT [[3SAT_NP_completezza]]
+- [x] Riduzione VERTEX COVER ≤ 3-SAT  [[Vertex_Cover_NP_completezza]]
+- [x] Riduzione VERTEX COVER ≤ INDEPENDENT SET[[Independent_Set_NP_completezza]]
+- [ ] Riduzione INDEPENDENT SET ≤ CLIQUE  [[Clique_NP_completezza]]
+- [x] Riduzione DOMINATING SET ≤ VERTEX COVER [[Dominating_Set_NP_completezza]]
+- [x] Riduzione 3-SAT ≤ 3-COLORABILITÀ  [[3SAT_to_3COLOR]]
+- [x] Riduzione VERTEX COVER ≤ CICLO HAMILTONIANO [[VC_to_HC]]
+- [x] Riduzione CICLO HAMILTONIANO ≤ PERCORSO HAMILTONIANO [[HC_to_HP_NP_completezza]]
+- [x] Riduzione PERCORSO HAMILTONIANO ≤ LONG PATH [[HP_to_LP_restrizione]]
+- [ ] Riduzione CICLO HAMILTONIANO ≤ COMMESSO VIAGGIATORE (TSP)  [[HC_to_TSP_NP_completezza]]
+
+
+
+
+
+ESERCIZI PROGETTAZIONE GRAMMATICHE
+ESERCIZI ESAME
+CHE ALTRI ESERCIZI?
+RIVEDI CLASSE P
+- PROBLEMA: CI SONO TIPO 20 ESERCIZI E 5 TEOREMI MAI VISTI MI SA

@@ -500,6 +500,103 @@ Ripetendo:
 - l’errore diminuisce
 - il modello migliora
 - l’ipotesi $h$ si avvicina alla funzione target
-# SGD
+# SISTEMI DI TRAINING PER I MODELLI
+ ## 1. Il problema dell’apprendimento
+
+In Machine Learning abbiamo sempre lo stesso obiettivo:
+
+> **trovare i parametri di un modello che lo facciano comportare bene sui dati**
+
+Un modello (regressione, classificatore, rete neurale) è descritto da:
+
+- **parametri**: pesi θ\thetaθ, bias bbb
+    
+- una **funzione di costo** J(θ,b)J(\theta, b)J(θ,b)
+    
+
+La funzione di costo misura **quanto il modello sbaglia** sui dati di addestramento.
+
+📌 **Imparare = minimizzare il costo**
+
+---
+
+## 2. La funzione di costo come superficie
+
+Possiamo immaginare la funzione di costo come una **superficie nello spazio dei parametri**:
+
+- ogni punto = una scelta dei parametri
+    
+- l’altezza = valore del costo JJJ
+    
+
+Il nostro obiettivo è trovare **il punto più basso** della superficie, cioè il **minimo**.
+
+Questo è un **problema di ottimizzazione**.
+
+---
+
+## 3. L’idea del Gradient Descent
+
+Il Gradient Descent nasce da una domanda semplice:
+
+> _Se sono in un punto della superficie, come faccio a sapere in che direzione scendere?_
+
+La risposta è il **gradiente**.
+
+### Il gradiente
+
+- è un vettore di derivate parziali
+    
+- indica la direzione in cui il costo cresce più velocemente
+    
+
+Se vogliamo **ridurre** il costo, dobbiamo muoverci **nella direzione opposta** al gradiente.
 
 
+#### PASSAGGI DEL GD
+- inizializza i parametri (casualmente)
+- prende tutti gli esempi (o mini-batch)
+- calcola l’errore $J$
+- calcola le derivate
+- aggiorna i parametri
+- ripeti per molte iterazioni (epoche)
+più lento!
+---
+
+## 4. La regola di aggiornamento dei parametri
+
+Per ogni parametro del modello applichiamo la stessa idea:
+
+nuovo parametro=vecchio parametro−α⋅∂J∂parametro\text{nuovo parametro} = \text{vecchio parametro} - \alpha \cdot \frac{\partial J}{\partial \text{parametro}}nuovo parametro=vecchio parametro−α⋅∂parametro∂J​
+
+Nel caso della slide:
+
+θ1=θ1−αΔθ1\theta_1 = \theta_1 - \alpha \Delta \theta_1θ1​=θ1​−αΔθ1​ θ2=θ2−αΔθ2\theta_2 = \theta_2 - \alpha \Delta \theta_2θ2​=θ2​−αΔθ2​ b=b−αΔbb = b - \alpha \Delta bb=b−αΔb
+
+### Cosa sta succedendo?
+
+- le **derivate** dicono _come_ il parametro influenza l’errore
+    
+- il **segno meno** garantisce che stiamo scendendo
+    
+- il tutto viene scalato da α\alphaα
+    
+
+---
+
+## 5. Il learning rate α\alphaα
+
+Il **learning rate** è un **iperparametro** scelto dall’essere umano.
+
+Stabilisce **quanto grande è il passo** che facciamo:
+
+- α\alphaα grande → passi lunghi, rischio instabilità
+    
+- α\alphaα piccolo → passi sicuri ma lenti
+
+
+### SGD 
+- prende un solo esempio dal dataset di addestramento
+- molto più veloce ma meno preciso e rumoroso
+- evoluzione dell'SGD
+	- uso mini batch quindi uso m esempi
