@@ -44,7 +44,7 @@ $$
 ---
 
 ## TEOREMA 3.2
-Un linguaggio $L$ è decidibile se e soltanto se la funzione $\chi_L$ è calcolabile.
+Un linguaggio $L$ è decidibile se e soltanto se la funzione $\chi_L$ è calcolabile. assumendo che $χL​$ sia **totale**.
 
 ### Dimostrazione
 
@@ -122,6 +122,9 @@ Poiché $f(x)$ è totale, `T(x)` termina sempre.
 **TERMINA SU OGNI INPUT ⇒ $L_f$ è decidibile.**
 
 ---
+
+
+
 
 ## TEOREMA 3.4
 >[!lemma]  
@@ -436,7 +439,7 @@ $G3 ⊂ G2 ⊂ G1 ⊆ \mathscr{D} ⊂ G0 = \mathscr{A}$
 	- α→β
 - G1
 	- **(context-sensitive)**, che generano i linguaggi context-sensitive hanno soltanto produzioni in cui la lunghezza della parte destra è maggiore o uguale alla lunghezza della parte sinistra
-	- $∣α∣ \leq∣β∣$
+	- $∣β∣ \leq∣α∣$
 - G2
 	- **(context-free)**, che generano i linguaggi context-free possiedono solo produzioni la cui parte sinistra consiste solamente di un carattere non terminale
 		- $A→α(A∈VN​)$
@@ -444,7 +447,12 @@ $G3 ⊂ G2 ⊂ G1 ⊆ \mathscr{D} ⊂ G0 = \mathscr{A}$
 - G3
 	- **(grammatiche regolari)**, dispongono solo di produzioni la cui parte sinistra consiste di un singolo carattere non terminale e la cui parte destra consiste di un singolo simbolo terminale
 		- posso avere in una sola grammatica un solo pattern
-		- $A \rightarrow aB$ 
+	- **1 non terminale a sinistra**
+		- **a destra**:
+		    - **1 terminale**
+		    - **oppure** 1 terminale + 1 non terminale
+		    - **mai di più**
+
 - Teoremi
 	- TEOREMA G.1
 		- sia G una grammatica di tipo t > 0 e sia G’ la grammatica ottenuta
@@ -485,7 +493,7 @@ $G3 ⊂ G2 ⊂ G1 ⊆ \mathscr{D} ⊂ G0 = \mathscr{A}$
 			- oppure ho superato le produzioni possibili 
 	- possiamo vedere che NTG1 terminerà sempre
 ### PUMPING LEMMA
-- questo lemma serve per dimostrare che un determinato linguaggio non è context free, stabilisce una condizione necessaria 
+- questo lemma serve per dimostrare che un determinato linguaggio non è context free, stabilisce una condizione *necessaria* 
 - sia L un linguaggio context free di tipo 2 allora esiste un intero $p_L>0$ t.c per ogni parola $z\in L$ se $|z|\geq p_L$ allora esistono
 	- 5 parole $u,v,w,x,y$ t.c
 - $z=uvwxy$ z si esprime come concentrazione di queste 5 parole
@@ -503,6 +511,7 @@ chiusura: Applicando quell’operazione a linguaggi della classe, **il risultato
 - TEOREMA G.7: l’insieme dei linguaggi context-free è chiusa rispetto all’unione
 - TEOREMA G.8: l’insieme dei linguaggi context-free non è chiusa rispetto all’intersezione
 - TEOREMA G.9: l’insieme dei linguaggi context-free non è chiusa rispetto al complemento
+
 ### PDA
 - I linguaggi context-free sono decidibili perché sono un sottoinsieme dei linguaggi di tipo 1; tuttavia, gli automi a pila non sono decisori in generale, ma accettano esattamente la classe dei linguaggi context-free.
 
@@ -780,7 +789,7 @@ Ora, costruiamo un PDA $$〈 {a,b}, \ {Z_{0}, A, B}, \ Z_{0} , \ {q_{0} , q_{1},
 è una funzione che associa ad ogni macchina di Turing un valore numerico che corrisponde al costo
 
 #### ASSIOMI DI BLOOM
-- una funzione è considerata valida dagli assiomi di Blum:
+- una funzione è considerata valida dagli assiomi di Bloom:
 	- una funzione $f$ è definita **solo per le computazioni che terminano**; intuitivamente, se una computazione $T(x)$non termina, **non ha senso attribuirle un costo finito**;
 	- la funzione $f$ deve essere **calcolabile**: deve cioè esistere una macchina di Turing $M$ che, ricevuti in input una macchina di Turing $T$ e una parola $x$, **calcoli il valore $f(T,x)$** ogniqualvolta tale valore sia definito, ossia **ogniqualvolta la computazione $T(x)$ termini**; intuitivamente, questo significa che il costo di una computazione terminante deve poter essere **determinato in modo effettivo**.
 
@@ -794,6 +803,7 @@ Ora, costruiamo un PDA $$〈 {a,b}, \ {Z_{0}, A, B}, \ Z_{0} , \ {q_{0} , q_{1},
 - dtime(T, x) = numero di istruzioni eseguite da T (x)
 - dspace(T, x) = numero di celle utilizzate da T (x)
 - ntime(NT, x) = minimo numero di istruzioni eseguite da una computazione deterministica accettante di NT (x)
+- ntime(NT, x) = massimo numero di istruzioni eseguite da una computazione deterministica rigettante di NT (x)
 - nspace(NT, x) = minimo numero di celle utilizzate da una computazione deterministica accettante di NT (x).
 
 
