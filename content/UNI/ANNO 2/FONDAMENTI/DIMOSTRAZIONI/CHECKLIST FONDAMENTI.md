@@ -9,33 +9,33 @@
 - [x] Teorema 5.1 – Σ* è numerabile
 - [x] Teorema 5.2 – Insieme delle MT su {0,1} è numerabile
 - [x] Teorema 5.3 – Insieme dei linguaggi su Σ non numerabile
-- [ ] Corollario 5.1 – Esiste un linguaggio non accettabile
+- [x] Corollario 5.1 – Esiste un linguaggio non accettabile
 - [x] Definizione – Linguaggio di Halting $L_H$
 - [x] Teorema 5.4 – Halting Problem accettabile
 - [x] Teorema 5.5 – Halting Problem non decidibile
-- [ ] Teorema 5.6 – Decidibilità ⇔ accettabilità di L e del complemento
-- [ ] Corollario 5.2 – Linguaggio decidibile ⇔ complemento decidibile
+- [x] Teorema 5.6 – Decidibilità ⇔ accettabilità di L e del complemento
+- [x] Corollario 5.2 – Linguaggio decidibile ⇔ complemento decidibile
 - [x] Definizione 5.3 – Riducibilità many-one
 
 ## 📚 Grammatiche
 - [x] Teorema G1 – Introduzione controllata della produzione ε
 - [x] Teorema G2 – ε-produzioni aggiungono solo la parola vuota
 - [x] Teorema G3 – Grammatiche tipo 1 possono simulare tipo 0
-- [ ] Teorema G4 – Linguaggi accettabili ⇔ grammatiche tipo 0
-- [ ] Teorema G5 – Da grammatica a macchina di Turing accettante
-- [ ] Teorema G6 – Grammatiche tipo 1 ⇒ linguaggi decidibili
+- [x] Teorema G4 – Linguaggi accettabili ⇔ grammatiche tipo 0
+- [x] Teorema G5 – Da grammatica a macchina di Turing accettante
+- [x] Teorema G6 – Grammatiche tipo 1 ⇒ linguaggi decidibili
 - [x] MACCHINA DI TURING NTG1
 - [x] Pumping Lemma – Linguaggi context-free
-- [ ] Teorema G7 – CFL chiusi rispetto all’unione
-- [ ] Teorema G8 – CFL non chiusi rispetto all’intersezione
-- [ ] Teorema G9 – CFL non chiusi rispetto al complemento
+- [x] Teorema G7 – CFL chiusi rispetto all’unione
+- [x] Teorema G8 – CFL non chiusi rispetto all’intersezione
+- [x] Teorema G9 – CFL non chiusi rispetto al complemento
 - [x] PDA
 - [x] Teorema G10 – PDA: pila vuota ⇔ stato finale
-- [ ] esempio 1 PDA 
-- [ ] esempio 2 PDA
-- [ ] Teorema G11 – Linguaggio context-free ⇔ esiste un PDA
-- [ ] Teorema G12 – DPDA ⊂ CFL
-- [ ] Teorema G13 – Ambiguità delle grammatiche CFL non decidibile
+- [x] esempio 1 PDA 
+- [x] esempio 2 PDA
+- [x] Teorema G11 – Linguaggio context-free ⇔ esiste un PDA
+- [x] Teorema G12 – DPDA ⊂ CFL
+- [x] Teorema G13 – Ambiguità delle grammatiche CFL non decidibile
 - [x] Pumping Lemma – Linguaggi regolari
 - [x] Teorema G14 – ASFD ⇔ grammatica regolare
 
@@ -49,12 +49,12 @@
 - [x] Teorema 6.9 – DTIME ⊆ DSPACE e NTIME ⊆ NSPACE DIMOSTRAZIONE DI UNA FRASE
 - [x] Teorema 6.10 – Limiti esponenziali tempo/spazio
 - [x] Teorema 6.11 – Chiusura rispetto al complemento (tempo/spazio) DIMOSTRAZIONE DI UNA FRASE
-- [ ] Teorema 6.12 – Inclusione per funzioni limite
+- [x] Teorema 6.12 – Inclusione per funzioni limite
 - [x] Teorema 6.13 – Gap Theorem
 - [x] Definizione 6.1 – Funzione time-constructible
 - [x] Definizione 6.2 – Funzione space-constructible
-- [ ] Teorema 6.14 – Gerarchia spaziale
-- [ ] Teorema 6.15 – Gerarchia temporale
+- [x] Teorema 6.14 – Gerarchia spaziale
+- [x] Teorema 6.15 – Gerarchia temporale
 - [x] Teorema 6.16 – f time constructible L è decidibile in NTIME DIMOSTRAZIONE
 - [x] Teorema 6.17 – Relazioni tra classi temporali/spaziali
 ## 🧠 Classi di complessità
@@ -73,11 +73,11 @@
 - [x] Teorema 6.18 – P ⊂ EXPTIME
 - [x] Teorema 6.19 – PSPACE = NPSPACE
 - [x] Teorema 6.20 – Completezza e riduzioni
-- [ ] Teorema 6.21 – P chiusa per riduzioni polinomiali
-- [ ] Teorema 6.22 – Chiusura di NP, EXPTIME, NEXPTIME
-- [ ] Corollario 6.4 – Se P ≠ NP allora NP-completi ∉ P
-- [ ] Teorema 6.23 – Se coNP ≠ NP allora P ≠ NP
-- [ ] Teorema 6.24 – coNP chiusa per riduzioni polinomiali
+- [x] Teorema 6.21 – P chiusa per riduzioni polinomiali
+- [x] Teorema 6.22 – Chiusura di NP, EXPTIME, NEXPTIME
+- [x] Corollario 6.4 – Se P ≠ NP allora NP-completi ∉ P
+- [x] Teorema 6.23 – Se coNP ≠ NP allora P ≠ NP
+- [x] Teorema 6.24 – coNP chiusa per riduzioni polinomiali
 - [x] Teorema 6.25 – NP-completezza ⇔ coNP-completezza del complemento
 - [x] Teorema 6.26 – NP ∩ coNP con completo ⇒ NP = coNP
 ## 🛎️ RIDUZIONI
