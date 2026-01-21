@@ -1083,35 +1083,7 @@ La classe $coNP$ è chiusa rispetto alla riducibilità polinomiale.
 
 ### Teorema 6.25
 Un linguaggio L è NP-completo se e soltanto se $L^c$ è coNP-completo
-
-Siano $L_{1} \preceq L_{2}$ e sia $L_{2} \in coNP$.
-Complementiamo $L_{1}$ e $L_{2}$ (così che sicuramente $L_{2} \in NP$) e utilizziamo la stessa dimostrazione per `NP`.
-###### DIMOSTRAZIONE
-(=>)
-1) Passo 1 -- appartenenza
-	- (L) è NP-completo ⇒ ($L \in NP$)
-	- quindi ($L^c \in coNP$)
-
-2) Passo 2 -- difficoltà (completezza)
-	Prendi **un qualunque** linguaggio ($L' \in coNP$).  
-	Allora:
-	- ($L'^c \in NP$)
-	
-	Poiché (L) è NP-completo: $$L'^c \le_p L$$cioè esiste una funzione polinomiale (f) tale che:  $$  
-x \in L'^c \iff f(x) \in L  
-$$
-	Ora complementi entrambi i lati:  $$  
-x \in L' \iff f(x) \in L^c  
-$$
-	Quindi:  
-$$  
-L' \preceq_p L^c  
-$$
-Vale per ogni ($L' \in coNP$).  
-Conclusione:
-- ($L^c$) è **coNP-completo**.
-
-(=>) È IDENTICA
+![[Screenshot_2026-01-21-15-42-35-89_45415775811cea13943236d9369df411.jpg|400]]
 
 #### Teorema 6.26:
 Se esiste un linguaggio $L$ NP-completo tale che $L ∈ NP ∩ coNP$, allora $NP=coNP$
