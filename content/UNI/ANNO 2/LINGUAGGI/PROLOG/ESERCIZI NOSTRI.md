@@ -231,3 +231,5 @@ stesso_dipartimento(X, Y, Coppie) :-
           Coppie).   
           
 ```
+
+c
