@@ -256,7 +256,7 @@ String testo = "Hello";
 boolean risultato = testo instanceof String; // true, perché testo è di tipo String
 ```
 - **Esempio pratico**
-	```java
+```java
 	class Animale {}
 
 	class Cane extends Animale {}
@@ -325,6 +325,3 @@ si inventa una tabella universale e questa è stata chiamata appunto viva la fan
 >Math è una libreria di funzioni matematiche. Voi mi direte, "No, ma non ci sono le funzioni, ci sono solo i metodi in Java". E infatti math è una classe che ha solo metodi, così come le costanti che sono il greco, il numero dello. Anche i metodi sono tutti statici. E voi mi direte, oddio, pure i metodi, quindi, sono statici. I metodi statici sono pure quelli un universali per una classe, che significa che possono essere imbocati direttamente dalla classe. Ancora una volta la sintassi non vi invocarli anche da un'istanza, però poco sensato e nel senso che è poco chiaro. Se io vedo un metodo chiamato da un'istanza mi aspetto che sia un metodo gravo. Se io lo chiamo dalla classe capisco che è un metodo di classe. Quindi, sebbene la senta, è sconsigliato invocare un metodo statico da una istanza. Meglio invocarlo direttamente dalla classe e far capire che è un metodo di classe. Se è un metodo di classe Attenzione, ci sono delle cose che sono riempite in già. Non potete inserire un riferimento non statico all'interno di un mezzo statico. Cioè, se io c'ho la variabile velocità della bicicletta e questa è una variabile non statica perché ogni bicicletta c'ha la il valore suo, non potete fare un metodo eh statico della classe bicicletta che faccia riferimento alla velocità. Perché dice la velocità di chi? Visto che questo è un metodo generale. 
 >Ecco, i metodi statici sapete di fatto cosa sono? 
 Sono funzioni. Vedete le care vecchie funzioni dei linguaggi tradizionali di programmazione tradizionale intendo prima della programmazione oggetti, no? E non è che non esistono, esistono di fatti sono i metodi statici perché per esempio la classe MATH non è pensata per avere istanze, nel senso c'è un'istanza della matematica, ok? La classe MATH è pensata di fatto, pensate che quel math là dentro si comporta qui come se fosse un package di funzioni, però dato che non potete avere la funzione dichiarata senza una classe attaccata, ecco, la classe math si sta comportando come se fosse semplicemente un collettore, proprio come se fosse un package, no, di funzioni e di costanti. Ok? Infatti dentro ci trovate una marea di funzioni matematiche e ci trovate dentro anche le due costanti che vi ho detto prima. Ok? Quindi di fatto il compito delle funzioni, no, è assolto dai metodi statici. In quel caso, appunto, la classe che contiene, visto che non ha nessuna caratteristica, no, che che che va a essere mantenuta, ecco, di fatto la classe che li contiene si si comporta veramente più come un collettore logico, un po' con lo stesso lavoro che fa il packaging, cioè io volevo tutte le funzioni matematiche, dove le metto in una cosa chiamata math. Ma posso mettere le funzioni in Java? No, devo avere i metodi che sono attaccati a una classe. Benissimo, la classe MATH svolge il compito di collettore di tutte le funzioni matematiche. 
-
-
-

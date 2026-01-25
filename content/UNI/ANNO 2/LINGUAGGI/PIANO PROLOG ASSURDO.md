@@ -12,6 +12,7 @@ Se non capisci questo → scrivi codice a caso.
 - Un programma = **fatti + regole**
     
 - Una query = “è vero che…?”
+    
 
 👉 Frase da orale:
 
@@ -173,46 +174,98 @@ Mini-mappa:
 - `setof` → ordina e rimuove duplicati
     
 
----
-
-## 🔥 9. STRINGHE COME LISTE (1 ORA – ESAMI SCRITTI)
-
-Serve per:
-
-- codifiche
-    
-- parsing
-    
-- esercizi su parole
-    
-
-Concetti chiave:
-
-- stringhe = liste di caratteri/codici
-    
-- `string_codes/2`
-    
-- manipolazione con liste
-    
 
 ---
 
-## 🔥 10. DCG BASE (45 min – SOLO QUESTO)
+# 🔥 9. STRINGHE COME LISTE (Prolog)
 
-NON NLP avanzato.
+## Idea fondamentale
 
-### Devi sapere:
+In Prolog **le stringhe non sono speciali**.  
+Vengono trattate come **liste di codici (numeri)**.
 
-- cos’è una DCG
+Esempio concettuale:
+
+```text
+"ciao" ↔ [99,105,97,111]
+```
+
+Questo è il motivo per cui:
+
+- puoi usare `member`
     
-- che `-->` è zucchero sintattico
+- puoi usare `append`
     
-- che lavora su liste
+- puoi usare ricorsione
     
 
-Esempio minimo:
+## `string_codes/2` (OBBLIGATORIO)
 
-`s --> np, vp. np --> [the], [cat]. vp --> [runs].`
+Serve a convertire:
 
-👉 Basta questo.
+- stringa → lista di codici
+    
+- lista di codici → stringa
+    
 
+```prolog
+string_codes("ciao", L).
+% L = [99,105,97,111]
+
+string_codes(S, [99,105,97,111]).
+% S = "ciao"
+```
+
+Funziona **in entrambi i sensi**.
+
+
+## Pattern tipico da esame
+
+### Controllare se una stringa contiene una sottostringa
+
+```prolog
+contiene(Stringa, Sub) :-
+    string_codes(Stringa, L),
+    string_codes(Sub, S),
+    append(_, S, L).
+```
+
+
+## Frase da orale
+
+> In Prolog le stringhe sono rappresentate come liste di codici e possono essere manipolate con i predicati sulle liste.
+
+---
+
+# 🔥 10. DCG BASE (SOLO QUELLO CHE SERVE)
+
+## Cos’è una DCG
+
+Una **DCG** (Definite Clause Grammar):
+
+- è un modo più leggibile di scrivere predicati
+    
+- che lavorano su **liste**
+    
+- tipicamente per riconoscere sequenze
+
+## DCG minima da esame
+
+```prolog
+s --> nome, verbo.
+nome --> [mario].
+verbo --> [corre].
+```
+
+Test:
+
+```prolog
+?- phrase(s, [mario, corre]).
+true.
+```
+
+## Frasi da orale (sicure)
+
+> Una DCG è una sintassi più leggibile per predicati che lavorano su liste.
+
+> Le DCG vengono eseguite tramite il predicato `phrase`.

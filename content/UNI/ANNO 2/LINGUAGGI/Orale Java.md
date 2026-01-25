@@ -74,6 +74,7 @@ composta da:
 Le interfacce in Java servono principalmente per definire un insieme di metodi _generici_ che devono essere implementati da varie classi.
 - Le interfacce si possono definire come dei contratti che vanno rispettati dalle varie classi che lo firmano e che devono OBBLIGATORIAMENTE applicare quei metodi  definiti
 - servono a risolvere alcuni problemi di **organizzazione del codice** e **manutenzione** che diventano evidenti quando il progetto cresce in complessità.
+- Nelle interfacce dichiaro solo i metodi necessari al comportamento esposto, non tutti i getter e setter
 ### *variabili in java*
 - le variabili possono essere primitive e non
 	- quelle primitive sono quelle solite come int float ecc...
@@ -343,7 +344,7 @@ public class Main {
 3. **`@SuppressWarnings`** → evita warning del compilatore.
 
 ##### Meta-annotazioni essenziali
-Con reflection puoi:
+Con la reflection puoi leggere e utilizzare effettivamente le annotazioni a runtime :
 1. **Ottenere informazioni su una classe**
     - Nome, package, metodi, costruttori, campi.
 2. **Leggere annotazioni a runtime**
@@ -353,13 +354,13 @@ Con reflection puoi:
 4. **Creare oggetti dinamicamente**
     - Senza usare `new`, ma caricando la classe per nome.
 
-5. **`@Retention`** → specifica fino a quando l’annotazione è visibile (solo codice, bytecode, runtime).
+5. **`@Retention.policy`** → specifica fino a quando l’annotazione è visibile (solo codice, bytecode, runtime).
 - `SOURCE` → solo nel codice (sparisce in compilazione).
 - `CLASS` → resta nel bytecode, ma non leggibile a runtime.
 - `RUNTIME` → leggibile anche con reflection.
 
-1. **`@Target`** → definisce dove può essere usata (metodo, classe, campo).
-2. **`@Repeatable`** → permette di applicare più volte la stessa annotazione.
+6. **`@Target`** → definisce dove può essere usata (metodo, classe, campo).
+7. **`@Repeatable`** → permette di applicare più volte la stessa annotazione.
 
 ```java
 class Animale {
@@ -551,3 +552,12 @@ Map<String, Integer> map = new HashMap<>();
 map.put("Apple", 1);
 System.out.println(map.get("Apple")); // 1
 ```
+
+### GOTO
+Java nasce negli anni ’90, quando:
+- linguaggi come **C, C++** avevano `goto`
+- `goto` era associato allo **spaghetti code**
+- la programmazione strutturata lo aveva **condannato**
+👉 I progettisti di Java decisero:
+- **vietarlo**
+- ma **riservare la parola** per il futuro (mai usata)
