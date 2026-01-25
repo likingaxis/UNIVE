@@ -496,6 +496,10 @@ class NumeroBox<T extends Number> { // solo tipi numerici
     private T numero;
 }
 ```
+#### Cos’è la **type erasure** (idea centrale)
+**In Java i generics esistono solo a compile-time.  
+A runtime vengono “cancellati” (erased).
+
 ##### WILDCARD
 La **wildcard** è un segnaposto che indica “qualche tipo sconosciuto” in una struttura generica.  
 Serve quando non ti importa il tipo preciso, ma vuoi comunque accettare più possibilità.
