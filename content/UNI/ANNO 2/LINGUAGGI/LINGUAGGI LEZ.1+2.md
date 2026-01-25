@@ -26,7 +26,7 @@ Con la programmazione a oggetti ci si avvicina al pensiero umano rendendo il cod
 3) EREDITARIETÀ
 	- L'ereditarietà consente di ridurre le ridondanze con sotto-gruppi che ereditano le caratteristiche del gruppo principale
 4) POLIMORFISMO
-- Il polimorfismo è la capacità di un linguaggio di programmazione di gestire in modo uniforme oggetti o funzioni che in realtà possono avere comportamenti diversi. In altre parole, uno stesso “nome” (un metodo o una funzione) può assumere forme differenti a seconda del contesto.
+	- Il polimorfismo è la capacità di un linguaggio di programmazione di gestire in modo uniforme oggetti o funzioni che in realtà possono avere comportamenti diversi. In altre parole, uno stesso “nome” (un metodo o una funzione) può assumere forme differenti a seconda del contesto.
 ### **Linguaggi tipizzati**
 
 - Un linguaggio può essere **debolmente tipizzato** (o "ipizzato" come avevi scritto, nel senso di più generico), cioè i tipi sono usati in modo meno rigoroso e possono anche essere convertiti implicitamente.

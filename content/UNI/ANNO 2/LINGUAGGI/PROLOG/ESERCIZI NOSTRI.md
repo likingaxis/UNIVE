@@ -214,3 +214,20 @@ maxlista([H|T],X):-
 
 
 fai FINDALL, BAGOF, SETOF
+```scss
+:- dynamic visto/2.
+
+dipendente(mario, marketing).
+dipendente(luigi, sviluppo).
+dipendente(valerio, sviluppo).
+dipendente(anna, marketing).
+dipendente(luca, marketing).
+dipendente(paolo, risorse_umane).
+
+
+stesso_dipartimento(X, Y, Coppie) :-
+    setof([X,Y], 
+          (dipendente(X, Z), dipendente(Y, Z), X\=Y, not(visto(X, Y)), assert(visto(X, Y)), assert(visto(Y, X))), 
+          Coppie).   
+          
+```

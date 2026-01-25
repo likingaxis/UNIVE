@@ -107,7 +107,7 @@ Posso creare delle sotto classi che riprendono TUTTE le caratteristiche della cl
 > 
 >     String colore="bianco";
 > 
->     void stampadati (){
+>      void stampadati (){
 > 
 >         System.out.println(ventole+" "+vram+" "+sborra+" "+colore+" ");   
 > 
@@ -247,9 +247,17 @@ Posso creare delle sotto classi che riprendono TUTTE le caratteristiche della cl
 > } 
 > class BARCA implements ACQUA{ int velocità= 60; @Override  
 > public void NAVIGA(){ System.out.println(velocità); }  
-> } class HOVERCRAFT implements TERRA,ACQUA{ int velocità=100; @Override  
-> public void GUIDA(){ System.out.println(velocità); } @Override  
-> public void NAVIGA(){ System.out.println(velocità); } } class interfacce{ public static void main(String[] args) { AUTOMOBILE lamborghini=new AUTOMOBILE(); lamborghini.velocità=400; BARCA yatch=new BARCA(); yatch.velocità=50; HOVERCRAFT aereo= new HOVERCRAFT(); aereo.velocità=700;  
+> } 
+> 
+> class HOVERCRAFT implements TERRA,ACQUA{ 
+> int velocità=100; 
+> @Override  
+> public void GUIDA(){ System.out.println(velocità); } 
+> @Override  
+> public void NAVIGA(){ System.out.println(velocità); 
+> } } 
+> 
+> class interfacce{ public static void main(String[] args) { AUTOMOBILE lamborghini=new AUTOMOBILE(); lamborghini.velocità=400; BARCA yatch=new BARCA(); yatch.velocità=50; HOVERCRAFT aereo= new HOVERCRAFT(); aereo.velocità=700;  
 > lamborghini.GUIDA(); yatch.NAVIGA(); aereo.NAVIGA(); aereo.GUIDA(); } }
 > ```
 

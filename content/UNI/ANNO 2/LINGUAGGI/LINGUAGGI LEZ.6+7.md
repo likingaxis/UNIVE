@@ -189,8 +189,7 @@ public class Automobile {
     public int livelloCarburante;
     
     // La classe Automobile ha un costruttore
-    public Automobile(int velocitàIniziale, int marciaIniziale, int 
-                      livelloCarburanteIniziale) {
+    public Automobile(int velocitàIniziale, int marciaIniziale, int, livelloCarburanteIniziale) {
         velocità = velocitàIniziale;
         marcia = marciaIniziale;
         livelloCarburante = livelloCarburanteIniziale;
