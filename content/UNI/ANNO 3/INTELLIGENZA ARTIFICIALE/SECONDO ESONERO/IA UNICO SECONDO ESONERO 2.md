@@ -1,0 +1,437 @@
+# Rappresentare la conoscenza 
+- una macchina di per sé visualizza esclusivamente Stringhe
+	- la parola gatto è solo una sequenza di 0 e 1
+	- da qui nasce la rappresentazione della conoscenza attraverso categorie
+		- tipo: animale -> gatto
+	- da qui nascono le ontologie
+#### Ontologie
+> **una specifica formale e condivisa di come un dominio è strutturato**
+In pratica:
+- **quali tipi di cose esistono**
+- **come sono collegate**
+- **quali proprietà hanno**
+- **quali relazioni sono valide**
+![[Pasted image 20251203171007.png]]
+da qui deriva poi
+L’**ingegneria ontologica** è la disciplina che si occupa di:
+- progettare modelli formali di conoscenza,
+- definire concetti e relazioni di un dominio,
+- strutturare questa conoscenza in modo da renderla **comprensibile, riutilizzabile e computabile** da sistemi artificiali.
+##### Ridurre la conoscenza
+- per ridurre la conoscenza da scrivere sono state utilizzate diverse strategie
+	- Categorie
+		- insiemi di oggetti con proprietà in comune
+	- Classificazione
+		- appartenenza di un oggetto a una certa categoria
+	- Ereditarietà
+		- le proprietà hanno una gerarchia da rispettare e che ereditano
+
+>[!bug] 	diversi problemi sulle conoscenze
+>    - eccezioni, tipo il pinguino è un uccello che non vola
+>    - conflitti di ereditarietà
+>    - ambiguità di categorie
+>    - mondo incompleto
+>    - impossibilità della macchina nell'esplorare le seguenti cose
+#### Ora che abbiamo definito la nostra conoscenza, non abbiamo ancora definito un modo per utilizzarla, sfruttarla e migliorarla
+Ora come ci ragiono sopra?
+# Sistemi di categorizzazione e ragionamento
+
+##### *Le reti semantiche* 
+un grafo di concetti collegati da relazioni semantiche
+- sono **visive**, intuitive, utili per rappresentare e navigare la conoscenza.
+- Sono **grafi**: 
+- nodi → concetti (Cane, Animale, Coda)
+- archi → relazioni (è-un, ha-parte, vive-in)
+- Permettono di **visualizzare** una base di conoscenza.
+- Usano relazioni come **IS-A** (sottoclasse) per trasmettere proprietà tramite **ereditarietà**.
+- Consentono inferenze semplici ed efficienti del tipo:  
+    “Se _canarino_ è un _uccello_ e gli uccelli volano, allora un canarino vola.”
+- ➜ Sono nate per modellare il **ragionamento valido**, prima in matematica, poi nel senso comune. 
+- È un’ontologia **disegnata come grafo**
+🔴 problema delle reti semantiche:
+- il significato degli archi è **informale**
+- dipende da come _interpreti_ il grafo
+##### *Le Logiche Descrittive (Description Logics) (DL)*
+Le Description Logics sono linguaggi formali che forniscono
+una semantica rigorosa alle strutture concettuali
+come categorie, classificazione ed ereditarietà.
+- le logiche descrittive dicono _cosa significa esattamente_ quella rappresentazione.
+Esse permettono di:
+- definire concetti in modo formale,
+- verificare la coerenza di una ontologia,
+- effettuare inferenze corrette e automatiche,
+- superare i limiti informali delle reti semantiche.
+
+
+### DOVE METTO LA CONOSCENZA APPRESA?
+# KB e KG
+Una **Knowledge Base (KB)** è:
+> un **insieme strutturato** di conoscenze utilizzabile da un sistema per inferire, interpretare o decidere.
+
+Può contenere:
+- fatti,
+- concetti,
+- relazioni,
+- (in alcuni casi) regole di inferenza.
+Una **Knowledge Graph (KG)** è:
+> **un grafo di entità collegate da relazioni semantiche**, tipicamente espresso tramite triple  
+> _(head, relation, tail)_.
+
+Vengono usati ad esempio anche dai modelli di ML(Machine Learning)
+
+
+### COME GESTISCO LE ECCEZIONI?
+- tipo prima avevo detto della roba del pinguino che è un uccello ma non vola
+- si usa una struttura nuova
+#### I frame
+I **frame** sono strutture mentali e strutture dati usate per rappresentare conoscenza “di senso comune”.
+- Quando affrontiamo una **situazione nuova**, la mente richiama uno **stereotipo** (frame) già noto e lo **adatta** al caso specifico.  
+ perché non si limita a rappresentare il significato delle frasi in termini di predicati, ma introduce strutture concettuali (frame) che modellano situazioni tipiche del mondo reale, permettendo inferenza, disambiguazione e collegamento con la conoscenza.
+ - Gli slot **IS** e **IS-A** permettono di costruire una tassonomia di frame (come classi e sottoclassi).
+### Un livello di INTERAZIONE con la conoscenza
+
+# NLP
+Un **sistema di Natural Language Processing (NLP)** è:
+
+> **un sistema artificiale che riceve in input espressioni in linguaggio naturale e costruisce una o più rappresentazioni interne, sintattiche e/o semantiche, al fine di interpretare, utilizzare o trasformare il contenuto linguistico.**
+
+In particolare, un sistema NLP:
+- prende in input **stringhe di testo**;
+- produce come output **una rappresentazione strutturata del significato**,  
+    ovvero una forma interna su cui il sistema può eseguire elaborazioni, inferenze o decisioni.
+Pertanto, l’obiettivo dell’NLP non è la semplice manipolazione del testo, ma la **costruzione di rappresentazioni del significato utilizzabili computazionalmente**.
+###### Principali difficoltà affrontate dai sistemi NLP
+I sistemi NLP devono confrontarsi con caratteristiche intrinseche del linguaggio naturale, che rendono complessa la sua elaborazione automatica.
+##### Variabilità linguistica
+- **Uno stesso concetto** può essere espresso tramite **frasi diverse**  
+    (es. _“Il cane morde”_, _“Il cane ha morso”_).
+- **Una stessa parola** può assumere **ruoli o significati diversi** a seconda del contesto  
+    (es. _“banca”_).
+##### Ambiguità
+Il linguaggio naturale presenta diversi livelli di ambiguità:
+- **Ambiguità lessicale**: una parola può avere più significati.
+- **Ambiguità sintattica**: una frase può ammettere più strutture grammaticali.
+- **Ambiguità semantica**: una frase può avere più interpretazioni di significato.
+- **Ambiguità pragmatica**: il significato dipende dal contesto e dall’intenzione comunicativa.
+👉 Un sistema NLP efficace deve **gestire e ridurre l’ambiguità a tutti questi livelli**, integrando informazione linguistica e conoscenza del mondo.
+
+### Esempio di NLP Wordnet senza frame
+**WordNet** è una **grande risorsa lessicale** organizzata come una **rete semantica**.
+- è un dizionario “intelligente” per i computer.
+- viene sfruttato dalle NLP ma con le limitazioni espresse sopra
+##### Frame semantics, una cosa sfruttata dai sistemi NLP
+>[!info]- NLP senza frame semantics
+>
+> ## Cosa fa l’NLP _senza_ frame semantics
+> Esempio:
+> “Luca ha comprato un libro da Anna per 10 euro”
+> Con NLP classico ottieni qualcosa tipo:
+> `comprare(Luca, libro, Anna, 10)`
+> Questo ti dice:
+> - c’è un verbo
+> - ci sono argomenti
+> ❌ Ma **non sai**:
+> - che questa è una transazione economica
+> - che Anna ora ha i soldi
+> - che Luca ora possiede il libro
+> - che “vendere” e “comprare” descrivono _la stessa situazione_
+- Senza frame semantics, l’NLP rappresenta il significato principalmente come predicati e argomenti, ma fatica a modellare il contesto concettuale e le situazioni del mondo reale.
+- la frame semantics è composta dalle FrameNet, essa viene sfruttata proprio dagli NLP
+**FrameNet** è una **risorsa linguistica basata sulla teoria della frame semantics**.
+- il significato delle parole viene interpretato in relazione al **frame concettuale** che esse attivano;
+- ogni frame rappresenta una **situazione tipica del mondo reale**;
+- le parole riempiono specifici **ruoli semantici (frame elements)** all’interno del frame.
+FrameNet consente una **rappresentazione semantica più ricca**, utile per **disambiguazione, inferenza e comprensione del linguaggio**.
+
+>[!info] I sistemi NLP a livello lessicale utilizzano tipicamente risorse come WordNet; quando è necessaria una rappresentazione semantica basata su eventi e ruoli, vengono invece impiegate risorse come FrameNet.
+
+
+
+## IL MACHINE LEARNING
+- tutto ciò che abbiamo visto fino ad ora ha un grande limite
+❌ **la conoscenza va scritta a mano**  
+❌ **non scala**  
+❌ **è fragile**  
+❌ **il mondo è troppo complesso**
+##### IL ML è **apprendimento di funzioni dai dati**.
+Il ML fa:
+> **classificazione senza ontologia esplicita**
+
+>[!quote] **Un agente impara da esperienza E rispetto a una classe di compiti T e una misura di prestazione P, se la sua prestazione nei compiti in T, misurata tramite P, migliora con l’esperienza E.**
+
+- E – Esperienza (_Experience_)
+È **la fonte dei dati** da cui il sistema apprende.
+
+### Progettare un sistema di Machine Learning
+##### 1️⃣ Scegliere e rappresentare la _training experience_
+Decidere:
+- **che tipo di esperienza usare**
+- **in che forma fornirla al sistema**
+Esempi:
+- mosse “migliori” fatte da esperti
+- partite complete
+- stati del gioco con valutazione
+- interazioni casuali
+⚠️ L’esperienza **non è sempre supervisionata**:
+- può essere corretta
+- rumorosa
+- parziale
+- generata dal sistema stesso
+##### 2️⃣ Scegliere la funzione target h (il modello)
+È **la funzione che vogliamo imparare**.
+Formalmente:
+- h : input → output
+Esempi:
+- `board → mossa`
+- `stato → azione ottimale`
+h rappresenta la relazione (ignota) tra input e output che il sistema cerca di approssimare a partire dall’esperienza.
+
+##### 3️⃣ Scegliere la rappresentazione della funzione h
+Qui **non stai ancora imparando**, stai decidendo:
+> _come_ la funzione può essere espressa
+
+Esempi:
+- funzione lineare con pesi
+- albero decisionale
+- rete neurale
+- insieme di regole
+⚠️ Questo è un **vincolo forte**:
+- se la rappresentazione è troppo semplice → non può imparare bene
+- se è troppo complessa → rischia overfitting
+##### 4️⃣ Scegliere l’algoritmo di apprendimento
+È il **meccanismo che modifica h usando E**.
+Esempi:
+- discesa del gradiente
+- aggiornamento dei pesi
+- backpropagation
+- metodi evolutivi
+👉 L’algoritmo **non è la conoscenza**,  
+è **il processo che la costruisce**.
+
+## Tipi di apprendimento
+- **Apprendimento Supervisionato**: il modello impara da esempi etichettati (input + output corretto) per apprendere una funzione che generalizza a nuovi dati.
+	- offre dei dettagli in più oltre a un semplice (hai fallito/hai fatto bene)
+- **Apprendimento Unsupervised**: il modello analizza dati non etichettati per scoprire strutture nascoste, pattern o raggruppamenti (es. clustering).
+- **Weakly Supervised Learning**: il modello apprende da etichette incomplete, imprecise o rumorose, compensando la scarsa qualità dell’informazione supervisionata.
+- **Reinforcement Learning**: un agente impara tramite interazione con un ambiente, scegliendo azioni e ricevendo ricompense o penalità per massimizzare una ricompensa cumulativa.
+
+##### Una volta definito il tipo di apprendimento, è necessario specificare la natura dell’output che il sistema deve apprendere.
+##### i problemi di apprendimento supervisionato Regressione e classificazione
+- **classificazione** → categoria discreta
+	- cioè una **funzione di scoring** che associa a ogni email:
+	- un numero reale (es. 0.93)
+	- poi a questa funzione associ un valore che è 1 o 0
+- **regressione** → valore continuo
+	- non ci sono classificazione il valore della funzione è l'output effettivo
+
+>[!info]- esempi
+>#### Classificazione
+>![[Pasted image 20260127123442.png]]
+>#### Regressione
+>![[Pasted image 20260127123430.png]]
+### ESEMPIO DI UN MODELLO teorico DI APPRENDIMENTO
+#### Inductive Learning (Apprendimento induttivo)
+L’apprendimento induttivo consiste nel costruire un’ipotesi generale a partire da un insieme finito di esempi, con l’obiettivo di approssimare una funzione target sconosciuta e generalizzare correttamente a nuovi casi.
+composto da:
+- Funzione target f
+- **f** è la **funzione target** (decision function)
+- rappresenta **la soluzione ideale**, sconosciuta
+	- ⚠️ f **non è accessibile direttamente**, altrimenti non servirebbe imparare.
+- Esempi di apprendimento
+	- Un **esempio** è una coppia:
+	- $(x, f(x))$
+		- dove:
+			- `x` = input (stato del mondo)
+			- `f(x)` = output corretto (decisione ideale)
+- Training set
+	- Il **training set** è:
+		- un insieme finito di esempi
+		- estratti (in modo più o meno rappresentativo) dal mondo reale
+		- Formalmente:
+		- $D = \{(x_1, f(x_1)), (x_2, f(x_2)), \dots\}$
+		- 👉 Il training set è **tutto ciò che il sistema conosce di f**.
+#### L’obiettivo dell’apprendimento induttivo
+#### Ipotesi h
+- **h** è un’ipotesi
+- una funzione _candidata_ che tenta di approssimare f
+Problema di apprendimento:
+> **Trovare un’ipotesi h tale che h ≈ f, usando solo il training set.**
+
+Esempio:
+- `h(x)` = mossa suggerita dal sistema nello stato x
+⚠️ h non deve solo copiare gli esempi:  
+deve **generalizzare**.
+- h ≈ f e non h = f
+- f è definita su **tutti** i possibili stati
+- il training set copre **solo una piccola parte**
+###### Consistenza
+Un’ipotesi **h è consistente** rispetto al training set se:
+$\forall x \in D,\quad h(x) = f(x)$
+cioè:
+- h dà la **stessa risposta corretta**
+- per **tutti** gli esempi osservati
+- non significa però che è tutto rose e fiori ad esempio
+👉 **l’ipotesi è perfettamente consistente sui dati di training**  
+👉 **ma si comporta male su input che non appartengono al training set**
+
+- Un modello di apprendimento generalizza bene quando produce predizioni corrette anche su istanze non appartenenti al training set, cioè su dati mai osservati durante l’addestramento.
+#### Rasoio di Occam
+Nel contesto dell’apprendimento induttivo, il Rasoio di Occam afferma che, tra tutte le ipotesi coerenti con i dati di training, è preferibile quella più semplice, poiché ha maggiore probabilità di generalizzare correttamente a nuovi esempi.
+![[Pasted image 20251212164416.png|400]]
+
+### Inductive System 
+L'Inductive System è il modo concreto in cui un sistema realizza l’apprendimento induttivo
+- Input
+	- Il sistema riceve:
+	- **Training examples** → esempi (x, f(x))
+	- **New instance** → un nuovo input mai visto
+##### Cosa fa il sistema
+- Ottiene il modello H attraverso il machine learning
+	- scegli una **classe di ipotesi** H  
+	    - (es. linee, alberi, reti neurali…)
+		- usi i dati per **scegliere una h ∈ H**
+		- ⚠️ Nota importante:
+> H **non è la singola ipotesi**,  
+> H è **lo spazio delle ipotesi possibili**
+- Utilizzo del modello
+	- una volta scelta h
+	- la applichi a una nuova istanza
+- Output:
+	- classificazione
+	- oppure “don’t know”
+Nel sistema induttivo:
+- **H è nascosto**
+- **le assunzioni non sono dichiarate**
+- sembra che il sistema “impari dai dati”
+-  l'utente vede solo input-> output
+- Per **assunzioni** si intendono **tutte le ipotesi a priori** che il sistema fa **prima di vedere i dati** e che **non sono deducibili dal training set**
+![[Pasted image 20251212174948.png]]
+
+IL SISTEMA INDUTTIVO DUNQUE NON È ESPLICITO 
+- abbiamo quindi...
+### Deductive System
+L’apprendimento induttivo può essere **reinterpretato in termini logici** riscrivendo lo stesso processo sotto forma di **ragionamento deduttivo**, rendendo esplicite le assunzioni che nel sistema induttivo restano implicite.
+Oltre a:
+- un insieme di **training examples** della forma $(x, f(x))$,
+- una **nuova istanza** da classificare,
+il sistema deduttivo introduce una **assunzione a priori** fondamentale:
+> **Assertion: la funzione target appartiene allo spazio delle ipotesi**
+
+Formalmente:
+$f \in H$
+Questa assunzione afferma che:
+
+> _la funzione target sconosciuta che si intende apprendere è rappresentabile all’interno dello spazio delle ipotesi H._
+
+⚠️ Tale affermazione **non è deducibile dai dati osservati**,  
+ma costituisce una **assunzione esplicita** sul problema di apprendimento.
+
+- foto:
+	- usa un **theorem prover** (deduzione logica)
+	- verifica:
+	    - quali ipotesi in H sono compatibili con gli esempi
+	    - cosa segue logicamente per il nuovo caso
+![[Pasted image 20251212173211.png]]
+### INDUCTIVE BIAS
+L’inductive bias è l’insieme delle assunzioni a priori che un sistema di apprendimento utilizza per generalizzare oltre gli esempi osservati.
+
+> **L’inductive bias è l’insieme delle assunzioni a priori che un sistema di Machine Learning utilizza per selezionare un’ipotesi tra le molte compatibili con i dati di training, consentendo la generalizzazione a nuovi esempi.**
+> _Tali assunzioni non sono deducibili dai dati e sono incorporate nella scelta dello spazio delle ipotesi, nella rappresentazione del modello e nell’algoritmo di apprendimento._
+> _Nel sistema induttivo il bias è implicito, mentre nella reinterpretazione deduttiva è reso esplicito tramite l’assunzione $f \in H$._
+- **bias troppo forte** → underfitting
+- **bias troppo debole** → overfitting
+### Decision Trees
+una **struttura ad albero** che rappresenta una sequenza di decisioni basate sui valori degli attributi, al fine di determinare una classe (o un valore numerico).
+- È la **struttura finale**
+- Un oggetto statico
+- Serve per:
+    - classificare
+    - predire
+👉 È il **risultato**
+Nodo interno     → test su un attributo
+Arco             → risultato del test
+Foglia           → output finale
+![[Pasted image 20251212174342.png]]
+### Decision tree learning
+Il **Decision Tree Learning** è un **processo di apprendimento induttivo supervisionato** che, a partire da esempi etichettati, **costruisce automaticamente un albero di decisione** per approssimare una funzione target sconosciuta e generalizzare a nuove istanze.
+Si assume che:
+- esista una **funzione target ignota**
+    f:X→Yf : X \rightarrow Yf:X→Y
+- lo spazio XXX sia lo **spazio delle istanze**, definito dagli **attributi** disponibili;
+- il sistema osservi un insieme finito di esempi etichettati
+    (x,f(x))(x, f(x))(x,f(x))
+L’obiettivo è costruire un’**ipotesi**
+h:X→Yh : X \rightarrow Yh:X→Y
+che approssimi fff e **generalizzi correttamente** a istanze non osservate.
+Nel decision tree learning, l’ipotesi hhh è **vincolata** ad avere una forma specifica:
+> hhh deve essere rappresentabile come **un albero di decisione**.
+Questo significa che:
+- ogni **nodo interno** rappresenta un **test su un attributo**;
+- ogni **arco** rappresenta l’esito del test;
+- ogni **foglia** rappresenta una decisione finale (classe o valore).
+👉 Questa scelta introduce un’**assunzione a priori** sulla forma della funzione target:  
+questa assunzione è detta **inductive bias**.
+- Lo **spazio delle istanze XXX** è l’insieme astratto di tutti gli oggetti descrivibili tramite gli attributi.
+    
+- Lo **spazio delle ipotesi HHH** è l’insieme di **tutti i possibili alberi di decisione** costruibili sugli attributi disponibili:
+    
+
+H={ h∣h eˋ un albero di decisione sugli attributi disponibili }H = \{\, h \mid h \text{ è un albero di decisione sugli attributi disponibili} \,\}H={h∣h eˋ un albero di decisione sugli attributi disponibili}
+
+📌 Il decision tree learning **non crea** questi spazi:  
+li **assume** come contesto del problema.
+
+Il decision tree learning **non esplora tutte le ipotesi in HHH**.  
+Costruisce invece l’albero **incrementalmente**, nodo per nodo.
+
+In ogni nodo:
+
+1. considera gli esempi che raggiungono quel nodo;
+    
+2. valuta tutti gli attributi disponibili;
+    
+3. sceglie **l’attributo e la partizione del suo dominio** che separano meglio gli esempi, secondo un **criterio locale** (es. Information Gain);
+    
+4. suddivide gli esempi e ripete il processo sui sottoinsiemi.
+    
+
+👉 Ogni scelta:
+
+- è **locale** (vale solo per il nodo corrente);
+    
+- è **greedy** (non viene riconsiderata);
+    
+- riduce implicitamente lo spazio delle ipotesi compatibili.
+Ogni albero possibile è un’ipotesi h∈Hh \in Hh∈H.  
+Costruire l’albero significa:
+
+> muoversi nello spazio delle ipotesi scegliendo, a ogni passo, una direzione ritenuta localmente migliore.
+
+Poiché:
+
+- le scelte sono guidate da un’euristica;
+    
+- non c’è backtracking;
+    
+
+il decision tree learning è una **ricerca euristica greedy nello spazio delle ipotesi**, non un’esplorazione esaustiva.
+La dimensione dello spazio delle ipotesi influisce sul comportamento del modello:
+
+- **spazio delle ipotesi grande**  
+    → minor bias, maggior rischio di overfitting (alta varianza);
+    
+- **spazio delle ipotesi piccolo**  
+    → maggior bias, migliore stabilità (bassa varianza).
+    
+
+Il decision tree learning gestisce questo compromesso tramite:
+
+- criteri di arresto;
+    
+- tecniche di potatura (pruning).
+
+![[Pasted image 20251212174321.png]]
+
+### Codice del DTL
+![[Pasted image 20251212180010.png]]
+
