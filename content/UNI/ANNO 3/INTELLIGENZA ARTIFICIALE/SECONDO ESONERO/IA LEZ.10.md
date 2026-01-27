@@ -161,6 +161,7 @@ Nel sistema induttivo:
 - **H è nascosto**
 - **le assunzioni non sono dichiarate**
 - sembra che il sistema “impari dai dati”
+- l'utente vede solo input-> output
 👉 Ma questo è solo **il punto di vista operativo**
 ![[Pasted image 20251212174948.png]]
 
@@ -196,6 +197,7 @@ Se:
 L’**inductive bias** è:
 > l’insieme delle assunzioni che permettono di generalizzare  
 > oltre i dati osservati
+
 Nel diagramma:
 - nel sistema induttivo → **implicito**
 - nel sistema deduttivo → **esplicito**
