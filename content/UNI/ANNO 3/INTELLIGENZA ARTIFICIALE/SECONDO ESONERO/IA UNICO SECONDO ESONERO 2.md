@@ -354,84 +354,98 @@ Foglia           → output finale
 ![[Pasted image 20251212174342.png]]
 ### Decision tree learning
 Il **Decision Tree Learning** è un **processo di apprendimento induttivo supervisionato** che, a partire da esempi etichettati, **costruisce automaticamente un albero di decisione** per approssimare una funzione target sconosciuta e generalizzare a nuove istanze.
-Si assume che:
-- esista una **funzione target ignota**
-    f:X→Yf : X \rightarrow Yf:X→Y
-- lo spazio XXX sia lo **spazio delle istanze**, definito dagli **attributi** disponibili;
-- il sistema osservi un insieme finito di esempi etichettati
-    (x,f(x))(x, f(x))(x,f(x))
-L’obiettivo è costruire un’**ipotesi**
-h:X→Yh : X \rightarrow Yh:X→Y
-che approssimi fff e **generalizzi correttamente** a istanze non osservate.
-Nel decision tree learning, l’ipotesi hhh è **vincolata** ad avere una forma specifica:
-> hhh deve essere rappresentabile come **un albero di decisione**.
-Questo significa che:
-- ogni **nodo interno** rappresenta un **test su un attributo**;
-- ogni **arco** rappresenta l’esito del test;
+Il decision tree learning costruisce in modo incrementale e greedy un’ipotesi $h$ appartenente allo spazio delle ipotesi degli alberi di decisione.  
+A ogni passo seleziona una scelta locale che restringe lo spazio delle ipotesi ai soli alberi compatibili con le decisioni già prese.  
+Un nodo interno di un decision tree rappresenta un test su un attributo, i cui esiti, rappresentati dagli archi, corrispondono a una partizione del dominio dell’attributo.  
+Il processo prosegue ricorsivamente fino al raggiungimento di un nodo foglia, che rappresenta l’output finale dell’ipotesi.
+
+ricorda:
+- h deve essere rappresentabile come **un albero di decisione**
+- ogni **nodo interno** rappresenta un **test su un attributo**
+- ogni **arco** rappresenta l’esito del test, consente di fare uno splitting decisionale 
 - ogni **foglia** rappresenta una decisione finale (classe o valore).
-👉 Questa scelta introduce un’**assunzione a priori** sulla forma della funzione target:  
-questa assunzione è detta **inductive bias**.
-- Lo **spazio delle istanze XXX** è l’insieme astratto di tutti gli oggetti descrivibili tramite gli attributi.
-    
-- Lo **spazio delle ipotesi HHH** è l’insieme di **tutti i possibili alberi di decisione** costruibili sugli attributi disponibili:
-    
-
-H={ h∣h eˋ un albero di decisione sugli attributi disponibili }H = \{\, h \mid h \text{ è un albero di decisione sugli attributi disponibili} \,\}H={h∣h eˋ un albero di decisione sugli attributi disponibili}
-
-📌 Il decision tree learning **non crea** questi spazi:  
-li **assume** come contesto del problema.
-
-Il decision tree learning **non esplora tutte le ipotesi in HHH**.  
-Costruisce invece l’albero **incrementalmente**, nodo per nodo.
-
-In ogni nodo:
-
-1. considera gli esempi che raggiungono quel nodo;
-    
-2. valuta tutti gli attributi disponibili;
-    
-3. sceglie **l’attributo e la partizione del suo dominio** che separano meglio gli esempi, secondo un **criterio locale** (es. Information Gain);
-    
-4. suddivide gli esempi e ripete il processo sui sottoinsiemi.
-    
-
-👉 Ogni scelta:
-
-- è **locale** (vale solo per il nodo corrente);
-    
-- è **greedy** (non viene riconsiderata);
-    
-- riduce implicitamente lo spazio delle ipotesi compatibili.
-Ogni albero possibile è un’ipotesi h∈Hh \in Hh∈H.  
-Costruire l’albero significa:
-
-> muoversi nello spazio delle ipotesi scegliendo, a ogni passo, una direzione ritenuta localmente migliore.
-
-Poiché:
-
-- le scelte sono guidate da un’euristica;
-    
-- non c’è backtracking;
-    
-
-il decision tree learning è una **ricerca euristica greedy nello spazio delle ipotesi**, non un’esplorazione esaustiva.
+- Lo **spazio delle istanze $X$** è l’insieme astratto di tutti gli oggetti descrivibili tramite gli attributi.
+- Lo **spazio delle ipotesi $H$** è l’insieme di **tutti i possibili alberi di decisione** costruibili sugli attributi disponibili:
+$$H = \{\, h \mid h \text{ è un albero di decisione sugli attributi disponibili} \,\}$$
 La dimensione dello spazio delle ipotesi influisce sul comportamento del modello:
-
 - **spazio delle ipotesi grande**  
     → minor bias, maggior rischio di overfitting (alta varianza);
-    
 - **spazio delle ipotesi piccolo**  
     → maggior bias, migliore stabilità (bassa varianza).
-    
-
-Il decision tree learning gestisce questo compromesso tramite:
-
-- criteri di arresto;
-    
-- tecniche di potatura (pruning).
 
 ![[Pasted image 20251212174321.png]]
 
 ### Codice del DTL
 ![[Pasted image 20251212180010.png]]
+
+### Criterio locale utilizzato nel DTL per splittare
+**quale test inserire nel nodo**, cioè **quale attributo (e quale partizione del suo dominio)** usare per separare gli esempi.
+Nel Decision Tree Learning vogliamo:
+> scegliere l’attributo che **riduce di più l’incertezza** sulla classe
+
+Nel decision tree learning, la scelta dello split in un nodo è guidata da un criterio locale che misura la qualità della partizione. Tale criterio è basato sull’entropia degli esempi e sull’Information Gain, che quantifica la riduzione di incertezza ottenuta applicando uno specifico split.
+
+##### Entropia (Information Content)
+Nel **Decision Tree Learning**, l’**entropia** è una misura dell’**incertezza** (o impurità) di un insieme di esempi rispetto alla **classe target**.
+In particolare, l’entropia indica **quanto è difficile prevedere la classe di un’istanza** osservando solo l’insieme di esempi corrente.
+La **classe di un’istanza** è:
+> il **valore dell’output (variabile target)** associato a quell’istanza, cioè il risultato che il modello deve predire.
+
+Formalmente:
+$f(x) = y$
+- $x$ → istanza (descritta dagli attributi) 
+- $y$ → **classe**
+
+- entropia minima(0)
+	- se l’insieme contiene **solo esempi della stessa classe**
+	- quindi qualsiasi f(x) porta alla stessa y, non ho split che portano a grandi cambiamenti
+	- Se l’insieme di esempi contiene solo istanze della stessa classe, l’entropia è nulla; in questo caso non è necessario effettuare ulteriori split e il nodo viene trasformato in una foglia che assegna direttamente la classe.
+- entropia massima
+	- se l’insieme contiene esempi **equamente distribuiti tra le classi**
+	- poiché la previsione della classe è completamente incerta
+- valore intermedio
+	- se l'insieme è sbilanciato 
+
+È importante notare che l’entropia **non misura quanta informazione è presente**, ma **quanta incertezza** rimane sulla classe target.
+Nel contesto del decision tree learning, l’entropia viene utilizzata per valutare la qualità di uno split:
+>[!info]- formula entropia per esercizi
+>![[Pasted image 20260128112043.png]]
+
+### REMAINDER
+> **quanta incertezza sulla classe rimane dopo aver suddiviso gli esempi usando un certo attributo**.
+
+In altre parole, il remainder quantifica **quanto “impuri” sono i sottoinsiemi** generati da uno split, tenendo conto **della loro dimensione**.
+Quando scegli un attributo $A$ in un nodo:
+- il training set $E$ viene suddiviso in più sottoinsiemi
+- ciascun sottoinsieme corrisponde a un **esito dello split**
+- il remainder misura l’**entropia complessiva dopo lo split**
+👉 È l’**incertezza residua**.
+
+![[Pasted image 20260128112528.png]]
+#### Information Gain
+Nel **Decision Tree Learning**, l’**Information Gain (IG)** misura:
+
+> **quanto l’utilizzo di un attributo $A$ riduce l’incertezza sulla classe target**.
+In altre parole, l’Information Gain quantifica **il beneficio informativo** ottenuto effettuando uno split sugli esempi tramite l’attributo $A$.
+
+- **IG alto**
+    - lo split separa bene le classi
+    - i sottoinsiemi risultanti sono più “puri”
+    - attributo **molto informativo**
+- **IG basso**
+    - lo split riduce poco l’incertezza
+    - attributo **poco utile**
+- **IG = 0**
+    - il remainder coincide con l’entropia iniziale
+    - lo split **non cambia nulla**
+    - l’attributo non fornisce informazione sulla classe
+👉 Per questo motivo, nel decision tree learning:
+> **si sceglie l’attributo che massimizza l’Information Gain**.
+
+>[!info]- formula da esame
+>![[Pasted image 20260128112802.png]]
+
+Entropia(E)        → incertezza prima
+Remainder(E, A)    → incertezza dopo
+Information Gain   → quanto ho guadagnato
 
