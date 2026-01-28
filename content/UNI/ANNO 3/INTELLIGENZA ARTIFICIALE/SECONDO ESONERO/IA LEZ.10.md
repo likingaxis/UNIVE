@@ -260,6 +260,7 @@ ma **quanta incertezza** c’è sulla classe.
     - massima incertezza
 Nel Decision Tree Learning vogliamo:
 > scegliere l’attributo che **riduce di più l’incertezza** sulla classe
+
 Quindi:
 - misuriamo l’entropia **prima** dello split
 - misuriamo l’entropia **dopo** lo split
