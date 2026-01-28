@@ -269,6 +269,7 @@ Quindi:
 ### Remainder
 Il **remainder** dice:
 > **quanta incertezza rimane dopo aver usato un certo attributo per dividere il training set**
+
 Se dopo la divisione:
 - sai già quasi sempre la risposta → remainder **basso**
 - sei ancora molto incerto → remainder **alto**
