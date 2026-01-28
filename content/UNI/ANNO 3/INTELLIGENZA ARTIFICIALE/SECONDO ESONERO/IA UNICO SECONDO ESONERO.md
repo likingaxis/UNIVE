@@ -355,7 +355,7 @@ Foglia           → output finale
 ![[Pasted image 20251212174342.png]]
 ### Decision tree learning
 Il **Decision Tree Learning** è un **processo di apprendimento induttivo supervisionato** che, a partire da esempi etichettati, **costruisce automaticamente un albero di decisione** per approssimare una funzione target sconosciuta e generalizzare a nuove istanze.
-Il decision tree learning costruisce in modo incrementale e greedy un’ipotesi $h$ appartenente allo spazio delle ipotesi degli alberi di decisione.  
+Il decision tree learning costruisce in modo incrementale e greedy un’ipotesi $h$ appartenente allo spazio delle ipotesi degli alberi di decisione.
 A ogni passo seleziona una scelta locale che restringe lo spazio delle ipotesi ai soli alberi compatibili con le decisioni già prese.  
 Un nodo interno di un decision tree rappresenta un test su un attributo, i cui esiti, rappresentati dagli archi, corrispondono a una partizione del dominio dell’attributo.  
 Il processo prosegue ricorsivamente fino al raggiungimento di un nodo foglia, che rappresenta l’output finale dell’ipotesi.
@@ -531,97 +531,160 @@ Un problema con **espressività ridondante** si ha quando:
 - Si misura la **performance reale** (generalizzazione)
 
 #### misura delle Performance in modo pratico
-## Confusion Matrix (Classifier Evaluation)
-
 La **confusion matrix** è una tabella che riassume le predizioni di un classificatore confrontandole con le etichette reali, permettendo di distinguere tra classificazioni corrette ed errori.
 
-Per una classe CCC:
-
-||Classe reale = C|Classe reale ≠ C|
-|---|---|---|
-|Predetto = C|**TP**|**FP**|
-|Predetto ≠ C|**FN**|**TN**|
+![[Pasted image 20251218104641.png]]
 
 Dove:
+- **TP (True Positive)**: istanze di $C$ correttamente classificate come $C$
+- **FP (False Positive)**: istanze non $C$ classificate come $C$
+- **FN (False Negative)**: istanze di $C$ classificate come non $C$
+- **TN (True Negative)**: istanze non $C$ classificate come non $C$
 
-- **TP (True Positive)**: istanze di CCC correttamente classificate come CCC
-    
-- **FP (False Positive)**: istanze non CCC classificate come CCC
-    
-- **FN (False Negative)**: istanze di CCC classificate come non CCC
-    
-- **TN (True Negative)**: istanze non CCC classificate come non CCC
-    
+**La confusion matrix multi-classe prende tutte le classi (A, B, C) insieme**  
+e mostra **come il classificatore le confonde tra loro**.
+![[Pasted image 20251218104411.png]]
 
----
-
-## Single-Class / Class-Based Evaluation
 
 La **class-based evaluation** valuta le prestazioni del classificatore **una classe alla volta**, trattando il problema come una classificazione binaria:
-
 - **classe C** vs **non C**
-    
-
 Si risponde alla domanda:
-
 > _Il classificatore ha deciso correttamente se un’istanza appartiene alla classe C?_
 
----
-
-## Precision
+![[Pasted image 20251218111106.png]]
+- Cerchio **Category examples** → tutti i **Members** (classe C reale)
+- Cerchio **Classified examples** → tutto ciò che il modello ha predetto come C
+- **Intersezione** → **TP** (Members correttamente classificati)
+Quindi:
+- **Members** = istanze che **appartengono davvero** alla classe C
+- **Not Members** = istanze che **non appartengono** alla classe C
+- **Classified** = il modello dice “sì, è C”
+- **Rejected** = il modello dice “no, non è C”
+##### Precision e Recall
 
 La **precisione** misura la correttezza delle predizioni positive.
 
-Precision(C)=TPTP+FP\boxed{ Precision(C) = \frac{TP}{TP + FP} }Precision(C)=TP+FPTP​​
+$$\boxed{ Precision(C) = \frac{TP}{TP + FP} }$$
 
 Indica:
-
-> la proporzione di istanze classificate come CCC che appartengono realmente a CCC.
-
----
-
-## Recall
+> la proporzione di istanze classificate come $C$ che appartengono realmente a $C$.
 
 Il **recall** misura la capacità del classificatore di riconoscere le istanze della classe.
-
-Recall(C)=TPTP+FN\boxed{ Recall(C) = \frac{TP}{TP + FN} }Recall(C)=TP+FNTP​​
-
+$$\boxed{ Recall(C) = \frac{TP}{TP + FN} }$$
 Indica:
+> la proporzione di istanze della classe $C$ che sono state correttamente riconosciute.
 
-> la proporzione di istanze della classe CCC che sono state correttamente riconosciute.
-
----
-
-## Trade-off Precision / Recall
+Per una classe $i$:
+- $a_i = TP_i$ (corretti)
+- $b_i = FP_i$
+- $c_i = FN_i$
+Le metriche diventano:
+$$\boxed{ Precision_i = \frac{a_i}{a_i + b_i} }$$
+$$\boxed{ Recall_i = \frac{a_i}{a_i + c_i} }$$
+- la **precision** è penalizzata dai **falsi positivi**
+- il **recall** è penalizzato dai **falsi negativi**
 
 Precision e Recall sono spesso in **trade-off**:
-
 - aumentando la precisione può diminuire il recall
-    
 - aumentando il recall può diminuire la precisione
-    
-
 Non esiste un valore ottimale universale: dipende dal contesto applicativo.
+- questo trade-off viene valutato dal
 
----
+##### Break even point
+- Il BEP è la stima interpolata del valore per la quale Recall = Precision
+- 👉 Una **stima interpolata** è:
+> **un valore non osservato direttamente, ma ricavato stimandolo tra due valori osservati**.
 
-## Notazione compatta (come nei lucidi)
+![[Pasted image 20251218112235.png]]
+Per ottenere una **stima affidabile**, i **test data devono essere istanze NON usate nel training**.
+- l’errore sul training **non predice** la performance futura
+- i dati nuovi **non sono identici** a quelli di addestramento
+**Overfitting** = adattamento troppo preciso ai dati di training  
+→ ottimi risultati sul training  
+→ **scarse prestazioni su nuovi dati**
+Vogliamo misurare:
+- **accuratezza delle predizioni**
+- **capacità di generalizzazione**
+❌ non la capacità di memorizzare i dati
 
-Per una classe iii:
+#### Funzioni che permettono una migliore lettura e utilizzo di Precision e Recall
+##### F-measure
+Media armonica di Precisione e Recall.
+![[Pasted image 20251218112459.png]]
+- penalizza valori molto sbilanciati
+- se **precision** o **recall** è bassa → **F1 è bassa**
+- F1 è alta **solo se entrambe sono alte**
+👉 Ogni classe ha il **suo F1-score**
+###### MEDIA MACRO
+- calcola la metrica **separatamente per ogni classe**
+- poi fa una **media aritmetica semplice**
+- tratta tutte le classi allo stesso modo
+- tutte le classi sono ugualmente importanti
+- vuoi valutare le performance anche sulle classi rare
+![[Pasted image 20251218112533.png]]
 
-- ai=TPia_i = TP_iai​=TPi​ (corretti)
-    
-- bi=FPib_i = FP_ibi​=FPi​ (falsi positivi)
-    
-- ci=FNic_i = FN_ici​=FNi​ (falsi negativi)
-    
+###### MEDIA MICRO
+- **aggrega** TP, FP e FN di tutte le classi
+- poi calcola precision, recall e F1 **globali**
+- le classi **più frequenti pesano di più**
+- l’obiettivo è la performance globale
+- gli errori sulle classi frequenti sono più rilevanti
+![[Pasted image 20251218112542.png]]
 
-Le metriche diventano:
+### Valutazione di un modello di Machine Learning
+Dopo l’addestramento di un modello di Machine Learning, è necessario stimarne le **prestazioni reali** e la **capacità di generalizzazione**, cioè la sua efficacia su dati non visti.
+La **valutazione di un modello** consiste nel confrontare le predizioni del modello con le etichette reali su un insieme di dati **distinto da quello di addestramento**, al fine di ottenere una stima affidabile delle prestazioni.
 
-Precisioni=aiai+bi\boxed{ Precision_i = \frac{a_i}{a_i + b_i} }Precisioni​=ai​+bi​ai​​​ Recalli=aiai+ci\boxed{ Recall_i = \frac{a_i}{a_i + c_i} }Recalli​=ai​+ci​ai​​​
+- **Model evaluation**: misura le prestazioni finali di un modello su dati mai visti
+- **Model validation**: processo di selezione e ottimizzazione del modello tramite dati separati dal training
+Per valutare correttamente un modello è necessario separare i dati utilizzati per l’apprendimento da quelli utilizzati per la valutazione.
+##### Passaggi per la evaluation/validation 
+- Il *dataset splitting* consiste nel suddividere il dataset in insiemi distinti, tipicamente:
+	- **Training set**: usato per addestrare il modello
+	- **Test set**: usato per valutare le prestazioni finali
+![[Pasted image 20251218115039.png|400]]
+- *fase di addestramento*
+	- Durante l’addestramento il modello apprende una funzione che approssima la funzione target.
+	- Nella **learning phase**, il training set viene fornito all’algoritmo di apprendimento, che costruisce un **modello** (o ipotesi $h$) capace di produrre predizioni.
+![[Pasted image 20251218115024.png|400]]
+- *fase di testing*
+	- Per stimare la capacità di generalizzazione del modello, è necessario testarlo su dati nuovi.
+	- Nel **testing**, il test set viene fornito al modello, che produce predizioni confrontate con le etichette reali (oracle).
+![[Pasted image 20251218115052.png|400]]
+### Procedure note di validation
+##### N-Fold Cross Validation
+Quando il numero di dati disponibili è limitato, una singola suddivisione in training e test set (hold-out) può produrre una stima **instabile** delle prestazioni, fortemente dipendente da come avviene lo split.
+La **N-fold cross validation** è una tecnica di valutazione in cui
+- il dataset viene suddiviso in $n$ sottoinsiemi (_fold_) di uguale dimensione;
+- a ogni iterazione:
+    - un fold viene utilizzato come **test set**;
+    - i restanti $n - 1$ fold vengono utilizzati come **training set**;
+- il processo viene ripetuto nnn volte, facendo ruotare il fold di test;
+- ogni istanza del dataset viene utilizzata:
+    - una volta come test
+    - $n - 1$ volte come training.
+![[Pasted image 20251218115327.png]]
 
----
+#### Hold-out
 
-## Frase finale da esame (opzionale ma perfetta)
+Quando si dispone di una quantità sufficiente di dati e si desidera una procedura di valutazione **semplice e veloce**.
+L’**hold-out** è una tecnica di valutazione in cui il dataset viene suddiviso **una sola volta** in:
+- un **training set**, utilizzato per l’addestramento del modello;
+- un **test set** (o validation set), utilizzato per la valutazione.
+- suddivisione tipica: **70% training – 30% test**;
+- semplice da implementare e computazionalmente economica;
+- la stima delle prestazioni dipende fortemente dallo split;
+- poco affidabile quando il dataset è piccolo.
+![[Pasted image 20251218121153.png|400]]
+## Hold-out nella Cross-Validation
+Quando la cross-validation viene utilizzata per il tuning dei parametri, esiste il rischio di ottenere stime **ottimistiche**, poiché il modello viene valutato su dati già coinvolti nella selezione delle configurazioni.
+Nell’**hold-out nella cross-validation**, una parte del dataset (un fold) viene completamente **tenuta da parte**:
+- non partecipa né al training
+- né alla cross-validation
+- viene utilizzata **solo alla fine** come test set finale.
+- fornisce un **test set realmente indipendente**;
+- riduce il rischio di ottimismo nella stima delle prestazioni;
+- garantisce una valutazione più corretta della **capacità di generalizzazione**;
+- combina i vantaggi della cross-validation e dell’hold-out.
 
-> «Le metriche di precisione e recall, derivate dalla confusion matrix, consentono di valutare le prestazioni di un classificatore su una singola classe, evidenziando il compromesso tra correttezza delle predizioni positive e capacità di riconoscere tutte le istanze della classe.»
+### Modelli di IA ecc...
