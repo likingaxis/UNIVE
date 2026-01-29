@@ -194,8 +194,6 @@ L’idea è sempre questa:
     - qui: $h_w(x) = w_1 x + w_0$​
 2. **Decidi cosa vuol dire “sbagliare”**
     - definisci una funzione di errore (**loss**)
-    - qui: errore quadratico  
-        $(y - h_w(x))^2$
 	- La **loss** è una funzione che misura **quanto la predizione del modello è sbagliata** rispetto al valore corretto (etichetta) **per un singolo esempio**
 		- $ℓ(\hat{y}​,y)$
 3. **Sommi l’errore su tutti i dati**
@@ -216,12 +214,14 @@ L’idea è sempre questa:
 ![[Pasted image 20260105114805.png]]
 - La y rappresenta subito una soluzione qua perché è la retta, prima andava comunque definita da h(x)
 - $\hat y$​ è **direttamente il valore predetto**
+- funzione di loss:    
+	- qui: errore quadratico  
+	        $(y - h_w(x))^2$
 ##### Ottimizzazione di w
 - asse x: valori possibili di $w_1$
 - asse y: **errore (MSE sul training set)**
 	- Errore Quadratico Medio
 - prendiamo il minimo
-
 ### N TRAINING
 - effettuo un aggiornamento in batch dei pesi
 	- $N$ = dimensione del training set
