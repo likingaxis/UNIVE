@@ -5,8 +5,7 @@
 - programmazione in ARM
 - Böhm-Jacopini dice che posso non scrivere porcherie e che posso scrivere cose strutturate, in modo strutturato
 - tipo di architettura:ARM7
-[[ciao/content/UNI/ANNO 1/ARCHITETTURA/LISTA ARGOMENTI]]
-
+[[UNI/ANNO 1/ARCHITETTURA/LISTA ARGOMENTI]]
 
 >[!example]- # [[1.INTRODUZIONE]]
 > argomenti
