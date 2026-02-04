@@ -139,5 +139,5 @@ sono tutti gli elementi con $i=j$
 - aggiungi un quantitativo di righe per ottenere la dimensione dello spazio totale
 	- quelli sono i tuoi vettori e devono formare elementi speciali
 	- matrice=rango
-
-
+## Verifica vettori L.I
+![[Screenshot 2026-02-04 114557 1.png]]
