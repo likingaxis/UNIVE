@@ -1,8 +1,6 @@
 
 | Materia                  | Appello Gennaio-Febbraio | Appello Giugno-Luglio | Appello Settembre |
 | ------------------------ | ------------------------ | --------------------- | ----------------- |
-| LING                     | ✅                        |                       |                   |
-| FOND.                    | ✅                        |                       |                   |
 | GEOMETRIA                | ✅                        |                       |                   |
 | INTELLIGENZA ARTIFICIALE | ✅                        |                       |                   |
 | INGEGNERIA DEL SOFTWARE  |                          | ✅                     |                   |
