@@ -1,3 +1,72 @@
+#### 🟨 BLOCCO 0 – Geometria affine (Bombardelli + Carrara)
+**Bombardelli 1 – Introduzione**
+
+- [ ] **Esercizio 2.1 (b)**
+
+> retta passante per un punto e parallela a un vettore  
+> 
+> geometria carrara
+
+🎯 Obiettivo:
+- capire “punto + direzione”
+- linguaggio affine corretto
+
+**Bombardelli 2 – Equazione parametrica della retta**
+
+- [ ] **Esercizio 2.2 (a)–(c)**
+
+> retta nello spazio: da punti, da vettore, da equazioni cartesiane  
+> 
+> geometria carrara
+
+🎯 Obiettivo:
+- cartesiane ↔ parametriche
+- trovare vettore direttore
+➡️ Questo è ESATTAMENTE ciò che serve negli esami.
+
+**Bombardelli 3 – Rette parallele e perpendicolari**
+
+- [ ] **Esercizio 2.4 (a)**
+
+> stabilire se due rette sono incidenti, parallele o sghembe  
+> 
+> geometria carrara
+
+🎯 Obiettivo:
+- classificazione corretta
+- schema “direzioni + sistema”
+➡️ Identico allo scritto.
+
+**Bombardelli 4 – Equazione cartesiana del piano**
+
+- [ ] **Esercizio 2.3 (a)**
+
+> piano per tre punti + verifica appartenenza  
+> 
+> geometria carrara
+
+🎯 Obiettivo:
+- piano come oggetto affine
+- controllo appartenenza
+
+**Bombardelli 5 – Intersezione di piani**
+
+- [ ] **Esercizio 2.5 (a)**
+
+> posizione reciproca di due rette parametriche  
+> 
+> geometria carrara
+
+🎯 Obiettivo:
+- complanari vs sghembe
+- intersezione come sistema
+#### 🚫 ESERCIZI DA EVITARE (per questo esame)
+Dal Carrara **NON fare**:
+- capitolo 12 (rette e piani con determinanti)
+- esercizi su **distanze**, **angoli**, **proiezioni**  
+    geometria carrara
+👉 **Non compaiono negli scritti del prof.**
+
 ## 🔹 BLOCCO 1 – Spazi vettoriali, basi, indipendenza
 
 📚 (fondamentale per Esercizio 1)
@@ -36,6 +105,9 @@
 ### ✍️ Esercizi
 - [ ] Esercizio 7.28
 - [x] Esercizio 7.68
+- [ ] Esercizio 7.60
+- [ ] **Esercizio 7.22** (rango + base + dimensione)
+- [ ] **Esercizio 7.25** (base e dimensione da un sistema lineare)
 - Appello **Giugno [1]** (rango + basi)
 - Appello **Luglio [1]**
 👉 Qui inizi a **fare punti veri allo scritto**.
@@ -53,11 +125,11 @@ Facoltativi:
 - sai ridurre una matrice a scala
 - sai dire: nessuna / una / infinite soluzioni
 ### ✍️ Esercizi
-- [ ] **Esercizio 4.8** (sistema con parametro: discutere e risolvere)
-- [ ] **Esercizio 4.9** (Rouché–Capelli con parametro: classificazione soluzioni))
-- [ ] **Esercizio 6.4** (calcolo dell’inversa con Gauss)
-- [ ] **Esercizio 7.22** (rango + base + dimensione)
-- [ ] **Esercizio 7.25** (base e dimensione da un sistema lineare)
+- [x] **Esercizio 4.8** (sistema con parametro: discutere e risolvere)
+- [x] **Esercizio 4.9** (Rouché–Capelli con parametro: classificazione soluzioni))
+- [ ] Esercizio 4.4
+- [ ] Esercizio 7.11
+
 - Appello **Giugno [4]**
 - Appello **Settembre [2]**
 👉 Se qui sei solido, **il 18 è praticamente assicurato**.
@@ -74,14 +146,16 @@ Facoltativi:
 - sai collegare determinante ≠ 0 ↔ inversa
 ### ✍️ Esercizi
 - [x] **Esercizio 6.6** (determinante con parametro + invertibilità + inversa)
+- [x] **Esercizio 6.4** (calcolo dell’inversa con Gauss)
+- [ ] 6.8
 - Appello **Luglio [2]**
 - Appello **Settembre [2]**
 ## 🔹 BLOCCO 5 – Autovalori & diagonalizzazione
 📚 (Esercizio 4 SEMPRE)
 ### 🎥 Video
 18.  **26** Applicazioni lineari
-19. **32**  Nucleo e immagine
-20. **27–28–29** Matrice associata
+19. **27–28–29** Matrice associata
+20. **32**  Nucleo e immagine
 21. **(31)** Autovalori e autovettori
 22. **(33)** Autospazi e molteplicità
 23. **(36)** Matrici diagonalizzabili
@@ -91,8 +165,13 @@ Facoltativi:
 - sai trovare gli autospazi
 - sai dire _perché_ è / non è diagonalizzabile
 ### ✍️ Esercizi
+- [ ] Esercizio 8.8
 - [ ] **Esercizio 8.8** (Ker/Im + appartenenza all’immagine)
 - [ ] **Esercizio 9.6** (autovalori/autospazi + diagonalizzazione)
+- [ ] Esercizio 9.17
+- [ ] Esercizio 9.17
+
+- [ ] Esercizio 8.40
 - Appello **Giugno [2]**
 - Appello **Luglio [4]**
 - Appello **Settembre [4]**
