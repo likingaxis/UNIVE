@@ -165,13 +165,11 @@ Facoltativi:
 - sai trovare gli autospazi
 - sai dire _perché_ è / non è diagonalizzabile
 ### ✍️ Esercizi
-- [ ] Esercizio 8.8
-- [ ] **Esercizio 8.8** (Ker/Im + appartenenza all’immagine)
-- [ ] **Esercizio 9.6** (autovalori/autospazi + diagonalizzazione)
-- [ ] Esercizio 9.17
+- [x] Esercizio 8.40
+- [x] **Esercizio 8.8** (Ker/Im + appartenenza all’immagine)
+- [x] **Esercizio 9.6** (autovalori/autospazi + diagonalizzazione)
 - [ ] Esercizio 9.17
 
-- [ ] Esercizio 8.40
 - Appello **Giugno [2]**
 - Appello **Luglio [4]**
 - Appello **Settembre [4]**

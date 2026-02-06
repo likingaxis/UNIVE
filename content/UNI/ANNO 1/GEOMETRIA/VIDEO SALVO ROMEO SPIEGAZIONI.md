@@ -61,8 +61,8 @@ sono tutti gli elementi con $i=j$
 ## DETERMINANTE
 ![[Screenshot 2026-02-03 185131.png]]
 - si può fare solo sulle matrici quadrate
-- normalmente si applica la formula vista in alto ma se è troppo grande si applica laplace
-	- laplace è quello che vedi sotto
+- normalmente si applica la formula vista in alto ma se è troppo grande si applica LaPlace
+	- LaPlace è quello che vedi sotto
 	- si consiglia la colonna o la riga con più zeri
 	- e si fa $elem*cofattore$ 
 		- se indice pari risultato singolo positivo sennò negativo
@@ -245,28 +245,58 @@ sono tutti gli elementi con $i=j$
 - la dim immagine è uguale al rango
 - la base è un insieme di vettori in colonna che sono della dimensione del rango
 - prendi r vettori dalla matrice associata
-	- calcoli dimensione ker facendo dimensione insieme partenza- dim immagine
+	- calcoli dimensione Ker facendo dimensione insieme partenza- dim immagine
 - scrivi i tuoi vettori come una equazione con incognite e poni tutto uguale a 0 
 	- il Ker rappresenta i vettori nulli
 	- le variabili libere sono dei valori a caso
 
+## AUTOVALORI E AUTOVETTORI
+![[Screenshot 2026-02-06 152958.png]]
+- Una funzione endomorfa richiede di calcolare autovalori e autovettori
+- un autovalore è una lambda definita come sopra
+- trovi la matrice associata con base canonica
+- e ti trovi la matrice H
+- poi ti trovi i lambda
+## AUTOVETTORI
+![[Screenshot 2026-02-06 153010.png]]
+- H lo moltiplichi per x y z e poni a 0 0 0 per ogni lambda
+- quelli sono gli autovettori
+## AUTOSPAZIO
+![[Screenshot 2026-02-06 155907.png]]
+- molteplicità algebrica: quante volte appare quell'autovalore
+- verificare se endomorfismo semplice o non semplice
+	- somma la molt geometrica
+	- in questo caso la mg è sempre >=1 e <=ma quindi qui è sempre 1
+	- 1+1+1 fa 3 quindi copre tutto, endomorfismo semplice
+- gli autovettori devono formare l'intero insieme 
+## ESEMPIO ESERCIZIO
+![[Screenshot 2026-02-06 155925.png]]
 
+![[Screenshot 2026-02-06 155947.png]]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## MATRICI DIAGONALIZZABILI, VERIFICA
+![[Screenshot 2026-02-06 161937.png]]
+- definizione
+### VERIFICA
+![[Screenshot 2026-02-06 162006.png]]
+- si usano le matrici H e devi avere il determinante e lo poni a 0
+	- i tuoi autovalori corrispondono a T
+	- se h è diverso da questi 3, allora siamo sicuri che è endomorfismo semplice
+- ma per gli altri bho
+### VERIFICHIAMO
+![[Screenshot 2026-02-06 162021.png]]
+- prova con h=0 e calcola mg
+	- dim-rango
+![[Screenshot 2026-02-06 162032.png]]
+- Se la **molteplicità algebrica** è diversa dalla **molteplicità geometrica**, **la matrice NON è diagonalizzabile**.
+![[Screenshot 2026-02-06 162046.png]]
+- matrice diagonalizzabile tranne per 1 e 3
+## DIAGONALIZZARE EFFETTIVAMENTE UNA MATRICE
+![[Screenshot 2026-02-06 163625.png]]
+- prendi A come matrice associata
+- H come matrice calcolata come detto precedentemente
+- poni il calcolo del determinante uguale a 0
+- trova i vari autovalori dalla formula del determinante
+- metti a sistema per trovare i valori x y z a 0
+- la diagonalizzazione è data dagli autovalori messi come identità
 
