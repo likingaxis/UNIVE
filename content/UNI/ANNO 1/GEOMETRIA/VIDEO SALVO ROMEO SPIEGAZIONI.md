@@ -141,3 +141,132 @@ sono tutti gli elementi con $i=j$
 	- matrice=rango
 ## Verifica vettori L.I
 ![[Screenshot 2026-02-04 114557 1.png]]
+
+
+
+## GAUSS
+![[Screenshot 2026-02-04 175120.png]]
+- serve per risolvere facilmente sistemi lineari
+- faccio il MEG(metodo eliminazione gauss)
+![[Screenshot 2026-02-04 175133.png]]
+- se ho una riga con tutti 0 allora ho una variabile libera, di conseguenza il sistema è possibile indeterminato
+![[Screenshot 2026-02-04 175144.png]]
+- qui ho incongruenze quindi è impossibile
+## SISTEMI LINEARI con Rouché capelli
+![[Screenshot 2026-02-04 181450.png]]
+- sistemi con incognite a un solo grado
+- prendo la mia matrice incompleta dei coefficienti
+- e la matrice completa(con i risultati)
+	- calcolo il rango di entrambe
+	- se sono uguali allora il sistema ha soluzioni
+![[Screenshot 2026-02-04 181435.png]]
+- se il numero di variabili m è > di r allora è indeterminato
+- se è uguale allora determinato
+![[Screenshot 2026-02-04 181416.png]]
+- esempio
+## SISTEMI INDETERMINATI
+![[Screenshot 2026-02-04 183032.png]]
+- hanno una variabile libera
+![[Screenshot 2026-02-04 183049.png]]
+- scegli le variabili libere in modo corretto prendendo le variabili corrette
+- variabili libere presenti in entrambi
+## SISTEMI LINEARI CON PARAMETRO
+![[Screenshot 2026-02-05 101312.png]]
+- scrivi la matrice completa con anche i parametri 
+- calcolo il rango e applico Rouché capelli ma definendo adeguatamente il dominio di quel determinato parametro
+##  CON VARIABILI LIBERE
+![[Screenshot 2026-02-05 101330.png]]
+- scegli due equazioni e prendi le variabili per trovare il loro valore a sistema
+## CRAMER
+![[Screenshot 2026-02-05 103810.png]]
+- serve per risolvere sistemi
+- la foto è abbastanza chiara
+- sostituisci la colonna di quella variabile che cerchi con i termini noti
+### ESEMPIO DI UN SISTEMA DETERMINATO
+![[Screenshot 2026-02-05 103827.png]]
+### ESEMPIO INDETERMINATO
+![[Screenshot 2026-02-05 103834.png]]
+- alcune variabili libere altre no
+##### DIMOSTRAZIONE CRAMER
+![[Screenshot 2026-02-05 103818.png]]
+
+## MATRICE INVERSA ALTRO METODO
+- puoi invertire solo se matrice quadratica
+- e rango diverso da 0
+![[Screenshot 2026-02-05 110121.png]]
+- $B$ rappresenta $A^{-1}$ 
+![[Screenshot 2026-02-05 110133.png]]
+- metti a sistema le righe che rappresentano B e mettile uguale alla matrice identità
+![[Screenshot 2026-02-05 110142.png]]
+- risolviamo con gauss prendendo la matrice completa
+- e moltiplichiamo i valori con i vettori e1 e2 e3
+### VERIFICA DELLA SOUZIONE 
+![[Screenshot 2026-02-05 110314.png]]
+- deve uscire matrice identità
+## APPLICAZIONI LINEARI
+![[Screenshot 2026-02-06 102649.png]]
+- funzioni di insiemi che devono verificare le due condizioni scritte sopra per essere tali
+- sotto c'è un esempio che verifica le due cose
+- se la funzione mappa la stessa dimensione si dice endomorfismo
+### ALTRO ESEMPIO
+![[Screenshot 2026-02-06 102701.png]]
+## MATRICE ASSOCIATA
+![[Screenshot 2026-02-06 111018.png]]
+- matrice associata ad una determinata base di destinazione e di arrivo
+- può essere con basi canoniche oppure no ed è definita da una certa applicazione lineare
+![[Screenshot 2026-02-06 111033.png]]
+- definisci la tua base di arrivo e di destinazione
+- calcola la f della destinazione
+- metti a combinazione lineare con parametri a b e c rispetto alla base
+- se hai le basi canoniche puoi scrivere direttamente in colonna le cose
+### SENZA BASI CANONICHE
+![[Screenshot 2026-02-06 111043.png]]
+- stesso ma non puoi mettere in colonna come vuoi
+
+## TROVARE UNA MATRICE ASSOCIATA CON BASI CANONICHE DA FUNZIONI GIÀ RISOLTE
+![[Screenshot 2026-02-06 112641.png]]
+- metti a sistema con le basi canoniche che moltiplicano i coefficineti del vettore di input
+![[Screenshot 2026-02-06 112709.png]]
+
+![[Screenshot 2026-02-06 112720.png]]
+
+## CAMBIO BASE DI UNA MATRICE ASSOCIATA
+![[Screenshot 2026-02-06 120026.png]]
+- calcola in base i vari output della funzione
+![[Screenshot 2026-02-06 120036.png]]
+- matrice non canonica, fai gli stessi calcoli 
+## NUCLEO E IMMAGINE
+![[Screenshot 2026-02-06 122326.png]]
+- nucleo=ker
+- immagine di f, sottoinsieme di W della funzione
+## TROVARE DIM IMMAGINE, BASE IMM DIM KER E KER
+![[Screenshot 2026-02-06 122340.png]]
+- tutto deve partire dalla matrice associata
+- la dim immagine è uguale al rango
+- la base è un insieme di vettori in colonna che sono della dimensione del rango
+- prendi r vettori dalla matrice associata
+	- calcoli dimensione ker facendo dimensione insieme partenza- dim immagine
+- scrivi i tuoi vettori come una equazione con incognite e poni tutto uguale a 0 
+	- il Ker rappresenta i vettori nulli
+	- le variabili libere sono dei valori a caso
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
