@@ -1,7 +1,8 @@
+[[ROADMAP ESAMI]]
 #### 🟨 BLOCCO 0 – Geometria affine (Bombardelli + Carrara)
 **Bombardelli 1 – Introduzione**
 
-- [ ] **Esercizio 2.1 (b)**
+- [x] **Esercizio 2.1 (b)**
 
 > retta passante per un punto e parallela a un vettore  
 > 
@@ -13,7 +14,7 @@
 
 **Bombardelli 2 – Equazione parametrica della retta**
 
-- [ ] **Esercizio 2.2 (a)–(c)**
+- [x] **Esercizio 2.2 (a)–(c)**
 
 > retta nello spazio: da punti, da vettore, da equazioni cartesiane  
 > 
@@ -26,7 +27,7 @@
 
 **Bombardelli 3 – Rette parallele e perpendicolari**
 
-- [ ] **Esercizio 2.4 (a)**
+- [x] **Esercizio 2.4 (a)**
 
 > stabilire se due rette sono incidenti, parallele o sghembe  
 > 
@@ -39,7 +40,7 @@
 
 **Bombardelli 4 – Equazione cartesiana del piano**
 
-- [ ] **Esercizio 2.3 (a)**
+- [x] **Esercizio 2.3 (a)**
 
 > piano per tre punti + verifica appartenenza  
 > 
@@ -51,7 +52,7 @@
 
 **Bombardelli 5 – Intersezione di piani**
 
-- [ ] **Esercizio 2.5 (a)**
+- [x] **Esercizio 2.5 (a)**
 
 > posizione reciproca di due rette parametriche  
 > 

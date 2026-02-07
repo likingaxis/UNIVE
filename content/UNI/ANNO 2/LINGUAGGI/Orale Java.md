@@ -6,7 +6,6 @@
 ### PROGRAMMAZIONE A OGGETTI (OOP)
 - Nasce per rendere più intuitiva la programmazione
 ### PRINCIPI FONDAMENTALI della OOP
-
 1. **Incapsulamento**
     - Organizzare il codice dividendo i problemi in più parti (classi, metodi).
     - Nascondere i dettagli implementativi, mostrando solo ciò che serve all’utilizzatore (_information hiding_).
