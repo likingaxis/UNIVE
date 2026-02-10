@@ -84,8 +84,7 @@ BV = { VECCHIA BASE, vettori canonici}
 3. Confronta:
     - rango A
     - rango A|b
-
-Conclusioni:
+Conclusioni ROUCHE CAPELLI:
 - ranghi diversi → **incompatibile**
 - ranghi uguali = n → **unica**
 - ranghi uguali < n → **infinite**
@@ -111,6 +110,7 @@ Conclusioni:
     
 3. Se det = 0:
     - A non invertibile
+	- Poiché $\det(A)=0$, le righe (o colonne) della matrice sono linearmente dipendenti; dunque il rango non è massimo e la trasformazione non è invertibile.
 
 4. INVERTIBILITÀ
 	- PUOI FARLA 
@@ -138,13 +138,13 @@ su **Z₅** devi ridurre tutto mod 5 E NON PUOI USARFE FRAZIONI MENTRE FAI GAUSS
 { a x + b y + c z = 0
 ```
 
-2. Base = soluzioni parametriche del sistema sostituire con i valori 
+2. Base = soluzioni parametriche del sistema per trovare una base esplicita del nucleo, una volta che ho risolto il sistema, quindi ho trovato l'equazione dei parametri, inserisco nella base i coefficienti dei vari parametri
 
 
 **Immagine**
 - Metti i vettori in colonna nella matrice
 - dim(IM) = rango
-- IM = prendi le colonne dei PIVOT e le metti in un insieme
+- IM/base imm = prendi le colonne dei PIVOT ORIGINALI e le metti in un insieme
 
 Formula sempre valida:
 ```
@@ -177,7 +177,8 @@ dim Ker + dim Im = n
 	- sapendo che $m_{g} \le m_{a}$ per ogni autovalore
 	- sapendo che $\sum m_{a} = n$
     
-
+#### MATRICE DIAGONALE
+Una matrice diagonalizzata di $A$ è una matrice diagonale simile ad $A$, i cui elementi diagonali sono gli autovalori di $A$.
 
 ---
 
@@ -214,6 +215,12 @@ Metti a sistema l'uguaglianza delle due eq. parametriche (se hai gli stessi para
 - SE HAI INFINITE SOLUZIONI
 	- **coincidenti**
 
+### RELAZIONE TRA PIANO E RETTA
+- vettori direttori delle rette del piano v2 e v3
+- hai il vettore direttore della retta v1
+- $αv2+βv3=v1$. 
+	- risolvi il sistema e vedi se ha soluzione
+
 >[!tip] TROVARE VETTORE NORMALE DI UN PIANO
 >- Il vettore direttore di una retta corrisponde ai coefficienti dei parametri 
 >- Sappiamo che un piano è formato da due parametri -> ti crei un vettore per il primo parametro e un vettore per il secondo parametro
@@ -244,11 +251,12 @@ Metti a sistema l'uguaglianza delle due eq. parametriche (se hai gli stessi para
 
 #### RETTA E PIANO $r \cap \pi$
 - DETERMINARE LA CARTESIANA del piano (la cosa blu sopra)
-- sostituisci i parametri della retta all'equazione cartesiana del piano e metti `= 0`
+- sostituisci le righe di x y e z della retta all'equazione cartesiana del piano e metti `= 0`
 	- trovi i valori dei parametri del sistema
 		- `t = PUNTO` -> intersecano in un punto
 		- `t = variabile libera` -> INTERSEZIONE È UNA RETTA (e sono complanari)
 		- `t` impossibile -> non intersecano
+- per trovare la cartesiana, sostituisci t alla retta
 
 #### Trovare l'eq cartesiana di una retta parallela a un'altra e che passa per un punto dato
 - Prendi il vettore direttore dell'altra retta
@@ -264,11 +272,33 @@ Metti a sistema l'uguaglianza delle due eq. parametriche (se hai gli stessi para
 #### Trovare eq param. `pi greco` parallelo alle rette `r1` e `r2` passante per il punto `p0`
 - Prendi i vettori direttori delle rette `r1` e `r2`
 - La parametrica del piano parte dal punto dato (`p0`) e i coefficienti dei parametri sono rispettivamente i coefficienti dei vettori direttori delle rette (uno per `t` e uno per `s`)
+###### per la cartesiana del piano
+trovo i vettori direttori di r1 e r2. successivamente ne calcolo il loro normale, poi lo metto nell'eq cartesiana come a b e c quindi avrò $ax+by+cz+d=0$ con a b e c i valori del normale, successivamente sostituisco con x y e z il punto dato dall'esercizio e trovo d, ora che ho d posso scrivere la cartesiana normalmente
 
+####  Retta **perpendicolare** a un’altra retta e passante per un punto
+- prendi la tua retta che già conosci
+	- scrivi il suo vettore direttore v
+	- bisogna trovare un vettore (x,y,z) che moltiplicato per v faccia 0
+	- $ax+by+cz=0$
+	- a b e c sono i valori del vettore v che già conosciamo
+	- svolgi il sistema
+	- scriviti la parametrica sfruttando il nuovo vettore e il punto P0
+#### Retta perpendicolare a un **piano** e passante per un punto
+- ti scrivi il normale della cartesiana del piano
+	- il vettore dei coefficienti
+		- il normale del piano n=(a,b,c)
+		- può essere usato per formare una retta
+		- P0+t(normale del piano)
 
->[!danger] DA VEDERE "perpendicolare" 
-
-
+#### Piano **perpendicolare** a una retta e passante per un punto
+- sappiamo che una eq cartesiana è ax+by+cz+d=0
+- prendiamo il vettore e lo sostituiamo ad a, b, c
+	- il punto invece a x, y, z 
+		- così troviamo d
+	- successivamente riscriviamo con la d la cartesiana
+#### Piano perpendicolare a un altro piano
+- due piani sono perpendicolari tra loro
+	- se il loro normale prodotto fa 0
 
 ## COMPLANARITÀ
 Due rette sono complanari se si trovano nello stesso piano.
@@ -278,7 +308,7 @@ Due rette sono complanari se si trovano nello stesso piano.
 - SE ESISTE -> complanari
 
 
-## EQUAZIONI PARAMETRICE DI UNA RETTA DATI DUE PUNTI
+## EQUAZIONI PARAMETRICHE DI UNA RETTA DATI DUE PUNTI
 Sappiamo che una retta è formata da $$P_{0} + t \cdot v$$
 Il vettore direttore `v` è dato dalla differente dei due punti dati $$v = P_{1} - P_{0}$$
 Una volta trovato il direttore scrivi il sistema sostituendo i valori che hai.
