@@ -1,0 +1,6 @@
+- divisione modulo 1 
+	- 40 pagine 40 pagine
+	- 4 giorni 10 pagine al giorno peak
+		- progetto da posizionare nella settimana
+- divisione modulo 2
+	- mano a mano con le lezioni
