@@ -19,6 +19,5 @@ appunti del corso: [[CRITTOGRAFIA INDICE]]
 
 ### [[ANNO 2 INDICE|CORSI ANNO 2]]
 
-ciao 
 
 ![[Pasted image 20260305145214.png]]
