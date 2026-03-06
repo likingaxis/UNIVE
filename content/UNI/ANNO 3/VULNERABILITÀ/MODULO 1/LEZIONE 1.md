@@ -25,3 +25,26 @@ Symlink
 Hardlink
 i node
 ls -li visualizza gli inode
+
+tar 
+tf 
+zcf
+zcat e zless
+unzip
+ps aux
+kill 
+df 
+watch
+Ctrl z
+bg e fg
+crontab
+- consente  di fare delle schedule in base a dei tempi
+netstat
+- -tulpn
+- -p
+ip a
+ip r
+ssh
+visudo
+sudo -l
+du
