@@ -9,6 +9,7 @@ Crea un file vuoto o aggiorna il timestamp.
 Mostra il contenuto di un file.
 **echo**  
 Stampa testo o variabili nel terminale.
+**awk**  
 **find**  
 Cerca file e directory nel filesystem.
 Esempio:
