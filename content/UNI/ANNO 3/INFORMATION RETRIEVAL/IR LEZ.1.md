@@ -127,3 +127,53 @@ inverted index
 ↓
 dictionary + postings lists
 ```
+
+
+
+
+#### SORTING IN BASE AI TERMINI
+- document frequency è molto utile
+	- tipo se esce the 3000k volte, posso pure ignorarlo nella fase di filtering
+- quindi alla fine avremo
+	- termine, frequenza, docID -> messa dentro le posting list
+
+### BOOLEAN RETRIEVAL MODEL
+- definizione e idea
+	- uso di AND, OR e NOT
+- svantaggi (lettura delle parole non in ordine)
+	- persona mangia gelato= gelato mangia persona
+- utilizzo
+	- spotlight
+	- email
+	- library catalog
+##### IMPORTANZA DEL MERGE CON GLI AND
+### SCRIVERE ESERCIZI!!!
+
+### AGGIUNGERE PHRASE QUERIES
+### CON B-GRAMMI
+Un **bi-gramma (bigram)** è una **sequenza di due token consecutivi**.
+- token = parola o unità lessicale ottenuta dopo la **tokenizzazione**    
+- bi-gramma = **due token di seguito**
+
+- se avessi una frase "stanford university"
+- non posso usare un solo token per 2 parole 
+- uso biword indexes
+	- ma per query maggiori di 2 non funzionerebbe
+	- la precision ne viene intaccata perchè potrei avere più falsi positivi
+	- soluzione non fattibile
+- soluzione peffozza
+	- salvo la posizione in cui appare la parola
+		- così poi posso fare stanford and university con il controllo delle posizioni uno dopo l'altro
+	- problema: tanta memoria dovuto alla posizione del testo
+	- un documento avrà un migliaio di parole
+	- con un documento circa 10 bit
+
+### NUMERI SU NUMERI SPIEGAZIONE
+- tokenizzo le cose più cercate
+	- tipo Michael Jackson
+		- per ridurre perdite di tempo
+	- senza usare positional index
+
+#### MISURA DEI TREND
+- usiamo probabilità condizionata
+	- per misurare un trend
