@@ -129,51 +129,148 @@ dictionary + postings lists
 ```
 
 
+### COME FUNZIONA LA FASE DI INDEX
+- innanzitutto serve per costruire la nostra struttura dati inverted index
+1. vengono raccolti tutti i documenti e ogni testo viene tokenizzato
+	- il testo viene diviso in **token**, cioè unità lessicali (tipicamente parole)
+2. il testo viene *normalizzato*
+3. si generano *coppie* *(termine,docID)*, 
+	- senza accorparle ancora in posting list
+4. le coppie vengono ordinate in base a term e docID
+	- questo permette che **uno stesso termine venga associato a più documenti**, costruendo successivamente la **posting list**.
+- fase di ordinamento
+![[Pasted image 20260311100247.png|300]]
+- fase di posting list
+	- i termini uguali vengono **raggruppati**
+	- si costruisce quindi la **posting list** per ogni termine
+- da notare che è stata aggiunta anche la frequenza della parola
+	- **document frequency (df)**  
+		- numero di documenti che contengono il termine.
+		- tipo se esce the 3000k volte, posso pure ignorarlo nella fase di filtering
+![[Pasted image 20260311100324.png|400]]
 
-
-#### SORTING IN BASE AI TERMINI
-- document frequency è molto utile
-	- tipo se esce the 3000k volte, posso pure ignorarlo nella fase di filtering
+#### STRUTTURA FINALE
 - quindi alla fine avremo
-	- termine, frequenza, docID -> messa dentro le posting list
+	- `term → df → posting list(docID)`
+![[Pasted image 20260311100541.png|500]]
+
+### QUERY PROCESSING
+- descrive il **processo di esecuzione di una query**
+- grazie all’**inverted index** una query può essere interpretata come una **Boolean Query**
+esempio:
+``Brutus AND Caesar``
+Procedura:
+1. Cercare **Brutus** nel dictionary
+2. Recuperare la postings list
+3. Cercare **Caesar**
+4. Recuperare la postings list
+5. Intersecare le liste ( con MERGE)
+![[Pasted image 20260311101126.png|400]]
+#### ALGORITMO DI MERGE
+PSEUDOCODICE MOLTO UTILE
+![[Pasted image 20260311101142.png|400]]
+
+##### Ottimizzazione delle query processing
+- se ho più condizioni logiche tipo 
+`(Brutus OR Caesar) AND NOT(Antony OR Cleopatra)`
+- possiamo ottimizzarla?
+	- si prendendo i termini in ordine crescente di frequenza
+![[Pasted image 20260311103414.png|400]]
 
 ### BOOLEAN RETRIEVAL MODEL
-- definizione e idea
-	- uso di AND, OR e NOT
-- svantaggi (lettura delle parole non in ordine)
-	- persona mangia gelato= gelato mangia persona
-- utilizzo
+- *definizione e idea*
+	- **definizione e idea**
+	    - modello di Information Retrieval basato su **query booleane**
+	    - i documenti vengono rappresentati come **insiemi di parole**
+	    - una query è una **espressione logica** composta da termini e operatori booleani
+	    - il sistema restituisce **tutti e solo i documenti che soddisfano la condizione logica**
+	    - le query vengono risolte usando operazioni di **merge sulle postings list** dell’inverted index
+	- **operatori**
+	    - **AND** → intersezione delle postings list
+	    - **OR** → unione delle postings list
+	    - **NOT** → esclusione dei documenti che contengono un termine
+	- **idea di base**
+	    - si recuperano le **postings list dei termini**
+	    - si applicano **operazioni logiche tra le liste**
+	    - il risultato è l’insieme dei documenti che soddisfano la query
+- *svantaggi* (lettura delle parole non in ordine):
+	- **assenza di ranking**
+		- i documenti sono solo:
+		    - rilevanti
+		    - non rilevanti
+	- **perdita della struttura del linguaggio**
+		- il modello considera solo la **presenza dei termini**
+		- ignora **ordine e contesto**
+		- `persona mangia gelato = gelato mangia persona`
+- *utilizzo*
 	- spotlight
 	- email
 	- library catalog
-##### IMPORTANZA DEL MERGE CON GLI AND
 ### SCRIVERE ESERCIZI!!!
-
-### AGGIUNGERE PHRASE QUERIES
-### CON B-GRAMMI
+[[ESERCIZI CROCIATA]]
+#### PHRASE QUERIES con bi grammi
 Un **bi-gramma (bigram)** è una **sequenza di due token consecutivi**.
 - token = parola o unità lessicale ottenuta dopo la **tokenizzazione**    
 - bi-gramma = **due token di seguito**
 
-- se avessi una frase "stanford university"
-- non posso usare un solo token per 2 parole 
-- uso biword indexes
-	- ma per query maggiori di 2 non funzionerebbe
-	- la precision ne viene intaccata perchè potrei avere più falsi positivi
-	- soluzione non fattibile
-- soluzione peffozza
-	- salvo la posizione in cui appare la parola
-		- così poi posso fare stanford and university con il controllo delle posizioni uno dopo l'altro
-	- problema: tanta memoria dovuto alla posizione del testo
-	- un documento avrà un migliaio di parole
-	- con un documento circa 10 bit
+serve per gestire le **phrase queries**, cioè query in cui l’ordine delle parole è importante.
+- es: `stanford university` ma non `university stanford`
 
-### NUMERI SU NUMERI SPIEGAZIONE
-- tokenizzo le cose più cercate
-	- tipo Michael Jackson
-		- per ridurre perdite di tempo
-	- senza usare positional index
+##### soluzione stupida *Biword indexing*:
+- salvare direttamente i **bi-grammi come termini dell’indice**
+	- occuperebbe tantissimo spazio
+- ad esempio per:
+	- `stanford university palo alto`
+	- la query diventerebbe:
+		- `stanford university  AND university palo  AND palo alto`
+		- ma potremmo trovare documenti che contengono queste coppie **senza avere la frase completa**.
+		- rischio di falsi positivi
+	- quindi:
+		- la **precision** peggiora
+		- soluzione poco pratica
+#### Soluzione con POSITIONAL INDEXES
+- salvo la posizione in cui appare il termine
+	- `term → docID → positions`
+	- così poi posso fare `stanford AND university` con il controllo delle posizioni uno dopo l'altro
+		- `pos(university) = pos(stanford) + 1`
+- problema: tanta memoria dovuto alla posizione del testo ma comunque fattibile
+##### Memoria occupata dal positional index
+>[!tip]- prima di parlare dei numeri che riguardano il positional index vorrei aprire una parentesi su cosa viene fatto in information retrieval come stima di occupazione di memoria di un documento
+> In molti esempi di Information Retrieval si assume che **un documento medio contenga circa 1000 parole**. 
+> - Una parola nel testo occupa circa **6 byte**, includendo lettere, spazi e punteggiatura. 
+> - Poiché **1 byte = 8 bit**, una parola occupa quindi circa **48 bit**. 
+> - Se un documento contiene 1000 parole, la dimensione approssimativa del documento è **1000 × 6 byte = 6000 byte**, cioè circa **6 KB**.
 
-#### MISURA DEI TREND
-- usiamo probabilità condizionata
-	- per misurare un trend
+- per quanto riguarda il positional index non salviamo in memoria tutto il testo parola per parola bensì salviamo per ogni termine nuovo solo il docID e la sua posizione e anche la frequenza
+### posizioni nel positional index
+nel positional index non salviamo il testo completo ma:
+- termine
+- docID
+- **posizione della parola**
+dato che un documento ha circa **1000 parole**, le posizioni possibili sono:
+$$1 → 1000$$
+per rappresentare N valori servono circa:
+$$log₂(N) bit$$
+quindi:
+$$log₂(1000) ≈ 10$$
+dato che
+$$2¹⁰ = 1024$$
+questo significa che **circa 10 bit sono sufficienti per rappresentare la posizione di una parola nel documento**.
+#### ESEMPIO
+![[Pasted image 20260311105821.png|400]]
+- qui abbiamo la parola be, la sua frequenza nei documenti
+- e il documento con le rispettive docID e le posizioni in cui appare
+![[Pasted image 20260311110845.png|450]]
+##### NUMERI SU NUMERI SPIEGAZIONE
+in alcuni casi si **pre-indicizzano frasi molto comuni**, ad esempio:
+`Michael Jackson`
+per ridurre il costo delle query frequenti **senza usare sempre il positional index**.
+##### MISURA DEI TREND
+- si possono usare **probabilità condizionate**
+- per misurare **quanto spesso certe parole compaiono insieme**
+questo è utile per:
+- scoprire **pattern frequenti**
+- identificare **frasi comuni da indicizzare direttamente**.
+>[!info]- probabilità
+>![[Pasted image 20260311113718.png]]
+
