@@ -69,3 +69,52 @@ definire delle aggiunte alle wordlist
 ### CRACKING ARCHIVE PASSWORDS
 
 ### HYDRA
+## WINDOWS
+
+##### Windows- active directory
+windows authentication è divisa in:
+- authentication protocol
+- password hash
+### HASHING 
+- prima era LAN ma è vecchietto
+- più recente NT hash
+	- NTLM è il protocollo(?)
+		- ma viene usato anche per dire NT hash
+	- password hashate in SAM 
+		- database di windows
+			- standalone significato
+cose citate ma che non so dove mettere
+- NTDS.dit
+- Pth pass the hash
+- SSO single sign on
+
+##### Dumping tools per windows
+- mimikatz
+	- post exploitation
+		- definizione
+	- dumping sam
+		- sam systembkup.hiv sambkup.hiv
+	- dumping lsass.exe
+		- privilege:: debug
+		- sekurlsa logon passwords
+#### SPIEGAZIONE APPROFONDITA DI NET NTLM protocol
+- protocollo challenge responsive
+	-  ovvero un protocollo che ha questo meccanismo dove invia una challenge per la singola autenticazione e applica delle operazioni rispetto all'hash... spiegazione continuata
+	- su questi protocolli non abbiamo l'hash effettivo con un aspetto diverso, ogni challenge ha una variazione di hashing??
+- esiste una versione 2
+	- algoritmo migliorato ma stessa struttura e vulnerabilità di v1?
+	- unici cambiamenti: aggiunge una roba 
+	- protocollo v2 funzionamento in step
+		- server manda challenge SC a client di 8 byte string
+		- arriva al client 
+			- genera 8 byte challenge random CC
+			- CC*
+			- e altra roba che non ho capito
+#### ATTACCO di poisoning con spiderlabs
+- spiegazione di attacco poisoning
+	- utilizzo nelle password con NLTM v2
+	- come funziona?
+	- quando il dns fallisce la vittima invia in broadcast un messaggio con protocolli normali
+		- sto tizio responder con spiderlabs risponde come il dns fingendosi
+		- così ti colleghi tipo
+			- il client invia l'hashing e il server del responder lo riceve
