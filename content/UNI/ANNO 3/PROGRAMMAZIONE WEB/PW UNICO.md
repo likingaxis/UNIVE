@@ -56,24 +56,87 @@ Repository locale
 Repository remoto
 ```
 
-
 ### PAGINA WEB
 Una **pagina web** è un documento visualizzato dal browser composto da tre parti principali:
 - 3 componenti
 	- statica(HTML)
 	- grafica(CSS)
 	- dinamica(JAVASCRIPT)
-### TAG html da ricordare
+- il server web non manda il file HTML ma manda il contenuto del file HTML
+### HTML
+- a cosa serve e cosa è
+	- html è un linguaggio di markdown che...
+- funziona attraverso elementi
+	- cosa sono?
+- i tag sono ...
+- i tag si dividono in 2 tipi
+	- void element 
+	- e not void element
+- sono anche di 2 tipi
+	- block element
+		- se vanno a capo
+	- inline element
+		- se non ci vanno
+- il browser considera solo uno spazio, gli a capo li rimuove per questo servono i br
+- caratteri Unicode al posto di ascii
+	- hanno sequenze di escape
+		- cosa sono?
+- html è composto da head e body
+	- head tutte informazioni per il browser
+	- body parte visibili della pagina
+		- viewport
+- l'albero degli elementi di html è
+	- .... slide 72
+	- è importante che ci sia questo albero per motivi di utilizzo javascript e css
+	- per raccogliere alcune specifiche in determinati gruppi dell'albero
+- Markup semantico di HTML5
+	- ogni volta che uso tag di un elemento voglio dare un significato e strutturare
+	- noi vogliamo comunicare al browser il significato dei tag, scegliendone i più opportuni
+	- prima di html5 non tutti i tag avevano un significato? ora si apparte div e span?
+#### TAG html da ricordare
+i tag si dividono in 2 tipi
+- void element
+- **`<meta>`**  
+    tag per **informazioni sulla pagina** (charset, viewport ecc).  
+    È un **void element**, quindi **non ha tag di chiusura**.
+- **`<img>`**
+- **`<!doctype>`**
+- **`<main>`** 
+- non void element
 - **`<html>`**  
     tag radice che contiene tutta la pagina.
 - **`<head>`**  
     contiene **metadati** della pagina (titolo, meta, link a CSS).
-- **`<meta>`**  
-    tag per **informazioni sulla pagina** (charset, viewport ecc).  
-    È un **void element**, quindi **non ha tag di chiusura**.
 - **`<title>`**  
     definisce il **titolo della pagina** mostrato nella scheda del browser.
 - **`<body>`**  
     contiene **tutto il contenuto visibile della pagina**.
 - **`<h1>`**  
     intestazione principale della pagina (heading).
+    può andare da 1 a 6
+di dividono a loro volta in text e non text level semantic tag
+- elenco a slide 30
+	- a, strong ,span, br
+- comandi da posizionare adeguatamente e fatti
+	- header 
+	- footer
+	- section
+	- figure
+	- ol
+		- ordered list
+		- dentro ha li
+	- ul unordered list
+		- li elemento dell'elenco puntato
+	- blockquote
+	- dl
+	- dt
+	- dd
+	- figure
+	- div
+	- span
+	- p
+	- nav
+	- a
+		- sta per ancora
+		- href
+	- hr in html5 ha subito un cambiamento con un suo significato
