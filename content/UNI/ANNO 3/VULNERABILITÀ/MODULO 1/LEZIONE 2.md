@@ -1,132 +1,345 @@
 ## LE PASSWORD
-- definizione
-- probabilita di azzeccare una pass
+- La **password** è un _shared secret_ tra due parti: l’utente e il servizio.  
+Serve per autenticare l’utente, cioè per dimostrare la sua identità al sistema.
+- probabilità di azzeccare una pass
+	- $\frac{1}{2^N}$  
 - password overload
+	- è il problema per cui gli utenti devono ricordare troppe password per troppi servizi diversi.
 - entropia
-	- bassa entropia
-	- formula e definizioni
+	- L’**entropia** misura quanto una password è **imprevedibile**.  
+		- Più entropia significa più casualità, quindi più difficoltà nel prevedere la password
 - predicibilità di una password
+	- **poor random number generators**.  
+		- In pratica, gli esseri umani non sanno generare casualità vera
 ### WORDLIST 
-- definizione e utilizzo (dizionari)
-
+- Una **wordlist** è un file contenente una lista di parole o password candidate che un attaccante può provare durante un attacco.
+	- È usata soprattutto nei **dictionary attack**, dove non si provano tutte le combinazioni possibili, ma solo parole realistiche
 ##### Creare un custom wordlist
+- Una **custom wordlist** è una wordlist costruita apposta per un bersaglio specifico.  
+	- È spesso più efficace di un dizionario generico, perché tiene conto del contesto della vittima.
 - `Crunch`
-	- SPIEGAZIONE RAPIDA DEL COMANDO CON ESEMPIO PRESENTE A SLIDE 21
+	- **Crunch** è un tool da riga di comando che crea wordlist basate su **combinazioni matematiche** di un certo insieme di caratteri.
+		- lunghezza minima
+		- lunghezza massima
+		- charset
+		- -o c.txt
+			- salva in un certo file
+```bash
+crunch 8 8 0123456789 -o myDigitsWordlist.txt
+```
+
 - `CeWL`
-	- SPIEGAZIONE RAPIDA DEL COMANDO CON ESEMPIO PRESENTE A SLIDE 22
+	- **CeWL** (_Custom Word List generator_) è un tool scritto in Ruby che visita un sito web e raccoglie le parole trovate nelle sue pagine.
+```bash
+cewl https://www.target.xyz -w targetSpecificWordlist.txt
+```
+
 - `Username-Anarchy`
-	- SPIEGAZIONE RAPIDA DEL COMANDO CON ESEMPIO PRESENTE A SLIDE 23
+	- **Username-Anarchy** è un tool che genera possibili username a partire da nome e cognome, seguendo formati tipici aziendali
+```bash
+./username-anarchy [OPTIONS] Mario Rossi > TargetUsernamesList.txt
+```
 
 #### Attacchi alle password
-- introuduzione e spiegazione
+- Gli attacchi alle password si dividono in due grandi categorie:
+	- **online attack**
+	- **offline attack**
+- La differenza fondamentale è dove avviene il tentativo di verifica della password.
+
 ##### uso con Hydra
-- SPIEGAZIONE RAPIDA DEL TOOL
+- **Hydra** è il tool principale mostrato per gli **attacchi online**.  
+	- Invia direttamente richieste di login al servizio bersaglio, per esempio:
+- SSH, web login, FTP, HTTP
 - problemi: 
 	- alta latenza
 	- alta visibilità
-	- rischio di essere bloccato fuori dalla macchina
-##### Attacchi offlne
+	- rischio di essere bloccato fuori dalla macchina (lockout)
+##### Attacchi offline
+Negli **attacchi offline**, l’attaccante ottiene un database di password hashate e le prova **sulla propria macchina**
+- limite: velocità della macchina, devo avere il database anche se hashato
 - hashcat
-	- SPIEGAZIONE RAPIDA DI HASHCAT
+	- **Hashcat** è un tool di cracking offline molto veloce, ottimizzato soprattutto per GPU.
 - jhon the ripper
-	- ci sono salvate nel pc le password hashate
-	- ora questi due tools provano offline
-	- limite: velocità della macchina, devo avere il database anche se hashato
+	- **John the Ripper** è uno dei password cracker più famosi e storici.
 ##### Come le password vengono criptate
-- hash function che cripta le password con sistema di hashing con una funzione one way
-	- esempio foto banca con alice
+Le password non vanno salvate in chiaro.  
+- Il servizio usa una **one-way hash function**, cioè una funzione che:
+- prende una stringa in input
+- restituisce un digest
+- è facile da calcolare in avanti
+- è difficilissimo da invertire
 - aggiunta del sale
-	- spiegazione ben fatta sul sale che non ho capito
-- spiegazione di slide 29
-- crackstation
-	- spiegazione rapida con foto esempio
+	- Il **salt** è una stringa casuale unica aggiunta alla password prima di calcolare l’hash
+		- $H(password || salt)$  
+	- serve per prevenire situazioni in cui utenti hanno stessa password e quindi stesso hash
+![[Pasted image 20260312161635.png]]
+- Crackstation
+	- **CrackStation** è l’esempio tipico di servizio/database che associa hash noti a password comuni.
+![[Pasted image 20260312161739.png]]
+
 #### Le Password su Linux
-- le password stanno in etc shadow
-	- scritte con id,salt,hash: altra roba
-- differenza tra etc passwd e etc shadow spiegata bene
-	- etc passwd dice solo le leggibilita dei file e a quale utente sono associate ma non fa vedere la password criptata con sale ecc, passwd ha la x come blocco di lettura
-	- in etc shadow ci sono i dati veri e propri come username algoritmo di hashing digest e sale, spiegazione di quest'ultimi soprattutto di digest
-foto slide 33
+Su Linux le credenziali protette stanno in:
+```bash
+/etc/shadow
+```
+- con il seguente formato hashato
+	- username
+	- id dell’algoritmo
+	- salt casuale
+	- password digest(risultato in hash).
+- Solo **root** può leggerlo
+In forma semplificata:
+```bash
+$id$salt$digest
+```
+
+esiste anche
+```bash
+/etc/passwd
+```
+- ma a differenza di shadow contiene informazioni pubbliche sugli utenti
+	- Al posto del campo password hashate compare di solito una `x`.
+![[Pasted image 20260312162229.png|500]]
+
+##### Come funziona il controllo password
+Su Linux il controllo funziona così:
+1. tu inserisci la password in chiaro
+2. il sistema recupera da `/etc/shadow`:
+    - **algoritmo di hashing**
+    - **salt**
+    - **digest** salvato
+3. prende la password che hai scritto
+4. la rihasha usando **lo stesso algoritmo** e **lo stesso salt**
+5. confronta il digest appena calcolato con quello memorizzato
 ##### Cracking Hashes offensive side
-- provo una parola e vedo se corrisponde a un codice hash?, spiegazione di slide 38
+-  i password cracking tools sono in sostanza dei **comparison engines** che generano candidati
+	- 1️⃣ si prende una **password candidata**  
+		- (esempio: `"password123"` dalla wordlist)
+	- 2️⃣ si calcola il suo hash con **lo stesso algoritmo e salt**
+	- 3️⃣ si confronta con l’hash rubato
+	- 4️⃣ se coincidono → hai trovato la password
+![[Pasted image 20260312164221.png]]
 
 ### CRACKING HASHES JHON THE RIPPER
-- unshadow tool spiegazione con comando a slide 40
-
+- spiegazione migliore di jhon the ripper e cosa può fare davvero
+###### Unshadow
+- `unshadow` serve a combinare `/etc/passwd` e `/etc/shadow` in un file leggibile da John.
+- `/etc/passwd` contiene dati utente
+- `/etc/shadow` contiene gli hash
+- John vuole un formato unificato
+```bash
+unshadow /etc/passwd /etc/shadow > hashesFile
+```
 #### SINGLE CRACK
-spiegazione a slide 41 scrivila qui
-
+La modalità **Single Crack** è il primo tentativo, il più veloce.
+- Si basa sull’assunto che gli utenti siano prevedibili e usino il proprio nome o username nella password.
+	- se utente si chiama admin allora si provano tutte le varianti di admin
+		- admin123, nimda, admin2000 ecc...
+```bash
+john --single hashesFile
+```
+- John applica regole interne definite in `john.conf`, nella sezione:
+	- `[List.Rules:Single]`
 #### DICTIONARY
-spiegazione a slide 42 scrivila e perfezionala qui
-- rock you come dizionario
+La modalità **Dictionary** usa una wordlist precompilata di password note.
+- `rockyou.txt` come dizionario
 	- uso -w per specificare il path della wordlist
-	- jhon permette di applicare delle regole
-
+	- Se la password non viene trovata direttamente, John può applicare **regole** per generare varianti della wordlist definite in `[List.Rules:Wordlist]`
+```bash
+john -w=baseWordlist.txt --rules=All --stdout > newWordlist.txt
+```
+- prende la wordlist base
+- applica tutte le regole
+- stampa in txt
 #### INCREMENTAL
-spiegazione a slide 43 spiegala tu per bene
+La modalità **Incremental** è il brute force vero e proprio.
+```bash
+john --incremental hashesFile
+```
 
 #### CUSTOM
-definire delle aggiunte alle wordlist 
-spiegazione a slide 44 spiegala tu per bene
-poi ci sono pochi esempi da 45 a 50
-- fai l'esempio e spiega la situazione diciamo
+La modalità **Custom** permette all’utente di definire regole proprie per modificare una wordlist.
+```bash
+john --wordlist=baseWordlist.txt --config=myRules.conf --rules=MyRuleName --stdout > newWordlist.txt
+```
+- `--wordlist=...` = wordlist di partenza
+- `--config=...` = file con le regole personalizzate
+- `--rules=MyRuleName` = nome della regola da usare
+![[Pasted image 20260312164309.png|400]]
+- `c` = rende maiuscola la prima lettera
+- `A0` = inserisce qualcosa all’inizio
+- `Az` = aggiunge qualcosa alla fine
+- `[xyz]` = prova uno dei caratteri in quella posizione
+- `@sXY` = sostituisce X con Y
+ESEMPIO
+`password` con `csa@Az"1[!?]"so0ss5`  sarà una di queste due
+- `P@55w0rd1!`
+- `P@55w0rd1?`
 ### CRACKING HASHES WITH HASHCAT
- - comandi di hashcat di slide 53 e 54 e 55 con spiegazione su una tabella
+
+
+|Comando / Opzione|Significato|
+|---|---|
+|`hashcat`|avvia il tool|
+|`-m`|specifica il tipo di hash|
+|`-a`|specifica la modalità di attacco|
+|`-o cracked.txt`|file di output delle password crackate|
+|`hashes.txt`|file contenente gli hash bersaglio|
+|`--stdout`|stampa i candidati senza effettuare cracking reale|
+ESEMPIO 
+```bash
+hashcat -m 0 -a 0 -o cracked.txt hashes.txt /usr/share/wordlists/rockyou.txt
+```
+
+|Parte|Spiegazione|
+|---|---|
+|`-m 0`|indica il tipo di hash; `0` corrisponde a MD5|
+|`-a 0`|modalità straight/dictionary|
+|`-o cracked.txt`|salva le password trovate|
+|`hashes.txt`|file con gli hash target|
+|`rockyou.txt`|wordlist usata per il dictionary attack|
+
+```bash
+hashcat -a 6 example.dict '?d?d?d?d' --stdout
+```
+Prende ogni parola della wordlist e le aggiunge 4 cifre finali.
+
+| Parte          | Spiegazione                                                           |
+| -------------- | --------------------------------------------------------------------- |
+| `-a 6`         | modalità ibrida wordlist + mask                                       |
+| `example.dict` | wordlist di partenza                                                  |
+| `'?d?d?d?d'`   | maschera che indica **4 cifre numeriche** da aggiungere alla password |
+| `--stdout`     | stampa i candidati                                                    |
+
+```bash
+hashcat -m 0 -a 1 -j '$_' dict1.txt dict2.txt --stdout
+```
+Combina parole provenienti da due dizionari, eventualmente applicando trasformazioni.
+
+|Parte|Spiegazione|
+|---|---|
+|`-m 0`|tipo hash MD5|
+|`-a 1`|modalità combinazione|
+|`-j '$_'`|applica una regola: aggiunge `_`|
+|`dict1.txt dict2.txt`|due dizionari da combinare|
+|`--stdout`|mostra i candidati|
+
 ### CRACKING ARCHIVE PASSWORDS
-- slide 57 spiegata, cosa è fcrackzip ecc?
+Le password degli archivi compressi possono essere attaccate offline.
+##### fcrackzip
+È un tool usato per crackare password di archivi ZIP.
+- Prova password candidate contro l’archivio finché ne trova una valida.
+```bash
+fcrackzip -u -b -v -D -p myWordlist.txt target.zip
+```
+Si può prima estrarre l’hash dell’archivio con strumenti del tipo:
+`zip2john target.zip > hashList.txt`
+Poi usare:
+```bash
+john --wordlist=myWordlist.txt hashList.txt
+```
 ### HYDRA
-- comandi hydra da 58 a 59
+
+```bash
+hydra -l <user name> -p <password> <protocol://hostname>
+hydra -L <user list> -P <password list> <protocol://hostname>
+```
+- `-l` = username singolo
+- `-p` = password singola
+- `-L` = lista di username
+- `-P` = lista di password
+
+ESEMPIO
+```bash
+hydra -l Alice -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.15
+```
+- Prova tutte le password di `rockyou.txt` per l’utente `Alice` sul servizio SSH della macchina indicata.
 
 ## WINDOWS
-
 ##### Windows- active directory
-cosa è la windows active directory spiegato semplice
+**Active Directory (AD)** è il servizio centralizzato di Microsoft per gestire:
+- utenti
+- gruppi
+- computer
+- autenticazione, autorizzazioni, policy di sicurezza
+In una rete Windows aziendale, invece di gestire ogni macchina separatamente, si usa Active Directory come archivio centrale delle identità.
+- Il **Domain Controller** autentica e autorizza utenti e computer.
+
+In un ambiente AD, un hash molto privilegiato può aprire l’accesso a un’intera organizzazione.
 ### LA WINDOWS AUTHENTICATION
-windows authentication è divisa in:
-- authentication protocol
-- password hash
+L’autenticazione Windows va distinta in due parti:
+- **authentication protocol**
+	- È il modo in cui le credenziali vengono usate e trasmesse durante il login in rete.
+- **password hash**
+	- È il formato in cui la password è salvata “a riposo”.
+
+Bisogna distinguere **come la password è memorizzata** da **come viene usata sulla rete**.
 ### HASHING 
-- prima era LM ma è vecchietto
-	- non ho capito cosa sia LAN se era l'algoritmo di hashing o cosa
+- prima era l'algoritmo LM(**LAN Manager Hash**) ma è vecchietto
+	- è comunque bene saperlo perché tante volte aziende non hanno sistemi aggiornati
 - più recente NT hash
-	- NTLM è il protocollo(?) verrà spiegato bene dopo
+	- L’**NT Hash** è il formato standard moderno per memorizzare la password a riposo in Windows.
+	- NTLM è il protocollo di autenticazione, verrà spiegato bene dopo
 		- ma viene usato anche per dire NT hash
-	- password hashate in SAM 
-		- database di windows
-			- standalone significato
-cose citate ma che non so dove mettere di slide 67
-- NTDS.dit
-- Pth pass the hash
-- SSO single sign on
+
+##### DOVE SI SALVANO LE PASSWORD HASHATE
+- in *SAM*
+	- È il database locale Windows che memorizza gli hash degli account locali di una macchina standalone
+		- non appartenente a un dominio active directory(aziende o cose)
+- in *NTDS.dit* 
+	- se hai una active directory
+	- è il database principale di Active Directory sul Domain Controller
+
+- attacco PTH
+	- Il **Pass the Hash** è una tecnica in cui l’attaccante usa direttamente l’hash NT per autenticarsi, senza conoscere la password in chiaro.
+	- sfruttando SSO
+		- L’utente si autentica una sola volta e poi accede a più risorse senza reinserire continuamente la password.
 ##### Dumping tools per windows
 - prima di spiegare questi dumping tools vorrei dare una definizione di post exploitation
-- mimikatz
-	- dumping sam
-		- sam systembkup.hiv sambkup.hiv
-	- dumping lsass.exe
-		- privilege:: debug
-		- sekurlsa logon passwords full
+	- La **post exploitation** è la fase successiva alla compromissione iniziale del sistema
+		- I dumping tools appartengono proprio a questa fase
+			- infatti dumping=estrarre dati sensibili dalla memoria o dai database di un sistema compromesso
+
+- **Mimikatz** è uno dei tool di post exploitation più famosi e potenti in ambiente Windows
+	- estrae: hash, credenziali e informazioni di autenticazione
+dumping al SAM con Mimikatz
+```text
+mimikatz # lsadump::sam SystemBkup.hiv SamBkup.hiv
+```
+- `hiv` sono i file hive, file che contengono parti del registro di sistema
 #### SPIEGAZIONE APPROFONDITA DI NET NTLM protocol
-- protocollo challenge responsive
-	-  ovvero un protocollo che ha questo meccanismo dove invia una challenge per la singola autenticazione e applica delle operazioni rispetto all'hash... spiegazione continuata
-	- su questi protocolli non abbiamo l'hash effettivo con un aspetto diverso, ogni challenge ha una variazione di hashing??
+NTLMv1 è un protocollo di autenticazione **challenge-response**.
+il server non chiede al client di inviare la password in chiaro.  
+Invece:
+1. il server manda una **challenge**, un valore casuale 
+2. il client calcola una **response** prendendo la password effettiva, dividendola in blocchi, ognuno di quei blocchi viene cifrato con la challenge
+3. il server verifica la response per vedere se corrisponde alla password
+L’hash della password non “cambia” ogni volta.  
+Quello che cambia a ogni autenticazione è la **challenge**, e quindi cambia la **response**.
 - esiste una versione 2
-	- algoritmo migliorato ma stessa struttura e vulnerabilità di v1?
-	- unici cambiamenti: aggiunge una roba 
+	- usa MD5 al posto di MD4 e migliora in generale le challenge ecc...
+La vulnerabilità concettuale resta: 
+- se l’attaccante riesce a farsi inviare una response valida, può catturarla e provare a crackarla offline o usarla in altri attacchi.
 #### protocollo v2 funzionamento in step
-SPIEGALO BENE SPIEGANDO OGNI COSA PER BENE TIPO SC COSA È CC COSA È CC A CHE SERVE ECC
-DA SLIDE 74 A 76
-- server manda challenge SC a client di 8 byte string
-	- arriva al client 
-	- genera 8 byte challenge random CC
-		- CC* non so cosa sia
-		- e altra roba che non ho capito
-#### ATTACCO di poisoning con spiderlabs
-- spiegazione di attacco poisoning
-	- utilizzo nelle password con NLTM v2
-	- come funziona?
-	- quando il dns fallisce la vittima invia in broadcast un messaggio con protocolli normali
-		- sto tizio responder con spiderlabs risponde come il dns fingendosi
-		- così ti colleghi tipo
-			- il client invia l'hashing e il server del responder lo riceve
-NON HO BEN CAPITO QUESTA PARTE QUINDI SE PUOI SPIEGARLA TU IN MODO DETTAGLIATO E SENZA LASCIARE COSE SPARSE
+![[Pasted image 20260312172524.png]]
+- 1. Il server manda al client una **Server Challenge (SC)**, cioè una stringa casuale di 8 byte.
+- 2. Il client genera una **Client Challenge (CC)**, anch’essa casuale, di 8 byte.
+- 3. costruisce una struttura con contesto e timestamp
+- 4. usa il proprio NT Hash per derivare una response
+La password in chiaro non viaggia, ma la **response** sì.  
+E quella response può essere catturata da un attaccante in certe condizioni.
+
+#### ATTACCO di poisoning con spiderlabs/responder
+- È un tool che si finge il servizio che la vittima sta cercando, così la induce ad autenticarsi verso l’attaccante
+- utilizzato anche in attacchi a NTLMv2
+- passaggi da sapere:
+	- La vittima prova a connettersi a una risorsa per esempio sbaglia un nome di rete o cerca una macchina inesistente
+	- Il DNS fallisce La risoluzione standard del nome non riesce
+	- La macchina della vittima manda richieste in broadcast 
+		- Usa protocolli legacy come **LLMNR** o **NBT-NS** e chiede alla rete locale: “chi conosce questa risorsa?”
+	- Responder risponde fingendosi il server 
+		- L’attaccante intercetta la richiesta e dice in sostanza: “sono io quel server” 
+		- Questa è la fase di **poisoning/spoofing**.
+	- La vittima crede di aver trovato il server corretto 
+		- A questo punto avvia l’handshake NTLMv2 verso la macchina dell’attaccante.
+	- in questo modo l'attaccante riceve la challenge response
