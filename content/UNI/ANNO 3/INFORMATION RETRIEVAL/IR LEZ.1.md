@@ -207,7 +207,7 @@ PSEUDOCODICE MOLTO UTILE
 	- email
 	- library catalog
 ### SCRIVERE ESERCIZI!!!
-[[ESERCIZI CROCIATA]]
+[[ESERCIZI CROCS]]
 #### PHRASE QUERIES con bi grammi
 Un **bi-gramma (bigram)** è una **sequenza di due token consecutivi**.
 - token = parola o unità lessicale ottenuta dopo la **tokenizzazione**    
