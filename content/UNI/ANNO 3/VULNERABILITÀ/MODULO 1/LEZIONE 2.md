@@ -177,7 +177,6 @@ ESEMPIO
 - `P@55w0rd1?`
 ### CRACKING HASHES WITH HASHCAT
 
-
 |Comando / Opzione|Significato|
 |---|---|
 |`hashcat`|avvia il tool|
