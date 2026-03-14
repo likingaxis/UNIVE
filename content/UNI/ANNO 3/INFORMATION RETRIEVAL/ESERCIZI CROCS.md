@@ -38,26 +38,27 @@
 ![[Pasted image 20260311111004.png|400]]
 
 >[!info]- soluzione
-```scss
- INTERSECT(p1,p2)
- answer <- {}
- while p1 != NIL and p2 != NIL
- do if docID(p1)=docID(p2)
-		 pos1 <- first(p1)
-		 pos2 <- first(p2)
-		 while pos1 != NIL and pos2 != NIL 
-			do if pos1=pos2-1
-					ADD(answer,docID(p1))
-					break
-				else if pos1< pos2 -1
-						pos1 <- nextpos(pos1)
-					else
-						pos2 <- nextpos(pos2)
-		 p1<- next(p1)
-		 p2<- next(p2)
-	else if docID(p1)< docID(p2)
-			p1<- next(p1)
-		 else
-			 p2<-next(p2)
- return answer
- ```
+> ```scss
+>  INTERSECT(p1,p2)
+>  answer <- {}
+>  while p1 != NIL and p2 != NIL
+>  do if docID(p1)=docID(p2)
+> 		 pos1 <- first(p1)
+> 		 pos2 <- first(p2)
+> 		 while pos1 != NIL and pos2 != NIL 
+> 			do if pos1=pos2-1
+> 					ADD(answer,docID(p1))
+> 					break
+> 				else if pos1< pos2 -1
+> 						pos1 <- nextpos(pos1)
+> 					else
+> 						pos2 <- nextpos(pos2)
+> 		 p1<- next(p1)
+> 		 p2<- next(p2)
+> 	else if docID(p1)< docID(p2)
+> 			p1<- next(p1)
+> 		 else
+> 			 p2<-next(p2)
+>  return answer
+>  ```
+
