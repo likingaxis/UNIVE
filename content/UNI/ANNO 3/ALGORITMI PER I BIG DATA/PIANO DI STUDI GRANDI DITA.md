@@ -31,11 +31,11 @@ Perché è difficile in ambito big data / randomized / stream?
 ### 2. Parametri
 Quali grandezze compaiono?  
 Ad esempio:
-- ( n )
-- ( m )
-- ( p )
-- ( \varepsilon )
-- ( \delta )
+- $( n )$
+- $( m )$
+- $( p )$
+- $( \varepsilon )$
+- $( \delta )$
 - lunghezza stream
 - numero elementi distinti
 - spazio usato
@@ -54,7 +54,7 @@ Da quello che hai scritto, meglio **non puntare** su:
 - roba generale introduttiva del Mitzenmacher
 - funzione / spazio di probabilità come pezzo da esposizione principale
 - esempi super accessori
-- slide con dimostrazione di ( \Pr(A \mid B) )
+- slide con dimostrazione di $( \Pr(A \mid B) )$
 Queste cose vanno sapute **quel tanto che serve**, ma non devono diventare il centro del tuo studio.
 ## C. Cosa invece è ideale da portare
 I tuoi “pezzi forti” sono:
@@ -80,98 +80,47 @@ Da fare:
     - dimostrazione fino a slide 41-42
 - Legge probabilità totali (**senza dimostrazione**)
 - Legge di Bayes
-    
     - applicazione all’algoritmo della matrice
-        
 - Min-Cut algorithm
-    
     - dal libro + slide
-        
     - salta il teorema one-side error, se confermato non richiesto
-        
-
 ### CH-02
-
 Da fare:
-
 - Random variable
-    
 - Variabili aleatorie indipendenti
-    
 - Definizione di valore atteso
-    
 - Linearità del valore atteso (**senza dimostrazione**)
-    
 - Bernoulliane
-    
 - Distribuzione binomiale
-    
 - Valore atteso binomiale (**senza dimostrazione**)
-    
 - Randomized QuickSort (**tutto + dimostrazione**)
-    
 - Distribuzione geometrica
-    
     - valore atteso
-        
     - varianza
-        
 - Memoryless property (**no dimostrazione**)
-    
 - Coupon collector problem (**tutto**)
-    
-
 ### CH-03
-
 Da fare:
-
 - Markov inequality (**no dimostrazione**)
-    
 - Varianza
-    
 - Chebyshev inequality (**no dimostrazione**)
-    
 - Slide 9: leggere, non dimostrare
-    
 - Varianza bernoulliane: sapere
-    
-    - ( \mathrm{Var}(X)=p(1-p) )
-        
-    - ( np(1-p) )
-        
+    - $( \mathrm{Var}(X)=p(1-p) )$
+    - $( np(1-p) )$
 - Punto 3 slide 18: **non fare**
-    
 - Coupon collector + Chebyshev
-    
 - Direct bound = union bound + coupon collector
-    
 - Weak law of large numbers (**no dimostrazione**)
-    
-
----
-
 ## BLOCCO 2 — Randomized algorithms / hashing base
-
 ### Tardos + Lucio/Andy
-
 Da fare:
-
 - Contention Resolution
-    
 - Global Min Cut / Karger
-    
 - Universal hashing
-    
 - Hash functions come base tecnica
-    
-
 Da non portare come focus:
-
 - hashing puro come argomento principale
-    
-
----
-
 ## BLOCCO 3 — Data streams e graph mining
 
 ### Prezza + MMDS + Andy
