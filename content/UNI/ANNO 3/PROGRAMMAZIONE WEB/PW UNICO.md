@@ -6,7 +6,6 @@ Funziona tramite **richieste (request)** e **risposte (response)**:
 - il **browser invia una richiesta HTTP**
 - il **server risponde inviando la pagina web o i dati richiesti**
 È un protocollo **stateless**, cioè **non mantiene memoria delle richieste precedenti**.
-
 ### PARADIGMA CLIENT SERVER WEB 
 Il Web si basa su un **modello client-server**.
 - **CLIENT (Browser)**  
