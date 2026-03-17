@@ -1,6 +1,5 @@
 #### SPAZIO PROBABILISTICO
 slide 21 MTZ upfal Chapter 1
-
 #### FUNZIONE PROBABILISTICA
 slide 22 MTZ upfal Chapter 1
 #### EVENTI INDIPENDENTI
