@@ -1,8 +1,6 @@
 ### PROBLEMA DI MEMORIZZAZIONE
 il numero totale di token $T$ nella collezione può essere enorme, quindi salvare tutte le coppie `(termID, docID)` in memoria può diventare impossibile.
-
 → Token string = la singola parola estratta dal testo del documento.
-
 #### RCV1
 **RCV1 (Reuters Corpus Volume 1)** è una collezione di documenti usata spesso negli esempi di Information Retrieval per **stimare dimensioni e costi della costruzione di un indice**.
 ##### Come è fatto un documento in questo esempio
@@ -194,38 +192,144 @@ Per questo nei sistemi reali:
 
 - chiedi alla fine della lezione quella cosa al prof su chi pesa di più bi word indexing o positional indexing
 ##### Task Paralleli
-- utilizzeremo due task paralleli
-	- parser
-	- inverter
-- dividiamo i blocchi in slice
-###### Data Flow dell'index construction
-- master assegna 
-- parsing andare a costruirsi un indice locale
-- credo che l'inverter svolga il ruolo di posting
-- grazie a questo data flow ho continuità di servizio
-- cilindri con i dischi replicati, così sono sempre operativo, il posting è sempre disponibile
-- vogliamo essere partition tollerance, sistemi sempre attivi (availability) , andiamo a perdere sulla consistenza
+- per svolgere adeguatamente il Map Reduce
+- utilizzeremo due task paralleli che rappresentano map e reduce
+	- parser(Map)
+		- lettura del documento producendo i token (token stream)
+			- poi costruendo le coppie `(term,docID)`
+	- inverter(Reduce)
+		- prendono tutte le coppie con lo stesso termine
+			- costruiscono le **posting list**
+- i documenti vengono divisi in **n split** per distribuire il lavoro
+- con il data flow spiegherò meglio la gestione di tutte queste operazioni
+##### Data Flow dell'index construction
+- il data flow rappresenta le procedure di costruzione dell'indice
+- il **master** divide la collezione in **split** (blocchi di documenti) e li assegna dinamicamente ai nodi disponibili
+    - se un nodo fallisce, il task viene riassegnato → **fault tolerance**
+    - **Fault tolerance** = capacità del sistema di continuare a funzionare anche se alcune parti si rompono
+###### Fase di parsing (Map)
+- ogni nodo (parser) prende uno **split**
+- legge i documenti e fa:
+    - `parsing + tokenization`
+    - produce direttamente coppie:
+        `(term, docID)`
+- le coppie vengono scritte in **segment files**
+    - organizzati per **partizioni di termini** `(es. a–f, g–p, q–z)`
+👉 ogni parser quindi costruisce una **struttura locale temporanea**, NON ancora l’indice finale
+###### Shuffle / Partitioning
+- le coppie vengono **raggruppate per termine**
+- tutti i dati relativi allo stesso termine vengono inviati allo stesso nodo (inverter)
+- se vedi infatti dalla `a-f` vanno tutte in un unico inverter
+###### Fase di inversione (Reduce)
+- gli **inverter** ricevono tutte le coppie di un termine
+- costruiscono le **posting list**:
+    `term → [docID1, docID2, ...]`
+- producono una parte dell’**inverted index finale**
+![[Pasted image 20260317184416.png|400]]
+###### Continuità di servizio e affidabilità
+- grazie alla distribuzione:
+    - il sistema continua a funzionare anche se alcuni nodi falliscono
+- i dati (segment files / posting) sono spesso:
+    - **replicati su più dischi/macchine**
+    - quindi sempre disponibili
+👉 questo garantisce:
+- **alta availability**
+- **fault tolerance**
+###### Trade-off dei sistemi distribuiti
+- vogliamo:
+    - **partition tolerance** (il sistema funziona anche con problemi di rete)
+    - **availability** (sempre operativo)
+- quindi accettiamo di perdere:
+    - **consistency** (non tutti i nodi sono sempre aggiornati allo stesso istante)
 #### Dynamic indexing
 - LA NOSTRA ASSUNZIONE FATTA IN PRECEDENZA OVVERO CHE LA NOSTRA STRUTTURA DATI È STATICA ORA NON È PIÙ VALIDA, LA STRUTTURA SARÀ DINAMICA
+- Il **dynamic indexing** è il processo di aggiornamento continuo dell’indice quando la collezione di documenti cambia nel tempo.
 ###### GESTIONE DELLA DYNAMIC INDEXING
-- divido un main index grande con tanti piccolo index ausiliari
-	- periodicamente aggiorno facendo il merge e reindicizzando tutto
-- per la eliminazione è semplice
-	- invalido i bit vector
+- divido l’indice in:
+    - **main index** (grande, su disco)
+    - **auxiliary index** (piccolo, in RAM, contiene i nuovi documenti)
+- i nuovi documenti vengono inseriti nell’**auxiliary index**
+    - quindi non modifico subito il main (operazione costosa)
+- durante le query:
+    - cerco sia nel **main** che nell’**auxiliary**
+    - poi **unisco i risultati**
+- periodicamente:
+    - faccio il **merge** tra auxiliary e main
+    - ottengo un nuovo main aggiornato
+- per la eliminazione:
+    - uso un **bit vector di invalidazione**
+    - i documenti eliminati non vengono cancellati subito
+    - ma filtrati a query time
 #### Quando va fatto questo merge(sapendo che sia costoso)
-- minor numero di merge, cercando di toccare il main il meno possibile
-- assunzione: il main ha come index un grande file
-##### logarithmic merge
-Z0 rappresenta gli index iniziali, I0 è l'indice ausiliario ma aspetto che sia di dimensione uguale a Z0
-poi sarà tutto logaritmico
-- idea algoritmo (insomma segui il pattern degli scorsi algoritmi)
+- voglio fare **pochi merge**
+    - per non toccare spesso il main index
+- quindi:
+    - lascio crescere l’auxiliary fino a una certa dimensione
+    - poi faccio il merge
+- trade-off:
+    - merge rari → indexing più efficiente
+    - ma auxiliary più grande → query più lente
+- assunzione:
+    - il main index è memorizzato come **un unico grande file**
+    - quindi il merge è costoso (richiede riscrittura)
+##### Logarithmic merge(miglioria al semplice merge tra i due)
+- è un algoritmo per gestire il **dynamic indexing**
+- serve quando la collezione **non è statica** e i documenti vengono aggiunti continuamente
+- nasce per migliorare la strategia semplice **main index + auxiliary index**, in cui il merge con il main è troppo costoso se fatto troppo spesso
+##### Idea principale
+- invece di avere solo:
+    - un **main index**
+    - un **auxiliary index**
+- mantengo **più indici di dimensione crescente**(vedi foto sotto)
+- ogni indice ha dimensione doppia del precedente:
+	- in memoria tengo:
+	    - **$Z_0$**, il più piccolo indice temporaneo
+		    - è l'auxiliary index
+	- su disco tengo:
+	    - **$I_0, I_1, I_2, ...$**
+		    - è il main
+![[Pasted image 20260317191928.png|400]]
 ###### PSEUDOCODICE DI LOG MERGE
-
+![[Pasted image 20260317192130.png]]
 - COSTI DI LOG MERGE
+- ricordando che 
+	- `T = numero totale di posting (o token) nella collezione`
+- con il metodo semplice **main + auxiliary**:
+    - un posting può essere riscritto moltissime volte
+    - costo totale:
+        - $O(T^2/n)$
+			- T = numero totale di posting (nella collezione)  
+			- n = dimensione massima del buffer $Z_0$ (in memoria ram)
+        - un merge costa T
+	        - ogni volta faccio un merge quindi
+	        - $(T / n) × T$
+- con **logarithmic merge**:
+    - ogni posting viene rielaborato solo una volta per livello
+    - numero di livelli circa:
+        - $\log(T/n)$
+	    - costo totale:
+	        - $O(T \log(T/n))$
+👉 idea intuitiva:
+- accumulo nuovi posting in **$Z_0$**
+- quando $Z_0$ è pieno:
+    - o lo trasformo in **$I_0$**
+    - oppure lo fondo con un indice già esistente
+- il merge continua “a cascata”, un po’ come un **riporto in binario**
 ###### MULTIPLE INDEXES
-- argomento che il prof ha deciso di reintrodurre (non ho capito quale)
-	- forse statistical correction delle ricerche?
-- struttura dati by construction di twitter
-	- efficiente prende la posting list, l'ultimo elemento e li scorre
-
-- roba sul positional indexes, non ho capito cosa integra ma il prof lo ha un po skippato
+I **multiple indexes** sono una struttura in cui l’informazione non è contenuta in un unico inverted index, ma è distribuita su **più indici separati**, che devono essere consultati insieme durante la ricerca.
+- presenti in ogni sistema con DYNAMIC INDEXING
+- durante una query avrò più indici quindi la loro ricerca sarà complessa
+	- oltretutto sarà anche complesso gestire la loro frequenza e il loro ranking
+##### nei sistemi reali (es. Twitter / Earlybird):
+- l’indice è diviso in **segmenti piccoli**
+- ogni segmento è:
+    - scrivibile (uno alla volta)
+    - oppure read-only
+- le posting list:
+	- sono spesso ordinate **per tempo (reverse chronological)**
+		- quindi:
+		    - i documenti più recenti sono in fondo (o in cima)
+👉 per query real-time:
+- si parte dagli elementi più recenti
+- si scorrono velocemente le posting list
+- molto efficiente per contenuti freschi (tweet)
