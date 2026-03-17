@@ -191,3 +191,41 @@ Per questo nei sistemi reali:
 
 - **MapReduce** viene usato soprattutto nella **fase di costruzione dell’indice** (index construction).
 - **Term-partitioned** e **Document-partitioned** descrivono **come l’indice è distribuito tra le macchine**, cosa che è particolarmente importante **quando si eseguono le query (ricerca)**.
+
+- chiedi alla fine della lezione quella cosa al prof su chi pesa di più bi word indexing o positional indexing
+##### Task Paralleli
+- utilizzeremo due task paralleli
+	- parser
+	- inverter
+- dividiamo i blocchi in slice
+###### Data Flow dell'index construction
+- master assegna 
+- parsing andare a costruirsi un indice locale
+- credo che l'inverter svolga il ruolo di posting
+- grazie a questo data flow ho continuità di servizio
+- cilindri con i dischi replicati, così sono sempre operativo, il posting è sempre disponibile
+- vogliamo essere partition tollerance, sistemi sempre attivi (availability) , andiamo a perdere sulla consistenza
+#### Dynamic indexing
+- LA NOSTRA ASSUNZIONE FATTA IN PRECEDENZA OVVERO CHE LA NOSTRA STRUTTURA DATI È STATICA ORA NON È PIÙ VALIDA, LA STRUTTURA SARÀ DINAMICA
+###### GESTIONE DELLA DYNAMIC INDEXING
+- divido un main index grande con tanti piccolo index ausiliari
+	- periodicamente aggiorno facendo il merge e reindicizzando tutto
+- per la eliminazione è semplice
+	- invalido i bit vector
+#### Quando va fatto questo merge(sapendo che sia costoso)
+- minor numero di merge, cercando di toccare il main il meno possibile
+- assunzione: il main ha come index un grande file
+##### logarithmic merge
+Z0 rappresenta gli index iniziali, I0 è l'indice ausiliario ma aspetto che sia di dimensione uguale a Z0
+poi sarà tutto logaritmico
+- idea algoritmo (insomma segui il pattern degli scorsi algoritmi)
+###### PSEUDOCODICE DI LOG MERGE
+
+- COSTI DI LOG MERGE
+###### MULTIPLE INDEXES
+- argomento che il prof ha deciso di reintrodurre (non ho capito quale)
+	- forse statistical correction delle ricerche?
+- struttura dati by construction di twitter
+	- efficiente prende la posting list, l'ultimo elemento e li scorre
+
+- roba sul positional indexes, non ho capito cosa integra ma il prof lo ha un po skippato
