@@ -1,0 +1,3 @@
+- prendi la history e rendila fruibile facilmente scrivendo tutti i contatti
+- r c r sul file di conf di john the ripper
+- consiglio: applica prima regole che impiegano meno tempo ma ora più tempo
