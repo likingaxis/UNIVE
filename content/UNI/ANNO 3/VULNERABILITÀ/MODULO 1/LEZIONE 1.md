@@ -16,7 +16,8 @@ Esempio:
 ```bash
 find / -name file.txt
 ```
-
+**binwalk**
+Dice il tipo di file
 #### 2️⃣ Variabili di ambiente e PATH
 **PATH**  
 Variabile che contiene le directory dove il sistema cerca i comandi eseguibili.
