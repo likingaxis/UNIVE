@@ -52,5 +52,5 @@
 - sapere il SO serve soprattutto per usare exploit di SO vecchissimi
 - `uname -a`
 	- cosa fa
-- 
+
 
