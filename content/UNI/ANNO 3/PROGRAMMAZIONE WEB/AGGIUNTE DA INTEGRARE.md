@@ -119,51 +119,76 @@ h1 {
     - **d = numero di:**
         - elementi
         - pseudoelementi
-FINISCI DA QUA
+- il confronto avviene da sx a dx `inline > id > classe > elemento`
 ##### PSEUDOCLASSI
-uso vicino al CSS i `:`
+- uso `:`
 - sono pseudoclassi
-	- definizione di pseudolasse ricordando che precisa lo stato di una classe
-- tipo `:hover`
-	- pseudoclasse che definisce un elemento che viene preso dal mouse
-- tipo `:visited`
-	- per i link visitati
-- NEL BROWSER SU ELEMENTS -> STYLES
-	- è possibile fare testing sulle pseudoclassi
-
+    - definiscono lo **stato di un elemento** (non di una classe!)
+- esempi:
+    - `:hover`
+        - elemento quando ci passo sopra col mouse
+    - `:visited`
+        - link già visitati
+    - `:focus`
+        - elemento selezionato (es input)
+- nel browser (Elements → Styles)
+    - posso fare testing delle pseudoclassi
 ##### PSEUDOELEMENTI
-- definito con `::`
-- definizione breve
-
+- definiti con `::`
+	- selezionano **una parte dell’elemento** oppure aggiungono contenuto
+- esempi:
+```css
+p::first-letter  
+p::before  
+p::after
+```
 ##### SELETTORE SU ATTRIBUTI
 - definito con `[]`
-	- seleziona un determinato attributo
-	- si possono usare le regular expression
-	- definizione rapida
-	- a cosa serve?
-		- se usi una libreria di qualcun'altro
-
-##### EREDITARIETÀ(DA ESAME)
-- le regole si applicano a tutti gli elementi dei discendenti
-	- MA NON VALE CON TUTTE LE REGOLE
-		- tutte quelle dei caratteri di solito sono passate
-		- quindi tipo font color ecc
-		- quelle relative al blocco di solito non vengono applicate, tipo i bordi o cose così
-##### CONFLITTI(DA ESAME)
+	- seleziona elementi in base agli attributi
+- esempi:
+```css
+[attribute]  
+[attribute=value]  
+a[target="_blank"]
+```
+- NON sono vere regex
+    - ma posso fare match su:
+        - inizio
+        - fine
+        - contenuto
+- a cosa serve:
+    - quando uso librerie esterne
+    - quando non posso modificare HTML
+##### EREDITARIETÀ (DA ESAME)
+- alcune proprietà vengono ereditate dai discendenti
+- NON vale per tutte:
+    - ✅ proprietà del testo
+        - color, font, ecc
+    - ❌ proprietà di layout
+        - border, margin, padding
+##### CONFLITTI (DA ESAME)
 - se più regole si applicano allo stesso elemento
-	- il browser deve scegliere quale applicare
-	- di solito id ha più priorità
-	- se sono a parità di forza vale l'ultima (peffozza
+    - il browser deve scegliere
+- criteri:
+    - specificità (id > classe > elemento)
+    - se pari:
+        - vince l’ultima regola scritta
 ##### CASCADE (DA ESAME)
-- Cascade, algoritmo che definisce come combinare i valori di proprietà provenienti da fonti diverse
-- di default dai browser esiste user agent stylesheet
-	- file di stile di default ma non affidabile poiché dipende dal browser
-- diversi stili classificati:
-	- stile del browser
-		- user agent ecc
-	- stile dell'autore
-		- quello scritto da noi
-	- stile dell'utente
-		- quello dell'utente tipo estensione dark mode
-- la cascata crea collisioni che vanno risolte
--  il valore !important va a scrivere la dichiarazione su un file che va applicato dopo
+- algoritmo che combina i valori delle proprietà da fonti diverse
+- esiste di default:
+    - **user agent stylesheet**
+        - stile del browser (default)    
+- tipi di stile:
+    - stile del browser
+    - stile dell’autore (noi)
+    - stile dell’utente (es estensioni)
+- la cascata:
+    - crea conflitti
+    - li risolve (specificità + ordine)
+##### !important
+- forza una dichiarazione
+```css
+color: red !important;
+```
+- viene applicata sopra le altre regole
+- da evitare (usare solo in casi particolari)
