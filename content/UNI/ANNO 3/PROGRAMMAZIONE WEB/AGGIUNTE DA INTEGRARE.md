@@ -159,6 +159,7 @@ a[target="_blank"]
 - a cosa serve:
     - quando uso librerie esterne
     - quando non posso modificare HTML
+- tipo TUTTI GLI ATTRIBUTI VERDI...
 ##### EREDITARIETÀ (DA ESAME)
 - alcune proprietà vengono ereditate dai discendenti
 - NON vale per tutte:
@@ -170,21 +171,26 @@ a[target="_blank"]
 - se più regole si applicano allo stesso elemento
     - il browser deve scegliere
 - criteri:
-    - specificità (id > classe > elemento)
+    - specificità `(id > classe > elemento)`
     - se pari:
         - vince l’ultima regola scritta
 ##### CASCADE (DA ESAME)
-- algoritmo che combina i valori delle proprietà da fonti diverse
-- esiste di default:
-    - **user agent stylesheet**
-        - stile del browser (default)    
-- tipi di stile:
-    - stile del browser
-    - stile dell’autore (noi)
-    - stile dell’utente (es estensioni)
+- algoritmo che decide **quale valore di una proprietà applicare** quando più regole si applicano allo stesso elemento
+- combina i valori provenienti da fonti diverse
+- di default dai browser esiste user agent stylesheet 
+	- file di stile di default ma non affidabile poiché dipende dal browser 
+- diversi stili classificati: 
+	- stile del browser 
+		- user agent stylesheet 
+	- stile dell'autore 
+	- quello scritto da noi 
+	- stile dell'utente 
+	- quello dell'utente tipo estensione dark mode
 - la cascata:
-    - crea conflitti
-    - li risolve (specificità + ordine)
+    - gestisce situazioni in cui più regole si applicano allo stesso elemento
+    - risolve i conflitti usando:
+        - specificità
+        - ordine (vince l’ultima)
 ##### !important
 - forza una dichiarazione
 ```css
@@ -192,4 +198,3 @@ color: red !important;
 ```
 - viene applicata sopra le altre regole
 - da evitare (usare solo in casi particolari)
-ciao a tutti
