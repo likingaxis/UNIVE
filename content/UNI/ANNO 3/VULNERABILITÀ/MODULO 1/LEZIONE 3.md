@@ -1,56 +1,138 @@
 ### PRIVILEGE ESCALATION
-- breve definizione
+- La **privilege escalation** è il processo con cui un attaccante sfrutta:
+	- bug
+	- errori di configurazione
+	- vulnerabilità
+	per ottenere **privilegi più elevati (tipicamente root)** rispetto a quelli iniziali
 - `echo $SHELL`
+	- stampa la shell di default dell’utente (es: /bin/bash)
+	- utile per capire in che ambiente siamo
 - `echo $0`
+	- mostra il nome della shell/processo corrente
+	- utile per capire se siamo in una shell ristretta o spawnata
 - `bash`
+	- avvia una nuova shell bash (se permesso)
 - `/bin/bash`
+	- esegue direttamente la bash dal path
+	- utile se il comando `bash` è bloccato ma il path no
 - `/bin/sh`
+	- shell più minimale (spesso linkata a bash o dash)
+	- può bypassare alcune restrizioni
 - `vi`
+	- editor di testo che permette anche esecuzione di comandi shell
 - `vim`
-- concetto di shell ristretta
-- `vi -c !/bin/bash`
-- nano e poi `ctrl+T` e poi chiudi con `ctrl+c` fa usare la shell diciamo
-- se presente python
-	- `python3 -c "import pty;pty.spawn("/bin/bash")"`
-- `script -qc /qc/bin/bash/dev/null`
-	- script serve a fare keylogging
-- se hai il path del bin bloccato puoi provare a scrivere lo stesso path con dei caratteri casuali e potrebbe andare
-	- tipo `/bin/b?ash`
-	- tipo `/bin/b[a]sh`
-	- `p${u}i${$u}n{$u}g local host`
-		- `${u}` rappresenta una variabile d'ambiente da sostituire in questo caso con nulla
-- concatenazione di comandi tipo `mi` poi `whoam` poi fai `!-1!-2` quindi eseguirà `whoami`
-- `w'u'h'u'o'u'a'u'm'u'i`
-- `cat ${IFS} /etc/passwd`
-	- la variabile IFS vale come spazio
-- `IFS=];b/bin/bash];$b`
-	- metto IFS=]
-	- quindi poi quando scriverò alla fine di bash una quadra chiusa mi metterà lo spazio
-- `{cat,sbers.txt}`
-- scrivi in esadecimale il path da eseguire
-	- `$'\x2f\x62...`
-	- `X=$'\x63\x64\x20;$X`
-- `CyberChef` per convertire in esadecimale
-- https://www.verylazytech.com/linux/bypassing-bash-restrictions-rbash
-#### PRIVILEGE ESCALATION
-- ENUMERATION
-	- breve definizione su cosa consiste
-- FINDING ATTACK VECTORS
-	- breve definizione su cosa consiste
-- EXPLOIT THEM
-	- breve definizione su cosa consiste
-
-##### Parte sulla ENUMERATION
-##### MOTD
-- message of the day
-	- quello che appare quando accedi a una macchina `ssh`
-- potrebbe contenere informazioni utili
-- `cat /etc/motd`
-- `cat /etc/update-motd.d/*`
-
-##### Informazioni del SO
-- sapere il SO serve soprattutto per usare exploit di SO vecchissimi
+	- versione avanzata di vi, stessa idea ma più potente
+### Shell ristretta
+- una **restricted shell (rbash, bash --restricted)** limita:
+	- esecuzione di comandi
+	- cambio directory
+	- uso di path assoluti
+- viene usata per limitare ciò che può fare un utente compromesso
+### Escape dalla restricted shell
+- `vi -c '!/bin/bash'`
+	- apre vi ed esegue direttamente `/bin/bash`
+	- permette di uscire dalla restricted shell
+- nano:
+	- `CTRL + T` → permette di eseguire comandi esterni
+	- `CTRL + C` per uscire
+	- può essere abusato per ottenere una shell
+- Python:
+	- `python3 -c "import pty; pty.spawn('/bin/bash')"`
+	- crea una **TTY interattiva**
+	- utile per avere una shell stabile
+- `script -qc /bin/bash /dev/null`
+	- crea una nuova shell interattiva tramite il comando `script`
+	- NON è per keylogging qui, ma per ottenere una TTY completa
+### Bypass restrizioni sui comandi
+- se i binari sono filtrati:
+	- `/bin/b?sh`
+	- `/bin/b[a]sh`
+		- uso wildcard per bypassare controlli semplici
+- variabili:
+	- `p${u}i${u}n${u}g`
+		- `${u}` viene espansa (anche vuota)
+		- serve per offuscare il comando
+- history trick:
+	- `mi`
+	- `whoam`
+	- `!-1!-2`
+		- concatena comandi precedenti → `whoami`
+- concatenazione caratteri:
+	- `w'u'h'u'o'u'a'u'm'u'i`
+		- bypass di filtri semplici
+### Bypass degli spazi (molto importante)
+- `cat${IFS}/etc/passwd`
+	- `IFS` = Internal Field Separator (spazio)
+	- usato quando lo spazio è bloccato
+- `IFS=];b=/bin/bash];$b`
+	- cambio IFS in `]`
+	- quando si usa `]` viene interpretato come separatore (tipo spazio)
+- `{cat,lol.txt}`
+	- espansione bash → `cat lol.txt`
+- `cat</etc/passwd`
+	- uso redirect invece dello spazio
+### Encoding / offuscamento
+- esadecimale:
+	- `$'\x2f\x62\x69\x6e\x2f\x6c\x73'`
+		- rappresenta `/bin/ls`
+- variabile:
+	- `X=$'\x63\x64\x20\x2e\x2e'; $X`
+		- esegue `cd ..`
+- tool:
+	- CyberChef → utile per convertire stringhe in hex
+- riferimento:
+	- https://www.verylazytech.com/linux/bypassing-bash-restrictions-rbash
+## 🔥 Processo di Privilege Escalation
+- **ENUMERATION**
+	- raccolta di tutte le informazioni sul sistema target
+- **FINDING ATTACK VECTORS**
+	- identificazione di vulnerabilità o misconfigurazioni
+- **EXPLOIT THEM**
+	- sfruttamento delle vulnerabilità trovate per ottenere privilegi
+## 🔍 ENUMERATION
+### MOTD
+- Message Of The Day
+	- messaggio mostrato al login (es: ssh)
+- può contenere info utili:
+	- IP interni
+	- credenziali riutilizzabili
+- comandi:
+	- `cat /etc/motd`
+	- `cat /etc/update-motd.d/*`
+### Informazioni del SO
+- servono per:
+	- capire vulnerabilità note
+	- trovare exploit compatibili
 - `uname -a`
-	- cosa fa
-
-
+	- mostra:
+		- kernel
+		- architettura
+		- hostname
+		- info complete sistema
+- altri comandi utili:
+	- `uname -r` → versione kernel
+	- `uname -m` → architettura
+	- `cat /etc/*release`
+	- `cat /proc/version`
+	- `lsb_release -a`
+### Informazioni interessanti (base)
+- utente:
+	- `whoami`
+	- `id`
+	- `groups`
+- utenti e shell:
+	- `cat /etc/passwd | grep "sh$"`
+- history:
+	- `cat ~/.bash_history`
+		- può contenere password o comandi sensibili
+- env:
+	- `printenv`
+	- `echo $PATH`
+- shell disponibili:
+	- `cat /etc/shells`
+- hostname:
+	- `hostname`
+- linguaggi disponibili:
+	- `which python`
+	- `which python3`
+	- `which perl`
