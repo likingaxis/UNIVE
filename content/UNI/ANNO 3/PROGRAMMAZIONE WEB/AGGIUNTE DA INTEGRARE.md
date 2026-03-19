@@ -40,13 +40,34 @@ h1 {
 	- da assegnare a un solo elemento della pagina
 	- uso `#` in css per selezionarlo
 		- si suggerisce di usarlo solo per un elemento per evitare problemi
-##### PARTE WEB GENERALE
+#### TIPI DI SELETTORI che vedremo in CSS
+- **selettore di elemento**
+    - es: `p { ... }`
+- **selettore di classe**
+    - es: `.classe { ... }`
+- **selettore id**
+    - es: `#id { ... }`
+- **selettori composti**
+    - es:
+	    ```
+	    div p  
+	    div > p  
+	    h2 + p
+	    ```
+- **selettori attributo**
+    - es:    `[attribute]  ``[attribute=value]`
+- **pseudoclassi**
+    - es:`:hover`   `:visited`  `:nth-child()`
+- **pseudoelementi**
+    - es:   `::before`  `::after`
 ##### SELETTORI WEB DOM
 - HTML è visto come un **albero**
     - parent (genitore)
     - child (figlio)
     - sibling (fratelli)
     - ancestor (antenati)
+![[Pasted image 20260319152110.png|400]]
+
 - selettori composti (dipendono dalla posizione nell'albero)
     - **descendant (spazio)**
         - `A B`
@@ -72,38 +93,6 @@ h1 {
         - es:
 	        `h2 ~ p`    
 	        → tutti i `p` dopo un `h2` (non solo il primo)
-- foto albero
-![[Pasted image 20260319152110.png|400]]
-#### TIPI DI SELETTORI
-- **selettore di elemento**
-    - es:
-	    `p { ... }`
-- **selettore di classe**
-    - es:
-	    `.classe { ... }`
-- **selettore id**
-    - es:
-	    `#id { ... }`
-- **selettori composti**
-    - es:
-	    ```
-	    div p  
-	    div > p  
-	    h2 + p
-	    ```
-- **selettori attributo**
-    - es:
-	    `[attribute]  `
-	    `[attribute=value]`
-- **pseudoclassi**
-    - es:
-	    `:hover`  
-	    `:visited`  
-	    `:nth-child()`
-- **pseudoelementi**
-    - es:
-	    `::before`  
-	    `::after`
 ##### PECIFICITÀ DI UN SELETTORE (DA ESAME)
 - è la **forza** con cui un selettore compete con altri
 - serve per capire quale regola viene applicata in caso di conflitto
@@ -176,16 +165,15 @@ a[target="_blank"]
         - vince l’ultima regola scritta
 ##### CASCADE (DA ESAME)
 - algoritmo che decide **quale valore di una proprietà applicare** quando più regole si applicano allo stesso elemento
-- combina i valori provenienti da fonti diverse
-- di default dai browser esiste user agent stylesheet 
-	- file di stile di default ma non affidabile poiché dipende dal browser 
-- diversi stili classificati: 
-	- stile del browser 
-		- user agent stylesheet 
-	- stile dell'autore 
-	- quello scritto da noi 
-	- stile dell'utente 
-	- quello dell'utente tipo estensione dark mode
+	- combina i valori provenienti da fonti diverse seguendo una cascata come gerarchia di scelta
+- **diversi stili classificati:**
+	- *stile del browser *
+		- `user agent stylesheet `
+		- file di stile di default ma non affidabile poiché dipende dal browser
+	- *stile dell'autore *
+		- quello scritto da noi in `css`
+	- *stile dell'utente *
+		- quello dell'utente tipo estensione dark mode
 - la cascata:
     - gestisce situazioni in cui più regole si applicano allo stesso elemento
     - risolve i conflitti usando:
