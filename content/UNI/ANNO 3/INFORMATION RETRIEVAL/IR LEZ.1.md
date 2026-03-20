@@ -228,6 +228,9 @@ serve per gestire le **phrase queries**, cioè query in cui l’ordine delle par
 	- quindi:
 		- la **precision** peggiora
 		- soluzione poco pratica
+- bi word, svantaggi(confondere la statistica)
+	- aumento anche di falsi positivi
+	- aumento anche di memoria
 #### Soluzione con POSITIONAL INDEXES
 - salvo la posizione in cui appare il termine
 	- `term → docID → positions`
