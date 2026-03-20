@@ -136,3 +136,49 @@
 	- `which python`
 	- `which python3`
 	- `which perl`
+##### TROVARE I FILE SCRIVIBILI DA QUEL DETERMINATO UTENTE
+- `find / -type -f....  a slide 18`
+	- cerca i file dal root in poi solo scrivibili...
+- `who`
+	- mostra le sessioni attive
+- `last`
+	- ultime sessioni di login
+- `cat /var/log/auth.log`
+	- log di autorizzazione particolari
+- `sudo -l`
+	- ti dice cosa può fare quel determinato utente come root
+- `find -type f a slide 20`
+	- trova i file eseguibili con SUID
+#### ENUMERATION- FASE DI ANALISI DEI PROCESSI
+- `ps aux`
+	- tipo gestione attività
+- `ps aux | cat | grep "processo"`
+	- 
+- `pidof "path del processo"`
+	- pid di un certo path
+- `isof -i -n -P`
+	- lista dele risorse usate da un processo
+- `netstat -tulpn`
+	- bho
+- `top`
+	- fa vedere i processi in ordine di sbers
+- `cronotab`
+- `cronjobs`
+
+#### ENUMERATION MYSQL
+#### ENUMERATION CRONJOBS
+#### ENUMERATION CAPABILITIES
+- creazione di un sottoinsieme di privilegi da assegnare a dei processi
+- inherited
+- effective
+- permitted
+- bounding
+- ambient 
+- facendo getcap -r / 2> dev/null
+	- possiamo vedere le capabilities delle varie cose 
+#### PROGRAMMI DI SCRIPT AUTOMATIZZATI
+- `linpeas` script che in modo automatico fa tutta la enumeration 
+	- fa una serie di operazioni che abbiamo visto anche oggi
+- `pspy`
+- sono belli ma rumorosi
+	- non conviene usarli subito
