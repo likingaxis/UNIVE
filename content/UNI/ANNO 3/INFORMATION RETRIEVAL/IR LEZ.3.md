@@ -125,18 +125,27 @@ se si usa una struttura ad albero:
 - ogni nodo contiene un offset alla stringa
 - questo permette di accedere ai termini mantenendo la struttura di ricerca
 ![[Pasted image 20260320182805.png]]
-
+bit per puntatore≈$log_2​(total \ string \ length)$
 #### VERSIONE DICTIONARY AS A STRING CON BLOCCHI
-- scelgo una dimensione di blocchi che indica l'inizio di un blocco di parole
-	- ognuna di quelle ha una sua lunghezza
-	- ogni blocco è puntato da un puntatore
-- miglioria per ridurre il numero di byte per i puntatori uso un numero per specificare la lunghezza della stringa
-	- uso un puntatore iniziale(iniziale del blocco)
-	- salvo 9 byte ma ne uso 3 per scrivere il numero
-- risparmio tanti byte, ma poi occupo tempo di ricerca per esplorare il singolo blocco
-- se avessi un puntatore per parola occuperei molto meno tempo ma occuperei più spazio per i puntatori
-- foto di albero per capire il numero di confronti medi
-	- slide 26, credo che la 25 sia come la 26 ma fatta peggio
+- Per ridurre il numero di puntatori, si raggruppano i termini in **blocchi di k parole**
+- Si memorizza:
+    - una stringa unica con tutte le parole
+    - un puntatore per ogni blocco (non per ogni parola)
+- All’interno di un blocco:
+    - le parole sono salvate consecutivamente
+    - ogni parola è preceduta dalla sua lunghezza, per poterla individuare
+- *VANTAGGI*
+	- Il numero di puntatori passa da $M$ a $M/k$
+		- dove $k$ è il numero di blocchi
+	- Riduzione significativa dello spazio occupato
+- *SVANTAGGI*
+	- Per cercare un termine:
+	    - si individua il blocco
+	    - si scansionano le parole nel blocco
+	- Aumenta il numero di confronti → maggiore tempo di ricerca
+		- Più blocchi piccoli → più spazio, meno tempo
+		- Blocchi grandi → meno spazio, più tempo
+	- Il costo medio della ricerca aumenta perché è necessario esplorare sequenzialmente il blocco dopo aver trovato il puntatore
 #### ESERCIZIO DI ESAME
 VEDERE COME CAMBIA QUESTA COSA RISPETTO A BLOCCHI DA 8 O DA 16
 ##### ULTERIORI OTTIMIZZAZIONI APPLICATI ALLA VERSIONE A BLOCCHI FRONT CODING
