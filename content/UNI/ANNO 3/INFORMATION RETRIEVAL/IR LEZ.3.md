@@ -146,8 +146,10 @@ bit per puntatore≈$log_2​(total \ string \ length)$
 		- Più blocchi piccoli → più spazio, meno tempo
 		- Blocchi grandi → meno spazio, più tempo
 	- Il costo medio della ricerca aumenta perché è necessario esplorare sequenzialmente il blocco dopo aver trovato il puntatore
+RIPRENDI QUI APPROFONDENDO DA SLIDE 24 A 26
 #### ESERCIZIO DI ESAME
 VEDERE COME CAMBIA QUESTA COSA RISPETTO A BLOCCHI DA 8 O DA 16
+SLIDE 27
 ##### ULTERIORI OTTIMIZZAZIONI APPLICATI ALLA VERSIONE A BLOCCHI FRONT CODING
 - tecnica che sfrutta le parole ordinate
 	- per ridurre tutte parole con la stessa iniziale ora posso prendere parole che sono praticamente uguali per una certa radice
