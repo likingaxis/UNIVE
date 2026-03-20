@@ -1,82 +1,131 @@
-##### QUANTO È GRANDE UN ALBERO?
-- va calcolato in base al logaritmo di qualcosa che non conosciamo
-- noi vogliamo poter stimare a priori la stima di quanto è grande un albero di decisione del dizionario seguente, sarà argomento proprio di questa lezione
 ### INDEX COMPRESSION
-- usata per ridurre le dimensioni della indicizzazione
-	- ma allo stesso tempo ne preserva la sua operatività
-- due tipi di compressione
-	- lossy
-		- posso perdere alcune informazioni qualità ecc
-	- lossless
-		- ottengo la stessa informazione dopo la decompressione
-- basso costo di decompressione
-- nelle posting list potenzialmente se ho 173 e poi 174 metto +1 al posto di 174 così non uso log_2 174 bit per rappresentarlo
-
+- La **index compression** serve a **ridurre lo spazio occupato dall’indice**, mantenendo però la sua capacità di funzionare correttamente(operatività)
+	- Non vogliamo perdere efficienza: l’obiettivo è avere una struttura **più compatta ma ancora utilizzabile velocemente**.
+- Possiamo distinguere due tipi di compressione:
+    - **Lossless**
+        - Non si perde informazione
+        - Dopo decompressione otteniamo esattamente i dati originali
+        - È quella usata principalmente in Information Retrieval
+    - **Lossy**
+        - Si perde parte dell’informazione
+        - Può influenzare la qualità dei risultati
+        - Alcuni preprocessing (come stopword o stemming) possono essere visti come forme di compressione lossy
+- Le tecniche di compressione devono avere un **basso costo di decompressione**
+- Questo perché:
+    - i dati vengono decompressi frequentemente durante le query
+    - se la decompressione fosse lenta, annullerebbe i vantaggi della compressione
 ###### VANTAGGI DI COSA TOGLIERE NELLA TABELLA E COSA FARE
-- questa tabella divide la convenienza in base alla struttura che stiamo analizzando
-	- la parte del dizionario(i termini)
-	- la parte delle posting non posizionali
-	- la parte delle posting posizionali
-- la convenienza varia in base a ciò che stiamo analizzando 
-- tipo le stopword non cambiano nulla alla struttura del dizionario, ma alle altre due si
-- cosa si intende per delta%?
-- togliere i numeri non conviene
-- case folding(togliere le maiuscole)
-	- riduce particolarmente la cosa
-- stop word non conviene(pk?) in un dizionario ma per i positional o non positional conviene
-- effettuare stemming conviene particolarmente
-	- lasciare solo la radice della parola
-	- stemming ti porta alla forma base della parola sapendo che una parola è formata sempre da radice e desinenza
-	- li serve la lemmatizzazione ovvero una forma base molto più avanzata
-		- quindi in italiano è meglio lemmatizzazione
+![[Pasted image 20260320170023.png]]
+- questa tabella mostra **come cambia la dimensione dell’indice** a seconda del preprocessing applicato
+	- il cambiamento viene misurato separatamente su:
+		- **dizionario** = numero di termini distinti
+		- **indice non posizionale** = numero di postings
+		- **indice posizionale** = numero di posizioni da memorizzare
+##### Effetti delle tecniche di preprocessing
+- Le diverse tecniche di preprocessing non hanno lo stesso effetto su tutte le componenti dell’indice: la loro convenienza dipende da cosa stiamo analizzando (dizionario, postings non posizionali, postings posizionali).
+- In particolare:
+    - **Rimozione delle stopword**
+	    - elimina tutte quelle che sono le stopword
+        - è **molto efficace** nel ridurre la dimensione delle postings lists (sia non posizionali che posizionali), perché le stopword sono estremamente frequenti
+        - è invece **poco utile sul dizionario**, perché il numero di termini distinti coinvolti è molto piccolo
+    - **Case folding (rimozione delle maiuscole)**
+	    - operazione che mira a togliere le maiuscole
+        - è **molto efficace sul dizionario**, perché unifica parole come _Apple_ e _apple_
+        - ha invece **effetto limitato sui postings**, e può non cambiare affatto il numero di posizioni
+    - **Eliminazione dei numeri**
+        - ha un **impatto ridotto sul dizionario**
+        - ha un effetto **moderato sulle postings**, ma non è tra le tecniche più incisive
+    - **Stemming**
+	    - operazione che riduce le parole a una forma comune, eliminando suffissi e variazioni morfologiche
+	        - è **molto efficace nel ridurre il numero di termini distinti** (dizionario)
+	        - ha un effetto **più contenuto sulle postings**
+	        - inoltre introduce una perdita di informazione, perché le parole vengono ridotte a forme non sempre linguisticamente corrette
+        - per lingue come l'italiano è consigliata la lemmatizzazione, rispetto allo stemming è più complessa ma efficace
+- cosa si intende per $\Delta \%$
+	- **Δ%** indica la variazione percentuale rispetto alla riga precedente della tabella
+	- **T%/cumul %** indica la riduzione cumulativa rispetto al caso iniziale “unfiltered”
 - RICORDA: non ci sono regole generali ogni testo ha la sua particolarità questi dati possono variare in base a cosa hai davanti
 	- un tweet avrà una riduzione praticamente solo sulle stopword, il resto di solito non si ripete
-- TUTTE QUESTE TECNICHE DI COMPRESSIONE SONO LOSSY perché perdo informazioni
+- **questi preprocessing** possono essere visti come forme di compressione **lossy**, perché eliminano o modificano informazione
 ### LEGGE DI HEAPS
-- formula $M=kT^b$
-- la grandezza del dizionario segue il numero di token nella collezione
-- con spesso k compreso tra 30 e 100 e b uguale a 0.5
-- spiega meglio questa parte e spiega perché si applica il log in quel modo slide 10
-- spiega slide pagina 11 con quel grafico
-- usare la seguente legge su una collezione di più di un tot documenti
-	- questa legge approssima in modo praticamente esatto rispetto alla reale effettiva
-	- la stima è ottima
-- la legge predice 38,323 termini
-- in realtà sono 38,365 
-- ottimo
-QUESTO È MOLTO UTILE PER STIMARE LA DIMENSIONE DELL'ALBERO 
-- prendi il numero della stima ci fai il logaritmo e vedi bene che hai la dimensione dell'albero
+- La legge di Heaps descrive come *cresce* il numero di *termini distinti* (dizionario) al crescere del numero di token in una collezione
+- *formula* $M=kT^b$
+	- $M$ è il numero di termini distinti
+	- $T$ è il numero totale di token
+	- $k$ è una costante (tipicamente tra 30 e 100)
+	- $b$ è circa 0.5
+Questa stima è *utile* perché consente di:
+- **prevedere la dimensione dell’indice**
+- **stimare** **l’altezza** delle strutture di ricerca (albero) (circa $log⁡M$) 
+- funziona bene per **collezioni grandi (T sufficientemente grande)**
+	- NON è esatta
+	- ma è **molto accurata**
+	- es con $1,000,020$ token
+		- la legge predice $38,323$ termini
+		- in realtà sono $38,365$ 
+![[Pasted image 20260320172623.png|400]]
+- il log viene usato principalmente per rendere il grafico lineare e quindi più leggibile e confrontabile con i dati reali
+	- qui abbiamo la retta teorica(quella tratteggiata)
+	- e la retta data dai valori effettivi dove ogni punto è una coppia `(M,T)`
+		- dove M sono i termini distinti e T i token totali
 ###### ESERCIZIO DI ESAME
 non ho capito quale
 30 minuti
-### LEGGE DI Zipf's 
-- forse serve per stimare dopo quanto riapparirà un certo termine?
-- spiega la legge adeguatamente e a cosa serve nel mondo della IR
-- se io ordinassi le mie parole per frequenza all'interno del corpus più o meno la i esima parola più frequente avrà la frequenza proporzionale a 1/i
-	- dove i rappresenta...
-- se la parola più frequente occorre un tot numero di volte, quella che viene dopo occorre tot volte
-	- l'ultima parola occorre ipoteticamente una volta sola(non ho capito)
+### LEGGE DI Zipf's
+- La legge di Zipf descrive **come sono distribuite le frequenze dei termini** all’interno di un corpus
+- NON serve a stimare quando riappare un termine, ma a capire **quanto spesso compaiono i termini rispetto agli altri**
+- Se ordiniamo le parole per frequenza decrescente:
+    - la parola in posizione $i$ (cioè la i-esima più frequente) avrà una frequenza **inversamente proporzionale a iii**
+    - dove:
+        - $i = 1$ → parola più frequente
+        - $i = 2$ → seconda più frequente
+        - ecc…
+- In formula:
+    $cf_i \approx \frac{K}{i}$
+    **cf = collection frequency**
+Se la parola più frequente compare un certo numero di volte:
+- la seconda compare circa la metà
+- la terza circa un terzo
+- e così via
+- Le frequenze non vengono calcolate da Zipf:
+    - sono già presenti nei dati
+- Zipf descrive il fatto che:
+    - poche parole sono **molto frequenti**
+    - moltissime parole sono **molto rare**
+![[Pasted image 20260320181700.png|400]]
+
 ### TECNICHE DI COMPRESSIONE
-- assunzioni: a slide 17 mi pare nessun positional index ecc...
-- sono molto utili perché vogliamo lavorare su memoria (ovviamente RAM)
-- versione senza nulla, naive version
-	- abbiamo riservato 20 byte per ogni parola
-	- ma occupa troppo spazio
-- versione dictionary as a string
-	- mettiamo tutto in una unica stringa
-	- usiamo dei puntatori che indicano la fine della parola per capire dove inizia la prossima
-	- uso la frequenza di quella parola non ho capito come
-		- forse serve per ridurre la riscrittura del termine sulla stringa?
-- uso la varianza per capire bho
-	- se la varianza è 0 allora
-	- se la varianza è 1 allora
-	- teorema del limite centrale
-		- media+varianza media-varianza da una stima adeguata per capire non ho capito cosa
-- ora si usa in numero la compressione
-	- capire quante posizioni risolve un puntatore
-	- capire la lunghezza totale della stringa
-	- calcoli su calcoli spiegali perfavore sono a slide 21
-- se si utilizzasse un albero esso conterrà in ogni nodo l'offset che indica la posizione della parola
+- Assunzioni:
+    - ci concentriamo sulla compressione del **dizionario**
+    - non consideriamo (per ora) l’indice posizionale
+- L’obiettivo è ridurre lo spazio occupato, in modo da poter mantenere il dizionario in memoria (RAM)
+###### VERSIONE SENZA NULLA, NAIVE fixed-width
+- ogni termine è memorizzato separatamente
+- si riserva uno spazio fisso (es. 20 byte per parola)
+- problema:
+    - grande spreco di spazio (molte parole sono più corte)
+![[Pasted image 20260320182736.png]]
+###### VERSIONE DICTIONARY AS A STRING
+- si concatenano tutti i termini in un’unica stringa
+- per accedere ai termini:
+    - si usano **puntatori (offset)** che indicano dove inizia ogni parola
+    - oppure si memorizza la lunghezza della parola
+- vantaggi:
+    - si elimina lo spazio inutilizzato
+    - si memorizzano solo i caratteri effettivi
+- il costo totale è dato da:
+    - dimensione della stringa (somma delle lunghezze delle parole)
+    - spazio per i puntatori
+i puntatori sono importanti:
+- ogni puntatore occupa memoria (es. 4 byte)
+- quindi bisogna bilanciare:
+    - numero di puntatori
+    - spazio risparmiato sulle stringhe
+se si usa una struttura ad albero:
+- ogni nodo contiene un offset alla stringa
+- questo permette di accedere ai termini mantenendo la struttura di ricerca
+![[Pasted image 20260320182805.png]]
+
 #### VERSIONE DICTIONARY AS A STRING CON BLOCCHI
 - scelgo una dimensione di blocchi che indica l'inizio di un blocco di parole
 	- ognuna di quelle ha una sua lunghezza
