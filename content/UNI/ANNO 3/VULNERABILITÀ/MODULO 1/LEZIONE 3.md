@@ -136,49 +136,247 @@
 	- `which python`
 	- `which python3`
 	- `which perl`
-##### TROVARE I FILE SCRIVIBILI DA QUEL DETERMINATO UTENTE
-- `find / -type -f....  a slide 18`
-	- cerca i file dal root in poi solo scrivibili...
+#### ENUMERATION - FILE E PERMESSI
+- fase in cui cerco file scrivibili o modificati recentemente per capire dove posso intervenire
+- spesso la privilege escalation nasce da file modificabili o script eseguiti da root
+- `find / -writable 2>/dev/null`
+    - trova tutti i file scrivibili (target principali per escalation)
+- `find / -writable 2>/dev/null | cut -d "/" -f 2,3 | sort -u`
+    - rende l’output più leggibile
+- `find / -type f -mtime -1 2>/dev/null`
+    - file modificati nelle ultime 24h
+- `find / -type f -mmin -60 2>/dev/null`
+    - file modificati nell’ultima ora
+- `find / -type f -newermt "09:00:00" 2>/dev/null`
+    - file modificati dopo un certo orario
+#### ENUMERATION - INFORMAZIONI SISTEMA
+- serve per capire su che macchina siamo (kernel, distro)
+- fondamentale per cercare exploit compatibili
+- `uname -a`
+    - info complete sistema
+- `uname -r`
+    - versione kernel (chiave per exploit)
+- `cat /etc/*release`
+    - distribuzione Linux
+- `cat /proc/version`
+    - info dettagliate kernel
+- `lsb_release -a`
+    - info distro
+#### ENUMERATION - INFORMAZIONI UTENTE
+- capire chi siamo e che permessi abbiamo
+- spesso escalation deriva da gruppi privilegiati o comandi già usati
+- `whoami`
+    - utente corrente
+- `id`
+    - UID, GID e gruppi
+- `groups`
+    - gruppi dell’utente
+- `cat /etc/passwd`
+    - lista utenti
+- `cat /etc/passwd | grep "sh$"`
+    - utenti con shell
+- `cat ~/.bash_history`
+    - comandi eseguiti (password o path utili)
+- `printenv`
+    - variabili ambiente
+- `echo $PATH`
+    - path dei binari (possibile hijacking)
+#### ENUMERATION - FILE INTERESSANTI
+- cerco info utili salvate nel sistema (mail, config, mount)
+- spesso contengono credenziali o indizi
+- `cat /etc/fstab`
+    - filesystem montati automaticamente
+- `mount | grep '^/'`
+    - partizioni montate
+- `findmnt`
+    - dettagli mount
+- `ls -la /var/mail`
+    - mail utenti
+- `ls -la /var/spool/mail`
+    - spool mail
+- `ls /var/www`
+    - file web server
+#### ENUMERATION - LOGGING
+- analisi dei log per capire cosa è successo prima
+- utile per trovare credenziali o attività sospette
 - `who`
-	- mostra le sessioni attive
+    - utenti loggati
+- `watch who`
+    - monitor live
 - `last`
-	- ultime sessioni di login
+    - ultimi login
+- `last root`
+    - login root
+- `lastlog`
+    - login di tutti
+- `lastb`
+    - login falliti
 - `cat /var/log/auth.log`
-	- log di autorizzazione particolari
+    - log autenticazione
+- `cat /var/log/auth.log | grep root`
+    - attività root
+- `cat /var/log/auth.log | grep chpasswd`
+    - cambi password
+- `strings /var/log/auth.log`
+    - estrae testo leggibile
+- `tail -f /var/log/syslog`
+    - monitor realtime
+#### ENUMERATION - SUDO, SUID, PERMESSI
+- qui si trovano le **vere opportunità di escalation**
+- controlliamo cosa può essere eseguito con privilegi elevati
 - `sudo -l`
-	- ti dice cosa può fare quel determinato utente come root
-- `find -type f a slide 20`
-	- trova i file eseguibili con SUID
-#### ENUMERATION- FASE DI ANALISI DEI PROCESSI
+    - cosa può fare l’utente come root
+- `sudo -V`
+    - versione sudo (possibili CVE)
+- `cat /etc/sudoers`
+    - configurazione sudo
+- `cat /etc/sudoers.d/*`
+    - config aggiuntive
+- `find -type f \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2>/dev/null`
+    - file SUID/SGID
+- `find / -type f -user root -perm -4000 2>/dev/null`
+    - SUID di root
+#### ENUMERATION - FASE DI ANALISI DEI PROCESSI
+- capire cosa gira sulla macchina
+- processi vulnerabili o mal configurati = escalation
 - `ps aux`
-	- tipo gestione attività
+    - tutti i processi
+- `ps -ef`
+    - alternativa
 - `ps aux | cat | grep "processo"`
-	- 
-- `pidof "path del processo"`
-	- pid di un certo path
-- `isof -i -n -P`
-	- lista dele risorse usate da un processo
+    - cerca processo
+- `echo $$`
+    - PID corrente
+- `pidof <processo>`
+    - PID di un processo
+- `lsof -p <PID>`
+    - file usati dal processo
+- `lsof -i -n -P`
+    - connessioni di rete
 - `netstat -tulpn`
-	- bho
-- `top`
-	- fa vedere i processi in ordine di sbers
-- `cronotab`
-- `cronjobs`
-
+    - porte aperte
+- `top` / `htop`
+    - monitor realtime
+- `cat /etc/services`
+    - servizi
+- `apt list --upgradable`
+    - pacchetti aggiornabili
+#### ENUMERATION - APPLICAZIONI INSTALLATE
+- idea: “living off the land”
+- usare software già presente invece di caricare exploit
+- `ls -lah /usr/bin`
+    - binari disponibili
+- `ls -lah /sbin`
+    - binari sistema
+- `dpkg -l`
+    - pacchetti Debian
+- `rpm -qa`
+    - pacchetti RedHat
+- `ls /var/cache/apt/archives`
+    - pacchetti scaricati
+#### ENUMERATION - RETE
+- serve per movimento laterale e capire servizi esposti
+- `ip a` / `ifconfig`
+    - interfacce
+- `arp -a`
+    - dispositivi in rete
+- `ip r` / `route`
+    - routing
+- `netstat -tulpn`
+    - porte aperte
+- `iptables -L -v -n`
+    - firewall
+- `tcpdump -i lo -A`
+    - sniffing traffico
+#### ENUMERATION - SSH
+- SSH è fondamentale perché può dare accesso diretto ad altri sistemi
+- spesso trovi chiavi private o config deboli
+- `cat /etc/ssh/ssh_config`
+    - config client
+- `cat /etc/ssh/sshd_config`
+    - config server
+- `grep PermitRootLogin /etc/ssh/sshd_config`
+    - verifica accesso root
+- `grep Port /etc/ssh/sshd_config`
+    - porta SSH
+- `find / -name id_rsa 2>/dev/null`
+    - trova chiavi private
+- `find / -name authorized_keys 2>/dev/null`
+    - chiavi autorizzate
+- `cat /home/*/.ssh/id_rsa`
+    - legge chiavi private
+👉 se trovi una chiave → puoi accedere senza password
 #### ENUMERATION MYSQL
+- database = miniera di credenziali
+- spesso password riutilizzate
+- `find / -name "*.db" -o -name "*.sqlite*" 2>/dev/null`
+    - trova database locali
+- `cat /etc/mysql/my.cnf`
+    - config MySQL
+- `cat /etc/mysql/debian.cnf`
+    - credenziali DB
+- `cat /etc/mysql/*.cnf`
+    - altre config
 #### ENUMERATION CRONJOBS
+- cronjob = task schedulati automaticamente
+- se uno script eseguito da root è scrivibile → escalation immediata
+- `crontab -l`
+    - cron utente
+- `crontab -l <user>`
+    - cron altro utente
+- `cat /etc/crontab`
+    - cron globale
+- `cat /etc/cron*`
+    - tutti i cron
+- `cat /var/spool/cron/*`
+    - cron salvati
+- `cat /etc/cron.daily/*`
+    - job giornalieri
+- `cat /etc/cron.hourly/*`
+    - job orari
+👉 controlla sempre:
+- chi esegue il job
+- cosa esegue
+- se puoi modificarlo
 #### ENUMERATION CAPABILITIES
-- creazione di un sottoinsieme di privilegi da assegnare a dei processi
-- inherited
-- effective
-- permitted
-- bounding
-- ambient 
-- facendo getcap -r / 2> dev/null
-	- possiamo vedere le capabilities delle varie cose 
+- Linux divide i privilegi di root in “pezzi” (capabilities)
+- un binario può avere privilegi elevati senza essere root
+- `getcap -r / 2>/dev/null`
+    - lista capabilities dei binari
+- `cat /proc/<PID>/status | grep Cap`
+    - capabilities processo
+- `capsh --decode=<valore>`
+    - decodifica capabilities
+- `setcap cap_xxx /path`
+    - assegna capability
+- `setcap -r /path`
+    - rimuove capability
+- **CapInh (Inherited)**
+    - capabilities ereditate dal processo padre
+    - se il padre è privilegiato → anche il figlio può esserlo
+- **CapEff (Effective)**
+    - capabilities realmente attive
+    - il kernel controlla queste per autorizzare operazioni
+- **CapPrm (Permitted)**
+    - massimo insieme di capabilities ottenibili
+    - da qui posso attivare quelle effective
+- **CapBnd (Bounding)**
+    - limite massimo assoluto
+    - impedisce escalation oltre un certo livello
+- **CapAmb (Ambient)**
+    - capabilities che sopravvivono tra esecuzioni (exec)
+    - utile per mantenere privilegi anche senza SUID
 #### PROGRAMMI DI SCRIPT AUTOMATIZZATI
-- `linpeas` script che in modo automatico fa tutta la enumeration 
-	- fa una serie di operazioni che abbiamo visto anche oggi
+- tool che fanno enumeration automaticamente
+- utili ma non sostituiscono la comprensione manuale
+- `linpeas`
+    - script completo che cerca vulnerabilità, SUID, cron, permessi, ecc.
 - `pspy`
-- sono belli ma rumorosi
-	- non conviene usarli subito
+    - monitora processi e cronjob senza permessi root
+👉 note importanti:
+- sono molto rumorosi (facili da rilevare)
+- usali solo dopo aver fatto enumeration manuale
+- servono quando:
+    - sei bloccato
+    - hai poco tempo (CTF)
+- manuale = più stealth e ti fa capire davvero il sistema
