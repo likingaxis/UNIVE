@@ -146,37 +146,104 @@ bit per puntatore≈$log_2​(total \ string \ length)$
 		- Più blocchi piccoli → più spazio, meno tempo
 		- Blocchi grandi → meno spazio, più tempo
 	- Il costo medio della ricerca aumenta perché è necessario esplorare sequenzialmente il blocco dopo aver trovato il puntatore
-RIPRENDI QUI APPROFONDENDO DA SLIDE 24 A 26
+
+##### CON BLOCCHI VS SENZA BLOCCHI
+##### IN TERMINI DI MEMORIA
+###### Senza blocking:
+- hai **1 puntatore per parola**
+- ogni puntatore ≈ **3 byte**(prendendo una stringa lunga tipo 3,2 mil)
+- per 4 parole →
+    $3 \times 4 = 12 \text{ byte}$
+##### Con blocking (k = 4):
+- hai:
+    - **1 puntatore per blocco** → 3 byte
+    - **+ 4 byte per le lunghezze delle parole** (1 byte ciascuna)
+👉 totale:
+$3 + 4 = 7 \text{ byte}$
+👉 risparmi: $12 - 7 = 5 \text{ byte ogni 4 parole}$
+##### IN TERMINI DI TEMPO
+- per la ricerca viene fatto un calcolo di probabilità del valore atteso
+	- assumendo che siano tutte ugualmente probabili
+$$E[X]=∑(valore×probabilita)$$
+
+###### senza blocking
+Formula (semplificata):
+$$(1 + 2×2 + 4×3 + 4)/8 ≈ 2.6$$
+- mediamente **~2.6 confronti**
+###### con blocking
+👉 ora hai 2 fasi:
+1. binary search sui blocchi
+2. ricerca lineare nel blocco
+Formula:
+$$(1 + 2×2 + 2×3 + 2×4 + 5)/8 = 3$$
+👉 media:
+- circa **3 confronti**
 #### ESERCIZIO DI ESAME
-VEDERE COME CAMBIA QUESTA COSA RISPETTO A BLOCCHI DA 8 O DA 16
-SLIDE 27
+[[ESERCIZI CROCS]]
 ##### ULTERIORI OTTIMIZZAZIONI APPLICATI ALLA VERSIONE A BLOCCHI FRONT CODING
-- tecnica che sfrutta le parole ordinate
-	- per ridurre tutte parole con la stessa iniziale ora posso prendere parole che sono praticamente uguali per una certa radice
-	- tipo automata, automate, automatic, automation
-		- posso prendere la radice e definire come parole diverse tutto il resto
+- Il **front coding** è un’ulteriore ottimizzazione applicata al dizionario compresso a blocchi.
+- Sfrutta il fatto che i termini sono ordinati lessicograficamente: parole consecutive sono spesso molto simili e condividono un **prefisso comune**.
+- Invece di memorizzare ogni parola per intero, si salva una sola volta il prefisso comune, e per le altre parole del blocco si memorizza soltanto la parte finale che cambia.
+- Esempio:
+    - `automata` `automate` `automatic` `automation`
+- Queste parole condividono il prefisso `automat`
+- Quindi si può salvare:
+    - una volta il prefisso comune
+    - poi, per ciascuna parola, solo il suffisso diverso:
+        - `a` `e` `ic`  `ion`
+![[Pasted image 20260321101544.png|400]]
 
 ##### QUANTO RIDUCO CON QUALE TECNICA?
-
-foto tabella
-- quello fixed width è la versione naive? si credo di si
+![[Pasted image 20260321101612.png|400]]
 ### LA POSTING COMPRESSION
-- senza nulla a quanto pare pure per the uso 32 bit per il termine e 32 per il puntatore?
-- operazione essenziale perché le posting possono prendere dimensioni esorbitanti
-	- tecnica con gap
-		- usare la somma per i docID, mi salvo solo il primo, poi per un termine il successivo sarà la somma
-		- ne uso tipo 20 di bit?
-	- tecnica con variable length encoding
-		- vorrei usare i bit solo di cui ne ho necessità
-		- vorrei una codifica che sia logaritmica di G dove G è la media dei termini
-		- quando me servono 3 bit uso 3 bit quando me servono 20 bit ne uso 20
-		- potrei usare la codifica unaria con alla fine 0
-			- questa codifica è stronza, è ottimale solo quando i numeri sono $2^-n$
-		- sfruttata però solo per fare la codifica gamma code
-			- si sfrutta sempre la tecnica con gap credo
-				- gamma code spiegato bene
-					- sfruttando magari anche l'esempio di gamma code con il numero 13
-				- questa cosa dal livello teorico è buono ma pratico è inapplicabile
-				- per codificare serve 2 log in base 2 del numero
-					- spiegare perché è ottimo
-				- utilizzo di bitmap vector con esso
+- Dopo aver compresso il dizionario, si passa alla compressione delle **postings lists**, che occupano molto più spazio del dizionario e quindi sono il vero problema principale. Le postings possono infatti raggiungere dimensioni molto grandi, quindi comprimerle è essenziale.
+- In questa parte della lezione si considera il caso più semplice:
+    - **indice booleano**
+    - **niente positional index**
+    - una posting è semplicemente un **docID**
+- Se memorizzassimo ogni docID in modo diretto, potremmo usare interi da **32 bit**. Tuttavia, con circa 800.000 documenti, per rappresentare un docID basterebbero già circa **20 bit**. L’obiettivo della compressione è però usare **molto meno di 20 bit per posting**, quando possibile.
+##### GAP ENCODING
+- Le postings lists sono ordinate per docID crescente.
+- Invece di memorizzare tutti i docID completi, si salva:
+    - il primo docID
+    - poi, per ciascun successivo, la differenza rispetto al precedente, cioè il **gap**
+- Esempio:
+    - docID: `33, 47, 154, 159, 202`
+    - gap: `33, 14, 107, 5, 43`
+- L’idea è che molti gap siano piccoli, soprattutto per termini frequenti, e quindi si possano rappresentare con meno bit dei docID completi.
+##### VARIABLE LENGTH ENCODING
+- Una volta ottenuti i gap, non conviene usare per tutti lo stesso numero di bit.
+- L’idea è usare una codifica a **lunghezza variabile**:
+    - pochi bit per i numeri piccoli
+    - più bit per i numeri grandi
+- Idealmente, se un gap vale $G$, ci piacerebbe usare circa $\log_2 G$ bit, cioè un numero di bit proporzionale alla grandezza del valore da rappresentare.
+### CODIFICA UNARIA
+- La codifica unaria rappresenta il numero $n$ come:
+    - $n$ uni seguiti da uno zero
+- Esempio:
+    - $3$ → `1110`
+- Da sola non è molto efficiente, ma è utile come componente di altre codifiche.
+- In particolare, è ottimale solo per una distribuzione molto specifica, circa $P(n)=2^{-n}$
+### GAMMA CODE
+- Il **gamma code** codifica un numero $G$ dividendolo in due parti:
+    - **offset**
+    - **length**
+- Procedimento:
+    1. scrivo $G$ in binario
+    2. tolgo il primo 1 → ottengo l’**offset**
+    3. considero la lunghezza dell’offset
+    4. codifico questa lunghezza in **unario**
+    5. concateno lunghezza e offset
+- Esempio con $G=13$:
+    - 13 in binario = `1101`
+    - offset = `101`
+    - lunghezza offset = 3
+    - 3 in unario = `1110`
+    - gamma code = `1110101`
+- Proprietà importante:
+    - un gamma code per $G$ usa $2\lfloor \log_2 G \rfloor + 1$bit
+    - quindi è vicino all’ordine di grandezza ideale $\log_2 G$, pur restando decodificabile in modo univoco
+- LIMITE PRATICO DEL GAMMA CODE
+	- Il gamma code è teoricamente molto elegante e comprime bene.
+	- Però lavora a livello di **bit**, quindi in pratica è più lento da manipolare, perché le macchine lavorano meglio con byte e parole di memoria.
+	- Per questo, nei sistemi reali si preferiscono spesso codifiche come **Variable Byte**, che sono più semplici e più veloci, anche se comprimono un po’ meno.

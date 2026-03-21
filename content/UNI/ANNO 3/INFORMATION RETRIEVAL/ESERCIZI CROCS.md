@@ -62,3 +62,6 @@
 >  return answer
 >  ```
 
+## LEZIONE 3 ESERCIZI
+![[Pasted image 20260321101333.png|400]]
+slide 27
