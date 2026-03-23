@@ -69,11 +69,17 @@ DA NON FARE
 - FM
 - cose difficili
 
-#### Come spiegare l'algoritmo
-- definisci problema (IMPORTANTE)
-- parametri (IMPORTANTE)
-- come funzione l'alg
-- analisi alg
+- **Definizione del problema (fondamentale)**  
+    → cosa voglio verificare? (es: due polinomi sono uguali?)
+- **Parametri in gioco (fondamentale)**  
+    → grado ddd, dimensione dominio, probabilità errore
+- **Descrizione dell’algoritmo (step chiari)**  
+    → input → scelta random → valutazione → confronto
+- **Idea chiave / intuizione (MOLTO IMPORTANTE)**  
+    → perché funziona? (es: valutazione in un punto casuale)
+- **Analisi dell’algoritmo**
+    - costo computazionale
+    - probabilità di errore (questa è CRUCIALE qui)
 
 ### NON PORTARE
 - Hashing
