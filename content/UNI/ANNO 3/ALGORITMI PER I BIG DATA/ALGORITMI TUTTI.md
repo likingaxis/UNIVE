@@ -1,69 +1,71 @@
 ### CH01
 ### Verifying Polynomial Identities
-PROBLEMA  
+*PROBLEMA*
 - Dati due polinomi $P(x)$ e $Q(x)$, voglio verificare se sono identici $(P ≡ Q)$.  
 - Confrontare i coefficienti direttamente può essere costoso, quindi cerco un metodo più veloce.
-IDEA CHIAVE  
+*IDEA CHIAVE*  
 - Considero il polinomio $H(x) = P(x) - Q(x)$.  
 - Se $P ≡ Q$ allora $H(x) ≡ 0$.  
 - Se $P ≠ Q$ allora $H(x)$ è un polinomio non nullo di grado $≤ d$.  
-- Un polinomio non nullo di grado d può avere al massimo d radici.  
+- Un polinomio non nullo di grado d può avere al massimo d radici.
+	- valori per cui il polinomio vale 0
 - Quindi se scelgo un punto casuale, è molto improbabile che sia proprio una radice.
-PARAMETRI  
+*PARAMETRI*  
 - $d$ = grado massimo dei polinomi  
 - $S$ = insieme da cui estraggo il valore casuale  
 - $r ∈ S$ scelto uniformemente
-ALGORITMO  
+*ALGORITMO*  
 1. Costruisco implicitamente $H(x) = P(x) - Q(x)$  
 2. Scelgo un valore $r ∈ S$ uniformemente a caso  
 3. Calcolo $P(r)$ e $Q(r)$ (equivalente a calcolare $H(r)$)  
 4. Se $P(r) = Q(r)$ → restituisco "uguali"  
    altrimenti → "diversi"
-ANALISI  
+*ANALISI*  
 - Se $P ≡ Q$ → algoritmo sempre corretto  
 - Se $P ≠ Q$:  
   $H(x)$ ha al massimo d radici  
   quindi al massimo d valori di $r$ per cui $P(r) = Q(r)$  
   ⇒ $Pr[errore] ≤ d / |S|$
-###### NATURA RANDOMIZZATA  
+
+**NATURA RANDOMIZZATA**  
 L’algoritmo usa una scelta casuale $r ∈ S$.  
 La correttezza non è deterministica, ma probabilistica.
-CORRETTEZZA  
+*CORRETTEZZA*  
 - Se $P ≡ Q$:  
   allora $P(r) = Q(r)$ per ogni $r$  
   ⇒ algoritmo sempre corretto  
 - Se $P ≠ Q:$  
   allora $H(x) = P(x) - Q(x)$ è un polinomio non nullo
-ANALISI PROBABILISTICA  
+*ANALISI PROBABILISTICA*  
 $H(x)$ ha grado $≤ d$ ⇒ può avere al massimo d radici  
 Se scelgo $r ∈ S$ uniformemente:  
 $Pr[H(r) = 0] ≤ d / |S|$  
 ⇒ $Pr[errore] ≤ d / |S|$
 
-TIPO DI ERRORE  
+*TIPO DI ERRORE*  
 - possibile errore: $P ≠ Q$ ma algoritmo dice "uguali"  
   (false positive)  
 - impossibile errore: dire "diversi" quando sono uguali
-RIDUZIONE DELL'ERRORE  
+*RIDUZIONE DELL'ERRORE*  
 Ripeto l’algoritmo $k$ volte con valori indipendenti:  
 $Pr[errore totale] ≤ (d / |S|)^k$  
 ⇒ errore decresce esponenzialmente
 ### Verifying Matrix Multiplication
-PROBLEMA  
-Dato tre matrici $A, B, C (n × n)$, verificare se:  
+*PROBLEMA*  
+Date tre matrici $A, B, C (n × n)$, verificare se:  
 $AB = C$  
 senza calcolare esplicitamente il prodotto $AB$ (che costa $O(n³)$)
-IDEA CHIAVE  
+*IDEA CHIAVE*  
 Invece di confrontare direttamente $AB$ e $C$, confronto:  
 $ABr$ e $Cr$  
 dove r è un vettore casuale.  
 Se $AB ≠ C$, allora $(AB - C )r ≠ 0$ con alta probabilità.
-PARAMETRI  
+*PARAMETRI*  
 - $n$ = dimensione delle matrici  
 - $r$ = vettore casuale di dimensione n  
-- $r_i ∈ \{0,1\}$ scelti indipendentemente  
+	- $r_i ∈ \{0,1\}$ scelti indipendentemente  
 - probabilità di errore
-ALGORITMO  
+*ALGORITMO*  
 1. Genera un vettore casuale $r ∈ \{0,1\}^n$  
 2. Calcola $Br$  
 3. Calcola $A(Br)$  
@@ -71,37 +73,36 @@ ALGORITMO
 5. Confronta:  
    - se $A(Br) = Cr$ → restituisci "uguali"  
    - altrimenti → "diversi"
-ANALISI  
+*ANALISI*  
 Costo:  
 - $Br → O(n²)$  
 - $A(Br) → O(n²)$  
 - $Cr → O(n²)$   
 ⇒ totale $O(n²)$ (molto meglio di $O(n³)$)
 
-ANALISI PROBABILISTICA  
+*ANALISI PROBABILISTICA*  
 Se $AB = C$ → algoritmo sempre corretto  
-Se $AB ≠ C$:  
+Se $AB ≠ C$:
 sia $D = AB - C ≠ 0$  
 ⇒ $Pr[Dr = 0] ≤ 1/2$  
 ⇒ probabilità di errore ≤ 1/2
-
-TIPO DI ERRORE  
+*TIPO DI ERRORE*  
 - possibile: dire "uguali" quando non lo sono  
 - impossibile: dire "diversi" quando sono uguali
-RIDUZIONE ERRORE  
+*RIDUZIONE ERRORE*  
 Ripetendo $k$ volte:  
 $Pr[errore] ≤ (1/2)^k$  
 ⇒ errore esponenzialmente piccolo
 ### Min-Cut Algorithm
-PROBLEMA  
+*PROBLEMA*
 Dato un grafo non orientato $G = (V, E)$,  
 trovare il taglio minimo (min-cut), cioè il minimo numero di archi  
 la cui rimozione disconnette il grafo.
-IDEA CHIAVE  
+*IDEA CHIAVE*  
 Contraggo archi casualmente fino a ottenere solo 2 nodi.  
 Se durante il processo NON contraggo archi del min-cut,  
 allora il taglio finale sarà proprio il min-cut.
-PARAMETRI  
+*PARAMETRI*  
 - $n$ = numero di nodi  
 - scelta casuale di archi  
 - probabilità di successo (dipende da n)
@@ -110,8 +111,7 @@ Prendi un arco $(u,v)$ e:
 1. **unisci i due nodi u e v in un unico nodo**
 2. tutti gli archi che prima andavano a u o v ora vanno al nuovo nodo
 3. **elimini i self-loop** (archi che collegano il nodo a sé stesso)
-
-ALGORITMO  
+*ALGORITMO*  
 4. Finché ci sono più di 2 nodi:  
    - scegli un arco (u, v) a caso  
    - contrai u e v in un unico nodo  
@@ -119,21 +119,21 @@ ALGORITMO
 
 2. Quando restano 2 nodi:  
    - gli archi tra loro = taglio trovato
-ANALISI  
+*ANALISI*  
 Costo:  
 - ogni contrazione riduce i nodi  
 - totale ≈ O(n²) (implementazione base)
 
-ANALISI PROBABILISTICA  
+*ANALISI PROBABILISTICA*  
 Sia $k =$ dimensione del min-cut  
 Ad ogni passo:  
 - probabilità di NON scegliere un arco del $min-cut ≥ 1 - (k / numero archi)$   
 Moltiplicando su tutti i passi:  
 ⇒ $Pr[trovare min-cut] ≥ 2 / (n(n - 1))$
-TIPO DI ERRORE  
+*TIPO DI ERRORE*  
 - possibile: non trovare il min-cut  
 - impossibile: trovare un taglio più piccolo del minimo
-RIDUZIONE ERRORE  
+*RIDUZIONE ERRORE*  
 Ripetendo l’algoritmo molte volte:  
 - probabilità di successo aumenta  
 - dopo $O(n² log n)$ iterazioni → alta probabilità di successo
