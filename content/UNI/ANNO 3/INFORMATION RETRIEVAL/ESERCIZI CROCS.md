@@ -65,3 +65,24 @@
 ## LEZIONE 3 ESERCIZI
 ![[Pasted image 20260321101333.png|400]]
 slide 27
+
+>[!info]- soluzione
+- esercizio 1
+Per $k=4$, i $400\,000$ termini vengono divisi in:
+- sapendo che contiene 400k termini
+$400\,000/4 = 100\,000 \text{ blocchi}$ ogni 4 parole
+Lo spazio totale si calcola sommando:
+- **term string**: $400\,000 \times 8 = 3.2 \ MB$
+- **document frequency**: $400\,000 \times 4 = 1.6 \ MB$
+- **posting pointer**: $400\,000 \times 4 = 1.6 \ MB$
+- **block pointer**: $100\,000 \times 3 = 0.3 \ MB$
+- **term length**: $400\,000 \times 1 = 0.4 \ MB$
+	- li sommo e ottengo 3,2+1,6+0,3+0,4
+la formula
+$400,000⋅(8+4+4+1)+400,000​/k⋅3$
+
+- esercizio 2
+la formula è $T_k​≈log_2​(\frac{M}{k}​)+\frac{k+1}{2}​$
+- M= numero termini
+- k= numero di blocchi
+- $\frac{k+1}{2}$ numero di confronti
