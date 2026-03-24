@@ -154,13 +154,25 @@ bit per puntatore≈$log_2​(total \ string \ length)$
 - ogni puntatore ≈ **3 byte**(prendendo una stringa lunga tipo 3,2 mil)
 - per 4 parole →
     $3 \times 4 = 12 \text{ byte}$
+
+Per ogni termine si memorizzano 4 cose:
+- **4 byte** per la frequenza
+- **4 byte** per il puntatore alla postings list
+- **3 byte** per il puntatore al termine nella stringa
+- **8 byte** in media per il termine stesso nella stringa
+Totale per termine:
+$4 + 4 + 3 + 8 = 19 \text{ byte}$
+Numero di termini:
+$400,000$
+Quindi:
+$400{,}000 \times 19 = 7{,}600{,}000 \text{ byte} \approx 7.6 \text{ MB}$
 ##### Con blocking (k = 4):
 - hai:
     - **1 puntatore per blocco** → 3 byte
     - **+ 4 byte per le lunghezze delle parole** (1 byte ciascuna)
 👉 totale:
 $3 + 4 = 7 \text{ byte}$
-👉 risparmi: $12 - 7 = 5 \text{ byte ogni 4 parole}$
+👉 risparmi: $12 - 7 = 5 \text{ byte ogni 4 termini}$
 ##### IN TERMINI DI TEMPO
 - per la ricerca viene fatto un calcolo di probabilità del valore atteso
 	- assumendo che siano tutte ugualmente probabili
