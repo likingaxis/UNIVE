@@ -102,6 +102,10 @@ la cui rimozione disconnette il grafo.
 Contraggo archi casualmente fino a ottenere solo 2 nodi.  
 Se durante il processo NON contraggo archi del min-cut,  
 allora il taglio finale sarà proprio il min-cut.
+👉 NON lo capisci in una singola esecuzione
+👉 lo capisci così:
+- ripeti l’algoritmo tante volte
+- tieni il **taglio più piccolo trovato**
 *PARAMETRI*  
 - $n$ = numero di nodi  
 - scelta casuale di archi  
@@ -111,8 +115,9 @@ Prendi un arco $(u,v)$ e:
 1. **unisci i due nodi u e v in un unico nodo**
 2. tutti gli archi che prima andavano a u o v ora vanno al nuovo nodo
 3. **elimini i self-loop** (archi che collegano il nodo a sé stesso)
+
 *ALGORITMO*  
-4. Finché ci sono più di 2 nodi:  
+1. Finché ci sono più di 2 nodi:  
    - scegli un arco (u, v) a caso  
    - contrai u e v in un unico nodo  
    - rimuovi eventuali self-loop  
