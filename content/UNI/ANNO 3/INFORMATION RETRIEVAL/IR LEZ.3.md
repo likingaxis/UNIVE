@@ -259,3 +259,21 @@ $$(1 + 2×2 + 2×3 + 2×4 + 5)/8 = 3$$
 	- Il gamma code è teoricamente molto elegante e comprime bene.
 	- Però lavora a livello di **bit**, quindi in pratica è più lento da manipolare, perché le macchine lavorano meglio con byte e parole di memoria.
 	- Per questo, nei sistemi reali si preferiscono spesso codifiche come **Variable Byte**, che sono più semplici e più veloci, anche se comprimono un po’ meno.
+##### VARIABLE BYTE ENCODING
+- in cosa consiste
+- come funziona
+- più facile da applicare rispetto a Gamma code
+- un bit viene dedicato alla continuation
+- domanda di esonero su rappresentazione sparsa e densa
+###### TABELLA SULLA RCV1 COMPRESSION
+- cambiamenti in numeri a partire dall'xml
+	- con altre implementazioni 
+	- l'ultima non è utilizzabile
+slide 44
+##### SIMPLE9 ENCODING
+- non è una codifica in cui lavori 1 byte alla volta
+- ottimizza variable byte encoding
+- IMPEGNATI A CAPIRE LE COSE AL LIVELLO DI BYTE
+
+
+Gamma code è sempre una tecnica di encoding?
