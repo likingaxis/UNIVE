@@ -229,14 +229,19 @@ $$(1 + 2×2 + 2×3 + 2×4 + 5)/8 = 3$$
     - pochi bit per i numeri piccoli
     - più bit per i numeri grandi
 - Idealmente, se un gap vale $G$, ci piacerebbe usare circa $\log_2 G$ bit, cioè un numero di bit proporzionale alla grandezza del valore da rappresentare.
-### CODIFICA UNARIA
+- vedremo
+	- *codifica unaria*
+	- *gamma code*
+	- *variable byte encoding*
+	- *simple9*
+##### CODIFICA UNARIA
 - La codifica unaria rappresenta il numero $n$ come:
     - $n$ uni seguiti da uno zero
 - Esempio:
     - $3$ → `1110`
 - Da sola non è molto efficiente, ma è utile come componente di altre codifiche.
 - In particolare, è ottimale solo per una distribuzione molto specifica, circa $P(n)=2^{-n}$
-### GAMMA CODE
+##### GAMMA CODE
 - Il **gamma code** codifica un numero $G$ dividendolo in due parti:
     - **offset**
     - **length**
@@ -260,20 +265,42 @@ $$(1 + 2×2 + 2×3 + 2×4 + 5)/8 = 3$$
 	- Però lavora a livello di **bit**, quindi in pratica è più lento da manipolare, perché le macchine lavorano meglio con byte e parole di memoria.
 	- Per questo, nei sistemi reali si preferiscono spesso codifiche come **Variable Byte**, che sono più semplici e più veloci, anche se comprimono un po’ meno.
 ##### VARIABLE BYTE ENCODING
-- in cosa consiste
-- come funziona
-- più facile da applicare rispetto a Gamma code
-- un bit viene dedicato alla continuation
-- domanda di esonero su rappresentazione sparsa e densa
+- Il **Variable Byte Encoding (VB)** è una tecnica di compressione usata per rappresentare numeri interi (tipicamente i **gap delle postings lists**) usando un numero variabile di byte.
+- È una tecnica **più pratica e veloce** rispetto al **Gamma code**, perché lavora a livello di **byte** (e non di bit), quindi è più efficiente sulle macchine reali.
+-  IN COSA CONSISTE
+- L’idea è:
+    - rappresentare un numero usando **uno o più byte**
+    - usare **l’ultimo bit di ogni byte** come **continuation bit**
+        - indica se ci sono altri byte dopo
+-  COME FUNZIONA
+- Ogni byte è formato da:
+    - **7 bit per il valore**
+    - **1 bit di continuation (MSB)**:
+        - `1` → questo è l’ultimo byte del numero
+        - `0` → ci sono altri byte dopo
+👉 Procedura:
+1. si prende il numero da codificare
+2. lo si scrive in binario
+3. lo si divide in gruppi da **7 bit** (partendo da destra)
+4. ogni gruppo diventa un byte:
+    - si aggiunge il bit di continuation davanti
+![[Pasted image 20260325100233.png]]
+
 ###### TABELLA SULLA RCV1 COMPRESSION
-- cambiamenti in numeri a partire dall'xml
-	- con altre implementazioni 
-	- l'ultima non è utilizzabile
-slide 44
+![[Pasted image 20260325100521.png]]
+- la collezione viene inizialmente presa come file xml(davvero pesante)
+- poi viene ripulita come text
+- viene fatta la matrice di incidenza dei termini e documenti
+- è irrealizzabile usare il gamma encoding quindi ci fermiamo all'uso del variable byte encoding
 ##### SIMPLE9 ENCODING
-- non è una codifica in cui lavori 1 byte alla volta
-- ottimizza variable byte encoding
-- IMPEGNATI A CAPIRE LE COSE AL LIVELLO DI BYTE
-
-
-Gamma code è sempre una tecnica di encoding?
+- Il **Simple9 encoding** è una tecnica di compressione delle postings più avanzata rispetto al Variable Byte.
+- NON lavora su un numero alla volta (come VB), ma su **più numeri insieme**.
+Si lavora su blocchi da **32 bit (4 byte)**:
+- i primi **4 bit (selector)** dicono:
+	- quanti numeri sto salvando
+	- quanti bit uso per ciascuno
+- **28 bit rimanenti** → contengono i numeri (i gap)
+però è:
+- più complesso da implementare
+- richiede scegliere il formato giusto per ogni blocco
+![[Pasted image 20260325101708.png|400]]
