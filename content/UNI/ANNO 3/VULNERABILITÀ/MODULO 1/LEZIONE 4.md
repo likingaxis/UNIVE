@@ -1,0 +1,72 @@
+nella scorsa lezione abbiamo visto che per fare privilege escalation ci sono 3 modalità o operazioni
+ora vedremo
+#### FINDING ATTACK VECTORS
+- in cosa consiste
+- cosa differisce da enumeration
+##### COSA SONO I KERNEL EXPLOIT
+- sono programmi che attaccano alcune versioni del kernel
+- ci sono tool come `searchsploit`
+	- per cercare exploit già presenti in un certo database
+###### dirty cow
+- permette di sostituire l'utente root come un'altro a cui posso fare accesso
+- è instabile, presenta log e crashing
+###### cosa provare se abbiamo dei ruoli in più stranamente
+- aggiungere un fake root account a `/etc/passwd`
+	- `mkpasswd -1 1234`
+		- mi permette di creare la password hashata
+	- `echo "hacker:password:0:0:root/root:/bin/bash" >> /etc/passwd`
+- modificare il file `/etc/sudoers`
+	- `echo "eve ALL=(ALL) NOPASSWD:ALL">> /etc/sudoers`
+		- l'utente eve ora può 
+		- usare sudo da ogni terminale
+		- può eseguire tutto
+		- non è richiesta la pass
+		- può eseguire ogni singolo comando o binario
+- creare una copia di bash con SUID
+	- cosa era il SUID?
+		- Quando un file eseguibile ha il bit SUID:  
+			- 👉 viene eseguito con i **permessi del proprietario del file**, non di chi lo esegue.
+	- `cp /bin/bash ~/myBash`
+	- `chmod 4777 ~/bin/bash`
+	- poi quando eseguo `~/myBash -p`
+		- uso `-p` per preservare il SUID
+###### se non possiamo essere root  direttamente possiamo provare a fare
+- password cracking scaricando in locale  `/etc/shadow` e `/etc/passwd`
+	- fare le classiche cose con john
+- Path Hijacking
+	- se uno script con dei privilegi chiama un servizio attraverso un path
+	- possiamo mettere un custom path con un ranking elevato
+	- `/home/vickie/bin`
+	- slide 17 spiega meglio
+- Wildcard tricks
+	- eseguo `sudo -l`
+		- lista dei path che può eseguire come sudo 
+		- senza pass ma anche con
+		- posso accedere al mio punto di memoria ma poi tornare indietro con `../../` ecc...
+			- `/usr/bin/cat /opt/scripts/../../../../../etc/shadow`
+	- ingannare 7zip per fargli interpretare male i nomi dei file
+		- slide 21
+			- creo un file `@tosteal` con touch, dentro ci scrivo una stringa con `echo "/etc/passwd" > tosteal`
+			- `7za a backup.7z -t7z -snl *`
+				- creando il backup interpreta il file `@tosteal` come una riga da eseguire, quindi fa il backup di `shadow`
+				- la @ viene usata per definire una lista di file da eseguire
+	- Bash script wildcard and input vulnerabilities
+		- posso usare negli script ad esempio `*`
+		- per far dare corrispondenza di password, in questo caso `db pass` è uguale a `user pass`
+- python exploitation
+	- ci sono diverse exploitation in python
+		- python2 problema con input che ci permette di eseguire comandi più elevati di root
+			- vedi un po a casa slide 25
+		- quando python fa import module
+			- modifica dei path di python per fare *module override*
+				- esempio a slide 29
+		- con python3 posso fare script replacement
+- cronjobs
+	- script cronjob scrivibile
+		- in questo caso posso fare molteplici cose
+- insecure binary permissions
+	- 38
+- exploiting Capabilities
+	- 39-40-41
+- GTFOBins
+	- privilege exploitation
