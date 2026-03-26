@@ -93,7 +93,7 @@ h1 {
         - es:
 	        `h2 ~ p`    
 	        → tutti i `p` dopo un `h2` (non solo il primo)
-##### PECIFICITÀ DI UN SELETTORE (DA ESAME)
+##### SPECIFICITÀ DI UN SELETTORE (DA ESAME)
 - è la **forza** con cui un selettore compete con altri
 - serve per capire quale regola viene applicata in caso di conflitto
 - come va calcolata la specificità:
@@ -109,7 +109,14 @@ h1 {
         - elementi
         - pseudoelementi
 - il confronto avviene da sx a dx `inline > id > classe > elemento`
-- esempio: 
+- esempio con un selettore CSS lungo: 
+- ```css
+  html body div#pagewrap ul#summer-drinks li.favorite
+  ```
+  ID: `#pagewrap`, `#summer-drinks` → **2**
+- Classi: `.favorite` → **1**
+- Tag: `html`, `body`, `div`, `ul`, `li` → **5**
+- quindi sarà `(2,1,5)`
 ##### PSEUDOCLASSI
 - uso `:`
 - sono pseudoclassi
@@ -187,3 +194,115 @@ color: red !important;
 ```
 - viene applicata sopra le altre regole
 - da evitare (usare solo in casi particolari)
+##### I FONT
+- si dividono in
+    - *font specifici*
+        - hanno un nome preciso (es. Arial, Times New Roman)
+        - funzionano solo se presenti nel sistema
+    - *font generici*
+        - famiglie generiche (serif, sans-serif, monospace)
+        - usati come fallback
+- si raggruppano spesso **in famiglie**
+    - es: `serif, sans-serif, monospace, cursive, fantasy`
+    - monospace → caratteri con stessa larghezza
+- i font **dipendono** dal **sistema**
+    - funzionano solo se installati sul dispositivo
+    - browser e OS diversi → font diversi
+si usa una sequenza (font stack)
+- il browser prova in ordine
+- alla fine dei font è sempre presente una famiglia generica
+- esempio
+```css
+    body {  
+    	font-family: Arial, Helvetica, sans-serif;  
+    }
+```
+- importare i font
+    - locali → nel progetto
+    - esterni → es Google Fonts
+    - con `@font-face`
+    - formato tipico `.woff`
+    - poi usato con `font-family`
+```css
+      @font-face {  
+            font-family:'Roboto';  
+            src:url('Roboto-Light-webfont.woff') format('woff');    
+        }
+```
+- `font size:`
+    - specifica dimensione testo
+    - *relative*
+        - `%` → rispetto al valore ereditato
+        - `em` → multiplo del font corrente
+        - più flessibili
+    - *assolute*
+        - `px` → valore fisso
+- `font-weight` e `font-style`
+    - *weight* → spessore (bold, normal)
+    - *style* → corsivo o normale
+- `font:`
+    - shorthand → tutte le proprietà in una riga
+    - ordine: style weight size/line-height family
+    - esempio
+        
+```css
+        p {  
+        	font: italic bold 16px/1.5 Arial, sans-serif;  
+        }
+```
+- i colori
+    - `color` → colore testo (ereditato)
+    - formati
+        - nome
+            - `color: red;`
+        - esadecimale
+            - `color: #336699;`
+        - *rgb()*
+            - `color: rgb(51, 102, 153);`
+        - *rgba()* (con opacità)
+            - `color: rgba(51, 102, 153, 0.5);`
+- `text align:`
+    - allineamento orizzontale
+    - valori: left / right / center / justify
+    - esempio
+        ```css
+        p {  
+        	text-align: center;  
+        }
+        ```
+- `text decoration:`
+    - decorazioni testo
+    - valori: none / underline / overline / line-through
+    - esempio
+        ```css
+        a {  
+        	text-decoration: none;  
+        }
+        ```
+- `text transform:`
+    - cambia maiuscole/minuscole
+    - valori: uppercase / lowercase / capitalize
+    - esempio
+        ```css
+        h1 {  
+        	text-transform: uppercase;  
+        }
+        ```
+- `text indent:`
+    - indentazione primo rigo
+    - valori: `px / em / %`
+    - esempio
+        ```css
+        p {  
+        	text-indent: 2em;  
+        }
+        ```
+- `text shadow:`
+    - ombra testo
+    - parametri: offset-x offset-y blur colore
+    - esempio
+        ```css
+        h1 {  
+        	text-shadow: 2px 2px 5px gray;  
+        }
+        ```
