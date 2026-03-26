@@ -109,6 +109,7 @@ h1 {
         - elementi
         - pseudoelementi
 - il confronto avviene da sx a dx `inline > id > classe > elemento`
+- esempio: 
 ##### PSEUDOCLASSI
 - uso `:`
 - sono pseudoclassi
