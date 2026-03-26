@@ -277,7 +277,7 @@ $$(1 + 2×2 + 2×3 + 2×4 + 5)/8 = 3$$
     - **7 bit per il valore**
     - **1 bit di continuation (MSB)**:
         - `1` → questo è l’ultimo byte del numero
-        - `0` → ci sono altri byte dopo
+        - `0` → ci sono altri byte dopo che rappresentano quel numero
 👉 Procedura:
 1. si prende il numero da codificare
 2. lo si scrive in binario
