@@ -171,13 +171,54 @@ si usa per trovare parole del dizionario **vicine** alla parola sbagliata
 
 ![[Pasted image 20260325114032.png]]
 
-###### Concetto di smoothing
+###### Concetto di smoothing di laplace
 - problema:
     - usando la confusion matrix
     - alcune probabilità possono essere **0**
 	- e questo **azzera tutto il prodotto**
 $$P(x∣w)⋅P(w)=0$$
-- aggiungo una piccola quantità a tutte le probabilità(tipo 1)
+- aggiungo una piccola quantità a tutte le probabilità(tipo 1) 
 - 👉 così:  nessun evento ha probabilità 0
 
-
+appunti da qui sotto
+##### Noisy channel in base al contesto per spell correction
+- sapere che il 25-40% delle spelling error sono real world
+	- spiegazione di cosa significa
+- il modello qui usa più sentence
+	- da mettere nel calcolo probabilistico
+		- formula a slide 48, dentro w ci sono le frasi candidate
+- w1 a slide 49 è la prima parola della frase o la prima parola di un errore?
+- le uniche cose che posso fare visto che il campione è ridotto, posso vedere solo data una parola la parola successiva e basta
+	- sono modelli markoviani
+		- slide 50, formula probabilistica, dice che aggiunge dello smoothing per le parole mai uscite, forse aggiungiamo come smoothing quante volte appare la parola singolarmente UNI
+			- uso lambda come valore per dare un peso alle probabilità
+				- della parola singola o della parola nel bi gramma
+				- quanto vale lambda?
+					- lo definisco costruendo un benchmark provando i vari valori di lambda, ottenendo una stima 
+		- per non far esplodere tutto con la produttoria(tra le probabilità fatte per confrontarle)
+		- uso il logaritmo per alleggerire le stime
+- esempio
+	- scritto a slide 52
+		- dentro ci sarebbe stato across
+		- invece qui viene messo actress
+###### Hidden markov model
+- markov nasce per tradurre sequenze
+- composto da
+	- osservazioni cosa vedo
+	- hidden cosa devo indovinare
+	- tutta la struttura viene chiamata trennis?
+- slide 54, cosa vediamo
+- ho la probabilità di osservazione e transizione
+- se le vedo tutte affitto domani
+- da qui viene l'algoritmo di viterbi
+	- scrivi decentemente cosa è
+	- non verrà usato, potrebbe suggerire troppo?
+- andiamo invece a semplificare, con one/two error per sentence
+- rischio: la probabilità potrebbe cambiare tutto
+	- magari l'utente usa parole rare
+	- cerchiamo di correggere artificialmente che quella parola sia effettivamente quella
+- slide 59, peter norvig, le probabilità di tutti i cambiamenti
+	- ma se non abbiamo dei cambiamenti?
+	- prendiamo per assodato che la probabilità che la parola scritta sia corretta alta
+	- poi il tutto si scontra con le successive?
+- qui a slide 60 usiamo Beta per cercare di non dare troppa probabilità alla frequenza
