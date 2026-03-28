@@ -130,11 +130,18 @@ Costo:
 - totale ≈ O(n²) (implementazione base)
 
 *ANALISI PROBABILISTICA*  
-Sia $k =$ dimensione del min-cut  
-Ad ogni passo:  
-- probabilità di NON scegliere un arco del $min-cut ≥ 1 - (k / numero archi)$   
-Moltiplicando su tutti i passi:  
-⇒ $Pr[trovare min-cut] ≥ 2 / (n(n - 1))$
+Fisso un min-cut C di taglia k.
+Se l’algoritmo non contrae mai archi di C, allora restituisce C.
+Poiché C è un min-cut, ogni vertice ha grado almeno k.
+Quindi, con t nodi rimasti, ci sono almeno $kt/2$ archi.
+
+Quando restano t nodi, la probabilità di evitare C in quel passo è almeno:
+$1 - k/(kt/2) = 1 - 2/t.$
+
+Moltiplicando per t = n, n-1, ..., 3:
+Pr(successo) ≥ (1-2/n)(1-2/(n-1))...(1-2/3)
+= (n-2)/n · (n-3)/(n-1) · ... · 1/3
+= 2 / (n(n-1)).
 *TIPO DI ERRORE*  
 - possibile: non trovare il min-cut  
 - impossibile: trovare un taglio più piccolo del minimo
