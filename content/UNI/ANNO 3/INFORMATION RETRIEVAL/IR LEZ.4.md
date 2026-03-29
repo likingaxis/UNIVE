@@ -201,40 +201,113 @@ $$P(x∣w)⋅P(w)=0$$
 	- questa formula di per se è corretta ma è davvero difficile stimare se tutta la frase è più o meno corretta rispetto a tutte le combinazioni possibili $P(W)$ 
 - di conseguenza per calcolare $P(W)$ si usa:
 ##### Bigram model
-- per calcolare P(W) quanto ogni parola è coerente con la precedente e non l'intera frase tutta insieme
+- per calcolare $P(W)$ quanto ogni parola è coerente con la precedente e non l'intera frase tutta insieme
 	- vado a vedere la probabilità della parola $w_i$ in base alla parola precedente $w_{i-1}$ 
 	- questo tipo di modello si chiama modello markoviano, i modelli markoviani in generale si basano su anche più parole precedenti ma i bigram si fermano a solo 1
 	- $P(w_1…w_n) = P(w_1)P(w_2|w_1)…P(w_n|w_{n−1})$
-	- sono modelli markoviani
-		- slide 50, formula probabilistica, dice che aggiunge dello smoothing per le parole mai uscite, forse aggiungiamo come smoothing quante volte appare la parola singolarmente UNI
-			- uso lambda come valore per dare un peso alle probabilità
-				- della parola singola o della parola nel bi gramma
-				- quanto vale lambda?
-					- lo definisco costruendo un benchmark provando i vari valori di lambda, ottenendo una stima 
-		- per non far esplodere tutto con la produttoria (tra le probabilità fatte per confrontarle)
-		- uso il logaritmo per alleggerire le stime
+###### Problema di smoothing
+- alcuni bigram possono comparire **0 volte**
+    - questo porta ad azzerare tutta la probabilità della sequenza  
+        → nella produttoria (quella del bigram sopra) basta uno zero per annullare tutto
+- si introduce quindi **smoothing** direttamente nella formula di $P(W)$ 
+    - soluzione (interpolazione tra bigram e unigram):
+    - $P(w_i \mid w_{i-1}) = \lambda \, P_{bigram}(w_i \mid w_{i-1}) + (1 - \lambda)\, P_{unigram}(w_i)$
+    - con 
+	    - $P_{bi}(w_k|w_{k−1}) = C(w_{k−1}, w_k) / C(w_{k−1})$
+		    - conta quante volte $w_k$ segue $w_{k-1}$
+	- e invece $P_{uni}=C(w_i)/C(W)$
+- idea:
+    - se il bigram non è mai visto → uso l’unigram
+    - se invece è affidabile → do più peso al bigram
+		- se $\lambda = 1$
+		    → uso solo bigram
+		- se $\lambda = 0$
+		    → uso solo unigram
+		- se $\lambda = 0.7$
+		    → 70% bigram, 30% unigram
+- $λ$ (lambda) è un parametro che:
+    - bilancia **contesto (bigram)** e **frequenza globale (unigram)**
+		- valore:
+		    - lo definisco costruendo un benchmark provando i vari valori di lambda e scegliendo quelli che portano a un risultato migliore 
+###### RIDURRE UNDERFLOW CON IL LOGARITMO
+- la formula per trovare $P(W)$
+	- così com'è rischia di causare underflow ovvero, sottostima dei valori
+	- al posto di moltiplicare le varie probabilità delle successioni delle varie parole
+	- si va a fare la somma con il logaritmo per avere valori più facili da confrontare
+	- $log P(w_1…w_n) = log \ P(w_1) + log \ P(w_2|w_1) + … + log \ P(w_n|w_{n−1})$
+	- quindi per tutta la formula del noisy channel avrò
+	- $\hat{W}=argmax[log \ P(X∣W)+log \ P(W)]$
 - esempio
-	- scritto a slide 52
-		- dentro ci sarebbe stato across
-		- invece qui viene messo actress
-###### Hidden markov model
-- markov nasce per tradurre sequenze
-- composto da
-	- osservazioni cosa vedo
-	- hidden cosa devo indovinare
-	- tutta la struttura viene chiamata trennis?
-- slide 54, cosa vediamo
-- ho la probabilità di osservazione e transizione
-- se le vedo tutte affitto domani
-- da qui viene l'algoritmo di viterbi
-	- scrivi decentemente cosa è
-	- non verrà usato, potrebbe suggerire troppo?
-- andiamo invece a semplificare, con one/two error per sentence
-- rischio: la probabilità potrebbe cambiare tutto
-	- magari l'utente usa parole rare
-	- cerchiamo di correggere artificialmente che quella parola sia effettivamente quella
-- slide 59, peter norvig, le probabilità di tutti i cambiamenti
-	- ma se non abbiamo dei cambiamenti?
-	- prendiamo per assodato che la probabilità che la parola scritta sia corretta alta
-	- poi il tutto si scontra con le successive?
-- qui a slide 60 usiamo Beta per cercare di non dare troppa probabilità alla frequenza
+![[Pasted image 20260329174344.png]]
+il modello sceglie:
+- **actress** perché “suona giusto nella frase” ed ha più alta probabilità
+### Hidden Markov Model (HMM)
+- nasce per modellare *sequenze* di stati nel tempo / sequenze simboliche
+- idea:
+    - ho due livelli:
+        - **osservazioni (X)** → ciò che vedo (query sbagliata)
+        - **stati nascosti (W)** → ciò che voglio indovinare (frase corretta)
+- struttura:
+    - **transizioni**
+        - $P(w_i \mid w_{i-1})$
+        - → successioni di parole
+    - **emissioni**
+        - $P(x_i \mid w_i)$
+        - → le parole possibili da scegliere
+- questa struttura si chiama **trellis 
+    - un grafo a livelli dove:
+        - ogni livello = posizione nella frase
+        - ogni nodo = possibile parola candidata
+![[Pasted image 20260329174642.png]]
+- se avessi tutte queste probabilità (transizioni + emissioni)  
+    → potrei costruire tutta la struttura e risolvere esattamente il problema  
+    → (se le vedo tutte capisco tutto)
+- da qui nasce l’**algoritmo di Viterbi**
+    - serve per:
+        - trovare la sequenza $W$ più probabile
+    - idea:
+        - invece di provare tutte le combinazioni (esponenziale)
+        - uso **programmazione dinamica**
+        - tengo solo i percorsi migliori passo passo
+    - in pratica:
+        - trova il **cammino migliore nel trellis**
+- nota:
+    - è il metodo corretto “teoricamente”
+    - ma qui **non viene usato davvero**
+        - sarebbe troppo pesante / overkill per IR
+- quindi si fa una **semplificazione pratica**
+    - assumo:
+        - **1 errore per frase** *One error per sentence*
+    - invece di esplorare tutto:
+        - genero alcune frasi candidate
+        - confronto le probabilità
+        - scelgo la migliore
+- **rischio: la probabilità può “falsare tutto”**
+    - il modello tende a favorire parole molto frequenti
+    - anche se nel contesto sono sbagliate
+    - esempio:
+        - parola rara ma corretta → penalizzata
+        - parola comune ma sbagliata → favorita
+    - quindi si rischia di 
+		- correggere **quando non serve**
+		- o correggere **male**
+###### Peter Norvig, le probabilità di tutti i cambiamenti
+- introduco:
+	- $P(w \mid w)$
+- probabilità che la parola sia già corretta  
+- idea:
+    - assumo che:
+        - l’utente **di solito scrive giusto**
+    - quindi:
+        - $P(w \mid w)$ è **alto** (es. 0.9–0.99)
+- problema:
+    - questa probabilità compete con le altre
+    - se troppo alta:  
+        → non correggo mai
+    - se troppo bassa:  
+        → correggo troppo
+- **introduco un peso (β)**
+$\arg\max P(X \mid W)\cdot P(W)^\beta$
+- serve per:
+    - ridurre l’effetto della frequenza $P(W)$
+    - evitare che parole comuni dominino sempre
