@@ -180,22 +180,38 @@ $$P(x∣w)⋅P(w)=0$$
 - aggiungo una piccola quantità a tutte le probabilità(tipo 1) 
 - 👉 così:  nessun evento ha probabilità 0
 
-appunti da qui sotto
+#### CONTEXT-SENSITIVE SPELL CORRECTION
+- contesto
+	- per real world errors è necessario un contesto
+	- es: _form → from_
+	- entrambe le parole sono corrette ma è possibile definire quale delle due è giusta solo in base al contesto
 ##### Noisy channel in base al contesto per spell correction
-- sapere che il 25-40% delle spelling error sono real world
-	- spiegazione di cosa significa
-- il modello qui usa più sentence
-	- da mettere nel calcolo probabilistico
-		- formula a slide 48, dentro w ci sono le frasi candidate
-- w1 a slide 49 è la prima parola della frase o la prima parola di un errore?
-- le uniche cose che posso fare visto che il campione è ridotto, posso vedere solo data una parola la parola successiva e basta
+- il modello precedente si basava solo ed esclusivamente su una parola alla volta senza poter vedere tutta la frase
+- ora (modello con contesto):
+    - considero **intere frasi**
+    - il modello usa **sequenze di parole**
+		- quindi:
+			- W = *frase* candidata  
+			- X = *frase* osservata
+- data la frase X osservata composta da $x_1, x_2, x_3, ..., x_n$
+	- ogni parola $x_i$ genera un insieme di parole candidate $w_i$ che potrebbero essere corrette
+	- $Candidate(x_i) = { x_i, w_i, w_i', w_i'', ... }$
+- *FORMULA IDEATA*
+	- $\hat{W}=argmaxP(W∣X)=argmaxP(X∣W)⋅P(W)$
+	- questa formula di per se è corretta ma è davvero difficile stimare se tutta la frase è più o meno corretta rispetto a tutte le combinazioni possibili $P(W)$ 
+- di conseguenza per calcolare $P(W)$ si usa:
+##### Bigram model
+- per calcolare P(W) quanto ogni parola è coerente con la precedente e non l'intera frase tutta insieme
+	- vado a vedere la probabilità della parola $w_i$ in base alla parola precedente $w_{i-1}$ 
+	- questo tipo di modello si chiama modello markoviano, i modelli markoviani in generale si basano su anche più parole precedenti ma i bigram si fermano a solo 1
+	- $P(w_1…w_n) = P(w_1)P(w_2|w_1)…P(w_n|w_{n−1})$
 	- sono modelli markoviani
 		- slide 50, formula probabilistica, dice che aggiunge dello smoothing per le parole mai uscite, forse aggiungiamo come smoothing quante volte appare la parola singolarmente UNI
 			- uso lambda come valore per dare un peso alle probabilità
 				- della parola singola o della parola nel bi gramma
 				- quanto vale lambda?
 					- lo definisco costruendo un benchmark provando i vari valori di lambda, ottenendo una stima 
-		- per non far esplodere tutto con la produttoria(tra le probabilità fatte per confrontarle)
+		- per non far esplodere tutto con la produttoria (tra le probabilità fatte per confrontarle)
 		- uso il logaritmo per alleggerire le stime
 - esempio
 	- scritto a slide 52
