@@ -2,9 +2,9 @@
 
 
 ## Settimana 1
-- [ ] Probabilità base, algoritmo polinomio, Bayes, algoritmo matrice, Min-Cut
+- [x] Probabilità base, algoritmo polinomio, Bayes, algoritmo matrice, Min-Cut
 ## Settimana 2
-- [ ] Random variables, valore atteso, binomiale, geometrica, QuickSort
+- [x] Random variables, valore atteso, binomiale, geometrica, QuickSort
 ## Settimana 3
 - [ ] Markov, Chebyshev, weak law, Coupon Collector, union bound
 ## Settimana 4
