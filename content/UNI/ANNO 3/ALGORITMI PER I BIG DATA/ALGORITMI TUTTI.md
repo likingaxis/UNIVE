@@ -151,8 +151,104 @@ Ripetendo l’algoritmo molte volte:
 - dopo $O(n² log n)$ iterazioni → alta probabilità di successo
 ### CH02
 ### Random quick sort
- 20
- - confronto con deterministic quick sort
+ _PROBLEMA_
+Dato un array $A$ di $n$ elementi, voglio ordinarlo in ordine crescente
+
+_IDEA CHIAVE_
+- Uso lo schema divide-et-impera di Quicksort:  
+	- scelgo un pivot e partiziono l’array
+- La differenza: il pivot è scelto **uniformemente a caso**.
+👉 Questo evita input “avversari” che causano partizioni sempre sbilanciate.
+- L’analisi non si basa su casi specifici, ma su una **media sulle scelte random**.
+👉 idea tecnica (fondamentale):  
+analizzo il numero di confronti tra coppie di elementi.
+ _PARAMETRI_
+- $n$ = numero di elementi
+- scelta casuale del pivot uniforme
+- tutte le scelte sono indipendenti
+- costo misurato in numero di confronti
+ _ALGORITMO_
+1. Se $n ≤ 1$ → ritorna array
+2. Scegli un pivot $x$ uniformemente a caso
+3. Partiziona $A$ in:
+    - $L = \{ elementi < x \}$
+    - $E = \{ elementi = x \}$
+    - $G = \{ elementi > x \}$
+4. Ricorsivamente:
+    - ordina $L$
+    - ordina $G$
+5. Restituisci: $L + E + G$
+ _ANALISI_
+Costo dipende da come si dividono i sotto-problemi:
+- caso peggiore:
+$T(n) = T(n-1) + O(n) \Rightarrow O(n^2)$
+- caso atteso:
+$E[T(n)] = O(n \log n)$
+_ANALISI PROBABILISTICA_ ⭐
+Ordiniamo gli elementi:
+$x_1 < x_2 < \dots < x_n$
+Definiamo per capire qual è la probabilità che $x_i$​ e $x_j$ vengano confrontati? :
+$$X_{i,j} = \begin{cases} 1 & \text{se } x_i \text{ e } x_j \text{ vengono confrontati} \\ 0 & \text{altrimenti} \end{cases}$$
+Allora:
+$$T(n) = \sum_{i < j} X_{i,j}$$
+Per linearità dell’aspettativa:
+$$E[T(n)] = \sum_{i < j} E[X_{i,j}]$$
+Ora il punto chiave:
+Due elementi $x_i, x_j$​ vengono confrontati **solo se** uno dei due viene scelto come pivot **prima** di qualsiasi elemento tra loro.
+- e quindi appartengono ancora entrambi allo stesso sotto-problema che va da $i$ a $j$
+	- $x_i​,x_{i+1}​,…,x_j​$
+Quindi:
+$$Pr(X_{i,j} = 1) = \frac{2}{j - i + 1}$$
+ogni elemento ha probabilità $\frac{1}{j-i+1}$ ma visto che ne vogliamo che i e j vengano confrontanti tra loro o 2 scelte, o scelgo $x_i$ come pivot o scelgo $x_j$ e quindi diventa 2/...
+Sommiamo per vedere il numero di confronti totali:
+$$E[T(n)] = \sum_{i<j} \frac{2}{j-i+1}$$
+- risolviamo la seguente sommatoria effettuando un cambio di variabile per $k=j-i$
+- invece di sommare su $(i,j)$, sommiamo:
+	- prima su $k$
+	- poi su tutti gli $i$ possibili
+$$E[T(n)] = \sum_{k=1}^{n-1} \sum_{i=1}^{n-k} \frac{2}{k+1}$$
+- $\frac{2}{k+1}$ non dipende da i quindi possiamo portarlo fuori
+$$E[T(n)] = \sum_{k=1}^{n-1} (n-k)\frac{2}{k+1}$$
+
+Separiamo:
+$$E[T(n)] \leq 2n \sum_{k=1}^{n-1} \frac{1}{k+1}$$
+(perché $n-k ≤ n$)
+
+Questa è la serie armonica
+
+ $H_n= \sum_{h=1}^{n} \frac{1}{h}$
+ 
+👉 quindi:
+
+$\sum_{h=2}^{n} \frac{1}{h} = H_{n - 1}$
+
+$\sum_{k=1}^{n-1} \frac{1}{k+1} = H_n = O(\log n)$
+Questo porta a:
+$$E[T(n)] = O(n \log n)$$
+
+ _NATURA RANDOMIZZATA_
+La randomizzazione è nella scelta del pivot.
+L’algoritmo non ha errore → la randomizzazione influenza solo il tempo.
+_CORRETTEZZA_
+- L’algoritmo è sempre corretto (come Quicksort)
+- produce sempre un array ordinato
+_TIPO DI ERRORE_
+❌ nessun errore
+
+>[!info]-  esempio
+> `A = [7, 2, 5, 1, 9]`
+>  1. Scelta pivot
+> Deterministico → ad esempio **primo elemento**
+> `pivot = 7`
+> 2. Partizionamento (QUESTA È LA PARTE CHIAVE)
+> Riorganizzo l’array in modo che:
+> `[ elementi < 7 | 7 | elementi > 7 ]`
+> Esempio:
+> `[2, 5, 1, 7, 9]`
+> 👉 Ora il pivot è **nella sua posizione definitiva**
+>  3. Ricorsione
+> Applico lo stesso algoritmo a:
+> `[2,5,1]    e    [9]`
 ### CH03
 #### RANDOMIZED MEDIAN ALGORITHM 
 - 14

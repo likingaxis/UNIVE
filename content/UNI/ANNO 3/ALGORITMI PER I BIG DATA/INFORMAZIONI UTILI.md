@@ -34,26 +34,47 @@ Sia ${E_1, ..., E_n}$ una partizione dello spazio (eventi disgiunti che coprono 
 
 ### CH02
 ##### RANDOM VARIABLE DEFINIZIONE
-- 1
+**Random Variable**  
+Una variabile aleatoria è una funzione che associa a ogni esito dello spazio campionario un numero reale:
+$$X:Ω→R$$
 ##### RANDOM VARIABLE INDIPENDENTI
-- 3
+Due variabili aleatorie 
+$$X, Y$$ sono indipendenti se la probabilità congiunta è il prodotto delle probabilità:
+$$\Pr(X = x \land Y = y) = \Pr(X = x)\cdot \Pr(Y = y)$$
+- La mediana $m$ di una variabile aleatoria $X$ è un valore tale che:
+$$Pr(X<m)≤\frac{1}{2} ​\ e \ Pr(X>m)<\frac{1}{2}​$$
 ##### EXPECTATION
-- 5
-##### proprietà varie sulle random variable
+Il valore atteso di una variabile aleatoria discreta $X$ è la media pesata dei suoi valori:
+$$E[X] = \sum_{i} i \cdot \Pr(X = i)$$
 - linearità
-- mediana
+$$E[X+Y]=E[X]+E[Y]$$
 ##### BERNOULLI RANDOM VARIABLE
-- 16
+**Bernoulli Random Variable**  
+Una variabile aleatoria Bernoulliana assume solo due valori:
+
+$Y = \begin{cases} 1 & \text{se successo} \\ 0 & \text{altrimenti} \end{cases}$
 ##### Binomial Random Variable
-17
-- expectation della binomial random variable 
-	- np
+Una variabile aleatoria binomiale $X \sim B(n,p)$ conta il numero di successi in $n$ prove indipendenti con probabilità $p$:
+$\Pr(X = j) = \binom{n}{j}\  p^j\  (1 - p)^{n-j}$
+
+LA SUA EXPECTATION È
+$$E[X]=np$$
 ##### DISTRIBUZIONE GEOMETRICA
-41
+**Distribuzione Geometrica**  
+Una variabile aleatoria geometrica $X$ (parametro $p$) rappresenta il numero di tentativi fino al primo successo:
+$\Pr(X = n) = (1 - p)^{n-1}\  p$
 - memoryless property
-- 42
+$$Pr(X=n+k∣X>k)=Pr(X=n)$$
 ##### Coupon Collector’s Problem
-46
+**Coupon Collector’s Problem**  
+Dato un insieme di $n$ coupon diversi, sia $X$ il numero di tentativi necessari per ottenerli tutti.  
+Si può scrivere come somma di variabili geometriche:
+$$X = \sum_{i=1}^{n} X_i$$
+dove $X_i$ è il numero di tentativi per ottenere un nuovo coupon quando ne hai già $i-1$.
+**Expectation**
+$$E[X] = n \cdot H_n = n \ln n + \Theta(n)$$
+_(intuizione)_  
+→ all’inizio è facile trovare coupon nuovi, ma gli ultimi sono sempre più rari → cresce come $n \log n$
 ### CH03
 ##### MARKOV INEQUALITY
 - 3
