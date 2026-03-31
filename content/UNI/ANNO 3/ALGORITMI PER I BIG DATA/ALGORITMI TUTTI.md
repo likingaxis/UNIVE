@@ -184,7 +184,7 @@ Costo dipende da come si dividono i sotto-problemi:
 $T(n) = T(n-1) + O(n) \Rightarrow O(n^2)$
 - caso atteso:
 $E[T(n)] = O(n \log n)$
-_ANALISI PROBABILISTICA_ ⭐
+_ANALISI PROBABILISTICA_ 
 Ordiniamo gli elementi:
 $x_1 < x_2 < \dots < x_n$
 Definiamo per capire qual è la probabilità che $x_i$​ e $x_j$ vengano confrontati? :
@@ -251,4 +251,128 @@ _TIPO DI ERRORE_
 > `[2,5,1]    e    [9]`
 ### CH03
 #### RANDOMIZED MEDIAN ALGORITHM 
-- 14
+ *PROBLEMA*
+- Input: insieme $S$ di $n = 2k+1$ elementi distinti totalmente ordinati
+	- (elementi sono **confrontabili**)
+- Output: mediana, cioè il $(k+1)$-esimo elemento in ordine crescente
+- Approcci classici:
+    - sorting: $O(n \log n)$
+    - algoritmo deterministico lineare: esiste ma è complesso
+ *IDEA CHIAVE*
+- Campiono un sottoinsieme casuale $R \subseteq S$
+- Uso $R$ per stimare un **intervallo $[d,u]$** che:
+    - contiene la mediana con alta probabilità
+    - è abbastanza piccolo
+- Poi lavoro solo sugli elementi tra $d$ e $u$
+**Intuizione**
+- I campioni sono “uniformemente distribuiti” nell’ordine totale
+- Quindi:
+    - circa metà dei campioni è sotto la mediana
+    - circa metà sopra
+- Questo permette di costruire un intervallo stretto attorno alla mediana
+*PARAMETRI*
+- $n$: numero elementi
+- $S$: insieme originale (NON ordinato)
+- $R$: campione casuale estratto da $S$ con $n^{3/4}$: dimensione campione
+- $C$: sottoinsieme filtrato tra $d$ e $u$
+- offset: $\sqrt{n}$​
+- soglia finale:$|C| \le 4n^{3/4}$
+ *ALGORITMO*
+1. Estrai $s = n^{3/4}$ elementi da $S$ con ripetizione, uniformemente a caso
+2. Ordina $R$
+3. Definisci:
+    - $d=$ elemento in posizione $\frac{1}{2}n^{3/4} - \sqrt{n}$
+    - $u=$ elemento in posizione $\frac{1}{2}n^{3/4} + \sqrt{n}$
+    - $\sqrt(n)$ è il giusto compromesso per avere un buon insieme di elementi da cui attingere
+    - Il campione $R$ viene ordinato e si scelgono due elementi $d$ e $u$ che si trovano a distanza $\sqrt{n}$​ dalla posizione centrale del campione.  
+	- Con alta probabilità, la mediana dell’insieme originale $S$ cade tra $d$ e $u$.
+4. Costruisci:
+    $C = \{x \in S : d \le x \le u\}$
+    e calcola:
+    $\ell_d = |\{x \in S : x < d\}|,\quad \ell_u = |\{x \in S : x > u\}|$
+5. Se $\ell_d > n/2$ oppure $\ell_u > n/2$ → FAIL
+6. Se $|C| \le 4n^{3/4}$ allora ordina $C$, altrimenti FAIL poiché ho un set di numeri troppo grande
+7. Output:
+    $\left(\left\lfloor \frac{n}{2} \right\rfloor - \ell_d + 1\right)\text{-esimo elemento di } C$
+
+*ANALISI*
+**Costo computazionale**
+- sampling: $O(n^{3/4})$
+- sorting R: $O(n^{3/4}\log n)$
+- scanning $S$: $O(n)$
+- sorting $C$: $O(n^{3/4}\log n)$
+➡ totale:
+- $O(n)$
+**Osservazione chiave**
+- Il costo è lineare **se non fallisce**
+
+![[Pasted image 20260331193831.png]]
+
+*ANALISI PROBABILISTICA*
+
+Definiamo:
+- $Y_1$: numero di campioni sotto la mediana
+- $Y_2$​: numero sopra la mediana
+Ogni campione:
+- è sotto la mediana con probabilità $1/2$
+- indipendente
+
+➡ quindi:
+
+$Y_1 = \sum_{i=1}^{n^{3/4}} X_i,\quad X_i \sim Bernoulli(1/2)$
+
+*VALORI ATTESI*
+ Per studiare $Y_1$​, definiamo per ogni campione estratto:
+$X_i = \begin{cases} 1 & \text{se l’i-esimo campione è } \le m \\ 0 & \text{altrimenti} \end{cases}$
+dove $m$ è la mediana vera di $S$
+$E[Y_1] = \frac{1}{2}n^{3/4}$
+$Var[Y_1] = \frac{1}{4}n^{3/4}$
+*EVENTI DI FALLIMENTO*
+L’algoritmo fallisce se succede uno tra:
+- $E_1: Y_1 < \frac{1}{2}n^{3/4} - \sqrt{n}$
+	- $E1​:$ nel campione ci sono troppo pochi elementi sotto la mediana, quindi il marcatore $d$ viene scelto troppo in alto.
+- $E_2: Y_2 < \frac{1}{2}n^{3/4} - \sqrt{n}$
+	- $E2​:$ nel campione ci sono troppo pochi elementi sopra la mediana, quindi il marcatore $u$ viene scelto troppo in basso.
+- $E_3: |C| > 4n^{3/4}$
+	- $E3​:$ l’intervallo $[d,u]$ risulta troppo grande, quindi l’insieme $C$
+	- contiene troppi elementi e non può essere gestito in tempo lineare.
+
+BOUND DI $E_1$
+
+Usiamo Chebyshev:
+$Pr(|Y_1 - E[Y_1]| \ge \sqrt{n}) \le \frac{Var[Y_1]}{n}$
+Sostituisco:
+$\frac{Var[Y_1]}{n} = \frac{n^{3/4}/4}{n} = \frac{1}{4}n^{-1/4}$
+➡ quindi:
+- $Pr(E_1) \le \frac{1}{4}n^{-1/4}$
+Per simmetria:
+- $Pr(E_2) \le \frac{1}{4}n^{-1/4}$
+Unione:
+- $Pr(E_1 \cup E_2) \le \frac{1}{2}n^{-1/4}$
+
+L'evento $E_3$ si verifica se l'insieme dei candidati $C$ è troppo grande ($|C| > 4n^{3/4}$). Se $C$ è troppo grande, l'ordinamento finale non sarebbe più efficiente. **Logica della dimostrazione:** Perché $|C|$ sia maggiore di $4n^{3/4}$, deve accadere che i pivot $d$ e $u$ siano finiti "troppo lontano" dalla mediana reale. In particolare, definiamo due sotto-eventi:
+1. **$\mathcal{E}_{3,1}$**: 
+2. Almeno $2n^{3/4}$ elementi di $C$ sono più grandi della mediana (ovvero $u$ è troppo a destra).
+**$\mathcal{E}_{3,2}$**: Almeno $2n^{3/4}$ elementi di $C$ sono più piccoli della mediana (ovvero $d$ è troppo a sinistra). Se $|C| > 4n^{3/4}$, allora almeno uno di questi due eventi deve essersi verificato. La probabilità che si verifichi $\mathcal{E}_{3,1}$ (vale lo stesso per $\mathcal{E}_{3,2}$) è 
+$$\Pr(\mathcal{E}_{3,1}) \leq \frac{Var[X]}{(\sqrt{n})^2} = \frac{\frac{1}{4}n^{3/4}}{n} = \frac{1}{4}n^{-1/4}$$
+PROBABILITÀ FINALE
+- $Pr(\text{fallimento}) \le Pr(E_1)+Pr(E_2)+Pr(E_3) \le n^{-1/4}$
+
+- $Pr(\text{successo}) \ge 1 - n^{-1/4}$
+
+CORRETTEZZA
+- Se l’algoritmo non fallisce:
+    - la mediana è sicuramente in $C$
+    - la posizione corretta viene calcolata esattamente
+- Quindi:
+    - **risultato corretto quando non fallisce**
+TIPO DI ERRORE
+- possibile:
+    - restituisce FAIL
+- impossibile:
+    - restituire una mediana sbagliata
+RIDUZIONE DELL’ERRORE
+- Ripeto l’algoritmo indipendentemente
+- probabilità fallimento dopo $t$ tentativi:
+- $(n^{-1/4})^t = n^{-t/4}$
+➡ decresce esponenzialmente
