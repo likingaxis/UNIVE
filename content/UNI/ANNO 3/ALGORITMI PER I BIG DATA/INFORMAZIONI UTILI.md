@@ -29,7 +29,7 @@ voglio: Pr(E | B) → difficile (effetto → causa)
 Sia ${E_1, ..., E_n}$ una partizione dello spazio (eventi disgiunti che coprono $Ω$), allora:
 - $Pr(E_j | B) = [Pr(B | E_j) · Pr(E_j)] / Σi Pr(B | E_i) · Pr(E_i)$
 → intuizione: aggiorna la probabilità di una causa dopo aver osservato un effetto
-
+##### COIN FLIP
 ![[Pasted image 20260323120525.png|400]]
 
 ### CH02
@@ -77,23 +77,110 @@ _(intuizione)_
 → all’inizio è facile trovare coupon nuovi, ma gli ultimi sono sempre più rari → cresce come $n \log n$
 ### CH03
 ##### MARKOV INEQUALITY
-- 3
+**MARKOV INEQUALITY**
+- Sia $X \ge 0$ una variabile aleatoria.
+- Fornisce un **upper bound** sulla probabilità che $X$ sia grande.
+	- $\Pr[X \ge a] \le \frac{\mathbb{E}[X]}{a}$ per $a > 0$.
+- Utile quando conosci solo il valore atteso.
 ##### VARIANZA
-- 4
-	- linearità
+- Misura quanto una variabile aleatoria si discosta dal valore atteso.
+- $\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]$
+- Formula equivalente: $\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$
+**(proprietà utili)**
+- $\mathrm{Var}(aX) = a^2 \mathrm{Var}(X)$
+-  $\mathrm{Var}(X + Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y)$
+- Se $X, Y$ indipendenti: 
+	- $\mathrm{Var}(X + Y) = \mathrm{Var}(X) + \mathrm{Var}(Y)$
 ##### CHEBYSHEV INEQUALITY
- - 6
+- Vale per qualsiasi variabile aleatoria con varianza finita.
+- Fornisce un **bound sulla deviazione dalla media**.
+- Chebyshev ti dice **quanto è improbabile che $X$ sia lontana dalla media**.
+- X è distante almeno k dalla media
+- $\Pr(|X - \mathbb{E}[X]| \ge k) \le \frac{\mathrm{Var}(X)}{k^2}$
+	- Se **varianza piccola** → valori concentrati → probabilità di deviazioni grandi è bassa
+	- Se **k grande** → stai chiedendo deviazioni enormi → probabilità ancora più piccola
 ##### VARIABILI INDIPENDENTI
+- Due variabili $X, Y$ sono indipendenti se il valore di una **non influenza** l’altra.
+- Formalmente: $\Pr(X, Y) = \Pr(X)\Pr(Y)$
+- Per eventi: $\Pr(A \cap B) = \Pr(A)\Pr(B)$
+- Conseguenza: $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$
+- Per la varianza: se indipendenti → $\mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y)$
 ##### BACK TO COIN FLIPS
-- 11
+- Considero $n$ lanci di moneta **indipendenti**.
+- Ogni lancio è una variabile $X_i$:
+    - $X_i = 1$ se esce testa
+    - $X_i = 0$ se esce croce
+- La somma $X = \sum X_i$ conta **quante teste ottengo in totale**.
+- Valore atteso:
+    - $\mathbb{E}[X] = np$ → numero medio di teste
+    - Se moneta equa: $\mathbb{E}[X] = n/2$
+- si vuole utilizzare il seguente problema per applicare delle regole spiegate precedentemente
+**Obiettivo:**
+- Stimare $\Pr(X \ge 3N/4)$
+ 1. Definizione variabili
+- $X_i = 1$ se testa, 0 altrimenti
+- $X = \sum_{i=1}^{N} X_i$
+ 1. Proprietà dei singoli $X_i$ (moneta equa)
+	- $\mathbb{E}[X_i] = 1/2$
+	- $\mathrm{Var}(X_i) = 1/4$
+ 2. Media e varianza di $X$
+	- $\mathbb{E}[X] = N \cdot 1/2 = N/2$
+	- $\mathrm{Var}(X) = N \cdot 1/4 = N/4$
+ 3. Riscrittura evento
+$$\Pr(X \ge 3N/4)=$$
+$$3N/4 - N/2 = N/4$$
+$$\Rightarrow \Pr(X \ge 3N/4) \le \Pr(|X - \mathbb{E}[X]| \ge N/4)$$
+ 4. Applicazione Chebyshev
+$$\Pr(|X - \mathbb{E}[X]| \ge N/4) \le \frac{\mathrm{Var}(X)}{(N/4)^2}$$
+ 5. Sostituzione
+$$\frac{N/4}{N^2/16} = \frac{4}{N}$$
+ 6. Conclusione
+$$\Pr(X \ge 3N/4) \le \frac{4}{N}$$
 ##### Bernoulli Trial
+- $X = 1$ con prob. $p$
+- $X = 0$ con prob. $1-p$
+- $E[X]=p$
+- $Var(X)=p(1−p)$
 ##### DISTRIBUZIONE GEOMETRICA DI UNA RANDOM VARIABLE
-- memoryless property
+descrive matematicamente una situazione reale
+- Modella il numero di prove fino al **primo successo**.
+	- Prove indipendenti con probabilità di successo $p$.
+- Supporto: $1,2,3,…$
+	- $\Pr(X = k) = (1-p)^{k-1} p$
+- memoryless **property**
+- “Il passato non conta”
+$\Pr(X > s+t \mid X > s) = \Pr(X > t)$
+	- Significa: se non hai ancora avuto successo dopo s prove, è come **ripartire da zero**
 - varianza di una geometrica 
-	- 35
+	- $E[X]=\frac{1}{p}$
+	- $Var(X)=\frac{1−p}{p^2}​$
 ##### back to coupon collector
-- 37
-##### The Advantage of Multiple Samples
-- 40 e 41
-##### The (Weak) Law of Large Numbers
-- 42
+- Problema:
+    - Ho $n$ tipi di coupon
+    - Ad ogni prova ne ottengo uno **uniforme a caso**
+    - Voglio sapere **quanto tempo serve per collezionarli tutti**
+🔹 Idea chiave
+- Divido il processo in fasi:
+    - tempo per passare da $k$ coupon a $k+1$
+🔹 Variabili
+- $X=$ tempo totale
+	- $X = X_0 + X_1 + \dots + X_{n-1}$
+- $X_k =$ tempo per trovare un nuovo coupon quando ne ho già $k$
+🔹 Distribuzione di $X_k$
+- Probabilità di nuovo coupon:
+$$p_k = \frac{n-k}{n}$$
+- Quindi:
+$$X_k \sim \text{Geometrica}(p_k)$$
+🔹 Valore atteso
+$$\mathbb{E}[X_k] = \frac{1}{p_k} = \frac{n}{n-k}$$
+🔹 Somma totale
+$$\mathbb{E}[X] = \sum_{k=0}^{n-1} \frac{n}{n-k} = n \sum_{i=1}^{n} \frac{1}{i}$$
+🔹 Risultato finale
+$$\mathbb{E}[X] = n H_n \approx n \log n$$
+
+$Pr(X≥2E[X])?$
+Applica direttamente **Markov**:
+$Pr(X \ge 2nH_n)\le \frac{1}{2}$
+
+**raffinamento (miglioramento) della stima** del Coupon Collector.
+![[Pasted image 20260331170422.png|500]]
