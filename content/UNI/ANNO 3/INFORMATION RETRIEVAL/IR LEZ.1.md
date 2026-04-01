@@ -44,6 +44,8 @@ Formula concettuale:
 ```scss
 Recall = documenti rilevanti recuperati / documenti rilevanti totali
 ```
+
+![[Pasted image 20260401115048.png|400]]
 ###### Domanda d’esame: differenza tra notazione sparsa e densa
 Attenzione: la differenza può riferirsi a **due cose diverse**:
 - **Natura intrinseca del fenomeno:** 
