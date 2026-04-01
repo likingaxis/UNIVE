@@ -1,0 +1,4 @@
+- DEFINIZIONE DI IR
+	- modello di ricerca generico
+		- user task, information need, query, query terms, search engine, collection
+- 
