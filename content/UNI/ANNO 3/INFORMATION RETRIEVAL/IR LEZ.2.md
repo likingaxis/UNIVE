@@ -34,16 +34,16 @@ Durante la costruzione dell’indice:
 - **Term**
     - sono **le parole distinte del vocabolario**
     - cioè **le parole nel dizionario dell’indice**, ogni parola compare **una sola volta**
-- tutta questo vedendo i dati (slide con quelle tabelle) occupa tanta memoria
+- tutto questo vedendo i dati (slide con quelle tabelle) occupa tanta memoria
 ##### Come risolvere?
 #### ALGORITMI DI SORTING
 ##### BSBI
-- È un algoritmo per **costruire l’inverted index quando la collezione è 
+- È un algoritmo per **costruire l’inverted index quando la collezione è troppo grande per stare in memoria (RAM)**
 - Idea principale:
 1. **si divide il token stream in blocchi**
 2. ogni blocco viene **ordinato in memoria RAM**
 3. il blocco ordinato viene **scritto su disco**
-4. alla fine **si fa il merge dei blocchi** per ottenere l’indice finale.
+4. alla fine **si fa il merge dei blocchi** per ottenere l’indice finale
 - potrei usare il 90% della ram senza sfruttarla tutta
 ##### PSEUDOCODICE
 ![[Pasted image 20260314183331.png]]
@@ -113,7 +113,7 @@ Dopo aver processato tutta la collezione:
 - significato di distribuito
 	- ricordiamo che distribuito significa che il lavoro di costruzione dell’indice **non viene fatto su una singola macchina**, ma viene **suddiviso tra molte macchine (nodi)** che lavorano in parallelo.
 - *SLA*
-	- Service level agreement
+	- *Service level agreement*
 		- Lo **SLA** indica il livello di disponibilità del sistema, cioè **quanto tempo il sistema deve rimanere operativo**.
 		- lo SLA al 99.99% non è sempre fattibile per costi
 Quando si hanno **molte macchine**, la probabilità che **qualcuna si rompa aumenta**.
@@ -158,7 +158,7 @@ Per costruire l’indice in un sistema distribuito si usa spesso il modello **Ma
 Le due fasi principali sono:
 ##### MAP
 - i documenti vengono **divisi in blocchi (splits)**
-- ogni macchina **parserizza i documenti**
+- ogni macchina **fa il parsing dei documenti**
 - produce coppie:
 	`(termID, docID)`
 Queste coppie vengono scritte in **segment files**.
@@ -189,8 +189,6 @@ Per questo nei sistemi reali:
 
 - **MapReduce** viene usato soprattutto nella **fase di costruzione dell’indice** (index construction).
 - **Term-partitioned** e **Document-partitioned** descrivono **come l’indice è distribuito tra le macchine**, cosa che è particolarmente importante **quando si eseguono le query (ricerca)**.
-
-- chiedi alla fine della lezione quella cosa al prof su chi pesa di più bi word indexing o positional indexing
 ##### Task Paralleli
 - per svolgere adeguatamente il Map Reduce
 - utilizzeremo due task paralleli che rappresentano map e reduce
