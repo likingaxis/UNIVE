@@ -323,6 +323,7 @@ si usa una sequenza (font stack)
         - `width` e `height` rappresentano **solo l’area del contenuto**
         - la dimensione reale del box è:
         `dimensione totale = content + padding + border + margin`
+- `<div>` è un elemento generico di tipo blocco
 - *STRUTTURA DEL BOX*
 	- ogni elemento è composto da **4 aree**
 	- ogni area ha lati: **top, right, bottom, left**
