@@ -1,13 +1,28 @@
-#### Stile per liste
-- `list-style-type|image|position`
-	- modificano il tipo l'immagine o la posizione delle liste
-##### Uso di link
-- possibilità di ricondursi con href a id di determinati elementi
-- specifica del protocollo in href con `tel:` o `mailto:`
-#### reset.css
-- file css che ci garantisce che il sito sia resettato senza avere regole css del browser(user agent stylesheet), resettandole
-	- codice reset.css
-	- si usava una volta
+##### STILE PER LE LISTE
+- proprietà CSS: `list-style-type`, `list-style-image`, `list-style-position`
+    - servono per modificare l’aspetto delle liste
+    - in particolare permettono di definire:
+        - il tipo di marcatore
+        - un’eventuale immagine come marcatore
+        - la posizione del marcatore rispetto al contenuto
+##### USO DEI LINK
+- con l’attributo `href` posso collegarmi a:
+    - altre pagine
+    - risorse esterne
+    - un punto specifico della stessa pagina
+- per collegarmi a un elemento della stessa pagina uso il suo `id`
+- in `href` posso anche specificare protocolli particolari, ad esempio:
+    - `mailto:` per aprire il client di posta
+    - `tel:` per avviare una chiamata da dispositivi che lo supportano
+##### RESET.CSS
+- `reset.css` è un file CSS usato per azzerare o uniformare gli stili di default applicati dal browser
+    - questi stili di default sono detti **user agent stylesheet**
+- l’obiettivo è partire da una base più controllabile e coerente tra browser diversi
+- storicamente si usava molto per “resettare” margini, padding e altri valori automatici
+- oggi si usa meno nella forma classica, perché spesso si preferiscono:
+    - reset più moderni
+    - normalizzazioni
+    - stylesheet di base personalizzati
 #### Posizione degli elementi
 - gli elementi hanno una posizione di default
 	- o inline o blocco
@@ -21,7 +36,7 @@
 		- absolute prende il primo elemento antenato che non ha una position static
 			- se non trova nulla si posiziona rispetto al body
 		- fixed rispetto al viewport
-- foto slide 6
+![[Pasted image 20260402141242.png|400]]
 - gestire sovrapposizioni con `z-index:numer|auto|inherit`
 	- consente di gestire la profondità
 - gioco con display none e display block per far apparire le cose con pseudoclasse `:hover`
