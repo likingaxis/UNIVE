@@ -29,13 +29,18 @@
     - `ip neigh` → versione moderna (suite `ip`)
 - `ip` / `ifconfig`
     - configurano e mostrano informazioni sulle **interfacce di rete**
-    - `ip` → comando moderno e completo
+    - `ip a` → comando moderno e completo per vedere tutte le interfacce di rete
     - `ifconfig` → più vecchio, mostra solo interfacce attive
     - `ipconfig` (Windows) → mostra tutte le interfacce
 - `route` / `ip route`
     - visualizzano e modificano la **tabella di routing**
     - `route` → comando legacy
     - `ip route` → versione moderna e più flessibile
+###### Uso di NETCAT
+- network tool in grado di connettersi a dei server
+	- inviando o ricevendo pacchetti con connessioni di tipo `TCP/UDP`
+	- inviare e ricevere dati raw quindi grezzi
+- comandi `nc` con `-v -n -e -l` 
 ##### IDENTIFICAZIONE DEL TARGET
 - attraverso indirizzo IP 
 	- può essere recuperato sfruttando il DNS
@@ -63,13 +68,45 @@
 	- `dig @dns-server hostname`
 	- `host` è tipo dig
 ###### Interacting with DNS
-- forward lookup
-- con `ns` abbiamo trovato i name server del DNS
-	- dopo abbiamo chiesto con any tutto ciò che riguarda un certo DNS
-	- ricorsivamente andiamo a interrogare il DNS, facendo query
+- forward lookup bruteforce
+	- partendo da uniroma2.it con wordlist si vanno a effettuare richieste per possibili sottodomini
+		- con `ns` abbiamo trovato i name server del DNS
+		- dopo abbiamo chiesto con any tutto ciò che riguarda un certo DNS
+		- ricorsivamente andiamo a interrogare il DNS, facendo query
+		- comando slide 35
 - reverse lookup
-- un altro approccio potrebbe essere utilizzando PTR con un approccio inverso
-	- invio richieste PTR con indirizzi IP simili 
-	- per sapere quale indirizzo IP provare per quel DNS
-		- `whois indirizzo`
-		- ti dice il range di indirizzi IP gestiti da quella società `NETRANGE:`
+	- utilizzo sul range previsto di indirizzi ip per effettuare la richiesta
+	- un altro approccio potrebbe essere utilizzando PTR con un approccio inverso
+		- invio richieste PTR con indirizzi IP simili 
+		- per sapere quale indirizzo IP provare per quel DNS
+			- `whois indirizzo`
+			- ti dice il range di indirizzi IP gestiti da quella società `NETRANGE:`
+		- comando slide 36
+- DNS zone transfer(AXFR)
+	- tecnica che prevede l'uso di un tool per ricevere la copia del determinato DNS
+	- tecnica che non funziona sempre, non tutti possono richiedere queste informazioni
+	- uso di dig oppure host
+	- oppure altri più specifici che magari contattano direttamente i DNS più interni al dominio
+		- con dig dovremmo informarci bene
+		- dnsrecon
+			- tool in python che fa cose, spiega cosa
+		- dnsenum
+			- tool utile 
+		- Fierce
+			- tool che fa più o meno questa roba
+	- si può risolvere forzando un DNS a effettuare il trasferimento solo da un certo indirizzo IP
+		- slide 47 
+##### ESERCITAZIONE
+- `dig nome sito`
+- attacco forward:
+- `dig nomesito ns`
+	- ora abbiamo i vari dns 
+		- creiamo un dizionario oppure ne usiamo uno già esistente
+		- dentro seclists usiamo discovery dns subdomaintop1milion.txt
+	- questo dizionario lo usiamo con dnsrecon
+		-  ora abbiamo Ip nomi di dominio ecc dei vari sottodomini 
+			- del dns
+- attacco zonetrasnfer:
+	- con dig e axfr
+	- `dig @dns-server hostname axfr`
+		- axfr è un tipo di richiesta per il trasferimento completo del DNS
