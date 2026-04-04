@@ -41,6 +41,10 @@
 	- inviando o ricevendo pacchetti con connessioni di tipo `TCP/UDP`
 	- inviare e ricevere dati raw quindi grezzi
 - comandi `nc` con `-v -n -e -l` 
+- `-v` → modalità verbose (mostra più informazioni)
+- `-n` → disabilita risoluzione DNS (usa direttamente IP)
+- `-l` → mette in ascolto su una porta
+- `-e` → esegue un programma e collega input/output alla connessione (es. shell)
 ##### IDENTIFICAZIONE DEL TARGET
 - attraverso indirizzo IP 
 	- può essere recuperato sfruttando il DNS
@@ -68,34 +72,48 @@
 	- `dig @dns-server hostname`
 	- `host` è tipo dig
 ###### Interacting with DNS
-- forward lookup bruteforce
-	- partendo da uniroma2.it con wordlist si vanno a effettuare richieste per possibili sottodomini
-		- con `ns` abbiamo trovato i name server del DNS
-		- dopo abbiamo chiesto con any tutto ciò che riguarda un certo DNS
-		- ricorsivamente andiamo a interrogare il DNS, facendo query
-		- comando slide 35
-- reverse lookup
-	- utilizzo sul range previsto di indirizzi ip per effettuare la richiesta
-	- un altro approccio potrebbe essere utilizzando PTR con un approccio inverso
-		- invio richieste PTR con indirizzi IP simili 
-		- per sapere quale indirizzo IP provare per quel DNS
-			- `whois indirizzo`
-			- ti dice il range di indirizzi IP gestiti da quella società `NETRANGE:`
-		- comando slide 36
-- DNS zone transfer(AXFR)
-	- tecnica che prevede l'uso di un tool per ricevere la copia del determinato DNS
-	- tecnica che non funziona sempre, non tutti possono richiedere queste informazioni
-	- uso di dig oppure host
-	- oppure altri più specifici che magari contattano direttamente i DNS più interni al dominio
-		- con dig dovremmo informarci bene
-		- dnsrecon
-			- tool in python che fa cose, spiega cosa
-		- dnsenum
-			- tool utile 
-		- Fierce
-			- tool che fa più o meno questa roba
-	- si può risolvere forzando un DNS a effettuare il trasferimento solo da un certo indirizzo IP
-		- slide 47 
+- tecniche per **scoprire host e servizi** partendo da un dominio
+- *forward lookup bruteforce*
+    - partendo da `uniroma2.it` con una wordlist si vanno a effettuare richieste per possibili sottodomini
+        - con `ns` abbiamo trovato i **name server** del DNS
+            - `host -t ns dominio`
+        - dopo abbiamo chiesto con `ANY` tutto ciò che riguarda un certo DNS
+            - `dig dominio any`
+        - ricorsivamente andiamo a interrogare il DNS, facendo query
+        - si automatizza con script o tool (wordlist)
+        - comando slide 35:
+            - `for sub in $(cat list.txt); do host $sub.dominio; done`
+        - se un nome esiste → otteniamo IP e info sul servizio
+- *reverse lookup*
+    - utilizzo su un **range previsto di indirizzi IP** per effettuare la richiesta
+    - un altro approccio è utilizzare record **PTR (IP → nome)**
+        - invio richieste PTR con indirizzi IP simili
+        - per sapere quale indirizzo IP provare per quel DNS
+            - `whois indirizzo`
+            - ti dice il range di indirizzi IP (`NETRANGE`)
+        - comando slide 36:
+            - `for ip in $(seq 1 255); do host x.x.x.$ip; done`
+        - utile per scoprire nomi host non trovati nel forward
+- *DNS zone transfer (AXFR)*
+    - tecnica che prevede l'uso di un tool per ricevere la **copia completa del DNS**
+    - il server pensa che siamo un DNS secondario (slave)
+    - tecnica che non funziona sempre (spesso bloccata)
+    - uso di:
+        - `dig @dns-server dominio axfr`
+        - `host -l dominio dns-server`
+    - oppure tool più specifici:
+        - `dnsrecon`
+            - tool in Python per enumerazione DNS (brute force, zone transfer, reverse)
+        - `dnsenum`
+            - tool utile per automatizzare discovery e AXFR
+        - `fierce`
+            - tool che trova host e spazio IP anche non contiguo
+    - rischio:
+        - espone nomi, IP e struttura della rete
+    - difesa:
+        - permettere il trasferimento solo da IP autorizzati (slide 47)
+![[Pasted image 20260404142440.png]]
+
 ##### ESERCITAZIONE
 - `dig nome sito`
 - attacco forward:
