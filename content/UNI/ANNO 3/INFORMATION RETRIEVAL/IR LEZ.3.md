@@ -68,14 +68,11 @@ Questa stima è *utile* perché consente di:
 	- qui abbiamo la retta teorica(quella tratteggiata)
 	- e la retta data dai valori effettivi dove ogni punto è una coppia `(M,T)`
 		- dove M sono i termini distinti e T i token totali
-###### ESERCIZIO DI ESAME
-non ho capito quale
-30 minuti
 ### LEGGE DI Zipf's
-- La legge di Zipf descrive **come sono distribuite le frequenze dei termini** all’interno di un corpus
+- La legge di Zipf's descrive **come sono distribuite le frequenze dei termini** all’interno di un corpus
 - NON serve a stimare quando riappare un termine, ma a capire **quanto spesso compaiono i termini rispetto agli altri**
 - Se ordiniamo le parole per frequenza decrescente:
-    - la parola in posizione $i$ (cioè la i-esima più frequente) avrà una frequenza **inversamente proporzionale a iii**
+    - la parola in posizione $i$ (cioè la i-esima più frequente) avrà una frequenza **inversamente proporzionale a $i$**
     - dove:
         - $i = 1$ → parola più frequente
         - $i = 2$ → seconda più frequente
@@ -223,6 +220,7 @@ $$(1 + 2×2 + 2×3 + 2×4 + 5)/8 = 3$$
     - docID: `33, 47, 154, 159, 202`
     - gap: `33, 14, 107, 5, 43`
 - L’idea è che molti gap siano piccoli, soprattutto per termini frequenti, e quindi si possano rappresentare con meno bit dei docID completi.
+- nel gap encoding senza compressione, ogni gap viene rappresentato con un numero fisso di bit pari a $\log_2(N_{doc})$ risultando inefficiente perché molti gap sono piccoli ma occupano comunque lo stesso spazio
 ##### VARIABLE LENGTH ENCODING
 - Una volta ottenuti i gap, non conviene usare per tutti lo stesso numero di bit.
 - L’idea è usare una codifica a **lunghezza variabile**:

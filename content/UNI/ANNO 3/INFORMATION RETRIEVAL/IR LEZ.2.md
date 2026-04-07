@@ -36,7 +36,7 @@ Durante la costruzione dell’indice:
     - cioè **le parole nel dizionario dell’indice**, ogni parola compare **una sola volta**
 - tutto questo vedendo i dati (slide con quelle tabelle) occupa tanta memoria
 ##### Come risolvere?
-#### ALGORITMI DI SORTING
+#### ALGORITMI DI COSTRUZIONE 
 ##### BSBI
 - È un algoritmo per **costruire l’inverted index quando la collezione è troppo grande per stare in memoria (RAM)**
 - Idea principale:
@@ -69,7 +69,7 @@ Se un termine compare in più blocchi:
 `postings_final = concatenazione(postings_blocco1, postings_blocco2, ...)`
 Dato che ogni blocco è già ordinato:
 - le posting list sono **già in ordine**
-- quindi basta **concatenarle/mergiarle sequenzialmente**.
+- quindi basta **concatenarle sequenzialmente**.
 ![[Pasted image 20260314183959.png|400]]
 ##### SPIMI
 - **SPIMI** significa **Single-Pass In-Memory Indexing**.  
@@ -92,7 +92,7 @@ Dato che ogni blocco è già ordinato:
 	- `Θ(T)`
 ###### USO DELLE TABELLE HASH
 - si usa una **tabella hash** come dizionario
-- la hash table serve a capire **se un termine è già presente nel dizionario del blocco**
+	- la hash table serve a capire **se un termine è già presente nel dizionario del blocco**
 - se il termine è già presente, si recupera la sua **posting list**
 - se non è presente, si crea una **nuova entry nel dizionario** e una nuova posting list.
 Quando la memoria è piena:
@@ -109,6 +109,8 @@ Dopo aver processato tutta la collezione:
 - si fa il **merge dei blocchi**
 - si uniscono le posting list dello stesso termine
 - si ottiene **l’indice invertito finale**.
+- `sort(termine1, termine2, …)`
+	- cioè ordini le **chiavi della hash table**
 ##### INDEXING DISTRIBUITO
 - significato di distribuito
 	- ricordiamo che distribuito significa che il lavoro di costruzione dell’indice **non viene fatto su una singola macchina**, ma viene **suddiviso tra molte macchine (nodi)** che lavorano in parallelo.
@@ -315,7 +317,7 @@ Per questo nei sistemi reali:
 - il merge continua “a cascata”, un po’ come un **riporto in binario**
 ###### MULTIPLE INDEXES
 I **multiple indexes** sono una struttura in cui l’informazione non è contenuta in un unico inverted index, ma è distribuita su **più indici separati**, che devono essere consultati insieme durante la ricerca.
-- presenti in ogni sistema con DYNAMIC INDEXING
+- presenti in ogni sistema con DYNAMIC INDEXING compreso quello che usa il log merge
 - durante una query avrò più indici quindi la loro ricerca sarà complessa
 	- oltretutto sarà anche complesso gestire la loro frequenza e il loro ranking
 ##### nei sistemi reali (es. Twitter / Earlybird):
