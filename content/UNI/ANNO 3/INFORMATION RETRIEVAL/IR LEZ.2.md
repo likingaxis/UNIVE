@@ -37,7 +37,7 @@ Durante la costruzione dell’indice:
 - tutto questo vedendo i dati (slide con quelle tabelle) occupa tanta memoria
 ##### Come risolvere?
 #### ALGORITMI DI COSTRUZIONE 
-##### BSBI
+##### BSBI(Block Sort Base Indexing)
 - È un algoritmo per **costruire l’inverted index quando la collezione è troppo grande per stare in memoria (RAM)**
 - Idea principale:
 1. **si divide il token stream in blocchi**
@@ -71,7 +71,7 @@ Dato che ogni blocco è già ordinato:
 - le posting list sono **già in ordine**
 - quindi basta **concatenarle sequenzialmente**.
 ![[Pasted image 20260314183959.png|400]]
-##### SPIMI
+##### SPIMI(Single Pass In Memory Indexing)
 - **SPIMI** significa **Single-Pass In-Memory Indexing**.  
 - È un algoritmo di costruzione dell’indice invertito pensato per collezioni grandi, quando non conviene usare l’approccio con ordinamento globale dei record come in BSBI.
 - Idea principale:
