@@ -61,6 +61,7 @@ Dato che il dataset è troppo grande per stare in memoria:
 		- facciamolo per ogni blocco
 		- ``O((N/B) * B log B)`
 			- `O(N log B)``
+			- dove $B$ sarebbe il token stream del singolo blocco
 ###### Fase di merge
 Durante il merge:
 - si leggono i blocchi dal disco
@@ -108,7 +109,7 @@ Alla fine avrai **molti blocchi di indice invertito su disco**.
 Dopo aver processato tutta la collezione:
 - si fa il **merge dei blocchi**
 - si uniscono le posting list dello stesso termine
-- si ottiene **l’indice invertito finale**.
+- si ottiene **l’indice invertito finale**
 - `sort(termine1, termine2, …)`
 	- cioè ordini le **chiavi della hash table**
 ##### INDEXING DISTRIBUITO
@@ -245,6 +246,7 @@ Per questo nei sistemi reali:
 - LA NOSTRA ASSUNZIONE FATTA IN PRECEDENZA OVVERO CHE LA NOSTRA STRUTTURA DATI È STATICA ORA NON È PIÙ VALIDA, LA STRUTTURA SARÀ DINAMICA
 - Il **dynamic indexing** è il processo di aggiornamento continuo dell’indice quando la collezione di documenti cambia nel tempo.
 ###### GESTIONE DELLA DYNAMIC INDEXING
+- si sfrutta nella fase di risposta alle query
 - divido l’indice in:
     - **main index** (grande, su disco)
     - **auxiliary index** (piccolo, in RAM, contiene i nuovi documenti)
