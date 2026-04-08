@@ -170,6 +170,12 @@ $400{,}000 \times 19 = 7{,}600{,}000 \text{ byte} \approx 7.6 \text{ MB}$
 👉 totale:
 $3 + 4 = 7 \text{ byte}$
 👉 risparmi: $12 - 7 = 5 \text{ byte ogni 4 termini}$
+- prima avevi **4 puntatori** = 4⋅3=124 \cdot 3 = 124⋅3=12 byte
+- ora hai **1 puntatore + 4 lunghezze** = 3+4=73+4=73+4=7 byte
+
+Risparmio:
+
+12−7=5 byte ogni 4 termini12-7=5 \text{ byte ogni 4 termini}12−7=5 byte ogni 4 termini
 ##### IN TERMINI DI TEMPO
 - per la ricerca viene fatto un calcolo di probabilità del valore atteso
 	- assumendo che siano tutte ugualmente probabili
@@ -185,6 +191,10 @@ $$(1 + 2×2 + 4×3 + 4)/8 ≈ 2.6$$
 2. ricerca lineare nel blocco
 Formula:
 $$(1 + 2×2 + 2×3 + 2×4 + 5)/8 = 3$$
+$$\frac{tp​+k​}{k}$$
+
+byte per puntatore al termine + numero blocchi/numero blocchi
+
 👉 media:
 - circa **3 confronti**
 #### ESERCIZIO DI ESAME
