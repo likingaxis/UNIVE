@@ -74,7 +74,7 @@
 ###### Interacting with DNS
 - tecniche per **scoprire host e servizi** partendo da un dominio
 - *forward lookup bruteforce*
-    - partendo da `uniroma2.it` con una wordlist si vanno a effettuare richieste per possibili sottodomini
+    - partendo da `uniroma2.it` con una wordlist si vanno a effettuare richieste per possibili sotto-domini
         - con `ns` abbiamo trovato i **name server** del DNS
             - `host -t ns dominio`
         - dopo abbiamo chiesto con `ANY` tutto ciò che riguarda un certo DNS
