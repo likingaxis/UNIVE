@@ -11,7 +11,7 @@ Questa misura cattura quanto i due insiemi si sovrappongono. Tuttavia ha due lim
 Quindi è troppo semplice per un sistema di retrieval efficace.
 
 #### VECTOR SPACE MODEL
-Per superare questi limiti si introduce il **Vector Space Model**. L’idea è rappresentare sia i documenti sia le query come **vettori in uno spazio ad alta dimensionalità**, dove ogni dimensione corrisponde a un termine del vocabolario. A questo punto non ragiono più solo in termini di “parola presente o assente”, ma posso associare a ogni termine un certo peso, che dipende dalla sua importanza nel documento e nella collezione.
+Per superare questi limiti si introduce il **Vector Space Model**. L’idea è *rappresentare* sia i *documenti* sia le *query* come **vettori in uno spazio ad alta dimensionalità**, dove ogni dimensione corrisponde a un termine del vocabolario. A questo punto non ragiono più solo in termini di “parola presente o assente”, ma posso associare a ogni termine un certo peso, che dipende dalla sua importanza nel documento e nella collezione.
 ###### Come rappresentiamo i documenti in questo modello
 Per migliorare il modello, dobbiamo rappresentare i documenti in modo più informativo.
 Nel caso più semplice usiamo una **incidence matrix**, dove ogni documento è rappresentato da un vettore binario:
@@ -19,7 +19,7 @@ Nel caso più semplice usiamo una **incidence matrix**, dove ogni documento è r
 - 0 se non è presente
 Questo però è ancora limitato, perché non tiene conto della frequenza.
 Per questo passiamo alla **count matrix**, dove ogni documento è rappresentato da un vettore di conteggi:
-- ogni componente indica quante volte compare un termine
+- ogni componente indica *quante volte compare un termine*
 Questa rappresentazione è più ricca, perché introduce l’idea che:
 
 > più una parola compare in un documento, più quel documento è rilevante per quella parola
@@ -27,15 +27,15 @@ Questa rappresentazione è più ricca, perché introduce l’idea che:
 ![[Pasted image 20260329183548.png|400]]
 ##### Bag of words
 In tutto questo modello assumiamo il **bag of words**:
-- ignoriamo completamente l’ordine delle parole
+- *ignoriamo* completamente *l’ordine delle parole*
 - consideriamo solo quali parole compaiono e quante volte
 Questo semplifica molto il problema, anche se perdiamo informazione sul contesto
 - il seguente modello funziona quindi per $tf$ (term frequency)
 - $tf_{t,d​}$=numero di volte che il termine t appare nel documento d
 ###### Problema della frequenza
 A questo punto potremmo pensare di usare direttamente il numero di occorrenze ($tf$), ma c’è un problema:
-se una parola compare 10 volte in un documento, non significa che quel documento sia 10 volte più rilevante rispetto a uno in cui compare una sola volta.
-Quindi la crescita della rilevanza rispetto alla frequenza **non è lineare**.
+se una *parola compare 10 volte* in un documento, *non significa* che quel documento *sia 10 volte più rilevante* rispetto a uno in cui compare una sola volta.
+Quindi la *crescita della rilevanza* rispetto alla frequenza **non è lineare**.
 ###### Soluzione: logaritmo
 Per gestire questo problema si usa una trasformazione logaritmica:
 Per sistemare questo problema introduco un **peso**:
@@ -46,7 +46,7 @@ $w_{t,d} = \begin{cases} 1 + \log(tf_{t,d}) & \text{se } tf_{t,d} > 0 \\ 0 & \te
 Il modello basato solo su $tf$ (anche con il log) non è ancora sufficiente.
 Infatti:
 - parole molto frequenti (es. _the, is, and_) compaiono in quasi tutti i documenti
-- quindi hanno un tftftf alto, ma **non sono informative**
+- quindi hanno un $tf$ alto, ma **non sono informative**
 👉 problema:
 - il modello darebbe troppo peso a parole inutili
 ### Introduzione dell’idf (inverse document frequency)
@@ -55,6 +55,7 @@ Per risolvere questo problema introduciamo una misura della **rarità del termin
 $idf_t = \log \frac{N}{df_t}$
 dove:
 - $N$ = numero totale di documenti
+- $df_t$=numero di documenti che contengono il termine t
 ![[Pasted image 20260329185228.png|400]]
 ### Intuizione dell’idf
 - se un termine compare in **pochi documenti**:
@@ -70,20 +71,19 @@ dove:
 A questo punto combiniamo:
 - frequenza nel documento ($tf$)
 - rarità nella collezione ($idf$)
-$dftw_{t,d} = (1 + \log tf_{t,d}) \cdot \log \frac{N}{df_t}$
-### Intuizione finale del tf-idf
+$tf-idf\ w_{t,d} = (1 + \log tf_{t,d}) \cdot \log \frac{N}{df_t}$
 Un termine ha peso alto se:
 - compare spesso nel documento
 - ma compare poco nella collezione
 👉 cioè:
 - è **rappresentativo di quel documento**
-### Collegamento con il ranking
+##### Collegamento con il ranking
 A questo punto:
 - ogni documento è rappresentato come vettore di pesi $w_{t,d}$
 - ogni query viene rappresentata allo stesso modo
 👉 il ranking dipenderà da:
 - quanto i pesi dei termini della query sono presenti nel documento
-### Nota sulle stop words
+##### Nota sulle stop words
 - parole molto frequenti (the, is, ecc.)
     - hanno $idf \approx 0$
     - quindi contribuiscono pochissimo
@@ -113,6 +113,7 @@ Un primo approccio potrebbe essere usare la distanza euclidea tra i punti finali
 * **Sensibilità alla Lunghezza:** La distanza euclidea è pesantemente influenzata dalla lunghezza dei vettori. Un documento lungo (che contiene molte più occorrenze di termini) avrà un vettore di lunghezza maggiore, anche se semanticamente simile a un documento più corto.
     * **Esempio:** Se un documento $d'$ è identico a un documento $d$ ma ripetuto due volte (quindi due volte più lungo), semanticamente sono identici. L'angolo tra i loro vettori sarà 0, indicando massima similarità. Tuttavia, la distanza euclidea tra $d$ e $d'$ risulterà grande, suggerendo bassa similarità.
     * Questo è un problema perché si darebbe un peso eccessivo a documenti semplicemente più lunghi, anche se non più rilevanti. Un classico esempio sarebbe un **dizionario** che, contenendo un'enorme quantità di parole, risulterebbe sempre tra i primi risultati se non si applicasse una normalizzazione per la lunghezza 
+![[Pasted image 20260408115417.png]]
 ##### Similarità tramite Angoli: La Funzione Coseno
 Un approccio migliore è ordinare i documenti in base all'angolo che il loro vettore forma con il vettore della query.
 * **Angolo vs Distanza:**
@@ -124,11 +125,15 @@ Un approccio migliore è ordinare i documenti in base all'angolo che il loro vet
     *   $\cos(180°) = -1$ (massima dissimilarità, ma non si usa in IR con pesi positivi).
 * **Equivalenza:** Rankare i documenti secondo l'angolo decrescente è equivalente a rankarli secondo il valore del coseno crescente.
 * **Vettori TF-IDF:** I vettori di query e documento sono formati dai pesi tf-idf 
+![[Pasted image 20260408115356.png]]
+
 ##### Normalizzazione della Lunghezza del Vettore
 Per rendere l'angolo una misura efficace di similarità, è essenziale che la lunghezza dei vettori non influenzi il risultato.
 * **Normalizzazione L2 (Euclidea):** Un vettore può essere normalizzato dividendo ogni sua componente per la sua lunghezza (o norma euclidea).$$||\vec{x}||_2 = \sqrt{\sum_i x_i^2}$$
     Dopo la normalizzazione, i vettori avranno lunghezza 1 e saranno proiettati su una sfera unitaria.
+	- la norma euclidea di un vettore si ottiene facendo la radice quadrata della somma dei quadrati delle sue componenti
 * **Benefici:** Documenti più lunghi e più corti avranno pesi dello stesso ordine di grandezza dopo la normalizzazione. Questo risolve il problema dei documenti lunghi che dominerebbero il ranking senza normalizzazione. Il documento $d'$ (doppio di $d$) dopo la normalizzazione avrà lo stesso vettore di $d$.
+
 
 ##### Similarità del Coseno (Cosine Similarity)
 Per vettori normalizzati, la similarità del coseno è equivalente al **prodotto scalare (dot product)** tra i vettori.

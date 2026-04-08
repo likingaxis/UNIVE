@@ -16,17 +16,17 @@ Una wildcard è un simbolo (come `*`) che rappresenta una sequenza arbitraria di
 	- per risolvere questa query dovrei fare `pro* AND *cent` 
 	- estremamente costoso
 ###### Permuterm index
-- è una struttura dati che permette di gestire **wildcard query generali**
+- è una *struttura dati* che permette di gestire **wildcard query generali**
 - idea: trasformare una wildcard query in una **ricerca per prefisso**
 per ogni termine:
 - aggiungo un simbolo speciale `$` alla fine
 - genero **tutte le rotazioni** della parola
-- ogni rotazione punta al termine originale, così da trovarlo facilmente
+- ogni rotazione punta al termine originale, così da trovarlo facilmente nella fase di query
 ![[Pasted image 20260325103249.png|400]]
 - `$` indica la **fine della parola**
 - serve per trovare parole che iniziano con una lettera e finiscono con un'altra
 	- ci saranno rotazioni dove appare prima del `$` la fine della parola e dopo il `$` l'inizio 
-esempio: 
+esempio di applicazione della query vera e propria: 
 ![[Pasted image 20260325103830.png|500]]
 
 - con una query tipo `X*Y*Z`
@@ -35,7 +35,7 @@ esempio:
 	- poi filtro controllando se ognuna di quelle parole ha `Y` in mezzo
 ###### Bigram (k-gram) indexes
 - Il k-gram index indicizza sottostringhe dei termini e permette di trovare candidati che condividono parti della query, ma richiede un post-filtering per eliminare i falsi positivi.
-- con k=2 creiamo una lista del seguente tipo
+- con $k=2$ creiamo una lista del seguente tipo  
 `hello → $h, he, el, ll, lo, o$`
 - `$h` → parola che **inizia con h**
 - `he` → contiene `"he"`
@@ -90,6 +90,7 @@ esempio:
 	    - insieme di tutte le possibili correzioni
 ##### Noisy Channel Model
 - utilizzo di noisy channel intuition
+	- il **noisy channel model** _(versione base)_ viene usato per stimare la correzione di una **non-word error**
 	- volevo scrivere una parola **corretta `w`**
 	- ma ho scritto **`x` per errore**
 	- dato `x`, trovare la parola corretta `w`
@@ -116,7 +117,7 @@ $$P(w) = C(w) / T$$
 ###### uso di edit distance per eventuali correzioni
 - la **edit distance** misura **quanto due parole sono diverse**
 	- più precisamente:
-	- è il **numero minimo di operazioni** necessarie per trasformare una parola in un’altra	
+		- è il **numero minimo di operazioni** necessarie per trasformare una parola in un’altra	
 	- con operazioni semplici come
 	- **insertion**
 		- inserisco un carattere
@@ -132,6 +133,9 @@ si usa per trovare parole del dizionario **vicine** alla parola sbagliata
     - righe = prefissi della prima parola
     - colonne = prefissi della seconda parola
 - ogni cella contiene il **costo minimo** per trasformare un prefisso nell’altro
+- tabella incompleta ma rende l'idea $\downarrow$ 
+![[Pasted image 20260408102725.png]]
+
 ![[Pasted image 20260325111724.png]]
 - circa **l’80% degli errori** sta entro **edit distance 1**
 - quasi tutti gli errori reali stanno entro **edit distance 2**
@@ -159,8 +163,9 @@ si usa per trovare parole del dizionario **vicine** alla parola sbagliata
 ![[Pasted image 20260325112927.png|400]]
 ###### Channel model
 - definizione operativa del channel model
-- bello vedere nella formula del noisy channel model $P(x∣w)$
-	- cosa è esattamente?
+	- modello che descrive **come una parola corretta $w$** viene trasformata nella parola osservata $x$ a causa di errori (typo)
+	- fa parte del complesso del noisy channel model, questo approfondisce solo la formula $P(x∣w)$
+- vedere nella formula del noisy channel model $P(x∣w)$
 ![[Pasted image 20260325113523.png]]
 
 - esempio con sub:
@@ -171,18 +176,19 @@ si usa per trovare parole del dizionario **vicine** alla parola sbagliata
 
 ![[Pasted image 20260325114032.png]]
 
-###### Concetto di smoothing di laplace
+###### Concetto di smoothing di LaPlace
 - problema:
     - usando la confusion matrix
     - alcune probabilità possono essere **0**
 	- e questo **azzera tutto il prodotto**
 $$P(x∣w)⋅P(w)=0$$
-- aggiungo una piccola quantità a tutte le probabilità(tipo 1) 
+- aggiungo una piccola quantità a tutte le probabilità(tipo 1)  con add-1
 - 👉 così:  nessun evento ha probabilità 0
-
+![[Pasted image 20260408105658.png|400]]
 #### CONTEXT-SENSITIVE SPELL CORRECTION
 - contesto
-	- per real world errors è necessario un contesto
+	- prima abbiamo visto un modello in grado di correggere le *non word*
+	- per **real world** errors è necessario un contesto
 	- es: _form → from_
 	- entrambe le parole sono corrette ma è possibile definire quale delle due è giusta solo in base al contesto
 ##### Noisy channel in base al contesto per spell correction
@@ -201,9 +207,9 @@ $$P(x∣w)⋅P(w)=0$$
 	- questa formula di per se è corretta ma è davvero difficile stimare se tutta la frase è più o meno corretta rispetto a tutte le combinazioni possibili $P(W)$ 
 - di conseguenza per calcolare $P(W)$ si usa:
 ##### Bigram model
-- per calcolare $P(W)$ quanto ogni parola è coerente con la precedente e non l'intera frase tutta insieme
+- per calcolare $P(W)$ vedo quanto ogni parola è coerente con la precedente e non l'intera frase tutta insieme
 	- vado a vedere la probabilità della parola $w_i$ in base alla parola precedente $w_{i-1}$ 
-	- questo tipo di modello si chiama modello markoviano, i modelli markoviani in generale si basano su anche più parole precedenti ma i bigram si fermano a solo 1
+	- questo tipo di modello si chiama *modello markoviano*, i modelli markoviani in generale si basano su anche più parole precedenti ma i *bigram* si fermano a solo 1
 	- $P(w_1…w_n) = P(w_1)P(w_2|w_1)…P(w_n|w_{n−1})$
 ###### Problema di smoothing
 - alcuni bigram possono comparire **0 volte**
