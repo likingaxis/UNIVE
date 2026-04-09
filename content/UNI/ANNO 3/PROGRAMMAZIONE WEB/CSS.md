@@ -578,3 +578,119 @@ overflow: auto;
 	    - impedisce agli elementi di affiancarsi ai float
 	- uso:
 	    - forzare un elemento a stare **sotto** i float
+#### Flexbox Display
+- `display:flex`
+    - consente di controllare la distribuzione degli elementi all’interno di un contenitore
+    - **introduce un nuovo modello di layout**
+        - non si basa più su blocchi/inline o float
+        - ma su una gestione “flessibile” dello spazio
+    - introduce il concetto di:
+        - **container**
+            - elemento padre su cui si applica `display:flex`
+            - definisce le regole di disposizione
+        - **items**
+            - elementi figli diretti del container
+            - vengono disposti automaticamente secondo le regole del container
+    - gli item non sono più gestiti come blocchi normali ma lungo una direzione principale
+- si può definire una `flex-direction: row | column`
+    - determina come vengono disposti gli item
+        - `row` → orizzontale (default)
+        - `column` → verticale
+- il container ha una struttura basata su assi:
+    - **main axis**
+        - asse principale lungo cui vengono disposti gli elementi
+        - dipende da `flex-direction`
+            - `row` → orizzontale
+            - `column` → verticale
+    - **cross axis**
+        - asse perpendicolare al main axis
+        - serve per l’allineamento trasversale degli elementi
+    - **start / end**
+        - indicano l’inizio e la fine degli assi (main-start, main-end, cross-start, cross-end)
+	- ![[Pasted image 20260409165710.png|400]]
+- `flex-wrap:`
+    - `nowrap | wrap | wrap-reverse`
+    - permette agli elementi di andare a capo quando non c’è spazio
+- data la direzione possiamo usare:
+    - `justify-content:`
+        - distribuisce gli elementi lungo il **main axis**
+			- ![[Pasted image 20260409165206.png|250]]
+	-  `align-items`
+        - allinea gli item lungo il **cross axis**
+        - valori:
+            - `flex-start`, `flex-end`, `center`, `stretch`, `baseline`
+- proprietà sugli item:
+    - `order`
+        - permette di cambiare l’ordine degli elementi
+        - default = 0
+        - valori più piccoli → vengono prima
+    - `align-self`
+        - permette a un singolo elemento di ignorare `align-items`
+        - si posiziona indipendentemente dagli altri
+#### LAYOUT DELLE PAGINE
+- semplificando, il layout delle pagine rappresenta come i contenuti si distribuiscono nella pagina
+- si divide principalmente in:
+    - **fluid**
+        - la larghezza è proporzionale al viewport (dimensione del browser)
+            - si lavora con percentuali
+        - **pro**
+            - si adatta automaticamente allo schermo evitando spazi vuoti e scrollbar orizzontali
+        - **contro**
+            - è difficile controllare esattamente il layout e su schermi grandi le righe possono diventare troppo lunghe
+    - **fixed**
+        - la larghezza non dipende dalla finestra del browser
+            - si definisce con i pixel il container
+        - **pro**
+            - permette un controllo preciso del layout ed è più semplice da progettare
+        - **contro**
+            - non si adatta agli schermi: su schermi piccoli si taglia, su schermi grandi lascia spazi vuoti
+- fluido e fisso riguardano **solo la dimensione del container**
+    - il comportamento degli elementi interni dipende da come sono definiti (non è automatico)
+#### SITI RESPONSIVE
+- cosa vuol dire responsive?
+    - è una tecnica che permette al sito di adattarsi automaticamente alla dimensione dello schermo (viewport)
+    - insieme di regole che, per ogni viewport, mostrano una visualizzazione ottimizzata per il dispositivo
+    - stessi contenuti ma presentati in modo diverso a seconda dello schermo
+- interessante sapere:
+    - i primi dispositivi mobili (es. iPhone) dichiaravano un viewport di circa **980px**
+    - poi ridimensionavano il sito per adattarlo allo schermo reale
+- si gestisce con 3 elementi principali:
+    - **controllo del viewport**
+        - tramite tag `meta` dentro `<head>`
+        - es:
+            - `<meta name="viewport" content="width=device-width, initial-scale=1">`
+        - definisce la larghezza reale della pagina sul dispositivo
+    - **media queries**
+        - `@media` in CSS permette di definire regole condizionate
+        - es:
+			```css
+			@media (max-width: 768px) {  
+				body {  
+					background-color: lightblue;  
+				}  
+			}
+			```
+            - se lo schermo ha una certa dimensione → applico certe regole
+        - si basano su:
+            - **media types** (`screen`, `print`, ecc.)
+            - **media features** (`width`, `height`, `orientation`, ecc.)
+        - le query si possono combinare con `and o or con la virgola`
+        - permettono di cambiare layout dinamicamente
+        - **breakpoints**
+            - sono punti di larghezza in cui il layout cambia
+            - definiti nelle media queries
+            - servono per adattare il layout ai diversi dispositivi
+        - strategie:
+            - **mobile first (`min-width`)**
+                - parto da schermi piccoli e aggiungo regole per schermi più grandi
+                - approccio: _progressive enhancement_
+            - **desktop first (`max-width`)**
+                - parto da schermi grandi e riduco per quelli piccoli
+                - approccio: _graceful degradation_
+    - **media fluidi**
+        - elementi (es. immagini) che si adattano al container
+        - tipicamente:
+            - `max-width: 100%`
+            - `height: auto`
+        - permette ai contenuti di ridimensionarsi senza rompere il layout
+chiedi al prof della gerarchia del body
