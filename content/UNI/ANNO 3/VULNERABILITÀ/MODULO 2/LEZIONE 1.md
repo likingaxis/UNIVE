@@ -59,6 +59,8 @@
 	- MX= per la mail
 	- PTR= il client invia al DNS server un indirizzo IP per ricevere il nome
 	- CNAME= **creare un alias** per un altro nome di dominio
+	- TEXT= aggiungi tu
+	- SOA= da aggiungere
 ###### Cosa accade dentro linux
 - prima di contattare il DNS linux controlla
 	- `/etc/hosts/`
