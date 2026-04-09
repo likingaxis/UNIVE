@@ -1,94 +1,52 @@
-###### STILE PER LE LISTE
-- proprietà CSS: `list-style-type`, `list-style-image`, `list-style-position`
-    - servono per modificare l’aspetto delle liste
-    - in particolare permettono di definire:
-        - il tipo di marcatore
-        - un’eventuale immagine come marcatore
-        - la posizione del marcatore rispetto al contenuto
-###### USO DEI LINK
-- con l’attributo `href` posso collegarmi a:
-    - altre pagine, risorse esterne, un punto specifico della stessa pagina
-- per collegarmi a un elemento della stessa pagina uso il suo `id`
-- in `href` posso anche specificare protocolli particolari, ad esempio:
-    - `mailto:` per aprire il client di posta
-    - `tel:` per avviare una chiamata da dispositivi che lo supportano
-###### RESET.CSS
-- `reset.css` è un file CSS usato per azzerare o uniformare gli stili di default applicati dal browser
-    - questi stili di default sono detti **user agent stylesheet**
-- l’obiettivo è partire da una base più controllabile e coerente tra browser diversi
-- storicamente si usava molto per “resettare” margini, padding e altri valori automatici
-#### POSIZIONE DEGLI ELEMENTI
-- gli elementi HTML hanno un comportamento di default:
-    - **inline** → occupano solo lo spazio necessario (es. `span`)
-    - **block** → occupano tutta la riga (es. `div`)
-- questo comportamento può essere modificato con CSS tramite:
-    - `display: inline | block | inline-block | ...`
-- gli elementi hanno anche la proprietà **`position`**
-    - serve a controllare **come l’elemento viene posizionato nella pagina**
-    - valori principali:
-        - `position: static | relative | absolute | fixed`
-- **static (default)**
-    - è il comportamento normale
-    - l’elemento segue il flusso della pagina
-    - **top, left, right, bottom NON hanno effetto**
-- **relative**
-    - l’elemento rimane nel flusso normale
-    - può essere spostato rispetto alla sua posizione originale
-    - esempio:
-        - `left: 80px` → si sposta **verso destra di 80px**
-- **absolute**
-    - l’elemento viene **rimosso dal flusso normale**
-    - si posiziona rispetto al suo **containing block**
-        - cioè: il primo antenato con `position ≠ static`
-    - se non esiste:
-        - si riferisce al `body` (pagina intera)
-    - ⚠️ quindi:
-        - NON occupa più spazio nel layout
-        - può sovrapporsi ad altri elementi
-- **fixed**
-    - simile ad `absolute`, ma:
-        - si posiziona rispetto al **viewport**
-    - quindi:
-        - rimane fermo anche durante lo scroll
-![[Pasted image 20260402141242.png|400]]
-###### SOVRAPPOSIZIONI (Z-INDEX)
-- proprietà: `z-index: number | auto | inherit`
-    - permette di gestire **la profondità (asse Z)** degli elementi
-- funziona solo su elementi **posizionati** (`position ≠ static`)
-- regola:
-    - valore più alto → elemento sopra
-    - valore più basso → elemento sotto
-- di default:
-    - gli elementi più in basso nell’ HTML stanno sopra quelli precedenti
-- INTERAZIONI CON `:HOVER`
-	- posso mostrare/nascondere elementi usando:
-	    - `display: none`
-	    - `display: block` (o altro valore)
-	- combinato con pseudo-classe:
-	    - `:hover`
-	- uso tipico:
-	    - dropdown menu
-	    - tooltip
-	- idea:
-	    - elemento nascosto → appare quando passo sopra un altro elemento
-###### FLOAT
-- proprietà: `float: left | right | none`
-    - sposta un elemento tutto a sinistra o a destra del contenitore
-    - permette agli altri elementi (es. testo) di **scorrere attorno**
-- comportamento:
-    - l’elemento esce **parzialmente dal flusso normale**
-    - il testo e gli elementi inline lo “circondano”
-    - viene posizionato:
-        - a sinistra (`left`)
-        - a destra (`right`)
-- caratteristiche importanti:
-    - ⚠️ non è corretto dire che “non occupa spazio”
-        - occupa spazio, ma **non riserva spazio nel layout come un block normale**
-    - può creare problemi:
-        - elementi successivi possono “salire” e affiancarsi
-        - il contenitore può non estendersi in altezza
-- *CLEAR (CHIUDERE I FLOAT)*
-	- proprietà: `clear: left | right | both | none`
-	    - impedisce agli elementi di affiancarsi ai float
-	- uso:
-	    - forzare un elemento a stare **sotto** i float
+#### Flexbox Display
+- `display:flex`
+	- consente di controllare la distribuzione degli elementi
+	- vivendo il concetto di container e di items vedendo gli item come tante colonne
+	- si può definire una `flex position:row|column`
+		- ti permette di definire gli item come riga o colonna
+		- il container è un elemento e ha come valori
+			- main axis
+				- s
+			- cross axis
+				- s
+			- start e end
+			- `flex wrap` per mandare a capo gli elementi
+		- data la direzione possiamo usare `justify-content` per spartire gli elementi in diversi modi
+			- foto slide 23
+		- `align-items:flex-start|altri` allinea gli item 
+		- `order`
+			- ordina gli elementi in base all'ordine
+		- `align:self` fa posizionare l'elemento indipendentemente dal container
+#### LAYOUT DELLE PAGINE
+- semplificando il layout delle pagine rappresenta come i contenuti si distribuiscono nella pagina e si dividono in
+	- fluid
+		- proporzionale al viewport la larghezza del browser
+			- si lavora con percentuali 
+		- pro e contro a slide 4, scrivi una frase per i pro e una per i contro
+	- fixed
+		- larghezza non dipende dalla finestra del browser
+			- definisci con i pixel il container
+		- pro e contro a slide 6, scrivi una frase per i pro e una per i contro
+- fluido e fisso riguardano la dimensione del container, se dentro ho item non fissi o fluidi non cambia nulla
+#### SITI RESPONSIVE
+- cosa vuol dire responsive?
+	- responsive è una tecnica che rende il sito dimensionato in base al viewport ovvero la dimensione dello schermo del dispositivo
+	- insieme di regole che per ogni viewport mostra una visualizzazione adatta per il dispositivo
+- interessante sapere che gli iphone prima dichiaravano larghezza viewport 980px e poi ridimensionavano il sito
+- si gestisce con 3 comandi specifici
+	- si controlla il viewport
+		- dentro al tag `meta`
+			- slide 15
+	- si adatta il layout con le media queries
+		- `@` in css consente di creare delle regole condizionate
+		- quindi se media è tot dimensione metti queste regole...
+		- slide 18
+		- ci sono tante variabili da poter confrontare le principali a slide 20
+		- le query si possono unire con and
+		- sono presenti i breakpoints
+			- ovvero dei tagli di spazio per definire i punti di rottura per il cambiamento delle regole della dimensione
+			- override con mobile first(min-width) o desktop first(max-width)
+				- salendo in modo incrementale progressive enhancement
+				- o scendendo con graceful degradation
+	- usare media fluid 
+chiedi al prof della gerarchia del body
