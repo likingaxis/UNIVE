@@ -1,0 +1,102 @@
+#### VALUTAZIONE DEI SISTEMI
+- obiettivo: restituire all'utente qualcosa che lo soddisfi
+	- come misurare qualcosa che non siano solo le emozioni degli altri?
+	- senza bias 
+- avere un modo per valutare oggettivamente attraverso un benchmark composto da
+	- insieme dei documenti che definisce il perimetro dell'analisi
+	- insieme di query note replicabili
+	- misurare la rilevanza o non rilevanza per ogni query e ogni documento
+		- qualcosa di replicabile
+- cambio di paradigma con benchmark
+	- per migliorare le cose investire su benchmark che facciano confronto su modelli e portino a migliorie inevitabilmente
+- le singole componenti sono difficili da confrontare di un singolo modello di IR
+	- si valuta tutto il percorso
+##### Processo Gold Standard
+- processo di costruzione dei dati etichettati
+	- gold standard oppure dataset oracolo oppure dataset annotato
+- Step 1 preparare delle query rappresentative
+- Step 2 usare una tecnologia base di IR per prendere tutti i candidati rilevanti, perimetro di analisi che cerca di massimizzare la recall, con falsi positivi
+- Step 3 per ogni query degli esperti stabiliscono se la rilevanza dei documenti selezionati allo step 2 è buona o meno
+	- questo processo prevede più annotatori per avere più confidenza
+- dopo aver creato la nostra collezione documentale
+	- andiamo a :
+#### Precision & Recall
+- un sottoinsieme di documenti rilevanti del gold standard viene confrontato con i documenti rilevanti per il sistema di information retrieval
+	- questo però é troppo stringente quindi usiamo le misure di precision e recall
+- ci sono 4 configurazioni possibili con cui consideriamo questi indici prestazionali
+	- tabella a slide 9
+	- tabella corrispondente con i TP e FN A SLIDE 10
+- formula di recall e formula di precision
+	- facendo la formula di recall non prendiamo i not retrieved and relevant? il prof dice di no ma come è possibile, nella formula effettivamente mi torna ma non capisco bene il concetto di true negative
+- quando conviene usare uno o l'altro
+- se volessi dare valore a entrambe
+	- non conviene fare la media aritmetica perché ...
+	- la prestazione ideale si trova a slide 12
+		- ovvero dove li trovo tutti corretti(Recall) ma allo stesso tempo ho precision 1
+		- precision a 1 e recall a 0, non hai preso nessun documento
+		- recall a 1 e precision a 0, li hai presi tutti
+		- noi cerchiamo il punto in mezzo tra i due
+	- calcolo 
+		- l'accuracy
+			- non viene utilizzata per motivi che bhooo non ho capito!
+				- l'error rate, scelte corrette che hai fatto sulle scelte totali
+					- 1- accuracy
+		- error è error rate o un'altra cosa?
+	- ho bisogno di una media armonica, ovvero la media tra i reciproci
+	- con F-Measure
+		- i sistemi non scrivono F-measure ma F1-measure
+			- perché applicano dei pesi alla precision e recall con F1 la potenza sta a 1
+	- grafico che evidenzia le cose
+- come valutiamo precision e recall?
+	- foto slide 13 con i relevant documents(sono quelli presi dal processo golden?)
+	- precision  recall sono ancora inesatte poiché se avessimo preso i primi 4 test avrebbe vinto uno, invece poi andando avanti sono simili
+- no non fanno schifo precision k e recall k servono solo per vedere meglio come si comportano al tempo K, invece precision e recall ci danno i dati su tutto il set
+- migliorie:
+#### Rank based measures
+##### A Rilevanza binaria
+- una risposta può essere rilevante oppure non lo so
+	- 1 o 0
+###### Precision@K
+- seleziono una treshold K
+	- calcolo le rilevanze dei primi K
+	- Prec@3 2/3
+	- Prec@4 2/4
+- Esiste anche Recall@K
+- foto dei colori!
+	- presenta in teoria sempre la stessa problematica
+- vado a interpolare i dati del grafico ovvero ... spiegazione della cosa
+	- formula
+	- voglio che sia monotona decrescente
+	- rappresenta una impronta digitale che ci spiega come si comporta un sistema con una determinata precision o recall
+	- dopo aver fatto questa interpolazione possiamo ora confrontare per bene le due impronte degli engine di bing e google a slide 22 circa
+	- posso confrontarli su un breakeven point
+##### Mean Average Precision MAP
+- è comunque booleana
+	- in base a diversi K calcola la media aritmetica di precision a k
+- precision per ogni documento rilevante recuperato
+- poi esiste anche la AVERAGE PRECISION che è delle prime k query
+	- MAP è una media macro
+	- micro vs macro
+		- micro: andiamo a giudicare le singole decisioni, vedendo i micro fenomeni
+			- confronta solo la singola query? non può dare sempre lo stesso risultato?
+		- macro: andiamo a vedere la prima query mediata con la seconda ecc...
+- utilizzata ancora tutt'oggi
+##### A più livelli di rilevanza
+- si misura basandosi su una assunzione, prima di tutto deve esserci una scala di giudizio, i migliori devono stare sopra e i peggiori peggiori sotto
+###### Discounted Cumulative Gain
+- è previsto che il guadagno informativo scenda in modo proporzionale all'ordine di apparizione dei risultati
+	- il discount misura quanto è buono il documento in base a quanto sono dovuto scendere per trovarlo
+		- di solito è $1/log(rank)$
+	- partiamo da un range di giudizio di rilevanza che va da 0 a r con r maggiore di 2
+	- il cumulative gain è la somma dei range di rilevanza
+	- il discount è la sottrazione?
+	- DCG formula e spiegazione rapida
+- esempio di applicazione della formula
+- il DCG si divide in discount e gain, spiega bene all'inizio
+- per confrontare questo DCG lo confronto con la controparte ottima ovvero ordinata in ordine dai più rilevanti ai meno rilevanti
+	- misuro la distanza presente tra i due
+###### NDCG 
+- credo sia la formula che carica quanto detto sopra
+- per confrontare questo DCG lo confronto con la controparte ottima ovvero ordinata in ordine dai più rilevanti ai meno rilevanti
+	- misuro la distanza presente tra i due
+- ground truth sarebbe il gold set
