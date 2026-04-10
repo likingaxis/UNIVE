@@ -1,102 +1,288 @@
 #### VALUTAZIONE DEI SISTEMI
-- obiettivo: restituire all'utente qualcosa che lo soddisfi
-	- come misurare qualcosa che non siano solo le emozioni degli altri?
-	- senza bias 
-- avere un modo per valutare oggettivamente attraverso un benchmark composto da
-	- insieme dei documenti che definisce il perimetro dell'analisi
-	- insieme di query note replicabili
-	- misurare la rilevanza o non rilevanza per ogni query e ogni documento
-		- qualcosa di replicabile
-- cambio di paradigma con benchmark
-	- per migliorare le cose investire su benchmark che facciano confronto su modelli e portino a migliorie inevitabilmente
-- le singole componenti sono difficili da confrontare di un singolo modello di IR
-	- si valuta tutto il percorso
+- obiettivo: restituire all’utente qualcosa che lo soddisfi
+    - problema: la soddisfazione dell’utente è **qualcosa di soggettivo**
+        - dipende dalla persona, dal contesto, dall’interfaccia, ecc.
+    - quindi nasce una domanda:
+        - _come posso misurare in modo oggettivo qualcosa che è soggettivo?_
+        - evitando bias e interpretazioni personali
+- soluzione: introdurre un metodo **standard e replicabile**
+    - si usa un **benchmark**, cioè un ambiente controllato di valutazione
+    - composto da:
+        - una **collezione di documenti**
+            - definisce il perimetro su cui lavoriamo
+        - un insieme di **query**
+            - rappresentano bisogni informativi realistici
+            - devono essere riutilizzabili per confronti futuri
+        - un insieme di **giudizi di rilevanza**
+            - per ogni coppia (query, documento)
+            - si stabilisce se il documento è rilevante oppure no
+        - tutto questo serve a rendere la valutazione **riproducibile**
+- idea chiave:
+    - non possiamo misurare direttamente la “felicità” dell’utente
+    - allora usiamo una **proxy**, cioè una misura indiretta che la approssima
+        - in questo caso: la **rilevanza dei documenti**
+    - quindi assumiamo:
+        - se i documenti restituiti sono rilevanti → l’utente sarà soddisfatto
+        - non è perfetto, ma è una buona approssimazione nella pratica
+- cambio di paradigma:
+    - si passa da valutazioni soggettive a una **valutazione empirica**
+    - grazie ai benchmark possiamo:
+        - confrontare sistemi diversi in modo equo
+        - capire quale funziona meglio
+        - migliorare i modelli nel tempo in modo sistematico
+- osservazione importante:
+    - è difficile isolare e confrontare singole componenti (ranking, pesi, stemming, ecc.)
+    - quindi nella pratica si valuta:
+        - **l’intero sistema di IR**
+        - guardando l’output finale rispetto al bisogno informativo dell’utente
 ##### Processo Gold Standard
-- processo di costruzione dei dati etichettati
-	- gold standard oppure dataset oracolo oppure dataset annotato
-- Step 1 preparare delle query rappresentative
-- Step 2 usare una tecnologia base di IR per prendere tutti i candidati rilevanti, perimetro di analisi che cerca di massimizzare la recall, con falsi positivi
-- Step 3 per ogni query degli esperti stabiliscono se la rilevanza dei documenti selezionati allo step 2 è buona o meno
-	- questo processo prevede più annotatori per avere più confidenza
-- dopo aver creato la nostra collezione documentale
-	- andiamo a :
+- non è il benchmark in sé
+    - ma il **processo di costruzione dei dati etichettati**
+    - cioè il dataset che poi useremo per valutare i sistemi
+- nomi equivalenti:
+    - **gold standard**
+    - **dataset oracolo**
+    - **dataset annotato**
+    - → rappresenta la “verità di riferimento” (ground truth)
+- idea:
+    - voglio costruire un dataset dove so già, per ogni query:
+        - quali documenti sono rilevanti
+        - quali non lo sono
+    - questo dataset servirà poi per valutare qualsiasi sistema IR
+- Step 1: preparare delle **query rappresentative**
+    - devono riflettere information need reali
+    - non query casuali
+- Step 2: recuperare i **documenti candidati**
+    - uso un sistema IR “di base”
+    - obiettivo: **massimizzare la recall**
+        - quindi prendere _tutti_ i possibili documenti rilevanti
+    - accetto il fatto che:
+        - ci saranno molti **falsi positivi**
+    - → questo step definisce il **perimetro di analisi**
+- Step 3: **annotazione umana**
+    - per ogni query, degli esperti valutano i documenti
+    - decidono se sono:
+        - rilevanti / non rilevanti
+    - spesso:
+        - ci sono **più annotatori**
+        - per ridurre errori e soggettività
+- osservazione:
+    - la rilevanza non è oggettiva al 100%
+    - quindi avere più giudici aumenta l’affidabilità
+- risultato finale:
+    - otteniamo una **collezione annotata**
+        - documenti + query + giudizi di rilevanza
+    - questo è ciò che useremo come **benchmark**
 #### Precision & Recall
-- un sottoinsieme di documenti rilevanti del gold standard viene confrontato con i documenti rilevanti per il sistema di information retrieval
-	- questo però é troppo stringente quindi usiamo le misure di precision e recall
-- ci sono 4 configurazioni possibili con cui consideriamo questi indici prestazionali
-	- tabella a slide 9
-	- tabella corrispondente con i TP e FN A SLIDE 10
-- formula di recall e formula di precision
-	- facendo la formula di recall non prendiamo i not retrieved and relevant? il prof dice di no ma come è possibile, nella formula effettivamente mi torna ma non capisco bene il concetto di true negative
-- quando conviene usare uno o l'altro
-- se volessi dare valore a entrambe
-	- non conviene fare la media aritmetica perché ...
-	- la prestazione ideale si trova a slide 12
-		- ovvero dove li trovo tutti corretti(Recall) ma allo stesso tempo ho precision 1
-		- precision a 1 e recall a 0, non hai preso nessun documento
-		- recall a 1 e precision a 0, li hai presi tutti
-		- noi cerchiamo il punto in mezzo tra i due
-	- calcolo 
-		- l'accuracy
-			- non viene utilizzata per motivi che bhooo non ho capito!
-				- l'error rate, scelte corrette che hai fatto sulle scelte totali
-					- 1- accuracy
-		- error è error rate o un'altra cosa?
-	- ho bisogno di una media armonica, ovvero la media tra i reciproci
-	- con F-Measure
-		- i sistemi non scrivono F-measure ma F1-measure
-			- perché applicano dei pesi alla precision e recall con F1 la potenza sta a 1
-	- grafico che evidenzia le cose
-- come valutiamo precision e recall?
-	- foto slide 13 con i relevant documents(sono quelli presi dal processo golden?)
-	- precision  recall sono ancora inesatte poiché se avessimo preso i primi 4 test avrebbe vinto uno, invece poi andando avanti sono simili
-- no non fanno schifo precision k e recall k servono solo per vedere meglio come si comportano al tempo K, invece precision e recall ci danno i dati su tutto il set
-- migliorie:
+- idea di base:
+    - confronto:
+        - i documenti **rilevanti nel gold standard**
+        - con quelli **restituiti dal sistema IR**
+    - non basta dire “giusto/sbagliato”
+        - perché il sistema restituisce **insiemi di documenti**, non singole risposte
+    - quindi servono metriche più adatte → **precision** e **recall**
+- rappresentazione:
+    - ci sono 4 configurazioni possibili:
+        - **True Positive (TP)** → documento rilevante e restituito
+        - **False Positive (FP)** → documento non rilevante ma restituito
+        - **False Negative (FN)** → documento rilevante ma NON restituito
+        - **True Negative (TN)** → documento non rilevante e NON restituito
+![[Pasted image 20260410173204.png|300]]
+![[Pasted image 20260410173225.png|300]]
+- formule:
+    - **Precision**
+        - tra i documenti che ho preso, quanti sono davvero rilevanti?
+        - $$P = \frac{TP}{TP + FP}$$
+    - **Recall**
+        - tra tutti i documenti rilevanti, quanti sono riuscito a trovare?
+        - $$R = \frac{TP}{TP + FN}$$
+>[!info]- quando usare precision vs recall:
+>    - **alta precision**
+>        - quando voglio pochi risultati ma buoni
+>        - es: web search (prima pagina)
+>    - **alta recall**
+>        - quando non voglio perdere nulla
+>        - es: ambito legale, medico, intelligence
+
+- trade-off:
+    - precision e recall sono in competizione:
+        - se prendo pochi documenti → alta precision, bassa recall
+        - se prendo tutto → alta recall, bassa precision
+    - non posso massimizzare entrambe contemporaneamente
+- caso ideale:
+    - precision = 1 e recall = 1
+        - → ho preso **tutti e solo** i documenti rilevanti
+    - altri casi:
+        - precision = 1, recall = 0 → non ho preso nulla
+        - recall = 1, precision = 0 → ho preso tutto (anche spazzatura)
+![[Pasted image 20260410173621.png|400]]
+- combinare precision e recall:
+    - non uso la media aritmetica
+        - perché può essere ingannevole (basta avere precision a 1 e recall a 0 per dare 0.5)
+- come misura potrei anche usare:
+	- **accuracy**
+	    - misura: quante classificazioni sono corrette sul totale
+        - $$accuracy = \frac{TP + TN}{TP + FP + FN + TN}$$
+    - **perché NON si usa in IR**
+        - nei sistemi di retrieval:
+            - i documenti non rilevanti (TN) sono **enormemente di più** dei rilevanti
+        - quindi:
+            - anche un sistema stupido che non restituisce nulla avrebbe accuracy altissima
+- **error rate**
+    - è semplicemente:
+        - $$error = 1 - accuracy$$
+voglio una singola misura che tenga conto di entrambe
+- soluzione:
+    - uso la **media armonica**
+        - cioè una media che dà più peso ai valori piccoli
+        - quindi:
+            - se precision o recall è bassa → il risultato finale scende molto
+		- **F-Measure**
+		    - combina precision e recall
+	        - **F1-measure**
+	            - $$F1 = \frac{2PR}{P + R}$$
+			- i sistemi non scrivono `F-measure` ma F1-measure 
+				- perché applicano dei pesi alla precision e recall con F1 la potenza sta a 1
+		    - F1 è alta solo se:
+		        - precision è alta
+		        - recall è alta
+			    - quindi misura il **bilanciamento tra le due**
+![[Pasted image 20260410174904.png|500]]
+- problema importante:
+    - precision e recall **globali** non raccontano tutto
+    - perché:
+        - nel ranking l’ordine conta!
+	    - esempio in foto:
+		    - sistema A mette documenti rilevanti subito
+		    - sistema B li mette in fondo
+		    - → stessi P e R, ma qualità percepita diversa
+- quindi:
+    - valutare solo su tutto il set è limitante
+    - introduciamo misure basate su ranking
 #### Rank based measures
+servono metriche che tengano conto della **posizione**
 ##### A Rilevanza binaria
-- una risposta può essere rilevante oppure non lo so
+- una risposta può essere rilevante oppure no
 	- 1 o 0
 ###### Precision@K
-- seleziono una treshold K
+- idea:
+    - guardo solo i **primi K risultati**
+    - calcolo quanti sono rilevanti
+- formula:
+    - $Precision@K = \frac{\text{relevant nei primi K}}{K}$
+- interpretazione:
+    - misura la qualità dei risultati **che l’utente vede davvero**
+    - molto importante per:
+        - web search
 	- calcolo le rilevanze dei primi K
 	- Prec@3 2/3
 	- Prec@4 2/4
-- Esiste anche Recall@K
-- foto dei colori!
-	- presenta in teoria sempre la stessa problematica
-- vado a interpolare i dati del grafico ovvero ... spiegazione della cosa
-	- formula
-	- voglio che sia monotona decrescente
-	- rappresenta una impronta digitale che ci spiega come si comporta un sistema con una determinata precision o recall
-	- dopo aver fatto questa interpolazione possiamo ora confrontare per bene le due impronte degli engine di bing e google a slide 22 circa
+- Esiste anche $Recall@K$
+![[Pasted image 20260410175036.png|400]]
+- i quadratini sono i risultati della singola query
+- anche qui precision e recall cambiano al variare di K
+- quindi voglio capire:
+    - come evolve il sistema al variare della soglia
+- costruisco un grafico:
+	- ogni punto corrisponde a un valore di K
+		- ![[Pasted image 20260410175412.png|300]]
+- problema:
+    - la curva precision-recall reale è **irregolare (a zig-zag)**
+        - perché:
+            - quando aggiungo un documento non rilevante → precision scende
+            - quando aggiungo uno rilevante → precision sale
+    - quindi:
+        - è difficile confrontare due sistemi direttamente
+- vado a **interpolare i dati del grafico**
+	- cioè costruisco una nuova curva più regolare
+		- $P(R) = \max \{ P' : R' \geq R \ \land \ (R', P') \in S \}$
+			- per un certo valore di recall $R$:
+		    - considero tutti i punti della curva con recall $R' \geq R$
+		    - tra questi prendo la **precision massima**
+				- quindi:
+				    - non uso il valore “locale”
+				    - ma il **miglior valore ottenibile da quel punto in poi**
+	- è **monotona decrescente**
+		- la curva interpolata rappresenta una sorta di:
+	        - **impronta digitale del sistema**
+	    - descrive come il sistema si comporta al variare del recall
+	        - in modo più stabile e meno rumoroso
+    - dopo l’interpolazione:
+        - posso confrontare correttamente sistemi diversi
+        - (es: Bing vs Google)
+		- ![[Pasted image 20260410180214.png|400]]
+	        - confronto curve “lisce” e non influenzate da oscillazioni casuali
 	- posso confrontarli su un breakeven point
-##### Mean Average Precision MAP
-- è comunque booleana
-	- in base a diversi K calcola la media aritmetica di precision a k
-- precision per ogni documento rilevante recuperato
-- poi esiste anche la AVERAGE PRECISION che è delle prime k query
-	- MAP è una media macro
+	    - **break-even point**
+	        - punto in cui:
+	            - precision = recall
+		    - è solo un riassunto
+##### Average Precision (AP) e Mean Average Precision (MAP)
+- sono comunque binarie
+- *Average Precision (AP)*
+	- è la metrica per **una singola query**
+	- idea:
+	    - non guardo un singolo K
+	    - ma considero:
+	        - **tutte le posizioni in cui trovo un documento rilevante**
+	- procedimento:
+	    - ogni volta che trovo un documento rilevante:
+	        - calcolo la **Precision@K** in quella posizione
+	    - poi faccio la **media** di questi valori
+	-  non guardo un singolo K
+	    - ma considero:
+	        - **tutte le posizioni in cui trovo un documento rilevante**
+	    - ogni volta che trovo un documento rilevante:
+	        - calcolo la **Precision@K** in quella posizione
+    - poi faccio la media di questi valori
+![[Pasted image 20260410180804.png|500]]
+- *Mean Average Precision (MAP)*
+	- estensione della AP a **più query**
+	    - è la **media delle AP** su tutte le query
+- $MAP = \frac{1}{|Q|} \sum_{q \in Q} AP(q)$
+    - prima calcolo $AP$ per ogni query
+    - poi faccio la media
+	- MAP è una media di tipo macro
 	- micro vs macro
-		- micro: andiamo a giudicare le singole decisioni, vedendo i micro fenomeni
-			- confronta solo la singola query? non può dare sempre lo stesso risultato?
-		- macro: andiamo a vedere la prima query mediata con la seconda ecc...
-- utilizzata ancora tutt'oggi
+		- micro: considera tutte le decisioni insieme, query con più documenti pesano di più
+		- macro: ogni query pesa allo stesso modo indipendentemente da quanti documenti rilevanti ha
+- MAP utilizzata ancora tutt'oggi
 ##### A più livelli di rilevanza
-- si misura basandosi su una assunzione, prima di tutto deve esserci una scala di giudizio, i migliori devono stare sopra e i peggiori peggiori sotto
+- introduciamo una **scala di rilevanza**
+	- es: 0, 1, 2, 3
+- i più rilevanti devono stare **più in alto nel ranking**
 ###### Discounted Cumulative Gain
 - è previsto che il guadagno informativo scenda in modo proporzionale all'ordine di apparizione dei risultati
-	- il discount misura quanto è buono il documento in base a quanto sono dovuto scendere per trovarlo
-		- di solito è $1/log(rank)$
-	- partiamo da un range di giudizio di rilevanza che va da 0 a r con r maggiore di 2
+- voglio misurare il **guadagno informativo totale**
+- tenendo conto di:
+    1. **quanto è rilevante un documento (gain)**
+    2. **dove si trova nel ranking (discount)**
+- si divide in:
+	- *GAIN*
+		- è la “qualità” del documento
+		- dipende dal livello di rilevanza:
+		    - più è alto → più contribuisce
+	    - uso il valore di rilevanza $r_i$
+	- *DISCOUNT*
+		- tiene conto della posizione nel ranking
+		    - un documento in alto vale di più
+		    - uno in basso vale meno
+		    - $\frac{1}{\log_2(i)}$
+	- partiamo da un range di giudizio di rilevanza $[0,r]$ con $r>2$
 	- il cumulative gain è la somma dei range di rilevanza
-	- il discount è la sottrazione?
-	- DCG formula e spiegazione rapida
-- esempio di applicazione della formula
-- il DCG si divide in discount e gain, spiega bene all'inizio
-- per confrontare questo DCG lo confronto con la controparte ottima ovvero ordinata in ordine dai più rilevanti ai meno rilevanti
-	- misuro la distanza presente tra i due
-###### NDCG 
-- credo sia la formula che carica quanto detto sopra
-- per confrontare questo DCG lo confronto con la controparte ottima ovvero ordinata in ordine dai più rilevanti ai meno rilevanti
-	- misuro la distanza presente tra i due
-- ground truth sarebbe il gold set
+$$CG = r_1+r_2+..r_n$$
+- il Discount cumulative Gain
+	- misura i contributi dei documenti in ordine di apparizione
+		- quelli più in fondo pesano meno
+$$DCG_p = rel_1 + \sum_{i=2}^{p} \frac{rel_i}{\log_2 i}$$
+
+###### NDCG (Normalized Discounted Cumulative Gain)
+- il DCG che abbiamo visto prima misura quanto è buono un ranking tenendo conto sia della rilevanza dei documenti sia della loro posizione.  
+    Però ha un problema importante: **il valore del DCG da solo non è facilmente confrontabile tra query diverse**.  
+    Questo succede perché:
+    - ogni query può avere un numero diverso di documenti rilevanti
+    - e distribuzioni di rilevanza diverse
+- per risolvere questo problema si introduce l’**NDCG**, che è semplicemente una **versione normalizzata del DCG**.  
+    - prendo il mio risultato reale
+    - lo confronto con il **miglior risultato possibile**(ranking ideale)
+$$NDCG = \frac{DCG}{IDCG}$$
