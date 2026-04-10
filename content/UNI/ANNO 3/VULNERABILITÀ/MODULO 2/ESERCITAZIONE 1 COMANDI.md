@@ -8,3 +8,5 @@ SE HA LA PORTA 53 è un DNS
 #### ES2
 `dnsenum vdsisecurity.lab --dnsserver 192.168.14.95 -f subdomains-top1million-5000.txt `
 #### ES3
+
+nella esercitazione con la richiesta http prova a inviare una richiesta con ping
