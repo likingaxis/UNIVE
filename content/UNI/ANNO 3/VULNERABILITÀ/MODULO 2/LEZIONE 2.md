@@ -116,7 +116,7 @@
 		- serve per:
 		    - capire presenza di **firewall**
 		    - mappare filtri di rete
-- *PING / HOST DISCOVERY (`-sP` / `-sn`)*
+- *PING / HOST DISCOVERY ( `-sn`)*
 	- serve per:
 	- trovare host attivi
 		- due casi:
@@ -228,7 +228,7 @@
 		- oppure rispondono sempre in modo generico
 #### Esercitazione
 `ip -a` 
-`sudo nmap -sP ip`
+`sudo nmap -sn ip`
 - scansione host
 - `sudo nmap -sS indirizzo ip target -p-`
 - `sudo nmap -sS indirizzo ip target -p- -Sv` 

@@ -1,0 +1,38 @@
+#### NETWORK ANALYSIS
+- Come analizzare il traffico nella rete
+	- Utilizziamo un software di sniffing in grado di interpretare i pacchetti header relativi al livello 2,3 e 4
+##### Software di sniffing
+- `TcpDump`
+	- basato su CLI ci agganciamo a una determinata interfaccia di rete sul pc e scansioniamo il loro traffico
+	- ad esempio usato per interfacce di rete come cavi ethernet
+	- formato del file chiamato `.pcap`
+	- esempio a slide 4/18
+	- ti fa vedere poi i pacchetti che vengono scambiati le corrispondenze a slide 4 quelli a capo
+- `Wireshark`
+	- protocol network analyzer
+	- permette di analizzare e catturare il traffico in tempo reale
+	- utilizza sempre i file `.pcap`
+	- identifica il pacchetto e lo disseziona cercando di dare un senso a tutti i byte del pacchetto
+		- con tcpDump uno ha solo una sequenza di byte senza averli interpretati
+	- applico dei filtri all'analisi del traffico utilizzando delle regole
+		- `ip.adddr==192.168.1.10`
+			- posso usare operatori logici con `||` `&&` `!` `==` `!=` ` contains` `matches` `in`
+		- posso specificare protocollo e campi vari
+	- significato di regex e aggiungilo anche a web
+	- seguire stream tra entità
+		- preso un pacchetto con uno stream type specifico `(TCP, UDP, HTTP, TLS)` posso seguirlo vedendo tutto il payload scambiato
+		- payload significato
+	- tool di analisi e aggregazione per identificare eventuali problemi
+		- Protocol Hierarchy
+			- gerarchia di comunicazione all'interno della rete
+			- se ho qualcuno che fa port scanning posso vedere se ci sono solo tentativi di connessione TCP(Handshake) senza avere altre richieste
+		- Endpoints
+			- sintetizza tutti gli endpoint delle varie comunicazioni
+				- ti dice indirizzo ip di mittente e destinatario di uno scambio di pacchetti
+		- Conversazioni
+			- ti dice tutte le comunicazioni delle parti `A<->B`
+		- `I/O` Graph
+			- grafico dell'input e output su quel determinato traffico
+		- Expert information panel
+			- pannello che riassume le operazioni di decodifica di un pacchetto svolte
+			- Tipo evidenzia pacchetti stealth con errore con `xmas` e quella roba la
