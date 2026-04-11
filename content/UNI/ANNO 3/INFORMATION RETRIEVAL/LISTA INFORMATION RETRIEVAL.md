@@ -109,6 +109,7 @@
 					- G numero del gap
 					- *CODIFICA UNARIA*
 						- bit+0
+						- $P(n)=2^{-n}$
 					- *GAMMA CODE*
 						- tolgo il primo 1 ottengo `offset`
 						- `lunghezza unario offset+offset`
