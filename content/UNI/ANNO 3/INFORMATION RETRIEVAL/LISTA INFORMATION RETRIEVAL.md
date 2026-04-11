@@ -1,4 +1,5 @@
 #### DEFINIZIONE DI IR
+- definizione di information retrieval
 - modello di ricerca generico
 	- *user task, information need, query, query terms, search engine, collection*
 - *MISURA DI UN SISTEMA IR*
@@ -6,21 +7,24 @@
 		- TP/TP+FP
 	- *RECALL*
 		- TP/TP+FN
-- notazione sparsa e densa
+- notazione *sparsa* e *densa*
 - *inverted index come struttura*
 	- IMPLEMENTAZIONE E COSTRUZIONE
-		- tokenizer
-		- linguistic modules
-		- preprocessing
-		- indexer
-		- `term → df → posting list(docID)`
+		- **tokenizer**
+			- token stream
+		- **preprocessing** con linguistic modules 
+			- stemming o lemmatizzazione
+		- **indexer**
+			- `(term, docID)`
+			- poi un raggruppamento che ci consente di avere
+				- `term → df → posting list(docID)`
 - *QUERY PROCESSING*
 	- boolean query
 		- algoritmo di merge
 		- `boolean` retrieval model
 		- `biword` indexing
 		- positional indexing
-#### PROBLEMA DI MEMORIZZAZIONE
+#### PROBLEMA DI MEMORIZZAZIONE IN FASE DI COSTRUZIONE
 - *RCV1*
 	- token stream
 	- term
@@ -35,17 +39,20 @@
 	- master node
 	- node
 	- $1-\text{operatività}^\text{numero \ macchine}$ 
-	- term partitioned index
-	- document partitioned index
+	- *term partitioned index*
+	- *document partitioned index*
 	- Modello map reduce
-		- map
-		- reduce
-		- Fault tolerance
-		- task paralleli
+		- *map*
+			- split dei documenti
+			- parsing dei documenti
+		- *reduce*
+			- raggruppamento degli split
 		- data flow
-			- fase di parsing(Map)
-				- shuffle partitioning
-			- fase di inversione(Reduce)
+			- *fase di parsing(Map)*
+				- `parsing+tokenization`
+				- segment files
+			- *shuffle/partitioning*
+			- *fase di inversione(Reduce)*
 		- partition tolerance, availability, consistency
 - *DYNAMIC INDEXING*
 	- main index
