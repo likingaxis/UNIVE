@@ -1,5 +1,6 @@
-### PROBLEMA DI MEMORIZZAZIONE
-il numero totale di token $T$ nella collezione può essere enorme, quindi salvare tutte le coppie `(termID, docID)` in memoria può diventare impossibile.
+### PROBLEMA DI MEMORIZZAZIONE IN FASE DI COSTRUZIONE
+il numero totale di token $T$ nella collezione può essere enorme, quindi salvare tutte le coppie `(termID, docID)`
+- quindi costruire un indice solo in memoria ram potrebbe essere difficile
 → Token string = la singola parola estratta dal testo del documento.
 #### RCV1
 **RCV1 (Reuters Corpus Volume 1)** è una collezione di documenti usata spesso negli esempi di Information Retrieval per **stimare dimensioni e costi della costruzione di un indice**.
@@ -51,6 +52,7 @@ Dato che il dataset è troppo grande per stare in memoria:
 - si usa **solo una parte della RAM** (ad esempio il 90%)
 - si salva il resto su **disco**
 ##### Procedura:
+- il tutto organizzato con un dizionario con AVL
 - sia **N** il numero totale di coppie `(termID, docID)`
 - si divide il token stream in **blocchi di dimensione B**
 - B è scelto in modo che **ogni blocco possa stare in RAM**
@@ -60,12 +62,12 @@ Dato che il dataset è troppo grande per stare in memoria:
 		- costo `O(B log B)`
 		- facciamolo per ogni blocco
 		- ``O((N/B) * B log B)`
-			- `O(N log B)``
+			- `O(N log B)`
 			- dove $B$ sarebbe il token stream del singolo blocco
-###### Fase di merge
 Durante il merge:
 - si leggono i blocchi dal disco
-- si uniscono le posting list dei termini uguali
+- si uniscono le posting list dei termini uguali ma sempre controllando il loro ordine
+- prendiamo per assodato che nella fase di tokenization e di divisione in blocchi i docID siano incrementali
 Se un termine compare in più blocchi:
 `postings_final = concatenazione(postings_blocco1, postings_blocco2, ...)`
 Dato che ogni blocco è già ordinato:
@@ -80,7 +82,6 @@ Dato che ogni blocco è già ordinato:
 	- lavora **un blocco alla volta in memoria**
 	- per ogni blocco costruisce direttamente un **indice invertito parziale**
 	- quando la memoria finisce, scrive il blocco su disco e ricomincia con un nuovo blocco.
-### Caratteristiche principali
 - **Single-pass**: i token vengono processati **una sola volta**
 	- non usa una struttura globale `term -> termID` come BSBI
 	- usa direttamente i **termini** invece dei `termID`
@@ -91,30 +92,40 @@ Dato che ogni blocco è già ordinato:
 ![[Pasted image 20260314184903.png]]
 - costi
 	- `Θ(T)`
-###### USO DELLE TABELLE HASH
-- si usa una **tabella hash** come dizionario
-	- la hash table serve a capire **se un termine è già presente nel dizionario del blocco**
-- se il termine è già presente, si recupera la sua **posting list**
-- se non è presente, si crea una **nuova entry nel dizionario** e una nuova posting list.
-Quando la memoria è piena:
-1. **si ordinano i termini del dizionario del blocco**
-2. si scrivono su disco:
-    - il **dizionario**
-    - le **posting list**
-Quindi su disco viene salvato **un blocco di indice invertito già costruito**.
-Poi:
-- si svuota la RAM
-- si ricomincia a processare **i token successivi della collezione**.
-Alla fine avrai **molti blocchi di indice invertito su disco**.
-Dopo aver processato tutta la collezione:
-- si fa il **merge dei blocchi**
-- si uniscono le posting list dello stesso termine
-- si ottiene **l’indice invertito finale**
-- `sort(termine1, termine2, …)`
-	- cioè ordini le **chiavi della hash table**
+###### PASSAGGI
+- 1. Processing dei token
+	- si leggono i documenti sequenzialmente
+	- si generano i token `(term, docID)`
+	- si continua finché la **RAM si riempie**
+- 2. Struttura dati
+	- si usa una **tabella hash** come dizionario
+	    - chiave → **termine**
+	    - valore → **posting list (lista di docID)**
+- 3. Inserimento dei token
+	- Per ogni token `(term, docID)`:
+	- se il termine è **già presente** nella hash table:
+	    - si recupera la sua **posting list**
+	    - si aggiunge il `docID` alla lista
+	- se il termine **non è presente**:
+	    - si crea una **nuova entry nel dizionario**
+	    - si crea una nuova **posting list**
+- 4. Quando la memoria è piena
+	-  si **ordinano i termini del dizionario**
+	    - cioè le **chiavi della hash table**
+	- si scrivono su disco:
+	    - il **dizionario ordinato**
+	    - le **posting list**
+-  5. Ripartenza
+	- si **svuota la RAM**
+	- si ricomincia a processare i **token successivi**
+- 6. Alla fine ottieni:
+	- **molti blocchi su disco**
+	- si fa il **merge dei blocchi**
+		- per ogni termine:
+		    - si uniscono le posting list provenienti dai vari blocchi
+	- si ottiene **l’inverted index finale**
 ##### INDEXING DISTRIBUITO
-- significato di distribuito
-	- ricordiamo che distribuito significa che il lavoro di costruzione dell’indice **non viene fatto su una singola macchina**, ma viene **suddiviso tra molte macchine (nodi)** che lavorano in parallelo.
+- ricordiamo che distribuito significa che il lavoro di costruzione dell’indice **non viene fatto su una singola macchina**, ma viene **suddiviso tra molte macchine (nodi)** che lavorano in parallelo.
 - *SLA*
 	- *Service level agreement*
 		- Lo **SLA** indica il livello di disponibilità del sistema, cioè **quanto tempo il sistema deve rimanere operativo**.
@@ -137,7 +148,7 @@ Macchina 1 → termini A–F
 Macchina 2 → termini G–P  
 Macchina 3 → termini Q–Z
 ```
-Se l’utente cerca:
+Se l’utente IN FASE DI QUERY E NON DI COSTRUZIONE cerca:
 `brutus AND caesar`
 la query deve essere inviata **alle macchine che gestiscono quei termini**.
 
@@ -151,7 +162,7 @@ Macchina 1 → documenti 1–1M
 Macchina 2 → documenti 1M–2M  
 Macchina 3 → documenti 2M–3M
 ```
-Se l’utente cerca:
+Se l’utente IN FASE DI QUERY E NON DI COSTRUZIONE cerca:
 `brutus AND caesar`
 la query viene **eseguita su tutte le macchine**, ma ciascuna restituisce risultati solo per **i propri documenti**.
 
@@ -169,45 +180,18 @@ Queste coppie vengono scritte in **segment files**.
 - le coppie con lo stesso termine vengono **raccolte insieme**
 - si costruiscono le **posting list finali**.
 Ogni nodo reduce si occupa **di un sottoinsieme dei termini**.
-##### Fault tolerance
-Un aspetto fondamentale dei sistemi distribuiti è la **tolleranza ai guasti**.
-- esiste un **master node** che assegna i task alle macchine disponibili
-- i nodi eseguono i task (map o reduce)
-Se una macchina fallisce:
-- il **master riassegna il lavoro** a un’altra macchina disponibile.
-Questo meccanismo permette:
-- **scalabilità**
-- **affidabilità**
-- capacità di lavorare anche con **macchine economiche e non perfettamente affidabili**.
-##### Problema del master
-Il **master node** coordina tutto il sistema:
-- assegna i task
-- monitora i worker
-- riassegna il lavoro in caso di guasto.
-Se il master si rompe:
-- il sistema può avere problemi.
-Per questo nei sistemi reali:
-- si usano **più master**
-- oppure meccanismi di **replica o backup del master**
 
 - **MapReduce** viene usato soprattutto nella **fase di costruzione dell’indice** (index construction).
 - **Term-partitioned** e **Document-partitioned** descrivono **come l’indice è distribuito tra le macchine**, cosa che è particolarmente importante **quando si eseguono le query (ricerca)**.
-##### Task Paralleli
-- per svolgere adeguatamente il Map Reduce
-- utilizzeremo due task paralleli che rappresentano map e reduce
-	- parser(Map)
-		- lettura del documento producendo i token (token stream)
-			- poi costruendo le coppie `(term,docID)`
-	- inverter(Reduce)
-		- prendono tutte le coppie con lo stesso termine
-			- costruiscono le **posting list**
-- i documenti vengono divisi in **n split** per distribuire il lavoro
-- con il data flow spiegherò meglio la gestione di tutte queste operazioni
 ##### Data Flow dell'index construction
 - il data flow rappresenta le procedure di costruzione dell'indice
 - il **master** divide la collezione in **split** (blocchi di documenti) e li assegna dinamicamente ai nodi disponibili
     - se un nodo fallisce, il task viene riassegnato → **fault tolerance**
+    - **alta availability** grazie a backup dei dati
     - **Fault tolerance** = capacità del sistema di continuare a funzionare anche se alcune parti si rompono
+- utilizzeremo due task paralleli che rappresentano map e reduce
+	- parser(Map)
+	- inverter(Reduce)
 ###### Fase di parsing (Map)
 - ogni nodo (parser) prende uno **split**
 - legge i documenti e fa:
@@ -216,7 +200,7 @@ Per questo nei sistemi reali:
         `(term, docID)`
 - le coppie vengono scritte in **segment files**
     - organizzati per **partizioni di termini** `(es. a–f, g–p, q–z)`
-👉 ogni parser quindi costruisce una **struttura locale temporanea**, NON ancora l’indice finale
+- costruisce una **struttura locale temporanea**, NON ancora l’indice finale
 ###### Shuffle / Partitioning
 - le coppie vengono **raggruppate per termine**
 - tutti i dati relativi allo stesso termine vengono inviati allo stesso nodo (inverter)
@@ -227,16 +211,7 @@ Per questo nei sistemi reali:
     `term → [docID1, docID2, ...]`
 - producono una parte dell’**inverted index finale**
 ![[Pasted image 20260317184416.png|400]]
-###### Continuità di servizio e affidabilità
-- grazie alla distribuzione:
-    - il sistema continua a funzionare anche se alcuni nodi falliscono
-- i dati (segment files / posting) sono spesso:
-    - **replicati su più dischi/macchine**
-    - quindi sempre disponibili
-👉 questo garantisce:
-- **alta availability**
-- **fault tolerance**
-###### Trade-off dei sistemi distribuiti
+
 - vogliamo:
     - **partition tolerance** (il sistema funziona anche con problemi di rete)
     - **availability** (sempre operativo)
@@ -280,16 +255,18 @@ Per questo nei sistemi reali:
 - nasce per migliorare la strategia semplice **main index + auxiliary index**, in cui il merge con il main è troppo costoso se fatto troppo spesso
 ##### Idea principale
 - invece di avere solo:
-    - un **main index**
+    - un **main index** 
     - un **auxiliary index**
 - mantengo **più indici di dimensione crescente**(vedi foto sotto)
-- ogni indice ha dimensione doppia del precedente:
 	- in memoria tengo:
 	    - **$Z_0$**, il più piccolo indice temporaneo
 		    - è l'auxiliary index
 	- su disco tengo:
 	    - **$I_0, I_1, I_2, ...$**
 		    - è il main
+- abbiamo il nostro auxiliary index $Z_0$, ogni volta che supera una certa soglia in termini di dimensioni va a diventare un main index $I_0$, se già presente un main index $I_0$ quest'ultimo verrà combinato con l'ultimo main index disponibile per crearne uno nuovo $I_k$
+	- ad ogni merge i livelli impiegati vengono eliminati permettendo la loro ricostruzione nuova
+
 ![[Pasted image 20260317191928.png|400]]
 ###### PSEUDOCODICE DI LOG MERGE
 ![[Pasted image 20260317192130.png]]
@@ -311,12 +288,6 @@ Per questo nei sistemi reali:
         - $\log(T/n)$
 	    - costo totale:
 	        - $O(T \log(T/n))$
-👉 idea intuitiva:
-- accumulo nuovi posting in **$Z_0$**
-- quando $Z_0$ è pieno:
-    - o lo trasformo in **$I_0$**
-    - oppure lo fondo con un indice già esistente
-- il merge continua “a cascata”, un po’ come un **riporto in binario**
 ###### MULTIPLE INDEXES
 I **multiple indexes** sono una struttura in cui l’informazione non è contenuta in un unico inverted index, ma è distribuita su **più indici separati**, che devono essere consultati insieme durante la ricerca.
 - presenti in ogni sistema con DYNAMIC INDEXING compreso quello che usa il log merge
@@ -331,7 +302,7 @@ I **multiple indexes** sono una struttura in cui l’informazione non è contenu
 	- sono spesso ordinate **per tempo (reverse chronological)**
 		- quindi:
 		    - i documenti più recenti sono in fondo (o in cima)
-👉 per query real-time:
+per query real-time:
 - si parte dagli elementi più recenti
 - si scorrono velocemente le posting list
 - molto efficiente per contenuti freschi (tweet)

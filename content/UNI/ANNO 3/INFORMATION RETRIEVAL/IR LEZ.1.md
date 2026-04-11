@@ -13,15 +13,12 @@
 	- È il **bisogno informativo reale** dell’utente.
 	- È importante per misurare l'efficacia del modello.
 - *Query*
-	- La **query** è ciò che l’utente scrive nel motore di ricerca.
-
-- *Query Terms* sono presenti tra **query** e **search engine** , cioè estrazioni dei termini in una forma comprensibile al motore di ricerca.
-
+	- La **query** è ciò che l’utente scrive nel motore di ricerca. 
 - *Search Engine*
 	- Il motore di ricerca prende la **query** e cerca nei documenti.
 	- l’**information need è nascosto** per il search engine.
 - *Collection*
-	- È la **collezione di documenti** in risposta alla query
+	- È la **collezione di documenti** usata per cercare la risposta alla query
 
 >[!tip] **Information need vs Query**
 > - **Information need**: il bisogno informativo dell’utente, cioè il tema o l’argomento su cui vuole ottenere informazioni.
@@ -52,14 +49,14 @@ Attenzione: la differenza può riferirsi a **due cose diverse**:
 	- indica **come il fenomeno è realmente** (es. i dati sono naturalmente sparsi perché molti valori sono zero).
 - **Modo in cui lo rappresentiamo:** 
 	- indica **come scegliamo di memorizzare o modellare quei dati nel sistema** (es. rappresentazione sparsa o densa in memoria).
-###### Rappresentazione sparsa
-- si memorizzano **solo gli elementi diversi da zero**
-- si evitano i bit inutili a 0
-###### Rappresentazione densa
-- si memorizzano **tutti i valori**, anche quelli inutili (0)
+- *Rappresentazione sparsa*
+	- si memorizzano **solo gli elementi diversi da zero**
+	- si evitano i bit inutili a 0
+- *Rappresentazione densa*
+	- si memorizzano **tutti i valori**, anche quelli inutili (0)
 
 Nel caso dell’IR le matrici sono **molto sparse**, perché la maggior parte dei termini **non appare nella maggior parte dei documenti**.
-##### Struttura dati utilizzata: matrice a indice inverso
+##### Struttura dati utilizzata: inverted index
 Idea iniziale:
 - per ogni **termine** memorizziamo la **lista dei documenti che lo contengono**
 - i documenti sono identificati da un **docID**
@@ -109,7 +106,7 @@ colore rossi
 ```
 problema: a quale posting list associare "rossi"?
 - viene affrontato dalla normalizzazione linguistica
-
+- Stemming
 - Lemmatizzazione
 	- Processo che fa parte della normalizzazione linguistica e porta una parola alla sua **forma base (lemma)**
 Esempio:
@@ -181,12 +178,10 @@ PSEUDOCODICE MOLTO UTILE
 
 ### BOOLEAN RETRIEVAL MODEL
 - *definizione e idea*
-	- **definizione e idea**
-	    - modello di Information Retrieval basato su **query booleane**
-	    - i documenti vengono rappresentati come **insiemi di parole**
-	    - una query è una **espressione logica** composta da termini e operatori booleani
-	    - il sistema restituisce **tutti e solo i documenti che soddisfano la condizione logica**
-	    - le query vengono risolte usando operazioni di **merge sulle postings list** dell’inverted index
+	- modello di Information Retrieval basato su **query booleane**
+	- i documenti vengono rappresentati come **insiemi di parole**
+	- una query è una **espressione logica**
+	- le query vengono risolte usando operazioni di **merge sulle postings list** dell’inverted index
 	- **operatori**
 	    - **AND** → intersezione delle postings list
 	    - **OR** → unione delle postings list
@@ -252,6 +247,7 @@ nel positional index non salviamo il testo completo ma:
 - termine
 - docID
 - **posizione della parola**
+- utile anche per proximity queries
 dato che un documento ha circa **1000 parole**, le posizioni possibili sono:
 $$1 → 1000$$
 per rappresentare N valori servono circa:
