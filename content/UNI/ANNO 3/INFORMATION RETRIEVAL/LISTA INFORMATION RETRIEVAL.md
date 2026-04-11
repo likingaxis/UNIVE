@@ -72,9 +72,13 @@
 - lossy
 - preprocessing
 	- rimozione stopword
+		- posting
 	- case folding
+		- dizionario
 	- eliminazione numeri
+		- posting
 	- stemming
+		- dizionario
 - *legge di heaps*
 	- $M=kT^b$
 		- $M$ è il numero di termini distinti
@@ -85,32 +89,35 @@
 - *legge di Zipf's*
 	- $cf_i \approx \frac{K}{i}$
 - *TECNICHE DI COMPRESSIONE*
-	- *versione naive*
-		- 20byte
-	- *dictionary as a string*
-		- puntatori offset oppure lunghezza
-			 - **4 byte** per la frequenza
-			- **4 byte** per il puntatore alla postings list
-			- **3 byte** per il puntatore al termine nella stringa
-			- **8 byte** in media per il termine stesso nella stringa
-	- *dictionary as a string con blocchi*
-		- $M/k$ puntatori
-	- *front coding*
+	- *TECNICHE PER I TERMINI*
+		- *versione naive*
+			- 20byte
+		- *dictionary as a string*
+			- puntatori offset oppure lunghezza
+			- bit per puntatore≈$log_2​(total \ string \ length)$
+				 - **4 byte** per la frequenza
+				- **4 byte** per il puntatore alla postings list
+				- **3 byte** per il puntatore al termine nella stringa
+				- **8 byte** in media per il termine stesso nella stringa
+		- *dictionary as a string con blocchi*
+			- $M/k$ puntatori
+		- *front coding*
 	- *POSTING COMPRESSION*
 		- *GAP ENCODING*
 			- *VARIABLE LENGTH ENCODING*
 				- ideale $log_2G: \ bit$ 
-				- *CODIFICA UNARIA*
-					- bit+0
-				- *GAMMA CODE*
-					- tolgo il primo 1 ottengo `offset`
-					- `lunghezza unario+offset`
-					-  $2\lfloor \log_2 G \rfloor + 1$bit
-				- *VARIABLE BYTE ENCODING*
-					- bit di continuation 
-				- *SIMPLE9 ENCODING*
-					- 4 bit di selettore
-					- 28 rimanenti
+					- G numero del gap
+					- *CODIFICA UNARIA*
+						- bit+0
+					- *GAMMA CODE*
+						- tolgo il primo 1 ottengo `offset`
+						- `lunghezza unario offset+offset`
+						-  $2\lfloor \log_2 G \rfloor + 1$bit
+					- *VARIABLE BYTE ENCODING*
+						- bit di continuation 
+					- *SIMPLE9 ENCODING*
+						- 4 bit di selettore
+						- 28 rimanenti
 #### SPELL CORRECTION
 - *WILD CARD*
 - *PERMUTERM INDEX*

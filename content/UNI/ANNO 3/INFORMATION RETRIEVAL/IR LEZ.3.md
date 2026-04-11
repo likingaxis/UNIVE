@@ -69,7 +69,7 @@ Questa stima è *utile* perché consente di:
 	- e la retta data dai valori effettivi dove ogni punto è una coppia `(M,T)`
 		- dove M sono i termini distinti e T i token totali
 ### LEGGE DI Zipf's
-- La legge di Zipf's descrive **come sono distribuite le frequenze dei termini** all’interno di un corpus
+- La legge di Zipf's descrive **come sono distribuite le frequenze dei termini** all’interno di una collezione di documenti
 - NON serve a stimare quando riappare un termine, ma a capire **quanto spesso compaiono i termini rispetto agli altri**
 - Se ordiniamo le parole per frequenza decrescente:
     - la parola in posizione $i$ (cioè la i-esima più frequente) avrà una frequenza **inversamente proporzionale a $i$**
@@ -80,6 +80,8 @@ Questa stima è *utile* perché consente di:
 - In formula:
     $cf_i \approx \frac{K}{i}$
     **cf = collection frequency**
+    K costante di normalizzazione
+    di solito $K ≈$ frequenza del termine più frequente
 Se la parola più frequente compare un certo numero di volte:
 - la seconda compare circa la metà
 - la terza circa un terzo
@@ -105,8 +107,9 @@ Se la parola più frequente compare un certo numero di volte:
 ###### VERSIONE DICTIONARY AS A STRING
 - si concatenano tutti i termini in un’unica stringa
 - per accedere ai termini:
-    - si usano **puntatori (offset)** che indicano dove inizia ogni parola
-    - oppure si memorizza la lunghezza della parola
+    - si usano **puntatori (offset)** che indicano dove inizia ogni termine
+	    - bit per puntatore≈$log_2​(total \ string \ length)$
+    - oppure si memorizza la lunghezza del termine prima che inizi quest'ultimo
 - vantaggi:
     - si elimina lo spazio inutilizzato
     - si memorizzano solo i caratteri effettivi
@@ -134,7 +137,6 @@ bit per puntatore≈$log_2​(total \ string \ length)$
 - *VANTAGGI*
 	- Il numero di puntatori passa da $M$ a $M/k$
 		- dove $k$ è il numero di blocchi
-	- Riduzione significativa dello spazio occupato
 - *SVANTAGGI*
 	- Per cercare un termine:
 	    - si individua il blocco
@@ -201,8 +203,7 @@ byte per puntatore al termine + numero blocchi/numero blocchi
 [[ESERCIZI CROCS]]
 ##### ULTERIORI OTTIMIZZAZIONI APPLICATI ALLA VERSIONE A BLOCCHI FRONT CODING
 - Il **front coding** è un’ulteriore ottimizzazione applicata al dizionario compresso a blocchi.
-- Sfrutta il fatto che i termini sono ordinati lessicograficamente: parole consecutive sono spesso molto simili e condividono un **prefisso comune**.
-- Invece di memorizzare ogni parola per intero, si salva una sola volta il prefisso comune, e per le altre parole del blocco si memorizza soltanto la parte finale che cambia.
+- Invece di memorizzare ogni termine per intero, si salva una sola volta il **prefisso comune**, e per le altre parole del blocco si memorizza soltanto la parte finale che cambia.
 - Esempio:
     - `automata` `automate` `automatic` `automation`
 - Queste parole condividono il prefisso `automat`
@@ -230,7 +231,7 @@ byte per puntatore al termine + numero blocchi/numero blocchi
     - docID: `33, 47, 154, 159, 202`
     - gap: `33, 14, 107, 5, 43`
 - L’idea è che molti gap siano piccoli, soprattutto per termini frequenti, e quindi si possano rappresentare con meno bit dei docID completi.
-- nel gap encoding senza compressione, ogni gap viene rappresentato con un numero fisso di bit pari a $\log_2(N_{doc})$ risultando inefficiente perché molti gap sono piccoli ma occupano comunque lo stesso spazio
+- nel gap encoding senza compressione, ogni gap viene rappresentato con un numero fisso di bit pari a $\log_2(N_{docid})$ risultando inefficiente perché molti gap sono piccoli ma occupano comunque lo stesso spazio
 ##### VARIABLE LENGTH ENCODING
 - Una volta ottenuti i gap, non conviene usare per tutti lo stesso numero di bit.
 - L’idea è usare una codifica a **lunghezza variabile**:
