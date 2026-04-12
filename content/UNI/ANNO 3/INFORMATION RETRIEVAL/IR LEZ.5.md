@@ -49,6 +49,7 @@ Infatti:
 - quindi hanno un $tf$ alto, ma **non sono informative**
 👉 problema:
 - il modello darebbe troppo peso a parole inutili
+- problema: parole troppo frequenti prenderebbero ogni volta un risultato
 ### Introduzione dell’idf (inverse document frequency)
 Per risolvere questo problema introduciamo una misura della **rarità del termine nella collezione**.
 - definiamo quindi:
