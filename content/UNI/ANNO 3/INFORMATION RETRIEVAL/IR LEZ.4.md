@@ -14,7 +14,7 @@ Una wildcard è un simbolo (come `*`) che rappresenta una sequenza arbitraria di
 	- salvo le parole al contrario e le cerco come prima
 - `pro*cent` → parole che iniziano con _pro_ e finiscono con _cent_
 	- per risolvere questa query dovrei fare `pro* AND *cent` 
-	- estremamente costoso
+	- **estremamente costoso**
 ###### Permuterm index
 - è una *struttura dati* che permette di gestire **wildcard query generali**
 - idea: trasformare una wildcard query in una **ricerca per prefisso**
@@ -61,15 +61,15 @@ esempio di applicazione della query vera e propria:
 - **non-word**
     - la parola non esiste nel dizionario
     - es: `teh`, `graffe`
-    - 👉 facile da individuare (non è nel dizionario)
+    - facile da individuare (non è nel dizionario)
 - **real-word**
     - la parola esiste ma è sbagliata nel contesto
     - es: `form → from`, `there → three`
-    - 👉 difficile, serve il **contesto**
+    - difficile, serve il **contesto**
 - **cognitive**
     - errori dovuti a pronuncia/suono simile (homophones)
     - es: `peace → piece`, `two → too`
-    - 👉 legati a come si pronuncia la parola
+    - legati a come si pronuncia la parola
 ##### Risolvere non word spelling
 - situazione:
     - l’utente scrive una parola che **non esiste nel dizionario**
@@ -102,11 +102,11 @@ $$\hat{w}=argmax \ P(w | x)$$
 	- errori comuni
 	- vicinanza dei tasti
 	- typo frequenti
-- **P(x∣w)** → CHANNEL MODEL PROBABILITY
+- **P(x∣w)** → *CHANNEL MODEL PROBABILITY*
 	- probabilità di fare errore
 	- se volevo scrivere `w`, quanto è probabile scrivere `x`?
 	- viene approfondita sotto dopo la confusion matrix!
-- **P(w)** → UNIGRAM PRIOR PROBABILITY
+- **P(w)** → *UNIGRAM PRIOR PROBABILITY*
     - quanto è comune la parola `w`
     - stimata da:
 $$P(w) = C(w) / T$$
@@ -114,10 +114,26 @@ $$P(w) = C(w) / T$$
 	- `C(w)` = numero di occorrenze della parola  
 	- `T` = numero totale di parole nel corpus
 	- più una parola è frequente → più è probabile
-###### uso di edit distance per eventuali correzioni
-- la **edit distance** misura **quanto due parole sono diverse**
-	- più precisamente:
-		- è il **numero minimo di operazioni** necessarie per trasformare una parola in un’altra	
+###### Computing error probability Confusion matrix
+- una matrice che contiene quanto è probabile ogni tipo di errore, sotto una certa trasformazione di quelle viste con la edit distance
+	- es:`sub[r,c]` → quante volte `r` diventa `c`
+![[Pasted image 20260325112927.png|400]]
+###### Channel model
+- definizione operativa del channel model
+	- modello che descrive **come una parola corretta $w$** viene trasformata nella parola osservata $x$ a causa di errori (typo)
+	- fa parte del complesso del noisy channel model, questo approfondisce solo la formula $P(x∣w)$
+- vedere nella formula del noisy channel model $P(x∣w)$
+![[Pasted image 20260325113523.png]]
+
+- esempio con sub:
+	- `sub[c,r]` = quante volte scrivo `c` invece di `r`
+		- Hai un dataset di errori, quante volte succede che quella parola viene inserita al posto di un altra
+	- `count[r]` = quante volte compare `r`
+		- count sta per quante volte compare quella determinata occorrenza
+###### uso di edit distance generare candidati
+- la **edit distance**
+	- algoritmo che ci consente di stimare quali $w$ sono da considerare
+	- è il **numero minimo di operazioni** necessarie per trasformare una parola in un’altra	
 	- con operazioni semplici come
 	- **insertion**
 		- inserisco un carattere
@@ -157,22 +173,6 @@ si usa per trovare parole del dizionario **vicine** alla parola sbagliata
 5. **liste precomputate**
     - mapping errore → correzioni  
         ✔ veloce ma poco flessibile
-###### Computing error probability Confusion matrix
-- una matrice che contiene quanto è probabile ogni tipo di errore, sotto una certa trasformazione di quelle viste con la edit distance
-	- es:`sub[r,c]` → quante volte `r` diventa `c`
-![[Pasted image 20260325112927.png|400]]
-###### Channel model
-- definizione operativa del channel model
-	- modello che descrive **come una parola corretta $w$** viene trasformata nella parola osservata $x$ a causa di errori (typo)
-	- fa parte del complesso del noisy channel model, questo approfondisce solo la formula $P(x∣w)$
-- vedere nella formula del noisy channel model $P(x∣w)$
-![[Pasted image 20260325113523.png]]
-
-- esempio con sub:
-	- `sub[c,r]` = quante volte scrivo `c` invece di `r`
-		- Hai un dataset di errori, quante volte succede che quella parola viene inserita al posto di un altra
-	- `count[r]` = quante volte compare `r`
-		- count sta per quante volte compare quella determinata occorrenza
 
 ![[Pasted image 20260325114032.png]]
 
@@ -207,7 +207,7 @@ $$P(x∣w)⋅P(w)=0$$
 	- questa formula di per se è corretta ma è davvero difficile stimare se tutta la frase è più o meno corretta rispetto a tutte le combinazioni possibili $P(W)$ 
 - di conseguenza per calcolare $P(W)$ si usa:
 ##### Bigram model
-- per calcolare $P(W)$ vedo quanto ogni parola è coerente con la precedente e non l'intera frase tutta insieme
+- per calcolare la $P(W)$ vedo quanto ogni parola è coerente con la precedente e non l'intera frase tutta insieme
 	- vado a vedere la probabilità della parola $w_i$ in base alla parola precedente $w_{i-1}$ 
 	- questo tipo di modello si chiama *modello markoviano*, i modelli markoviani in generale si basano su anche più parole precedenti ma i *bigram* si fermano a solo 1
 	- $P(w_1…w_n) = P(w_1)P(w_2|w_1)…P(w_n|w_{n−1})$
@@ -217,7 +217,7 @@ $$P(x∣w)⋅P(w)=0$$
         → nella produttoria (quella del bigram sopra) basta uno zero per annullare tutto
 - si introduce quindi **smoothing** direttamente nella formula di $P(W)$ 
     - soluzione (interpolazione tra bigram e unigram):
-    - $P(w_i \mid w_{i-1}) = \lambda \, P_{bigram}(w_i \mid w_{i-1}) + (1 - \lambda)\, P_{unigram}(w_i)$
+    - $P(w_i \mid w_{i-1}) =  (1 - \lambda) \, P_{bigram}(w_i \mid w_{i-1}) + \lambda\, P_{unigram}(w_i)$
     - con 
 	    - $P_{bi}(w_k|w_{k−1}) = C(w_{k−1}, w_k) / C(w_{k−1})$
 		    - conta quante volte $w_k$ segue $w_{k-1}$
@@ -226,9 +226,9 @@ $$P(x∣w)⋅P(w)=0$$
     - se il bigram non è mai visto → uso l’unigram
     - se invece è affidabile → do più peso al bigram
 		- se $\lambda = 1$
-		    → uso solo bigram
-		- se $\lambda = 0$
 		    → uso solo unigram
+		- se $\lambda = 0$
+		    → uso solo bigram
 		- se $\lambda = 0.7$
 		    → 70% bigram, 30% unigram
 - $λ$ (lambda) è un parametro che:
@@ -264,6 +264,7 @@ il modello sceglie:
     - un grafo a livelli dove:
         - ogni livello = posizione nella frase
         - ogni nodo = possibile parola candidata
+    - si vanno a moltiplicare le varie probabilità di emissione con quella di transizione
 ![[Pasted image 20260329174642.png]]
 - se avessi tutte queste probabilità (transizioni + emissioni)  
     → potrei costruire tutta la struttura e risolvere esattamente il problema  

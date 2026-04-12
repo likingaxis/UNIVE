@@ -137,8 +137,11 @@
 		- scelta del migliore
 		- *Noisy Channel Model*
 			- $\hat{w}=argmax​ \ P(x∣w)⋅P(w)$
-				- Channel model graffa con del ins sub trans ecc
+				- Channel model probability graffa con del ins sub trans ecc
 				- $P(w) = C(w) / T$
+				- unigram prior probability
+			- *confusion matrix*
+			- *smoothing di LaPlace*
 			- edit distance
 				- insertion
 				- deletion
@@ -148,16 +151,15 @@
 			- *k-gram*
 			- *finite state automata*
 			- *liste precomputate*
-		- *confusion matrix*
 	- *Context sensitive spelling correction*
 		- Noisy channel updated sulla frase
 			- formula ideale
 			- $\hat{W}=argmaxP(W∣X)=argmaxP(X∣W)⋅P(W)$
 				- bigram model
-				-  $P(w_1…w_n) = P(w_1)P(w_2|w_1)…P(w_n|w_{n−1})$
+					-  $P(w_1…w_n) = P(w_1)P(w_2|w_1)…P(w_n|w_{n−1})$
 				- smoothing
 				- interpolazione tra bigram e unigram
-					- $P(w_i \mid w_{i-1}) = \lambda \, P_{bigram}(w_i \mid w_{i-1}) + (1 - \lambda)\, P_{unigram}(w_i)$
+					- $P(w_i \mid w_{i-1}) =  (1 - \lambda) \, P_{bigram}(w_i \mid w_{i-1}) + \lambda\, P_{unigram}(w_i)$
 					- $P_{bi}(w_k|w_{k−1}) = C(w_{k−1}, w_k) / C(w_{k−1})$
 					- $P_{uni}=C(w_i)/C(W)$
 				- applicazione del $log$ per underflow
