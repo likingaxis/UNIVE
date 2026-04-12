@@ -100,7 +100,7 @@ Se la parola più frequente compare un certo numero di volte:
 - L’obiettivo è ridurre lo spazio occupato, in modo da poter mantenere il dizionario in memoria (RAM)
 ###### VERSIONE SENZA NULLA, NAIVE fixed-width
 - ogni termine è memorizzato separatamente
-- si riserva uno spazio fisso (es. 20 byte per parola)
+- si riserva uno spazio fisso (es. 20 byte per termine)
 - problema:
     - grande spreco di spazio (molte parole sono più corte)
 ![[Pasted image 20260320182736.png]]
