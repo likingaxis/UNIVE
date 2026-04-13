@@ -5,6 +5,8 @@ In questo modo otteniamo una sorta di **soft AND**: non richiedo che tutte le pa
 ##### Primo tentativo: confronto come insiemi
 Un primo modo per misurare la similarità tra query e documento è trattarli come **insiemi di parole** e usare la **Jaccard similarity**:
 $\frac{|A \cap B|}{|A \cup B|}$
+- $A$ = **documento**  
+- $B$ = **query**
 Questa misura cattura quanto i due insiemi si sovrappongono. Tuttavia ha due limiti importanti:
 - non considera quante volte compare una parola
 - non distingue tra parole frequenti e parole rare
@@ -17,6 +19,9 @@ Per migliorare il modello, dobbiamo rappresentare i documenti in modo più infor
 Nel caso più semplice usiamo una **incidence matrix**, dove ogni documento è rappresentato da un vettore binario:
 - 1 se la parola è presente
 - 0 se non è presente
+e dove:
+- righe → termini
+- colonne → documenti
 Questo però è ancora limitato, perché non tiene conto della frequenza.
 Per questo passiamo alla **count matrix**, dove ogni documento è rappresentato da un vettore di conteggi:
 - ogni componente indica *quante volte compare un termine*
@@ -65,7 +70,6 @@ dove:
 - se un termine compare in **tutti i documenti**:
     - $df_t \approx N$ → $idf_t \approx 0$
         → termine poco utile
-👉 quindi:
 - parole rare → **peso alto**
 - parole frequenti → **peso basso**
 ### tf-idf: peso finale del termine
@@ -76,7 +80,6 @@ $tf-idf\ w_{t,d} = (1 + \log tf_{t,d}) \cdot \log \frac{N}{df_t}$
 Un termine ha peso alto se:
 - compare spesso nel documento
 - ma compare poco nella collezione
-👉 cioè:
 - è **rappresentativo di quel documento**
 ##### Collegamento con il ranking
 A questo punto:
@@ -90,27 +93,29 @@ A questo punto:
     - quindi contribuiscono pochissimo
 per questo:
 - spesso vengono direttamente rimosse (stop words)
-
->[!tip]- Nota su cf vs df 
->La **Collection Frequency** ($\text{cf}_t$) conta il numero totale di token del termine nella collezione. 
->La $\text{df}_t$ è preferibile perché distingue meglio i termini che appaiono molte volte ma in pochi documenti (spesso termini tecnici molto rilevanti).
-
 ##### Query come vettori
 Dopo aver calcolato i pesi **tf-idf** per ogni termine in un documento, possiamo rappresentare sia i documenti che le query come **vettori** in uno spazio ad alta dimensionalità.
 * **Vettori Documento:** Ogni documento $d$ è un vettore di pesi tf-idf $\vec{d} \in \mathbb{R}^{|V|}$, dove $|V|$ è la dimensione del vocabolario (numero di termini distinti).
 * **Assi dello Spazio:** I termini del vocabolario fungono da assi in questo spazio.
-* **Punti nello Spazio:** I documenti sono rappresentati come punti (o vettori) in questo spazio.
-* **Alta Dimensionalità:** Per un motore di ricerca web, la dimensionalità può essere di decine di milioni.
 * **Vettori Sparsi:** La maggior parte delle componenti di questi vettori è zero, poiché un documento contiene solo una piccola frazione di tutti i termini possibili.
 ##### Rappresentazione Vettoriale delle Query
 L'idea chiave è applicare la stessa logica anche alle query:
 * **Query come Vettori:** Anche le query possono essere rappresentate come vettori nello stesso spazio ad alta dimensionalità dei documenti, utilizzando gli stessi pesi tf-idf.
+Il vettore della query è costruito così:
+$$q = [w_{1,q}, w_{2,q}, ..., w_{M,q}]$$
+dove ogni componente è:
+$$w_{t,q} = tf_{t,q} \cdot idf_t$$
+
+- **$tf_{t,q}$** = numero di volte che il termine compare **nella query**
+- **$idf_t$​** = importanza del termine calcolata **sul corpus dei documenti**
 * **Ranking per Prossimità:** L'obiettivo è ordinare i documenti in base alla loro "prossimità" o "somiglianza" alla query.
     * **Prossimità ≈ Similarità ≈ Distanza Negativa.**
     * Vogliamo quindi ordinare i documenti in ordine inverso rispetto alla distanza del loro vettore dal vettore della query.
 * **Definire la Distanza:** Il problema diventa definire una metrica di distanza (o similarità) tra questi vettori di termini.
 ###### Perché la Distanza Euclidea non è Adatta
-Un primo approccio potrebbe essere usare la distanza euclidea tra i punti finali dei vettori. Tuttavia, questa metrica ha dei limiti significativi:
+Un primo approccio potrebbe essere usare la distanza euclidea tra i punti finali dei vettori. 
+- distanza tra gli endpoint dei vettori
+Tuttavia, questa metrica ha dei limiti significativi:
 * **Sensibilità alla Lunghezza:** La distanza euclidea è pesantemente influenzata dalla lunghezza dei vettori. Un documento lungo (che contiene molte più occorrenze di termini) avrà un vettore di lunghezza maggiore, anche se semanticamente simile a un documento più corto.
     * **Esempio:** Se un documento $d'$ è identico a un documento $d$ ma ripetuto due volte (quindi due volte più lungo), semanticamente sono identici. L'angolo tra i loro vettori sarà 0, indicando massima similarità. Tuttavia, la distanza euclidea tra $d$ e $d'$ risulterà grande, suggerendo bassa similarità.
     * Questo è un problema perché si darebbe un peso eccessivo a documenti semplicemente più lunghi, anche se non più rilevanti. Un classico esempio sarebbe un **dizionario** che, contenendo un'enorme quantità di parole, risulterebbe sempre tra i primi risultati se non si applicasse una normalizzazione per la lunghezza 
@@ -134,8 +139,6 @@ Per rendere l'angolo una misura efficace di similarità, è essenziale che la lu
     Dopo la normalizzazione, i vettori avranno lunghezza 1 e saranno proiettati su una sfera unitaria.
 	- la norma euclidea di un vettore si ottiene facendo la radice quadrata della somma dei quadrati delle sue componenti
 * **Benefici:** Documenti più lunghi e più corti avranno pesi dello stesso ordine di grandezza dopo la normalizzazione. Questo risolve il problema dei documenti lunghi che dominerebbero il ranking senza normalizzazione. Il documento $d'$ (doppio di $d$) dopo la normalizzazione avrà lo stesso vettore di $d$.
-
-
 ##### Similarità del Coseno (Cosine Similarity)
 Per vettori normalizzati, la similarità del coseno è equivalente al **prodotto scalare (dot product)** tra i vettori.
 
