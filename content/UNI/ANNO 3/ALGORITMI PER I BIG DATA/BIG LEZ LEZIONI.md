@@ -6,19 +6,24 @@
 	- MEDIAN-andy-10-2025.pdf
 		- in realtà è mitz upfal chapter 3
 #### SECONDA PARTE
+- ALGORITMI RANDOMIZZATI
 - ALGORITMI TARDOS RANDOMIZEDS pdf libro
 	- Cont-Resolution-Slides-Andy.pdf
 		- capitolo 13
+#### TERZA PARTE
+- FINDING SIMILAR ITEMS
 - mmds http://infolab.stanford.edu/~ullman/mmds.html
-	-  Ch03-ABD-Andy_SLIDES 3.pdf slide 10
+	-  Ch03-ABD-Andy_SLIDES 3.pdf fino a slide 10
 		- capitolo 3
 - Tardos
 	- HASH_FUNCTIONS_LUCIO_ANDY_11-25.pdf
 		- capitolo 13.6
 - mmds http://infolab.stanford.edu/~ullman/mmds.html
-	-  Ch03-ABD-Andy_SLIDES 3.pdf slide 10
+	-  Ch03-ABD-Andy_SLIDES 3.pdf da slide 10
 		- capitolo 3
 	- DOPO AVER VISTO LE HASH FUNCTION DI LUCIO ANDY
+#### QUARTA PARTE
+- CH04 STREAMS
 - mmds http://infolab.stanford.edu/~ullman/mmds.html
 	-  ch04-streams1_Andy_11_25_mac.pdf
 		- capitolo 4

@@ -376,3 +376,18 @@ RIDUZIONE DELL’ERRORE
 - probabilità fallimento dopo $t$ tentativi:
 - $(n^{-1/4})^t = n^{-t/4}$
 ➡ decresce esponenzialmente
+### RANDOMIZED ALGORITHMS
+#### CONTENTION RESOLUTION IN A DISTRIBUTED SYSTEM
+- da fare
+#### GLOBAL MIN CUT
+- da fare
+#### LOAD BALANCING
+- da fare
+### FINDING SIMILAR ITEMS IN LARGE DATA SETS
+#### ALGORITMO MIN HASING
+SLIDE 34
+#### ALGORITHM FOR SIGNATURE MATRIX
+#### LOCALITY SENSITIVE HASHING
+#### STEP 1,2
+#### BANDS 
+#### LSH ANALYSIS
