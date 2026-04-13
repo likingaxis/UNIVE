@@ -24,6 +24,7 @@
 		- `boolean` retrieval model
 		- `biword` indexing
 		- positional indexing
+			- proximity queries
 #### PROBLEMA DI MEMORIZZAZIONE IN FASE DI COSTRUZIONE
 - *RCV1*
 	- token stream
@@ -191,7 +192,6 @@
 		- $df_t$=numero di documenti che contengono il termine t
 	- *tf-idf*
 		- $tf-idf\ w_{t,d} = (1 + \log tf_{t,d}) \cdot \log \frac{N}{df_t}$
-	- *cf vs df*
 	- *vettori documento*
 	- assi dello spazio
 	- punti nello spazio

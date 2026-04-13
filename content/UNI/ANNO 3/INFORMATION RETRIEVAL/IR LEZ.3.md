@@ -293,6 +293,7 @@ byte per puntatore al termine + numero blocchi/numero blocchi
 3. lo si divide in gruppi da **7 bit** (partendo da destra)
 4. ogni gruppo diventa un byte:
     - si aggiunge il bit di continuation davanti
+- tu vai a fare una lettura lineare di tutta la stringa
 ![[Pasted image 20260325100233.png]]
 
 ###### TABELLA SULLA RCV1 COMPRESSION
