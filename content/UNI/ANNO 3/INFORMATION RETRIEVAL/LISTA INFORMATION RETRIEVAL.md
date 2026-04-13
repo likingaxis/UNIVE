@@ -34,6 +34,7 @@
 	- *BSBI*
 		- $O(N log B)$
 	- *SPIMI*
+		- single pass
 		- $Θ(T)$
 - *INDEXING DISTRIBUITO*
 	- SLA

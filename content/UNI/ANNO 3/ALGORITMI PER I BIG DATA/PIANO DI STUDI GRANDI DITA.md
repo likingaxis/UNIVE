@@ -6,7 +6,7 @@
 ## Settimana 2
 - [x] Random variables, valore atteso, binomiale, geometrica, QuickSort
 ## Settimana 3
-- [ ] Markov, Chebyshev, weak law, Coupon Collector, union bound
+- [x] Markov, Chebyshev, weak law, Coupon Collector, union bound
 ## Settimana 4
 - [ ] Contention Resolution, hashing universale
 ## Settimana 5
@@ -126,33 +126,17 @@ Da non portare come focus:
 ### Prezza + MMDS + Andy
 
 Da fare:
-
 - Chernoff bound
-    
 - Bloom filter
-    
 - Flajolet-Martin
-    
 - Exponential buckets a grandi linee
-    
 - DGIM
-    
 - Graphs1 fino a slide 18
-    
 - PDF Valerio con quadrupla da sapere
-    
-
 Da saltare:
-
 - ultima slide di FM
-    
 - slide 46-48 di streams2
-    
 - Hashing/Shingling come topic da esposizione principale
-    
-
----
-
 # 2. Piano di studio ottimizzato — 6 settimane, 2 volte a settimana
 
 Questo secondo me è il compromesso migliore:  
