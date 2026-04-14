@@ -1,38 +1,60 @@
 #### NETWORK ANALYSIS
-- Come analizzare il traffico nella rete
-	- Utilizziamo un software di sniffing in grado di interpretare i pacchetti header relativi al livello 2,3 e 4
+- Come analizzare il traffico di rete
+    - Utilizziamo software di sniffing in grado di catturare e interpretare i pacchetti, analizzando gli header relativi ai livelli 2, 3 e 4 del modello di rete
 ##### Software di sniffing
-- `TcpDump`
-	- basato su CLI ci agganciamo a una determinata interfaccia di rete sul pc e scansioniamo il loro traffico
-	- ad esempio usato per interfacce di rete come cavi ethernet
-	- formato del file chiamato `.pcap`
-	- esempio a slide 4/18
-	- ti fa vedere poi i pacchetti che vengono scambiati le corrispondenze a slide 4 quelli a capo
-- `Wireshark`
-	- protocol network analyzer
-	- permette di analizzare e catturare il traffico in tempo reale
-	- utilizza sempre i file `.pcap`
-	- identifica il pacchetto e lo disseziona cercando di dare un senso a tutti i byte del pacchetto
-		- con tcpDump uno ha solo una sequenza di byte senza averli interpretati
-	- applico dei filtri all'analisi del traffico utilizzando delle regole
-		- `ip.adddr==192.168.1.10`
-			- posso usare operatori logici con `||` `&&` `!` `==` `!=` ` contains` `matches` `in`
-		- posso specificare protocollo e campi vari
-	- significato di regex e aggiungilo anche a web
-	- seguire stream tra entità
-		- preso un pacchetto con uno stream type specifico `(TCP, UDP, HTTP, TLS)` posso seguirlo vedendo tutto il payload scambiato
-		- payload significato
-	- tool di analisi e aggregazione per identificare eventuali problemi
-		- Protocol Hierarchy
-			- gerarchia di comunicazione all'interno della rete
-			- se ho qualcuno che fa port scanning posso vedere se ci sono solo tentativi di connessione TCP(Handshake) senza avere altre richieste
-		- Endpoints
-			- sintetizza tutti gli endpoint delle varie comunicazioni
-				- ti dice indirizzo ip di mittente e destinatario di uno scambio di pacchetti
-		- Conversazioni
-			- ti dice tutte le comunicazioni delle parti `A<->B`
-		- `I/O` Graph
-			- grafico dell'input e output su quel determinato traffico
-		- Expert information panel
-			- pannello che riassume le operazioni di decodifica di un pacchetto svolte
-			- Tipo evidenzia pacchetti stealth con errore con `xmas` e quella roba la
+##### `TcpDump`
+- tool basato su CLI _(Command Line Interface)_: si utilizza tramite terminale scrivendo comandi testuali, senza interfaccia grafica
+- ci agganciamo a una determinata interfaccia di rete del PC e analizziamo il traffico che passa su di essa
+- tipicamente usato su interfacce di rete (es. ethernet)
+- permette di catturare pacchetti salvandoli in file `.pcap`
+- con `sudo tcpdump -i eth0` viene mostrato ad esempio:
+	- `11:37:14.857172 IP 192.168.49.1.64644 > 192.168.49.131.ssh: <packet>`
+	- ![[Pasted image 20260414100512.png]]
+	- mostra i pacchetti scambiati evidenziando: timestamp, IP sorgente/destinazione, porte e protocollo
+
+#### `Wireshark`
+- network protocol analyzer (con interfaccia grafica, a differenza di `tcpdump`)
+- permette di catturare e analizzare il traffico in tempo reale
+- utilizza file `.pcap` / `.pcapng` per salvare le catture
+- identifica i pacchetti e li disseziona, dando significato a tutti i byte (analisi strutturata per protocolli)
+	- con `tcpdump` si ha una vista più grezza, mentre Wireshark interpreta i protocolli
+- permette di applicare *filtri* per analizzare solo il traffico rilevante
+	- esempio: `ip.addr == 192.168.1.10`
+	- operatori utilizzabili:
+		- logici: `||` (OR), `&&` (AND), `!` (NOT)
+		- confronto: `==`, `!=`, `>`, `<`, `>=`, `<=`
+	     - altri: `contains`, `matches`, `in`
+	    - posso specificare protocolli e campi (es. `http`, `tcp.port`, `ip.src`, ecc.)
+- **regex (regular expression)**:
+    - è un modo per cercare pattern nel testo
+    - usata con `matches` per filtrare pacchetti che rispettano una certa struttura (es. domini, stringhe particolari)
+    - `http.host matches ".*google.*"`  
+		→ tutti i domini che contengono “google”
+- permette di *seguire gli stream* di comunicazione tra entità
+    - dato un pacchetto appartenente a uno stream `(TCP, UDP, HTTP, TLS)` posso ricostruire tutta la comunicazione
+    - **payload**:
+        - è il contenuto del pacchetto (i dati veri trasportati, esclusi gli header)
+        - es: contenuto HTTP, dati inviati tra client e server
+- *tool di analisi e aggregazione per identificare eventuali problemi nel traffico*
+    - **Protocol Hierarchy**
+        - mostra la distribuzione del traffico per protocollo (% pacchetti/byte)
+        - utile per capire quali protocolli dominano nella rete
+        - es: in caso di port scanning posso vedere molti tentativi TCP (handshake) senza traffico applicativo reale
+    - **Endpoints**
+        - elenca tutti gli host osservati (IP, MAC, porte)
+        - mostra quanto traffico inviano/ricevono
+        - utile per identificare host sospetti o molto attivi
+    - **Conversations**
+        - mostra tutte le comunicazioni tra coppie di host (A ↔ B)
+        - include numero di pacchetti, byte e durata
+    - **I/O Graph**
+        - grafico del traffico nel tempo
+        - utile per individuare picchi di traffico o correlare eventi (es. DNS + TCP)
+    - **Expert Information Panel**
+        - pannello di analisi automatica che evidenzia eventi rilevanti
+        - classifica i problemi per gravità:
+            - error → problemi seri (pacchetti malformati)
+            - warning → problemi significativi (retransmission, reset, ecc.)
+            - note → eventi normali ma rilevanti
+            - chat → eventi normali (es. apertura/chiusura connessione)
+        - utile per individuare anomalie, attacchi o comportamenti sospetti (es. pacchetti strani tipo XMAS)
