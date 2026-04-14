@@ -4,8 +4,8 @@
 quindi introduciamo:
 - wildcard queries
 - spelling correction
-obiettivo:
-- recuperare documenti **anche con errori o varianti**
+- obiettivo:
+	- recuperare documenti **anche con errori o varianti**
 ##### WILD CARD
 Una wildcard è un simbolo (come `*`) che rappresenta una sequenza arbitraria di caratteri, permettendo di cercare termini anche senza conoscerne esattamente la forma.
 - `mon*` → tutte le parole che iniziano con _mon_
@@ -34,7 +34,7 @@ esempio di applicazione della query vera e propria:
 	- faccio prima  `X*Z`
 	- poi filtro controllando se ognuna di quelle parole ha `Y` in mezzo
 ###### Bigram (k-gram) indexes
-- Il k-gram index indicizza sottostringhe dei termini e permette di trovare candidati che condividono parti della query, ma richiede un post-filtering per eliminare i falsi positivi.
+- Il k-gram index indicizza sotto-stringhe dei termini e permette di trovare candidati che condividono parti della query, ma richiede un post-filtering per eliminare i falsi positivi.
 - con $k=2$ creiamo una lista del seguente tipo  
 `hello → $h, he, el, ll, lo, o$`
 - `$h` → parola che **inizia con h**
@@ -51,7 +51,7 @@ esempio di applicazione della query vera e propria:
 	- `mon*` → trova anche `moon`
 *EFFETTUO POST FILTERING*
 - controllo finale sulla stringa reale
-#### SPELLING TASK
+#### SPELLING CORRECTION TASK
 - si divide in:
 	- **spelling error detection**
 	    - capire se una parola è sbagliata
@@ -76,7 +76,7 @@ esempio di applicazione della query vera e propria:
 	    - es: `teh`, `acress`
 - costruisco un sistema che:
 	-  **genera candidati**
-	    - parole reali simili all’errore
+	    - parole reali simili all'errore
 	-  **sceglie il migliore**
 	    - tra i candidati
 - cosa useremo

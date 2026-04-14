@@ -101,6 +101,7 @@ Dato che ogni blocco è già ordinato:
 	- si usa una **tabella hash** come dizionario
 	    - chiave → **termine**
 	    - valore → **posting list (lista di docID)**
+	- se la posting list la raddoppio
 - 3. Inserimento dei token
 	- Per ogni token `(term, docID)`:
 	- se il termine è **già presente** nella hash table:
