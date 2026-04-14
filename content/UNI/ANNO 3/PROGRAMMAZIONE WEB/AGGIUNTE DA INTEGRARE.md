@@ -1,69 +1,118 @@
 #### VARIABILI IN CSS
-- possiamo definire custom properties 
-	- si dichiarano in modo globale da :root
-	- con `--nome custom property:valore`
-	- `var(<custom-property>,<declaration-value>)`
-		- assegna come valore la custom property, oppure se non rilevata si usa il declaration value
+- possiamo definire delle **custom properties**
+	- si dichiarano in modo globale dentro `:root`
+	- sintassi:
+	    - `--nome-custom-property: valore;`
+	- per usarle:
+	    - `var(<custom-property>, <declaration-value>)`
+	        - assegna come valore la custom property
+	        - se non è definita, usa il _declaration value_ (fallback)
 #### Grid system
-- sistema a griglia 
-	- proporzione fra elementi in termini di dimensione di colonne 
-		- suddivide il sito in colonne consentendo agli elementi di essere suddivisi per colonne per dare una giusta proporzione 
-	- composta in colonna, gutter, container, riga
-##### I FRAMEWORK 
-- definizione di framework
-- di solito si dividono in 2 parti, css e javascript
-- sappi che anche i flexbox lo erano, forse non lo avevi specificato
-- un esempio è il CSS grid
-	- introduce il concetto di grid lines, sistema a 2 dimensioni che alloca elementi alle grid lines
-	- spazi composti da righe e colonne 
-	- foto delle grid
-	- andando a specificare 
+- sistema a griglia
+    - permette di organizzare il layout in modo ordinato
+    - si basa sulla **proporzione fra elementi**, soprattutto rispetto alle colonne
+        - il sito viene suddiviso in colonne
+        - gli elementi vengono posizionati dentro queste colonne per mantenere allineamento e proporzioni
+    - è composto da:
+        - **colonne** → suddivisione verticale dello spazio
+        - **righe (row)** → suddivisione orizzontale
+        - **gutter** → spazio tra le colonne
+        - **container** → contenitore principale che racchiude la griglia
+![[Pasted image 20260414135656.png|400]]
+- è una **feature nativa del CSS**
+    - permette di creare layout a griglia
+    - sistema **bidimensionale** → gestisce **righe + colonne** contemporaneamente
+- introduce il concetto di:
+    - **grid lines**
+        - linee che delimitano le celle della griglia
+        - servono per posizionare gli elementi
+    - **celle**
+        - spazi composti dall’intersezione tra righe e colonne
+- `display: grid;`
+	- attiva la grid
 ```css
-display: grid;
-
-                grid-template-columns: 200px 300px 100px;
-
-                grid-template-rows: auto;
+grid-template-columns: 200px 300px 100px;  
+grid-template-rows: auto;
 ```
-- vado a definire le colonne e le righe della nostra griglia
-- possiamo poi assegnare ad ogni colonna o riga un determinato elemento
+- vado a definire:
+    - quante colonne ho e la loro dimensione
+    - quante righe ho
+- posso assegnare gli elementi alla griglia:
+``` css
+.header {  
+    grid-column: 1 / 4;  
+}
+```
+- occupa le colonne dalla 1 alla 4
+- spesso si usano le **unità frazionarie (`fr`)**
+    - dividono lo spazio disponibile in proporzioni
+	- `grid-template-columns: 1fr 2fr 1fr;`
+	- `grid-template-columns: repeat(12, 1fr);`
+	- utile per creare layout tipo Bootstrap (12 colonne)
+- shorthand e casi utili:
+    - `grid-column: 1 / -1`
+        - prende tutta la riga (fino all’ultima grid line)
+    - `grid-column: 1 / 7`
+        - occupa una porzione (es. metà su 12 colonne)
+- dimensionamento layout:
+    - spesso si usa un **container centrato**
 ```css
-            .header {
-
-                grid-column: 1 / 4;
-
-            }
+width: 1200px;  
+margin: auto;
 ```
-- spesso però si lavora con i template a frazioni 1fr
-- posso definire posso avere repeat 12,1fr
-- posso fare grid column 1/-1 prende l'ultima grid lines
-- posso fare 1/7 per dire una porzione di 6 colonne
-- lo vado a fissare con width definito e margin auto
-- una volta fissata la larghezza le colonne degli elementi saranno frazioni della larghezza definita
-	- fare un esempio con menu e header
-	- vedi file del prof aggiornato, utile per capire il cambiamento tra le cose e anche slide 27
-	- `grid-gap`
-		- spazio tra colonne
-- andiamo a definire delle aree del container
-	- `grid-template-areas`
-	- utilizzo delle stringhe per dire dove sono posizionate le varie posizioni
+- una volta fissata la larghezza:
+    - le colonne in `fr` diventano **frazioni di quella larghezza**
+- andiamo a definire delle **aree del container**
+    - proprietà: `grid-template-areas`
+    - utilizzo delle **stringhe** per descrivere il layout della griglia
+        - ogni lettera rappresenta un’area
+        - il punto `.` rappresenta una cella vuota
+- grid-template-areas:  
 ```css
-h h h h h h h
-a a a a a a a
-m m m m m . . 
+"h h h h h h h"  
+"a a a a a a a"  
+"m m m m m . .";
 ```
-- e poi dico a quel determinato elemento chi è con 
-	- `grid-area:h`
-- bootstrap
-	- framework responsive mobile first
-	- esiste una versione minimized di bootstrap, quella che usiamo davvero
-	- bootstrap grid definisce i breakpoint per la dimensione dei dispositivi
-		- divisi in `xs, sm, md, lg, xl, xxl`
-		- usiamo le classi per definire un elemento in base a una certa dimensione
-		- vedi `col-md-12 col-lg-3`
-		- `col-|sm-|md-|lg-|xl-|xxl-`
-	- uso CDN, content delivery network per definire il file css di bootstrap, non in memoria
-		- si può anche fare dalla memoria
-	- dobbiamo usare le classi di bootstrap
-	- esiste container
-	- posso fare l'override con uno style interno delle regole che già esistono
+- in questo modo:
+	 - ogni riga rappresenta una riga della griglia
+	  - elementi con lo stesso nome occupano più celle
+- poi assegno ogni elemento alla sua area:
+```css
+.header {  
+    grid-area: h;  
+}
+```
+##### I FRAMEWORK
+- un **framework** è una libreria che fornisce strumenti già pronti per sviluppare applicazioni
+    - include codice riutilizzabile
+    - evita di scrivere tutto da zero
+- di solito è composto da:
+    - **CSS** → layout, stile
+    - **JavaScript** → comportamento dinamico
+- **Bootstrap**
+    - è un **framework CSS (con componenti JS)**
+    - è **responsive** e segue un approccio **mobile-first**
+    - esiste una versione **minified**
+        - più leggera
+        - senza spazi/commenti → quella usata in produzione
+- **Bootstrap grid**
+    - definisce un sistema a griglia con **breakpoint**
+        - dimensioni dei dispositivi:
+            - `sm, md, lg, xl, xxl`
+            - (`xs` nelle versioni più vecchie)
+    - uso delle classi:
+        - `col-md-12 col-lg-3`
+            - su schermi medi → 12 colonne
+            - su schermi grandi → 3 colonne
+        - sintassi:
+            - `col-[breakpoint]-[numero]`
+- **uso di Bootstrap**
+    - tramite **CDN (Content Delivery Network)**
+        - importo il file CSS online (non locale)
+    - oppure in locale (scaricando i file)
+- concetti base:
+    - uso di classi predefinite
+    - esiste il **container**
+        - contiene la griglia
+    - posso fare **override**
+        - sovrascrivo gli stili di Bootstrap con CSS personalizzato
