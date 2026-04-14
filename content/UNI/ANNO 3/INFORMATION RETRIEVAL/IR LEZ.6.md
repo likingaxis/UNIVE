@@ -286,3 +286,20 @@ $$DCG_p = rel_1 + \sum_{i=2}^{p} \frac{rel_i}{\log_2 i}$$
     - prendo il mio risultato reale
     - lo confronto con il **miglior risultato possibile**(ranking ideale)
 $$NDCG = \frac{DCG}{IDCG}$$
+
+#### Cosa succede se i risultati non sono in una lista?
+- il famoso ago in un pagliaio, se avessimo solo un risultato le misure viste ora non sono utili
+##### Mean Reciprocal Rank
+1/K
+#### PROBLEMA Gli human judgments sono estremamente costosi
+gli human judgments sono estremamente costosi
+- user behavior
+	- adattare il ranking in base ai click dell'utente
+- click position bias
+	- fiducia nei confronti di google che ci porta a dire che i primi risultati sono i migliori
+- gli utenti sono troppo condizionati da un bias
+- A/B testing schema di valutazione basato su giudizio di coppie
+	- non mi dice la rilevanza rispetto la query ma rispetto agli altri documenti recuperati
+	- re ranking
+	- si contano gli user click su due set di risposte differenti
+	- intervallo i due insiemi togliendo i duplicati

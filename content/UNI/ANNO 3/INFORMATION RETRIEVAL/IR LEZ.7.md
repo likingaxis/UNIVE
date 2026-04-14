@@ -1,0 +1,11 @@
+#### A BRIEF INTRODUCTION
+- per capire se una parola è sinonimo di un altra andiamo a vedere i contesti a sx e i contesti a dx
+- su larga scala sinonimi avranno distribuzione simile
+- due parole sono in relazione paradigmatica quando posso cambiare l'una con l'altra ma il significato continua a essere ben formato
+- oltre ad avere lo spazio topico abbiamo anche lo spazio delle co occorrenze
+- Pointwise mutual information
+	- due parole sono qualcosa se si vedono insieme
+	- formula $I(x,y)$
+	- non è il numero di volte che co occorrono ma quanto è forte l'apparizione di queste due parole
+- Esempio di Topic space
+	- 
