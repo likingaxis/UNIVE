@@ -175,7 +175,6 @@ si usa per trovare parole del dizionario **vicine** alla parola sbagliata
         ✔ veloce ma poco flessibile
 
 ![[Pasted image 20260325114032.png]]
-
 ###### Concetto di smoothing di LaPlace
 - problema:
     - usando la confusion matrix
