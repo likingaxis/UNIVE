@@ -252,7 +252,6 @@ Ogni nodo reduce si occupa **di un sottoinsieme dei termini**.
     - quindi il merge è costoso (richiede riscrittura)
 ##### Logarithmic merge(miglioria al semplice merge tra i due)
 - è un algoritmo per gestire il **dynamic indexing**
-- serve quando la collezione **non è statica** e i documenti vengono aggiunti continuamente
 - nasce per migliorare la strategia semplice **main index + auxiliary index**, in cui il merge con il main è troppo costoso se fatto troppo spesso
 ##### Idea principale
 - invece di avere solo:
