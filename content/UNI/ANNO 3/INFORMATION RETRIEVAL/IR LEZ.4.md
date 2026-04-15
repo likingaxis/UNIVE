@@ -204,6 +204,7 @@ $$P(x∣w)⋅P(w)=0$$
 - *FORMULA IDEATA*
 	- $\hat{W}=argmaxP(W∣X)=argmaxP(X∣W)⋅P(W)$
 	- questa formula di per se è corretta ma è davvero difficile stimare se tutta la frase è più o meno corretta rispetto a tutte le combinazioni possibili $P(W)$ 
+	- la parte con $P(X|W)$ viene trattata come indipendenza delle singole probabilità quindi $P(X|W) = \prod_i P(x_i | w_i)$
 - di conseguenza per calcolare $P(W)$ si usa:
 ##### Bigram model
 - per calcolare la $P(W)$ vedo quanto ogni parola è coerente con la precedente e non l'intera frase tutta insieme
