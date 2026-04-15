@@ -29,6 +29,8 @@ Questa rappresentazione è più ricca, perché introduce l’idea che:
 
 > più una parola compare in un documento, più quel documento è rilevante per quella parola
 
+NON VENGONO USATE DAVVERO POI NEL CONCRETO SI USANO LE INCIDENCE MATRIX PER AVERE FREQUENZA O ALTRO
+
 ![[Pasted image 20260329183548.png|400]]
 ##### Bag of words
 In tutto questo modello assumiamo il **bag of words**:
@@ -41,6 +43,7 @@ Questo semplifica molto il problema, anche se perdiamo informazione sul contesto
 A questo punto potremmo pensare di usare direttamente il numero di occorrenze ($tf$), ma c’è un problema:
 se una *parola compare 10 volte* in un documento, *non significa* che quel documento *sia 10 volte più rilevante* rispetto a uno in cui compare una sola volta.
 Quindi la *crescita della rilevanza* rispetto alla frequenza **non è lineare**.
+*non è linearmente proporzionale*
 ###### Soluzione: logaritmo
 Per gestire questo problema si usa una trasformazione logaritmica:
 Per sistemare questo problema introduco un **peso**:
@@ -129,6 +132,8 @@ Un approccio migliore è ordinare i documenti in base all'angolo che il loro vet
     *   $\cos(0°) = 1$ (massima similarità)
     *   $\cos(90°) = 0$ (nessuna similarità)
     *   $\cos(180°) = -1$ (massima dissimilarità, ma non si usa in IR con pesi positivi).
+    * se il coseno è grande → angolo piccolo  
+    * se il coseno è piccolo → angolo grande
 * **Equivalenza:** Rankare i documenti secondo l'angolo decrescente è equivalente a rankarli secondo il valore del coseno crescente.
 * **Vettori TF-IDF:** I vettori di query e documento sono formati dai pesi tf-idf 
 ![[Pasted image 20260408115356.png]]
