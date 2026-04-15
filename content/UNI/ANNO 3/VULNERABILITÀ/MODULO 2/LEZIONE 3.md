@@ -58,3 +58,8 @@
             - note → eventi normali ma rilevanti
             - chat → eventi normali (es. apertura/chiusura connessione)
         - utile per individuare anomalie, attacchi o comportamenti sospetti (es. pacchetti strani tipo XMAS)
+- la porta di sorgente cambia ogni volta perché apri una comunicazione
+- il processo è sempre uno ma la socket ogni volta cambia
+	- una socket un solo processo
+	- ma un processo può creare più socket
+	- le porte vengono date dal kernel sono dette effimere e non privilegiate

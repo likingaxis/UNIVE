@@ -1,0 +1,52 @@
+#### Vari modi per collegarsi alle shell
+- remote shell
+	- quello che scrivi avviene in remoto sul computer di un altro
+- invio exploit tramite pacchetti 
+- ma questo è estremamente tedioso
+- assunzioni: posso far fare remote code execution, far eseguire codici semplici
+- farli eseguire tutti sarebbe tedioso
+##### diverse tipologie di shell remote
+- bind shell
+	- faccio creare una shell su una certa porta al server
+	- il server shell ha un processo collegato ad una porta
+	- il client shell si connette al server ed ha la shell remota
+	- problema: potrei avere un firewall che blocca la connessione a quella determinata porta per accedere alla shell
+- reverse shell
+	- mi metto in ascolto su una porta, il server shell si connette a me, e il firewall non blocca questa connessione
+	- dico al server shell di connettersi a me con quel code execution
+	- poi io impartisco comandi da far eseguire alla shell del server shell
+	 - Come creare la nostra shell?
+	- `netcat`
+	- oppure linguaggi di programmazione a nostro piacimento
+		- [revshell.com](https://revshell.com)
+- pivoting
+	- in cosa consiste
+	- attraverso il port forwarding
+		- i router indirizzano il traffico al posto tuo su una certa porta pubblica anche se il server è privato
+	- tunneling, incapsula il traffico a ssh tunnels
+		- spiegazione
+	- proxying, usa sock proxies
+		- incapsula il pacchetto e lo invia al posto tuo e fa da proxy inviando le risposte al posto tuo
+- PARTE CHE NON HO CAPITO SE È ANCORA PIVOTING
+	- imposto una regola al router, dicendo se ricevo una qualsiasi comunicazione ip su una certa porta, lui la riindirizza su un determinato indirizzo ip con una determinata porta
+		- penso di parlare con un server ma in realtà parlo con un altro
+		- local port forwarding
+			- può essere fatto con ssh al comando a slide 163
+			- con anche foto
+			- chiedi a samuele la foto che non ho capito bene
+			- a quanto pare utile pure per usare i tool di kali a quella macchina
+			- senza doverli spostare totalmente
+- remote port forwarding
+	- spiegazione di cosa fa
+	- comandi a slide 164
+	- spiega la foto a slide 164
+	- medesimo risultato ma cambia come effettuiamo la connessione
+	- è lui che si connette tramite ssh a noi
+	- utile non ho capito per cosa forse per dire borg?
+	- pericoloso, potremmo avere un target che attacca a noi
+- ALTRI TOOL PER FARE PORT FORWARDING
+	- chisel
+	- netstat
+		- ci fa vedere tutte le connessioni attive senza fare caciara come nmap
+		- le porte in ascolto, processi associati ecc 
+		- `netstat -tulpn`
