@@ -272,7 +272,7 @@ Ogni nodo reduce si occupa **di un sottoinsieme dei termini**.
 ![[Pasted image 20260317192130.png]]
 - COSTI DI LOG MERGE
 - ricordando che 
-	- `T = numero totale di posting (o token) nella collezione`
+	- `T = numero totale di token nella collezione`
 - con il metodo semplice **main + auxiliary**:
     - un posting può essere riscritto moltissime volte
     - costo totale:
