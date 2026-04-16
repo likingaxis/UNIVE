@@ -205,6 +205,8 @@ PSEUDOCODICE MOLTO UTILE
 	- library catalog
 ### SCRIVERE ESERCIZI!!!
 [[ESERCIZI CROCS]]
+#### PHRASE QUERIES
+Le **phrase queries** sono query in cui si richiede che i termini compaiano **in una specifica sequenza e posizione** all’interno del documento.
 #### PHRASE QUERIES con bi grammi
 Un **bi-gramma (bigram)** è una **sequenza di due token consecutivi**.
 - token = parola o unità lessicale ottenuta dopo la **tokenizzazione**    
