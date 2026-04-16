@@ -228,6 +228,7 @@
     - cosa può fare l’utente come root
 - `sudo -V`
     - versione sudo (possibili CVE)
+    - CVE ovvero common vulnerability exposure
 - `cat /etc/sudoers`
     - configurazione sudo
 - `cat /etc/sudoers.d/*`
