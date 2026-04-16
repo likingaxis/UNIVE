@@ -1,0 +1,45 @@
+- Descrive la parte dinamica legata al web
+- lato server abbiamo diverse cose, php, python, java ecc...
+- UNICO linguaggio di programmazione web disponibile lato client
+- `ECMAscript`, versione comune di `javacript`
+- javascript ha una sua VM da cui eseguire il codice
+- typeahead si basano su javascript
+- in sostanza ci permette di fare:
+	- javascript ci consente di cambiare elementi e stili in una pagina
+		- DOM manipulation
+			- spiegazione
+	- Comunicazione asincrona mediante AJAX
+		- AJAX
+			- tecnologia che in modo asincrono consente di utilizzare la pagina html facendo inviare messaggi al server con dati `xml` o `json`
+			- consente di non far hard refresh della pagina
+	- altro tipo polyfills
+		- `polyfills` consente di far funzionare codici html5 a browser che non li supportano
+- cosa non fa
+	- accedere ai file locali del computer
+	- interagire con qualsiasi server remoto
+- node.js
+	- usato per fare backend lato server
+- framework javascript servono per migliorare javascript
+	- spiega cosa sono i framework
+	- angular, react, vue.js
+	- framework che usiamo è vanilla Js
+- Typescript è un linguaggio che viene poi convertito in javascript
+	- attraverso Transpiler
+	- da codice sorgente a codice sorgente
+###### Caratteristiche di Javascript
+- è dinamico ovvero non è compilato ma eseguito in una macchina virtuale
+- Loosely typed non bisogna specificare la variabile
+- Case sensitive non serve specificare la sbebbers
+- ha un garbage collector anche Javascript
+- Video sulle slide di come è nato javascript
+
+##### BASI DI JAVASCRIPT
+javascript viene citato inline oppure dentro head con il tag `<script>` oppure come link di collegamento
+- Comandi alla console javascript di developer options
+	- `console.log("ciao");`
+		- stampa direttamente sulla console
+	- `alert("ciao");`
+		- apre una modale
+- variabili in javascript
+	- `let myName="lorenzo";`
+	- `typeof(test)` per vedere il tipo di variabile
