@@ -17,6 +17,7 @@
 	- poi io impartisco comandi da far eseguire alla shell del server shell
 	 - Come creare la nostra shell?
 	- `netcat`
+		- strumento che consente l'ascolto o la connessione
 	- oppure linguaggi di programmazione a nostro piacimento
 		- [revshell.com](https://revshell.com)
 - pivoting
