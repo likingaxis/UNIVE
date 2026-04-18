@@ -1,16 +1,26 @@
-## WEB
-- breve introduzione su cosa è
+#### WEB
+- introduzione al modello **client-server**
+    - il client (browser) invia una richiesta
+    - il server la elabora e restituisce una risposta
+- tipicamente: **1 server → più client**
+- Regole importanti per sviluppo web
+	- **non fidarti mai del client**
+	- tutto ciò che arriva dal client può essere modificato
+	- validazioni e controlli vanno fatti **lato server**
 ##### PROTOCOLLO HTTP
-- protocollo applicativo che funziona attraverso operazioni di GET e POST
-- in versione 1.1 protocollo stateless, ogni richiesta è indipendente dall'altra
-	- meccanismo dei cookie da un identificativo tra browser e client per consentire uno scambio di dati per quel determinato utente
-- PHP viene eseguito solo sul server JAVASCRIPT solo sul client
-
-##### Regole importanti per sviluppo web
-- non fidarti mai del client
+- protocollo applicativo usato per la comunicazione web
+- funziona tramite richieste e risposte (es. **GET, POST**)
+- HTTP/1.1 è **stateless**
+    - ogni richiesta è indipendente dalle altre
+    - per mantenere lo stato si usano i **cookie**
+        - permettono di identificare l’utente tra richieste diverse
+- esecuzione del codice:
+    - **PHP → lato server**
+    - **JavaScript → lato client** _(anche se oggi può essere anche lato server, ma qui restiamo base)_
 #### Enumeration WEB
+fase in cui si raccolgono informazioni su un'applicazione web
 - i codici di errore HTTP 
-	- utili per scansioni web
+	- fondamentali durante l’enumeration perché danno informazioni sul comportamento del server
 
 | **Codice**              | **Descrizione**                                                                  |
 | ----------------------- | -------------------------------------------------------------------------------- |
@@ -19,22 +29,41 @@
 | **3xx** (Redirect)      | Il client deve fare un’altra richiesta perché la risorsa si è spostata.          |
 | **4xx** (Client Error)  | La richiesta contiene un errore (es. risorsa non trovata, richiesta non valida). |
 | **5xx** (Server Error)  | Errore lato server, il server non ha potuto soddisfare la richiesta.             |
-negli applicativi web esiste un file che si chiama robots.txt
-- è un file accedibile solo tramite query http e non attraverso crawler web
-###### Virtual hosts
-- il parametro host modificato mi consente di cambiare l'indirizzamento a una pagina web
-	- in base al valore di host vado su diverse applicazioni web
-	- nella richiesta http possiamo vedere dentro `host:` per indirizzare il virtual host
-
+- **403 Forbidden → la risorsa esiste ma non puoi accedervi**
+- **404 Not Found → probabilmente non esiste**
+##### robots.txt
+- file accessibile via HTTP (`/robots.txt`)
+- contiene istruzioni per i crawler su cosa NON visitare
+- punto importante:
+    - può rivelare directory nascoste
+    - quindi è utile in fase di enumeration
+#### Virtual Hosts
+- più siti web possono stare sullo stesso IP
+- il server decide quale mostrare in base all’header:
+    - `Host:`
+- modificando questo valore possiamo:
+    - scoprire altri siti/applicazioni sullo stesso server
 ##### ESERCITAZIONE WEB ENUMERATION
-- si può analizzare il sito con inspect, analisi del sito curl per scaricare parti
-- poi si può passare a usare burp suite
-	- permette di analizzare richieste e risposte
-	- funziona con un meccanismo di proxy, si pone come intermediario e analizza i vari dati
-	- dobbiamo configurare il proxy con foxy-proxy
-	- importiamo il certificato per accedere in rete
-	- il certificato è una firma di autenticazione 
-	- sapere la versione del server può portare a sapere determinate CVE
-	- determinate vulnerabilità
-	- https://www.exploit-db.com/
+##### Analisi base
+- **Inspect (browser)** → analisi frontend
+- **curl** → scaricare e analizzare contenuti da terminale
+##### Burp Suite
+- tool fondamentale per il web testing
+- funziona come **proxy**
+    - si mette tra browser e server
+    - intercetta tutte le richieste HTTP
+ Permette di:
+- leggere richieste e risposte
+- modificarle
+- reinviare (repeater)
+Configurazione
+- usare **FoxyProxy** nel browser
+- configurare il proxy di Burp
+- importare il certificato di Burp nel browser
+    - serve per intercettare traffico HTTPS
+###### Note utili
+- conoscere la **versione del server** può aiutare a:
+    - trovare vulnerabilità note (CVE)
+- database utile:
+    - [https://www.exploit-db.com/](https://www.exploit-db.com/)
 

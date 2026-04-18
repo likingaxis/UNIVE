@@ -1,5 +1,5 @@
 - Descrive la parte dinamica legata al web
-- lato server abbiamo diverse cose, php, python, java ecc...
+- lato server abbiamo diverse cose, `php, python, java` ecc...
 - UNICO linguaggio di programmazione web disponibile lato client
 - `ECMAscript`, versione comune di `javacript`
 - javascript ha una sua VM da cui eseguire il codice
