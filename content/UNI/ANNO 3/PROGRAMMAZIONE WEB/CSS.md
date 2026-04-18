@@ -118,6 +118,11 @@ h1 {
 - Classi: `.favorite` → **1**
 - Tag: `html`, `body`, `div`, `ul`, `li` → **5**
 - quindi sarà `(2,1,5)`
+
+Dato che ti viene mostrato **solo il selettore CSS**, si assume:
+
+- `a = 0` (perché non stiamo vedendo HTML inline)
+sarebbe `a = 1`  solo se css dichiarato inline
 ##### PSEUDOCLASSI
 - uso `:`
 - sono pseudoclassi
@@ -179,9 +184,9 @@ a[target="_blank"]
 	- *stile del browser *
 		- `user agent stylesheet `
 		- file di stile di default ma non affidabile poiché dipende dal browser
-	- *stile dell'autore *
+	- *stile dell'autore*
 		- quello scritto da noi in `css`
-	- *stile dell'utente *
+	- *stile dell'utente*
 		- quello dell'utente tipo estensione dark mode
 - la cascata:
     - gestisce situazioni in cui più regole si applicano allo stesso elemento
@@ -339,7 +344,7 @@ div {
 }
 ```
 - tutto il resto (padding, border, margin) si aggiunge **intorno**
-2. AREA DEL PADDING
+2. **AREA DEL PADDING**
 - è lo spazio tra contenuto e bordo
 - serve a creare **spazio interno**
 ```css
@@ -693,8 +698,6 @@ overflow: auto;
             - `max-width: 100%`
             - `height: auto`
         - permette ai contenuti di ridimensionarsi senza rompere il layout
-chiedi al prof della gerarchia del body
-
 #### VARIABILI IN CSS
 - possiamo definire delle **custom properties**
 	- si dichiarano in modo globale dentro `:root`
