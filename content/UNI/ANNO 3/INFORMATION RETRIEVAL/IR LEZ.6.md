@@ -288,18 +288,84 @@ $$DCG_p = rel_1 + \sum_{i=2}^{p} \frac{rel_i}{\log_2 i}$$
 $$NDCG = \frac{DCG}{IDCG}$$
 
 #### Cosa succede se i risultati non sono in una lista?
-- il famoso ago in un pagliaio, se avessimo solo un risultato le misure viste ora non sono utili
-##### Mean Reciprocal Rank
-1/K
-#### PROBLEMA Gli human judgments sono estremamente costosi
-gli human judgments sono estremamente costosi
-- user behavior
-	- adattare il ranking in base ai click dell'utente
-- click position bias
-	- fiducia nei confronti di google che ci porta a dire che i primi risultati sono i migliori
-- gli utenti sono troppo condizionati da un bias
-- A/B testing schema di valutazione basato su giudizio di coppie
-	- non mi dice la rilevanza rispetto la query ma rispetto agli altri documenti recuperati
-	- re ranking
-	- si contano gli user click su due set di risposte differenti
-	- intervallo i due insiemi togliendo i duplicati
+- ci sono casi in cui:
+    - **non ci interessa una lista di documenti**
+    - ma trovare **un solo risultato corretto**
+        - il famoso _ago in un pagliaio_
+    - tipo **fact retrieval**
+        - es: “capitale del Giappone”
+- in questi casi:
+    - metriche come **precision, recall, MAP**
+        - **non sono adatte**
+    - perché:
+        - non mi interessa _quanti_ documenti rilevanti trovo
+        - ma **quanto velocemente trovo il primo giusto**
+##### Mean Reciprocal Rank (MRR)
+- guardo **la posizione del primo documento rilevante**
+    - se il primo documento rilevante è in posizione $K$:
+        - il punteggio è:
+            $RR = \frac{1}{K}$
+    - più il documento è **in alto**  
+        → più il punteggio è alto
+- **Mean Reciprocal Rank (MRR)**:
+    - estensione a più query
+    - faccio la media dei reciprocal rank:
+        $MRR = \frac{1}{|Q|} \sum_{q \in Q} \frac{1}{rank_q}$
+#### PROBLEMA: gli human judgments sono costosi
+- i **giudizi umani di rilevanza**:
+    - sono **costosi**
+    - richiedono tempo ed esperti
+    - sono anche:
+        - **inconsistenti** (tra annotatori diversi)
+        - **variabili nel tempo**
+#### Soluzione: usare il comportamento degli utenti (user behavior)
+- sfruttare i **click degli utenti**
+- come segnale implicito di rilevanza
+    - se un documento viene cliccato spesso → probabilmente è rilevante
+    - dati **abbondanti**
+    - raccolti automaticamente
+    - ma i click **non sono perfetti**
+###### Click Position Bias
+- gli utenti: tendono a cliccare di più i risultati **in alto**
+    - un documento può ricevere molti click:
+        - **non perché è rilevante**
+        - ma perché è **in prima posizione**
+    - i click sono:
+        - **informativi**
+        - ma anche **biased** (distorti)
+![[Pasted image 20260418083556.png|300]]
+- anche invertendo i risultati, quelli in alto ricevono comunque più attenzione
+#### Valutazioni relative (pairwise)
+- invece di definire la rilevanza del documento in modo binario “questo documento è rilevante o no”
+    - si effettua una valutazione relativa dove si dice
+	    - **Doc A è meglio di Doc B**
+    - mediante i click per inferire **preferenze relative**
+    - più robusto rispetto al bias assoluto
+#### Confronto tra ranking: Interleaving + click
+- ho due ranking:
+    - ranking A
+    - ranking B
+- costruisco un **ranking interleaved**:
+    - mescolo i risultati dei due
+    - rimuovo duplicati
+- mostro la lista all’utente
+- conto i click:
+    - quanti su A
+    - quanti su B
+- conclusione:
+    - il ranking con più click è **migliore (in media)**
+- foto sotto: ho due liste di risultati, le intervallo e le metto in una unica lista, tolgo i duplicati e conto quali vengono presi di più
+![[Pasted image 20260418082919.png|500]]
+![[Pasted image 20260418082931.png|500]]
+#### A/B Testing
+- è diverso dall’interleaving
+- idea:
+    - divido gli utenti in due gruppi:
+        - gruppo A → sistema vecchio
+        - gruppo B → sistema nuovo
+- confronto metriche:
+    - click
+    - tempo
+    - conversioni
+- serve per:
+    - testare **una modifica reale in produzione**
