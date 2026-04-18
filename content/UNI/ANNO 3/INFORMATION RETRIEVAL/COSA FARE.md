@@ -1,3 +1,1 @@
-- ir mancano slide nuove
-- web
 - big d
