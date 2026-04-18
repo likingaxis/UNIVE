@@ -1,4 +1,3 @@
-- ir
-- vuln
+- ir mancano slide nuove
 - web
 - big d
