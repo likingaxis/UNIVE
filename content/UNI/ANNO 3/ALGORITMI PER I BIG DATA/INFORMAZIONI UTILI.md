@@ -8,7 +8,8 @@ Uno spazio probabilistico è una tripla $(Ω, F, Pr)$ dove:
 Una funzione $Pr : F → ℝ$ che assegna probabilità agli eventi e soddisfa:
 - $0 ≤ Pr(E) ≤ 1$
 - $Pr(Ω) = 1$
-- additività: unione per eventi disgiunti, $Pr(⋃ Ei) = Σ Pr(Ei)$
+- UNION BOUND:
+	- additività: unione per eventi disgiunti, $Pr(⋃ Ei) \leq Σ Pr(Ei)$
 ##### EVENTI INDIPENDENTI
 Due eventi E e F sono indipendenti se:
 - $Pr(E ∩ F) = Pr(E) · Pr(F)$
@@ -185,10 +186,18 @@ $Pr(X \ge 2nH_n)\le \frac{1}{2}$
 **raffinamento (miglioramento) della stima** del Coupon Collector.
 ![[Pasted image 20260331170422.png|500]]
 ### RANDOMIZED ALGORITHMS
-#### UNIVERSAL HASHING
-- tocca capire bene cosa è
 #### CHERNOUFF BOUNDS
-- tocca capire bene cosa è
+Disuguaglianze probabilistiche che forniscono **limiti esponenziali** sulla probabilità che la somma di variabili aleatorie indipendenti si discosti dal valore atteso.
+Siano:
+- $X_1, \dots, X_n$​ variabili aleatorie indipendenti (tipicamente Bernoulli)
+- $X =\sum_i X_i$
+- $\mu = \mathbb{E}[X]$
+*Upper Tail*
+$\Pr[X \ge (1 + \delta)\mu] \le e^{-\frac{\delta^2 \mu}{3}} \quad (\delta > 0)$
+Probabilità che $X$ sia **molto più grande della media**
+*Lower Tail*
+$\Pr[X \le (1 - \delta)\mu] \le e^{-\frac{\delta^2 \mu}{2}} \quad (0 < \delta < 1)$
+Probabilità che $X$ sia **molto più piccolo della media**
 ### FINDING SIMILAR ITEMS IN LARGE DATA SETS
 #### HASH FUNCTIONS
 #### TEOREMA 1 
