@@ -445,84 +445,71 @@ Concludendo
 $\Pr[F_t] \le n \cdot \frac{1}{n^2} = \frac{1}{n}$
 Ricorda: Union bound è la probabilità dell'unione che diventa una sommatoria degli eventi
 #### LOAD BALANCING
-PROBLEMA
-- Ho:
-    - nnn **jobs**
-    - nnn **processori**
-- Ogni palla deve essere assegnata a un bin
-- Obiettivo:
-    - distribuire il carico in modo **uniforme**
-    - minimizzare il **massimo numero di palle in un bin** (makespan)
-IDEA CHIAVE
-- Strategia base:
-    - ogni palla sceglie **un bin a caso uniformemente**
-- Analizzo:
-    - quanto è **sbilanciata** la distribuzione
-- Risultato classico:
-    - il massimo carico non è costante, ma cresce lentamente
-PARAMETRI
-- nnn: numero di palle
-- nnn: numero di bin
-- XiX_iXi​: numero di palle nel bin iii
-- M=max⁡iXiM = \max_i X_iM=maxi​Xi​: massimo carico
-ALGORITMO
-1. Per ogni palla j=1,…,nj = 1, \dots, nj=1,…,n:
-    - scegli un bin i∈{1,…,n}i \in \{1, \dots, n\}i∈{1,…,n} **uniformemente a caso**
-    - inserisci la palla nel bin scelto
-ANALISI
-- Ogni assegnazione costa O(1)O(1)O(1)
-- Totale:
-    - O(n)O(n)O(n)
-ANALISI PROBABILISTICA
-VARIABILI INDICATRICI
-- Definisco:
-    - Xi,j=1X_{i,j} = 1Xi,j​=1 se la palla jjj va nel bin iii, 0 altrimenti
-- Allora:
-    - Xi=∑j=1nXi,jX_i = \sum_{j=1}^n X_{i,j}Xi​=∑j=1n​Xi,j​
-VALORE ATTESO
-- Per ogni jjj:
-    - Pr⁡[Xi,j=1]=1n\Pr[X_{i,j} = 1] = \frac{1}{n}Pr[Xi,j​=1]=n1​
-- Quindi:
-E[Xi,j]=1n\mathbb{E}[X_{i,j}] = \frac{1}{n}E[Xi,j​]=n1​
-- Per linearità dell’attesa:
-E[Xi]=∑j=1nE[Xi,j]=n⋅1n=1\mathbb{E}[X_i] = \sum_{j=1}^n \mathbb{E}[X_{i,j}] = n \cdot \frac{1}{n} = 1E[Xi​]=j=1∑n​E[Xi,j​]=n⋅n1​=1
-👉 **Intuizione:** in media ogni bin riceve 1 palla
-PROBABILITÀ DI CARICO ALTO
-- Voglio stimare:
-Pr⁡[Xi≥k]\Pr[X_i \ge k]Pr[Xi​≥k]
-- Uso bound (tipo Chernoff / Stirling semplificato):
-Pr⁡[Xi≥k]≤(ek)k\Pr[X_i \ge k] \le \left(\frac{e}{k}\right)^kPr[Xi​≥k]≤(ke​)k
-👉 questa probabilità decresce **molto velocemente**
-MASSIMO CARICO (UNION BOUND)
-- Voglio:
-Pr⁡[M≥k]=Pr⁡[∃i:Xi≥k]\Pr[M \ge k] = \Pr[\exists i : X_i \ge k]Pr[M≥k]=Pr[∃i:Xi​≥k]
-- Uso union bound:
-Pr⁡[M≥k]≤n⋅Pr⁡[Xi≥k]\Pr[M \ge k] \le n \cdot \Pr[X_i \ge k]Pr[M≥k]≤n⋅Pr[Xi​≥k]
-- Sostituisco:
-Pr⁡[M≥k]≤n⋅(ek)k\Pr[M \ge k] \le n \cdot \left(\frac{e}{k}\right)^kPr[M≥k]≤n⋅(ke​)k
-SCELTA DI kkk
-- Prendo:
-k=log⁡nlog⁡log⁡nk = \frac{\log n}{\log \log n}k=loglognlogn​
-- Sostituendo:
-    - il termine (ek)k\left(\frac{e}{k}\right)^k(ke​)k diventa **super piccolo**
-    - il prodotto con nnn tende a 0
-👉 ottengo:
-M=O(log⁡nlog⁡log⁡n)con alta probabilitaˋM = O\left(\frac{\log n}{\log \log n}\right) \quad \text{con alta probabilità}M=O(loglognlogn​)con alta probabilitaˋ
-NATURA RANDOMIZZATA
-- La randomizzazione entra:
-    - nella scelta casuale del bin per ogni palla
-- L’algoritmo è:
-    - **Monte Carlo (senza errore di correttezza, ma con analisi probabilistica del risultato)**
-CORRETTEZZA
-- L’algoritmo:
-    - assegna tutte le palle correttamente
-- Non c’è rischio di fallimento:
-    - sempre produce una distribuzione valida
-TIPO DI ERRORE
-- possibile:
-    - distribuzione sbilanciata (evento raro)
-- impossibile:
-    - errore di correttezza
+*PROBLEMA*
+- Abbiamo un sistema in cui $m$ lavori arrivano in uno stream e devono essere processati immediatamente.
+- Sono disponibili $n$ processori identici.
+- Bisogna assegnare ogni job a un processore cercando di bilanciare il carico.
+- **Caso Centralizzato**: Si userebbe *round-robin*, ottenendo un carico di $\lceil m/n \rceil$.
+- **Caso Decentralizzato**: Non c’è coordinazione $\rightarrow$ ogni job sceglie un processore **uniformemente a caso**.
+*IDEA CHIAVE*
+- La randomizzazione sostituisce il coordinamento esplicito.
+- **Domanda**: Qual è il carico massimo ($MaxLoad$) di un singolo processore?
+- Ci aspettiamo che, anche senza coordinazione, nessun processore sia "troppo" carico.
+*PARAMETRI*
+- $m = n$ (caso critico analizzato)
+- $X_i$: carico del processore $i$-esimo.
+- $Y_{ij}$: variabile indicatrice (1 se il job $j$ va al processore $i$, 0 altrimenti).
+- $\mu = E[X_i] = 1$ (carico medio).
+*ALGORITMO*
+1. Per ogni job $j = 1 \dots n$:
+2. Scegli $i \in \{1, \dots, n\}$ a caso.
+3. Assegna job $j$ a $i$.
+4. Costo: $O(n)$ totale.
+*ANALISI PROBABILISTICA (Chernoff Bound)*
+Vogliamo stimare la probabilità che un processore superi una soglia $c$.
+Dalla formula di Chernoff:
+$Pr[X_i > c] < \frac{e^{c-1}}{c^c} < \left( \frac{e}{c} \right)^c$
+
+**Scelta strategica di $c$:**
+Poniamo $c = e \cdot \gamma(n)$
+dove $\gamma(n)$ è definita dalla relazione $\gamma(n)^{\gamma(n)} = n$.
+*Nota:* Asintoticamente $\gamma(n) \approx \frac{\ln n}{\ln \ln n}$.
+*DIMOSTRAZIONE (Sviluppo algebrico)*
+Sostituiamo $c = e \cdot \gamma$ nel bound:
+$Pr[X_i > c] \le \left( \frac{e}{e\gamma} \right)^{e\gamma} = \left( \frac{1}{\gamma} \right)^{e\gamma}$
+
+**Passaggio ai logaritmi:**
+Usiamo l'identità $a^b = e^{b \ln a}$:
+$(1/\gamma)^{e\gamma} = \left( e^{\ln(1/\gamma)} \right)^{e\gamma} = e^{e\gamma \cdot \ln(1/\gamma)} = e^{-e\gamma \ln(\gamma)}$ **(I)**
+
+**Analisi dell'esponente:**
+Sostituendo $\gamma(n) \approx \frac{\ln n}{\ln \ln n}$:
+$e \cdot \left( \frac{\ln n}{\ln \ln n} \right) \cdot \ln \left( \frac{\ln n}{\ln \ln n} \right) = e \cdot \frac{\ln n}{\ln \ln n} \cdot [ \ln \ln n - \ln \ln \ln n ]$
+
+Semplificando il termine $\ln \ln n$ al numeratore e denominatore:
+$\approx e \cdot [ \ln n - \ln \ln \ln n ]$
+
+**Riscrittura finale:**
+Per $\gamma \ge 2$, si dimostra che:
+$(I) \le e^{-\frac{e \gamma}{2} \ln n} \implies (I) \le \frac{1}{n^2}$
+*UNION BOUND E CONCLUSIONE*
+Per ottenere il risultato su **tutti** i processori simultaneamente, usiamo l'Union Bound:
+$Pr[\exists i : X_i > c] \le \sum_{i=1}^{n} Pr[X_i > c]$
+$Pr[MaxLoad > c] \le n \cdot \frac{1}{n^2} = \frac{1}{n}$
+**Risultato finale:**
+Con probabilità almeno $1 - \frac{1}{n}$, il carico massimo è:
+$MaxLoad = O(e \cdot \gamma(n)) = \Theta\left( \frac{\ln n}{\ln \ln n} \right)$
+*CORRETTEZZA E ERRORE*
+- **Correttezza**: Sempre corretto (tutti i lavori vengono assegnati).
+- **Tipo di Errore**: Errore di "performance" (bilanciamento povero/evento raro).
+- **Evento Raro**: Con probabilità $1/n$ il carico massimo supera la soglia teorica.
+*ESTENSIONE: MANY JOBS ($m = 16n \ln n$)*
+Se il numero di lavori aumenta molto rispetto ai processori:
+- Carico medio: $\mu = 16 \ln n$
+- Usando Chernoff standard, la probabilità che un processore devii dalla media crolla:
+  $Pr[X_i > 2\mu] \le e^{-\mu/3} \approx n^{-5}$
+- **Conclusione**: Con alta probabilità, ogni processore ha un carico tra $[\frac{1}{2}\mu, 2\mu]$.
+- Più lavori ci sono, più il sistema appare "bilanciato" in proporzione.
 ### FINDING SIMILAR ITEMS IN LARGE DATA SETS
 #### ALGORITMO MIN HASING
 SLIDE 34
