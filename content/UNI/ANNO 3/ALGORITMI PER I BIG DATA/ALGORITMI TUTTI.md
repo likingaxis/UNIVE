@@ -355,34 +355,174 @@ L'evento $E_3$ si verifica se l'insieme dei candidati $C$ è troppo grande ($|C|
 2. Almeno $2n^{3/4}$ elementi di $C$ sono più grandi della mediana (ovvero $u$ è troppo a destra).
 **$\mathcal{E}_{3,2}$**: Almeno $2n^{3/4}$ elementi di $C$ sono più piccoli della mediana (ovvero $d$ è troppo a sinistra). Se $|C| > 4n^{3/4}$, allora almeno uno di questi due eventi deve essersi verificato. La probabilità che si verifichi $\mathcal{E}_{3,1}$ (vale lo stesso per $\mathcal{E}_{3,2}$) è 
 $$\Pr(\mathcal{E}_{3,1}) \leq \frac{Var[X]}{(\sqrt{n})^2} = \frac{\frac{1}{4}n^{3/4}}{n} = \frac{1}{4}n^{-1/4}$$
-PROBABILITÀ FINALE
+*PROBABILITÀ FINALE*
 - $Pr(\text{fallimento}) \le Pr(E_1)+Pr(E_2)+Pr(E_3) \le n^{-1/4}$
 
 - $Pr(\text{successo}) \ge 1 - n^{-1/4}$
 
-CORRETTEZZA
+*CORRETTEZZA*
 - Se l’algoritmo non fallisce:
     - la mediana è sicuramente in $C$
     - la posizione corretta viene calcolata esattamente
 - Quindi:
     - **risultato corretto quando non fallisce**
-TIPO DI ERRORE
+*TIPO DI ERRORE*
 - possibile:
     - restituisce FAIL
 - impossibile:
     - restituire una mediana sbagliata
-RIDUZIONE DELL’ERRORE
+*RIDUZIONE DELL’ERRORE*
 - Ripeto l’algoritmo indipendentemente
 - probabilità fallimento dopo $t$ tentativi:
 - $(n^{-1/4})^t = n^{-t/4}$
 ➡ decresce esponenzialmente
 ### RANDOMIZED ALGORITHMS
 #### CONTENTION RESOLUTION IN A DISTRIBUTED SYSTEM
-- da fare
-#### GLOBAL MIN CUT
-- da fare
+PROBLEMA*
+- Hai $n$ processi $P_1, \dots, P_n$
+- tutti vogliono accedere a **una risorsa condivisa** (es. database / canale radio)
+⚠️ Regola critica:
+- se **2 o più processi accedono insieme → collisione → nessuno passa**
+- i processi **non possono comunicare tra loro**
+
+*IDEA CHIAVE*
+ Questo è fondamentale: niente coordinazione → serve rompere la simmetria
+determinismo = ❌
+Se tutti fanno la stessa cosa:
+- o entrano tutti → collisione
+- o nessuno entra → stallo
+*STRATEGIA PROBABILISTICA*
+Ogni processo, ad ogni tempo $t$:
+- prova ad accedere con probabilità
+$p = \frac{1}{n}$
+
+Si definisce $S(i,t)$ l’evento in cui il processo i-esimo riesce ad accedere al database al tempo $t$.
+Un processo $i$ ha successo se:
+1. lui prova (probabilità $p$)
+2. tutti gli altri NON provano (probabilità $(1-p)^{n-1}$)
+
+*ANALISI*
+Teorema 3.1
+Quindi:
+$Pr[S(i,t)] = p \cdot (1-p)^{n-1}$
+$Pr[S(i,t)] = \frac{1}{n} \left(1 - \frac{1}{n}\right)^{n-1}$
+il termine
+$\left(1 - \frac{1}{n}\right)^{n-1}$
+sta tra:
+$\frac{1}{e} \quad \text{e} \quad \frac{1}{2}$
+poiché la funzione è decrescente, a infinito diventa $1/e$ per il limite notevole
+come valore massimo si ha $1/2$ 
+La probabilità di successo quindi
+$\frac{1}{e \cdot n} \le Pr[S(i,t)] \le \frac{1}{2n}$
+- ogni round ha **probabilità ≈ $1/n$** di far passare un processo
+Se ripeti il processo:
+- probabilità che un processo **NON riesca mai** dopo $t$ round:
+$(1 - \frac{1}{en})^t$
+Dal Teorema 3.1, in ogni round il processo $i$ ha probabilità di successo almeno
+$\frac{1}{en}$.
+Quindi in un round la probabilità di fallire è al più
+$1-\frac{1}{en}$.
+*TEOREMA 3.2*
+Teorema 3.2. La probabilità che l'evento $i$-esimo fallisca ad accedere al database in $en$ tentativi $\le \frac{1}{e}$. Dopo $en(c \log n)$ tentativi, la probabilità $\le \frac{1}{n^c}$
+*Dimostrazione.* Sia $F_{i,t}$ l'evento in cui il processo $i$ fallisce fallisce nell'accesso al database nei round $1, \dots, t$. Poiché i tentativi sono indipendenti tra di loro, si ha che
+$\Pr[F_{i,t}] \le \left( 1 - \frac{1}{en} \right)^t$
+Per cui scegliendo $t = \lceil en \rceil$ si ha
+$\Pr[F_{i,t}] \le \left( 1 - \frac{1}{en} \right)^{\lceil en \rceil} \le \left( 1 - \frac{1}{en} \right)^{en} \le \frac{1}{e}$
+Scegliendo $t = \lceil en \rceil \cdot \lceil c \log n \rceil$ si ha
+$\Pr[F_{i,t}] \le \left( \frac{1}{e} \right)^{c \log n} = \frac{1}{n^c}$
+
+*PROBABILITÀ GLOBALE DI SUCCESSO*
+Dati questi teoremi come base, è possibile definire la probabilità per cui tutti i processi abbiano successo in $2e n \log n$ tentativi $\Pr[\text{Successo}] \ge 1 - \frac{1}{n}$
+
+*Dimostrazione.* Sia $F_t$ l'evento in cui almeno uno degli $n$ processi fallisce nell'accesso nei tentativi $1, \dots, t$
+$\Pr[F_t] = \Pr \left[ \bigcup_{i=1}^n F_{i,t} \right] \le$
+(Per union buond 1.1) $\le \sum_{i=1}^n \Pr[F_{i,t}] \le n \left(1 - \frac{1}{en}\right)^t$
+
+Inoltre per $t = 2e n \log n$ tentativi ($c = 2$), per il teorema precedente
+$\Pr[F_{i,t}] \le n \cdot \left( \frac{1}{e} \right)^{2 \log n} = \frac{1}{n^2}$
+
+Concludendo
+$\Pr[F_t] \le n \cdot \frac{1}{n^2} = \frac{1}{n}$
+Ricorda: Union bound è la probabilità dell'unione che diventa una sommatoria degli eventi
 #### LOAD BALANCING
-- da fare
+PROBLEMA
+- Ho:
+    - nnn **jobs**
+    - nnn **processori**
+- Ogni palla deve essere assegnata a un bin
+- Obiettivo:
+    - distribuire il carico in modo **uniforme**
+    - minimizzare il **massimo numero di palle in un bin** (makespan)
+IDEA CHIAVE
+- Strategia base:
+    - ogni palla sceglie **un bin a caso uniformemente**
+- Analizzo:
+    - quanto è **sbilanciata** la distribuzione
+- Risultato classico:
+    - il massimo carico non è costante, ma cresce lentamente
+PARAMETRI
+- nnn: numero di palle
+- nnn: numero di bin
+- XiX_iXi​: numero di palle nel bin iii
+- M=max⁡iXiM = \max_i X_iM=maxi​Xi​: massimo carico
+ALGORITMO
+1. Per ogni palla j=1,…,nj = 1, \dots, nj=1,…,n:
+    - scegli un bin i∈{1,…,n}i \in \{1, \dots, n\}i∈{1,…,n} **uniformemente a caso**
+    - inserisci la palla nel bin scelto
+ANALISI
+- Ogni assegnazione costa O(1)O(1)O(1)
+- Totale:
+    - O(n)O(n)O(n)
+ANALISI PROBABILISTICA
+VARIABILI INDICATRICI
+- Definisco:
+    - Xi,j=1X_{i,j} = 1Xi,j​=1 se la palla jjj va nel bin iii, 0 altrimenti
+- Allora:
+    - Xi=∑j=1nXi,jX_i = \sum_{j=1}^n X_{i,j}Xi​=∑j=1n​Xi,j​
+VALORE ATTESO
+- Per ogni jjj:
+    - Pr⁡[Xi,j=1]=1n\Pr[X_{i,j} = 1] = \frac{1}{n}Pr[Xi,j​=1]=n1​
+- Quindi:
+E[Xi,j]=1n\mathbb{E}[X_{i,j}] = \frac{1}{n}E[Xi,j​]=n1​
+- Per linearità dell’attesa:
+E[Xi]=∑j=1nE[Xi,j]=n⋅1n=1\mathbb{E}[X_i] = \sum_{j=1}^n \mathbb{E}[X_{i,j}] = n \cdot \frac{1}{n} = 1E[Xi​]=j=1∑n​E[Xi,j​]=n⋅n1​=1
+👉 **Intuizione:** in media ogni bin riceve 1 palla
+PROBABILITÀ DI CARICO ALTO
+- Voglio stimare:
+Pr⁡[Xi≥k]\Pr[X_i \ge k]Pr[Xi​≥k]
+- Uso bound (tipo Chernoff / Stirling semplificato):
+Pr⁡[Xi≥k]≤(ek)k\Pr[X_i \ge k] \le \left(\frac{e}{k}\right)^kPr[Xi​≥k]≤(ke​)k
+👉 questa probabilità decresce **molto velocemente**
+MASSIMO CARICO (UNION BOUND)
+- Voglio:
+Pr⁡[M≥k]=Pr⁡[∃i:Xi≥k]\Pr[M \ge k] = \Pr[\exists i : X_i \ge k]Pr[M≥k]=Pr[∃i:Xi​≥k]
+- Uso union bound:
+Pr⁡[M≥k]≤n⋅Pr⁡[Xi≥k]\Pr[M \ge k] \le n \cdot \Pr[X_i \ge k]Pr[M≥k]≤n⋅Pr[Xi​≥k]
+- Sostituisco:
+Pr⁡[M≥k]≤n⋅(ek)k\Pr[M \ge k] \le n \cdot \left(\frac{e}{k}\right)^kPr[M≥k]≤n⋅(ke​)k
+SCELTA DI kkk
+- Prendo:
+k=log⁡nlog⁡log⁡nk = \frac{\log n}{\log \log n}k=loglognlogn​
+- Sostituendo:
+    - il termine (ek)k\left(\frac{e}{k}\right)^k(ke​)k diventa **super piccolo**
+    - il prodotto con nnn tende a 0
+👉 ottengo:
+M=O(log⁡nlog⁡log⁡n)con alta probabilitaˋM = O\left(\frac{\log n}{\log \log n}\right) \quad \text{con alta probabilità}M=O(loglognlogn​)con alta probabilitaˋ
+NATURA RANDOMIZZATA
+- La randomizzazione entra:
+    - nella scelta casuale del bin per ogni palla
+- L’algoritmo è:
+    - **Monte Carlo (senza errore di correttezza, ma con analisi probabilistica del risultato)**
+CORRETTEZZA
+- L’algoritmo:
+    - assegna tutte le palle correttamente
+- Non c’è rischio di fallimento:
+    - sempre produce una distribuzione valida
+TIPO DI ERRORE
+- possibile:
+    - distribuzione sbilanciata (evento raro)
+- impossibile:
+    - errore di correttezza
 ### FINDING SIMILAR ITEMS IN LARGE DATA SETS
 #### ALGORITMO MIN HASING
 SLIDE 34
