@@ -127,17 +127,15 @@ La finestra di contesto è un parametro chiave
 
 #### POINTWISE MUTUAL INFORMATION (PMI)
 PMI misura:
-
 > “quanto è sorprendente vedere x e y insieme rispetto a vederli separatamente”
-
 - non ci interessa:
 	- quante volte due parole compaiono insieme
 - ci interessa:
 	- **quanto è significativa questa co-occorrenza**
 ##### Formula
 $$P(x)P(y)PMI(x,y) = \log \frac{P(x,y)}{P(x)P(y)}$$
-- $P(x)$ → probabilità di vedere x
-- $P(y)$ → probabilità di vedere y
+- $P(x)$ → probabilità di vedere $x$
+- $P(y)$ → probabilità di vedere $y$
 - $P(x,y)$ → probabilità che compaiano insieme
 	- parole molto frequenti → penalizzate
 	- parole rare ma significative → valorizzate
@@ -148,7 +146,7 @@ Dopo aver costruito la matrice (anche con PMI), abbiamo ancora problemi:
 - presenza di **rumore**
 - difficile catturare relazioni profonde
 soluzione: **ridurre e “ripulire” lo spazio**
-LSA cerca di:
+**LSA** cerca di:
 - ridurre la dimensionalità
 - mantenere solo le informazioni più importanti
 - far emergere **relazioni latenti (nascoste)**
