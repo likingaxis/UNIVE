@@ -421,7 +421,7 @@ $(1 - \frac{1}{en})^t$
 Dal Teorema 3.1, in ogni round il processo $i$ ha probabilità di successo almeno
 $\frac{1}{en}$.
 Quindi in un round la probabilità di fallire è al più
-$1-\frac{1}{en}$.
+$1-\frac{1}{en}$
 *TEOREMA 3.2*
 Teorema 3.2. La probabilità che l'evento $i$-esimo fallisca ad accedere al database in $en$ tentativi $\le \frac{1}{e}$. Dopo $en(c \log n)$ tentativi, la probabilità $\le \frac{1}{n^c}$
 *Dimostrazione.* Sia $F_{i,t}$ l'evento in cui il processo $i$ fallisce fallisce nell'accesso al database nei round $1, \dots, t$. Poiché i tentativi sono indipendenti tra di loro, si ha che
@@ -436,7 +436,7 @@ Dati questi teoremi come base, è possibile definire la probabilità per cui tut
 
 *Dimostrazione.* Sia $F_t$ l'evento in cui almeno uno degli $n$ processi fallisce nell'accesso nei tentativi $1, \dots, t$
 $\Pr[F_t] = \Pr \left[ \bigcup_{i=1}^n F_{i,t} \right] \le$
-(Per union buond 1.1) $\le \sum_{i=1}^n \Pr[F_{i,t}] \le n \left(1 - \frac{1}{en}\right)^t$
+(Per union bound 1.1) $\le \sum_{i=1}^n \Pr[F_{i,t}] \le n \left(1 - \frac{1}{en}\right)^t$
 
 Inoltre per $t = 2e n \log n$ tentativi ($c = 2$), per il teorema precedente
 $\Pr[F_{i,t}] \le n \cdot \left( \frac{1}{e} \right)^{2 \log n} = \frac{1}{n^2}$
