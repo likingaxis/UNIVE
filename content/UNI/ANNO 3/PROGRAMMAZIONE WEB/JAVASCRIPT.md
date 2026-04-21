@@ -103,17 +103,14 @@ Javascript può essere inserito in una pagina:
 	- `const prefix`
 		- per le costanti
 	- `typeof(test)` per vedere il tipo di variabile
-
-
-SISTEMA APPUNTI DA QUA
 ##### Gestione di variabili
-- Una variabile ha dei metodi 
+- Una variabile ha dei metodi
 	- Stringa `v.toUpperCase()`
 	- number `v.toFixed()` per ridurre il numero di cifre decimali
 - `parseInt()` funzione che effettua il parsing di una stringa e ritorna la forma numerica di quest'ultima
 - casting con `let num= Number("43")`
 - tante volte le conversioni avvengono in automatico `"45"-3` crea una stringa giusta con `42` numerico
-- determinate codifiche non sono effettuabili `0/0` -> NaN 
+- determinate codifiche non sono effettuabili `0/0` -> `NaN `
 - `"use strict"` per usare la strict mode, che aggiunge un interprete per lo strict mode
 	- il vecchio interprete lo leggerà come una normale stringa quello nuovo lo legge e si attiva
 - `"2"==2` true UGUALE
@@ -123,9 +120,22 @@ SISTEMA APPUNTI DA QUA
 - `a??b` ritorna a se esiste a oppure b se a non esiste
 ###### Switch
 - Switch case
-	- spiegazione rapida
+```JS
+switch (espressione) {
+	case valore1:
+		// istruzioni
+		break;
+
+	case valore2:
+		// istruzioni
+		break;
+
+	default:
+		// caso di default
+}
+```
 ##### Funzioni
-- copiate da SKIMA
+- copiate da **Scheme**
 - modo pratico per raggruppare comandi e richiamarli più volte
 ```JS
 function calcolatrice(parametri){
@@ -138,12 +148,27 @@ return n1
 ##### Scope di una variabile
 - indica i punti di visibilità di una variabile
 - Locale o Globale
-- Locale tipo nella funzione
+- Locale tipo dentro la funzione
 variabili non dichiarate sono `UNDEFINED`
 - anche parametri non dichiarati o non necessari
-#### DEBUGGING CON CHROME(ESAME)
-- vado su Sources, apriamo il file corretto, metto un breakpoint sulle righe che voglio analizzare
-	- il breakpoint una volta impostato, blocca l'esecuzione del codice a quel determinato punto
-	- poi posso gestire quante righe eseguire successivamente
-	- step into: skippa la funziome
-	- step out: fa vedere la funzione bene dentro
+#### DEBUGGING CON CHROME (ESAME)
+- Strumento:
+    - **Chrome DevTools → tab "Sources"**
+*BREAKPOINT*
+- si inserisce su una riga di codice
+- serve per:
+    - **bloccare l’esecuzione** in quel punto
+- permette di:
+    - analizzare variabili
+    - vedere il flusso del programma
+**CONTROLLO DELL’ESECUZIONE**
+Dopo il breakpoint possiamo eseguire il codice passo passo:
+- **Step over**
+    - esegue la riga corrente
+    - **senza entrare nelle funzioni**
+- **Step into**
+    - entra dentro la funzione chiamata
+    - permette di analizzarla riga per riga
+- **Step out**
+    - esce dalla funzione corrente
+    - torna al chiamante
