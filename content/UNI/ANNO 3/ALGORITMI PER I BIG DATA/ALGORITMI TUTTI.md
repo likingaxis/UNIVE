@@ -380,7 +380,7 @@ $$\Pr(\mathcal{E}_{3,1}) \leq \frac{Var[X]}{(\sqrt{n})^2} = \frac{\frac{1}{4}n^{
 #### CONTENTION RESOLUTION IN A DISTRIBUTED SYSTEM
 PROBLEMA*
 - Hai $n$ processi $P_1, \dots, P_n$
-- tutti vogliono accedere a **una risorsa condivisa** (es. database / canale radio)
+- tutti vogliono accedere a **una risorsa condivisa** database
 ⚠️ Regola critica:
 - se **2 o più processi accedono insieme → collisione → nessuno passa**
 - i processi **non possono comunicare tra loro**
