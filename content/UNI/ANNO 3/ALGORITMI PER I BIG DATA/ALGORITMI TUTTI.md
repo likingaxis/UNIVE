@@ -511,7 +511,7 @@ Se il numero di lavori aumenta molto rispetto ai processori:
 - **Conclusione**: Con alta probabilità, ogni processore ha un carico tra $[\frac{1}{2}\mu, 2\mu]$.
 - Più lavori ci sono, più il sistema appare "bilanciato" in proporzione.
 ### FINDING SIMILAR ITEMS IN LARGE DATA SETS
-#### ALGORITMO MIN HASING
+#### ALGORITMO MIN HASHING
 SLIDE 34
 #### ALGORITHM FOR SIGNATURE MATRIX
 #### LOCALITY SENSITIVE HASHING
