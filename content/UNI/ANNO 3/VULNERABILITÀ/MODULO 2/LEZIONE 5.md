@@ -67,3 +67,10 @@ Configurazione
 - database utile:
     - [https://www.exploit-db.com/](https://www.exploit-db.com/)
 
+gobuster tool
+- cosa fa
+	- Gobuster prova migliaia di nomi di cartelle e file in pochi secondi usando una "wordlist"
+- wordlist da usare 
+- content length per escludere le risposte
+- host discovery e virtual host enumeration
+- vfuz
