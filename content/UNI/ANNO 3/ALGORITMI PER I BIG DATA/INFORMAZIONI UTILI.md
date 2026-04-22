@@ -186,7 +186,8 @@ $Pr(X \ge 2nH_n)\le \frac{1}{2}$
 **raffinamento (miglioramento) della stima** del Coupon Collector.
 ![[Pasted image 20260331170422.png|500]]
 ### RANDOMIZED ALGORITHMS
-#### CHERNOUFF BOUNDS
+#### CHERNOFF BOUNDS
+è un teorema
 Disuguaglianze probabilistiche che forniscono **limiti esponenziali** sulla probabilità che la somma di variabili aleatorie indipendenti si discosti dal valore atteso.
 Siano:
 - $X_1, \dots, X_n$​ variabili aleatorie indipendenti (tipicamente Bernoulli)
@@ -195,11 +196,20 @@ Siano:
 *Upper Tail*
 $\Pr[X \ge (1 + \delta)\mu] \le e^{-\frac{\delta^2 \mu}{3}} \quad (\delta > 0)$
 Probabilità che $X$ sia **molto più grande della media**
+
+- VERSIONE COMPLESSA CHE SI USA TIPO NEL LOAD BALACING
+Per $X=\sum_i X_i$​, con $X_i$ indipendenti 0-1 e $\mu=\mathbb E[X]$ una forma standard è:
+
+$\Pr[X \ge (1+\delta)\mu] \le \left(\frac{e^\delta}{(1+\delta)^{1+\delta}}\right)^\mu \qquad (\delta>0)$
+
+Questa è la forma **più precisa**.
+
 *Lower Tail*
 $\Pr[X \le (1 - \delta)\mu] \le e^{-\frac{\delta^2 \mu}{2}} \quad (0 < \delta < 1)$
 Probabilità che $X$ sia **molto più piccolo della media**
 ### FINDING SIMILAR ITEMS IN LARGE DATA SETS
 #### HASH FUNCTIONS
+
 #### TEOREMA 1 
 - SLIDE 10
 #### TEOREMA 2
