@@ -85,4 +85,4 @@ gobuster tool
 - vfuz
 `gobuster dir -u http://cloud.vdsi/archive --proxy http://127.0.0.1:8080 -w /usr/share/wordlists/seclists/Discovery/Web-Content/big.txt --exclude-length 4829`
 - se URL non esiste rindirizza in automatico il file index.html, noi lo escludiamo facendo exclude-length 4829
-- `-X` per aggiungere estensioni file 
+- `-x` per aggiungere estensioni file 
