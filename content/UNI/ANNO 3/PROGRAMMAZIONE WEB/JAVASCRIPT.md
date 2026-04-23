@@ -76,6 +76,7 @@
     - gestione automatica della memoria
     - rimuove gli oggetti non più referenziati
     - evita (in parte) problemi di memoria
+	- risolve il concetto di memory leak
 
 ##### BASI DI JAVASCRIPT
 Javascript può essere inserito in una pagina:
@@ -172,3 +173,38 @@ Dopo il breakpoint possiamo eseguire il codice passo passo:
 - **Step out**
     - esce dalla funzione corrente
     - torna al chiamante
+PROVA A USARLO
+##### One function, one action
+
+###### Functional expression
+- le funzioni sono oggetti che possamo chiamare
+###### Funzioni anonime
+dichiaro una funzione anonima direttamente tra i parametri di una funzione
+###### Arrow functions
+`somma(a,b) => a+b`
+##### Oggetti
+Coppie `(chiave,valore)`
+- chiave=proprietà
+- valore=valore assegnato alla proprietà
+Dichiarazione di un oggetto esempio:
+instanziazione di un oggetto:
+se metti studente.proprietà e la proprietà non esisteva, ne crea una nuova
+si può eliminare con `delete`
+hanno metodi
+- aggiungi una proprietà `saluta:() => alert("ciao sono pippo");`
+###### Concetto di aliasing
+- `let luca={voto:30}`
+- `let aneta=luca`
+- slide a numero `69`
+- in precedenza abbiamo detto che il garbage collector risolve il memory leak, ma non al 100%
+	- vedi slide `70`
+
+uso di this che contiene il riferimento all'oggetto che sta usando la funzione, name è la proprietà di Pippo ad esempio
+- this viene valutato a call time
+##### Costruttori
+- funzione costruttore che attraverso this consente di creare i nostri oggetti
+	- esempio con studente 
+	- iniziano con la maiuscola
+viene creato un oggetto nuovo, viene eseguita la funzione, viene ritornato il this
+###### Tipi primitivi e metodi
+- ci sono vari tipi primitivi a slide 79, questi hanno dei metodi
