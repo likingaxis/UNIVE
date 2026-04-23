@@ -43,6 +43,15 @@ fase in cui si raccolgono informazioni su un'applicazione web
     - `Host:`
 - modificando questo valore possiamo:
     - scoprire altri siti/applicazioni sullo stesso server
+- Il livello applicativo viene gestito dalla web app
+- i livelli sottostanti sono gestiti dal OS
+- più applicazioni web sulla stessa porta si differenziano dall'HOST
+- tool per usare wordlist delle virtual host `wfuzz`
+- usi FUZZ come wildcard
+	- `wfuzz -w ./subdomains-top1million-5000.txt -u http://192.168.14.132 -H "HOST: FUZZ.cloud.vdsi" `
+
+![[Pasted image 20260423100404.png|400]]
+
 ##### ESERCITAZIONE WEB ENUMERATION
 ##### Analisi base
 - **Inspect (browser)** → analisi frontend
@@ -74,3 +83,6 @@ gobuster tool
 - content length per escludere le risposte
 - host discovery e virtual host enumeration
 - vfuz
+`gobuster dir -u http://cloud.vdsi/archive --proxy http://127.0.0.1:8080 -w /usr/share/wordlists/seclists/Discovery/Web-Content/big.txt --exclude-length 4829`
+- se URL non esiste rindirizza in automatico il file index.html, noi lo escludiamo facendo exclude-length 4829
+- `-X` per aggiungere estensioni file 
