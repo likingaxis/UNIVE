@@ -177,7 +177,7 @@ PROVA A USARLO
 ##### One function, one action
 
 ###### Functional expression
-- le funzioni sono oggetti che possamo chiamare
+- le funzioni sono oggetti che possiamo chiamare
 ###### Funzioni anonime
 dichiaro una funzione anonima direttamente tra i parametri di una funzione
 ###### Arrow functions

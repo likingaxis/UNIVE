@@ -1,118 +1,258 @@
-#### VARIABILI IN CSS
-- possiamo definire delle **custom properties**
-	- si dichiarano in modo globale dentro `:root`
-	- sintassi:
-	    - `--nome-custom-property: valore;`
-	- per usarle:
-	    - `var(<custom-property>, <declaration-value>)`
-	        - assegna come valore la custom property
-	        - se non è definita, usa il _declaration value_ (fallback)
-#### Grid system
-- sistema a griglia
-    - permette di organizzare il layout in modo ordinato
-    - si basa sulla **proporzione fra elementi**, soprattutto rispetto alle colonne
-        - il sito viene suddiviso in colonne
-        - gli elementi vengono posizionati dentro queste colonne per mantenere allineamento e proporzioni
-    - è composto da:
-        - **colonne** → suddivisione verticale dello spazio
-        - **righe (row)** → suddivisione orizzontale
-        - **gutter** → spazio tra le colonne
-        - **container** → contenitore principale che racchiude la griglia
-![[Pasted image 20260414135656.png|400]]
-- è una **feature nativa del CSS**
-    - permette di creare layout a griglia
-    - sistema **bidimensionale** → gestisce **righe + colonne** contemporaneamente
-- introduce il concetto di:
-    - **grid lines**
-        - linee che delimitano le celle della griglia
-        - servono per posizionare gli elementi
-    - **celle**
-        - spazi composti dall’intersezione tra righe e colonne
-- `display: grid;`
-	- attiva la grid
-```css
-grid-template-columns: 200px 300px 100px;  
-grid-template-rows: auto;
+##### One function, one action
+- una funzione deve avere **nome descrittivo**
+    - es: `getName`, `runCalculator`, `checkIsOnline`
+- una funzione deve fare **una sola cosa**
+    - deve fare _esattamente ciò che dice il nome_
+    - se fa più cose → va **divisa in più funzioni**
+###### Functional expression
+- le funzioni sono **oggetti che possiamo chiamare**
+- una _function expression_ viene creata **quando il codice viene eseguito**
+    - quindi è utilizzabile **solo da quel punto in poi**
+###### Funzioni anonime
+- dichiaro una funzione **senza nome**
+- spesso direttamente **come parametro di un’altra funzione**
+- usate molto come **callback**
+###### Arrow functions
+- sintassi più compatta per scrivere funzioni
+- esempio:
+	`somma(a,b) => a+b`
+	utile per funzioni brevi
+##### Oggetti
+insieme di coppie `(chiave, valore)`
+- chiave = **proprietà**
+- valore = dato associato (numero, stringa, array, funzione, oggetto…)
+Dichiarazione di un oggetto esempio:
 ```
-- vado a definire:
-    - quante colonne ho e la loro dimensione
-    - quante righe ho
-- posso assegnare gli elementi alla griglia:
-``` css
-.header {  
-    grid-column: 1 / 4;  
-}
+let studente = {  name: "Pierpaolo",  age: 80};
 ```
-- occupa le colonne dalla 1 alla 4
-- spesso si usano le **unità frazionarie (`fr`)**
-    - dividono lo spazio disponibile in proporzioni
-	- `grid-template-columns: 1fr 2fr 1fr;`
-	- `grid-template-columns: repeat(12, 1fr);`
-	- utile per creare layout tipo Bootstrap (12 colonne)
-- shorthand e casi utili:
-    - `grid-column: 1 / -1`
-        - prende tutta la riga (fino all’ultima grid line)
-    - `grid-column: 1 / 7`
-        - occupa una porzione (es. metà su 12 colonne)
-- dimensionamento layout:
-    - spesso si usa un **container centrato**
-```css
-width: 1200px;  
-margin: auto;
+- oggetto vuoto:
 ```
-- una volta fissata la larghezza:
-    - le colonne in `fr` diventano **frazioni di quella larghezza**
-- andiamo a definire delle **aree del container**
-    - proprietà: `grid-template-areas`
-    - utilizzo delle **stringhe** per descrivere il layout della griglia
-        - ogni lettera rappresenta un’area
-        - il punto `.` rappresenta una cella vuota
-- grid-template-areas:  
-```css
-"h h h h h h h"  
-"a a a a a a a"  
-"m m m m m . .";
+let studente = {};// oppurelet studente = new Object();
 ```
-- in questo modo:
-	 - ogni riga rappresenta una riga della griglia
-	  - elementi con lo stesso nome occupano più celle
-- poi assegno ogni elemento alla sua area:
-```css
-.header {  
-    grid-area: h;  
-}
+###### PROPRIETÀ
+- aggiungere proprietà:
 ```
-##### I FRAMEWORK
-- un **framework** è una libreria che fornisce strumenti già pronti per sviluppare applicazioni
-    - include codice riutilizzabile
-    - evita di scrivere tutto da zero
-- di solito è composto da:
-    - **CSS** → layout, stile
-    - **JavaScript** → comportamento dinamico
-- **Bootstrap**
-    - è un **framework CSS (con componenti JS)**
-    - è **responsive** e segue un approccio **mobile-first**
-    - esiste una versione **minified**
-        - più leggera
-        - senza spazi/commenti → quella usata in produzione
-- **Bootstrap grid**
-    - definisce un sistema a griglia con **breakpoint**
-        - dimensioni dei dispositivi:
-            - `sm, md, lg, xl, xxl`
-            - (`xs` nelle versioni più vecchie)
-    - uso delle classi:
-        - `col-md-12 col-lg-3`
-            - su schermi medi → 12 colonne
-            - su schermi grandi → 3 colonne
-        - sintassi:
-            - `col-[breakpoint]-[numero]`
-- **uso di Bootstrap**
-    - tramite **CDN (Content Delivery Network)**
-        - importo il file CSS online (non locale)
-    - oppure in locale (scaricando i file)
-- concetti base:
-    - uso di classi predefinite
-    - esiste il **container**
-        - contiene la griglia
-    - posso fare **override**
-        - sovrascrivo gli stili di Bootstrap con CSS personalizzato
+studente.voto = 30;
+```
+- accesso:
+```
+studente.votostudente["voto"]
+```
+- eliminare proprietà:
+```
+delete studente.voto;
+```
+- se accedi a una proprietà che non esiste → `undefined`
+###### METODI
+- un oggetto può avere **funzioni come proprietà**
+```
+let studente = {  nome: "pippo",  saluta: () => alert("ciao sono pippo")};
+```
+- si chiamano:
+```
+studente.saluta();
+```
+hanno metodi
+- aggiungi una proprietà `saluta:() => alert("ciao sono pippo");`
+###### Concetto di aliasing
+```
+let luca = { voto: 30 }let aneta = luca
+```
+- **non viene copiato l’oggetto**, ma il **riferimento**
+- quindi `luca` e `aneta` puntano allo **stesso oggetto in memoria**
+- se modifico uno → cambia anche l’altro
+    ```
+    luca.voto = 18// anche aneta.voto diventa 18
+    ```
+- confronto:
+    ```
+    let a = {}let b = {}a == b // false (oggetti diversi)let c = ac == a // true (stesso riferimento)
+    ```
+###### Garbage collector e memory leak
+- JavaScript alloca memoria **dinamicamente**
+- il **garbage collector** libera la memoria degli oggetti **non più raggiungibili**
+- ⚠️ però:
+    - non sempre basta → possono esserci **memory leak**
+    - esempio: oggetti che si referenziano tra loro
+        ```
+        a.dog = bb.owner = a
+        ```
+    - anche se metti `a = null` e `b = null`, il riferimento interno può mantenerli “vivi”
+###### this
+- `this` contiene il **riferimento all’oggetto che sta eseguendo la funzione**
+- esempio:
+    ```
+    let a = {  name: "pippo",  saluta: function () {    alert("ciao sono " + this.name)  }}
+    ```
+- **importante**:
+    - `this` viene valutato a **call time** (quando la funzione viene chiamata)
+    - non quando viene definita
+###### Binding di this
+```
+function sayMyName() {  alert("ciao sono " + this.name)}let a = { name: "pippo", saluta: sayMyName }let b = { name: "pluto", saluta: sayMyName }a.saluta() // pippob.saluta() // pluto
+```
+- dipende da **chi chiama la funzione**, non da dove è scritta
+###### Arrow functions e this
+- nelle arrow function `this` **NON cambia**
+- prende il valore dal **contesto esterno (outer scope)**
+```
+let a = {  name: "pippo",  saluta: function () {    let x = () => alert(this.name)    x()  }}
+```
+###### Costruttori
+- funzione usata per creare oggetti
+- convenzione: **nome con iniziale maiuscola**
+```
+function User(name) {  this.name = name  this.isAdmin = false}
+```
+- uso:
+```
+let user = new User("Pippo")
+```
+- cosa fa `new`:
+    1. crea un **oggetto vuoto**
+    2. lo assegna a `this`
+    3. esegue la funzione
+    4. ritorna `this`
+###### Tipi primitivi e metodi
+- tipi primitivi in JS:
+    - `string`, `number`, `bigint`, `boolean`, `symbol`, `null`, `undefined`
+- contengono un **solo valore**
+- però hanno comunque dei **metodi**
+    ```
+    let v = "ciao"v.toUpperCase()
+    ```
+- perché?
+    - JS crea temporaneamente un **object wrapper**
+    - poi lo distrugge dopo l’uso
+##### Buona pratica (JSDoc)
+
+- commenti strutturati per spiegare funzione e parametri
+- esempio (slide con codice)
+
+```
+/** * @param {number} shortSideLen * @returns {number} */function getGoldenRectangle(shortSideLen) {  const phi = 1.61803398875;  return shortSideLen * phi;}
+```
+#### Array
+- contenitori di valori (anche di tipo diverso)
+- ogni elemento ha un **indice (parte da 0)**
+
+```
+let arr = [5, "ciao", false, undefined];
+```
+
+##### Creazione e modifica
+
+```Javascript
+let arr = [1,2,3];  
+
+// modifica  
+arr[0] = "nuovo"  
+  
+// aggiunta  
+arr.push("fine") // fine  
+arr.unshift("inizio") // inizio  
+  
+// rimozione  
+arr.pop() // ultimo  
+arr.shift() // primo  
+  
+// lunghezza  
+arr.length
+```
+
+Attenzione agli indici
+```Javascript
+let a = ["a","b","c"];
+delete a[0]; // NON compatta array
+```
+- `delete` lascia `undefined`
+- `length` non diminuisce
+###### Slice vs Splice
+
+```Javascript
+arr.slice(1,4) // NON modifica array  
+  
+arr.splice(3,2) // modifica array
+```
+
+- `slice` → copia porzione
+- `splice` → modifica array originale
+
+###### Iterazione
+**for...in**
+- itera sulle **proprietà (chiavi)** dell’oggetto
+**for...of**
+- itera sui **valori** (elementi)
+```Javascript
+for (let i in arr) { }  
+for (let v of arr) { }
+```
+###### Metodi utili array
+
+**forEach**
+```Javascript
+arr.forEach(item => console.log(item));
+```
+**indexOf**
+```Javascript
+arr.indexOf("b");
+```
+**join**
+```Javascript
+arr.join(" - ");
+```
+###### map
+- trasforma un array in un altro
+```Javascript
+arr.map(item => item.length);
+```
+- ritorna nuovo array
+###### reduce
+- riduce array a un singolo valore
+```Javascript
+[1,2,3].reduce((acc, item) => acc + item);
+```
+- `acc` = accumulatore
+
+#### STRINGHE
+
+###### Stringhe base
+
+```
+let s = "Ciao a tutti";
+```
+###### Metodi principali
+```Javascript
+s.indexOf("a")
+s.slice(1)
+s.trim()
+s.charAt(1)
+s.toUpperCase()
+s.toLowerCase()
+```
+###### Replace
+```Javascript
+"ciao ciao".replace("ciao", "bye")      // solo prima
+"ciao ciao".replace(/ciao/g, "bye")     // tutte
+```
+`“trova **tutte le occorrenze** di `ciao` nella stringa”`
+###### Template string
+```Javascript
+let n = 3;
+`Lezione numero ${n}`
+```
+- più leggibile rispetto a concatenazione
+##### Array e stringhe sono oggetti
+- ma si scrivono in forma semplificata
+```Javascript
+let a = []
+let a = new Array() // equivalente
+
+let s = "ciao"
+let s = new String("ciao")
+```
+- meglio usare forma **semplice**
+
+Iterazione avanzata (nota utile)
+- console interattiva:
+    - TAB → mostra metodi disponibili
