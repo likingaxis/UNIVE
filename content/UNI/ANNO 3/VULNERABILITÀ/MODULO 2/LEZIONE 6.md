@@ -47,18 +47,18 @@ Questo è esattamente quello mostrato nelle slide: **entrambi i comandi vengono 
 - `||` → se il primo fallisce 
 - `&` → il comando viene eseguito **in background**, cioè senza bloccare il terminale
 Una volta che riesci a eseguire comandi, puoi:
-🔍 1. Information disclosure
+###### 🔍 1. Information disclosure
 - leggere file sensibili:
     ```
     cat /etc/passwd
     ```
-🖥️ 2. Remote access (reverse shell)
+###### 🖥️ 2. Remote access (reverse shell)
 L’obiettivo reale spesso è ottenere una shell remota:
 - il server si connette all’attaccante
 - l’attaccante controlla il sistema
 📌 Questo è mostrato nelle slide come passo successivo
 
-⚠️ 3. Limitazioni (concetto importante)
+###### ⚠️ 3. Limitazioni (concetto importante)
 Le web app:
 - non sono interattive
 - girano con utenti limitati (es. `www-data`)
@@ -67,7 +67,7 @@ quindi:
 - non hai privilegi elevati
 ➡️ ma puoi fare **privilege escalation dopo**
 ##### 🛡️ Difese 
-1️⃣ Input Validation
+###### 1️⃣ Input Validation
  Devi controllare cosa inserisce l’utente
 Ci sono due approcci:
 - Approccio corretto: **Whitelist**
@@ -77,12 +77,12 @@ Ci sono due approcci:
 - Approccio sconsigliato: **Blacklist**
 	- blocchi caratteri pericolosi
 	- ma rischi di dimenticare qualcosa
-2️⃣ Parsing corretto dell’input
+###### 2️⃣ Parsing corretto dell’input
 Non basta filtrare:  
-👉 devi anche **interpretare correttamente l’input**
+devi anche **interpretare correttamente l’input**
 (es: separare i 4 ottetti di un IP)
-3️⃣ Principle of Least Privilege
-👉 L’applicazione deve girare con:
+###### 3️⃣ Principle of Least Privilege
+L’applicazione deve girare con:
 - utente dedicato
 - pochi permessi (es. `www-data`)
 📌 Se attaccano:
@@ -156,12 +156,12 @@ Permette all’attaccante di:
 #### Cosa può fare davvero un attaccante
 Una volta che hai una SQL Injection, non è solo “bypassare il login”.
 In realtà hai **controllo parziale sulle query del database**, quindi puoi fare molto di più.
-##### 🔓 1. Bypass dell’autenticazione
+###### 🔓 1. Bypass dell’autenticazione
 Lo abbiamo già visto:
 - modifichi il `WHERE`
 - lo rendi sempre vero
 entri senza conoscere password
-##### 📂 2. Lettura dei dati (Data Exfiltration)
+###### 📂 2. Lettura dei dati (Data Exfiltration)
 Puoi leggere:
 - utenti
 - password
@@ -172,7 +172,7 @@ Esempio concettuale:
 UNION SELECT username, password FROM users
 ```
  il database ti restituisce dati che **non dovresti vedere**
-##### 🧨 3. Modifica o distruzione dei dati
+###### 🧨 3. Modifica o distruzione dei dati
 Se il database lo permette (cioè hai i privilegi), puoi fare operazioni distruttive:
 ```
 1'; DROP TABLE Users; --
@@ -190,3 +190,101 @@ DROP TABLE Users;
 --
 ```
 commento → ignora il resto della query
+
+`REPOSITORY SU GIT CON VARI ATTACCHI → payloadallthethings`
+#### Tipi di SQL Injection
+###### 1️⃣ In-band SQL Injection
+Il più semplice
+- usi **lo stesso canale**
+- mandi input → ricevi output nella risposta HTTP
+Esempio:
+- fai injection in una pagina web
+- il risultato compare nella pagina
+ spesso chiamato anche:
+- error-based
+- union-based
+![[Pasted image 20260430120155.png]]
+###### 2️⃣ Out-of-band SQL Injection
+Usi un **canale diverso**
+- input → web app
+- output → altro mezzo (email, DNS, ecc.)
+Esempio:
+- il database manda dati via email all’attaccante
+più raro, ma utile se:
+- la risposta web non mostra dati
+![[Pasted image 20260430120211.png]]
+###### 3️⃣ Blind SQL Injection (Inferential)
+Il più “subdolo”
+- NON vedi direttamente i dati
+- li ricostruisci osservando il comportamento
+
+ Due tecniche principali
+ 
+⏱️ Timing-based
+Fai query tipo:
+```
+IF(condizione) WAIT 5 secondi
+```
+ se il server risponde lentamente → condizione vera
+ 
+🔁 Boolean-based
+Osservi:
+- pagina diversa
+- risposta diversa
+capisci se una condizione è vera o falsa
+Idea chiave:
+> non vedi i dati, ma li **deduci**
+
+![[Pasted image 20260430120222.png]]
+
+#### Detection (come scoprire la vulnerabilità)
+Metodo base:
+```
+'
+```
+Perché funziona?
+
+Se l’app fa:
+```
+WHERE id = '$input'
+```
+
+E tu inserisci:
+```
+'
+```
+la query diventa sintatticamente sbagliata
+
+ il database genera un errore tipo:
+> "SQL syntax error"
+
+Questo ti dice:
+- sta usando SQL
+- è vulnerabile
+##### Information Schema (enumerazione database)
+Questo è un concetto molto importante
+
+`information_schema` è un database speciale che contiene:
+- nomi delle tabelle
+- nomi delle colonne
+- struttura del database
+#### Come lo usa un attaccante
+Esempio:
+```
+UNION SELECT table_name FROM information_schema.tables
+```
+risultato:
+- lista di tutte le tabelle
+Poi:
+```
+UNION SELECT column_name FROM information_schema.columns
+```
+scopri:
+- colonne di una tabella
+ Perché è importante
+ti permette di:
+1. capire struttura DB
+2. sapere cosa attaccare
+3. estrarre dati mirati
+
+##### ESERCITAZIONE SQL
