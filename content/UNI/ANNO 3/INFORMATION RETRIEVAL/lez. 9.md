@@ -128,7 +128,7 @@ $$
 * $=_{rank}$: ==simbolo di equivalenza ai fini del ranking==
 * **indipendenza feature**: $p(f_{1},\dots,f_{n}|R,q) = \prod_{i} p(f_{i}|R,q)$, dunque le features sono indipendenti tra loro $\forall \in [1,n]$.
 
-**in BIM, ogni feture di un documento**:
+**in BIM, ogni feature di un documento**:
 1. e' associata ad un termine
 2. e' binario: vale 1 se occorre nel documento, 0 altrimenti.
 3. **il documento e'** $v_{d}= (x_{1},\dots,x_{m})$ con $x_{i} = 1$ se $t_{i} \in d$.
