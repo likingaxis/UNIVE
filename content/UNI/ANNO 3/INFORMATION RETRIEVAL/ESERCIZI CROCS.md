@@ -86,3 +86,8 @@ slide 27
 > - k= numero di blocchi
 > - $\frac{k+1}{2}$ numero di confronti
 
+#### LEZIONE 9
+![[Pasted image 20260502130237.png]]
+>[!info]- soluzione
+>BORT
+

@@ -1,1 +1,3 @@
 - big d
+- information retrieval
+- esercizi vulner
