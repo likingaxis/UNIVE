@@ -4,10 +4,6 @@ Mentre i modelli algebrici (vettoriali), che abbiamo visto finora, si basano sul
 - **Rappresentazione**: Il sistema ha una visione limitata/approssimata del documento e della query.
 Obiettivo: Stimare la probabilità che un documento $d$ sia rilevante rispetto a una query $q$: 
 $P(\text{relevant} | d,q) = \text{probabilita che il documento e' buono dati } d,q$.
-
-
-
-
 **come lo calcolo la rilevanza**?
 * **modelli probabilistici**: *binary independence model e bestmatch25.*
 * **language model**: che si applica anche all'information retrieval.
@@ -205,7 +201,8 @@ $$
 O(R|v_{d},v_{q}) =_{rank} \prod_{t_{i}:x_{i}=y_{i}=1} \frac{p_{i}(1-u_{i})}{u_{i}(1-p_{i})} 
 $$
 ##### Retrieval Status Value (RSV)
-Applichiamo il logaritmo (funzione monotona crescente) per trasformare la produttoria in una sommatoria. Il valore risultante è chiamato **RSV (Retrieval Status Value)**:
+Otteniamo l'**RSV**, un valore numerico che indica quanto un documento $d$ "meriti" di stare in cima ai risultati
+Applicando il logaritmo (funzione monotona crescente) per trasformare la produttoria in una sommatoria. Il valore risultante è chiamato **RSV (Retrieval Status Value)**:
 $$RSV_d = \log \prod_{i:x_i=y_i=1} \frac{p_i(1-u_i)}{u_i(1-p_i)} = \sum_{i:x_i=y_i=1} \log \frac{p_i(1-u_i)}{u_i(1-p_i)}$$
 Il punteggio del documento è dunque la somma dei pesi $c_i$ dei termini della query presenti nel documento:
 $$RSV_d = \sum_{i:x_i=y_i=1} c_i$$
@@ -289,4 +286,184 @@ Il valore **RSV** viene ridefinito per riflettere questa nuova natura non binari
 $$RSV_d = \sum_{i:y_i=1} \log \frac{P(d_{t_i} = n_i | R, v_q) \cdot P(d_{t_i} = 0)}{P(d_{t_i} = n_i) \cdot P(d_{t_i} = 0 | R, v_q)}$$
 
 Dove $n_i$ è il numero di volte che il termine $i$ appare nel documento $d$. Il problema centrale diventa ora **stimare queste probabilità** per variabili discrete (conteggi).
+Per superare i limiti del modello binario (BIM) e includere la frequenza dei termini (TF), si utilizza la **Distribuzione di Poisson**. Questa distribuzione è ideale per modellare il numero di occorrenze di un termine in un documento, trattandole come eventi rari all'interno di un numero elevato di "slot" (parole totali).
+- **Nota dal modello Bag of Words:** Generalmente non interessa dove compare un termine.
+- **Dalla Binomiale alla Poisson:** Il numero di occorrenze è teoricamente una binomiale, ma poiché le parole sono tante e la probabilità che una specifica parola appaia è un fenomeno raro, possiamo usare Poisson. Si conta quanti "slot" si hanno a disposizione per la probabilità di vedere il termine.
+###### Definizione Poisson
+La probabilità di osservare $x$ occorrenze di un termine, data una media $\lambda$ di occorrenze attese, è definita come:
+$$Poisson(x|\lambda) = \frac{e^{-\lambda} \lambda^x}{x!}$$
+* **$\lambda$**: rappresenta il tasso medio di occorrenza del termine. Corrisponde al numero atteso di volte in cui si vede quel termine nel documento (è il valore atteso).
+* **Andamento**: La distribuzione presenta un picco in prossimità di $\lambda$ e decresce asintoticamente all'aumentare di $x$.
+Il parametro $\lambda$ deve essere stimato a partire dai dati della collezione. 
+Una buona stima è data da
+$$\lambda \approx \frac{CF_j}{N}$$
+dove:
+- $CF_j$ è il numero di volte che appare il termine $j$ nella collezione
+- $N$ è il numero totale di documenti
+Per fare il ranking, dobbiamo modellare **quante volte ci aspettiamo che un termine compaia nei documenti**, e lo facciamo in due modi diversi:
+1.  **$\rho_j$**: numero atteso di occorrenze del termine $t_j$ nei documenti **rilevanti**.$$p(d_{t_j} = n_j \mid R, v_q) = \frac{e^{-\rho_j} \rho_{j}^{n_j}}{n_j!}$$$$p(d_{t_j} = 0 \mid R, v_q) = e^{-\rho_j}$$
+	- **Difficoltà di stima:** non è facilmente calcolabile (ad esempio se non si hanno documenti rilevanti a priori).
+	- **Possibili soluzioni:** Si potrebbe usare un modello BIM scegliendo arbitrariamente i documenti ritenuti rilevanti, dato che a priori non si può fare molto. L'obiettivo è stimare come si comporta Poisson nei confronti dei documenti rilevanti rispetto ai non rilevanti.
+2.  **$\gamma_j$**: numero atteso di occorrenze del termine $t_j$ nei documenti della **collezione generale**.$$p(d_{t_j} = n_j) = \frac{e^{-\gamma_j} \gamma_{j}^{n_j}}{n_j!}$$$$p(d_{t_j} = 0) = e^{-\gamma_j}$$
+Da queste definizioni derivano le probabilità di osservare $n_j$ occorrenze o zero occorrenze, sia nel set rilevante che in quello generale.
+###### Formula semplificata di RSV
+$$RSV_d = \sum_{t_i:y_i=1} \log \left( \frac{\rho_i}{\gamma_i} \right)^{n_i} = \sum_{t_i:y_i=1} n_i \log \frac{\rho_i}{\gamma_i}$$
+**Interpretazione**: In questo modello, ogni singola occorrenza del termine contribuisce al punteggio in modo **lineare**. Il peso è dato dal logaritmo del rapporto tra le occorrenze attese nei documenti rilevanti e quelle nella collezione.
+Cioè: se il termine compare 1 volta, dà un certo contributo; se compare 10 volte, dà 10 volte quel contributo; se compare 100 volte, dà 100 volte quel contributo.
+* **Termini senza contenuto (Contentless)**: La Poisson modella bene le parole comuni (stop-words) che non contribuiscono molto al contenuto di un documento
+	* riesce a **descrivere in modo realistico (o abbastanza fedele)** come si distribuisce il numero di occorrenze di certi termini nei documenti
+* **Termini semantici (Contentful)**: Per le parole che definiscono il tema di un documento, la situazione è diversa. Se un documento tratta un certo argomento, il termine relativo apparirà con una frequenza molto più alta del normale (**fenomeno dell'Eliteness**).
+	* *Intuizione sulla rilevanza:* Se una parola si vede tante volte ma è spalmata su molti documenti, non è troppo rilevante rispetto a una che si vede tante volte ma in pochi documenti.
+* **Evidenza empirica**: Analizzando la distribuzione reale dei termini, si nota che i termini "contentful" mostrano valori di $df_t$ (document frequency) più alti del previsto quando il documento è pertinente al tema.
+![[Pasted image 20260502144641.png]]
+##### Soluzione Il Modello 2-Poisson
+Si ipotizza che in un documento coesistano due classi di termini:
+1.  **Termini non caratterizzanti**: appaiono casualmente, con un tasso di occorrenza basso.
+2.  **Termini caratterizzanti (Topic-related)**: descrivono l'argomento e appaiono con un tasso di occorrenza elevato.
+Ogni classe segue una distribuzione di Poisson diversa (una con parametro $\lambda$ basso, l'altra elevato).
 
+###### Variabile di Eliteness
+Viene introdotta la variabile nascosta binaria **Eliteness ($E_i$)**:
+* Un documento è **Elite** per un termine se il concetto denotato da quel termine è un argomento centrale del documento.
+* **Proprietà**: Il numero di occorrenze dipende direttamente dall'Eliteness. Se il documento è Elite, il termine apparirà più spesso.
+* **Legame con la Rilevanza**: L'Eliteness non è la rilevanza, ma è fortemente correlata ad essa.
+###### 2- poisson nel concreto
+> per un termine $t_i$, il numero di occorrenze $n_i$ in un documento può nascere da due situazioni diverse.
+
+Le due situazioni sono:
+```
+1. il documento è elite per il termine   
+   → il termine è centrale nel documento   
+   → il termine tende a comparire molte volte
+2. il documento non è elite per il termine
+   → il termine non è centrale   
+   → il termine tende a comparire poche volte
+```
+Quindi non usiamo una sola Poisson, ma una **combinazione pesata di due Poisson**
+
+si vuole calcolare
+$$p(d_{t_i}=n_i|R,v_q)$$
+probabilità che il termine $t_i$ compaia $n_i$ volte nel documento, sapendo che il documento è rilevante per la query.
+**nel 2-Poisson usi due Poisson diverse**:
+una Poisson per il caso *ELITE* una Poisson per il caso *NON ELITE*
+$$p(d_{t_i} = n_i | R, v_q) = p(d_{t_i} = n_i | E_i) p(E_i | R, v_q) + p(d_{t_i} = n_i | \bar{E}_i) p(\bar{E}_i | R, v_q)$$
+per sapere la probabilità di vedere $n_i$ occorrenze, considero due possibilità: il documento è elite per quel termine oppure non è elite.
+dove 
+- $E_i$ = il documento è **elite** per il termine $t_i$;
+- $\bar E_i$ = il documento **non è elite** per il termine $t_i$.
+Sostituendo le probabilità degli stati con i parametri $p_i$ (la probabilità che il termine sia nello stato d'élite) e $(1 - p_i)$, otteniamo la combinazione lineare di due distribuzioni di Poisson:
+$$p(d_{t_i} = n_i | R, v_q) = p_i \cdot \text{Poisson}(n_i | \mu_i) + (1 - p_i) \cdot \text{Poisson}(n_i | \bar{\mu}_i)$$
+###### FORMULA FINALE ESPLICITA 2-POISSON
+Espandendo la funzione di densità della distribuzione di Poisson per entrambi i componenti:
+
+$$p(d_{t_i} = n_i | R, v_q) = p_i \frac{e^{-\mu_i} \mu_{i}^{n_i}}{n_i!} + (1 - p_i) \frac{e^{-\bar{\mu}_i} \bar{\mu}_{i}^{n_i}}{n_i!}$$
+*   **$p_i$**: probabilità che il documento sia Elite per il termine $t_i$.
+*   **$\mu_i$**: media delle occorrenze nei documenti Elite (alta).
+*   **$\bar{\mu}_i$**: media delle occorrenze nei documenti non-Elite (bassa).
+![[Pasted image 20260502152923.png|500]]
+> **Visualizzazione**: Il grafico mostra due picchi: uno stretto vicino allo zero (non-elite) e uno più ampio e spostato a destra (elite).
+
+#### Calcolo del RSV
+A questo punto riscriviamo le probabilità necessarie per calcolare l’RSV usando la mistura elite/non-elite.  
+
+Per ogni termine $t_i$, definiamo:  
+
+- $C(n_i)=Poisson(n_i|\mu_i)$: probabilità di osservare $n_i$ occorrenze se il documento è elite;  
+- $\bar C(n_i)=Poisson(n_i|\bar\mu_i)$: probabilità di osservare $n_i$ occorrenze se il documento non è elite;  
+- $p_i$: probabilità che un documento rilevante sia elite per $t_i$;  
+- $\bar p$: probabilità che un documento qualsiasi della collezione sia elite per $t_i$.  
+Quindi, nei documenti rilevanti:  
+$$  
+p(d_{t_i}=n_i|R,v_q)=C(n_i)p_i+\bar C(n_i)(1-p_i)  
+$$
+e nella collezione generale:  
+
+$$  
+p(d_{t_i}=n_i)=C(n_i)\bar p+\bar C(n_i)(1-\bar p)  
+$$
+Lo stesso vale per il caso $n_i=0$ quindi con:
+$$p(d_{t_i} = 0 | R, v_q) = C(0)p_i + \bar{C}(0)(1 - p_i)$$
+$$p(d_{t_i} = 0) = C(0)\bar{p} + \bar{C}(0)(1 - \bar{p})$$
+
+Questa formalizzazione serve a sostituire le probabilità generiche dell’RSV con probabilità calcolate tramite il modello 2-Poisson.
+
+Sostituendo queste scomposizioni nella formula generale dell'RSV, otteniamo l'espressione completa per il punteggio di un documento:
+$$RSV_d = \sum_{t_i:y_i=1} \log \frac{(C(n_i)p_i + \bar{C}(n_i)(1 - p_i))(C(0)\bar{p} + \bar{C}(0)(1 - \bar{p}))}{(C(0)p_i + \bar{C}(0)(1 - p_i))(C(n_i)\bar{p} + \bar{C}(n_i)(1 - \bar{p}))}$$
+
+Questa formula, sebbene teoricamente corretta, è **inutilizzabile nella pratica** perché per ogni singolo termine $t_i$ dovremmo stimare ben 4 parametri ignoti (che a priori non conosciamo):
+1.  **$\mu_i$**: media delle occorrenze nei documenti elite.
+2.  **$\bar{\mu}_i$**: media delle occorrenze nei documenti non-elite.
+3.  **$p_i$**: probabilità di eliteness nei documenti rilevanti.
+4.  **$\bar{p}$**: probabilità di eliteness nella collezione.
+
+Si cerca una **funzione parametrica semplice** che approssimi il comportamento della curva 2-Poisson.
+Questa funzione deve:
+5.  Essere pari a $0$ se $n_i=0$.
+6.  Crescere in modo monotono all'aumentare di $n_i$.
+	$$\log \frac{p_i(1 - \bar{p})}{(1 - p_i)\bar{p}}$$
+7.  **Saturare**: tendere asintoticamente a un valore massimo (il valore del caso binario).
+	- la saturazione è importante perché fa sì che, se un termine compare troppe volte, dopo un po' inizia a non impattare più sulla rilevanza generale
+La curva scelta è:
+$$\frac{(k+1)n_i}{k+n_i} \cdot \log(\frac {p_{i}(1-\bar{p})} {(1-p_{i})\bar{p}})$$
+- $k$ è una costante (parametro) che decidiamo noi. **VA OTTIMIZZATO TRAMITE BENCHMARK**.
+
+Assumendo l'assenza di feedback di rilevanza ($p_i = 0.5$) e approssimando la parte logaritmica con l'IDF (come visto nel BIM), otteniamo la prima formulazione della funzione di scoring dei **modelli Best Match**:
+$$RSV_d = \sum_{t_i:y_i=1} \frac{(k+1)n_i}{k+n_i} \log \frac{N}{df_{t_i}}$$
+
+> **Importanza**: Questo è il "primo passo verso il modello BM25". Il fattore $\frac{(k+1)n_i}{k+n_i}$ è ciò che permette di pesare la **Term Frequency** in modo non lineare, introducendo il concetto di **saturazione**.
+
+Per **saturazione** si intende che il contributo della term frequency **cresce all’inizio**, ma poi **aumenta sempre meno** fino a tendere a un valore massimo.
+se un termine compare più volte, il documento prende più punteggio; però dopo un certo punto, altre occorrenze aggiungono pochissimo.
+#### Modello Okapi BM25
+Il modello **Okapi BM25** (o semplicemente BM25) rappresenta l'evoluzione moderna del BIM. È un modello probabilistico **non binario** che risolve le limitazioni dei modelli precedenti integrando la frequenza dei termini (TF) e la normalizzazione della lunghezza.
+Mentre il BIM era adatto a record brevi (titoli o abstract) di lunghezza omogenea, il BM25 è progettato per il **full-text search** moderno. 
+Le sue caratteristiche principali sono:
+* **Sensibilità alla TF**: non si limita a rilevare la presenza di un termine, ma ne pesa l'occorrenza.
+* **Sensibilità alla lunghezza**: adatta il peso dei termini in base a quanto è lungo il documento.
+* **Robustezza**: è considerato uno dei modelli di ranking più efficaci e utilizzati nello stato dell'arte
+Il nucleo fondamentale del BM25 è il peso **IDF**. Nella sua forma più semplice (che coincide con il BIM in assenza di feedback), il punteggio di un documento è la somma dei pesi IDF dei termini della query presenti nel documento:
+$$RSV_d = \sum_{t \in q} \log \frac{N}{df_t}$$
+Per migliorare il semplice IDF, BM25 introduce la frequenza del termine nel documento ($tf_{td}$) attraverso una funzione di saturazione. La formula base diventa:
+$$RSV_d = \sum_{t \in q} \frac{(k_1 + 1)tf_{td}}{k_1 + tf_{td}} \log \frac{N}{df_t}$$
+
+* **$k_1$**: è un parametro di *tuning* che controlla la scala di saturazione della valenza della TF.
+	- solitamente impostato tra **1.2** e **2.0**.
+	- Un valore di $k_1$ **basso** porta a una saturazione rapida (già con poche occorrenze il termine raggiunge quasi il suo peso massimo).
+    * Un valore di $k_1$ **alto** rende la crescita del punteggio più lenta e "più vicina" a una crescita lineare (tipica del tf-idf classico).
+* **Fattore $(k_1 + 1)$**: serve a normalizzare il punteggio in modo che, quando $tf_{td} = 1$, il contributo della componente TF sia pari a 1 (rendendo il punteggio finale pari all'IDF puro).
+* **Bounded scores**: a differenza del modello vettoriale (dove la TF può crescere quasi linearmente), qui il punteggio è **limitato superiormente** da un asintoto.
+![[Pasted image 20260502154640.png]]
+- quanto k fa variare la valenza della TF per un certo termine
+###### Ulteriore correzione
+Dopo aver gestito la saturazione della TF, è necessario correggere un altro bias fondamentale: i documenti lunghi tendono ad avere valori di TF più elevati per ragioni puramente statistiche.
+Un documento può essere più lungo per due motivi principali:
+1. **Verbosità (Verbosity)**: L'autore utilizza molte parole per esprimere lo stesso concetto. In questo caso, le alte frequenze dei termini sono "artificiali" e vanno penalizzate.
+2. **Ampiezza del contenuto (Larger Scope)**: Il documento tratta molti argomenti diversi. In questo caso, le frequenze osservate possono essere corrette.
+Poiché una collezione reale contiene entrambi i tipi di documenti, è necessaria una **normalizzazione parziale**.
+Definiamo innanzitutto i parametri di calcolo:
+* **$L_d$**: Lunghezza del documento $d$, calcolata come somma delle frequenze di tutti i termini in esso contenuti $$L_{d} = \sum_{t} tf_{td}$$
+* **$L_{ave}$**: Lunghezza media dei documenti nell'intera collezione $D$ $$L_{ave} = \frac 1 {|D|} \sum\limits_{d \in D}L_{d}$$
+* **Fattore di normalizzazione $B$**: $$B = (1 - b) + b \frac{L_d}{L_{ave}} \quad \text{con } 0 \leq b \leq 1$$
+	Il parametro **$b$** regola l'intensità della normalizzazione:
+	*   **$b = 1$**: Normalizzazione totale (penalizza pesantemente la lunghezza).
+	*   **$b = 0$**: Nessuna normalizzazione (modello sordo alla lunghezza).
+Il fattore $B$ viene inserito al denominatore della componente TF. Di conseguenza:   
+**Valore Standard**: Empiricamente, si è dimostrato che un valore di **$b \approx 0.75$** offre il miglior compromesso tra verbosità e ampiezza di contenuto.
+
+###### Okapi BM25+correzioni varie
+$$RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1 \left( (1 - b) + b \frac{L_d}{L_{ave}} \right) + tf_{td}}$$
+
+#### Riepilogo dei Parametri Operativi
+1.  **$tf_{td}$**: Frequenza del termine della query nel documento.
+2.  **$L_d$ e $L_{ave}$**: Lunghezza del documento corrente e lunghezza media della collezione.
+3.  **$k_1$ (TF Saturation)**: Controlla la saturazione della frequenza. 
+    *   Se $k_1 = 0$, il modello diventa binario (BIM).
+    *   Valori tipici: **1.2 - 2.0**.
+4.  **$b$ (Length Normalization)**: Controlla quanto penalizzare i documenti lunghi. 
+    *   Valori tipici: **0.75**.
+- Per qualcosa di **semplice e basico**: usare Modello Vettoriale con pesatura tf-idf.    
+    - Per un **ranking robusto e performante**: usare BM25 (o modelli del linguaggio) con parametri ottimizzati.
+    
+- **BM25 nella pratica reale:**
+    - **Elasticsearch:** utilizza BM25 come modello di default per la similarità.
+    - **Apache Solr:** utilizza BM25 come default dalla versione 8.x in poi.
