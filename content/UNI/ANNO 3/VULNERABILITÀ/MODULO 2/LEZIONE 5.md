@@ -75,14 +75,44 @@ Configurazione
     - trovare vulnerabilità note (CVE)
 - database utile:
     - [https://www.exploit-db.com/](https://www.exploit-db.com/)
-
-gobuster tool
-- cosa fa
-	- Gobuster prova migliaia di nomi di cartelle e file in pochi secondi usando una "wordlist"
-- wordlist da usare 
-- content length per escludere le risposte
-- host discovery e virtual host enumeration
-- vfuz
-`gobuster dir -u http://cloud.vdsi/archive --proxy http://127.0.0.1:8080 -w /usr/share/wordlists/seclists/Discovery/Web-Content/big.txt --exclude-length 4829`
-- se URL non esiste rindirizza in automatico il file index.html, noi lo escludiamo facendo exclude-length 4829
-- `-x` per aggiungere estensioni file 
+##### Gobuster
+- `Gobuster` è un tool di **content discovery**
+    - prova migliaia di nomi di cartelle/file in pochi secondi usando una **wordlist**
+    - serve per scoprire directory, file nascosti, backup, pannelli di login ecc.
+- **Wordlist**
+    - lista di parole che Gobuster prova nel target
+    - esempio:
+```
+/usr/share/wordlists/seclists/Discovery/Web-Content/big.txt
+```
+- **Content length**
+    - utile per escludere risposte sempre uguali
+    - se un URL non esiste, a volte il server reindirizza sempre a `index.html`
+    - in quel caso le risposte false hanno tutte la stessa dimensione
+    - possiamo escluderle con `--exclude-length`
+```
+gobuster dir -u http://cloud.vdsi/archive --proxy http://127.0.0.1:8080 -w /usr/share/wordlists/seclists/Discovery/Web-Content/big.txt --exclude-length 4829
+```
+- `--exclude-length 4829`
+    - ignora tutte le risposte lunghe `4829` byte
+    - utile per eliminare falsi positivi
+- `-x`
+    - aggiunge estensioni ai nomi della wordlist
+    - esempio:
+```
+-x php,txt,html,bak
+```
+- **Modalità `vhost`**
+    - utile per fare **virtual host enumeration**
+    - prova possibili sottodomini/host nascosti
+    - esempio: `admin.sito.com`, `dev.sito.com`, `test.sito.com`
+- **Host discovery / virtual host enumeration**
+    - serve a scoprire host o sottodomini non visibili direttamente
+    - Gobuster è molto utile soprattutto in modalità `vhost`
+- **Alternativa**
+```
+feroxbuster -u http://TARGET_IP -w /usr/share/seclists/Discovery/Web-Content/common.txt
+```
+- **Altro tool simile**
+    - `ffuf`
+    - usato per fuzzing di path, parametri, header e virtual host
