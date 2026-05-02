@@ -109,6 +109,7 @@ gobuster dir -u http://cloud.vdsi/archive --proxy http://127.0.0.1:8080 -w /usr/
 - **Host discovery / virtual host enumeration**
     - serve a scoprire host o sottodomini non visibili direttamente
     - Gobuster è molto utile soprattutto in modalità `vhost`
+    - `gobuster vhost -u http://example.com/ -w usr/share/wordlists/Web-Content/common.txt`
 - **Alternativa**
 ```
 feroxbuster -u http://TARGET_IP -w /usr/share/seclists/Discovery/Web-Content/common.txt
