@@ -221,7 +221,7 @@ $$c_i = \log \frac{p_i(1-u_i)}{u_i(1-p_i)} = \log \frac{p_i}{1-p_i} - \log \frac
 >Con questi calcoli che abbiamo fatto possiamo notare che il BIM e il vector space model sono identici per quanto riguarda il livello delle operazioni, cambia solo il `term weights`.
 >In particolare: possiamo utilizzare le stesse strutture dati (tipo inverted index) per entrambi i modelli.
 
-##### Stima delle Probabilità nel BIM
+#### Stima delle Probabilità nel BIM
 Per poter calcolare concretamente il peso $c_i$ di ogni termine, dobbiamo stimare le probabilità $p_i$ (presenza in documenti rilevanti) e $u_i$ (presenza in documenti non rilevanti).
 Esistono due situazioni operative principali:
 1. **Presenza di giudizi di rilevanza**: disponiamo di informazioni su quali documenti siano rilevanti (es. tramite un *training set* fornito da esperti o tramite *pseudo-relevance feedback*).
@@ -278,7 +278,7 @@ Il modello BIM presenta dei limiti strutturali che lo rendono inadeguato per la 
 3. **Mancanza di Normalizzazione**
 **limitazioni di BIM**: e' stato creato per fare retrieval su titoli e abstract. Non andrebbe usato per la ricerca su interi documenti, dovremmo porre attenzione alla term frequency e alla lunghezza dei documenti.
 * BIM non analizza term frequency e doc length.
-#### Si vuole introdurre la Term Frequency
+#### Si vuole introdurre la Term Frequency Modello POISSON
 Per introdurre la TF, dobbiamo cambiare la rappresentazione del documento:
 * **BIM**: Vettore binario $\{0, 1\}$.
 * **Nuovo Modello**: Vettore di interi $(d_{t_1}, \dots, d_{t_n})$, dove ogni componente rappresenta il **conteggio delle occorrenze** del termine nel documento.
@@ -316,7 +316,7 @@ Cioè: se il termine compare 1 volta, dà un certo contributo; se compare 10 vol
 	* *Intuizione sulla rilevanza:* Se una parola si vede tante volte ma è spalmata su molti documenti, non è troppo rilevante rispetto a una che si vede tante volte ma in pochi documenti.
 * **Evidenza empirica**: Analizzando la distribuzione reale dei termini, si nota che i termini "contentful" mostrano valori di $df_t$ (document frequency) più alti del previsto quando il documento è pertinente al tema.
 ![[Pasted image 20260502144641.png]]
-##### Soluzione Il Modello 2-Poisson
+#### Soluzione Il Modello 2-Poisson
 Si ipotizza che in un documento coesistano due classi di termini:
 1.  **Termini non caratterizzanti**: appaiono casualmente, con un tasso di occorrenza basso.
 2.  **Termini caratterizzanti (Topic-related)**: descrivono l'argomento e appaiono con un tasso di occorrenza elevato.
@@ -363,11 +363,10 @@ $$p(d_{t_i} = n_i | R, v_q) = p_i \frac{e^{-\mu_i} \mu_{i}^{n_i}}{n_i!} + (1 - p
 ![[Pasted image 20260502152923.png|500]]
 > **Visualizzazione**: Il grafico mostra due picchi: uno stretto vicino allo zero (non-elite) e uno più ampio e spostato a destra (elite).
 
-#### Calcolo del RSV
+##### Calcolo del RSV
 A questo punto riscriviamo le probabilità necessarie per calcolare l’RSV usando la mistura elite/non-elite.  
-
+È semplicemente lo **score finale assegnato a un documento rispetto a una query**.
 Per ogni termine $t_i$, definiamo:  
-
 - $C(n_i)=Poisson(n_i|\mu_i)$: probabilità di osservare $n_i$ occorrenze se il documento è elite;  
 - $\bar C(n_i)=Poisson(n_i|\bar\mu_i)$: probabilità di osservare $n_i$ occorrenze se il documento non è elite;  
 - $p_i$: probabilità che un documento rilevante sia elite per $t_i$;  
