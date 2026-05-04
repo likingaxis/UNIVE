@@ -8,7 +8,7 @@
 ## Settimana 3
 - [x] Markov, Chebyshev, weak law, Coupon Collector, union bound
 ## Settimana 4
-- [ ] Contention Resolution, hashing universale
+- [x] Contention Resolution, hashing universale
 ## Settimana 5
 - [ ] Chernoff, Bloom Filter, Flajolet-Martin
 ## Settimana 6
