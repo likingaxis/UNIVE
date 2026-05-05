@@ -84,26 +84,105 @@ return x * (a + b);
 	- salvo `let s = multisum(15);`
 		- poi chiamo `s(12, 13);`
 ##### Closure
-definisce lo scope outer function e inner function lo scope si chude su quello del padre
-come esempio ha creato una funzione con dentro due sotto funzioni scritte inline che sono inc e dec
-credo sia un pattern di programmazione dove lo scope della funzione interna si chiude su quella esterna
-
-posso creare privacy dei dati perchè a non viene vista
+- Una closure si crea quando una funzione interna usa variabili appartenenti allo scope della funzione esterna. Lo scope della funzione interna si “chiude” su quello del padre, quindi la funzione interna continua ad avere accesso a quelle variabili anche dopo che la funzione esterna ha terminato la sua esecuzione.
+Esempio base:
 ```Javascript
-function counter(){
-let a=0;
-return {
-	inc: ()=> a++
-	dec:()=> a--
-	}
+function salutatore(name) {  
+	let text = "Ciao " + name;  
+	let diCiao = function() { alert(text);  }; 
+	 return diCiao;
+	 }
+let s = salutatore("Lorenzo");
+s();
+```
+Qui `salutatore("Lorenzo")` ritorna una funzione.
+La cosa importante è che `s` non memorizza solo la funzione ritornata, ma anche l’ambiente in cui quella funzione è stata creata.
+###### Closure e dati privati
+- Un uso molto importante delle closure è creare dati “privati”.
+Esempio:
+```Javascript
+function counter() {
+  let a = 0;
+
+  return {
+    inc: () => a++,
+    dec: () => a--,
+    get: () => a,
+    reset: () => a = 0
+  };
 }
 ```
-questa cosa ci permette di creare dati privati se metto c=counter()
-non ci sarà accesso ad a
-posso applicarla a multisum?
-le closure permettono di sperare l'implementazione dall'interfaccia
-###### IIFE(Independent Invoked Functional Expression)
-tecnica che consente di creare una funzione anonima per per le closure?
-esempio a slide 118
+- Qui `counter()` crea una variabile locale
+- Queste funzioni sono definite dentro `counter()`, quindi formano una closure sulla variabile `a`.
+Uso:
+```Javascript
+let c = counter();c.inc();c.inc();console.log(c.get());// 2
+```
+- Se però provo ad accedere direttamente ad `a`:
+```Javascript
+console.log(c.a);
+```
+- non ottengo il valore di `a`.
+- Questo succede perché `a` non è una proprietà dell’oggetto ritornato. È una variabile locale della funzione `counter()`, accessibile solo dalle funzioni interne che sono state create in quello scope.
+- Le closure permettono anche di separare **interfaccia** e **implementazione**.
+- Nel caso di `counter`, l’interfaccia è ciò che l’utente può usare dall’esterno:
+- L’implementazione, invece, è il modo in cui il dato viene gestito internamente
+- Chi usa `counter()` non può modificare direttamente `a`.
+
+###### IIFE (Immediately Invoked Function Expression)
+Una IIFE è una funzione anonima invocata immediatamente. Viene usata per creare uno scope locale e non sporcare il global scope. Può essere usata anche insieme alle closure, perché le funzioni interne possono accedere alle variabili definite dentro la IIFE.
+La struttura è questa:
+```Javascript
+(function() {  
+// codice
+})();
+```
+Esempio:
+
+>[!info]- normalmente avresti fatto
+> ```Javascript
+> let a = 0;  
+> let b = 0;  
+>   
+> function pippo(x, y) {  
+> return x * y;  
+> }
+> ```
+
+ma ora è:
+```Javascript
+(function() {
+  let a = 0;
+  let b = 0;
+
+  function pippo(x, y) {
+    return x * y;
+  }
+})();
+```
+La funzione viene eseguita subito, quindi il codice al suo interno parte immediatamente.
+Però, appena finisce, le variabili `a`, `b` e la funzione `pippo` non sono visibili dall’esterno.
+Quindi il punto non è “eseguirla subito” perché ci piace farlo, ma perché vogliamo dire:
+> questo pezzo di codice deve partire subito, ma le sue variabili devono rimanere private/locali.
+
+>[!info]- normalmente avresti fatto
+> ```Javascript
+> let a = 0;  
+> let b = 0;  
+>   
+> function pippo(x, y) {  
+> return x * y;  
+> }
+> ```
 
 QUIZ A SLIDE 120
+```Javascript
+(function() {
+  let a = b = 5;
+})();
+
+console.log(b);
+```
+- non significa davvero:`let a = 5;let b = 5;`
+- Significa invece: `b = 5;let a = b;`
+- **`b` diventa una proprietà dell’oggetto globale `window`**, se il codice non è in strict mode. quindi `console.log` stampa 5
