@@ -152,6 +152,7 @@ return n1
 - Locale tipo dentro la funzione
 variabili non dichiarate sono `UNDEFINED`
 - anche parametri non dichiarati o non necessari
+- una variabile se dichiarata con let ha uno scope di tipo, se ha dichiarata con var ha uno score di tipo...
 #### DEBUGGING CON CHROME (ESAME)
 - Strumento:
     - **Chrome DevTools → tab "Sources"**
@@ -263,6 +264,7 @@ let luca = { voto: 30 }let aneta = luca
 - **importante**:
     - `this` viene valutato a **call time** (quando la funzione viene chiamata)
     - non quando viene definita
+	- this se non contiene null usa le assegnazioni di window
 ###### Binding di this
 ```
 function sayMyName() {  alert("ciao sono " + this.name)}let a = { name: "pippo", saluta: sayMyName }let b = { name: "pluto", saluta: sayMyName }a.saluta() // pippob.saluta() // pluto
