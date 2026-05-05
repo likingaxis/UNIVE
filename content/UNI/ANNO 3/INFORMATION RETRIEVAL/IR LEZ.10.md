@@ -1,0 +1,65 @@
+#### Language model per information retrieval
+- definire un framework probabilistico per cui dato un documento otterremo un modello generativo che 
+- BM25, ci dice la probabilità di un documento, ora invece si vuole derivare la query
+- data una query come q=Frodo Ring
+- ogni documento avrà il suo modello generativo che genera delle query per ogni documento
+	- quanto è simile la query dell'utente alle query del modello generativo?
+	- il language model funziona in modo simile a quello definito nella lezione dello spelling correction
+	- si va a vedere la probabilità di una parola precedente data una successiva
+	- sempre approccio bagof words (parole indipendenti tra loro)
+	- si vuole definire un automa a stati finiti
+	- un language model dipende dalla history
+	- nel mondo degli IR usiamo come sempre una versione semplificata
+	- definita per ogni documento da M_d
+- forse non ho capito bene cosa c'entra un documento con le varie probabilità con la query
+- non abbiamo le probabilità ma questo viene usato per dire quanto ci spiega una determinata query
+- cosa genera il modello esattamente?query?
+- per capire la rilevanza andiamo a confrontare le probabilità di generazione della determinata query andando a sommare le varie probabilità
+	- slide 13
+	- per misurarlo vado a vedere il prodotto delle probabilità
+- metodo basato sulla stima per ottenere le probabilità
+	- in un modello unigram la probabilià che un termine venga generato è pi
+	- slide 19
+	- possiamo contare quante volte il termine compare in una query
+	- applico un multinomial model a slide 20
+		- che si può riassumere in una formula
+		- la somma delle probabilità di un intero documento deve fare 1
+		- rapporto tra term frequency e lunghezza del documento
+	- se prendo una probabilità di un termine nella query che non è presente in quel documento avrei 0
+		- add-1 di laplace
+		- normalizzo facendo la lunghezza del documento+quante volte ho fatto add di laplace quindi la card di V
+		- laplace non ci piace applico la tecnica di bagoff
+			- faccio una stima più semplice ma meno precisa
+				- se la parola non è presente uso la probabilità della parola nella collezione
+		- continua a non piacerci non ho capito perchè quindi applico jelinek mercer smoothing
+			- utilizzo pesature, perchè non ho più la query? t sarebbe il termine della query?
+			- lambda iperparametro da stimare mediante benchmark
+			- lambda alto=priorità doc freq lambda basso= priorità a collection freq
+				- meglio lambda più senti audio a 27:00
+		- ESEMPIO
+			- uno contiene il termine l'altro no
+			- slide 30
+		- ESERCIZIO TIPICO, stimare secondo quei casi a slide 31
+		- si cerca uno smoothing che dia peso alla lunghezza del documento
+		- partendo dal classico collection language model
+		- aggiungiamo degli pseudo-token
+			- creiamo dei pesi virtuali
+			- combiniamo pesi reali con pesi virtuali
+			- è in comune tra tutti i documenti
+			- è uno pseudo documento che vado ad aggiungere
+		- esempio missing word a slide 38 e 39
+		- si vuole semplificare la formula di diglett
+		- diglett dipende dalla lunghezza del singolo documento con lambda d che ci riporta una formula con d/ d+mu
+		- mu è un numero positivo che va da 1 a infinito
+		- cosa succede al variare di lambda di d e mu slide 43
+		- APPLICAZIONE DI DIGLETT:
+			- per ogni documento e per una query data si va ad applicare la formula a slide 44
+		- il prodotto si tramuta in somma di logaritmi per rendere il tutto più semplice(come si chiamva l'operazione specifica?)
+	- Diglett vs Jannik sinner
+		- diglett funziona meglio per keyword queries invece jannik funziona meglio per query verbose
+	- fregatura per importanza di termini che manca la inverse document frequency
+	- BM25 e LM usano modellazione probabilistica
+	- Vector space model nel frattempo invece usa similarità in uno spazio geometrico
+		- la term frequency viene usata in entrambi i casi
+	- Language Model molto semplice a differenza degli altri
+		- ma meno competitivo
