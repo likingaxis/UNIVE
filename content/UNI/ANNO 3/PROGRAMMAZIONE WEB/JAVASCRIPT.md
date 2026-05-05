@@ -152,7 +152,12 @@ return n1
 - Locale tipo dentro la funzione
 variabili non dichiarate sono `UNDEFINED`
 - anche parametri non dichiarati o non necessari
-- una variabile se dichiarata con let ha uno scope di tipo, se ha dichiarata con var ha uno score di tipo...
+- una variabile se dichiarata con let ha uno scope di enclosing block
+	- è visibile solo dentro il blocco di codice in cui viene dichiarata.
+	- Per “blocco” si intendono le graffe `{ }`
+- se dichiarata con var ha uno score di tipo functional block
+	- cioè rimane visibile dentro tutta la funzione in cui viene dichiarata.
+![[Pasted image 20260505150139.png|400]]
 #### DEBUGGING CON CHROME (ESAME)
 - Strumento:
     - **Chrome DevTools → tab "Sources"**
