@@ -1,3 +1,3 @@
-- big d
 - information retrieval
-- esercizi vulner
+- big d
+- eserciziario vulnerab
