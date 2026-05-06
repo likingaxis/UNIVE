@@ -98,7 +98,7 @@ include("file.php");
 ```
 cosa fa:
 - include un file
-- lo **esegue come codice PHP**
+- lo **esegue come codice PHP** in automatico come import in Python
 ######  eval()
 ```
 eval("codice");
@@ -111,6 +111,7 @@ PHP permette di accedere ai dati dell’utente tramite variabili globali.
 
 ###### $_GET
 - prende i dati dall’URL
+- i dati parametro dell'URL sono in un dizionario della get
 Esempio:
 ```
 index.php?id=3
@@ -120,6 +121,7 @@ index.php?id=3
 tipico nei form
 - prende i dati dal body della richiesta
 ###### $_REQUEST
+- combina tutti i dizionari del caso
  contiene:
 - $_GET
 - $_POST
@@ -129,4 +131,61 @@ tipico nei form
 usando `$_REQUEST`:
 - **non sai da dove arriva il dato**
 - aumenti la superficie di attacco
+###### PHP FILE INCLUSION
+- quando ho una include()
+	- che dipende dall'input utente che non è stato sanitization propriamente
+	- a slide 20 e 21 ci sono esempi di `"sanitizzazione"` dell'input 
+	- slide 22 bho
+- si divide in 2 tipologie
+	- LFI
+		- di tipo locale, posso includere un file locale presente sulla macchina Linux
+		- www-data, nome utente tipico che gestisce il server web
+		- ci consente di vedere l'esecuzione(se file php) oppure la sorgente(per file non php) in caso di file locali(permessi permettendo)
+			- a slide 19 abbiamo un esempio
+		- se ho un LFI come posso vedere il sorgente di file php?
+			- Log Poisoning
+				- 
+	- RFI
+		- inclusione remota tramite URL ma solo se in php.ini è presente `allow_url_include` a true
+		- utile per inserire web shell o remote shell
+		- di default è disabilitato
+#### PHP WRAPPER
+slide 31
+#### WordPress
+- i plugin di wordpress potrebbero avere varie vulnerabilità
+- eseguo e uso wpscan, ritorna le possibili vulnerabilità di un sito che usa framework wordpress
+##### SKIP da 36 a 44
+#### Server Side Request Forgery
+- NON RIGUARDA PIÙ LE TECNICHE DI INJECTION MA LO AGGIUNGO QUI
+- accedo a pagine non a nome mio ma a nome del web server
+	- ad esempio richieste a URL che solo quel web server può accedere
+- foto a slide 47 e 48
+- ci sono poi 3 esempi
+- idea: fare port scanning, accedere a dati sensibili o servizi interni
+
+###### ESERCITAZIONE DVWA
+cerco nell'URL input dei parametri dell'utente e provo a fare LFI
+- LFI cerca nel file system dell'utente quindi se cerco /etc/passwd me lo trova
+	- quindi se ho `?page=path`
+	- posso sostituire path
+	- se ho un certo blocco per determinati file, posso mettere innumerevoli ../ finché non raggiungo il  root e poi il path necessario 
+	- se viene anche bloccato questo posso mettere `?page=file:///etc/passwd`
+		- ovvero ricerca dell'URL locale
+		- utilizzi il protocollo di accesso dei file locali
+- SE NON FUNZIONA BURP 
+	- network.proxy.allow_hijacking_localhost -> true dentro about::conf
+- ESERCIZIO PHP WRAPPER
+	- creiamo un file php da revshell
+	- lo uplodiamo nella macchina
+	- lo eseguiamo da include nel parametro page
+	- la rev shell magari funziona se non funziona prova un altro comando
+	- la più stabile credo sia la `proc_open`
+	- gli altri eseguono il comando nel web server e il processo shell muore subito
+	- così apre il nuovo processo
+
+- cosa fare se non si ha file upload?
+	- esistono file.log e access.log
+		- spiega a cosa servono
+		- presenti dentro /var/log/nomeserver
+		- LO VEDIAMO DOPO
 
