@@ -108,7 +108,6 @@ cosa fa:
 - la esegue come codice PHP
 #### 🌐 Parametri HTTP in PHP
 PHP permette di accedere ai dati dell’utente tramite variabili globali.
-
 ###### $_GET
 - prende i dati dall’URL
 - i dati parametro dell'URL sono in un dizionario della get
@@ -132,36 +131,78 @@ usando `$_REQUEST`:
 - **non sai da dove arriva il dato**
 - aumenti la superficie di attacco
 ###### PHP FILE INCLUSION
-- quando ho una include()
-	- che dipende dall'input utente che non è stato sanitization propriamente
-	- a slide 20 e 21 ci sono esempi di `"sanitizzazione"` dell'input 
-	- slide 22 bho
+La **File Inclusion** si verifica quando una web application PHP usa una funzione come `include()` o `require()` per includere un file, ma il nome del file dipende da un input controllabile dall’utente
+
+```php
+$file = $_REQUEST["file"];
+include($file . ".php");
+```
+In questo caso l’utente può controllare il valore di `$file`, quindi può provare a far includere file diversi da quelli previsti dall'applicazione.
+
+La vulnerabilità è tipicamente causata da una **sanitizzazione insufficiente dell’input utente**. Anche quando il codice prova a filtrare alcuni caratteri pericolosi, la protezione può essere incompleta.
+Ad esempio, una possibile “protezione” consiste nel rimuovere `../` per impedire il directory traversal:
+```
+$file = str_replace("../", "", $_GET["file"]);include($file . ".php");
+```
+Questa però non è una protezione solida, perché può essere aggirata usando tecniche di bypass, come l’encoding dei caratteri nell’URL.
+Per esempio `/` può essere scritto come `%2F`, quindi un percorso come:
+`../../../../etc/passwd`
+può diventare:
+`..%2F..%2F..%2F..%2Fetc%2Fpasswd`
+
 - si divide in 2 tipologie
 	- LFI
-		- di tipo locale, posso includere un file locale presente sulla macchina Linux
-		- www-data, nome utente tipico che gestisce il server web
-		- ci consente di vedere l'esecuzione(se file php) oppure la sorgente(per file non php) in caso di file locali(permessi permettendo)
-			- a slide 19 abbiamo un esempio
-		- se ho un LFI come posso vedere il sorgente di file php?
-			- Log Poisoning
-				- 
+	- La **LFI** si verifica quando l’applicazione include un file presente **localmente** sul file system del server.  
+	- In pratica, tramite un parametro controllabile dall’utente, posso provare a far includere file presenti sulla macchina Linux che ospita la web application.
+	- Bisogna però ricordare che l’accesso ai file dipende dai permessi dell’utente con cui gira il web server. Spesso questo utente è `www-data`, cioè l’utente tipico usato da Apache/Nginx per eseguire il servizio web.
+		- se includo un file **non PHP**, posso leggerne il contenuto;
+		- se includo un file **PHP**, normalmente non vedo il sorgente, perché il file viene eseguito dal motore PHP e ottengo l'output
+	- Una LFI può anche essere usata per arrivare a eseguire codice, ma serve un modo per far finire codice PHP dentro un file che poi verrà incluso.
+		- Una tecnica è il **Log Poisoning**.
+			- L’idea alla base prevede 
+				- l'invio tramite una richiesta HTTP con dentro il codice PHP
+				- far salvare la richiesta nel file log del web browser
+				- includere il file log con LFI
+				- vedere il codice PHP eseguito
 	- RFI
 		- inclusione remota tramite URL ma solo se in php.ini è presente `allow_url_include` a true
 		- utile per inserire web shell o remote shell
 		- di default è disabilitato
 #### PHP WRAPPER
-slide 31
+I **PHP Wrapper** sono dei meccanismi messi a disposizione da PHP per accedere a diverse risorse usando una sintassi simile a un protocollo, ad esempio `php://`, `file://`, `data://`
+- Nel contesto della **Local File Inclusion**, i wrapper possono essere sfruttati per leggere file in modi particolari oppure, in alcuni casi, per eseguire codice
+- Un caso molto importante è il wrapper:
+	- `php://filter` 
+		- serve a **leggere un file esistente applicando un filtro prima che PHP lo interpreti**
+	- `php://filter/read=convert.base64-encode/resource=config`
+		- In questo caso PHP legge la risorsa `config`, ma prima di restituirla la converte in **Base64**.
+		- Una volta ottenuto l’output in Base64, basta decodificarlo per ricostruire il sorgente originale del file PHP.
+	- `data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7Pz4=`
+	- serve per **iniettare direttamente del contenuto**, per esempio codice PHP codificato in Base64, senza dover caricare un file sul server.
 #### WordPress
-- i plugin di wordpress potrebbero avere varie vulnerabilità
+- i plugin di Wordpress potrebbero avere varie vulnerabilità
 - eseguo e uso wpscan, ritorna le possibili vulnerabilità di un sito che usa framework wordpress
-##### SKIP da 36 a 44
 #### Server Side Request Forgery
-- NON RIGUARDA PIÙ LE TECNICHE DI INJECTION MA LO AGGIUNGO QUI
-- accedo a pagine non a nome mio ma a nome del web server
-	- ad esempio richieste a URL che solo quel web server può accedere
-- foto a slide 47 e 48
-- ci sono poi 3 esempi
+La **Server Side Request Forgery (SSRF)** è una vulnerabilità in cui una web application effettua una richiesta verso una risorsa remota usando un URL fornito dall’utente, senza validarlo correttamente.  
+- Non riguarda più direttamente le tecniche di **Injection**, però viene trattata qui perché è comunque una vulnerabilità lato server.  
+L’idea principale è che l’attaccante non accede direttamente a una certa risorsa, ma costringe il **web server** a fare la richiesta al posto suo.  
+In altre parole:  
+- non sono io attaccante a fare direttamente la richiesta,  
+- ma faccio fare la richiesta al server vulnerabile
 - idea: fare port scanning, accedere a dati sensibili o servizi interni
+ESEMPIO
+Un esempio semplice è una funzione che prende un URL dall’utente e lo scarica:
+```
+@app.route("/fetch1", methods=["POST"])
+def fetch1():    
+	url = request.form.get("url")    
+	r = requests.get(url, timeout=3)
+```
+Qui non viene fatto nessun controllo sull'URL fornito dall’utente.
+potrei accedere a 
+`http://127.0.0.1:8080/admin`
+![[Pasted image 20260506174823.png|400]]
+![[Pasted image 20260506174835.png|400]]
 
 ###### ESERCITAZIONE DVWA
 cerco nell'URL input dei parametri dell'utente e provo a fare LFI
@@ -184,8 +225,9 @@ cerco nell'URL input dei parametri dell'utente e provo a fare LFI
 	- così apre il nuovo processo
 
 - cosa fare se non si ha file upload?
-	- esistono file.log e access.log
-		- spiega a cosa servono
+	- esistono access.log o file-generico.log
+		- I file di log servono a registrare gli eventi del server. 
+			- Nel caso del web server, l’`access.log` registra le richieste HTTP ricevute.
 		- presenti dentro /var/log/nomeserver
 		- LO VEDIAMO DOPO
 
