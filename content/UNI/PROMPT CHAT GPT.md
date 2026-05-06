@@ -20,6 +20,17 @@
 >[!info]- prompt appunti
 > ho bisogno di aiuto a riscrivere e correggere gli appunti del giorno su questa lezione, [NOME_CORSO / ARGOMENTO] [NUMERO_LEZIONE] sono tutte le slide da fare, [NOME_FILE_SLIDE] è il materiale completo, [NOME_FILE_APPUNTI] è la mia lezione scritta del giorno, è molto abbozzata ma i contenuti dovrebbero esserci, soprattutto la forma e la scrittura di alcuni concetti che vorrei rimanessero scritti così, per il momento limitati a dirmi ok e leggi ciò che ti ho inviato
 
+>[!info]- prompt pre-appunti
+>Prima di entrare nei dettagli tecnici, possiamo fare un breve excursus introduttivo sulla lezione?
+> Vorrei capire, a grandi linee:
+> 1. **Di cosa tratterà la lezione**
+> 2. **Quali sono le principali macro-aree affrontate**
+> 3. **A quali problemi, domande o esigenze cerca di rispondere**
+> 4. **Qual è il contesto applicativo in cui si inserisce**
+> 5. **Quali aspetti pratici o concettuali punta a gestire**
+> 6. **Perché questi argomenti sono rilevanti nel dominio di riferimento**
+> In particolare, vorrei una panoramica iniziale che mi aiuti a capire il senso complessivo della lezione prima di affrontare i singoli dettagli.
+
 >[!info]- prompt LateX Obsidian
 > 
 > Sistema questi appunti per Obsidian con una regola **rigidissima**:

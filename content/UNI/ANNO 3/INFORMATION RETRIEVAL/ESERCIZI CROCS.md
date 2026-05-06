@@ -91,3 +91,9 @@ slide 27
 >[!info]- soluzione
 >BORT
 
+#### LEZIONE 10
+![[Pasted image 20260506120542.png|556]]
+
+>[!info]- soluzione
+>BORT
+
