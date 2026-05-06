@@ -95,9 +95,9 @@ Javascript può essere inserito in una pagina:
 - Comandi alla console javascript di developer options
 	- `console.log("ciao");`
 		- stampa direttamente sulla console
-	- `alert("ciao");`
+	- `modali`
 		- apre una finestra modale nel browser
-		- si dividono in: alert`(ok)`, prompt`(scrivi)`, confirm`(cancella,ok)`
+		- si dividono in: `alert("ciao")`, prompt`(scrivi)`, confirm`(cancella,ok)`
 - variabili in javascript
 	- `let myName="lorenzo";`
 		- inizializzazione opzionale
@@ -271,12 +271,18 @@ let luca = { voto: 30 }let aneta = luca
     - non quando viene definita
 	- this se non contiene null usa le assegnazioni di window
 ###### Binding di this
-```
-function sayMyName() {  alert("ciao sono " + this.name)}let a = { name: "pippo", saluta: sayMyName }let b = { name: "pluto", saluta: sayMyName }a.saluta() // pippob.saluta() // pluto
+```Javascript
+function sayMyName() {  
+alert("ciao sono " + this.name)}
+let a = { name: "pippo", saluta: sayMyName }
+let b = { name: "pluto", saluta: sayMyName }
+a.saluta() // pippob.saluta() // pluto
 ```
 - dipende da **chi chiama la funzione**, non da dove è scritta
 ###### Arrow functions e this
 - nelle arrow function `this` **NON cambia**
+- Il `this` è "congelato" a quello che c'era **fuori** dall'oggetto al momento della creazione. con le arrow
+- con le funzioni normali no
 - prende il valore dal **contesto esterno (outer scope)**
 ```
 let a = {  name: "pippo",  saluta: function () {    let x = () => alert(this.name)    x()  }}
@@ -340,7 +346,7 @@ arr.pop() // ultimo
 arr.shift() // primo  
   
 // lunghezza  
-arr.length
+arr.length()
 ```
 
 Attenzione agli indici
@@ -358,9 +364,8 @@ arr.slice(1,4) // NON modifica array
 arr.splice(3,2) // modifica array
 array.splice(start, deleteCount, ...nuoviElementi) // scrittura reale
 ```
-
-- `slice` → copia porzione
-- `splice` → modifica array originale
+- **`slice` (Copia porzione)**: Estrae una sezione di un array e la restituisce sotto forma di un **nuovo array**. L'array originale rimane intatto.
+- **`splice` (Modifica array originale)**: Viene utilizzato per aggiungere, rimuovere o sostituire elementi direttamente nell'array di partenza, cambiandone il contenuto in modo definitivo. Restituisce gli elementi che sono stati rimossi.
 
 ###### Iterazione
 **for...in**
