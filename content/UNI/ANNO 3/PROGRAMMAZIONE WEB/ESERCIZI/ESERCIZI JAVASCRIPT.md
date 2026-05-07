@@ -106,3 +106,5 @@ Creare tramite closure un oggetto `Player`
     - giù
     - destra
     - sinistra
+##### Esercizio 8
+Far direi il proprio nome ai 3 studenti  – implementare `Student.sayName()`
