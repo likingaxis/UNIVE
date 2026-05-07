@@ -74,6 +74,7 @@ Questa cosa però non vale allo stesso modo con `let` e `const`.
 - Quindi JavaScript è lo stesso linguaggio, ma l’ambiente in cui viene eseguito cambia alcuni oggetti disponibili.
 ##### DOM MANIPULATION SU JAVASCRIPT
 - Il DOM, cioè Document Object Model, è un’interfaccia di programmazione per documenti HTML e XML.
+	- Il DOM è uno standard definito dal W3C, quindi fornisce un modo comune per rappresentare e manipolare i documenti web.
 	- In pratica il DOM fornisce a JavaScript una rappresentazione strutturata della pagina web.
 	- La pagina HTML non viene vista soltanto come testo, ma come una struttura composta da oggetti.
 	- Questa struttura viene chiamata DOM tree, cioè albero del DOM e rappresenta ogni elemento del file html
@@ -86,15 +87,19 @@ Questa cosa però non vale allo stesso modo con `let` e `const`.
 - Una volta preso un elemento, possiamo modificarlo.
 - `document.getElementById("miodiv").innerHTML = "Ciao"`
 - Questo cambia il contenuto HTML dell’elemento con id `miodiv`.
-Quindi JavaScript non modifica il file HTML originale salvato sul computer o sul server.
-Piuttosto, dopo che il browser ha caricato ed eseguito la pagina, JavaScript modifica la rappresentazione della pagina in memoria, cioè il DOM.
-Per questo possiamo dire che JavaScript modifica dinamicamente la pagina HTML dopo che è stata caricata.
-Il DOM è molto utile perché permette a un programma JavaScript di interagire con la pagina senza dover modificare direttamente il testo HTML a mano.
-Per esempio, se vogliamo aggiungere una riga a una tabella, cambiare il testo di un paragrafo, nascondere un elemento o reagire al click di un pulsante, lo facciamo attraverso il DOM.
-Il DOM è uno standard definito dal W3C, quindi fornisce un modo comune per rappresentare e manipolare i documenti web.
+	 - dopo che il browser ha caricato ed eseguito la pagina, JavaScript modifica la rappresentazione della pagina in memoria, cioè il DOM.
+	 - JavaScript modifica dinamicamente la pagina HTML dopo che è stata caricata.
 ###### Selettori
-documentbyid
-documetsbyclass
-documentsbytag
-queryselectorAll
-ritornano array quelli al plurale
+- `document.getElementById("miodiv")` restituisce un solo elemento
+- `document.getElementsByClassName("warning")` restituisce una lista di elementi
+- `document.getElementsByTagName("p")` restituisce una lista di elementi
+-  `document.querySelectorAll("p .warning")` restituisce una lista di elementi
+- I metodi “al plurale”, cioè quelli che possono trovare più elementi
+	- restituiscono una lista simile a un array, chiamata `NodeList` oppure `HTMLCollection`, a seconda del metodo usato.
+		- Per esempio:
+		- `let paragraphs = document.getElementsByTagName("p");`
+		- In questo caso `paragraphs` contiene tutti gli elementi `<p>` della pagina.
+		- Possiamo accedere al primo elemento con:
+		- `paragraphs[0]`
+		- e possiamo sapere quanti elementi sono stati trovati con:
+		- `paragraphs.length`
