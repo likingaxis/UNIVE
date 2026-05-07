@@ -1,0 +1,42 @@
+- internet 
+- switch host
+- perché dividiamo in layer i vari servizi? 
+	- TCP/IP ISO/OSI
+	- Serve per un discorso organizzativo e implementativo
+	- TABELLA ISO OSI CARINA
+		- JS SU OBSIDIAN?
+	- HOST LINK IMPLEMENTATION
+	- carina la slide Encapsulation and end-end view
+- che porta ha il DHCP?
+-  prima di fare una richiesta http il browser con aiuto del SO apre una socket per inviare le cose al server google e sbebbers
+- la tabella ARP ha un TTL
+	- denial of service
+	- switch poisoning / arp spoofing / arp poisoning
+	- il dispositivo nella rete inoltra a sua volta i mac address malevoli
+- slide 29
+	-  banda al livello fisico è diverso, questo è solo quanti bit trasferisco al secondos
+- protocolli di accesso multiplo al canale sono FDMA TDMA CDMA
+- più banda più veloce, non troppo la frequenza
+	- frequenza più alta spesso spazio di banda maggiore
+- per instaurare connessioni wireless
+	- beacon: AP inviano pacchetti beacon 
+	- probing: device invia pacchetti alle base station
+- Evil Twin
+- Software defined radio
+- ripasso half-duplex definizione
+###### Come funziona la comunicazione Elettromagnetica
+- mediante una antenna che crea un campo elettromagnetico
+- un campo elettromagnetico mediante un'onda e una funzione di propagazione
+	- distanza tra i due picchi è la lunghezza dell'onda ($\lambda$)
+	- la frequenza è c/lambda
+	- l'onda si propaga in base a una certa direzione
+	- la distanza del campo elettromagnetico varia nel tempo
+	- se prendessi in considerazione solo la frequenza per definire bit 0 o 1
+		- potrei avere qualcuno che invia segnali più alti facendo overshadowing
+	- la fase di un segnale periodico vede una traslazione nel tempo in caso di sfasamento
+		- il bit potrebbe essere contenuto dalla fase
+	- il segnale viene codificato o in base alla fase o in base alla frequenza
+	- esempio a slide 16
+	- cambiare la fase del segnale indica il passaggio tra 0 e 1
+	- la potenza rappresenta l'energia utilizzata per una unità di tempo trasmessa dall'antenna
+	- dBm scala logaritmica per la potenza, a un certo delta di potenza
