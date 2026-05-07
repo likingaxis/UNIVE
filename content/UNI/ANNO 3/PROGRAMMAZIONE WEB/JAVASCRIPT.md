@@ -284,13 +284,18 @@ a.saluta() // pippob.saluta() // pluto
 - Il `this` è "congelato" a quello che c'era **fuori** dall'oggetto al momento della creazione. con le arrow
 - con le funzioni normali no
 - prende il valore dal **contesto esterno (outer scope)**
-```
-let a = {  name: "pippo",  saluta: function () {    let x = () => alert(this.name)    x()  }}
+```Javascript
+let a = {  
+name: "pippo",  
+saluta: function () {
+    let x = () => alert(this.name)    x()  
+    }
+	}
 ```
 ###### Costruttori
 - funzione usata per creare oggetti
 - convenzione: **nome con iniziale maiuscola**
-```
+```Javascript
 function User(name) {  this.name = name  this.isAdmin = false}
 ```
 - uso:
