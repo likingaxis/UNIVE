@@ -78,6 +78,7 @@ $$M_d = [p(t_1 \mid M_d), \dots, p(t_{|V|} \mid M_d)]$$
 e la somma di tutte le probabilità del documento deve essere uguale a 1:
 $$\sum_{i=1}^{|V|} p(t_i \mid M_d) = 1$$
 #### Smoothing
+- LO smoothing cerca di stabilizzare le cose come se ci fosse una sorta di IDF
 - per stimare la probabilità di un termine nel modello del documento abbiamo usato 
 $$\hat{p}(t_i \mid M_d) = \frac{tf_{t_i,d}}{|d|}$$
 - ma potrebbe lasciare qualche valore a 0 se il termine non è presente

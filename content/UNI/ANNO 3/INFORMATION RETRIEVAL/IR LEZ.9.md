@@ -1,4 +1,3 @@
-
 !!!!!!VEDERE MODELLI MULTINOMIALI BINOMIALI E DI POISSON
 
 Mentre i modelli algebrici (vettoriali), che abbiamo visto finora, si basano sulla somiglianza geometrica, l'approccio probabilistico nasce per gestire l'incertezza intrinseca nel processo di ricerca. L'incertezza deriva da:
