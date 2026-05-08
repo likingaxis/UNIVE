@@ -230,4 +230,3 @@ cerco nell'URL input dei parametri dell'utente e provo a fare LFI
 			- Nel caso del web server, l’`access.log` registra le richieste HTTP ricevute.
 		- presenti dentro /var/log/nomeserver
 		- LO VEDIAMO DOPO
-
