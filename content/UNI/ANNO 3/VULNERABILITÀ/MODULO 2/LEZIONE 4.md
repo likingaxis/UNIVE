@@ -143,3 +143,6 @@
 	    - `-l` → listening
 	    - `-p` → processi
 	    - `-n` → IP numerici
+comando python per aprire shell carina
+
+`python3 -c 'import pty; pty.spawn("/bin/bash")'`
