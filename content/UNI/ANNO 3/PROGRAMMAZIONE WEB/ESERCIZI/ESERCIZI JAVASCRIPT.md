@@ -196,5 +196,40 @@ Creare tramite closure un oggetto `Player`
     - giù
     - destra
     - sinistra
+        function player()
+
+        {
+
+            let x=0;
+
+            let y=0;
+
+            return
+
+            {
+
+                su: ()=> y-1;
+
+                giu: ()=> y+1;
+
+                destra: ()=> x+1;
+
+                sinistra: ()=> x-1;
+
+                mostrapos:()=> console.log(x+""+""+y);
+
+            };
+
+        }
+
+        let primo=new player();
+
+        player.destra();
+
+        player.destra();
+
+        player.su();
+
+        player.mostrapos();
 ##### Esercizio 8
 Far direi il proprio nome ai 3 studenti  – implementare `Student.sayName()`
