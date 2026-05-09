@@ -89,16 +89,106 @@ Realizzare una calcolatrice con oggetti e metodi
 > console.log(max)
 > ```
 ##### Esercizio 5
-Realizzare un modello di dati per un sito di e-commerce con:
-- Un array DI OGGETTI contenente i prodotti (`id`, `descrizione`, `costo`, `disponibilità`)
-- Un oggetto `"carrello"` con metodi:
-    - `aggiungi`
-    - `rimuovi`
-    - `guarda`
+> [!FAQ]- Realizzare un modello di dati per un sito di e-commerce con:
+> - Un array DI OGGETTI contenente i prodotti (`id`, `descrizione`, `costo`, `disponibilità`)
+> - Un oggetto `"carrello"` con metodi:
+>     - `aggiungi`
+>     - `rimuovi`
+>     - `guarda`
+> ```Javascript
+> let prodotti=[
+> 
+>   { id:0,
+> 
+>     descrizione:"Farina 00",
+> 
+>     costo:50,
+> 
+>     disponibilità:4
+> 
+>   },
+> 
+>     {id:1,
+> 
+>     descrizione:"Farina 01",
+> 
+>     costo:34,
+> 
+>     disponibilità:1
+> 
+>   },
+> 
+>     {id:2,
+> 
+>     descrizione:"Puzzette",
+> 
+>     costo:1,
+> 
+>     disponibilità:12231123213
+>   }
+> ];
+> 
+> let carrello = 
+> {
+>     oggetti: [],
+>   	aggiungi: function () {
+>     	let idScelto = Number(prompt("Inserisci l'ID del prodotto che vuoi comprare:"));
+>     	let prodottoTrovato = prodotti.find(p => p.id === idScelto);
+>     	if (prodottoTrovato)
+>         	{
+>     		this.oggetti.push(prodottoTrovato);
+>           	alert("prodotto inserito "+prodottoTrovato.descrizione);
+>         	}
+>     	else
+>         	{
+>           	 alert("ID non trovato!");
+>         	}
+> 		},
+> 	rimuovi:function(){
+> 		let idScelto = Number(prompt("Inserisci l'ID del prodotto che vuoi eliminare:"));
+>         let oggettoTrovato = this.oggetti.findIndex(p => p.id === idScelto);
+>       	if(oggettoTrovato!==-1)
+>           {
+>       		let descrizione=this.oggetti[oggettoTrovato].descrizione;
+>             this.oggetti.splice(oggettoTrovato, 1);
+>             alert("ID eliminato! "+descrizione);
+>           }
+>       	else{
+>           	 alert("ID non trovato!");
+>         	}
+> 	},
+> 	guarda:function(){
+>       let s="";
+>       for(i of this.oggetti)
+>       {
+>         s+=i.id+ " "+ i.descrizione+ " "+ i.costo+ " \n";
+>       }
+>       alert(s);
+>     }
+> }
+> 
+> carrello.aggiungi();
+> carrello.guarda();
+> carrello.rimuovi();
+> carrello.guarda();
+> ```
 
 ##### Esercizio 6
-- Stampare `"ciao"` ogni 5 secondi per un massimo di 4 volte
-- Ricaricare ogni X secondi una pagina (ad es. sito di un giornale online)
+>[!FAQ]- Stampare `"ciao"` ogni 5 secondi per un massimo di 4 volte
+> - Ricaricare ogni X secondi una pagina (ad es. sito di un giornale online)
+> ```Javascript
+> let cont=0
+> let id=setInterval(()=>
+>       {
+>           alert("ciao");
+>           cont++;
+>         if(cont>=4){
+> 		clearInterval(id);
+>     		}
+>       },5000);
+> 
+> setTimeout(()=>location.reload(),5000);
+> ```
 ##### Esercizio 7
 Creare tramite closure un oggetto `Player`
 - Implementare le funzioni di movimento:
