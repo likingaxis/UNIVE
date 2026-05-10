@@ -13,9 +13,6 @@
 > calcolatrice();
 > ```
 ##### Esercizio 2
-Realizzare una calcolatrice con oggetti e metodi
-- Permettere l'inserimento di due numeri (funzione inserisci)
-- Implementare i metodi somma, sottrazione, moltiplicazione e di divisione
 >[!FAQ]- Realizzare una calcolatrice con oggetti e metodi deve Permettere l'inserimento di due numeri (funzione inserisci) deve Implementare i metodi somma, sottrazione, moltiplicazione e di divisione
 >```Javascript
 >let calcolatrice={
@@ -60,7 +57,6 @@ Realizzare una calcolatrice con oggetti e metodi
 >   };
 > calcolatrice.menu();
 >```
-
 ##### Esercizio 3
 >[!FAQ]-  Crea un array con i giorni della settimana poi modificalo rendendolo compatibile con i giorni della settimana americani posizione 0 domenica poi lunedì ecc...
 > ```Javascript
@@ -172,7 +168,6 @@ Realizzare una calcolatrice con oggetti e metodi
 > carrello.rimuovi();
 > carrello.guarda();
 > ```
-
 ##### Esercizio 6
 >[!FAQ]- Stampare `"ciao"` ogni 5 secondi per un massimo di 4 volte
 > - Ricaricare ogni X secondi una pagina (ad es. sito di un giornale online)
@@ -190,42 +185,57 @@ Realizzare una calcolatrice con oggetti e metodi
 > setTimeout(()=>location.reload(),5000);
 > ```
 ##### Esercizio 7
-Creare tramite closure un oggetto `Player`
-- Implementare le funzioni di movimento:
-    - su
-    - giù
-    - destra
-    - sinistra
-function player() {
-
-            let x=0;
-
-            let y=0;
-
-            return{
-
-                su: ()=> y--,
-
-                giu: ()=> y++,
-
-                destra: ()=> x++,
-
-                sinistra: ()=> x--,
-
-                mostrapos:()=> console.log(x+""+""+y)
-
-            };
-
-        }
-
-        let primo=new player();
-
-        primo.destra();
-
-        primo.destra();
-
-        primo.su();
-
-        primo.mostrapos();
+>[!FAQ]-  Creare tramite closure un oggetto `Player`
+> - Implementare le funzioni di movimento:
+>     - su
+>     - giù
+>     - destra
+>     - sinistra
+> 
+> ```Javascript
+> function player() {
+> 
+>             let x=0;
+> 
+>             let y=0;
+> 
+>             return{
+> 
+>                 su: ()=> y--,
+> 
+>                 giu: ()=> y++,
+> 
+>                 destra: ()=> x++,
+> 
+>                 sinistra: ()=> x--,
+> 
+>                 mostrapos:()=> console.log(x+""+""+y)
+> 
+>             };
+> 
+>         }
+> 
+>         let primo=new player();
+> 
+>         primo.destra();
+> 
+>         primo.destra();
+> 
+>         primo.su();
+> 
+>         primo.mostrapos();
+> ```
 ##### Esercizio 8
-Far direi il proprio nome ai 3 studenti  – implementare `Student.sayName()`
+>[!FAQ]-  Far dire il proprio nome ai 3 studenti  – implementare `Student.sayName()`
+> ```Javascript
+> function Studente(nome, cognome, matricola)
+> {
+>     this.nome = nome;
+>     this.cognome = cognome;
+>     this.matricola = matricola;
+> }
+> Studente.prototype={sayName:function(){console.log(this.nome)}};
+> 
+> let paolo=new Studente("paolo","gianno","0342321");
+> paolo.sayName();
+> ```
