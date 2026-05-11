@@ -383,6 +383,22 @@ Per applicazioni in cui S varia si fa uso delle funzioni hash universali, di cui
 #### SIMILARITY FOR SHINGLES
 #### WORKING HYPOTESIS
 #### MIN HASHING
+La matrice al centro **non contiene tutti i possibili documenti**: contiene i documenti che stai confrontando. Le **colonne** sono i documenti, per esempio D1,D2,D3,D4D_1, D_2, D_3, D_4D1​,D2​,D3​,D4​. Le **righe** sono invece i possibili k-shingle dell’universo considerato, cioè tutti gli shingle che possono comparire almeno nei documenti del dataset, o teoricamente nell’universo UUU.
+
+Quindi una cella vale:
+
+Input[r,c]=1Input[r,c] = 1Input[r,c]=1
+
+se il documento DcD_cDc​ contiene lo shingle associato alla riga rrr. Vale invece:
+
+Input[r,c]=0Input[r,c] = 0Input[r,c]=0
+
+se quel documento non contiene quello shingle.
+La matrice a sinistra non è proprio “la matrice originale indicata con permutazioni”, ma è un insieme di **permutazioni delle righe**. Ogni colonna π1,π2,π3\pi_1, \pi_2, \pi_3π1​,π2​,π3​ rappresenta un diverso riordinamento possibile delle righe. Per esempio, sotto π1\pi_1π1​, la riga 5 potrebbe essere visitata per prima, la riga 1 per seconda, la riga 2 per terza, ecc.
+
+Poi, per ogni documento e per ogni permutazione, fai questa cosa:
+
+> guardi le righe nell’ordine dato dalla permutazione e trovi la prima riga in cui quel documento ha valore 1.
 #### ENCODINGH SETS AS BINARY VECTORS
 #### FINDING SIMILAR COLUMNS
 #### MIN HASHING
