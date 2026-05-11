@@ -29,6 +29,9 @@
 - un campo elettromagnetico mediante un'onda e una funzione di propagazione
 	- distanza tra i due picchi è la lunghezza dell'onda ($\lambda$)
 	- la frequenza è c/lambda
+		- ci definisce la distanza tra l'inizio di un'onda e la successiva
+			- lunghezza di onda più corta frequenza più alta
+				- viceversa più bassa
 	- l'onda si propaga in base a una certa direzione
 	- la distanza del campo elettromagnetico varia nel tempo
 	- se prendessi in considerazione solo la frequenza per definire bit 0 o 1
@@ -40,3 +43,67 @@
 	- cambiare la fase del segnale indica il passaggio tra 0 e 1
 	- la potenza rappresenta l'energia utilizzata per una unità di tempo trasmessa dall'antenna
 	- dBm scala logaritmica per la potenza, a un certo delta di potenza
+	- banda base è un approccio di trasmissione naturale ovvero quando trasmetto...
+		- non si usa in wireless perchè altrimenti avrei interferenze su diversi segnali generati
+		- di solito applico una sinusoide con occupazione spettrale ridotta(un solo punto)
+		- esempio nelle slide 
+			- banda passante è tutto ciò che avviene intorno al punto di occupazione spettrale
+			- il canale è una porzione di spettro della banda passante
+		- lo spettro è condiviso tra tutti e viene distribuito tra 3 macro tipologie
+			- licensed
+			- shared
+			- unlicensed
+		- non ho capito perchè con alte frequenze posso creare più canali
+- Esempio di trasmissione
+	- trasformata di furier, prendere la banda e moltiplicarla per un certo coseno porta ad avere due frequenze -fc e fc
+	- fc frequenza di carrier
+- esempio di ricezione 
+	- posso trasformare la mia banda base effettuando queste moltiplicazioni per il coseno ottenendo 2fc e 0, quindi elimino 2fc e ottengo a 0 la banda base
+		- quindi il segnale che ci serve è -fc dopo aver moltiplicato il coseno
+	- quindi si torna al valore originale banda base avendo filtrato il segnale di 2fc
+		- cancella tutte quelle frequenze a 2fc(funzione di aliasing)
+- recap sulla potenza
+	- la potenza è l'energia trasmessa o ricevuta in una certa unità di tempo
+- larghezza di banda
+	- si misura in hz ed è il range delle frequenze usate dal segnale radio
+	- sta a slide 23
+##### Layer fisico
+- dati originali: bit
+- coding+correzione errori e bit:
+	- aggiungo EDC
+- digital modulation: tecnica che massimizza 
+	- modulazione dei bit per tempo di bit (bit per secondo è l'inverso )
+		- + modulazione richiede più banda
+		- vado a modulare questa portante su 3 caratteristiche
+			- ampiezza frequenza o fase
+			- in ampiezza: moltiplico 1 e 0 sulla sinusoide
+			- frequenza: frequenza più bassa quando trasmetto 0 frequenza più alta 1
+			- fase: parti da una certa fase, cambio di fase indica lo scambio tra 0 o 1
+		- ASK e PSK
+			- usate in ambito radio le ask
+				- usato in ambito amplitude
+			- psk cambia la fase di 180 gradi
+			- qpsk
+				- in un cambio di fase di 4 trasmetto 4 possibili segnali 00 01 10 11
+- pulse shaping: match trasmission bandwidth
+- rf modulation: trasmette segnale 
+iq represenation:
+- posso scrivere un coseno sommando due componenti in quadratura, ovvero sfasate di 90 gradi
+	- scelta della fase del segnale mantenendo l'ampiezza costante
+- diagramma di costellazione 
+	- qpsk visto in precedenza si può rappresentare in uno spazio bidimensionale
+		- che indica il cambio di fase
+	- qpsk supremo che generalizza ampiezza e fase con qam
+	- lavorando a 64 qam per il wifi
+		- più aumento qam più devo avere frequenza e fase precisi devo avere
+- rapporto segnale rumore SNR
+	- un snr basso permette qam alti
+	- un snr alto porta a qam bassi
+	- effettuando quindi una modulazione di fase
+- path loss wireless
+	- preceived/ptransmitted ~ $1/(fd)^2$
+	- hidden terminal problema principale del path loss
+- multipath
+	- riflessioni ambientali
+	- tempo di coerenza, troppe riflessioni la bitrate deve essere ridotta
+		- altrimenti non capisco quale bit corrisponde a quale
