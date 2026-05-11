@@ -1,5 +1,7 @@
 idea: chiedere al professore Lorenzo Bracciale
 campi dove ha lavorato:
+https://nam.cnit.it/people/lorenzo-bracciale
+https://lorenzobracciale.github.io/
 
 |Area di ricerca|Idea centrale|Esempi concreti|
 |---|---|---|
@@ -17,3 +19,39 @@ progetti interessanti:
 - In Plain Sight: A Pragmatic Exploration of the Italian Medical Landscape (In)security
 - Cybersecurity vulnerability analysis of medical devices purchased by national health services
 - Anonymization and Pseudonymization of FHIR Resources for Secondary Use of Healthcare Data
+### IDEE
+1. Simulazione ambiente ospedaliero e possibili vulnerabilità da mostrare
+2. 
+
+
+
+###### IDEA 1
+Per rendere il progetto credibile, puoi prendere come riferimento il **Fascicolo Sanitario Elettronico 2.0**.
+
+Developers Italia spiega che nel FSE 2.0 confluiscono dati in formato **HL7 FHIR**, acquisiti dai sistemi produttori delle strutture e archiviati nel Data Repository Centrale, e documenti in formato **HL7 CDA2** inseriti in PDF firmati e archiviati nei repository documentali delle strutture sanitarie.
+```scss
+Backend:
+- FastAPI, Node.js/Express o Spring Boot
+
+Database:
+- PostgreSQL
+
+Storage documentale:
+- MinIO, cioè uno storage locale compatibile S3
+  oppure filesystem controllato
+
+Autenticazione:
+- JWT oppure sessioni server-side
+
+Containerizzazione:
+- Docker Compose
+
+Testing:
+- Postman / pytest / script automatici
+
+Security testing:
+- OWASP ZAP per test web/API
+- test manuali per access control
+- eventualmente Semgrep per analisi statica base
+```
+
