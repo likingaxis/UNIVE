@@ -20,7 +20,7 @@ progetti interessanti:
 - Cybersecurity vulnerability analysis of medical devices purchased by national health services
 - Anonymization and Pseudonymization of FHIR Resources for Secondary Use of Healthcare Data
 ### IDEE
-1. Simulazione ambiente ospedaliero e possibili vulnerabilità da mostrare
+1. Simulazione ambiente ospedaliero(in una sua porzione) e possibili vulnerabilità da mostrare
 2. 
 
 
@@ -55,3 +55,4 @@ Security testing:
 - eventualmente Semgrep per analisi statica base
 ```
 
+###### IDEA 2
