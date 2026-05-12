@@ -239,9 +239,111 @@
 > let paolo=new Studente("paolo","gianno","0342321");
 > paolo.sayName();
 > ```
-
 ##### Esercizio 9
-- fare un piccolo videogioco, dove c'è il div che si muove e noi dobbiamo cliccarlo
+>[!FAQ]- fare un piccolo videogioco, dove c'è il div che si muove e noi dobbiamo cliccarlo
+> ```Javascript
+> function haiVinto(e)
+> 
+> {
+> 
+>     alert('hai vinto');
+> 
+> }
+> 
+> const el=document.getElementById("clickme");
+> 
+> const bod=document.body; //oppure document.getElementsByTagName('body')[0]; perchè abbiamo una lista e prendiamo il primo
+> 
+> //el.style.backgroundColor='black';
+> 
+> bod.style.backgroundColor='white';
+> 
+> let divIsBlack=true;
+> 
+> function moveTheDiv(){
+> 
+>     if (divIsBlack)
+> 
+>         {
+> 
+>             //el.style.backgroundColor='white';
+> 
+>             bod.style.backgroundColor='black';
+> 
+>         }
+> 
+>         else{
+> 
+>             //el.style.backgroundColor='black';
+> 
+>             bod.style.backgroundColor='white';
+> 
+>         }
+> 
+>         divIsBlack=!divIsBlack;
+> 
+>     console.log('eccomi');
+> 
+>     el.style.marginLeft=Math.random()*500+"px";
+> 
+>     el.style.marginTop=Math.random()*500+"px";
+> 
+> }
+> 
+> el.addEventListener('click',haiVinto);
+> 
+> const INTERVAL=1000;
+> 
+> setInterval(moveTheDiv,INTERVAL);
+> ```
+> 
+##### Esercizio 10
+>[!FAQ]- Altro esercizio tutte le volte che premi un pulsante cambia la foto nello sfondo 
+> ```Javascript
+> const imgel= document.getElementById("my-image");
+> const button= document.getElementById("change-img");
+> let img=[
+>     "https://media.istockphoto.com/id/1503385646/it/foto/ritratto-divertente-e-felice-shiba-inu-cucciolo-di-cane-che-fa-capolino-da-dietro-una-bandiera.jpg?s=612x612&w=0&k=20&c=rDIu9qMDJdPIwmpb88ms3cOZ6E04qT2EaAGQIxOE8Uw=",
+>     "https://media.eliocarchidi.com/uploads/2017/05/foto-cani-bellissimi-meticci-13.jpg",
+>     "capture.PNG"
+> ];
+> let randomIndex=0;
+> imgel.src=img[randomIndex];
+> function changeImage(){
+>     randomIndex= (randomIndex+1)%img.length;
+>     imgel.src=img[randomIndex];
+> }
+> button.addEventListener("click", changeImage);
+> ```
+##### Esercizio 11
+>[!FAQ]- Altro esercizio crea una wishlist con desideri da aggiungere
+> ```Javascript
+> 
+> const but=document.getElementById("add-item");
+> 
+> const list=document.getElementById("wish-list");
+> 
+> function addWish()
+> 
+> {
+> 
+>     const newWish=prompt("Enter your wish:");
+> 
+>     if(newWish)    {
+> 
+>         const listItem=document.createElement("li");
+> 
+>         listItem.textContent=newWish;
+> 
+>         //const txt= document.createTextNode(newWish);
+> 
+>         list.appendChild(listItem);
+> 
+>     }
+> 
+> }
+> 
+> but.addEventListener("click",addWish);
+> 
+> ```
 
-Altro esercizio tutte le volte che premi un pulsante cambia la foto nello sfondo
-Altro esercizio crea una wishlist con desideri da aggiungere
