@@ -21,10 +21,8 @@ progetti interessanti:
 - Anonymization and Pseudonymization of FHIR Resources for Secondary Use of Healthcare Data
 ### IDEE
 1. Simulazione ambiente ospedaliero(in una sua porzione) e possibili vulnerabilità da mostrare
-2. 
-
-
-
+2. progettare un honeycomb per raccolta informazioni di possibili attacchi 
+3. 
 ###### IDEA 1
 Per rendere il progetto credibile, puoi prendere come riferimento il **Fascicolo Sanitario Elettronico 2.0**.
 
