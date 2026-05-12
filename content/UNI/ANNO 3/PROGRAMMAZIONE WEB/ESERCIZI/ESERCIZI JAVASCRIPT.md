@@ -239,3 +239,9 @@
 > let paolo=new Studente("paolo","gianno","0342321");
 > paolo.sayName();
 > ```
+
+##### Esercizio 9
+- fare un piccolo videogioco, dove c'è il div che si muove e noi dobbiamo cliccarlo
+
+Altro esercizio tutte le volte che premi un pulsante cambia la foto nello sfondo
+Altro esercizio crea una wishlist con desideri da aggiungere
