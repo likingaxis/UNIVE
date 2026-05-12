@@ -719,7 +719,7 @@ Questa cosa però non vale allo stesso modo con `let` e `const`.
 	- La pagina HTML non viene vista soltanto come testo, ma come una struttura composta da oggetti.
 	- Questa struttura viene chiamata DOM tree, cioè albero del DOM e rappresenta ogni elemento del file html
 - Nel DOM tree ogni elemento della pagina è rappresentato come un nodo.
-	- La radice principale del DOM è `document`.
+	- La radice principale del DOM è `document` un oggetto..
 	- `document` rappresenta l’intera pagina HTML caricata nel browser.
 - Per esempio, se vogliamo prendere un elemento con un certo id, possiamo scrivere:
 	- `document.getElementById("miodiv")`
