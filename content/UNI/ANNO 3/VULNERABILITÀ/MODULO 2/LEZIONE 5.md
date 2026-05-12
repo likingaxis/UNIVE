@@ -115,5 +115,5 @@ gobuster dir -u http://cloud.vdsi/archive --proxy http://127.0.0.1:8080 -w /usr/
 feroxbuster -u http://TARGET_IP -w /usr/share/seclists/Discovery/Web-Content/common.txt
 ```
 - **Altro tool simile**
-    - `ffuf`
+    - `ffuf -u "http://vdsi-services.xyz" -H "Host: FUZZ.vdsi-services.xyz" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt\n`
     - usato per fuzzing di path, parametri, header e virtual host
