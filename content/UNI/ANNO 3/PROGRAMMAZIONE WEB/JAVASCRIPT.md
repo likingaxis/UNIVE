@@ -812,64 +812,33 @@ Questa cosa però non vale allo stesso modo con `let` e `const`.
     - più precisamente è un nodo di testo
 - posso creare nuovi nodi direttamente con JavaScript
 - per creare un nuovo elemento HTML uso `createElement`
-```
-var newDiv = document.createElement("div");
-```
+	- `var newDiv = document.createElement("div");`
 - questo crea un nuovo nodo `<div>`
     - però non appare subito nella pagina
     - esiste solo in memoria finché non lo inserisco nel DOM
 - per creare del testo uso `createTextNode`
-
-```
-var ourText = document.createTextNode("Ciao!");
-```
-
+	- `var ourText = document.createTextNode("Ciao!");`
 - per inserire il testo dentro il `div` uso `appendChild`
-
-```
-newDiv.appendChild(ourText);
-```
-
+	- `newDiv.appendChild(ourText);`
 - `appendChild` significa “aggiungi come figlio”
     - quindi `ourText` diventa figlio di `newDiv`
 - poi inserisco il nuovo `div` dentro un elemento già presente nella pagina
-
-```
-var ourDiv = document.getElementById("mydiv");ourDiv.appendChild(newDiv);
-```
-
+	- `var ourDiv = document.getElementById("mydiv");ourDiv.appendChild(newDiv);`
 - quindi:
     - creo un nodo `div`
     - creo un nodo di testo
     - metto il testo dentro il `div`
     - metto il `div` dentro l’elemento con id `"mydiv"`
-
 ##### Metodi principali sui nodi
-
 - `appendChild`
     - aggiunge un nodo come ultimo figlio di un altro nodo
-
-```
-ourDiv.appendChild(newDiv);
-```
-
+	- `ourDiv.appendChild(newDiv);`
 - `insertBefore`
     - inserisce un nodo prima di un altro nodo già presente
-
-```
-ourDiv.insertBefore(newHeading, para);
-```
-
+	- `ourDiv.insertBefore(newHeading, para);`
 - `replaceChild`
     - sostituisce un nodo con un altro
-
-```
-ourDiv.replaceChild(newImg, oldImg);
-```
-
+	- `ourDiv.replaceChild(newImg, oldImg);`
 - `removeChild`
     - rimuove un nodo figlio dal suo nodo genitore
-
-```
-parentDiv.removeChild(removeMe);
-```
+	- `parentDiv.removeChild(removeMe);`
