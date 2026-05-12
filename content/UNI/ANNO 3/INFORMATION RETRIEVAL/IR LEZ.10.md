@@ -162,6 +162,10 @@ Quindi:
 $$\log p_{Dir}(q \mid d) = \sum_{k=1}^{n} \log \frac{tf_{w_k,d} + \mu p(w_k \mid M_c)} {|d|+\mu}$$
 
 Si fa perché moltiplicare tante probabilità piccole può produrre numeri estremamente vicini a zero, causando **underflow numerico**. Usando i logaritmi, il prodotto diventa una somma e il ranking rimane lo stesso, perché il logaritmo è una funzione monotona crescente
+lo score sarà probabilmente negativo
+cerco lo score più piccolo perchè voglio la probabilità più alta, quindi a 1, quindi una somma di probabilità a 1
+la formula viene allargata nell'esercizio
+![[Pasted image 20260512163635.png]]
 
 ###### CONFRONTO TRA VECTOR SPACE MODEL, BM25 E LANGUAGE MODELS
 - BM25 e Language Models sono entrambi motivati da una modellazione probabilistica, anche se rispondono a domande diverse
@@ -181,4 +185,6 @@ Una differenza importante riguarda l’idf.
 - Nei Language Models, invece, l’idf non compare esplicitamente. 
 Tuttavia, l’uso del modello della collezione produce un effetto simile: termini rari nella collezione, ma frequenti in un certo documento, hanno un impatto maggiore sul ranking
 Quindi i Language Models non usano direttamente la document frequency come BM25, ma usano la collection frequency attraverso il collection language model
+BM25 ha un maggior controllo dei fenomeni
 
+ESERCIZI CROCS AGGIUNGERE la parte finale
