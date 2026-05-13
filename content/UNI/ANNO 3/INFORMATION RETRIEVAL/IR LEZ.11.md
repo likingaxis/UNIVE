@@ -61,3 +61,4 @@ ESERCIZI CROCS
 - è una strategia efficiente per lavorare ma scala abbastanza bene
 - perchè usare il random sampling
 - veloce ecc
+FINO ALLA SLIDE 30
