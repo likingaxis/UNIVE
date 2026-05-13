@@ -101,7 +101,6 @@
 
 >[!info]- incredibile appunti versione estesa
 >
-> 
 > ```scss
 > Ho bisogno di aiuto per trasformare i miei appunti grezzi di lezione in appunti universitari completi, ordinati e studiabili.
 > 
@@ -175,8 +174,9 @@
 > 7. Alla fine, se richiesto, ricostruisci tutti gli appunti in un unico testo coerente.
 > 
 > Output atteso:
-> Voglio appunti finali in formato Markdown, con titoli e sottotitoli chiari, formule ben formattate, spiegazioni discorsive e uno stile adatto allo studio universitario.
+> Voglio appunti finali in formato, con titoli e sottotitoli chiari, formule ben formattate, spiegazioni discorsive e uno stile adatto allo studio universitario. inizialmente forniscimi un excursus delle lezioni grazie
 > ```
+> 
 
 > [!info]- versione estesa 2 TROPPO LUNGA
 > 
