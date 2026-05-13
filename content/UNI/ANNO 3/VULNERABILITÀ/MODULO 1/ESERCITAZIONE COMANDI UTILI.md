@@ -30,7 +30,7 @@
 		- `-perm` filtra in base ai permessi
 	- `find / -perm /utente `
 	- così è possibile trovare un determinato file con suid
-		- con -p possiamo eseguire quel file con effective `uid` di quell'utente
+		- con `su -p` possiamo eseguire quel file con effective `uid` di quell'utente
 		- se file non eseguibile `chmod a+x eseguibile`
 		- uso `pspy64` per vedere i cronjobs senza root
 
