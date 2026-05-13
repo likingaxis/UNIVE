@@ -1,3 +1,5 @@
-- Programmazione Web
-- big d
-- eserciziario vulnerab
+- Programmazione Web esercizi
+- big d finire algoritmi
+- eserciziario vulnerabilità da finire
+- information retrieval
+- tesi
