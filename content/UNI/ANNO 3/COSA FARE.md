@@ -1,5 +1,10 @@
-- Programmazione Web esercizi  e lezione
+- Programmazione Web esercizi e lezione
+	- oggi
 - big d finire algoritmi IMPORTANTE
-- lezione vulnerabilità IMPORTANTE
+	- weekend
+- laboratorio vulnerabilità IMPORTANTE
+	- weekend
 - information retrieval vedere codici python IMPORTANTE
+	- weekend
 - tesi
+	- weekend

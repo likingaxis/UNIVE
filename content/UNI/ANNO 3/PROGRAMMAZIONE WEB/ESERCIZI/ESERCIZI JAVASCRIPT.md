@@ -347,3 +347,19 @@
 > 
 > ```
 
+##### Esercizio 12
+Associamo una funzione js quando si clikka un div  – presentiamo un “alert” all’utente
+
+##### Esercizio 13
+Prendere esercizio precedente e spostare  dinamicamente il div ogni X secondi  • Ogni volta che si sposta, cambiare il colore del  background e del div da bianco a nero e viceversa
+
+##### Esercizio 14
+Aggiungere dinamicamente un elemento a una lista
+
+##### Esercizio 15
+Creare un json con la lista degli esami svolti • Visualizzarlo i dati in una pagina con una tabella
+
+##### Esercizio 16
+Costruisce una promise che si risolve dopo 5 secondi. – Il valore della promessa dovrebbe essere: "la mia prima promise è stata un successo!".
+
+Esercizi vari alle ultime slide con una sorta di quiz
