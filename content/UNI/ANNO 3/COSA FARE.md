@@ -1,5 +1,5 @@
 - Programmazione Web esercizi  e lezione
 - big d finire algoritmi IMPORTANTE
-- eserciziario vulnerabilità da finire IMPORTANTE
+- lezione vulnerabilità IMPORTANTE
 - information retrieval vedere codici python IMPORTANTE
 - tesi
