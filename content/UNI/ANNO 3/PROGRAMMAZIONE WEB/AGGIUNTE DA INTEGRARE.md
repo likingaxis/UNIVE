@@ -1,131 +1,101 @@
-##### Continuo DOM
-- In JavaScript è possibile associare del codice a un evento, cioè a qualcosa che accade nella pagina, ad esempio un click su un bottone
-	- per catturare eventi posso usare onclick inline e eseguo il javascript che voglio
-		- `<button id="btn" onclick="saluta()">sconfiggi louis nell'ULTIMA battaglia FINALE</button>`
-	- `document.getElementById("id").tipoevento=funzione;`
-	- oppure posso usare 
-		- `document.getElementById("id").addEventListener('tipoevento',funzione)`
-	- posso chiamare funzioni dichiarate anche dal file `.js`
-	- quando l’evento avviene, viene eseguito il codice associato
-		- questo codice è gestito dall’**handler dell’evento**
-		- l’handler è quindi la funzione che stabilisce cosa deve succedere quando l’evento viene generato
-	- posso associare una funzione anche dallo script js
-##### Esempi di eventi
-- in JavaScript esistono diversi tipi di eventi che posso intercettare sugli elementi del DOM
-	- un evento rappresenta qualcosa che accade nella pagina
-	- quando si verifica un evento, il browser può passare automaticamente alla funzione un oggetto evento
-	- questo oggetto contiene informazioni utili su ciò che è successo
-	- nel caso di eventi legati al mouse o al puntatore, posso avere un oggetto di tipo `PointerEvent` o simile
-	- per riceverlo basta modificare il codice della funzione, forzando il passaggio del parametro dell’oggetto evento
-		- l’oggetto evento dà informazioni utilissime, ad esempio:
-		- la posizione del mouse
-		- l’elemento che ha generato l’evento
-		- l’elemento su cui l’evento è avvenuto
-		- proprietà come `srcElement` e `target`
-- `onclick`
-    - viene generato quando l’utente clicca su un elemento
-- `onblur` / `onfocus`
-    - `onfocus` viene generato quando un elemento prende il focus
-        - ad esempio quando clicco dentro un input
-    - `onblur` viene generato quando un elemento perde il focus
-- `onchange`
-    - viene generato quando il contenuto di un elemento cambia
-        - ad esempio quando cambia il valore di un input, di una select o di un campo di un form
-- `onload`
-    - viene generato quando la pagina, o una certa risorsa, ha finito di caricarsi
-    - può essere usato per eseguire codice solo dopo il caricamento del documento
-    - esercizio:
-        - levare `defer`
-        - usare `document.onload` o un evento di caricamento per eseguire lo script solo quando il documento è pronto
-- `onmousedown` / `onmouseup`
-    - `onmousedown` viene generato quando un bottone del mouse viene premuto
-    - `onmouseup` viene generato quando il bottone del mouse viene rilasciato
-- `onmousemove` / `onmouseout` / `onmouseover`
-    - `onmousemove` viene generato quando il mouse si muove sopra un elemento
-    - `onmouseover` quando il mouse entra sopra un elemento
-    - `onmouseout` quando il mouse esce da un elemento
-- `onsubmit`
-    - viene generato quando viene inviato un form
-    - è utile per controllare i dati prima dell’invio
-    - tramite l’oggetto evento posso capire quale form ha generato il submit
-###### Metodi migliori per rispettare la continuazione del DOM
-- quando dichiaro un file js in html devo inserirlo quando il DOM ha generato quella determinata porzione da noi interessata
-	- questo non è ottimale ma possiamo mettere defer `src`
-	- usare `defer`, include il file js solo dopo che il DOM è stato generato totalmente
-	- usare `async` per eseguire appena la parte asincrona ha finito di scaricare
-		- non aspetta la generazione del DOM
-- ricordiamo che l'oggetto global è window
-###### Modificare Css dal DOM
-- prendo l'elemento con tipo `getElementById` e poi aggiungo .style.proprietà
-	- al posto del - uso la prima lettera maiuscola
-	- di base funziona come getter
-	- se aggiungo un uguale diventa setter
-	- `document.getElementById("clickme").style.marginTop=Math.random()*500+"px";`
-##### Creare un nodo
-- nel DOM ogni elemento della pagina può essere visto come un **nodo**
-- il `div` è un nodo
-- anche il testo `"Ciao!"` è un nodo
-    - più precisamente è un nodo di testo
-- posso creare nuovi nodi direttamente con JavaScript
-- per creare un nuovo elemento HTML uso `createElement`
-```
-var newDiv = document.createElement("div");
-```
-- questo crea un nuovo nodo `<div>`
-    - però non appare subito nella pagina
-    - esiste solo in memoria finché non lo inserisco nel DOM
-- per creare del testo uso `createTextNode`
+#### Javascript asincrono
+- sincrono invio di richieste una appresso all'altra
+- asincrono invio di richieste insieme
+- definizione completa di FETCH
+###### Codice sincrono
+- modale con background color red e poi creiamo una conferma
+	- fa vedere la modale e poi si blocca, successivamente continua dopo aver risposto alla modale
+###### Codice asincrono
+- settimeout imposta il timer e poi avviene un background task
+	- dopo 2 secondi viene eseguito questo
+	- che succede se ne accumulo di più nello stesso tempo?
+- avere una callback chiamata a funzione non rende il codice asincrono 
+	- ad esempio con il forEach avrei comunque una situazione sincrona
+	- perchè eseguirebbe la riga 2 e poi la 3
+- Codice asincrono 2
+	- add event listener aggiunge comunque un pezzo di codice asincrono
+	- aggiungo una immagine con url poi quando avviene load aggiungo fadeIn
+###### Event Loop
+- come funziona?
+- abbiamo la call stack la memory heap 
+	- le web apis che fanno partire un processo separato che gestisce la background task
+	- in caso di onclick magari un handler che gestisce il click e che si attiva quando l'utente clicka
+	- una volta terminate finiscono in una coda chiamata Callback Queue
+		- Event loop cicla all'interno di questa lista di eventi e vede se si riempie
+		- non mi ricordo chi esegue il codice javascript facendo eseguire gli step sincroni
+			- l'Event loop rimane attivo in attesa di eventi nella coda e li esegue
+				- aspetta che la funzione termini prima di eseguire il prossimo evento della callback queue
+###### Gif esempio di una completa operazione 
+- prendila dalle slide
+- i setTimeout partono sempre dopo l'esecuzione della parte sincrona
 
-```
-var ourText = document.createTextNode("Ciao!");
-```
+###### Promises
+- consentono a java di eseguire codice asincrono in modo semplice
+- in javascript ricordiamo che
+- quasi tutto è asincrono
+	- utente online che interagisce con la pagina ecc
+	- funzione con una certa callback ecc
+- Callback hell problema dove ho un sacco di callback
+	- Esempio di Callback Hell nelle ultime slide
+- promises è un oggetto usato come placeholder per il risultato futuro di una operazione asincrona
+	- un contenitore per un valore assegnato in modo asincrono
+		- per un valore futuro che arriverà dopo
+	- puoi gestire il risultato anche prima che arrivi il dato
+	- restituisce un risultato che dirà in futuro arriverà qualcosa
+- `new Promise(executor)`
+	- executor è una funzione che chiama 2 callback
+	- restituisce un oggetto che ha 3 stati con una sorta di enum
+		- pending, resolved, rejected
+- Esempio pratico di una promise
+	- function ha 2 parametri resolve e reject
+- Esempio da fare a casa con math random
+	- quando refresho la cosa non funziona
+- Le promise hanno un attributo detto then, quando la promise è fullfilled o rejected 
+	- quindi fare tipo quando il server ha dei dati then renderizzali
+	- then ha due argomenti uno per resolve uno per reject
+	- il then dietro le quinte ad una funzione aggiunge il new promise
+- una volta che hai fatto resolve non avviene il reject
+	- sono uno o l'altro
+```Javascript
+let promise = new Promise((resolve, reject) => {
 
-- per inserire il testo dentro il `div` uso `appendChild`
+    setTimeout(() => {
 
+        if(Math.random() > 0.5) {
+
+            reject(new Error("errore!"));
+
+        }
+
+        else{
+
+            resolve("fatto!");
+
+        }
+
+        console.log(promise) //sono dentro la promise
+
+    }, 10000);
+
+});
+
+console.log(promise); //ci sarà la promise pending
+
+promise.then(result => console.log(result), error => console.error(error)); //risultato fatto!
 ```
-newDiv.appendChild(ourText);
-```
-
-- `appendChild` significa “aggiungi come figlio”
-    - quindi `ourText` diventa figlio di `newDiv`
-- poi inserisco il nuovo `div` dentro un elemento già presente nella pagina
-
-```
-var ourDiv = document.getElementById("mydiv");ourDiv.appendChild(newDiv);
-```
-
-- quindi:
-    - creo un nodo `div`
-    - creo un nodo di testo
-    - metto il testo dentro il `div`
-    - metto il `div` dentro l’elemento con id `"mydiv"`
-
-##### Metodi principali sui nodi
-
-- `appendChild`
-    - aggiunge un nodo come ultimo figlio di un altro nodo
-
-```
-ourDiv.appendChild(newDiv);
-```
-
-- `insertBefore`
-    - inserisce un nodo prima di un altro nodo già presente
-
-```
-ourDiv.insertBefore(newHeading, para);
-```
-
-- `replaceChild`
-    - sostituisce un nodo con un altro
-
-```
-ourDiv.replaceChild(newImg, oldImg);
-```
-
-- `removeChild`
-    - rimuove un nodo figlio dal suo nodo genitore
-
-```
-parentDiv.removeChild(removeMe);
-```
+#### Posso creare delle catene di promise
+- Esercizio 2: orderpizza.then console log viene eseguito dopo quando si risolverà la promise
+- Esempio 3: il then viene eseguito comunque alla fine perchè l'event loop lo fa eseguire alla fine
+	- in questo caso viene messo subito nella coda
+- Esempio 4: se non premo entro 5 secondi fa console.log Option B
+Foto con concatenazione di promise
+- Esempio 5
+	- javascript te lo cambia come se ci fosse una sorta di new promise
+	- il then dietro le quinte ad una funzione aggiunge il new promise
+- alla fine della chain potrei mettere un finally o un catch di un ipotetico errore se vengono usate per errori
+##### Le microtask queue
+- le promise non vanno nel callback queue ma nel microtask queue
+	- con priorità maggiore preemptive
+		- la svuota tutta e poi fa la callback queue
+- esempio di priorità
+	- fa prima start poi stop poi fa quelle della micro quindi res ciclo res e poi fa timer 0
