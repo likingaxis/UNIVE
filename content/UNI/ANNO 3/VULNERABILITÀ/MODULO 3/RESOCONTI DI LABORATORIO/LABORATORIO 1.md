@@ -19,5 +19,12 @@ In questo laboratorio abbiamo utilizzato Matlab per analizzare uno spettro dato 
 		- mettendo un averaging method esponenziale sotto suggerimento dell'insegnante a 1 siamo riusciti a definire bene i picchi di frequenza
 			- possiamo dedurre che è li che si hanno le vere e proprie informazioni utili
 		- come visto è stato messo 102.5 ma probabilmente non prendeva adeguatamente perchè in Capture 6 a 0 non abbiamo picchi ne onde particolari
+			- in realtà prende a 92.4
 		- con capture 8 mi connetto a una diversa frequenza 106.6 capture 9 per vedere il cambio di input
 		- con uno strumento di misurazione basilare di spectrum analyzer posso misurare ampiezza in mhz e in dbm altezza di un determinato range da me definito della banda totale da me visibile
+- specchietto di cosa ho imparato...
+	- asse x 
+	- asse y
+	- ampiezza 
+	- banda
+- con il metodo di misura abbiamo la distanza in ampiezza e in dbm e in khz
