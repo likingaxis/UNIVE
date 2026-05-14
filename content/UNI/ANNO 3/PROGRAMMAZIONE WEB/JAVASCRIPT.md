@@ -792,6 +792,7 @@ Questa cosa però non vale allo stesso modo con `let` e `const`.
     - viene generato quando viene inviato un form
     - è utile per controllare i dati prima dell’invio
     - tramite l’oggetto evento posso capire quale form ha generato il submit
+- CON EVENTLISTENER DEVI TOGLIERE ON
 ###### Metodi migliori per rispettare la continuazione del DOM
 - quando dichiaro un file js in html devo inserirlo quando il DOM ha generato quella determinata porzione da noi interessata
 	- questo non è ottimale ma possiamo mettere defer `src`
