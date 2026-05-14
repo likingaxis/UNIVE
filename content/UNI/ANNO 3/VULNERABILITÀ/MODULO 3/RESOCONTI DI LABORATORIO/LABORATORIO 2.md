@@ -1,0 +1,74 @@
+- la prof ci ha fatto vedere un altro rst
+	- si chiama usrp b210
+- piccola digressione sul rumore bianco
+	- il rumore bianco in realtà ha una densita PSD...
+	- il canale additive white gaussian noise
+		- il canale base s(t) di solito in output ha del rumore n(t)
+- file numero 2
+- ricevitore broadcast di radio fm a 92.4
+	- ha anche un gain che aumenta 
+		- sia potenza che rumore di ricezione
+	- con 2 analizzatori di spettro
+		- il primo
+			- 
+		- il secondo
+			- ci fa vedere lo spettro dopo la modulazione
+	- un demodulatore
+		- modula la frequenza della nostra portante a seconda dello speaker
+	- ho un filtro che ci dai l focus sulla banda da osservare
+		- sottocampiono
+	- e trasmetto
+- analisi del segnale della trasmissione prima della centratura
+	- tono pilota, per la sincronizzazione
+	- audio mono audio stereo 
+	- RBDS dati come nome o altro
+- applicato ad RTL abbiamo... 
+	- screen che manca
+- ogni radio trasmette alla sua frequenza
+	- questo si dice frequency division multiple access
+	- tra una stazione e un'altra c'è una guard band che identifica l'intervallo tra una trasmissione e un'altra
+	- se nessuno trasmette abbiamo un rumore detto noise floor
+- psig/pnoise=snr
+- misuro la banda vedendo la frequenza sull'asse delle x
+	- vado a prendere dove inizia il segnale più alto del rumore
+	- vedo dove finisce il segnale del noise floor 
+	- e così ho trovato la banda
+- per il momento stiamo usando il canale vecchio
+	- nelle impostazioni possiamo definire l'inizio e la fine le frequenze
+	- in frequency scan
+	- in estimation possiamo applicare un metodo di media
+	- esponenziale
+		- mettendolo a 1
+		- non vedrò una fotografia del segnale ma avrò una media sulla somma delle misure applicando un algoritmo esponenziale credo
+- andiamo a misurare un certo canale mettiamo start and stop frequency con start frequency e stop frequeny
+	- inizialmente avevo messo 1000000 e -1000000
+	- solo che non riusciva a misurare
+	- ora ho messo uno zero in meno
+	- e riesce a misurare adeguatamente le cose
+- differenza tra primo e secondo 
+##### Proviamo a connetterci a un segnale trasmesso dalla prof
+- come lo trasmette
+- la linea a 0 è solo una limitazione hardware
+- quindi le domande sono 
+	- banda:
+	- le due frequenze centrali:
+	- snr é già in scala logaritmica quindi in dbm
+		- facciamo la sottrazione tra le due potenzei n dbm
+		- facendo received signal power e noise power la formula normale del SNR
+		- quindi nel nostro caso dati alla mano abbiamo
+	- abbiamo misurato il dbm value prendendo un range con una frequenza con rumore basso
+		- il floor di rumore
+- è stato aggiunto del rumore alla stessa frequenza centrale da un attaccante
+	- ma è presente un picco a 30
+	- cattura 10
+- una gaussiana è composta da media e varianza
+	- più ho rumore potente più sto alzando il noise floor
+	- facendo averaging dovrei vedere meglio i picchi
+- il nuovo noise floor ora è cattura 11
+- qualcuno sta aumentando il noise floor nella zona di interesse
+- un jammer esperto non aumenta il rumore così tanto nella zona di interesse
+- mette rumore solo attorno al pilota, così distrugge la sincronizzazione
+	- attaccando il segnale di sincronizzazione
+	- si dice selective jammer
+- così non si fa sgamare
+	- rompo una sorta di preambolo
