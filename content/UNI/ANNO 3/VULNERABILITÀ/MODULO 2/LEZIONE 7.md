@@ -223,7 +223,6 @@ cerco nell'URL input dei parametri dell'utente e provo a fare LFI
 	- la più stabile credo sia la `proc_open`
 	- gli altri eseguono il comando nel web server e il processo shell muore subito
 	- così apre il nuovo processo
-
 - cosa fare se non si ha file upload?
 	- esistono access.log o file-generico.log
 		- I file di log servono a registrare gli eventi del server. 

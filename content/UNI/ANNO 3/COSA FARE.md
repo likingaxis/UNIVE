@@ -1,4 +1,4 @@
-- Programmazione Web esercizi 
+- Programmazione Web esercizi  e lezione
 - big d finire algoritmi IMPORTANTE
 - eserciziario vulnerabilità da finire IMPORTANTE
 - information retrieval vedere codici python IMPORTANTE
