@@ -249,6 +249,8 @@ di solito usato con anche
 			- `r` = read, `w` = write, `x` = execute
 			- SUID: il file viene eseguito con l’effective `uid` del proprietario
 			- SGID: simile al SUID ma riguarda il gruppo
+	- better shell
+		- `python3 -c 'import pty; pty.spawn("/bin/bash")'`
 	- Privesc vera e propria
 		- switch user `su nomeutente`
 			- cambia utente, serve la password di quell’utente
@@ -271,6 +273,9 @@ di solito usato con anche
 			- aggiunge permesso di lettura
 		- `chmod 777 file.txt`
 			- dà lettura, scrittura ed esecuzione a tutti
+###### Path hijacking
+`export PATH=/tmp:$PATH`
+
 ###### Aggiungere un utente
 - `openssl passwd -6 password123`
 	- crea l’hash della password
@@ -305,7 +310,6 @@ di solito usato con anche
 - `curl -v -X TRACE http://192.168.14.99:8080`
     - prova il metodo HTTP `TRACE`
     - `-v` mostra dettagli della richiesta/risposta
-    - se TRACE è attivo può essere una configurazione insicura
 - `nc 192.168.14.115 9007`
     - si connette alla porta `9007` con netcat
     - utile per banner grabbing, servizi custom o challenge testuali
@@ -348,6 +352,7 @@ cartelle utilissime per trovare cose nascoste o altro
 - trovare i virtual host che nascondono gli host che hanno 4829 linee
 	- `wfuzz -w ./subdomains-top1million-5000.txt -u http://192.168.14.132 -H "HOST: FUZZ.cloud.vdsi" --hh 4829`
 		- `gobuster vhost -u http://vdsi-services.xyz/ -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt`
+		- `-k` per ignorare
 - trovare i web content delle cartelle
 	- `gobuster dir -u http://cloud.vdsi --proxy http://127.0.0.1:8080 -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt --exclude-length 4829`
 	- `gobuster dir -u http://admin.cloud.vdsi  -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt --exclude-length 0 -x php`
