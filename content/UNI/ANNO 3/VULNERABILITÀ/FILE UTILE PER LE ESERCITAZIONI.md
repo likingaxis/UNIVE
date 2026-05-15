@@ -216,6 +216,8 @@ di solito usato con anche
 			- controlla eventuali cronjob degli utenti
 		- `find / -perm -u=s -type f 2>/dev/null`
 			- cerca tutti i file con bit SUID attivo nel sistema
+		- `find / -user muntrea-sysadmin 2>/dev/null`
+			- trova i file di quell'utente
 		- `find / -type f \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2>/dev/null`
 			- cerca file con SUID o SGID attivo
 		- `find / -group nomegruppo 2>/dev/null`

