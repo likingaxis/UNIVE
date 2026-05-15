@@ -143,4 +143,48 @@ Se scelgo $\sqrt{N}$​ leader, ottengo grosso modo $\sqrt{N}$​ gruppi, ciascu
 - se una regione dello spazio vettoriale contiene molti documenti, è probabile che il campionamento casuale selezioni più leader proprio in quella zona, producendo una partizione più fine dove la densità dei documenti è più alta
 ![[Pasted image 20260513194816.png|362]]
 
-FINO ALLA SLIDE 30
+#### Tiered Indexes
+- Cosa fare se abbiamo un insieme A (lista di documenti autoritativi) troppo piccolo? in una certa posting list
+	- posso creare una stratificazione di A magari di serie A o serie B
+- Esempio a slide 34
+	- prendo il tier 1
+	- se qualche termine non ha sufficienti documenti nel tier 1
+	- analizzo anche la tier 2 e prendo quel numero di documenti
+- la creazione di tier è demandato all'uso di g(d) come unità di misura
+##### Presenta problematiche
+vogliamo calcolare score solo per documenti con w_t,d abbastanza grande
+- la weighted term frequecy quella con il log
+- ordinare le posting list basandosi su wf
+###### Early elimination
+- prendo r docs
+###### Ordino i termini per idf
+- vado a vedere i documenti più speranzosi
+	- quelli che possono essere più informativi
+
+- in generale cerco di massimizzare la recall 
+#### Safe vs non safe ranking
+- vogliamo avere un metodo che però sia safe
+- safe nel senso che ti ritrova un sottoinsieme con i top ma poi vanno comunque calcolati
+###### Upper bounds
+- l'obiettivo è capire se più avanti scorrendo la singola posting list ci sono candidati buoni o se smettono di esserlo
+	- metto una sorta di variabile associata ad ogni documento della posting detta finger
+	- che mi dice quale sarà il massimo dei successivi
+	- precalcolato
+- le posting list sono ordinate dentro? per wf?
+- Pivoting
+	- in un punto a caso vado a fare la somma dei contributi 
+	- scorro le posting una ad una e cerco lo scenario migliore
+	- perchè il primo catcher si ferma a 273
+	- l'algoritmo ipotizza i docid successivi elle precedenti posting list
+	- si ferma quando superi la treshold, non deve essere troppo aggressiva
+	- migliora la slide 45 e 46
+- più vado a destra più UB diminuisce?
+###### Scoring wand
+- sfrutta il concetto di upper bounds e pivoting
+- Vede un Document at a time DAAT scoring
+- tagliamo tutti i documenti con cosine similarity(o BM25) sotto una certa soglia
+	- basta che sia additivo
+- prendiamo i primi 1000 documenti senza ordine ma so che sono i primi 1000
+- questo algoritmo riduce +90% delle computazioni su una certa query
+	- funziona bene su query composte da più termini
+- sempre meglio di fare l'OR
