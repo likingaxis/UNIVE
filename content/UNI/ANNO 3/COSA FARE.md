@@ -4,5 +4,7 @@
 	- weekend
 - information retrieval vedere codici python IMPORTANTE
 	- weekend
+- information retrieval vedere ultima lezione IMPORTANTE
+	- weekend
 - tesi
 	- weekend
