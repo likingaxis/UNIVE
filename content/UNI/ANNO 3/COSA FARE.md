@@ -2,8 +2,6 @@
 	- oggi
 - big d finire algoritmi IMPORTANTE
 	- weekend
-- laboratorio vulnerabilità IMPORTANTE
-	- weekend
 - information retrieval vedere codici python IMPORTANTE
 	- weekend
 - tesi
