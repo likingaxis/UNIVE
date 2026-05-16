@@ -15,8 +15,7 @@ $$r(t) = s(t) + n(t)$$
 
 >[!attention] all'aumentare della potenza del rumore aumenta anche il livello medio dello spettro ovvero il cosiddetto noise floor
 
-
-- qui possiamo vedere un esempio tangibile di noise floor e di misurazione di quest'ultimo
+- oggi possiamo vedere un esempio tangibile di noise floor e di misurazione di quest'ultimo
 
 ##### Modello Simulink più avanzato
 A lezione è stato introdotto un modello Simulink più complesso in grado di ricevere il vero e proprio segnale FM sempre sfruttando la RTL-SDR
@@ -42,7 +41,6 @@ quest'ultimo non è stato utilizzato ai fini del laboratorio ma solo con lo scop
 	- l’uscita audio
 - applicato ad RTL abbiamo... 
 	- screen che manca di come si vede il tutto
-
 ##### Il Channel measurements e Occupied Bandwidth
 - lo spectrum Analyzer ha uno strumento che ci permette di calcolare automaticamente alcune misure utili di un certo canale, questo strumento si chiama Channel Measurements
 ![[2026-05-1410-13-46-ezgif.com-crop.gif|657]]
@@ -52,6 +50,7 @@ quest'ultimo non è stato utilizzato ai fini del laboratorio ma solo con lo scop
 ##### Misurazioni del segnale trasmesso dall'insegnante
 - abbiamo ricevuto del segnale trasmesso dal dispositivo USRP B210
 - il segnale inizialmente si presentava in questo modo e vedeva dei picchi misurati adeguatamente sempre grazie agli strumenti forniti da spectrum analyzer
+![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 8.PNG|498]]
 le misure effettuate sono state le seguenti:
 - misurare le distanze dello spettro del primo e secondo picco e anche l'altezza massima dei due
 - il noise floor
