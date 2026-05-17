@@ -8,4 +8,9 @@
 | PROGRAMMAZIONE WEB       | ✅                     |                   |
 | INFORMATION RETRIEVAL    | ✅                     |                   |
 | CALCOLO                  |                       | ✅                 |
-DAMMI LA PAZIENZA 
+DAMMI LA PAZIENZA
+- giugno information retrieval
+- giugno vulnerabilità
+- giugno programmazione web
+- 2 luglio geometria
+- 7 luglio big data
