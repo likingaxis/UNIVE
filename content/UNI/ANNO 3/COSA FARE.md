@@ -4,7 +4,5 @@
 	- weekend
 - information retrieval vedere ultima lezione IMPORTANTE
 	- weekend
-- vulnerabilità
-	- lunedì scrivi a Danilo per la macchina
 - tesi
 	- weekend
