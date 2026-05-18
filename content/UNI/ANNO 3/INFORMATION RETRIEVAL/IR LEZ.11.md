@@ -144,47 +144,93 @@ Se scelgo $\sqrt{N}$​ leader, ottengo grosso modo $\sqrt{N}$​ gruppi, ciascu
 ![[Pasted image 20260513194816.png|362]]
 
 #### Tiered Indexes
-- Cosa fare se abbiamo un insieme A (lista di documenti autoritativi) troppo piccolo? in una certa posting list
-	- posso creare una stratificazione di A magari di serie A o serie B
-- Esempio a slide 34
-	- prendo il tier 1
-	- se qualche termine non ha sufficienti documenti nel tier 1
-	- analizzo anche la tier 2 e prendo quel numero di documenti
-- la creazione di tier è demandato all'uso di g(d) come unità di misura
-##### Presenta problematiche
-vogliamo calcolare score solo per documenti con w_t,d abbastanza grande
-- la weighted term frequecy quella con il log
-- ordinare le posting list basandosi su wf
-###### Early elimination
-- prendo r docs
-###### Ordino i termini per idf
-- vado a vedere i documenti più speranzosi
-	- quelli che possono essere più informativi
+- Se restringiamo troppo l’insieme dei documenti candidati $A$, potremmo ottenere meno di $K$ documenti da restituire
+Per risolvere questo problema si può organizzare l’indice in più livelli, detti **tiers**. L’idea è creare una stratificazione delle posting list:
+- nel **tier 1** mettiamo i documenti più promettenti;
+- nel **tier 2** mettiamo documenti meno forti, ma comunque potenzialmente utili;
+- nei tier successivi mettiamo documenti via via meno importanti.
+![[Pasted image 20260518121617.png|462]]
+- prendo il tier 1
+- se qualche termine non ha sufficienti documenti nel tier 1
+- analizzo anche la tier 2 e prendo quel numero di documenti
+-  questa importanza può essere determinata da $g(d)$, dal peso del termine nel documento o da un’altra misura utile al ranking
+Quindi il sistema non parte subito dall'intera posting list, ma prova prima a lavorare sulla parte più importante dell’indice. Solo se questa parte non è sufficiente, amplia la ricerca
+##### impact ordered posting
+- non vogliamo calcolare gli score per tutti i documenti, ma solo per quelli in cui un termine ha un peso abbastanza grande
+- sfruttare la weighted term frequency
+$$wf_{t,d} = 1 + \log(tf_{t,d})$$
 
-- in generale cerco di massimizzare la recall 
+$tf_{t,d} > 0$
+- ordiniamo le posting basandoci su questo $wf_{t,d}$
+Questa scelta ha un vantaggio: i documenti più promettenti per quel termine vengono analizzati prima. 
+- Però ha anche una conseguenza importante: le posting list non condividono più un ordinamento comune. Ogni termine ha un proprio ordinamento, perché il peso $wf_{t,d}$​ cambia da termine a termine
+	- non è più possibile attraversare tutte le posting list in parallelo
+	- si passa ad un approccio term-at-a-time
+	- si processa un termine alla volta e si accumulano progressivamente i punteggi dei documenti
+###### Early termination
+- prima tecnica collegata all'impact ordered posting
+- Con l’early termination si attraversa solo un prefisso della posting list ordinata per impatto, fermandosi dopo $r$ documenti o quando il peso del termine diventa troppo basso
+Questa è una tecnica efficiente, ma generalmente **non-safe**, perché un documento ignorato potrebbe comunque ottenere un buon punteggio
+###### Ordino le posting dei termini per idf
+analizzare prima i termini con idf più alto: sono quelli che probabilmente contribuiscono di più allo score finale e permettono di individuare prima i documenti più promettenti
+- idf: Termini rari in tutta la collezione hanno idf alto ovvero più informativi
+processando prima i termini con idf più alto, il sistema concentra il calcolo sui documenti più promettenti, cioè quelli associati ai termini più informativi della query
+- L’obiettivo è ridurre il costo computazionale mantenendo una recall sufficientemente alta, cioè cercando di non eliminare troppi documenti che potrebbero essere rilevanti
+- la **recall** dipende dai **falsi negativi**
+###### Compromesso
+Quindi il compromesso è:
+- più pruning → meno costo computazionale
+- più pruning → maggiore rischio di perdere documenti rilevanti
+- meno pruning → più garanzie di qualità, ma costo maggiore
 #### Safe vs non safe ranking
-- vogliamo avere un metodo che però sia safe
-- safe nel senso che ti ritrova un sottoinsieme con i top ma poi vanno comunque calcolati
-###### Upper bounds
-- l'obiettivo è capire se più avanti scorrendo la singola posting list ci sono candidati buoni o se smettono di esserlo
-	- metto una sorta di variabile associata ad ogni documento della posting detta finger
-	- che mi dice quale sarà il massimo dei successivi
-	- precalcolato
-- le posting list sono ordinate dentro? per wf?
-- Pivoting
-	- in un punto a caso vado a fare la somma dei contributi 
-	- scorro le posting una ad una e cerco lo scenario migliore
-	- perchè il primo catcher si ferma a 273
-	- l'algoritmo ipotizza i docid successivi elle precedenti posting list
-	- si ferma quando superi la treshold, non deve essere troppo aggressiva
-	- migliora la slide 45 e 46
-- più vado a destra più UB diminuisce?
-###### Scoring wand
-- sfrutta il concetto di upper bounds e pivoting
-- Vede un Document at a time DAAT scoring
-- tagliamo tutti i documenti con cosine similarity(o BM25) sotto una certa soglia
-	- basta che sia additivo
-- prendiamo i primi 1000 documenti senza ordine ma so che sono i primi 1000
-- questo algoritmo riduce +90% delle computazioni su una certa query
-	- funziona bene su query composte da più termini
-- sempre meglio di fare l'OR
+- vogliamo ridurre il numero di documenti da valutare completamente, ma mantenendo la garanzia di ottenere davvero i top $K$
+- un metodo safe non trova semplicemente “un sottoinsieme con i top”; trova un modo per scartare documenti solo quando è garantito che non possano superare la soglia della top $K$. Gli score completi vengono calcolati solo per i documenti non scartati
+##### Scoring Wand
+- con la tecnica Scoring Wand il sistema ragiona sui documenti uno alla volta, provando a capire se un certo documento può avere uno score abbastanza alto da meritare il calcolo completo
+- per evitare calcoli inutili e rimanere safe scartando i documenti che con una garanzia matematica non possono rientrare nella top $K$ fa questo:
+	- mantengo una soglia corrente, cioè lo score del $K$-esimo miglior documento trovato finora
+	- per ogni nuovo documento candidato, calcolo un limite superiore massimo teorico del punteggio che potrebbe ottenere
+	- se anche nel caso migliore quel documento non può superare la soglia, lo scarto
+	- se invece potrebbe superarla, allora calcolo il suo score completo
+nel WAND, le posting list devono essere attraversabili in ordine crescente di docID, perché l’algoritmo usa i docID correnti dei vari termini per decidere quali documenti possono essere saltati
+- si assume che esista un iteratore speciale capace di saltare al primo docID maggiore o uguale a un certo valore $X$
+###### Finger e upper bound
+Per ogni termine della query, l’algoritmo mantiene un puntatore, chiamato nelle slide **finger**, dentro la posting list di quel termine
+- il finger punta al successivo docID di quella posting list che deve ancora essere processato
+	- tutti i precedenti sono stati processati oppure scartati
+- per ogni termine t WAND mantiene anche un limite superiore detto $UB_t$ che rappresenta quanto al massimo può contribuire quel termine allo score di un determinato documento ancora non processato nella sua posting list a destra del finger
+![[Pasted image 20260518131636.png|600]]
+$UB_t$ è calcolato sui documenti ancora rimanenti nella posting list. 
+Se procedo verso destra, sto eliminando dalla parte “ancora possibile” alcuni documenti. Il massimo tra i documenti rimanenti non può aumentare: può restare uguale o diminuire
+$$UB_t = \max score_t(d)$$
+###### Threshold e Pivoting
+WAND mantiene anche una **threshold**, cioè una *soglia* corrente. Questa soglia corrisponde allo score del $K$-esimo miglior documento trovato finora
+- se ho per ora selezionato 100 documenti, il successivo deve superare la threshold del 100esimo documento scelto
+- dove il 100esimo è quello con score peggiore
+Il **pivoting** è il meccanismo con cui WAND decide quali documenti possono essere scartati e su quale documento eventualmente calcolare lo score completo
+- si ordinano i termini della query in base al docID attualmente puntato dai loro finger
+- si sommano progressivamente gli upper bound dei termini in questo ordine
+- ci si ferma quando la somma degli upper bound supera la threshold
+- il docID del termine in cui ci si ferma diventa il **pivot**
+fino a quel pivot, la somma massima teorica dei contributi diventa finalmente abbastanza alta da poter superare la soglia. Prima del pivot, invece, i documenti non hanno speranza di raggiungere la threshold **(hopeless)**
+###### Esempio per capire UB
+![[Pasted image 20260518134439.png|359]]
+- andando avanti di finger al documento 589 $UB$ sarà uguale a 1.7
+- andando verso destra nella posting list, UB può solo diminuire
+###### Esempio completo con più documenti
+![[Pasted image 20260518134841.png|391]]
+![[Pasted image 20260518134826.png|484]]
+
+Lo score reale di un documento viene calcolato combinando i contributi di tutti i termini della query presenti nel documento (ad esempio tramite cosine similarity o BM25).  
+Questo calcolo può essere costoso, soprattutto quando i documenti candidati sono moltissimi.
+Per questo WAND usa gli **upper bound (UB)**: invece di calcolare subito lo score completo, il sistema mantiene per ogni termine una stima del massimo contributo che quel termine può ancora dare ai documenti non processati.
+Sommando gli upper bound dei termini della query, il sistema ottiene un massimo score teorico possibile.  
+Se anche questo massimo teorico non supera la threshold corrente della top $K$, allora non vale la pena calcolare lo score completo del documento, che può essere scartato in modo safe.
+Gli upper bound servono quindi a evitare moltissimi calcoli completi inutili
+
+###### SAFENESS DI WAND
+WAND è safe perché non elimina documenti “a intuito”. Elimina un documento solo quando la somma massima possibile dei contributi dei termini non può superare la threshold
+significa che anche nel migliore scenario possibile non potrebbe entrare nella top $K$
+- WAND non è specifico della cosine similarity. Può funzionare anche con BM25 o altre funzioni, purché lo score sia **additivo per termine**
+- nei test, WAND può portare a una riduzione superiore al **90%** nel numero di score computation. Inoltre, i guadagni sono migliori per query più lunghe, perché con più termini ci sono più upper bound e più possibilità di dimostrare che certi documenti non possono superare la soglia
+- WAND è più efficiente di una valutazione OR esaustiva delle posting list, perché evita di calcolare lo score completo per molti documenti che, pur contenendo termini della query, non possono entrare nella top $K$
