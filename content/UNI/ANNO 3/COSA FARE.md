@@ -1,4 +1,4 @@
-- Programmazione Web esercizi e lezione
+- Programmazione Web esercizi
 	- oggi
 - big d finire algoritmi IMPORTANTE
 	- weekend
