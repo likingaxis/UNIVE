@@ -348,18 +348,195 @@
 > ```
 
 ##### Esercizio 12
-Associamo una funzione js quando si clikka un div  – presentiamo un “alert” all’utente
-
+>[!FAQ]- Associamo una funzione js quando si clikka un div  poi presentiamo un “alert” all’utente
+>
+> ```html
+> <!DOCTYPE html>
+> 
+> <html lang="en">
+> 
+> <head>
+> 
+>     <meta charset="UTF-8">
+> 
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+> 
+>     <title>Document</title>
+> 
+>     <script src="script.js" defer></script>
+> 
+> </head>
+> 
+> <body>
+> 
+>     <div id="myDiv">click me</div>
+> 
+> </body>
+> 
+> </html>
+> ```
+> 
+> ```Javascript
+> const div=document.getElementById("myDiv");
+> div.addEventListener("click",()=>alert("ciao"));
+> ```
+> 
 ##### Esercizio 13
-Prendere esercizio precedente e spostare  dinamicamente il div ogni X secondi  • Ogni volta che si sposta, cambiare il colore del  background e del div da bianco a nero e viceversa
-
+>[!FAQ]- Prendere esercizio precedente e spostare  dinamicamente il div ogni X secondi  
+> • Ogni volta che si sposta, cambiare il colore del  background e del div da bianco a nero e viceversa
+>
+> 
+> ```html
+> <!DOCTYPE html>
+> 
+> <html lang="en">
+> 
+> <head>
+> 
+>     <meta charset="UTF-8">
+> 
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+> 
+>     <title>Document</title>
+> 
+>     <script src="script.js" defer></script>
+> 
+>     <style>
+> 
+>         #myDiv{
+> 
+>             width: 100px;
+> 
+>             height: 50px;
+> 
+>             position:absolute;
+> 
+>         }
+> 
+>     </style>
+> 
+> </head>
+> 
+> <body>
+> 
+>     <div id="myDiv">click me</div>
+> 
+> </body>
+> 
+> </html>
+> ```
+> 
+> 
+> ```Javascript
+> const div=document.getElementById("myDiv");
+> 
+> div.addEventListener("click",()=>alert("ciao"));
+> 
+> let bool=true
+> 
+> function funzione()
+> 
+> {
+> 
+>     div.style.marginTop=300*Math.random()+"px";
+> 
+>     div.style.marginLeft=600*Math.random()+"px";
+> 
+>     if(bool){
+> 
+>         div.style.backgroundColor="white";  
+> 
+>         document.body.style.backgroundColor="black";
+> 
+>         bool=false;
+> 
+>     }
+> 
+>     else{
+> 
+>         div.style.color="black";  
+> 
+>         document.body.style.backgroundColor="white";
+> 
+>         bool=true;
+> 
+>     }
+> 
+> }
+> 
+> setInterval(funzione,1000);
+> ```
 ##### Esercizio 14
-Aggiungere dinamicamente un elemento a una lista
-
+>[!FAQ]- Aggiungere dinamicamente un elemento a una lista
+> ```html
+> <!DOCTYPE html>
+> 
+> <html lang="en">
+> 
+> <head>
+> 
+>     <meta charset="UTF-8">
+> 
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+> 
+>     <title>Document</title>
+> 
+>     <script defer src="script.js"> </script>
+> 
+> </head>
+> 
+> <body>
+> 
+>     <h3>lista della spesa</h3>
+> 
+>     <ul id="listaspesa">
+> 
+>         <li>cacao</li>  
+> 
+>         <li>peffozza</li>
+> 
+>         <li>sivallets</li>
+> 
+>     </ul>
+> 
+>     <button id="aggiungi">aggiungi nuovo li</button>
+> 
+> </body>
+> 
+> </html>
+> ```
+> 
+> ```Javascript
+> function aggiungi()
+> 
+> {
+> 
+>     let newli=document.createElement("li");
+> 
+>     let testo=prompt("scrivi cosa vuoi aggiungere")
+> 
+>     let text=document.createTextNode(testo);
+> 
+>     newli.appendChild(text);
+> 
+>     document.getElementById("listaspesa").appendChild(newli);
+> 
+>   
+> 
+> }
+> 
+>   
+>   
+> 
+> document.getElementById("aggiungi").addEventListener("click",aggiungi);
+> ```
 ##### Esercizio 15
 Creare un json con la lista degli esami svolti • Visualizzarlo i dati in una pagina con una tabella
 
 ##### Esercizio 16
-Costruisce una promise che si risolve dopo 5 secondi. – Il valore della promessa dovrebbe essere: "la mia prima promise è stata un successo!".
+>[!FAQ]-  Costruisce una promise che si risolve dopo 5 secondi. 
+> – Il valore della promessa dovrebbe essere: "la mia prima promise è stata un successo!".
+
+
 
 Esercizi vari alle ultime slide con una sorta di quiz
