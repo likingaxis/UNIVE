@@ -149,3 +149,4 @@ poi ho anche
 filtro usato frame contains "test"
 
 ##### SIM_STNDB: Antivirus Sicuro
+application/x-msdownload
