@@ -1,5 +1,3 @@
-- Programmazione Web esercizi
-	- oggi
 - big d finire algoritmi IMPORTANTE
 	- weekend
 - information retrieval vedere codici python IMPORTANTE

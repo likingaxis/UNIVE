@@ -535,8 +535,28 @@ Creare un json con la lista degli esami svolti • Visualizzarlo i dati in una p
 
 ##### Esercizio 16
 >[!FAQ]-  Costruisce una promise che si risolve dopo 5 secondi. 
-> – Il valore della promessa dovrebbe essere: "la mia prima promise è stata un successo!".
-
-
+> – Il valore della promessa dovrebbe essere: "la mia prima promise è stata un successo!" su console
+>
+> const promise=new Promise(function(resolve,reject)
+> 
+>     {
+> 
+>         setTimeout(function()
+> 
+>         {resolve("la mia prima promise è stata un successo!")},5000);
+> 
+>     }
+> 
+> );
+> 
+> promise.then(function(messaggio)
+> 
+>     {
+> 
+>         console.log(messaggio);
+> 
+>     }
+> 
+> );
 
 Esercizi vari alle ultime slide con una sorta di quiz

@@ -968,6 +968,7 @@ new Promise(function (resolve, reject) {
 	- *pending*, in attesa di essere risolta
 	- *fulfilled*, completata con resolve
 	- *rejected*, fallita con reject
+- quella function è anonima e viene eseguita appena la promise viene istanziata
 ![[Pasted image 20260517184004.png|528]]
 Un esempio
 ```Javascript
@@ -1004,6 +1005,7 @@ promise.then(
 ```
 Dopo 2 secondi viene chiamato `resolve('Dati ricevuti dal server')`.
 A quel punto viene eseguita la prima funzione passata a `.then()`, che riceve come parametro il valore passato a `resolve`
+qui con then dichiaro delle funzioni anonime di tipo arrow
 
 
 >[!attention]
