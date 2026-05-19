@@ -4,5 +4,7 @@
 	- weekend
 - information retrieval vedere ultima lezione IMPORTANTE
 	- weekend
+- vulnerabilità fai il laboratorio
+	- rispondi alle domande
 - tesi
 	- weekend
