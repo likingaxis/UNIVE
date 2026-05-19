@@ -55,18 +55,18 @@ $$\vec{\mu}(D) = \frac{1}{|D|} \sum_{d \in D} \vec{v}(d)$$
 - $D$ è un insieme di documenti
 - $\vec{v}(d)$ è il vettore che rappresenta il documento $d$
 - la somma dei vettori viene divisa per il numero di documenti, quindi si ottiene una media
-
 ##### Query ottima
 In un caso ideale, potremmo immaginare di conoscere:
-- $C_r$: l’insieme di **tutti** i documenti rilevanti nella collezione;
-- $C_{nr}$​: l’insieme di **tutti** i documenti non rilevanti nella collezione.
+- $C_r$: l’insieme di **tutti** i documenti rilevanti nella collezione
+- $C_{nr}$​: l’insieme di **tutti** i documenti non rilevanti nella collezione
 Se conoscessimo davvero questi due insiemi, potremmo costruire una **query ottima**, cioè una query che separa il più possibile i documenti rilevanti da quelli non rilevanti
 L’obiettivo è trovare un vettore query $\vec{q}$​ che massimizzi la similarità con i documenti rilevanti e minimizzi la similarità con quelli non rilevanti:
 $$S(\vec{q}, C_r, C_{nr}) = s(\vec{q}, \vec{\mu}(C_r)) - s(\vec{q}, \vec{\mu}(C_{nr}))$$
-- $s$ è una misura di similarità;
-- $\vec{\mu}(C_r)$ è il centroide dei documenti rilevanti;
-- $\vec{\mu}(C_{nr})$ è il centroide dei documenti non rilevanti.
-- vogliamo una query molto simile al centro dei documenti rilevanti e poco simile al centro dei documenti non rilevanti.
+- $s$ è una misura di similarità
+- $\vec{\mu}(C_r)$ è il centroide dei documenti rilevanti
+- $\vec{\mu}(C_{nr})$ è il centroide dei documenti non rilevanti
+- vogliamo una query molto simile al centro dei documenti rilevanti e poco simile al centro dei documenti non rilevanti
+- q è uguale per entrambi quindi la porto fuori e rimangono $\mu$
 Con la **cosine similarity**, questa idea porta alla seguente forma della query ottima:
 $$\vec{q}_{opt} = \vec{\mu}(C_r) - \vec{\mu}(C_{nr})$$
 cioè:
@@ -74,12 +74,14 @@ $$\vec{q}_{opt} = \frac{1}{|C_r|} \sum_{\vec{d}_j \in C_r} \vec{d}_j - \frac{1}{
 
 Questa formula significa che la query ottima è la **differenza tra il centroide dei documenti rilevanti e il centroide dei documenti non rilevanti**
 - da qui nasce l'idea di rocchio
-	- non usiamo tutti i documenti rilevanti e non rilevanti, perché non li conosciamo; usiamo solo quelli che l’utente ha giudicato durante il feedback
+	- non usiamo tutti i documenti rilevanti e non rilevanti, perché non li conosciamo
+	- usiamo solo quelli che l’utente ha giudicato durante il feedback
 - non sappiamo in anticipo quali siano **tutti** i documenti rilevanti e **tutti** quelli non rilevanti della collezione
+![[Pasted image 20260519160332.png|496]]
 ##### Rocchio Algorithm
 L’algoritmo di **Rocchio** approssima la query ottima usando le informazioni disponibili dopo il *relevance feedback*
-- ​$q_0$​: la query originale;
-- $D_r$​: l’insieme dei documenti giudicati rilevanti dall’utente;
+- ​$q_0$​: la query originale
+- $D_r$​: l’insieme dei documenti giudicati rilevanti dall’utente
 - $D_{nr}$​: l’insieme dei documenti giudicati non rilevanti dall’utente
 Allora Rocchio costruisce una nuova query modificata
 $$\vec{q}_m = \alpha \vec{q}_0 + \beta \frac{1}{|D_r|} \sum_{\vec{d}_j \in D_r} \vec{d}_j - \gamma \frac{1}{|D_{nr}|} \sum_{\vec{d}_j \in D_{nr}} \vec{d}$$Questa formula è una **combinazione lineare** di tre componenti:
@@ -89,39 +91,38 @@ $$\vec{q}_m = \alpha \vec{q}_0 + \beta \frac{1}{|D_r|} \sum_{\vec{d}_j \in D_r} 
 	- $\alpha$: quanto peso dare alla query iniziale
 	- $\beta$: quanto peso dare ai documenti rilevanti
 	- $\gamma$: quanto peso dare ai documenti non rilevanti
-Quindi Rocchio non sostituisce semplicemente la query con il centroide dei documenti rilevanti. La modifica in modo controllato, mantenendo una parte della query originale e aggiungendo l’informazione ottenuta dal feedback
+Quindi Rocchio non sostituisce semplicemente la query con il centroide dei documenti rilevanti.
+La modifica in modo controllato, mantenendo una parte della query originale e aggiungendo l’informazione ottenuta dal feedback
+Il libro osserva che il feedback positivo tende a essere più utile del feedback negativo, quindi molti sistemi usano $\gamma < \beta$. 
+Un esempio di valori ragionevoli riportato dal libro è:
+$\alpha = 1, \qquad \beta = 0.75, \qquad \gamma = 0.15$
+Questo riflette un comportamento conservativo: si mantiene la query originale, si dà un peso significativo ai documenti rilevanti e un peso più limitato a quelli non rilevanti
 
-- in un mondo geometrico posso assumere l'insieme di tutti e solo i documenti rilevanti dalla query e tutti e solo quelli non rilevanti
-	- potrei avere la query ottima
-	- data dalla formula della optimal query che massimizza S formula a slide 16
-	- al posto di includere il vettore query dentro lo tiro fuori e fare la differenza
-- non avrò sicuramente la certezza della rilevanza o meno, quindi la query ottima non si può fare
-	- posso però approssimare un sottoinsieme di documenti
-- per spostare il vettore query ai documenti più importanti e rilevanti
-	- posso spostare la query su quel punto centroide
-	- ma cerco di spostarmi in modo non eccessivo bensì a metà
-- faccio la combinazione lineare
-	- me lo lascio parametrico perchè
-	- non so se dare importanza alla query alla rilevanza o alla non rilevanza
-	- si consiglia sempre di essere conservativi e dare valori
-- in modo quasi virtuale aggiunge termini alla query, spostando la query in un altro punto
-	- Dnr sta per segnalati non rilevanti dopo un feedback
-- questo schema funziona bene anche per classificazione di machine learning applicando algoritmo k-nn
-- Non Automatizzazione del feedback
-	- faccio 2 assunzioni
-		- che l'utente sia molto consapevole della collezione
-		- che i documenti rilevanti contengono termini simili
-	- relevance feedback non è un bullseye
-###### Come automatizzare il feedback(Pseudo relevance feedback)
-- lo faccio di nascosto all'utente
-- assunzione
-	- il primo sistema di ad hoc retrieval non sia così male
-- i documenti meno rilevanti che appaiono in pagina 12213213312
-	- potrebbero contenere termini diversi
-		- li metto tipo al 4-5 posto per migliorare la recall
-	- i primi 1-3 saranno davvero i migliori recuperati
-	- questo viene detto query drift
-###### Migliorare la recall non con metodi locali
-- potrei usare metodi globali
-	- tipo una rete semantica
-	- 
+L’idea alla base di Rocchio è collegata alla visione geometrica usata anche in alcuni algoritmi di machine learning: documenti e query sono punti nello spazio, e la decisione dipende da vicinanza e distanza. Tuttavia Rocchio non coincide con k-NN: Rocchio usa centroidi e combinazioni lineari, mentre k-NN classifica in base ai vicini più prossimi
+##### Assunzioni al relevance feedback
+ci sono due assunzioni principali per il funzionamento del relevance feedback
+- l’utente riesca comunque a formulare una query iniziale abbastanza vicina al suo bisogno informativo. Se la query iniziale è completamente fuori strada, il sistema potrebbe non recuperare documenti utili su cui fare feedback
+- Se i documenti rilevanti hanno vocabolari molto diversi tra loro, il centroide può diventare poco rappresentativo. Per esempio, una query può avere più “prototipi” diversi di documenti rilevanti. In quel caso il feedback su un gruppo di documenti rilevanti può aiutare a trovare altri documenti simili a quel gruppo, ma non necessariamente documenti rilevanti appartenenti a un altro gruppo
+
+>[!info] Il relevance feedback non è un bullseye: non centra automaticamente il bisogno informativo dell’utente. È una tecnica di approssimazione che usa pochi giudizi di rilevanza per spostare la query in una direzione probabilmente migliore, ma il risultato dipende dalla qualità della query iniziale e dalla rappresentatività dei documenti giudicati
+
+
+##### Come automatizzare il feedback: pseudo-relevance feedback
+Nel pseudo-relevance feedback, questa fase viene automatizzata: il sistema non chiede nulla all'utente, ma assume direttamente che i primi documenti recuperati siano rilevanti
+La procedura è la seguente:
+1. l’utente inserisce una query;
+2. il sistema esegue una normale ricerca ad hoc;
+3. viene prodotto un primo ranking di documenti;
+4. il sistema assume che i primi $k$ documenti del ranking siano rilevanti;
+5. su questi documenti viene applicato un metodo di relevance feedback, per esempio Rocchio;
+6. la query viene riformulata automaticamente;
+7. il sistema riesegue la ricerca con la query modificata.
+Quindi la differenza principale rispetto al relevance feedback classico è che l’utente non marca manualmente i documenti. Il sistema prende i primi risultati e li tratta come se fossero stati giudicati rilevanti.
+###### Assunzioni dello pseudo relevance feedback migliorie e rischi
+- si vuole prima vedere una assunzione
+	- primo il sistema iniziale deve essere abbastanza buono da mettere almeno alcuni documenti realmente rilevanti nelle prime posizioni del ranking
+- cosa ottima: il sistema può migliorare la recall senza chiedere aiuto aggiuntivo all'utente
+	- Supponiamo che i primi documenti restituiti siano davvero pertinenti. Questi documenti possono contenere termini utili che non erano presenti nella query iniziale. Inserendo o pesando maggiormente quei termini nella query riformulata, il sistema può recuperare altri documenti rilevanti
+- rischio: query drift
+	- Il query drift si verifica quando la query riformulata si sposta progressivamente verso un significato diverso da quello cercato dall’utente
+	- Se tra i primi risultati ci sono documenti non rilevanti o solo parzialmente rilevanti, i termini contenuti in quei documenti possono contaminare la nuova query
