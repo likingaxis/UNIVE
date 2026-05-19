@@ -198,7 +198,7 @@ nel WAND, le posting list devono essere attraversabili in ordine crescente di do
 Per ogni termine della query, l’algoritmo mantiene un puntatore, chiamato nelle slide **finger**, dentro la posting list di quel termine
 - il finger punta al successivo docID di quella posting list che deve ancora essere processato
 	- tutti i precedenti sono stati processati oppure scartati
-- per ogni termine t WAND mantiene anche un limite superiore detto $UB_t$ che rappresenta quanto al massimo può contribuire quel termine allo score di un determinato documento ancora non processato nella sua posting list a destra del finger
+- per ogni termine $t$ WAND mantiene anche un limite superiore detto $UB_t$ che rappresenta quanto al massimo può contribuire quel termine allo score di un determinato documento ancora non processato nella sua posting list a destra del finger
 ![[Pasted image 20260518131636.png|600]]
 $UB_t$ è calcolato sui documenti ancora rimanenti nella posting list. 
 Se procedo verso destra, sto eliminando dalla parte “ancora possibile” alcuni documenti. Il massimo tra i documenti rimanenti non può aumentare: può restare uguale o diminuire
