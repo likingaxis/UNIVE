@@ -1,5 +1,5 @@
 #### VALUTAZIONE DEI SISTEMI
-- obiettivo: restituire all’utente qualcosa che lo soddisfi
+- obiettivo: restituire all'utente qualcosa che lo soddisfi
     - problema: la soddisfazione dell’utente è **qualcosa di soggettivo**
         - dipende dalla persona, dal contesto, dall’interfaccia, ecc.
     - quindi nasce una domanda:
