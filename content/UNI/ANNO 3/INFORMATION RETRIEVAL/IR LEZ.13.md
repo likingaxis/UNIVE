@@ -1,0 +1,79 @@
+- nella lezione precedente abbiamo visto come migliorare la recall
+- lezione di inciso tra quella precedente e le slide successive che mancavano
+### Latent Semantic Indexing
+- useremo tecniche di dimensionalità per trasformare una cosa sparsa in una cosa densa
+##### Piccolo ripassino di geometria
+- analisi spettrale con autovalori e autovettori
+	- idea che nasce dal fatto che una matrice può essere scomposta in un insieme di informazioni che ricomposte danno la matrice originale
+	- eigenvector eigenvalue
+	- ho un vettore che moltiplicato per una matrice che allungandolo porta alla matrice S per il vettore
+- quanti autovalori esistono
+	- devo trovare tutti gli autovettori per cui la semplificazione è nulla
+- possiamo trovare m di questi lambda, che hanno al più m soluzioni distinte
+	- m è il rango
+	- il vettore x può essere visto dalla combinazione lineare ...
+- proprietà:
+	- una matrice simmetrica è data da:
+		- i vettori di una matrice simmetrica sono ortogonali
+		- la matrice S t.c sottratta ai suoi autovalori per matrice identita uguale a 0 è uguale alla matrice trasposta avremo sempre vettori reali
+		- matrice normale x la matrice trasposta, infatti in retrieval la matrice non è simmetrica di base ma sarà utile applicare questa regola
+		- esempio a slide di applicazione di autovalori e trovare autovettori
+- $S*U=lambda*U$ che possiamo scrivere come
+- lambda è diagonale
+- preso lambda avremo quale vettore ha più contributo di un altro
+- decomposizione per lambda
+esempio di decomposizione e ricomposizione della matrice
+- dividere per radice di 2 ci porta ad avere una norma
+	- se normalizzo quella matrice la sua normalizzazione è uguale alla trasposta
+##### Applicazione di retrieval sfruttando queste nozioni algebriche
+- ho una matrice mxn A di rango r esiste sempre una fattorizzazione detta SVD che segue le seguenti caratteristiche
+	- U è mxm sigma è mxn V è nxn
+	- le colonne di U sono gli autovettori di $AA^T$ trasposto
+		- avrà la similarità di tutti i documenti
+	- le colonne di V sono gli autovettori di $A^TA$ 
+- illustrazione da spiegare
+- una volta che io li ho ordinati e prendo i primi tot, gli altri li pongo a 0, quando vado a moltiplicare per 0 avrò 0, quindi è come se non li avessi
+	- moltiplicare queli pero mi fa tornare la matrice originale
+- secondo la norma di frobenius quelli sono la somma minima per ottenere una controparte della matrice originale che però è la miglior approssimazione di quella
+- è detta PCA?
+- A che è la matrice densa e mediante SVD prendendo valori singolari che corrispondono a
+	- prendendone k posso andare a ottenere le 200 dimensioni che rappresentano U e le 800 righe che rappresentano V
+	- la rappresentazione è diventata densa ma ho compresso la mia matrice originale
+- per prendere una cella di k faccio la combinazione della cella ...
+- è la miglior approssimazione possibile
+- se abbiamo una matrice termini per documenti il rango di questa matrice sarà 500k 
+	- rango uguale degli autovalori nel nostro caso valori singolari
+##### Latent semantic analysis con SVD
+- come la ottengo? esistono degli incremental SVD, che ti permettono di trovare il primo valore singolare della matrice, in modo incrementale ne trovo k necessari di conseguenza i vettori
+	- esiste la libreria che la calcola
+- partiamo da una matrice termini documenti $A$ e computiamo una sua approssimazione $A_k$ 
+- i documenti non vivono più nello spazio originale ma nello spazio k che è molto più piccolo di r
+	- sono una rappresentazione diversa
+- Esempio
+	- A=UsigmaVtrasposto
+	- Usigma alla 1/2 sigma all 1/2 e vtrasposto
+	- lo faccio perchè sigma alla 1/2 è positivo
+	- li chiudo tra due parentesi tonde e ottengo per la prima i termini e la seconda i documenti
+		- foto lavagna
+	- prendiamo il vettore del termine laptop e lo moltiplichiamo per il vettore doc 3
+		- prodotto scalare se i due sono vicini allora quel termine è importante per quel documento, quindi il termine è più vicino
+- si sono accorti di una cosa
+	- la dimensione indica il macroargomento dei termini, una informazione latente da cui il nome latent semantyc indexing
+- avendo schiacciato le dimensioni avrò un contributo non nullo
+- questo è il primo ad avere la necessità di un vector db
+- se ho pianeta e saturno questi due termini avranno similità
+	- sigma alla -1 si preferisce scrivere come sigma alla -1/2 per sigma alla -1/2
+- q rappresenta un vettore
+- moltiplicato per U e sigma alla -1 
+- diventa uno strumento che rappresenta nello stesso spazio termini e documenti
+	- mi aiuta a sistemare la data sparsness
+- se avrò due termini nella query q come dog e friends avrò la combinazione lineare dei due elementi del vettore
+- possiamo fare query expansion con metodo globale
+- questa cosa ha un vantaggio enorme rispetto a wordnet
+	- è estremamente costoso
+- aiuta a migliorare la recall ma la precision insomma
+- fare query booleane no, non posso dire `fiat volswagen no ford`
+- usati per tecniche di reranking
+- full text search indice inverso con BM25
+- si catturano relazioni di secondo ordine
+- spesso si usa BERT al giorno d'oggi
