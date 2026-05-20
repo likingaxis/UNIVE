@@ -8,9 +8,9 @@ In questo laboratorio abbiamo utilizzato **MATLAB** per analizzare lo spettro ra
 
 ##### Configurazione Iniziale
 - La configurazione è avvenuta mediante un dispositivo WINDOWS
-- per poter comunicare con il nostro(in realtà è della professoressa) **RTL-SDR**
+- per poter comunicare con il dispositivo **RTL-SDR**
 	- sono stati installati dei driver mediante *Zadig*
-- successivamente abbiamo tramite **simulink** e **MATLAB**, che ora possono comunicare correttamente con il ricevitore, aperto un modello **simulink**
+- successivamente abbiamo tramite **Simulink** e **MATLAB**, che ora possono comunicare correttamente con il ricevitore, aperto un modello **Simulink**
 	- `spectrumAnalyzer_RTLSDR.slx`
 - sotto è possibile vedere una foto di come si presenta **MATLAB**, da qui è possibile importare dei progetti su 
 	- Open -> e si seleziona il nome del file
@@ -23,7 +23,7 @@ In questo laboratorio abbiamo utilizzato **MATLAB** per analizzare lo spettro ra
 	- un *blocco RTL-SDR* Receiver che serve proprio per ricevere il segnale radio
 		- l'input viene inviato in fc e l'output è Data
 	- lo *Spectrum Analyzer* per visualizzare l'effettivo spettro del segnale ricevuto
-		- il nostro Spectrum Analyzer mostra le frequenze relative infatti 91MHz lo avremo con le x a 0 
+		- il nostro Spectrum Analyzer mostra le frequenze relative infatti 91MHz lo avremo con le x a 0
 >[!attention] la frequenza centrale è in Hz ma dobbiamo convertirla in MHz quindi dobbiamo moltiplicare per $10^6$ aggiungendo $e6$
 
 >[!attention] fc sta per frequenza centrale, la frequenza attorno alla quale il nostro ricevitore si sintonizza per acquisire una determinata porzione di spettro(una certa banda di frequenza)
@@ -80,8 +80,6 @@ $$r(t) = s(t) + n(t)$$
 - $s(t)$ è il segnale trasmesso
 - $n(t)$ è il rumore aggiunto dal canale, segue una ampiezza con distribuzione gaussiana
 - $r(t)$ è il segnale ricevuto
->[!info] piccola parentesi sulle distribuzioni gaussiane
->aggiungi dopo
 
 >[!attention] all'aumentare della potenza del rumore aumenta anche il livello medio dello spettro ovvero il cosiddetto noise floor
 

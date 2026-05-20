@@ -5,7 +5,7 @@
 - information retrieval vedere ultima lezione IMPORTANTE
 	- giovedì
 - vulnerabilità scrivi laboratorio
-	- stasera
+	- weekend
 - web ipotetica lezione
 	- giovedì
 - tesi
