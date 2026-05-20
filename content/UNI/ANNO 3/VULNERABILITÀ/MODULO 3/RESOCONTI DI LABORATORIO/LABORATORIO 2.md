@@ -69,8 +69,11 @@ per rendere più chiara la visualizzazione ho messo uno stile stem per rappresen
 
 ###### Constellation Diagram
 ci permette di vedere i simboli ricevuti su un piano $I/Q$
-- sulle x ho la In-phase
-- sulle y ho la Quadratura(chiedi meglio domani alla prof cosa sono)
+- sulle x ho la In-phase amplitude
+- sulle y ho la Quadrature Amplitude
+>[!info] spiegazione fatta bene di in phase e quadrature amplitude
+
+
 - nel caso della BPSK avrò due punti della costellazione che si trovano una a sinistra e una a destra
 	- poi avrò i punti ricevuti che rappresentano il segnale e possono essere interpretati come bit
 	- se si trovano a sx posso vederli come 0 se si trovano a dx come 1
@@ -139,7 +142,7 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 > 		- dove $s(t)$ rappresenta il segnale nel tempo
 > - metodo 2
 > 	- uso uno strumento presente nei tools di misurazione del Time Scope
-> 	- prendo RMS con strumento di misurazione del time scope tools > measurements
+> 	- prendo RMS(Root Mean Square) con strumento di misurazione del time scope tools > measurements
 > 	- appare il valore del RMS 
 > 		- $P=RMS^2$ che è uguale proprio a 1
 > ![[Pasted image 20260520102209.png|280]]
