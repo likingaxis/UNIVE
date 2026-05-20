@@ -79,72 +79,153 @@ Vedendo più intervalli di tempo ci permette di capire la qualità della comunic
 se l'occhio figurativo che si forma è chiuso allora la qualità è pessima se l'occhio è aperto allora la qualità è buona
 ##### Misurazioni fatte e considerazioni
 ho provato due $Eb/N0$ diverse e sfruttando gli strumenti di analisi mi sono fatto delle considerazioni interessanti sul variare del rumore e su quanto effettivamente il segnale può disperdersi fino al raggiungimento di una situazione dove effettivamente non si può distinguere quale dei due simboli si sta ricevendo
+ciò che non è per niente cambiato sicuramente è il segnale del primo spectrum analyzer prima che passi per il AWGN channel
+![[Eb10 spectrum analyzer prima rumore.png|478]]
+##### Con $Eb/N0=10$
+con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualità del segnale davvero buona, andiamo a vedere i nostri strumenti di analisi come hanno reagito
+
+###### Spectrum analyzer del segnale dopo AWGN
+![[Eb10 spectrum analyzer dopo il rumore.png|537]]
+- possiamo vedere sicuramente più rumore confrontando lo spettro prima che passasse per l'AWGN(vedi foto sopra)
+###### Constellation diagram
+![[Eb10 constellation.png|537]]
+- possiamo vedere che in questo caso i due simboli sono abbastanza riconoscibili e non si incrociano a vicenda
+
+###### Eye Diagram prima del modulo che fa il calcolo integrale
+![[Eye diagram prima dell'integrale.png|537]]
+- notiamo qui estrema instabilità del segnale
+	- fa riflettere molto su quanto sia utile integrare per avere decisioni sui simboli più equilibrate
+###### Eye Diagram dopo calcolo integrale
+![[Eb10 eye diagram.png|537]]
+- l'occhio non è perfettamente aperto ma comunque non è chiuso(dopo vedremo con Eb3 la differenza), di conseguenza possiamo dire che la qualità del segnale è più che accettabile
+###### Time scope
+![[Eb10 Time Scope.png|537]]
+- **primo grafico** prima del canale AWGN abbiamo un segnale pulito che assume valori precisi `-1` e `1`
+- **secondo grafico** qui vediamo del segnale distorto dopo essere passato per il canale AWGN ma è comunque riconoscibile e si comprende l'intenzione iniziale che voleva avere
+- **terzo grafico** qui abbiamo più decisione del valore dei segnali dopo aver sfruttato l'integrale che per l'appunto somma e da un valore più deciso
 
 
+###### Modulo di calcolo dell'errore
+![[Eb10 error rate calculation.png|537]]
+- qui abbiamo praticamente 0 errori, fa capire come il rumore aggiunto è stato processato con successo senza perdere informazioni particolari
+##### Con $Eb/N0=3$
+- ora procediamo con un'aggiunta dell'errore particolarmente decisa, qui ho deciso di mettere a sinistra le foto precedenti con valore a 10 e a destra quelle con valore a 3
+###### Spectrum analyzer del segnale dopo AWGN
+![[collage_04.png]]
+###### Costellazione
+![[collage_01.png]]
 
-per capire inizialmente il progetto abbiamo aggiunto due spectrum analyzer
-- uno prima il modulo AWGN
-- uno dopo il modulo AWGN
-- lo abbiamo modificato a 5 dentro
-- e ora abbiamo un error rate maggiore
-- possiamo anche vedere il constellation diagram
-	- vediamo il segnale che mostra l'ampiezza e la fase
-	- l'ampiezza resta costante ma cambia la fase perchè sono con BPSK
-	- stessa cosa se ho un 2ASK
-- mostra 2 confronti uno a 5 uno a 100
-il time scope ha 3 ingressi
-- prima del rumore
-- dopo il rumore
-- vedo cosa ha fatto l'integrale
-	- somma la grandezza dei campioni(vedi sul time scope)
-	- se era >0 il bit è a 1
-	- vedi con time sc
-	- se avessi più simboli avrei più problemi
-- dopo il rumore non capisco più nnt
-- analisi foto del time scope
-	- nell'asse delle x ho il tempo passato
-	- in quello delle y ho l'ampiezza
-- ho messo pure modalità di visualizzazione axes style stem
-	- passando dal digitale all'analogico
-	- metti capture 2
+###### Eye diagram prima dell'integrale
+![[collage_03.png]]
 
-quando la nuvola inizia ad allargarsi troppo della costellazione
-- non si distinguono i bit a dx e sx
-- fai schema della prof su `excalidraw` fatto foto della prof sul tel
+###### Eye Diagram dopo calcolo integrale
+![[collage_05.png]]
+###### Time scope
+![[collage_06.png]]
+###### Error rate calculation
+![[collage_02.png]]
 
-- abbiamo anche visto come misurazione gli eye diagram
-	- formano un occhio se le cose vanno bene
-	- quando si chiude troppo rumore
-	- vedi foto slide
-
-quindi abbiamo visto lo spectrum analysis(misura frequenza e potenza) poi il time scope(che si chiama) poi la costellazione(che misura) il diagramma ad occhio(che misura)
-Dentro AWGN channel dobbiamo modificare il Eb/No che equivale all'SNR
-
-la media si vede con SMR
 ###### Domande di laboratorio
->[!Question]- domanda 1
+>[!Question] domanda 1
 > 
 > Add a Time Scope block and display the output of the Ideal Rectangular Pulse Filter block. What is its average signal power?
+> 
+> una volta aggiunto il time scope 
+> per misurare la average signal power ci sono 2 metodi
+> - metodo 1
+> 	- se il segnale è bipolare e assume dei valori $+A$ e $-A$ si può calcolare l'average signal power facendo $A^2$ 
+> 		- nel nostro caso è 1
+> 		- $s(t)^2=1$
+> 		- dove $s(t)$ rappresenta il segnale nel tempo
+> - metodo 2
+> 	- uso uno strumento presente nei tools di misurazione del Time Scope
+> 	- prendo RMS con strumento di misurazione del time scope tools > measurements
+> 	- appare il valore del RMS 
+> 		- $P=RMS^2$ che è uguale proprio a 1
+> ![[Pasted image 20260520102209.png|280]]
 
-per misurare la average signal power
-- metodo 1
-	- calcoliamo la ampiezza e la eleviamo al quadrato
-		- $s(t)$ è l'ampiezza nel tempo del segnale
-		- la calcolo facendo in questo caso è 1 
-		- $s(t)^2$
-- metodo 2
-	- faccio RMS con strumento di misurazione del time scope tools > measurements
-	- $P=RMS^2$
 
->[!question]- domanda 2
+>[!question] domanda 2
+> Add a Time Scope block and display the input to the AWGN Channel block, the output of the AWGN Channel block, and the output of the Gain block. In the AWGN Channel block, set the Input signal power to the value you calculated in the previous problem and set $Eb/N0$ to $12dB$. Set the remaining parameters based on your understanding of the simulation. Run the simulation, and take a screen capture of the Time Scope block. Explain and interpret the plots
+> 
+> ![[Pasted image 20260520102842.png|482]]
+> - posso notare come il tutto sia ancora perfettamente riconoscibile e che si possono definire perfettamente i simboli che si vogliono rappresentare
+> 	- il calcolo integrale è davvero utile
 
+>[!question] domanda 3
+> 
+> Add Eye Diagram and Constellation Diagram blocks to the signal at the input of the BPSK Demodulator Baseband block. Set the AWGN Channel block for $Eb/N0$ of $12dB$. Run the simulation, and take screen captures of the eye diagram and signal constellation. Repeat for $Eb/N0$ of $6dB$. Explain and interpret the plots. Comment on how the plots change as a function of $Eb/N0$
+> 
+> - a sinistra abbiamo $Eb/N0$ a $12$ invece a destra con valore a $6dB$
+> ![[collage_02.png]]
+> - **12 dB**: l'occhio risulta abbastanza aperto indica probabilità di errore bassa e buon margine decisionale dei simboli
+> - **6dB**: l'occhio inizia a chiudersi mostrando una possibile indecisione nell'interpretare i simboli
+> ![[collage_01.png]]
+> - **12 dB**: le costellazioni sono perfettamente circoscritte al loro dominio di appartenenza, mi chiedo cosa possa accadere se aumentassimo l'interpretazione simbolica con ad esempio una estensione come la QPSK a un certo valore
+> - **6dB**: alcuni bit che dovrebbero stare in una delle due fasi inizia quasi a toccarsi mostrano una possibile incertezza del segnale
 
-Add a Time Scope block and display the input to the AWGN Channel block, the output of the AWGN Channel block, and the output of the Gain block. In the AWGN Channel block, set the Input signal power to the value you calculated in the previous problem and set Eb/N0 to 12dB. Set the remaining parameters based on your understanding of the simulation. Run the simulation, and take a screen capture of the Time Scope block. Explain and interpret the plots
-
->[!question]- domanda 3
-
-Add Eye Diagram and Constellation Diagram blocks to the signal at the input of the BPSK Demodulator Baseband block. Set the AWGN Channel block for Eb/N0 of 12dB. Run the simulation, and take screen captures of the eye diagram and signal constellation. Repeat for Eb/N0 of 6dB. Explain and interpret the plots. Comment on how the plots change as a function of Eb/N0
 
 >[!question]- domanda 4
 
 You will now use the model to simulate the system performance over a range of Eb/N0 values. Run the simulation for Eb/N0 values of 0dB to 12dB in 1dB steps. Set the simulation time to ensure the results are meaningful. This is especially important when very few bit errors are expected. Observe and record the error rate for each run. Plot bit error rate vs Eb/N0 and compare to the theoretical prediction. Comment on the results
+
+per svolgere prima questa simulazione ho scoperto che esiste un blocco che mi salva in un array i risultati chiamato`To Workspace` che ho collegato al blocco di calcolo degli errori
+
+![[Pasted image 20260520105335.png|336]]
+
+![[Pasted image 20260520105259.png|336]]
+poi mi è sufficiente ad ogni simulazione chiamare la variabile in formato long e ottenere solo la riga finale(quella utile davvero)
+```scss
+format long g
+errStats(end,:)
+```
+
+La simulazione è stata eseguita su `101000` simboli per ogni valore di `Eb/N0`.
+**BER** = numero di bit errati / numero totale di bit trasmessi
+
+|Eb/N0 [dB]|Error Rate / BER|Number of Errors|Total Number of Symbols|
+|---|---|---|---|
+|0|0.0796732673|8047|101000|
+|1|0.0578712871|5845|101000|
+|2|0.0383267327|3871|101000|
+|3|0.0233762376|2361|101000|
+|4|0.0130099010|1314|101000|
+|5|0.0058514851|591|101000|
+|6|0.0023366337|236|101000|
+|7|0.0007722772|78|101000|
+|8|0.0001683168|17|101000|
+|9|0.0000198020|2|101000|
+|10|0|0|101000|
+|11|0|0|101000|
+|12|0|0|101000|
+
+- Dai risultati si nota che la percentuale di BER diminuisce progressivamente all’aumentare di `Eb/N0`.
+- Da 10 dB in poi si nota come l'error rate è a 0
+![[Pasted image 20260520111028.png]]
+- grafico che fa vedere al variare dei dB quanto cambia il BER
+per ottimizzare i tempi ho fatto creare da `chat GPT` questo script molto simpatico che aumenta automaticamente il dB e salva l'array `errStats`
+```scss
+clear errStats
+
+EbN0_values = 0:12;
+results = zeros(length(EbN0_values), 4);
+
+modelName = "simulateBPSK_pulseShapingRectangular_VDSI2026";
+
+for i = 1:length(EbN0_values)
+    EbN0 = EbN0_values(i);
+
+    sim(modelName);
+
+    last = errStats(end,:);
+
+    results(i,:) = [EbN0, last(1), last(2), last(3)];
+end
+
+T = array2table(results, ...
+    "VariableNames", ["EbN0_dB", "ErrorRate", "NumberOfErrors", "TotalNumberOfSymbols"]);
+
+disp(T)
+
+writetable(T, "risultati_BER.txt");
+```

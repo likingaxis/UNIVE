@@ -109,8 +109,6 @@ quest'ultimo non è stato utilizzato ai fini del laboratorio ma solo con lo scop
 			- RBDS che danno informazioni come il nome della radio o altro
 	- un blocco di sotto-campionamento per ridurre le frequenze da utilizzare
 	- l’uscita audio
-- applicato ad RTL abbiamo... 
-	- screen che manca di come si vede il tutto
 ##### Il Channel measurements e Occupied Bandwidth
 - lo spectrum Analyzer ha uno *strumento* che ci permette di calcolare automaticamente alcune misure utili di un certo canale, questo strumento si chiama **Channel Measurements**
 ![[2026-05-1410-13-46-ezgif.com-crop.gif|657]]
