@@ -66,3 +66,5 @@ foto carina slide 23
 	- ci sono richieste difficili che contengono un messaggio di protezione iniziale
 	- richiesta application/json se risponde accetto allora bene sennò non faccio nemmeno partire la richiesta
 - quando avremo un server dobbiamo gestire le cors, sarà interessante
+ - questa cosa funziona anche con fetch o solo con XMLHTTP?
+martedì avremo degli esempietti da vedere, cors non è da fare
