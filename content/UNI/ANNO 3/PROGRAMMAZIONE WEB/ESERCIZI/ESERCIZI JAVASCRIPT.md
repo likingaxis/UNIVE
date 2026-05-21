@@ -562,5 +562,67 @@ Creare un json con la lista degli esami svolti • Visualizzarlo i dati in una p
 ##### Esercizio 17
 >[!FAQ]- Come esercizio possiamo creare due bottoni, ad esempio `button1` e `button2`.
 >Quando clicchiamo un bottone, viene chiamata una funzione che fa una richiesta al server e recupera i dati di una persona in base al suo `id`
+> 
+> 
+> ```Javascript
+> <!DOCTYPE html>
+> 
+> <html lang="en">
+> 
+> <head>
+> 
+>     <meta charset="UTF-8">
+> 
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+> 
+>     <title>Document</title>
+> 
+> </head>
+> 
+> <body>
+> 
+>     <button id="but1">stampa dati utente1</button>
+> 
+>     <button id="but2">stampa dati utente2</button>
+> 
+>     <div id="visu"></div>
+> 
+>   
+> 
+>     <script>
+> 
+>         let bottone1=document.querySelector("#but1");
+> 
+>         let bottone2=document.querySelector("#but2");
+> 
+>         let visu=document.querySelector("#visu");
+> 
+>         async function GET (u)
+> 
+>         {
+> 
+>              let response = await fetch('https://jsonplaceholder.typicode.com/users/'+u);
+> 
+>              let data= await response.json();
+> 
+>              visu.innerHTML="<p>"+data.name+"</p>";
+> 
+>         }
+> 
+>         bottone1.addEventListener('click',()=>GET(1));
+> 
+>         bottone2.addEventListener('click',()=>GET(2));
+> 
+>     </script>
+> 
+> </body>
+> 
+>   
+>   
+> 
+> </html>
+> ```
+
+
 
 Esercizi vari alle ultime slide con una sorta di quiz
