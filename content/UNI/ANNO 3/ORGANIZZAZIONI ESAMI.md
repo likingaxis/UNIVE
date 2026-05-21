@@ -9,8 +9,9 @@
 | INFORMATION RETRIEVAL    | ✅                     |                   |
 | CALCOLO                  |                       | ✅                 |
 DAMMI LA PAZIENZA
-- giugno information retrieval
-- giugno vulnerabilità
-- giugno programmazione web
+- 12 giugno information retrieval
+- 20 giugno vulnerabilità
+- 23-24 giugno programmazione web
 - 2 luglio geometria
 - 7 luglio big data
+- 27 luglio calcolo numerico
