@@ -559,4 +559,8 @@ Creare un json con la lista degli esami svolti • Visualizzarlo i dati in una p
 > 
 > );
 
+##### Esercizio 17
+>[!FAQ]- Come esercizio possiamo creare due bottoni, ad esempio `button1` e `button2`.
+>Quando clicchiamo un bottone, viene chiamata una funzione che fa una richiesta al server e recupera i dati di una persona in base al suo `id`
+
 Esercizi vari alle ultime slide con una sorta di quiz
