@@ -1,30 +1,19 @@
-- nella lezione precedente abbiamo visto come migliorare la recall
-- lezione di inciso tra quella precedente e le slide successive che mancavano
 ### Latent Semantic Indexing
 - useremo tecniche di dimensionalità per trasformare una cosa sparsa in una cosa densa
-##### Piccolo ripassino di geometria
-- analisi spettrale con autovalori e autovettori
-	- idea che nasce dal fatto che una matrice può essere scomposta in un insieme di informazioni che ricomposte danno la matrice originale
-	- eigenvector eigenvalue
-	- ho un vettore che moltiplicato per una matrice che allungandolo porta alla matrice S per il vettore
-- quanti autovalori esistono
-	- devo trovare tutti gli autovettori per cui la semplificazione è nulla
-- possiamo trovare m di questi lambda, che hanno al più m soluzioni distinte
-	- m è il rango
-	- il vettore x può essere visto dalla combinazione lineare ...
-- proprietà:
-	- una matrice simmetrica è data da:
-		- i vettori di una matrice simmetrica sono ortogonali
-		- la matrice S t.c sottratta ai suoi autovalori per matrice identita uguale a 0 è uguale alla matrice trasposta avremo sempre vettori reali
-		- matrice normale x la matrice trasposta, infatti in retrieval la matrice non è simmetrica di base ma sarà utile applicare questa regola
-		- esempio a slide di applicazione di autovalori e trovare autovettori
-- $S*U=lambda*U$ che possiamo scrivere come
-- lambda è diagonale
-- preso lambda avremo quale vettore ha più contributo di un altro
-- decomposizione per lambda
-esempio di decomposizione e ricomposizione della matrice
-- dividere per radice di 2 ci porta ad avere una norma
-	- se normalizzo quella matrice la sua normalizzazione è uguale alla trasposta
+- questa lezione è di inciso della lezione 11
+##### Ripassino di geometria
+[[Ripasso geometria]]
+
+Fin qui abbiamo parlato soprattutto di matrici quadrate.
+Ma nel Vector Space Model e nella LSI usiamo una matrice termine-documento:
+$$A \in \mathbb{R}^{m \times n}$$
+dove:
+- le righe sono i termini;
+- le colonne sono i documenti;
+- ogni cella rappresenta il peso di un termine in un documento, ad esempio frequenza, TF-IDF o altro peso.
+Questa matrice di solito è rettangolare, non quadrata.
+Quindi non posso applicare direttamente la decomposizione agli autovalori vista prima.
+Da qui nasce il bisogno della SVD.
 ##### Applicazione di retrieval sfruttando queste nozioni algebriche
 - ho una matrice mxn A di rango r esiste sempre una fattorizzazione detta SVD che segue le seguenti caratteristiche
 	- U è mxm sigma è mxn V è nxn
