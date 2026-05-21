@@ -1,11 +1,8 @@
 - big d finire algoritmi IMPORTANTE
 	- weekend
-- information retrieval vedere codici python IMPORTANTE
+- information retrieval ripassa tutto da zero e poi vedere codici python IMPORTANTE
 	- weekend
 - vulnerabilità scrivi laboratorio
-	- weekend
-- web ipotetica lezione
-	- lunedì
+	- aspetta che la prof le carichi
 - tesi
 	- weekend
-
