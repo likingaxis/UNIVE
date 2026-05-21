@@ -7,7 +7,7 @@
 - vulnerabilità scrivi laboratorio
 	- weekend
 - web ipotetica lezione
-	- giovedì
+	- lunedì
 - tesi
 	- weekend
 
