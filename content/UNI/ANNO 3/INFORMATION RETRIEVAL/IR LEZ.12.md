@@ -102,3 +102,18 @@ La cosine similarity misura quanto due vettori puntano nella stessa direzione:
 $$\cos(q_k,d_k)=\frac{q_k \cdot d_k}{\|q_k\|\|d_k\|}$$
 Se il valore è alto, vuol dire che query e documento sono vicini nello spazio latente
 
+
+
+
+sigma sono i valori singolari sono gli autovalori con la radice ma sono gli autovalori della trasposta
+le due matrici vengono confrontate facendo la sommatoria sugli esercizi
+le componenti intende le informazioni latenti?
+Come viene raccontato un documento
+la matrice originale ha dellle informazioni
+immaginiamo uno spazio con 3 dimensioni
+applicando una trasformazione tipo una rotazione
+il punto 0 non è più 0 
+l'informazione varia conviene comunque calcolare con frobenius
+non conviene usare la formula iniziale con le sommatorie, potremmo comunque ipotizzare male l'ottimo
+per trovare l'ottimo devo comunque calcolarmeli tutti
+k spesso è sempre compreso tra 100-1000
