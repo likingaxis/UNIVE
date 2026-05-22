@@ -126,3 +126,13 @@ Quindi la differenza principale rispetto al relevance feedback classico è che l
 - rischio: query drift
 	- Il query drift si verifica quando la query riformulata si sposta progressivamente verso un significato diverso da quello cercato dall’utente
 	- Se tra i primi risultati ci sono documenti non rilevanti o solo parzialmente rilevanti, i termini contenuti in quei documenti possono contaminare la nuova query
+##### Global Query expansion
+- prendere altri termini che sono sinonimi ma da tutta la collezione?
+- va un po in contrapposizione ai manual thesaurus scritti manualmente come wordnet o PubMed
+- automatic thesaurus, estratti automaticamente
+	- potrebbe ottimizzare la recall ma mandare a rotoli la preicison
+come gestisco la query expansion all'interno di un workflow
+- uso le parole espanse aggiunte alla query?
+	- il contributo nella costruzione del vettore, quando vado a fare la combinazione lineare con i termini e i documenti
+	- vado a dare un peso diverso alla query 
+	- per farlo avvicinare meno ai documenti
