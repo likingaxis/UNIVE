@@ -127,6 +127,19 @@ Quindi la differenza principale rispetto al relevance feedback classico è che l
 	- Il query drift si verifica quando la query riformulata si sposta progressivamente verso un significato diverso da quello cercato dall’utente
 	- Se tra i primi risultati ci sono documenti non rilevanti o solo parzialmente rilevanti, i termini contenuti in quei documenti possono contaminare la nuova query
 ##### Global Query expansion
+La **global query expansion** è una tecnica usata per migliorare la **recall** di un sistema di Information Retrieval modificando la query dell’utente attraverso l’aggiunta di termini collegati semanticamente a quelli originali.
+La query expansion è detta **globale** quando la riformulazione della query non dipende dai risultati specifici restituiti per quella query, ma da una risorsa generale, costruita sull’intera collezione o su una conoscenza esterna.
+una riformulazione basata su una risorsa non dipendente dalla singola query
+La query expansion globale si contrappone ai metodi locali, come relevance feedback e pseudo-relevance feedback
+nella global query expansion si aggiungono alla query termini semanticamente correlati usando risorse globali, cioè non costruite a partire dai soli risultati della query corrente.
+Usa risorse generali come:
+- thesaurus;
+- vocabolari controllati;
+- WordNet;
+- thesauri di dominio, come quelli usati in ambito biomedico;
+- thesauri costruiti automaticamente
+
+
 - prendere altri termini che sono sinonimi ma da tutta la collezione?
 - va un po in contrapposizione ai manual thesaurus scritti manualmente come wordnet o PubMed
 - automatic thesaurus, estratti automaticamente
@@ -136,3 +149,5 @@ come gestisco la query expansion all'interno di un workflow
 	- il contributo nella costruzione del vettore, quando vado a fare la combinazione lineare con i termini e i documenti
 	- vado a dare un peso diverso alla query 
 	- per farlo avvicinare meno ai documenti
+- SVD e LSI sono utili perché permettono una query expansion su tutta la collezione scegliendo una matrice k adatta
+
