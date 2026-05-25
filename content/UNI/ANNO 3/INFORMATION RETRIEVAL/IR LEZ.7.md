@@ -1,3 +1,4 @@
+### Distributional Lexical Semantics
 #### INTRODUZIONE
 In questa lezione introduciamo i **modelli distribuzionali della semantica lessicale** (_Distributional Lexical Semantics_), cioè un modo per rappresentare il significato delle parole **in modo automatico a partire dai testi**.
 L’idea di base è la **Distributional Hypothesis**:
