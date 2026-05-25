@@ -1,5 +1,5 @@
 !!!!!!VEDERE MODELLI MULTINOMIALI BINOMIALI E DI POISSON
-
+#### PROBABILISTIC RETRIEVAL
 Mentre i modelli algebrici (vettoriali), che abbiamo visto finora, si basano sulla somiglianza geometrica, l'approccio probabilistico nasce per gestire l'incertezza intrinseca nel processo di ricerca. L'incertezza deriva da:
 - **Utenti**: Diversi utenti hanno diverse opinioni sulla rilevanza della stessa query. 
 - **Contesto**: Il bisogno informativo varia a seconda della situazione dell'utente. 
