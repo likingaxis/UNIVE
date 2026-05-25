@@ -33,7 +33,7 @@ Indica la probabilità che un evento NON avvenga
 $p(\bar A) = 1 − p(A)$
 ###### Regola della Partizione 
 Se un evento B può essere diviso in un insieme esaustivo di sotto casi disgiunti (che non si sovrappongono), la probabilità di B è la somma delle probabilità dei singoli sotto casi.
-* $P(B) = P(A,B) \cdot P(\bar A, B)$.
+* $P(B) = P(A,B) + P(\bar A, B)$.
 ###### Teorema di Bayes
 Ci permette di aggiornare la nostra conoscenza su un evento alla luce di nuove prove (evidenza).
 $$
@@ -43,16 +43,7 @@ $$
 * **posteriori**: $P(A|B)$ = la probabilità aggiornata dopo aver visto l'evidenza.
 * **ossia**: posso trovare la probabilità a posteriori di $A$ usando quella a priori.
 
-Il denominatore p(B) può essere espanso tramite la regola della partizione: $$p(B) = \sum_{X \in \{A, \bar{A}\}} p(B|X) \cdot p(X)$$ *Questo è il cuore del sistema. Vogliamo calcolare la probabilità che un documento sia rilevante (A) data la query/evidenza (B).
-
-###### Odds (Rapporto di Probabilità)
-In IR è molto utile ragionare in termini di Odds (O), che in statistica indica il rapporto tra la probabilità che un dato evento accada e la probabilità che lo stesso evento NON accada
-$$O(A) = \frac{P(A)}{P(\bar{A})} = \frac{P(A)}{1-P(A)}$$
-* se $O(A) > 1$ allora e' più probabile che il documento sia rilevante
-* se $O(A) = 1$ allora non si sa
-* se $O(A) < 1$ allora e' più probabile che il documento non sia rilevante
-nel caso di IR sarebbe
-$$O(R|d,q)=\frac{P(R=1|d,q)}{P(R=0|d,q)}$$
+Il denominatore p(B) può essere espanso tramite la regola della partizione: $$p(B) = \sum_{X \in \{A, \bar{A}\}} p(B|X) \cdot p(X)$$ *Questo è il cuore del sistema. Vogliamo calcolare la probabilità che un documento sia rilevante (A) data la query/evidenza (B).*
 
 #### Rilevanza probabilistica di un documento  
 Quindi l’obiettivo del sistema IR è stimare:  
@@ -90,23 +81,25 @@ La probabilità condizionata può essere decomposta in due modi:
 	 $p(R|d,q) = \frac{p(d|R,q)p(R|q)}{p(d|q)}$, ed $p(\bar{ R}| d,q)$ si ricava similmente
 2. **Approccio dei Language Models:** Si inverte la logica. Dato un documento, quanto è probabile che l'utente avesse in mente proprio quel documento quando ha scritto la query? $p(q|R, d)$.
 	$p(R|d,q) = \frac{p(q|R,d)p(R|d)}{p(q|d)}$, ed $p(\bar{R}|d,q)$ si ricava similmente
-#### Il Ranking Probabilistico e le sue Assunzioni 
-L'obiettivo di un sistema di Ranked Retrieval è restituire una lista ordinata di documenti in base alla loro probabilità stimata di rilevanza rispetto alla query: $p(R|d,q)$.
-- applichiamo prima Bayes
-faccio il ranking dei documenti osservando dunque $O(R|d,q)$ (odds).
-*Nota fondamentale:* Poiché un documento o è rilevante o non lo è, la somma delle due probabilità deve essere sempre 1: $p(R|d, q) + p(\bar{R}|d, q) = 1$.
+#### Ranking probabilistico e assunzioni
+L’obiettivo del ranking probabilistico è ordinare i documenti in base alla probabilità stimata di rilevanza:
+$$p(R|d,q)$$
 
-**assunzioni**:
-* **indipendenza**: assumiamo $d$ e $q$  indipendenti $\forall d,q$
-* **uniformita documenti**: $\forall d,d': p(d) = p(d')$ (questa assunzione non vale per altri contesti, es: pagerank)
-* **ignorare**: $p(R|q)$ puo essere ignorato. e' un valore costante per tutti i documenti.
-$$
-p(R|d,q) = \frac{p(d|R,q)p(R|q)}{p(d|q)} = \frac{p(d|R,q)p(R|q)}{p(d)}
-$$
-**definizioni**:
-* $p(d|R,q) = \text{p. che } d \text{ venga scelto u.a.r dai documenti rilevanti per } q$.
-* $p(R|q) = \text{p. che un documento scelto dalla collezione sia rilevante per } q$
-* $p(d|q) = p(d) = \text{la probabilita che } d \text{ sia pescato dalla collezione}$, si assumono $d,q$  indipendenti $\forall d,q$.
+Applicando Bayes:
+$$p(R|d,q)=\frac{p(d|R,q)p(R|q)}{p(d|q)}$$
+
+Nel ranking la query $q$ è fissata, quindi $p(R|q)$ è costante per tutti i documenti e può essere ignorata.
+Inoltre, assumendo indipendenza tra documento e query:
+
+$$p(d|q)=p(d)$$
+e assumendo uniformità dei documenti:
+$$\forall d,d': p(d) = p(d')$$
+- tutti i documenti hanno la stessa probabilità di essere pescati dalla collezione
+anche il denominatore è costante e può essere ignorato.
+Quindi, ai fini del ranking:
+$$p(R|d,q)=_{rank}p(d|R,q)$$
+In pratica, invece di calcolare direttamente la probabilità che un documento sia rilevante, stimiamo quanto è probabile osservare quel documento tra i documenti rilevanti per la query.
+
 ##### PRP (Probability Ranking Principle)
 Il PRP dice che se non hai altre informazioni, l'ordine basato sulla probabilità di rilevanza decrescente è quello che ti garantisce, statisticamente, il minor numero di documenti irrilevanti nelle prime posizioni. È l'ottimo teorico sotto l'ipotesi che la rilevanza di un documento sia indipendente da quella degli altri.
 ##### Error cost of retrieval
@@ -149,11 +142,12 @@ Per scopi di **Ranking** (ordinamento), ci interessa solo ciò che cambia da doc
 **rimodelliamo** $p(R|d,q)$ **usando i vettori**:
 * $p(R|v_{d},v_{q}) = \frac{p(v_{d}|R,v_{q})p(R|v_{q})}{p(v_{d}|v_{q})} =_{rank} p(v_{d}|R,v_{q})$
 * **similmente**: $p(\bar{R}|v_{d},v_{q}) = p(v_{d}| \bar{R}, v_{q})$
-* $p(v_{d}|R,v_{q})$ e' la probabilita che se un documento rilevante e' stato selezionato, allora $v_{d}$ e' la sua rappresentazione.
+* $p(v_{d}|R,v_{q})$ e' la probabilità che se un documento rilevante e' stato selezionato, allora $v_{d}$ e' la sua rappresentazione.
 ##### L'Assunzione di Naive Bayes (Indipendenza Condizionale)
 Si assume che la presenza o l'assenza di un termine in un documento sia indipendente dalla presenza o assenza di qualsiasi altro termine, data la rilevanza.
 Matematicamente, la probabilità congiunta diventa il prodotto delle probabilità dei singoli termini:
 $$p(f_1, \dots, f_n|R, q) = \prod_{i} p(f_i|R, q)$$
+f sono le feature ad esempio i termini
 >[!tip] Il sistema stima quanto ogni singolo termine contribuisca alla rilevanza e poi "moltiplica" questi contributi per ottenere il punteggio totale del documento.
 ##### USO degli ODDS
 Invece di calcolare $p(R|v_d, v_q)$, calcoliamo il rapporto tra la probabilità che il documento sia rilevante e quella che non lo sia. Questo non cambia l'ordine finale (ranking)

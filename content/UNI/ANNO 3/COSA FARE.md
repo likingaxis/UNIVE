@@ -2,6 +2,9 @@
 	- weekend
 - information retrieval ripassa tutto da zero e poi vedere codici python IMPORTANTE
 	- weekend
+- riscrivi tutta lez.8
+	- mancano da vedere
+	- poisson 2 poisson bm25
 - vulnerabilità scrivi laboratorio
 	- aspetta che la prof le carichi
 - tesi
