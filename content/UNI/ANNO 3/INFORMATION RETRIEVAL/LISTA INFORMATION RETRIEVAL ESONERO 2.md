@@ -80,8 +80,21 @@
 			* $RSV_d = \sum_{i:x_i=y_i=1} c_i$
 		* senza giudizi di rilevanza e pi=0.5
 			* $RSV_d \approx \sum_{i:x_i=y_i=1} \log \frac{N}{df_i}$
-	* USATO PER TITOLI E ABSTRACT
-* 
+		* USATO PER TITOLI E ABSTRACT
+* Poisson Model
+	* $d_{t_i}=n_i$
+	* $Poisson(x|\lambda)=\frac{e^{-\lambda}\lambda^x}{x!}$
+	* $\lambda \approx \frac{CF_j}{N}$
+	* $RSV_d=\sum_{t_i:y_i=1} n_i \log \frac{\rho_i}{\gamma_i}$
+* 2-Poisson Model
+	* $p(d_{t_i}=n_i|R,v_q)=p_i \cdot Poisson(n_i|\mu_i)+(1-p_i)\cdot Poisson(n_i|\bar \mu_i)$
+* Modello BM25
+	* saturazione e peso IDF
+	* $RSV_d = \sum_{t \in q} \frac{(k_1 + 1)tf_{td}}{k_1 + tf_{td}} \log \frac{N}{df_t}$
+		* k1 basso= saturazione rapida
+		* k1 alto= saturazione lenta
+	* BM25 con saturazione e bilanciamento
+		* $RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1 \left( (1 - b) + b \frac{L_d}{L_{ave}} \right) + tf_{td}}$
 [[LABORATORIO 3]]
 #### LANGUAGE MODEL PER RANKING DI INFORMATION RETRIEVAL
 Domanda da fare al prof, se un sistema di IR per stessa query potrebbe restituire risultati differenti se ad esempio si usa un modello di retrieval come language model, o sbaglio? se si è possibile avere difficoltà nella valutazione del sistema?
