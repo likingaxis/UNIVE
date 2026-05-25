@@ -138,16 +138,13 @@ Usa risorse generali come:
 - WordNet;
 - thesauri di dominio, come quelli usati in ambito biomedico;
 - thesauri costruiti automaticamente
-
-
-- prendere altri termini che sono sinonimi ma da tutta la collezione?
-- va un po in contrapposizione ai manual thesaurus scritti manualmente come wordnet o PubMed
-- automatic thesaurus, estratti automaticamente
-	- potrebbe ottimizzare la recall ma mandare a rotoli la preicison
-come gestisco la query expansion all'interno di un workflow
-- uso le parole espanse aggiunte alla query?
-	- il contributo nella costruzione del vettore, quando vado a fare la combinazione lineare con i termini e i documenti
-	- vado a dare un peso diverso alla query 
-	- per farlo avvicinare meno ai documenti
-- SVD e LSI sono utili perché permettono una query expansion su tutta la collezione scegliendo una matrice k adatta
-
+Un thesaurus è una raccolta di termini collegati semanticamente: sinonimi, quasi-sinonimi, termini più generali, termini più specifici o termini associati
+si dividono in:
+- Un **manual thesaurus** è costruito e mantenuto da esperti o editor umani. Esempi classici sono WordNet o i vocabolari controllati usati in ambiti specialistici, come PubMed/MedLine
+- Un **automatic thesaurus** viene invece costruito automaticamente analizzando una collezione di documenti.
+	- cercare termini che tendono a comparire in contesti simili. Se due parole compaiono spesso con parole simili, oppure hanno relazioni grammaticali simili con altri termini, allora possono essere considerate semanticamente vicine
+La query expansion tende ad aumentare la recall, perché amplia l’insieme dei documenti potenzialmente recuperabili. Tuttavia può ridurre significativamente la precision, perché l’aggiunta di termini ambigui o troppo generici può far entrare nel ranking documenti non rilevanti
+- soluzione leggera:
+	- I termini aggiunti tramite query expansion possono ricevere un peso minore rispetto ai termini originali, in modo da ampliare la ricerca senza spostare eccessivamente la query verso documenti non perfettamente coerenti con l’intento iniziale
+###### SVD E LSI NEL QUERY EXPANSION
+SVD e LSI possono essere viste come tecniche che aiutano a superare il semplice matching lessicale. Non espandono necessariamente la query aggiungendo parole visibili, ma proiettano query e documenti in uno spazio latente in cui termini correlati risultano più vicini. In questo senso producono un effetto simile alla query expansion globale, perché sfruttano informazioni distribuzionali ricavate dall’intera collezione
