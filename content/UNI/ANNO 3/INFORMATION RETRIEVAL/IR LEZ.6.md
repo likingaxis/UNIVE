@@ -40,7 +40,6 @@
     - ma il **processo di costruzione dei dati etichettati**
     - cioè il dataset che poi useremo per valutare i sistemi
 - nomi equivalenti:
-    - **gold standard**
     - **dataset oracolo**
     - **dataset annotato**
     - → rappresenta la “verità di riferimento” (ground truth)
