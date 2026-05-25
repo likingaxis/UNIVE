@@ -1,6 +1,6 @@
 #### Language Model per ranking di information retrieval
 ##### INTRODUZIONE
-In questa lezione si introduce l’uso dei **Language Models per l’Information Retrieval**. L’obiettivo è definire un framework probabilistico in cui, dato un documento ddd, si costruisce un modello generativo MdM_dMd​, cioè un modello linguistico associato a quel documento.
+In questa lezione si introduce l’uso dei **Language Models per l’Information Retrieval**. L’obiettivo è definire un framework probabilistico in cui, dato un documento $d$, si costruisce un modello generativo $M_d$​, cioè un modello linguistico associato a quel documento.
 La differenza rispetto a BM25 o all’approccio probabilistico classico è che non ci chiediamo direttamente:
 > quanto è probabile che un documento sia rilevante per una certa query?
 
