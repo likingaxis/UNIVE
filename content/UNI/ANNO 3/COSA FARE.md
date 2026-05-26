@@ -7,5 +7,4 @@
 - tesi
 	- weekend
 - slide hackaton
-- foto hackaton
 - report hackaton

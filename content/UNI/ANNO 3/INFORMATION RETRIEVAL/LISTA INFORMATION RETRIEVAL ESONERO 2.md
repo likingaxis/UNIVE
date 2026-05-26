@@ -98,6 +98,8 @@
 [[LABORATORIO 3]]
 #### LANGUAGE MODEL PER RANKING DI INFORMATION RETRIEVAL
 Domanda da fare al prof, se un sistema di IR per stessa query potrebbe restituire risultati differenti se ad esempio si usa un modello di retrieval come language model, o sbaglio? se si è possibile avere difficoltà nella valutazione del sistema?
+
+[[LABORATORIO 3]]
 #### OTTIMIZZAZIONE DEI SISTEMI DI RANKING
 #### RELEVANCE FEEDBACK E QUERY EXPANSION
 #### LATENT SEMANTIC INDEXING

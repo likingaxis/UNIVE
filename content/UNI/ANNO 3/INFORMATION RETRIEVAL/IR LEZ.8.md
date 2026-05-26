@@ -399,7 +399,20 @@ $$RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1
     *   Valori tipici: **0.75**.
 - Per qualcosa di **semplice e basico**: usare Modello Vettoriale con pesatura tf-idf.    
     - Per un **ranking robusto e performante**: usare BM25 (o modelli del linguaggio) con parametri ottimizzati.
-    
 - **BM25 nella pratica reale:**
     - **Elasticsearch:** utilizza BM25 come modello di default per la similarità.
-    - **Apache Solr:** utilizza BM25 come default dalla versione 8.x in poi.
+    - **Apache Solr:** utilizza BM25 come default dalla versione 8.x in poi
+
+N.B è possibile sfruttare la saturazione delle term frequency della query usando k3
+BM25 è robusto con valori compresi tra k1=1.2-2.0 e b circa 0.75
+Questi valori non sono leggi universali.
+In un sistema reale, i parametri andrebbero scelti su un development set, misurando metriche come:
+- precision
+- recall
+- MAP
+- nDCG
+- MRR
+COSINE SIMILARITY VS BM25 
+- TF-IDF + cosine normalizza geometricamente i vettori
+- BM25 usa saturazione della term frequency e normalizzazione esplicita della lunghezza
+- cosine similarity ritorna un valore compreso tra 0 e 1 mentre BM25 uno score numerico che va a infinito
