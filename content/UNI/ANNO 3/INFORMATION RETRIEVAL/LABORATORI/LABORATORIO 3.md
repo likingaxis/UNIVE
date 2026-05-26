@@ -20,3 +20,73 @@ L'obiettivo non è solo implementare le formule, ma capire:
 9. confronto qualitativo con TF-IDF
 10. introduzione ai language model
 11. smoothing con Dirichlet
+
+
+#### INIZIO LABORATORIO BM25
+###### Funzione di load 20 news group
+con una funzione di fetch poi vai a precisare la categoria e il subset train
+###### Applicazione di preprocessing
+- rimozione dell'header;
+- lowercase;
+- normalizzazione dei numeri;
+- rimozione della punteggiatura;
+- tokenizzazione;
+- rimozione delle stop words;
+- rimozione dei token troppo corti;
+- stemming.
+L'obiettivo non è costruire il miglior preprocessing possibile, ma avere una rappresentazione semplice e controllabile.
+###### Struttura dati
+costruiamo una struttura dati composta da 
+docID -> lista di token che lo riguardano
+e poi aggiungiamo 
+- $L_d$
+	- è la lunghezza del documento, cioè il numero di token dopo il preprocessing.
+- $tf_{t,d}$
+	- è la frequenza del termine nel documento.
+- $df_t$
+	- è il numero di documenti in cui il termine compare almeno una volta.
+- $cf_t$
+	- è il numero totale di occorrenze del termine nell'intera collezione.
+- $\bar{L}$
+	- è la lunghezza media dei documenti.
+
+La formula BM25 che useremo è:
+$$
+
+BM25(d,q)
+
+=
+
+\sum_{t \in q^\ast}
+
+IDF(t)
+
+\cdot
+
+\frac{(k_1+1)tf_{t,d}}
+
+{k_1\left((1-b)+b\frac{L_d}{\overline L}\right)+tf_{t,d}}
+
+$$
+
+- $tf_{t,d}$ è la frequenza del termine nel documento;
+- $L_d$ è la lunghezza del documento;
+- $\overline L$ è la lunghezza media dei documenti;
+- $k_1$ controlla la saturazione della term frequency;
+- $b$ controlla la normalizzazione per lunghezza;
+- $q^\ast$ indica l'insieme dei termini distinti della query.
+Per l'IDF useremo:
+$$
+
+IDF(t)=
+
+\log\left(
+
+1+
+
+\frac{N-df_t+0.5}{df_t+0.5}
+
+\right)
+
+$$
+Questa è una variante comune che evita valori negativi dell'IDF.
