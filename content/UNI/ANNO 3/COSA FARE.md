@@ -6,3 +6,6 @@
 	- aspetta che la prof le carichi
 - tesi
 	- weekend
+- slide hackaton
+- foto hackaton
+- report hackaton
