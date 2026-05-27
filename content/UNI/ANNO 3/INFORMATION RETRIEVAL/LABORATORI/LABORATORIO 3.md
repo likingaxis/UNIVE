@@ -239,8 +239,12 @@ $$
 \sum_{i=1}^{m} \log p(w_i \mid M_d)
 
 $$
+
+
+per calcolare la probabilità di un termine usiamo maximum likelihood
+$p(t \mid M_d) = \frac{tf_{t,d}}{|d|}$
 un termine non presente nel documento ha probabilità zero.
-renderebbe tutta la probabilità nulla
+renderebbe tutta la probabilità nulla anche se abbiamo il logaritmo avrei $- \infty$ 
 Per evitare questo problema usiamo lo **smoothing**.
 Qui implementiamo lo smoothing di Dirichlet:
 $$
@@ -254,3 +258,122 @@ p(t \mid d)
 {|d| + \mu}
 
 $$
+- il parametro $\mu$ decide quanto pesa il background rispetto al documento.
+Se $\mu$ è grande, il modello del documento assomiglia di più al modello della collezione.  
+Se $\mu$ è piccolo, il modello si fida di più delle frequenze osservate nel singolo documento.
+```scss
+QueryLikelihoodDirichletLM(D, q):
+
+1. Calcolo le statistiche:
+   - len[d] = lunghezza del documento
+   - tf[t,d] = frequenza del termine t nel documento d
+   - cf[t] = frequenza del termine t nella collezione
+   - collection_length = numero totale di token nella collezione
+
+2. Calcolo il modello della collezione:
+   p(t | C) = cf[t] / collection_length
+
+3. Per ogni documento d e per ogni termine t della query:
+   calcolo la probabilità smoothed:
+
+   p(t | d) =
+       (tf[t,d] + μ p(t | C)) / (len[d] + μ)
+
+4. Lo score del documento rispetto alla query è:
+
+   score(d,q) =
+       Σ log p(t | d)
+
+5. Ignoro i termini fuori vocabolario, cioè quelli con p(t | C) = 0.
+
+6. Ordino i documenti per score decrescente e restituisco i primi top_k.
+```
+
+Quindi può sembrare che un termine molto comune, come `the`, sia favorito perché ha probabilità alta.
+Il punto importante è che, quando usiamo lo smoothing, il modello del documento viene confrontato implicitamente con il **background della collezione**.
+
+## Esercizio 1 — Cambiare query
+
+Prova query diverse, per esempio:
+
+- `jpeg image compression`
+- `window manager graphics`
+- `rendering software`
+- `computer animation file`
+- `image display color`
+
+Per ogni query confronta:
+- top-3 BM25
+- top-3 Language Model
+Domande guida:
+1. I due modelli restituiscono gli stessi documenti?
+	- la maggior parte delle volte i primi due top documenti si ma gli altri al di sotto no
+2. Quali documenti compaiono in entrambi i ranking?
+	- 490, 366, 178, 406, 540, 429, 128, 578, 297, 222 
+3. I documenti molto corti appaiono spesso nelle prime posizioni? Oppure vengono penalizzati?
+	- sembra che il tutto sia indipendente dalla dimensione del documento, è possibile vedere sia documenti lunghi che corti
+	- BM25 e Language Model tengono entrambi conto della lunghezza, ma in modi diversi. BM25 usa la normalizzazione tramite il parametro `b`, mentre il Language Model con Dirichlet usa il denominatore `len[d] + μ`
+4. Quale modello sembra penalizzare di più i documenti che non contengono tutti i termini della query?
+- Il Language Model tende a penalizzare di più i documenti che non contengono tutti i termini della query, perché lo score è una somma di log-probabilità dei termini della query dato il documento. Se un termine non compare nel documento, la sua probabilità non diventa zero grazie allo smoothing, ma viene stimata soprattutto dal modello della collezione, quindi il contributo può essere basso e rendere lo score più negativo
+- Se un termine della query non compare nel documento, il suo contributo è semplicemente zero. Il documento perde il possibile contributo positivo di quel termine, ma non riceve una penalizzazione negativa diretta.
+
+
+## Esercizio 2 — Analizzare $k_1$
+
+Modifica il parametro $k_1$ in BM25 usando valori come:
+$$
+
+0.2,\ 0.8,\ 1.5,\ 3.0,\ 8.0
+
+$$
+Domande guida:
+
+
+1. Il ranking cambia?
+	- con k1 da 0.2 a 1.5 cambia davvero poco
+	- successivamente alcuni documenti più lunghi tendono a saturare meno e quindi ad avere più rilevanza
+	- di conseguenza nella classifica avrò documenti più lunghi con più ripetizioni di quei termini
+2. Quali documenti rimangono stabili nella top-5?
+	- anche se cambiano leggermente di posizione rimane solo il 490
+3. I documenti con molte ripetizioni dei termini della query vengono favoriti di più quando $k_1$ cresce?
+	- decisamente si
+
+
+## Esercizio 3 — Analizzare $b$
+
+Modifica il parametro $b$ usando valori come:
+
+$$
+
+0.0,\ 0.25,\ 0.75,\ 1.0
+
+$$
+
+Domande guida:
+
+1. Cosa succede ai documenti lunghi?
+	- con b basso i documenti non vengono quasi per niente normalizzati, se a 0 non vengono proprio normalizzati
+	- i documenti lunghi hanno un grosso vantaggio con b circa a 0
+2. Cosa succede ai documenti corti?
+	- i documenti corti hanno un grosso svantaggio con b basso mentre con b vicino a 1 possono essere più competitivi
+3. In quali query la normalizzazione della lunghezza sembra più importante?
+- La normalizzazione della lunghezza sembra più importante nelle query con termini abbastanza comuni o facilmente ripetibili, perché in questi casi i documenti lunghi possono accumulare molte occorrenze solo grazie alla loro dimensione. Senza normalizzazione, questi documenti dominano il ranking. Con `b` alto, invece, BM25 distingue meglio tra documenti lunghi solo perché ricchi di testo e documenti effettivamente concentrati sui termini della query
+## Esercizio 4 — Analizzare $\mu$ nel Language Model
+Modifica il parametro $\mu$ usando valori come:
+
+$$
+
+50,\ 200,\ 1000,\ 3000,\ 10000
+
+$$
+
+Domande guida:
+1. Con $\mu$ piccolo, quali documenti vengono favoriti?
+	- Con `μ` piccolo vengono favoriti i documenti in cui i termini della query sono molto concentrati. Spesso questi documenti sono corti, perché anche poche occorrenze dei termini della query possono produrre una probabilità alta rispetto alla lunghezza del documento
+2. Con $\mu$ molto grande, le differenze tra documenti si attenuano?
+	- sembra di vedere più varietà di grandezza, quindi si 
+	- In altre parole, i documenti vengono “smussati” molto: il modello specifico del documento conta meno, mentre conta di più la probabilità generale del termine nella collezione.
+	- Questo tende ad attenuare le differenze tra documenti, perché tutti i documenti vengono avvicinati allo stesso modello globale della collezione
+3. Quali documenti sono più sensibili allo smoothing?
+	- nei documenti corti, poche occorrenze o poche assenze cambiano molto la probabilità stimata
+
