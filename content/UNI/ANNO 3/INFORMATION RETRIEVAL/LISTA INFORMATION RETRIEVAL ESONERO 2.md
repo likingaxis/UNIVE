@@ -97,10 +97,31 @@
 		* $RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1 \left( (1 - b) + b \frac{L_d}{L_{ave}} \right) + tf_{td}}$
 [[LABORATORIO 3]]
 #### LANGUAGE MODEL PER RANKING DI INFORMATION RETRIEVAL
-Domanda da fare al prof, se un sistema di IR per stessa query potrebbe restituire risultati differenti se ad esempio si usa un modello di retrieval come language model, o sbaglio? se si è possibile avere difficoltà nella valutazione del sistema?
+- $p(q \mid M_d)$
+- $𝑀_𝑑 = {𝑝(𝑡 ∣ 𝑀_𝑑) ∶ 𝑡 ∈ 𝑉 }$
+	- Unigram con bag of words
+- modello multinomiale
+	- $p(q \mid M_d)  \propto  \prod_{t:tf_{t,q}>0}  p(t \mid M_d)^{tf_{t,q}}$
+- Maximum likelihood Estimation
+	- $\hat{p}(t_i \mid M_d) = \frac{tf_{t_i,d}}{|d|}$
+- Smoothing metodi
+	- Laplace add-1
+		- $p_{Lap}(t \mid d) = \frac{tf_{t,d} + 1}{|d| + |V|}$
+	- collection language model
+		- $p(t \mid M_c) = \frac{cf_t}{T}$
+	- Jelinek-Mercer
+		- $p_{JM}(t \mid d) = \lambda \frac{tf_{t,d}}{|d|} + (1-\lambda)\frac{cf_t}{T}$
+	- Dirichlet 
+		- $p_{Dir}(t \mid d) = \lambda_d p(t \mid \hat{M}_d) + (1-\lambda_d)p(t \mid \hat{M}_c)$
+		- con
+			- $\lambda_d = \frac{|d|}{|d|+\mu}$
+- log likelihood con Dirichlet e operazioni algebriche varie otteniamo
+	- $\log p_{Dir}(t \mid d) = \log \frac{\mu p(t \mid C)} {|d|+\mu} + \log \left( 1+ \frac{tf_{t,d}} {\mu p(t \mid C)} \right)$
+- cerco lo score più piccolo
 
 [[LABORATORIO 3]]
 #### OTTIMIZZAZIONE DEI SISTEMI DI RANKING
+
 #### RELEVANCE FEEDBACK E QUERY EXPANSION
 #### LATENT SEMANTIC INDEXING
 [[UNI/ANNO 3/INFORMATION RETRIEVAL/LABORATORI/LABORATORIO 4|LABORATORIO 4]]

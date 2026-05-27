@@ -129,6 +129,8 @@ diventa quindi
 $$\mu p(t \mid M_c)$$
 $μ$ è un iperparametro globale che rappresenta la quantità totale di pseudo-count aggiunti a ogni documento. 
 È come se a ogni documento venisse aggiunto uno pseudo-documento di lunghezza $\mu$, distribuito secondo il collection language model. $\mu$ è uguale per tutti i termini e documenti, ma il contributo virtuale di ciascun termine cambia perché dipende da $p(t \mid M_c)$
+grazie a $\mu$ diciamo quanto la collezione conta, quindi:
+- il modello specifico del documento conta meno, mentre conta di più la probabilità generale del termine nella collezione
 la formula finale con aggiunta la $tf_{t,d}$ poi quindi diventa:
 $$p_{Dir}(t \mid d) = \frac{tf_{t,d} + \mu p(t \mid M_c)} {|d| + \mu}$$
 dove:
@@ -169,12 +171,22 @@ cerco lo score più piccolo perché voglio la probabilità più alta, quindi a 1
 la formula viene allargata nell'esercizio
 ![[Pasted image 20260512163635.png]]
 
+QUINDI INFINE ABBIAMO
+
+$$\log p_{Dir}(t \mid d) = \log \frac{\mu p(t \mid C)} {|d|+\mu} + \log \left( 1+ \frac{tf_{t,d}} {\mu p(t \mid C)} \right)$$
+facendo poi, data una query q
+cioè la query è composta da più termini. A quel punto applichi la formula sopra **a ogni termine della query** e sommi i log:
+$$\log p_{Dir}(q \mid d) = \sum_{k=1}^{n} \log p_{Dir}(w_k \mid d)$$
+Quindi nella formula del singolo termine devi sostituire:
+$t = w_k$
+- Qui la formula viene separata in due contributi.
+il primo è il contributo di **background**, cioè quanto il termine è probabile nella collezione in generale.
+- il secondo è il contributo specifico del documento: misura quanto il documento aumenta la probabilità di quel termine rispetto al background della collezione
 ###### CONFRONTO TRA VECTOR SPACE MODEL, BM25 E LANGUAGE MODELS
 - BM25 e Language Models sono entrambi motivati da una modellazione probabilistica, anche se rispondono a domande diverse
 	- BM25 ragiona in termini di evidenza di rilevanza: quanto il documento fornisce evidenza rispetto alla query
 	- I Language Models, invece, ragionano in termini generativi: quanto è probabile che il modello linguistico del documento generi la query
 	- Il Vector Space Model, invece, è diverso: non nasce da una modellazione probabilistica, ma da una nozione geometrica di similarità
-
 La term frequency compare in tutti e tre i modelli, ma viene usata in modo diverso:
 - nei Language Models, la term frequency serve per stimare probabilità dei termini
 - in BM25 e nel Vector Space Model, la term frequency viene trasformata in un peso
@@ -187,6 +199,4 @@ Una differenza importante riguarda l’idf.
 - Nei Language Models, invece, l’idf non compare esplicitamente. 
 Tuttavia, l’uso del modello della collezione produce un effetto simile: termini rari nella collezione, ma frequenti in un certo documento, hanno un impatto maggiore sul ranking
 Quindi i Language Models non usano direttamente la document frequency come BM25, ma usano la collection frequency attraverso il collection language model
-BM25 ha un maggior controllo dei fenomeni
-
-ESERCIZI CROCS AGGIUNGERE la parte finale
+**BM25 ha un maggior controllo dei fenomeni**
