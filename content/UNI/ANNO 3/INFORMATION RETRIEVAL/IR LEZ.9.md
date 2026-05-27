@@ -2,9 +2,11 @@
 ##### INTRODUZIONE
 In questa lezione si introduce l’uso dei **Language Models per l’Information Retrieval**. L’obiettivo è definire un framework probabilistico in cui, dato un documento $d$, si costruisce un modello generativo $M_d$​, cioè un modello linguistico associato a quel documento.
 La differenza rispetto a BM25 o all'approccio probabilistico classico è che non ci chiediamo direttamente:
+
 > quanto è probabile che un documento sia rilevante per una certa query?
 
 ma ci chiediamo:
+
 > quanto è probabile che la query dell’utente sia stata generata dal modello linguistico del documento?
 
 Formalmente, quindi, il ranking non si basa più direttamente su una probabilità del tipo:
@@ -130,14 +132,14 @@ $μ$ è un iperparametro globale che rappresenta la quantità totale di pseudo-c
 la formula finale con aggiunta la $tf_{t,d}$ poi quindi diventa:
 $$p_{Dir}(t \mid d) = \frac{tf_{t,d} + \mu p(t \mid M_c)} {|d| + \mu}$$
 dove:
-- $f_{t,d}$è il conteggio reale del termine nel documento;
-- $p(t \mid M_c)$ è la probabilità del termine nella collezione;
-- $\mu p(t \mid M_c)$ è il conteggio virtuale aggiunto;
-- $|d|$ è la lunghezza del documento;
-- $\mu$ controlla quanto smoothing viene applicato.
-	- se $\mu$ aumenta, aumenta il peso della collezione;
-	- se $\mu$ diminuisce, aumenta il peso del documento;
-	- $\mu$ è un iperparametro positivo, scelto/tarato sperimentalmente.
+- $f_{t,d}$è il conteggio reale del termine nel documento
+- $p(t \mid M_c)$ è la probabilità del termine nella collezione
+- $\mu p(t \mid M_c)$ è il conteggio virtuale aggiunto
+- $|d|$ è la lunghezza del documento
+- $\mu$ controlla quanto smoothing viene applicato
+	- se $\mu$ aumenta, aumenta il peso della collezione
+	- se $\mu$ diminuisce, aumenta il peso del documento
+	- $\mu$ è un iperparametro positivo, scelto/tarato sperimentalmente
 - “Dir” sta per Dirichlet, più precisamente Dirichlet smoothing o Dirichlet prior smoothing
 La formula di Dirichlet può essere riscritta come interpolazione tra modello del documento e modello della collezione:
 $$p_{Dir}(t \mid d) = \lambda_d p(t \mid \hat{M}_d) + (1-\lambda_d)p(t \mid \hat{M}_c)$$
@@ -163,7 +165,7 @@ $$\log p_{Dir}(q \mid d) = \sum_{k=1}^{n} \log \frac{tf_{w_k,d} + \mu p(w_k \mid
 
 Si fa perché moltiplicare tante probabilità piccole può produrre numeri estremamente vicini a zero, causando **underflow numerico**. Usando i logaritmi, il prodotto diventa una somma e il ranking rimane lo stesso, perché il logaritmo è una funzione monotona crescente
 lo score sarà probabilmente negativo
-cerco lo score più piccolo perchè voglio la probabilità più alta, quindi a 1, quindi una somma di probabilità a 1
+cerco lo score più piccolo perché voglio la probabilità più alta, quindi a 1, quindi una somma di probabilità a 1
 la formula viene allargata nell'esercizio
 ![[Pasted image 20260512163635.png]]
 

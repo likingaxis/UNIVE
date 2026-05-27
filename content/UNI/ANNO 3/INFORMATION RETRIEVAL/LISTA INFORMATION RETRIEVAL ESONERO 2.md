@@ -1,4 +1,4 @@
-#### VALUTAZIONE DEI SISTEMI
+##### VALUTAZIONE DEI SISTEMI
 [[IR LEZ.6]]
 - Gold Standard
 - precision recall F-measure error rate
@@ -33,7 +33,7 @@
 	- Pairwise valuation
 	- ranking interleaved
 	- A/B Testing
-#### DISTRIBUTIONAL LEXICAL SEMANTICS
+##### DISTRIBUTIONAL LEXICAL SEMANTICS
 [[LISTA INFORMATION RETRIEVAL ESONERO 2]]
 - Distributional Hypothesis
 - tipi di relazione
@@ -47,7 +47,7 @@
 	- $P(x)P(y)PMI(x,y) = \log \frac{P(x,y)}{P(x)P(y)}$
 - Latent semantic analysis
 	- sotto
-#### PROBABILISTIC RETRIEVAL
+##### PROBABILISTIC RETRIEVAL
 - Evento binario $R_{d,q}$
 	- 1 se il documento d è rilevante rispetto alla query q 0 altrimenti
 - Rilevanza probabilistica di un documento
