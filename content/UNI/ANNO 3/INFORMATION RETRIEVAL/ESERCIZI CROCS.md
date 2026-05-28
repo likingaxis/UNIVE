@@ -92,6 +92,14 @@ slide 27
 >BORT
 
 #### LEZIONE 10
+
+How can Champion Lists be implemented in an  inverted index?
+- metterei nelle posting list prima gli r migliori documenti per quel termine e poi tutti gli altri
+
+
+
+
+###### NON SO DI COSA SIA
 ![[Pasted image 20260506120542.png|556]]
 
 >[!info]- soluzione
