@@ -120,7 +120,7 @@ La procedura è la seguente:
 Quindi la differenza principale rispetto al relevance feedback classico è che l’utente non marca manualmente i documenti. Il sistema prende i primi risultati e li tratta come se fossero stati giudicati rilevanti.
 ###### Assunzioni dello pseudo relevance feedback migliorie e rischi
 - si vuole prima vedere una assunzione
-	- primo il sistema iniziale deve essere abbastanza buono da mettere almeno alcuni documenti realmente rilevanti nelle prime posizioni del ranking
+	- il sistema iniziale deve essere abbastanza buono da mettere almeno alcuni documenti realmente rilevanti nelle prime posizioni del ranking
 - cosa ottima: il sistema può migliorare la recall senza chiedere aiuto aggiuntivo all'utente
 	- Supponiamo che i primi documenti restituiti siano davvero pertinenti. Questi documenti possono contenere termini utili che non erano presenti nella query iniziale. Inserendo o pesando maggiormente quei termini nella query riformulata, il sistema può recuperare altri documenti rilevanti
 - rischio: query drift

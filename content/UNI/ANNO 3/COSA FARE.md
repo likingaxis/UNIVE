@@ -2,6 +2,8 @@
 	- weekend
 - information retrieval ripassa tutto da zero e poi vedere codici python IMPORTANTE
 	- weekend
+	- colab 4, domani mattina
+	- ir lez.13 pom+aggiunte del giorno
 - vulnerabilità scrivi laboratorio 3
 	- aspetta che la prof le carichi
 - tesi

@@ -7,9 +7,9 @@ Fin qui abbiamo parlato soprattutto di matrici quadrate.
 Ma nel Vector Space Model e nella LSI usiamo una matrice termine-documento:
 $$A \in \mathbb{R}^{m \times n}$$
 dove:
-- le righe sono i termini;
-- le colonne sono i documenti;
-- ogni cella rappresenta il peso di un termine in un documento, ad esempio frequenza, TF-IDF o altro peso.
+- le righe sono i termini
+- le colonne sono i documenti
+- ogni cella rappresenta il peso di un termine in un documento, ad esempio frequenza, TF-IDF o altro peso
 Questa matrice di solito è rettangolare, non quadrata.
 Quindi non posso applicare direttamente la decomposizione agli autovalori vista prima.
 Per questo si usa la **Singular Value Decomposition**, abbreviata in **SVD**.
@@ -67,7 +67,8 @@ $A_k = U_k \Sigma_k V_k^T$
 ##### Mapping delle query
 Se $q$ è il vettore della query nello spazio originale dei termini, la sua rappresentazione nello spazio LSI è:
 $q_k = \Sigma_k^{-1} U_k^T$ 
-Le slide dicono che ogni riga e colonna di $A$ viene mappata nello spazio LSI a $k$ dimensioni, e che anche la query $q$ viene mappata nello stesso spazio. Inoltre, dopo questa trasformazione, la query non è più sparsa come nel modello vettoriale classico
+Ogni riga e colonna di $A$ viene mappata nello spazio LSI a $k$ dimensioni, e che anche la query $q$ viene mappata nello stesso spazio. 
+Inoltre, dopo questa trasformazione, la query non è più sparsa come nel modello vettoriale classico
 Serve a prendere una **query scritta nello spazio originale dei termini** e trasformarla nello **spazio latente LSI** a $k$ dimensioni
 se la query contiene solo due parole, per esempio “dog” e “friends”, il vettore query ha valori non nulli solo su quelle due dimensioni. In LSI, invece, la query viene proiettata nello spazio latente e diventa una combinazione delle dimensioni latenti. Quindi può attivare anche concetti collegati indirettamente ai termini originali
 LSI può essere vista anche come una forma di **query expansion globale**: non espande la query usando un thesaurus esterno come WordNet, ma sfrutta le associazioni presenti nell'intera collezione
@@ -82,8 +83,6 @@ Non è adatta a esprimere richieste del tipo:
 fiat volkswagen NOT ford
 ```
 oppure condizioni rigide del tipo “trova documenti che parlano di queste cinque aziende”
-
-
 - **full-text search** con indice inverso e modelli come BM25;
 - rappresentazioni dense, oggi spesso ottenute con modelli neurali come BERT o altri embedding model;
 - tecniche di **reranking**, in cui un primo sistema recupera candidati e un secondo modello li riordina.
@@ -114,5 +113,5 @@ La norma di Frobenius misura invece la distanza tra la matrice originale $A$ e l
 $$∥A−Ak​∥_F​$$
 quanto sto sbagliando ricostruendo $A$ con solo $k$ componenti?
 
-In LSI kkk è scelto molto più piccolo del rango originale. Storicamente si usano spesso valori nell’ordine delle centinaia, per esempio 100-300 o qualche centinaio, ma la scelta dipende dalla collezione e dal compromesso tra compressione, rumore e perdita di informazione
+In LSI $k$ è scelto molto più piccolo del rango originale. Storicamente si usano spesso valori nell’ordine delle centinaia, per esempio 100-300 o qualche centinaio, ma la scelta dipende dalla collezione e dal compromesso tra compressione, rumore e perdita di informazione
 

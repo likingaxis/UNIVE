@@ -121,10 +121,69 @@
 
 [[LABORATORIO 3]]
 #### OTTIMIZZAZIONE DEI SISTEMI DI RANKING
-
+- ranking safe non safe
+- Heap
+	- $O(logJ)$
+- $K < |A| \ll NK$
+- Index Elimination
+	- high idf query terms only
+	- docs containing a lot of query terms
+- Champion lists
+- Static Quality Scores
+	- $g(d)$
+	- $\text{net-score}(q,d) = g(d) + \text{cosine}(q,d)$
+	- $g(d) + tf\text{-}idf_{t,d}$
+- Cluster Pruning
+	- $O(\sqrt{N})$
+- Tiered Indexes
+- impact ordered posting
+	- $wf_{t,d} = 1 + \log(tf_{t,d})$
+	- early termination
+	- ordino per idf
+		- recall
+- Scoring Wand
+	- finger
+	- $UB_t = \max score_t(d)$
+	- threshold
 #### RELEVANCE FEEDBACK E QUERY EXPANSION
+- $Precision = \frac{\# \text{documenti rilevanti recuperati}}{\# \text{documenti recuperati}}$
+- $Recall = \frac{\# \text{documenti rilevanti recuperati}}{\# \text{documenti rilevanti}}$
+- $F_1 = \frac{2PR}{P + R}$
+- synonymy
+- metodi locali
+	- relevance feedback
+	- centroide
+		- $\vec{\mu}(D) = \frac{1}{|D|} \sum_{d \in D} \vec{v}(d)$
+	- query ottima
+		- $\vec{q}_{opt} = \frac{1}{|C_r|} \sum_{\vec{d}_j \in C_r} \vec{d}_j - \frac{1}{|C_{nr}|} \sum_{\vec{d}_j \in C_{nr}} \vec{d}_j$
+	- rocchio algorithm
+		- $\vec{q}_m = \alpha \vec{q}_0 + \beta \frac{1}{|D_r|} \sum_{\vec{d}_j \in D_r} \vec{d}_j - \gamma \frac{1}{|D_{nr}|} \sum_{\vec{d}_j \in D_{nr}} \vec{d}$
+	- pseudo-relevance feedback
+		- query drift
+- metodi globali
+	- Global query expansion
+	- migliora recall riduce precision
+	- manual thesaurus 
+	- automatic thesaurus
+	- SVD e LSI utili per query expansion
 #### LATENT SEMANTIC INDEXING
 [[UNI/ANNO 3/INFORMATION RETRIEVAL/LABORATORI/LABORATORIO 4|LABORATORIO 4]]
+- SVD(Singular Value Decomposition)
+	- matrice di low rank di solito k è 100-1000
+	- $A_k = U \, \mathrm{diag}(\sigma_1, \dots, \sigma_k, 0, \dots, 0)V^T$
+	- $A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T$
+- LSI
+	- spazio semantico latente
+	- $A = (U\Sigma^{1/2})(\Sigma^{1/2}V^T)$
+	- query dentro LSI
+		- $q_k = \Sigma_k^{-1} U_k^T$ 
+	- sinonimia
+	- polisemia
+	- no boolean query
+	- formula di energia
+		- $\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$
+	- Frobenius
+		- $∥A−Ak​∥_F​$
 #### QUERY GLOBALI NEL RELEVANCE FEEDBACK E QUERY EXPANSION
 
 

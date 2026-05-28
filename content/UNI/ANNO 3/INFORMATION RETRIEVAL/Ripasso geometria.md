@@ -1,51 +1,28 @@
 # Riassunto geometrico utile per SVD e LSI
 
 ### 1. Autovettori e autovalori
-
 Un autovettore è una direzione speciale di una matrice.
-
 Se:
-
 $$Sv = \lambda v$$
-
 allora:
-
 - $v$ è un autovettore;
-    
 - $\lambda$ è il suo autovalore.
-    
-
 Geometricamente significa che la matrice $S$, applicata a $v$, non cambia la direzione del vettore, ma lo scala soltanto.
-
 Quindi:
-
 - se $\lambda = 3$, il vettore viene allungato di 3;
-    
 - se $\lambda = 1$, resta lungo uguale;
-    
 - se $\lambda = 0$, quella componente viene annullata;
-    
 - se $\lambda$ è piccolo, quella direzione contribuisce poco.
-    
-
 Idea da ricordare per LSI:
-
 le direzioni con valori grandi sono importanti; quelle con valori piccoli possono rappresentare dettagli deboli o rumore.
 
 ### 2. Scrivere un vettore come combinazione di autovettori
-
 Un vettore qualsiasi può essere scritto come combinazione di autovettori, ad esempio:
-
 $$x = 2v_1 + 4v_2 + 6v_3$$
-
 Se gli autovalori associati sono:
-
 3, 2, 0
-
 allora applicare la matrice diventa semplice:
-
 $$Sx = 2 \cdot 3v_1 + 4 \cdot 2v_2 + 6 \cdot 0v_3$$
-
 Quindi la componente lungo $v_3$ sparisce.
 
 Da ricordare:
