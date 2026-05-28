@@ -56,13 +56,11 @@ L’insieme $A$ deve essere abbastanza grande da contenere documenti buoni, ma m
 La prima tecnica è l’**index elimination**, cioè l’eliminazione di una parte dell’indice o di una parte dei candidati prima del calcolo completo degli score.
 - Nel calcolo cosine standard, un documento viene considerato candidato se contiene almeno uno dei termini della query. 
 	- Questo è già un primo filtro: se un documento non contiene nessun termine della query, avrà score nullo rispetto a quella query nel modello vettoriale classico, quindi può essere ignorato.
-L’index elimination porta questa idea oltre. Invece di considerare tutti i documenti che contengono almeno un termine della query, si restringe ulteriormente il calcolo usando due criteri principali:
-1. considerare solo i termini della query con alto **idf**;
-2. considerare solo i documenti che contengono molti termini della query
-Questa tecnica riduce il numero di documenti da valutare, ma può diventare non-safe: un documento eliminato potrebbe comunque essere rilevante, soprattutto se il ranking finale combina più segnali
+L’index elimination porta questa idea oltre.
 - è composta da due forme principali
-	- high idf query terms only
-	- docs containing a lot of query terms
+	- <font color="#b2a2c7">high idf query terms only</font>
+	- <font color="#b2a2c7">docs containing a lot of query terms</font>
+Questa tecnica riduce il numero di documenti da valutare, ma può diventare non-safe: un documento eliminato potrebbe comunque essere rilevante, soprattutto se il ranking finale combina più segnali
 ###### high idf query terms only
 - La prima forma di index elimination consiste nel considerare solo i termini della query con alto **idf**
 	- termini a basso idf contribuiscono poco allo score e difficilmente modificano molto l’ordinamento finale
@@ -86,8 +84,8 @@ applicando il criterio “3 termini su 4”, vengono considerati solo i document
 - poi ad una determinata query consulto solo le champion lists
 	- per ottenere l'insieme dei contender $A$
 - è solo una cosa a scopo didattico perchè creerei la possibilità di censurare determinati documenti
-ESERCIZI CROCS 
-A SLIDE 17
+
+[[ESERCIZI CROCS#LEZIONE 10|esercizi ]]
 ### Static quality scores
 Nei sistemi di ricerca reali, la sola rilevanza testuale non è sufficiente. Due documenti possono essere entrambi pertinenti rispetto alla query
 - ma avere livelli molto diversi di **autorevolezza**, affidabilità o qualità generale.
@@ -103,10 +101,6 @@ $$g(d)$$
 ###### Net score
 Una volta introdotto il punteggio statico di qualità, si può definire un punteggio complessivo, detto **net score**, che combina rilevanza e autorevolezza:
 $$\text{net-score}(q,d) = g(d) + \text{cosine}(q,d)$$
-- $q$ è la query;
-- $d$ è il documento;
-- $g(d)$ è il punteggio statico di qualità del documento;
-- $\text{cosine}$ misura la rilevanza del documento rispetto alla query.
 - In questa formulazione, il documento ottiene un punteggio alto se è 
 	- sia pertinente rispetto alla query 
 	- sia autorevole in generale 
@@ -166,6 +160,7 @@ Questa scelta ha un vantaggio: i documenti più promettenti per quel termine ven
 - Però ha anche una conseguenza importante: le posting list non condividono più un ordinamento comune. Ogni termine ha un proprio ordinamento, perché il peso $wf_{t,d}$​ cambia da termine a termine
 	- non è più possibile attraversare tutte le posting list in parallelo
 	- si passa ad un approccio term-at-a-time
+		- non più parallelo
 	- si processa un termine alla volta e si accumulano progressivamente i punteggi dei documenti
 ###### Early termination
 - prima tecnica collegata all'impact ordered posting
@@ -179,8 +174,7 @@ processando prima i termini con idf più alto, il sistema concentra il calcolo s
 - la **recall** dipende dai **falsi negativi**
 ###### Compromesso
 Quindi il compromesso è:
-- più pruning → meno costo computazionale
-- più pruning → maggiore rischio di perdere documenti rilevanti
+- più pruning → meno costo computazionale e maggiore rischio di perdere documenti rilevanti
 - meno pruning → più garanzie di qualità, ma costo maggiore
 #### Safe vs non safe ranking
 - vogliamo ridurre il numero di documenti da valutare completamente, ma mantenendo la garanzia di ottenere davvero i top $K$
