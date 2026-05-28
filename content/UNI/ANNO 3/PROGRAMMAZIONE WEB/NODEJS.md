@@ -30,11 +30,11 @@ Poi ci sono anche alcune librerie/componenti usate internamente, tra cui:
 ![[Pasted image 20260526151208.png|483]]
 Nelle slide vengono distinti tre tipi principali di moduli:
 
-|Tipo di modulo|Significato|
-|---|---|
-|**Core modules**|Moduli già inclusi in Node.js|
-|**Local modules**|Moduli creati da noi localmente|
-|**Third party modules**|Moduli esterni installati tramite `npm`|
+| Tipo di modulo          | Significato                                |
+| ----------------------- | ------------------------------------------ |
+| **Core modules**        | Moduli già inclusi in Node.js              |
+| **Local modules**       | Moduli creati da noi localmente con `path` |
+| **Third party modules** | Moduli esterni installati tramite `npm`    |
 
 I **core modules** sono moduli di sistema già installati con Node.js. Alcuni esempi importanti sono:
 
@@ -101,7 +101,6 @@ e lo importiamo con
 `const betterlog=require('./betterLog');`
 poi possiamo usare l'oggetto betterlog con i metodi che sono le funzioni del file
 
-
 ###### Esempio con fs
 ```Javascript
 const fs= require('fs');
@@ -158,3 +157,49 @@ server.listen(PORT, 'localhost', () => {
 
 });
 ```
+##### Importare terze parti con npm
+Scaricare i moduli degli altri con 
+`npm` node packet manager
+`su npmjs.com` 
+il progetto è una cartella con dentro il file `package.json`
+comandi `npm`
+- `init`
+- `un`
+	- elimina i moduli
+- `up`
+	- aggiorna i moduli
+- `run`
+	- eseguo gli script presenti nel file `package.json`
+			```Javascript
+			  "scripts": {
+			
+			    "test": "echo \"Error: no test specified\" && exit 1",
+			
+			    "dev": "nodemon index.js",
+			
+			    "start": "node index.js"
+			
+			  },
+			```
+- `i`
+	- ci fa scaricare tute le dipendenze
+- `--global`
+	- opzione che fa installare il progetto in modo globale
+###### Npm nodemon
+- pacchetto per aiuto sviluppo ma non è essenziale per l'esecuzione
+- si può eseguire facendo
+	- `npm install nodemon --save-dev`
+	- serve per installare il modulo a parte
+	- fare `nodemon index.js`
+		- non modifica il frontend ma salva i cambiamenti del backend del server
+#### Versioni
+se cambio la prima cifra della versione quindi da `1.0.0` a `2.0.0` non posso garantire la backward compatibility
+la terza cifra dice le patch fix invece la 2 cifra dice minor release
+- posso sfruttarlo nel file delle dipendenze andando a limitare quale aggiornamento deve essere fatto
+- `~1.0.4` patch release
+- `^1.0.4` fino a minor release
+- `*.0.4` anche le major
+- se non metto niente niente aggiornamenti
+###### Nota sui moduli
+i moduli vengono eseguiti una sola volta, quando chiamiamo la require nel codice
+successivamente non più 
