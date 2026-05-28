@@ -203,3 +203,25 @@ la terza cifra dice le patch fix invece la 2 cifra dice minor release
 ###### Nota sui moduli
 i moduli vengono eseguiti una sola volta, quando chiamiamo la require nel codice
 successivamente non più 
+##### Express
+- framework minimale di `nodejs`
+- routing complesso
+- `req/resp` handling
+- middleware
+- server side rendering
+
+```Javascript
+const express=require('express');
+const app=express();
+const port=4000;
+app.get('/',(req,res)=>{
+    res.send('Hello World!');
+});
+app.listen(port,()=>{
+
+    console.log(`Example app listening on port ${port}`);
+
+});
+```
+##### REST API
+utile per inviare dati al server e vedere la risposta credo
