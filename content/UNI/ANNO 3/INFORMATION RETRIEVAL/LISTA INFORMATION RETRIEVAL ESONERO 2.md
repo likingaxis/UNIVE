@@ -174,8 +174,11 @@
 	- $A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T$
 - LSI
 	- spazio semantico latente
-	- $A = (U\Sigma^{1/2})(\Sigma^{1/2}V^T)$
-	- query dentro LSI
+		- $A = (U\Sigma^{1/2})(\Sigma^{1/2}V^T)$
+	- documenti e termini
+		- $T_k=U_k\Sigma_k^{1/2}$
+		- $D_k=\Sigma_k^{1/2}V_k^T$
+	- query dentro LSI(folding-in)
 		- $q_k = \Sigma_k^{-1} U_k^T$ 
 	- sinonimia
 	- polisemia
@@ -184,6 +187,4 @@
 		- $\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$
 	- Frobenius
 		- $∥A−Ak​∥_F​$
-#### QUERY GLOBALI NEL RELEVANCE FEEDBACK E QUERY EXPANSION
-
-
+#### LINK ANALYSIS

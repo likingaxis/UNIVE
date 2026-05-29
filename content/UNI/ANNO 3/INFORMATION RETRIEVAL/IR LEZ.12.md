@@ -60,6 +60,16 @@ $$A = U \Sigma V^T$$​
 e riscriverla, concettualmente, come:
 $$A = (U\Sigma^{1/2})(\Sigma^{1/2}V^T)$$
 Questa forma serve a dare una rappresentazione simmetrica a termini e documenti nello stesso spazio latente. La prima parte può essere vista come rappresentazione dei termini, la seconda come rappresentazione dei documenti
+$$
+
+T_k=U_k\Sigma_k^{1/2}
+
+$$
+$$
+
+D_k=\Sigma_k^{1/2}V_k^T
+
+$$
 Quindi, se voglio capire quanto un termine è collegato a un documento, posso confrontare il vettore del termine con il vettore del documento nello spazio latente, per esempio tramite prodotto scalare. Se il prodotto scalare è alto, significa che quel termine e quel documento sono vicini nello spazio latente
 “prendiamo il vettore del termine laptop e lo moltiplichiamo per il vettore del documento 3”: non sto controllando solo se la parola “laptop” appare letteralmente nel documento 3, ma sto stimando quanto il documento 3 sia vicino semanticamente alla direzione latente associata a quel termine
 che poi ridotta a $k$ dimensioni sarebbe
@@ -67,6 +77,7 @@ $A_k = U_k \Sigma_k V_k^T$
 ##### Mapping delle query
 Se $q$ è il vettore della query nello spazio originale dei termini, la sua rappresentazione nello spazio LSI è:
 $q_k = \Sigma_k^{-1} U_k^T$ 
+la query viene “inserita dentro” lo spazio latente già costruito dai documenti, **senza rifare tutta la SVD** infatti si dice folding-in
 Ogni riga e colonna di $A$ viene mappata nello spazio LSI a $k$ dimensioni, e che anche la query $q$ viene mappata nello stesso spazio. 
 Inoltre, dopo questa trasformazione, la query non è più sparsa come nel modello vettoriale classico
 Serve a prendere una **query scritta nello spazio originale dei termini** e trasformarla nello **spazio latente LSI** a $k$ dimensioni
@@ -93,21 +104,33 @@ Una volta che ho:
 $q_k$
 e per ogni documento ho:
 $d_{1,k}, d_{2,k}, d_{3,k}, \dots$
-posso calcolare la similarità tra query e documenti.
+posso calcolare la similarità tra query e documenti detta score sapendo che 
+- $D_k = \Sigma_k V_k^T$	
+- $T_k = U_k\Sigma_k$
+lo score LSI viene calcolato confrontando:
+$$
+
+q_k
+
+\qquad\text{con}\qquad
+
+D_k(d)
+
+$$
+per ogni documento $d$
 Di solito si usa:
 $\cos(q_k,d_k)$
-cioè la **cosine similarity**, oppure un prodotto scalare, a seconda della formulazione.
+cioè la **cosine similarity**
 La cosine similarity misura quanto due vettori puntano nella stessa direzione:
 $$\cos(q_k,d_k)=\frac{q_k \cdot d_k}{\|q_k\|\|d_k\|}$$
 Se il valore è alto, vuol dire che query e documento sono vicini nello spazio latente
-
 
 ##### Formula dell'energia
 serve a misurare quanta “energia” o informazione complessiva viene catturata dalle prime $k$ componenti
 Questa formula è utile per scegliere $k$. Per esempio posso dire: scelgo $k$ in modo da conservare almeno il 90% o il 95% dell’energia
 $$\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$$
 
-serve a misurare quanta “energia” o informazione complessiva viene catturata dalle prime $k$ componenti.
+L’**energia** misura quanto una componente latente contribuisce a ricostruire la matrice originale.
 ##### Formula di Frobenius
 La norma di Frobenius misura invece la distanza tra la matrice originale $A$ e la matrice approssimata $A_k$
 $$∥A−Ak​∥_F​$$
@@ -115,3 +138,8 @@ quanto sto sbagliando ricostruendo $A$ con solo $k$ componenti?
 
 In LSI $k$ è scelto molto più piccolo del rango originale. Storicamente si usano spesso valori nell’ordine delle centinaia, per esempio 100-300 o qualche centinaio, ma la scelta dipende dalla collezione e dal compromesso tra compressione, rumore e perdita di informazione
 
+Una dimensione latente è una specie di “asse semantico” costruito combinando:
+$$u_i,\ \sigma_i,\ v_i^T$$
+- documenti e termini
+		- $D_k = \Sigma_k V_k^T$
+		- $T_k = U_k\Sigma_k$
