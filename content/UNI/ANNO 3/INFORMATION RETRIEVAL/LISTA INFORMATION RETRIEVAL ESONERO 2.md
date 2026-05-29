@@ -188,3 +188,17 @@
 	- Frobenius
 		- $∥A−Ak​∥_F​$
 #### LINK ANALYSIS
+- Good/Bad/Unknowns
+- Anchor text
+- Connectivity Servers
+	- url -> outlinks
+	- url -> inlinks
+- Boldi and Vigna
+	- 64 bit
+	- 7 URL
+	- Gap Encoding e gamma code
+- Page Ranking
+	- Globale
+		- rando surfer
+	- Locale
+		- 
