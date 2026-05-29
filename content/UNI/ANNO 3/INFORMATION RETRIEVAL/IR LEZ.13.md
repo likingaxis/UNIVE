@@ -126,29 +126,55 @@ definisco sotto la probabilità di random walk e di teleporting con $\alpha$ e $
 	- ovvero la probabilità di $1/n$ di fare teleporting su uno qualsiasi dei nodi
 - **gli zeri della matrice originale non restano più zeri**, perché il teleporting aggiunge una piccola probabilità di passare da qualunque nodo a qualunque altro nodo $1/60$
 ###### Locale HITS(Hyperlink-induced Topic Search)
-- metodo locale, a differenza di quello globale non deve visitare tutte le pagine
-la pagina che punta da informazioni alla pagina a cui è puntata
-simile allo pseudo relevance feedback
-ci sono due tipi di pagine, pagine hub e pagine authority
-metodo utile per broad topics, ma non viene molto usato ultimamente
-una buona hub page punta a pagine autorevoli 
-una buona pagina autorevole è puntata da più hub
-modello locale perchè ho bisogno di partire da alcune pagine che rispondono a una determinata query
-non come quello globale che puntava a visitarle tutte
-- ho un insieme iniziale di pagine detto root set, partendo da esso esploro altre pagine, con query
+- metodo locale, non cerca di assegnare un punteggio stabile a tutte le pagine del Web, ma lavora su un sottoinsieme di pagine costruito a partire da una **query**
+vogliamo distinguere tra due tipi di pagine:
+- pagine **authority**, cioè pagine autorevoli su un certo argomento;
+- pagine **hub**, cioè pagine che raccolgono e puntano a buone authority
+La relazione tra hub e authority è circolare:
+$$\text{un buon hub punta a molte buone authority}$$$$\text{una buona authority è puntata da molti buoni hub}$$
+Questa idea assomiglia, a livello intuitivo, allo **pseudo relevance feedback**: si parte da un primo insieme di risultati ottenuti con una query, poi si usa quell’insieme per espandere o raffinare l’informazione. In HITS, però, l’espansione non avviene principalmente sui termini della query, ma sulla struttura dei link
+Il procedimento è:
+1. si parte da una query testuale;
+2. si recuperano le pagine che contengono quella query;
+3. queste pagine formano il **root set**;
+4. dal root set si costruisce un insieme più ampio, detto **base set**;
+5. sul base set si calcolano hub score e authority score.
+HITS è utile soprattutto per **broad topic queries**, cioè query ampie e informative
 ###### Come capisco se una pagina è buona da selezionare?
 - l'obiettivo è restituire all'utente pagine authority
-inizialmente assegno hub e authority a entrambe
-h(x)<-1 a(x)<-1
-iterativamente andiamo ad aggiornare questi valori, vedendo gli hyperlink se sono verso di esso allora è un autorevole, se sono fuori allora è un hub, quelli che puntano verso l'authority saranno a loro volta un hub allora
-inizio con 1 ma è uguale l'importante è ottenere una lista ordinata di authority
+inizialmente assegno 1 sia ad hub che authority
+- $h(x) \leftarrow 1$
+- $a(x) \leftarrow 1$
+
+Poi l’algoritmo aggiorna iterativamente i punteggi guardando i link
+Il punteggio hub di una pagina $x$ si calcola sommando i punteggi authority delle pagine verso cui $x$ punta:
+$$h(x) \leftarrow \sum_{x \to y} a(y)$$
+
+Il punteggio authority di una pagina $x$ si calcola sommando i punteggi hub delle pagine che puntano a $x$:
+$$a(x) \leftarrow \sum_{y \to x} h(y)$$
+
+
+
+
+
+Per dimostrare perché l’algoritmo converge, si usa la **matrice di adiacenza** $A$ del grafo costruito sul base set.
+La matrice ha una riga e una colonna per ogni pagina. 
+L’elemento:
+$A_{ij}$ vale 1 se la pagina $i$ contiene un link verso la pagina $j$ altrimenti 0
+La direzione entrante o uscente dipende da come leggo la matrice:
+- leggendo la **riga $i$** vedo i link uscenti dalla pagina $i$;
+- leggendo la **colonna $j$** vedo i link entranti nella pagina $j$.
+In forma matriciale, gli aggiornamenti diventano:
+$$h=Aa$$
+$$a = A^Th$$
+- Il ruolo della trasposta è importante perché permette di invertire il punto di vista: con $A$ guardo i link uscenti, mentre con $A^T$ guardo i link entranti.​
+Sostituendo una formula nell'altra si ottiene:
+$$h = AA^Th$$$$a = A^T A a$$
+sono uno legato dall'autovettore dell'altro
 - Dopo quante iterazioni ho una buona stima?
-	- la matrice di adiacenza mostra un arco entrante o uscente a seconda della trasposta della matrice
-	- se ho elemento a 1 entrante se 0 uscente
-	- quindi posso capire gli entranti e gli uscenti
-	- scrivi motivo fatto bene
-	- dopo circa 5 iterazioni ho recuperato tutto
+	- In teoria si può continuare fino alla convergenza, cioè fino a quando i valori cambiano pochissimo da un’iterazione alla successiva. In pratica, però, spesso bastano poche iterazioni per ottenere un ordinamento abbastanza stabile delle migliori pagine
+	- circa $5$
 usato in scenari troppo specifici spesso per discovery
-- globale lo fai una volta locale lo dovrei fare più volte
+- globale lo fai una volta locale lo dovrei fare più volte, quindi limitante
 - poi anche topic drift
 	- potrei deviare cambiando topic
