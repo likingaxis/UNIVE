@@ -416,3 +416,5 @@ COSINE SIMILARITY VS BM25
 - TF-IDF + cosine normalizza geometricamente i vettori
 - BM25 usa saturazione della term frequency e normalizzazione esplicita della lunghezza
 - cosine similarity ritorna un valore compreso tra 0 e 1 mentre BM25 uno score numerico che va a infinito
+
+BM25 È USATO SU LUCENE
