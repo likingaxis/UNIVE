@@ -36,7 +36,7 @@ Dopo aver rappresentato il Web come un **grafo diretto**, nasce un problema prat
 e che la struttura dati rimanga comunque sempre operativa
 $$\text{URL} \rightarrow \text{outlinks}$$
 $$\text{URL} \rightarrow \text{inlinks}$$
-###### Liste di adiacenza
+##### Liste di adiacenza
 Un modo naturale per rappresentare il grafo è usare le **liste di adiacenza**. Ogni URL viene rappresentato come un intero, e a ogni URL viene associata la lista dei suoi vicini, cioè le pagine collegate tramite link
 Quindi, se ogni pagina è un nodo del grafo:
 - la lista degli **outlinks** contiene gli archi uscenti;
