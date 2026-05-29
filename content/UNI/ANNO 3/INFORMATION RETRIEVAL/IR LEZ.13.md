@@ -125,5 +125,30 @@ definisco sotto la probabilità di random walk e di teleporting con $\alpha$ e $
 - quindi conto anche la probabilità di una matrice $nxn$ tutta a $1/n$
 	- ovvero la probabilità di $1/n$ di fare teleporting su uno qualsiasi dei nodi
 - **gli zeri della matrice originale non restano più zeri**, perché il teleporting aggiunge una piccola probabilità di passare da qualunque nodo a qualunque altro nodo $1/60$
-###### Locale HITS
+###### Locale HITS(Hyperlink-induced Topic Search)
+- metodo locale, a differenza di quello globale non deve visitare tutte le pagine
+la pagina che punta da informazioni alla pagina a cui è puntata
+simile allo pseudo relevance feedback
 ci sono due tipi di pagine, pagine hub e pagine authority
+metodo utile per broad topics, ma non viene molto usato ultimamente
+una buona hub page punta a pagine autorevoli 
+una buona pagina autorevole è puntata da più hub
+modello locale perchè ho bisogno di partire da alcune pagine che rispondono a una determinata query
+non come quello globale che puntava a visitarle tutte
+- ho un insieme iniziale di pagine detto root set, partendo da esso esploro altre pagine, con query
+###### Come capisco se una pagina è buona da selezionare?
+- l'obiettivo è restituire all'utente pagine authority
+inizialmente assegno hub e authority a entrambe
+h(x)<-1 a(x)<-1
+iterativamente andiamo ad aggiornare questi valori, vedendo gli hyperlink se sono verso di esso allora è un autorevole, se sono fuori allora è un hub, quelli che puntano verso l'authority saranno a loro volta un hub allora
+inizio con 1 ma è uguale l'importante è ottenere una lista ordinata di authority
+- Dopo quante iterazioni ho una buona stima?
+	- la matrice di adiacenza mostra un arco entrante o uscente a seconda della trasposta della matrice
+	- se ho elemento a 1 entrante se 0 uscente
+	- quindi posso capire gli entranti e gli uscenti
+	- scrivi motivo fatto bene
+	- dopo circa 5 iterazioni ho recuperato tutto
+usato in scenari troppo specifici spesso per discovery
+- globale lo fai una volta locale lo dovrei fare più volte
+- poi anche topic drift
+	- potrei deviare cambiando topic
