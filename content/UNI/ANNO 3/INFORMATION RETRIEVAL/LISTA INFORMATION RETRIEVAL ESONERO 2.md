@@ -1,50 +1,65 @@
 ##### VALUTAZIONE DEI SISTEMI
 [[IR LEZ.6]]
+- soggettività utente
+- collezione di documenti, insieme di query e giudizi di rilevanza
+	- IR end-to-end di valutazione non componenti singole
 - Processo Gold Standard
+	- costruisce il dataset
+		- 1. query rappresentative
+		- 2. documenti candidati da IR base, alta recall
+		- 3. annotazione umana rilevante/non rilevante
 - precision recall F-measure error rate
 	- $P = \frac{TP}{TP + FP}$
 	- $R = \frac{TP}{TP + FN}$
 	- $accuracy = \frac{TP + TN}{TP + FP + FN + TN}$
 	- $error = 1 - accuracy$
 	- $F1 = \frac{2PR}{P + R}$
+	- misure da sole non forniscono un ordine del recupero
 - Ranked based measures
 	- Rilevanza binaria
 		- Precision@K
 			- $Precision@K = \frac{\text{relevant nei primi K}}{K}$
 		- Average Precision e Mean Average Precision
-			- AP=media di tutti i Precision@K per una singola query
+			- AP=media di tutti i Precision@K per una singola query, scorrendo tutte le posizioni
 			- $MAP = \frac{1}{|Q|} \sum_{q \in Q} AP(q)$ per più query
 	- Più livelli di rilevanza
 		- Discount Cumulative Gain
-			- Gain $r_i$ 
-			- Discount $\frac{1}{\log_2(i)}$
-			- $CG = r_1+r_2+..r_n$
+			- Gain $r_i$ del singolo documento
+			- Discount $\frac{1}{\log_2(i)}$ valore in base alla posizione
+			- $CG = r_1+r_2+..r_n$ di un range di documenti
 			- $DCG_p = rel_1 + \sum_{i=2}^{p} \frac{rel_i}{\log_2 i}$
+			- difficile da confrontare con query diverse
 		- Normalized Discount Cumulative Gain
 			- confronto con ranking ideale
 			- $NDCG = \frac{DCG}{IDCG}$
 - Not Ranking based measures
 	- Reciprocal Rank
-		- $RR = \frac{1}{K}$
+		- $RR = \frac{1}{K}$ dove $K$ è la posizione
 	- Mean Reciprocal Rank(MRR)
 		- $MRR = \frac{1}{|Q|} \sum_{q \in Q} \frac{1}{rank_q}$
 - User Behavior
 	- Click Position Bias
 	- Pairwise valuation
+		- Doc A vs Doc B
 	- ranking interleaved
+		- merge tra 2 ranking alternati
 	- A/B Testing
+		- divido utenti in 2 gruppi
 ##### DISTRIBUTIONAL LEXICAL SEMANTICS
 [[LISTA INFORMATION RETRIEVAL ESONERO 2]]
 - Distributional Hypothesis
-- tipi di relazione
-	- sintagmattiche
-	- paradigmatiche
-	- topiche
+- tipi di relazioni
+	- sintagmatiche, parole nello stesso testo
+	- paradigmatiche, scambiate nello stesso contesto significati simili
+	- topiche, stesso argomento
 - Word Spaces
+	- rappresentare parole con spazi vettoriali
 	- Matrice di co-occorrenza 
 		- `lexicon → [verb:2, available:1, online:1, ...]`
+		- parole come vettori sparsi
 - Pointwise Mutual Information
-	- $P(x)P(y)PMI(x,y) = \log \frac{P(x,y)}{P(x)P(y)}$
+	- misura quanto sorprende vedere x,y insieme
+	- $PMI(x,y) = \log \frac{P(x,y)}{P(x)P(y)}$
 - Latent semantic analysis
 	- sotto
 ##### PROBABILISTIC RETRIEVAL
