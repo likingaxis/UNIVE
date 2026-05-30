@@ -1,7 +1,7 @@
 #### VALUTAZIONE DEI SISTEMI
 - obiettivo: restituire all'utente qualcosa che lo soddisfi
     - problema: la soddisfazione dell’utente è **qualcosa di soggettivo**
-        - dipende dalla persona, dal contesto, dall’interfaccia, ecc.
+        - dipende dalla persona, dal contesto, dall'interfaccia, ecc
     - quindi nasce una domanda:
         - _come posso misurare in modo oggettivo qualcosa che è soggettivo?_
         - evitando bias e interpretazioni personali
