@@ -63,11 +63,12 @@
 - Latent semantic analysis
 	- sotto
 ##### PROBABILISTIC RETRIEVAL
+- utili per definire i contesti
 - Evento binario $R_{d,q}$
-	- 1 se il documento d è rilevante rispetto alla query q 0 altrimenti
-- Rilevanza probabilistica di un documento
-	- $p(R|d,q)=\sum_{u \in U} p(R|d,q,u)p(u)$
-	- $p(R|d,q)=\frac{p(d|R,q)p(R|q)}{p(d|q)}$
+	- 1 se il documento d è rilevante rispetto alla query q 
+	- 0 altrimenti
+- Rilevanza probabilistica di un documento con approccio non language model
+	- $p(R|d,q)=_{rank}p(d|R,q)$
 - Decisione per odds
 	- $O(R|d,q)=\frac{p(R|d,q)}{p(\bar R|d,q)}$
 	- >1 più rilevante che non =1 uguali <1 più non rilevante
@@ -76,7 +77,9 @@
 	-  $C(d,q)$ Costo se $d$ è rilevante ma non viene restituito (Falso Negativo).
 	* $C'(d,q)$ Costo se $d$ non è rilevante ma viene restituito (Falso Positivo).
 	- $R(D(q)) = \sum_{d \in D(q)} C'(d,q)p(\bar{R}|d,q) + \sum_{d \notin D(q)} C(d,q)p(R|d,q)$
+	- Se assumiamo una Loss  $C = C' = 1$, il rischio è minimo quando restituiamo i $k$ documenti con la più alta probabilità di rilevanza.
 - BIM
+	- semplice e binario
 	- documento $v_{d}= (x_{1},\dots,x_{m})$ con $x_{i} = 1$ se $t_{i} \in d$.
 	- query $v_{q} = (y_{1},\dots,y_{m})$ dove $y_{i} = 1$ se $t_{i} \in q$.
 	- $O(R|v_d, v_q) = \prod_{i=1}^{M} \frac{p(x_i|R, v_q)}{p(x_i|\bar{R}, v_q)}$
@@ -90,7 +93,9 @@
 				* $p_i = 0.5$
 				* $u_i \approx \frac{df_i}{N}$
 		* $u_{t} = p(x_{t} = 1| \bar{R},v_{q})$ : probabilità che il termine $t_i$ compaia in un documento non rilevante per la query $q$
-		* $c_i = \log \frac{p_i(1-u_i)}{u_i(1-p_i)}$
+		* contributo di un termine della query con log odds ratio
+			* $c_i = \log \frac{p_i(1-u_i)}{u_i(1-p_i)}$
+			* >0 più documenti rilevanti =0 non si distinguono rilevanti da non rilevanti <0 il termine è più in documenti non rilevanti
 		* con giudizi di rilevanza 
 			* $RSV_d = \sum_{i:x_i=y_i=1} c_i$
 		* senza giudizi di rilevanza e pi=0.5
