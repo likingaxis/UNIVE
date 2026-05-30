@@ -10,8 +10,8 @@
 - [x] lab 3
 - [x] lab 4
 ##### Ripetere
-- [ ] IR lez.6
-- [ ] IR lez.7
+- [x] IR lez.6
+- [x] IR lez.7
 - [ ] IR lez.8
 - [ ] IR lez.9
 - [ ] IR lez.10
