@@ -135,7 +135,7 @@ PMI misura:
 - ci interessa:
 	- **quanto è significativa questa co-occorrenza**
 ##### Formula
-$$P(x)P(y)PMI(x,y) = \log \frac{P(x,y)}{P(x)P(y)}$$
+$$PMI(x,y) = \log \frac{P(x,y)}{P(x)P(y)}$$
 - $P(x)$ → probabilità di vedere $x$
 - $P(y)$ → probabilità di vedere $y$
 - $P(x,y)$ → probabilità che compaiano insieme
