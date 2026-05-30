@@ -1,6 +1,6 @@
 ##### VALUTAZIONE DEI SISTEMI
 [[IR LEZ.6]]
-- Gold Standard
+- Processo Gold Standard
 - precision recall F-measure error rate
 	- $P = \frac{TP}{TP + FP}$
 	- $R = \frac{TP}{TP + FN}$
