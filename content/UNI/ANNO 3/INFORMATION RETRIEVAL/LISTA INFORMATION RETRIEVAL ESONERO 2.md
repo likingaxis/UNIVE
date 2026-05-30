@@ -199,6 +199,17 @@
 	- Gap Encoding e gamma code
 - Page Ranking
 	- Globale
-		- rando surfer
+		- random surfer
+			- $\frac{1}{4}$
+			- $\sum_{j=1}^{n} P_{ij}= 1$
+			- $x_{\text{next}} = xP^i$
 	- Locale
-		- 
+		- HITS
+			- *root set*
+			- *base set*
+			- hub e authority
+				- $h(x) \leftarrow \sum_{x \to y} a(y)$
+				- $a(x) \leftarrow \sum_{y \to x} h(y)$
+			- $a = A^T A a$
+			- $h = AA^Th$
+		- topic drift
