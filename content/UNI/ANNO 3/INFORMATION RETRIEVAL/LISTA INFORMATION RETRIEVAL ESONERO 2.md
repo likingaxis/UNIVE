@@ -137,56 +137,96 @@
 		* utilizzato su Lucene, software di information retrieval
 	* cosine similarity ritorna un valore compreso tra 0 e 1 mentre BM25 uno score numerico che va a infinito
 	* cosine similarity usa TF senza saturazione e normalizza con vettori mentre qui con lunghezze vere e proprie
+
 [[LABORATORIO 3]]
 #### LANGUAGE MODEL PER RANKING DI INFORMATION RETRIEVAL
+- andiamo a definire la stima basandola su quanto è probabile che la query sia stata generata dal modello generativo di un determinato linguaggio
 - $p(q \mid M_d)$
+- modello generativo unigram e bag of words
 - $𝑀_𝑑 = {𝑝(𝑡 ∣ 𝑀_𝑑) ∶ 𝑡 ∈ 𝑉 }$
-	- Unigram con bag of words
-- modello multinomiale
+- modello multinomiale con query likelihood
+	- misuriamo quanto bene il modello del documento spiega la query osservata
 	- $p(q \mid M_d)  \propto  \prod_{t:tf_{t,q}>0}  p(t \mid M_d)^{tf_{t,q}}$
-- Maximum likelihood Estimation
+	- considera più volte l'apparizione di un certo termine per term frequency
+- Maximum likelihood Estimation per stimare la probabilità
 	- $\hat{p}(t_i \mid M_d) = \frac{tf_{t_i,d}}{|d|}$
 - Smoothing metodi
 	- Laplace add-1
 		- $p_{Lap}(t \mid d) = \frac{tf_{t,d} + 1}{|d| + |V|}$
+		- altera troppo le probabilità
 	- collection language model
 		- $p(t \mid M_c) = \frac{cf_t}{T}$
 	- Jelinek-Mercer
 		- $p_{JM}(t \mid d) = \lambda \frac{tf_{t,d}}{|d|} + (1-\lambda)\frac{cf_t}{T}$
+		- Se $λ$ è alto, diamo più peso al documento
+		- Se $λ$ è basso, diamo più peso alla collezione
+			- iper-parametro
+		- tutti i documenti hanno stesso parametro
 	- Dirichlet 
 		- $p_{Dir}(t \mid d) = \lambda_d p(t \mid \hat{M}_d) + (1-\lambda_d)p(t \mid \hat{M}_c)$
 		- con
 			- $\lambda_d = \frac{|d|}{|d|+\mu}$
+		- $\mu$ controlla quanto smoothing viene applicato
+		- se $\mu$ aumenta, aumenta il peso della collezione
+		- se $\mu$ diminuisce, aumenta il peso del documento
+		- $\mu$ è un iper-parametro positivo, scelto/tarato tramite benchmark
 - log likelihood con Dirichlet e operazioni algebriche varie otteniamo
 	- $\log p_{Dir}(t \mid d) = \log \frac{\mu p(t \mid C)} {|d|+\mu} + \log \left( 1+ \frac{tf_{t,d}} {\mu p(t \mid C)} \right)$
+	- definita poi una query andiamo a fare
+	- $\log p_{Dir}(q \mid d) = \sum_{k=1}^{n} \log p_{Dir}(w_k \mid d)$
 - cerco lo score più piccolo
+- BM25 VS Language Models
+	- BM25 maggior controllo dei fenomeni e idf esplicita
+	- Language model hanno idf non esplicita ma con la collection frequency si ottiene un risultato simile
 
 [[LABORATORIO 3]]
 #### OTTIMIZZAZIONE DEI SISTEMI DI RANKING
 - ranking safe non safe
 - Heap
-	- $O(logJ)$
-- $K < |A| \ll NK$
+	- costruzione $O(J)$
+	- estrazione primi $K$    $O(KlogJ)$
+	- aiuta nella scelta dei migliori $K$ ma il ranking devo farlo comunque per tutti i documenti
+- **pruning** 
+- $K < |A| \ll N$
+	- A insieme di contender
+	- dopo aver trovato A si calcola il ranking
 - Index Elimination
 	- high idf query terms only
+		- elimina certamente le stopword
 	- docs containing a lot of query terms
+		- considero solo i documenti che sono presenti in un certo numero di posting list dei termini della query
 - Champion lists
-- Static Quality Scores
+	- migliori $r$ documenti costruita a index time
+- Static Quality Scores, per ranking più preciso
+	- aggiungiamo autorevolezza
 	- $g(d)$
 	- $\text{net-score}(q,d) = g(d) + \text{cosine}(q,d)$
-	- $g(d) + tf\text{-}idf_{t,d}$
+	- global champion list per ridurre documenti in fase di ranking
+		- $g(d) + tf\text{-}idf_{t,d}$
 - Cluster Pruning
-	- $O(\sqrt{N})$
-- Tiered Indexes
+	- $\sqrt{N}$ leader con circa $\sqrt{N}$ followers
+	- $O(\sqrt{N})$ cosine similarity 
+	- non safe ma molto veloce
+- Tiered Indexes, non restringe insieme di contender A
+	- divide in tier i documenti
+	- posso dividere i documenti dei termini in tier con $g(d)$
 - impact ordered posting
+	- sfrutta weighted term frequency per capire quali sono promettenti
 	- $wf_{t,d} = 1 + \log(tf_{t,d})$
 	- early termination
-	- ordino per idf
-		- recall
+		- solo i primi $r$ documenti ordinati per weighted term frequency o in base a una certa soglia del peso
+		- non safe
+	- ordino e elimino per idf
+	- cerco di mantenere comunque buona recall
+	- compromesso su quanto pruning fare
 - Scoring Wand
-	- finger
-	- $UB_t = \max score_t(d)$
-	- threshold
+	- ordino crescente per docID
+	- finger locale
+	- $UB_t = \max score_t(d)$ 
+	- threshold globale
+	- pivoting globale
+	- è safe perchè analizza la massima somma possibile degli score
+	- riduce costo computazionale del 90% ed è ottima
 #### RELEVANCE FEEDBACK E QUERY EXPANSION
 - $Precision = \frac{\# \text{documenti rilevanti recuperati}}{\# \text{documenti recuperati}}$
 - $Recall = \frac{\# \text{documenti rilevanti recuperati}}{\# \text{documenti rilevanti}}$
