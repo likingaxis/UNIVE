@@ -134,7 +134,9 @@ O(R|v_d,v_q)
 
 In pratica, ogni termine contribuisce separatamente al punteggio del documento.
 ###### Parametri $p_i$ e $u_i$
-Per ogni termine $t_i$ definiamo due probabilità fondamentali:
+Dopo aver definito il BIM, sappiamo che il modello non usa la frequenza dei termini, ma solo la loro presenza o assenza nei documenti. A questo punto il problema diventa: **quanto è informativo un termine della query per distinguere i documenti rilevanti da quelli non rilevanti?**  
+Per rispondere, il BIM 
+per ogni termine $t_i$ definisce due probabilità fondamentali:
 $$p_i=p(x_i=1|R,v_q)$$
 $$u_i=p(x_i=1|\bar R,v_q)$$
 
@@ -163,6 +165,8 @@ Quindi \($c_i$\) misura quanto un termine aiuta a distinguere documenti rilevant
 ##### Retrieval Status Value, RSV
 Applicando il logaritmo, la produttoria degli odds diventa una sommatoria. Otteniamo così il **Retrieval Status Value**, cioè il punteggio finale del documento:
 $$RSV_d=\sum_{i:x_i=y_i=1} c_i$$
+
+dove $x_i$ sono i termini del doc e $y_i$ sono i termini della query
 Il documento riceve quindi un punteggio pari alla somma dei pesi dei termini che:
 - sono presenti nella query;
 - sono presenti anche nel documento.
@@ -171,10 +175,7 @@ Questa è la formula operativa finale del BIM.
 > A livello operativo, BIM e Vector Space Model sono simili: entrambi calcolano uno score sommando pesi dei termini e possono usare strutture come l’inverted index.
 > La differenza è nel significato dei pesi: nel VSM sono geometrici/statistici, nel BIM sono probabilistici.
 
-#### Stima delle probabilità nel BIM
-
-Per calcolare il peso \($c_i$\), dobbiamo stimare \($p_i$\) e \($u_i$\).
-Se abbiamo giudizi di rilevanza, usiamo:
+i valori effettivi di $p_i$ e $u_i$ sono rispetivamente
 - \($N$\): numero totale di documenti nella collezione;
 - \($R$\): numero di documenti rilevanti;
 - \($r_i$\): numero di documenti rilevanti che contengono il termine \($t_i$\);
@@ -222,9 +223,7 @@ Questi limiti motivano il passaggio ai modelli successivi, come Poisson, 2-Poiss
 Il BIM rappresenta i documenti in modo binario: per ogni termine considera solo se compare oppure no.
 $x_i \in \{0,1\}$
 Questo però è limitante, perché non distingue tra un termine presente una volta e uno presente molte volte.
-Per introdurre la **Term Frequency**, cambiamo rappresentazione:
-- nel **BIM** ogni termine è binario;
-- nel nuovo modello ogni componente rappresenta il numero di occorrenze del termine nel documento.
+Introduciamo quindi la **Term Frequency**
 Quindi il documento viene rappresentato come vettore di conteggi:
 $(d_{t_1}, \dots, d_{t_n})$
 dove \($d_{t_i}=n_i$\) indica quante volte il termine \($t_i$\) compare nel documento.
@@ -398,3 +397,5 @@ COSINE SIMILARITY VS BM25
 - cosine similarity ritorna un valore compreso tra 0 e 1 mentre BM25 uno score numerico che va a infinito
 
 BM25 È USATO SU LUCENE
+	* cosine similarity ritorna un valore compreso tra 0 e 1 mentre BM25 uno score numerico che va a infinito
+	* cosine similarity usa TF senza saturazione e normalizza con vettori mentre qui con lunghezze vere e proprie

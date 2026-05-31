@@ -85,36 +85,58 @@
 	- $O(R|v_d, v_q) = \prod_{i=1}^{M} \frac{p(x_i|R, v_q)}{p(x_i|\bar{R}, v_q)}$
 		- per i termini non presenti nella query metto probabilità per R e not R a 1 così si annullano
 	- parametrizzazione
-		* $p_{t} = p(x_{t}=1|R,v_{q})$ : probabilità che il termine $t_i$ compaia in un documento rilevante per la query $q$
+		* $p_i=p(x_i=1|R,v_q)$: probabilità che il termine $t_i$ compaia in un documento rilevante per la query $q$
+		* $u_i=p(x_i=1|\bar R,v_q)$
 			* con giudizi di rilevanza
 				* $p_i = \frac{r_i}{R}$
 				* $u_i = \frac{df_i - r_i}{N - R}$
 			* senza giudizi di rilevanza
 				* $p_i = 0.5$
 				* $u_i \approx \frac{df_i}{N}$
-		* $u_{t} = p(x_{t} = 1| \bar{R},v_{q})$ : probabilità che il termine $t_i$ compaia in un documento non rilevante per la query $q$
 		* contributo di un termine della query con log odds ratio
 			* $c_i = \log \frac{p_i(1-u_i)}{u_i(1-p_i)}$
 			* >0 più documenti rilevanti =0 non si distinguono rilevanti da non rilevanti <0 il termine è più in documenti non rilevanti
+		* retrieval status value, punteggio finale del singolo documento
 		* con giudizi di rilevanza 
 			* $RSV_d = \sum_{i:x_i=y_i=1} c_i$
-		* senza giudizi di rilevanza e pi=0.5
+		* senza giudizi di rilevanza e $p_i=0.5$
 			* $RSV_d \approx \sum_{i:x_i=y_i=1} \log \frac{N}{df_i}$
-		* USATO PER TITOLI E ABSTRACT
+		* USATO PER TITOLI E ABSTRACT, non usa term frequency
+* modelli con term frequency
 * Poisson Model
 	* $d_{t_i}=n_i$
-	* $Poisson(x|\lambda)=\frac{e^{-\lambda}\lambda^x}{x!}$
-	* $\lambda \approx \frac{CF_j}{N}$
+	* $Poisson(x|\lambda)=\frac{e^{-\lambda}\lambda^x}{x!}$ distribuzione che indica quanto è raro un evento
+		* \($x$\) è il numero di occorrenze osservate;
+		- \($\lambda$\) è il numero medio atteso di occorrenze.
+	* $\lambda \approx \frac{CF_{t_j}}{N}$
 	* $RSV_d=\sum_{t_i:y_i=1} n_i \log \frac{\rho_i}{\gamma_i}$
+		- \($n_i$\) è il numero di occorrenze del termine \($t_i$\) nel documento;
+		- \($\rho_i$\) è la frequenza media attesa nei documenti rilevanti;
+		- \($\gamma_i$\) è la frequenza media attesa nella collezione generale.
+		- linearità del contributo di un termine
+	- Eliteness(termini che rappresentano a pieno quel documento e appaiono molto)
 * 2-Poisson Model
 	* $p(d_{t_i}=n_i|R,v_q)=p_i \cdot Poisson(n_i|\mu_i)+(1-p_i)\cdot Poisson(n_i|\bar \mu_i)$
-* Modello BM25
+	* sfrutta il concetto di Eliteness e distingue termini Elite da non Elite
+	* \($p_i$\) è la probabilità che il documento sia elite per il termine;
+	- \($\mu_i$\) è la media delle occorrenze nei documenti elite;
+	- \($\bar \mu_i$\) è la media delle occorrenze nei documenti non-elite.
+	- troppi parametri da dover stimare per ogni termine quindi si usa BM25 con saturazione
+* Modello Okapi BM25
 	* saturazione e peso IDF
-	* $RSV_d = \sum_{t \in q} \frac{(k_1 + 1)tf_{td}}{k_1 + tf_{td}} \log \frac{N}{df_t}$
-		* k1 basso= saturazione rapida
-		* k1 alto= saturazione lenta
+	* $L_{d} = \sum_{t} tf_{td}$
+	* $L_{ave} = \frac 1 {|D|} \sum\limits_{d \in D}L_{d}$
 	* BM25 con saturazione e bilanciamento
 		* $RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1 \left( (1 - b) + b \frac{L_d}{L_{ave}} \right) + tf_{td}}$
+		* $b\approx 0,75$ 
+			* fattore di normalizzazione b della lunghezza dei documenti
+		* k1 basso= saturazione rapida
+		* k1 alto= saturazione lenta
+		* k1 di solito tra $1.2$ e $2$
+			* limita superiormente la term frequency dopo una certa crescita rapida o lenta a seconda del valore di k
+		* utilizzato su Lucene, software di information retrieval
+	* cosine similarity ritorna un valore compreso tra 0 e 1 mentre BM25 uno score numerico che va a infinito
+	* cosine similarity usa TF senza saturazione e normalizza con vettori mentre qui con lunghezze vere e proprie
 [[LABORATORIO 3]]
 #### LANGUAGE MODEL PER RANKING DI INFORMATION RETRIEVAL
 - $p(q \mid M_d)$
