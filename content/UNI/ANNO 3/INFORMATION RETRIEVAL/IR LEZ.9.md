@@ -20,6 +20,7 @@ ogni documento avrà un proprio modello generativo.
 Un documento che parla di Frodo e dell’Anello dovrebbe assegnare una probabilità più alta a questa query rispetto a un documento che parla di un argomento completamente diverso.
 - Quindi l’idea non è tanto misurare una “somiglianza” in senso geometrico, come nel Vector Space Model, ma stimare quanto bene il modello del documento riesca a **spiegare la query osservata**.
 - la query è il dato fissato, mentre il modello cambia da documento a documento. Il documento più rilevante sarà quello il cui modello rende più probabile la query.
+##### Come funziona il modello generativo
 Il Language Model funziona in modo simile ai modelli probabilistici visti anche in altri contesti, come nello spelling correction: 
 - si assegna una probabilità alla generazione di termini o sequenze di termini. 
 In generale, un language model può dipendere dalla storia precedente, cioè dalle parole già generate:
@@ -47,9 +48,6 @@ $$p(q \mid M_d) = \prod_i p(w_i \mid M_d)$$
 >[!example]- esempio
 >![[Pasted image 20260506111012.png]]
 
-**PROCESSO di trasformazione delle probabilità**
-- si parte dalla probabilità classica, si effettua Bayes, poi ci si rende conto che stiamo lavorando con Language model quindi la approssimiamo al modello linguistico del documento d data  una query q
-$$p(d \mid q) \Rightarrow \frac{p(q \mid d)p(d)}{p(q)} \Rightarrow p(q \mid d) \Rightarrow p(q \mid M_d)$$
 ###### STIMA DELLE PROBABILITÀ NEL MODELLO UNIGRAM
 Una volta definito il Language Model associato a un documento, bisogna capire come ottenere le probabilità dei termini (per riempire la tabella del modello)
 Nel caso dell’Information Retrieval si usa un modello molto semplice: il **modello unigram**. In questo modello, ogni termine viene generato indipendentemente dagli altri, quindi a ogni termine $t_i$​ viene associata una probabilità:
@@ -82,15 +80,14 @@ $$\sum_{i=1}^{|V|} p(t_i \mid M_d) = 1$$
 #### Smoothing
 - LO smoothing cerca di stabilizzare le cose come se ci fosse una sorta di IDF
 - per stimare la probabilità di un termine nel modello del documento abbiamo usato 
-$$\hat{p}(t_i \mid M_d) = \frac{tf_{t_i,d}}{|d|}$$
 - ma potrebbe lasciare qualche valore a 0 se il termine non è presente
 siccome la probabilità della query viene calcolata come prodotto delle probabilità dei suoi termini, basta un solo termine con probabilità zero per ottenere:
 $p(q \mid M_d) = 0$
-Questo è un problema perché un documento potrebbe essere comunque rilevante anche se non contiene esattamente tutti i termini della query.
+Questo è un problema perché un documento potrebbe essere comunque rilevante anche se non contiene esattamente tutti i termini della query
 ###### SOL.1 **Laplace smoothing / add-1 smoothing**
 - primo tentativo è quello di applicare il classico smoothing di Laplace con add-1
 La formula diventa:$$p_{Lap}(t \mid d) = \frac{tf_{t,d} + 1}{|d| + |V|}$$
-- Poiché aggiungo 1 al conteggio di ogni termine del vocabolario, devo rinormalizzare aggiungendo $|V|$ al denominatore.
+- Poiché aggiungo 1 al conteggio di ogni termine del vocabolario, devo normalizzare nuovamente aggiungendo $|V|$ al denominatore.
 Questo può alterare troppo le probabilità, soprattutto quando il vocabolario è grande
 ###### SOL.2 **collection language model**
 - aggiungere un modello linguistico stimato sull’intera collezione di documenti.
@@ -109,7 +106,7 @@ $$p_{JM}(t \mid d) = \lambda \frac{tf_{t,d}}{|d|} + (1-\lambda)\frac{cf_t}{T}$$
 		- produce una ricerca più “conjunctive-like”, cioè tende a favorire documenti che contengono tutti o quasi tutti i termini della query
 	- Se $λ$ è basso, diamo più peso alla collezione
 		- produce una ricerca più disgiuntiva e può essere più adatto a query lunghe o verbose.
-Il limite di questo metodo è che usa lo stesso parametro λ\lambdaλ per tutti i documenti. 
+Il limite di questo metodo è che usa lo stesso parametro $\lambda$ per tutti i documenti. 
 Questo significa che tutti i documenti vengono smussati nello stesso modo, indipendentemente dalla loro lunghezza.
 ESEMPIO E ESERCIZIO3
 >[!example]- esempio con Jelinek-Mercer smoothing e esercizio alla fine

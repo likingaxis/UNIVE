@@ -25,7 +25,7 @@ Un ordinamento completo di tutti i $J$ documenti sarebbe inutile, perché produr
 - si costruisce uno heap a partire dai $J$ documenti con score non nullo
 	- con costo $O(2J)$
 - poi si estraggono i $K$ documenti con score più alto.
-	- $O(log J)$ 
+	- $O(Klog J)$ 
 	- $logJ$ corrisponde all’altezza dell’albero.
 - con K=100 e con J=1milione  
 	- usare uno heap per selezionare i primi 100 risultati costa circa il **10%** rispetto al costo di ordinare completamente tutti i documenti candidati
@@ -44,12 +44,12 @@ La struttura comune di queste tecniche è la seguente:
 - invece di considerare tutti i documenti della collezione, il sistema costruisce un insieme $A$ di **contender**
 	- documenti candidati al ranking finale.
 L’obiettivo è avere:
-$$K < |A| \ll NK$$
+$$K < |A| \ll N$$
 
-- $K$ è il numero di risultati che vogliamo restituire;
-- $|A|$ è il numero di documenti candidati;
-- $N$ è il numero totale di documenti nella collezione.
-L’insieme $A$ deve essere abbastanza grande da contenere documenti buoni, ma molto più piccolo dell’intera collezione. 
+- $K$ è il numero di risultati che vogliamo restituire
+- $|A|$ è il numero di documenti candidati
+- $N$ è il numero totale di documenti nella collezione
+L’insieme $A$ deve essere abbastanza grande da contenere documenti buoni, ma molto più piccolo dell’intera collezione
 - Una volta costruito $A$, il sistema calcola gli score solo per i documenti in $A$, poi restituisce i migliori $K$ tra questi
 - ora spiego delle tecniche precise per la costruzione di $A$
 ##### Index Elimination
@@ -74,7 +74,7 @@ La seconda forma di index elimination consiste nel considerare solo i documenti 
 	- Richiede però che il documento contenga un numero sufficientemente alto di termini della query
 Esempio
 ![[Pasted image 20260513192545.png]]
-applicando il criterio “3 termini su 4”, vengono considerati solo i documenti **8, 16 e 32**, perché sono quelli che compaiono in almeno tre posting list
+applicando il criterio “considero solo i documenti che compaiono in almeno 3 posting list su 4”, vengono considerati solo i documenti **8, 16 e 32**, perché sono quelli che compaiono in almeno tre posting list
 - prendo in considerazione solo i documenti che soddisfano una soglia minima di copertura dei termini della query
 	- lo facciamo osservando le caratteristiche e i contributi che danno le singole parole
 ##### Champion lists
@@ -176,9 +176,6 @@ processando prima i termini con idf più alto, il sistema concentra il calcolo s
 Quindi il compromesso è:
 - più pruning → meno costo computazionale e maggiore rischio di perdere documenti rilevanti
 - meno pruning → più garanzie di qualità, ma costo maggiore
-#### Safe vs non safe ranking
-- vogliamo ridurre il numero di documenti da valutare completamente, ma mantenendo la garanzia di ottenere davvero i top $K$
-- un metodo safe non trova semplicemente “un sottoinsieme con i top”; trova un modo per scartare documenti solo quando è garantito che non possano superare la soglia della top $K$. Gli score completi vengono calcolati solo per i documenti non scartati
 ##### Scoring Wand
 - con la tecnica Scoring Wand il sistema ragiona sui documenti uno alla volta, provando a capire se un certo documento può avere uno score abbastanza alto da meritare il calcolo completo
 - per evitare calcoli inutili e rimanere safe scartando i documenti che con una garanzia matematica non possono rientrare nella top $K$ fa questo:
