@@ -12,7 +12,7 @@
 ##### Ripetere
 - [x] IR lez.6
 - [x] IR lez.7
-- [ ] IR lez.8
+- [x] IR lez.8
 - [ ] IR lez.9
 - [ ] IR lez.10
 - [ ] IR lez.11
@@ -22,8 +22,8 @@
 - [ ] lab 4
 ##### Quiz
 - [x] IR lez.6
-- [ ] IR lez.7
-- [ ] IR lez.8
+- [x] IR lez.7
+- [x] IR lez.8
 - [ ] IR lez.9
 - [ ] IR lez.10
 - [ ] IR lez.11
