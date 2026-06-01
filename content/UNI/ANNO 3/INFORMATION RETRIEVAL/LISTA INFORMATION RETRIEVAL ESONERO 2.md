@@ -291,27 +291,45 @@
 	- ranking si può fare ad esempio con cosine similarity nello spazio latente
 #### LINK ANALYSIS
 - Good/Bad/Unknowns
-- Anchor text
+- Hyperlink con Anchor text
 - Connectivity Servers
 	- url -> outlinks
 	- url -> inlinks
+- Liste di adiacenza 
+	- ogni url è un intero, e ha una lista degli outlink e inlinks
+	- 64 bit per ogni hyperlink
 - Boldi and Vigna
-	- 64 bit
 	- 7 URL
+	- la lista successiva di URL si scrive come differenza della precedente
 	- Gap Encoding e gamma code
+	- $1+2\lfloor logx \rfloor$ occupazione media
 - Page Ranking
+	- non si limita a contare e basta gli inlink e outlink
 	- Globale
-		- random surfer
-			- $\frac{1}{4}$
-			- $\sum_{j=1}^{n} P_{ij}= 1$
-			- $x_{\text{next}} = xP^i$
+		- algoritmo random surfer
+			- 4 link uscenti da una pagina avremmo $\frac{1}{4}$
+			- teleporting per risolvere dead-end e loop
+			- calcolo del visit rate
+				- catene di Markov come processo che vede una matrice di transizione con le varie probabilità di visitare un elemento seguito da un altro
+				- $\sum_{j=1}^{n} P_{ij}= 1$ ogni riga
+				- $x_{\text{next}} = xP^i$
+			- ergodicità della catena di markov
+				- grazie al teleporting possiamo dire con certezza che dopo un certo numero di iterazioni abbiamo visitato tutte le pagine e il valore della catena di markov non cambia
+				- $a = aP$ $a$ è autovettore associato all'autovalore 1 rappresenta il non cambiamento della distribuzione probabilistica
 	- Locale
 		- HITS
-			- *root set*
-			- *base set*
+			- *root set* pagine recuperate da una query
+			- *base set* si calcolano hub score e authority score dal root set
 			- hub e authority
 				- $h(x) \leftarrow \sum_{x \to y} a(y)$
 				- $a(x) \leftarrow \sum_{y \to x} h(y)$
+			- uso matrici di adiacenza per capire se HITS converge a una soluzione stabile
+				- $A_{ij}=1$ se i ha un link verso j 0 altrimenti
+				- quindi h e a sono definiti come
+				- $h=Aa$
+				- $a = A^Th$
+			- sono uno legato alla formula dell'altra quindi dopo diverse iterazioni avrò una buona stima che converge
+			- di solito circa 5
 			- $a = A^T A a$
 			- $h = AA^Th$
-		- topic drift
+		- topic drift cambiando topic
