@@ -231,12 +231,19 @@
 - $Precision = \frac{\# \text{documenti rilevanti recuperati}}{\# \text{documenti recuperati}}$
 - $Recall = \frac{\# \text{documenti rilevanti recuperati}}{\# \text{documenti rilevanti}}$
 - $F_1 = \frac{2PR}{P + R}$
-- synonymy
-- metodi locali
+- non sono sufficienti causa
+	- synonymy
+- ad hoc retrieval, niente feedback
+- metodi locali 
 	- relevance feedback
+		- query reformulation
 	- centroide
+		- funzionano solo con vector space model
+		- vettore medio di un insieme di documenti
 		- $\vec{\mu}(D) = \frac{1}{|D|} \sum_{d \in D} \vec{v}(d)$
 	- query ottima
+		- assumiamo di conoscere $C_r$ e $C_{nr}$
+		- con cosine similarity avremmo
 		- $\vec{q}_{opt} = \frac{1}{|C_r|} \sum_{\vec{d}_j \in C_r} \vec{d}_j - \frac{1}{|C_{nr}|} \sum_{\vec{d}_j \in C_{nr}} \vec{d}_j$
 		- centroide dei documenti rilevanti - quelli non rilevanti
 	- rocchio algorithm
@@ -244,10 +251,12 @@
 		- $\alpha$: quanto peso dare alla query iniziale
 		- $\beta$: quanto peso dare ai documenti rilevanti
 		- $\gamma$: quanto peso dare ai documenti non rilevanti
-		- 
+		- si basa sul giudizio dell'utente
 	- pseudo-relevance feedback
+		- assumo i primi $k$ documenti come rilevanti e applico relevance su di essi
 		- query drift
 - metodi globali
+	- non si basa su una serie di documenti già recuperati
 	- Global query expansion
 	- migliora recall riduce precision
 	- manual thesaurus 
@@ -259,7 +268,12 @@
 	- matrice di low rank di solito k è 100-1000
 	- $A_k = U \, \mathrm{diag}(\sigma_1, \dots, \sigma_k, 0, \dots, 0)V^T$
 	- $A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T$
+	- $U$ righe, $\sigma$ valori singolari, $V$ colonne se trasposta
+	- Frobenius
+		- $∥A−Ak​∥_F​$
+	- SVD tecnica di decomposizione con minimo errore possibile
 - LSI
+	- tecnica che sfrutta SVD per rappresentare termini e documenti
 	- spazio semantico latente
 		- $A = (U\Sigma^{1/2})(\Sigma^{1/2}V^T)$
 	- documenti e termini
@@ -267,13 +281,14 @@
 		- $D_k=\Sigma_k^{1/2}V_k^T$
 	- query dentro LSI(folding-in)
 		- $q_k = \Sigma_k^{-1} U_k^T$ 
+	- query expansion
+		- LSI aiuta soprattutto con la **sinonimia**, perché termini diversi ma usati in contesti simili vengono proiettati vicino nello spazio latente
 	- sinonimia
 	- polisemia
 	- no boolean query
 	- formula di energia
 		- $\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$
-	- Frobenius
-		- $∥A−Ak​∥_F​$
+	- ranking si può fare ad esempio con cosine similarity nello spazio latente
 #### LINK ANALYSIS
 - Good/Bad/Unknowns
 - Anchor text

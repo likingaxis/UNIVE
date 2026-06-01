@@ -33,6 +33,15 @@ La matrice approssimata può anche essere vista come somma di matrici di rango 1
 $$A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T$$
 dove ogni termine della somma rappresenta una componente della matrice originale
 Man mano che $i$ cresce, i valori singolari tendono a diminuire, quindi il contributo delle componenti successive diventa meno rilevante
+
+La norma di Frobenius misura invece la distanza tra la matrice originale $A$ e la matrice approssimata $A_k$
+$$∥A−Ak​∥_F​$$
+quanto sto sbagliando ricostruendo $A$ con solo $k$ componenti?
+
+In LSI $k$ è scelto molto più piccolo del rango originale. Storicamente si usano spesso valori nell’ordine delle centinaia, per esempio 100-300 o qualche centinaio, ma la scelta dipende dalla collezione e dal compromesso tra compressione, rumore e perdita di informazione
+
+Una dimensione latente è una specie di “asse semantico” costruito combinando:
+$$u_i,\ \sigma_i,\ v_i^T$$
 ![[Pasted image 20260521155903.png|525]]
 
 info sul rango
@@ -130,7 +139,7 @@ serve a misurare quanta “energia” o informazione complessiva viene catturata
 Questa formula è utile per scegliere $k$. Per esempio posso dire: scelgo $k$ in modo da conservare almeno il 90% o il 95% dell’energia
 $$\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$$
 
-L’**energia** misura quanto una componente latente contribuisce a ricostruire la matrice originale.
+L’**energia** misura quanto una componente latente contribuisce a ricostruire la matrice originale
 ##### Formula di Frobenius
 La norma di Frobenius misura invece la distanza tra la matrice originale $A$ e la matrice approssimata $A_k$
 $$∥A−Ak​∥_F​$$
