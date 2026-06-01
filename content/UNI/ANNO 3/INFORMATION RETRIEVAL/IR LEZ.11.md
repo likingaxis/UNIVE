@@ -97,7 +97,6 @@ Il libro osserva che il feedback positivo tende a essere più utile del feedback
 Un esempio di valori ragionevoli riportato dal libro è:
 $\alpha = 1, \qquad \beta = 0.75, \qquad \gamma = 0.15$
 Questo riflette un comportamento conservativo: si mantiene la query originale, si dà un peso significativo ai documenti rilevanti e un peso più limitato a quelli non rilevanti
-
 L’idea alla base di Rocchio è collegata alla visione geometrica usata anche in alcuni algoritmi di machine learning: documenti e query sono punti nello spazio, e la decisione dipende da vicinanza e distanza. Tuttavia Rocchio non coincide con k-NN: Rocchio usa centroidi e combinazioni lineari, mentre k-NN classifica in base ai vicini più prossimi
 ##### Assunzioni al relevance feedback
 ci sono due assunzioni principali per il funzionamento del relevance feedback
