@@ -238,8 +238,13 @@
 		- $\vec{\mu}(D) = \frac{1}{|D|} \sum_{d \in D} \vec{v}(d)$
 	- query ottima
 		- $\vec{q}_{opt} = \frac{1}{|C_r|} \sum_{\vec{d}_j \in C_r} \vec{d}_j - \frac{1}{|C_{nr}|} \sum_{\vec{d}_j \in C_{nr}} \vec{d}_j$
+		- centroide dei documenti rilevanti - quelli non rilevanti
 	- rocchio algorithm
 		- $\vec{q}_m = \alpha \vec{q}_0 + \beta \frac{1}{|D_r|} \sum_{\vec{d}_j \in D_r} \vec{d}_j - \gamma \frac{1}{|D_{nr}|} \sum_{\vec{d}_j \in D_{nr}} \vec{d}$
+		- $\alpha$: quanto peso dare alla query iniziale
+		- $\beta$: quanto peso dare ai documenti rilevanti
+		- $\gamma$: quanto peso dare ai documenti non rilevanti
+		- 
 	- pseudo-relevance feedback
 		- query drift
 - metodi globali

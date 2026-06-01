@@ -14,7 +14,7 @@
 - [x] IR lez.7
 - [x] IR lez.8
 - [x] IR lez.9
-- [ ] IR lez.10
+- [x] IR lez.10
 - [ ] IR lez.11
 - [ ] IR lez.12
 - [ ] IR lez.13
