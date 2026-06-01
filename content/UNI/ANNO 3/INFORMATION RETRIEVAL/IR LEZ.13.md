@@ -15,7 +15,6 @@ La link analysis serve quindi a estendere le funzionalità di un sistema di IR o
 - **classificazione**, perché documenti che si linkano tra loro tendono spesso a trattare argomenti simili
 - **crawling**, cioè per decidere quali pagine visitare successivamente durante l’esplorazione del Web
 
-
 ###### Web come un grafo diretto
 Il Web può essere rappresentato come un **grafo diretto**: ogni pagina web è un nodo, mentre ogni hyperlink è un arco orientato che parte da una pagina sorgente e arriva a una pagina destinazione.
 
@@ -158,6 +157,7 @@ $$a(x) \leftarrow \sum_{y \to x} h(y)$$
 
 
 Per dimostrare perché l’algoritmo converge, si usa la **matrice di adiacenza** $A$ del grafo costruito sul base set.
+sapere se questo processo porta davvero a un risultato stabile oppure se continua a oscillare/cambiare senza senso
 La matrice ha una riga e una colonna per ogni pagina. 
 L’elemento:
 $A_{ij}$ vale 1 se la pagina $i$ contiene un link verso la pagina $j$ altrimenti 0
