@@ -171,7 +171,6 @@
 		- se $\mu$ diminuisce, aumenta il peso del documento
 		- $\mu$ è un iper-parametro positivo, scelto/tarato tramite benchmark
 - log likelihood con Dirichlet e operazioni algebriche varie otteniamo
-	- $\log p_{Dir}(t \mid d) = \log \frac{\mu p(t \mid C)} {|d|+\mu} + \log \left( 1+ \frac{tf_{t,d}} {\mu p(t \mid C)} \right)$
 	- definita poi una query andiamo a fare
 	- $\log p_{Dir}(q \mid d) = \sum_{k=1}^{n} \log p_{Dir}(w_k \mid d)$
 - cerco lo score più piccolo
@@ -196,7 +195,7 @@
 	- docs containing a lot of query terms
 		- considero solo i documenti che sono presenti in un certo numero di posting list dei termini della query
 - Champion lists
-	- migliori $r$ documenti costruita a index time
+	- migliori $r$ documenti costruita a index time per ogni termine $t$ 
 - Static Quality Scores, per ranking più preciso
 	- aggiungiamo autorevolezza
 	- $g(d)$
@@ -205,6 +204,7 @@
 		- $g(d) + tf\text{-}idf_{t,d}$
 - Cluster Pruning
 	- $\sqrt{N}$ leader con circa $\sqrt{N}$ followers
+	- cerco il leader più vicino alla query oppure random sampling
 	- $O(\sqrt{N})$ cosine similarity 
 	- non safe ma molto veloce
 - Tiered Indexes, non restringe insieme di contender A

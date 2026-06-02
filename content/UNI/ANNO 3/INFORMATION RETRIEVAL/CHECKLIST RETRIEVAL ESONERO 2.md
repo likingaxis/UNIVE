@@ -23,8 +23,8 @@ MATTINA
 - [x] IR lez.6
 - [x] IR lez.7
 POMERIGGIO
-- [ ] IR lez.8
-- [ ] IR lez.9
+- [x] IR lez.8
+- [x] IR lez.9
 - [ ] IR lez.10
 MATTINA DOMANI
 - [ ] IR lez.11
