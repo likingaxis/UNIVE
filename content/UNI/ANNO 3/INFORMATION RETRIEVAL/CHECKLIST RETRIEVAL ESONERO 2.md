@@ -18,12 +18,12 @@
 - [x] IR lez.11
 - [x] IR lez.12
 - [x] IR lez.13
-##### Ripetere 2
+##### Riscrivere 2
 MATTINA
-- [ ] IR lez.6
-- [ ] IR lez.7
-- [ ] IR lez.8
+- [x] IR lez.6
+- [x] IR lez.7
 POMERIGGIO
+- [ ] IR lez.8
 - [ ] IR lez.9
 - [ ] IR lez.10
 MATTINA DOMANI
