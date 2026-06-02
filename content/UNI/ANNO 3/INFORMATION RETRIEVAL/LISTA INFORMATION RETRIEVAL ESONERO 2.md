@@ -1,5 +1,5 @@
 ##### VALUTAZIONE DEI SISTEMI
-[[IR LEZ.6]]
+[[IR LEZ.6 LONG]]
 - soggettività utente
 - collezione di documenti, insieme di query e giudizi di rilevanza
 	- IR end-to-end di valutazione non componenti singole

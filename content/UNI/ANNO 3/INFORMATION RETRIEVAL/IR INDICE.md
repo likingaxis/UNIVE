@@ -4,5 +4,5 @@
 [[IR LEZ.3]]
 [[IR LEZ.4]]
 [[IR LEZ.5]]
-[[IR LEZ.6]]
-[[IR LEZ.7]]
+[[IR LEZ.6 LONG]]
+[[IR LEZ.7 LONG]]
