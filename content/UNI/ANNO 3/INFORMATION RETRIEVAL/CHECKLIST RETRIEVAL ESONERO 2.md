@@ -18,12 +18,24 @@
 - [x] IR lez.11
 - [x] IR lez.12
 - [x] IR lez.13
+##### Ripetere 2
+MATTINA
+- [ ] IR lez.6
+- [ ] IR lez.7
+- [ ] IR lez.8
+POMERIGGIO
+- [ ] IR lez.9
+- [ ] IR lez.10
+MATTINA DOMANI
+- [ ] IR lez.11
+- [ ] IR lez.12
+- [ ] IR lez.13
 ##### Quiz
 - [x] IR lez.6
 - [x] IR lez.7
 - [x] IR lez.8
-- [ ] IR lez.9
-- [ ] IR lez.10
+- [x] IR lez.9
+- [x] IR lez.10
 - [ ] IR lez.11
 - [ ] IR lez.12
 - [ ] IR lez.13
