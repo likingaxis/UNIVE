@@ -205,9 +205,18 @@ i moduli vengono eseguiti una sola volta, quando chiamiamo la require nel codice
 successivamente non più 
 
 ###### Wrapping 
-ogni modulo ha dei parametri che lo raccolgono della funzione IIFE
-
-perchè `__dirname` è uno dei parametri passata dalla funzione che serve a lanciare i moduli del wrapping
+In Node.js ogni file JavaScript viene trattato come un **modulo**.
+Quando Node carica un file, non esegue semplicemente il codice così com’è in uno scope globale unico, ma lo avvolge internamente dentro una funzione wrapper simile a questa:
+```Javascript
+(function (exports, require, module, __filename, __dirname) {
+    // codice del modulo
+});
+```
+Questo spiega perché in ogni file Node abbiamo disponibili variabili e funzioni come:
+`require` serve per importare altri moduli.
+`module.exports` o `exports` servono per decidere cosa rendere visibile all'esterno del modulo.
+`__filename` rappresenta il percorso completo del file corrente.
+`__dirname` rappresenta la cartella in cui si trova il file corrente.
 
 ##### Express
 - framework minimale di `nodejs`
