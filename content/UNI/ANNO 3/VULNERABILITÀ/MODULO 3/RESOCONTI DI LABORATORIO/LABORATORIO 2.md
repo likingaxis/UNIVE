@@ -232,3 +232,6 @@ disp(T)
 
 writetable(T, "risultati_BER.txt");
 ```
+
+A quanto pare il lab 2 continua con quella roba sul csma cd ecc che era prima LAB 3
+bho!
