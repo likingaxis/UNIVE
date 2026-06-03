@@ -1265,6 +1265,7 @@ Ad esempio, un sito malevolo potrebbe provare a fare richieste verso un altro si
 - il browser le controlla
 CORS è il meccanismo con cui un server può dire al browser se permette oppure no a una pagina di un’altra origine di accedere alle sue risorse
 Quindi, se una pagina caricata da un dominio `X` prova a fare una richiesta AJAX/fetch verso un dominio `Y`, il browser controlla se il server `Y` ha autorizzato quella richiesta
+
 ###### Richieste semplici
 Alcune richieste cross-origin sono dette **simple request**
 Sono comunque richieste cross-origin, ma sono abbastanza semplici da non richiedere una richiesta preliminare di controllo
