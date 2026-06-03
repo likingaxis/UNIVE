@@ -1,12 +1,12 @@
 - big d finire algoritmi IMPORTANTE
 	- weekend
-- information retrieval ripassa tutto da zero e poi vedere codici python IMPORTANTE
+- information retrieval studio
 	- weekend
-	- colab 4, domani mattina
-	- ir lez.13 pom+aggiunte del giorno
 - vulnerabilità scrivi laboratorio 3
 	- aspetta che la prof le carichi
 - tesi
 	- weekend
+- programmazione web
+	- lezione di oggi
 - slide hackaton
 - report hackaton
