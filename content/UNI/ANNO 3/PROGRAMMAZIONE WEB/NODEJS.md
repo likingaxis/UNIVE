@@ -203,6 +203,12 @@ la terza cifra dice le patch fix invece la 2 cifra dice minor release
 ###### Nota sui moduli
 i moduli vengono eseguiti una sola volta, quando chiamiamo la require nel codice
 successivamente non più 
+
+###### Wrapping 
+ogni modulo ha dei parametri che lo raccolgono della funzione IIFE
+
+perchè `__dirname` è uno dei parametri passata dalla funzione che serve a lanciare i moduli del wrapping
+
 ##### Express
 - framework minimale di `nodejs`
 - routing complesso
