@@ -472,3 +472,4 @@ const cors = require('cors');
 app.use(cors());
 ```
 In questo modo il server aggiunge gli header necessari per permettere al browser di accettare richieste provenienti da origini diverse.
+
