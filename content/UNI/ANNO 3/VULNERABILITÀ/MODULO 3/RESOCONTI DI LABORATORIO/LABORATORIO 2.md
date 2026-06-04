@@ -71,9 +71,6 @@ per rendere più chiara la visualizzazione ho messo uno stile stem per rappresen
 ci permette di vedere i simboli ricevuti su un piano $I/Q$
 - sulle x ho la In-phase amplitude
 - sulle y ho la Quadrature Amplitude
->[!info] spiegazione fatta bene di in phase e quadrature amplitude
-
-
 - nel caso della BPSK avrò due punti della costellazione che si trovano una a sinistra e una a destra
 	- poi avrò i punti ricevuti che rappresentano il segnale e possono essere interpretati come bit
 	- se si trovano a sx posso vederli come 0 se si trovano a dx come 1
@@ -168,78 +165,80 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 > - **6dB**: alcuni bit che dovrebbero stare in una delle due fasi inizia quasi a toccarsi mostrano una possibile incertezza del segnale
 
 
->[!question]- domanda 4
-
-You will now use the model to simulate the system performance over a range of Eb/N0 values. Run the simulation for Eb/N0 values of 0dB to 12dB in 1dB steps. Set the simulation time to ensure the results are meaningful. This is especially important when very few bit errors are expected. Observe and record the error rate for each run. Plot bit error rate vs Eb/N0 and compare to the theoretical prediction. Comment on the results
-
-per svolgere prima questa simulazione ho scoperto che esiste un blocco che mi salva in un array i risultati chiamato`To Workspace` che ho collegato al blocco di calcolo degli errori
-
-![[Pasted image 20260520105335.png|336]]
-
-![[Pasted image 20260520105259.png|336]]
-poi mi è sufficiente ad ogni simulazione chiamare la variabile in formato long e ottenere solo la riga finale(quella utile davvero)
-```scss
-format long g
-errStats(end,:)
-```
-
-La simulazione è stata eseguita su `101000` simboli per ogni valore di `Eb/N0`.
-**BER** = numero di bit errati / numero totale di bit trasmessi
-
-|Eb/N0 [dB]|Error Rate / BER|Number of Errors|Total Number of Symbols|
-|---|---|---|---|
-|0|0.0796732673|8047|101000|
-|1|0.0578712871|5845|101000|
-|2|0.0383267327|3871|101000|
-|3|0.0233762376|2361|101000|
-|4|0.0130099010|1314|101000|
-|5|0.0058514851|591|101000|
-|6|0.0023366337|236|101000|
-|7|0.0007722772|78|101000|
-|8|0.0001683168|17|101000|
-|9|0.0000198020|2|101000|
-|10|0|0|101000|
-|11|0|0|101000|
-|12|0|0|101000|
-
-- Dai risultati si nota che la percentuale di BER diminuisce progressivamente all’aumentare di `Eb/N0`.
-- Da 10 dB in poi si nota come l'error rate è a 0
-![[Pasted image 20260520111028.png]]
-- grafico che fa vedere al variare dei dB quanto cambia il BER
-per ottimizzare i tempi ho fatto creare da `chat GPT` questo script molto simpatico che aumenta automaticamente il dB e salva l'array `errStats`
-```scss
-clear errStats
-
-EbN0_values = 0:12;
-results = zeros(length(EbN0_values), 4);
-
-modelName = "simulateBPSK_pulseShapingRectangular_VDSI2026";
-
-for i = 1:length(EbN0_values)
-    EbN0 = EbN0_values(i);
-
-    sim(modelName);
-
-    last = errStats(end,:);
-
-    results(i,:) = [EbN0, last(1), last(2), last(3)];
-end
-
-T = array2table(results, ...
-    "VariableNames", ["EbN0_dB", "ErrorRate", "NumberOfErrors", "TotalNumberOfSymbols"]);
-
-disp(T)
-
-writetable(T, "risultati_BER.txt");
-```
+>[!question] domanda 4
+> 
+> You will now use the model to simulate the system performance over a range of Eb/N0 values. Run the simulation for Eb/N0 values of 0dB to 12dB in 1dB steps. Set the simulation time to ensure the results are meaningful. This is especially important when very few bit errors are expected. Observe and record the error rate for each run. Plot bit error rate vs Eb/N0 and compare to the theoretical prediction. Comment on the results
+> 
+> per svolgere prima questa simulazione ho scoperto che esiste un blocco che mi salva in un array i risultati chiamato`To Workspace` che ho collegato al blocco di calcolo degli errori
+> 
+> ![[Pasted image 20260520105335.png|336]]
+> 
+> ![[Pasted image 20260520105259.png|336]]
+> poi mi è sufficiente ad ogni simulazione chiamare la variabile in formato long e ottenere solo la riga finale(quella utile davvero)
+> ```scss
+> format long g
+> errStats(end,:)
+> ```
+> 
+> La simulazione è stata eseguita su `101000` simboli per ogni valore di `Eb/N0`.
+> **BER** = numero di bit errati / numero totale di bit trasmessi
+> 
+>
+> |Eb/N0 [dB]|Error Rate / BER|Number of Errors|Total Number of Symbols|
+> |---|---|---|---|
+> |0|0.0796732673|8047|101000|
+> |1|0.0578712871|5845|101000|
+> |2|0.0383267327|3871|101000|
+> |3|0.0233762376|2361|101000|
+> |4|0.0130099010|1314|101000|
+> |5|0.0058514851|591|101000|
+> |6|0.0023366337|236|101000|
+> |7|0.0007722772|78|101000|
+> |8|0.0001683168|17|101000|
+> |9|0.0000198020|2|101000|
+> |10|0|0|101000|
+> |11|0|0|101000|
+> |12|0|0|101000|
+> 
+> - Dai risultati si nota che la percentuale di BER diminuisce progressivamente all’aumentare di `Eb/N0`.
+> - Da 10 dB in poi si nota come l'error rate è a 0
+> ![[Pasted image 20260520111028.png]]
+> - grafico che fa vedere al variare dei dB quanto cambia il BER
+> per ottimizzare i tempi ho fatto creare da `chat GPT` questo script molto simpatico che aumenta automaticamente il dB e salva l'array `errStats`
+> ```scss
+> clear errStats
+> 
+> EbN0_values = 0:12;
+> results = zeros(length(EbN0_values), 4);
+> 
+> modelName = "simulateBPSK_pulseShapingRectangular_VDSI2026";
+> 
+> for i = 1:length(EbN0_values)
+>     EbN0 = EbN0_values(i);
+> 
+>     sim(modelName);
+> 
+>     last = errStats(end,:);
+> 
+>     results(i,:) = [EbN0, last(1), last(2), last(3)];
+> end
+> 
+> T = array2table(results, ...
+>     "VariableNames", ["EbN0_dB", "ErrorRate", "NumberOfErrors", "TotalNumberOfSymbols"]);
+> 
+> disp(T)
+> 
+> writetable(T, "risultati_BER.txt");
+> ```
 
 #### Giorno 2
 questa seconda giornata di laboratorio volge a voler definire con mezzi pratici l'accesso simultaneo di mezzi di trasferimento Wireless o via cavo
 È quindi bene definire delle regole per decidere quando e come ogni dispositivo può trasmettere
 ##### Protocollo ideale di multiple access protocol
-Quando il dispositivo è unico trasmette a massima potenza sfruttando tutta la capacità del canale 
-- trasferimento R quando ci sono più dispositivi R/M
-- decentralizzato e semplice
+Il protocollo ideale ad accesso multiplo funziona così:
+Quando il dispositivo è unico trasmette a massima potenza sfruttando tutta la capacità del canale $R$ 
+quando invece ci sono più dispositivi trasmette a R/M
+inoltre deve essere decentralizzato e semplice
 ##### protocolli famosi utilizzati si dividono principalmente in
 - channel partitioning
 - random access
@@ -267,8 +266,8 @@ $$D_i=\sum_{m=1}^{M} Z_{i,m} \cdot c_m$$
 ##### DSSS Simulation Simulink
 In questo laboratorio usiamo il progetto `simulateDSSS_binaryMessage_VDSI2026.slx`
 che simula un DSSS che sta per Direct Sequence Spread Spectrum, una vera realizzazione del modello CDMA visto in precedenza dove ogni bit viene moltiplicato per una sequenza di chip più veloce così che il segnale venga distribuito su una banda più ampia creando un fenomeno detto spreading
-- questo accade perchè il chip rate è maggiore del bit rate quindi questo aumenta la banda
-- ricordiamo che la banda dipende da quante volte il segnale cambia nel tempo, più cambiamenti banda più larga, e viceversa
+- questo spreading accade poiché il chip rate è maggiore del bit rate quindi questo aumenta la banda
+	- ricordiamo che la banda dipende da quante volte il segnale cambia nel tempo, più cambiamenti equivalgono a una banda più larga, e viceversa
 ###### FOTO E DESCRIZIONE DEL PROGETTO
 ![[foto progetto.png]]
 Il seguente progetto si divide in due parti principali
@@ -332,14 +331,15 @@ abbiamo la stessa informazione ma più "spalmata"
 > quindi facendo il rapporto avremmo
 > $146.76 / 101.59 ≈ 1.44$
 > che rappresenta circa il 44% quindi avviene effettivamente lo spreading
+> - non è un valore assoluto perchè dipende dal sistema di misurazione usato, ma ci da una idea molto forte sul concetto
+
 
 >[!Question] domanda 2
 > Check the Noise Floor Measurement: Look at the peak power of the signal. Did spreading the signal make its peak sink down closer to the noise floor?
 > 
 > il channel power(preso dal channel measurements della domanda precedente) non cambia particolarmente
 > il Channel Power prima del prodotto è circa `29.9490 dBm`, mentre dopo il prodotto è circa `29.5021 dBm`. 
-> Quindi la potenza complessiva del segnale non cambia in modo significativo
-
+> Quindi la potenza complessiva del segnale non cambia in modo significativo ma quest'ultima viene spalmata sulla frequenza, questo fenomeno causa un avvicinamento al noise floor che possiamo vedere visibilmente nella seconda foto del collage riportata alla domanda 1
 
 >[!Question] domanda 3
 > Check the De-Spreading Effect: Look at the spectrum right before the receiver’s DSSS multiplier, and then right after it. What happened to the wide signal? Did it shrink back down to its original narrow shape?
@@ -372,6 +372,7 @@ abbiamo la stessa informazione ma più "spalmata"
 >Check the Bit Rate vs. Chip Rate: Look at the time scope of the original BPSK data bits, then look at the DSSS spread signal. How many tiny chips fit inside just one single data bit?
 > 
 > Prendendo la foto del Time scope presa in precedenza possiamo dire con certezza che la chip rate è maggiore della bit rate ma non riesco a definire un numero preciso
+> posso però dire che il numero di chip per bit corrisponde alla lunghezza della chipping sequence ovvero 16 bit
 > ![[Time scope 1(prima del prodotto,bit codice,dopo il prodotto).PNG]]
 
 
