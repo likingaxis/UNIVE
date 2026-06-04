@@ -1,3 +1,5 @@
+## Piano operativo — 10 serate da circa 2 ore
+
 |Serata|Obiettivo concreto|Cosa faremo insieme|Argomenti ripassati|Output finale della serata|
 |--:|---|---|---|---|
 |1|Definire bene il progetto e scrivere le specifiche|Scriviamo il documento `specifiche/progetto.md` con obiettivo, utenti, funzionalità, struttura frontend, mockup minimale e scenari di test. Deve essere fatto prima dello sviluppo, come chiede il prof .|Git, specifiche, progettazione, requisiti, uso AI|Cartella `specifiche/` + file `.md` pronto + primo commit: `specifiche: primo documento di specifica del progetto`|
@@ -10,6 +12,9 @@
 |8|Aggiungere sezioni secondarie: comunicazioni, orari, archivio|Inseriamo comunicazioni, orari e prove scritte passate. Possiamo farle statiche o tramite altre API semplici tipo `/api/notices`, `/api/lessons`, `/api/past-exams`.|Organizzazione dati, rendering DOM, struttura frontend|Portale completo nelle sue sezioni principali|
 |9|Aggiungere 2/3 extra intelligenti|Scegliamo extra utili ma spiegabili: filtro per corso/docente, `DELETE`, eventuale `PUT`, salvataggio su file JSON. La consegna suggerisce modifica/cancellazione, filtri e persistenza come extra facoltativi .|Query params, DELETE/PUT, persistenza, gestione errori|Progetto più completo e più forte all’orale|
 |10|Rifinitura, README, test manuali e simulazione orale|Scriviamo `README.md`, documentiamo uso AI, funzionalità, installazione, avvio, test manuali. Poi prepariamo cosa mostrare: DevTools, Network, Console, log server, git log.|README, Git, DevTools, Network, debugging, esposizione orale|Progetto pronto da presentare|
+
+---
+
 ## Versione più dettagliata serata per serata
 
 ### Serata 1 — Specifiche, prima ancora del codice
@@ -18,20 +23,31 @@ Questa è importantissima perché il professore chiede esplicitamente un documen
 
 File da creare:
 
-```
+```txt
 specifiche/progetto.md
 ```
 
 Dentro ci mettiamo:
 
-```
-# Specifiche progetto — Portale Informatica Tor Vergata## 1. Obiettivo dell'applicazione## 2. Cosa può fare l'utente## 3. Struttura del frontend## 4. Mockup minimale## 5. Scenari di test
+```md
+# Specifiche progetto — Portale Informatica Tor Vergata
+
+## 1. Obiettivo dell'applicazione
+
+## 2. Cosa può fare l'utente
+
+## 3. Struttura del frontend
+
+## 4. Mockup minimale
+
+## 5. Scenari di test
 ```
 
 Alla fine commit:
 
-```
-git add .git commit -m "specifiche: primo documento di specifica del progetto"
+```bash
+git add .
+git commit -m "specifiche: primo documento di specifica del progetto"
 ```
 
 Questo messaggio è proprio quello indicato dalla consegna .
@@ -44,14 +60,28 @@ Costruiamo la pagina statica.
 
 Struttura possibile:
 
-```
-public/├── index.html├── css/│   └── style.css└── js/    └── app.js
+```txt
+public/
+├── index.html
+├── css/
+│   └── style.css
+└── js/
+    └── app.js
 ```
 
 Sezioni:
 
-```
-<header><nav><main>  <section id="appelli"></section>  <section id="orari"></section>  <section id="comunicazioni"></section>  <section id="archivio"></section>  <section id="area-docente"></section></main><footer>
+```html
+<header>
+<nav>
+<main>
+  <section id="appelli"></section>
+  <section id="orari"></section>
+  <section id="comunicazioni"></section>
+  <section id="archivio"></section>
+  <section id="area-docente"></section>
+</main>
+<footer>
 ```
 
 Qui ripassi molto bene HTML semantico, form, input e organizzazione del contenuto.
@@ -64,19 +94,28 @@ Obiettivo: farlo sembrare un portale universitario ordinato, non una pagina butt
 
 Cose da usare:
 
-```
-display: flex;display: grid;@media screen and (max-width: 768px) { ... }
+```css
+display: flex;
+display: grid;
+@media screen and (max-width: 768px) { ... }
 ```
 
 Elementi grafici:
 
 - navbar;
+    
 - card appelli;
+    
 - card comunicazioni;
+    
 - tabella/card orari;
+    
 - form docente;
+    
 - messaggi di errore/successo;
+    
 - layout mobile.
+    
 
 ---
 
@@ -86,14 +125,19 @@ Creiamo il cuore Node/Express.
 
 Struttura:
 
-```
-server.jspackage.jsondata/  exams.jsonpublic/
+```txt
+server.js
+package.json
+data/
+  exams.json
+public/
 ```
 
 Middleware obbligatori:
 
-```
-app.use(express.json());app.use(express.static("public"));
+```js
+app.use(express.json());
+app.use(express.static("public"));
 ```
 
 Questi sono richiesti nella consegna: parsing JSON e file statici .
@@ -104,26 +148,41 @@ Questi sono richiesti nella consegna: parsing JSON e file statici .
 
 Risorsa principale:
 
-```
+```txt
 /api/exams
 ```
 
 Oggetto esempio:
 
-```
-{  id: 1,  corso: "Programmazione Web",  docente: "Pierpaolo Loreti",  data: "2026-07-10",  ora: "09:00",  aula: "Aula T1",  tipo: "Scritto",  note: "Prenotazione obbligatoria"}
+```js
+{
+  id: 1,
+  corso: "Programmazione Web",
+  docente: "Pierpaolo Loreti",
+  data: "2026-07-10",
+  ora: "09:00",
+  aula: "Aula T1",
+  tipo: "Scritto",
+  note: "Prenotazione obbligatoria"
+}
 ```
 
 Rotte:
 
-```
-GET /api/examsGET /api/exams/:idPOST /api/exams
+```js
+GET /api/exams
+GET /api/exams/:id
+POST /api/exams
 ```
 
 Status code da sapere spiegare:
 
-```
-200 OK201 Created400 Bad Request404 Not Found500 Internal Server Error
+```txt
+200 OK
+201 Created
+400 Bad Request
+404 Not Found
+500 Internal Server Error
 ```
 
 ---
@@ -134,14 +193,19 @@ Qui colleghiamo davvero browser e server.
 
 Funzioni probabili:
 
-```
-loadExams()renderExams(exams)showExamDetail(id)
+```js
+loadExams()
+renderExams(exams)
+showExamDetail(id)
 ```
 
 Concetti da ripassare:
 
-```
-async function loadExams() {  const response = await fetch("/api/exams");  const data = await response.json();}
+```js
+async function loadExams() {
+  const response = await fetch("/api/exams");
+  const data = await response.json();
+}
 ```
 
 E all’orale puoi mostrare la richiesta nel pannello **Network** delle DevTools, cosa richiesta esplicitamente nella consegna .
@@ -154,20 +218,29 @@ Questa serata è molto importante perché copre tanti requisiti.
 
 Stati da mostrare:
 
-```
-Caricamento...Errore nel caricamento degli appelliNessun appello disponibileAppello creato con successoCampo corso obbligatorio
+```txt
+Caricamento...
+Errore nel caricamento degli appelli
+Nessun appello disponibile
+Appello creato con successo
+Campo corso obbligatorio
 ```
 
 Validazione client:
 
-```
-if (!corso || !docente || !data) {  showError("Compila tutti i campi obbligatori");  return;}
+```js
+if (!corso || !docente || !data) {
+  showError("Compila tutti i campi obbligatori");
+  return;
+}
 ```
 
 Validazione server:
 
-```
-if (!corso || !docente || !data) {  return res.status(400).json({ error: "Dati non validi" });}
+```js
+if (!corso || !docente || !data) {
+  return res.status(400).json({ error: "Dati non validi" });
+}
 ```
 
 Questa parte è fondamentale perché la consegna chiede sia validazione lato client sia lato server .
@@ -180,8 +253,24 @@ Qui completiamo l’identità del portale.
 
 Sezioni:
 
-```
-Comunicazioni- cambio aula- sospensione lezione- avviso esameOrari lezioni- corso- giorno- orario- aula- docenteArchivio prove scritte- corso- anno- tipo- link al file/statico
+```txt
+Comunicazioni
+- cambio aula
+- sospensione lezione
+- avviso esame
+
+Orari lezioni
+- corso
+- giorno
+- orario
+- aula
+- docente
+
+Archivio prove scritte
+- corso
+- anno
+- tipo
+- link al file/statico
 ```
 
 Puoi farle in modo semplice. Non serve che tutto abbia POST. L’importante è che il progetto risulti completo ma non ingestibile.
@@ -203,8 +292,10 @@ I migliori per te secondo me sono:
 
 Io farei:
 
-```
-GET /api/exams?corso=Programmazione WebDELETE /api/exams/:idsalvataggio su data/exams.json
+```txt
+GET /api/exams?corso=Programmazione Web
+DELETE /api/exams/:id
+salvataggio su data/exams.json
 ```
 
 Sono extra buoni ma non troppo pericolosi.
@@ -217,14 +308,39 @@ La consegna richiede anche un `README.md` obbligatorio con titolo, descrizione, 
 
 README:
 
-```
-# Portale Informatica Tor Vergata## Descrizione## Installazionenpm install## Avvionpm start## Funzionalità implementate## Funzionalità extra## Uso dell'AI
+```md
+# Portale Informatica Tor Vergata
+
+## Descrizione
+
+## Installazione
+
+npm install
+
+## Avvio
+
+npm start
+
+## Funzionalità implementate
+
+## Funzionalità extra
+
+## Uso dell'AI
 ```
 
 Poi prepariamo una mini scaletta orale:
 
-```
-1. Mostro il sito nel browser2. Mostro appelli caricati via fetch3. Apro DevTools > Network4. Mostro GET /api/exams5. Inserisco un appello valido6. Mostro POST /api/exams con payload e response7. Inserisco un appello non valido8. Mostro errore 4009. Mostro codice Express10. Mostro git log
+```txt
+1. Mostro il sito nel browser
+2. Mostro appelli caricati via fetch
+3. Apro DevTools > Network
+4. Mostro GET /api/exams
+5. Inserisco un appello valido
+6. Mostro POST /api/exams con payload e response
+7. Inserisco un appello non valido
+8. Mostro errore 400
+9. Mostro codice Express
+10. Mostro git log
 ```
 
 ---
@@ -235,7 +351,7 @@ Visto che la consegna dice che la storia dei commit deve mostrare fasi di svilup
 
 Esempio:
 
-```
+```bash
 git commit -m "specifiche: primo documento di specifica del progetto"
 git commit -m "struttura: crea layout HTML iniziale"
 git commit -m "stile: aggiunge layout responsive"
@@ -255,7 +371,7 @@ git commit -m "docs: completa README e scenari di test"
 
 Alla fine delle 10 serate dovresti avere:
 
-```
+```txt
 ✅ Documento specifiche in Markdown
 ✅ Frontend HTML/CSS/JS separati
 ✅ Layout responsive
