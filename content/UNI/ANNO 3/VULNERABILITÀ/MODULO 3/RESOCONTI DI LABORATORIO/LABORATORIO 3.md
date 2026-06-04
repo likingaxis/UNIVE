@@ -115,3 +115,134 @@ pre= [0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1];
 
 ho 600 campioni e vedo 2 picchi quindi 2 volte il preambolo, sappiamo che ho una codifica ascii
 in 600 bit probabilmente il messaggio è lungo 256 bit dovuto al fatto che abbiamo 2 ripetizioni quindi $2^8$
+
+IDEA:
+ricevuto un messaggio che corrisponde a un bitstream bk ci da l'istante di tempo
+facciamo una codifica differenziale con una modulazione di fase
+in base all'asse del tempo trasmetterò un segnale a bit 1 poi bit 0 ecc
+i segnali 
+fa una funzione di moltiplicazione tra uno e l'altro che rispettivamente sono
+devo fare una aggiunta al codice della prof che mi trova il preambolo e mi decodifica il segnale
+
+codice finale:
+```scss
+%% Visualizzazione della fase dei simboli ricevuti
+
+% La fase assoluta può mostrare eventuali rotazioni dovute
+
+% a errori di sincronizzazione di fase o di frequenza.
+
+load("C:\Users\Luca\Documents\MATLAB\esempiosegnalericevuto2.mat");
+
+%% Caricamento dei campioni ricevuti
+
+% Segnale complesso in banda base.
+
+sig = yout.signals.values(1:600,1,20);
+
+phase = angle(sig(1:200));
+
+figure(1);
+
+stem(phase,'filled');
+
+grid on;
+
+title('Fase dei simboli ricevuti');
+
+xlabel('Indice simbolo');
+
+ylabel('Fase [rad]');
+
+%% Demodulazione differenziale DBPSK
+
+% Si confronta ogni simbolo con il precedente:
+
+%
+
+% d(k) = r(k) * conj(r(k-1))
+
+%
+
+% In questo modo un offset di fase costante viene eliminato
+
+% automaticamente.
+
+phase_diff = sig(2:end) .* conj(sig(1:end-1));
+
+figure(2);
+
+stem(real(phase_diff),'filled');
+
+grid on;
+
+title('Parte reale dei simboli differenziali');
+
+xlabel('Indice simbolo');
+
+ylabel('Re\{d(k)\}');
+
+%% Decisione sui bit
+
+% I i simboli DBPSK dovrebbero essere
+
+% concentrati attorno a +1 e -1 sull'asse reale.
+
+%
+
+% Re{d_corr} < 0 -> bit 1
+
+% Re{d_corr} > 0 -> bit 0
+
+rxBits = real(phase_diff) < 0;
+
+%% Visualizzazione dei primi bit decodificati
+
+figure(3);
+
+stem(rxBits(1:100),'filled');
+
+grid on;
+
+ylim([-0.2 1.2]);
+
+title('Primi 100 bit decodificati');
+
+xlabel('Indice bit');
+
+ylabel('Bit');
+
+%% Preambolo atteso
+
+pre = [0; 0; 0; 0; 1; 1; 1; 1; 0; 0; 0; 0; 1; 1; 1; 1];
+
+%% andiamo a trovare la fine del preambolo
+
+prbdet = comm.PreambleDetector(pre,Input='Bit');
+
+idx = prbdet(rxBits);
+
+display(idx);
+
+lunghezza=length(rxBits);
+
+%% converto il messaggio in ascii
+
+Lpre = length(pre);
+
+indiceuno = idx(1) + 1;
+
+indicedue = idx(2) - Lpre;
+
+bits_msg = rxBits(indiceuno:indicedue);
+
+binstr8 = reshape(bits_msg, 8, []).';
+
+binstr8 = char(binstr8 + '0');
+
+binmtx = bin2dec(binstr8);
+
+chrmtx = char(binmtx).';
+
+disp(chrmtx)
+```
