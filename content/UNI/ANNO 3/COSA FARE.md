@@ -1,17 +1,14 @@
-- big d finire algoritmi IMPORTANTE
-	- weekend
+##### PRIORITÀ MASSIMA
 - information retrieval studio
-	- weekend
-- vulnerabilità scrivi laboratorio 3
-	- aspetta che la prof le carichi
-- tesi
-	- weekend
-- programmazione web
-	- lezione di oggi
-- slide hackaton
-- report hackaton
-- finire i report di vulnerabilità il prima possibile
-	- 2 report
+- ricontrolla report vulnerabilità
+	- stasera
+##### MEDIA IMPORTANZA
 - fare sito web pw
 	- la sera lavoraci
-- fare 
+- tesi
+	- weekend
+##### POCO IMPORTANTE
+- big d finire algoritmi IMPORTANTE
+	- weekend
+- slide hackaton
+- report hackaton
