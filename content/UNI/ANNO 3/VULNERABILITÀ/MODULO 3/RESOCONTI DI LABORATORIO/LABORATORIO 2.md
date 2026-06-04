@@ -234,3 +234,189 @@ writetable(T, "risultati_BER.txt");
 ```
 
 #### Giorno 2
+questa seconda giornata di laboratorio volge a voler definire con mezzi pratici l'accesso simultaneo di mezzi di trasferimento Wireless o via cavo
+È quindi bene definire delle regole per decidere quando e come ogni dispositivo può trasmettere
+##### Protocollo ideale di multiple access protocol
+Quando il dispositivo è unico trasmette a massima potenza sfruttando tutta la capacità del canale 
+- trasferimento R quando ci sono più dispositivi R/M
+- decentralizzato e semplice
+##### protocolli famosi utilizzati si dividono principalmente in
+- channel partitioning
+- random access
+- taking turns
+###### TDMA
+Time Division Multiple Access, il canale viene diviso in slot temporali e ogni utente trasmette solo nel suo intervallo di tempo
+- spreca tantissime risorse con slot inutilizzati se l'utente non invia nulla
+###### FDMA
+Frequency Division Multiple Access, lo spettro radio viene diviso in bande di frequenza prefissate e ogni stazione riceve una propria banda di invio
+- se alcune bande non vengono usate comporta degli sprechi
+###### OFDM
+Orthogonal Frequency Division Multiplexing, divide la banda in tante sottoportanti che vengono dette subcarriers
+usato tutt'oggi 
+![[Pasted image 20260604151004.png|459]]
+###### CDMA
+Code Division Multiple Access, gli utenti non vengono separati da frequenze o tempi diversi ma attraverso codici
+- ogni utente ha una sequenza di codice chiamata chipping sequence
+	- questo codice viene moltiplicato con il messaggio che si vuole inviare per l'invio
+	- il ricevitore conoscendo lo stesso codice lo usa per la decodifica
+- se i codici sono trasmessi bene più utenti possono trasmettere sulla stessa banda con una interferenza limitata
+*CODIFICA*
+$$Z_{i,m}=d_i \cdot c_m$$
+*DECODIFICA*
+$$D_i=\sum_{m=1}^{M} Z_{i,m} \cdot c_m$$
+##### DSSS Simulation Simulink
+In questo laboratorio usiamo il progetto `simulateDSSS_binaryMessage_VDSI2026.slx`
+che simula un DSSS che sta per Direct Sequence Spread Spectrum, una vera realizzazione del modello CDMA visto in precedenza dove ogni bit viene moltiplicato per una sequenza di chip più veloce così che il segnale venga distribuito su una banda più ampia creando un fenomeno detto spreading
+- questo accade perchè il chip rate è maggiore del bit rate quindi questo aumenta la banda
+- ricordiamo che la banda dipende da quante volte il segnale cambia nel tempo, più cambiamenti banda più larga, e viceversa
+###### FOTO E DESCRIZIONE DEL PROGETTO
+![[foto progetto.png]]
+Il seguente progetto si divide in due parti principali
+- trasmettitore DSSS
+- ricevitore DSSS
+**parte del trasmettitore**
+Abbiamo un modulo che genera un messaggio binario che poi passa per un modulo BPSK(Binary Phase Shift Keying) che li trasforma in simboli BPSK e poi passa per il
+rectangular pulse filter, che rende il segnale più adatto alla trasmissione
+sotto poi abbiamo la sequenza di valori che dopo essere passata per un rectangular pulse filter
+viene moltiplicato insieme al BPSK con il modulo di moltiplicazione
+- qui avviene il vero e proprio spreading
+il tutto passa per un AWGN channel che aggiunge del rumore prima di passare per i blocchi del ricevitore
+**parte del ricevitore**
+abbiamo i moduli che fanno l'operazione inversa (De-spreading)
+- il tutto poi viene passato al modulo di Integrate and Dump
+	- utile per capire meglio quale simbolo è stato trasmesso in un certo range di tempo simbolico
+- il blocco di gain poi serve per riportare i valori in un intervallo corretto dopo l'integrate and dump infatti viene fatto il rapporto tra `tempo di campionamento/ simbolo e tempo di bit`
+##### Strumenti di analisi utilizzati nel modello
+Abbiamo aggiunto 4 Spectrum Analyzer per misurare(nel dominio della frequenza) rispettivamente
+- il segnale prima del prodotto lato mittente
+- il segnale dopo il prodotto lato mittente
+- il segnale prima del prodotto lato ricevente
+- il segnale dopo il prodotto lato ricevente
+e 2 time scope per confrontare il segnale nel tempo prima e dopo lo spreading
+###### Gli spectrum Analyzer
+![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_01.png]]
+- in questa foto vediamo il segnale prima e dopo il prodotto lato trasmettitore
+	- possiamo vedere come il segnale dopo il prodotto risulti più distribuito nello spettro 
+	- mentre prima era più concentrato vicino a 0 Hz
+![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_02.png]]
+- qui il segnale prima e dopo il prodotto lato ricevente
+	- il segnale risulta come prima ma invertito proprio dovuto al prodotto effettuato che riporta il segnale originale
+###### i time scope
+![[Time scope 1(prima del prodotto,bit codice,dopo il prodotto).PNG]]
+- il time scope analizza i seguenti input:
+	- segnale prima del prodotto
+	- segnale del codice di spreading
+	- segnale dopo il prodotto 
+		- possiamo notare grazie al time scope un aumento delle variazioni dovuto proprio allo spreading
+abbiamo la stessa informazione ma più "spalmata"
+
+![[Time scope 2(output finale,prima del prodotto,bit codice).PNG]]
+- il time scope analizza i seguenti input:
+	- segnale dell'output finale
+		- possiamo vedere un segnale estremamente leggibile
+	- segnale prima del prodotto
+		- molto indeciso e poco leggibile
+		- integrate and dump risolve molto la cosa
+	- segnale del codice
+		- fa vedere una chip rate molto alta
+##### Domande guidate di laboratorio
+>[!Question] domanda 1
+>Open the spectrum analyzer after the BPSK modulator, then open the one after the DSSS Spreader. How much wider did the signal get?
+> 
+> per rispondere alla domanda ho usato Channel Measurements dello spectrum analyzer
+> per capire la banda occupata
+> 
+> ![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_03.png]]
+> - Prima del prodotto lato trasmettitore, quindi prima dello spreading, la banda occupata misurata è circa 101.59 Hz
+> - Dopo il prodotto lato trasmettitore, quindi dopo la moltiplicazione con la chipping sequence, la banda occupata è circa 146.76 Hz
+> quindi facendo il rapporto avremmo
+> $146.76 / 101.59 ≈ 1.44$
+> che rappresenta circa il 44% quindi avviene effettivamente lo spreading
+
+>[!Question] domanda 2
+> Check the Noise Floor Measurement: Look at the peak power of the signal. Did spreading the signal make its peak sink down closer to the noise floor?
+> 
+> il channel power(preso dal channel measurements della domanda precedente) non cambia particolarmente
+> il Channel Power prima del prodotto è circa `29.9490 dBm`, mentre dopo il prodotto è circa `29.5021 dBm`. 
+> Quindi la potenza complessiva del segnale non cambia in modo significativo
+
+
+>[!Question] domanda 3
+> Check the De-Spreading Effect: Look at the spectrum right before the receiver’s DSSS multiplier, and then right after it. What happened to the wide signal? Did it shrink back down to its original narrow shape?
+> 
+> 
+> prima del prodotto lato ricevitore:  
+> - Occupied Bandwidth ≈ 163.2966 Hz
+> dopo il prodotto lato ricevitore:  
+> - Occupied Bandwidth ≈ 129.3670 Hz
+> facendo il rapporto quindi abbiamo
+> $129.3670 / 163.2966 ≈ 0.79$
+> - e quindi abbiamo una riduzione del 21%
+>![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_04.png]]
+
+>[!Question] domanda 4
+> If a jammer is turned on, look at its sharp spike before the multiplier. What happens to that sharp spike after the multiplier?
+> 
+> Qui non abbiamo usato un vero e proprio jammer selettivo, ma un canale AWGN, che aggiunge rumore al segnale in modo più generale
+> ipoteticamente, se fosse stato presente un jammer narrowband, nello Spectrum Analyzer lo avremmo visto come uno spike di potenza concentrato in un punto specifico della banda
+> dopo la moltiplicazione lato ricevitore con il codice DSSS, però, questo disturbo non verrebbe ricompattato come il segnale utile, perché il jammer non usa lo stesso codice di spreading. Di conseguenza, il suo picco verrebbe distribuito su una banda più ampia e avrebbe meno rilevanza sul segnale recuperato
+
+>[!Question] domanda 5
+> If DSSS is so amazing at stopping interference and noise, why don't we use it to stream 4K video on modern 5G or Wi-Fi networks? What do we sacrifice when we spread a signal?
+> 
+> - il DSSS migliora la robustezza del segnale ma sacrifichiamo troppa banda a causa dello spreading
+> - quindi vengono usate cose come OFDM viste in precedenza
+
+
+>[!Question] domanda 6
+>Check the Bit Rate vs. Chip Rate: Look at the time scope of the original BPSK data bits, then look at the DSSS spread signal. How many tiny chips fit inside just one single data bit?
+> 
+> Prendendo la foto del Time scope presa in precedenza possiamo dire con certezza che la chip rate è maggiore della bit rate ma non riesco a definire un numero preciso
+> ![[Time scope 1(prima del prodotto,bit codice,dopo il prodotto).PNG]]
+
+
+>[!question] domanda 7
+>Check the Phase Changes: Zoom in on the DSSS signal. Do you see the sharp phase flips happening much faster than the original BPSK signal?
+>
+Sì, nel segnale DSSS si osservano cambi di fase più rapidi rispetto al BPSK originale. Questo accade perché il segnale viene moltiplicato per il codice di spreading, che varia alla chip rate. Di conseguenza il segnale dopo il prodotto segue anche le variazioni veloci dei chip, non solo quelle dei bit informativi.
+> - Nel primo segnale, cioè il BPSK originale, le variazioni sono più lente perché dipendono dai bit informativi
+> - Nel terzo segnale, cioè dopo il prodotto, vedo più cambi di segno/fase perché il BPSK è stato moltiplicato per il codice di spreading
+> 	- quindi il segnale segue anche le variazioni veloci del codice
+
+>[!question] domanda 8
+>Check the Corrupted Signal: Look at the time scope of the incoming signal from the channel with noise/jamming. Can you visually see any square digital pulses at all?
+>
+> per rispondere alla seguente domanda aggiungo un time scope all'uscita della AWGN
+> ![[Pasted image 20260604181154.png]]
+> - si possono intuire le zone positive e negative ma sicuramente il segnale non risulta pulito e immediatamente leggibile
+
+>[!question] domanda 9
+>Check the Recovered Signal: Now look at the time scope right after the de-spreader multiplier. Did the clean, slow-moving data pulses magically reappear?
+> 
+> ![[time scope dopo de spreading con e senza integrate and dump.PNG]]
+> ho aggiunto un time scope dopo il de spreading prima e dopo integrate and dump
+> possiamo vedere che il segnale dopo il de spreading contiene molti campioni e risulta irregolare ma è comunque tornato e visibile
+> con integrate and dump cambia tutto e vediamo molta decisione nell'interpretazione dei bit
+
+>[!question] domanda 10
+> Check the Standard BPSK Dots: Open the BPSK constellation. Turn up the noise. How far apart do the two dots scatter before they start crossing the center line?
+> 
+> 
+> ![[constellation diagram dopo AWGN.PNG|456]]
+> ho aggiunto un constellation diagram di tipo BPSK e posso dire che abbiamo 2 nuvolette ma non abbastanza grandi da non far capire il simbolo
+> 
+> aumentando il noise togliendo il seed 67 e mettendo $E_b/N_0$ a 2 vediamo come il tutto sia estremamente incomprensibile
+> ![[Pasted image 20260604182734.png|425]]
+
+>[!question] domanda 11
+>Check the DSSS Dots Before and After: Look at the DSSS constellation before the de-spreader. Now look after the de-spreader. Did it snap back into two clean BPSK dots?
+> 
+> 
+> ![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_06.png]]
+> mettendo un constellation diagram prima e dopo lo spreading notiamo una buona sincronizzazione dei due, il secondo constellation diagram mostrava quelli in un certo istante di tempo quindi prima andava nella fase a -1 poi nella fase a 1
+
+##### Conclusione del laboratorio
+In questo laboratorio abbiamo analizzato il funzionamento di un sistema di comunicazione digitale tramite Simulink, concentrandoci sulla modulazione BPSK, sull'effetto del rumore AWGN e sul comportamento del BER al variare di ($E_b/N_0$)
+Dalle simulazioni è emerso che, aumentando il rumore, il segnale diventa più difficile da interpretare: la costellazione si disperde, l'eye diagram tende a chiudersi e il numero di errori aumenta. Al contrario, con valori più alti di ($E_b/N_0$), la comunicazione risulta più stabile e il BER diminuisce fino ad annullarsi
+Nella seconda parte del laboratorio abbiamo osservato il funzionamento del DSSS, che permette di rendere il segnale più robusto distribuendolo su una banda più ampia. Questo però comporta un maggiore utilizzo di banda
+In conclusione, il laboratorio ha permesso di comprendere meglio il rapporto tra rumore, qualità del segnale, probabilità di errore e tecniche di trasmissione digitale
