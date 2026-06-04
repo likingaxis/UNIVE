@@ -24,3 +24,5 @@ comunicare al programma javascript che riceve il messaggio dire l'esito della ri
 secondo delle logiche si vuole scrivere un modo best practice per inviare status di richieste in formato JSON
 
 aggiungi middleware `app.use(express.json)`
+
+abbiamo aggiunto pure morgan un middleware per le CORS
