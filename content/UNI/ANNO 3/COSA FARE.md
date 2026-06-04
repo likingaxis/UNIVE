@@ -1,7 +1,6 @@
 ##### PRIORITÀ MASSIMA
 - information retrieval studio
-- ricontrolla report vulnerabilità
-	- stasera
+- consegna report 2 vulnerabilità
 ##### MEDIA IMPORTANZA
 - fare sito web pw
 	- la sera lavoraci
