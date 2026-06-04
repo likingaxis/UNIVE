@@ -10,3 +10,8 @@
 	- lezione di oggi
 - slide hackaton
 - report hackaton
+- finire i report di vulnerabilità il prima possibile
+	- 2 report
+- fare sito web pw
+	- la sera lavoraci
+- fare 
