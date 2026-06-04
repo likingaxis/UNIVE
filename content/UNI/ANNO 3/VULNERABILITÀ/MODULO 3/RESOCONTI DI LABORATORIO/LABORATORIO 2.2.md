@@ -1,8 +1,6 @@
 ##### Giornata 2
 In questa seconda giornata di laboratorio introduciamo il problema dell'accesso alle risorse in modo multiplo
 
-
-
 questa lezione volge a voler definire con mezzi pratici l'accesso simultaneo di mezzi di trasferimento Wireless o via cavo
 - in un sistema wifi non associo in modo statico la frequenza a un solo dispositivo
 ##### Sistema ideale di multiple access protocol
