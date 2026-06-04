@@ -116,6 +116,7 @@ pre= [0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1];
 ho 600 campioni e vedo 2 picchi quindi 2 volte il preambolo, sappiamo che ho una codifica ascii
 in 600 bit probabilmente il messaggio è lungo 256 bit dovuto al fatto che abbiamo 2 ripetizioni quindi $2^8$
 
+
 IDEA:
 ricevuto un messaggio che corrisponde a un bitstream bk ci da l'istante di tempo
 facciamo una codifica differenziale con una modulazione di fase
