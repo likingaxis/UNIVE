@@ -1,154 +1,61 @@
-### Latent Semantic Indexing
-- useremo tecniche di dimensionalità per trasformare una cosa sparsa in una cosa densa
-- questa lezione è di inciso della lezione 11
-##### Ripassino di geometria
-[[Ripasso geometria]]
-Fin qui abbiamo parlato soprattutto di matrici quadrate.
-Ma nel Vector Space Model e nella LSI usiamo una matrice termine-documento:
+### Ridurre le matrici e ottenere uno spazio latente con topic
+##### Rappresentazione geometrica
+Nel Vector Space Model e ora nella LSI usiamo una matrice termine-documento rappresentare il peso di un termine per quel documento ad esempio la frequenza TF-IDF o altro
+la matrice quindi sarà
 $$A \in \mathbb{R}^{m \times n}$$
-dove:
-- le righe sono i termini
-- le colonne sono i documenti
-- ogni cella rappresenta il peso di un termine in un documento, ad esempio frequenza, TF-IDF o altro peso
-Questa matrice di solito è rettangolare, non quadrata.
-Quindi non posso applicare direttamente la decomposizione agli autovalori vista prima.
-Per questo si usa la **Singular Value Decomposition**, abbreviata in **SVD**.
-Se $A$ è una matrice $m \times n$ di rango $r$, allora esiste una fattorizzazione:
+dove le righe sono i termini e le colonne sono i vari documenti
+mi piacerebbe decomporre questa matrice per degli autovalori ma visto che la matrice è rettangolare e non quadrata devo usare la **SVD**
+##### SVD
+la *Singular Value Decomposition* che ci permette di fattorizzare una matrice $A$ $m \times n$ di rango $r$ facendola diventare
 $$A = U \Sigma V^T$$
-- $U$ è una matrice $m \times m$, rappresenta le righe
-- $\Sigma$ è una matrice $m \times n$, i valori singolari, ovvero i valori che consentono di ricostruire la matrice
-- $V$ è una matrice $n \times n$, quindi $V^T$ è la sua trasposta, descrive le colonne 
-Le colonne di $U$ sono gli autovettori ortogonali di $AA^T$, mentre le colonne di $V$ sono gli autovettori ortogonali di $A^TA$. I valori sulla diagonale di $\Sigma$ sono i **valori singolari** $\sigma_1, \sigma_2, \dots, \sigma_r$, ordinati in modo decrescente.
-##### Low rank matrix approximation
-se vogliamo comprimere la matrice, possiamo tenere solo i primi $k$ valori singolari e mettere a zero gli altri. In questo modo otteniamo una matrice approssimata detta di low-rank:
-$$A_k = U \, \mathrm{diag}(\sigma_1, \dots, \sigma_k, 0, \dots, 0)V^T$$
-Invece di usare tutta la matrice $A$, scegliamo una versione compressa di rango $k$, con $k \ll r$
+- $U$ è una matrice $m \times m$, rappresenta le **righe**
+- $\Sigma$ è una matrice $m \times n$,  che in diagonale ha dei **valori singolari** $\sigma_1, \sigma_2, \dots, \sigma_r$, che permettono di ricostruire i valori della matrice
+- $V$ è una matrice $n \times n$, quindi $V^T$ è la sua trasposta, descrive le **colonne** 
+###### Low-rank approximation
+Possiamo comprimere la matrice fattorizzata con SVD tenendo conto solo dei primi $k$ valori singolari ottenendo una matrice di low-rank 
+$$
+A_k = U_k\Sigma_k V_k^T
+$$
 Dopo la riduzione a $k$ dimensioni, **i termini e i documenti restano tutti presenti**, ma vengono rappresentati in uno spazio più piccolo
+ricordiamo che $k \ll r$
 
-###### vicinanza con la matrice originale
-si vuole misurare tramite un sistema di norma di Frobenius la vicinanza di una matrice $A$ da una sua approssimazione con low-rank $A_k$ vedendo l'errore complessivo tra due celle delle due matrici
-- la SVD produce la miglior approssimazione possibile di rango $k$ rispetto alla norma di Frobenius
-	- abbiamo il minimo errore possibile per $k$ valori singolari tenuti
-La matrice approssimata può anche essere vista come somma di matrici di rango 1:
-$$A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T$$
-dove ogni termine della somma rappresenta una componente della matrice originale
-Man mano che $i$ cresce, i valori singolari tendono a diminuire, quindi il contributo delle componenti successive diventa meno rilevante
-
-La norma di Frobenius misura invece la distanza tra la matrice originale $A$ e la matrice approssimata $A_k$
+###### Frobenius
+utilizziamo la norma di Frobenius per dimostrare che l'approssimazione low-rank della matrice prodotta con SVD è la migliore possibile per quel determinato rango $k$ 
 $$∥A−Ak​∥_F​$$
-quanto sto sbagliando ricostruendo $A$ con solo $k$ componenti?
+più $k$ è simile al rango effettivo più $A_k$ è simile ad $A$
 
-In LSI $k$ è scelto molto più piccolo del rango originale. Storicamente si usano spesso valori nell’ordine delle centinaia, per esempio 100-300 o qualche centinaio, ma la scelta dipende dalla collezione e dal compromesso tra compressione, rumore e perdita di informazione
-
-Una dimensione latente è una specie di “asse semantico” costruito combinando:
-$$u_i,\ \sigma_i,\ v_i^T$$
+spesso $k$ è compreso tra 100 e 300
 ![[Pasted image 20260521155903.png|525]]
-
-info sul rango
-Se abbiamo una matrice termine-documento con $m$ termini e $n$ documenti, il rango massimo è:
-$r \leq \min(m,n)$
-Quindi, se per esempio abbiamo $m = 50000$ termini e $n = 10$ milioni di documenti, il rango non può superare $50000$
 ##### Latent Semantic Indexing
-rappresenta una tecnica di rappresentazione che sfrutta la SVD per rappresentare termini documenti e query in uno spazio semantico latente a dimensionalità ridotta
-“Latente” significa che il significato non è rappresentato direttamente come parola o etichetta, ma emerge indirettamente dai rapporti tra termini e documenti
-- nella formula vista in precedenza della rappresentazione della matrice intera $S$ , quella davvero strutturata con termini documenti e pesi tf-idf
-	- abbiamo che 
-	- $U$ può essere visto come il lato dei **termini**
-	- $V^T$ come il lato dei **documenti**
-	- $\Sigma$ contiene i **valori singolari**, cioè i pesi delle dimensioni latenti
-- viene sfruttata la SVD con low rank a k
-Con LSI, termini e documenti non sono più rappresentati nello spazio originale, dove ogni dimensione corrispondeva a una parola. Vengono invece rappresentati in uno spazio di dimensione $k$, detto **spazio semantico latente**
-- è detto latente perchè grazie all'SVD 
-termini come “laptop”, “portable”, “computer” e “display” possono finire vicini perché appartengono allo stesso contesto semantico
-![[Pasted image 20260521161841.png|489]]
-nello spazio originale “Laptop” e “Portable” sono assi distinti, mentre nello spazio LSI diventano punti o direzioni dentro un sistema di coordinate nuovo. In questo nuovo spazio, un documento può essere vicino a un termine anche se nel vettore originale quel termine non compariva direttamente
-###### Densità della LSI dopo la SVD
-La matrice originale termine-documento è spesso sparsa, perché ogni documento contiene solo pochi termini del vocabolario. Dopo la SVD, invece, le celle vengono ricostruite come combinazioni di componenti latenti, quindi possono comparire valori non nulli anche dove prima c’erano zeri
-Un modo utile di vedere la LSI è separare la decomposizione in due parti:
-$$A = U \Sigma V^T$$​
-e riscriverla, concettualmente, come:
-$$A = (U\Sigma^{1/2})(\Sigma^{1/2}V^T)$$
-Questa forma serve a dare una rappresentazione simmetrica a termini e documenti nello stesso spazio latente. La prima parte può essere vista come rappresentazione dei termini, la seconda come rappresentazione dei documenti
-$$
-
-T_k=U_k\Sigma_k^{1/2}
-
-$$
-$$
-
-D_k=\Sigma_k^{1/2}V_k^T
-
-$$
-Quindi, se voglio capire quanto un termine è collegato a un documento, posso confrontare il vettore del termine con il vettore del documento nello spazio latente, per esempio tramite prodotto scalare. Se il prodotto scalare è alto, significa che quel termine e quel documento sono vicini nello spazio latente
-“prendiamo il vettore del termine laptop e lo moltiplichiamo per il vettore del documento 3”: non sto controllando solo se la parola “laptop” appare letteralmente nel documento 3, ma sto stimando quanto il documento 3 sia vicino semanticamente alla direzione latente associata a quel termine
-che poi ridotta a $k$ dimensioni sarebbe
-$A_k = U_k \Sigma_k V_k^T$
-##### Mapping delle query
-Se $q$ è il vettore della query nello spazio originale dei termini, la sua rappresentazione nello spazio LSI è:
-$q_k = \Sigma_k^{-1} U_k^T$ 
-la query viene “inserita dentro” lo spazio latente già costruito dai documenti, **senza rifare tutta la SVD** infatti si dice folding-in
-Ogni riga e colonna di $A$ viene mappata nello spazio LSI a $k$ dimensioni, e che anche la query $q$ viene mappata nello stesso spazio. 
-Inoltre, dopo questa trasformazione, la query non è più sparsa come nel modello vettoriale classico
-Serve a prendere una **query scritta nello spazio originale dei termini** e trasformarla nello **spazio latente LSI** a $k$ dimensioni
-se la query contiene solo due parole, per esempio “dog” e “friends”, il vettore query ha valori non nulli solo su quelle due dimensioni. In LSI, invece, la query viene proiettata nello spazio latente e diventa una combinazione delle dimensioni latenti. Quindi può attivare anche concetti collegati indirettamente ai termini originali
-LSI può essere vista anche come una forma di **query expansion globale**: non espande la query usando un thesaurus esterno come WordNet, ma sfrutta le associazioni presenti nell'intera collezione
+tecnica di rappresentazione che sfrutta la SVD per rappresentare termini documenti e query in uno spazio latente con dimensionalità ridotta mediante approssimazioni
+- le informazioni delle singole celle vengono poi definite dal rapporto che si fa tra i termini e i documenti per questo si dice latente
+una matrice termine documento quindi si rappresenta così
+$A = (U\Sigma^{1/2})(\Sigma^{1/2}V^T)$
+- $U$ sono i termini che vengono prodotti per i valori singolari
+- $V^T$ sono i documenti sempre prodotti per i valori singolari
+e si possono rappresentare i termini e i documenti(dopo anche un ipotetico low-rank) come
+- $T_k=U_k\Sigma_k^{1/2}$
+- $D_k=\Sigma_k^{1/2}V_k^T$
+La query invece viene rappresentata nello spazio LSI mediante folding-in
+$$q_k = \Sigma_k^{-1} U_k^T$$
+la query viene definita dai documenti già presenti nello spazio latente senza dove ricalcolare l'SVD
+è possibile inoltre notare come termini che hanno rappresentazione latente simile tendono ad appartenere a un certo topic semantico
+Questo nel caso di un recupero dei risultati potrebbe portare a una maggiore **recall** dovuta al fatto che includiamo anche documenti per sinonimia o polisemia ovvero quando due parole hanno significati simili o quando una stessa parola ha significati diversi
+ma non un aumento della precision obbligatorio soprattutto perché esso dipende dal $k$ scelto
 ![[Pasted image 20260521164410.png|462]]
-
-Il vantaggio principale della LSI è che prova a correggere alcuni limiti del Vector Space Model, in particolare **sinonimia** e **polisemia**
-- **sinonimia**, quando parole diverse hanno significati simili, come “car” e “automobile”;
-- **polisemia**, quando la stessa parola può avere significati diversi, come “saturn” pianeta o “Saturn” marca/azienda
-Dal punto di vista del retrieval, ci si aspetta spesso un miglioramento della **recall**, perché il sistema può recuperare documenti anche quando non condividono esattamente le stesse parole della query. La precisione, invece, non migliora sempre in modo netto: le slide riportano risultati sperimentali in cui LSI può essere leggermente migliore del Vector Space Model classico, ma anche che la scelta della dimensionalità $k$ è delicata
-Non è adatta a esprimere richieste del tipo:
-```scss
-fiat volkswagen NOT ford
-```
-oppure condizioni rigide del tipo “trova documenti che parlano di queste cinque aziende”
-- **full-text search** con indice inverso e modelli come BM25;
-- rappresentazioni dense, oggi spesso ottenute con modelli neurali come BERT o altri embedding model;
-- tecniche di **reranking**, in cui un primo sistema recupera candidati e un secondo modello li riordina.
-Quindi LSI non è necessariamente la tecnica più usata oggi nella sua forma classica, ma è fondamentale per capire il passaggio concettuale: dal matching lessicale puro alla rappresentazione semantica vettoriale
-#### Vero e proprio ranking
-poi per fare il vero e proprio ranking si può applicare la cosine similarity
-Una volta che ho:
-$q_k$
-e per ogni documento ho:
-$d_{1,k}, d_{2,k}, d_{3,k}, \dots$
-posso calcolare la similarità tra query e documenti detta score sapendo che 
-- $D_k = \Sigma_k V_k^T$	
-- $T_k = U_k\Sigma_k$
+###### Come applicare Cosine Similarity alla rappresentazione con LSI
 lo score LSI viene calcolato confrontando:
 $$
 
 q_k
-
 \qquad\text{con}\qquad
-
 D_k(d)
-
 $$
-per ogni documento $d$
-Di solito si usa:
-$\cos(q_k,d_k)$
-cioè la **cosine similarity**
-La cosine similarity misura quanto due vettori puntano nella stessa direzione:
+questo per ogni documento $d$ effettuando la cosine similarity tra i due vettori 
 $$\cos(q_k,d_k)=\frac{q_k \cdot d_k}{\|q_k\|\|d_k\|}$$
-Se il valore è alto, vuol dire che query e documento sono vicini nello spazio latente
-
 ##### Formula dell'energia
 serve a misurare quanta “energia” o informazione complessiva viene catturata dalle prime $k$ componenti
 Questa formula è utile per scegliere $k$. Per esempio posso dire: scelgo $k$ in modo da conservare almeno il 90% o il 95% dell’energia
 $$\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$$
 
 L’**energia** misura quanto una componente latente contribuisce a ricostruire la matrice originale
-##### Formula di Frobenius
-La norma di Frobenius misura invece la distanza tra la matrice originale $A$ e la matrice approssimata $A_k$
-$$∥A−Ak​∥_F​$$
-quanto sto sbagliando ricostruendo $A$ con solo $k$ componenti?
-
-In LSI $k$ è scelto molto più piccolo del rango originale. Storicamente si usano spesso valori nell’ordine delle centinaia, per esempio 100-300 o qualche centinaio, ma la scelta dipende dalla collezione e dal compromesso tra compressione, rumore e perdita di informazione
-
-Una dimensione latente è una specie di “asse semantico” costruito combinando:
-$$u_i,\ \sigma_i,\ v_i^T$$
-- documenti e termini
-		- $D_k = \Sigma_k V_k^T$
-		- $T_k = U_k\Sigma_k$

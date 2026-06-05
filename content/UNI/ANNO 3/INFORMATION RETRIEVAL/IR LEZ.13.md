@@ -91,7 +91,7 @@ una catena di Markov come un processo in cui la probabilità del prossimo stato 
 se il surfer si trova nella pagina $i$, la probabilità di andare nella pagina $j$ dipende solo da $i$, non da come è arrivato lì
 ###### Matrice di transizione
 Costruiamo quindi una **matrice di transizione** $P$, dove ogni elemento $P_{ij}$ rappresenta:
-$$P_{ij} = \text{probabilità di passare dalla pagina } i \text{ alla pagina }$$
+$$P_{ij} = \text{probabilità di passare dalla pagina } i \text{ alla pagina j }$$
 Ogni riga della matrice rappresenta tutte le possibili destinazioni a partire da una certa pagina. Per questo motivo, la somma degli elementi di ogni riga deve essere uguale a 1:
 $$\sum_{j=1}^{n} P_{ij}= 1$$
 ![[Pasted image 20260527113917.png|387]]
