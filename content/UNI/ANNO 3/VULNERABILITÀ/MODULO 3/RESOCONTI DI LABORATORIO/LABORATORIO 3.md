@@ -77,6 +77,35 @@ con il precedente coniugato ovvero `conj(r(k-1))`
 se due simboli hanno la stessa fase il risultato di `d(k)` risulta essere positivo altrimenti c'è una inversione di fase di circa $\pi$
 - (+1), quando non c’è variazione di fase significativa tra due simboli consecutivi
 - (-1), quando tra i due simboli c’è un salto di fase di circa ($\pi$)
+
+AGGIUNTA DA SISTEMARE
+`quando ho una fase a +1 sto trasmettendo 0 quando ho una fase -1 sto trasmettendo 0`
+
+```scss
+oltretutto aggiungi pure quella roba con s(t) spiegata al fly
+dove c'è il coseno e prendiamo la parte reale dell'esponenziale complesso per leggere se il messaggio è 1 o -1
+dove il coseno bla bla bla è la portante
+quando inviamo il segnale moltiplichiamo per la portante
+quando lo riceviamo lo facciamo e elevato a una portante ecc con fc+un lambda f che rappresenta un disturbo
+
+quando prendo un filtro banda base per leggere il segnale ricevuto non mi metto a 0 ma mi sposto di un certo deltaf
+oltre a uno sfasamento di frequenza ne ho anche uno di fase 
+(vedi formula in foto)
+
+AGGIUNGI FOTO DELLA COSTELLAZIONE CON UN CERCHIO PERCHÈ TUTTI SI SPOSTANO
+per colpa del disturbo ci troviamo con deltaf e uno di fase ovvero phi
+
+prendo due campioni del segnale presi a due istanti di tempo vicini
+t1 e t2 
+prende il coniugato dei due perchè vogliamo approssimarli
+tolgo gli sfasamenti e se i due disturbi deltaf sono vicini li tolgo anche e rimane 
+
+di tutta la roba in foto rimane questo 
+m(t1)*m(t2) dove se sono uguali allora vale 1 se diversi vale -1
+
+quindi elimino lo sfasamento
+```
+
 quindi nel grafico sotto posso vedere il risultato del confronto tra un simbolo con il precedente
 abbiamo quasi una forma decodificata del segnale perchè distinguiamo tra regione positiva e negativa
 ```scss
@@ -129,6 +158,8 @@ rappresentiamo poi in figura 3 i primi 100 bit decodificati
 % Re{d_corr} < 0 -> bit 1
 
 % Re{d_corr} > 0 -> bit 0
+
+questo perché se ho bit uguali allora vale 0 se ho bit diversi allora vale 1
 
 rxBits = real(phase_diff) < 0;
 
