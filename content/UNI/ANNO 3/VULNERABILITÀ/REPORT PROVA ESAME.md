@@ -68,7 +68,6 @@ REMOTE_PATH=/backup/manuals
 STAMP=20260513
 ```
 #### Domanda 4
- 1 (100% liked)  0
 
 In un manuale interno viene specificato quale metodo di autenticazione è concesso agli operatori per l'accesso remoto al server. Qual è?
 
@@ -81,6 +80,7 @@ RSA Private Key
 #### Domanda 5
 sto esplorando il ftp ho trovato una flag bho
 VDSI{4dm1n_fl4g_h3r3}
+
 ho trovato /v1/adm1n/d4shb0ard/
 nmap mi ha dato il certificato e l'ho messo
 #### Domanda 6
@@ -93,7 +93,7 @@ root:x:0:0:root:/root:/bin/bash daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin 
 ```
 trovato id con 
 `muntrea-operator`
-sto provando a fare
+
 #### Domanda 8
 /home/muntrea-operator/.ssh/id_rsa
 ```scss
