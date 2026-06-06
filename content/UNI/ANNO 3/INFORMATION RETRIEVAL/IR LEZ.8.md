@@ -139,7 +139,7 @@ La normalizzazione per lunghezza serve a ridurre la disparità tra documenti lun
 *   **$b = 0$**: Nessuna normalizzazione
 di solito si mette a  **$b \approx 0.75$** 
 ##### Retrieval status Value
-$RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1 \left( (1 - b) + b \frac{L_d}{L_{ave}} \right) + tf_{td}}$
+$$RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1  B + tf_{td}}$$
 questa formula vede a sinistra l'uso della inverse document frequency e a destra la term frequency è moltiplicata per una certa TF saturation
 infatti $k_1$ è un parametro di tuning definito per controllare la scala della saturazione della Term frequency
 limita superiormente la term frequency dopo una certa crescita rapida o lenta a seconda del valore di k

@@ -27,15 +27,15 @@ POMERIGGIO
 - [x] IR lez.9
 - [x] IR lez.10
 MATTINA DOMANI
-- [ ] IR lez.11
-- [ ] IR lez.12
-- [ ] IR lez.13
+- [x] IR lez.11
+- [x] IR lez.12
+- [x] IR lez.13
 ##### Quiz
 - [x] IR lez.6
 - [x] IR lez.7
 - [x] IR lez.8
 - [x] IR lez.9
 - [x] IR lez.10
-- [ ] IR lez.11
-- [ ] IR lez.12
-- [ ] IR lez.13
+- [x] IR lez.11
+- [x] IR lez.12
+- [x] IR lez.13

@@ -20,7 +20,7 @@
 		- Precision@K
 			- $Precision@K = \frac{\text{relevant nei primi K}}{K}$
 		- Average Precision e Mean Average Precision
-			- AP=media di tutti i Precision@K per una singola query, scorrendo tutte le posizioni
+			- AP=media di tutti i Precision@K per una singola query, scorrendo solo tutte le posizioni dove un documento è rilevante
 			- $MAP = \frac{1}{|Q|} \sum_{q \in Q} AP(q)$ per più query
 	- Più livelli di rilevanza
 		- Discount Cumulative Gain
@@ -127,7 +127,8 @@
 	* $L_{d} = \sum_{t} tf_{td}$
 	* $L_{ave} = \frac 1 {|D|} \sum\limits_{d \in D}L_{d}$
 	* BM25 con saturazione e bilanciamento
-		* $RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1 \left( (1 - b) + b \frac{L_d}{L_{ave}} \right) + tf_{td}}$
+		* $RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1  B + tf_{td}}$
+		* $B = (1-b)+b\frac{|d|}{avgdl}$
 		* $b\approx 0,75$ 
 			* fattore di normalizzazione b della lunghezza dei documenti
 		* k1 basso= saturazione rapida
@@ -163,7 +164,9 @@
 			- iper-parametro
 		- tutti i documenti hanno stesso parametro
 	- Dirichlet 
-		- $p_{Dir}(t \mid d) = \lambda_d p(t \mid \hat{M}_d) + (1-\lambda_d)p(t \mid \hat{M}_c)$
+		- $p_{Dir}(t|d)= \frac{tf_{t,d}+\mu p(t|C)} {|d|+\mu}$
+		- che poi diventa
+			- $p_{Dir}(t \mid d) = \lambda_d p(t \mid \hat{M}_d) + (1-\lambda_d)p(t \mid \hat{M}_c)$
 		- con
 			- $\lambda_d = \frac{|d|}{|d|+\mu}$
 		- $\mu$ controlla quanto smoothing viene applicato
@@ -173,10 +176,12 @@
 - log likelihood con Dirichlet e operazioni algebriche varie otteniamo
 	- definita poi una query andiamo a fare
 	- $\log p_{Dir}(q \mid d) = \sum_{k=1}^{n} \log p_{Dir}(w_k \mid d)$
-- cerco lo score più piccolo
+	- il log serve per evitare underflow numerico e trasformare i prodotti in somme
+	- produce score negativi quindi cerco il valore più vicino allo 0 negativo
 - BM25 VS Language Models
-	- BM25 maggior controllo dei fenomeni e idf esplicita
+	- BM25 maggior controllo dei fenomeni con i parametri k1 e b e idf esplicita
 	- Language model hanno idf non esplicita ma con la collection frequency si ottiene un risultato simile
+		- poco controllo solo con $\mu$ che regola lo smoothing verso la collezione
 
 [[LABORATORIO 3]]
 #### OTTIMIZZAZIONE DEI SISTEMI DI RANKING
@@ -266,7 +271,7 @@
 [[UNI/ANNO 3/INFORMATION RETRIEVAL/LABORATORI/LABORATORIO 4|LABORATORIO 4]]
 - SVD(Singular Value Decomposition)
 	- matrice di low rank di solito k è 100-1000
-	- $A_k = U \, \mathrm{diag}(\sigma_1, \dots, \sigma_k, 0, \dots, 0)V^T$
+	- $A_k = U_k\Sigma_k V_k^T$
 	- $A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T$
 	- $U$ righe, $\sigma$ valori singolari, $V$ colonne se trasposta
 	- Frobenius
@@ -280,7 +285,7 @@
 		- $T_k=U_k\Sigma_k^{1/2}$
 		- $D_k=\Sigma_k^{1/2}V_k^T$
 	- query dentro LSI(folding-in)
-		- $q_k = \Sigma_k^{-1} U_k^T$ 
+		- $q_k=q^T U_k\Sigma_k^{-1}$
 	- query expansion
 		- LSI aiuta soprattutto con la **sinonimia**, perché termini diversi ma usati in contesti simili vengono proiettati vicino nello spazio latente
 	- sinonimia
