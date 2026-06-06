@@ -242,6 +242,8 @@
 - metodi locali 
 	- relevance feedback
 		- query reformulation
+			- la query iniziale è abbastanza vicina all’information need;
+			- i documenti rilevanti sono abbastanza coerenti tra loro, cioè formano un gruppo riconoscibile nello spazio vettoriale.
 	- centroide
 		- funzionano solo con vector space model
 		- vettore medio di un insieme di documenti
@@ -257,6 +259,7 @@
 		- $\beta$: quanto peso dare ai documenti rilevanti
 		- $\gamma$: quanto peso dare ai documenti non rilevanti
 		- si basa sul giudizio dell'utente
+		- $\alpha = 1, \qquad \beta = 0.75, \qquad \gamma = 0.15$
 	- pseudo-relevance feedback
 		- assumo i primi $k$ documenti come rilevanti e applico relevance su di essi
 		- query drift
