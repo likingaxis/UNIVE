@@ -237,29 +237,29 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 
 #### Giorno 2
 questa seconda giornata di laboratorio volge a voler definire con mezzi pratici l'accesso simultaneo di mezzi di trasferimento Wireless o via cavo
-È quindi bene definire delle regole per decidere quando e come ogni dispositivo può trasmettere
+È quindi bene definire delle *regole* per decidere quando e come ogni dispositivo può trasmettere
 ##### Protocollo ideale di multiple access protocol
 Il protocollo ideale ad accesso multiplo funziona così:
-Quando il dispositivo è unico trasmette a massima potenza sfruttando tutta la capacità del canale $R$ 
-quando invece ci sono più dispositivi trasmette a R/M
+Quando il dispositivo è *unico trasmette* a massima potenza sfruttando tutta la capacità del canale $R$ 
+quando invece *ci sono più dispositivi* trasmette a R/M
 inoltre deve essere decentralizzato e semplice
 ##### protocolli famosi utilizzati si dividono principalmente in
 - channel partitioning
 - random access
 - taking turns
 ###### TDMA
-Time Division Multiple Access, il canale viene diviso in slot temporali e ogni utente trasmette solo nel suo intervallo di tempo
+Time Division Multiple Access, il *canale* viene *diviso* in *slot temporali* e ogni utente trasmette solo nel suo intervallo di tempo
 - spreca tantissime risorse con slot inutilizzati se l'utente non invia nulla
 ###### FDMA
-Frequency Division Multiple Access, lo spettro radio viene diviso in bande di frequenza prefissate e ogni stazione riceve una propria banda di invio
+Frequency Division Multiple Access, lo spettro radio viene *diviso* in *bande di frequenza* prefissate e ogni stazione riceve una propria banda di invio
 - se alcune bande non vengono usate comporta degli sprechi
 ###### OFDM
-Orthogonal Frequency Division Multiplexing, divide la banda in tante sottoportanti che vengono dette subcarriers
+Orthogonal Frequency Division Multiplexing, *divide* la *banda* in tante *sotto-portanti* che vengono dette subcarriers
 usato tutt'oggi 
 ![[Pasted image 20260604151004.png|459]]
 ###### CDMA
-Code Division Multiple Access, gli utenti non vengono separati da frequenze o tempi diversi ma attraverso codici
-- ogni utente ha una sequenza di codice chiamata chipping sequence
+Code Division Multiple Access, gli utenti non vengono *separati* da frequenze o tempi diversi ma *attraverso codici*
+- ogni *utente* ha una *sequenza* di codice chiamata **chipping sequence**
 	- questo codice viene moltiplicato con il messaggio che si vuole inviare per l'invio
 	- il ricevitore conoscendo lo stesso codice lo usa per la decodifica
 - se i codici sono trasmessi bene più utenti possono trasmettere sulla stessa banda con una interferenza limitata
@@ -269,33 +269,33 @@ $$Z_{i,m}=d_i \cdot c_m$$
 $$D_i=\sum_{m=1}^{M} Z_{i,m} \cdot c_m$$
 ##### DSSS Simulation Simulink
 In questo laboratorio usiamo il progetto `simulateDSSS_binaryMessage_VDSI2026.slx`
-che simula un DSSS che sta per Direct Sequence Spread Spectrum, una vera realizzazione del modello CDMA visto in precedenza dove ogni bit viene moltiplicato per una sequenza di chip più veloce così che il segnale venga distribuito su una banda più ampia creando un fenomeno detto spreading
+che simula un *DSSS* che sta per **Direct Sequence Spread Spectrum**, una vera realizzazione del modello CDMA visto in precedenza dove ogni bit viene moltiplicato per una sequenza di chip più veloce così che il segnale venga distribuito su una banda più ampia creando un fenomeno detto spreading
 - questo spreading accade poiché il chip rate è maggiore del bit rate quindi questo aumenta la banda
 	- ricordiamo che la banda dipende da quante volte il segnale cambia nel tempo, più cambiamenti equivalgono a una banda più larga, e viceversa
 ###### FOTO E DESCRIZIONE DEL PROGETTO
 ![[foto progetto.png]]
 Il seguente progetto si divide in due parti principali
-- trasmettitore DSSS
-- ricevitore DSSS
+- **trasmettitore DSSS**
+- **ricevitore DSSS**
 **parte del trasmettitore**
-Abbiamo un modulo che genera un messaggio binario che poi passa per un modulo BPSK(Binary Phase Shift Keying) che li trasforma in simboli BPSK e poi passa per il
-rectangular pulse filter, che rende il segnale più adatto alla trasmissione
-sotto poi abbiamo la sequenza di valori che dopo essere passata per un rectangular pulse filter
-viene moltiplicato insieme al BPSK con il modulo di moltiplicazione
-- qui avviene il vero e proprio spreading
-il tutto passa per un AWGN channel che aggiunge del rumore prima di passare per i blocchi del ricevitore
+Abbiamo un modulo che genera un messaggio binario che poi passa per un modulo *BPSK(Binary Phase Shift Keying)* che li trasforma in simboli BPSK e poi passa per il
+*rectangular pulse filter*, che rende il segnale più adatto alla trasmissione
+sotto poi abbiamo la *sequenza di valori* che dopo essere passata per un rectangular pulse filter
+viene moltiplicato insieme al *BPSK* con il modulo di moltiplicazione
+- qui avviene il vero e proprio **spreading**
+il tutto passa per un *AWGN channel* che aggiunge del rumore prima di passare per i blocchi del ricevitore
 **parte del ricevitore**
-abbiamo i moduli che fanno l'operazione inversa (De-spreading)
-- il tutto poi viene passato al modulo di Integrate and Dump
+abbiamo i moduli che fanno l'operazione inversa **(De-spreading)**
+- il tutto poi viene passato al modulo di *Integrate and Dump*
 	- utile per capire meglio quale simbolo è stato trasmesso in un certo range di tempo simbolico
-- il blocco di gain poi serve per riportare i valori in un intervallo corretto dopo l'integrate and dump infatti viene fatto il rapporto tra `tempo di campionamento/ simbolo e tempo di bit`
+- il *blocco di gain* poi serve per riportare i valori in un intervallo corretto dopo l'integrate and dump infatti viene fatto il rapporto tra `tempo di campionamento/ simbolo e tempo di bit`
 ##### Strumenti di analisi utilizzati nel modello
-Abbiamo aggiunto 4 Spectrum Analyzer per misurare(nel dominio della frequenza) rispettivamente
+Abbiamo aggiunto 4 *Spectrum Analyzer* per misurare(nel dominio della frequenza) rispettivamente
 - il segnale prima del prodotto lato mittente
 - il segnale dopo il prodotto lato mittente
 - il segnale prima del prodotto lato ricevente
 - il segnale dopo il prodotto lato ricevente
-e 2 time scope per confrontare il segnale nel tempo prima e dopo lo spreading
+e 2 *time scope* per confrontare il segnale nel tempo prima e dopo lo spreading
 ###### Gli spectrum Analyzer
 ![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_01.png]]
 - in questa foto vediamo il segnale prima e dopo il prodotto lato trasmettitore
