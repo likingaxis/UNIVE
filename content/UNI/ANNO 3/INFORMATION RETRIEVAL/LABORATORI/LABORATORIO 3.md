@@ -143,45 +143,52 @@ INPUT:
     q = query testuale
     k1, b = parametri BM25
     top_k = numero di documenti da restituire
-
-1. Calcolo le statistiche della collezione:  
-	- N = numero documenti  
-	- len[d] = lunghezza di ogni documento  
-	- avg_len = lunghezza media  
-	- tf[t,d] = frequenza del termine t nel documento d  
-	- df[t] = numero di documenti che contengono t
-
-2. Calcolo inverse document frequency
-	se df[t] = 0:
-	    idf(t) = 0
-	altrimenti:
-	    idf(t) = log(1 + (N - df[t] + 0.5) / (df[t] + 0.5))
-3. funzione di calcolo del contributo
-   contributo(t,d):
-		se tf = 0:
-		    contributo(t, d) = 0
-		altrimenti:
-		    B = (1 - b) + b * len[d] / avg_len
-		    componente_tf = ((k1 + 1) * tf) / (tf + k1 * B)
-		    contributo(t, d) = idf(t) * componente_tf
-4. applicazione alla query q
-	preprocessing alla query q, possiamo decidere se semplificare le cose togliendo la 
-	ripetizione dei termini
-	Q = insieme dei termini distinti della query
-	Costruisco l'insieme dei candidati C:
-		C=insieme vuoto
-		per ogni termine t in Q:
-		aggiungo a C tutti i documenti di t
-			usando un inverted index
-	per ogni documento d in C:
-	    score[d] = 0
-	    per ogni termine t in Q:
-	        score[d] = score[d] + contributo(t, d)
-	    se score[d] > 0:
-	        salva (d, score[d])
-	ordina i documenti salvati per score decrescente
-	restituisci i primi top_k documenti
+1. Preprocessing dei documenti:
+    per ogni documento d in D:
+        tokenizza / normalizza / rimuovi stopword / stemming se previsto
+2. Costruzione delle statistiche:
+    N = numero totale di documenti
+    len[d] = numero di token del documento d
+    avg_len = media delle lunghezze dei documenti
+    tf[t,d] = frequenza di t in d
+    df[t] = numero di documenti che contengono t
+    idf[t] = log(1 + (N - df[t] + 0.5) / (df[t] + 0.5))
+3. Costruzione dell'indice inverso
+    con posting list ovvero lista dei documenti d che contengono t
+        eventualmente con tf[t,d] e altre informazioni
+4. Preprocessing della query:
+    q_tokens = stessi passaggi usati sui documenti
+    per semplicità:
+        Q = termini distinti della query
+    oppure, nella versione completa:
+        conserva tf[t,q] per eventuale peso dei termini ripetuti
+5. Costruzione dei candidati:
+    C = insieme vuoto
+    per ogni termine t in Q and t in V:
+        per ogni documento d in posting_list[t]:
+            aggiungi d a C
+6. Calcolo dello score BM25:
+    per ogni documento d in C:
+        score[d] = 0
+        per ogni termine t in Q:
+            tf_td = tf[t,d]
+            se tf_td = 0:
+                continua
+            B = (1 - b) + b * len[d] / avg_len
+            componente_tf =
+                ((k1 + 1) * tf_td) /
+                (tf_td + k1 * B)
+            score[d] =
+                score[d] + idf[t] * componente_tf
+        se score[d] > 0:
+            salva (d, score[d])
+7. Top-K:
+    ordina i documenti salvati per score decrescente
+    restituisci i primi top_k documenti
+    oppure, per efficienza:
+        mantieni un min-heap di dimensione top_k
 ```
+
 
 Document frequency vs idf con BM25
 

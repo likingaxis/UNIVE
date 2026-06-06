@@ -127,7 +127,10 @@
 	* $L_{d} = \sum_{t} tf_{td}$
 	* $L_{ave} = \frac 1 {|D|} \sum\limits_{d \in D}L_{d}$
 	* BM25 con saturazione e bilanciamento
-		* $RSV_d = \sum_{t \in q} \log \left( \frac{N}{df_t} \right) \cdot \frac{(k_1 + 1)tf_{td}}{k_1  B + tf_{td}}$
+		* $RSV_d = \sum_{t \in q}  IDF(t) \cdot \frac{(k_1 + 1)tf_{td}}{k_1  B + tf_{td}}$
+		* IDF che può essere
+			* $log(1 + (N - df[t] + 0.5) / (df[t] + 0.5))$
+			* oppure $\log \left( \frac{N}{df_t} \right)$
 		* $B = (1-b)+b\frac{|d|}{avgdl}$
 		* $b\approx 0,75$ 
 			* fattore di normalizzazione b della lunghezza dei documenti
