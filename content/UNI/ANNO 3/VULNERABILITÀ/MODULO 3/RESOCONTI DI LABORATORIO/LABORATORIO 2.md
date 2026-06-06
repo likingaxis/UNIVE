@@ -129,7 +129,8 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 >[!Question] domanda 1
 > 
 > Add a Time Scope block and display the output of the Ideal Rectangular Pulse Filter block. What is its average signal power?
-> 
+
+>[!success] risposta
 > una volta aggiunto il time scope 
 > per misurare la average signal power ci sono 2 metodi
 > - metodo 1
@@ -147,7 +148,8 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 
 >[!question] domanda 2
 > Add a Time Scope block and display the input to the AWGN Channel block, the output of the AWGN Channel block, and the output of the Gain block. In the AWGN Channel block, set the Input signal power to the value you calculated in the previous problem and set $Eb/N0$ to $12dB$. Set the remaining parameters based on your understanding of the simulation. Run the simulation, and take a screen capture of the Time Scope block. Explain and interpret the plots
-> 
+
+>[!success] risposta
 > ![[Pasted image 20260520102842.png|482]]
 > - posso notare come il tutto sia ancora perfettamente riconoscibile e che si possono definire perfettamente i simboli che si vogliono rappresentare
 > 	- il calcolo integrale è davvero utile
@@ -155,7 +157,8 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 >[!question] domanda 3
 > 
 > Add Eye Diagram and Constellation Diagram blocks to the signal at the input of the BPSK Demodulator Baseband block. Set the AWGN Channel block for $Eb/N0$ of $12dB$. Run the simulation, and take screen captures of the eye diagram and signal constellation. Repeat for $Eb/N0$ of $6dB$. Explain and interpret the plots. Comment on how the plots change as a function of $Eb/N0$
-> 
+
+>[!success] risposta
 > - a sinistra abbiamo $Eb/N0$ a $12$ invece a destra con valore a $6dB$
 > ![[collage_02.png]]
 > - **12 dB**: l'occhio risulta abbastanza aperto indica probabilità di errore bassa e buon margine decisionale dei simboli
@@ -168,7 +171,8 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 >[!question] domanda 4
 > 
 > You will now use the model to simulate the system performance over a range of Eb/N0 values. Run the simulation for Eb/N0 values of 0dB to 12dB in 1dB steps. Set the simulation time to ensure the results are meaningful. This is especially important when very few bit errors are expected. Observe and record the error rate for each run. Plot bit error rate vs Eb/N0 and compare to the theoretical prediction. Comment on the results
-> 
+
+>[!success] risposta
 > per svolgere prima questa simulazione ho scoperto che esiste un blocco che mi salva in un array i risultati chiamato`To Workspace` che ho collegato al blocco di calcolo degli errori
 > 
 > ![[Pasted image 20260520105335.png|336]]
@@ -321,7 +325,8 @@ abbiamo la stessa informazione ma più "spalmata"
 ##### Domande guidate di laboratorio
 >[!Question] domanda 1
 >Open the spectrum analyzer after the BPSK modulator, then open the one after the DSSS Spreader. How much wider did the signal get?
-> 
+
+>[!success] risposta
 > per rispondere alla domanda ho usato Channel Measurements dello spectrum analyzer
 > per capire la banda occupata
 > 
@@ -336,14 +341,16 @@ abbiamo la stessa informazione ma più "spalmata"
 
 >[!Question] domanda 2
 > Check the Noise Floor Measurement: Look at the peak power of the signal. Did spreading the signal make its peak sink down closer to the noise floor?
-> 
+
+>[!success] risposta
 > il channel power(preso dal channel measurements della domanda precedente) non cambia particolarmente
 > il Channel Power prima del prodotto è circa `29.9490 dBm`, mentre dopo il prodotto è circa `29.5021 dBm`. 
 > Quindi la potenza complessiva del segnale non cambia in modo significativo ma quest'ultima viene spalmata sulla frequenza, questo fenomeno causa un avvicinamento al noise floor che possiamo vedere visibilmente nella seconda foto del collage riportata alla domanda 1
 
 >[!Question] domanda 3
 > Check the De-Spreading Effect: Look at the spectrum right before the receiver’s DSSS multiplier, and then right after it. What happened to the wide signal? Did it shrink back down to its original narrow shape?
-> 
+
+>[!success] risposta
 > 
 > prima del prodotto lato ricevitore:  
 > - Occupied Bandwidth ≈ 163.2966 Hz
@@ -356,21 +363,24 @@ abbiamo la stessa informazione ma più "spalmata"
 
 >[!Question] domanda 4
 > If a jammer is turned on, look at its sharp spike before the multiplier. What happens to that sharp spike after the multiplier?
-> 
+
+>[!success] risposta
 > Qui non abbiamo usato un vero e proprio jammer selettivo, ma un canale AWGN, che aggiunge rumore al segnale in modo più generale
 > ipoteticamente, se fosse stato presente un jammer narrowband, nello Spectrum Analyzer lo avremmo visto come uno spike di potenza concentrato in un punto specifico della banda
 > dopo la moltiplicazione lato ricevitore con il codice DSSS, però, questo disturbo non verrebbe ricompattato come il segnale utile, perché il jammer non usa lo stesso codice di spreading. Di conseguenza, il suo picco verrebbe distribuito su una banda più ampia e avrebbe meno rilevanza sul segnale recuperato
 
 >[!Question] domanda 5
 > If DSSS is so amazing at stopping interference and noise, why don't we use it to stream 4K video on modern 5G or Wi-Fi networks? What do we sacrifice when we spread a signal?
-> 
+
+>[!success] risposta
 > - il DSSS migliora la robustezza del segnale ma sacrifichiamo troppa banda a causa dello spreading
 > - quindi vengono usate cose come OFDM viste in precedenza
 
 
 >[!Question] domanda 6
 >Check the Bit Rate vs. Chip Rate: Look at the time scope of the original BPSK data bits, then look at the DSSS spread signal. How many tiny chips fit inside just one single data bit?
-> 
+
+>[!success] risposta
 > Prendendo la foto del Time scope presa in precedenza possiamo dire con certezza che la chip rate è maggiore della bit rate ma non riesco a definire un numero preciso
 > posso però dire che il numero di chip per bit corrisponde alla lunghezza della chipping sequence ovvero 16 bit
 > ![[Time scope 1(prima del prodotto,bit codice,dopo il prodotto).PNG]]
@@ -378,7 +388,8 @@ abbiamo la stessa informazione ma più "spalmata"
 
 >[!question] domanda 7
 >Check the Phase Changes: Zoom in on the DSSS signal. Do you see the sharp phase flips happening much faster than the original BPSK signal?
->
+
+>[!success] risposta
 Sì, nel segnale DSSS si osservano cambi di fase più rapidi rispetto al BPSK originale. Questo accade perché il segnale viene moltiplicato per il codice di spreading, che varia alla chip rate. Di conseguenza il segnale dopo il prodotto segue anche le variazioni veloci dei chip, non solo quelle dei bit informativi.
 > - Nel primo segnale, cioè il BPSK originale, le variazioni sono più lente perché dipendono dai bit informativi
 > - Nel terzo segnale, cioè dopo il prodotto, vedo più cambi di segno/fase perché il BPSK è stato moltiplicato per il codice di spreading
@@ -386,13 +397,16 @@ Sì, nel segnale DSSS si osservano cambi di fase più rapidi rispetto al BPSK or
 
 >[!question] domanda 8
 >Check the Corrupted Signal: Look at the time scope of the incoming signal from the channel with noise/jamming. Can you visually see any square digital pulses at all?
->
+
+>[!success] risposta
 > per rispondere alla seguente domanda aggiungo un time scope all'uscita della AWGN
 > ![[Pasted image 20260604181154.png]]
 > - si possono intuire le zone positive e negative ma sicuramente il segnale non risulta pulito e immediatamente leggibile
 
 >[!question] domanda 9
 >Check the Recovered Signal: Now look at the time scope right after the de-spreader multiplier. Did the clean, slow-moving data pulses magically reappear?
+
+>[!success] risposta
 > 
 > ![[time scope dopo de spreading con e senza integrate and dump.PNG]]
 > ho aggiunto un time scope dopo il de spreading prima e dopo integrate and dump
@@ -401,6 +415,8 @@ Sì, nel segnale DSSS si osservano cambi di fase più rapidi rispetto al BPSK or
 
 >[!question] domanda 10
 > Check the Standard BPSK Dots: Open the BPSK constellation. Turn up the noise. How far apart do the two dots scatter before they start crossing the center line?
+
+>[!success] risposta
 > 
 > 
 > ![[constellation diagram dopo AWGN.PNG|456]]
@@ -411,6 +427,8 @@ Sì, nel segnale DSSS si osservano cambi di fase più rapidi rispetto al BPSK or
 
 >[!question] domanda 11
 >Check the DSSS Dots Before and After: Look at the DSSS constellation before the de-spreader. Now look after the de-spreader. Did it snap back into two clean BPSK dots?
+
+>[!success] risposta
 > 
 > 
 > ![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_06.png]]
