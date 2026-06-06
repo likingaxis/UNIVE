@@ -35,6 +35,11 @@ $$\lambda_d = \frac{|d|}{|d|+\mu}$$
 e sia $\mu$ definita come un conteggio virtuale che si moltiplica alla probabilità del termine con il modello della collezione
 infatti senza semplificazioni avremmo $$\mu p(t \mid M_c)$$
 - $\mu$ controlla quanto peso dare alla collezione e viene definito tramite benchmark
+ea, però devi saper dire la formula compatta:
+
+$$p_{Dir}(t|d)= \frac{tf_{t,d}+\mu p(t|C)} {|d|+\mu}$$
+
+Questa è la formula più importante.
 dopo varie semplificazioni abbiamo come formula finale
 $$p_{Dir}(t \mid d) = \lambda_d p(t \mid \hat{M}_d) + (1-\lambda_d)p(t \mid \hat{M}_c)$$
 
@@ -44,6 +49,8 @@ se il documento è *lungo* allora avremo $\lambda_d$ alto e quindi possiamo pren
 dal prodotto si passa alla somma mediante passaggio al logaritmo con uso della log-likelihood dove il logaritmo con dentro una moltiplicazione è uguale alla somma dei logaritmi
 - andiamo a calcolare la probabilità con Dirichlet smoothing dei singoli termini della query che sono $w_k$
 $$\log p_{Dir}(q \mid d) = \sum_{k=1}^{n} \log p_{Dir}(w_k \mid d)$$
+- il log serve per evitare underflow numerico e trasformare i prodotti in somme
+- produce score negativi quindi cerco il valore più vicino allo 0 negativo
 ###### CONFRONTO TRA BM25 E LANGUAGE MODELS
 con i language model lo score più alto potrebbe essere negativo dovuto al fatto che utilizziamo il logaritmo e tra 0 e 1 il logaritmo vale valori negativi
 cerchiamo un valore vicino allo 0 comunque

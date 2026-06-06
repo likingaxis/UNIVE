@@ -35,6 +35,8 @@ con una funzione di fetch poi vai a precisare la categoria e il subset train
 - rimozione dei token troppo corti;
 - stemming.
 L'obiettivo non è costruire il miglior preprocessing possibile, ma avere una rappresentazione semplice e controllabile.
+
+e **tokenizzazione**
 ###### Struttura dati
 costruiamo una struttura dati composta da 
 docID -> lista di token che lo riguardano
@@ -49,6 +51,11 @@ e poi aggiungiamo
 	- è il numero totale di occorrenze del termine nell'intera collezione.
 - $\bar{L}$
 	- è la lunghezza media dei documenti.
+
+
+- alto `cf` e alto `df`: termine diffuso
+- alto `cf` e basso `df`: termine concentrato in pochi documenti
+- basso `cf` e basso `df`: termine raro.
 
 La formula BM25 che useremo è:
 $$
@@ -108,6 +115,26 @@ $$
 
 La normalizzazione per lunghezza serve a ridurre la disparità tra documenti lunghi e documenti corti. Un documento lungo ha più probabilità di contenere molte volte un termine solo perché contiene più parole, quindi senza normalizzazione potrebbe ricevere uno score più alto anche se non è davvero più rilevante.  
 In BM25 questa correzione è controllata dal parametro `b`
+
+Osserviamo cosa succede al variare di $k_1$.
+- se $k_1$ è piccolo, la saturazione è rapida;
+- se $k_1$ è grande, la saturazione è più lenta: quindi le occorrenze aggiuntive continuano ad avere effetto più a lungo;
+- per $k_1=0$, conta solo la presenza del termine.
+Il grafico mostra una proprietà centrale di BM25:
+
+  
+
+$$
+
+tf \uparrow \quad \Rightarrow \quad score \uparrow
+
+$$
+
+  
+
+ma la crescita non è lineare ha un asintoto orizzontale a alla fine il contributo del termine non può superare $k_1+1$
+
+
 
 ###### PSEUDOCODICE BM25
 ```scss
