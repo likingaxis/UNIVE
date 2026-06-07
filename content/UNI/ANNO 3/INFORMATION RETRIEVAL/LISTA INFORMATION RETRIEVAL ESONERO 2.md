@@ -346,3 +346,7 @@
 			- $a = A^T A a$
 			- $h = AA^Th$
 		- topic drift cambiando topic
+###### SISTEMI IBRIDI
+norma dello score
+	$score_{norm}(d)= \frac{score(d)-min}{max-min}$
+$hybrid(d)= BM25_{norm}(d)^\alpha \cdot kNN_{norm}(d)^{1-\alpha}$
