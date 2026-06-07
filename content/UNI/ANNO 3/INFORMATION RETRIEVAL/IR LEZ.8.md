@@ -41,13 +41,6 @@ $$x_i =
 \end{cases}$$
 sfruttiamo gli Odds citati in precedenza per rappresentare il rapporto di un documento data la query della rilevanza o della non rilevanza
 $$O(R|v_d,v_q)=\frac{p(R|v_d,v_q)}{p(\bar R|v_d,v_q)}$$
-che si va a calcolare per ogni termine mediante la produttoria delle probabilità indipendenti
-$$
-O(R|v_d,v_q)
-=
-\prod_{i=1}^{M}
-\frac{p(x_i|R,v_q)}
-{p(x_i|\bar R,v_q)}$$
 visto che non possiamo sfruttare term frequency o altro per definire quanto è tipico che un termine appaia in un documento o una query usiamo due parametri
 $$p_i=p(x_i=1|R,v_q)$$
 
