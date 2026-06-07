@@ -201,7 +201,8 @@
 	- high idf query terms only
 		- elimina certamente le stopword
 	- docs containing a lot of query terms
-		- considero solo i documenti che sono presenti in un certo numero di posting list dei termini della query
+		- considero solo i documenti che sono presenti in un certo numero di posting list dei termini della query es:3 su 4
+		- soft AND
 - Champion lists
 	- migliori $r$ documenti costruita a index time per ogni termine $t$ 
 - Static Quality Scores, per ranking più preciso
@@ -211,7 +212,7 @@
 	- global champion list per ridurre documenti in fase di ranking
 		- $g(d) + tf\text{-}idf_{t,d}$
 - Cluster Pruning
-	- $\sqrt{N}$ leader con circa $\sqrt{N}$ followers
+	- $\sqrt{N}$ leader e circa $\sqrt{N}$ followers
 	- cerco il leader più vicino alla query oppure random sampling
 	- $O(\sqrt{N})$ cosine similarity 
 	- non safe ma molto veloce
@@ -224,6 +225,7 @@
 	- early termination
 		- solo i primi $r$ documenti ordinati per weighted term frequency o in base a una certa soglia del peso
 		- non safe
+		- term at a time
 	- ordino e elimino per idf
 	- cerco di mantenere comunque buona recall
 	- compromesso su quanto pruning fare
@@ -231,7 +233,7 @@
 	- ordino crescente per docID
 	- finger locale
 	- $UB_t = \max score_t(d)$ 
-	- threshold globale
+	- threshold globale corrente
 	- pivoting globale
 	- è safe perchè analizza la massima somma possibile degli score
 	- riduce costo computazionale del 90% ed è ottima
@@ -323,7 +325,7 @@
 			- calcolo del visit rate
 				- catene di Markov come processo che vede una matrice di transizione con le varie probabilità di visitare un elemento seguito da un altro
 				- $\sum_{j=1}^{n} P_{ij}= 1$ ogni riga
-				- $x_{\text{next}} = xP^i$
+				- $x_{\text{next}} = xP$
 			- ergodicità della catena di markov
 				- grazie al teleporting possiamo dire con certezza che dopo un certo numero di iterazioni abbiamo visitato tutte le pagine e il valore della catena di markov non cambia
 				- $a = aP$ $a$ è autovettore associato all'autovalore 1 rappresenta il non cambiamento della distribuzione probabilistica

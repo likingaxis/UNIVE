@@ -55,7 +55,7 @@ $$g(d) + tf\text{-}idf_{t,d}$$
 è una tecnica non-safe che prevede un lavoro di preprocessing per poi ridurre il costo computazionale del calcolo degli score per la query
 1. si scelgono casualmente circa $\sqrt{N}$​ documenti, chiamati **leaders**;
 2. ogni altro documento viene assegnato al leader più vicino, diventando un suo **follower**
-con $\sqrt{N}$ leaders avrò $\sqrt{N}$​ gruppi 
+con $\sqrt{N}$ leaders avrò $\sqrt{N}$​ followers 
 - all'arrivo di una query prima di calcolare lo score seleziono quale leader è più vicino alla query nello spazio vettoriale
 - poi posso calcolare ​cosine similarity per quell'insieme di followers con un tempo computazionale nell'ordine di $O(\sqrt{N})$
 ###### Cluster Pruning con random sampling
