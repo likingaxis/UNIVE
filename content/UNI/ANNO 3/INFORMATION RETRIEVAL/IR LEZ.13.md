@@ -58,8 +58,8 @@ andare a fare la somma delle probabilità di ogni riga mi porta il valore 1 perc
 ![[Pasted image 20260527113917.png|387]]
 definisco quindi un vettore $x$ dove ogni componente rappresenta la probabilità che il random surfer si trovi su quella determinata pagina
 
-aggiornare i valori del vettore x con una esecuzione $i$ esima del random surfer si fa moltiplicando il vettore x con la matrice di transizione $P$ elevata al passo i esimo
-$$x_{\text{next}} = xP^i$$
+aggiornare i valori del vettore x si fa prendendo x e moltiplicando per la matrice di transizione con le varie probabilità
+$$x_{\text{next}} = xP$$
 le catene di Markov qui definite sono ergodiche ovvero, dopo un certo numero di iterazioni il valore della catena si stabilizza su un certo valore stazionario  definito con $a$, quindi applicare un altro passo alla catena non la cambia particolarmente infatti ha distribuzione
 $$a = aP$$
 tutto questo è possibile grazie al teleporting che ci permette di non avere punti di fermo o loop
