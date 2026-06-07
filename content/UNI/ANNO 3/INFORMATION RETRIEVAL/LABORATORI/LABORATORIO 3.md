@@ -296,7 +296,7 @@ $$
 Se $\mu$ è grande, il modello del documento assomiglia di più al modello della collezione.  
 Se $\mu$ è piccolo, il modello si fida di più delle frequenze osservate nel singolo documento.
 ```scss
-QueryLikelihoodDirichletLM(D, q):
+QueryLikelihoodDirichletLM(D, q, μ, top_k)
 
 1. Calcolo le statistiche:
    - len[d] = lunghezza del documento
