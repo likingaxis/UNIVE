@@ -974,6 +974,10 @@ score_norm(d) =
 (score(d) - min_score) / (max_score - min_score)
 ```
 
+$$score_norm(d) =
+(score(d) - min_{score}) / (max_{score} - min_{score})$$
+
+
 Dopo questa trasformazione, gli score stanno tra 0 e 1.
 
 ### Combinazione tramite prodotto pesato
