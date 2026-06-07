@@ -82,7 +82,7 @@
 	- semplice e binario
 	- documento $v_{d}= (x_{1},\dots,x_{m})$ con $x_{i} = 1$ se $t_{i} \in d$.
 	- query $v_{q} = (y_{1},\dots,y_{m})$ dove $y_{i} = 1$ se $t_{i} \in q$.
-	- $O(R|v_d, v_q) = \prod_{i=1}^{M} \frac{p(x_i|R, v_q)}{p(x_i|\bar{R}, v_q)}$
+	- $O(R|v_d,v_q)=\frac{p(R|v_d,v_q)}{p(\bar R|v_d,v_q)}$
 		- per i termini non presenti nella query metto probabilità per R e not R a 1 così si annullano
 	- parametrizzazione
 		* $p_i=p(x_i=1|R,v_q)$: probabilità che il termine $t_i$ compaia in un documento rilevante per la query $q$
