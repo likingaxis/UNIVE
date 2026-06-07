@@ -93,9 +93,6 @@ $$
 T_k=U_k\Sigma_k^{1/2}
 
 $$
-
-  
-
 $$
 
 D_k=\Sigma_k^{1/2}V_k^T
