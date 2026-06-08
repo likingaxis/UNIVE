@@ -375,6 +375,7 @@ avremo 3 esperimentis ma non ci vuole dire la prof cosa sono dobbiamo per ognis 
 - decodificas
 devo capire cosa sta succedendo al segnale i primi 2 dovrebbero essere con jamming il terzo sta arrivando un altro tizios
 possibili soluzioni DSS e frequency hopping
+una di queste a quanto pare era uno shadowing farlocco
 ##### Esperimentaziones 0
 quella fatta la volta scorza
 ##### Esperimetaziones 1
