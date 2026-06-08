@@ -1,8 +1,10 @@
+Una **matrice densa** è una matrice in cui **la maggior parte delle celle contiene valori diversi da 0**.
+Una **matrice sparsa**, invece, è una matrice in cui **la maggior parte delle celle vale 0**.
 ##### VALUTAZIONE DEI SISTEMI
 - soggettività utente
 - collezione di documenti, insieme di query e giudizi di rilevanza
 	- IR end-to-end di valutazione non componenti singole
-- Processo Gold Standard
+- Processo Gold Standard ground truth
 	- costruisce il dataset
 		- 1. query rappresentative
 		- 2. documenti candidati da IR base, alta recall
@@ -13,7 +15,7 @@
 	- $accuracy = \frac{TP + TN}{TP + FP + FN + TN}$
 	- $error = 1 - accuracy$
 	- $F1 = \frac{2PR}{P + R}$
-	- misure da sole non forniscono un ordine del recupero
+	- misure da sole non forniscono un ordine del recupero sono globali
 - Ranked based measures
 	- Rilevanza binaria
 		- Precision@K
@@ -33,11 +35,11 @@
 			- $NDCG = \frac{DCG}{IDCG}$
 - Not Ranking based measures
 	- Reciprocal Rank
-		- $RR = \frac{1}{K}$ dove $K$ è la posizione
+		- $RR = \frac{1}{K}$ dove $K$ è la posizione del primo documento rilevante
 	- Mean Reciprocal Rank(MRR)
 		- $MRR = \frac{1}{|Q|} \sum_{q \in Q} \frac{1}{rank_q}$
 - User Behavior
-	- Click Position Bias
+	- Click Position Bias 
 	- Pairwise valuation
 		- Doc A vs Doc B
 	- ranking interleaved
@@ -46,32 +48,36 @@
 		- divido utenti in 2 gruppi
 ##### DISTRIBUTIONAL LEXICAL SEMANTICS
 - Distributional Hypothesis
+	- parole con significati simili tendono ad apparire in contesti simili
 - tipi di relazioni
-	- sintagmatiche, parole nello stesso testo
-	- paradigmatiche, scambiate nello stesso contesto significati simili
+	- sintagmatiche, parole nello stesso testo window based
+	- paradigmatiche, scambiate nello stesso contesto ottenendo significati simili
 	- topiche, stesso argomento
 - Word Spaces
 	- rappresentare parole con spazi vettoriali
 	- Matrice di co-occorrenza 
 		- `lexicon → [verb:2, available:1, online:1, ...]`
-		- parole come vettori sparsi
+		- parole come vettori sparsi con tanti zeri
 - Pointwise Mutual Information
 	- misura quanto sorprende vedere x,y insieme
 	- $PMI(x,y) = \log \frac{P(x,y)}{P(x)P(y)}$
 - Latent semantic analysis
-	- sotto
+	- idea alla base che prevede rappresentazione in uno spazio latente che indirettamente costruiscono relazioni topiche tra documenti o termini
+	- es: uso di LSI con SVD
 ##### PROBABILISTIC RETRIEVAL
-- utili per definire i contesti
+- utili per definire i contesti in cui il termine si trova e definire se quel determinato termine si trovi più in documenti rilevanti o non rilevanti
 - Evento binario $R_{d,q}$
 	- 1 se il documento d è rilevante rispetto alla query q 
 	- 0 altrimenti
 - Rilevanza probabilistica di un documento con approccio non language model
 	- $p(R|d,q)=_{rank}p(d|R,q)$
-- Decisione per odds
-	- $O(R|d,q)=\frac{p(R|d,q)}{p(\bar R|d,q)}$
-	- >1 più rilevante che non =1 uguali <1 più non rilevante
-- Probability Ranking Principle minimizza Error cost
+	- probabilità che la variabile di rilevanza R sia vera, dato il documento d e la query q
+- Probability Ranking Principle 
+	- ranking ottimale si basa sull'ordinamento decrescente delle probabilità 
+	- ci sia costo di errore uniforme
+	- con probabilità dei documenti rilevanti indipendenti
 - Error Cost Retrieval
+	- giustifica il PRP calcolando il rischio atteso
 	-  $C(d,q)$ Costo se $d$ è rilevante ma non viene restituito (Falso Negativo).
 	* $C'(d,q)$ Costo se $d$ non è rilevante ma viene restituito (Falso Positivo).
 	- $R(D(q)) = \sum_{d \in D(q)} C'(d,q)p(\bar{R}|d,q) + \sum_{d \notin D(q)} C(d,q)p(R|d,q)$
@@ -80,13 +86,16 @@
 	- semplice e binario
 	- documento $v_{d}= (x_{1},\dots,x_{m})$ con $x_{i} = 1$ se $t_{i} \in d$.
 	- query $v_{q} = (y_{1},\dots,y_{m})$ dove $y_{i} = 1$ se $t_{i} \in q$.
+	- rappresentare un documento data la query
 	- $O(R|v_d,v_q)=\frac{p(R|v_d,v_q)}{p(\bar R|v_d,v_q)}$
+		- >1 più rilevante che non =1 uguali <1 più non rilevante
 		- per i termini non presenti nella query metto probabilità per R e not R a 1 così si annullano
-	- parametrizzazione
+	- parametrizzazione per stimare le probabilità effettive
 		* $p_i=p(x_i=1|R,v_q)$: probabilità che il termine $t_i$ compaia in un documento rilevante per la query $q$
 		* $u_i=p(x_i=1|\bar R,v_q)$
 			* con giudizi di rilevanza
 				* $p_i = \frac{r_i}{R}$
+				* $r_i$ numero di documenti rilevanti per il termine $i$ 
 				* $u_i = \frac{df_i - r_i}{N - R}$
 			* senza giudizi di rilevanza
 				* $p_i = 0.5$
@@ -99,7 +108,8 @@
 			* $RSV_d = \sum_{i:x_i=y_i=1} c_i$
 		* senza giudizi di rilevanza e $p_i=0.5$
 			* $RSV_d \approx \sum_{i:x_i=y_i=1} \log \frac{N}{df_i}$
-		* USATO PER TITOLI E ABSTRACT, non usa term frequency
+		* USATO PER TITOLI E ABSTRACT, non usa term frequency o inverse document frequency direttamente
+		* però senza giudizi di rilevanza indirettamente otteniamo un tipo di IDF
 * modelli con term frequency
 * Poisson Model
 	* $d_{t_i}=n_i$
@@ -119,8 +129,10 @@
 	* \($p_i$\) è la probabilità che il documento sia elite per il termine;
 	- \($\mu_i$\) è la media delle occorrenze nei documenti elite;
 	- \($\bar \mu_i$\) è la media delle occorrenze nei documenti non-elite.
-	- troppi parametri da dover stimare per ogni termine quindi si usa BM25 con saturazione
+	- troppi parametri da dover stimare per ogni termine quindi si usa BM25 con saturazione 
 * Modello Okapi BM25
+	* modello usato tutt'oggi ad esempio con Lucene, considerato come uno dei più efficaci
+	* difetti: problemi di sinonimia ed è di tipo bagofwords risolvi sinonimia con kNN facendo versione ibrida
 	* saturazione e peso IDF
 	* $L_{d} = \sum_{t} tf_{td}$
 	* $L_{ave} = \frac 1 {|D|} \sum\limits_{d \in D}L_{d}$
@@ -136,27 +148,61 @@
 		* k1 alto= saturazione lenta
 		* k1 di solito tra $1.2$ e $2$
 			* limita superiormente la term frequency dopo una certa crescita rapida o lenta a seconda del valore di k
+		* b=1 normalizzazione totale 0 altrimenti
 		* utilizzato su Lucene, software di information retrieval
-	* cosine similarity ritorna un valore compreso tra 0 e 1 mentre BM25 uno score numerico che va a infinito
+	* cosine similarity ritorna un valore compreso tra 0 e 1 se usata con TF-IDF mentre BM25 uno score numerico che va a infinito
 	* cosine similarity usa TF senza saturazione e normalizza con vettori mentre qui con lunghezze vere e proprie
+	* saturare la term frequency della query usando $k_3$
+		* $\frac{(k_3+1)tf_{tq}}{k_3 + tf_{tq}}$
 
-[[LABORATORIO 3]]
+```scss
+BM25(D,q,k1,b,top_k):
+1. preprocessing
+   for d in D:
+	   preprocessing(d) e creo un vocabolario dei termini V
+2. calcolo statistiche utili
+   N=|D|
+   avg_len=$L_{ave} = \frac 1 {|D|} \sum\limits_{d \in D}L_{d}$
+   tf[t,d]= term frequency di t in d
+   df[t]=document frequency di t in C
+   idf[t]= log(N/df[t])
+3. costruisco un inverted index con posting list e term frequency e altre informazioni aggiuntive
+4. query processing 
+   applico preprocessing alla query senza togliere le ripetizioni quindi calcolo 
+	   tf(t,q)
+5. estraggo i candidati
+   for t in q and t in V:
+	   for d in posting(t)
+		  cand.add(d)
+6. calcolo score con BM25
+   for d in C
+	   score[d]=0
+	   for t in Q:
+			if tf[t,d]=0 continue
+			else
+			B=(1-b)+b*len(d)/avg_len
+			score[d]=score[d]+IDF[t]*((k1+1)*tf[t,d])/tf[t,d]+k1*B)
+7. estraggo i top-k documenti dalla lista, potrei usare una struttura ad heap nel codice per migliorarlo e ridurre i costi e potrei aggiungere una query reformulation con pseudo relevance feedback(per semplicità userei quella ma solo se so che il sistema già restituisce risultati buoni altrimenti rischierei query drift)
+8. ipotetico benchmark con gold standard e NDCG O PRECISION@K
+```
+
 #### LANGUAGE MODEL PER RANKING DI INFORMATION RETRIEVAL
 - andiamo a definire la stima basandola su quanto è probabile che la query sia stata generata dal modello generativo di un determinato linguaggio
 - $p(q \mid M_d)$
-- modello generativo unigram e bag of words
+	- modello generativo unigram e bag of words
 - $𝑀_𝑑 = {𝑝(𝑡 ∣ 𝑀_𝑑) ∶ 𝑡 ∈ 𝑉 }$
 - modello multinomiale con query likelihood
 	- misuriamo quanto bene il modello del documento spiega la query osservata
 	- $p(q \mid M_d)  \propto  \prod_{t:tf_{t,q}>0}  p(t \mid M_d)^{tf_{t,q}}$
-	- considera più volte l'apparizione di un certo termine per term frequency
-- Maximum likelihood Estimation per stimare la probabilità
+	- considera più volte l'apparizione di un certo termine per term frequency grazie al modello multinomiale
+- Maximum likelihood Estimation per stimare la probabilità che un termine sia spiegato da $M_d$
 	- $\hat{p}(t_i \mid M_d) = \frac{tf_{t_i,d}}{|d|}$
 - Smoothing metodi
 	- Laplace add-1
 		- $p_{Lap}(t \mid d) = \frac{tf_{t,d} + 1}{|d| + |V|}$
 		- altera troppo le probabilità
 	- collection language model
+		- aggiunge un modello linguistico dell'intera collezione 
 		- $p(t \mid M_c) = \frac{cf_t}{T}$
 	- Jelinek-Mercer
 		- $p_{JM}(t \mid d) = \lambda \frac{tf_{t,d}}{|d|} + (1-\lambda)\frac{cf_t}{T}$
@@ -165,12 +211,12 @@
 			- iper-parametro
 		- tutti i documenti hanno stesso parametro
 	- Dirichlet 
-		- $p_{Dir}(t|d)= \frac{tf_{t,d}+\mu p(t|C)} {|d|+\mu}$
+		- $p_{Dir}(t|d)= \frac{tf_{t,d}+\mu p(t|M_c)} {|d|+\mu}$
 		- che poi diventa
 			- $p_{Dir}(t \mid d) = \lambda_d p(t \mid \hat{M}_d) + (1-\lambda_d)p(t \mid \hat{M}_c)$
 		- con
 			- $\lambda_d = \frac{|d|}{|d|+\mu}$
-		- $\mu$ controlla quanto smoothing viene applicato
+		- $\mu$ controlla quanto peso dare alla probabilità di background del collection language model
 		- se $\mu$ aumenta, aumenta il peso della collezione
 		- se $\mu$ diminuisce, aumenta il peso del documento
 		- $\mu$ è un iper-parametro positivo, scelto/tarato tramite benchmark
@@ -178,11 +224,40 @@
 	- definita poi una query andiamo a fare
 	- $\log p_{Dir}(q \mid d) = \sum_{k=1}^{n} \log p_{Dir}(w_k \mid d)$
 	- il log serve per evitare underflow numerico e trasformare i prodotti in somme
-	- produce score negativi quindi cerco il valore più vicino allo 0 negativo
+	- produce score negativi poichè la probabilità è compresa tra 0 e 1 quindi cerco il valore più vicino allo 0 negativo
 - BM25 VS Language Models
 	- BM25 maggior controllo dei fenomeni con i parametri k1 e b e idf esplicita
-	- Language model hanno idf non esplicita ma con la collection frequency si ottiene un risultato simile
+	- Language model hanno idf non esplicita ma con il collection language model si ottiene un risultato simile
 		- poco controllo solo con $\mu$ che regola lo smoothing verso la collezione
+```scss
+1. preprocessing
+   for d in D:
+	   preprocessing(d) e creo un vocabolario dei termini V
+2. calcolo statistiche utili
+   N=|D|
+   tf[t,d]= term frequency di t in d
+   cf[t]= somma di tutte le term frequency di quel termine per tutti i documenti
+   coll_length=dimensione per token della collezione
+3. costruisco un inverted index con posting list e term frequency e altre informazioni aggiuntive
+4. definisco il collection language model
+   for t in V:
+	   p(t|C)=cf[t]/coll_length
+5. calcolo dirichlet 
+   for t in V:
+	   for d in posting(t)
+			  p(t|d)=(tf[t,d]+mu p(t|C))/(len(d)+mu)
+6. query processing 
+   applico preprocessing alla query senza togliere le ripetizioni quindi calcolo 
+	   tf(t,q)
+7. estraggo i candidati
+   for t in q and t in V:
+	   for d in posting(t)
+		  cand.add(d)
+8. calcolo lo score con query likelihood e sfruttando dirichlet calcolato 
+   score(d,q)=\sum_{k=1}^{n} tf[t,q] *\log p_{Dir}(w_k \mid d) 
+9. estraggo i top-k documenti dalla lista, potrei usare una struttura ad heap nel codice per migliorarlo e ridurre i costi e potrei aggiungere una query reformulation con pseudo relevance feedback(per semplicità userei quella ma solo se so che il sistema già restituisce risultati buoni altrimenti rischierei query drift)
+10. ipotetico benchmark con gold standard e NDCG O PRECISION@K
+```
 
 [[LABORATORIO 3]]
 #### OTTIMIZZAZIONE DEI SISTEMI DI RANKING
