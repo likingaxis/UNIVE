@@ -19,6 +19,8 @@ per questo è importante differenziare sistemi di comunicazione
 - se il bit da trasmettere è 0, il simbolo mantiene la stessa fase del simbolo precedente
 - se il bit da trasmettere è 1, il simbolo cambia fase rispetto al simbolo precedente
 In questo modo il ricevitore non deve necessariamente conoscere la fase assoluta del segnale, ma può confrontare ogni simbolo ricevuto con quello precedente
+
+
 ##### MODELLO SIMULINK
 abbiamo in questo laboratorio usato il seguente modello Simulink
 `receiveDBPSK_RTLSDR_030626.slx`
@@ -33,6 +35,9 @@ abbiamo in questo laboratorio usato il seguente modello Simulink
 ![[offset a 3500.png]]
 Durante il laboratorio sono state provate diverse impostazioni di offset
 con un offset non corretto il segnale risulta spostato rispetto alla posizione desiderata, mentre regolando il valore dell’offset è possibile portare i picchi dello spettro in una posizione più adatta alla ricezione
+##### Gif della costellazione
+![[gif costellazione.gif]]
+aggiungi spiegazione del perchè è un cerchio
 ###### Usare yout
 dopo aver terminato l'esecuzione quindi abbiamo la variabile yout
 e la salviamo facendo
@@ -78,33 +83,34 @@ se due simboli hanno la stessa fase il risultato di `d(k)` risulta essere positi
 - (+1), quando non c’è variazione di fase significativa tra due simboli consecutivi
 - (-1), quando tra i due simboli c’è un salto di fase di circa ($\pi$)
 
-AGGIUNTA DA SISTEMARE
-`quando ho una fase a +1 sto trasmettendo 0 quando ho una fase -1 sto trasmettendo 0`
-
-```scss
-oltretutto aggiungi pure quella roba con s(t) spiegata al fly
-dove c'è il coseno e prendiamo la parte reale dell'esponenziale complesso per leggere se il messaggio è 1 o -1
-dove il coseno bla bla bla è la portante
-quando inviamo il segnale moltiplichiamo per la portante
-quando lo riceviamo lo facciamo e elevato a una portante ecc con fc+un lambda f che rappresenta un disturbo
-
-quando prendo un filtro banda base per leggere il segnale ricevuto non mi metto a 0 ma mi sposto di un certo deltaf
-oltre a uno sfasamento di frequenza ne ho anche uno di fase 
-(vedi formula in foto)
-
-AGGIUNGI FOTO DELLA COSTELLAZIONE CON UN CERCHIO PERCHÈ TUTTI SI SPOSTANO
-per colpa del disturbo ci troviamo con deltaf e uno di fase ovvero phi
-
-prendo due campioni del segnale presi a due istanti di tempo vicini
-t1 e t2 
-prende il coniugato dei due perchè vogliamo approssimarli
-tolgo gli sfasamenti e se i due disturbi deltaf sono vicini li tolgo anche e rimane 
-
-di tutta la roba in foto rimane questo 
-m(t1)*m(t2) dove se sono uguali allora vale 1 se diversi vale -1
-
-quindi elimino lo sfasamento
-```
+>[!Question]- perchè fare il prodotto tra il simbolo ricevuto al momento k e il coniugato al momento k-1 porta al simbolo in quel momento k?
+> 
+> 
+> La portante può essere rappresentata come:
+> $$cos(2πfct)$$
+> Quindi, in modo semplificato, il segnale trasmesso può essere scritto come:
+> $$s(t) = A m(t) cos(2πfct)$$
+> - $A$ è l’ampiezza
+> - $m(t)$ è il simbolo informativo, che può valere +1 oppure -1
+> - $cos(2πfct)$ è la portante radio
+> usando i numeri complessi abbiamo
+> $$s(t) = Re\{A \ m(t) \  e^{(j \ 2π \ fct)}\}$$
+> Il problema è che, nel ricevitore reale, la portante locale non è mai perfettamente uguale a quella del trasmettitore. Il ricevitore prova a riportare il segnale in banda base, ma può avere:
+> $$r(t) ≈ C m(t) e^{(j(2πΔf t + φ))}$$
+> dove C rappresenta un fattore di ampiezza, 
+> mentre il termine esponenziale rappresenta la rotazione causata dall’errore di frequenza e di fase.
+> - un errore di frequenza Δf;
+> - un errore di fase φ.
+> Facendo il prodotto con il complesso coniugato del simbolo all'istante precedente $k-1$:
+> $$r(k) · conj(r(k-1))$$
+> il termine di fase costante φ si elimina. Rimane solo una piccola rotazione dovuta alla differenza temporale tra due simboli consecutivi:
+> $$e^{(j2πΔfT)}$$
+> dove T è l’intervallo simbolico.
+> Se l’offset di frequenza Δf è piccolo rispetto alla velocità dei simboli, questa rotazione tra due simboli vicini è abbastanza limitata. Quindi il prodotto differenziale conserva soprattutto il termine:
+> $m(k) · m(k-1)$
+> Questo termine è il punto fondamentale:
+> - se due simboli consecutivi hanno la stessa fase, il prodotto vale +1;
+> - se due simboli consecutivi hanno fase opposta, il prodotto vale -1.
 
 quindi nel grafico sotto posso vedere il risultato del confronto tra un simbolo con il precedente
 abbiamo quasi una forma decodificata del segnale perchè distinguiamo tra regione positiva e negativa
@@ -142,8 +148,9 @@ ylabel('Re\{d(k)\}');
 ###### FIGURA 3
 dopo aver ottenuto i simboli differenziali il passo successivo consiste nel trasformarli in una vera e propria sequenza di bit
 quindi andiamo a definire una decisione sui bit
-- se (Re{d(k)} < 0), il bit ricevuto viene interpretato come **1**;
-- se (Re{d(k)} > 0), il bit ricevuto viene interpretato come **0**.
+Con la convenzione usata nel codice:
+- Re{d(k)} > 0 indica assenza di cambio di fase, quindi bit 0
+- Re{d(k)} < 0 indica cambio di fase di circa π, quindi bit 1
 restituendo quindi poi un vettore logico formato dai valori 0 e 1
 rappresentiamo poi in figura 3 i primi 100 bit decodificati
 ```scss
@@ -365,34 +372,21 @@ chrmtx = char(binmtx).';
 disp(chrmtx)
 ```
 
-##### Giorno 2!
-avremo 3 esperimentis ma non ci vuole dire la prof cosa sono dobbiamo per ognis esperimentos
-- analizzare lo spettros 
-- la costellaziones
-- la fase raws
-- i bits ricevutis
-- l ricercas del preambolos
-- decodificas
-devo capire cosa sta succedendo al segnale i primi 2 dovrebbero essere con jamming il terzo sta arrivando un altro tizios
-possibili soluzioni DSS e frequency hopping
-una di queste a quanto pare era uno shadowing farlocco
-##### Esperimentaziones 0
-quella fatta la volta scorza
-##### Esperimetaziones 1
-- analizzare lo spettros 
-- la costellaziones
-- la fase raws
-- i bits ricevutis
-- l ricercas del preambolos
-- decodificas
-messaggio non leggibile, diverso offset a 2500 hz l'altra volta era a 3500 hz
-è difficile definire dei picchi
-yout salvato si chiama `esperimento1segnalericevuto2`
-CONFRONTA LO SPETTRO E LA COSTELLAZIONE DELL'ALTRA VOLTA FACENDO RAGIONAMENTI DECENTI
+##### Giorno 2
+in questa seconda giornata avremo 3 esperimenti da analizzare con l'obiettivo di definire il tipo di disturbo che la professoressa sta aggiungendo al segnale di base trasmesso il progetto Simulink usato è il medesimo della giornata precedente
+##### Esperimento 0
+quella fatta nella prima giornata
+##### Esperimento 1
+![[collage_esperimento1.png]]
+a sinistra abbiamo il segnale dell'esperimento 0 mentre a destra il segnale dell'esperimento 1
+possiamo dire sicuramente che il segnale nell'esperimento 1 risulta molto simile a quello nell'esperimento 0 
+forse solo leggermente variato di offset visto che con l'esperimento 0 avevamo messo offset a 3500Hz e ora è a 2500Hz
+![[collage_costellazioneesperimento1.png]]
+per quanto riguarda il confronto delle costellazioni possiamo definire con certezza un forte rumore e una scarsa distinzione dei segnali
+nell'esperimento 0 i punti risultavano più strutturati ora abbiamo una nuvola invece
 
-DECODIFICA INCOMPRENSIBILE output
-CHE TIPO DI DISTURBO È?
-
+in sostanza la decisione dei bit sembra decisamente meno affidabile
+l'output dello script usato nella giornata precedente risulta essere il seguente
 ```
 Preamboli trovati nelle posizioni finali:  
 134  
@@ -404,20 +398,39 @@ WlàeEn@# kfahlciPïo!\n
 Tutti i messaggi estratti:  
 WlàeEn@# kfahlciPïo!\n
 
->>
 ```
-##### Esperimentaziones 2
-non possiamo nemmeno dire chi sta trasmettendo
+il fatto che siano stati trovati 2 preamboli significa che la struttura del messaggio non è completamente persa
+sicuramente possiamo dire che i messaggi siano corrotti e penso sia un caso compatibile con un overshadowing mal riuscito dove il preambolo ancora rimane ma il messaggio è illeggibile
+
+lo yout salvato si chiama `esperimento1segnalericevuto2`
+
+##### Esperimento 2
+Qui il comportamento del sistema cambia completamente rispetto all'esperimento 0
+![[collage_esperimentosegnale2.png]]
+possiamo vedere chiaramente come lo spettro risulti disturbato
+![[collage_costellazioneesperimento2.png]]
+vediamo come la costellazione mostri un disturbo ancora maggiore è impossibile definire i simboli adeguati
+l'output dello script usato nella giornata precedente risulta essere il seguente
 ```
 Error using [untitled](matlab:matlab.lang.internal.introspective.errorDocCallback\('untitled',%20'C:\Users\Luca\Documents\MATLAB\untitled.m',%2075\)) ([line 75](matlab:%20opentoline\('C:\Users\Luca\Documents\MATLAB\untitled.m',75,0\)))  
 Sono stati trovati meno di 2 preamboli: impossibile estrarre messaggi delimitati.
 ```
+il fatto che non ci siano nemmeno i preamboli significa che non è possibile delimitare il messaggio per la decodifica
+dati gli effetti descritti è possibile ipotizzare un noise jamming che va a disturbare il canale utilizzato
+una possibile soluzione potrebbe essere il frequency hopping dove il mittente cambia diverse volte la frequenza utilizzata nell'invio del segnale sotto accordo con il ricevente
+oppure potremmo usare il DSSS (Direct Sequence Spread Spectrum) analizzato nel laboratorio precedente che applica effettivamente l'idea dietro i CDMA
 
-##### Esperimentaziones 3
-non sara un jammer
-overshadowing 
-la prof sta inviando grande ci 6 riuscito ma io ricevo un altro segnale
+##### Esperimento 3
+Questo esperimento rappresenta un caso di overshadowing ben riuscito e ora cercherò di spiegare il motivo
+![[collage_segnaleesperimento3.png]]
+andando a confrontare lo spettro possiamo notare che sia differente ma comunque sembra essere strutturato
+![[collage_costellazioneesperimento3.png]]
+la costellazione ci indica molto bene come il segnale ricevuto sia facilmente interpretabile con una interpretazione dei simboli ben definita
 
+l'output dello script usato nella giornata precedente risulta essere il seguente
+sono stati trovati 3 preamboli e effettivamente il messaggio visualizzato è perfettamente leggibile ma sotto suggerimento dell'insegnante non è quello aspettato
+il messaggio doveva essere lo stesso della giornata 1
+il segnale inviato dall'attaccante può essere stato inviato con potenza maggiore e quindi andiamo a decodificare quello
 ```scss
 Preamboli trovati nelle posizioni finali:  
 78  
@@ -435,5 +448,12 @@ Tutti i messaggi estratti:
 "Un alieno ha mangiato i bit!\n"  
 "Un alieno ha mangiato i bit!\n"
 
->>
 ```
+
+##### Conclusione
+In questo laboratorio abbiamo analizzato la ricezione di segnali DBPSK contenenti messaggi codificati in ASCII e abbiamo analizzato diversi scenari di disturbo riassumibili in questa tabella
+
+![[Pasted image 20260608230612.png]]
+- Se l'attaccante trasmette il segnale in assenza del target si sta creando effettivamente il messaggio 
+- Se l'attaccante trasmette il segnale in presenza del target  può creare un effetto di annihilation o noise jamming con un messaggio che verrà eliminato(esperimento 2)
+- Se l'attaccante vuole modificare il messaggio può fare symbol flipping oppure overshadowing(esperimento 3)
