@@ -364,3 +364,75 @@ chrmtx = char(binmtx).';
 
 disp(chrmtx)
 ```
+
+##### Giorno 2!
+avremo 3 esperimentis ma non ci vuole dire la prof cosa sono dobbiamo per ognis esperimentos
+- analizzare lo spettros 
+- la costellaziones
+- la fase raws
+- i bits ricevutis
+- l ricercas del preambolos
+- decodificas
+devo capire cosa sta succedendo al segnale i primi 2 dovrebbero essere con jamming il terzo sta arrivando un altro tizios
+possibili soluzioni DSS e frequency hopping
+##### Esperimentaziones 0
+quella fatta la volta scorza
+##### Esperimetaziones 1
+- analizzare lo spettros 
+- la costellaziones
+- la fase raws
+- i bits ricevutis
+- l ricercas del preambolos
+- decodificas
+messaggio non leggibile, diverso offset a 2500 hz l'altra volta era a 3500 hz
+è difficile definire dei picchi
+yout salvato si chiama `esperimento1segnalericevuto2`
+CONFRONTA LO SPETTRO E LA COSTELLAZIONE DELL'ALTRA VOLTA FACENDO RAGIONAMENTI DECENTI
+
+DECODIFICA INCOMPRENSIBILE output
+CHE TIPO DI DISTURBO È?
+
+```
+Preamboli trovati nelle posizioni finali:  
+134  
+390  
+  
+  
+Messaggio 1:  
+WlàeEn@# kfahlciPïo!\n  
+Tutti i messaggi estratti:  
+WlàeEn@# kfahlciPïo!\n
+
+>>
+```
+##### Esperimentaziones 2
+non possiamo nemmeno dire chi sta trasmettendo
+```
+Error using [untitled](matlab:matlab.lang.internal.introspective.errorDocCallback\('untitled',%20'C:\Users\Luca\Documents\MATLAB\untitled.m',%2075\)) ([line 75](matlab:%20opentoline\('C:\Users\Luca\Documents\MATLAB\untitled.m',75,0\)))  
+Sono stati trovati meno di 2 preamboli: impossibile estrarre messaggi delimitati.
+```
+
+##### Esperimentaziones 3
+non sara un jammer
+overshadowing 
+la prof sta inviando grande ci 6 riuscito ma io ricevo un altro segnale
+
+```scss
+Preamboli trovati nelle posizioni finali:  
+78  
+334  
+590  
+  
+  
+Messaggio 1:  
+Un alieno ha mangiato i bit!\n  
+  
+Messaggio 2:
+
+Un alieno ha mangiato i bit!\n  
+Tutti i messaggi estratti:  
+"Un alieno ha mangiato i bit!\n"  
+"Un alieno ha mangiato i bit!\n"
+
+>>
+```
