@@ -391,18 +391,25 @@ BM25(D,q,k1,b,top_k):
 		- $\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$
 	- ranking si può fare ad esempio con cosine similarity nello spazio latente
 ```scss
-codice
+codice scrivi meglio dopo
 ```
 #### LINK ANALYSIS
+- andiamo a fare un recupero non solo basato sui contenuti testuali dei documenti ma anche in base ai collegamenti tra di essi
 - Good/Bad/Unknowns
+	- definisce la reputazione di un nodo
+	- se un nodo buono punta a un nodo cattivo allora potrebbe diventare cattivo
+	- se un nodo buono punta a un nodo sconosciuto questo diventa buono o cattivo nel caso sia puntato da un nodo cattivo
 - Hyperlink con Anchor text
-- Connectivity Servers
-	- url -> outlinks
-	- url -> inlinks
+	- hyperlink sono composti da Anchor text li sfrutto per dare informazioni aggiuntive a documenti o pagine
+	- il peso con cui viene messo questo anchor text può dipendere dall'autorevolezza delle pagine
+- Web come un grafo diretto
+	- hyperlink 
+	- `url -> outlinks`
+	- `url <- inlinks`
 - Liste di adiacenza 
-	- ogni url è un intero, e ha una lista degli outlink e inlinks
+	- ogni `url` è un intero, e ha una lista degli `outlink` e `inlinks`
 	- 64 bit per ogni hyperlink
-- Boldi and Vigna
+- `Boldi and Vigna`
 	- 7 URL
 	- la lista successiva di URL si scrive come differenza della precedente
 	- Gap Encoding e gamma code
