@@ -261,20 +261,23 @@ BM25(D,q,k1,b,top_k):
 
 [[LABORATORIO 3]]
 #### OTTIMIZZAZIONE DEI SISTEMI DI RANKING
+- si vuole ottimizzare la fase di calcolo della rilevanza dei documenti e la fase di ordinamento e selezione dei documenti
 - ranking safe non safe
 - Heap
 	- costruzione $O(J)$
 	- estrazione primi $K$    $O(KlogJ)$
 	- aiuta nella scelta dei migliori $K$ ma il ranking devo farlo comunque per tutti i documenti
 - **pruning** 
+- ha come obiettivo quello di eliminare preventivamente i documenti che ipoteticamente non sono destinati alla top $K$
 - $K < |A| \ll N$
 	- A insieme di contender
 	- dopo aver trovato A si calcola il ranking
 - Index Elimination
 	- high idf query terms only
+		- elimina i termini della query che hanno idf basso
 		- elimina certamente le stopword
 	- docs containing a lot of query terms
-		- considero solo i documenti che sono presenti in un certo numero di posting list dei termini della query es:3 su 4
+		- considero solo i documenti che sono presenti in un certo numero di posting list dei termini della query es: 3 su 4
 		- soft AND
 - Champion lists
 	- migliori $r$ documenti costruita a index time per ogni termine $t$ 
@@ -283,30 +286,32 @@ BM25(D,q,k1,b,top_k):
 	- $g(d)$
 	- $\text{net-score}(q,d) = g(d) + \text{cosine}(q,d)$
 	- global champion list per ridurre documenti in fase di ranking
+		- creo liste di documenti autorevoli per ogni termine
 		- $g(d) + tf\text{-}idf_{t,d}$
 - Cluster Pruning
 	- $\sqrt{N}$ leader e circa $\sqrt{N}$ followers
-	- cerco il leader più vicino alla query oppure random sampling
-	- $O(\sqrt{N})$ cosine similarity 
+	- cerco il leader più vicino alla query nello spazio vettoriale oppure random sampling scegliendo casualmente quali leader prendere
+	- il random sampling andrà a prendere più leader dove ci sono più documenti
+	- calcolo poi ad esempio $O(\sqrt{N})$ cosine similarity 
 	- non safe ma molto veloce
 - Tiered Indexes, non restringe insieme di contender A
 	- divide in tier i documenti
 	- posso dividere i documenti dei termini in tier con $g(d)$
 - impact ordered posting
 	- sfrutta weighted term frequency per capire quali sono promettenti
-	- $wf_{t,d} = 1 + \log(tf_{t,d})$
+	- ordino posting list per $wf_{t,d} = 1 + \log(tf_{t,d})$
 	- early termination
-		- solo i primi $r$ documenti ordinati per weighted term frequency o in base a una certa soglia del peso
+		- solo i primi $r$ documenti o in base a una certa soglia del peso
 		- non safe
 		- term at a time
 	- ordino e elimino per idf
 	- cerco di mantenere comunque buona recall
 	- compromesso su quanto pruning fare
 - Scoring Wand
-	- ordino crescente per docID
+	- ordino crescente per docID ad ogni iterazione
 	- finger locale
-	- $UB_t = \max score_t(d)$ 
-	- threshold globale corrente
+	- $UB_t = \max score_t(d)$  globale
+	- threshold globale
 	- pivoting globale
 	- è safe perchè analizza la massima somma possibile degli score
 	- riduce costo computazionale del 90% ed è ottima

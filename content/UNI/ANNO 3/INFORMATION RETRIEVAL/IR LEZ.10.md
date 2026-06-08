@@ -79,11 +79,14 @@ tecnica di pruning safe che scarta i documenti che con una garanzia matematica n
 mediante finger upper bound pivot e threshold
 e ordinando le posting list per docID
 - finger è un puntatore della singola posting list al successivo docID che ancora deve essere analizzato
-- upper bound rappresenta il massimo valore informativo che il termine può ancora dare ai docID successivi al finger
+- upper bound rappresenta il massimo valore informativo che il termine fornisce
 	- calcolo UB ad esempio mediante BM25 senza query
 	- $UB_t = \max score_t(d)$
-- il pivot è una informazione globale che rappresenta il punto di fermo ovvero un certo docID per cui si è raggiunto un certo score
-- la threshold è quel valore numerico globale che deve essere superato dalla somma degli upper bound dei termini, se sommati non superano la treshold allora i docID successivi non sono informativi matematicamente e quindi l'ultimo docID selezionato diventa il pivot
+- il pivot è una informazione globale che rappresenta l'ultimo docID minimo che ha superato la threshold di una determinata iterazione
+- la threshold è quel valore numerico globale che deve essere superato dalla somma degli upper bound dei termini, se sommati non superano la threshold allora quei docID matematicamente non sono informativi
+- se il docID minimo della lista di quella iterazione supera la threshold allora si calcola lo score effettivo
+	- altrimenti si ignora e si passa a i docID successivi
+- ad ogni iterazione ordino per docID crescente e sommo gli UB 
 successivamente si calcolano gli score dei soli docID precedenti a quel pivot
 ![[Pasted image 20260518134841.png|391]]
 ![[Pasted image 20260518134826.png|484]]
