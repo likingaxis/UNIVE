@@ -325,7 +325,7 @@ BM25(D,q,k1,b,top_k):
 - metodi locali 
 	- relevance feedback
 		- query reformulation
-			- la query iniziale è abbastanza vicina all’information need;
+			- la query iniziale è abbastanza vicina all'information need;
 			- i documenti rilevanti sono abbastanza coerenti tra loro, cioè formano un gruppo riconoscibile nello spazio vettoriale.
 	- centroide
 		- funzionano solo con vector space model
