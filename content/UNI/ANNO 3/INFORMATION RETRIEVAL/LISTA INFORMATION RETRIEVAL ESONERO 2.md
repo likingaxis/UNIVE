@@ -1,5 +1,4 @@
 ##### VALUTAZIONE DEI SISTEMI
-[[IR LEZ.6 LONG]]
 - soggettività utente
 - collezione di documenti, insieme di query e giudizi di rilevanza
 	- IR end-to-end di valutazione non componenti singole
@@ -46,7 +45,6 @@
 	- A/B Testing
 		- divido utenti in 2 gruppi
 ##### DISTRIBUTIONAL LEXICAL SEMANTICS
-[[LISTA INFORMATION RETRIEVAL ESONERO 2]]
 - Distributional Hypothesis
 - tipi di relazioni
 	- sintagmatiche, parole nello stesso testo
@@ -114,7 +112,7 @@
 		- \($\rho_i$\) è la frequenza media attesa nei documenti rilevanti;
 		- \($\gamma_i$\) è la frequenza media attesa nella collezione generale.
 		- linearità del contributo di un termine
-	- Eliteness(termini che rappresentano a pieno quel documento e appaiono molto)
+- Per un dato termine, un documento può essere elite se il termine è contentful in quel documento, oppure non-elite se il termine è contentless
 * 2-Poisson Model
 	* $p(d_{t_i}=n_i|R,v_q)=p_i \cdot Poisson(n_i|\mu_i)+(1-p_i)\cdot Poisson(n_i|\bar \mu_i)$
 	* sfrutta il concetto di Eliteness e distingue termini Elite da non Elite
