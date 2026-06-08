@@ -37,7 +37,7 @@ infatti senza semplificazioni avremmo $$\mu p(t \mid M_c)$$
 - $\mu$ controlla quanto peso dare alla collezione e viene definito tramite benchmark
 ea, però devi saper dire la formula compatta:
 
-$$p_{Dir}(t|d)= \frac{tf_{t,d}+\mu p(t|C)} {|d|+\mu}$$
+$$p_{Dir}(t|d)= \frac{tf_{t,d}+\mu p(t|M_c)} {|d|+\mu}$$
 
 Questa è la formula più importante.
 dopo varie semplificazioni abbiamo come formula finale
