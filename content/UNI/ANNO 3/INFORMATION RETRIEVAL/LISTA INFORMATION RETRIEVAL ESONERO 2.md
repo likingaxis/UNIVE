@@ -316,35 +316,38 @@ BM25(D,q,k1,b,top_k):
 	- è safe perchè analizza la massima somma possibile degli score
 	- riduce costo computazionale del 90% ed è ottima
 #### RELEVANCE FEEDBACK E QUERY EXPANSION
-- $Precision = \frac{\# \text{documenti rilevanti recuperati}}{\# \text{documenti recuperati}}$
-- $Recall = \frac{\# \text{documenti rilevanti recuperati}}{\# \text{documenti rilevanti}}$
-- $F_1 = \frac{2PR}{P + R}$
-- non sono sufficienti causa
-	- synonymy
+- si vuole migliorare la recall poiché la query originale potrebbe presentare
+	- synonymy, ovvero termini simili nei documenti non vengono presi perchè diversi
 - ad hoc retrieval, niente feedback
 - metodi locali 
 	- relevance feedback
+		- aggiunge termini alla query originale basandosi sul feedback dell'utente del primo risultato restituito
 		- query reformulation
-			- la query iniziale è abbastanza vicina all'information need;
-			- i documenti rilevanti sono abbastanza coerenti tra loro, cioè formano un gruppo riconoscibile nello spazio vettoriale.
+			- prendo due assunzioni
+				- la query iniziale è abbastanza vicina all'information need, altrimenti query drift
+				- i documenti rilevanti sono abbastanza coerenti tra loro, cioè formano un gruppo riconoscibile nello spazio vettoriale
 	- centroide
 		- funzionano solo con vector space model
-		- vettore medio di un insieme di documenti
+		- rappresenta il vettore medio di un insieme di documenti
 		- $\vec{\mu}(D) = \frac{1}{|D|} \sum_{d \in D} \vec{v}(d)$
 	- query ottima
 		- assumiamo di conoscere $C_r$ e $C_{nr}$
+		- $C_r$: l’insieme di **tutti** i documenti rilevanti nella collezione
+		- $C_{nr}$​: l’insieme di **tutti** i documenti non rilevanti nella collezione
 		- con cosine similarity avremmo
 		- $\vec{q}_{opt} = \frac{1}{|C_r|} \sum_{\vec{d}_j \in C_r} \vec{d}_j - \frac{1}{|C_{nr}|} \sum_{\vec{d}_j \in C_{nr}} \vec{d}_j$
 		- centroide dei documenti rilevanti - quelli non rilevanti
+		- non conosciamo in anticipo i rilevanti e i non rilevanti della collezione
 	- rocchio algorithm
+		- approssima la query ottima su base dei feedback dell'utente
 		- $\vec{q}_m = \alpha \vec{q}_0 + \beta \frac{1}{|D_r|} \sum_{\vec{d}_j \in D_r} \vec{d}_j - \gamma \frac{1}{|D_{nr}|} \sum_{\vec{d}_j \in D_{nr}} \vec{d}$
 		- $\alpha$: quanto peso dare alla query iniziale
-		- $\beta$: quanto peso dare ai documenti rilevanti
-		- $\gamma$: quanto peso dare ai documenti non rilevanti
+		- $\beta$: quanto peso dare ai documenti rilevanti per l'utente
+		- $\gamma$: quanto peso dare ai documenti non rilevanti per l'utente
 		- si basa sul giudizio dell'utente
 		- $\alpha = 1, \qquad \beta = 0.75, \qquad \gamma = 0.15$
 	- pseudo-relevance feedback
-		- assumo i primi $k$ documenti come rilevanti e applico relevance su di essi
+		- assumo i primi $k$ documenti come rilevanti e applico relevance feedback su di essi
 		- query drift
 - metodi globali
 	- non si basa su una serie di documenti già recuperati
@@ -352,20 +355,27 @@ BM25(D,q,k1,b,top_k):
 	- migliora recall riduce precision
 	- manual thesaurus 
 	- automatic thesaurus
-	- SVD e LSI utili per query expansion
+	- SVD e LSI utili per query expansion con uno spazio latente posso avere co occorrenze topiche
 #### LATENT SEMANTIC INDEXING
 [[UNI/ANNO 3/INFORMATION RETRIEVAL/LABORATORI/LABORATORIO 4|LABORATORIO 4]]
+- A è una matrice mxn termini documento
 - SVD(Singular Value Decomposition)
-	- matrice di low rank di solito k è 100-1000
-	- $A_k = U_k\Sigma_k V_k^T$
-	- $A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T$
-	- $U$ righe, $\sigma$ valori singolari, $V$ colonne se trasposta
-	- Frobenius
+	- tecnica che ci permette di fattorizzare la matrice in
+	- $A = U \Sigma V^T$
+	- $U$ righe($m \times m$), $\Sigma$ valori singolari($m \times n$), $V^T$ colonne($n \times n$)
+	- matrice di low rank approximation di solito k è 100-1000
+		- $A_k = U_k\Sigma_k V_k^T$
+		- riduce il rango delle matrici rispettivamente diventeranno
+		- $m \times k$ poi  $k \times k$ poi  $k \times n$
+		- $A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T$
+	- norma di Frobenius
+		- differenza tra matrice originale e matrice low rank
+		- dimostra che l'approssimazione low rank è la migliore possibile
 		- $∥A−Ak​∥_F​$
 	- SVD tecnica di decomposizione con minimo errore possibile
 - LSI
 	- tecnica che sfrutta SVD per rappresentare termini e documenti
-	- spazio semantico latente
+	- spazio semantico latente con dimensionalità ridotta grazie alle approssimazioni
 		- $A = (U\Sigma^{1/2})(\Sigma^{1/2}V^T)$
 	- documenti e termini
 		- $T_k=U_k\Sigma_k^{1/2}$
@@ -380,6 +390,9 @@ BM25(D,q,k1,b,top_k):
 	- formula di energia
 		- $\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$
 	- ranking si può fare ad esempio con cosine similarity nello spazio latente
+```scss
+codice
+```
 #### LINK ANALYSIS
 - Good/Bad/Unknowns
 - Hyperlink con Anchor text
