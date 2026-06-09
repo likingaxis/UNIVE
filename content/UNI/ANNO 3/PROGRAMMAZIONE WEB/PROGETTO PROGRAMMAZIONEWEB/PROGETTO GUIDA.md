@@ -1,3 +1,17 @@
+- [x] serata 1
+- [x] serata 2
+- [ ] serata 3
+- [ ] serata 4
+- [ ] serata 5
+- [ ] serata 6
+- [ ] serata 7
+- [ ] serata 8
+- [ ] serata 9
+- [ ] serata 10
+
+
+
+
 ## Piano operativo — 10 serate da circa 2 ore
 
 |Serata|Obiettivo concreto|Cosa faremo insieme|Argomenti ripassati|Output finale della serata|
