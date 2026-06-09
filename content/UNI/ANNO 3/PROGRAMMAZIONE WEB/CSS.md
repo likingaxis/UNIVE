@@ -585,7 +585,7 @@ overflow: auto;
 	    - forzare un elemento a stare **sotto** i float
 #### Flexbox Display
 - `display:flex`
-    - consente di controllare la distribuzione degli elementi all’interno di un contenitore
+    - consente di controllare la distribuzione degli elementi all'interno di un contenitore
     - **introduce un nuovo modello di layout**
         - non si basa più su blocchi/inline o float
         - ma su una gestione “flessibile” dello spazio
