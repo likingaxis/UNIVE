@@ -387,6 +387,7 @@ BM25(D,q,k1,b,top_k):
 	- sinonimia
 	- polisemia
 	- no boolean query
+		- perché LSI non lavora più nello spazio lessicale originale, dove posso controllare esattamente presenza/assenza dei termini, ma in uno spazio latente continuo e approssimato
 	- formula di energia
 		- $\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$
 	- ranking si può fare ad esempio con cosine similarity nello spazio latente
