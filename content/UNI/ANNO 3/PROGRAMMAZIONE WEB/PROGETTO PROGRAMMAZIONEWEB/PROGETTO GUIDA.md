@@ -4,7 +4,7 @@
 - [x] serata 4
 - [x] serata 5
 - [x] serata 6
-- [ ] serata 7
+- [x] serata 7
 - [ ] serata 8
 - [ ] serata 9
 - [ ] serata 10
