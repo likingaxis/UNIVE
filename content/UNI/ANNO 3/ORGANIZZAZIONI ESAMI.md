@@ -7,12 +7,11 @@
 | VULNERABILITÀ            | ✅                     |                   |
 | PROGRAMMAZIONE WEB       | ✅                     |                   |
 | INFORMATION RETRIEVAL    | ✅                     |                   |
-| CALCOLO                  |                       | ✅                 |
+| CALCOLO                  | ✅                     |                   |
 DAMMI LA PAZIENZA
-- 12 giugno information retrieval
-- 20 giugno vulnerabilità
-- 23 giugno programmazione web
-- 21 luglio non confermata
-- 2 luglio geometria
-- 7 luglio big data
-- 27 luglio calcolo numerico
+- **12 giugno information retrieval**
+- **15 giugno geometria**
+- **22 giugno vulnerabilità**
+- **23 giugno programmazione web**
+- **7 luglio big data**
+- **27 luglio calcolo numerico**
