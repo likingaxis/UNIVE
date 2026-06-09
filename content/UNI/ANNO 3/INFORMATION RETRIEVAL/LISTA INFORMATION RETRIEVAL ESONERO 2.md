@@ -391,7 +391,22 @@ BM25(D,q,k1,b,top_k):
 		- $\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_i \sigma_i^2}$
 	- ranking si può fare ad esempio con cosine similarity nello spazio latente
 ```scss
-codice scrivi meglio dopo
+LSI_RANKING(D,q,k,top_k):
+1. costruisco una matrice A=mxn termini documenti
+2. chiamo la funzione SVD(A) che mi restituisce U,Σ,V^T
+3. applico una approssimazione di low rank prendendo k
+   U_k=prime k colonne di U
+   Σ_k=primi k valori di Σ
+   V_k^T=primi k valori di V^T
+   lista_documenti=Σ_k*V_k^T
+4. preprocessing della query
+   preprocessing(q)
+   q_v= vettore con le tf-idf della query
+   q_k=q^T*U_k*Σ_k^-1 effettuo folding in della query
+   for dj in lista_documenti
+	   scorej= qk*dj/||qk||*||dj||
+5. estraggo i top-k documenti dalla lista, potrei usare una struttura ad heap nel codice per migliorarlo e ridurre i costi
+   
 ```
 #### LINK ANALYSIS
 - andiamo a fare un recupero non solo basato sui contenuti testuali dei documenti ma anche in base ai collegamenti tra di essi
