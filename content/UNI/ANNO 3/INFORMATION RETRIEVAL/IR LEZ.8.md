@@ -16,7 +16,7 @@ $$O(R|d,q)=\frac{p(R|d,q)}{p(\bar R|d,q)}$$
 - \($O(R|d,q)=1$\): rilevanza e non rilevanza sono bilanciate
 - \($O(R|d,q)<1$\): il documento è più probabilmente non rilevante
 #### PRP: Probability Ranking Principle
-Afferma che in assenza di ulteriori informazioni il ranking ottimale si basa sull'ordinamento dei documenti in ordine decrescente di rilevanza
+se conoscessimo la probabilità di rilevanza di ogni documento rispetto alla query afferma che in assenza di ulteriori informazioni il ranking ottimale si basa sull'ordinamento dei documenti in ordine decrescente di rilevanza
 assumendo che
 - la rilevanza di un documento è indipendente da quella degli altri
 - gli errori hanno costo uniforme
