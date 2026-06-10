@@ -326,6 +326,30 @@ QueryLikelihoodDirichletLM(D, q, μ, top_k)
 Quindi può sembrare che un termine molto comune, come `the`, sia favorito perché ha probabilità alta.
 Il punto importante è che, quando usiamo lo smoothing, il modello del documento viene confrontato implicitamente con il **background della collezione**.
 
+
+$$
+
+\log p_{\mathrm{Dir}}(t \mid d)
+
+=
+
+\log
+
+\frac{\mu p(t\mid C)}{|d|+\mu}
+
++
+
+\log
+
+\left(
+
+1+
+
+\frac{tf_{t,d}}{\mu p(t\mid C)}
+
+\right)
+
+$$
 ## Esercizio 1 — Cambiare query
 
 Prova query diverse, per esempio:
