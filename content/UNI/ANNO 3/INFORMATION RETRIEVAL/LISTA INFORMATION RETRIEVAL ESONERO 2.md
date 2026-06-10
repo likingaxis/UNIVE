@@ -384,6 +384,7 @@ BM25(D,q,k1,b,top_k):
 		- $q_k=q^T U_k\Sigma_k^{-1}$
 	- query expansion
 		- LSI aiuta soprattutto con la **sinonimia**, perché termini diversi ma usati in contesti simili vengono proiettati vicino nello spazio latente
+		- la relazione topica tra termini è conseguenza utile dei pattern distribuzionali della collezione
 	- sinonimia
 	- polisemia
 	- no boolean query
