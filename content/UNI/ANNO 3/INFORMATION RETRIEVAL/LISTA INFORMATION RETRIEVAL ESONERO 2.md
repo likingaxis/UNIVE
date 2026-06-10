@@ -230,6 +230,7 @@ BM25(D,q,k1,b,top_k):
 	- Language model hanno idf non esplicita ma con il collection language model si ottiene un risultato simile
 		- poco controllo solo con $\mu$ che regola lo smoothing verso la collezione
 ```scss
+QueryLikelihoodDirichletLM(D, q, μ, top_k):
 1. preprocessing
    for d in D:
 	   preprocessing(d) e creo un vocabolario dei termini V
