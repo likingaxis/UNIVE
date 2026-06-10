@@ -24,7 +24,8 @@ valerio rocky 3 al cinema
 pubblicità yogurt valsoia luca
 frakka pubblicità whiplash/profumi
 
-quarta domanda: pantano o abbruzzo?
+quarta domanda: 
+	ora bazziamo alla guarda domanda, riesci a indovinare se gueste fodo zono di abbruzzo o di pantano a roma?
 
 quinta domanda:
 se domande giuste tu avere risposto allora potere accedere
@@ -32,3 +33,9 @@ in finale
 	amigo tu presendare progetto idea qualcosa da fare vedere su discord in serada 
 	tu avere tempo fino a luglio poi tempo scaduto
 
+A high-fashion cinematic scene of an elegant West African male TV host with radiant deep dark skin, wearing a bespoke emerald green velvet tuxedo. He stands on a grand television stage with a polished black glass floor and dramatic golden spotlights. He performs a rhythmic and charismatic spoken-word announcement in a deep Senegalese-accented Italian. Audio: 'se domande giuste tu avere risposto allora potere accedere
+in finale 
+	amigo tu presendare progetto idea qualcosa da fare vedere su discord in serada 
+	tu avere tempo fino a luglio poi tempo scaduto
+
+' SFX: Sophisticated TV transition music. High production value, photorealistic, 4k. No animal or non-human features.
