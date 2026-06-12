@@ -352,7 +352,7 @@ cartelle utilissime per trovare cose nascoste o altro
 - `/robots.txt`
 - `/sitemap.xml`
 - trovare i virtual host che nascondono gli host che hanno 4829 linee
-	- `wfuzz -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u https://192.168.14.27  -H "HOST: FUZZ.muntrea-energy.vdsi" --hh 1950
+	- `wfuzz -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u https://192.168.14.27  -H "HOST: FUZZ.muntrea-energy.vdsi" --hh 1950`
 		- `gobuster vhost -u http://vdsi-services.xyz/ -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt`
 		- `-k` per ignorare i certificati https
 - trovare i web content delle cartelle
