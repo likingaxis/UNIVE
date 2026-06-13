@@ -16,3 +16,21 @@
 
 per definire un piano dobbiamo prendere due punti paralleli
 
+## 1. Additività
+
+Se sommi due vettori prima di applicare fff, deve essere uguale ad applicare fff ai due vettori separatamente e poi sommare:
+$f(u+v)=f(u)+f(v)$
+
+## 2. Omogeneità
+
+Se moltiplichi un vettore per uno scalare prima di applicare fff, deve essere uguale ad applicare fff e poi moltiplicare il risultato per quello scalare:
+$f(\lambda u)=\lambda f(u)$
+
+Spesso le due proprietà si riassumono in una sola:
+$f(\alpha u+\beta v)=\alpha f(u)+\beta f(v)$
+per ogni α,β∈R\alpha,\beta\in\mathbb Rα,β∈R.
+
+
+
+- det diverso 0 rango max quindi lin ind
+- iniettiva suriettiva 
