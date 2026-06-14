@@ -1,3 +1,63 @@
+## TEORIA
+###### Somma tra vettori
+La somma di due vettori si rappresenta con la **regola del parallelogramma**.
+Il prodotto di un vettore per uno scalare modifica lunghezza e verso:
+- se $\lambda>0$, stesso verso;
+- se $\lambda<0$, verso opposto;
+- se $\lambda=0$, vettore nullo.
+###### Sottospazio vettoriale
+Un sottoinsieme $W\subseteq V$ è un sottospazio vettoriale se:
+- contiene il vettore nullo;
+- è chiuso rispetto alla somma;
+- è chiuso rispetto al prodotto per scalare.
+In formula:
+$$u,v\in W \Rightarrow u+v\in W$$
+$$\lambda\in\mathbb R,\ v\in W \Rightarrow \lambda v\in W$$
+Una retta o un piano sono sottospazi solo se passano per l’origine.
+###### Span
+Lo span di alcuni vettori è l’insieme di tutte le loro combinazioni lineari:
+$$\operatorname{Span}(v_1,\dots,v_k)={\alpha_1v_1+\dots+\alpha_kv_k:\alpha_i\in\mathbb R}$$
+
+Lo span è sempre un sottospazio vettoriale.
+###### Base
+Una base di uno spazio vettoriale $V$ è un insieme di vettori che:
+- genera $V$;
+- è linearmente indipendente.
+###### Dimensione
+La dimensione di uno spazio vettoriale è il numero di vettori di una sua base.
+###### Sistema lineare e sistema omogeneo
+Un sistema lineare si scrive:
+$$Ax=b$$
+dove:
+- $A$ è la matrice dei coefficienti;
+- $x$ è il vettore delle incognite;
+- $b$ è il vettore dei termini noti.
+Un sistema è compatibile se ammette almeno una soluzione.
+Un sistema è omogeneo se:
+$$Ax=0$$
+Ogni sistema omogeneo ha sempre almeno la soluzione nulla.
+###### Teorema rango-nullità
+Per una applicazione lineare:
+$$T:V\to W$$
+vale: $\dim V=\dim(\ker T)+\dim(\operatorname{Im}T)$
+
+###### Determinante
+Se una riga o una colonna è nulla OPPURE se due righe/colonne sono uguali/proporzionali, allora: $$\det(A) = 0$$Scambiare due righe cambia il segno del determinante.
+Moltiplicare una riga per $\lambda$ moltiplica il determinante per $\lambda$.
+Aggiungere a una riga un multiplo di un’altra riga non cambia il determinante.
+###### Forma cartesiana del piano
+La forma cartesiana di un piano è:
+$$ax+by+cz+d=0$$
+Il vettore $(a,b,c)$ è normale al piano.
+###### Autospazio
+L’autospazio associato a un autovalore $\lambda$ è: $$E_\lambda=\ker(A-\lambda I)$$L’autospazio contiene anche il vettore nullo (che però non è un autovettore).
+###### Diagonalizzabilità: definizione teorica
+Una matrice quadrata $A$ è diagonalizzabile se esiste una base formata da autovettori di $A$.
+Equivalentemente, $A$ è diagonalizzabile se si riescono a trovare $n$ autovettori linearmente indipendenti.
+Se $A$ è diagonalizzabile, allora è simile a una matrice diagonale. 
+
+
+## ESERCIZI
 ### RETTE
 ###### parallele, incidenti, sghembe
 Metti a sistema l'uguaglianza delle due eq. <u>parametriche</u> (se hai gli stessi parametri ricorda di cambiarli in una delle due)
