@@ -23,6 +23,9 @@ progetti interessanti:
 1. Simulazione ambiente ospedaliero(in una sua porzione) e possibili vulnerabilità da mostrare
 2. progettare un honeycomb per raccolta informazioni di possibili attacchi 
 3. 
+
+
+idea extra: sicurezza informatica e ruolo dell'intelligenza artificiale, fable 5, rottura delle falle interne
 ###### IDEA 1
 Per rendere il progetto credibile, puoi prendere come riferimento il **Fascicolo Sanitario Elettronico 2.0**.
 
