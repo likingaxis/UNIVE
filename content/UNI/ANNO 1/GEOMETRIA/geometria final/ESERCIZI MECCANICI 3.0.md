@@ -102,6 +102,25 @@ $$\boxed{ A \text{ invertibile} \Longleftrightarrow \det(A)\neq 0 \Longleftright
 - per verificare se un vettore è autovettore di una applicazione lineare
 	- sostituiscila e vedere se ha autovalori multipli di quelli originali
 
+Una matrice A∈Mn×nA\in M_{n\times n}A∈Mn×n​ è **diagonalizzabile** se, per ogni autovalore λ\lambdaλ, la sua **molteplicità geometrica** è uguale alla sua **molteplicità algebrica**.
+
+mg(λ)=ma(λ)per ogni autovalore λ\boxed{m_g(\lambda)=m_a(\lambda)\quad \text{per ogni autovalore } \lambda}mg​(λ)=ma​(λ)per ogni autovalore λ​
+
+dove:
+
+ma(λ)=quante volte λ compare nel polinomio caratteristicom_a(\lambda)=\text{quante volte } \lambda \text{ compare nel polinomio caratteristico}ma​(λ)=quante volte λ compare nel polinomio caratteristico
+
+mentre:
+
+mg(λ)=dim⁡(Eλ)m_g(\lambda)=\dim(E_\lambda)mg​(λ)=dim(Eλ​)
+
+cioè la dimensione dell’autospazio associato a λ\lambdaλ.
+
+
+- D sono gli autovalori in diagonale P sono gli autovettori in colonna
+	- Quando diagonalizzi una matrice AAA, cerchi:
+	- D=P−1APD=P^{-1}APD=P−1AP
+
 ###### Rouche capelli
 - rango matrice normale= rango matrice estesa 
 
