@@ -34,6 +34,9 @@ per ogni α,β∈R\alpha,\beta\in\mathbb Rα,β∈R.
 
 - det diverso 0 rango max quindi lin ind
 - iniettiva suriettiva 
+	- suriettiva se rg(A) = numero di righe
+	- iniettiva se rg(A) = numero di colonne
+
 
 ##### Cosa abbiamo scoperto di nuovo
 ###### Rette
@@ -58,6 +61,9 @@ per ogni α,β∈R\alpha,\beta\in\mathbb Rα,β∈R.
 ###### Vettori e matrici
 - omogeneo con termini noti a 0
 - compatibile se ha soluzione
+- rappresentativa della base canonica sarebbe quella cosa che fai prendendo i coefficienti del sistema lineare e disponendoli in matrice
+- moltiplichi per tutti i vettori a base canonica
+- molt tra matrici
 ###### Applicazione lineare
 - verificare se una applicazione è lineare
 	1. Additività
@@ -70,14 +76,25 @@ per ogni α,β∈R\alpha,\beta\in\mathbb Rα,β∈R.
 	- Dim(IMMAGINE)=numero colonne
 - iniettiva
 	- Ker=insieme vuoto
+- f(span(v,w))=span{f(v),f(w)}
+	- prendi i due vettori e gli applichi l'app lineare poi ottieni l'insieme dei due vettori
 ###### Det e inversa
 - se matrice triangolare superiore det=molt dei pivot
-- se det!=0 rango=n
+- se det!=0 rango=n e la matrice è quadrata
 	- altrimenti rango <=n-1
 		- trovare una sottomatrice di dimensione di 1 ridotta 
 			- per cui det !=0 
 - per invertire la matrice i cofattori e poi fai fratto det
 	- ai cofattori cambia segno quando indici dispari
+- se una matrice non è quadrata non è invertibile
+	- pk vale la regola che per essere invertibile deve essere sia iniettiva che suriettiva
+
+- f composto g diventa il prodotto delle matrici f e g
+- g composto f allora era prodotto tra g e f
+allora queste condizioni sono tutte equivalenti:
+
+$$\boxed{ A \text{ invertibile} \Longleftrightarrow \det(A)\neq 0 \Longleftrightarrow \operatorname{rg}(A)=n \Longleftrightarrow \ker(A)=\{0\} \Longleftrightarrow L_A \text{ iniettiva} \Longleftrightarrow L_A \text{ suriettiva} }$$
+
 ###### Autovettori Autovalori
 - insieme di vettori è una base se sono linearmente indipendenti
 - polinomio caratteristico detto P di lambda= det(a-lambda I)
@@ -87,3 +104,4 @@ per ogni α,β∈R\alpha,\beta\in\mathbb Rα,β∈R.
 
 ###### Rouche capelli
 - rango matrice normale= rango matrice estesa 
+
