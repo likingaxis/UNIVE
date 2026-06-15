@@ -1,13 +1,12 @@
 ##### PRIORITÀ MASSIMA
-- information retrieval studio
-- consegna report 2 vulnerabilità
-##### MEDIA IMPORTANZA
+- vulnerabilità report 3
+- vedere slide vulnerabilità finali
 - fare sito web pw
-	- la sera lavoraci
-- tesi
-	- weekend
+PRENOTARSI A VULNERABILITÀ E PW
+
+##### MEDIA IMPORTANZA
+- studiare teoria web pw
+- studiare teoria vuln
 ##### POCO IMPORTANTE
 - big d finire algoritmi IMPORTANTE
 	- weekend
-- slide hackaton
-- report hackaton
