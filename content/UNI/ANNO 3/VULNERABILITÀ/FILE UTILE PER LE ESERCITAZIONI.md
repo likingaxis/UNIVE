@@ -156,6 +156,7 @@ For the Windows hash, the fact that it is entirely in CAPS LOCK is a strong hint
 	- `john --wordlist=/usr/share/wordlists/rockyou.txt secret_corporate.zip.hash`
 - piccola parentesi su come si fa unzip di un file con una certa password
 	- `7z x backup.7z -p{PASSWORD}`
+
 ###### Creare una tua wordlist
 - crea un file `.conf`
  il formato di scrittura interno è
@@ -174,21 +175,9 @@ c Az"202[0123456][!@#$%^&*]"
 - per poi esportare la tua wordlist il `.conf`
 	- `john --wordlist=seasons.txt --config=rules.conf --rules=E04 --stdout > E04_passwords.list`
 ###### Unshadow
-- etc/passwd e etc/shadow
+- `etc/passwd` e `etc/shadow`
 	- `unshadow passwd.txt shadow.txt > unshadowed.txt`
 - `john --wordlist=/usr/share/wordlists/rockyou.txt unshadowed.txt`
-###### hydra
-di solito usato con anche 
-- `cewl [https://www.target.xyz](https://www.target.xyz) -w targetWL.txt` genera una wordlist estraendo parole dal sito web
-	- w output
-	- m 5 lunghezza minima delle parole
-- `username-anarchy -i names.txt > usernames.txt`
-	- genera varie combinazioni dei nomi
-	- `-i`
-- esempio di hydra con post form(fai lo snippet e sostituisci i vari nomi
-	- `hydra -L users.txt -P E05_passwords.list vdsi.mrt.red -s 5000 http-post-form "/login:user=^USER^&pass=^PASS^:F=Login Failed" -V -c 1`
-- esempio con get:
-	- `hydra -L users.txt -P E05_passwords.list vdsi.mrt.red -s 5000 http-get /loginpage -V -c 1`
 ##### Privesc
 - Privesc si divide in 2 parti principali 
 	- enumeration 
