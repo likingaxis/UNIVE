@@ -1,3 +1,4 @@
+##### Giorno 1
 Nel seguente laboratorio abbiamo analizzato un sistema di comunicazione basato su modulazione DBPSK(Differential Binary Phase Shift Keying)
 l'obiettivo di questo laboratorio è quello di ricevere un vero e proprio segnale tramite RTL-SDR e osservarne il suo comportamento mediante anche una decodifica per recuperare un messaggio ASCII
 ##### Spiegazione teorica prima di vedere il progetto effettivo
@@ -19,8 +20,6 @@ per questo è importante differenziare sistemi di comunicazione
 - se il bit da trasmettere è 0, il simbolo mantiene la stessa fase del simbolo precedente
 - se il bit da trasmettere è 1, il simbolo cambia fase rispetto al simbolo precedente
 In questo modo il ricevitore non deve necessariamente conoscere la fase assoluta del segnale, ma può confrontare ogni simbolo ricevuto con quello precedente
-
-
 ##### MODELLO SIMULINK
 abbiamo in questo laboratorio usato il seguente modello Simulink
 `receiveDBPSK_RTLSDR_030626.slx`
@@ -34,17 +33,18 @@ abbiamo in questo laboratorio usato il seguente modello Simulink
 ##### Foto del segnale ricevuto 
 ![[offset a 3500.png]]
 Durante il laboratorio sono state provate diverse impostazioni di offset
-con un offset non corretto il segnale risulta spostato rispetto alla posizione desiderata, mentre regolando il valore dell’offset è possibile portare i picchi dello spettro in una posizione più adatta alla ricezione
+con un offset non corretto il segnale risulta spostato rispetto alla posizione desiderata in frequenza, mentre regolando il valore dell’offset è possibile portare i picchi dello spettro in una posizione più adatta alla ricezione
 ##### Gif della costellazione
 ![[gif costellazione.gif]]
-aggiungi spiegazione del perchè è un cerchio
+Nella DBPSK la costellazione può assumere una forma circolare perché il ricevitore non è perfettamente sincronizzato con la portante del trasmettitore proprio perchè DBPSK è di tipo non coerente
+- quindi l'interpretazione dei simboli è contenuta nella differenza tra i simboli trasmessi consecutivamente
+- il simbolo vede delle rotazioni nel piano I/Q poiché la portante usata dal ricevitore è differente da quella del mittente
 ###### Usare yout
 dopo aver terminato l'esecuzione quindi abbiamo la variabile yout
 e la salviamo facendo
 `save('esempiosegnalericevuto','yout');`
 
-
-dopo aver ricevuto il segnale mediante degli script in MATLAB iniziamo a lavorare sui dati ricevuti 
+dopo aver caricato il segnale in MATLAB iniziamo a lavorare sui dati ricevuti 
 ###### FIGURA 1
 carichiamo il file con i campioni ricevuti e prendiamo i primi 600 valori del segnale
 inoltre poi applichiamo la funzione angle che ci mostra la fase di ciascun campione e poi mostriamo un grafico che ci fa vedere il comportamento del segnale ricevuto
@@ -83,7 +83,7 @@ se due simboli hanno la stessa fase il risultato di `d(k)` risulta essere positi
 - (+1), quando non c’è variazione di fase significativa tra due simboli consecutivi
 - (-1), quando tra i due simboli c’è un salto di fase di circa ($\pi$)
 
->[!Question]- perchè fare il prodotto tra il simbolo ricevuto al momento k e il coniugato al momento k-1 porta al simbolo in quel momento k?
+>[!Question] perchè fare il prodotto tra il simbolo ricevuto al momento k e il coniugato al momento k-1 porta al simbolo in quel momento k?
 > 
 > 
 > La portante può essere rappresentata come:
@@ -99,10 +99,16 @@ se due simboli hanno la stessa fase il risultato di `d(k)` risulta essere positi
 > $$r(t) ≈ C m(t) e^{(j(2πΔf t + φ))}$$
 > dove C rappresenta un fattore di ampiezza, 
 > mentre il termine esponenziale rappresenta la rotazione causata dall’errore di frequenza e di fase.
-> - un errore di frequenza Δf;
-> - un errore di fase φ.
+> - con un un errore di frequenza Δf;
+> - ed un errore di fase φ.
 > Facendo il prodotto con il complesso coniugato del simbolo all'istante precedente $k-1$:
 > $$r(k) · conj(r(k-1))$$
+> quindi poi abbiamo sostituendo:
+> 
+> $$d(k) \approx  
+> C,m(k)e^{j(2\pi \Delta f t_k+\phi)}  
+> \cdot  
+> C,m(k-1)e^{-j(2\pi \Delta f t_{k-1}+\phi)}  $$
 > il termine di fase costante φ si elimina. Rimane solo una piccola rotazione dovuta alla differenza temporale tra due simboli consecutivi:
 > $$e^{(j2πΔfT)}$$
 > dove T è l’intervallo simbolico.
@@ -112,7 +118,7 @@ se due simboli hanno la stessa fase il risultato di `d(k)` risulta essere positi
 > - se due simboli consecutivi hanno la stessa fase, il prodotto vale +1;
 > - se due simboli consecutivi hanno fase opposta, il prodotto vale -1.
 
-quindi nel grafico sotto posso vedere il risultato del confronto tra un simbolo con il precedente
+quindi nel grafico sotto possiamo vedere il risultato del confronto tra un simbolo con il precedente
 abbiamo quasi una forma decodificata del segnale perchè distinguiamo tra regione positiva e negativa
 ```scss
 %% Demodulazione differenziale DBPSK
@@ -373,12 +379,14 @@ disp(chrmtx)
 ```
 
 ##### Giorno 2
-in questa seconda giornata avremo 3 esperimenti da analizzare con l'obiettivo di definire il tipo di disturbo che la professoressa sta aggiungendo al segnale di base trasmesso il progetto Simulink usato è il medesimo della giornata precedente
+in questa seconda giornata avremo 3 esperimenti da analizzare con l'obiettivo di definire il tipo di disturbo che la professoressa sta aggiungendo al segnale di base trasmesso.
+- Il progetto Simulink usato è il medesimo della giornata precedente
 ##### Esperimento 0
-quella fatta nella prima giornata
+[[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/LABORATORIO 3#Giorno 1|Esperimento e dati raccolti del giorno 1]]
 ##### Esperimento 1
 ![[collage_esperimento1.png]]
 a sinistra abbiamo il segnale dell'esperimento 0 mentre a destra il segnale dell'esperimento 1
+
 possiamo dire sicuramente che il segnale nell'esperimento 1 risulta molto simile a quello nell'esperimento 0 
 forse solo leggermente variato di offset visto che con l'esperimento 0 avevamo messo offset a 3500Hz e ora è a 2500Hz
 ![[collage_costellazioneesperimento1.png]]
@@ -400,22 +408,24 @@ WlàeEn@# kfahlciPïo!\n
 
 ```
 il fatto che siano stati trovati 2 preamboli significa che la struttura del messaggio non è completamente persa
+###### Tipo di attacco identificato
 sicuramente possiamo dire che i messaggi siano corrotti e penso sia un caso compatibile con un overshadowing mal riuscito dove il preambolo ancora rimane ma il messaggio è illeggibile
-
-lo yout salvato si chiama `esperimento1segnalericevuto2`
 
 ##### Esperimento 2
 Qui il comportamento del sistema cambia completamente rispetto all'esperimento 0
 ![[collage_esperimentosegnale2.png]]
-possiamo vedere chiaramente come lo spettro risulti disturbato
+possiamo vedere chiaramente come lo spettro risulti disturbato con un noise floor totalmente in linea con il possibile segnale effettivo
 ![[collage_costellazioneesperimento2.png]]
-vediamo come la costellazione mostri un disturbo ancora maggiore è impossibile definire i simboli adeguati
+vediamo come la costellazione mostri un disturbo ancora maggiore 
+- è impossibile definire i simboli adeguati
 l'output dello script usato nella giornata precedente risulta essere il seguente
-```
-Error using [untitled](matlab:matlab.lang.internal.introspective.errorDocCallback\('untitled',%20'C:\Users\Luca\Documents\MATLAB\untitled.m',%2075\)) ([line 75](matlab:%20opentoline\('C:\Users\Luca\Documents\MATLAB\untitled.m',75,0\)))  
+```scss
+Error using [untitled](matlab:matlab.lang.internal.introspective.errorDocCallback\('untitled',%20'C:\Users\Luca\Documents\MATLAB\untitled.m',%2075\)) ([line 75](matlab:%20opentoline\('C:\Users\Luca\Documents\MATLAB\untitled.m',75,0\))) 
+ 
 Sono stati trovati meno di 2 preamboli: impossibile estrarre messaggi delimitati.
 ```
-il fatto che non ci siano nemmeno i preamboli significa che non è possibile delimitare il messaggio per la decodifica
+il fatto che non ci sia nemmeno la possibilità di rilevare i preamboli significa che non è possibile delimitare il messaggio per la decodifica
+###### Tipo di attacco identificato
 dati gli effetti descritti è possibile ipotizzare un noise jamming che va a disturbare il canale utilizzato
 una possibile soluzione potrebbe essere il frequency hopping dove il mittente cambia diverse volte la frequenza utilizzata nell'invio del segnale sotto accordo con il ricevente
 oppure potremmo usare il DSSS (Direct Sequence Spread Spectrum) analizzato nel laboratorio precedente che applica effettivamente l'idea dietro i CDMA
@@ -423,14 +433,17 @@ oppure potremmo usare il DSSS (Direct Sequence Spread Spectrum) analizzato nel l
 ##### Esperimento 3
 Questo esperimento rappresenta un caso di overshadowing ben riuscito e ora cercherò di spiegare il motivo
 ![[collage_segnaleesperimento3.png]]
-andando a confrontare lo spettro possiamo notare che sia differente ma comunque sembra essere strutturato
+andando a confrontare lo spettro possiamo notare che esso sia differente 
+ma sembra avere ancora una struttura comprensibile solo che disposta a una potenza maggiore
 ![[collage_costellazioneesperimento3.png]]
-la costellazione ci indica molto bene come il segnale ricevuto sia facilmente interpretabile con una interpretazione dei simboli ben definita
+la costellazione ci indica molto bene come il segnale ricevuto sia facilmente interpretabile in termini di simboli
 
 l'output dello script usato nella giornata precedente risulta essere il seguente
 sono stati trovati 3 preamboli e effettivamente il messaggio visualizzato è perfettamente leggibile ma sotto suggerimento dell'insegnante non è quello aspettato
-il messaggio doveva essere lo stesso della giornata 1
+il messaggio doveva essere lo stesso della giornata 1 `Grande!!! Ci sei riuscita/o!\n`
+
 il segnale inviato dall'attaccante può essere stato inviato con potenza maggiore e quindi andiamo a decodificare quello
+output effettivo:
 ```scss
 Preamboli trovati nelle posizioni finali:  
 78  
@@ -449,6 +462,9 @@ Tutti i messaggi estratti:
 "Un alieno ha mangiato i bit!\n"
 
 ```
+###### Tipo di attacco identificato
+Attacco di tipo overshadowing ben riuscito dove un attaccante si pone a una potenza maggiore rispetto a quella del mittente originale
+- il ricevitore si aggancia al messaggio inviato dall'attaccante
 
 ##### Conclusione
 In questo laboratorio abbiamo analizzato la ricezione di segnali DBPSK contenenti messaggi codificati in ASCII e abbiamo analizzato diversi scenari di disturbo riassumibili in questa tabella
