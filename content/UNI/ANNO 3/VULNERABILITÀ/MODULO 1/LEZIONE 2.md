@@ -2,7 +2,7 @@
 - La **password** è un _shared secret_ tra due parti: l’utente e il servizio.  
 Serve per autenticare l’utente, cioè per dimostrare la sua identità al sistema.
 - probabilità di azzeccare una pass
-	- $\frac{1}{2^N}$  
+	- $\frac{1}{2^N}$
 - password overload
 	- è il problema per cui gli utenti devono ricordare troppe password per troppi servizi diversi.
 - entropia

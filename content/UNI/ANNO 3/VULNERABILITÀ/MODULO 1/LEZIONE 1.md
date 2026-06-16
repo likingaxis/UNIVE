@@ -39,7 +39,6 @@ Esempio attacco:
 #!/bin/bash
 /bin/bash
 ```
-
 3. metto la cartella nel PATH
 Ora eseguendo `ls` si apre **bash**.
 #### 3️⃣ Permessi e proprietà dei file
@@ -145,7 +144,7 @@ Struttura che contiene i metadati del file:
 - dimensione
 - blocchi disco
 **ls -li**  
-Mostra gli inode dei file.
+Mostra gli i-node dei file.
 
 **Hard link**
 - stesso inode
