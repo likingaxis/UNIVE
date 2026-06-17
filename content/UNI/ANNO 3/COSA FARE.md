@@ -5,6 +5,10 @@ Mattina:
 Pomeriggio:
 - [ ] Javascript
 - [ ] Slide se il prof risponde
+
+##### Dopodomani
+parte del sito di pw
+
 ##### PRIORITÀ MASSIMA
 - fare sito web pw
 ##### MEDIA IMPORTANZA
