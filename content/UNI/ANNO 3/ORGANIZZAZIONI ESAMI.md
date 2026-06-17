@@ -6,10 +6,8 @@
 | ALGORITMI PER I BIG DATA | ✅                     |                   |
 | VULNERABILITÀ            | ✅                     |                   |
 | PROGRAMMAZIONE WEB       | ✅                     |                   |
-| INFORMATION RETRIEVAL    | ✅                     |                   |
 | CALCOLO                  | ✅                     |                   |
 DAMMI LA PAZIENZA
-- **12 giugno information retrieval**
 - **15 giugno geometria**
 - **22 giugno vulnerabilità**
 - **23 giugno programmazione web**
