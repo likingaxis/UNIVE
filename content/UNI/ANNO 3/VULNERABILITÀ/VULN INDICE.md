@@ -1,11 +1,10 @@
 ##### MODULO 1
-- [ ] FATTO
+- [x] FATTO
 ##### MODULO 2
-- [ ] FATTO
+- [x] FATTO
 ##### MODULO 3
 - [ ] FATTO
 ##### SEMINARI
 - [ ] FATTO
-
 ##### MIGLIORIE SCRIPT 
-- [ ] FATTO
+- [x] FATTO
