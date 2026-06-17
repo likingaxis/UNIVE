@@ -11,7 +11,7 @@
 - ricorda che sotto una applicazione web è presente la socket
 	- una socket è un’interfaccia software che permette a un processo di inviare e ricevere dati tramite una connessione di rete, utilizzando protocolli come TCP o UDP
 - Firewall
-	- controllo su quale traffico è consentito per l'accesso o l'uscita della rete network
+	- controllo su quale traffico è consentito l'accesso o l'uscita della rete network
 	- funzionamento attraverso regole che filtrano i pacchetti 
 ![[Pasted image 20260402192522.png|400]]
 ###### COMANDI
