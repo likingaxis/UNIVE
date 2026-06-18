@@ -1,6 +1,6 @@
 ##### Domani
 Mattina:
-- [ ] Modulo 1 e 2 ripeti
+- [x] Modulo 1 e 2 ripeti
 - [ ] Modulo 3 
 Pomeriggio:
 - [ ] Javascript
