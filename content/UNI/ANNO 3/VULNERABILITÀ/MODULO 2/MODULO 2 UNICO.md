@@ -1,9 +1,9 @@
 ##### DNS, DNS query e DNS record
-Il DNS è un sistema distribuito che permette di associare nomi di dominio a informazioni utili, soprattutto indirizzi IP. Interagiamo con il DNS tramite query e riceviamo record come `A`, `AAAA`, `MX`, `TXT`, `PTR`, `CNAME`, `SOA`.
+Il DNS è un sistema distribuito che permette di associare nomi di dominio a informazioni utili, soprattutto indirizzi IP. Interagiamo con il DNS tramite query e riceviamo record come `A`, `AAAA`, `MX`, `TXT`, `PTR`, `CNAME`, `SOA`
 ###### Forward lookup brute force
-Consiste nel provare molti possibili sottodomini tramite una wordlist, ad esempio `admin.dominio.it`, `dev.dominio.it`, `test.dominio.it`, per vedere quali esistono e a quali IP puntano.
+Consiste nel provare molti possibili sottodomini tramite una wordlist, ad esempio `admin.dominio.it`, `dev.dominio.it`, `test.dominio.it`, per vedere quali esistono e a quali IP puntano
 ###### Reverse lookup
-Consiste nel partire da un indirizzo IP o da un range di IP e cercare i nomi associati tramite record `PTR`.
+Consiste nel partire da un indirizzo IP o da un range di IP e cercare i nomi associati tramite record `PTR`
 ###### Zone transfer
 Consiste nel provare una richiesta `AXFR` per ottenere una copia completa della zona DNS. Se il server è configurato male, può rivelare molti record, host e sottodomini interni.
 ##### Host discovery
