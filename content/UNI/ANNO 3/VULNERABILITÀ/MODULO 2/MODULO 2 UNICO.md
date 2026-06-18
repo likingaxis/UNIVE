@@ -7,7 +7,7 @@ Consiste nel partire da un indirizzo IP o da un range di IP e cercare i nomi ass
 ###### Zone transfer
 Consiste nel provare una richiesta `AXFR` per ottenere una copia completa della zona DNS. Se il server è configurato male, può rivelare molti record, host e sottodomini interni.
 ##### Host discovery
-Serve a capire quali host/IP sono attivi e raggiungibili in una rete. È una fase iniziale dell’enumeration.
+Serve a capire quali host/IP sono attivi e raggiungibili in una rete. È una fase iniziale dell’enumeration
 ###### ARP scan
 Funziona nella rete locale. Usa ARP per risolvere indirizzi IP in MAC address. È molto affidabile nella stessa subnet perché usa richieste broadcast a livello link.
 ###### Ping scan
