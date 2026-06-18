@@ -1,7 +1,6 @@
 ##### Domani
 Mattina:
-- [x] Modulo 1 e 2 ripeti
-- [ ] Modulo 3 
+- [ ] Modulo 1 e 2 e 3 ripeti
 Pomeriggio:
 - [ ] Javascript
 - [ ] Slide se il prof risponde
