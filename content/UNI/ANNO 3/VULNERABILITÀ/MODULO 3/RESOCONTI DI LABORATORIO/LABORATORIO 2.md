@@ -299,8 +299,8 @@ e 2 *time scope* per confrontare il segnale nel tempo prima e dopo lo spreading
 ###### Gli spectrum Analyzer
 ![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_01.png]]
 - in questa foto vediamo il segnale prima e dopo il prodotto lato trasmettitore
-	- possiamo vedere come il segnale dopo il prodotto risulti più distribuito nello spettro 
-	- mentre prima era più concentrato vicino a 0 Hz
+	- possiamo vedere come il segnale dopo il prodotto risulti meno distribuito nello spettro 
+	- mentre prima era più distribuito vicino a 0 Hz
 ![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_02.png]]
 - qui il segnale prima e dopo il prodotto lato ricevente
 	- il segnale risulta come prima ma invertito proprio dovuto al prodotto effettuato che riporta il segnale originale
