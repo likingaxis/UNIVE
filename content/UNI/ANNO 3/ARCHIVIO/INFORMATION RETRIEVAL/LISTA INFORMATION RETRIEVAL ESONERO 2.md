@@ -260,7 +260,7 @@ QueryLikelihoodDirichletLM(D, q, μ, top_k):
 10. ipotetico benchmark con gold standard e NDCG O PRECISION@K
 ```
 
-[[LABORATORIO 3]]
+[[UNI/ANNO 3/ARCHIVIO/INFORMATION RETRIEVAL/LABORATORI/LABORATORIO 3]]
 #### OTTIMIZZAZIONE DEI SISTEMI DI RANKING
 - si vuole ottimizzare la fase di calcolo della rilevanza dei documenti e la fase di ordinamento e selezione dei documenti
 - ranking safe non safe
@@ -358,7 +358,7 @@ QueryLikelihoodDirichletLM(D, q, μ, top_k):
 	- automatic thesaurus
 	- SVD e LSI utili per query expansion con uno spazio latente posso avere co occorrenze topiche
 #### LATENT SEMANTIC INDEXING
-[[UNI/ANNO 3/INFORMATION RETRIEVAL/LABORATORI/LABORATORIO 4|LABORATORIO 4]]
+[[LABORATORIO 4|LABORATORIO 4]]
 - A è una matrice mxn termini documento
 - SVD(Singular Value Decomposition)
 	- tecnica che ci permette di fattorizzare la matrice in
