@@ -1,6 +1,6 @@
 ##### Domani
 Mattina:
-- [ ] Modulo 1 e 2 e 3 ripeti con Samuele
+- [x] Modulo 1 e 2 e 3 ripeti con Samuele
 Pomeriggio:
 - [ ] Javascript
 - [ ] aggiungi dark mode e nascondi appelli
