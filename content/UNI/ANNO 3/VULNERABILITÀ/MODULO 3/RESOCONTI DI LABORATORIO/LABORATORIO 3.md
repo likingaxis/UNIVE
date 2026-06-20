@@ -411,6 +411,7 @@ il fatto che siano stati trovati 2 preamboli significa che la struttura del mess
 ###### Tipo di attacco identificato
 sicuramente possiamo dire che i messaggi siano corrotti e penso sia un caso compatibile con un overshadowing mal riuscito dove il preambolo ancora rimane ma il messaggio è illeggibile
 
+
 ##### Esperimento 2
 Qui il comportamento del sistema cambia completamente rispetto all'esperimento 0
 ![[collage_esperimentosegnale2.png]]
