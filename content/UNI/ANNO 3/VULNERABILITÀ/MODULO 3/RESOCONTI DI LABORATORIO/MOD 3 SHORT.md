@@ -52,8 +52,11 @@ il ricevitore confronta il simbolo ricevuto corrente con quello ricevuto precede
 - mediante servizi opensource 
 ###### Analizzare 3 livelli di sicurezza
 - design security
+	- sicurezza by design dei prodotti, possono lasciare vulnerabilità già in fase del progetto stesso
 - configuration security
+	- misconfigurazione da parte degli utenti, lasciando flag attivi che non dovevano essere attive
 - security assurance
+	- sicurezza vera e propria dei dispositivi, rispettando i 2 livelli di sicurezza precedenti e una serie di regole
 ###### Network mapper per base station
 - *5G MAP*
 	- necessario:
