@@ -905,7 +905,6 @@ modal.style.backgroundColor = 'white';
 - dopo aver registrato l’evento `load`, continua con la riga successiva e imposta il colore di sfondo della modale a bianco
 ###### Event Loop
 Quando una funzione viene chiamata, entra nella Call Stack. Quando la funzione termina, viene rimossa dalla Call Stack. Questo è il meccanismo con cui Javascript esegue normalmente il codice sincrono: una funzione alla volta, dall’inizio alla fine
-Quando una funzione viene chiamata, entra nella Call Stack. Quando la funzione termina, viene rimossa dalla Call Stack. Questo è il meccanismo con cui Javascript esegue normalmente il codice sincrono: una funzione alla volta, dall'inizio alla fine
 Javascript, da solo, esegue il codice in modo sincrono. Le operazioni asincrone vengono invece gestite con l’aiuto dell’ambiente in cui Javascript sta girando, ad esempio il browser o alcune web APIs
 - Per esempio, nel caso di `setTimeout`, il timer viene gestito dal browser. Nel caso di un `onclick`, il browser registra un handler, cioè una funzione da eseguire quando l’utente cliccherà su un certo elemento
 Quando l’operazione asincrona è pronta, la callback associata non viene eseguita immediatamente. Prima viene inserita in una coda chiamata **Callback Queue**, o **Message Queue**.
