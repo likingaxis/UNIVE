@@ -79,3 +79,9 @@ La file inclusion avviene quando una web app include un file il cui nome/percors
 Il path traversal permette di uscire dalla directory prevista usando sequenze come `../`, oppure varianti codificate, per raggiungere file in altre directory del filesystem.
 ###### PHP wrapper
 I PHP wrapper sono meccanismi come `php://`, `file://`, `data://` che permettono di accedere a risorse in modi particolari. In una LFI, `php://filter` può essere usato per leggere il sorgente di un file PHP codificandolo in Base64 prima che venga interpretato.
+
+```php
+file:// -> leggo un file dal filesystem  
+php:// -> leggo/scrivo stream speciali di PHP  
+data:// -> creo contenuto direttamente dentro l’URL
+```
