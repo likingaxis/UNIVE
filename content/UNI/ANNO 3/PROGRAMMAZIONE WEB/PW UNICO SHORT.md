@@ -51,10 +51,13 @@ p              /* selettore per tag */
 .classe        /* selettore per classe */
 #id            /* selettore per id */
 
-div p          /* discendente */
-div > p        /* figlio diretto */
-h1 + p         /* fratello immediato */
-h1 ~ p         /* fratelli generici */
+div p      /* p discendente di div */
+div > p    /* p figlio diretto di div */
+h2 + p     /* primo p subito dopo h2 */
+h2 ~ p     /* tutti i p fratelli dopo h2 */
+p.red      /* p con classe red */
+.card.active /* elemento con entrambe le classi */
+h1, h2, p  /* raggruppamento */
 a:hover        /* pseudoclasse */
 ```
 Specificità CSS:  
