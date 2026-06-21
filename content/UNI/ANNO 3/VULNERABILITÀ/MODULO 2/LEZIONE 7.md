@@ -179,6 +179,7 @@ I **PHP Wrapper** sono dei meccanismi messi a disposizione da PHP per accedere a
 		- Una volta ottenuto l’output in Base64, basta decodificarlo per ricostruire il sorgente originale del file PHP.
 	- `data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7Pz4=`
 	- serve per **iniettare direttamente del contenuto**, per esempio codice PHP codificato in Base64, senza dover caricare un file sul server.
+`http://target/page.php?file=data://text/plain;base64,...`
 #### WordPress
 - i plugin di Wordpress potrebbero avere varie vulnerabilità
 - eseguo e uso wpscan, ritorna le possibili vulnerabilità di un sito che usa framework wordpress
