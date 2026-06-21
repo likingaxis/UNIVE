@@ -24,9 +24,10 @@ git log --oneline
 - **PATCH**: modifica parzialmente una risorsa.
 - **DELETE**: elimina una risorsa.
 - **Content-Type**: indica il formato dei dati inviati, ad esempio `application/json`.
-- **CORS**: meccanismo di sicurezza che regola le richieste tra domini diversi come porta o ip o protocollo
-	- se il client invia richieste semplici il tutto viene autorizzato dal browser
-	- se invia richieste complesse si ha il bisogno di inviare una preflight al server per chidere l'autorizzazione prima di farlo
+- **CORS**: meccanismo di sicurezza che regola le richieste tra domini diversi come porta o IP o protocollo
+	- se il client invia richieste semplici il tutto viene analizzato l'header della risposta per vedere se questa richiesta è stata autorizzata con successo
+		- se la risposta è no allora il browser non fa visualizzare la risposta
+	- se invia richieste complesse si ha il bisogno di inviare una preflight al server per chiedere l'autorizzazione prima di inviare la richiesta effettiva
 - **1xx**: informativi.
 - **2xx**: successo.
 - **3xx**: redirect.
