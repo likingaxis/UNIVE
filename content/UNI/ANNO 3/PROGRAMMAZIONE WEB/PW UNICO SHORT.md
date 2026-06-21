@@ -84,6 +84,13 @@ content → padding → border → margin
 ```
 - `box-sizing: content-box`: width/height riguardano solo il contenuto.
 - `box-sizing: border-box`: width/height includono contenuto, padding e border.
+```css
+/* content-box */
+larghezza finale = width + padding + border
+
+/* border-box */
+larghezza finale = width
+```
 Position:
 - **static**: valore di default
 - **relative**: si sposta rispetto alla sua posizione originale
@@ -230,7 +237,7 @@ array.sort((a, b) => a - b);
 - È basato sul motore **V8** di Google.
 - Può accedere a risorse del sistema operativo, file system, rete e server.
 - Ha architettura single-thread, ma gestisce operazioni asincrone non bloccanti grazie all’event loop
-- Può gestire più richieste senza bloccare il programma durante operazioni lente, come lettura file o richieste di rete.
+- Può gestire più richieste senza bloccare il programma durante operazioni lente, come lettura file o richieste di rete, delegando quest'ultime a s.o. o thread interni 
 Moduli
 - **Core modules**: già inclusi in Node.js, per esempio `fs`, `http`, `path`.
 - **Local modules**: file creati da noi.
@@ -294,4 +301,23 @@ __filename  // percorso assoluto del file corrente
 require     // importa moduli/file in CommonJS
 module      // rappresenta il modulo/file corrente
 exports     // oggetto usato per esportare valori dal modulo
+```
+
+
+```js
+req.params // parametri dinamici della rotta  
+req.query // parametri nella query string  
+req.body // dati inviati nel body  
+req.method // metodo HTTP  
+req.url // URL richiesto  
+req.headers // header della richiesta
+```
+
+```js
+res.send()      // invia risposta generica
+res.json()      // invia JSON
+res.status()    // imposta codice HTTP
+res.redirect()  // reindirizza
+res.set()       // imposta header
+res.sendFile()  // invia file
 ```
