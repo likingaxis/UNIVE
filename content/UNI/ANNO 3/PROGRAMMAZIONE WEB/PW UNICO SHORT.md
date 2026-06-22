@@ -322,3 +322,56 @@ res.redirect()  // reindirizza
 res.set()       // imposta header
 res.sendFile()  // invia file
 ```
+
+#### AUTENTICAZIONE, COOKIE E TOKEN
+- **Authentication**: serve a capire _chi sei_.  
+    Esempio: login con email e password.
+- **Authorization**: serve a capire _cosa puoi fare_.  
+    Esempio: puoi accedere a `/api/profile`, ma non alle informazioni di altri utenti.
+- HTTP è **stateless**, cioè il server non ricorda automaticamente chi ha fatto login prima.  
+    Per questo ogni richiesta deve portare una “prova” dell’identità dell’utente, ad esempio un cookie di sessione o un token.
+Cookie di sessione:
+- Dopo il login, il server crea una sessione e manda un cookie al browser con `Set-Cookie`.
+- Il browser salva il cookie e lo reinvia automaticamente nelle richieste successive allo stesso dominio.
+- Il cookie di solito contiene solo un identificativo, per esempio `sessionId=abc123`.
+- Il server usa quell’id per ritrovare l’utente associato alla sessione.
+```js
+app.use(session({
+  secret: "una stringa segreta",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.post("/login", (req, res) => {
+  req.session.userId = user.id;
+  res.redirect("/profile");
+});
+```
+Token / Bearer token:
+- Dopo il login, il server può restituire un token.
+- Il client salva il token e lo invia nelle richieste successive tramite header:
+```js
+Authorization: Bearer <token>
+```
+- Le API protette controllano il token prima di rispondere.
+- “Bearer” indica il modo in cui il token viene trasportato, non per forza il formato del token.
+JWT:
+- Un **JWT** è un possibile formato di token.
+- È composto da header, payload e signature.
+- È firmato, quindi il server può controllare se è stato modificato.
+- È codificato ma non cifrato: non bisogna inserirci password o dati sensibili.
+Esempio middleware Express:
+```js
+function verifyToken(req, res, next) {
+  const auth = req.headers.authorization;
+
+  if (!auth?.startsWith("Bearer ")) {
+    return res.sendStatus(401);
+  }
+
+  req.user = jwt.verify(auth.slice(7), SECRET);
+  next();
+}
+
+app.get("/api/profile", verifyToken, handler);
+```
