@@ -136,6 +136,18 @@ const user = {
 - Se una proprietà/metodo non è presente nell'oggetto, JavaScript la cerca nella **prototype chain**
 	- `oggetto.__proto__`
 	- oppure per sovrascriverlo di un costruttore `Persona.prototype={metti proprietà e metodi qui}`
+```Javascript
+function Studente(nome) {  
+this.nome = nome;  
+}  
+  
+Studente.prototype.saluta = function() {  
+return "Ciao, sono " + this.nome;  
+};  
+  
+const luca = new Studente("Luca");  
+console.log(luca.saluta());
+```
 Variabili:
 - `let`: scope di blocco.
 - `const`: scope di blocco, ma non può essere riassegnata.
