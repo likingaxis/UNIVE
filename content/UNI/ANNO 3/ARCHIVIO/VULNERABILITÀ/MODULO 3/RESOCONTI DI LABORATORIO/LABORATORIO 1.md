@@ -14,10 +14,10 @@ In questo laboratorio abbiamo utilizzato **MATLAB** per analizzare lo spettro ra
 	- `spectrumAnalyzer_RTLSDR.slx`
 - sotto è possibile vedere una foto di come si presenta **MATLAB**, da qui è possibile importare dei progetti su 
 	- Open -> e si seleziona il nome del file
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 1/capture 3.PNG]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 1/capture 3.PNG]]
 #### Il modello Simulink
 - il modello Simulink si presenta così
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 1/capture 2.PNG|526]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 1/capture 2.PNG|526]]
 - è composto da 3 blocchi principali
 	- un *blocco costante* che serve per impostare la frequenza centrale
 	- un *blocco RTL-SDR* Receiver che serve proprio per ricevere il segnale radio
@@ -44,7 +44,7 @@ Inizialmente il segnale(come da foto) risulta estremamente rumoroso con variazio
 Per permettere una *migliore leggibilità* dello spettro è stato modificato il metodo di stima 
 - è stato impostato un metodo esponenziale con *forgetting factor* a 1
 	- riduce le fluttuazioni casuali mostrando le cose in modo **più definito e chiaro**
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 1/capture 6.PNG]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 1/capture 6.PNG]]
 
 ###### Considerazioni sulla frequenza centrale
 Durante il laboratorio abbiamo provato diverse frequenze centrali
@@ -57,7 +57,7 @@ Spectrum Analyzer ci offre diversi strumenti per poter fare varie misurazioni, i
 - i cursori ci consentono di selezionare due punti dello spettro e *misurare* *2 differenze* in particolare
 	- la differenza tra i due punti in termini di MHz o kHz(a seconda di quanto abbiamo ingrandito la visualizzazione dello spettro)
 	- la differenza di potenza tra i due punti espressa in dBm
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 1/capture 8.PNG]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 1/capture 8.PNG]]
 - qui è possibile vedere come si sono registrate all'incirca le seguenti misure
 ```scss
 ΔMHz = 0.2108 MHz
@@ -88,7 +88,7 @@ $$r(t) = s(t) + n(t)$$
 ##### Modello Simulink più avanzato
 A lezione è stato introdotto un modello *Simulink* più complesso in grado di ricevere il vero e proprio segnale FM sempre sfruttando la RTL-SDR
 quest'ultimo non è stato utilizzato ai fini del laboratorio ma solo con lo scopo di farci vedere come è composto e da quali moduli è formato
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 4.PNG]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 4.PNG]]
 - i moduli utilizzati sono stati i seguenti:
 	- il blocco per impostare la **frequenza centrale**
 	- il blocco **RTL-SDR Receiver**
@@ -116,7 +116,7 @@ quest'ultimo non è stato utilizzato ai fini del laboratorio ma solo con lo scop
 ##### Misurazioni del segnale trasmesso dall'insegnante
 - abbiamo ricevuto del segnale trasmesso dal dispositivo *USRP B210*
 - il segnale inizialmente si presentava in questo modo e vedeva dei picchi misurati adeguatamente sempre grazie agli strumenti forniti da spectrum analyzer
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 8.PNG|498]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 8.PNG|498]]
 le misure effettuate sono state le seguenti:
 - *misurare le distanze* dello spettro del primo e secondo picco e anche *l'altezza massima* dei due
 - il *noise floor*
@@ -149,8 +149,8 @@ noise floor:
 ```
 - ovviamente è stato escluso il picco quello a 0 che è dovuto a **limitazioni hardware**
 - qua sotto le rispettive foto delle misurazioni
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 7.PNG|517]]
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 6.PNG|517]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 7.PNG|517]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 2/capture 6.PNG|517]]
 ![[capture14.png|355]]
 
 ###### Stima dell'SNR

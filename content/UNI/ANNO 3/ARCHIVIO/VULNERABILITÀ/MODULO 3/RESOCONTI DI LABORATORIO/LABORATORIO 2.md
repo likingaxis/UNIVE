@@ -111,19 +111,19 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 ##### Con $Eb/N0=3$
 - ora procediamo con un'aggiunta dell'errore particolarmente decisa, qui ho deciso di mettere a sinistra le foto precedenti con valore a 10 e a destra quelle con valore a 3
 ###### Spectrum analyzer del segnale dopo AWGN
-![[collage_04.png]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_04.png]]
 ###### Costellazione
-![[collage_01.png]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_01.png]]
 
 ###### Eye diagram prima dell'integrale
-![[collage_03.png]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_03.png]]
 
 ###### Eye Diagram dopo calcolo integrale
-![[collage_05.png]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_05.png]]
 ###### Time scope
-![[collage_06.png]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_06.png]]
 ###### Error rate calculation
-![[collage_02.png]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_02.png]]
 
 ###### Domande di laboratorio
 >[!Question] domanda 1
@@ -160,10 +160,10 @@ con $Eb/N0=10$ abbiamo un rumore davvero basso quindi dovremmo vedere una qualit
 
 >[!success] risposta
 > - a sinistra abbiamo $Eb/N0$ a $12$ invece a destra con valore a $6dB$
-> ![[collage_02.png]]
+> ![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_02.png]]
 > - **12 dB**: l'occhio risulta abbastanza aperto indica probabilità di errore bassa e buon margine decisionale dei simboli
 > - **6dB**: l'occhio inizia a chiudersi mostrando una possibile indecisione nell'interpretare i simboli
-> ![[collage_01.png]]
+> ![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_01.png]]
 > - **12 dB**: le costellazioni sono perfettamente circoscritte al loro dominio di appartenenza, mi chiedo cosa possa accadere se aumentassimo l'interpretazione simbolica con ad esempio una estensione come la QPSK a un certo valore
 > - **6dB**: alcuni bit che dovrebbero stare in una delle due fasi inizia quasi a toccarsi mostrano una possibile incertezza del segnale
 
@@ -297,11 +297,11 @@ Abbiamo aggiunto 4 *Spectrum Analyzer* per misurare(nel dominio della frequenza)
 - il segnale dopo il prodotto lato ricevente
 e 2 *time scope* per confrontare il segnale nel tempo prima e dopo lo spreading
 ###### Gli spectrum Analyzer
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_01.png]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_01.png]]
 - in questa foto vediamo il segnale prima e dopo il prodotto lato trasmettitore
 	- possiamo vedere come il segnale dopo il prodotto risulti meno distribuito nello spettro 
 	- mentre prima era più distribuito vicino a 0 Hz
-![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_02.png]]
+![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_02.png]]
 - qui il segnale prima e dopo il prodotto lato ricevente
 	- il segnale risulta come prima ma invertito proprio dovuto al prodotto effettuato che riporta il segnale originale
 ###### i time scope
@@ -330,7 +330,7 @@ abbiamo la stessa informazione ma più "spalmata"
 > per rispondere alla domanda ho usato Channel Measurements dello spectrum analyzer
 > per capire la banda occupata
 > 
-> ![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_03.png]]
+> ![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_03.png]]
 > - Prima del prodotto lato trasmettitore, quindi prima dello spreading, la banda occupata misurata è circa 101.59 Hz
 > - Dopo il prodotto lato trasmettitore, quindi dopo la moltiplicazione con la chipping sequence, la banda occupata è circa 146.76 Hz
 > quindi facendo il rapporto avremmo
@@ -359,7 +359,7 @@ abbiamo la stessa informazione ma più "spalmata"
 > facendo il rapporto quindi abbiamo
 > $129.3670 / 163.2966 ≈ 0.79$
 > - e quindi abbiamo una riduzione del 21%
->![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_04.png]]
+>![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_04.png]]
 
 >[!Question] domanda 4
 > If a jammer is turned on, look at its sharp spike before the multiplier. What happens to that sharp spike after the multiplier?
@@ -431,7 +431,7 @@ Sì, nel segnale DSSS si osservano cambi di fase più rapidi rispetto al BPSK or
 >[!success] risposta
 > 
 > 
-> ![[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_06.png]]
+> ![[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/FOTOLAB/LAB 4/collage_06.png]]
 > mettendo un constellation diagram prima e dopo lo spreading notiamo una buona sincronizzazione dei due, il secondo constellation diagram mostrava quelli in un certo istante di tempo quindi prima andava nella fase a -1 poi nella fase a 1
 
 ##### Conclusione del laboratorio
