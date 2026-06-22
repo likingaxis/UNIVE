@@ -54,8 +54,8 @@ p              /* selettore per tag */
 
 div p      /* p discendente di div */
 div > p    /* p figlio diretto di div */
-h2 + p     /* primo p subito dopo h2 */
-h2 ~ p     /* tutti i p fratelli dopo h2 */
+h2 + p   /* solo il primo p subito dopo h2 */
+h2 ~ p   /* tutti i p fratelli dopo h2 */
 p.red      /* p con classe red */
 .card.active /* elemento con entrambe le classi */
 h1, h2, p  /* raggruppamento */
