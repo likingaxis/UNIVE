@@ -382,7 +382,7 @@ disp(chrmtx)
 in questa seconda giornata avremo 3 esperimenti da analizzare con l'obiettivo di definire il tipo di disturbo che la professoressa sta aggiungendo al segnale di base trasmesso.
 - Il progetto Simulink usato è il medesimo della giornata precedente
 ##### Esperimento 0
-[[content/UNI/ANNO 3/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/LABORATORIO 3#Giorno 1|Esperimento e dati raccolti del giorno 1]]
+[[content/UNI/ANNO 3/ARCHIVIO/VULNERABILITÀ/MODULO 3/RESOCONTI DI LABORATORIO/LABORATORIO 3#Giorno 1|Esperimento e dati raccolti del giorno 1]]
 ##### Esperimento 1
 ![[collage_esperimento1.png]]
 a sinistra abbiamo il segnale dell'esperimento 0 mentre a destra il segnale dell'esperimento 1
