@@ -41,4 +41,3 @@
 		- 5.4.2
 - ch10-graphs1-andy-18-12-23.pdf
 	- fino a slide 18+pdf Valerio con quadrupla da sapere
-
