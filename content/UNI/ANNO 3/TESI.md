@@ -20,12 +20,12 @@ progetti interessanti:
 - Cybersecurity vulnerability analysis of medical devices purchased by national health services
 - Anonymization and Pseudonymization of FHIR Resources for Secondary Use of Healthcare Data
 ### IDEE
-1. Simulazione ambiente ospedaliero(in una sua porzione) e possibili vulnerabilità da mostrare
-2. progettare un honeycomb per raccolta informazioni di possibili attacchi 
-3. 
+1. Simulazione di una porzione di ambiente ospedaliero digitale, con servizi web/API e vulnerabilità controllate da analizzare e mostrare.
+2. Progettazione di un honeypot didattico, eventualmente ambientato in un contesto sanitario simulato, per raccogliere e classificare tentativi di attacco.
+3. Progettazione di un agente AI a supporto dell’analisi di vulnerabilità, limitato a scenari controllati, codice selezionato o output di strumenti di sicurezza.
+4. Uso di tecniche di IA/ML per supportare l’analisi di sicurezza in ambito e-health o network security, ad esempio tramite classificazione di eventi, log o traffico anomalo.
+5. Studio delle vulnerabilità dei sistemi LLM e degli agenti AI, come prompt injection, data leakage, tool misuse e limiti delle difese.
 
-
-idea extra: sicurezza informatica e ruolo dell'intelligenza artificiale, fable 5, rottura delle falle interne
 ###### IDEA 1
 Per rendere il progetto credibile, puoi prendere come riferimento il **Fascicolo Sanitario Elettronico 2.0**.
 
