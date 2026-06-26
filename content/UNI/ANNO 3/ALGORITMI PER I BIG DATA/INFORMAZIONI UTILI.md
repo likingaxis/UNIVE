@@ -420,3 +420,191 @@ Si presenta il problema del pattern matching. Sia Σ un alfabeto, data una strin
 
 
 
+#### Problemi di campionamento
+##### Problema 1: Campione a porzione fissa
+Si assuma lo scenario in cui la Stream U e` composta da query dei motori di ricerca, ovvero ogni elemento della Stream e` una tupla (ID utente, query, tempo). Lo scopo principale `e quello di trovare un campione S ⊆ U che per un utente medio u e una query q, approssimi bene la frazione di occorrenze q in U fatte da u.  Definizione 5.5.1 (Occorrenza q). Una tupla in U `e chiamata occorrenza q se ha il componente query = q.  Un algoritmo banale consiste nel calcolare il valore Hash di ogni elemento (quindi fare uso di bucket) nella Stream e successivamente prendere una porzione di bucket. Segue un esempio  Algorithm 6: Algoritmo di banale  S=∅  for tupla t ∈ U do  Scegli un bucket ∈u [10] Salva t in S se il bucket `e 0  for query q ∈ U do  return la frazione delle occorrenze q in S Analisi procedura  Supponiamo che la Stream U sia tale che ogni utente u faccia m query differenti una volta, e d query differenti due volte, per cui U = m + 2d. L’algoritmo dovrebbe approssimare bene la frazione degli utenti medi che hanno due occorrenze in U . La frazione delle d-query `e d  m+d , il valore E[|S|] = 1  10 · |U | (la probabilit`a di inserimento di una tupla t `e 1  10 ). Infine S conterr`a m  10 delle query m, poich ́e la probabilit`a di inserimento `e 1  10 ed e` presente esattamente un’occorrenza per ognuna delle m query.  E[Elementi distinti ∈ S] = m  10 + d  100 + 18d  100  E[|S|] = m  10 + 2d  100 + 18d  100 Si giustificano i calcoli. Le query d vengono campionate con probabilit`a 1  10 , ce ne sono due, la probabilit`a di  campionarle entrambe e` 1  100 per d query allora d  100 , 18d  100 vengono campionati una sola volta ( 1  10 · 9  10 + 9  10 · 1  10 d  volte).  In S ci saranno 19  100 d delle query d  Dimostrazione. d  100 delle query d appariranno due volte, altre 18d  100 appariranno esattamente una volta. Infine l’algoritmo dar`a l’approssimazione di S come  d 100 m  10 + d  100 + 18d  100  =d  10m + 19d  questo approccio non `e quindi funzionante, si presenta un secondo approccio, in cui vengono campionati gli utenti sia I l’insieme degli utenti, si scelga una porzione degli utenti (per esempio 1  10 ) e si mettano le loro occorrenze q in S (con la tecnica dei bucket vista in precedenza). Si restituisca la media calcolata in S.  Algorithm 7: User-Sample Algorithm Data: I: Insieme di tutti gli ID Utente Result: S: Campione contenente tutte le q-occorrenze degli utenti selezionati  // Fase 1: Selezione di 1/10 degli utenti  Scegli una funzione di hash h che mappi gli ID utente in 10 bucket i.u.a.r. S←∅  for ID ∈ I do  if h(ID) == 1 then  Estrai tutte le occorrenze q associate a tale ID e aggiungile a S  // Fase 2: Elaborazione dei dati  Esegui computazioni medie (statistiche) sul campione S  Analisi campionamento degli utenti  Sia Q l’insieme delle query, I l’insieme degli ID utente. Fissando una data query q si definisce la funzione x(v, q) come il numero di occorrenze q dell’utente v nella Stream. Inoltre si definisce la variabile aleatoria XS(V, q) come il numero di occorrenze dall’utente V (variabile) in S. Nell’algoritmo 7 gli ID degli utenti V `e una variabile aleatoria uniforme.  Il valore cercato `e AV GV ∈I (x(v, q)) = EV ∈S [XS(V, q)] per ogni q fissata. Per cui AV GV ∈S(VS(V, q)) (il risultato dell’algoritmo).  Sia Cj una variabile aleatoria definita come segue  Cj =  (  1 se l’hash dell’utente j `e 0 0 altrimenti sia inoltre xj la variabile che conta il numero di elementi dell’utente j in U . E[|S|] = P  j xj · Pr [Cj = 1] =  1 10 · P  j xj = |U|  10 . `E da notare che la varianza pu`o essere molto grande, si presenta quindi una soluzione generale.  Sia U una Stream di tuple (x1, x2, . . . , xk) una chiave `e un sottoinsieme (xi1 , xi2 , . . . , xij ), per ottenere un campione S di porzione a/b della Stream si procede nel seguente modo:  1. si esegue l’hash della chiave in b bucket 2. si inseriscono in S solo le tuple le cui hash ≤ a.  Poiche ́ non `e sempre possibile mantenere un sottoinsieme di dimensione proporzionale allo Stream e` possibile utilizzare un altro metodo:  1. si esegue l’hash di ogni chiave in un grande numero b di bucket 2. si imposta una soglia iniziale t ≤ b per cui tutti gli elementi pi`u piccoli della soglia finiscono in S 3. se S diventa troppo grande t viene ridotto e tutti gli elementi sopra la nuova soglia vengono rimossi 4. si ripete finch ́e necessario
+
+##### Problema 2: Campione di spazio fissato
+5.5.2 Problema 2: Campione di spazio fissato  Si suppone di voler mantenere in memoria un campione di S di esattamente s elementi, supponendo di aver visto n elementi al tempo n, allora ogni tupla deve essere nel campione con probabilit`a 1  n . Si presenta l’algoritmo di Reservoir-sampling 5.5.3 Reservoir Sampling  Il metodo di Reservoir Sampling consiste nel salvare in S i primi s elementi, quando arriva un elemento n-esimo, per n ≥ s  1. scegli con probabilit`a s  n se inserire il nuovo elemento in S  2. se l’elemento `e scelto per l’inserimento si sceglie un elemento x ∈u S da rimuovere con probabilit`a 1  s.  Teorema 5.2. Per ogni s ≥ 1 e per ogni tempo n ≥ s l’algoritmo Reservoir Sampling ha la seguente propriet`a: dopo n passi S contiene ognuno degli n elementi con la stessa probabilit`a Dimostrazione. Caso Base:  dopo aver visto n = s elementi S ha tutti gli elementi con probabilit`a s  s = 1.  Caso Induttivo:  Assumendo che al passo n ogni elemento appartenga con probabilit`a s  n , dopo l’elemento n + 1 la propriet`a `e  mantenuta ovvero s  n+1 .  Per ogni “vecchio” elemento gi`a in S, la probabilit`a che l’algoritmo lo mantenga `e  1− s  n+1  | {z }  Elemento n + 1  scartato  +s  n+1  | {z }  Elemento n + 1 non scartato  · s−1  s  | {z }  Qualsiasi altro elemento e` scelto  =n  n+1  quindi al tempo n ogni elemento in S `e presente con probabilit`a s  n , al tempo n + 1 ogni vecchio elemento x ∈ S  rimane con probabilit`a n  n+1 . Infine la probabilit`a che l’elemento sia in S `e s  n· n  n+1 = s  n+1 .
+
+##### 5.5.4 Sliding Window
+Un modello utile riguarda una finestra di lunghezza N sulla Stream, in cui sono contenuti gli N elementi piu` recenti. N e` grande abbastanza da non poter mantenere gli elementi in memoria.  5.5.5 Counting Bits  Sia I una Stream di bit infinita, con una finestra di lunghezza N . Si vuole calcolare il valore della funzione #1(I, N, k) che rappresenta il numero di ‘1’ negli ultimi k bit (k ≤ N ). Una soluzione banale consiste nel memorizzare gli ultimi N bit  Teorema 5.3. Per una Stream con distribuzione arbitraria la funzione #1(I, N, k) richiede spazio ≥ N .  Dimostrazione. Si supponga sia possibile fare uso dello schema di rappresentazione R(N, k), con |R(N, k)| ≤ N − 1 allora devono esistere 2 bit nella finestra w che hanno la stessa rappresentazione in R(N, k), assumiamo per qualche k  x = . . . 1 xk−1xk−2 . . . x1 z = . . . 0 xk−1xk−2 . . . x1  in pratica x e z sono entrambi esprimibili con qualche R(N, k) di cui la dimensione `e ≤ N − 1 (in qualche modo qualche informazione viene persa). Qualsiasi algoritmo per #1(I, N, k) non riesce a distinguere una finestra x da una finestra z, quindi fallisce.  Nel caso in cui una finestra N non possa essere salvata in memoria `e necessario fornire un’approssimazione per il valore della funzione #1(I, N, k). Si fa uso del metodo DGIM
+
+##### DGIM (Datar, Gioinis, Indikm, Motwani)
+Il metodo DGIM funziona con qualsiasi distribuzione su Stream lo spazio utilizzato `e O(log 2N ) bit per Stream, e non fornisce mai l’approssimazione piu` del 50% del valore effettivo.  Piu` precisamente (dalle note di Prezza) DGIM usa O(ε−1 log2 m) spazio fornendo una (1 + ε) approssimazione. Ne segue una descrizione del funzionamento, sia B = ⌈1/ε⌉, i bit della Stream vengono raggruppati in gruppi G1, G2, . . . , Gt che devono soddisfare le seguenti condizioni  1. ogni Gi inizia e finisce con il bit 1 2. tra due gruppi adiacenti Gi, Gi+1 ci sono solamente bit 0,  per cui la Stream `e della forma 0m0 G0, 0m1 G1, . . . , 0mt Gt 3. ogni gruppo Gi contiene 2k bit 1 4. Per ogni ≤ i ≤ t se Gi contiene 2k bit 1 allora Gi+1 contiene 2k o 2k−1 bit 1 5. Per ogni k eccezione per la pi`u grande, il numero Zk di gruppi contenenti 2k bit 1 soddisfa B ≤ Zk ≤ B + 1  (i gruppi devono essere adiacenti).  La “testa” della Stream e` l’elemento piu` recente. Per ogni k ci sono almeno B = 1 gruppi che contengono 2k bit 1 e al massimo B + 1 gruppi con 2k bit 1.  0100101010111101  G1(4) G2(2) G3(2) G4(1)  Inizio stream Testa  `E necessario definire come aggiornare i gruppi quando nuovi elementi vengono ricevuti, se il bit `e 0 non si fa nulla, al contrario per nuovi bit 1 si procede come segue  1. viene creato un nuovo gruppo con il nuovo bit 1 2. se ci sono B + 2 gruppi contenenti 20 bit 1, i gruppi piu` a sinistra vengono uniti in modo tale che ci siano B  gruppi contenenti 20 bit 1. Cosı` facendo il nuovo gruppo contiene 21 bit 1 3. il processo viene ripetuto con i gruppi contenenti 2i bit 1. `e facile vedere che un singolo aggiornamento richiede tempo O(log m) facendo uso di una doppia lista collegata.  Sia L una lista globale  L = lq ↔ lq−1 ↔ · · · ↔ l1.  in cui l’elemento li contiene tutti i gruppi con 2i bit 1 ed `e a sua volta una doppia lista collegata  li = Gj1 ↔ · · · ↔ Gjs  in cui, appunto, Gj1 , . . . , Gjs sono tutti i gruppi contenenti 2i bit 1. Ogni gruppo `e una coppia (sx,dx) che rappresenta l’inizio e la fine del gruppo. Per ogni lista collegata li vengono salvate la testa, la coda, numero di bit contenuti e numero di bit 1 contenuti nei suoi gruppi.  Per cui trovare i gruppi piu` a sinistra dato un li, unirli e spostare un gruppo in li+1 richiede tempo O(1). Un aggiornamento richiede tempo O(q) = O(log m), pi`u precisamente un aggiornamento richiede tempo O(1)∗ ammortizzato.  Dimostrazione. Si supponga che un aggiornamento aumenti Zk di un unit`a (Zk `e il numero di gruppi con 2k elementi), questo significa che prima dell’aggiornamento Zk′ = B +1 per ogni k′ ≤ k. In turno questa configurazione richiede 2k − 1 aggiornamenti precedenti, che aggiunti al nuovo aggiornamento fa 2k aggiornamenti totali. Un solo aggiornamento ogni 2k costa O(k). Il costo ammortizzato e` P∞  k=1  k  2k = O(1).  37 2k 1-bits  ... 1  testa window (m ̄ bits)  d 1-bits (valore reale) d ̃ 1-bits (approssimazione)  Si procede valutando il fattore di approssimazione di DGIM.  La figura 5.5.5 corrisponde al caso peggiore. Nel caso peggiore la query ( la finestra con  ̄m bit) comprende solamente l’ultimo bit di un blocco, il vero numero di bit 1 nella finestra e` d. La risposta restituita d ̃ include l’intero blocco di 2k bit 1.  Sia k tale che il gruppo piu` vecchio che interseca la finestra ha 2k bit 1. Sia d il vero numero di bit 1 nella finestra, d ̃ la somma dei bit 1 nei gruppi che intersecano la finestra (l’approssimazione).  Se k = 0 `e facile verificare che d ̃ = d poiche ́ ogni gruppo che interseca la finestra contiene esattamente un bit. `E possibile supporre k > 0 =⇒ d ̃ ≥ d, dal momento che viene contato ogni blocco che interseca la finestra.  Si calcola un lower-bound per d (poich ́e la finestra espande un gruppo con 2k bit 1 ), allora la finestra sicuramente contiene almeno B gruppi contenenti 2j bit 1 per ogni j = 1, . . . , k  d ≥B · 2k + B · 2k−1 + · · · + B · 20  =B ·  k−1  X  i=0  2i = B(2k − 1) Inoltre d ≤ d ̃ ≤ d(1 + ε).  `E anche possibile gestire il caso in cui la Stream sia di interi e si vuole approssimare il valore della somma degli ultimi k elementi. Si presenta la procedura di risoluzione  1. sapendo che ogni intero fa uso ≤ m bit allora gli m bit dell’intero vengono trattati come una Stream stessa  si fa uso di DGIM per la stima del numero di bit 1 nella rappresentazione binaria di ogni intero. Sia ci il conto stimato per l’i-esimo bit, la somma e` Pm−1  i=0 ci2i  2. si fa uso dei bucket per mantenere le somme parziali (la somma degli elementi in un bucket di dimensione b `e  al massimo 2b)
+Il problema è:
+
+#1(I,N,k)\#1(I,N,k)#1(I,N,k)
+
+cioè: data una stream di bit, voglio sapere **quanti 1 ci sono negli ultimi kkk bit**, con k≤Nk \leq Nk≤N. Salvare tutta la finestra di NNN bit costerebbe troppo, quindi DGIM salva un riassunto approssimato. Gli appunti dicono infatti che, se non possiamo salvare la finestra, dobbiamo fornire un’approssimazione del conteggio.
+
+## 1. L’idea base di DGIM
+
+DGIM non salva tutti i bit. Salva solo dei **gruppi**, o bucket, che riassumono blocchi della stream.
+
+Ogni gruppo contiene un certo numero di bit a 111, sempre una potenza di due:
+
+1, 2, 4, 8, 16,…1,\ 2,\ 4,\ 8,\ 16,\dots1, 2, 4, 8, 16,…
+
+Quindi un gruppo può dire:
+
+> “In questa porzione della stream ci sono 4 bit a 1”
+
+oppure:
+
+> “In questa porzione della stream ci sono 8 bit a 1”
+
+Non salva tutti i bit interni al gruppo, salva solo informazioni tipo:
+
+(inizio gruppo,fine gruppo,numero di 1 nel gruppo)(\text{inizio gruppo}, \text{fine gruppo}, \text{numero di 1 nel gruppo})(inizio gruppo,fine gruppo,numero di 1 nel gruppo)
+
+Infatti gli appunti dicono che ogni gruppo è rappresentato da una coppia (sx,dx)(sx,dx)(sx,dx), cioè inizio e fine del gruppo.
+
+## 2. Perché i gruppi iniziano e finiscono con 1?
+
+Perché DGIM si interessa solo al conteggio degli 111. Gli zeri tra un gruppo e l’altro non sono importanti per il conteggio, però servono per sapere dove sono posizionati i gruppi nella finestra.
+
+Per questo gli appunti impongono:
+
+1. ogni gruppo GiG_iGi​ inizia e finisce con un bit 111;
+2. tra due gruppi adiacenti ci sono solo bit 000.
+
+Esempio intuitivo:
+
+```
+0 1 0 0 1 0 1 0 1 0 1 1 1 1 0 1
+```
+
+DGIM non salva ogni bit singolarmente. Raggruppa gli 111, ad esempio:
+
+```
+[gruppo da 4 uno] [gruppo da 2 uno] [gruppo da 2 uno] [gruppo da 1 uno]
+```
+
+La “testa” della stream è l’elemento più recente, cioè quello più a destra negli appunti.
+
+## 3. Perché i gruppi hanno dimensione 2k2^k2k?
+
+Per risparmiare memoria.
+
+Invece di avere tantissimi gruppi singoli da 111, DGIM li fonde progressivamente:
+
+1+1=21+1 = 21+1=2 2+2=42+2 = 42+2=4 4+4=84+4 = 84+4=8
+
+e così via.
+
+Quindi i gruppi più recenti sono piccoli, mentre quelli più vecchi possono essere più grandi.
+
+L’idea è:
+
+> dei bit recenti voglio sapere informazioni più precise; dei bit vecchi posso permettermi informazioni più approssimate.
+
+## 4. Cosa succede quando arriva un nuovo bit?
+
+Se arriva uno **0**, DGIM non deve creare nuovi gruppi, perché lo 0 non cambia il conteggio degli 1.
+
+Se arriva un **1**, crea un nuovo gruppo da 1:
+
+G={1}G = \{1\}G={1}
+
+cioè un gruppo contenente:
+
+20=12^0 = 120=1
+
+bit a 1.
+
+Poi controlla: ci sono troppi gruppi della stessa dimensione?
+
+Negli appunti si usa il parametro:
+
+B=⌈1/ε⌉B = \lceil 1/\varepsilon \rceilB=⌈1/ε⌉
+
+e si impone che, per ogni dimensione 2k2^k2k, ci siano circa tra BBB e B+1B+1B+1 gruppi di quella dimensione, tranne eventualmente per la dimensione più grande.
+
+Se ci sono troppi gruppi da 111, DGIM prende i due più vecchi e li fonde in un gruppo da 222.
+
+Se ora ci sono troppi gruppi da 222, prende i due più vecchi gruppi da 222 e li fonde in un gruppo da 444.
+
+Se ci sono troppi gruppi da 444, li fonde in un gruppo da 888, e così via.
+
+È molto simile a un riporto binario.
+
+Esempio con B=1B=1B=1, semplificato. Supponiamo che arrivino tanti 111:
+
+```
+arriva 1:  [1]arriva 1:  [1][1]arriva 1:  [1][1][1]  troppi gruppi da 1            fondo i due più vecchi:            [2][1]arriva 1:  [2][1][1]arriva 1:  [2][1][1][1]  troppi gruppi da 1            [2][2][1]    ora troppi gruppi da 2            [4][1]
+```
+
+Questa è la parte degli appunti dove dice: se ci sono B+2B+2B+2 gruppi contenenti 202^020 bit a 1, i gruppi più a sinistra vengono uniti creando un gruppo contenente 212^121 bit a 1; poi il processo viene ripetuto per 2i2^i2i.
+
+## 5. Come risponde DGIM a una query?
+
+Supponi di voler sapere quanti 111 ci sono negli ultimi mˉ\bar mmˉ bit.
+
+DGIM guarda quali gruppi intersecano questa finestra.
+
+Per tutti i gruppi completamente dentro la finestra, li conta interamente.
+
+Il problema è **il gruppo più vecchio che interseca la finestra**.
+
+Questo gruppo potrebbe essere solo parzialmente dentro la finestra. Però DGIM non sa esattamente quanti 111 di quel gruppo siano dentro e quanti fuori, perché non salva tutti i bit interni.
+
+Quindi fa un’approssimazione.
+
+Negli appunti indicano:
+
+d=numero reale di 1 nella finestrad = \text{numero reale di 1 nella finestra}d=numero reale di 1 nella finestra d~=stima restituita da DGIM\tilde d = \text{stima restituita da DGIM}d~=stima restituita da DGIM
+
+Nel caso peggiore, la finestra prende solo l’ultimo bit di un gruppo, ma DGIM conta tutto il gruppo. Quindi d~\tilde dd~ può essere più grande del valore reale ddd. Gli appunti dicono infatti che nel caso peggiore la query comprende solo l’ultimo bit di un blocco, ma la risposta include l’intero blocco da 2k2^k2k bit a 1.
+
+## 6. Perché l’errore è controllato?
+
+Sia 2k2^k2k la dimensione del gruppo più vecchio che interseca la finestra.
+
+Il massimo errore nasce dal fatto che potresti contare troppo quel gruppo.
+
+Quindi l’errore massimo è circa:
+
+2k2^k2k
+
+Ma DGIM garantisce che, se esiste un gruppo vecchio di dimensione 2k2^k2k, allora dentro la finestra ci sono già abbastanza gruppi più recenti più piccoli o uguali. Per questo il valore reale ddd non può essere troppo piccolo.
+
+Gli appunti scrivono un lower bound:
+
+d≥B⋅2k+B⋅2k−1+⋯+B⋅20d \ge B\cdot 2^k + B\cdot 2^{k-1}+\dots+B\cdot 2^0d≥B⋅2k+B⋅2k−1+⋯+B⋅20
+
+che poi diventa:
+
+d≥B(2k−1)d \ge B(2^k-1)d≥B(2k−1)
+
+Il senso è:
+
+> se sto contando forse troppo un gruppo da 2k2^k2k, comunque nella finestra ci sono già abbastanza 111 da rendere questo errore relativamente piccolo.
+
+Perciò ottieni:
+
+d≤d~≤d(1+ε)d \le \tilde d \le d(1+\varepsilon)d≤d~≤d(1+ε)
+
+cioè DGIM non sottostima e non sovrastima più di un fattore controllato.
+
+## 7. Come ricordarlo per l’esame
+
+DGIM serve per:
+
+stimare il numero di 1 negli ultimi k bit di una stream\boxed{\text{stimare il numero di 1 negli ultimi }k\text{ bit di una stream}}stimare il numero di 1 negli ultimi k bit di una stream​
+
+senza salvare tutta la finestra.
+
+Funziona così:
+
+raggruppa gli 1 in bucket di dimensione 1,2,4,8,…\boxed{\text{raggruppa gli 1 in bucket di dimensione }1,2,4,8,\dots}raggruppa gli 1 in bucket di dimensione 1,2,4,8,…​
+
+Quando arriva un 111:
+
+crea un bucket da 1 e fonde bucket vecchi se ce ne sono troppi\boxed{\text{crea un bucket da 1 e fonde bucket vecchi se ce ne sono troppi}}crea un bucket da 1 e fonde bucket vecchi se ce ne sono troppi​
+
+Quando fai una query:
+
+somma i bucket dentro la finestra, approssimando quello piuˋ vecchio che la interseca\boxed{\text{somma i bucket dentro la finestra, approssimando quello più vecchio che la interseca}}somma i bucket dentro la finestra, approssimando quello piuˋ vecchio che la interseca​
+
+L’unica fonte principale di errore è il gruppo più vecchio parzialmente incluso nella finestra. DGIM costruisce i gruppi in modo che quell’errore sia piccolo rispetto al numero totale reale di 111.
