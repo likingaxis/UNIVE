@@ -282,8 +282,6 @@
 - [ ] Estensione a stream di interi
 - [ ] Teorema importante: DGIM fornisce una buona approssimazione usando spazio polilogaritmico
 
----
-
 ## 6. Algoritmi sulle Stream
 
 ### Stima delle frequenze
