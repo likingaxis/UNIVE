@@ -227,26 +227,26 @@
 ## 5.2–5.5 Data Stream e campionamento
 
 ### Data Stream
-- [ ] Definizione di stream
-- [ ] Stream troppo grandi per essere mantenuti in memoria
-- [ ] Sketch
-- [ ] Parametri di valutazione:
-  - [ ] memoria
-  - [ ] tempo per elemento
-  - [ ] probabilità di correttezza
-  - [ ] fattore di approssimazione
-- [ ] Proprietà di aggiornabilità dello sketch
+- [x] Definizione di stream
+- [x] Stream troppo grandi per essere mantenuti in memoria
+- [x] Sketch
+- [x] Parametri di valutazione:
+  - [x] memoria
+  - [x] tempo per elemento
+  - [x] probabilità di correttezza
+  - [x] fattore di approssimazione
+- [x] Proprietà di aggiornabilità dello sketch
 
 ### Pattern Matching su stream
-- [ ] Problema del pattern matching
-- [ ] Funzione hash di Rabin
-- [ ] Rabin sketch
-- [ ] Aggiornamento per concatenazione di caratteri
-- [ ] Aggiornamento per concatenazione di stringhe
-- [ ] Rolling hash
-- [ ] Complessità spaziale e temporale
-- [ ] Lemma importante: per stringhe diverse, probabilità di collisione ≤ `n/q`
-- [ ] Corollario importante: scegliendo `q` grande, errore ≤ `1/n^c`
+- [x] Problema del pattern matching
+- [x] Funzione hash di Rabin
+- [x] Rabin sketch
+- [x] Aggiornamento per concatenazione di caratteri
+- [x] Aggiornamento per concatenazione di stringhe
+- [x] Rolling hash
+- [x] Complessità spaziale e temporale
+- [x] Lemma importante: per stringhe diverse, probabilità di collisione ≤ `n/q`
+- [x] Corollario importante: scegliendo `q` grande, errore ≤ `1/n^c`
 
 ### Proprietà degli algoritmi su stream
 - [ ] Campionamento proporzionale alla dimensione dello stream
