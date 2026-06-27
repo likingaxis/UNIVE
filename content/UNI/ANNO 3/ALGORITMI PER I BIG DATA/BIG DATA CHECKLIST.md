@@ -249,24 +249,24 @@
 - [x] Corollario importante: scegliendo `q` grande, errore ≤ `1/n^c`
 
 ### Proprietà degli algoritmi su stream
-- [ ] Campionamento proporzionale alla dimensione dello stream
-- [ ] Campione di dimensione fissata
-- [ ] Proprietà dinamica del campione
+- [x] Campionamento proporzionale alla dimensione dello stream
+- [x] Campione di dimensione fissata
+- [x] Proprietà dinamica del campione
 
 ### Campionamento a porzione fissa
-- [ ] Scenario: query dei motori di ricerca
-- [ ] Campionamento ingenuo delle tuple
-- [ ] Problema delle query duplicate
-- [ ] Campionamento degli utenti
-- [ ] Campionamento tramite chiave
-- [ ] Soglia dinamica per controllare la dimensione del campione
+- [x] Scenario: query dei motori di ricerca
+- [x] Campionamento ingenuo delle tuple
+- [x] Problema delle query duplicate
+- [x] Campionamento degli utenti
+- [x] Campionamento tramite chiave
+- [x] Soglia dinamica per controllare la dimensione del campione
 
 ### Reservoir Sampling
-- [ ] Obiettivo: mantenere `s` elementi da stream arbitrariamente lungo
-- [ ] Inserimento del nuovo elemento con probabilità `s/n`
-- [ ] Rimozione uniforme dal reservoir
-- [ ] Dimostrazione per induzione
-- [ ] Teorema importante: dopo `n` passi ogni elemento ha la stessa probabilità di essere nel campione
+- [x] Obiettivo: mantenere `s` elementi da stream arbitrariamente lungo
+- [x] Inserimento del nuovo elemento con probabilità `s/n`
+- [x] Rimozione uniforme dal reservoir
+- [x] Dimostrazione per induzione
+- [x] Teorema importante: dopo `n` passi ogni elemento ha la stessa probabilità di essere nel campione
 
 ### Sliding Window e Counting Bits
 - [ ] Modello sliding window
