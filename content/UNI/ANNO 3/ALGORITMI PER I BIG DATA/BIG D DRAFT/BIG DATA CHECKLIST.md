@@ -269,18 +269,18 @@
 - [x] Teorema importante: dopo `n` passi ogni elemento ha la stessa probabilità di essere nel campione
 
 ### Sliding Window e Counting Bits
-- [ ] Modello sliding window
-- [ ] Conteggio degli `1` negli ultimi `k` bit
-- [ ] Lower bound: spazio almeno `N` per soluzione esatta
-- [ ] Necessità di approssimazione
-- [ ] Metodo DGIM
-- [ ] Gruppi/bucket di potenze di due
-- [ ] Aggiornamento dei gruppi
-- [ ] Fusione dei gruppi
-- [ ] Tempo di aggiornamento
-- [ ] Analisi dell’approssimazione
-- [ ] Estensione a stream di interi
-- [ ] Teorema importante: DGIM fornisce una buona approssimazione usando spazio polilogaritmico
+- [x] Modello sliding window
+- [x] Conteggio degli `1` negli ultimi `k` bit
+- [x] Lower bound: spazio almeno `N` per soluzione esatta
+- [x] Necessità di approssimazione
+- [x] Metodo DGIM
+- [x] Gruppi/bucket di potenze di due
+- [x] Aggiornamento dei gruppi
+- [x] Fusione dei gruppi
+- [x] Tempo di aggiornamento
+- [x] Analisi dell’approssimazione
+- [x] Estensione a stream di interi
+- [x] Teorema importante: DGIM fornisce una buona approssimazione usando spazio polilogaritmico
 
 ## 6. Algoritmi sulle Stream
 
