@@ -31,3 +31,68 @@ Secondo me devi sapere bene, in ordine:
 5. **MinHashing + LSH**, perché è un blocco grosso del programma.
 6. **Hashing universale**, perché ritorna in Count-Min, Bloom e strutture hash.
 7. **Min-Cut, verifica prodotto matriciale, verifica polinomi**, come classici algoritmi randomizzati.
+
+## Struttura giornaliera corretta
+### Mattina
+Argomenti generali nuovi + appunti Obsidian.
+Esempio: probabilità, poi algoritmi probabilistici, poi hashing, poi stream.
+### Pomeriggio
+Argomento a piacere DGIM.
+Qui lavori ogni giorno un pezzo diverso: prima struttura, poi dimostrazione, poi discorso orale, poi simulazione.
+### Sera
+Interrogazione cumulativa.
+Non solo su quello fatto quel giorno, ma anche su quello già visto.
+Per esempio:
+- **giorno 1 sera:** probabilità + DGIM base;
+- **giorno 2 sera:** sampling + reservoir + probabilità;
+- **giorno 3 sera:** hashing + sampling + DGIM;
+- **giorno 4 sera:** Count-Min + hashing + probabilità;
+- **giorno 5 sera:** Bloom + Count-Min + DGIM;
+- **giorno 6 sera:** MinHash + LSH + stream;
+- **giorno 7 sera:** simulazione completa.
+In questo modo gli argomenti dei primi giorni tornano più volte.
+## Come evitare di arrivare a filo
+Ti consiglio di dividere lo studio in tre livelli.
+### Livello A: da sapere bene
+Questi devono essere pronti entro il **3 luglio**, non il 6:
+- probabilità base: Markov, Chebyshev, Chernoff, union bound;
+- hashing universale;
+- sampling e reservoir sampling;
+- DGIM;
+- Count-Min Sketch;
+- Bloom Filter.
+Questi sono troppo collegati tra loro e molto probabili.
+### Livello B: da sapere discretamente
+Da chiudere entro il **5 luglio**:
+- MinHashing;
+- LSH;
+- Pattern Matching / Rabin-Karp su stream;
+- Flajolet-Martin;
+- AMS.
+### Livello C: da ripassare come domande secondarie
+Da tenere più sintetici:
+- verifica identità polinomiali;
+- verifica moltiplicazione matriciale;
+- Min-Cut;
+- QuickSort randomizzato;
+- randomized median;
+- contention resolution;
+- load balancing.
+Non li devi ignorare, ma non puoi dedicare loro lo stesso peso di DGIM, Count-Min, Bloom e MinHash.
+## Piccola modifica al piano
+Io non lascerei il “ripasso generale” al 6. Farei così:
+- **29 giugno:** probabilità + DGIM introduzione.
+- **30 giugno:** sampling/reservoir + DGIM algoritmo.
+- **1 luglio:** hashing + DGIM analisi.
+- **2 luglio:** Count-Min Sketch + prima simulazione DGIM completa.
+- **3 luglio:** Bloom Filter + ripasso cumulativo di probabilità/hashing/Count-Min.
+- **4 luglio:** MinHashing/LSH + seconda simulazione completa.
+- **5 luglio:** classici algoritmi randomizzati + ripasso stream.
+- **6 luglio:** solo ripasso orale, schemi, domande probabili, niente argomenti nuovi.
+Quindi il vero obiettivo è: **entro il 5 sera hai visto tutto almeno una volta; il 6 non studi, consolidi**.
+## Metodo pratico per la sera
+La sera non fare rilettura passiva. Fai così:
+1. chiudi gli appunti;
+2. provi a spiegare a voce;
+3. quando ti blocchi, guardi;
+4. riscrivi in Obsidian una frase breve tipo:
