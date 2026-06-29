@@ -1,4 +1,5 @@
 ### Parte probabilistica
+- Coin flip
 - Coupon collector
 - Verifying Polynomial Identities
 - Verifying Matrix Multiplication
@@ -46,3 +47,6 @@
 - **Flajolet Martin**
 ### Calcolo dei momenti
 - **AMS**
+
+24 algoritmi totali
+11 più di 1 pagina
