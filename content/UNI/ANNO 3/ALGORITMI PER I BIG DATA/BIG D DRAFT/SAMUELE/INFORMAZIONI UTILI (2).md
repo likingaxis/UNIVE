@@ -67,7 +67,6 @@ La probabilità condizionata che un evento `E` capiti sapendo che un evento `F` 
 ## Variabili Aleatorie (R.V.)
 Una **variabile aleatoria $X$** su uno spazio campionario $\Omega$ è una funzione a valori reali definita sugli esiti dello spazio: $X: \Omega \to \mathbb{R}$.
 - **R.V. Discreta:** assume solo un numero finito o numerabile di valori.
-- **Connessione con gli Algoritmi:** In ambito Big Data/Algoritmi, ogni volta che un algoritmo effettua una scelta randomizzata (es. scelta di un pivot, campionamento), sta implicitamente utilizzando variabili aleatorie.
 
 ## Indipendenza
 Due variabili aleatorie $X$ e $Y$ si dicono **indipendenti** se e solo se per ogni coppia di valori $x, y$:
@@ -191,7 +190,7 @@ Riprendendo l'esempio di $N$ lanci di moneta (Bernoulli trial):
 ![[Pasted image 20260331160407.png]]
 
 
-## Distribuzioni e Varianze Notevoli (Slide 15, 29-36)
+## Distribuzioni e Varianze Notevoli 
 
 ### Variabile Binomiale ($B(n, p)$)
 *   Somma di $n$ prove di Bernoulli indipendenti.
@@ -228,8 +227,6 @@ Spiega perché campionare più volte un fenomeno ci dà una stima precisa.
 
 # 4. Cont Resolution Andy
 ## Chernoff Bounds (Sopra la media)
-*Riferimento: PDF pag. 7 + Slide 11-12*
-
 I Chernoff Bounds sono strumenti fondamentali per limitare la coda di una distribuzione. Rispetto alla disuguaglianza di Chebyshev, offrono un bound molto più "stretto" (esponenziale invece che polinomiale).
 
 ### Teorema (Above Mean)
@@ -249,9 +246,7 @@ Un confronto fondamentale:
 ![[Pasted image 20260420103507.png]]
 
 ## Contention Resolution in Sistemi Distribuiti
-*Riferimento: PDF pag. 18 + Slide 4-9*
-
-**Problema:** $n$ processi ($P_1, \dots, P_n$) competono per l'accesso a un database (o canale radio). Se $\geq 2$ processi accedono contemporaneamente, avviene una collisione e tutti rimangono bloccati.
+**Problema:** $n$ processi ($P_1, \dots, P_n$) competono per l'accesso a una risorsa condivisa. Se $\geq 2$ processi accedono contemporaneamente, avviene una collisione e tutti rimangono bloccati.
 **Vincolo:** I processi sono **anonimi** e **non possono comunicare** tra loro (Symmetry-breaking paradigm).
 
 ### Il Protocollo (Randomizzato)
@@ -263,17 +258,18 @@ $$\Pr[S_{i,t}] = p(1-p)^{n-1} = \frac{1}{n} \left(1 - \frac{1}{n}\right)^{n-1}$$
 * **Dalle Slide:** Per $n \to \infty$, il termine $(1 - 1/n)^{n-1}$ converge a $1/e$. 
 * Quindi: $\frac{1}{en} \leq \Pr[S_{i,t}] \leq \frac{1}{2n}$.
 
-### Nota sull'Indipendenza (Dai tuoi appunti)
-* **N.B. 1:** Gli eventi $S(i_1, t)$ e $S(i_2, t)$ (due processi diversi nello stesso istante) **NON sono indipendenti**. Se uno ha successo, l'altro deve aver fallito.
-* **N.B. 2:** Gli eventi $\bigcap_{j=1}^t \bar{S}(i, j)$ (lo stesso processo in istanti diversi) **SONO indipendenti**.
+>[!tip] **N.B. 1:** Gli eventi $S(i_1, t)$ e $S(i_2, t)$ (due processi diversi nello stesso istante) **NON sono indipendenti**. Se uno ha successo, l'altro deve aver fallito.
+
+>[!tip] **N.B. 2:** Gli eventi $\bigcap_{j=1}^t \bar{S}(i, j)$ (lo stesso processo in istanti diversi) **SONO indipendenti**.
 
 ### Risultati Fondamentali
-1. **Fallimento del singolo:** La probabilità che il processo $i$ fallisca per $t = \lceil en \rceil$ round è $\leq 1/e$. Se scegliamo $t = \lceil en \rceil \cdot c \ln n$, la probabilità di fallimento scende a $1/n^c$.
-2. ![[Pasted image 20260420105729.png]]
-3. **Successo Globale (Union Bound):** Vogliamo che **tutti** i processi abbiano successo. Usando l'Union Bound, se impostiamo $t = 2e \cdot n \ln n$, la probabilità che esista ancora un processo che non ha ottenuto la risorsa è $\leq 1/n$ (questo si chiama *claim versione negativa*).
+1. **Fallimento del singolo:** La probabilità che il processo $i$ fallisca per $t = \lceil en \rceil$ round è $\leq 1/e$. Se scegliamo $t = \lceil en \rceil \cdot c \ln n$, la probabilità di fallimento scende a $1/n^c$. ![[Pasted image 20260420105729.png]]
+2. **Successo Globale (Union Bound):** Vogliamo che **tutti** i processi abbiano successo. Usando l'Union Bound, se impostiamo $t = 2e \cdot n \ln n$, la probabilità che esista ancora un processo che non ha ottenuto la risorsa è $\leq 1/n$ (questo si chiama *claim versione negativa*).
     *   **Conclusione:** Con altissima probabilità ($1 - 1/n$), tutti finiscono entro $O(n \log n)$ round.
 ![[Pasted image 20260420105934.png]]
 
+## Load balancing
+Vedere [[ALGORITMI - DA SOSTITUIRE CON PDF#^210441|Load Balancing]] 
 
 ---
 
@@ -500,7 +496,7 @@ Il punto di partenza è l'inefficienza computazionale. Dopo aver trasformato i d
 
 Per risolvere questo problema dobbiamo comprimere i doc originali in **firme (signatures)** di dimensione fissa e ridotta, che però conservino la "memoria" della similarità originale.
 
-##### La Matrice Caratteristica e il Concetto di Permutazione
+##### La Matrice Caratteristica
 Per visualizzare il processo, si immagina una **matrice caratteristica** dove le righe rappresentano tutti i possibili shingle e le colonne rappresentano i documenti. Una cella vale 1 se lo shingle è presente nel documento, 0 altrimenti.
 ![[Pasted image 20260504161300.png]]
 
@@ -596,8 +592,8 @@ Questa formula genera una **S-Curve**. Se impostassimo $r=1$ (bande da una sola 
 
 ##### 4. Analisi dei Casi e Soglie di Confidenza
 Consideriamo l'esempio di una matrice con $t=100$ righe, divisa in $b=20$ bande e $r=5$ righe, con l'obiettivo di trovare documenti con similarità $\geq 0.8$.
-*   **Caso 1 (Documenti Simili):** Se $J.Sim(C_1, C_2) = 0.8$, la probabilità che i documenti non abbiano nessuna banda in comune è $(1 - 0.8^5)^{20} \approx 0.00035$. Ciò significa che il **99.965%** delle coppie corrette verrà individuato.
-*   **Caso 2 (Documenti Dissimili):** Se $J.Sim(C_1, C_2) = 0.3$, la probabilità che diventino accidentalmente candidati è $1 - (1 - 0.3^5)^{20} \approx 0.0474$. Avremo quindi solo il **4.74%** di falsi positivi.
+* **Caso 1 (Documenti Simili):** Se $J.Sim(C_1, C_2) = 0.8$, la probabilità che i documenti non abbiano nessuna banda in comune è $(1 - 0.8^5)^{20} \approx 0.00035$. Ciò significa che il **99.965%** delle coppie corrette verrà individuato.
+* **Caso 2 (Documenti Dissimili):** Se $J.Sim(C_1, C_2) = 0.3$, la probabilità che diventino accidentalmente candidati è $1 - (1 - 0.3^5)^{20} \approx 0.0474$. Avremo quindi solo il **4.74%** di falsi positivi.
 
 Il punto di flesso della curva (la soglia teorica) è approssimato dalla formula $k \approx (1/b)^{1/r}$. In questo esempio, $k = (1/20)^{1/5} \approx 0.55$. I documenti sopra questa soglia tendono a collidere (vengono mantenuti), quelli sotto tendono a essere scartati.
 ![[Pasted image 20260511101948.png]]
@@ -675,3 +671,689 @@ Esistono due strategie principali:
 **La proprietà fondamentale: Dinamicità.** Per essere corretto, un algoritmo di campionamento deve garantire che, in ogni istante $k$, ogni elemento visto fino a quel momento abbia la **stessa probabilità** di trovarsi nel campione.
 
 Vedere [[ALGORITMI - DA SOSTITUIRE CON PDF#^d3cca1|Algoritmi per il campionamento]]
+
+
+---
+
+# Algoritmi sulle stream
+Presentiamo ora diversi algoritmi che operano sulle stream
+
+## 6.1 Stima delle frequenze
+### Problema
+Abbiamo uno stream di `m` elementi: `x_1, x_2, ..., x_m`, dove ogni elemento appartiene a `[n]`.
+
+Per ogni elemento `y ∈ [n]` vogliamo stimare la sua frequenza nello stream, cioè quante volte `y` compare.
+
+La frequenza reale di `y` è:
+$$  
+f(y)=|{i:x_i=y}|  
+$$
+
+Il problema è che, in uno stream, non vogliamo memorizzare tutti gli `m` elementi.
+
+L'obiettivo è quindi stimare `f(y)` usando poca memoria.
+
+
+### 6.1.1 Sampling Algorithm `S-ALG`
+L'idea del sampling è prendere solo alcuni elementi dello stream e usarli per stimare la frequenza reale.
+
+Assumiamo inizialmente che `m` sia noto.
+Se `m` non è noto, si può usare **Reservoir Sampling** per ottenere comunque un campione di dimensione fissa.
+
+#### Passaggi dell'algoritmo
+L'algoritmo `S-ALG` funziona così:
+1. sceglie `q` indici casuali $j_1, j_2, ..., j_q ∈ [m]$, scelti indipendentemente e uniformemente a caso;
+    
+2. durante lo streaming, salva solo gli elementi in quelle posizioni: $x_{j_1}, x_{j_2}, ..., x_{j_q}$;
+	- questi elementi salvati formano lo **sketch**;
+    
+3. per stimare la frequenza di `y`, conta quante volte `y` appare nel campione e scala il risultato.
+
+Lo **stimatore restituito** è:$$  
+F(y)=\frac{m}{q}\sum_{k=1}^{q}1(x_{j_k}=y)  
+$$dove:$$  
+\text{aleatoria bernulliana} \leftarrow 1(x_{j_k}=y)=  
+\begin{cases}  
+1 & \text{se } x_{j_k}=y \\ 
+0 & \text{altrimenti}  
+\end{cases}  
+$$
+>[!lemma] Lemma 1
+Per ogni `y` e per ogni variabile casuale $x_{j_k}$ vale:$$  
+\mathbb{E}[\mathbf{1}(x_{j_k}=y)] = \frac{f(y)}{m}  
+$$
+- L'indice $j_k$ viene scelto uniformemente tra tutte le posizioni dello stream.
+- Ogni posizione ha probabilità `1/m` di essere scelta.
+- Dato che `y` compare nello stream esattamente `f(y)` volte, la probabilità che il campione scelto sia uguale a `y` è:$$  
+\frac{f(y)}{m}  
+$$
+
+Ora, per il lemma 1, sommiamo su tutti i `q` campioni:$$  
+\mathbb{E}\left[\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)\right]
+q\cdot \frac{f(y)}{m} \ \ \ =$$$$  
+= \mathbb{E}\left[\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)\right]
+
+\frac{q}{m}f(y)  
+$$
+Questa formula dice che, in media, nel campione vediamo una frazione `q/m` delle occorrenze totali di `y`.
+
+
+>[!lemma] Lemma 2 
+`F(y)` è uno ***stimatore unbiased***, ossia in media restituisce il valore corretto.
+>- Non significa che ogni singola stima sia perfetta, ma che l'errore medio è nullo.
+
+Lo stimatore è:$$  
+F(y)=\frac{m}{q}\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)  $$Vogliamo calcolare il suo valore atteso `E[F(y)]`.
+
+Sostituiamo la definizione:$$  
+\mathbb{E}[F(y)] = 
+\mathbb{E}\left[  
+\frac{m}{q}\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)  
+\right]  
+$$
+Portiamo fuori la costante: $$\frac{m}{q}  
+\mathbb{E}\left[  
+\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)  
+\right]  
+$$
+Usando il risultato precedente: $$\frac{m}{q}\cdot \frac{q}{m} \cdot f(y)$$
+Quindi: $$\mathbb{E}[F(y)] = f(y)$$
+Questo conferma che `F(y)` è uno stimatore **unbiased**.
+
+
+##### Errore dello stimatore
+Vogliamo controllare la probabilità che la stima sia troppo lontana dal valore reale.
+
+Studiamo: $$\Pr[|F(y)-f(y)|>\varepsilon m]$$dove:
+- `ε` controlla l'errore massimo ammesso;
+
+Usando la definizione di `F(y)`: $F(y)=\frac{m}{q}\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)$, si può riscrivere:
+$$  
+\Pr[|F(y)-f(y)|>\varepsilon m]
+=
+\Pr\left[  
+\left|  
+\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)
+-
+\mathbb{E}\left[  
+\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)  
+\right]  
+\right|
+>
+\varepsilon q  
+\right]  
+$$
+
+Quindi il problema diventa controllare quanto la somma degli indicatori si allontana dal suo valore atteso.
+
+Per questo si usa il **Chernoff Bound**, da cui otteniamo: 
+$$  
+\Pr\left[  
+\left|  
+\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)
+-
+\mathbb{E}\left[  
+\sum_{k=1}^{q}\mathbf{1}(x_{j_k}=y)  
+\right]  
+\right|
+>
+\varepsilon q  
+\right]   
+$$
+$$
+\substack{\text{Per il}\\ \text{Chernoff Bound}}
+< 2\exp\left(-\frac{(\varepsilon q)^2}{2q}\right)
+= 2\exp\left(-\frac{\varepsilon^2 q}{2}\right)
+$$
+
+Vogliamo che questa probabilità sia $<$ `δ`.
+Quindi imponiamo: $$2\exp\left(-\frac{\varepsilon^2 q}{2}\right)<\delta$$Da questa condizione basta scegliere: $$q>\varepsilon^{-2}\log\left(\frac{2}{\delta}\right)$$
+Così la probabilità di errore è al massimo `δ`.
+
+
+>[!lemma] Teorema 
+Dati un errore di approssimazione `ε`; un parametro di confidenza `δ`; su uno stream di `m` elementi; e per ogni elemento qualunque `y`;
+>
+>l'algoritmo `S-ALG` restituisce uno stimatore unbiased `F(y)` tale che:
+>
+>$$  
+>|F(y)-f(y)|<\varepsilon m  
+>$$
+>
+>con probabilità almeno: $1-\delta$  
+>
+>La complessità in spazio e tempo è:
+>$$  
+>O\left(\varepsilon^{-2}\log\left(\frac{2}{\delta}\right)\right)  
+>$$
+>
+>perché l'algoritmo salva `q` campioni e $q>\varepsilon^{-2}\log\left(\frac{2}{\delta}\right)$
+
+###### Osservazione: errore a due lati
+Il Sampling Algorithm può sia sovrastimare sia sottostimare la frequenza reale. 
+Per questo si dice che è uno stimatore con **errore a due lati**.
+
+Il problema è che se un elemento `y` compare poche volte, può anche non comparire mai nel campione.
+In quel caso l'algoritmo potrebbe sottostimare molto la sua frequenza.
+
+Per migliorare questo aspetto si passa poi a tecniche come **Count-Min Sketch**.
+
+
+
+### 6.1.2 Algoritmo Count-Min Sketch
+Il **Count-Min Sketch** è un metodo per stimare le frequenze degli elementi in uno stream che usa meno spazio rispetto al sampling.
+
+A differenza del sampling ha anche un errore di tipo **one-sided**: può sovrastimare la frequenza reale, ma non la sottostima mai.
+
+#### Struttura dello sketch
+Il Count-Min Sketch usa una matrice `M` di contatori, inizializzata tutta a `0`: $$M \in \mathbb{N}^{t \times s}$$I parametri `t` e `s` controllano:
+- `s`: il numero di colonne, legato all'errore;
+- `t`: il numero di righe, legato alla probabilità di successo.
+
+A ogni riga `j` è associata una funzione hash universale: $$h_j:[n]\rightarrow[s] \ \ \ \  \ \ \text{per } j = 1, \dots, t$$
+
+Quindi ogni elemento `x` dello stream viene mandato, in ogni riga, in una posizione della matrice tramite $h_j(x)$.
+
+
+#### Inserimento di un elemento
+Quando arriva un elemento `x` nello stream, per ogni riga $j=1,\dots,t$ si aggiorna il contatore corrispondente: $$M(j,h_j(x))=M(j,h_j(x))+1$$
+Quindi l'elemento `x` viene contato in `t` celle diverse, una per ogni funzione hash.
+
+
+#### Stima della frequenza
+Per stimare la frequenza di un elemento `y`, guardiamo i contatori nelle posizioni in cui `y` viene mappato dalle varie funzioni hash.
+
+La stima è: $$\tilde{f}_y=\min{M(j,h_j(y)):j=1,\dots,t}$$Si prende il minimo perché ogni contatore può contenere non solo le occorrenze di `y`, ma anche quelle di altri elementi che sono finiti nella stessa cella per collisione.
+
+###### Perché non sottostima mai?
+Ogni volta che `y` appare nello stream, il contatore $M(j,h_j(y))$ viene incrementato in ogni riga.
+Quindi, per ogni `j`, vale: $$M(j,h_j(y))\geq f_y$$
+Di conseguenza anche il minimo tra questi valori non può essere minore di $f_y$: $$\tilde{f}_y\geq f_y$$
+Quindi Count-Min Sketch non dà mai una sottostima.
+L'errore può solo andare verso l'alto, perché nei contatori di `y` possono finire anche elementi diversi da `y`.
+
+#### Effetto delle collisioni
+Se un elemento `z` diverso da `y` finisce nella stessa cella di `y`, cioè: $$h_j(z)=h_j(y)$$
+allora il contatore `M(j,h_j(y))` contiene anche le occorrenze di `z`.
+
+In quel caso il contatore può diventare: $$M(j,h_j(y))=f_y+f_z$$
+Più in generale, il contatore contiene:
+- le occorrenze vere di `y`;
+- più le occorrenze degli elementi che collidono con `y`.
+
+Per questo lo stimatore può sovrastimare.
+
+#### Variabile indicatrice di collisione
+Per studiare l'errore, si definisce la variabile indicatrice: $$I(j,x,y)=  
+\begin{cases}  
+1 & \text{se } h_j(x)=h_j(y) \\  
+0 & \text{altrimenti}  
+\end{cases}$$
+Sia $S={x_1,\dots,x_m}$ l'insieme degli elementi distinti nello stream.
+Il valore del contatore di `y` nella riga `j` può essere visto come: $$M(j,h_j(y))=f_y+\sum_{x\in S,\ x\neq y} f_x I(j,x,y)$$
+- La prima parte è la frequenza reale di `y`.
+- La seconda parte è il rumore dovuto agli elementi diversi da `y` che collidono con `y`.
+###### Valore atteso del contatore $M(j,h_j(y))$
+$$\mathbb{E}[M(j,h_j(y))]=f_y+\mathbb{E}\left[\sum_{x\in S,\ x\neq y} f_x I(j,x,y)\right]$$
+Portando il valore atteso dentro la somma: $$\mathbb{E}[M(j,h_j(y))]=f_y+\sum_{x\in S,\ x\neq y} f_x\mathbb{E}[I(j,x,y)]$$Poiché $h_j$ è una funzione hash universale, la probabilità di collisione tra `x` e `y` è al massimo: $$\Pr[h_j(x)=h_j(y)]\leq\frac{1}{s}$$Quindi: $$\mathbb{E}[I(j,x,y)]\leq\frac{1}{s}$$
+Allora: $$\mathbb{E}[M(j,h_j(y))]\leq f_y+\sum_{x\in S,\ x\neq y} f_x\frac{1}{s}$$
+Poiché la somma delle frequenze di tutti gli elementi è `m`, vale: $$\sum_{x\in S} f_x=m$$Quindi: $$\sum_{x\in S,\ x\neq y} f_x\leq m$$
+Otteniamo: $$\mathbb{E}[M(j,h_j(y))]\leq f_y+\frac{m}{s}$$
+
+Quindi l'errore atteso del contatore rispetto a $f_y$ è al massimo: $$\mathbb{E}[M(j,h_j(y))-f_y]\leq\frac{m}{s}$$
+
+###### Uso della disuguaglianza di Markov
+Vogliamo limitare la probabilità che il contatore superi troppo la frequenza reale $f_y$.
+
+Dalla disuguaglianza di Markov: $$\Pr\left[M(j,h_j(y))-f_y\geq\frac{2m}{s}\right]\leq\frac{1}{2}$$
+
+Ora vogliamo che l'errore massimo sia `εm`, quindi imponiamo che $$\frac{2m}{s}=\varepsilon m \implies_{\text{da cui }} \ \ s = \frac{2}{\varepsilon}$$
+Quindi, scegliendo $s=\frac{2}{ε}$, per ogni riga `j` otteniamo: $$\Pr[M(j,h_j(y))\geq f_y+\varepsilon m]\leq\frac{1}{2}$$Questo significa che una singola riga può sbagliare con probabilità al massimo `1/2`.
+
+
+>[!question] Qual è la probabilità che lo stimatore $\tilde{f}_y>f_y+\varepsilon m$?
+> Per far sì che si verifichi, deve succedere che **tutte** le righe abbiano un contatore maggiore di $f_y+εm$.
+> - Se anche una sola riga ha un valore buono, il minimo prende quella riga e la stima resta buona.
+>
+>Poiché le funzioni hash $h_j$ sono scelte indipendentemente, la probabilità che tutte le `t` righe sbaglino è: $$\Pr[\tilde{f}_y>f_y+\varepsilon m]\leq\left(\frac{1}{2}\right)^t$$
+>Vogliamo che questa probabilità sia al massimo `δ`.
+Quindi imponiamo: $$\left(\frac{1}{2}\right)^t\leq\delta$$
+Risolvendo rispetto a `t`, basta scegliere: $$t=\left\lceil\log_2\left(\frac{1}{\delta}\right)\right\rceil$$
+
+Quindi scegliendo: $s=\frac{2}{\varepsilon}$ e $t=\left\lceil\log_2\left(\frac{1}{\delta}\right)\right\rceil$ lo stimatore soddisfa: $$f_y\leq\tilde{f}_y\leq f_y+\varepsilon m$$
+con probabilità almeno $1-\delta$.
+Quindi Count-Min Sketch fornisce una stima che non sottostima mai `f_y` e che, con alta probabilità, non la sovrastima di più di `εm`.
+
+#### Complessità
+###### SPAZIO
+La matrice ha `t` righe e `s` colonne, quindi lo spazio è: $$O(t\cdot s) \implies O\left(\frac{\log(1/\delta)}{\varepsilon}\right)$$
+- Sostituendo i valori di `t` e `s` trovati in precedenza
+###### TEMPO
+Il tempo di aggiornamento per ogni elemento è: $$O(t)=O(\log(1/\delta))$$perché per ogni elemento bisogna aggiornare un contatore in ciascuna delle `t` righe.
+
+
+
+## 6.2 Filtro delle stream
+Ora consideriamo il problema del **filtro su stream**.
+
+Ogni elemento dello stream è una tupla $x = <k_1, ..., k_l>$.
+In input abbiamo un insieme `S` di valori “buoni” per una certa chiave `k`.
+L'obiettivo è decidere se un nuovo elemento dello stream deve essere accettato oppure scartato, controllando se il valore della sua chiave appartiene a `S`.
+
+>[!example]- Esempio pratico per capire
+>- `x= <id_utente, IP, pagina_visitata, timestamp>`
+>- `k = 2` -> `x_k = x_2 = IP`
+>- `S = {IP autorizzati}`
+>Quindi quando arriva un nuovo elemento, prendiamo il suo IP e verifichiamo se appartiene a `S`.,
+
+Una soluzione banale sarebbe 
+- salvare tutto `S` in una tabella hash `T`.
+- poi per ogni elemento `x` si calcola il valore della chiave `k(x)` e si controlla se è presente in `T`.
+Il problema è che `S` può essere troppo grande per essere mantenuto interamente in memoria.
+
+### 6.2.1 Algoritmo First-Cut
+- Sia `U` l'insieme di tutti i possibili valori per la chiave `k`.
+- Sia `S` l'insieme dei valori “buoni” della chiave `k`.
+
+L'algoritmo lavora in due fasi:
+1. costruzione del filtro;
+2. controllo degli elementi dello stream.
+
+#### Fase 1: costruzione del filtro
+Creiamo un array di bit `B[1,n]` di lunghezza `n` (che scegliamo noi), inizializzato tutto a `0`.
+- Scegliamo una funzione hash: $h:U\rightarrow[n]$
+- Per ogni elemento `s ∈ S`, calcoliamo il suo hash `h(s)`.
+- Poi impostiamo a `1` la posizione corrispondente nell'array: $B[h(s)] = 1$
+	- Quindi `B` diventa una rappresentazione compatta dell'insieme `S`.
+Non salviamo direttamente tutti gli elementi di `S`, ma solo le posizioni in cui finiscono tramite hash.
+
+#### Fase 2: controllo di un elemento dello stream
+Sia $x = <x_1, ..., x_l>$ un nuovo elemento dello stream.
+- Calcoliamo il valore della chiave scelta, cioè $x_k$.
+- Poi calcoliamo: $h(x_k)$
+- A questo punto controlliamo il bit corrispondente:
+	- se $B[h(x_k)] = 1$, allora l'elemento `x` viene accettato;
+	- se $B[h(x_k)] = 0$, allora l'elemento `x` viene scartato.
+
+
+##### One-sided error: Falsi positivi e falsi negativi
+Questo metodo può produrre **falsi positivi**, ma non produce mai **falsi negativi**.
+
+*NESSUN FALSO NEGATIVO*
+- Se un elemento ha chiave $x_k ∈ S$, allora durante la fase di costruzione abbiamo sicuramente impostato: $B[h(x_k)] = 1$
+	- Quindi quando l'elemento arriva nello stream, viene accettato.
+- In altre parole: se un elemento è davvero buono, il filtro non lo scarta.
+
+*POSSIBILI FALSI POSITIVI*
+- Un falso positivo avviene quando $x_k ∉ S$, ma collide con un elemento buono `s ∈ S`, cioè $$h(x_k)=h(s)$$
+	- In questo caso $B[h(x_k)] = 1$ e il filtro accetta `x` per errore.
+
+>[!tip] Quindi l'errore è **one-sided**: non ci sono falsi negativi ma possono esserci falsi positivi.
+
+###### Analisi dei falsi positivi
+Vogliamo stimare la probabilità di falso positivo.
+- Sia `|S| = m`, cioè ci sono `m` valori buoni.
+- Sia `|B| = n`, cioè l'array ha `n` bucket.
+
+Per qualche elemento $u \in U$ la probabilità di finire in una posizione di B già inizializzata a `1` è esattamente la frazione di `ERR` di *bucket* in `B`.
+
+Per stimare `ERR` usiamo l'esperimento *balls into bins*.
+- I bucket sono le posizioni dell'array `B`, quindi `0, ..., n-1`.
+- Le palline sono gli elementi di `S`.
+- Ogni elemento `s ∈ S` viene mandato nel bucket `h(s)`.
+Ogni pallina finisce in un bucket con probabilità `1/n`.
+
+Vogliamo sapere qual è la probabilità che un bucket riceva almeno una pallina.
+Fissiamo un bucket e otteniamo
+La probabilità che una singola pallina non finisca in quel bucket è: $$
+\Pr[ERR]
+=
+1-
+\underbrace{
+\left(
+\underbrace{1-\frac{1}{n}}_{\substack{\text{una pallina non finisce}\\ \text{nel bucket fissato}}}
+\right)^m
+}_{\substack{\text{nessuna delle } m \text{ palline}\\ \text{finisce nel bucket fissato}}}
+\approx
+\underbrace{1-e^{-m/n}}_{\text{approssimazione esponenziale}}
+$$
+###### Caso `m` molto più piccolo di `n`
+Se $m \ll n$, allora si può usare l'approssimazione: $$1-e^{-m/n}\approx \frac{m}{n}$$
+Quindi, quando l'array `B` è molto più grande dell'insieme `S`, la probabilità di falso positivo è circa: $$\frac{m}{n}$$
+
+
+### 6.2.2 Filtri di Bloom
+Il **Filtro di Bloom** è un miglioramento del First-Cut, in cui vengono utilizzare `k` funzioni hash indipendenti: $$h_1, h_2, ..., h_k$$
+L'idea è ridurre la probabilità di falsi positivi usando più posizioni dell'array `B`.
+
+#### Setup
+- Sia `S` l'insieme dei valori buoni, con `|S| = m`.
+- Sia `B` un array di bit, con `|B| = n`.
+	- Quindi `B` ha `n` bucket.
+- Ogni funzione hash manda un elemento in una posizione dell'array `B`.
+
+#### Fase di inizializzazione
+All'inizio l'array `B` viene inizializzato tutto a `0`: `B = [0, ..., 0]`
+
+Poi, per ogni elemento `s ∈ S`, si calcolano tutte le `k` funzioni hash: $$h_1(s), h_2(s), ..., h_k(s)$$
+Per ogni valore ottenuto, si imposta a `1` la posizione corrispondente:
+$$  
+B[h_i(s)] = 1 \ \ \ \  \text{per ogni } i = 1, \dots, k
+$$
+
+
+#### Fase di controllo
+Quando arriva un nuovo elemento dello stream con chiave `x`, calcoliamo: $$h_1(x), h_2(x), ..., h_k(x)$$
+Poi controlliamo i bit corrispondenti.
+L'elemento `x` viene accettato se ***tutte le posizioni sono uguali a `1`***:
+$$  
+B[h_i(x)] = 1 \quad \text{per ogni } i=1,\dots,k  
+$$
+Se anche una sola posizione vale `0`, allora `x` viene scartato.
+
+>[!tip] N.B.: anche il Bloom Filter può avere falsi positivi (ma mai falsi negativi).
+
+###### Analisi del numero di bit a `1`
+Durante l'inizializzazione, ogni elemento `s ∈ S` viene inserito usando `k` funzioni hash.
+Dato che `|S| = m`, il numero totale di tentativi di inserimento è: $k · m$
+Questi `k · m` tentativi vengono distribuiti su `n` bucket.
+
+Usando l'analisi balls into bins, la frazione di bucket impostati a `1` è circa:
+$$  
+1-e^{-\frac{k m}{n}} \approx \underbrace{\frac{km}{n}}_{\text{con } k \cdot m \ll n}
+$$
+
+###### Probabilità di falso positivo
+Un elemento `x ∉ S` viene accettato solo se tutte le sue `k` posizioni hash sono già a `1`.
+La probabilità che una singola posizione sia a `1` è circa: $1-e^{-\frac{k m}{n}}$
+Poiché le `k` funzioni hash sono indipendenti, la probabilità che tutte le `k` posizioni siano a `1` è:
+$$  
+\mathbb{Pr}[\text{falso positivo}] =  \left(1-e^{-\frac{k m}{n}}\right)^k  
+$$
+
+È necessario determinate un valore di `k` ottimale, in cui la funzione è minima
+Dall'analisi matematica si ottiene $$k=\frac{n}{m}\log(2)$$
+
+
+
+## 6.3 Conteggio degli elementi distinti
+Il problema consiste nello stimare quanti elementi distinti sono comparsi finora in uno stream.
+- Gli elementi dello stream sono scelti da un universo `U` di dimensione `N`.
+- Indichiamo con `d` il numero reale di elementi distinti visti nello stream.
+
+Una soluzione banale sarebbe mantenere una tabella hash con tutti gli elementi già visti.
+Quando arriva un nuovo elemento, controlliamo se è già presente e eventualmente incrementiamo il contatore.
+Il problema è che questa soluzione può richiedere troppo spazio, perché nel caso peggiore bisogna memorizzare tutti gli elementi distinti.
+
+Per usare meno memoria si usa l’algoritmo di **Flajolet-Martin**.
+
+### Idea dell’algoritmo Flajolet-Martin
+L’algoritmo sceglie una funzione hash `h` che mappa ogni elemento dell’universo in una stringa binaria.
+
+La funzione hash è: $$h:[N]\rightarrow\{0,1\}^{s} \qquad \text{con } s\geq \log_2(N)$$
+- Per ogni elemento `a` dello stream, calcoliamo `h(a)`.
+- Poi guardiamo la posizione del primo `1` contando da destra.
+	- Indichiamo questa quantità con `r(a)`.
+
+Esempio intuitivo:
+- se `h(a)` termina con `1`, allora `r(a)=0`;
+- se `h(a)` termina con `10`, allora `r(a)=1`;
+- se `h(a)` termina con `100`, allora `r(a)=2`.
+In pratica `r(a)` misura quanti zeri finali ci sono prima del primo `1`.
+
+#### Sketch mantenuto
+L’algoritmo non salva tutti gli elementi distinti ma mantiene solo il massimo valore di `r(a)` visto finora. 
+Lo sketch è: $$R=\max\{r(a)\}$$dove il massimo è preso su tutti gli elementi distinti visti nello stream.
+
+Alla fine, il numero di elementi distinti viene stimato con: $2^R$
+- L’idea è che vedere un valore grande di `r(a)` è raro; quindi se nello stream compare un hash con molti zeri finali, probabilmente abbiamo visto molti elementi distinti.
+
+###### Perché le ripetizioni non cambiano lo sketch
+Una proprietà utile è che le occorrenze ripetute dello stesso elemento non modificano la stima.
+
+Se lo stesso elemento `a` appare più volte, il valore `h(a)` è sempre lo stesso.
+- Quindi anche `r(a)` è sempre lo stesso.
+Di conseguenza, ripetere un elemento già visto non cambia `R`.
+
+Questo è coerente con il problema: vogliamo contare gli elementi distinti, non il numero totale di occorrenze.
+
+>[!tip] Combinazione di sketch
+Lo sketch `R` è facile da combinare.
+Se abbiamo più stream separati, con sketch `R_1, R_2, ..., R_k`, lo sketch dello stream unito si ottiene prendendo il massimo: $$R=\max(R_1,R_2,\dots,R_k)$$
+Questo funziona perché `R` rappresenta il massimo valore di `r(a)` visto.
+Unendo più stream, basta tenere il massimo tra i massimi.
+
+
+#### Probabilità legata a `r(a)`
+Assumiamo che `h` si comporti come una funzione hash casuale.
+Per un elemento `a`, la probabilità che `r(a)` sia almeno `r` è: $$\Pr[r(a)\geq r]=\left(\frac{1}{2}\right)^r$$
+Questo perché avere `r(a) ≥ r` significa che l’hash termina con almeno `r` zeri.
+- Ogni bit ha probabilità `1/2`, quindi avere `r` zeri finali ha probabilità $1/2^r$.
+
+#### Variabile casuale `X_r`
+Definiamo la variabile casuale $X_r$ così: $$X_r=  
+\begin{cases}  
+1 & \text{se esiste un elemento } a \text{ tale che } r(a)\geq r \\  
+0 & \text{altrimenti}  
+\end{cases}$$Quindi $X_r = 1$ significa che almeno un elemento distinto ha prodotto un hash con almeno `r` zeri finali.
+
+Se `d` è il vero numero di elementi distinti visti, allora: $$\Pr[X_r=1]=1-\left(1-\frac{1}{2^r}\right)^d$$
+Infatti:
+- $1/2^r$ è la probabilità che un singolo elemento abbia `r(a) ≥ r`;
+- $1 - 1/2^r$ è la probabilità che un singolo elemento non abbia `r(a) ≥ r`;
+- elevando a `d`, otteniamo la probabilità che nessuno dei `d` elementi distinti abbia `r(a) ≥ r`;
+- facendo `1 - ...`, otteniamo la probabilità che almeno uno lo abbia.
+
+Quindi vale anche: $$\Pr[X_r=0]=\left(1-\frac{1}{2^r}\right)^d$$
+#### Errori
+##### Errore verso l’alto
+Come abbiamo visto prima, la stima restituita è $2^R$.
+La stima è troppo grande se: $$2^{R}>2^{c} \cdot d \ \ \implies \ R >  \log(d) + c$$Quindi: $$\Pr[2^R>2^c d]=\Pr[R>\log d+c]$$
+- Se `R > log(d) + c`, allora esiste almeno un elemento con `r(a) ≥ log(d) + c`.
+
+Quindi: $$\Pr[R>\log d+c]=\Pr[X_{\log d+c}=1]$$Usando un bound semplice: $$\Pr[X_{\log d+c}=1]\leq \frac{d}{2^{\log d+c}}=2^{-c}$$
+Quindi: $$\Pr[2^R>2^c d]\leq 2^{-c}$$Questo dice che la probabilità di sovrastimare troppo diminuisce esponenzialmente in `c`.
+
+##### Errore verso il basso
+La stima è troppo piccola se `R` è molto più piccolo di `log(d)`.
+In modo intuitivo, questo succede se nessuno dei `d` elementi distinti produce un hash con abbastanza zeri finali.
+
+Il bound usato nell’analisi è di tipo esponenziale: $$\Pr[m < 2^{c} \cdot d] = Pr[X_{\log(d) + c}] \  \leq e^{-2^{c-1}}$$Quindi anche la probabilità di sottostima forte diminuisce rapidamente al crescere di `c`.
+
+>[!example] Per `c = 2`, si ottiene una approssimazione costante con probabilità almeno `2/3`.
+
+#### Spazio occupato
+L’algoritmo deve memorizzare solo il valore `R`.
+Dato che `R` è al massimo dell’ordine di $log_2(N)$, servono pochi bit (ordine logaritmico) per salvarlo.
+Lo spazio occupato è: $$O(\log\log d)$$
+
+>[!danger] Problema del valore atteso
+Un problema dell’algoritmo base è che $\mathbb{E}[2^{R}]$ è potenzialmente infinito.
+La probabilità si dimezza passando da `R` a `R+1`, ma il valore della stima raddoppia.
+Per questo si usano più funzioni hash indipendenti, ognuna che produce uno sketch diverso: `R_1, R_2, ..., R_k`.
+Poi gli sketch vengono combinati in modo più stabile.
+Una tecnica è:
+>1. dividere gli sketch in piccoli gruppi;
+>2. calcolare la mediana in ogni gruppo;
+>3. calcolare la media delle mediane ottenute.
+>Questo serve a ridurre la varianza e rendere la stima più affidabile.
+
+
+
+### 6.4 Calcolo dei momenti
+Sia `I` uno stream composto da elementi scelti da un insieme `A`.
+Indichiamo con `N` la dimensione dell’insieme `A`: `|A| = N`.
+Per ogni elemento `i ∈ A`, indichiamo con $m_i$ il numero di volte in cui `i` appare nello stream `I`.
+
+Il **momento k-esimo** dello stream è definito come: $$\sum_{i\in A} m_i^k$$
+- **MOMENTO `0`**: corrisponde al numero di elementi distinti nello stream.
+	- Infatti, considerando $m_{i}^{0}$, ogni elemento che appare almeno una volta contribuisce con `1`.
+	
+- **MOMENTO `1`**: corrisponde alla cardinalità dello stream, cioè alla sua lunghezza totale.
+	- Infatti: $$\sum_{i\in A} m_i = |I|$$sono incluse anche le ripetizioni
+	
+- **MOMENTO `2`**, chiamato **surprise number**.
+	- È definito come: $$S=\sum_{i\in A} m_i^2$$
+	- Questo valore misura quanto la distribuzione degli elementi nello stream è sbilanciata.
+		- Se gli elementi hanno frequenze simili, il valore di `S` è più basso.
+		- Se invece pochi elementi compaiono moltissime volte, il valore di `S` diventa più alto.
+
+#### Metodo AMS
+Per stimare i momenti su stream si usa il metodo **AMS**, il quale funziona per tutti i momenti e fornisce una stima **unbiased**.
+
+Ci concentriamo sul secondo momento, cioè sul surprise number: $$S=\sum_{i\in A}m_i^2$$
+L’algoritmo prende e aggiorna un campione di variabili casuali indipendenti: $X_1, X_2, ..., X_k$
+Per ogni variabile `X`, vengono mantenuti due valori:
+- `X.el` -> indica un elemento `i` dello stream.
+	- Più precisamente, sarà l’elemento che compare in una certa posizione casuale dello stream.
+- `X.val` -> indica il conteggio delle occorrenze future di quell’elemento.
+	- ossia dalla posizione scelta fino alla fine dello stream.
+
+>[!tip] Come impostare `X.el` e `X.val`
+Consideriamo uno stream `I` di lunghezza `L`.
+>
+>***`X.el`***: L’algoritmo sceglie un timestamp casuale `t`, uniformemente in `[1,L]` e poi guarda l’elemento dello stream in quella posizione. $$\text{Se } \ i=I[t] \implies X.el = i$$
+>
+>***`X.val`***: Indichiamo con `c` il numero di occorrenze dell’elemento `i` nella sotto-stream che parte da `t` e arriva fino alla fine.
+Quindi `c` conta quante volte `i` appare in $I[t], I[t+1], ..., I[L]$ e si imposta: $$X.val=c$$
+
+###### Stima del secondo momento
+Per una singola variabile casuale `X`, l’algoritmo restituisce la stima: $$f(X)=L\cdot(2c-1)$$
+dove:
+- `L` è la lunghezza dello stream;
+- `c = X.val`;
+
+###### Uso di più variabili casuali
+In pratica l’algoritmo non usa una sola variabile `X`, ma più variabili: $$X_1, X_2, ..., X_k$$Ognuna produce una stima $f(X_j)$.
+
+La stima finale è la media delle stime ottenute: $$S=\frac{1}{k}\sum_{j=1}^{k}f(X_j)$$e in questo modo la stima è più stabile.
+
+### Analisi del metodo AMS
+Consideriamo una variabile casuale `X` definita come nell’algoritmo AMS.
+
+Abbiamo:
+- `t`: timestamp scelto uniformemente a caso nello stream;
+- `i`: elemento scelto, cioè `i = I[t]`;
+- `c`: numero di occorrenze di `i` nella sotto-stream `I[t,...,L]`;
+- `L`: lunghezza dello stream.
+
+La stima prodotta da una singola variabile `X` è: $$f(X)=L(2c-1)$$Vogliamo mostrare che questa stima è **unbiased**, cioè che il suo valore atteso coincide con il secondo momento.
+
+#### Valore atteso della stima
+Poiché il timestamp `t` viene scelto uniformemente tra le `L` posizioni dello stream, ogni posizione ha probabilità `1/L` di essere scelta.
+
+Quindi: $$\mathbb{E}[L(2c-1)] = \sum_{i=1}^{L} L(2c(i)-1)\frac{1}{L}$$
+Semplificando `L` con `1/L`, otteniamo: $$\mathbb{E}[L(2c-1)] = \sum_{i=1}^{L}(2c(i)-1)$$
+
+Ora dobbiamo capire quanto vale questa somma.
+Fissiamo un elemento `a ∈ A` e supponiamo che `a` compaia $m_a$ volte nello stream.
+Indichiamo le sue posizioni con: $j_1, j_2, ..., j_{m_a}$
+1. Se scegliamo il timestamp nella prima occorrenza di `a`, allora da lì fino alla fine vediamo ancora tutte le $m_a$ occorrenze di `a`. Quindi: $$c(j_1)=m_a$$
+2. Se scegliamo il timestamp nella seconda occorrenza di `a`, allora da lì fino alla fine vediamo `m_a-1` occorrenze. Quindi: $$c(j_2)=m_a-1$$
+3. Continuando così arriviamo a: $$c(j_{m_a})=1$$
+Il contributo dell’elemento `a` alla somma è: $$\sum_{z=1}^{m_a}(2z-1)$$
+Questa è la somma dei primi $m_a$ numeri dispari.
+Andando per livelli abbiamo
+- $\sum_{z=1}^{n}(z) = \frac{n(n+1)}{2}$
+- $\sum_{z=1}^{n}(2z) = {n(n+1)}$
+- $\sum_{z=1}^{n}(2z-1) = n^{2} + n - n = n^{2}$
+
+Allora: $$\sum_{z=1}^{m_a}(2z-1)=m_a^2$$
+Quindi ogni elemento `a` contribuisce con il quadrato della sua frequenza.
+
+Quindi $$\mathbb{E}[L(2c-1)] \ = \ \sum_{t=1}^{L}(2c(t)-1) \ = \ \sum_{a\in A}m_{a^{2}} \ = \ S$$Perciò $$\mathbb{E}[f(X)] = S$$
+###### Momenti di ordine maggiore
+Il metodo AMS può essere generalizzato anche a momenti di ordine maggiore.
+- Per il terzo momento, la stima usa una forma del tipo: $$L(3c^2-3c+1)$$
+L’idea generale è che, scegliendo un timestamp casuale e contando le occorrenze future `c`, si costruisce una funzione di `c` il cui valore atteso restituisce il momento desiderato.
+- Per il momento di ordine `k`, la stima ha forma generale collegata a: $$c^k-(c-1)^k$$
+
+---
+
+## Clustering e Community Detection
+Il **clustering** ha l’obiettivo di dividere un insieme di oggetti in gruppi, detti **cluster**, in modo che gli oggetti nello stesso gruppo siano simili tra loro.
+
+### Definizione del problema di clustering
+Abbiamo un insieme `U` di `n` oggetti: $p_1, p_2, ..., p_n$
+Per ogni coppia di oggetti $p_i, p_j$ è definita una funzione distanza: $$distance(p_i, p_j)$$Questa distanza misura quanto due oggetti sono diversi.
+
+Proprietà della funzione distanza
+![[Pasted image 20260628184838.png]]
+
+
+Una soluzione possibile è una **k-partizione** di `U`, cioè una divisione di `U` in `k` cluster, la quale deve rispettare due proprietà:
+- i cluster non si sovrappongono;
+- l’unione di tutti i cluster restituisce l’intero insieme `U`.
+
+>[!tip] Spesso però il valore di `k` non è noto in anticipo e viene scelto in modo empirico.
+
+### Spacing tra cluster
+Dato un clustering, lo **spacing** tra due cluster è la *distanza minima tra una coppia di punti appartenenti ai due cluster*.
+
+L’obiettivo è ottenere cluster ben separati, per questo vogliamo ***massimizzare il minimo spacing tra cluster***.
+
+### Formulazione come problema di ottimizzazione
+Un problema di ottimizzazione è definito da:
+- insieme delle istanze;
+- insieme delle soluzioni ammissibili;
+- costo di una soluzione;
+- obiettivo: massimizzare o minimizzare il costo.
+
+Nel nostro caso:
+- l’istanza è data dagli oggetti, dalla funzione distanza e dal valore `k`;
+- le soluzioni ammissibili sono tutte le possibili k-partizioni;
+	- è molto grande, serve un algoritmo efficiente
+- il costo è il minimo spacing tra coppie di cluster;
+- l’obiettivo è massimizzare questo minimo spacing.
+
+### Trasformazione in grafo completo pesato
+Il problema può essere visto come un problema su grafi.
+Costruiamo un grafo completo pesato:
+- ogni oggetto diventa un nodo;
+- ogni coppia di nodi è collegata da un arco;
+- il peso dell’arco è la distanza tra i due oggetti.
+
+#### Algoritmo basato su MST
+Un modo per risolvere il problema è usare il **Minimum Spanning Tree**.
+
+L’idea è:
+1. costruire il grafo completo pesato;
+2. calcolare un MST del grafo (albero che tocca tutti i nodi la cui somma degli archi è minima);
+3. ordinare gli archi dell’MST in ordine decrescente di peso;
+4. rimuovere i `k-1` archi più pesanti;
+5. le componenti connesse rimanenti sono i `k` cluster.
+###### Intuizione sulla correttezza
+Il teorema afferma che la k-partition ottenuta rimuovendo i `k-1` archi più pesanti dell’MST è un clustering di spacing massimo.
+- L’intuizione è che, se esistesse un clustering migliore, dovrebbe separare due punti che nell’MST sono collegati da archi più leggeri rispetto a quelli rimossi.
+	- Ma questo produrrebbe uno spacing minore, quindi non sarebbe migliore.
+
+
+## Community Detection
+Nella **community detection** non sempre abbiamo una metrica precisa tra gli oggetti.
+Inoltre, un nodo può anche appartenere a più comunità.
+
+Quindi il problema è più flessibile rispetto al clustering classico.
+L’obiettivo è trovare gruppi di nodi che rappresentano comunità nella rete.
+
+
+Nelle reti sociali, un concetto importante è la **edge betweenness**.
+- La betweenness di un arco misura quanto quell’arco è importante per collegare parti diverse della rete.
+	- È definita come il numero di cammini minimi che passano su quell’arco.
+
+Un arco con alta betweenness spesso collega due comunità diverse.
+- Quindi rimuovere archi con alta betweenness può aiutare a separare le comunità.
+
+### Algoritmo di Girvan-Newman
+L’algoritmo di **Girvan-Newman** usa la edge betweenness per trovare comunità.
+
+Funziona così:
+1. calcola la edge betweenness di ogni arco;
+2. elimina l’arco con betweenness maggiore;
+3. ricalcola la edge betweenness nel grafo modificato;
+4. elimina di nuovo l’arco con valore massimo;
+5. ripete il processo.
+
+Ogni rimozione può separare il grafo in componenti più piccole.
+
+Il risultato può essere rappresentato come una struttura gerarchica, cioè un albero di cluster a diversi livelli.
+![[Pasted image 20260628184902.png]]

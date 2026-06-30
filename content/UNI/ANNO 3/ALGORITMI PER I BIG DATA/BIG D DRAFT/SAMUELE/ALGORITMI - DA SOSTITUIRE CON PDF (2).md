@@ -265,9 +265,7 @@ Quindi $$Pr(E_{3}) \le \frac 1 2 n^{-1/4}$$
 ---
 
 # Cont Resolution Andy
-## Load Balancing
-*Riferimento: PDF pag. 19 + Slide 14-17*
-
+## Load Balancing ^210441
 **Problema:** Un sistema in cui `m` job arrivano in uno stream e necessitano di essere processati su `n` processori identici. Vogliamo trovare un'assegnazione che bilanci il lavoro dei processori in modo equo. 
 * **Caso Deterministico:** Round-Robin (carico max $\lceil m/n \rceil$). Richiede un controller centrale.
 	* il R.R. prevede che tutti i job siano già conosciuti (in un caso di big data è impossibile)
@@ -301,12 +299,9 @@ Scegliamo come soglia di carico $c = e \cdot \gamma(n)$.
 **Sviluppo matematico della probabilità di errore:**
 1.  $\Pr[X_i > c] < \frac{e^{c-1}}{c^c}$
 2.  Notiamo che $e^{c-1} < e^c$, quindi: $\Pr[X_i > c] < \left( \frac{e}{c} \right)^c$
-3.  Sostituendo $c = e \cdot \gamma(n)$:
-    $$\left( \frac{e}{e \cdot \gamma(n)} \right)^{e \cdot \gamma(n)} = \left( \frac{1}{\gamma(n)} \right)^{e \cdot \gamma(n)}$$
-4.  Poiché $e \approx 2.718 > 2$, possiamo scrivere:
-    $$\left( \frac{1}{\gamma(n)} \right)^{e \cdot \gamma(n)} < \left( \frac{1}{\gamma(n)} \right)^{2\gamma(n)} = \left( \frac{1}{\gamma(n)^{\gamma(n)}} \right)^2$$
-5.  Dalla definizione $\gamma(n)^{\gamma(n)} = n$, otteniamo:
-    $$\Pr[X_i > c] < \left( \frac{1}{n} \right)^2 = \frac{1}{n^2}$$
+3.  Sostituendo $c = e \cdot \gamma(n)$: $$\left( \frac{e}{e \cdot \gamma(n)} \right)^{e \cdot \gamma(n)} = \left( \frac{1}{\gamma(n)} \right)^{e \cdot \gamma(n)}$$
+4.  Poiché $e \approx 2.718 > 2$, possiamo scrivere: $$\left( \frac{1}{\gamma(n)} \right)^{e \cdot \gamma(n)} < \left( \frac{1}{\gamma(n)} \right)^{2\gamma(n)} = \left( \frac{1}{\gamma(n)^{\gamma(n)}} \right)^2$$
+5.  Dalla definizione $\gamma(n)^{\gamma(n)} = n$, otteniamo: $$\Pr[X_i > c] < \left( \frac{1}{n} \right)^2 = \frac{1}{n^2}$$
 
 
 #### Scenario A: $m = n$ (Stesso numero di job e processori)
@@ -314,22 +309,12 @@ Usando Chernoff e scegliendo opportunamente i parametri, si dimostra che con alt
 $$e \cdot \gamma(n) = \Theta\left(\frac{\log n}{\log \log n}\right) \text{ jobs.}$$
 
 
-
-
-
----
-
 ### Analisi Dettagliata: Load Balancing ($m=n$)
-
 L'obiettivo è dimostrare quanto è "equo" il bilanciamento casuale dei job quando abbiamo $n$ job e $n$ processori.
 
-#### 1. Definizione delle Variabili
-
-
-#### 2. Osservazioni Fondamentali (Note in Rosso/Blu)
 È essenziale distinguere tra la dipendenza dei processori e l'indipendenza dei job:
-*   **Correlazione tra processori ($X_i$):** Le variabili $X_i$ sono **correlate**. Se un processore riceve tutti gli $n$ job, gli altri ne avranno necessariamente 0.
-*   **Indipendenza dei job ($Y_{ij}$):** Per un **singolo processore $i$ fissato**, le variabili $Y_{i,1}, Y_{i,2}, \dots, Y_{i,n}$ sono **indipendenti**. Infatti, la scelta di dove finisce il job 1 non influenza minimamente la scelta del job 2. Questa indipendenza ci permette di usare i **Chernoff Bounds**.
+* **Correlazione tra processori ($X_i$):** Le variabili $X_i$ sono **correlate**. Se un processore riceve tutti gli $n$ job, gli altri ne avranno necessariamente 0.
+* **Indipendenza dei job ($Y_{ij}$):** Per un **singolo processore $i$ fissato**, le variabili $Y_{i,1}, Y_{i,2}, \dots, Y_{i,n}$ sono **indipendenti**. Infatti, la scelta di dove finisce il job 1 non influenza minimamente la scelta del job 2. Questa indipendenza ci permette di usare i **Chernoff Bounds**.
 
 #### 3. Valore Atteso e Parametri
 *   La probabilità che un job finisca su un determinato processore è $P[Y_{ij}=1] = 1/n$.
@@ -396,8 +381,6 @@ Costo:
 ### L'Algoritmo "Doc-Pair Check" e il Parametro $t$
 
 ^05ddb5
-
-L'algoritmo descrive come un computer calcola effettivamente la somiglianza tra due documenti ($C_1, C_2$). 
 ![[Pasted image 20260504165737.png]]
 * **Il parametro $t$:** È il numero di permutazioni che scegliamo (es. 100 o 500). Viene chiamato "parametro di confidenza" perché più è alto, più la nostra stima sarà precisa.
 * **Il calcolo:** L'algoritmo non fa altro che contare quante volte $h_{\pi_j}(C_1)$ è uguale a $h_{\pi_j}(C_2)$ e dividere il risultato per $t$. 
