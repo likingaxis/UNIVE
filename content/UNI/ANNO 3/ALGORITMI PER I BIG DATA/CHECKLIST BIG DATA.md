@@ -21,17 +21,17 @@
 - [x] Doubling/Halving Technique
 ### Document Similarity
 - [x] Shingling
-- [ ] **Min hashing**
-	- [ ] Doc-Pair Check
-	- [ ] Calcolo della matrice delle firme
-- [ ] Local Sensitive Hashing
+- [x] **Min hashing**
+	- [x] Doc-Pair Check
+	- [x] Calcolo della matrice delle firme
+- [x] Local Sensitive Hashing
 ### Data Stream
-- [ ] **Pattern Matching**
-	- [ ] Karp Rabin
+- [x] **Pattern Matching**
+	- [x] Karp Rabin
 - [ ] **Sampling dello stream**
 	- [ ] A porzione fissa
-		- [ ] Algoritmo banale
-		- [ ] User sample algorithm   *AAAAAAAA*
+		- [x] Algoritmo banale
+		- [x] User sample algorithm 
 	- [ ] A dimensione fissa
 		- [ ] Reservoir sampling
 - [ ] **Sliding window**
