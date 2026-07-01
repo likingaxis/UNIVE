@@ -68,6 +68,7 @@ L'obiettivo è mostrare che questo rumore non è troppo grande con buona probabi
 quindi
 $$\mathbb{E}[M(j,h_j(y))]=f(y)+\mathbb{E}[\sum_{x \in S, x \neq y}f(x)\ 1(j,x,y)]=f(y)+\sum_{x \in S, x \neq y} f(x) \mathbb{E}[1(j,x,y)]$$
 - al secondo passaggio si applica linearità del valore atteso dove la somma di una expectation è la sommatoria delle expectation
+gli altri termini sono considerati **costanti** rispetto alla scelta casuale della funzione hash $h_j$
 $h_j$ è una funzione hash universale su una tabella di $s$ slot e $1(j,x,y)$ è una variabile indicatrice
 
 $$\mathbb{E}[1(j,x,y)]=Pr[h_j(x)=h_j(y)] \le \frac{1}{s}$$
@@ -90,10 +91,11 @@ applichiamo la Markov inequality per avere un bound sulla probabilità
 $$Pr[M(j,h_j(y)) \ge f(y) +\epsilon \ m]$$
 possiamo definire quindi una variabile aleatoria che indica l'errore totale 
 $$X=\sum_{x\in S, \ x\neq y}f(x)1(j,x,y)$$
-definita come $M-f(y)$
+definita come $X=M-f(y)$
+
 ma sappiamo già che 
 $$\mathbb{E}[X] \leq \frac{m}{s}$$
-
+Vogliamo stimare quando la probabilità dell'errore superi 2 volte m/s
 $$Pr[M(j,h_j(y))- f(y) \ge \frac{2m}{s}]$$
 ovvero per Markov
 Qual è la probabilità che l’errore sia almeno il doppio di questo valore atteso massimo?
@@ -108,19 +110,23 @@ $\epsilon m$ quindi $\frac{2m}{s}=\epsilon m$ poniamo $s=\frac{2}{\epsilon}$
 e abbiamo che
 per ogni $\epsilon >0$ $Pr[M(j,h_j(y)) \ge f(y) +\epsilon \ m] \leq \frac{1}{2}$ 
 
-rapportandolo per ogni riga abbiamo
-
+rapportandolo per ogni riga abbiamo 
+$$F(y)=min\{M(j,h_j(y):j=1,...,t\}$$
 $$Pr[F(y)\ge f(y)+\varepsilon m]\le \left(\frac{1}{2}\right)^t$$
 perché $F(y)$ è il minimo e quindi supera la soglia solo se tutte le righe la superano
 e oltretutto le funzioni hash delle righe sono indipendenti, gli eventi “la riga $j$ è cattiva” sono indipendenti, quindi le probabilità si moltiplicano
 ###### Costi computazionali
 definendo una probabilità di errore che possiamo sopportare come $\delta$ 
-la probabilità che l'algoritmo non fallisca quindi deve essere $\geq 1-\delta$
-abbiamo che per soddisfare la probabilità di errore dobbiamo avere
 
+la probabilità che l'algoritmo abbia successo deve essere $\geq 1-\delta$
+
+abbiamo che per soddisfare la probabilità di errore dobbiamo avere
 $(\frac{1}{2})^t \leq \delta$
 perciò $t \geq log_2(\frac{1}{\delta})$
 $s=\frac{2}{\epsilon}$
+
+quindi probabilità che ci sia una sovrastima tollerabile è
+$$Pr[F(y)\leq f(y)+\varepsilon m]\geq 1-\delta$$
 
 *COSTO SPAZIALE*
 la memoria occupata dalla matrice è  $O(t \cdot s)$ 
