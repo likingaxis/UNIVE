@@ -40,7 +40,7 @@
 		- [x] DGIM
 ### Algoritmi sulle stream
 - [ ] **Stima sulle frequenze**
-	- [ ] Sampling
+	- [x] Sampling
 	- [ ] Count Min-Sketch
 ### Filtri sulle stream
 - [ ] First Cut
