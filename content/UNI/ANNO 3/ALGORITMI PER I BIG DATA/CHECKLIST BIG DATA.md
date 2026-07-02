@@ -39,15 +39,15 @@
 		- [x] Exp buckets
 		- [x] DGIM
 ### Algoritmi sulle stream
-- [ ] **Stima sulle frequenze**
+- [x] **Stima sulle frequenze**
 	- [x] Sampling
-	- [ ] Count Min-Sketch
+	- [x] Count Min-Sketch
 ### Filtri sulle stream
-- [ ] First Cut
-- [ ] Filtri di Bloom
-- [ ] **Flajolet Martin**
+- [x] First Cut
+- [x] Filtri di Bloom
+- [x] **Flajolet Martin**
 ### Calcolo dei momenti
-- [ ] **AMS**
+- [x] **AMS**
 
 24 algoritmi totali
 11 più di 1 pagina
