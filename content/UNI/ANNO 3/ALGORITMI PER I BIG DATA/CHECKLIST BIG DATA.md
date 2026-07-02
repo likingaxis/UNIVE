@@ -29,18 +29,19 @@
 - [x] **Pattern Matching**
 	- [x] Karp Rabin
 - [ ] **Sampling dello stream**
-	- [ ] A porzione fissa
+	- [x] A porzione fissa
 		- [x] Algoritmo banale
 		- [x] User sample algorithm 
-	- [ ] A dimensione fissa
-		- [ ] Reservoir sampling
-- [ ] **Sliding window**
-	- [ ] Counting Bits
-		- [ ] Exp buckets
-		- [ ] DGIM
+	- [x] A dimensione fissa
+		- [x] Reservoir sampling
+- [x] **Sliding window**
+	- [x] Counting Bits
+		- [x] Exp buckets
+		- [x] DGIM
 ### Algoritmi sulle stream
-- [ ] Sampling
-- [ ] Count Min-Sketch
+- [ ] **Stima sulle frequenze**
+	- [ ] Sampling
+	- [ ] Count Min-Sketch
 ### Filtri sulle stream
 - [ ] First Cut
 - [ ] Filtri di Bloom
