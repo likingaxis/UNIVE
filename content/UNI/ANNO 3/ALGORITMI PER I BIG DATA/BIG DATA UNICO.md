@@ -1,6 +1,14 @@
 #### Coin Flip
-
-
+- **Esempio (Coin Flips):** Qual è la probabilità di ottenere più di $3N/4$ teste in $N$ lanci?
+    
+    - $E[X] = N/2$. Applicando Markov: $\Pr(X \geq 3N/4) \leq \frac{N/2}{3N/4} = \frac{2}{3}$.
+        
+        - _Nota:_ Questo limite è molto pessimistico, la probabilità reale è molto più bassa.
+Riprendendo l'esempio di $N$ lanci di moneta (Bernoulli trial):
+- Per una singola moneta (Bernoulli $p=1/2$): $E[X_i] = 1/2$ e $Var[X_i] = p(1-p) = 1/4$.
+- Per $N$ lanci indipendenti (Binomiale): $E[X] = N/2$ e $Var[X] = N/4$.
+- **Bound di Chebyshev:** La probabilità di avere $X \geq 3N/4$ (ovvero una deviazione $\geq N/4$ dalla media) è: $$\Pr(|X - N/2| \geq N/4) \leq \frac{N/4}{(N/4)^2} = \frac{4}{N}$$
+- **Conclusione:** Rispetto al $2/3$ di Markov, il limite di Chebyshev ($4/N$) è **significativamente migliore** perché diminuisce all'aumentare di $N$.
 #### Coupon Collector
 ##### Problema
 - $n$ coupon di tipologia differente distribuiti in delle scatole
