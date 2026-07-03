@@ -95,7 +95,11 @@ definita come $X=M-f(y)$
 
 ma sappiamo già che 
 $$\mathbb{E}[X] \leq \frac{m}{s}$$
-Vogliamo stimare quando la probabilità dell'errore superi 2 volte m/s
+Vogliamo stimare la probabilità che il rumore dovuto alle collisioni sia grande, cioè almeno il doppio del suo valore atteso massimo:  
+$$  
+\Pr\left[X \ge \frac{2m}{s}\right]  
+$$  
+dove $X = M(j,h_j(y))-f(y)$ rappresenta il rumore della riga $j$
 $$Pr[M(j,h_j(y))- f(y) \ge \frac{2m}{s}]$$
 ovvero per Markov
 Qual è la probabilità che l’errore sia almeno il doppio di questo valore atteso massimo?
@@ -116,7 +120,7 @@ $$Pr[F(y)\ge f(y)+\varepsilon m]\le \left(\frac{1}{2}\right)^t$$
 perché $F(y)$ è il minimo e quindi supera la soglia solo se tutte le righe la superano
 e oltretutto le funzioni hash delle righe sono indipendenti, gli eventi “la riga $j$ è cattiva” sono indipendenti, quindi le probabilità si moltiplicano
 ###### Costi computazionali
-definendo una probabilità di errore che possiamo sopportare come $\delta$ 
+definendo una probabilità di errore che possiamo sopportare come $\delta$
 
 la probabilità che l'algoritmo abbia successo deve essere $\geq 1-\delta$
 
