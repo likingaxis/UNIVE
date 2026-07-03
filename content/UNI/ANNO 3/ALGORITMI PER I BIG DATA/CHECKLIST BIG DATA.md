@@ -6,19 +6,19 @@
 - [x] **Min-cut algorithm**
 - [x] **Random Quick-sort**
 - [ ] **Randomized Median Algorithm**
-- [ ] **Content Resolution In a distributed System**
-- [ ] **Load Balancing**
+- [x] **Content Resolution In a distributed System**
+- [x] **Load Balancing**
 ### Hashing teoremi vari
-- [ ] famiglia di funzioni hash
-- [ ] funzione hash uniforme
-- [ ] famiglia hash universale
-- [ ] 2 indipendenza -> universalità
-- [ ] famiglia hash universale 1
-- [ ] famiglia hash universale 2
-- [ ] perfect hashing
-- [ ] problema del dizionario
-- [ ] tabelle hash
-- [ ] Doubling/Halving Technique
+- [x] famiglia di funzioni hash
+- [x] funzione hash uniforme
+- [x] famiglia hash universale
+- [x] 2 indipendenza -> universalità
+- [x] famiglia hash universale 1
+- [x] famiglia hash universale 2
+- [x] perfect hashing
+- [x] problema del dizionario
+- [x] tabelle hash
+- [x] Doubling/Halving Technique
 ### Document Similarity
 - [ ] Shingling
 - [ ] **Min hashing**
