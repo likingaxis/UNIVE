@@ -10,3 +10,50 @@
 - $P(r)\neq Q(r)$ quanto è $PR [H(r)=0]$ fai d/100d 
 - esegui t volte per migliorarlo
 #### Verifying Matrix Multiplication
+- AB = C? con matrici n$\times$n
+- Scegliamo `u.a.r` un vettore binario $\{0,1\}^n$
+- PSEUDO -> Eseguiamo
+    - Ar
+        - B(Ar)
+        - Cr
+        - Verifichiamo se B(Ar) = Cr
+- B(Ar) = Cr -> r(AB - C) = 0 (AB - C -> dick)
+- $Pr[r x dick = 0]$ $\leq$ $\frac{1}{2}$
+- Spazio = O(n) -> se ho le matrici in input
+- Tempo = O($n^{2}$)
+- Ripeto $k$ volte per abbassare la prob. di errore
+#### Quick Sort randomizzato
+- Data una lista di n elementi
+- restituire una versione ordinata di essa
+	- scelgo u.a.r un pivot ovvero un elemento della lista
+	- creo 2 liste lx e dx e eseguo quick sort su di esse
+	- return `lx+elemento+dx`
+- analisi dei costi
+- assumiamo che la lista sia già ordinata
+- creo una variabile aleatoria $X_{ij}$ che vale 1 se avviene un confronto tra $x_i$ e $x_j$
+- calcolo la expectation della sommatoria di tutti gli elementi della aleatoria con $i<j$ sono due sommatorie una che va da i=1 a n e quella dentro che va da j=i+1 a n la probabilità di $X_{ij}=2/j-i+1$ metto k=j-i+1 e la sommatoria viene k=2 a n armonica che vale il log di n
+- poi la sommatoria fuori moltiplica per n quindi esce che la expectation è n log n
+- quindi ci aspettiamo di fare n log n
+#### Min Cut algorithm
+- G(V,E)
+- trovare C tale che G(V,E\C) è disconnesso
+- l'algoritmo prende un arco u.a.r n-2 volte e lo contrae
+- il risultato è un grafo con 2 nodi e un numero di archi quegli archi sono un cut
+- quanto è probabile che il cut sia il min cut
+- poniamo C come min cut con dimensione k
+- probabilità che l'arco preso sia di C=k/m
+- probabilità che non sia quello =1-k/m
+- definiamo due eventi Ei Fi
+	- Ei evento che dice nella i esima iterazione non ho preso un arco di C
+	- Fi dice con i iterazioni non ho mai preso un arco di C
+- probabilità per il caso base
+	- F1 e E1 sono uguali
+	- mi trovo un lower bound di m ponendo 2m>=kn
+	- grado del grafo è maggiore uguale di kn
+	- trovo m>=kn/2
+- prendo la probabilità di F1 e E1 e sostituisco m 1-k/m con m cambiato e metto >= $1-(\frac{k}{\frac{kn}2})$
+- calcolo probabilità condizionata $E_i|F_{i-1}$ e la metto maggiore uguale alla stessa probabilità per F1 e E1 solo che al posto di n metto n-i+1
+- la probabilità per Fn-2 è maggiore uguale della produttoria di quello visto prima solo che diventa una produttoria nota con 2/n(n-1)
+- quindi probabilità di prendere un arco di questi è 1-2/n(n-1)
+- Tempo $O(n^2)$
+- Spazio $O(n+m)$

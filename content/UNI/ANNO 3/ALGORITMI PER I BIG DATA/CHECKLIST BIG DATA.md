@@ -2,9 +2,9 @@
 - [x] Coin flip
 - [x] Coupon collector
 - [x] Verifying Polynomial Identities
-- [ ] Verifying Matrix Multiplication
-- [ ] **Min-cut algorithm**
-- [ ] **Random Quick-sort**
+- [x] Verifying Matrix Multiplication
+- [x] **Min-cut algorithm**
+- [x] **Random Quick-sort**
 - [ ] **Randomized Median Algorithm**
 - [ ] **Content Resolution In a distributed System**
 - [ ] **Load Balancing**
