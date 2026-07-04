@@ -105,3 +105,67 @@ alla fine calcoliamo la probabilità che nessun processore riceva più di c job
 prima calcoliamo la cosa facendo l'unione di tutte le macchine di $X_j$ e poi mettiamo 1- questo risultato per avere ciò di cui avevamo bisogno
 
 #### Randomized Median Algorithm
+problema
+- Lista S di n elementi non ordinata
+- si vuole trovare il mediano n/2 parte intera superiore senza ordinare tutto S
+- S grande
+idea e pseudocodice
+- prendiamo un sottoinsieme R di $n^{3/4}$ elementi scelti `u.a.r`
+- prendo d e u come $n^{3/4}-\sqrt{n}$ e u come  $n^{3/4}+\sqrt{n}$
+- prendo ld e lu come numero di elementi in S che sono minori come valori e maggiori di d e u
+- se ld o lu>$n/2$ fail
+- C= tutti gli elementi di S compresi tra d e u
+- se |C|>$4n^{3/4}$ fail
+- ordina C prendi l'elemento in posizione $n/2$-ld+1
+analisi
+Y_1 è il numero di elementi in R che sono sotto la mediana di S
+Y_2 è il numero di elementi in R che sono sopra la mediana di S
+
+Eventi di fallimento
+$E1=Y_1<n^{3/4}-\sqrt{n}$
+$E2=Y_1<n^{3/4}-\sqrt{n}$
+$E3=|C|>4n^{3/4}$
+per trovare E1 usiamo la Chebyshev inequality
+$Pr[|X-\mathbb{E}[X]|>=a]<=\frac{Var[X]}{a^2}$
+$Pr[Y_1<n^{3/4}-\sqrt{n}]$
+
+definisco $X_i$ variabile aleatoria come $=1$ se l'elemento $x_i<mediana$
+
+$Y_1$=sommatoria di i che va da 1 a $n^{3/4}$ di $X_i$ 
+
+$E[Y_1]=$ expectation sommatoria di i che va da 1 a $n^{3/4}$ di $X_i$ 
+
+la probabilità di $X_i=\frac{\frac{n}{2}}{n}=1/2$
+quindi poi ti calcoli la sommatoria per $Y_1$
+
+per la varianza di $Y_1$ te la calcoli come la sommatoria della varianza di $X_i$
+$VAR[X_i]=E[X_i^2]+(E[X_i])^2$
+poi nella formula mettiamo tutti i pezzi
+- prendi la formula della probabilità ti porti a sx $n^{3/4}$ cambi il segno della radice e poi metti il modulo, ti risulterà avere proprio una Chebyshev da applicare 
+- applicala e hai fatto
+E2 uguale a E1
+$Pr[E3]<=n^{\frac{-1}{4}}/2$ 
+
+union bound su questi eventi per stimare probabilità di errore
+
+costi
+tempo: $n^{3/4} log n$
+spazio: $O(n)$
+
+#### Document Similarity
+Dato un insieme U di documenti si vuole calcolare la similarità tra tutti loro
+usiamo una funzione di confronto Jaccard similarity intersezione di documenti D1 D2 fratto cardinalità unione
+Jaccard similarity=probabilità di unione condizionata a intersezione
+###### Shingling
+siano i token l'alfabeto dei caratteri usati dai documenti
+un k shingle è una sequenza di k token nel documento
+ogni documento ha una sequenza di k shingle
+creo una matrice con tutti i possibili k-shingle $|U_t|^k$
+la matrice M sarà con le righe i k shingle e con le colonne i documenti
+è di tipo binario {0,1}
+matrice davvero troppo grande applichiamo min hashing
+###### Min hashing
+Costruisco una matrice delle firme che approssima la matrice degli Shingle
+utilizzo t funzioni hash ognuna definita come
+data una pi greco permutazione
+$h_{\pi}(D)=min\{\ i\in \ m:M_{\pi{iD}}=1\}$
