@@ -5,7 +5,7 @@
 - [x] Verifying Matrix Multiplication
 - [x] **Min-cut algorithm**
 - [x] **Random Quick-sort**
-- [ ] **Randomized Median Algorithm**
+- [x] **Randomized Median Algorithm**
 - [x] **Content Resolution In a distributed System**
 - [x] **Load Balancing**
 ### Hashing teoremi vari
@@ -20,11 +20,11 @@
 - [x] tabelle hash
 - [x] Doubling/Halving Technique
 ### Document Similarity
-- [ ] Shingling
-- [ ] **Min hashing**
-	- [ ] Doc-Pair Check
-	- [ ] Calcolo della matrice delle firme
-- [ ] Local Sensitive Hashing
+- [x] Shingling
+- [x] **Min hashing**
+	- [x] Doc-Pair Check
+	- [x] Calcolo della matrice delle firme
+- [x] Local Sensitive Hashing
 ### Data Stream
 - [ ] **Pattern Matching**
 	- [ ] Karp Rabin
