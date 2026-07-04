@@ -26,21 +26,21 @@
 	- [x] Calcolo della matrice delle firme
 - [x] Local Sensitive Hashing
 ### Data Stream
-- [ ] **Pattern Matching**
-	- [ ] Karp Rabin
-- [ ] **Sampling dello stream**
-	- [ ] A porzione fissa
-		- [ ] Algoritmo banale
-		- [ ] User sample algorithm 
-	- [ ] A dimensione fissa
-		- [ ] Reservoir sampling
-- [ ] **Sliding window**
-	- [ ] Counting Bits
-		- [ ] Exp buckets
-		- [ ] DGIM
+- [x] **Pattern Matching**
+	- [x] Karp Rabin
+- [x] **Sampling dello stream**
+	- [x] A porzione fissa
+		- [x] Algoritmo banale DIM
+		- [x] User sample algorithm DIM
+	- [x] A dimensione fissa
+		- [x] Reservoir sampling
+- [x] **Sliding window**
+	- [x] Counting Bits
+		- [x] Exp buckets
+		- [x] DGIM
 ### Algoritmi sulle stream
-- [ ] **Stima sulle frequenze**
-	- [ ] Sampling
+- [x] **Stima sulle frequenze**
+	- [x] Sampling
 	- [ ] Count Min-Sketch
 ### Filtri sulle stream
 - [ ] First Cut
