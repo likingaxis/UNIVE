@@ -168,4 +168,157 @@ matrice davvero troppo grande applichiamo min hashing
 Costruisco una matrice delle firme che approssima la matrice degli Shingle
 utilizzo t funzioni hash ognuna definita come
 data una pi greco permutazione
-$h_{\pi}(D)=min\{\ i\in \ m:M_{\pi{iD}}=1\}$
+$h_{\pi}(D)=min\{\ i\in \ m:M_{\pi{(i)D}}=1\}$
+la probabilità che avvenga una collisione tra 2 documenti è uguale alla jaccard similarity dei due
+utilizziamo t funzioni hash e calcoliamo la signature similarity di due documenti come
+$$Sign-Sim(D1,D2)=\frac{|\{i=1,...,t:h_{\pi i}(D1)=h_{\pi i}(D2)\}|}{t}$$
+$t->\infty->signsim->jsim$ 
+*Doc pair check*
+tempo O(t) spazio O(1)
+```scss
+input: D1,D2,t
+inizializza Sign-sim(D1,D2) a 0
+for i=1,...,t 
+	if h_t(D1)=h_t(D2):
+		Sign-sim(D1,D2)++
+return Sign-sim(D1,D2)/t
+```
+
+*Matrix Signature construction*
+$O(m*n)$ tempo $O(n)$ spazio
+```
+input: matrice M e t funzioni hash
+Signature matrice txN inizializzata a infinito
+for riga i della matrice M
+	for colonna j della matrice M
+		if(M(i)(j)==1)
+			for t 
+			if(h_t(i)<sig(t)(j))
+				aggiorna sig
+return sig
+```
+
+###### Local Sensitive Hashing
+risolve il problema relativo a un eccessivo numero di confronti per ogni documento
+porterebbe un costo $O(N^2)$
+l'idea è di stimare preventivamente se conviene o meno confrontare due documenti
+viene suddivisa la signature matrix in b bande e r righe t.c $t=b*r$
+
+viene effettuata una funzione di hashing per ogni banda e questa viene messa in una certa entratura con bucket
+se due documenti sono uguali per almeno una banda allora vale la pena confrontarli
+- se $h(b(C_{1})) = h(b(C_{2}))$ -> buone possibilità di similarità
+- $Pr[\text{firme coincidono in una r}] = J-sim = x$
+- $Pr[\text{tutte le righe coincidono}] = x^r$
+- $Pr[\text{nessuna riga coincide/una banda non coincide}] = 1-x^{r}$
+- $Pr[\text{nessuna delle b bande coincide}] = (1-x^{r})^{b}$
+- $Pr[\text{ALMENO una banda coincide / SUCCESSO}] = 1- (1-x^{r})^{b}$
+- FALSI NEGATIVI -> devo controllare sulla matrice delle firme (O($n^{2}$)) -> diminuisco aumentando `b` 
+#### Pattern Matching
+
+##### Karp Rabin
+#### Sampling dello stream
+problema
+Sia S uno stream di n elementi x1,...xn dove ogni elemento è una tupla composta da idutente query e tempo di arrivo della query
+si vogliono effettuare calcoli statistici su queste query come ad esempio contare il numero di occorrenze della query q
+analizzare tutto lo stream risulta eccessivamente costoso, si vuole trovare un sottoinsieme di S detto campione
+questo campione può essere fatto con 2 approcci diversi
+- dimensione proporzionale allo stream, es: 1/10 della dimensione dello stream
+- dimensione fissa s dove s<|S|
+###### Algoritmo banale
+pseudocodice
+```scss
+input:stream,k
+C campione vuoto
+for tupla t in stream
+	scegli un bucket uniformemente a caso tra k bucket
+	se il bucket è 0
+		salva t in C
+per una certa query q
+restituisci count[q] in C
+```
+analisi
+l'algoritmo non prende molto bene gli elementi in modo distinto
+si vuole stimare
+$\mathbb{E}[elementi distinti \in S]$ 
+per farlo poniamo un problema più semplice da definire
+date m query distinte e d query distinte
+gli utenti ne hanno fatte m query e 2d query 
+si vuole trovare d/m+d ovvero la frazione delle d query distinte
+la expectation è data dalla somma delle expectation
+Allora:
+
+$$\mathbb{E}[X] = \mathbb{E}[X_{\text{singole}}] + \mathbb{E}[X_{\text{doppie viste una volta}}] + \mathbb{E}[X_{\text{doppie viste due volte}}]$$
+quindi sarebbe m/10+d/100+18d/100
+
+quindi il nostro campione avrebbe
+$$\frac{\frac{d}{100}} {\frac{m}{10}+\frac{19d}{100}}$$
+che se lo svolgiamo esce una roba che fa una stima molto più grande rispetto a d/m+d
+###### User sample algorithm
+pseudocodice
+```scss
+input:stream, lista utenti, k
+C lista vuota
+sia h:U->[k]
+for u in listautenti:
+	se h(u)==1
+		metti tutte le query delle tuple di u in C
+esegui statistiche su C
+```
+analisi
+si vuole calcolare la expectation sulla dimensione di S
+$\mathbb{E}[|S|]$
+sia Xi variabile aleatoria che vale 1 se l'utente i finisce nel bucket 1
+sia Yi il numero di query distinte che ha fatto l'utente j
+$\mathbb{E}[|S|]=\sum_{i=1}^{u}\mathbb{E}[X_i]\ Y_i$ 
+Y_i non lo mettiamo perchè è fissato su base della stream
+alla fine abbiamo 1/k la probabilità che u venga scelto moltiplicato per la sommatoria di Yi ovvero la dimensione dello stream
+quindi alla fine abbiamo |U|/k
+dove U è l'universo ovvero il numero di elementi distinti della stream
+#### Reservoir sampling
+problema
+dato uno stream di n elementi x1,...xn 
+si vuole fare un sample costante dove la dimensione del campione è <=k
+pseudocodice
+```scss
+input: stream,k
+sia F lista vuota di dimensione fissa k
+for i in stream
+	scegli u.a.r se mettere i in F
+		se true controlla |F|=k allora
+			togli un elemento con prob 1/k
+			e metti i
+return F
+```
+analisi
+si vuole dimostrare che l'insieme F contiene gli elementi dello stream con stessa probabilità uniforme k/n
+induzione
+caso base
+n=k
+probabilità k/k=1
+ipotesi al caso n+1 un nuovo elemento quindi
+la probabilità che un elemento in F rimane è
+probabilità che viene scelto il nuovo elemento moltiplicata per la probabilità che uno viene eliminato ma non è quello
+più probabilità che il nuovo elemento non viene preso 
+$$Pr[X \text{ rimane}] = 1-\frac{k}{n+1} + \frac{k}{n+1}\cdot 1-\frac{1}{k}$$
+#### Sliding Window
+dato uno stream S di elementi x1,...,xm si vuole mantenere una finestra grande N degli elementi più recenti
+##### Counting Bits
+problema 
+dato uno stream S x1,..., xm t.c xi appartiene a 0 o 1 relativo a sliding window, dove noi vogliamo contare il numero di 1 nei k bit della finestra N dove $k<N$
+$$\#1(S,N,k)$$
+###### exp bucket
+dato lo stream S suddivido in bucket gli elementi che arrivano con dimensione $2^j$
+quando arriva un nuovo elemento n creo un bucket di dimensione 1, se ne esiste già uno faccio il merge dei due provocando un merge a cascata
+se un bucket B esce dalla window lo elimino
+un bucket contiene la sua dimensione e il numero di 1 che contiene
+restituisco la somma dei bucket
+
+analisi
+l'algoritmo potrebbe dare una stima sbagliata sul numero di 1 dello stream dovuto a causa del bucket più vecchio, quest'ultimo potrebbe contenere tutti i bit a 1 al di fuori della finestra k ma comunque li conteremmo tutti
+###### DGIM
+suddivido in bucket lo stream
+la dimensione dei bucket rappresenta il numero di uno
+esso è espresso con potenze di 2
+ho la certezza che il bucket più vecchio abbia come ultimo bit un 1 quindi la stima è con almeno un bit a 1
+di conseguenza possiamo dire che da una stima migliore rispetto a exp bucket
+il bucket più vecchio viene preso fratto 2
