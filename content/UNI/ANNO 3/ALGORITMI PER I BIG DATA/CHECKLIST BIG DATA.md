@@ -43,8 +43,8 @@
 	- [x] Sampling
 	- [x] Count Min-Sketch
 ### Filtri sulle stream
-- [ ] First Cut
-- [ ] Filtri di Bloom
+- [x] First Cut
+- [x] Filtri di Bloom
 - [ ] **Flajolet Martin**
 ### Calcolo dei momenti
 - [ ] **AMS**

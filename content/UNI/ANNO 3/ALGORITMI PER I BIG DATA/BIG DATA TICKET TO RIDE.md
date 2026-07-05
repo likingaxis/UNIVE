@@ -326,8 +326,10 @@ il bucket più vecchio viene preso fratto 2
 ##### Sampling Algorithm
 Problema
 Dato uno stream di n elementi xi appartenenti a interi dato un elemento y trovare f(y)={i:1...n:xi=y}
+
 Idea e soluzione
-Questo algoritmo sfrutta un sampling a dimensione fissa k
+Questo algoritmo sfrutta un sampling a dimensione fissa k t.c $k<n$
+
 ```scss
 Pseudocodice
 Input:stream, k
@@ -337,7 +339,13 @@ inserisco quelle k posizioni in F
 query(y):
 calcolo frequenza di y
 return m/k*F(y)
-
 ```
+problema possiamo avere sia sovrastima e sottostima di f(y)
 
+$$\mathbb{E}[X]=\sum_x x \cdot \Pr[X=x]$$
+
+### Filtri sulle Stream
 ##### Count Min-Sketch
+
+
+ First Cut
