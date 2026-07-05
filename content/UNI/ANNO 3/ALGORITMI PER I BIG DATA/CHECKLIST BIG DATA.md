@@ -45,9 +45,9 @@
 ### Filtri sulle stream
 - [x] First Cut
 - [x] Filtri di Bloom
-- [ ] **Flajolet Martin**
+- [x] **Flajolet Martin**
 ### Calcolo dei momenti
-- [ ] **AMS**
+- [x] **AMS**
 
 24 algoritmi totali
 11 più di 1 pagina
