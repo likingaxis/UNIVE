@@ -343,9 +343,91 @@ return m/k*F(y)
 problema possiamo avere sia sovrastima e sottostima di f(y)
 
 $$\mathbb{E}[X]=\sum_x x \cdot \Pr[X=x]$$
-
-### Filtri sulle Stream
 ##### Count Min-Sketch
+### Filtri sulle Stream
+dato uno stream X x1,...,xn t.c xi=<key1,...,keyn>
+fornito un insieme S di chiavi ottime sottoinsieme di U dove U_k è l'insieme dei valori delle chiavi distinte di key1
+accettare o meno una chiave di un elemento che arriva dalla stream
+###### First Cut
+questo algoritmo si basa su una funzione hash $h:U_k->[m]$
+```scss
+input:S insieme di chiavi ottime
+h:Uk->[m]
+sia B lista inizializzata a 0 di m elementi
+for i in S
+	calcola h(S[i])
+	B[h(S[i])]=1
 
+fase di query(x)
+arriva un nuovo elemento
+if (B(h(x_k1))==1)
+	accetta x
+```
+analisi
+$Pr[falso positivo]=(1-(1-1/m)^n)$
 
- First Cut
+###### Bloom filter
+problema uguale al precedente
+soluzione e idea
+utilizzare t funzioni hash indipendenti invece di 1
+```scss
+input:S insieme di chiavi ottime, t
+B lista inizializzata a 0 di m elementi
+scegli t funzioni hash indipendenti da una famiglia di funzioni hash
+for i in S
+	for j=1...t
+		B[h_j(i)]=1
+
+fase di query(x)
+arriva x
+for j=1...t
+	if(B[h_j(x)]==1 per tutte le j)
+		return accetta
+```
+analisi
+$Pr[falsopositivo]=(1-(1-1/m)^{nt})^t$
+
+###### Flajolet Martin
+problema
+dato uno stream S di n elementi x1,...,xn
+contare il numero di elementi distinti di S
+sia U l'universo di elementi distinti di dimensione N
+idea
+utilizzare una funzione hash $h:U->\{0,1\}^s$
+dove s>=log_2(N)
+sia r(x) funzione che restituisce la posizione del primo 1 partendo da destra
+mantenere in memoria lo sketch del R=max(r(x)) visto finora
+restituire $2^R$
+analisi
+con probabilità molto bassa $1/2^R$ abbiamo una codifica con tanti zeri a destra e un 1 in posizione lontana
+se eseguiamo tante volte un hash con output diverso quindi vediamo tanti elementi distinti aumenta questa probabilità e quindi potenzialmente abbiamo visto $2^R$ elementi distinti
+###### AMS
+problema
+dato uno stream di elementi x1,...,xm dato 
+mi=numero di volte in cui appare l'elemento xi nello stream
+sia U l'universo degli elementi distinti di dimensione N
+sia definito il momento k esimo come
+sommatoria  $\sum_{i=1}^{|U|}m_i^k$
+i momenti 
+F0: numero di elementi distinti
+F1: dimensione dello stream
+F2: surprise number, utile per indicare la distribuzione delle frequenze degli elementi distinti
+- basso se elementi con frequenza ben distribuita
+- alto se elementi con frequenza mal distribuita
+Algoritmo per il calcolo dei momenti
+si vuole avere un sottoinsieme dei momenti di dimensione k
+dove si prende un elemento in una posizione casuale dallo stream, successivamente si conta il numero di volte in cui appare quell'elemento nei passi successivi della stream fino alla fine
+f(x) è una funzione di stima dei momenti date le occorrenze di quel singolo elemento a destra definita come
+$$f(x)=L(2*c-1)$$
+dove c è il numero di volte in cui appare l'elemento a destra degli elementi
+L è la dimensione dello stream
+```scss
+input: stream di dimensione L,k
+momenti=0
+for i=1,...,k
+	contatore=0
+	scegli uniformemente a caso dallo stream una posizione
+	contatore=calcola le occorrenze fino a L di quell'elemento
+	momenti+=L(2*contatore-1)
+return momenti/k
+```
