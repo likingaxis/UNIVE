@@ -322,3 +322,22 @@ esso è espresso con potenze di 2
 ho la certezza che il bucket più vecchio abbia come ultimo bit un 1 quindi la stima è con almeno un bit a 1
 di conseguenza possiamo dire che da una stima migliore rispetto a exp bucket
 il bucket più vecchio viene preso fratto 2
+#### Algoritmi sulle stream
+##### Sampling Algorithm
+Problema
+Dato uno stream di n elementi xi appartenenti a interi dato un elemento y trovare f(y)={i:1...n:xi=y}
+Idea e soluzione
+Questo algoritmo sfrutta un sampling a dimensione fissa k
+```scss
+Pseudocodice
+Input:stream, k
+F insieme vuoto di dimensione fissa k
+scelgo k posizioni casuali dello stream
+inserisco quelle k posizioni in F
+query(y):
+calcolo frequenza di y
+return m/k*F(y)
+
+```
+
+##### Count Min-Sketch

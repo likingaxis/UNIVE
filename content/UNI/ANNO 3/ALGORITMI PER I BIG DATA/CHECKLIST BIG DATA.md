@@ -41,7 +41,7 @@
 ### Algoritmi sulle stream
 - [x] **Stima sulle frequenze**
 	- [x] Sampling
-	- [ ] Count Min-Sketch
+	- [x] Count Min-Sketch
 ### Filtri sulle stream
 - [ ] First Cut
 - [ ] Filtri di Bloom
