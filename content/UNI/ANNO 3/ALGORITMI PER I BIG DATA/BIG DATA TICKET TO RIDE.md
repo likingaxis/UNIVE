@@ -69,6 +69,7 @@
     - $Pr[fallimento]\geq 1- \frac{1}{en}$
     - Dopo `t` istanti (per singolo processo) -> $Pr[fallimento] \leq Pr[F_{i,t}]=\left( 1-\frac{1}{en} \right)^{t}$
     - Per `n` processi -> UNION BOUND -> $Pr[\cup F_{i,t}]=\sum_{i=1}^{n}(1-\frac{1}{en})^t$
+- $t=O(n \ log\ n)$
 #### Load Balancing
 problema
 - n processori
