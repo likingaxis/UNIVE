@@ -104,6 +104,7 @@ dopo sostituzioni varie poniamo un altro bound a $<1/n^2$
 alla fine calcoliamo la probabilità che nessun processore riceva più di c job
 prima calcoliamo la cosa facendo l'unione di tutte le macchine di $X_j$ e poi mettiamo 1- questo risultato per avere ciò di cui avevamo bisogno
 
+
 #### Randomized Median Algorithm
 problema
 - Lista S di n elementi non ordinata
@@ -152,6 +153,78 @@ costi
 tempo: $n^{3/4} log n$
 spazio: $O(n)$
 
+
+#### Hashing
+###### Funzioni Hash
+una funzione hash è definita come $h:U->[m]$
+ci consente di mappare ogni elemento del dominio U un valore in $[m]$
+###### Funzione Hash Uniforme
+una funzione hash si dice uniforme quando
+$Pr[h(x1)=y1,...,h(xn)=xy]$=$1/n^{|U|}$
+###### Famiglia Hash universale
+una famiglia hash è un insieme di funzioni hash che condivide stesso valore di mappatura
+si dice universale quando presa uniformemente a caso una funzione hash dalla famiglia H dove $h=U->[n]$
+$Pr[h(x1)=h(x2)]<=1/n$
+###### 2 indipendenza -> universalità
+si ha 2 indipendenza quando due elementi hanno risultato hash differenti
+dati due elementi x1,x2
+$Pr[h(x1)=y1 \ and \ h(x2)=y2]={1/n}^2$
+$Pr[h(x1)=h(x2)]=\sum_{y\in{0,n}} Pr[h(x1)=y \ and\ h(x2)=y]$ 
+probabilità 1/n quindi universale
+###### famiglia hash universale 1
+sia una famiglia hash universale definita come 
+$h:U->[0,n]$
+sia m un numero primo compreso tra n e 2n 
+sia a un vettore di r tale che r è compreso tra 0 e m-1
+a è un vettore dove ai è appartenente a $[m]$
+sia $x_i$ appartenente a U come un vettore in base m di r cifre
+$h(x)=\sum_{j=0}^r x_j\cdot a_j \  mod \ m$
+vogliamo dimostrare che sia una funzione hash universale
+ovvero che 
+$Pr(h(x)=h(y))<=1/n$
+fissati due elementi x e y in U abbiamo
+$Pr[\sum_{j=0}^r x_j\cdot a_j \  mod \ m= \sum_{j=0}^r y_j\cdot a_j \  mod \ m]$
+spostiamo a sinistra la cosa, racchiudiamo tutto così
+$Pr[\sum_{j=0}^r (x_j-y_j)\cdot a_j \ mod \ m=0]$
+se x e y sono diversi allora in almeno un indice essi sono diversi per cui
+$x_i-y_i\cdot a_i \ \sum_{j\neq i}x_j-y_j\cdot a_j \  mod \ m$ 
+poniamo la cosa a sx tutta uguale a z quella a dx tutta uguale ad a
+abbiamo che $z\cdot a_i=a \  mod\  m$
+moltiplichiamo per $z^{-1}$ ovvero l'unica inversa moltiplicativa del campo di m per cui
+$a_i$ vale zero solo per $a\cdot z^{-1}$ 
+$Pr[a_i=a \cdot z^{-1} \ mod m ]\leq 1/m$
+###### Perfect hashing
+$h\in_u{H}$
+$h:U->[n]$
+dato un sottoinsieme di elementi di U detto S
+abbiamo che con alta probabilità per ogni x y di S diversi
+$h(x)\neq h(y)$
+###### Dizionario
+il dizionario è un tipo di dato che dato un universo U di elementi possibili mantiene un sottoinsieme S che permette le seguenti operazioni:
+- create()
+- insert(u)
+- delete(u)
+- lookup(u)
+si presenta una soluzione ovvero le tabelle hash
+###### Tabelle hash
+definita una funzione hash $h:U->[m]$
+l'universo U ha dimensione N
+m è compreso tra N e 2N con m primo
+sia S un array di dimensione m-1
+viene inoltre implementata una lista di trabocco per le collisioni 
+aggiornare S avviene mediante l'algoritmo doubling halving
+numero di elementi attuali n
+###### Doubling halving
+```scss
+if n>N
+	N=2N
+	definisci un nuovo m
+	effettua rehashing
+if n<N/4
+	N=N/2
+	scelgo nuovo m 
+	effettuo rehashing
+```
 #### Document Similarity
 Dato un insieme U di documenti si vuole calcolare la similarità tra tutti loro
 usiamo una funzione di confronto Jaccard similarity intersezione di documenti D1 D2 fratto cardinalità unione
