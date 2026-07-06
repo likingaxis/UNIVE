@@ -1,24 +1,24 @@
 ### Parte probabilistica
-- [x] Coin flip
-- [x] Coupon collector
-- [x] Verifying Polynomial Identities
-- [x] Verifying Matrix Multiplication
-- [x] **Min-cut algorithm**
-- [x] **Random Quick-sort**
-- [x] **Randomized Median Algorithm**
-- [x] **Content Resolution In a distributed System**
-- [x] **Load Balancing**
+- [ ] Coin flip
+- [ ] Coupon collector
+- [ ] Verifying Polynomial Identities
+- [ ] Verifying Matrix Multiplication
+- [ ] **Min-cut algorithm**
+- [ ] **Random Quick-sort**
+- [ ] **Randomized Median Algorithm**
+- [ ] **Content Resolution In a distributed System**
+- [ ] **Load Balancing**
 ### Hashing teoremi vari
-- [x] famiglia di funzioni hash
-- [x] funzione hash uniforme
-- [x] famiglia hash universale
-- [x] 2 indipendenza -> universalità
-- [x] famiglia hash universale 1
-- [x] famiglia hash universale 2
-- [x] perfect hashing
-- [x] problema del dizionario
-- [x] tabelle hash
-- [x] Doubling/Halving Technique
+- [ ] famiglia di funzioni hash
+- [ ] funzione hash uniforme
+- [ ] famiglia hash universale
+- [ ] 2 indipendenza -> universalità
+- [ ] famiglia hash universale 1
+- [ ] famiglia hash universale 2
+- [ ] perfect hashing
+- [ ] problema del dizionario
+- [ ] tabelle hash
+- [ ] Doubling/Halving Technique
 ### Document Similarity
 - [x] Shingling
 - [x] **Min hashing**
@@ -26,28 +26,28 @@
 	- [x] Calcolo della matrice delle firme
 - [x] Local Sensitive Hashing
 ### Data Stream
-- [x] **Pattern Matching**
-	- [x] Karp Rabin
-- [x] **Sampling dello stream**
-	- [x] A porzione fissa
-		- [x] Algoritmo banale DIM
-		- [x] User sample algorithm DIM
-	- [x] A dimensione fissa
-		- [x] Reservoir sampling
-- [x] **Sliding window**
-	- [x] Counting Bits
-		- [x] Exp buckets
-		- [x] DGIM
+- [ ] **Pattern Matching**
+	- [ ] Karp Rabin
+- [ ] **Sampling dello stream**
+	- [ ] A porzione fissa
+		- [ ] Algoritmo banale
+		- [ ] User sample algorithm
+	- [ ] A dimensione fissa
+		- [ ] Reservoir sampling
+- [ ] **Sliding window**
+	- [ ] Counting Bits
+		- [ ] Exp buckets
+		- [ ] DGIM
 ### Algoritmi sulle stream
-- [x] **Stima sulle frequenze**
-	- [x] Sampling
-	- [x] Count Min-Sketch
+- [ ] **Stima sulle frequenze**
+	- [ ] Sampling
+	- [ ] Count Min-Sketch
 ### Filtri sulle stream
-- [x] First Cut
-- [x] Filtri di Bloom
-- [x] **Flajolet Martin**
+- [ ] First Cut
+- [ ] Filtri di Bloom
+- [ ] **Flajolet Martin**
 ### Calcolo dei momenti
-- [x] **AMS**
+- [ ] **AMS**
 
 24 algoritmi totali
 11 più di 1 pagina
