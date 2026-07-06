@@ -412,7 +412,7 @@ scelgo k posizioni casuali dello stream
 inserisco quelle k posizioni in F
 query(y):
 calcolo frequenza di y
-return m/k*F(y)
+return n/k*F(y)
 ```
 problema possiamo avere sia sovrastima e sottostima di f(y)
 

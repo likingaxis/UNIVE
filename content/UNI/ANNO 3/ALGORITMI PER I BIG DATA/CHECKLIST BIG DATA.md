@@ -1,16 +1,14 @@
 ### Parte probabilistica
-- [ ] Coin flip
-- [ ] Coupon collector
-- [ ] Verifying Polynomial Identities
-- [ ] Verifying Matrix Multiplication
-- [ ] **Min-cut algorithm**
+- [x] Verifying Polynomial Identities
+- [x] Verifying Matrix Multiplication
+- [x] **Min-cut algorithm**
 - [ ] **Random Quick-sort**
 - [ ] **Randomized Median Algorithm**
-- [ ] **Content Resolution In a distributed System**
-- [ ] **Load Balancing**
+- [x] **Content Resolution In a distributed System**
+- [x] **Load Balancing**
 ### Hashing teoremi vari
 - [ ] famiglia di funzioni hash
-- [ ] funzione hash uniforme
+- [x] funzione hash uniforme
 - [ ] famiglia hash universale
 - [ ] 2 indipendenza -> universalità
 - [ ] famiglia hash universale 1
@@ -26,28 +24,28 @@
 	- [x] Calcolo della matrice delle firme
 - [x] Local Sensitive Hashing
 ### Data Stream
-- [ ] **Pattern Matching**
-	- [ ] Karp Rabin
+- [x] **Pattern Matching**
+	- [x] Karp Rabin
 - [x] **Sampling dello stream**
 	- [x] A porzione fissa
 		- [x] Algoritmo banale
 		- [x] User sample algorithm
 	- [x] A dimensione fissa
 		- [x] Reservoir sampling
-- [ ] **Sliding window**
-	- [ ] Counting Bits
-		- [ ] Exp buckets
-		- [ ] DGIM
+- [x] **Sliding window**
+	- [x] Counting Bits
+		- [x] Exp buckets
+		- [x] DGIM
 ### Algoritmi sulle stream
-- [ ] **Stima sulle frequenze**
-	- [ ] Sampling
-	- [ ] Count Min-Sketch
+- [x] **Stima sulle frequenze**
+	- [x] Sampling
+	- [x] Count Min-Sketch
 ### Filtri sulle stream
-- [ ] First Cut
-- [ ] Filtri di Bloom
-- [ ] **Flajolet Martin**
+- [x] First Cut
+- [x] Filtri di Bloom
 ### Calcolo dei momenti
-- [ ] **AMS**
+- [x] **Flajolet Martin**
+- [x] **AMS**
 
 24 algoritmi totali
 11 più di 1 pagina
