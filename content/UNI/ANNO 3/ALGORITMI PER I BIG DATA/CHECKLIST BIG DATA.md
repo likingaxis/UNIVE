@@ -28,12 +28,12 @@
 ### Data Stream
 - [ ] **Pattern Matching**
 	- [ ] Karp Rabin
-- [ ] **Sampling dello stream**
-	- [ ] A porzione fissa
-		- [ ] Algoritmo banale
-		- [ ] User sample algorithm
-	- [ ] A dimensione fissa
-		- [ ] Reservoir sampling
+- [x] **Sampling dello stream**
+	- [x] A porzione fissa
+		- [x] Algoritmo banale
+		- [x] User sample algorithm
+	- [x] A dimensione fissa
+		- [x] Reservoir sampling
 - [ ] **Sliding window**
 	- [ ] Counting Bits
 		- [ ] Exp buckets
