@@ -1286,7 +1286,7 @@ La logica della stima è moltiplicare maggioranti semplici dei singoli fattori.
 
 Negli esercizi bisogna sempre verificare con attenzione che ogni maggiorazione sia valida su tutto l'intervallo dichiarato.
 
-## 9.5 Seconda stima: massimo del prodotto
+ ## 9.5 Seconda stima: massimo del prodotto
 
 Definiamo
 
@@ -1337,47 +1337,75 @@ $$
 segue
 
 $$
-\left(y-\frac\pi6\right)
-\left(y-\frac\pi4\right)
+\left(y-\frac{\pi}{6}\right)
+\left(y-\frac{\pi}{4}\right)
 =
-y^2-\frac{5\pi}{12}y+rac{\pi^2}{24}.
+y^2-\frac{5\pi}{12}y+\frac{\pi^2}{24}.
 $$
 
 Moltiplicando per $y$:
 
 $$
-\omega(y)=y^3-\frac{5\pi}{12}y^2+rac{\pi^2}{24}y.
+\omega(y)=y^3-\frac{5\pi}{12}y^2+\frac{\pi^2}{24}y.
 $$
 
 Deriviamo:
 
-$$
-\omega'(y)=3y^2-\frac{5\pi}{6}y+rac{\pi^2}{24}.
-$$
-
-Risolviamo
-
-$$
-3y^2-\frac{5\pi}{6}y+rac{\pi^2}{24}=0.
+$$  
+\omega'(y)=3y^2-\frac{5\pi}{6}y+\frac{\pi^2}{24}.  
 $$
 
-La formula risolutiva dà
+Risolviamo:
 
+$$  
+3y^2-\frac{5\pi}{6}y+\frac{\pi^2}{24}=0.  
 $$
-y_{1,2}
-=
-\frac{\frac{5\pi}{6}\pm
-\sqrt{\left(\frac{5\pi}{6}\right)^2-rac{\pi^2}{2}}}{6}.
+
+Applicando la formula risolutiva:
+$$  
+y_{1,2} =
+\frac{  
+\frac{5\pi}{6}  
+\pm  
+\sqrt{  
+\left(\frac{5\pi}{6}\right)^2
+
+4\cdot 3\cdot \frac{\pi^2}{24}  
+}  
+}{  
+2\cdot 3  
+}.  
+$$
+
+Poiché:
+ $$  
+4\cdot 3\cdot \frac{\pi^2}{24}
+
+\frac{\pi^2}{2},  
+$$
+
+si ottiene:
+$$  
+y_{1,2}=
+\frac{  
+\frac{5\pi}{6}  
+\pm  
+\sqrt{  
+\left(\frac{5\pi}{6}\right)^2
+
+\frac{\pi^2}{2}  
+}  
+}{6}.  
 $$
 
 Semplificando:
-
-$$
+ $$  
 y_{1,2}
-=
-\frac{5\pi}{36}\pm\frac{\sqrt7\pi}{36}.
-$$
 
+\frac{5\pi}{36}  
+\pm  
+\frac{\sqrt{7}\pi}{36}.  
+$$
 Entrambi appartengono a $[0,1]$.
 
 I candidati per il massimo assoluto sono:
