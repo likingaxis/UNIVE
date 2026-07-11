@@ -5,6 +5,4 @@
 | CALCOLO                  | ✅                     |                   |
 DAMMI LA PAZIENZA
 - **27 luglio calcolo numerico**
-
-
 - **IS A SETTEMBRE**
