@@ -306,26 +306,26 @@
 > - cosa devo saper dire all’orale.
 > ```
 
-|Mini-lezione|Pagine|Argomento|Valutazione|
-|---|--:|---|---|
-|1|2-6|Esistenza, unicità, Vandermonde, forma canonica, Lagrange|**Perfetta**|
-|2|7-10|Errore/resto dell’interpolazione polinomiale|**Perfetta**|
-|3|11-12|Forma di Newton e differenze divise|**Meglio separarla**|
-|4|13-15|Algoritmo di valutazione, Ruffini-Horner, costo computazionale|**Da sola**|
-|5|15-17|Aggiunta di un nodo + transizione all’integrazione numerica|**Breve ma utile**|
-|6|17-22|Formula dei trapezi, errore, scelta di n dato ε|**Buona, ma molto importante**|
-|7|22-24|Estrapolazione|**Perfetta da sola**|
-|8|25-29|Richiami di algebra lineare: determinanti, autovalori, invertibilità, diagonalizzazione, hermitiane|**Meglio separata**|
-|9|29-31|Matrici definite positive|**Da sola**|
-|10|31-33|Polinomi di matrici + introduzione matrici irriducibili|**Buona**|
-|11|34-41|Gershgorin e localizzazione degli autovalori|**Da sola, molto importante**|
-|12|41-43|Diagonale dominante e invertibilità|**Da sola**|
-|13|43-48|Norme vettoriali e matriciali|**Da sola**|
-|14|49-55|Metodo iterativo stazionario e convergenza|**Da sola**|
-|15|55-57|Velocità di convergenza, residuo, decomposizione A = M − N|**Da sola**|
-|16|58-60|Jacobi e Gauss-Seidel: costruzione dei metodi|**Da sola**|
-|17|60-68|Teoremi di convergenza di Jacobi e Gauss-Seidel|**Da sola, molto teorica**|
-|18|69-77|Esercizi di riepilogo risolti|**Da dividere esercizio per esercizio**|
+| Mini-lezione | Pagine | Argomento                                                                                           | Valutazione                             |
+| ------------ | -----: | --------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| 1            |    2-6 | Esistenza, unicità, Vandermonde, forma canonica, Lagrange                                           | **Perfetta**                            |
+| 2            |   7-10 | Errore/resto dell’interpolazione polinomiale                                                        | **Perfetta**                            |
+| 3            |  11-12 | Forma di Newton e differenze divise                                                                 | **Meglio separarla**                    |
+| 4            |  13-15 | Algoritmo di valutazione, Ruffini-Horner, costo computazionale                                      | **Da sola**                             |
+| 5            |  15-17 | Aggiunta di un nodo + transizione all’integrazione numerica                                         | **Breve ma utile**                      |
+| 6            |  17-22 | Formula dei trapezi, errore, scelta di n dato ε                                                     | **Buona, ma molto importante**          |
+| 7            |  22-24 | Estrapolazione                                                                                      | **Perfetta da sola**                    |
+| 8            |  25-29 | Richiami di algebra lineare: determinanti, autovalori, invertibilità, diagonalizzazione, hermitiane | **Meglio separata**                     |
+| 9            |  29-31 | Matrici definite positive                                                                           | **Da sola**                             |
+| 10           |  31-33 | Polinomi di matrici + introduzione matrici irriducibili                                             | **Buona**                               |
+| 11           |  34-41 | Gershgorin e localizzazione degli autovalori                                                        | **Da sola, molto importante**           |
+| 12           |  41-43 | Diagonale dominante e invertibilità                                                                 | **Da sola**                             |
+| 13           |  43-48 | Norme vettoriali e matriciali                                                                       | **Da sola**                             |
+| 14           |  49-55 | Metodo iterativo stazionario e convergenza                                                          | **Da sola**                             |
+| 15           |  55-57 | Velocità di convergenza, residuo, decomposizione A = M − N                                          | **Da sola**                             |
+| 16           |  58-60 | Jacobi e Gauss-Seidel: costruzione dei metodi                                                       | **Da sola**                             |
+| 17           |  60-68 | Teoremi di convergenza di Jacobi e Gauss-Seidel                                                     | **Da sola, molto teorica**              |
+| 18           |  69-77 | Esercizi di riepilogo risolti                                                                       | **Da dividere esercizio per esercizio** |
 
 # Sequenza consigliata
 
