@@ -327,6 +327,7 @@
 | 17           |  60-68 | Teoremi di convergenza di Jacobi e Gauss-Seidel                                                     | **Da sola, molto teorica**              |
 | 18           |  69-77 | Esercizi di riepilogo risolti                                                                       | **Da dividere esercizio per esercizio** |
 
+
 # Sequenza consigliata
 
 ## Settimana 1 — Interpolazione
