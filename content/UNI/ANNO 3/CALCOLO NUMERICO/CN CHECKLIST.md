@@ -1,0 +1,18 @@
+- [x]  Esistenza, unicità, Vandermonde, forma canonica e Lagrange
+- [x]  Errore dell’interpolazione polinomiale
+- [ ]  Forma di Newton e differenze divise
+- [ ]  Ruffini-Horner e costo computazionale
+- [ ]  Aggiunta di un nodo e introduzione all’integrazione numerica
+- [ ]  Formula dei trapezi ed errore
+- [ ]  Estrapolazione
+- [ ]  Richiami di algebra lineare
+- [ ]  Matrici definite positive
+- [ ]  Polinomi di matrici e matrici irriducibili
+- [ ]  Teoremi di Gershgorin
+- [ ]  Diagonale dominante e invertibilità
+- [ ]  Norme vettoriali e matriciali
+- [ ]  Metodi iterativi stazionari e convergenza
+- [ ]  Velocità di convergenza, residuo e decomposizione (A=M-N)
+- [ ]  Metodi di Jacobi e Gauss-Seidel
+- [ ]  Teoremi di convergenza di Jacobi e Gauss-Seidel
+- [ ]  Esercizi di riepilogo risolti
