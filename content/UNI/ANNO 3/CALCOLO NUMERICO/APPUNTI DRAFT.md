@@ -185,3 +185,79 @@ cioè se yi=f(xi) per ogni i che va da 0 a n allora p(x) si chiama anche polinom
 domanda orale
 cosa è per definizione il polinomio di interpolazione della funzione f(x) sui nodi x0,xn 
 è l'unico polinomio in Rn[x] che soddisfa la condizione p(xi)=f(xi) per ogni i che va da 1 a n
+## Errore o resto dell'interpolazione polinomiale
+Quanto sbagliamo nell'approssimazione
+#### Teorema
+sia f:a,b->R 
+una funzione di classe $C^{n+1}[a,b]$
+- cosa vuol dire classe n+1 di a,b
+	- definizione di classe C+n+1
+	- esistono derivate nell'intervallo a,b fino alla n+1 esima 
+	- funzioni continue nell'intervallo di [a,b]
+e sia p(x) il polinomio di interpolazione di f(x) sugli n+1 nodi distinti 
+x0,...,xn appartenenti in a,b
+cosa è l'oggetto p(x)
+- p(x) è l'unico polinomio che appartiene a Rn[x] tale che per ogni i che va da 0 a n 
+	- f(xi)=p(xi)
+per ogni x che sta nell'intervallo a,b esiste un unico intervallo Csi=csi(x) appartiene ad a,b
+f(x)-p(x)= derivata n+1 esima di csi fratto n+1! con x-x0 fino a x-xn
+dimostriamo che questo 
+mi fisso un punto x in [a,b] 
+il primo caso è x coincide con uno dei nodi x0,...,xn
+- qualunque csi mi va bene perchè tanto si azzererebbe comunque
+- prendo un qualsiasi csi in a,b e la nostra formula vale perchè viene 0=0
+il secondo caso è x non coincide con uno dei nodi x0,...,xn
+definiamo delle funzioni ausiliarie
+pi greco di y=y-x0 per y-x1 fino a y-xn
+r(y) è detta funzione di resto ovvero
+r(y)=f(y)-p(y)
+Z sia una funzione definita da a,b ->R 
+Z(y)=r(y)-r(x)/pi greco di (x) pi gredo di y
+non usiamo x perchè x è un punto fissato in a,b
+usiamo y per l'indeterminata
+la parte dove usiamo x dove c'è r(x)/ pi greco(x) è una costante
+a che classe appartiene la funzione Z
+un polinomio come p(x) ha classe C infinito
+se la deriviamo n+1 volte vale 0 e poi possiamo farle all'infinito
+pi greco y è un polinomio di grado più alto però anche lui è derivabile infinite volte
+r(y) è di classe C n+1
+globalmente quindi Z(y) è C n+1 
+infatti Z(y) é di classe C^n+1 [a,b]
+come differenza di r(y) che è di classe Cn+1 [a,b] e r(x)/pigreco(x) pigreco(y)
+di classe C infinito [a,b]
+inoltre Z(y) si annulla in almeno n+2 punti di [a,b] perchè si annulla nei nodi x0,x1,...,xn 
+e in x(il punto che avevamo fissato)
+ad esempio facendo Z(x0) avremmo 0
+il caso 1 ci serve per escludere i nodi che abbiamo fissato
+se y è un nodo di x0 xn è un conto ma se x fosse così ci sarebbe un problema
+
+A CASA AGGIUNGI UNA FOTO DEL GRAFICO DI Z nel caso n=2?
+guardiamo 2 punti consecutivi in cui si annulla la funzione
+in mezzo a questi due punti ci deve essere un punto in cui la derivata fa 0
+questo lo dice il teorema di rolle
+nella foto i punti blu sono i punti dove si annulla la derivata
+se la mia funzione Z si annulla in almeno n+2 punti
+la derivata prima si annulla in almeno n+1 punti
+Z secondo per rolle si annulla in n punti
+Z terzo n-1 punti
+Z n+1(y) si annullerà in almeno 1 punto
+quando diciamo punti diciamo a,b quindi punti interni nell'intervallo
+questo punto lo chiamo proprio csi appartenente in a,b
+farà al caso nostro
+verifichiamo che questo punto csi fa valere la nostra funzione di calcolo di errore
+dobbiamo fare la derivata Z n+1 esima di y
+sarebbe la derivata di r(y) invece r(x)/pi greco(x) rimane così poichè costante pi greco di y invece va derivato anche quello
+facciamo dei calcoli della derivata n+1 esima
+luca ripassa un pò le derivate regole base
+derivo il polinomio più del suo grado quindi farà 0 per ogni y 
+perché p(y) ha grado minore uguale di n
+togliamo p(y)
+fare la derivata fa venire il fattoriale di una costante
+facendo la derivata di pi greco abbiamo che tutte le altre derivate muoiono di pi greco
+questo si può dire monico e quindi si può scrivere come n+1!
+- il coefficiente davanti a y alla n+1 è 1 il più grande
+dobbiamo ricordarci che questa derivata si annulla in quel punto csi
+quindi 
+0=z derivato di csi è uguale alla nostra funzione infatti
+scrivi formula qui
+isola r(x) e si ritrova la formula di prima
