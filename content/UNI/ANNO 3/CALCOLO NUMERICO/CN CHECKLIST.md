@@ -3,7 +3,7 @@
 - [x]  Forma di Newton e differenze divise
 - [x]  Ruffini-Horner e costo computazionale
 - [x]  Aggiunta di un nodo e introduzione all’integrazione numerica
-- [ ]  Formula dei trapezi ed errore
+- [x]  Formula dei trapezi ed errore
 - [ ]  Estrapolazione
 - [ ]  Richiami di algebra lineare
 - [ ]  Matrici definite positive
