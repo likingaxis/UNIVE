@@ -2,7 +2,7 @@
 - [x]  Errore dell’interpolazione polinomiale
 - [x]  Forma di Newton e differenze divise
 - [x]  Ruffini-Horner e costo computazionale
-- [ ]  Aggiunta di un nodo e introduzione all’integrazione numerica
+- [x]  Aggiunta di un nodo e introduzione all’integrazione numerica
 - [ ]  Formula dei trapezi ed errore
 - [ ]  Estrapolazione
 - [ ]  Richiami di algebra lineare
