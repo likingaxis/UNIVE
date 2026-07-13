@@ -1,7 +1,7 @@
 - [x]  Esistenza, unicità, Vandermonde, forma canonica e Lagrange
 - [x]  Errore dell’interpolazione polinomiale
-- [ ]  Forma di Newton e differenze divise
-- [ ]  Ruffini-Horner e costo computazionale
+- [x]  Forma di Newton e differenze divise
+- [x]  Ruffini-Horner e costo computazionale
 - [ ]  Aggiunta di un nodo e introduzione all’integrazione numerica
 - [ ]  Formula dei trapezi ed errore
 - [ ]  Estrapolazione
