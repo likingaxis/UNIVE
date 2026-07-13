@@ -449,3 +449,108 @@ Quindi non puoi usare facilmente:
 Allora cosa si fa?
 
 Si sostituisce f(x)f(x)f(x) con una funzione più semplice s(x)s(x)s(x), costruita a tratti.
+ricordiamo la formula della formula dei trapezi
+In...
+ora vedremo 
+##### Errore o resto della formula dei trapezi
+abbiamo quindi l'errore |integrale di f(x)-In|
+vediamo ora un lemma utile per dimostrare poi il teorema
+###### Lemma
+siano omega, alfa, beta delle funzioni definite nel nostro intervallo a,b in R sono funzioni tali che 
+- omega di x è continua e >=0 su a,b
+- alfa e b(x)w(x) sono continue su a,b
+- la funzione b(x) è compreso tra m e M ovvero il minimo e il massimo della funzione alfa(y) per un y in a,b
+- citando weirestrass sappiamo che il max e il min sono compresi tra a e b perchè alfa è continua
+allora esiste un certo punto eta in a,b tale che
+integrale di B(x)w(x)dx= alfa(eta)integrale w(x) dx
+è come se noi portassimo fuori b(x) e diventasse alfa(eta)
+
+>[!info]- oss del lemma
+> Oss. se nel lemma prendo w(x)=1 identicamente B(x)=alfa(x) continua su a,b
+> allora esiste eta in a,b tale che l'integrale di a,b di alfa(x)dx è uguale a alfa di eta per b-a
+> concludendo abbiamo che questo in realtà è il teorema della media integrale
+> in pratica il teorema della media integrale ci dice che preso un integrale y=alfa(x) continuo in due punti a,b
+> abbiamo che esiste un punto eta in a,b tale che l'integrale è uguale a scrivi
+> per cui le due aree sono uguali 
+
+Dimostriamo ora il lemma
+visto che w(x)>=0 e per ogni x in a,b e B(x) compreso tra m e M per ogni x in a,b
+allora
+B(x) per w(x) è compreso in m w(x) e Mw(x) per ogni x in a,b
+questo perchè ho w(x) innocuo e quindi la disuguaglianza non ci cambia particolarmente
+se prendo un integrale di tutti i membri la disuguaglianza rimane uguale alla precedente
+perchè vale per ogni x in a b
+quindi 
+scrivi integrale della disuguaglianza scritta prima
+
+metti disegno del prof
+siccome B(x)w(x) sta sempre sopra e sotto di mw(x) e Mw(x) possiamo fare questo integrale facendo valere la regola della monotonia dell'integrale
+
+definiamo quindi z:[a,b] ->R , z(y)= alfa(y) per integrale che va da a a b di w(x) dx 
+chiamiamo l'ultimo integrale C>=0
+siccome alfa è continua su a,b anche Z lo è 
+per il teorema dei valori intermedi z assume tutti i valori tra il suo minimo mC e il suo massimo MC
+Quindi Z assume anche il valore dell'integrale di B(x)w(x) dx perchè anche lui era compreso tra mC e MC 
+per valore si intende che esiste un eta a,b t.c Z(eta) è l'integrale che va da a a b di B(x)w(x)dx
+quindi Z(eta) corrisponde proprio ad alfa di eta per integrale di w(x)dx
+
+>[!info]- piccolo specchietto che spiega teorema dei valori intermedi
+>metti qui
+
+##### Teorema
+![[Pasted image 20260713130109.png]]
+
+sia f:[a,b]->R di classe C2a,b e sia In la formula dei trapezi di ordine n e passo h=b-a/n
+per approssimare integrale tra a b di f(x) dx
+allora esiste un certo punto eta che sta tra a e b tale che 
+integrale che va da a e b di f(x)dx -In= -b-a f ''eta/12 h alla seconda
+- C2a,b vuol dire che le prime 2 derivate esistono e sono continue
+Dim
+siano xj=a+hj con j=0,...,n i punti mostrati in figura e sia s(x) la funzione lineaere a tratti mostrata in figura.
+il grafico di s(x) su due punti xj e xj+1 rappresenta proprio un polinomio di interpolazione
+su questo intervallo fissato quindi abbiamo che è l'unico polinomio minore uguale di 1 che coincide con la funzione dei nodi
+se xj e xj+1 sono uguali abbiamo grado 0?
+ne traiamo questa osservazione
+osservazione: s(x) coincide sull'intervallino [xj,xj+1] con il polinomio di interpolazione di f(x) sui 2 nodi xj,xj+1 vero per ogni j che va da 0 a n-1
+
+vogliamo trovare integrale che va da a a b con f(x) dx-In che è uguale a quello che era davvero In
+poi mettiamo tutto sotto un unico integrale sfruttando la linearità degli integrali
+questo integrale lo calcolo come somma j=0 a n-1 dell'integrale dei singoli intervallini xj xj+1 di f(x)-s(x) dx
+f(x)-s(x) è l'errore dell'interpolazione polinomiale, per ogni x in questo intervallo xj xj+1
+esiste un punto csij=csij(x) per ogni intervallino scelgo uno csi j che appartiene a questo intervallino aperto xj xj+1 t.c f(x)-s(x) è la derivata seconda di f(csi(x))/2! (x-xj)(x-xj+1)
+csi è un punto che dipende da x, quindi lo scriviamo in modo esplicito così che dentro l'integrale scritto qua sotto siamo sicuri di non trattarlo come una cosa che si può portare fuori
+
+ovvero la sommatoria di j=0 a n-1 di integrale che va da xj a xj+1 di f'' di csi(x)/2 (x-xj)(x-xj+1) dx
+abbiamo un prodotto negativo qua dentro, ma noi ora volevamo applicare il lemma scritto prima
+quindi mettiamo un meno davanti così non diventa negativo
+scrivi formula con il meno e applichiamo ora il lemma dove x-xjxj+1-x  per 1/2 è il mio omega x e invece f''(csi(x)) è beta(x) senza il fratto 2
+alfa di x è invece f''(x) senza csij(x)
+per applicare il lemma devono essere soddisfatte le ipotesi
+- omega(x) è continua e >=0 su intervallo xj,xj+1
+	- perchè?
+- alfa(x) continua su xj,xj+1 perchè f sta nella classe C2[a,b]
+- beta(x)omega(x) è continua?
+	- abbiamo una ipotesi che guarda all'indietro beta di x per omega di x è -[f(x)-s(x)]
+	- questa è continua quindi anche beta(x)omega(x) è continua su xj,xj+1
+- beta di x è compreso tra il min e il max
+	- poiché per ogni x in xj,xj+1 abbiamo che csij è in xj,xj+1 dunque sono comprese perchè
+	- non ho capito perchè
+esiste un etaj appartenente a xj,xj+1 tale che integrale xj xj+1 Beta(x)w(x) dx= f''(etaj) di integrale che va da xj a xj+1 di w(x) dx
+ora applichiamo il lemma sul nostro intervallino
+quindi quello di prima è la - sommatoria con j=0 che va a n-1 f''(etaj) integrale xj xj+1 x-xj xj+1-x/2 dx
+vale per quel lemma messo sopra
+faccio il calcolo mettendo t=x-xj
+dt=dx
+con estremi che sono 0 e h non ho capito perchè 
+di t h-t /2 dt 
+
+calcoliamo questo integrale ora
+scrivi qua sotto quanto vale
+-sommatoria che va da j=0 a n-1 di f''(etaj)[h/2 per t alla seconda/2 -1/2 per t cubo/3] tra 0 e h
+sostituiamo 0 e h e abbiamo
+-sommatoria j=0 n-1 di f''(etaj) h al cubo/12
+portiamo fuori la costante e moltiplichiamo e dividiamo per n così abbiamo una media
+h al cubo lo riscriviamo con -h quadro b-a/12  
+questa media è un valore compreso tra il minimo e il massimo ovvero f'' di etaj 
+- essendo f''(x) continua su a,b e essendo la media aritmetica 1/n somme per j=0 n-1 di f'' etaj un valore compreso tra il minimo e il massimo di f'' su a,b per il teorema dei valori intermedi esiste sicuramente un punto eta in a,b t.c il valore di f''(eta) è uguale a questa media aritmetica
+abbiamo ora raggiunto la fine quindi
