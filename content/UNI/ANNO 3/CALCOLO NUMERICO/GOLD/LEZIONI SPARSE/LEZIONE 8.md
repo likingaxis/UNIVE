@@ -69,3 +69,24 @@
 	- Oss.
 		- gli autovalori di una matrice hermitiana sono reali
 		- dimostrazione
+		- sia A in C nxn harmitiana e sia lambda un suo autovalore generico
+		- allora esiste un autovettore sia x in C n \{0} un autovettore associato a lambda
+		- Ax=lambdax
+		- x* sarebbe= vettore riga di x ma anche coniugato
+		- posso moltiplicare entrambi i membri per x* 
+		- x*Ax=x*lambdax
+		- Ax era un vettore colonna
+		- x*Ax è uno scalare 
+		- qui abbiamo una uguaglianza tra 2 scalari
+		- porto fuori lambda e posso scrivere x*x come scalare quindi metterlo come
+		- lambda che moltiplica i=1 a n di xi coniugato xi
+		- cosa succede se facciamo un valore per il suo coniugato?
+		- avremmo a+iB e a-iB quindi viene il modulo al quadrato
+		- quindi dentro la sommatoria mettiamo il modulo al quadrato
+		- è un numero strettamente positivo quindi lambda=x*Ax/sommatoria che va da 1 a n di moudulo di xi al quadrato
+		- se ho un numero reale diviso un numero positivo allora ne ho uno reale
+		- dimostriamo che x*Ax è reale
+		- quale è il complesso coniugato di tutto x*Ax coincide con il numero x*Ax tutto coniugato e trasposto
+		- quindi (xy)*=y*x*
+		- ottenendo perciò x*A*(x*)*=x*Ax 
+		- un numero complesso coniugato a se stesso è reale 
