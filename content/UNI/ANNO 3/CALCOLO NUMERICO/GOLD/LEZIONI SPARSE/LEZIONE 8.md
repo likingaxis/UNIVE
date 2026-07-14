@@ -1,0 +1,71 @@
+#### Richiami delle matrici di algebra lineare
+- calcolo dei detetrminanti
+	- ripassiamo il metodo di laplace per i determinanti
+- teorema di binet il det(AB)=det(a)det(B) per ogni A,B in C nxn
+- altro teorema det(A)=det(A^T) per ogni A in C nxn
+- fa un esempio per cui la matrice ha determinante nullo
+	- usiamo binet
+- traccia, determinante, raggio spettrale e autovalori
+	- per noi gli autovalori di una matrice nxn sono valutati in base al numero di volte pari alla sua molteplicità algebrica, quindi sono massimo n
+- viene definita la traccia come la somma degli elementi in diagonale, coincide con la somma degli autovalori considerati con la molteplicità
+- il determinante di una matrice è il prodotto delle molteplicità degli autovalori
+- il raggio spettrale di A è \ro(A)=max dei moduli degli autovalori lambda di A
+- cosa si intende per modulo di lambda1 lambda 2 ecc...
+	- sarebbe la distanza dallo 0 quindi la lunghezza del segmento
+- si sfrutta la traccia per capire se una matrice possiede almeno un autovalore lambda non reale cioè che la parte immaginaria di lambda é diversa da 0
+- dimostrare che A possiede almeno un autovalore lambda non reale mu con parte reale <=-2
+- notiamo che la traccia di A è -8+i nell'esempio del prof, quindi non è reale
+	- la somma degli autovalori deve per forza esistere almeno un autovalore di A non reale
+	- Deve esistere per forza almeno un autovalore μ con parte reale minore o uguale a −2, perché se tutti  gli autovalori λ1, λ2, λ3, λ4 avessero parte reale maggiore di −2 allora la traccia avrebbe parte reale maggiore di −8:  Re(traccia(A)) = Re(λ1 + λ2 + λ3 + λ4)  = Re(λ1) + Re(λ2) + Re(λ3) + Re(λ4)  > −2 + (−2) + (−2) + (−2) = −8.
+	- ma noi abbiamo visto che il max è -8
+- matrici invertibili
+	- A i C nxn si dice invertibile se esiste una matrice B in C nxn tale che AB=BA=I
+	- in tal caso la marice B è univocamente determinata e si chiama inversa di A denotata con A alla -1
+	- una matrice A si dice invertibile se sei l determinante di A è diverso da 0 se e solo se 0 non è un autovalore di A 
+		- poiché il determinante è il prodotto degli autovalori
+	- AB è invertibile se e solo se A e B sono invertibili poichè det(AB)=det(A)det(B)
+	- l’inversa in tal caso è (AB)−1 = B−1A−1
+	- per trovare l'inversa usiamo il metodo con 1/det(A) per i determinanti di A
+	- facendo scorrere i vettori della base canonica e ricopiando la matrice, poi calcoliamo il determinante
+- matrice diagonalizzabili
+	- una matrice A in C nxn si dice diagonalizzabile se esistono una matrice invertibile X in C nxn e una matrice diagonale D in C nxn t.c A=XDX^-1
+	- oss importante da esame
+		- se indichiamo con lambda 1 lambda n gli elementi diagonali di A e con x1 xn le colonne della matrice X allora nella formula precedente è scritto che per ogni i che va da 1 a n lambda i è un autovalore di A con corrispondente autovettore xi
+		- dimostrazione
+			- quando incontriamo una scrittura di quel tipo come la formula c'è scritto che le colonne di x sono gli autovettori di A gli elementi di D sono autovalori di A 
+			- hanno un ordine ben preciso con corrispondenza ordinata rispetto gli autovalori e gli autovettori
+			- moltiplichiamo la formula di entrambi i membri per X
+				- AX=XD
+				- adesso guardiamo questa equazione column wise quindi colonna per colonna
+				- queste sono due matrici e XD è una matrice in C nxn 
+				- quando le colonne sono uguali queste due cose sono uguali
+				- ogni colonna di AX è uguale alla corrispondente colonna di XD dunque per ogni i da 1 fino a n si ha che AX^i=XD^i
+				- cosa è AX^1 e cosa è XD^1?
+				- pensiamo al prodotto righe per colonne per le matrici
+				- per ottenere la prima colonna facciamo riga per colonna
+				- la prima colonna di AX è tutta A per la prima colonna di X 
+					- che sarebbe x1
+				- e poi XD 1 sarebbe XD per la prima colonna di D ma la prima colonna di D ha tutti zeri quindi l'unico che sopravvive è lambda1x1 
+				- quindi la nostra assegnazione per i=1 ci dice che 
+				- Ax1=lambda1x1
+					- cioè abbiamo la definizione di autovalore ovvero che lambda1 è un autovalore di A con autovettore x1
+				- con lo stesso ragionamento si dimostra che Axi=lambdaixi per ogni i che va da 1 a n
+				- infatti lambdai è un autovalore corrispondente dell'autovettore di xi
+- Matrici hermitiane e simmetriche
+	- data A in C nxn indichiamo con A* la trasposta coniugata di A
+		- ricordando che il coniugato di un numero complesso è
+		- per ogni z in C z=alfa+iB
+		- z coniugato è alfa-iBeta
+	- la trasposta di una matrice coniugata andiamo a fare la trasposta e poi coniughiamo gli elementi come sopra
+	- la trasposta di un prodotto funziona come l'inversa 
+	- AB trasposto è uguale a B trasposto A trasposto
+	- quindi i trasposto coniugato vale uguale AB coniugato trasposto quindi $*$= B* A*
+	- per ogni coppia di matrici moltiplicabili A,B
+	- A in C nxn si dice hermitiana se A*=A 
+	- Oss. 
+		- se le componenti di A sono reali allora A è hermitiana se AT=A cioè se e solo se é simmetrica
+	- Oss.
+		- gli elementi diagonali di una matrice hermitiana sono reali perchè sono uguali ai loro coniugati per definizione di matrici Hermitiane
+	- Oss.
+		- gli autovalori di una matrice hermitiana sono reali
+		- dimostrazione
