@@ -613,3 +613,166 @@ $$
 -\frac{(b-a)f''(\eta)}{12}h^2
 $$
 abbiamo ora raggiunto la fine della dimostrazione.
+
+##### Osservazione di errore
+
+in alcuni esercizi viene usato questo valore $n(\varepsilon)$, cioè il valore che garantisce un errore
+
+$$
+\left|\int_a^b f(x)\,dx-I_n\right|\leq \varepsilon
+$$
+
+se prendiamo
+
+$$
+n\geq n(\varepsilon)
+$$
+
+questo valore $n(\varepsilon)$ è della forma
+
+$$
+\frac{C}{\sqrt{\varepsilon}}
+$$
+
+con $C$ costante.
+
+È un fatto generale, infatti in base alla formula del teorema dell’errore della formula dei trapezi sappiamo che
+
+$$
+\int_a^b f(x)\,dx-I_n
+=
+-\frac{(b-a)f''(\eta)}{12}h^2
+$$
+
+dove $\eta\in[a,b]$ e
+
+$$
+h=\frac{b-a}{n}
+$$
+
+quindi, passando al modulo,
+
+$$
+\left|\int_a^b f(x)\,dx-I_n\right|
+=
+\left|-\frac{(b-a)f''(\eta)}{12}h^2\right|
+=
+\frac{(b-a)|f''(\eta)|}{12}h^2
+$$
+
+siccome
+
+$$
+h^2=\left(\frac{b-a}{n}\right)^2=\frac{(b-a)^2}{n^2}
+$$
+
+allora
+
+$$
+\left|\int_a^b f(x)\,dx-I_n\right|
+=
+\frac{(b-a)|f''(\eta)|}{12}\frac{(b-a)^2}{n^2}
+=
+\frac{(b-a)^3|f''(\eta)|}{12n^2}
+$$
+
+ora chiamiamo $K$ una costante tale che
+
+$$
+|f''(x)|\leq K
+$$
+
+per ogni $x\in[a,b]$.
+
+In particolare, siccome $\eta\in[a,b]$, vale anche
+
+$$
+|f''(\eta)|\leq K
+$$
+
+quindi
+
+$$
+\left|\int_a^b f(x)\,dx-I_n\right|
+=
+\frac{(b-a)^3|f''(\eta)|}{12n^2}
+\leq
+\frac{(b-a)^3K}{12n^2}
+$$
+
+per garantire che l’errore sia minore o uguale a $\varepsilon$, basta imporre
+
+$$
+\frac{(b-a)^3K}{12n^2}\leq \varepsilon
+$$
+
+risolviamo rispetto a $n$:
+
+$$
+\frac{(b-a)^3K}{12n^2}\leq \varepsilon
+$$
+
+equivale a
+
+$$
+(b-a)^3K\leq 12\varepsilon n^2
+$$
+
+quindi
+
+$$
+n^2\geq \frac{(b-a)^3K}{12\varepsilon}
+$$
+
+e dunque
+
+$$
+n\geq \sqrt{\frac{(b-a)^3K}{12\varepsilon}}
+$$
+
+definiamo quindi
+
+$$
+n(\varepsilon)=\sqrt{\frac{(b-a)^3K}{12\varepsilon}}
+$$
+
+in questo modo, se prendiamo
+
+$$
+n\geq n(\varepsilon)
+$$
+
+allora è garantito che
+
+$$
+\left|\int_a^b f(x)\,dx-I_n\right|\leq \varepsilon
+$$
+
+inoltre possiamo riscrivere
+
+$$
+n(\varepsilon)=\sqrt{\frac{(b-a)^3K}{12\varepsilon}}
+=
+\frac{1}{\sqrt{\varepsilon}}\sqrt{\frac{(b-a)^3K}{12}}
+$$
+
+quindi
+
+$$
+n(\varepsilon)=\frac{C}{\sqrt{\varepsilon}}
+$$
+
+dove
+
+$$
+C=\sqrt{\frac{(b-a)^3K}{12}}
+$$
+
+quindi il valore minimo teorico di $n$ cresce come $\frac{1}{\sqrt{\varepsilon}}$: se voglio un errore molto più piccolo, devo aumentare parecchio $n$.
+
+Negli esercizi, siccome $n$ deve essere un numero intero, alla fine si prende
+
+$$
+n=\lceil n(\varepsilon)\rceil
+$$
+cioè il primo intero maggiore o uguale a $n(\varepsilon)$.

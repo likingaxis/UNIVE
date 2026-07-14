@@ -4,7 +4,7 @@
 - [x]  Ruffini-Horner e costo computazionale
 - [x]  Aggiunta di un nodo e introduzione all’integrazione numerica
 - [x]  Formula dei trapezi ed errore
-- [ ]  Estrapolazione
+- [x]  Estrapolazione
 - [ ]  Richiami di algebra lineare
 - [ ]  Matrici definite positive
 - [ ]  Polinomi di matrici e matrici irriducibili

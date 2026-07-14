@@ -554,3 +554,54 @@ h al cubo lo riscriviamo con -h quadro b-a/12
 questa media è un valore compreso tra il minimo e il massimo ovvero f'' di etaj 
 - essendo f''(x) continua su a,b e essendo la media aritmetica 1/n somme per j=0 n-1 di f'' etaj un valore compreso tra il minimo e il massimo di f'' su a,b per il teorema dei valori intermedi esiste sicuramente un punto eta in a,b t.c il valore di f''(eta) è uguale a questa media aritmetica
 abbiamo ora raggiunto la fine quindi
+##### Osservazione di errore
+in alcuni esercizi viene usato questo valore n(epsilon) quello che garantisce un errore integrale tra a e b di f(x)dx-In<=epsilon se prendiamo n>=n epsilon è della forma C/radice di epsilon con C costante
+è un fatto generale infatti in base alla formula del teorema della stima degli errori se chiamo K una costante t.c modulo f''(x) <= K per ogni  x in a,b
+allora la formula della stima degli errori prende b-a al cubo f'' di eta /12 n al quadrato che e  <=b-a al cubo K/12 n al quadrato 
+e b-a al cubo K/12n al quadrato è <= epsilon se e solo se n al quadrato è >= b-a al cubo k /12 epsilon se e solo se n>= radice di b-a al cubo K/12 epsilon= n per epsilon
+con n epsilon= radice b-a al cubo K/12 epsilon = C/radice di epsilon con C=radice b-a al cubo k/12
+
+Questo numero si chiama:
+
+n(ε)n(\varepsilon)n(ε)
+
+cioè il numero minimo teorico di sottointervalli necessario per garantire errore al massimo ε\varepsilonε.
+#### Estrapolazione
+sia f:[a,b]->R integrabile e siano In0 In1 Inm le formule dei trapezi di ordini distinti n0 n1 nm passi h0=b-a/n0 h1=b-a/n1 ... hm=b-a/nm per approssimare integrale a b di f(x)dx
+chiamiamo
+p(x) il polinomio di interpolazione dei dati (h0 al quadrato, In0), (h1 al quadrato, In1),...,(hm al quadrato, Inm)
+dove p(x) è l'unico polinomio in Rm[x] t.c p(hi^2)=Ini per ogni i=0,..,m
+risultato non dimostrato:
+p(0) è il polinomio di interpolazione calcolato in p(0) è una approssimazione dell'integrale di a,b f(x) dx molto più precisa rispetto alle singole formule dei trapezi In0 In1,Inm
+![[Pasted image 20260714104259.png|424]]
+con m=2 p(0) è una approssimazione dell'integrale molto più valida di In2 In1 In0
+la funzione in rosso invece è y=p(x)
+la procedura di valutare in 0 il polinomio di interpolazione p(x) si chiama estrapolazione perchè p(x) viene valutato in un punto 0 che sta fuori dal più piccolo intervallo che contiene i nodi h0 quadro h1 quadro fino ad hm quadro
+p(0) è detto valore estrapolato
+Quindi il polinomio ppp non approssima la funzione originale fff. Approssima il comportamento delle approssimazioni InI_nIn​ al variare di h2h^2h2.
+Perché:
+
+x=h2.x=h^2.x=h2.
+
+Se valuto in:
+
+x=0,x=0,x=0,
+
+sto immaginando:
+
+h2=0h^2=0h2=0
+
+cioè:
+
+h=0.h=0.h=0.
+
+Ma h=0h=0h=0 significherebbe avere intervallini infinitamente piccoli, cioè un numero infinito di trapezi.
+
+In quel caso l’approssimazione dei trapezi dovrebbe diventare l’integrale vero:
+
+lim⁡h→0In=∫abf(x) dx.\lim_{h\to0} I_n = \int_a^b f(x)\,dx.h→0lim​In​=∫ab​f(x)dx.
+
+Quindi p(0)p(0)p(0) cerca di prevedere quale sarebbe il valore dell’integrale nel caso ideale h=0h=0h=0.
+Infine valutiamo questo polinomio in 000, cioè nel caso ideale h=0h=0h=0. Il valore p(0)p(0)p(0) fornisce una stima più accurata dell’integrale ver
+dall'esempio 2.4 alla fine realizziamo che
+Osservazione. Il risultato ottenuto nel punto (d) mostra che, per garantire mediante la formula dei trapezi In un’approssimazione di I con una precisione ε = 1.3 · 10−9 pari a quella fornita da p(0), occorre prendere n = 123114 molto grande. Non vale quindi la pena calcolare In per un n così grande, considerato che la stessa precisione può essere molto più facilmente ottenuta calcolando prima I12, I24, I30 e poi il valore estrapolato p(0) come abbiamo fatto nei punti (b)–(c) di questo esempio.
