@@ -605,3 +605,214 @@ Quindi p(0)p(0)p(0) cerca di prevedere quale sarebbe il valore dell’integrale 
 Infine valutiamo questo polinomio in 000, cioè nel caso ideale h=0h=0h=0. Il valore p(0)p(0)p(0) fornisce una stima più accurata dell’integrale ver
 dall'esempio 2.4 alla fine realizziamo che
 Osservazione. Il risultato ottenuto nel punto (d) mostra che, per garantire mediante la formula dei trapezi In un’approssimazione di I con una precisione ε = 1.3 · 10−9 pari a quella fornita da p(0), occorre prendere n = 123114 molto grande. Non vale quindi la pena calcolare In per un n così grande, considerato che la stessa precisione può essere molto più facilmente ottenuta calcolando prima I12, I24, I30 e poi il valore estrapolato p(0) come abbiamo fatto nei punti (b)–(c) di questo esempio.
+#### Richiami delle matrici di algebra lineare
+- calcolo dei detetrminanti
+	- ripassiamo il metodo di laplace per i determinanti
+- teorema di binet il det(AB)=det(a)det(B) per ogni A,B in C nxn
+- altro teorema det(A)=det(A^T) per ogni A in C nxn
+- fa un esempio per cui la matrice ha determinante nullo
+	- usiamo binet
+- traccia, determinante, raggio spettrale e autovalori
+	- per noi gli autovalori di una matrice nxn sono valutati in base al numero di volte pari alla sua molteplicità algebrica, quindi sono massimo n
+- viene definita la traccia come la somma degli elementi in diagonale, coincide con la somma degli autovalori considerati con la molteplicità
+- il determinante di una matrice è il prodotto delle molteplicità degli autovalori
+- il raggio spettrale di A è \ro(A)=max dei moduli degli autovalori lambda di A
+- cosa si intende per modulo di lambda1 lambda 2 ecc...
+	- sarebbe la distanza dallo 0 quindi la lunghezza del segmento
+- si sfrutta la traccia per capire se una matrice possiede almeno un autovalore lambda non reale cioè che la parte immaginaria di lambda é diversa da 0
+- dimostrare che A possiede almeno un autovalore lambda non reale mu con parte reale <=-2
+- notiamo che la traccia di A è -8+i nell'esempio del prof, quindi non è reale
+	- la somma degli autovalori deve per forza esistere almeno un autovalore di A non reale
+	- Deve esistere per forza almeno un autovalore μ con parte reale minore o uguale a −2, perché se tutti  gli autovalori λ1, λ2, λ3, λ4 avessero parte reale maggiore di −2 allora la traccia avrebbe parte reale maggiore di −8:  Re(traccia(A)) = Re(λ1 + λ2 + λ3 + λ4)  = Re(λ1) + Re(λ2) + Re(λ3) + Re(λ4)  > −2 + (−2) + (−2) + (−2) = −8.
+	- ma noi abbiamo visto che il max è -8
+- matrici invertibili
+	- A i C nxn si dice invertibile se esiste una matrice B in C nxn tale che AB=BA=I
+	- in tal caso la marice B è univocamente determinata e si chiama inversa di A denotata con A alla -1
+	- una matrice A si dice invertibile se sei l determinante di A è diverso da 0 se e solo se 0 non è un autovalore di A 
+		- poiché il determinante è il prodotto degli autovalori
+	- AB è invertibile se e solo se A e B sono invertibili poichè det(AB)=det(A)det(B)
+	- l’inversa in tal caso è (AB)−1 = B−1A−1
+	- per trovare l'inversa usiamo il metodo con 1/det(A) per i determinanti di A
+	- facendo scorrere i vettori della base canonica e ricopiando la matrice, poi calcoliamo il determinante
+- matrice diagonalizzabili
+	- una matrice A in C nxn si dice diagonalizzabile se esistono una matrice invertibile X in C nxn e una matrice diagonale D in C nxn t.c A=XDX^-1
+	- oss importante da esame
+		- se indichiamo con lambda 1 lambda n gli elementi diagonali di A e con x1 xn le colonne della matrice X allora nella formula precedente è scritto che per ogni i che va da 1 a n lambda i è un autovalore di A con corrispondente autovettore xi
+		- dimostrazione
+			- quando incontriamo una scrittura di quel tipo come la formula c'è scritto che le colonne di x sono gli autovettori di A gli elementi di D sono autovalori di A 
+			- hanno un ordine ben preciso con corrispondenza ordinata rispetto gli autovalori e gli autovettori
+			- moltiplichiamo la formula di entrambi i membri per X
+				- AX=XD
+				- adesso guardiamo questa equazione column wise quindi colonna per colonna
+				- queste sono due matrici e XD è una matrice in C nxn 
+				- quando le colonne sono uguali queste due cose sono uguali
+				- ogni colonna di AX è uguale alla corrispondente colonna di XD dunque per ogni i da 1 fino a n si ha che AX^i=XD^i
+				- cosa è AX^1 e cosa è XD^1?
+				- pensiamo al prodotto righe per colonne per le matrici
+				- per ottenere la prima colonna facciamo riga per colonna
+				- la prima colonna di AX è tutta A per la prima colonna di X 
+					- che sarebbe x1
+				- e poi XD 1 sarebbe XD per la prima colonna di D ma la prima colonna di D ha tutti zeri quindi l'unico che sopravvive è lambda1x1 
+				- quindi la nostra assegnazione per i=1 ci dice che 
+				- Ax1=lambda1x1
+					- cioè abbiamo la definizione di autovalore ovvero che lambda1 è un autovalore di A con autovettore x1
+				- con lo stesso ragionamento si dimostra che Axi=lambdaixi per ogni i che va da 1 a n
+				- infatti lambdai è un autovalore corrispondente dell'autovettore di xi
+- Matrici hermitiane e simmetriche
+	- data A in C nxn indichiamo con A* la trasposta coniugata di A
+		- ricordando che il coniugato di un numero complesso è
+		- per ogni z in C z=alfa+iB
+		- z coniugato è alfa-iBeta
+	- la trasposta di una matrice coniugata andiamo a fare la trasposta e poi coniughiamo gli elementi come sopra
+	- la trasposta di un prodotto funziona come l'inversa 
+	- AB trasposto è uguale a B trasposto A trasposto
+	- quindi i trasposto coniugato vale uguale AB coniugato trasposto quindi $*$= B* A*
+	- per ogni coppia di matrici moltiplicabili A,B
+	- A in C nxn si dice hermitiana se A*=A 
+	- Oss. 
+		- se le componenti di A sono reali allora A è hermitiana se AT=A cioè se e solo se é simmetrica
+	- Oss.
+		- gli elementi diagonali di una matrice hermitiana sono reali perchè sono uguali ai loro coniugati per definizione di matrici Hermitiane
+	- Oss.
+		- gli autovalori di una matrice hermitiana sono reali
+		- dimostrazione
+		- sia A in C nxn harmitiana e sia lambda un suo autovalore generico
+		- allora esiste un autovettore sia x in C n \{0} un autovettore associato a lambda
+		- Ax=lambdax
+		- x* sarebbe= vettore riga di x ma anche coniugato
+		- posso moltiplicare entrambi i membri per x* 
+		- x*Ax=x*lambdax
+		- Ax era un vettore colonna
+		- x*Ax è uno scalare 
+		- qui abbiamo una uguaglianza tra 2 scalari
+		- porto fuori lambda e posso scrivere x*x come scalare quindi metterlo come
+		- lambda che moltiplica i=1 a n di xi coniugato xi
+		- cosa succede se facciamo un valore per il suo coniugato?
+		- avremmo a+iB e a-iB quindi viene il modulo al quadrato
+		- quindi dentro la sommatoria mettiamo il modulo al quadrato
+		- è un numero strettamente positivo quindi lambda=x*Ax/sommatoria che va da 1 a n di moudulo di xi al quadrato
+		- se ho un numero reale diviso un numero positivo allora ne ho uno reale
+		- dimostriamo che x*Ax è reale
+		- quale è il complesso coniugato di tutto x*Ax coincide con il numero x*Ax tutto coniugato e trasposto
+		- quindi (xy)*=y*x*
+		- ottenendo perciò x*A*(x*)*=x*Ax 
+		- un numero complesso coniugato a se stesso è reale 
+#### Matrici definite positive
+A in C nxn si dice dice definita postiva se Re(x*Ax)>0 per ogni x in Cn\{0}
+dove Re sta per rappresentazione reale
+osserviamo che per ogni A in C nxn e per ogni x in Cn
+la parte reale Re(x*Ax) sarebbe z+z coniugato/2 uguale ad alfa
+quindi Re(x*Ax)=x*Ax+x*Ax coniugato/2=x*Ax+x*A*x/2
+raccogliamo per x* 
+e abbiamo questo
+la matrice tra x* e x è la matrice parte Reale di A
+la parte immagiaria di A Im(A) è A-A*/2i perchè la parte immaginaria di 2 valori è z-z coniugato/2i 
+partendo sempre dal fatto che z coniugato di z= alfa-iB per alfa+iB
+Oss. Re(A) e Im(A) sono sempre matrici hermitiane dim=esercizio usate questa 
+Lo si dimostri per esercizio sfruttando il fatto che (αB)∗ = αB∗ per ogni α ∈ C e ogni matrice B.
+A in C nxn è definita positiva se e solo se la parte reale di x*AX>0 per ogn x in C n tranne 0
+è la stessa cosa di dire che x*Re(A)x>0 per ogni x in C n tranne 0
+è come dire Re(x*Re(A)x)>0 per ogni x in Cn tranne 0
+sto dicendo quindi che la parte reale di A è definita positiva per definizione
+ovvero è un amatrice che ha parte Re(x*Ax)>0 per ogni x in Cn
+quindi A è definita positiva è come dire che la sua parte reale Re(A) è definita positiva
+ricordiamo che la parte reale di A è sempre harmitiana
+
+Proprietà
+se A è in C nxn è definita positiva allora i suoi autovalori hanno parte reale positiva e di conseguenza A è invertibile perchè 0 non è un autovalore di A
+Dimostrazione
+Sia A in C nxn definita positiva e sia lambda un generico autovalore di A allora preso x in C n tranne 0 autovttore di A associato a lambda allora si ha Ax=lambdax
+moltiplico per x* e avrò x*Ax=x*(lambdax)=lambda della sommatoria di i che va da 1 a n di xi coniugato per xi= lambda della sommatoria del modulo di xi al quadrato
+per cui lambda= x*Ax/sommatoria di i che va da1 a n di xi modulo al quadrato
+sappiamo che la parte al numeratore ha parte reale positiva e che sotto è >0
+al numeratore 
+la parte reale di lambda è uguale a Re(x*Ax)/la sommatoria di i che va da 1 a n di modulo xi al quadrato
+che è >0
+questo perchè sappiamo che definita z=alfa+iB con alfa>0 abbiamo che z/r=alfa/r+iB/r
+dove dividiamo tutto per un r che rappresenta un reale positivo
+serve per dire che se un numero complesso ha parte reale positiva, allora anche dividendo per un numero reale positivo, la parte reale resta positiva.
+##### Teorema
+sia A in C nxn una matrice hermitiana e siano A1=[a11], A2=[a11 a12 a21 a22], A3=[a11 a1 ] 
+scrivile come matrici fino ad An=A
+queste sono definite come le principali sottomatrici di testa di A
+sapendo che A è definito come la matrice che va da a11 fino ad ann
+allora le seguenti condizioni sono equivalenti:
+1. A è definita positiva
+2. x*Ax>0 per ogni x in Cn tranne 0
+3. gli autovalori di A sono reali e positivi
+4. det(Ak)>0 per ogni k che va da 1 a n
+MI RACCOMANDO QUESTO VALE SOLO SE LA MATRICE È HERMITIANA
+ma ricordiamo che una matrice A è definita positiva se solo se la sua parte reale è positiva
+lo applico alla parte reale o alla matrice se è hermitiana (spiega meglio questa cosa)
+il prof ha chiesto di dimostrare che 1<=>2 e che 1=>3 
+ricordiamo che Re(A)=A+A*/2
+##### Polinomi di matrici
+sia p(lambda) un polinomo =a0+a1lambda+a2lambda2+...+amlambdam
+- al posto di avere x mettiamo lambda perchè lavoriamo con matrici ma andava bene anche x
+e sia A in Cnxn una matrice
+Definiamo
+p(A)=a0I+a1A+a2Aquadro+...+amA allam in C nxn
+sto sommando delle matrici nxn per degli scalari, rimane comunque in totale una matrice nxn
+##### Teorema
+Sia p(lambda) un polinomio e sia A in C nxn una matrice con autovalori da lambda1 a lambda n
+allora gli autovalori di p(A) sono p(lambda1),...,p(lambdan)
+- gli autovalori del polinomio di p(A) sono le valutazioni del polinomio di p(lambda1)...p(lambdan)
+Dimostriamo questo teorema in 3 casi
+- caso 1
+	- p(lambda)=a0 è costante in tal caso p(A)=a0I=>gli autovalori di p(A) sono a0,...,a0 n volte= p(lambda1),...,p(lambdan) sono tutti a0 perchè quello che restituisce p(lambda) è sempre a0 indipendentemente da lambda
+		- perchè abbiamo una matrice diagonale, infatti è quella identità e quindi gli autovalori di una matrice diagonale sono proprio tutti a0
+piccola spiegazione aggiuntiva da integrare al caso 1 in formato breve:
+Adesso chiediamoci: quali sono gli autovalori di
+
+a0I?a_0I?a0​I?
+
+Ricorda la definizione: λ\lambdaλ è autovalore di una matrice BBB se esiste un vettore v≠0v\neq0v=0 tale che:
+
+Bv=λv.Bv=\lambda v.Bv=λv.
+
+Nel nostro caso:
+
+B=a0I.B=a_0I.B=a0​I.
+
+Allora:
+
+Bv=a0Iv.Bv=a_0Iv.Bv=a0​Iv.
+
+Ma la matrice identità lascia invariato ogni vettore:
+
+Iv=v.Iv=v.Iv=v.
+
+Quindi:
+
+a0Iv=a0v.a_0Iv=a_0v.a0​Iv=a0​v.
+
+Questo ha esattamente la forma:
+
+Bv=λv.Bv=\lambda v.Bv=λv.
+- caso 2
+	- p(lambda)=a0+a1lambda ha grado 1 rispetto a prima che era grado 0
+	- in tal caso il polinomio caratteristico di p(A) e quello di A sono legati dalla seguente relazione
+	- per ogni lambda in C il polinomio caratteristico C_{p(A)}(lambda)=det(lambdaI-p(A))=det(lambdaI-(a0I+a1A)) raccolgo per I = det((lambda-a0)I-a1A)=det(a1(lambda-A0/a1I-A))
+	- ricordiamo che per ogni a in C e per ogni B in C nxn abbiamo che det(aB)=a^ndet(B)
+	- quindi a1 alla n det(lambda-a0/a1I-A))
+	- vediamo quel lambda-a0/a1 come una possibile variabile del polinomio caratteristico di A 
+	- quindi abbiamo che questo è uguale a a1alla n per CA(lambda-a0/a1)
+	- gli autovalori di p(A) sono {lambda in C:Cp(A)lambda=0}={lambda in C:CA(lambda-a0/a1)=0}
+	- il polinomio caratteristico si annulla quando lambda deve essere uno degli autovalori di A
+	- quindi {lambda in C:lambda-a0/a1=lambda1,...,lambdan}={lambda in C:lambda=a0+a1lambda1,a0+a1lambda2,...,a0+a1lambdan}={a0+a1lambda1,a0+a1lambda2,...,a0+a1lambdan}=p(lambda1),p(lambda2),...,p(lambdan)
+- caso 3
+	- assumendo A diagonalizzabile allora esiste matrice X in Cnxn e esiste una matrice D=diag(lambda1,..,lambdan) in diagonale con gli autovalori di A
+	- t.c A=XDX alla meno 1
+	- A quadro sarebbe= XDX alla-1 XDX alla-1= XDquadroX alla -1
+	- A cubo sarebbe scrivi tu cosa sarebbe
+	- A alla k avremmo XD alla k X alla -1 per ogni k>=0
+	- vogliamo dimostrare che sia p(lambda)=a0+a1lambda+amlambda alla m
+	- il polinomio nelle ipotesi del teorema è p(A)=a0I+a1A+a2A quadro+...+amA alla m
+	- sostituendo le A come le conosciamo scriviamo p(A)= scrivi tu come sarebbe
+	- raccogliamo per x alla -1 e x la cosa al centro sarebbe uguale a p(D) 
+	- p(D) per definizione è a0I+a1D+...+amD alla m=a0 [matrice identità]+a1[matrice D mettila qui]+a2[matrice con D al quadrato]+...+am[matrice con D alla m]
+	- facciamo la somma di queste matrici avremmo [scrivi qui la matrice con i puntini puntini]
+	- il primo elemento di questa matrice è p(lambda1) e alla fine abbiamo p(lambdan)
+	- ora abbiamo dimostrato che p(A)=Xp(D)X alla -1
+	- in questa formula stiamo dicendo diverse cose, p(A) è diagonalizzabile, gli elementi diagonali di p(D) sono gli autovalori di p(A) le colonne di X sono gli autovettori di p(A)
+	- dal punto 2 segue quindi che gli autovalori di p(A) sono p(lamda1) p(lambda2),...,p(lambdan)

@@ -1,3 +1,0 @@
-
-#### Esempio 3.4
-Esempio 3.4. Dire se la matrice  A=     2 −1 1 −1 2 0 1 01     è definita positiva.  Soluzione. Osserviamo che A è hermitiana (reale e simmetrica). Pertanto, grazie al Teorema 3.1, A è definita positiva se e solo se det(Ak) > 0 per ogni k = 1, 2, 3. Si ha  det(A1) = 2 > 0, det(A2) =  ∣ ∣ ∣ ∣  2 −1 −1 2  ∣ ∣ ∣ ∣  = 3 > 0, det(A3) =  ∣ ∣ ∣ ∣ ∣ ∣  2 −1 1 −1 2 0 1 01  ∣ ∣ ∣ ∣ ∣ ∣  =  ∣ ∣ ∣ ∣  −1 1 20  ∣ ∣ ∣ ∣  +  ∣ ∣ ∣ ∣  2 −1 −1 2  ∣ ∣ ∣ ∣  = −2 + 3 = 1 > 0.  Dunque A è definita positiva.
