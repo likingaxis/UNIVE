@@ -7,8 +7,8 @@
 - [x]  Estrapolazione
 - [x]  Richiami di algebra lineare
 - [x]  Matrici definite positive
-- [ ]  Polinomi di matrici e matrici irriducibili
-- [ ]  Teoremi di Gershgorin
+- [x]  Polinomi di matrici e matrici irriducibili
+- [x]  Teoremi di Gershgorin
 - [ ]  Diagonale dominante e invertibilità
 - [ ]  Norme vettoriali e matriciali
 - [ ]  Metodi iterativi stazionari e convergenza
