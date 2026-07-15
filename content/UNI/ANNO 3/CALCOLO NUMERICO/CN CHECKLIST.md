@@ -5,8 +5,8 @@
 - [x]  Aggiunta di un nodo e introduzione all’integrazione numerica
 - [x]  Formula dei trapezi ed errore
 - [x]  Estrapolazione
-- [ ]  Richiami di algebra lineare
-- [ ]  Matrici definite positive
+- [x]  Richiami di algebra lineare
+- [x]  Matrici definite positive
 - [ ]  Polinomi di matrici e matrici irriducibili
 - [ ]  Teoremi di Gershgorin
 - [ ]  Diagonale dominante e invertibilità
