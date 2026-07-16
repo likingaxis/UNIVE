@@ -195,6 +195,8 @@ y_n
 \end{pmatrix}
 $$
 ricordando che, dato un polinomio in quella forma, allora se i coefficienti sono unici allora anche il polinomio è unico
+>[!info]- extra
+
 
 ora si vuole dimostrare che il determinante di $V$ è proprio quel determinante
 la dimostrazione la facciamo per $n=3$ ma questo vale per $n\geq 1$
@@ -221,13 +223,9 @@ d_3=
 $$
 
 creiamo degli $0$ nella riga per calcolare il determinante
-
 sostituiamo una colonna con se stessa meno la colonna precedente moltiplicata per $x_3$
-
 questa operazione non cambia il determinante
-
 partendo dalla colonna più a destra facciamo
-
 $$
 C_4\leftarrow C_4-x_3C_3
 $$
@@ -303,12 +301,9 @@ $$
 
 estraiamo dalle righe gli scalari in comune
 
-nella prima riga raccogliamo $x_0-x_3$
-
-nella seconda riga raccogliamo $x_1-x_3$
-
-nella terza riga raccogliamo $x_2-x_3$
-
+- nella prima riga raccogliamo $x_0-x_3$
+- nella seconda riga raccogliamo $x_1-x_3$
+- nella terza riga raccogliamo $x_2-x_3$
 quindi
 
 $$
@@ -324,7 +319,6 @@ d_3
 $$
 
 la matrice a destra è proprio $d_2$
-
 $$
 d_2=
 \begin{vmatrix}
@@ -333,9 +327,7 @@ d_2=
 1 & x_2 & x_2^2
 \end{vmatrix}
 $$
-
 quindi
-
 $$
 d_3
 =
@@ -346,35 +338,25 @@ $$
 sono usciti $3$ fattori e il $(-1)^3$ lo possiamo applicare cambiando il verso di ogni fattore
 
 infatti
-
 $$
 (-1)^3(x_0-x_3)(x_1-x_3)(x_2-x_3)
 =
 (x_3-x_0)(x_3-x_1)(x_3-x_2)
 $$
-
 quindi
-
 $$
 d_3=(x_3-x_0)(x_3-x_1)(x_3-x_2)d_2
 $$
-
 questa è una formula ricorsiva
-
 allo stesso modo
-
 $$
 d_2=(x_2-x_0)(x_2-x_1)d_1
 $$
-
 e
-
 $$
 d_1=(x_1-x_0)
 $$
-
 infatti
-
 $$
 d_1=
 \begin{vmatrix}
@@ -730,6 +712,8 @@ q(x)=p(x)
 $$
 
 quindi abbiamo dimostrato l’unicità del polinomio interpolante
+$$\square$$
+
 
 ##### Definizione
 siano

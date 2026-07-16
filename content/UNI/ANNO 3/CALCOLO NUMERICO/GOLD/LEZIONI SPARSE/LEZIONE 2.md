@@ -348,3 +348,4 @@ f(x)-p(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)(x-x_1)\cdots(x-x_n)
 $$
 
 che è proprio la formula dell’errore o resto dell’interpolazione polinomiale.
+$$\square$$
