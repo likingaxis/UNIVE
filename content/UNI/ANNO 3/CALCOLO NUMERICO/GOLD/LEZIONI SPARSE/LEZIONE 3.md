@@ -83,8 +83,8 @@ $$
 
 quindi nel caso di due punti la differenza divisa coincide con il rapporto incrementale di $f(x)$ relativo ai punti $y_1,y_2$
 
-#### ora definiamo il teorema di Newton
-
+#### Teorema 1.3
+Teorema di Newton
 sia $f:[a,b]\to\mathbb{R}$ e siano
 
 $$

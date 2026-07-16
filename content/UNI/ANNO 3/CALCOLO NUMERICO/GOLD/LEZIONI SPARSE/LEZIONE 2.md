@@ -2,7 +2,7 @@
 
 Quanto sbagliamo nell'approssimazione.
 
-#### Teorema
+#### Teorema 1.2
 
 sia $f:[a,b]\to\mathbb{R}$ una funzione di classe $C^{n+1}[a,b]$
 
