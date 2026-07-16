@@ -22,7 +22,7 @@ $$
 
 vediamo ora un lemma utile per dimostrare poi il teorema
 
-###### Lemma
+###### Lemma 2.1
 
 siano $\omega,\alpha,\beta:[a,b]\to\mathbb{R}$ funzioni tali che:
 
@@ -192,7 +192,7 @@ che è proprio quello che volevamo dimostrare.
 > z(\eta)=L
 > $$
 
-##### Teorema
+##### Teorema 2.1
 
 ![[Pasted image 20260713130109.png]]
 

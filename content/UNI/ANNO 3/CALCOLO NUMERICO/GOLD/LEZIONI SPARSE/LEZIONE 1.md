@@ -35,7 +35,7 @@ esiste un unico $p(x)\in\mathbb{R}_n[x]$ tale che
 $$
 p(x_i)=f(x_i)\qquad i=0,\ldots,n
 $$
-#### Teorema 1.1 precisato
+#### Teorema 1.1 
 siano
 $$
 (x_0,y_0),(x_1,y_1),\ldots,(x_n,y_n)\in\mathbb{R}^2

@@ -301,7 +301,7 @@ $$
 
 dunque tutti gli autovalori di $A$ hanno parte reale positiva. In particolare nessun autovalore può essere $0$, quindi $A$ è invertibile.
 
-##### Teorema
+##### Teorema 3.1
 
 sia $A\in\mathbb{C}^{n\times n}$ una matrice hermitiana e siano $A_1,A_2,\ldots,A_n$ le sue sottomatrici principali di testa.
 
@@ -535,7 +535,7 @@ $$
 p(A)\in\mathbb{C}^{n\times n}
 $$
 
-##### Teorema
+##### Teorema 3.2
 
 sia $p(\lambda)$ un polinomio e sia $A\in\mathbb{C}^{n\times n}$ una matrice con autovalori
 
