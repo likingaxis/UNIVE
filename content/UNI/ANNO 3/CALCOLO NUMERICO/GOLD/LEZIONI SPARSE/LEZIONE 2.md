@@ -297,6 +297,9 @@ $$
 \pi(y)=y^{n+1}+\text{termini di grado minore}
 $$
 
+
+
+
 facendo la derivata $(n+1)$-esima, tutti i termini di grado minore spariscono e rimane
 
 $$
