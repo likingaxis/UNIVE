@@ -1093,3 +1093,144 @@ che tende a 0
 quindi la convergenza componente per componente coincide con la convergenza rispetto alla norma infinito
 allora ricordando l'equivalenza di tutte le norme
 dire x k->x componente per componente è lo stesso che dire che xk->x in una qualsiasi norma
+#### Norme matriciali
+Si vuole introdurre un concetto di distanza sullo spazio delle matrici per misurare la vicinanza tra due matrici A,B in C nxn
+Definizione
+Una funzione || . || : C nxn in R si dice norma matriciale se soddisfa le seguenti proprietà
+a) norma di A maggiore uguale di 0 e norma di A =0 se e solo se A=0 positività
+b) norma di alfa A= modulo di alfa per norma di A per ogni alfa in C per ogni A in Cnxn omoegeneità
+c) norma A+B <= norma di A + norma di B per ogni A,B in C nxn disuguaglianza triangolare
+
+Data una norma matriciale || . || : C nxn -> R definiamo la distanza fra due matrici A,B in C nxn 
+come la norma di A-B
+un modo intuitivo per definire una norma matriciale su C nxn consiste nell'interpretare una matrice A in C nxn come un vettore di n^2 componenti e usare come norma di A una delle norme vettoriali già usate per i vettori
+Data A in C nxn definisco la norma infinito di A con una sola stanghetta che usa la norma dei vettori= max i,j che va da 1 a n modulo aij analoga della norma infinito per i vettori
+Problema: questa norma infinito con una stanghetta sola non si comporta bene rispetto al prodotto di matrici, nel senso che non é sub moltiplicativa, date due matrici A,B in C nxn non è detto che valga norma AB infinito <=norma di A infinito per norma di B infinito
+Ecco un esempio:  A=  [1 1 01  ]  , B=  [1 0 11  ]  , AB =  [2 1 11  ]  ,  |A|∞ = 1, |B|∞ = 1, |AB|∞ = 2.
+
+una norma matriciale è anche definita così ma noi vogliamo una proprietà in più detta di sub additività ovvero quella definita sopra
+#### Norme matriciali indotte
+Definizione. Data una norma vettoriale con doppia stanghetta in C nxn e una matrice A in C nxn definiamo 
+norma A=max x!=0 norma di Ax fratto norma di x dove x è in Cn tutti i vettori tranne lo zero
+max di x in Cn x diverso da 0 
+questo uguale al max x in Cn x diverso da 0 applichiamo la proprietà di omogeneità e avere norma di 1/norma di x per Ax
+max x in Cn x diverso da 0 norma di A x/norma di x 
+sapendo che A(alfax)=alfaAx
+
+x/norma di x diventa y
+quanto sarebbe la norma di y?
+norma di x/norma di x= 1/norma x per norma x=1
+quindi il massimo è al variare di y in Cn con norma di y=1 della norma di Ay
+Si può dimostrare che || . || tale che C nxn -> R è una norma matriciale
+che si chiama norma matriciale indotta dalla norma vettoriale con stessa norma
+OSS. 
+una norma matriciale indotta si denota sempre allo stesso modo con cui è stata indotta
+##### Teorema 3.9
+Sia ||.||: C nxn -> R una norma matriciale indotta dalla norma vettoriale denotata con lo stesso simbolo
+e siano A,B in C nxn  valgono le seguenti proprietà:
+1. la norma della matrice Identità vale 1 norma I=1
+2. la norma di Ax<=norma di A per norma di x per ogni x in Cn
+3. la norma di A è la più piccola costante C che soddisfa la proprietà del punto 2 quindi norma di Ax<= C norma di x per ogni x in Cn
+4. norma di AB <= norma di A per norma di B submoltiplicatività
+5. ro(A) ovvero il raggio spettrale di A è il massimo degli autovalori di A è <= norma di A
+###### Soluzione
+dimostriamo 1
+norma di I=max x in Cn norma di x=1 norma di Ix è la norma di x ovvero =1
+dimostriamo 2
+per ogni x in Cn tranne vettore nullo si ha che la norma di Ax/norma di x<=max y in Cn con y diverso vettore nullo di norma di Ay/norma di y per definizione questa è la norma di A
+moltiplico per norma di x per cui la norma di Ax <= norma di A per norma di x
+per il vettore nullo faccio una vera e propria sostituzione
+avremmo 0<=0
+quindi dimostrato anche per l'unico vettore nullo x=0
+dimostriamo 3
+sia C una costante che soddisfa la norma di Ax<= C norma x per ogni vettore x in Cn
+mostriamo che C è maggiore uguale della norma di A 
+Da Ax<=C norma di x si ottiene dividendo per norma di x che per ogni vettore di x diverso dal vettore nullo
+la norma di Ax/norma di x <= C per ogni x diverso dal vettore nullo
+se vale per tutti gli x diversi dal vettore nullo quindi anche per il massimo
+perciò max y in Cn y diverso da 0 norma di Ay/norma y <=C 
+questa qui è esattamente la norma di A che è <= C 
+dimostriamo 4
+per ogni x in Cn si ha norma di Abx <= norma di A per norma di Bx<= norma di A per norma di B per norma di x
+la applichiamo quindi 2 volte
+quindi  norma di A per norma di B è una delle costanti C che soddisfano la disuguaglianza norma di Abx <= C norma x per ogni x in Cn
+riprendendo la proprietà 3 e la 2
+sapendo questo per la proprietà 3 la norma di Ab è la più piccola costante C che soddisfa 
+norma di AB x <= C norma di x per ogni x in Cn
+quindi la norma di Ab <= norma di A per la norma di B
+dimostriamo 5
+sia lambda un autovalore di A t.c modulo di lambda= ro(A)
+e sia x diverso da vettore nullo un corrispondente autovettore
+Ax=lambdax
+abbiamo poi la norma di Ax= norma di lambda x
+per omogeneità scriviamo= modulo di lambda normax = ro(A) norma di x
+divido per norma di x e ottengo ro(A)= norma di Ax/ norma di x
+questo è minore uguale del max di y in Cn y diverso da 0 di norma Ay/ norma y = norma di A
+#### Norme vettoriali indotte 1,2, infinito
+Le norme matriciali più importanti sono
+norma A1= max x in Cn con x diverso vettore nullo con norma Ax1 fratto norma di x1
+norma A2= max x in Cn x diverso da 0 norma Ax 2/norma x 2
+norma A infinito=max x in Cn x diverso da 0 norma di Ax infinito/norma x infinito
+
+##### Teorema 3.10
+per ogni A in C nxn valgono le seguenti formule
+norma di A 1= max j=1 n delle somme di i che va da 1 a n modulo di aij= max(‖A[1]‖1, ‖A[2]‖1, . . . , ‖A[n]‖1).
+norma di A2= radice di ro(A per A)
+norma infinito= max di i che va da 1 a n della sommatoria di j=1 n del modulo di aij= max(‖A[1]‖1, ‖A[2]‖1, . . . , ‖A[n]‖1).
+
+A* rappresenta la trasposta
+#### Equivalenza delle norme
+##### Teorema 3.11
+Tutte le norme matriciali, anche quelle indotte e non in Cnxn sono equivalenti nel senso che 
+se prendiamo due norme matriciali norma primo e norma secondo da C nxn ->R allora si ha che la norma di A primo è compreso tra alfa norma di A secondo e Beta norma di A secondo per ogni A in C nxn dove alfa, beta>0 sono costanti indipendenti da A
+#### Successioni di matrici
+Una successione di matrici A0 A1 A2 ... in C nxn si dice convergente alla matrice A in C nxn
+rispetto alla norma matriciale ||.|| se norma di A (k) -A tende a 0 dove (k) è l'indice della successione
+siccome tutte le norme matriciali sono equivalenti, se una successione di matrici converge ad A rispetto a una norma allora converge ad A rispetto a tutte le norme
+dimostrazione data per esercizio, ma fallo tu grazie
+
+Una successione di matrici A0 A1 A2 ... in C nxn si dice convergente componente per componente
+a una matrice A in c nxn se Ak ->A componente per componente
+cioè se 
+
+akij -> aij per ogni i,j che va da 1 a n dove a sono le componenti
+se e solo se modulo di aijk -aij->0 per ogni i che va da 1 a n se e solo se max i,j che va da 1 a n modulo aijk-aij ->0 questa rappresenta proprio la norma delle matrici classica 
+quindi norma di Ak-A infinito ->0
+Quindi la convergenza componente per componente altro non è che la convergenza in norma infinito classica con una stanghetta sola
+ricordando il teorema di equivalenza di tutte le norme dire che Ak ->A componente per componente è come dire che Ak-> A in una qualsiasi norma
+##### Teorema 3.12
+Sia A in C nxn allora 
+Ak -> 0 ovvero la matrice nulla se e solo se ro(A)<1
+dove per Ak qui si intende la potenza 
+Dimostriamo nel caso di A in C nxn diagonalizzabile
+allora esiste x in C nxn invertibile ed esiste D= diag( lambda1,lambdan)
+diagonale avente sulla diagonale gli autovalori di A tali che la matrice A la posso scrivere come A=XDXalla meno 1
+A2 sarà XDX-1per XDX -1 quindi qui abbiamo XDIDX-1= XD al quadrato per X -1
+A3 sarà XD3X-1
+Ak sarà XDkX-1
+dimostriamo <=
+supponiamo che raggio spettrale di A sia <1
+allora applichiamo una norma indotta come quella infinito
+ottengo che norma Ak infinito=norma XdkX-1 infinito per sub moltiplicatività abbiamo che <= norma X infinito per norma DkX-1 una seconda volta <=norma X infinito per norma Dk infinito per norma X-1 infinito
+D alla k sono i valori in diagonale lambda alla k di D
+quindi la norma di Dk di infinito è uguale al massimo delle righe quindi il massimo delle lambda perchè nelle righe c'è solo lambda
+tiro fuori dal modulo alla k e quindi ho il massimo tra i vari lambda in modulo tutto alla k
+il massimo dei lambda è proprio uguale al ro di A alla k
+quindi abbiamo
+norma di X infinito ro(A) alla k norma di X-1 infinito
+il raggio spettrale di A per ipotesi era <1 per k che tende a infinito tende a 0
+se avessimo raggio spettrale -2 avremmo una cosa che non tende a 0 ma il raggio spettrale è sempre positivo quindi ro(A alla k) tende a 0 per k che tende a infinito
+
+quindi la norma di Ak infinito è compresa tra 0 e 0  per k che tende a infinito
+quindi la norma di Ak infinito tende a 0
+ora dimostriamo =>
+supponiamo che A alla k ->matrice nulla
+Ak=xDkX-1 se moltiplichiamo a sx e dx per X e X-1
+X-1AkX=Dk
+dimostrato prima che ro(A) allak è uguale a norma di Dk infinito è uguale a norma di x-1AkX infinito per sub moltiplicatività in 2 step <=norma di X-1 infinito per norma Ak infinito per norma di X infinito
+norma di Ak infinito tende a 0 quindi ro Ak è compreso tra 0 e una cosa che tende a 0
+quindi per il teorema del sandwitch ro(Ak) tende a 0
+raggio spettrale di A <1 perchè il raggio spettrale di A compreso tra 0 e infinito
+se fosse 1 tende a 1 se fosse più grande di 1 tende a infinito
+quindi compreso tra 0 e 1 con 1 escluso quindi <1
+$$\square$$
