@@ -962,3 +962,134 @@ in questo esempio qua sotto nessuno può essere un autovalore di A
 
 Osservazione 3.1. Gli autovalori di una matrice A ∈ Cn×n e della sua trasposta AT coincidono perché i polinomi caratteristici di A e AT coincidono:  CAT (λ) = det(λI − AT ) = det((λI − A)T ) = det(λI − A) = CA(λ).  Di conseguenza, possiamo applicare i teoremi di Gershgorin non solo ad A ma anche ad AT per ottenere localizzazioni migliori degli autovalori di A. In particolare, il primo teorema di Gershgorin applicato ad A e AT ci dice la cosa seguente.
 Di conseguenza, possiamo applicare i teoremi di Gershgorin non solo ad A ma anche ad AT per ottenere localizzazioni migliori degli autovalori di A. In particolare, il primo teorema di Gershgorin applicato ad A e AT ci dice la cosa seguente.  Gli autovalori di una matrice A ∈ Cn×n stanno tutti sia nell’unione dei cerchi di Gershgorin K1, . . . , Kn di A sia nell’unione dei cerchi di Gershgorin H1, . . . , Hn di AT , per cui stanno nell’intersezione delle due unioni (K1 ∪ · · · ∪ Kn) ∩ (H1 ∪ · · · ∪ Hn).  Notiamo che i cerchi di Gershgorin H1, . . . , Hn di AT sono semplicemente i cerchi di Gershgorin per colonna di A, in quanto le righe di AT sono le colonne di A. Pertanto, il risultato precedente può anche essere enunciato nel modo seguente.  Gli autovalori di una matrice A ∈ Cn×n stanno tutti sia nell’unione dei cerchi di Gershgorin per riga K1, . . . , Kn di A sia nell’unione dei cerchi di Gershgorin per colonna H1, . . . , Hn di A, per cui stanno nell’intersezione delle due unioni (K1 ∪ · · · ∪ Kn) ∩ (H1 ∪ · · · ∪ Hn).  Osserviamo inoltre, in vista dell’applicazione del terzo teorema di Gershgorin, che una matrice A è irriducibile se e solo se la sua trasposta AT è irriducibile (Esercizio 3.8
+### Matrice a diagonale dominante e a diagonale dominante in senso stretto
+Sia A in C nxn una matrice
+si dice che A è a diagonale dominante per righe se:
+- 1.
+	 - modulo di aii >= sommatoria di j che va da 1 a n di j diverso da i modulo aij per ogni i che va da 1 a n
+	 - la distanza del centro Ki è maggiore uguale del raggio
+	- questa condizione si esprime anche dicendo che nessun cerchio di gershgorin di A contiene lo 0 al suo interno
+	- Infatti nel piano complesso il modulo
+	- ∣aii∣|a_{ii}|∣aii​∣
+	- è proprio la distanza di aiia_{ii}aii​ dall’origine.
+![[Pasted image (16).png]]
+- 2.
+	- esiste almeno un indice k in 1 n interno
+	- tale che modulo di akk > sommatoria di j=1 n con j!=k modulo akj questa condizione si esprime anche dicendo che esiste almeno un cerchio di gershgorin di A che non contiene lo 0
+
+- si dice che A è diagonale dominante in senso stretto (per righe)
+- se modulo di aii è maggiore della somma j=1 j!=i che va a n di modulo di aij per ogni i che va da 1 a n
+	- quindi nessun cerchio di G di a contiene solo lo 0
+
+per colonne specifichiamo invece che
+si dice che A è diagonale dominante per colonne se
+- modulo ajj >= somma che va da i=1 a n con i diverso da j modulo aij per ogni j che va da 1 a n
+	- ovviamente questo vale per i cerchi per colonna
+- esiste almeno un indice K in 1,...,n tale che modulo di akk > della somma di i che va da 1 a n con i diverso da k di modulo di aik
+in senso stretto per colonne si dice che A è diagonale dominante se
+- modulo di ajj > sommatoria di i che va da 1 a n con i diverso da j del modulo di aij per ogni j che va da 1 a n
+#### Teorema 3.7
+supponiamo che la matrice A in C nxn soddisfi almeno una delle seguenti condizioni
+1. A è a diagonale dominante e irriducibile
+2. A è a diagonale dominante in senso stretto per righe
+3. A è a diagonale dominante per colonne e irriducibile
+4. A è a diagonale dominante in senso stretto per colonne
+Allora A è invertibile
+Dimostriamo la prima ipotesi, scrivimi tu la dimostrazione anche per gli altri casi
+supponiamo che A sia a diagonale dominante e irriducibile
+Dimostriamo che 0 non è autovalore di A usando il 3 teorema di Gershgorin forte
+per farlo verifichiamo che 0 soddisfa le ipotesi del 3 teorema di gershgorin
+- 0 sta sul bordo di quei cerchi di Gershgorin a cui esso appartiene
+	- è vero per via della condizione a della definizione di matrice a diagonale dominante la quale ci assicura che 0 non può stare dentro nessun cerchio
+- 0 non sta sul bordo di tutti i cerchi
+	- vero per via della condizione b della definizione di matrice a diagonale dominante
+- sono soddisfatte le ipotesi del terzo teorema di Gershgorin forte quindi 0 non è autovalore di A
+quindi A è invertibile
+$$\square$$
+Osservazione:
+non possiamo utilizzare la versione debole del teorema di Gershgorin e questo viene spiegato con il seguente esempio
+![[Pasted image (17).png]]
+è a diagonale dominante e irriducibile (lo si verifichi per esercizio), e ha i cerchi di Gershgorin (sia per righe che per colonne) mostrati in Figura 3.4, per cui non riusciremmo a dimostrare che è invertibile (cioè che 0 non è un autovalore) usando la sola versione debole del terzo teorema di Gershgorin
+#### Norme Vettoriali
+consideriamo il seguente sistema lineare
+    81 1 1 5 −1 1 −1 5       x1 x2 x3   =     26 7 7     la cui soluzione è x = [3, 1, 1]T . 
+Supponiamo di aver ottenuto le seguenti approssimazioni di x
+y=2.99972 1.00023 1.00030 
+z=3.000027 0.99971 0.99955 
+Come stabiliamo quale delle due è più vicina alla soluzione x?
+Occorre un concetto di distanza sullo spazio dei vettori e misurare poi le distanze di y da x e di z da x
+chi ha la distanza minore è la migliore approssimazione
+###### Definizione informale di norma vettoriale
+|| . || : C n -> R si dice norma vettoriale se soddisfa le seguenti proprietà:
+a) norma di x >=0 per ogni x in Cn e norma di x=0 se e solo se x=0 questo caso si chiama positività
+b) norma di alfa x= modulo di alfa per norma di x per ogni alfa in C per ogni x in Cn questo si chiama omogeneità
+c) norma di x+y minore uguale di norma di x + norma di y per ogni x y in Cn questo si chiama disuguaglianza triangolare
+
+se io devo misurare la distanza tra due numeri faccio la differenza e il modulo infatti
+data una norma vettoriale norma da Cn in R 
+definiamo la distanza fra 2 vettori x,y in Cn come la norma di x-y
+###### Definiamo Norme 1,2 e infinito
+dato x in Cn definiamo
+norma di x1=modulo di x1+modulo di x2+...+modulo di xn
+norma di x2= radice quadrata della somma dei quadrati dei modulo di x1+x2+ xn alla 2
+norma di xinfinito= max(modulo x1,x2,...,xn)
+tutte queste rispettano le proprietà precedenti
+
+Le relative distanze sono definite nel modo seguente:  ‖x − y‖1 = |x1 − y1| + |x2 − y2| + . . . + |xn − yn|, ‖x − y‖2 = √|x1 − y1|2 + |x2 − y2|2 + . . . + |xn − yn|2, ‖x − y‖∞ = max(|x1 − y1|, |x2 − y2|, . . . , |xn − yn|).
+
+Tornando all’esempio introduttivo, se calcoliamo la distanza dei vettori y e z in (3.6)–(3.7) dal vettore soluzione x = [3, 1, 1]T usando la ‖ · ‖∞, otteniamo  x − y = [0.00028, −0.00023, −0.00030]T =⇒ ‖x − y‖∞ = 0.00030, x − z = [−0.00027, 0.00029, 0.00045]T =⇒ ‖x − z‖∞ = 0.00045.  Quindi rispetto alla ‖ · ‖∞ il vettore y è più vicino a x rispetto al vettore z.
+###### Equivalenza delle norme vettoriali
+##### Teorema 3.8
+Tutte le norme vettoriali in Cn sono equivalenti nel senso che se prendiamo due norme a caso
+norma primo e norma secondo in cn->R
+allora si ha che la norma primo di x è compreso tra la norma alfa per norma seconda di x e beta per norma seconda di x per ogni x in Cn
+dove alfa e beta sono due costanti indipendenti da x
+Verifichiamo che la norma 1 e la norma infinito sono equivalenti
+per ogni x in Cn 
+la norma 1 di x è la somma del modulo delle componenti e la mettiamo compresa tra
+norma infinito e n volte la norma x infinito
+mettendo al centro la norma 1 di x abbiamo che le costanti alfa e beta del teoremas ono alfa=1 e beta=n se considero come norma prima la norma 1 e norma seconda norma infinito
+mentre sono alfa 1/n Beta 1 se considero la norma prima uguale a norma infinito e norma seconda norma 1
+questo perchè se prendiamo la formula del teorema e la poniamo per norma seconda dobbiamo fare fratto alfa e beta e quindi abbiamo
+scrivi
+1/beta norma x primo<= norma x secondo<=1/alfa norma x primo
+perchè alfa e beta sono 1 e n?
+
+###### Successioni di Vettori
+Una successione di vettori x 0 x1 x2 in Cn si dice convergente al vettore x in Cn
+rispetto alla norma vettoriale norma se la distanza tra x k -x tende a 0 per k che tende a infinito
+il teorema delle equivalenze delle norme di prima ci permette di dire che
+poichè tutte le norme sono equivalenti per il teorema 3.8 precedente se una successione di vettori converge a x rispetto a una norma allora converge a x rispetto a tutte le norme
+Dimostrazione
+infatti supponiamo che xk k=0,1,2... converga a x rispetto alla norma norma e sia norma ' un'altra norma
+allora poichè queste norme sono equivalenti 
+poichè norma e norma primo sono equivalenti esistono due costanti alfa e beta positive
+tali che la norma ' di y posso metterla compresa tra
+alfa norma y e Bnorma y per ogni y in Cn
+sostituisco xk-x al posto di y
+e avrò una cosa che vale per ogni k
+α‖x(k) − x‖ ≤ ‖x(k) − x‖′ ≤ β‖x(k) − x‖
+
+il modulo di xk-x a destra e sinistra della cosa tendono a 0
+per cui usiamo il teorema del sandwitch
+anche la norma di xk-x primo tende a 0 
+quindi xk tende a x in norma primo
+
+Una successione di vettori si dice convergente
+x0 x1 x2 in cn si dice convergente componente per componente
+al vettore x in Cn se xk tende a x componente per componente
+cioè se x1k-> x1
+
+x2k->x2 
+xnk->xn 
+
+se e solo se 
+
+x1k-x1 tende a 0 x1k -x1 tende a 0
+... xnk-x1 tende a 0
+allora è come dire che il massimo di questi tende a zero
+che corrisponde alla norma di xk-x a infinito
+che tende a 0
+quindi la convergenza componente per componente coincide con la convergenza rispetto alla norma infinito
+allora ricordando l'equivalenza di tutte le norme
+dire x k->x componente per componente è lo stesso che dire che xk->x in una qualsiasi norma

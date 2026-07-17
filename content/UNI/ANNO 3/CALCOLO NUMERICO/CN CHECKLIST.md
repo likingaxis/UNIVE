@@ -9,7 +9,7 @@
 - [x]  Matrici definite positive
 - [x]  Polinomi di matrici e matrici irriducibili
 - [x]  Teoremi di Gershgorin
-- [ ]  Diagonale dominante e invertibilità
+- [x]  Diagonale dominante e invertibilità
 - [ ]  Norme vettoriali e matriciali
 - [ ]  Metodi iterativi stazionari e convergenza
 - [ ]  Velocità di convergenza, residuo e decomposizione (A=M-N)
