@@ -11,7 +11,7 @@
 - [x]  Teoremi di Gershgorin
 - [x]  Diagonale dominante e invertibilità
 - [x]  Norme vettoriali e matriciali
-- [ ]  Metodi iterativi stazionari e convergenza
+- [x]  Metodi iterativi stazionari e convergenza
 - [ ]  Velocità di convergenza, residuo e decomposizione (A=M-N)
 - [ ]  Metodi di Jacobi e Gauss-Seidel
 - [ ]  Teoremi di convergenza di Jacobi e Gauss-Seidel
