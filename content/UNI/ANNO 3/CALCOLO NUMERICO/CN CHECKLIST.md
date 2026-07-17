@@ -15,4 +15,3 @@
 - [ ]  Velocità di convergenza, residuo e decomposizione (A=M-N)
 - [ ]  Metodi di Jacobi e Gauss-Seidel
 - [ ]  Teoremi di convergenza di Jacobi e Gauss-Seidel
-- [ ]  Esercizi di riepilogo risolti
