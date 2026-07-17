@@ -95,8 +95,8 @@ m\int_a^b \omega(x)\,dx
 M\int_a^b \omega(x)\,dx
 $$
 
-metti disegno del prof
-
+disegno del prof
+![[Pasted image 20260717111916.png]]
 Siccome $\beta(x)\omega(x)$ sta sempre tra $m\omega(x)$ e $M\omega(x)$, anche il suo integrale sta tra gli integrali di $m\omega(x)$ e $M\omega(x)$.
 
 Definiamo quindi
