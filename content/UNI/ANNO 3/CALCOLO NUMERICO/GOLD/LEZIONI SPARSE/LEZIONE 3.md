@@ -54,25 +54,20 @@ f:[a,b]\to\mathbb{R}
 $$
 
 si definiscono due casi:
-
 - se $y\in[a,b]$, allora si definisce differenza divisa di $f(x)$ relativa a $y$ il numero
-
 $$
 f[y]=f(y)
 $$
 
 - se $y_1,\ldots,y_k\in[a,b]$ sono $k\geq 2$ punti distinti, si definisce differenza divisa di $f(x)$ relativa a $y_1,\ldots,y_k$ il numero
-
 $$
 f[y_1,\ldots,y_k]
 =
 \frac{f[y_1,\ldots,y_{k-2},y_k]-f[y_1,\ldots,y_{k-1}]}{y_k-y_{k-1}}
 $$
-
 questa definizione è ricorsiva perché per calcolare una differenza divisa con $k$ punti devo usare differenze divise calcolate con meno punti
 
 nel caso $k=2$ otteniamo
-
 $$
 f[y_1,y_2]
 =
@@ -80,21 +75,15 @@ f[y_1,y_2]
 =
 \frac{f(y_2)-f(y_1)}{y_2-y_1}
 $$
-
 quindi nel caso di due punti la differenza divisa coincide con il rapporto incrementale di $f(x)$ relativo ai punti $y_1,y_2$
-
 #### Teorema 1.3
 Teorema di Newton
 sia $f:[a,b]\to\mathbb{R}$ e siano
-
 $$
 x_0,x_1,\ldots,x_n\in[a,b]
 $$
-
 nodi distinti
-
 allora il polinomio di interpolazione di $f(x)$ su questi nodi è dato da
-
 $$
 p(x)=f[x_0]+f[x_0,x_1](x-x_0)+f[x_0,x_1,x_2](x-x_0)(x-x_1)+\cdots+f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1})
 $$
@@ -115,7 +104,7 @@ $$
 
 quindi non sono “le differenze di $x$” i coefficienti: i coefficienti sono le differenze divise, mentre i fattori $(x-x_i)$ costruiscono la base di Newton
 
-##### Dimostriamo un piccolo corollario
+##### Dimostriamo un piccolo corollario 1.1
 
 sia $f:[a,b]\to\mathbb{R}$ e siano $x_0,x_1,\ldots,x_n\in[a,b]$ distinti
 
@@ -194,7 +183,7 @@ f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]
 $$
 
 questo dimostra il corollario
-
+$$\square$$
 N.B. possiamo usare la forma di Newton anche senza conoscere esplicitamente la funzione: se abbiamo solo i dati $(x_0,y_0),\ldots,(x_n,y_n)$, possiamo pensare che esista una qualsiasi funzione $f$ tale che $f(x_i)=y_i$ e calcolare le differenze divise a partire dai valori $y_i$
 
 ##### Algoritmo di valutazione del polinomio di interpolazione in un punto

@@ -18,25 +18,20 @@ $$
 
 dove $h$ si chiama passo di discretizzazione.
 
-Foto del grafico fatto dal prof
-
+grafico fatto dal prof
 ![[Pasted image 20260713130109.png]]
-
 con il caso $n=5$.
-
 Definiamo i nodi
-
 $$
 x_j=a+jh,\qquad j=0,\ldots,n
 $$
-
 quindi nel caso $n=5$ abbiamo
 
 $$
 a=x_0,\qquad b=x_5
 $$
 
-Questi punti che individuo nel grafico della funzione li congiungo con dei segmenti. Nel caso $n=5$ ho $6$ nodi, cioè $x_0,\ldots,x_5$, e quindi $5$ segmenti, uno per ogni sottointervallo.
+Questi punti che individuo nel grafico della funzione li congiungo con dei segmenti. Nel caso $n=5$ ho $6$ nodi, cioè $x_0,\ldots,x_5$, e quindi $5$ segmenti, uno per ogni sotto intervallo.
 
 L’idea è questa: invece di calcolare l’area sotto la funzione vera $f(x)$, approssimo $f(x)$ con una funzione più semplice, indicata con $s(x)$, che è lineare a tratti.
 
@@ -54,12 +49,12 @@ $$
 
 dove $s(x)$ è la funzione spezzata verde.
 
-La funzione
+![[Pasted image 20260717110444.png]]
 
+La funzione
 $$
 s:[a,b]\to\mathbb{R}
 $$
-
 è definita a tratti: per $x\in[x_j,x_{j+1}]$ si prende la retta che passa per i punti
 
 $$
@@ -67,11 +62,9 @@ $$
 $$
 
 Il coefficiente angolare di questa retta è
-
 $$
 \frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j}
 $$
-
 quindi, per $x\in[x_j,x_{j+1}]$, abbiamo
 
 $$

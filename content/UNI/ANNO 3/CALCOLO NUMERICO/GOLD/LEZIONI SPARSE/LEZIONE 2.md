@@ -189,10 +189,8 @@ $$
 
 non sarebbe definita.
 
-A CASA AGGIUNGI UNA FOTO DEL GRAFICO DI $z$ nel caso $n=3$.
+AGGIUNGI UNA FOTO DEL GRAFICO DI $z$ nel caso $n=3$.
 ![[Pasted image 20260712155016.png]]
-
-
 Adesso usiamo il teorema di Rolle.
 
 Se una funzione si annulla in due punti consecutivi, allora in mezzo a questi due punti esiste almeno un punto in cui la derivata prima si annulla.
@@ -292,22 +290,15 @@ y\cdot y\cdots y=y^{n+1}
 $$
 
 quindi
-
 $$
 \pi(y)=y^{n+1}+\text{termini di grado minore}
 $$
 
-
-
-
 facendo la derivata $(n+1)$-esima, tutti i termini di grado minore spariscono e rimane
-
 $$
 \pi^{(n+1)}(y)=(n+1)!
 $$
-
 quindi
-
 $$
 z^{(n+1)}(y)=f^{(n+1)}(y)-\frac{r(x)}{\pi(x)}(n+1)!
 $$
