@@ -1308,3 +1308,50 @@ Esistendo un autovalore di P modulo >=1 si ha che ro(P)>=1
 => il metodo m non è convergente per il teorema 4.1
 
 la dimostrazione è identica per il determinante solo che cambia al posto di traccia uno scrive det e fa il prodotto e basta
+#### Velocità di convergenza
+Consideriamo il metodo m per risolvere il sistema s e supponiamo che sia convergente cioè x=Px+q e raggio spettrale di P <1
+usando l'equazione dell'errore ek=Pke0 per ogni k=0,1,2,...
+si può dimostrare questo fatto
+Fissiamo una qualsiasi norma vettoriale ||.|| per quasi tutti i vettori iniziali x0 in Cn l'errore ek=xk-x commesso dal metodo m al passo k soddisfa questa condizione 
+norma di ek circa Ck alla m ro P alla k
+per ogni k abbastanza grande (in realtà nella pratica anche per k piccolo)
+dove m è compreso tra 0 e n-1 dipende solo da P e C è una costante indipendente da k
+dove m è un numero intero non il metodo
+m=0 se P è diagonalizzabile
+
+La convergenza delle successioni x0 x1 x2 ... prodotte dal metodo m è tanto più veloce quanto più ro(P) è piccolo
+Def. Dati due metodi alfa e Beta della forma m per risolvere s entrambi convergenti
+diremo che alfa converge più velocemente di Beta se il raggio di Palfa < ro(Pbeta)
+dove Palfa e Pbeta sono le matrici di iterazione associate ad Alfa e Beta 
+#### Criterio del resto del residuo
+Consideriamo il metodo m per risolvere il sistema s
+La successione x0,x1,x2,... generata da m anche quando risulta convergente dev'essere prima o poi arrestata.
+Il criterio di arresto più usato è quello del residuo:
+Si sceglie una norma vettoriale ||.|| (tipicamente ||.||1 ||.||2 ||.||infinito)
+e si arresta  la successione al primo vettore xK che soddisfa la condizione che la norma del residuo K/ norma di b <= epsilon
+dove rK=b-AxK è il residuo del sistema s relativo al passo con xK
+dove epsilon>0 è una soglia di precisione prefissata.
+
+ricordiamo che b è bbb è il **vettore dei termini noti** del sistema lineare che stai cercando di risolvere 
+la condizione del residuo impone che l'errore relativo ||AxK-b||/||b|| commesso approssimando b con AxK sia <=epsilon
+Perchè si usa l'errore relativo e non quello assoluto?
+norma di AxK-b/ norma di b rappresenta l'errore relativo con cui AxK approssima b!=0 così come 
+modulo di a tilde -a / modulo a rappresenta l'errore relativo con cui a tilde approssima a diverso da 0
+arrestando la successione con il criterio del residuo 
+l'errore relativo sulla soluzione soddisfa norma x-xK / norma di x= norma di A-1 b-AxK/norma di x
+quindi poi abbiamo che é uguale a norma di A -1 rK/ norma di x
+usiamo la proprietà numero 2 delle norme matriciali indotte
+infatti questo è <= norma di A-1 per norma rK/norma di x
+moltiplico per norma di A sopra e sotto 
+norma di A per norma di A-1 per norma rK/ norma di A per norma di x
+noi vogliamo avere la norma di Ax così fa b sotto
+<= norma di Ax al denominatore e sopra invariato
+questo minore uguale lo possiamo fare perchè il denominatore risulta essere più piccolo quindi avremmo una frazione più grande e questo è uguale a norma di A per norma di A-1 per norma di rK fratto norma b
+chiamiamo norma di A per norma di A-1 mu di A per epsilon come la soglia di errore
+dove mu di A si chiama numero di condizionamento della matrice A rispetto alla norma considerata
+dove mu lo vogliamo piccolo
+
+si usa l'errore relativo e non quello assoluto per il motivo che risulta da questi esempi
+a=10000 a tilde=9999 modulo a tilde-a =1 invece quello relativo a tilde-a .modulo di a= 10 alla -4 che è molto buono
+
+Osservazione La successione di vettori x(0), x(1), x(2), . . . generata dal metodo (4.2), anche quando risulta convergente alla soluzione x del sistema (4.1), potrebbe impiegare troppo tempo a convergere. In tal caso, potrebbero volerci troppe iterazioni prima che venga soddisfatta la condizione di arresto del residuo (4.8). Per questo motivo è indispensabile, quando si implementa un metodo iterativo come (4.2), fissare sempre un numero massimo di iterazioni consentite. Questo peraltro serve anche ad arrestare le iterazioni quando non c’è convergenza.
