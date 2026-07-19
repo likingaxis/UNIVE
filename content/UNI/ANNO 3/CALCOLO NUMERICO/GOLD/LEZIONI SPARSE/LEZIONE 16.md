@@ -97,3 +97,15 @@ possiamo concludere che E+E*=A+D
 dove D=parte diagonale di A
 
 ###### Parte 2
+Dimostriamo che è convergente ovvero ro(G)<1
+Sia lambda un autovalore di G mostriamo che il modulo di lambda<1
+Prendiamo un autovettore y diverso dal vettore nullo di G corrispondente a lambda
+Gy=lambday siccome A-G*AG è HDP, per un teorema visto sulle matrici HDP si ha che y* (A-G*AG)y=y* Ay- y*G*AGy=y*Ay-(Gy)*A(Gy)= y*Ay-(lambday)*A(lambday)=y*Ay-lambda coniugato y*A(lambday)=
+y*Ay-lambda modulo al quadrato y*Ay=y*Ay(1-modulo di lambda al quadrato)
+
+sapendo che (lambday)*=lambda coniugato y* in generale (alfaB)*=alfa coniugato B*
+y*Ay è positivo perchè A è HDP e quindi uso lo stesso teorema di prima 
+(1-lamdbda modulo al quadrato)
+per cui 1- modulo di lambda al quadrato>0 se e solo se lambda al quadrato con moudulo è <1 se e solo se lambda modulo <1
+per cui tutti tli autovalori di A di G hanno modulo <1
+con ro(G)<1
