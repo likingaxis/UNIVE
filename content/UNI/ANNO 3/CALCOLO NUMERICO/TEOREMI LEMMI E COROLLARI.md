@@ -1,12 +1,9 @@
 [[LEZIONE 1#Teorema 1.1|Teorema1.1]]
 [[LEZIONE 2#Teorema 1.2|Teorema 1.2]]
-
 [[LEZIONE 3#Teorema 1.3|Teorema 1.3]]
 [[LEZIONE 3#Dimostriamo un piccolo corollario 1.1|Corollario 1.1]]
-
 [[LEZIONE 6#Teorema 2.1|Teorema 2.1]]
 [[LEZIONE 6#Lemma 2.1|Lemma 2.1]]
-
 [[LEZIONE 9#Teorema 1.3|Teorema 3.1]]
 [[LEZIONE 9#Teorema 3.2|Teorema 3.2]]
 [[LEZIONE 10#Teorema 3.3 primo teorema di Gershgorin|Teorema 3.3]]
@@ -18,3 +15,9 @@
 [[LEZIONE 12#Teorema 3.10|Teorema 3.10]]
 [[LEZIONE 12#Teorema 3.11|Teorema 3.11]]
 [[LEZIONE 12#Teorema 3.12|Teorema 3.12]]
+[[LEZIONE 13#Teorema 4.1, CNS, condizione necessaria e sufficiente di convergenza|Teorema 4.1]]
+[[LEZIONE 13#Corollario 4.1, CS, condizione sufficiente di convergenza|Corollario 4.1]]
+[[LEZIONE 13#Corollario 4.2, CN, condizioni necessarie di convergenza|Corollario 4.2]]
+[[LEZIONE 15#Teorema 4.2|Teorema 4.2]]
+[[LEZIONE 16#Teorema 4.3|Teorema 4.3]]
+[[LEZIONE 16#Teorema 4.4|Teorema 4.4]]
