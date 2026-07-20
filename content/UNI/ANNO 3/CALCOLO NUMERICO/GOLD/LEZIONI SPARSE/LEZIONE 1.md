@@ -195,8 +195,6 @@ y_n
 \end{pmatrix}
 $$
 ricordando che, dato un polinomio in quella forma, allora se i coefficienti sono unici allora anche il polinomio è unico
->[!info]- extra
-
 
 ora si vuole dimostrare che il determinante di $V$ è proprio quel determinante
 la dimostrazione la facciamo per $n=3$ ma questo vale per $n\geq 1$
