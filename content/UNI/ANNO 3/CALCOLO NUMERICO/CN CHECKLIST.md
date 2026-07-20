@@ -18,9 +18,9 @@
 
 
 - [x] Teorema 1.1
-- [ ] Teorema 1.2
-- [ ] Teorema 1.3
-- [ ] Corollario 1.1
+- [x] Teorema 1.2
+- [x] Teorema 1.3
+- [x] Corollario 1.1
 - [ ] Teorema 2.1
 - [ ] Lemma 2.1
 - [ ] Teorema 3.1
