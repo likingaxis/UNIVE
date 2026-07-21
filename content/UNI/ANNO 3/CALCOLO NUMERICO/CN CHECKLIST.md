@@ -21,10 +21,11 @@
 - [x] Teorema 1.2
 - [x] Teorema 1.3
 - [x] Corollario 1.1
-- [ ] Teorema 2.1
-- [ ] Lemma 2.1
-- [ ] Teorema 3.1
+- [x] Lemma 2.1
+- [x] Teorema 2.1
+- [x] Teorema 3.1
 - [ ] Teorema 3.2
+
 - [ ] Teorema 3.3
 - [ ] Teorema 3.4
 - [ ] Teorema 3.5

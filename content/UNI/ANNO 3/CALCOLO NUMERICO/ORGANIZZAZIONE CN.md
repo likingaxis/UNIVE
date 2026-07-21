@@ -15,10 +15,10 @@ ripeti teoremi e teoria con il buon samus
 | -----: | -------------------------------------------------------------- | ----- | ---------------------------------------------------------------- |
 |      1 | Interpolazione base: esistenza, unicità, Lagrange, Vandermonde | ✅     | Capire perché il polinomio interpolante esiste ed è unico        |
 |      2 | Newton e differenze divise                                     | ✅     | Costruire il polinomio con la tabella delle differenze divise    |
-|      3 | Aggiunta di un nodo                                            | ❌     | Aggiornare (p_n) in (p_{n+1}) senza rifare tutto                 |
-|      4 | Errore di interpolazione                                       | ❌     | Stimare (                                                        |
-|      5 | Formula dei trapezi                                            | ❌     | Calcolare (I_n) e stimare l’errore                               |
-|      6 | Trapezi + interpolazione                                       | ❌     | Collegare (\int p(x),dx), errore di interpolazione e trapezi     |
+|      3 | Aggiunta di un nodo                                            | ✅     | Aggiornare (p_n) in (p_{n+1}) senza rifare tutto                 |
+|      4 | Errore di interpolazione                                       | ✅     | Stimare (                                                        |
+|      5 | Formula dei trapezi                                            | ✅     | Calcolare (I_n) e stimare l’errore                               |
+|      6 | Trapezi + interpolazione                                       | ✅     | Collegare (\int p(x),dx), errore di interpolazione e trapezi     |
 |      7 | Estrapolazione/Romberg                                         | ❌     | Usare (I_n, I_{2n}, I_{4n}) per migliorare l’approssimazione     |
 |      8 | Autovalori, raggio spettrale, polinomi di matrici              | ❌     | Usare (\rho(A)), (p(A)), limiti di potenze                       |
 |      9 | Gershgorin                                                     | ❌     | Localizzare autovalori, stimare (\rho(A)), dedurre invertibilità |
