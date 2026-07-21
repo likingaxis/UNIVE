@@ -1,3 +1,4 @@
 ##### Priorità massima
 - dermatologo
-- calcolo numerico domani
+- prepara prompt per scritto di CN
+- merge riassunti CN teoremi lezioni+teoremi chat gpt+ lista definizioni di facile lettura
