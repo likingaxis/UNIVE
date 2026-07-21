@@ -24,18 +24,20 @@
 - [x] Lemma 2.1
 - [x] Teorema 2.1
 - [x] Teorema 3.1
-- [ ] Teorema 3.2
+- [x] Teorema 3.2
 
 - [ ] Teorema 3.3
 - [ ] Teorema 3.4
 - [ ] Teorema 3.5
 - [ ] Teorema 3.7
 - [ ] Teorema 3.8
+
 - [ ] Teorema 3.9
 - [ ] Teorema 3.10
 - [ ] Teorema 3.11
 - [ ] Teorema 3.12
 - [ ] Teorema 4.1
+
 - [ ] Corollario 4.1
 - [ ] Corollario 4.2
 - [ ] Teorema 4.2
