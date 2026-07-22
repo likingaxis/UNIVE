@@ -31,7 +31,7 @@
 - [x] Teorema 3.5
 - [x] Teorema 3.6
 - [x] Teorema 3.7
-- [ ] Teorema 3.8
+- [x] Teorema 3.8
 
 - [ ] Teorema 3.9
 - [ ] Teorema 3.10
