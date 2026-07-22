@@ -30,7 +30,7 @@
 - [x] Teorema 3.4
 - [x] Teorema 3.5
 - [x] Teorema 3.6
-- [ ] Teorema 3.7
+- [x] Teorema 3.7
 - [ ] Teorema 3.8
 
 - [ ] Teorema 3.9
