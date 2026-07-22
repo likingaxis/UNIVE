@@ -9,6 +9,7 @@
 [[LEZIONE 10#Teorema 3.3 primo teorema di Gershgorin|Teorema 3.3]]
 [[LEZIONE 10#Teorema 3.4 secondo teorema di Gershgorin|Teorema 3.4]]
 [[LEZIONE 10#Teorema 3.5 terzo teorema di Gershgorin(forte)|Teorema 3.5]]
+[[LEZIONE 10#Teorema 3.6 Terzo teorema di Gershgorin(debole)|Teorema 3.6]]
 [[LEZIONE 11#Teorema 3.7|Teorema 3.7]]
 [[LEZIONE 11#Teorema 3.8|Teorema 3.8]]
 [[LEZIONE 12#Teorema 3.9|Teorema 3.9]]
