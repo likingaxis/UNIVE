@@ -197,6 +197,7 @@ $$
 
 Si può dimostrare che questa funzione
 
+
 $$
 \|\cdot\|:\mathbb{C}^{n\times n}\to\mathbb{R}
 $$
