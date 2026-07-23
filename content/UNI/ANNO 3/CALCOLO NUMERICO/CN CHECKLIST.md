@@ -33,11 +33,11 @@
 - [x] Teorema 3.7
 - [x] Teorema 3.8
 
-- [ ] Teorema 3.9
-- [ ] Teorema 3.10
-- [ ] Teorema 3.11
-- [ ] Teorema 3.12
-- [ ] Teorema 4.1
+- [x] Teorema 3.9
+- [x] Teorema 3.10
+- [x] Teorema 3.11
+- [x] Teorema 3.12
+- [x] Teorema 4.1
 
 - [ ] Corollario 4.1
 - [ ] Corollario 4.2
