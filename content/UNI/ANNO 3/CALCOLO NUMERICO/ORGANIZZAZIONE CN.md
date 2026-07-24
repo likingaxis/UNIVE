@@ -9,7 +9,7 @@
 - [x] Esempio 2.4
 - [x] Esempio 3.6
 - [x] Esempio 3.12
-- [ ] Esempio 4.4 
+- [x] Esempio 4.4 
 
 
 - [ ] Esempio 4.5 
