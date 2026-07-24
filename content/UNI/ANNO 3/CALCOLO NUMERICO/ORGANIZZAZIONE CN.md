@@ -5,10 +5,10 @@
 - [x] Esempio 1.4
 - [x] Esempio 1.6
 - [x] Esempio 2.2
-- [ ] Esempio 2.3
-- [ ] Esempio 2.4
-- [ ] Esempio 3.6
-- [ ] Esempio 3.12
+- [x] Esempio 2.3
+- [x] Esempio 2.4
+- [x] Esempio 3.6
+- [x] Esempio 3.12
 - [ ] Esempio 4.4 
 
 
