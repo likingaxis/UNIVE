@@ -421,6 +421,7 @@ $$
 
 quindi la trasposta di un prodotto e la trasposta coniugata di un prodotto invertono l’ordine dei fattori.
 
+##### Matrice hermitiana
 - una matrice $A\in\mathbb{C}^{n\times n}$ si dice hermitiana se
 
 $$
