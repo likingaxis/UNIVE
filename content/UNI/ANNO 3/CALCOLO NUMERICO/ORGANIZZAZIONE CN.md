@@ -2,17 +2,17 @@
 - [x] Esempio 1.3
 
 
-- [ ] Esempio 1.4
-- [ ] Esempio 1.6
-- [ ] Esempio 2.2
+- [x] Esempio 1.4
+- [x] Esempio 1.6
+- [x] Esempio 2.2
 - [ ] Esempio 2.3
 - [ ] Esempio 2.4
-
 - [ ] Esempio 3.6
 - [ ] Esempio 3.12
 - [ ] Esempio 4.4 
-- [ ] Esempio 4.5 
 
+
+- [ ] Esempio 4.5 
 - [ ] Esempio 4.6
 - [ ] Esercizio 5.1
 - [ ] Esercizio 5.2

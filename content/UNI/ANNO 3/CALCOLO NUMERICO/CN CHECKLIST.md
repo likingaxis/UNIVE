@@ -13,8 +13,8 @@
 - [x]  Norme vettoriali e matriciali
 - [x]  Metodi iterativi stazionari e convergenza
 - [x]  Velocità di convergenza, residuo e decomposizione (A=M-N)
-- [ ]  Metodi di Jacobi e Gauss-Seidel
-- [ ]  Teoremi di convergenza di Jacobi e Gauss-Seidel
+- [x]  Metodi di Jacobi e Gauss-Seidel
+- [x]  Teoremi di convergenza di Jacobi e Gauss-Seidel
 
 
 - [x] Teorema 1.1
@@ -39,11 +39,16 @@
 - [x] Teorema 3.12
 - [x] Teorema 4.1
 
-- [ ] Corollario 4.1
-- [ ] Corollario 4.2
-- [ ] Teorema 4.2
+- [x] Corollario 4.1
+- [x] Corollario 4.2
+- [x] Teorema 4.2
+- [ ] Oss smart
 - [ ] Teorema 4.3
 - [ ] Teorema 4.4
+
+
+Osservazioni mancanti da vedere:
+
 
 - **Giorno 1:** 5 teoremi
     
