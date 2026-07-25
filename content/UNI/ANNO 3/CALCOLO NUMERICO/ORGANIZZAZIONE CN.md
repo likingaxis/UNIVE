@@ -36,6 +36,19 @@ se avanza tempo
 
 Esame 22/06/2026
 
+
+
+
+##### Domani
+- esercizio 5.4
+- luca russo esame esercizio 4
+- rivedi scritture del simons del valers e del lucangz
+- Prepara chat
+- preparare sistema infallibile rainbow six siege
+
+
+
+
 ipotizziamo un orale il 2 agosto
 27-28-29-30-31-1-2
 ripeti teoremi e teoria con il buon samus
