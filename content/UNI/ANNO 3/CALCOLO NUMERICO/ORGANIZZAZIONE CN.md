@@ -12,11 +12,11 @@
 - [x] Esempio 4.4 
 
 
-- [ ] Esempio 4.5 
-- [ ] Esempio 4.6
-- [ ] Esercizio 5.1
-- [ ] Esercizio 5.2
-- [ ] Esercizio 5.3
+- [x] Esempio 4.5 
+- [x] Esempio 4.6
+- [x] Esercizio 5.1
+- [x] Esercizio 5.2
+- [x] Esercizio 5.3
 - [ ] Esercizio 5.4
 
 Esame 19/01/2026
