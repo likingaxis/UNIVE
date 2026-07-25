@@ -22,3 +22,6 @@
 [[LEZIONE 15#Teorema 4.2|Teorema 4.2]]
 [[LEZIONE 16#Teorema 4.3|Teorema 4.3]]
 [[LEZIONE 16#Teorema 4.4|Teorema 4.4]]
+
+Fare lista di definizioni e osservazioni
+e vedere esercizio quello tipo 3.4
