@@ -85,4 +85,3 @@ DEVI DIRE CHE QUESTA È LA ***CONDIZIONE NECESSARIA E SUFFICIENTE PER LA CONVERG
 
 ## Generali
 Quando arrivi alla fine di un esercizio e hai una frazione scrivi sempre quando vale in decimale la frazione.
-
