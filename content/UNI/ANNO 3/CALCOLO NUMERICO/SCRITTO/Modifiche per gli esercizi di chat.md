@@ -43,7 +43,7 @@ Calcoli poi il determinante di ogni sottomatrice (chiaramente scegliendo come co
 **Al posto di mettere**
 La localizzazione più precisa è dunque
 $$\boxed{ \sigma(A)\subset \bigl(C(4i,3)\setminus\partial C(4i,3)\bigr) \cup \bigl(C(-4i,3)\setminus\partial C(-4i,3)\bigr) }$$
-con esattamente nnn autovalori all’interno di ciascun cerchio.
+con esattamente n autovalori all’interno di ciascun cerchio.
 
 
 **metti**
