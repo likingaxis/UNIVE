@@ -17,7 +17,7 @@
 - [x] Esercizio 5.1
 - [x] Esercizio 5.2
 - [x] Esercizio 5.3
-- [ ] Esercizio 5.4
+- [x] Esercizio 5.4
 
 Esame 19/01/2026
 Esame 09/02/2026
@@ -40,11 +40,11 @@ Esame 22/06/2026
 
 
 ##### Domani
-- esercizio 5.4
-- luca russo esame esercizio 4
-- rivedi scritture del simons del valers e del lucangz
-- Prepara chat
-- preparare sistema infallibile rainbow six siege
+- [x] esercizio 5.4
+- [x] luca russo esame esercizio 4
+- [x] rivedi scritture del simons del valers e del lucangz
+- [x] Prepara chat
+- [x] preparare sistema infallibile rainbow six siege
 
 
 
