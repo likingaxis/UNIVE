@@ -1,3 +1,4 @@
+giorno 28
 - [x] Teorema 1.1
 - [x] Osservazione a pagina 6
 - [x] Teorema 1.2
@@ -5,17 +6,20 @@
 - [x] Corollario 1.1
 - [x] Osservazione 1.1
 - [x] Osservazione 1.2
+
+giorno 29
 - [ ] Lemma 2.1
 - [ ] Teorema 2.1
 - [ ] Osservazione 2.1
 - [ ] Osservazione pagina 27 con dimostrazione da fare
 - [ ] Teorema 3.1
 - [ ] Esercizio 3.4
-
 - [ ] Teorema 3.2
 - [ ] Teorema 3.3
 - [ ] Teorema 3.4
 - [ ] Teorema 3.5
+
+giorno 30
 - [ ] Teorema 3.6
 - [ ] Teorema 3.7
 - [ ] Teorema 3.8
@@ -25,11 +29,12 @@
 - [ ] Teorema 3.12
 - [ ] Osservazione 4.1
 - [ ] Teorema 4.1
-
 - [ ] Corollario 4.1
 - [ ] Corollario 4.2
 - [ ] Osservazione 4.2
 - [ ] Osservazione 4.4
+
+giorno 31
 - [ ] Teorema 4.2
 - [ ] Osservazione 4.5
 - [ ] Osservazione 4.6
