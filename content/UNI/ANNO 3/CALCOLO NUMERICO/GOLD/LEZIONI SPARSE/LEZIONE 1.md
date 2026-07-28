@@ -619,11 +619,9 @@ $$
 infatti $p(x)$ è combinazione lineare di polinomi che stanno in $\mathbb{R}_n[x]$, quindi anche $p(x)$ resta in $\mathbb{R}_n[x]$
 
 vogliamo quindi ora dimostrare che sia soddisfatta la proprietà
-
 $$
 p(x_i)=y_i
 $$
-
 per ogni $i=0,\ldots,n$
 
 sfruttiamo la proprietà vista prima
@@ -711,8 +709,6 @@ $$
 
 quindi abbiamo dimostrato l’unicità del polinomio interpolante
 $$\square$$
-
-
 ##### Definizione
 siano
 $$

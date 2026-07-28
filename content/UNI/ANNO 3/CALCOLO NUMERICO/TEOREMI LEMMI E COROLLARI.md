@@ -25,3 +25,4 @@
 
 Fare lista di definizioni e osservazioni
 e vedere esercizio quello tipo 3.4
+Esercizio 3.4
