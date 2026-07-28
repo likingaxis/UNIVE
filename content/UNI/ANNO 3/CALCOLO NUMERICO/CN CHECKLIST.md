@@ -1,51 +1,44 @@
-- [x]  Esistenza, unicità, Vandermonde, forma canonica e Lagrange
-- [x]  Errore dell’interpolazione polinomiale
-- [x]  Forma di Newton e differenze divise
-- [x]  Ruffini-Horner e costo computazionale
-- [x]  Aggiunta di un nodo e introduzione all’integrazione numerica
-- [x]  Formula dei trapezi ed errore
-- [x]  Estrapolazione
-- [x]  Richiami di algebra lineare
-- [x]  Matrici definite positive
-- [x]  Polinomi di matrici e matrici irriducibili
-- [x]  Teoremi di Gershgorin
-- [x]  Diagonale dominante e invertibilità
-- [x]  Norme vettoriali e matriciali
-- [x]  Metodi iterativi stazionari e convergenza
-- [x]  Velocità di convergenza, residuo e decomposizione (A=M-N)
-- [x]  Metodi di Jacobi e Gauss-Seidel
-- [x]  Teoremi di convergenza di Jacobi e Gauss-Seidel
-
-
 - [x] Teorema 1.1
-- [ ] Teorema 1.2
-- [ ] Teorema 1.3
-- [ ] Corollario 1.1
+- [x] Osservazione a pagina 6
+- [x] Teorema 1.2
+- [x] Teorema 1.3
+- [x] Corollario 1.1
+- [x] Osservazione 1.1
+- [x] Osservazione 1.2
 - [ ] Lemma 2.1
 - [ ] Teorema 2.1
+- [ ] Osservazione 2.1
+- [ ] Osservazione pagina 27 con dimostrazione da fare
 - [ ] Teorema 3.1
-- [ ] Teorema 3.2
+- [ ] Esercizio 3.4
 
+- [ ] Teorema 3.2
 - [ ] Teorema 3.3
 - [ ] Teorema 3.4
 - [ ] Teorema 3.5
 - [ ] Teorema 3.6
 - [ ] Teorema 3.7
 - [ ] Teorema 3.8
-
 - [ ] Teorema 3.9
 - [ ] Teorema 3.10
 - [ ] Teorema 3.11
 - [ ] Teorema 3.12
+- [ ] Osservazione 4.1
 - [ ] Teorema 4.1
 
 - [ ] Corollario 4.1
 - [ ] Corollario 4.2
+- [ ] Osservazione 4.2
+- [ ] Osservazione 4.4
 - [ ] Teorema 4.2
+- [ ] Osservazione 4.5
+- [ ] Osservazione 4.6
+- [ ] Osservazione 4.7
 - [ ] Oss smart
 - [ ] Teorema 4.3
+- [ ] Osservazione 4.9
 - [ ] Teorema 4.4
-
+- [ ] Osservazione 4.10
 
 ##### Osservazioni
 ###### Interpolazione

@@ -378,4 +378,200 @@ $$
 
 quindi abbiamo dimostrato l’unicità del polinomio interpolante
 $$\square$$
+#### Osservazione a pagina 6
+una volta che hai trovato il polinomio $p(x)$ in **forma canonica**, i suoi coefficienti sono esattamente gli stessi che otterresti risolvendo il sistema con la matrice di Vandermonde
+$$p(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n$$
+per cui la matrice di Vandermonde
+vettore dei coefficienti:
+$$\begin{pmatrix} a_0\\ a_1\\ \vdots\\ a_n \end{pmatrix} = \left[V(x_0,x_1,\dots,x_n)\right]^{-1} \begin{pmatrix} f(x_0)\\ f(x_1)\\ \vdots\\ f(x_n) \end{pmatrix}$$
+dove $x_0,x_1,...,x_n$ sono i nodi di interpolazione
+##### Errore o resto dell’interpolazione polinomiale
 #### TEOREMA 1.2
+Sia $f:[a,b]\to\mathbb{R}$ una funzione di classe $C^{n+1}[a,b]$ e sia $p(x)$ il polinomio di interpolazione di $f(x)$ sugli $n+1$ nodi distinti $x_0,x_1,...,x_n \in [a,b]$ 
+allora $\forall x \in [a,b]$ $\exists \  un \ punto \xi=\xi(x) \in (a,b)$ t.c
+$$
+f(x)-p(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)(x-x_1)\cdots(x-x_n)
+$$
+
+è l'errore di interpolazione nel punto $x$
+##### Dimostrazione
+sia $x \in [a,b]$ un punto fissato
+strutturo la dimostrazione in 2 casistiche separate
+*Caso 1:*
+se $x=x_i$ $\forall i=0,...,n$ allora
+$f(x_i)-p(x_i)=0$ 
+in questo caso $\forall \xi \in (a,b)$ si annullano entrambi i membri della formula
+poiché compare il fattore  che azzera tutto il prodotto
+$$
+x_i-x_i=0
+$$
+*Caso 2:*
+$x \notin {x_0,x_1,...,x_n}$
+definiamo delle funzoni ausiliarie $\forall y\in [a,b]$ 
+$$
+\pi(y)=(y-x_0)(y-x_1)\cdots(y-x_n)
+$$
+$$
+r(y)=f(y)-p(y)
+$$
+detta funzione di resto
+e sia inoltre $z:[a,b]\to\mathbb{R}$
+$$
+z(y)=r(y)-\frac{r(x)}{\pi(x)}\pi(y)
+$$
+questa funzione è di classe $C^{n+1}[a,b]$ poiché $r(y)$ è di quella classe perché a sua volta $f(y)$ è di quella classe mentre $p(y)$ e $\pi(y)$ sono di classe $C^\infty$
+sappiamo che $z(y)$ si annulla in almeno n+2 punti di $[a,b]$ 
+- per i nodi $x_0,...,x_n$ 
+- per il nodo x fissato
+
+Per il teorema di Rolle sappiamo che
+Se una funzione si annulla in due punti consecutivi, allora in mezzo a questi due punti esiste almeno un punto in cui la derivata prima si annulla.
+Quindi, se $z(y)$ si annulla in almeno $n+2$ punti, allora $z'(y)$ si annulla in almeno $n+1$ punti.
+applicando Rolle per la derivata  $(n+1)$ esima
+$$
+z^{(n+1)}(y)
+$$
+abbiamo che si annulla in almeno un punto $\xi \in (a,b)$ 
+tale che 
+$$
+z^{(n+1)}(\xi)=0
+$$
+calcoliamo la derivata $z^{(n+1)}$
+$$z^{(n+1)}(y)=r^{(n+1)}(y)-\frac{r(x)}{\pi(x)}\pi^{(n+1)}(y)$$
+$$
+r^{(n+1)}(y)=f^{(n+1)}(y)-p^{(n+1)}(y)
+$$
+$p(y)$ con derivato n+1 volte si annulla perché ha grado al più n
+
+$$
+\pi(y)=(y-x_0)(y-x_1)\cdots(y-x_n)
+$$
+
+è un polinomio di grado $n+1$ ed è monico, cioè il coefficiente davanti a $y^{n+1}$ è $1$.
+
+Infatti, se moltiplico tutti i termini principali dei fattori, ottengo
+
+$$
+y\cdot y\cdots y=y^{n+1}
+$$
+
+quindi
+$$
+\pi(y)=y^{n+1}+\text{termini di grado minore}
+$$
+
+![[Pasted image 20260728163027.png]]
+
+facendo la derivata $(n+1)$-esima, tutti i termini di grado minore spariscono e rimane
+$$
+\pi^{(n+1)}(y)=(n+1)!
+$$
+quindi
+$$
+z^{(n+1)}(y)=f^{(n+1)}(y)-\frac{r(x)}{\pi(x)}(n+1)!
+$$
+quindi per $\xi$ abbiamo che 
+$$
+0=z^{(n+1)}(\xi)=f^{(n+1)}(\xi)-\frac{r(x)}{\pi(x)}(n+1)!
+$$
+$$
+\frac{r(x)}{\pi(x)}(n+1)!=f^{(n+1)}(\xi)
+$$
+$$
+r(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\pi(x)
+$$
+
+
+$$
+r(x)=f(x)-p(x)
+$$
+
+e
+
+$$
+\pi(x)=(x-x_0)(x-x_1)\cdots(x-x_n)
+$$
+
+quindi otteniamo
+
+$$
+f(x)-p(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)(x-x_1)\cdots(x-x_n)
+$$
+
+che è proprio la formula dell’errore o resto dell’interpolazione polinomiale.
+$$\square$$
+#### TEOREMA 1.3
+sia $f:[a,b]\to\mathbb{R}$ e siano $x_0,x_1,\ldots,x_n\in[a,b]$ nodi distinti
+allora il polinomio di interpolazione di $f(x)$ su questi nodi è dato da
+$$
+p(x)=f[x_0]+f[x_0,x_1](x-x_0)+f[x_0,x_1,x_2](x-x_0)(x-x_1)+\cdots+f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1})
+$$
+
+questa si chiama forma di Newton del polinomio di interpolazione $p(x)$
+i coefficienti sono le differenze divise
+$$
+f[x_0],\ f[x_0,x_1],\ f[x_0,x_1,x_2],\ldots,\ f[x_0,\ldots,x_n]
+$$
+#### Corollario 1.1
+sia $f:[a,b]\to\mathbb{R}$ e siano $x_0,x_1,\ldots,x_n\in[a,b]$ distinti
+allora $f[x_0,x_1,\ldots,x_n]$ non cambia se vengono permutati i suoi $n+1$ argomenti
+$$
+f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]
+$$
+per ogni permutazione $\sigma$ di $\{0,\ldots,n\}$
+##### Dimostrazione
+
+sia $\sigma$ una qualsiasi permutazione di $\{0,\ldots,n\}$
+
+applichiamo la forma di Newton prima con i nodi in ordine standard
+
+$$
+x_0,x_1,\ldots,x_n
+$$
+
+e poi con i nodi permutati
+
+$$
+x_{\sigma(0)},x_{\sigma(1)},\ldots,x_{\sigma(n)}
+$$
+in entrambi i casi otteniamo lo stesso polinomio interpolante, perché i nodi sono gli stessi e cambiare l’ordine dei nodi non cambia i dati da interpolare
+$p(x)$ ha come ultimo termine
+$f[x_0,\ldots,x_n]$ e $f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$
+con coefficienti $(x-x_0)...(x-x_{n-1})$ e $(x-x_{\sigma(0)})...(x-x_{\sigma(n-1)})$
+abbiamo due polinomi interpolanti uguali su stesso nodo dunque
+$$
+f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]
+$$
+$$\square$$
+##### Osservazione 1.1
+Dati per supposizione i punti $(x_0,y_0),(x_1,y_1),...,(x_n,y_n) \in \mathbb{R}^2$
+con $x_0,x_1,...,x_n$ distinti allora i numeri $y_0,y_1,...,y_n$ possono essere interpretati come valori in $x_0,x_1,...,x_n$ di una qualche funzione $f:[a,b]->\mathbb{R}$ definita su un qualche intervallo $[a,b]$ che contiene i punti $x_0,...,x_n$ 
+perciò ha senso parlare di forma di Newton del polinomio di interpolazione dei dati $(x_0,y_0),...,(x_n,y_n)$ anche quando non viene specificata alcuna funzione $f(x)$ t.c $f(x_i)=y_i$ $\forall i =0,...,n$ 
+in questi casi qui è sufficiente immaginarsi una funzione che assume quei valori y in quei nodi
+##### Osservazione 1.2
+la prima parte dell'algoritmo è indipendente dal punto t in cui $p(x)$ viene valutato quindi per valutare $p(x)$ in $m$ punti $t_1,t_2,...,t_m \in \mathbb{R}$ 
+si calcolano le differenze divise una volta sola con costo$$
+c_1(n)=n(n+1)A+\frac{n(n+1)}{2}D
+$$
+si calcolano invece per la seconda fase tutti i $p(t_i)$ con $i=1,...m$ 
+con costo computazionale 
+$$
+c_2(n)=m(2nA+nM)
+$$
+
+$$
+c_m(n)=n(n+1)A+\frac{n(n+1)}{2}D+m(2nA+nM)
+$$
+
+quindi
+
+$$
+c_m(n)=(n^2+2mn+n)A+mnM+\left(\frac{n^2}{2}+\frac{n}{2}\right)D
+$$
+
+approssimando per $n$ grande otteniamo
+
+$$
+c_m(n)\approx (n^2+2mn)A+mnM+\frac{n^2}{2}D
+$$
+
