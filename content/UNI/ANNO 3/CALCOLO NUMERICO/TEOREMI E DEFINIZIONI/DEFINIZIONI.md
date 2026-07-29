@@ -170,3 +170,9 @@ $$
 ##### Matrici hermitiane e simmetriche e definite positive
 
 ##### Polinomi di matrici
+##### Matrici irriducibili
+##### Localizzazione degli autovalori
+##### Matrice a diagonale dominante
+##### Norme Vettoriali
+##### Successioni di vettori
+##### Raggio spettrale
