@@ -19,14 +19,12 @@ giorno 29
 - [x] Teorema 3.4
 - [x] Teorema 3.5
 - [x] Teorema 3.6
-
-giorno 30
 - [ ] Teorema 3.7
 - [ ] Teorema 3.8
 - [ ] Teorema 3.9
 - [ ] Teorema 3.10
-SAMUELE
 
+giorno 30
 - [ ] Teorema 3.11
 - [ ] Teorema 3.12
 - [ ] Osservazione 4.1
