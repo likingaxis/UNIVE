@@ -1813,3 +1813,537 @@ Allora i punti di $B$ che non stanno sul bordo di tutti i cerchi non sono autova
 ##### Dimostrazione
 ogni punto di $B$ sta nei bordi dell'unione dei cerchi, quindi soddisfa le ipotesi del 3 teorema di Gershgorin forte
 quindi è escluso dagli autovalori di A
+#### TEOREMA 3.7
+Sia una matrice $A\in\mathbb{C}^{n\times n}$ tale che soddisfi almeno una delle seguenti condizioni:
+
+1. $A$ è a diagonale dominante per righe e irriducibile
+2. $A$ è a diagonale dominante in senso stretto per righe
+3. $A$ è a diagonale dominante per colonne e irriducibile
+4. $A$ è a diagonale dominante in senso stretto per colonne
+
+Allora $A$ è invertibile
+##### Dimostrazioni
+##### Dimostrazione 1
+
+Supponiamo che $A$ sia a diagonale dominante per righe e irriducibile.
+
+Vogliamo dimostrare che $A$ è invertibile.
+
+Per farlo dimostriamo che $0$ non è autovalore di $A$, usando il terzo teorema di Gershgorin forte.
+
+Ricordiamo che una matrice è invertibile se e solo se $0$ non è un suo autovalore.
+
+Verifichiamo che $0$ soddisfa le ipotesi del terzo teorema di Gershgorin forte.
+
+- $0$ sta sul bordo di quei cerchi di Gershgorin a cui appartiene.
+
+Questo è vero per la condizione 1 della diagonale dominante per righe.
+
+Infatti, per ogni $i$,
+
+$$
+|a_{ii}|\geq r_i
+$$
+
+dove
+
+$$
+r_i=\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
+$$
+
+Quindi $0$ non può stare dentro nessun cerchio $K_i$.
+
+Può solo stare fuori oppure sul bordo.
+
+Se $0$ appartiene a un cerchio $K_i$, non può esserne interno, quindi deve stare per forza sul bordo.
+
+- $0$ non sta sul bordo di tutti i cerchi.
+
+Questo è vero per la condizione 2 della diagonale dominante per righe.
+
+Infatti esiste almeno un indice $k$ tale che
+
+$$
+|a_{kk}|>r_k
+$$
+
+quindi $0$ sta fuori dal cerchio $K_k$, non sul bordo.
+
+Quindi $0$ non sta sul bordo di tutti i cerchi.
+
+- $A$ è irriducibile per ipotesi.
+
+Sono quindi soddisfatte le ipotesi del terzo teorema di Gershgorin forte.
+
+Perciò $0$ non è autovalore di $A$.
+
+Quindi $A$ è invertibile.
+
+$$
+\square
+$$
+##### Dimostrazione 2
+
+Supponiamo che $A$ sia a diagonale dominante in senso stretto per righe.
+
+Allora per ogni $i=1,\ldots,n$ vale
+
+$$
+|a_{ii}|>\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
+$$
+
+cioè
+
+$$
+|a_{ii}|>r_i
+$$
+
+dove $r_i$ è il raggio del cerchio di Gershgorin $K_i$.
+
+Questo significa che la distanza di $0$ dal centro $a_{ii}$ è maggiore del raggio.
+
+Quindi $0$ sta fuori da ogni cerchio di Gershgorin $K_i$.
+
+Per il primo teorema di Gershgorin, tutti gli autovalori di $A$ stanno nell’unione dei cerchi:
+
+$$
+K_1\cup\cdots\cup K_n
+$$
+
+ma $0$ non appartiene a nessuno di questi cerchi, quindi $0$ non può essere autovalore di $A$.
+
+Allora $A$ è invertibile.
+
+$$
+\square
+$$
+##### Dimostrazione 3
+
+Supponiamo che $A$ sia a diagonale dominante per colonne e irriducibile.
+
+Dire che $A$ è a diagonale dominante per colonne equivale a dire che $A^T$ è a diagonale dominante per righe.
+
+Infatti le colonne di $A$ diventano le righe di $A^T$.
+
+Inoltre $A$ è irriducibile se e solo se $A^T$ è irriducibile.
+
+Quindi $A^T$ è a diagonale dominante per righe e irriducibile.
+
+Per la dimostrazione del caso 1, applicata ad $A^T$, otteniamo che $A^T$ è invertibile.
+
+Ma
+
+$$
+\det(A^T)=\det(A)
+$$
+
+quindi se $A^T$ è invertibile, allora anche $A$ è invertibile.
+
+$$
+\square
+$$
+##### Dimostrazione 4
+
+Dimostrazione della quarta ipotesi.
+
+Supponiamo che $A$ sia a diagonale dominante in senso stretto per colonne.
+
+Allora $A^T$ è a diagonale dominante in senso stretto per righe.
+
+Per la dimostrazione del caso 2, applicata ad $A^T$, segue che $A^T$ è invertibile.
+
+Ma
+
+$$
+\det(A^T)=\det(A)
+$$
+
+quindi anche $A$ è invertibile.
+
+$$
+\square
+$$
+
+#### TEOREMA 3.8
+
+Tutte le norme vettoriali in $\mathbb{C}^n$ sono equivalenti.
+
+Questo significa che, se prendiamo due norme qualunque
+
+$$
+\|\cdot\|'
+$$
+
+e
+
+$$
+\|\cdot\|''
+$$
+
+su $\mathbb{C}^n$, allora esistono due costanti positive $\alpha,\beta>0$, indipendenti da $x$, tali che
+
+$$
+\alpha\|x\|''\leq \|x\|'\leq \beta\|x\|''
+$$
+
+per ogni $x\in\mathbb{C}^n$
+##### Esempio
+Verifichiamo che la norma $1$ e la norma infinito sono equivalenti
+Per ogni $x\in\mathbb{C}^n$ vale
+$$
+\|x\|_\infty\leq \|x\|_1\leq n\|x\|_\infty
+$$
+Infatti:
+- $\|x\|_\infty\leq \|x\|_1$, perché il massimo dei moduli delle componenti è sicuramente minore o uguale della somma di tutti i moduli;
+- $\|x\|_1\leq n\|x\|_\infty$, perché ogni componente soddisfa
+$$
+|x_i|\leq \|x\|_\infty
+$$
+quindi
+$$
+\|x\|_1=|x_1|+\cdots+|x_n|
+\leq
+\|x\|_\infty+\cdots+\|x\|_\infty
+=
+n\|x\|_\infty
+$$
+mettendo al centro la norma $1$, abbiamo
+$$
+\|x\|_\infty\leq \|x\|_1\leq n\|x\|_\infty
+$$
+quindi, se considero
+$$
+\|x\|'=\|x\|_1
+$$
+e
+$$
+\|x\|''=\|x\|_\infty
+$$
+allora le costanti del teorema sono
+$$
+\alpha=1,\qquad \beta=n
+$$
+perché
+
+$$
+1\cdot\|x\|_\infty\leq \|x\|_1\leq n\|x\|_\infty
+$$
+
+Se invece voglio mettere al centro la norma infinito, parto sempre da
+$$
+\|x\|_\infty\leq \|x\|_1\leq n\|x\|_\infty
+$$
+dalla seconda disuguaglianza ottengo
+$$
+\frac{1}{n}\|x\|_1\leq \|x\|_\infty
+$$
+quindi
+$$
+\frac{1}{n}\|x\|_1\leq \|x\|_\infty\leq \|x\|_1
+$$
+allora, se considero
+$$
+\|x\|'=\|x\|_\infty
+$$
+e
+$$
+\|x\|''=\|x\|_1
+$$
+le costanti sono
+$$
+\alpha=\frac{1}{n},\qquad \beta=1
+$$
+Questo spiega perché prima avevamo $\alpha=1,\beta=n$, mentre invertendo l’ordine delle norme otteniamo $\alpha=\frac{1}{n},\beta=1$.
+In generale, dalla formula
+$$
+\alpha\|x\|''\leq \|x\|'\leq \beta\|x\|''
+$$
+possiamo anche isolare $\|x\|''$:
+dalla parte destra
+$$
+\|x\|'\leq \beta\|x\|''
+$$
+otteniamo
+$$
+\frac{1}{\beta}\|x\|'\leq \|x\|''
+$$
+dalla parte sinistra
+$$
+\alpha\|x\|''\leq \|x\|'
+$$
+otteniamo
+$$
+\|x\|''\leq \frac{1}{\alpha}\|x\|'
+$$
+quindi
+$$
+\frac{1}{\beta}\|x\|'\leq \|x\|''\leq \frac{1}{\alpha}\|x\|'
+$$
+##### Teorema 3.9
+Sia
+$$
+\|\cdot\|:\mathbb{C}^{n\times n}\to\mathbb{R}
+$$
+una norma matriciale indotta dalla norma vettoriale denotata con lo stesso simbolo $\|\cdot\|$ e siano 
+$$
+A,B\in\mathbb{C}^{n\times n}
+$$
+
+valgono le seguenti proprietà:
+
+1. 
+
+$$
+\|I\|=1
+$$
+
+2. 
+
+$$
+\|Ax\|\leq \|A\|\|x\|
+\qquad \forall x\in\mathbb{C}^n
+$$
+
+3. $\|A\|$ è la più piccola costante $C$ che soddisfa
+
+$$
+\|Ax\|\leq C\|x\|
+\qquad \forall x\in\mathbb{C}^n
+$$
+
+4. submoltiplicatività:
+
+$$
+\|AB\|\leq \|A\|\|B\|
+$$
+
+5. il raggio spettrale è minore o uguale di ogni norma matriciale indotta:
+
+$$
+\rho(A)\leq \|A\|
+$$
+
+dove
+
+$$
+\rho(A)=\max\{|\lambda|:\lambda \text{ autovalore di } A\}
+$$
+##### Dimostrazioni
+##### Dimostrazione 1
+Per definizione di norma indotta,
+$$
+\|I\|=\max_{\|x\|=1}\|Ix\|
+$$
+ma
+$$
+Ix=x
+$$
+quindi
+$$
+\|I\|=\max_{\|x\|=1}\|x\|=1
+$$
+##### Dimostrazione 2
+
+Per ogni $x\neq 0$ si ha
+
+$$
+\frac{\|Ax\|}{\|x\|}
+\leq
+\max_{y\neq 0}\frac{\|Ay\|}{\|y\|}
+$$
+
+per definizione di massimo.
+
+Il termine a destra è proprio
+
+$$
+\|A\|
+$$
+
+quindi
+
+$$
+\frac{\|Ax\|}{\|x\|}\leq \|A\|
+$$
+
+moltiplicando per $\|x\|>0$ otteniamo
+
+$$
+\|Ax\|\leq \|A\|\|x\|
+$$
+
+Se invece $x=0$, allora
+
+$$
+\|A0\|=\|0\|=0
+$$
+
+e
+
+$$
+\|A\|\|0\|=0
+$$
+
+quindi la disuguaglianza diventa
+
+$$
+0\leq 0
+$$
+
+ed è vera.
+##### Dimostrazione 3
+
+Sia $C$ una costante tale che
+
+$$
+\|Ax\|\leq C\|x\|
+$$
+
+per ogni $x\in\mathbb{C}^n$.
+
+Per ogni $x\neq 0$, dividendo per $\|x\|$, otteniamo
+
+$$
+\frac{\|Ax\|}{\|x\|}\leq C
+$$
+
+siccome questa disuguaglianza vale per ogni $x\neq 0$, vale anche per il massimo:
+
+$$
+\max_{x\neq 0}\frac{\|Ax\|}{\|x\|}\leq C
+$$
+
+ma
+
+$$
+\max_{x\neq 0}\frac{\|Ax\|}{\|x\|}=\|A\|
+$$
+
+quindi
+
+$$
+\|A\|\leq C
+$$
+
+Questo significa che $\|A\|$ è la più piccola costante possibile che soddisfa
+
+$$
+\|Ax\|\leq C\|x\|
+$$
+##### Dimostrazione 4
+Per ogni $x\in\mathbb{C}^n$, usando il punto 2 due volte, abbiamo
+$$
+\|ABx\|=\|A(Bx)\|
+\leq
+\|A\|\|Bx\|
+$$
+e ancora
+$$
+\|Bx\|\leq \|B\|\|x\|
+$$
+quindi
+$$
+\|ABx\|
+\leq
+\|A\|\|B\|\|x\|
+$$
+Questo significa che la costante
+$$
+C=\|A\|\|B\|
+$$
+soddisfa
+$$
+\|ABx\|\leq C\|x\|
+\qquad \forall x\in\mathbb{C}^n
+$$
+Per il punto 3, $\|AB\|$ è la più piccola costante con questa proprietà.
+Quindi
+$$
+\|AB\|\leq \|A\|\|B\|
+$$
+##### Dimostrazione 5
+Sia $\lambda$ un autovalore di $A$ tale che
+$$
+|\lambda|=\rho(A)
+$$
+e sia $x\neq 0$ un corrispondente autovettore.
+Allora
+$$
+Ax=\lambda x
+$$
+quindi
+$$
+\|Ax\|=\|\lambda x\|
+$$
+per omogeneità della norma vettoriale,
+$$
+\|\lambda x\|=|\lambda|\|x\|
+$$
+quindi
+$$
+\|Ax\|=|\lambda|\|x\|
+$$
+cioè
+$$
+\|Ax\|=\rho(A)\|x\|
+$$
+dividendo per $\|x\|>0$,
+$$
+\rho(A)=\frac{\|Ax\|}{\|x\|}
+$$
+ma
+$$
+\frac{\|Ax\|}{\|x\|}
+\leq
+\max_{y\neq 0}\frac{\|Ay\|}{\|y\|}
+=
+\|A\|
+$$
+quindi
+$$
+\rho(A)\leq \|A\|
+$$
+#### TEOREMA 3.10
+Per ogni
+$$
+A\in\mathbb{C}^{n\times n}
+$$
+valgono le seguenti formule.
+Norma $1$:
+$$
+\|A\|_1=
+\max_{j=1,\ldots,n}
+\sum_{i=1}^n |a_{ij}|
+$$
+cioè la norma $1$ matriciale indotta è il massimo delle somme dei moduli degli elementi sulle colonne.
+Se indichiamo con $A^{[j]}$ la colonna $j$-esima di $A$, allora
+$$
+\|A\|_1=
+\max\left(\|A^{[1]}\|_1,\|A^{[2]}\|_1,\ldots,\|A^{[n]}\|_1\right)
+$$
+Norma $2$:
+$$
+\|A\|_2=
+\sqrt{\rho(A^*A)}
+$$
+dove $A^*$ è la trasposta coniugata di $A$.
+Attenzione: non è $\sqrt{\rho(A\cdot A)}$, ma
+$$
+\sqrt{\rho(A^*A)}
+$$
+Norma infinito:
+$$
+\|A\|_\infty=
+\max_{i=1,\ldots,n}
+\sum_{j=1}^n |a_{ij}|
+$$
+
+cioè la norma infinito matriciale indotta è il massimo delle somme dei moduli degli elementi sulle righe.
+Se indichiamo con $A_{[i]}$ la riga $i$-esima di $A$, allora
+$$
+\|A\|_\infty=
+\max\left(\|A_{[1]}\|_1,\|A_{[2]}\|_1,\ldots,\|A_{[n]}\|_1\right)
+$$
+Attenzione alla differenza:
+- $\|A\|_1$ guarda le colonne;
+- $\|A\|_\infty$ guarda le righe.
