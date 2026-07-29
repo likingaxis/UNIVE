@@ -306,7 +306,6 @@ dunque tutti gli autovalori di $A$ hanno parte reale positiva. In particolare ne
 sia $A\in\mathbb{C}^{n\times n}$ una matrice hermitiana e siano $A_1,A_2,\ldots,A_n$ le sue sottomatrici principali di testa.
 
 Cioè, se
-
 $$
 A=
 \begin{pmatrix}
@@ -316,9 +315,7 @@ a_{21} & a_{22} & \cdots & a_{2n}\\
 a_{n1} & a_{n2} & \cdots & a_{nn}
 \end{pmatrix}
 $$
-
 allora
-
 $$
 A_1=
 \begin{pmatrix}
