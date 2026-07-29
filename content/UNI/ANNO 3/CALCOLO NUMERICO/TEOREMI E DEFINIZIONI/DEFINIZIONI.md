@@ -11,7 +11,9 @@
 ##### Cosa vuol dire $C^{n+1}[a,b]$
 
 ##### Differenze divise
+
 ##### Polinomio in forma di Newton
+
 ##### Algoritmo di valutazione del polinomio d'interpolazione in un punto e il suo costo
 sia $f:[a,b]\to\mathbb{R}$, siano
 $x_0,\ldots,x_n\in[a,b]$
@@ -100,3 +102,71 @@ approssimando per $n$ grande, guardiamo solo i termini di grado più alto
 $$
 c(n)\approx n^2A+\frac{n^2}{2}D
 $$
+##### Aggiunta di un nodo
+##### Formula dei trapezi
+Data una funzione integrabile $f:[a,b]\to\mathbb{R}$, si vuole calcolare un’approssimazione di
+
+$$
+\int_a^b f(x)\,dx
+$$
+
+ricordiamo che l’integrale rappresenta l’area sottesa dal grafico della funzione, più precisamente l’area con segno: se la funzione è sopra l’asse $x$ l’area contribuisce positivamente, se è sotto contribuisce negativamente.
+
+A tal fine si suddivide l’intervallo $[a,b]$ in $n\geq 1$ sottointervalli tutti della stessa ampiezza
+
+$$
+h=\frac{b-a}{n}
+$$
+
+dove $h$ si chiama passo di discretizzazione.
+
+Il valore che si prende come approssimazione del nostro integrale
+
+$$
+\int_a^b f(x)\,dx
+$$
+
+è
+
+$$
+\int_a^b s(x)\,dx
+$$
+
+La funzione
+$$
+s:[a,b]\to\mathbb{R}
+$$
+è definita a tratti: per $x\in[x_j,x_{j+1}]$ si prende la retta che passa per i punti
+
+$$
+(x_j,f(x_j)),\qquad (x_{j+1},f(x_{j+1}))
+$$
+quindi, per $x\in[x_j,x_{j+1}]$, abbiamo
+
+$$
+s(x)=f(x_j)+\frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j}(x-x_j)
+$$
+
+questa regola vale per ogni indice
+
+$$
+j=0,\ldots,n-1
+$$
+corrisponde alla formula dei trapezi
+$$
+I_n=
+h\left[
+\frac{f(a)+f(b)}{2}
++
+\sum_{j=1}^{n-1}f(x_j)
+\right]
+$$
+##### Estrapolazione
+
+##### Traccia, determinante, raggio spettrale e autovalori
+
+##### Matrici diagonalizzabili
+
+##### Matrici hermitiane e simmetriche e definite positive
+
+##### Polinomi di matrici
