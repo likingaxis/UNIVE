@@ -3303,4 +3303,423 @@ $$x^{(k+1)}=(I-M^{-1}A)x^{(k)}+M^{-1}b$$
 la prima parte è P la seconda é q
 il metodo converge se e solo se $$\rho(P) < 1$$
 Quindi $\rho(I-M^{-1}A) < 1$
-##### Osservazione 4.5
+##### Osservazione 4.5 (SMART)
+
+Il polinomio caratteristico di
+$$
+I-M^{-1}A
+$$
+è
+$$
+C_{I-M^{-1}A}(\lambda)
+=
+\det(\lambda I-(I-M^{-1}A))
+$$
+quindi
+$$
+C_{I-M^{-1}A}(\lambda)
+=
+\det(\lambda I-I+M^{-1}A)
+$$
+Ora vogliamo evitare di calcolare esplicitamente $M^{-1}$.
+Osserviamo che
+$$
+\lambda I-I+M^{-1}A
+=
+(\lambda-1)I+M^{-1}A
+$$
+possiamo raccogliere $M^{-1}$ scrivendo
+$$
+(\lambda-1)I+M^{-1}A
+=
+M^{-1}[(\lambda-1)M+A]
+$$
+infatti
+$$
+M^{-1}[(\lambda-1)M+A]
+=
+(\lambda-1)M^{-1}M+M^{-1}A
+=
+(\lambda-1)I+M^{-1}A
+$$
+quindi
+$$
+C_{I-M^{-1}A}(\lambda)
+=
+\det(M^{-1}[(\lambda-1)M+A])
+$$
+per Binet:
+$$
+C_{I-M^{-1}A}(\lambda)
+=
+\det(M^{-1})\det((\lambda-1)M+A)
+$$
+cioè
+$$
+C_{I-M^{-1}A}(\lambda)
+=
+\det(M^{-1})\det(\lambda M-M+A)
+$$
+Il primo determinante
+$$
+\det(M^{-1})
+$$
+è diverso da zero perché $M$ è invertibile.
+Infatti
+$$
+\det(M)\neq 0
+$$
+e quindi
+$$
+\det(M^{-1})=\frac{1}{\det(M)}\neq 0
+$$
+Allora
+$$
+C_{I-M^{-1}A}(\lambda)=0
+$$
+se e solo se
+$$
+\det(\lambda M-M+A)=0
+$$
+Questa è l’equazione smart.
+Serve per calcolare gli autovalori e quindi il raggio spettrale di
+$$
+I-M^{-1}A
+$$
+senza calcolare esplicitamente né
+$$
+M^{-1}
+$$
+né
+$$
+I-M^{-1}A
+$$
+Quindi, invece di costruire la matrice di iterazione e poi calcolarne gli autovalori, possiamo risolvere direttamente
+$$
+\det(\lambda M-M+A)=0
+$$
+##### OSSERVAZIONE 4.6
+L’iterazione $k$-esima del metodo viene calcolata con la formula
+$$
+x^{(k+1)}=x^{(k)}+M^{-1}r^{(k)}
+$$
+e richiede il calcolo del vettore
+$$
+z^{(k)}=M^{-1}r^{(k)}
+$$
+detto residuo precondizionato.
+In pratica, però, non si calcola mai esplicitamente $M^{-1}$.
+Il calcolo di $z^{(k)}$ si fa risolvendo il sistema lineare
+$$
+Mz^{(k)}=r^{(k)}
+$$
+Infatti, se
+$$
+Mz^{(k)}=r^{(k)}
+$$
+allora
+$$
+z^{(k)}=M^{-1}r^{(k)}
+$$
+Questo è molto più conveniente dal punto di vista computazionale rispetto al calcolo esplicito di $M^{-1}$.
+Ovviamente il sistema lineare
+$$
+Mz^{(k)}=r^{(k)}
+$$
+deve essere più rapido da risolvere del sistema originario
+$$
+Ax=b
+$$
+altrimenti non converrebbe usare questo metodo iterativo.
+##### OSSERVAZIONE 4.7
+Intuitivamente, quanto più il precondizionatore $M$ assomiglia alla matrice $A$, tanto più il metodo dovrebbe convergere velocemente.
+La velocità dipende dal raggio spettrale della matrice di iterazione
+$$
+P=I-M^{-1}A
+$$
+Se
+$$
+M\approx A
+$$
+allora
+$$
+M-A\approx 0
+$$
+e quindi
+$$
+M^{-1}(M-A)\approx 0
+$$
+cioè
+$$
+I-M^{-1}A\approx 0
+$$
+per cui ci si aspetta un raggio spettrale piccolo.
+Il caso limite è
+$$
+M=A
+$$
+In questo caso
+$$
+I-M^{-1}A=I-A^{-1}A=I-I=0
+$$
+quindi la matrice di iterazione è nulla.
+Il metodo diventa
+$$
+x^{(k+1)}=x^{(k)}+A^{-1}(b-Ax^{(k)})
+$$
+cioè
+$$
+x^{(k+1)}=x^{(k)}+A^{-1}b-A^{-1}Ax^{(k)}
+$$
+quindi
+$$
+x^{(k+1)}=x^{(k)}+A^{-1}b-x^{(k)}
+$$
+e dunque
+$$
+x^{(k+1)}=A^{-1}b=x
+$$
+cioè converge in una sola iterazione alla soluzione esatta.
+Il problema è che questa unica iterazione richiede di risolvere un sistema con matrice $A$, quindi costa come risolvere direttamente il sistema originale
+$$
+Ax=b
+$$
+Conclusione: nella scelta del precondizionatore $M$ occorre mediare fra due cose:
+- qualità dell’approssimazione $M\approx A$
+- facilità e rapidità della risoluzione di un sistema lineare con matrice $M$
+Una buona approssimazione
+$$
+M\approx A
+$$
+generalmente assicura una buona velocità di convergenza.
+La facilità e rapidità della risoluzione di
+$$
+Mz=r
+$$
+assicura invece che ogni iterazione del metodo sia veloce.
+##### OSSERVAZIONE 4.8
+Confrontando i precondizionatori $D$ ed $E$ dei metodi di Jacobi e Gauss-Seidel, osserviamo quanto segue
+- L’approssimazione
+$$
+E\approx A
+$$
+è migliore dell’approssimazione
+$$
+D\approx A
+$$
+perché $E$ contiene più informazioni di $A$ rispetto a $D$.
+Infatti $D$ contiene solo la diagonale di $A$, mentre $E$ contiene tutta la parte triangolare inferiore, inclusa la diagonale.
+Inoltre
+$$
+E-A
+$$
+ha più zeri rispetto a
+$$
+D-A
+$$
+Questo spiega perché molto spesso il metodo di Gauss-Seidel converge più velocemente del metodo di Jacobi, cioè spesso
+$$
+\rho(G)<\rho(J)
+$$
+dove $J$ e $G$ sono rispettivamente le matrici di iterazione di Jacobi e Gauss-Seidel.
+- Però la risoluzione di un sistema lineare con matrice $E$ è più costosa della risoluzione di un sistema lineare con matrice $D$.
+Infatti:
+- con $D$ basta risolvere un sistema diagonale, cioè fare $n$ divisioni;
+- con $E$ bisogna risolvere un sistema triangolare inferiore, usando sostituzione in avanti.
+Pertanto, una iterazione di Gauss-Seidel costa di più di una iterazione di Jacobi.
+Quindi il confronto è questo:
+- Jacobi: iterazioni più economiche, ma spesso convergenza più lenta;
+- Gauss-Seidel: iterazioni più costose, ma spesso convergenza più veloce.
+#### TEOREMA 4.3
+Supponiamo che $A\in\mathbb{C}^{n\times n}$ soddisfi almeno una delle seguenti condizioni:
+- $A$ è a diagonale dominante per righe e irriducibile
+- $A$ è a diagonale dominante in senso stretto per righe
+- $A$ è a diagonale dominante per colonne e irriducibile
+- $A$ è a diagonale dominante in senso stretto per colonne.
+Allora i metodi di Jacobi e Gauss-Seidel per risolvere un sistema lineare di matrice $A$ sono convergenti
+##### Osservazione 4.9
+Se $A\in\mathbb{C}^{n\times n}$ soddisfa almeno una delle quattro condizioni del teorema, allora:
+- $A$ è invertibile per il Teorema 3.7
+- gli elementi diagonali di $A$ sono diversi da $0$
+Infatti, se per assurdo ci fosse un elemento diagonale nullo, ad esempio
+$$
+a_{ii}=0
+$$
+allora, nel caso di dominanza diagonale per righe, avremmo
+$$
+0=|a_{ii}|\geq \sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
+$$
+quindi necessariamente
+$$
+a_{ij}=0 \qquad \forall j\neq i
+$$
+
+cioè tutta la riga $i$-esima sarebbe nulla. Questo è impossibile se $A$ è invertibile
+Analogamente, nel caso di dominanza per colonne, se $a_{jj}=0$, allora tutta la colonna $j$-esima sarebbe nulla, quindi $A$ non potrebbe essere invertibile
+
+Conclusione: 
+se $A$ soddisfa almeno una delle quattro condizioni del Teorema 4.3, allora i metodi di Jacobi e Gauss-Seidel sono applicabili, perché richiedono che gli elementi diagonali di $A$ siano non nulli
+
+##### Dimostrazione Teorema 4.3
+##### Dimostrazione 1 per il metodo di Gauss-Seidel a diagonale dominante per righe e irriducibile
+per dimostrare che  il metodo di Gauss-Seidel converge dobbiamo dimostrare che $\rho(G)<1$
+con $G=I-E^{-1}A$ come matrice di iterazione di Gauss-Seidel
+per osservazione smart gli autovalori di G sono dati dall'equazione del $det(\lambda E+A-E)=0$
+ipotizzando un caso dove n=4 abbiamo che 
+$$
+E=
+\begin{pmatrix}
+a_{11} & 0 & 0 & 0\\
+a_{21} & a_{22} & 0 & 0\\
+a_{31} & a_{32} & a_{33} & 0\\
+a_{41} & a_{42} & a_{43} & a_{44}
+\end{pmatrix}
+$$
+allora
+$$
+\lambda E+A-E=
+\begin{pmatrix}
+\lambda a_{11} & a_{12} & a_{13} & a_{14}\\
+\lambda a_{21} & \lambda a_{22} & a_{23} & a_{24}\\
+\lambda a_{31} & \lambda a_{32} & \lambda a_{33} & a_{34}\\
+\lambda a_{41} & \lambda a_{42} & \lambda a_{43} & \lambda a_{44}
+\end{pmatrix}
+$$
+si vuole dimostrare che nessun $|\lambda|\geq 1$ è in G 
+per questo vogliamo dimostrare che $\lambda E+A-E$ è invertibile $\forall \lambda \geq 1$ 
+se questo è invertibile allora significa che il suo determinante è diverso da 0 perciò quel $\lambda$ non è autovalore di G
+per il teorema 3.7 se A è a diagonale dominante e irriducibile allora A è invertibile visto che $|\lambda| \geq 1$ 
+
+abbiamo $\lambda\neq 0$, quindi moltiplicare certi elementi di $A$ per $\lambda$ non cambia il fatto che siano nulli o non nulli
+
+Gli zeri della matrice $\lambda E+A-E$ stanno nelle stesse posizioni degli zeri di $A$
+Quindi le due matrici hanno lo stesso grafo associato
+Siccome $A$ è irriducibile, il grafo di $A$ è fortemente connesso, e quindi anche il grafo di $\lambda E+A-E$ è fortemente connesso
+
+quindi $\lambda E + A-E$ è irriducibile
+per dimostrare invece che $\lambda E + A-E$ è a diagonale dominante per righe
+Fissiamo una riga $i$.
+L’elemento diagonale della riga $i$ è
+$$
+\lambda a_{ii}
+$$
+quindi il suo modulo è
+$$
+|\lambda a_{ii}|=|\lambda||a_{ii}|
+$$
+Gli elementi fuori diagonale della riga $i$ sono:
+- quelli con $j<i$, cioè sotto la diagonale, moltiplicati per $\lambda$;
+- quelli con $j>i$, cioè sopra la diagonale, lasciati invariati.
+Quindi la somma dei moduli degli elementi fuori diagonale della riga $i$ della matrice $\lambda E+A-E$ è
+$$
+\sum_{j=1}^{i-1}|\lambda a_{ij}|+\sum_{j=i+1}^n |a_{ij}|
+$$
+cioè
+$$
+|\lambda|\sum_{j=1}^{i-1}|a_{ij}|+\sum_{j=i+1}^n |a_{ij}|
+$$
+Ora, siccome $A$ è a diagonale dominante per righe,
+$$
+|a_{ii}|
+\geq
+\sum_{j=1}^{i-1}|a_{ij}|+\sum_{j=i+1}^n |a_{ij}|
+$$
+moltiplichiamo per $|\lambda|$:
+$$
+|\lambda||a_{ii}|
+\geq
+|\lambda|\sum_{j=1}^{i-1}|a_{ij}|
++
+|\lambda|\sum_{j=i+1}^n |a_{ij}|
+$$
+siccome $|\lambda|\geq 1$
+abbiamo
+$$
+|\lambda|\sum_{j=i+1}^n |a_{ij}|
+\geq
+\sum_{j=i+1}^n |a_{ij}|
+$$
+quindi
+$$
+|\lambda||a_{ii}|
+\geq
+|\lambda|\sum_{j=1}^{i-1}|a_{ij}|
++
+\sum_{j=i+1}^n |a_{ij}|
+$$
+cioè
+$$
+|\lambda a_{ii}|
+\geq
+\sum_{j=1}^{i-1}|\lambda a_{ij}|
++
+\sum_{j=i+1}^n |a_{ij}|
+$$
+Questa è esattamente la dominanza diagonale per righe della matrice $\lambda E+A-E$
+
+definire dominanza diagonale implica anche che per una riga k si ha che 
+
+$$
+|a_{kk}|>
+\sum_{\substack{j=1\\j\neq k}}^n |a_{kj}|
+$$
+per cui  per $\lambda E+A-E$ abbiamo che 
+$$
+|\lambda||a_{kk}|>
+|\lambda|\sum_{\substack{j=1\\j\neq k}}^n |a_{kj}|
+$$
+quindi per il teorema 3.7 $\lambda E+A-E$ è invertibile
+quindi $det(\lambda E+ A -E)\ \neq 0 \ \ \ \forall |\lambda| \geq 1$
+Conclusione: tutte le radici hanno modulo minore di $1$.
+Ma queste radici sono gli autovalori di $G$.
+Quindi tutti gli autovalori di $G$ hanno modulo minore di $1$, e dunque
+$$
+\rho(G)<1
+$$
+Perciò il metodo di Gauss-Seidel è convergente.
+$$
+\square
+$$
+##### Dimostrazione per jacobi
+
+Per il metodo di Jacobi, il ragionamento è analogo, ma si usa
+$$
+J=I-D^{-1}A
+$$
+e l’equazione smart diventa
+$$
+\det(\lambda D + A-D)=0
+$$
+Se $|\lambda|\geq 1$, la matrice $\lambda D+A-D$ conserva la dominanza diagonale e l’irriducibilità, quindi è invertibile per il Teorema 3.7. Dunque nessun $\lambda$ con $|\lambda|\geq 1$ può essere autovalore di $J$, e quindi
+$$
+\rho(J)<1
+$$
+##### Caso della dominanza per colonne
+Se $A$ è a diagonale dominante per colonne e irriducibile, il ragionamento è lo stesso, ma si lavora sulle **colonne** invece che sulle righe.
+In particolare, per ogni $\lambda$ con $|\lambda|\geq 1$
+si dimostra che la matrice ausiliaria considerata nella dimostrazione, cioè
+$\lambda E+A-E$ nel caso di Gauss-Seidel, oppure
+$\lambda D+A-D$ nel caso di Jacobi, conserva la dominanza diagonale per colonne e l’irriducibilità
+
+Quindi, per il Teorema 3.7, tale matrice è invertibile. Di conseguenza $\det(\lambda E+A-E)\neq 0$
+oppure $\det(\lambda D+A-D)\neq 0$
+Pertanto nessun $\lambda$ con$|\lambda|\geq 1$ può essere autovalore della matrice di iterazione corrispondente. 
+Quindi il raggio spettrale della matrice di iterazione è minore di 1, e il metodo converge per il Teorema 4.1.
+##### Caso della dominanza in senso stretto
+Se invece $A$ è a diagonale dominante in senso stretto, per righe o per colonne, la dimostrazione è più semplice.
+
+Infatti, in questo caso non serve usare l’irriducibilità. La dominanza stretta garantisce che lo zero sta fuori da tutti i cerchi di Gershgorin della matrice ausiliaria.
+
+Per esempio, se una matrice $B$ è a diagonale dominante in senso stretto per righe, allora per ogni riga $i$ vale
+$$|b_{ii}|>\sum_{j\neq i}|b_{ij}|$$
+Questo significa che, nel cerchio di Gershgorin $K_i$, la distanza dello zero dal centro $b_{ii}$​ è maggiore del raggio. 
+
+Quindi $0\notin K_i \qquad \forall i$
+
+Per il primo teorema di Gershgorin, tutti gli autovalori di $B$ stanno nell’unione dei cerchi di Gershgorin. Poiché lo zero non appartiene a nessun cerchio, lo zero non è autovalore di $B$. Quindi $B$ è invertibile.
+Applicando questo alla matrice ausiliaria $\lambda E+A-E$
+oppure $\lambda D+A-D$
+si conclude ancora che, per ogni $\lambda$ con $|\lambda|\geq 1$, tale matrice è invertibile. Quindi quel $\lambda$ non è autovalore della matrice di iterazione. 
+Di conseguenza tutti gli autovalori della matrice di iterazione hanno modulo minore di 1, cioè $\rho(G)<1$
+oppure $\rho(J)<1$
+Per il Teorema 4.1, il metodo converge

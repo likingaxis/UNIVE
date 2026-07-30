@@ -34,13 +34,13 @@ giorno 30
 - [x] Corollario 4.2
 - [x] Osservazione 4.2
 - [x] Teorema 4.2
-- [ ] Osservazione 4.5 (SMART)
-- [ ] Osservazione 4.6
-- [ ] Osservazione 4.7
-- [ ] Osservazione 4.8
+- [x] Osservazione 4.5 (SMART)
+- [x] Osservazione 4.6
+- [x] Osservazione 4.7
+- [x] Osservazione 4.8
 giorno 31
-- [ ] Teorema 4.3
-- [ ] Osservazione 4.9
+- [x] Teorema 4.3
+- [x] Osservazione 4.9
 - [ ] Teorema 4.4
 - [ ] Osservazione 4.10
 
