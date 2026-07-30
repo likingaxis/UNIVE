@@ -13,7 +13,7 @@ giorno 29
 - [x] Osservazione 2.1
 - [x] Osservazione pagina 27 con dimostrazione da fare
 - [x] Teorema 3.1
-- [ ] Esercizio 3.4
+- [x] Esercizio 3.4
 - [x] Teorema 3.2
 - [x] Teorema 3.3
 - [x] Teorema 3.4
@@ -21,26 +21,24 @@ giorno 29
 - [x] Teorema 3.6
 - [x] Teorema 3.7
 - [x] Teorema 3.8
-- [ ] sulla velocità delle norme
+- [x] sulla velocità delle norme
 - [x] Teorema 3.9
 - [x] Teorema 3.10
 
 giorno 30
-- [ ] Teorema 3.11
-- [ ] Teorema 3.12
-- [ ] Osservazione 4.1
-- [ ] Teorema 4.1
-- [ ] Corollario 4.1
-- [ ] Corollario 4.2
-- [ ] Osservazione 4.2
-- [ ] Osservazione 4.4
-
-giorno 31
-- [ ] Teorema 4.2
-- [ ] Osservazione 4.5
+- [x] Teorema 3.11
+- [x] Teorema 3.12
+- [x] Osservazione 4.1
+- [x] Teorema 4.1
+- [x] Corollario 4.1
+- [x] Corollario 4.2
+- [x] Osservazione 4.2
+- [x] Teorema 4.2
+- [ ] Osservazione 4.5 (SMART)
 - [ ] Osservazione 4.6
 - [ ] Osservazione 4.7
-- [ ] Oss smart
+- [ ] Osservazione 4.8
+giorno 31
 - [ ] Teorema 4.3
 - [ ] Osservazione 4.9
 - [ ] Teorema 4.4
