@@ -12,7 +12,10 @@
 - [x] Ansible
 - [x] Proxmox VE
 - [x] Docker
-- [ ] LLM Agents MCP
+- [x] LLM Agents
+- [x] MCP
+- [ ] ReAct
+- [ ] AI Workflows
 - [ ] LangGraph
 
 
