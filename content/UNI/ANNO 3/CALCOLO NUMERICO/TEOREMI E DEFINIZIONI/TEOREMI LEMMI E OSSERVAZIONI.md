@@ -1183,8 +1183,100 @@ $$
 \lambda>0
 $$
 
-quindi gli autovalori sono reali e positivi.
-##### Esercizio 3.4
+quindi gli autovalori sono reali e positivi
+#### Esercizio 3.4
+Sia $A \in \mathbb{C}^{n \times n}$ una matrice hermitiana definita positiva
+Dimostrare che gli elementi diagonali di $A$ sono tutti positivi ovvero
+$$
+a_{ii}>0
+\qquad \text{per ogni } i=1,\dots,n.
+$$
+Prendiamo il vettore ($e_i$) della base canonica di $\mathbb{C}^n$ 
+- cioè il vettore che ha $(1)$ nella posizione (i)-esima e (0) in tutte le altre posizioni.
+Poiché ($A$) è definita positiva, per ogni vettore non nullo $(x)$ vale
+$$x^*Ax>0.$$
+In particolare possiamo scegliere
+$$x=e_i$$
+Quindi
+$$e_i^*Ae_i>0$$
+Ora vediamo quanto vale questo prodotto
+Calcoliamo ora il prodotto ($e_i^*Ae_i$).
+Prima calcoliamo
+$Ae_i$
+Poiché ($e_i$) ha tutti zeri tranne un ($1$) nella posizione ($i$)-esima, il prodotto ($Ae_i$) seleziona la colonna ($i$)-esima di (A):
+$$Ae_i=  
+\begin{pmatrix}  
+a_{1i}\  
+a_{2i}\  
+\vdots\  
+a_{ii}\  
+\vdots\  
+a_{ni}  
+\end{pmatrix}.  $$
+Ora moltiplichiamo a sinistra per ($e_i^*$).
+Essendo ($e_i$) formato soltanto da numeri reali, il suo trasposto coniugato è
+$$
+e_i^*=  
+\begin{pmatrix}  
+0&\cdots&0&1&0&\cdots&0  
+\end{pmatrix}.  
+$$
+Quindi
+$$
+\begin{pmatrix}  
+0&\cdots&0&1&0&\cdots&0  
+\end{pmatrix}  
+\begin{pmatrix}  
+a_{1i}\  
+a_{2i}\  
+\vdots\  
+a_{ii}\  
+\vdots\  
+a_{ni}  
+\end{pmatrix}.  
+$$
+Eseguendo il prodotto scalare, tutti i termini vengono moltiplicati per (0), tranne la componente (i)-esima, che viene moltiplicata per (1):
+
+$$0\cdot a_{1i}  
++\cdots+  
+1\cdot a_{ii}  
++\cdots+  
+0\cdot a_{ni}.  
+]$$
+Pertanto
+$$
+e_i^*Ae_i=a_{ii}.  
+$$
+Ma avevamo già ottenuto
+$$ 
+e_i^*Ae_i>0.  
+$$
+Quindi
+$$
+\boxed{a_{ii}>0}  
+\qquad \text{per ogni } i=1,\ldots,n.  
+$$
+Poi $(e_i^*)$ seleziona la componente (i)-esima di questa colonna. Quindi
+$$
+e_i^*Ae_i=a_{ii}.
+$$
+Pertanto
+$$
+a_{ii}=e_i^*Ae_i>0.
+$$
+Essendo $(i)$ arbitrario, concludiamo che
+$$
+a_{ii}>0
+\qquad
+\forall i=1,\dots,n.
+$$
+In generale si possono usare due indici $i,j\in{1,...,n}$
+$$
+e_i^*Ae_j=a_{ij}.
+$$
+Infatti $(Ae_j)$ seleziona la colonna $(j)-esima$, mentre $(e_i^*)$ ne seleziona la componente $(i)$-esima. Ponendo $(j=i)$, otteniamo proprio
+$$e_i^*Ae_i=a_{ii}$$
+
 #### TEOREMA 3.2
 sia $p(\lambda)$ un polinomio e sia $A\in\mathbb{C}^{n\times n}$ una matrice con autovalori
 $$
@@ -2079,6 +2171,200 @@ quindi
 $$
 \frac{1}{\beta}\|x\|'\leq \|x\|''\leq \frac{1}{\alpha}\|x\|'
 $$
+
+#### Successioni di vettori
+
+Una successione di vettori
+
+$$
+x^{(0)},x^{(1)},x^{(2)},\ldots
+$$
+
+in $\mathbb{C}^n$ si dice convergente al vettore $x\in\mathbb{C}^n$ rispetto alla norma $\|\cdot\|$ se
+
+$$
+\|x^{(k)}-x\|\to 0
+$$
+
+per
+
+$$
+k\to+\infty
+$$
+
+Il teorema di equivalenza delle norme ci permette di dire che, poiché tutte le norme sono equivalenti in $\mathbb{C}^n$, se una successione di vettori converge a $x$ rispetto a una norma, allora converge a $x$ rispetto a tutte le norme.
+
+Dimostrazione.
+
+Supponiamo che
+
+$$
+x^{(k)}\to x
+$$
+
+rispetto alla norma $\|\cdot\|$.
+
+Questo significa che
+
+$$
+\|x^{(k)}-x\|\to 0
+$$
+
+Sia $\|\cdot\|'$ un’altra norma.
+
+Poiché le due norme sono equivalenti, esistono due costanti positive $\alpha,\beta>0$ tali che
+
+$$
+\alpha\|y\|\leq \|y\|'\leq \beta\|y\|
+$$
+
+per ogni $y\in\mathbb{C}^n$.
+
+Sostituiamo
+
+$$
+y=x^{(k)}-x
+$$
+
+e otteniamo
+
+$$
+\alpha\|x^{(k)}-x\|
+\leq
+\|x^{(k)}-x\|'
+\leq
+\beta\|x^{(k)}-x\|
+$$
+
+Poiché
+
+$$
+\|x^{(k)}-x\|\to 0
+$$
+
+anche
+
+$$
+\alpha\|x^{(k)}-x\|\to 0
+$$
+
+e
+
+$$
+\beta\|x^{(k)}-x\|\to 0
+$$
+
+Per il teorema del confronto, o teorema dei carabinieri, otteniamo
+
+$$
+\|x^{(k)}-x\|'\to 0
+$$
+
+quindi
+
+$$
+x^{(k)}\to x
+$$
+
+anche rispetto alla norma $\|\cdot\|'$.
+
+Una successione di vettori
+
+$$
+x^{(0)},x^{(1)},x^{(2)},\ldots
+$$
+
+in $\mathbb{C}^n$ si dice convergente componente per componente al vettore
+
+$$
+x=
+\begin{pmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{pmatrix}
+$$
+
+se, scrivendo
+
+$$
+x^{(k)}=
+\begin{pmatrix}
+x_1^{(k)}\\
+x_2^{(k)}\\
+\vdots\\
+x_n^{(k)}
+\end{pmatrix}
+$$
+
+vale
+
+$$
+x_i^{(k)}\to x_i
+$$
+
+per ogni
+
+$$
+i=1,\ldots,n
+$$
+
+cioè
+
+$$
+x_1^{(k)}\to x_1
+$$
+
+$$
+x_2^{(k)}\to x_2
+$$
+
+$$
+\vdots
+$$
+
+$$
+x_n^{(k)}\to x_n
+$$
+
+equivalentemente,
+
+$$
+x_i^{(k)}-x_i\to 0
+$$
+
+per ogni $i=1,\ldots,n$.
+
+Questo è equivalente a dire che
+
+$$
+\max_{i=1,\ldots,n}|x_i^{(k)}-x_i|\to 0
+$$
+
+ma
+
+$$
+\max_{i=1,\ldots,n}|x_i^{(k)}-x_i|
+=
+\|x^{(k)}-x\|_\infty
+$$
+
+quindi la convergenza componente per componente coincide con la convergenza rispetto alla norma infinito.
+
+Allora, ricordando l’equivalenza di tutte le norme in $\mathbb{C}^n$, dire
+
+$$
+x^{(k)}\to x
+$$
+
+componente per componente è lo stesso che dire
+
+$$
+x^{(k)}\to x
+$$
+
+rispetto a una qualsiasi norma vettoriale.
 ##### Teorema 3.9
 Sia
 $$
@@ -2347,3 +2633,674 @@ $$
 Attenzione alla differenza:
 - $\|A\|_1$ guarda le colonne;
 - $\|A\|_\infty$ guarda le righe.
+#### TEOREMA 3.11
+Tutte le norme matriciali, sia indotte sia non indotte, in $\mathbb{C}^{n\times n}$ sono equivalenti.
+Questo significa che, se prendiamo due norme matriciali qualsiasi
+$\|\cdot\|'$ e $\|\cdot\|''$
+da $\mathbb{C}^{n\times n}$ in $\mathbb{R}$, allora esistono due costanti positive
+$$
+\alpha,\beta>0
+$$
+indipendenti da $A$ tali che
+$$
+\alpha\|A\|''\leq \|A\|'\leq \beta\|A\|''
+$$
+per ogni
+$$
+A\in\mathbb{C}^{n\times n}
+$$
+dimostrazione analoga alla 3.7.4
+#### TEOREMA 3.12
+Sia
+$$
+A\in\mathbb{C}^{n\times n}
+$$
+allora
+$$
+lim_{\ k->\infty}A^k\to 0
+$$
+cioè la potenza $k$-esima di $A$ tende alla matrice nulla, se e solo se
+$$
+\rho(A)<1
+$$
+dove $\rho(A)$ è il raggio spettrale di $A$.
+
+#####  Dimostrazione
+Dimostriamo il teorema nel caso in cui $A$ sia diagonalizzabile
+Allora esistono una matrice invertibile
+
+$$
+X\in\mathbb{C}^{n\times n}
+$$
+e una matrice diagonale
+$$
+D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)
+$$
+avente sulla diagonale gli autovalori di $A$ t.c
+$$
+A=XDX^{-1}
+$$
+Allora
+
+$A^2=(XDX^{-1})(XDX^{-1})$ siccome $X^{-1}X=I$
+otteniamo $A^2=XD^2X^{-1}$
+
+Analogamente $A^3=XD^3X^{-1}$ e in generale
+$$
+A^k=XD^kX^{-1}
+$$
+##### Dimostrazione 1
+$$
+\rho(A)<1 \Longrightarrow A^k\to 0
+$$
+
+Usiamo una norma matriciale indotta, per esempio la norma infinito.
+Abbiamo
+$$
+\|A^k\|_\infty
+=
+\|XD^kX^{-1}\|_\infty
+$$
+per submoltiplicatività,
+$$
+\|XD^kX^{-1}\|_\infty
+\leq
+\|X\|_\infty \|D^kX^{-1}\|_\infty
+$$
+e ancora, applicando una seconda volta la submoltiplicatività,
+$$
+\|D^kX^{-1}\|_\infty
+\leq
+\|D^k\|_\infty \|X^{-1}\|_\infty
+$$
+quindi
+$$
+\|A^k\|_\infty
+\leq
+\|X\|_\infty \|D^k\|_\infty \|X^{-1}\|_\infty
+$$
+Ora
+$$
+D^k=
+\operatorname{diag}(\lambda_1^k,\ldots,\lambda_n^k)
+$$
+quindi
+$$
+\|D^k\|_\infty
+=
+\max_{i=1,\ldots,n}|\lambda_i^k|
+$$
+ma
+$$
+|\lambda_i^k|=|\lambda_i|^k
+$$
+perciò
+$$
+\|D^k\|_\infty
+=
+\max_{i=1,\ldots,n}|\lambda_i|^k
+=
+\left(\max_{i=1,\ldots,n}|\lambda_i|\right)^k
+$$`
+cioè
+$$
+\|D^k\|_\infty=\rho(A)^k
+$$
+quindi
+$$
+\|A^k\|_\infty
+\leq
+\|X\|_\infty \|X^{-1}\|_\infty \rho(A)^k
+$$
+siccome
+$$
+\rho(A)<1
+$$
+allora
+$$
+\rho(A)^k\to 0
+$$
+per $k\to+\infty$.
+Dato che $\|X\|_\infty$ e $\|X^{-1}\|_\infty$ sono costanti, otteniamo
+$$
+\|X\|_\infty \|X^{-1}\|_\infty \rho(A)^k\to 0
+$$
+Inoltre
+$$
+0\leq \|A^k\|_\infty
+\leq
+\|X\|_\infty \|X^{-1}\|_\infty \rho(A)^k
+$$
+quindi, per il teorema del confronto,
+$$
+\|A^k\|_\infty\to 0
+$$
+e dunque
+$$
+A^k\to 0
+$$
+##### Dimostrazione 2
+$$
+A^k\to 0 \Longrightarrow \rho(A)<1
+$$
+Supponiamo che
+$$
+A^k\to 0
+$$
+cioè
+$$
+lim_{k->\infty} \ \|A^k\|_\infty\to 0
+$$
+Poiché
+$$
+A^k=XD^kX^{-1}
+$$
+moltiplichiamo a sinistra per $X^{-1}$ e a destra per $X$:
+$$
+X^{-1}A^kX=D^k
+$$
+quindi
+$$
+D^k=X^{-1}A^kX
+$$
+Ora calcoliamo la norma infinito:
+$$
+\|D^k\|_\infty
+=
+\|X^{-1}A^kX\|_\infty
+$$
+per submoltiplicatività,
+$$
+\|X^{-1}A^kX\|_\infty
+\leq
+\|X^{-1}\|_\infty \|A^kX\|_\infty
+$$
+e ancora
+$$
+\|A^kX\|_\infty
+\leq
+\|A^k\|_\infty \|X\|_\infty
+$$
+quindi
+$$
+\|D^k\|_\infty
+\leq
+\|X^{-1}\|_\infty \|A^k\|_\infty \|X\|_\infty
+$$
+ma
+$$
+\|A^k\|_\infty\to 0
+$$
+e $\|X^{-1}\|_\infty,\|X\|_\infty$ sono costanti, quindi
+$$
+\|D^k\|_\infty\to 0
+$$
+D’altra parte abbiamo già visto che
+$$
+\|D^k\|_\infty=\rho(A)^k
+$$
+quindi
+$$
+\rho(A)^k\to 0
+$$
+Ora, siccome $\rho(A)\geq 0$, l’unico modo affinché
+$$
+\rho(A)^k\to 0
+$$
+è che
+$$
+\rho(A)<1
+$$
+infatti:
+- se $\rho(A)=1$, allora $\rho(A)^k=1$ per ogni $k$
+- se $\rho(A)>1$, allora $\rho(A)^k\to+\infty$
+- se $0\leq \rho(A)<1$, allora $\rho(A)^k\to 0$
+quindi
+$$
+\rho(A)<1
+$$
+Abbiamo dimostrato che, nel caso diagonalizzabile,
+$$
+A^k\to 0
+\iff
+\rho(A)<1
+$$
+$$
+\square
+$$
+##### Osservazione 4.1
+Se una successione ${x^{(k)}}_{k=0,1,2,...}$ generata dal metodo 
+$$
+x^{(0)}\in\mathbb{C}^n \text{ dato}
+$$
+$$
+x^{(k+1)}=Px^{(k)}+q,\qquad k=0,1,2,\ldots
+$$
+dove $P\in\mathbb{C}^{n\times n}$ è una matrice fissata, che si chiama matrice di iterazione, e $q\in\mathbb{C}^n$ è un vettore fissato
+converge a un vettore $x^{(\infty)}$ allora $x^{(\infty)}$ soddisfa l'equazione
+Supponiamo che la successione converga a un vettore $(x^{(\infty)})$, cioè
+$$ 
+x^{(k)}\to x^{(\infty)}  
+\qquad \text{per } k\to\infty.  $$
+Allora anche la successione ($x^{(k+1)}$) converge allo stesso limite:
+$$ 
+x^{(k+1)}\to x^{(\infty)}.  $$
+Passando al limite nell’equazione del metodo iterativo, otteniamo
+$$ \lim_{k\to\infty}x^{(k+1)}=
+\lim_{k\to\infty}\left(Px^{(k)}+q\right)$$
+Poiché (P) e (q) non dipendono da (k), possiamo portare il limite all’interno:
+$$P\left(\lim_{k\to\infty}x^{(k)}\right)+q$$
+Dato che
+$\lim_{k\to\infty}x^{(k)}=x^{(\infty)}$, 
+segue che
+$\boxed{x^{(\infty)}=Px^{(\infty)}+q}$
+Quindi, se una successione generata dal metodo iterativo converge, il suo limite deve necessariamente soddisfare l’equazione
+$x=Px+q$
+Di conseguenza, se la soluzione (x) del sistema iniziale non soddisfa
+$x=Px+q$
+allora nessuna successione generata dal metodo
+$x^{(k+1)}=Px^{(k)}+q$  
+può convergere a quella soluzione.
+Dire che (x) soddisfa
+$x=Px+q$
+significa dire che (x) è un **punto fisso** della funzione
+$g(y)=Py+q$
+perché
+$g(x)=Px+q=$
+In conclusione, affinché il metodo iterativo possa convergere alla soluzione del sistema, è necessario che tale soluzione sia un punto fisso della funzione (g)
+#### TEOREMA 4.1, CNS, condizione necessaria e sufficiente di convergenza
+Sia M metodo definito come iterativo
+Supponiamo che il metodo $M$ sia consistente con il sistema $S$
+Allora il metodo $M$ è convergente se e solo se
+$$
+\rho(P)<1
+$$
+raggio spettrale della matrice di iterazione
+
+Dove il metodo M è definito come
+dato un sistema lineare
+$$
+Ax=b
+$$
+che chiamiamo $S$, con
+$$
+A\in\mathbb{C}^{n\times n},\qquad b\in\mathbb{C}^n
+$$
+e supponiamo che $A$ sia invertibile
+Per risolvere $S$ consideriamo questo metodo iterativo stazionario, cioè metodo della forma
+$$
+x^{(0)}\in\mathbb{C}^n \text{ dato}
+$$
+$$
+x^{(k+1)}=Px^{(k)}+q,\qquad k=0,1,2,\ldots
+$$
+dove
+$$
+P\in\mathbb{C}^{n\times n}
+$$
+è una matrice fissata, che si chiama matrice di iterazione, e
+$$
+q\in\mathbb{C}^n
+$$
+è un vettore fissato
+
+##### Dimostrazione
+Dimostriamo solo la direzione
+$$
+\rho(P)<1\Longrightarrow M \text{ convergente}
+$$
+Dobbiamo dimostrare che il metodo $M$ è convergente, cioè che la successione generata dal metodo converge alla soluzione $x$ di $S$, indipendentemente dalla scelta di $x^{(0)}$.
+Poiché $M$ è consistente con $S$ per ipotesi, vale
+$$
+x=Px+q
+$$
+chiamiamo questa equazione $(a)$.
+Inoltre, la successione generata dal metodo soddisfa
+$$
+x^{(k+1)}=Px^{(k)}+q
+$$
+per ogni $k=0,1,2,\ldots$
+chiamiamo questa equazione $(b)$
+Sottraendo membro a membro $(a)$ da $(b)$ otteniamo
+$$
+x^{(k+1)}-x=Px^{(k)}+q-(Px+q)
+$$
+quindi
+$$
+x^{(k+1)}-x=P(x^{(k)}-x)
+$$
+per ogni $k=0,1,2,\ldots$
+Definiamo l’errore al passo $k$ come
+$$
+e^{(k)}=x^{(k)}-x
+$$
+Allora l’equazione precedente diventa
+$$
+e^{(k+1)}=Pe^{(k)}
+$$
+per ogni $k=0,1,2,\ldots$
+questa è l’equazione dell’errore
+Sviluppiamo per ricorrenza:
+per $k=0$,
+$$
+e^{(1)}=Pe^{(0)}
+$$
+per $k=1$,
+$$
+e^{(2)}=Pe^{(1)}=P(Pe^{(0)})=P^2e^{(0)}
+$$
+per $k=2$,
+$$
+e^{(3)}=Pe^{(2)}=P(P^2e^{(0)})=P^3e^{(0)}
+$$
+e quindi, in generale,
+$$
+e^{(k)}=P^ke^{(0)}
+$$
+per ogni $k=0,1,2,\ldots$
+anche per $k=0$ la formula è vera, perché
+$$
+P^0=I
+$$
+e quindi
+$$
+P^0e^{(0)}=Ie^{(0)}=e^{(0)}
+$$
+per il teorema 3.12 abbiamo che
+
+data una matrice
+$$
+P\in\mathbb{C}^{n\times n}
+$$
+si ha
+$$
+P^k\to 0
+$$
+se e solo se
+$$
+\rho(P)<1
+$$
+Siccome per ipotesi
+$$
+\rho(P)<1
+$$
+allora
+$$
+P^k\to 0
+$$
+Quindi
+$$
+e^{(k)}=P^ke^{(0)}\to 0
+$$
+Infatti, intuitivamente, una matrice che tende alla matrice nulla, moltiplicata per un vettore fissato $e^{(0)}$, dà un vettore che tende al vettore nullo.
+Dunque
+$$
+e^{(k)}\to 0
+$$
+ma
+$$
+e^{(k)}=x^{(k)}-x
+$$
+quindi
+$$
+x^{(k)}-x\to 0
+$$
+e perciò
+$$
+x^{(k)}\to x
+$$
+Abbiamo dimostrato che la successione converge alla soluzione $x$, qualunque sia $x^{(0)}$.
+Quindi il metodo $M$ è convergente.
+$$
+\square
+$$
+##### COROLLARIO 4.1, CS, condizione sufficiente di convergenza
+Supponiamo che il metodo $M$ sia consistente con il sistema $S$.
+Se esiste una norma matriciale indotta $\|\cdot\|$ tale che
+$$
+\|P\|<1
+$$
+allora il metodo $M$ è convergente.
+##### Dimostrazione
+Sappiamo che, per ogni norma matriciale indotta,
+$$
+\rho(P)\leq \|P\|
+$$
+Se
+$$
+\|P\|<1
+$$
+allora
+$$
+\rho(P)\leq \|P\|<1
+$$
+quindi
+$$
+\rho(P)<1
+$$
+Per il teorema 4.1, cioè per la condizione necessaria e sufficiente di convergenza, il metodo $M$ è convergente.
+$$
+\square
+$$
+
+##### COROLLARIO 4.2, CN, condizioni necessarie di convergenza
+chiedere a Samuele se le dimostrazioni se le sta scrivendo anche su obsidian
+
+Supponiamo che il metodo $M$ sia consistente con il sistema $S$.
+
+- se $|\operatorname{traccia}(P)|\geq n$ allora il metodo $M$ non è convergente;
+- se $|\det(P)|\geq 1$ allora il metodo $M$ non è convergente.
+Quindi le condizioni
+
+$|\operatorname{traccia}(P)|<n$ e $|\det(P)|<1$
+
+sono condizioni necessarie per la convergenza.
+Attenzione: sono condizioni necessarie, non sufficienti
+
+Vuol dire che se il metodo converge, allora devono valere. Però il fatto che valgano non garantisce da solo che il metodo converga
+##### Dimostrazione sulla |traccia(P)|
+Supponiamo che
+$$
+|\operatorname{traccia}(P)|\geq n
+$$
+allora M non è convergente
+Siano $\lambda_1,\ldots,\lambda_n$
+sappiamo che
+$$
+\operatorname{traccia}(P)=\lambda_1+\cdots+\lambda_n
+$$
+
+Supponiamo per assurdo che tutti gli autovalori abbiano modulo strettamente minore di $1$, cioè
+$$
+|\lambda_i|<1 \ \ \ \ \ \ \ \ \ \forall  i=1,\ldots,n
+$$
+Allora, per la disuguaglianza triangolare,
+$$
+|\operatorname{traccia}(P)|
+=
+|\lambda_1+\cdots+\lambda_n|
+\leq
+|\lambda_1|+\cdots+|\lambda_n|
+$$
+ma, siccome ogni $|\lambda_i|<1$, otteniamo
+$$
+|\lambda_1|+\cdots+|\lambda_n|<n
+$$
+quindi
+$$
+|\operatorname{traccia}(P)|<n
+$$
+ma questo contraddice l’ipotesi
+$$
+|\operatorname{traccia}(P)|\geq n
+$$
+Quindi deve esistere almeno un autovalore $\lambda_i$ tale che
+$$
+|\lambda_i|\geq 1
+$$
+Allora
+$$
+\rho(P)\geq 1
+$$
+e quindi, per il teorema 4.1, il metodo $M$ non è convergente
+##### Dimostrazione sul |Det(P)|
+Supponiamo che
+$$
+|\det(P)|\geq 1
+$$
+Sappiamo che
+$$
+\det(P)=\lambda_1\lambda_2\cdots\lambda_n
+$$
+quindi
+
+$$
+|\det(P)|=|\lambda_1\lambda_2\cdots\lambda_n|
+$$
+
+e usando la proprietà del modulo del prodotto,
+
+$$
+|\det(P)|=|\lambda_1||\lambda_2|\cdots|\lambda_n|
+$$
+Se tutti gli autovalori avessero modulo strettamente minore di $1$, cioè
+$$
+|\lambda_i|<1
+$$
+per ogni $i=1,\ldots,n$, allora anche il prodotto dei loro moduli sarebbe strettamente minore di $1$:
+$$
+|\lambda_1||\lambda_2|\cdots|\lambda_n|<1
+$$
+quindi
+$$
+|\det(P)|<1
+$$
+ma questo contraddice l’ipotesi
+$$
+|\det(P)|\geq 1
+$$
+Dunque deve esistere almeno un autovalore $\lambda_i$ tale che
+$$
+|\lambda_i|\geq 1
+$$
+quindi
+$$
+\rho(P)\geq 1
+$$
+Per il teorema 4.1, il metodo $M$ non è convergente.
+$$
+\square
+$$
+##### OSSERVAZIONE 4.2
+Si può dimostrare che se il metodo iterativo non è convergente allora ogni scelta del vettore $x^{(0)}$ produce una successione che non converge alla soluzione $x$ del sistema
+
+L’Osservazione 4.2 non viene dimostrata nel dettaglio. Si basa sull’equazione dell’errore $$e(0)e^{(k)}=P^k e^{(0)}$$Poiché il comportamento asintotico delle potenze $P^k$ è governato dal raggio spettrale $\rho(P)$, l’errore si comporta, per $k$ grande, come $Ck^m\rho(P)^k$ Perciò, tra due metodi convergenti, quello con raggio spettrale più piccolo converge più velocemente
+#### TEOREMA 4.2 PRIMA (Costruzione metodo iterativo)
+Un metodo iterativo per risolvere $Ax=b$
+Si considera una decomposizione della matrice
+$$
+A=M-(M-A)
+$$
+con $M\in\mathbb{C}^{n\times n}$ invertibile detta matrice di precondizionamento
+
+L’idea è questa: invece di usare direttamente $A$, scegliamo una matrice $M$ che assomigli ad $A$, ma che sia molto più facile da usare nei calcoli, cioè tale che i sistemi lineari con matrice $M$ siano facili da risolvere
+
+Osserviamo che il sistema
+$$
+Ax=b
+$$
+si può riscrivere usando
+$$
+A=M-(M-A)
+$$
+infatti
+$$
+Ax=b
+$$
+diventa
+$$
+[M-(M-A)]x=b
+$$
+cioè
+$$
+Mx-(M-A)x=b
+$$
+portando il secondo termine a destra:
+$$
+Mx=(M-A)x+b
+$$
+siccome $M$ è invertibile, moltiplichiamo per $M^{-1}$:
+$$
+x=M^{-1}(M-A)x+M^{-1}b
+$$
+questa è una forma a punto fisso.
+Possiamo anche riscriverla in un altro modo:
+$$
+x=M^{-1}(M-A)x+M^{-1}b
+$$
+sviluppiamo
+$$
+M^{-1}(M-A)=M^{-1}M-M^{-1}A=I-M^{-1}A
+$$
+
+quindi
+$$
+x=(I-M^{-1}A)x+M^{-1}b
+$$
+cioè
+$$
+x=x-M^{-1}Ax+M^{-1}b
+$$
+raccogliendo $M^{-1}$:
+$$
+x=x+M^{-1}(b-Ax)
+$$
+per cui $\forall y \in \mathbb{C}^n$ definiamo $r(y)=b-Ay$ 
+
+il residuo del sistema nel punto $y$
+
+per cui $x=x+M^{-1}r(x)$ 
+
+A partire da questa riscrittura, si definisce il metodo iterativo:
+$$
+x^{(0)}\in\mathbb{C}^n \text{ dato}
+$$
+$$
+x^{(k+1)}=M^{-1}(M-A)x^{(k)}+M^{-1}b
+$$
+per $k=0,1,2,\ldots$
+equivalentemente,
+$$
+x^{(k+1)}=x^{(k)}+M^{-1}r^{(k)}
+$$
+dove $r^{(k)}=r(x^{(k)})=b-Ax^{(k)}$
+e come matrice di iterazione abbiamo
+$M^{-1}(M-A)=I-M^{-1}A$ 
+Il metodo costruito qui è consistente con il sistema $S$ $Ax=b$ dove
+
+$Ax=b$   -> $b-Ax=0$ quindi
+
+$x+M^{-1}(b-Ax)=x+M^{-1}0=x$ 
+
+per cui $x=x+M^{-1}(b-Ax)$
+
+un punto fisso del metodo
+
+#### TEOREMA 4.2 DOPO
+Il metodo Costruito per risolvere $Ax=b$
+è convergente se e solo se 
+$$
+\rho(I-M^{-1}A)<1
+$$
+sappiamo che il metodo è 
+$$
+x^{(k+1)}=x^{(k)}+M^{-1}(b-Ax^{(k))})
+$$
+nella forma del teorema della convergenza abbiamo
+$$x^{(k+1)}=x^{k}b-M^{-1}Ax^{(k)}$$
+dove poi abbiamo
+$$x^{(k+1)}=(I-M^{-1}A)x^{(k)}+M^{-1}b$$
+la prima parte è P la seconda é q
+il metodo converge se e solo se $$\rho(P) < 1$$
+Quindi $\rho(I-M^{-1}A) < 1$
+##### Osservazione 4.5

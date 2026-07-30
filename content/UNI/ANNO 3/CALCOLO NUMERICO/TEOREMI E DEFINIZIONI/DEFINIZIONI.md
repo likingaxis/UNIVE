@@ -176,3 +176,15 @@ $$
 ##### Norme Vettoriali
 ##### Successioni di vettori
 ##### Raggio spettrale
+##### Norme matriciali
+##### Norme matriciali indotte
+##### Successioni di matrici
+##### Metodi iterativi per risoluzione di sistemi lineari
+
+##### Metodo consistente
+##### Metodo convergente
+##### Velocità di convergenza
+##### Criterio del resto del residuo
+##### Procedura di costruzione di metodi iterativi mediante decomposizione della matrice
+##### Metodo di Jacobi
+##### Metodo di Gauss-Seidel
