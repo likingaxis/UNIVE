@@ -1,14 +1,102 @@
 ##### Problema dietro il Polinomio di interpolazione $p(x)$
 
+data una funzione $f:[a,b]\to\mathbb{R}$ di cui sono noti i valori
+$$
+f(x_0),f(x_1),\ldots,f(x_n)
+$$
+negli $n+1$ punti distinti
+$$
+x_0,x_1,\ldots,x_n\in [a,b]
+$$
+si sceglie una classe $C$ di funzioni definite su $[a,b]$ a valori in $\mathbb{R}$
+si vuole approssimare la funzione $f(x)$ con una funzione $p:[a,b]\to\mathbb{R}$ che appartiene a $C$
+e che nei punti $x_0,x_1,\ldots,x_n$ assume i valori
+$$
+f(x_0),f(x_1),\ldots,f(x_n)
+$$
+cioè vogliamo che valga
+$$
+p(x_i)=f(x_i)\qquad i=0,\ldots,n
+$$
+si vuole definire un problema ben posto ovvero un problema dove questa classe $C$ ha una e una sola funzione che soddisfa queste condizioni
+
+scegliendo $C$ dimostriamo il teorema 1.1
+esiste un unico $p(x)\in\mathbb{R}_n[x]$ tale che
+$$
+p(x_i)=f(x_i)\qquad i=0,\ldots,n
+$$
 ##### Polinomio di interpolazione $p(x)$
+è l’unico polinomio $p(x)\in\mathbb{R}_n[x]$ che soddisfa la condizione
+$$
+p(x_i)=f(x_i)
+$$
+per ogni $i=0,\ldots,n$
 
 ##### Polinomio in forma canonica
-
+siano
+$$
+(x_0,y_0),\ldots,(x_n,y_n)\in\mathbb{R}^2
+$$
+con $x_0,\ldots,x_n$ punti distinti
+l’unico polinomio $p(x)\in\mathbb{R}_n[x]$ che soddisfa la condizione
+$$
+p(x_i)=y_i \qquad i=0,\ldots,n
+$$
+si chiama polinomio d’interpolazione dei dati
+$$
+(x_0,y_0),\ldots,(x_n,y_n)
+$$
+oppure polinomio d’interpolazione dei valori $y_0,\ldots,y_n$ sui nodi $x_0,\ldots,x_n$
+la prima dimostrazione del teorema precedente ci dice che $p(x)$ si scrive in forma canonica come
+$$
+p(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n
+$$
+questa si chiama forma canonica di $p(x)$
+con vettore dei coefficienti dato da
+$$
+\begin{pmatrix}
+a_0\\
+a_1\\
+a_2\\
+\vdots\\
+a_n
+\end{pmatrix}
+=
+[V(x_0,\ldots,x_n)]^{-1}
+\begin{pmatrix}
+y_0\\
+y_1\\
+y_2\\
+\vdots\\
+y_n
+\end{pmatrix}
+$$
+dove $V(x_0,\ldots,x_n)$ è la matrice di Vandermonde sui nodi $x_0,\ldots,x_n$
 ##### $Rn[x]$
-
+Una base di $R_{n}[x]$ è un **insieme di elementi** $v_{1}(x), v_{r}(x) \in R_{n}[x]$ tali che:
+1. sono **linearmente indipendenti**
+	- l'unica combinazione lineare $\alpha_{1}v_{1}(x) + \alpha_{r}v_{r}(x)$ che coincide con il polinomio nullo è la combinazione lineare con $\alpha_{1}=\dots=\alpha_{r}=0$
+2. **generano** tutto lo spazio
+	- ogni polinomio $q(x) \in R_{n}[x]$ si può scrivere come combinazione lineare $q(x) = \beta_{1}v_{1}(x) + \beta_{r}v_{r}(x)$ 
 ##### Polinomio in forma di Lagrange
+la forma di Lagrange, che è molto più facile da scrivere perché usa direttamente i valori $y_0,\ldots,y_n$
+$$
+p(x)=y_0L_0(x)+y_1L_1(x)+\cdots+y_nL_n(x)
+$$
+dove per ogni $j=0,\ldots,n$
+$$
+L_j(x)=\prod_{\substack{i=0\\i\neq j}}^n \frac{x-x_i}{x_j-x_i}
+$$
+e $L_j(x)$ si chiama $j$-esimo polinomio di Lagrange relativo ai nodi $x_0,\ldots,x_n$
+se gli $y_i$ sono i valori nei punti $x_i$ di una funzione $f:[a,b]\to\mathbb{R}$, cioè se
+$$
+y_i=f(x_i)
+$$
+per ogni $i=0,\ldots,n$, allora $p(x)$ si chiama anche polinomio d’interpolazione della funzione $f(x)$ sui nodi $x_0,\ldots,x_n$
+##### Errore o resto dell'interpolazione polinomiale
 
 ##### Cosa vuol dire $C^{n+1}[a,b]$
+
 
 ##### Differenze divise
 
@@ -102,6 +190,7 @@ approssimando per $n$ grande, guardiamo solo i termini di grado più alto
 $$
 c(n)\approx n^2A+\frac{n^2}{2}D
 $$
+
 ##### Aggiunta di un nodo
 ##### Formula dei trapezi
 Data una funzione integrabile $f:[a,b]\to\mathbb{R}$, si vuole calcolare un’approssimazione di

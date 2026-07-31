@@ -7,16 +7,16 @@
 - [x] Osservazione 1.2
 - [x] Lemma 2.1
 - [x] Teorema 2.1
-- [ ] Osservazione 2.1
-- [ ] Osservazione pagina 27 con dimostrazione da fare
-- [ ] Teorema 3.1
-- [ ] Esercizio 3.4
-- [ ] Teorema 3.2
-- [ ] Teorema 3.3
-- [ ] Teorema 3.4
-- [ ] Teorema 3.5
-- [ ] Teorema 3.6
-- [ ] Teorema 3.7
+- [x] Osservazione 2.1
+- [x] Osservazione pagina 27 con dimostrazione da fare
+- [x] Teorema 3.1
+- [x] Esercizio 3.4
+- [x] Teorema 3.2
+- [x] Teorema 3.3
+- [x] Teorema 3.4
+- [x] Teorema 3.5
+- [x] Teorema 3.6
+- [x] Teorema 3.7
 - [ ] Teorema 3.8
 - [ ] sulla velocità delle norme
 - [ ] Teorema 3.9
