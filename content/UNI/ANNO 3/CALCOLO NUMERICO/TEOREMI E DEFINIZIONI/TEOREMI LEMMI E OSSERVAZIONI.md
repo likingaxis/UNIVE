@@ -3723,3 +3723,403 @@ si conclude ancora che, per ogni $\lambda$ con $|\lambda|\geq 1$, tale matrice �
 Di conseguenza tutti gli autovalori della matrice di iterazione hanno modulo minore di 1, cioè $\rho(G)<1$
 oppure $\rho(J)<1$
 Per il Teorema 4.1, il metodo converge
+#### TEOREMA 4.4
+Sia
+$$
+A\in\mathbb{C}^{n\times n}
+$$
+HDP, cioè hermitiana definita positiva.
+Allora il metodo di Gauss-Seidel per risolvere un sistema lineare di matrice $A$ è convergente.
+##### Osservazione 4.10
+Se $A\in\mathbb{C}^{n\times n}$ è HDP, allora:
+- $A$ è invertibile, perché i suoi autovalori sono reali e positivi, quindi $0$ non è autovalore di $A$;
+- gli elementi diagonali di $A$ sono positivi, infatti
+$$
+a_{ii}=e_i^*Ae_i>0
+$$
+dove $e_i$ è l’$i$-esimo vettore della base canonica.
+Ricorda: autovalori ed elementi diagonali sono due cose diverse.
+Il fatto che $A$ sia HDP implica sia positività degli autovalori sia positività degli elementi diagonali, ma sono due proprietà diverse.
+##### Dimostrazione
+Dobbiamo dimostrare che
+$$
+\rho(G)<1
+$$
+dove
+$$
+G=I-E^{-1}A
+$$
+è la matrice di iterazione di Gauss-Seidel.
+La dimostrazione si divide in due parti.
+###### Parte 1
+Dimostriamo che
+$$
+A-G^*AG
+$$
+è HDP.
+Prima dimostriamo che è hermitiana.
+Siccome $A$ è hermitiana, abbiamo
+$$
+A^*=A
+$$
+Calcoliamo la trasposta coniugata:
+$$
+(A-G^*AG)^*
+=
+A^*-(G^*AG)^*
+$$
+usando la proprietà
+$$
+(XY)^*=Y^*X^*
+$$
+otteniamo
+$$
+(G^*AG)^*=G^*A^*G
+$$
+perché
+$$
+(G^*)^*=G
+$$
+e poi l’ordine si ricompone nello stesso modo.
+Siccome $A^*=A$, segue
+$$
+(G^*AG)^*=G^*AG
+$$
+quindi
+$$
+(A-G^*AG)^*=A-G^*AG
+$$
+dunque $A-G^*AG$ è hermitiana.
+Ora dimostriamo che è definita positiva.
+Poniamo
+$$
+F=E^{-1}A
+$$
+Allora
+$$
+G=I-E^{-1}A=I-F
+$$
+Osserviamo che $F$ è invertibile perché è prodotto di matrici invertibili:
+$$
+F=E^{-1}A
+$$
+infatti $E$ è invertibile perché ha diagonale positiva, e $A$ è invertibile perché è HDP.
+Inoltre
+$$
+F^{-1}=A^{-1}E
+$$
+Infatti
+$$
+F^{-1}=(E^{-1}A)^{-1}=A^{-1}E
+$$
+Usiamo anche la notazione
+$$
+F^{-*}=(F^{-1})^*=(F^*)^{-1}
+$$
+Questa notazione ha senso perché
+$$
+(F^{-1})^*
+$$
+è proprio l’inversa di $F^*$.
+Infatti
+$$
+(F^{-1})^*F^*=(FF^{-1})^*=I^*=I
+$$
+e
+$$
+F^*(F^{-1})^*=(F^{-1}F)^*=I^*=I
+$$
+Ora sviluppiamo
+$$
+A-G^*AG
+$$
+siccome
+$$
+G=I-F
+$$
+abbiamo
+$$
+A-G^*AG=A-(I-F)^*A(I-F)
+$$
+cioè
+$$
+A-G^*AG=A-(I-F^*)A(I-F)
+$$
+sviluppiamo il prodotto:
+$$
+(I-F^*)A(I-F)=A-AF-F^*A+F^*AF
+$$
+quindi
+$$
+A-G^*AG=A-\left(A-AF-F^*A+F^*AF\right)
+$$
+da cui
+$$
+A-G^*AG=AF+F^*A-F^*AF
+$$
+Adesso vogliamo riscrivere questa espressione raccogliendo $F^*$ a sinistra e $F$ a destra:
+$$
+AF+F^*A-F^*AF
+=
+F^*(F^{-*}A+AF^{-1}-A)F
+$$
+Verifichiamo i tre termini:
+$$
+F^*F^{-*}AF=AF
+$$
+perché
+$$
+F^*F^{-*}=I
+$$
+poi
+$$
+F^*AF^{-1}F=F^*A
+$$
+e infine resta
+$$
+-F^*AF
+$$
+Quindi
+$$
+A-G^*AG
+=
+F^*(F^{-*}A+AF^{-1}-A)F
+$$
+Ora calcoliamo i due termini dentro la parentesi.
+Siccome
+$$
+F^{-1}=A^{-1}E
+$$
+abbiamo
+$$
+AF^{-1}=A(A^{-1}E)=E
+$$
+Inoltre
+$$
+F^{-*}A=(F^{-1})^*A
+$$
+ma
+$$
+F^{-1}=A^{-1}E
+$$
+quindi
+$$
+(F^{-1})^*=(A^{-1}E)^*=E^*(A^{-1})^*
+$$
+siccome $A$ è hermitiana, anche $A^{-1}$ è hermitiana, quindi
+$$
+(A^{-1})^*=A^{-1}
+$$
+perciò
+$$
+(F^{-1})^*=E^*A^{-1}
+$$
+e dunque
+$$
+F^{-*}A=E^*A^{-1}A=E^*
+$$
+Quindi
+$$
+F^{-*}A+AF^{-1}-A=E^*+E-A
+$$
+Ora ricordiamo che $E$ è la parte triangolare inferiore di $A$ inclusa la diagonale.
+Poiché $A$ è hermitiana, la parte triangolare superiore di $A$ è la trasposta coniugata della parte triangolare inferiore.
+Quindi
+$$
+E+E^*=A+D
+$$
+dove $D$ è la parte diagonale di $A$:
+$$
+D=
+\begin{pmatrix}
+a_{11} & 0 & \cdots & 0\\
+0 & a_{22} & \cdots & 0\\
+\vdots & \vdots & & \vdots\\
+0 & 0 & \cdots & a_{nn}
+\end{pmatrix}
+$$
+Infatti, fuori dalla diagonale, $E+E^*$ ricostruisce $A$, mentre sulla diagonale conta due volte gli elementi diagonali. Per questo
+$$
+E+E^*=A+D
+$$
+e quindi
+$$
+E^*+E-A=D
+$$
+Allora
+$$
+A-G^*AG=F^*DF
+$$
+Abbiamo scoperto quindi che
+$$
+A-G^*AG=F^*DF
+$$
+Ora dimostriamo la positività.
+Per ogni
+$$
+y\in\mathbb{C}^n\setminus\{0\}
+$$
+abbiamo
+$$
+y^*(A-G^*AG)y
+=
+y^*F^*DFy
+$$
+poniamo
+$$
+u=Fy
+$$
+Allora
+$$
+y^*F^*DFy=(Fy)^*D(Fy)=u^*Du
+$$
+Siccome $F$ è invertibile e $y\neq 0$, allora
+$$
+u=Fy\neq 0
+$$
+Ora
+$$
+u^*Du
+=
+\sum_{i=1}^n a_{ii}|u_i|^2
+$$
+siccome $A$ è HDP, gli elementi diagonali sono positivi:
+$$
+a_{ii}>0
+$$
+per ogni $i=1,\ldots,n$.
+Inoltre $u\neq 0$, quindi almeno una componente $u_i$ è diversa da zero.
+Dunque
+$$
+\sum_{i=1}^n a_{ii}|u_i|^2>0
+$$
+quindi
+$$
+y^*(A-G^*AG)y>0
+$$
+per ogni $y\neq 0$.
+Abbiamo quindi dimostrato che
+$$
+A-G^*AG
+$$
+è hermitiana definita positiva.
+###### Parte 2
+Dimostriamo ora che il metodo è convergente, cioè che
+$$
+\rho(G)<1
+$$
+Sia $\lambda$ un autovalore di $G$.
+Vogliamo mostrare che
+$$
+|\lambda|<1
+$$
+Prendiamo un autovettore
+$$
+y\neq 0
+$$
+di $G$ associato a $\lambda$, quindi
+$$
+Gy=\lambda y
+$$
+Siccome dalla Parte 1 sappiamo che
+$$
+A-G^*AG
+$$
+è HDP, allora
+$$
+y^*(A-G^*AG)y>0
+$$
+Sviluppiamo:
+$$
+y^*(A-G^*AG)y
+=
+y^*Ay-y^*G^*AGy
+$$
+ma
+$$
+y^*G^*=(Gy)^*$$
+quindi
+$$
+y^*G^*AGy=(Gy)^*A(Gy)
+$$
+Siccome
+
+$$
+Gy=\lambda y
+$$
+abbiamo
+$$
+(Gy)^*A(Gy)
+=
+(\lambda y)^*A(\lambda y)
+$$
+Ora
+$$
+(\lambda y)^*=\overline{\lambda}y^*
+$$
+quindi
+$$
+(\lambda y)^*A(\lambda y)
+=
+\overline{\lambda}y^*A(\lambda y)
+$$
+portiamo fuori anche $\lambda$:
+$$
+=
+\overline{\lambda}\lambda y^*Ay
+$$
+cioè
+$$
+=
+|\lambda|^2y^*Ay
+$$
+Quindi
+$$
+y^*(A-G^*AG)y
+=
+y^*Ay-|\lambda|^2y^*Ay
+$$
+cioè
+$$
+y^*(A-G^*AG)y
+=
+(1-|\lambda|^2)y^*Ay
+$$
+Ora sappiamo due cose:
+- dalla Parte 1,
+$$
+y^*(A-G^*AG)y>0
+$$
+- siccome $A$ è HDP e $y\neq 0$,
+$$
+y^*Ay>0
+$$
+Quindi
+$$
+(1-|\lambda|^2)y^*Ay>0
+$$
+ma
+$$
+y^*Ay>0
+$$
+perciò deve essere
+$$
+1-|\lambda|^2>0
+$$
+cioè
+$$
+|\lambda|^2<1
+$$
+e dunque
+$$
+|\lambda|<1
+$$
+Abbiamo dimostrato che ogni autovalore $\lambda$ di $G$ ha modulo minore di $1$.
+Quindi
+$$
+\rho(G)<1
+$$
+Per il teorema generale di convergenza dei metodi iterativi, il metodo di Gauss-Seidel è convergente.
+$$
+\square
+$$
