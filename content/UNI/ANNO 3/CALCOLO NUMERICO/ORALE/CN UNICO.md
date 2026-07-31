@@ -1,4 +1,93 @@
 ### Interpolazione polinomiale
+##### Problema dietro il Polinomio di interpolazione $p(x)$
+data una funzione $f:[a,b]\to\mathbb{R}$ di cui sono noti i valori
+$$
+f(x_0),f(x_1),\ldots,f(x_n)
+$$
+negli $n+1$ punti distinti
+$$
+x_0,x_1,\ldots,x_n\in [a,b]
+$$
+si sceglie una classe $C$ di funzioni definite su $[a,b]$ a valori in $\mathbb{R}$
+si vuole approssimare la funzione $f(x)$ con una funzione $p:[a,b]\to\mathbb{R}$ che appartiene a $C$
+e che nei punti $x_0,x_1,\ldots,x_n$ assume i valori
+$$
+f(x_0),f(x_1),\ldots,f(x_n)
+$$
+cioè vogliamo che valga
+$$
+p(x_i)=f(x_i)\qquad i=0,\ldots,n
+$$
+si vuole definire un problema ben posto ovvero un problema dove questa classe $C$ ha una e una sola funzione che soddisfa queste condizioni
+
+scegliendo $C$ dimostriamo il teorema 1.1
+esiste un unico $p(x)\in\mathbb{R}_n[x]$ tale che
+$$
+p(x_i)=f(x_i)\qquad i=0,\ldots,n
+$$
+
+##### Polinomio di interpolazione $p(x)$
+è l’unico polinomio $p(x)\in\mathbb{R}_n[x]$ che soddisfa la condizione
+$$
+p(x_i)=f(x_i)
+$$
+per ogni $i=0,\ldots,n$
+
+##### Polinomio in forma canonica
+siano
+$$
+(x_0,y_0),\ldots,(x_n,y_n)\in\mathbb{R}^2
+$$
+con $x_0,\ldots,x_n$ punti distinti
+l’unico polinomio $p(x)\in\mathbb{R}_n[x]$ che soddisfa la condizione
+$$
+p(x_i)=y_i \qquad i=0,\ldots,n
+$$
+si chiama polinomio d’interpolazione dei dati
+$$
+(x_0,y_0),\ldots,(x_n,y_n)
+$$
+oppure polinomio d’interpolazione dei valori $y_0,\ldots,y_n$ sui nodi $x_0,\ldots,x_n$
+la prima dimostrazione del teorema precedente ci dice che $p(x)$ si scrive in forma canonica come
+$$
+p(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n
+$$
+questa si chiama forma canonica di $p(x)$
+con vettore dei coefficienti dato da
+$$
+\begin{pmatrix}
+a_0\\
+a_1\\
+a_2\\
+\vdots\\
+a_n
+\end{pmatrix}
+=
+[V(x_0,\ldots,x_n)]^{-1}
+\begin{pmatrix}
+y_0\\
+y_1\\
+y_2\\
+\vdots\\
+y_n
+\end{pmatrix}
+$$
+dove $V(x_0,\ldots,x_n)$ è la matrice di Vandermonde sui nodi $x_0,\ldots,x_n$
+##### Polinomio in forma di Lagrange
+la forma di Lagrange, che è molto più facile da scrivere perché usa direttamente i valori $y_0,\ldots,y_n$
+$$
+p(x)=y_0L_0(x)+y_1L_1(x)+\cdots+y_nL_n(x)
+$$
+dove per ogni $j=0,\ldots,n$
+$$
+L_j(x)=\prod_{\substack{i=0\\i\neq j}}^n \frac{x-x_i}{x_j-x_i}
+$$
+e $L_j(x)$ si chiama $j$-esimo polinomio di Lagrange relativo ai nodi $x_0,\ldots,x_n$
+se gli $y_i$ sono i valori nei punti $x_i$ di una funzione $f:[a,b]\to\mathbb{R}$, cioè se
+$$
+y_i=f(x_i)
+$$
+per ogni $i=0,\ldots,n$, allora $p(x)$ si chiama anche polinomio d’interpolazione della funzione $f(x)$ sui nodi $x_0,\ldots,x_n$
 #### TEOREMA 1.1
 Siano $(x_0,y_0),(x_1,y_1),...,(x_n,y_n) \in \mathbb{R}^2$
 Allora esiste un unico polinomio $p(x)\in \mathbb{R}_n[x]$ tale che $p(x_i)=f(x_i) \ \forall i=0,...,n$ 
@@ -241,7 +330,6 @@ $$
 nel caso n=3 
 ##### Dimostrazione 2
 Dimostriamo l'unicità del polinomio mediante 
-
 rappresentazione dei polinomi di Lagrange definiti come
 $\forall j=0,...,n$ 
 $$
@@ -255,18 +343,17 @@ $$
 abbiamo quindi n+1 polinomi
 vogliamo dimostrare che 
 $L_0(x),...,L_n(x)\in base(\mathbb{R}_n(x))$
-
-una base di $\mathbb{R}_n[x]$ è un insieme di elementi $v_1(x),\ldots,v_r(x)$ appartenenti a $\mathbb{R}_n[x]$ tali che:
-- sono linearmente indipendenti
- - cioè l’unica combinazione lineare $\alpha_1v_1(x)+\cdots+\alpha_rv_r(x)$ che coincide con il polinomio nullo è quella con tutti i coefficienti uguali a $0$
- - generano $\mathbb{R}_n[x]$
-	- cioè ogni polinomio $q(x)\in\mathbb{R}_n[x]$ si può scrivere come combinazione lineare
- $$
+perché così ogni polinomio di grado al più $n$ si può scrivere come combinazione lineare di essi
+$$
  q(x)=\beta_1v_1(x)+\cdots+\beta_rv_r(x)
  $$
 andiamo quindi a dimostrare che 
+
 n+1 elementi sono base di $\mathbb{R}_n[x]$ se e solo se sono linearmente indipendenti tra loro
+
 dimostriamo che sono linearmente indipendenti tra loro
+
+conosciamo la seguente proprietà dei polinomi di Lagrange:
 $\forall i,j=0,...,n$ 
 $$
 L_j(x_i)=
@@ -275,11 +362,12 @@ L_j(x_i)=
 0 & \text{se } i\neq j
 \end{cases}
 $$
-supponiamo che ci sia questa combinazione lineare
+supponiamo che ci sia la seguente combinazione lineare
 $$
 \alpha_0L_0(x)+\alpha_1L_1(x)+\cdots+\alpha_nL_n(x)=0
 $$
 definita per ogni $x\in\mathbb{R}$
+
 allora possiamo valutare questa combinazione lineare per i nodi $x_i$ $\forall i=0,...,n$ 
 quindi
 $$
@@ -303,8 +391,10 @@ $$
 \alpha_0=\alpha_1=\cdots=\alpha_n=0
 $$
 
-quindi $L_0(x),\ldots,L_n(x)$ sono linearmente indipendenti
+tutti i coefficienti sono nulli, dunque i polinomi  $L_0(x),\ldots,L_n(x)$ sono linearmente indipendenti
+
 perché l’unica combinazione lineare che dà il polinomio nullo è quella con tutti i coefficienti uguali a $0$
+
 essendo linearmente indipendenti allora sono base di $\mathbb{R}_n[x]$
 
 sia quindi $p(x)\in \mathbb{R}_n[x]$ polinomio interpolante definito come 
@@ -312,7 +402,7 @@ $$
 p(x)=y_0L_0(x)+y_1L_1(x)+\cdots+y_nL_n(x)
 $$
 sappiamo che $p(x)\in \mathbb{R}_n[x]$ poiché è combinazione lineare di polinomi che stanno in $\mathbb{R}_n[x]$, quindi anche $p(x)$ resta in $\mathbb{R}_n[x]$
-vogliamo dimostrare che 
+vogliamo dimostrare ora che 
 $$
 p(x_i)=y_i
 $$
@@ -386,14 +476,22 @@ vettore dei coefficienti:
 $$\begin{pmatrix} a_0\\ a_1\\ \vdots\\ a_n \end{pmatrix} = \left[V(x_0,x_1,\dots,x_n)\right]^{-1} \begin{pmatrix} f(x_0)\\ f(x_1)\\ \vdots\\ f(x_n) \end{pmatrix}$$
 dove $x_0,x_1,...,x_n$ sono i nodi di interpolazione
 ##### Errore o resto dell’interpolazione polinomiale
+Dato il polinomio interpolante $p(x)$ di una funzione $f(x)$
+sui nodi distinti$x_0,x_1,\ldots,x_n\in [a,b]$
+si chiama **errore di interpolazione nel punto x** la quantità
+$$f(x)-p(x)$$
+Il Teorema 1.2 fornisce una formula esplicita per questo errore
 #### TEOREMA 1.2
 Sia $f:[a,b]\to\mathbb{R}$ una funzione di classe $C^{n+1}[a,b]$ e sia $p(x)$ il polinomio di interpolazione di $f(x)$ sugli $n+1$ nodi distinti $x_0,x_1,...,x_n \in [a,b]$ 
-allora $\forall x \in [a,b]$ $\exists \  un \ punto \xi=\xi(x) \in (a,b)$ t.c
+allora $\forall x \in [a,b]$ $\exists \  un \ punto \ \xi=\xi(x) \in (a,b)$ t.c
 $$
 f(x)-p(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)(x-x_1)\cdots(x-x_n)
 $$
 
 è l'errore di interpolazione nel punto $x$
+
+##### Cosa vuol dire $C^{n+1}[a,b]$
+Dire che$f\in C^{n+1}$ significa che $f$ è derivabile fino all’ordine $n+1$ e che tali derivate sono continue su $[a,b]$. Questa ipotesi è necessaria perché nella formula dell’errore compare la derivata $(n+1)$-esima della funzione.
 ##### Dimostrazione
 sia $x \in [a,b]$ un punto fissato
 strutturo la dimostrazione in 2 casistiche separate
@@ -407,25 +505,25 @@ x_i-x_i=0
 $$
 *Caso 2:*
 $x \notin {x_0,x_1,...,x_n}$
-definiamo delle funzoni ausiliarie $\forall y\in [a,b]$ 
+definiamo delle funzioni ausiliarie $\forall y\in [a,b]$ 
 $$
 \pi(y)=(y-x_0)(y-x_1)\cdots(y-x_n)
 $$
+inoltre definiamo una funzione di resto tale che
 $$
 r(y)=f(y)-p(y)
 $$
-detta funzione di resto
 e sia inoltre $z:[a,b]\to\mathbb{R}$
 $$
 z(y)=r(y)-\frac{r(x)}{\pi(x)}\pi(y)
 $$
-questa funzione è di classe $C^{n+1}[a,b]$ poiché $r(y)$ è di quella classe perché a sua volta $f(y)$ è di quella classe mentre $p(y)$ e $\pi(y)$ sono di classe $C^\infty$
+questa funzione è di classe $C^{n+1}[a,b]$ poiché $r(y)$ è di quella classe perché a sua volta $f(y)$ è di quella classe mentre
+$p(y)$ e $\pi(y)$ sono di classe $C^\infty$
 sappiamo che $z(y)$ si annulla in almeno n+2 punti di $[a,b]$ 
 - per i nodi $x_0,...,x_n$ 
 - per il nodo x fissato
-
 Per il teorema di Rolle sappiamo che
-Se una funzione si annulla in due punti consecutivi, allora in mezzo a questi due punti esiste almeno un punto in cui la derivata prima si annulla.
+Se una funzione si annulla in due punti consecutivi, allora tra questi due punti esiste almeno un punto in cui la derivata prima si annulla
 Quindi, se $z(y)$ si annulla in almeno $n+2$ punti, allora $z'(y)$ si annulla in almeno $n+1$ punti.
 applicando Rolle per la derivata  $(n+1)$ esima
 $$
@@ -474,24 +572,22 @@ quindi per $\xi$ abbiamo che
 $$
 0=z^{(n+1)}(\xi)=f^{(n+1)}(\xi)-\frac{r(x)}{\pi(x)}(n+1)!
 $$
+portiamo a sinistra $r(x)/\pi(x)$ 
 $$
 \frac{r(x)}{\pi(x)}(n+1)!=f^{(n+1)}(\xi)
 $$
+moltiplicando per $\pi(x)$
 $$
 r(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\pi(x)
 $$
-
-
+sappiamo però che
 $$
 r(x)=f(x)-p(x)
 $$
-
 e
-
 $$
 \pi(x)=(x-x_0)(x-x_1)\cdots(x-x_n)
 $$
-
 quindi otteniamo
 
 $$
@@ -500,12 +596,39 @@ $$
 
 che è proprio la formula dell’errore o resto dell’interpolazione polinomiale.
 $$\square$$
+
+##### Definizione dei coefficienti della forma di Newton
+sia
+$$
+f:[a,b]\to\mathbb{R}
+$$
+si definiscono due casi:
+- se $y\in[a,b]$, allora si definisce differenza divisa di $f(x)$ relativa a $y$ il numero
+$$
+f[y]=f(y)
+$$
+- se $y_1,\ldots,y_k\in[a,b]$ sono $k\geq 2$ punti distinti, si definisce differenza divisa di $f(x)$ relativa a $y_1,\ldots,y_k$ il numero
+$$
+f[y_1,\ldots,y_k]
+=
+\frac{f[y_1,\ldots,y_{k-2},y_k]-f[y_1,\ldots,y_{k-1}]}{y_k-y_{k-1}}
+$$
+questa definizione è ricorsiva perché per calcolare una differenza divisa con $k$ punti devo usare differenze divise calcolate con meno punti
+nel caso $k=2$ otteniamo
+$$
+f[y_1,y_2]
+=
+\frac{f[y_2]-f[y_1]}{y_2-y_1}
+=
+\frac{f(y_2)-f(y_1)}{y_2-y_1}
+$$
+quindi nel caso di due punti la differenza divisa coincide con il rapporto incrementale di $f(x)$ relativo ai punti $y_1,y_2$
+##### Polinomio in forma di Newton
+Il polinomio in forma di Newton è definito dal seguente Teorema
 #### TEOREMA 1.3
 sia $f:[a,b]\to\mathbb{R}$ e siano $x_0,x_1,\ldots,x_n\in[a,b]$ nodi distinti
 allora il polinomio di interpolazione di $f(x)$ su questi nodi è dato da
-$$
-p(x)=f[x_0]+f[x_0,x_1](x-x_0)+f[x_0,x_1,x_2](x-x_0)(x-x_1)+\cdots+f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1})
-$$
+$$p(x)=f[x_0]+f[x_0,x_1](x-x_0)+f[x_0,x_1,x_2](x-x_0)(x-x_1)+\cdots+f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1})$$
 
 questa si chiama forma di Newton del polinomio di interpolazione $p(x)$
 i coefficienti sono le differenze divise
@@ -520,34 +643,138 @@ f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]
 $$
 per ogni permutazione $\sigma$ di $\{0,\ldots,n\}$
 ##### Dimostrazione
+Sia $\sigma$ una qualsiasi permutazione di $\{0,\ldots,n\}$
+Consideriamo il polinomio interpolante relativo ai nodi nell’ordine
+$x_0,x_1,\ldots,x_n$
+Nella forma di Newton esso si scrive come
+$p(x) = f[x_0] + f[x_0,x_1](x-x_0) +\cdots+ f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1})$
+Adesso consideriamo gli stessi nodi, ma nell’ordine permutato
+$x_{\sigma(0)},x_{\sigma(1)},\ldots,x_{\sigma(n)}$
 
-sia $\sigma$ una qualsiasi permutazione di $\{0,\ldots,n\}$
+Otteniamo ancora il medesimo polinomio interpolante, perché i dati interpolati sono gli stessi: cambiare l’ordine dei nodi non cambia le condizioni
+$p(x_i)=f(x_i)$
+Quindi anche nella forma di Newton rispetto all’ordine permutato si ha lo stesso polinomio $p(x)$, scritto però come
+$$p(x) = f[x_{\sigma(0)}] + f[x_{\sigma(0)},x_{\sigma(1)}](x-x_{\sigma(0)}) +\cdots+ f[x_{\sigma(0)},\ldots,x_{\sigma(n)}] (x-x_{\sigma(0)})\cdots(x-x_{\sigma(n-1)})$$
 
-applichiamo la forma di Newton prima con i nodi in ordine standard
+Ora confrontiamo il coefficiente del termine di grado massimo, cioè il coefficiente di $x^n$
 
-$$
-x_0,x_1,\ldots,x_n
-$$
+Nella prima scrittura, tutti i termini tranne l’ultimo hanno grado minore di $n$. L’ultimo termine è
+$f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1})$
 
-e poi con i nodi permutati
+Il prodotto $(x-x_0)\cdots(x-x_{n-1})$
+è monico di grado $n$, quindi il coefficiente di $x^n$ è $f[x_0,\ldots,x_n]$
 
-$$
-x_{\sigma(0)},x_{\sigma(1)},\ldots,x_{\sigma(n)}
-$$
-in entrambi i casi otteniamo lo stesso polinomio interpolante, perché i nodi sono gli stessi e cambiare l’ordine dei nodi non cambia i dati da interpolare
-$p(x)$ ha come ultimo termine
-$f[x_0,\ldots,x_n]$ e $f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$
-con coefficienti $(x-x_0)...(x-x_{n-1})$ e $(x-x_{\sigma(0)})...(x-x_{\sigma(n-1)})$
-abbiamo due polinomi interpolanti uguali su stesso nodo dunque
-$$
-f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]
-$$
+Nella seconda scrittura, allo stesso modo, il coefficiente di $x^n$ è $f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$
+
+Poiché le due scritture rappresentano lo stesso polinomio $p(x)$, i coefficienti di $x^n$ devono coincidere. 
+
+Pertanto
+$f[x_0,\ldots,x_n] = f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$
+Quindi la differenza divisa non dipende dall’ordine dei nodi.
 $$\square$$
 ##### Osservazione 1.1
 Dati per supposizione i punti $(x_0,y_0),(x_1,y_1),...,(x_n,y_n) \in \mathbb{R}^2$
-con $x_0,x_1,...,x_n$ distinti allora i numeri $y_0,y_1,...,y_n$ possono essere interpretati come valori in $x_0,x_1,...,x_n$ di una qualche funzione $f:[a,b]->\mathbb{R}$ definita su un qualche intervallo $[a,b]$ che contiene i punti $x_0,...,x_n$ 
+con $x_0,x_1,...,x_n$ distinti 
+allora i numeri $y_0,y_1,...,y_n$ possono essere interpretati come valori in $x_0,x_1,...,x_n$ di una qualche funzione $f:[a,b]->\mathbb{R}$ definita su un qualche intervallo $[a,b]$ che contiene i punti $x_0,...,x_n$ 
+
 perciò ha senso parlare di forma di Newton del polinomio di interpolazione dei dati $(x_0,y_0),...,(x_n,y_n)$ anche quando non viene specificata alcuna funzione $f(x)$ t.c $f(x_i)=y_i$ $\forall i =0,...,n$ 
-in questi casi qui è sufficiente immaginarsi una funzione che assume quei valori y in quei nodi
+in questi casi qui è sufficiente immaginarsi una funzione che assume quei valori $y$ in quei nodi
+##### Algoritmo di valutazione del polinomio d'interpolazione in un punto e il suo costo
+
+sia $f:[a,b]\to\mathbb{R}$, siano
+$x_0,\ldots,x_n\in[a,b]$
+punti distinti e sia $t\in\mathbb{R}$
+vogliamo costruire un algoritmo per calcolare $p(t)$, dove $p(x)$ è il polinomio di interpolazione di $f(x)$ sui nodi $x_0,x_1,\ldots,x_n$
+l’algoritmo nel caso $n=3$
+in base al teorema della forma di Newton abbiamo
+Partiamo da
+$$p(t)=f[x_0]+f[x_0,x_1](t-x_0)+f[x_0,x_1,x_2](t-x_0)(t-x_1)+f[x_0,x_1,x_2,x_3](t-x_0)(t-x_1)(t-x_2)$$
+
+
+la prima parte dell'algoritmo è indipendente dal punto $t$ in cui devo valutare $p(x)$
+
+consiste nel calcolo delle differenze divise, con la tabella delle differenze divise
+
+scriviamo $p(t)$ nella seguente forma
+raccolgo per $(t-x_0)$ poi per $(t-x_1)$ e raccolgo infine per $(t-x_2)$
+$$
+p(t)=f[x_0]+(t-x_0)\left(f[x_0,x_1]+(t-x_1)\left(f[x_0,x_1,x_2]+(t-x_2)f[x_0,x_1,x_2,x_3]\right)\right)
+$$
+
+prima definiamo l’ultima differenza divisa come $h_3$, poi $h_2$ è la parentesi più interna, $h_1$ è la parentesi successiva e $h_0$ sarà tutto il valore finale, cioè $p(t)$
+quindi calcoliamo prima $h_3$, poi $h_2$, poi $h_1$, poi $h_0$
+
+$$
+h_3=f[x_0,x_1,x_2,x_3]
+$$
+$$
+h_2=f[x_0,x_1,x_2]+(t-x_2)h_3
+$$
+$$
+h_1=f[x_0,x_1]+(t-x_1)h_2
+$$
+$$
+h_0=f[x_0]+(t-x_0)h_1
+$$
+alla fine
+$$
+h_0=p(t)
+$$
+calcoliamo i costi
+
+della prima fase abbiamo la nostra tabella delle differenze divise
+![[Pasted image (4).png]]
+il numero di elementi da calcolare è
+$$
+1+2+\cdots+n=\frac{n(n+1)}{2}
+$$
+nel nostro caso 6 elementi
+il numero di elementi consiste nella parte triangolare inferiore della tabella delle differenze divise
+la formula delle differenze divise per essere svolta ha bisogno di  2 sottrazioni e 1 divisione quindi
+
+$2\cdot\frac{n(n+1)}{2}=n(n+1)$ sottrazioni, 
+e $\frac{n(n+1)}{2}$ divisioni
+$$
+c_1(n)=n(n+1)A+\frac{n(n+1)}{2}D
+$$
+nel nostro caso 12 sottrazioni e 6 divisioni
+
+
+Dopo aver calcolato, nella prima fase, tutte le differenze divise, la seconda fase consiste nel valutare il polinomio interpolante nel punto assegnato t
+quindi calcoliamo le varie h
+
+abbiamo una addizione, una sottrazione e una moltiplicazione per tutti gli $h$ da calcolare dopo $h_n$
+
+$h_n$ non va calcolato perché è già l’ultima differenza divisa
+quindi in totale:
+- $n$ sottrazioni
+- $n$ moltiplicazioni
+- $n$ addizioni
+
+ma il costo delle addizioni e delle sottrazioni è uguale ma questo non vale per le divisioni e le moltiplicazioni
+poniamo:
+- $A=$ addizioni e sottrazioni
+- $M=$ moltiplicazioni
+- $D=$ divisioni
+abbiamo
+per la seconda fase abbiamo
+$$
+c_2(n)=2nA+nM
+$$
+perché ci sono $n$ sottrazioni e $n$ addizioni, quindi $2nA$, più $n$ moltiplicazioni
+quindi
+$$
+c(n)=n(n+1)A+2nA+nM+\frac{n(n+1)}{2}D
+$$
+cioè
+$$
+c(n)=(n^2+3n)A+nM+\left(\frac{n^2}{2}+\frac{n}{2}\right)D
+$$
+approssimando per $n$ grande, guardiamo solo i termini di grado più alto
+$$
+c(n)\approx n^2A+\frac{n^2}{2}D
+$$
+
 ##### Osservazione 1.2
 la prima parte dell'algoritmo è indipendente dal punto t in cui $p(x)$ viene valutato quindi per valutare $p(x)$ in $m$ punti $t_1,t_2,...,t_m \in \mathbb{R}$ 
 si calcolano le differenze divise una volta sola con costo$$
@@ -558,22 +785,98 @@ con costo computazionale
 $$
 c_2(n)=m(2nA+nM)
 $$
-
 $$
 c_m(n)=n(n+1)A+\frac{n(n+1)}{2}D+m(2nA+nM)
 $$
-
 quindi
-
 $$
 c_m(n)=(n^2+2mn+n)A+mnM+\left(\frac{n^2}{2}+\frac{n}{2}\right)D
 $$
-
 approssimando per $n$ grande otteniamo
-
 $$
 c_m(n)\approx (n^2+2mn)A+mnM+\frac{n^2}{2}D
 $$
+
+##### Aggiunta di un nodo di interpolazione nella forma di Newton
+la forma di Newton è conveniente quando ai dati di interpolazione
+$$
+(x_0,y_0),\ldots,(x_n,y_n)
+$$
+viene aggiunto un nuovo dato
+$$
+(x_{n+1},y_{n+1})
+$$
+con
+$$
+x_{n+1}\neq x_0,\ldots,x_n
+$$
+infatti, detta $f(x)$ una qualche funzione qualsiasi tale che
+$$
+f(x_i)=y_i \qquad i=0,\ldots,n+1
+$$
+il polinomio di interpolazione dei dati
+$$
+(x_0,y_0),\ldots,(x_n,y_n)
+$$
+si scrive in forma di Newton nel modo seguente
+$$
+p(x)=f[x_0]+f[x_0,x_1](x-x_0)+\cdots+f[x_0,\ldots,x_n](x-x_0)\cdots(x-x_{n-1})
+$$
+il nuovo polinomio di interpolazione dei dati
+$$
+(x_0,y_0),\ldots,(x_{n+1},y_{n+1})
+$$
+si scrive invece come
+$$
+q(x)=p(x)+f[x_0,\ldots,x_{n+1}](x-x_0)\cdots(x-x_n)
+$$
+
+La forma di Newton è **incrementale**: il nuovo polinomio si ottiene aggiungendo un solo termine al polinomio precedente.
+
+Supponiamo di avere già $p(x)$ in forma di Newton.
+Sono quindi già noti i coefficienti (o differenze divise):
+$$
+f[x_0],
+\quad
+f[x_0,x_1],
+\quad
+\dots,
+\quad
+f[x_0,\dots,x_n].
+$$
+
+Per ottenere la forma di Newton di $q(x)$ basta calcolare la nuova differenza divisa:
+$$
+f[x_0,\dots,x_n,x_{n+1}].
+$$
+
+Non serve ricalcolare tutta la tabella, ma si aggiunge soltanto una nuova riga, partendo dal nuovo valore:
+$$
+f[x_{n+1}]=y_{n+1}.
+$$
+
+Da questo valore si calcolano, uno dopo l’altro:
+$$
+f[x_0,x_{n+1}],
+$$
+$$
+f[x_0,x_1,x_{n+1}],
+$$
+$$
+\dots,
+$$
+$$
+f[x_0,\dots,x_n,x_{n+1}].
+$$
+Per costruire la nuova riga bastano:
+- i coefficienti già presenti nella forma di Newton;
+- il nuovo valore $f[x_{n+1}]$.
+ ![[Pasted image 20260713125631.png]]
+
+
+##### INTEGRAZIONE NUMERICA
+
+
 #### LEMMA 2.1
 Siano $\omega,\alpha,\beta:[a,b]\to\mathbb{R}$ funzioni tali che:
 - $\omega(x)$ è continua e $\omega(x)\geq 0$ su $[a,b]$
