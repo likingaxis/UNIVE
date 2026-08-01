@@ -495,13 +495,12 @@ $$\square$$
 #### Osservazione a pagina 6
 una volta che hai trovato il polinomio $p(x)$ in **forma canonica**, i suoi coefficienti sono esattamente gli stessi che otterresti risolvendo il sistema con la matrice di Vandermonde
 $$p(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n$$
-per cui la matrice di Vandermonde
-vettore dei coefficienti:
+per cui la matrice di Vandermonde è
 $$\begin{pmatrix} a_0\\ a_1\\ \vdots\\ a_n \end{pmatrix} = \left[V(x_0,x_1,\dots,x_n)\right]^{-1} \begin{pmatrix} f(x_0)\\ f(x_1)\\ \vdots\\ f(x_n) \end{pmatrix}$$
 dove $x_0,x_1,...,x_n$ sono i nodi di interpolazione
 ##### Errore o resto dell’interpolazione polinomiale
 Dato il polinomio interpolante $p(x)$ di una funzione $f(x)$
-sui nodi distinti$x_0,x_1,\ldots,x_n\in [a,b]$
+sui nodi distinti $x_0,x_1,\ldots,x_n\in [a,b]$
 si chiama **errore di interpolazione nel punto x** la quantità
 $$f(x)-p(x)$$
 Il Teorema 1.2 fornisce una formula esplicita per questo errore
@@ -511,11 +510,10 @@ allora $\forall x \in [a,b]$ $\exists \  un \ punto \ \xi=\xi(x) \in (a,b)$ t.c
 $$
 f(x)-p(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)(x-x_1)\cdots(x-x_n)
 $$
-
 è l'errore di interpolazione nel punto $x$
 
 ##### Cosa vuol dire $C^{n+1}[a,b]$
-Dire che$f\in C^{n+1}$ significa che $f$ è derivabile fino all’ordine $n+1$ e che tali derivate sono continue su $[a,b]$. Questa ipotesi è necessaria perché nella formula dell’errore compare la derivata $(n+1)$-esima della funzione.
+Dire che $f\in C^{n+1}$ significa che $f$ è derivabile fino all’ordine $n+1$ e che tali derivate sono continue su $[a,b]$. Questa ipotesi è necessaria perché nella formula dell’errore compare la derivata $(n+1)$- esima della funzione
 ##### Dimostrazione
 sia $x \in [a,b]$ un punto fissato
 strutturo la dimostrazione in 2 casistiche separate
@@ -528,7 +526,7 @@ $$
 x_i-x_i=0
 $$
 *Caso 2:*
-$x \notin {x_0,x_1,...,x_n}$
+se $x \notin {x_0,x_1,...,x_n}$
 definiamo delle funzioni ausiliarie $\forall y\in [a,b]$ 
 $$
 \pi(y)=(y-x_0)(y-x_1)\cdots(y-x_n)
@@ -541,11 +539,13 @@ e sia inoltre $z:[a,b]\to\mathbb{R}$
 $$
 z(y)=r(y)-\frac{r(x)}{\pi(x)}\pi(y)
 $$
-questa funzione è di classe $C^{n+1}[a,b]$ poiché $r(y)$ è di quella classe perché a sua volta $f(y)$ è di quella classe mentre
+questa funzione è di classe $C^{n+1}[a,b]$ poiché $r(y)$ è di quella classe e perché a sua volta $f(y)$ è di quella classe mentre
 $p(y)$ e $\pi(y)$ sono di classe $C^\infty$
 sappiamo che $z(y)$ si annulla in almeno n+2 punti di $[a,b]$ 
-- per i nodi $x_0,...,x_n$ 
-- per il nodo x fissato
+- per i nodi $x_0,...,x_n$  che sono $n+1$
+- per il nodo x fissato che è $1$
+per verificarlo basta sostituire questo nella formula di $z(y)$
+
 Per il teorema di Rolle sappiamo che
 Se una funzione si annulla in due punti consecutivi, allora tra questi due punti esiste almeno un punto in cui la derivata prima si annulla
 Quindi, se $z(y)$ si annulla in almeno $n+2$ punti, allora $z'(y)$ si annulla in almeno $n+1$ punti.
@@ -560,19 +560,20 @@ z^{(n+1)}(\xi)=0
 $$
 calcoliamo la derivata $z^{(n+1)}$
 $$z^{(n+1)}(y)=r^{(n+1)}(y)-\frac{r(x)}{\pi(x)}\pi^{(n+1)}(y)$$
+
+sappiamo che $r^{(n+1)}(y)$ è questo 
 $$
 r^{(n+1)}(y)=f^{(n+1)}(y)-p^{(n+1)}(y)
 $$
-$p(y)$ con derivato n+1 volte si annulla perché ha grado al più n
+
+dove $p(y)$ derivato $n+1$ volte si annulla perché ha grado al più $n$
 
 $$
 \pi(y)=(y-x_0)(y-x_1)\cdots(y-x_n)
 $$
-
 è un polinomio di grado $n+1$ ed è monico, cioè il coefficiente davanti a $y^{n+1}$ è $1$.
 
 Infatti, se moltiplico tutti i termini principali dei fattori, ottengo
-
 $$
 y\cdot y\cdots y=y^{n+1}
 $$
@@ -584,7 +585,7 @@ $$
 
 ![[Pasted image 20260728163027.png]]
 
-facendo la derivata $(n+1)$-esima, tutti i termini di grado minore spariscono e rimane
+facendo la derivata $(n+1)$-esima, tutti i termini di grado minore spariscono e rimane $y^{n+1}$ che derivato fa $(n+1)!$ 
 $$
 \pi^{(n+1)}(y)=(n+1)!
 $$
@@ -600,7 +601,7 @@ portiamo a sinistra $r(x)/\pi(x)$
 $$
 \frac{r(x)}{\pi(x)}(n+1)!=f^{(n+1)}(\xi)
 $$
-moltiplicando per $\pi(x)$
+moltiplicando per $\pi(x)$$/(n+1)!$
 $$
 r(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\pi(x)
 $$
@@ -661,13 +662,13 @@ f[x_0],\ f[x_0,x_1],\ f[x_0,x_1,x_2],\ldots,\ f[x_0,\ldots,x_n]
 $$
 #### Corollario 1.1
 sia $f:[a,b]\to\mathbb{R}$ e siano $x_0,x_1,\ldots,x_n\in[a,b]$ distinti
-allora $f[x_0,x_1,\ldots,x_n]$ non cambia se vengono permutati i suoi $n+1$ argomenti
+allora la differenza divisa $f[x_0,x_1,\ldots,x_n]$ non cambia se vengono permutati i suoi $n+1$ argomenti
 $$
 f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]
 $$
 per ogni permutazione $\sigma$ di $\{0,\ldots,n\}$
 ##### Dimostrazione
-Sia $\sigma$ una qualsiasi permutazione di $\{0,\ldots,n\}$
+Sia $\sigma$ sigma una qualsiasi permutazione di $\{0,\ldots,n\}$
 Consideriamo il polinomio interpolante relativo ai nodi nell’ordine
 $x_0,x_1,\ldots,x_n$
 Nella forma di Newton esso si scrive come
@@ -677,6 +678,7 @@ $x_{\sigma(0)},x_{\sigma(1)},\ldots,x_{\sigma(n)}$
 
 Otteniamo ancora il medesimo polinomio interpolante, perché i dati interpolati sono gli stessi: cambiare l’ordine dei nodi non cambia le condizioni
 $p(x_i)=f(x_i)$
+
 Quindi anche nella forma di Newton rispetto all’ordine permutato si ha lo stesso polinomio $p(x)$, scritto però come
 $$p(x) = f[x_{\sigma(0)}] + f[x_{\sigma(0)},x_{\sigma(1)}](x-x_{\sigma(0)}) +\cdots+ f[x_{\sigma(0)},\ldots,x_{\sigma(n)}] (x-x_{\sigma(0)})\cdots(x-x_{\sigma(n-1)})$$
 
@@ -694,26 +696,24 @@ Poiché le due scritture rappresentano lo stesso polinomio $p(x)$, i coefficient
 
 Pertanto
 $f[x_0,\ldots,x_n] = f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$
-Quindi la differenza divisa non dipende dall’ordine dei nodi.
+Quindi la differenza divisa non dipende dall’ordine dei nodi
 $$\square$$
 ##### Osservazione 1.1
+ha senso parlare di forma di Newton del polinomio di interpolazione dei dati $(x_0,y_0),...,(x_n,y_n)$ anche quando non viene specificata alcuna funzione $f(x)$ t.c $f(x_i)=y_i$ $\forall i =0,...,n$ 
+in questi casi qui è sufficiente immaginarsi una funzione che assume quei valori $y$ in quei nodi
+
 Dati per supposizione i punti $(x_0,y_0),(x_1,y_1),...,(x_n,y_n) \in \mathbb{R}^2$
 con $x_0,x_1,...,x_n$ distinti 
 allora i numeri $y_0,y_1,...,y_n$ possono essere interpretati come valori in $x_0,x_1,...,x_n$ di una qualche funzione $f:[a,b]->\mathbb{R}$ definita su un qualche intervallo $[a,b]$ che contiene i punti $x_0,...,x_n$ 
-
-perciò ha senso parlare di forma di Newton del polinomio di interpolazione dei dati $(x_0,y_0),...,(x_n,y_n)$ anche quando non viene specificata alcuna funzione $f(x)$ t.c $f(x_i)=y_i$ $\forall i =0,...,n$ 
-in questi casi qui è sufficiente immaginarsi una funzione che assume quei valori $y$ in quei nodi
 ##### Algoritmo di valutazione del polinomio d'interpolazione in un punto e il suo costo
-
 sia $f:[a,b]\to\mathbb{R}$, siano
 $x_0,\ldots,x_n\in[a,b]$
 punti distinti e sia $t\in\mathbb{R}$
 vogliamo costruire un algoritmo per calcolare $p(t)$, dove $p(x)$ è il polinomio di interpolazione di $f(x)$ sui nodi $x_0,x_1,\ldots,x_n$
 l’algoritmo nel caso $n=3$
-in base al teorema della forma di Newton abbiamo
+in base al teorema della forma di Newton
 Partiamo da
 $$p(t)=f[x_0]+f[x_0,x_1](t-x_0)+f[x_0,x_1,x_2](t-x_0)(t-x_1)+f[x_0,x_1,x_2,x_3](t-x_0)(t-x_1)(t-x_2)$$
-
 
 la prima parte dell'algoritmo è indipendente dal punto $t$ in cui devo valutare $p(x)$
 
@@ -753,7 +753,9 @@ $$
 1+2+\cdots+n=\frac{n(n+1)}{2}
 $$
 nel nostro caso 6 elementi
-il numero di elementi consiste nella parte triangolare inferiore della tabella delle differenze divise
+
+il numero di elementi consiste nella parte triangolare inferiore della tabella delle differenze divise tranne la prima colonna
+
 la formula delle differenze divise per essere svolta ha bisogno di  2 sottrazioni e 1 divisione quindi
 
 $2\cdot\frac{n(n+1)}{2}=n(n+1)$ sottrazioni, 
@@ -764,8 +766,8 @@ $$
 nel nostro caso 12 sottrazioni e 6 divisioni
 
 
-Dopo aver calcolato, nella prima fase, tutte le differenze divise, la seconda fase consiste nel valutare il polinomio interpolante nel punto assegnato t
-quindi calcoliamo le varie h
+Dopo aver calcolato, nella prima fase, tutte le differenze divise, la seconda fase consiste nel valutare il polinomio interpolante nel punto assegnato $t$
+quindi calcoliamo le varie $h$
 
 abbiamo una addizione, una sottrazione e una moltiplicazione per tutti gli $h$ da calcolare dopo $h_n$
 
@@ -790,7 +792,7 @@ quindi
 $$
 c(n)=n(n+1)A+2nA+nM+\frac{n(n+1)}{2}D
 $$
-cioè
+cioè moltiplicando e sommando otteniamo
 $$
 c(n)=(n^2+3n)A+nM+\left(\frac{n^2}{2}+\frac{n}{2}\right)D
 $$
@@ -798,9 +800,8 @@ approssimando per $n$ grande, guardiamo solo i termini di grado più alto
 $$
 c(n)\approx n^2A+\frac{n^2}{2}D
 $$
-
 ##### Osservazione 1.2
-la prima parte dell'algoritmo è indipendente dal punto t in cui $p(x)$ viene valutato quindi per valutare $p(x)$ in $m$ punti $t_1,t_2,...,t_m \in \mathbb{R}$ 
+la prima parte dell'algoritmo è indipendente dal punto $t$ in cui $p(x)$ viene valutato quindi per valutare $p(x)$ in $m$ punti $t_1,t_2,...,t_m \in \mathbb{R}$ 
 si calcolano le differenze divise una volta sola con costo$$
 c_1(n)=n(n+1)A+\frac{n(n+1)}{2}D
 $$
@@ -830,7 +831,7 @@ viene aggiunto un nuovo dato
 $$
 (x_{n+1},y_{n+1})
 $$
-con
+con il nuovo nodo diverso dai precedenti
 $$
 x_{n+1}\neq x_0,\ldots,x_n
 $$
@@ -858,7 +859,7 @@ $$
 La forma di Newton è **incrementale**: il nuovo polinomio si ottiene aggiungendo un solo termine al polinomio precedente.
 
 Supponiamo di avere già $p(x)$ in forma di Newton.
-Sono quindi già noti i coefficienti (o differenze divise):
+Sono quindi già noti i coefficienti (ovvero le differenze divise):
 $$
 f[x_0],
 \quad
@@ -898,9 +899,138 @@ Per costruire la nuova riga bastano:
  ![[Pasted image 20260713125631.png]]
 
 
-##### INTEGRAZIONE NUMERICA
+### INTEGRAZIONE NUMERICA
+Data una funzione integrabile $f:[a,b]\to\mathbb{R}$, si vuole calcolare un’approssimazione di
 
+$$
+\int_a^b f(x)\,dx
+$$
+A tal fine si suddivide l’intervallo $[a,b]$ in $n\geq 1$ sotto-intervalli tutti della stessa ampiezza
+$$
+h=\frac{b-a}{n}
+$$
+dove $h$ è detto passo di discretizzazione.
+Definiamo i nodi
+$$
+x_j=a+jh,\qquad j=0,\ldots,n
+$$
+Il valore che si prende come approssimazione del nostro integrale $\int_a^b f(x)\,dx$ è $\int_a^b s(x)\,dx$
+La funzione
+$$
+s:[a,b]\to\mathbb{R}
+$$
+è definita a tratti: per $x\in[x_j,x_{j+1}]$ si prende la retta che passa per i punti
+$$
+(x_j,f(x_j)),\qquad (x_{j+1},f(x_{j+1}))
+$$
+Il coefficiente angolare di questa retta è
+$$
+\frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j}
+$$
+quindi, per $x\in[x_j,x_{j+1}]$, abbiamo
+$$
+s(x)=f(x_j)+\frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j}(x-x_j)
+$$
+questa regola vale per ogni indice $j=0,\ldots,n-1$
 
+Quindi prendiamo come approssimazione di $\int_a^b f(x)\,dx$
+$$
+I_n=\int_a^b s(x)\,dx
+=
+\sum_{j=0}^{n-1}\int_{x_j}^{x_{j+1}}s(x)\,dx
+$$
+Siccome $s(x)$ è definita a tratti possiamo spezzare l’integrale come sopra
+poi sostituendo $s(x)$
+$$
+I_n=
+\sum_{j=0}^{n-1}
+\int_{x_j}^{x_{j+1}}
+\left[
+f(x_j)+\frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j}(x-x_j)
+\right]dx
+$$
+Ora risolviamo l’integrale dentro la sommatoria
+Dividiamolo in due pezzi:
+$$\int_{x_j}^{x_{j+1}} f(x_j)\,dx + \int_{x_j}^{x_{j+1}} \frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j}(x-x_j)\,dx$$
+la prima parte risulta essere
+$\int f(x_j)\,dx$
+
+Qui $f(x_j)$ è costante, perché $x_j$è fissato. Quindi una primitiva potrebbe essere
+$f(x_j)(x-x_j)$
+
+Si sceglie questa forma perché quando poi metti $x=x_j$, viene subito zero:
+$f(x_j)(x_j-x_j)=0$
+
+Consideriamo la seconda parte dell'integrale
+$$\int \frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j}(x-x_j)\,dx$$
+La frazione
+$$\frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j}$$
+è costante rispetto a $x$. Quindi la portiamo idealmente fuori dall’integrale.
+Rimane da integrare: $\int (x-x_j)\,dx$
+
+La primitiva è $\frac{(x-x_j)^2}{2}.$
+Perché?
+
+Perché derivando:
+$$\frac{d}{dx}\left(\frac{(x-x_j)^2}{2}\right) = \frac{1}{2}\cdot 2(x-x_j)\cdot 1 = x-x_j.dx$$
+Quindi la primitiva completa è
+$$f(x_j)(x-x_j)+ \frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j} \frac{(x-x_j)^2}{2}$$
+Da scrivere con gli estremi:
+$$\left[ f(x_j)(x-x_j)+ \frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j} \frac{(x-x_j)^2}{2} \right]_{x_j}^{x_{j+1}}$$
+
+Ora valutiamo per l'estremo $x=x_{j+1}$
+$$f(x_j)(x_{j+1}-x_j)+ \frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j} \frac{(x_{j+1}-x_j)^2}{2}$$
+invece per $x=x_j$
+$$f(x_j)(x_j-x_j)+ \frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j} \frac{(x_j-x_j)^2}{2}=0$$
+Quindi resta solo il valore nel punto superiore
+
+Adesso semplifichiamo il secondo termine tra denominatore e numeratore
+$$\frac{f(x_{j+1})-f(x_j)}{x_{j+1}-x_j} \frac{(x_{j+1}-x_j)^2}{2} = \frac{f(x_{j+1})-f(x_j)}{2}(x_{j+1}-x_j)$$
+Quindi otteniamo:
+$$f(x_j)(x_{j+1}-x_j) + \frac{f(x_{j+1})-f(x_j)}{2}(x_{j+1}-x_j)$$
+Raccogliamo $(x_{j+1}-x_j)$
+$$(x_{j+1}-x_j) \left[ f(x_j)+\frac{f(x_{j+1})-f(x_j)}{2} \right]$$
+Dentro la parentesi:
+$$f(x_j)+\frac{f(x_{j+1})-f(x_j)}{2} = \frac{2f(x_j)+f(x_{j+1})-f(x_j)}{2} = \frac{f(x_j)+f(x_{j+1})}{2}$$
+Quindi:
+$$\int_{x_j}^{x_{j+1}}s(x)\,dx = (x_{j+1}-x_j)\frac{f(x_j)+f(x_{j+1})}{2}$$
+Siccome gli intervalli hanno tutti ampiezza $h=x_{j+1}-x_j$
+allora possiamo scrivere direttamente $h$
+$$\int_{x_j}^{x_{j+1}}s(x)\,dx = h\frac{f(x_j)+f(x_{j+1})}{2}$$
+quindi ponendo la sommatoria abbiamo
+$$I_n= \sum_{j=0}^{n-1} \frac{f(x_j)+f(x_{j+1})}{2}h$$
+
+Poi si porta fuori $\frac{h}{2}$
+$$I_n= \frac{h}{2} \sum_{j=0}^{n-1} \left[ f(x_j)+f(x_{j+1}) \right]$$
+Ora il passaggio importante è capire cosa succede sviluppando la sommatoria:
+$$\begin{aligned} I_n &= \frac{h}{2} \left[ f(x_0)+f(x_1) +f(x_1)+f(x_2) +f(x_2)+f(x_3) +\cdots +f(x_{n-1})+f(x_n) \right]. \end{aligned}$$
+Qui:
+$f(x_0)$
+compare solo nel primo trapezio, mentre
+$f(x_n)$
+compare solo nell’ultimo trapezio.
+Invece ogni nodo interno
+$f(x_1),f(x_2),\ldots,f(x_{n-1})$
+compare due volte, perché ogni nodo interno è contemporaneamente estremo destro di un sotto-intervallo ed estremo sinistro del successivo
+
+Quindi la somma diventa:
+$$I_n= \frac{h}{2} \left[ f(x_0)+2\sum_{j=1}^{n-1}f(x_j)+f(x_n) \right]$$
+con $f(x_n)$ fuori dalla sommatoria
+Dato che $x_0=a,\qquad x_n=b$
+possiamo scrivere:
+$$I_n= \frac{h}{2} \left[ f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b) \right]$$
+Infine distribuiamo il fattore $\frac h2$
+$$I_n= h\left[ \frac{f(a)+f(b)}{2} + \sum_{j=1}^{n-1}f(x_j) \right]$$
+
+Questa è la **formula dei trapezi di ordine n**:
+$$I_n= h\left[ \frac{f(a)+f(b)}{2} + \sum_{j=1}^{n-1}f(x_j) \right], \qquad h=\frac{b-a}{n}$$
+##### Errore o resto della formula dei trapezi
+Finora abbiamo costruito la formula dei trapezi, cioè un valore numerico $I_n$ che approssima l’integrale esatto$$\int_a^b f(x)\,dx$$A questo punto è naturale chiedersi quanto sia buona questa approssimazione, cioè quanto $I_n$ sia vicino al valore reale dell’integrale. 
+Per misurare questa distanza consideriamo l’errore $\left|\int_a^b f(x)\,dx-I_n\right|$ 
+
+L’obiettivo è quindi ottenere una stima di questo errore in funzione del passo di discretizzazione  $h=\frac{b-a}{n}$ In particolare vogliamo capire come cambia l’errore quando aumentiamo il numero di sotto-intervalli $n$ cioè quando il passo $h$ diventa più piccolo. 
+
+Per dimostrare la formula dell’errore della formula dei trapezi, introduciamo prima un lemma tecnico, che è una generalizzazione del teorema della media integrale.
 #### LEMMA 2.1
 Siano $\omega,\alpha,\beta:[a,b]\to\mathbb{R}$ funzioni tali che:
 - $\omega(x)$ è continua e $\omega(x)\geq 0$ su $[a,b]$
@@ -908,7 +1038,6 @@ Siano $\omega,\alpha,\beta:[a,b]\to\mathbb{R}$ funzioni tali che:
 - $m\leq \beta(x)\leq M \qquad \forall x\in[a,b]$ dove m e M sono min e max della funzione $\alpha(x)$ su $[a,b]$ 
 
 Allora $\exists$ un certo punto $\eta\in[a,b]$ tale che
-
 $$
 \int_a^b \beta(x)\omega(x)\,dx
 =
@@ -933,11 +1062,11 @@ $$
 ![[Pasted image 20260717111916.png]]
 Siccome $\beta(x)\omega(x)$ sta sempre tra $m\omega(x)$ e $M\omega(x)$, anche il suo integrale sta tra gli integrali di $m\omega(x)$ e $M\omega(x)$.
 
-Definiamo quindi
-
+Definiamo quindi una funzione $z$
 $$
 z:[a,b]\to\mathbb{R}
 $$
+tale che
 $$
 z(y)=\alpha(y)\int_a^b \omega(x)\,dx
 $$
@@ -951,14 +1080,18 @@ $$
 C\geq 0
 $$
 perché $\omega(x)\geq 0$.
+
 Allora
 $$
 z(y)=\alpha(y)C
 $$
-siccome $\alpha$ è continua su $[a,b]$, anche $z$ è continua su $[a,b]$.
+siccome $\alpha$ è continua su $[a,b]$, anche $z$ è continua su $[a,b]$
+
 Per il teorema dei valori intermedi, $z$ assume tutti i valori compresi tra il suo minimo e il suo massimo
+
 $mC \leq z(y) \leq MC$ 
-ma anche 
+
+ma anche questo lo era
 $$
 mC
 \leq
@@ -967,35 +1100,29 @@ mC
 MC
 $$
 
-Quindi $z$ assume anche il valore
-
+Quindi $z$ essendo continua assumerà anche il valore
 $$
 \int_a^b \beta(x)\omega(x)\,dx
 $$
-
 cioè esiste un punto $\eta\in[a,b]$ tale che
-
 $$
 z(\eta)=\int_a^b \beta(x)\omega(x)\,dx
 $$
-
 ma
-
 $$
 z(\eta)=\alpha(\eta)\int_a^b \omega(x)\,dx
 $$
-
 quindi
-
 $$
 \int_a^b \beta(x)\omega(x)\,dx
 =
 \alpha(\eta)\int_a^b \omega(x)\,dx
 $$
+
 $$\square$$
 #### TEOREMA 2.1
-
 sia $f:[a,b]\to\mathbb{R}$ di classe $C^2[a,b]$ e sia $I_n$ la formula dei trapezi di ordine $n$ e passo $h=\frac{b-a}{n}$
+
 per approssimare
 $$
 \int_a^b f(x)\,dx
@@ -1006,17 +1133,16 @@ $$
 =
 -\frac{(b-a)f''(\eta)}{12}h^2
 $$
+Questo teorema ci dice quanto vale l’errore commesso dalla formula dei trapezi
 ##### DIMOSTRAZIONE
 Siano
 $x_j=a+jh,\qquad j=0,\ldots,n$ e sia $s(x)$ la funzione lineare a tratti dove $s(x)$ su un intervallo $[x_j,x_{j+1}]$ rappresenta l'unico polinomio di interpolazione di $f(x)$ sui nodi $x_j$ e $x_{j+1}$ che appartiene a $\mathbb{R}_1[x]$
 
 ![[Pasted image 20260713130109.png]]
-
 Si vuole trovare
 $$
 \int_a^b f(x)\,dx-I_n
 $$
-
 $$
 \int_a^b f(x)\,dx-I_n
 =
@@ -1035,14 +1161,16 @@ $$
 \sum_{j=0}^{n-1}\int_{x_j}^{x_{j+1}}[f(x)-s(x)]\,dx
 $$
  $f(x)-s(x)$ è l’errore dell’interpolazione polinomiale con $n=1$.
-Per il teorema dell’errore dell’interpolazione
+
+Per il teorema dell’errore dell’interpolazione sappiamo che
 
 $\forall x \in [x_j,x_{j+1}]$ $\exists$ un punto $\xi_j(x)\in(x_j,x_{j+1})$ t.c
 
 $$
 f(x)-s(x)=\frac{f''(\xi_j(x))}{2!}(x-x_j)(x-x_{j+1})
 $$
-utilizziamo il lemma 2.1 su $[x_j,x_{j+1}]$ abbiamo che
+
+utilizziamo il lemma 2.1 sull'intervallo $[x_j,x_{j+1}]$ e poniamo che
 $$
 \omega(x)=\frac{(x-x_j)(x_{j+1}-x)}{2}
 $$
@@ -1054,47 +1182,47 @@ $$
 $$
 
 per applicare il lemma devono essere soddisfatte le ipotesi:
+Siano $\omega,\alpha,\beta:[a,b]\to\mathbb{R}$ funzioni tali che:
+- $\omega(x)$ è continua e $\omega(x)\geq 0$ su $[a,b]$
+- $\alpha(x)$ e $\beta(x)\omega(x)$ sono continue su $[a,b]$
+- $m\leq \beta(x)\leq M \qquad \forall x\in[a,b]$ 
+	- dove m e M sono min e max della funzione $\alpha(x)$ su $[a,b]$ 
 
 - $\omega(x)$ è continua e $\omega(x)\geq 0$ su $[x_j,x_{j+1}]$
-	- è continua perché è un polinomio
-	- è $\geq 0$ perché su $[x_j,x_{j+1}]$ abbiamo $x-x_j\geq 0$ e $x_{j+1}-x\geq 0$, quindi il prodotto è non negativo
+	- è continua poiché è un polinomio
+	- è $\geq 0$ perché su $[x_j,x_{j+1}]$ abbiamo al numeratore
+	- $x-x_j\geq 0$ e $x_{j+1}-x\geq 0$, quindi il prodotto è non negativo
 
 - $\alpha(x)$ è continua su $[x_j,x_{j+1}]$
-	- infatti $\alpha(x)=f''(x)$ e $f\in C^2[a,b]$
-
+	- infatti $\alpha(x)=f''(x)$ e $f\in C^2[a,b]$ 
+	- f è derivabile due volte e la derivata seconda $f''$ è continua su $[a,b]$.
 - $\beta(x)\omega(x)$ è continua
 	- qui non dobbiamo dimostrare che $\beta(x)$ da sola è continua
 	- il lemma richiede la continuità di $\beta(x)\omega(x)$
-	- infatti, dalla formula dell’errore,
-
+	- infatti, dalla formula dell’errore sappiamo la seguente uguaglianza
 $$
 f(x)-s(x)=-\beta(x)\omega(x)
 $$
-
 quindi
-
 $$
 \beta(x)\omega(x)=s(x)-f(x)
 $$
-
 e questa funzione è continua perché sia $s(x)$ sia $f(x)$ sono continue
-- $\beta(x)$ è compresa tra il minimo e il massimo di $\alpha(x)=f''(x)$ su $[x_j,x_{j+1}]$
-	- infatti $\beta(x)=f''(\xi_j(x))$
-	- per ogni $x\in[x_j,x_{j+1}]$, il punto $\xi_j(x)$ appartiene a $(x_j,x_{j+1})$
-	- quindi $f''(\xi_j(x))$ è uno dei valori assunti da $f''$ dentro l’intervallino
-	- perciò è necessariamente compreso tra il minimo e il massimo di $f''$ su $[x_j,x_{j+1}]$
+
+- Infine dobbiamo verificare che $\beta(x)$ sia compresa tra il minimo e il massimo di $\alpha(x)$. 
+- Nel nostro caso $\alpha(x)=f''(x)$, quindi il minimo e il massimo sono quelli di $f''$ su $[x_j,x_{j+1}]$ 
+- Poiché $\beta(x)=f''(\xi_j(x))$ e $\xi_j(x)\in(x_j,x_{j+1})$,
+- $\beta(x)$ è un valore assunto da $f''$ all’interno dell’intervallo. 
+- Quindi $\beta(x)$ è necessariamente compresa tra il minimo e il massimo di $f''$ su $[x_j,x_{j+1}]$ In questo modo anche l’ultima ipotesi del lemma è verificata
 
 ora che le proprietà sono tutte verificate il lemma diceva che $\exists \ \eta_j\in[x_j,x_{j+1}]$ t.c
-
 $$
 \int_{x_j}^{x_{j+1}}\beta(x)\omega(x)\,dx
 =
 f''(\eta_j)
 \int_{x_j}^{x_{j+1}}\omega(x)\,dx
 $$
-
 cioè
-
 $$
 \int_{x_j}^{x_{j+1}}
 f''(\xi_j(x))\frac{(x-x_j)(x_{j+1}-x)}{2}\,dx
@@ -1104,8 +1232,8 @@ f''(\eta_j)
 \frac{(x-x_j)(x_{j+1}-x)}{2}\,dx
 $$
 
-quindi quello di prima diventa
-
+Applicando il Lemma 2.1 a ciascun sotto-intervallo
+$[x_j,x_{j+1}]$, possiamo sostituire il termine $f''(\xi_j(x))$, che dipende da $x$, con un valore costante $f''(\eta_j)$, per un opportuno punto $\eta_j\in[x_j,x_{j+1}]$ Pertanto otteniamo
 $$
 \int_a^b f(x)\,dx-I_n
 =
@@ -1115,58 +1243,70 @@ f''(\eta_j)
 \int_{x_j}^{x_{j+1}}
 \frac{(x-x_j)(x_{j+1}-x)}{2}\,dx
 $$
-
 ora calcoliamo l’integrale
-
 $$
 \int_{x_j}^{x_{j+1}}
 \frac{(x-x_j)(x_{j+1}-x)}{2}\,dx
 $$
-
 faccio il cambio di variabile
-
 $$
 t=x-x_j
 $$
+ricaviamo:
+$x=t+x_j$
+derivando rispetto a $x$:
+$$\frac{dt}{dx}=\frac{d}{dx}(x-x_j)=1$$
+Infatti:
+$$\frac{d}{dx}x=1, \qquad \frac{d}{dx}x_j=0$$
+Quindi: $\frac{dt}{dx}=1$
 
-quindi
+Da questa uguaglianza si scrive informalmente:
+$dt=dx$
+Quindi il differenziale non cambia.
 
-$$
-dt=dx$$
-Gli estremi diventano:
-
-se $x=x_j$, allora
-
+Cambiando gli estremi abbiamo che 
+all'inizio dell'intervallo  $x=x_j$, allora
 $$
 t=x_j-x_j=0
 $$
-
-se $x=x_{j+1}$, allora
-
+alla fine dell'intervallo $x=x_{j+1}$, allora
 $$
 t=x_{j+1}-x_j=h
 $$
+ma sappiamo che è proprio uguale a h questo perché
+$$x_{j}=a+(j)h$$
+$$x_{j+1}=a+(j+1)h$$
+quindi
+$$x_{j+1}-x_j = a+(j+1)h-(a+jh) = h$$
 
-inoltre
-
+inoltre possiamo definire che al numeratore il primo fattore
+$$x-(x_j)=t$$
+il secondo fattore
 $$
 x_{j+1}-x=x_{j+1}-(t+x_j)=x_{j+1}-x_j-t=h-t
 $$
-
 quindi l’integrale diventa
 
 $$
 \int_0^h \frac{t(h-t)}{2}\,dt
 $$
 
-calcoliamo questo integrale:
-
+calcoliamo questo integrale: portiamo fuori $1/2$ e moltiplichiamo $t$
 $$
 \int_0^h \frac{t(h-t)}{2}\,dt
 =
 \frac{1}{2}\int_0^h (ht-t^2)\,dt
 $$
-
+Ora calcola una primitiva di
+$$ht-t^2$$
+portiamo fuori una costante h e vediamo le due primitive di $t$ e di $t^2$
+questa parte ha come primitiva
+$$\int ht\,dt = h\int t\,dt = h\frac{t^2}{2}$$
+la seconda parte ha come primitiva
+$$\int t^2\,dt = \frac{t^3}{3}$$
+Quindi:
+$$\int (ht-t^2)\,dt = \frac{ht^2}{2}-\frac{t^3}{3}$$
+Per questo otteniamo:
 $$
 =
 \frac{1}{2}
@@ -1176,7 +1316,6 @@ $$
 $$
 
 sostituendo $h$ e $0$:
-
 $$
 =
 \frac{1}{2}
@@ -1192,7 +1331,6 @@ $$
 \frac{h^3}{2}-\frac{h^3}{3}
 \right)
 $$
-
 $$
 =
 \frac{1}{2}\cdot \frac{h^3}{6}
@@ -1200,8 +1338,7 @@ $$
 \frac{h^3}{12}
 $$
 
-quindi
-
+quindi abbiamo che 
 $$
 \int_a^b f(x)\,dx-I_n
 =
@@ -1209,18 +1346,14 @@ $$
 \sum_{j=0}^{n-1}
 f''(\eta_j)\frac{h^3}{12}
 $$
-
-portiamo fuori la costante:
-
+portiamo fuori la costante $h^3/12$
 $$
 \int_a^b f(x)\,dx-I_n
 =
 -\frac{h^3}{12}
 \sum_{j=0}^{n-1}f''(\eta_j)
 $$
-
 moltiplichiamo e dividiamo per $n$ così otteniamo una media aritmetica:
-
 $$
 -\frac{h^3}{12}
 \sum_{j=0}^{n-1}f''(\eta_j)
@@ -1229,27 +1362,19 @@ $$
 \frac{1}{n}
 \sum_{j=0}^{n-1}f''(\eta_j)
 $$
-
 ora usiamo il fatto che
-
 $$
 nh=b-a
 $$
-
 perché
-
 $$
 h=\frac{b-a}{n}
 $$
-
 quindi
-
 $$
 nh^3=h^2(nh)=h^2(b-a)
 $$
-
-allora
-
+allora abbiamo che
 $$
 \int_a^b f(x)\,dx-I_n
 =
@@ -1260,8 +1385,11 @@ $$
 \right]
 $$
 
-questa media è un valore compreso tra il minimo e il massimo di $f''$ su $[a,b]$ per Weierstrass
-$f''(x)$ continua su $[a,b]$, per il teorema dei valori intermedi esiste sicuramente un punto $\eta\in[a,b]$ tale che
+Poiché $f''$ è continua su $[a,b]$ 
+
+La quantità $\frac{1}{n}\sum_{j=0}^{n-1}f''(\eta_j)$ è una media aritmetica di valori assunti da $f''$ quindi è compresa tra il minimo e il massimo di $f''$ su $[a,b]$ 
+
+Per il teorema dei valori intermedi, esiste allora un punto $\eta\in[a,b]$ tale che  $f''(\eta) = \frac{1}{n} \sum_{j=0}^{n-1}f''(\eta_j)$
 
 $$
 f''(\eta)
@@ -1269,16 +1397,13 @@ f''(\eta)
 \frac{1}{n}
 \sum_{j=0}^{n-1}f''(\eta_j)
 $$
-
-sostituendo otteniamo
-
+sostituendo alla formula originale otteniamo
 $$
 \int_a^b f(x)\,dx-I_n
 =
 -\frac{(b-a)h^2}{12}f''(\eta)
 $$
-
-cioè
+cioè otteniamo la formula finale dell’errore della formula dei trapezi
 $$
 \int_a^b f(x)\,dx-I_n
 =
@@ -1286,95 +1411,557 @@ $$
 $$
 $$\square$$
 ##### Osservazione 2.1
-Questa osservazione sta dicendo una cosa pratica sulla **formula dei trapezi composita**: se voglio garantire un errore al massimo uguale a ε\varepsilonε, allora devo scegliere un numero di sottointervalli nnn che cresce come
-$\frac{1}{\sqrt{\varepsilon}}$
-Cioè: più voglio un errore piccolo, più devo aumentare $n$, ma non in modo lineare rispetto a $1/\varepsilon$, bensì rispetto a $1/\sqrt{\varepsilon}$​
-Sostituendo nella formula dell’errore:
-$$\left|\int_a^b f(x)\,dx-I_n\right| = \frac{(b-a)|f''(\eta)|}{12}\frac{(b-a)^2}{n^2}$$
-Quindi
+**come scegliere $n$**, cioè il numero di sotto-intervalli della formula dei trapezi, per garantire che l’errore sia minore o uguale a una certa tolleranza $\varepsilon>0$
+Dal Teorema 2.1 sappiamo che la formula dell'errore dei trapezi è la seguente
+$$\int_a^b f(x)\,dx-I_n = -\frac{(b-a)f''(\eta)}{12}h^2$$
+dove abbiamo 
+$$h=\frac{b-a}{n}$$
+Passando al valore assoluto otteniamo, mettendo a destra solo il modulo alla derivata perché tutto il resto sappiamo essere maggiore di 0
+$$\left|\int_a^b f(x)\,dx-I_n\right| = \frac{(b-a)|f''(\eta)|}{12}h^2$$
+Sostituendo
+$$h=\frac{b-a}{n}$$
+abbiamo
+$$\left|\int_a^b f(x)\,dx-I_n\right| = \frac{(b-a)|f''(\eta)|}{12} \frac{(b-a)^2}{n^2}$$
+
+quindi moltiplicando $b-a$ abbiamo che
 $$\left|\int_a^b f(x)\,dx-I_n\right| = \frac{(b-a)^3|f''(\eta)|}{12n^2}$$
-Ora, di solito non conosciamo il punto η\etaη, quindi non possiamo calcolare esattamente $$|f''(\eta)|$$Allora prendiamo una costante $K$ tale che
+
+Il problema è che il punto $\eta$  non lo conosciamo. 
+Quindi non possiamo usare direttamente il valore $|f''(\eta)|$
+Per questo introduciamo una costante $K$ tale che
 $$|f''(x)|\leq K \qquad \forall x\in[a,b]$$
-Questa $K$ è un maggiorante della derivata seconda sull’intervallo.
-Allora sicuramente
+In questo modo, sicuramente,
 $$|f''(\eta)|\leq K$$
-e quindi
+Allora otteniamo la stima
 $$\left|\int_a^b f(x)\,dx-I_n\right| \leq \frac{(b-a)^3K}{12n^2}$$
-A questo punto vogliamo che l’errore sia al massimo $\varepsilon$, quindi imponiamo
+Ora vogliamo imporre che l’errore sia al massimo $\varepsilon$
+
+Basta quindi mettere a disuguaglianza che
 $$\frac{(b-a)^3K}{12n^2}\leq \varepsilon$$
-Risolviamo rispetto a $n$.
 
-Moltiplicando:
-$(b-a)^3K\leq 12\varepsilon n^2$
-Dividendo per $12\varepsilon$:
-$\frac{(b-a)^3K}{12\varepsilon}\leq n^2$
-Quindi
-$n\geq \sqrt{\frac{(b-a)^3K}{12\varepsilon}}$
-Questa quantità viene chiamata
-$n(\varepsilon)$
-Quindi
-$n(\varepsilon)=\sqrt{\frac{(b-a)^3K}{12\varepsilon}}$
-L’osservazione poi nota che questa formula si può scrivere come
-$n(\varepsilon)=\frac{C}{\sqrt{\varepsilon}}$
-dove
-$C=\sqrt{\frac{(b-a)^3K}{12}}$
-Infatti:
-$\sqrt{\frac{(b-a)^3K}{12\varepsilon}} = \frac{1}{\sqrt{\varepsilon}} \sqrt{\frac{(b-a)^3K}{12}}$
-##### Osservazione a pagina 27
- Osservazione — Esistenza di un autovalore con parte immaginaria $(\ge \frac14)$
-
-Nell’Esempio 3.2 si considera la matrice
-$$\begin{pmatrix} 2 & 4 & -1 & 0\\ 0 & 1+i & 0 & 7\\ 1 & -1 & 1 & -2i\\ 3 & -1 & 0 & -12 \end{pmatrix}$$
-
-La matrice è $4\times 4$, quindi ha quattro autovalori, che indichiamo con
-La matrice è ($4\times 4$), quindi ha quattro autovalori, che indichiamo con
-$\lambda_1,\lambda_2,\lambda_3,\lambda_4$ 
-Dal richiamo teorico sappiamo che la traccia di una matrice è uguale alla somma dei suoi autovalori, contati con molteplicità algebrica:
-$$\operatorname{tr}(A)=\lambda_1+\lambda_2+\lambda_3+\lambda_4.  $$
-Nel libro viene calcolato che 
-$$\operatorname{tr}(A)=-8+i.  $$
-
-Quindi la parte immaginaria della traccia è
-$$\operatorname{Im}(\operatorname{tr}(A))=1 $$
-Vogliamo dimostrare che esiste almeno un autovalore $\lambda_j$ tale che
-$\operatorname{Im}(\lambda_j)\ge \frac14$
-Cioè vogliamo dimostrare che almeno uno degli autovalori ha parte immaginaria maggiore o uguale a ($\frac14$)
-
-Supponiamo per assurdo che nessun autovalore abbia parte immaginaria maggiore o uguale a $(\frac14)$.
-Allora tutti e quattro gli autovalori avrebbero parte immaginaria strettamente minore di $(\frac14)$:
-$\operatorname{Im}(\lambda_1)<\frac14$
-$\operatorname{Im}(\lambda_2)<\frac14$
-$\operatorname{Im}(\lambda_3)<\frac14$
-$\operatorname{Im}(\lambda_4)<\frac14$
-Ora usiamo il fatto che
-$$\operatorname{tr}(A)=\lambda_1+\lambda_2+\lambda_3+\lambda_4$$
-Prendiamo la parte immaginaria di entrambi i membri:
-$\operatorname{Im}(\operatorname{tr}(A))$
-$\operatorname{Im}(\lambda_1+\lambda_2+\lambda_3+\lambda_4)$
-La parte immaginaria della somma è la somma delle parti immaginarie, quindi
-$\operatorname{Im}(\operatorname{tr}(A))$
-$\operatorname{Im}(\lambda_1)$
-$\operatorname{Im}(\lambda_2)$
-$\operatorname{Im}(\lambda_3)$  
-$\operatorname{Im}(\lambda_4)$
-Per l’ipotesi assurda, ciascun termine è minore di $(\frac14)$ Quindi
-$$\operatorname{Im}(\operatorname{tr}(A))  
-<  
-\frac14+\frac14+\frac14+\frac14$$
-Ma
-$\frac14+\frac14+\frac14+\frac14=1$
-Dunque avremmo
-$\operatorname{Im}(\operatorname{tr}(A))<1$
-Però sappiamo che
-$\operatorname{tr}(A)=-8+i,$
+Risolviamo rispetto a $n$:
+$$(b-a)^3K\leq 12\varepsilon n^2$$
 quindi
-$\operatorname{Im}(\operatorname{tr}(A))=1$
-Abbiamo ottenuto una contraddizione:
-$1<1$
-che è impossibile.
-Quindi l’ipotesi assurda era falsa.
-Pertanto deve esistere almeno un autovalore ($\lambda_j$) tale che
-$\operatorname{Im}(\lambda_j)\ge \frac14$
+$$\frac{(b-a)^3K}{12\varepsilon}\leq n^2$$
+Dato che $n>0$, mettiamo la radice da una parte e dall'altra
+$$n\geq \sqrt{\frac{(b-a)^3K}{12\varepsilon}}$$
+Definiamo quindi
+$$n(\varepsilon)=\sqrt{\frac{(b-a)^3K}{12\varepsilon}}$$
+Questo valore ci dice che, per garantire un errore minore o uguale a $\varepsilon$, basta scegliere un intero $n$ tale che $n\geq n(\varepsilon)$
+
+Infine osserviamo che possiamo portare fuori la radice di epsilon
+$$n(\varepsilon) = \sqrt{\frac{(b-a)^3K}{12\varepsilon}} = \frac{1}{\sqrt{\varepsilon}} \sqrt{\frac{(b-a)^3K}{12}}$$
+
+Ponendo
+$$C=\sqrt{\frac{(b-a)^3K}{12}}$$
+si ottiene
+$$n(\varepsilon)=\frac{C}{\sqrt{\varepsilon}}$$
+Quindi il numero di sotto-intervalli necessario cresce come la funzione
+$$\frac{1}{\sqrt{\varepsilon}}$$
+##### Estrapolazione
+Dopo aver studiato la formula dei trapezi, abbiamo visto che l’approssimazione
+$$I_n$$​
+dipende dal passo di discretizzazione
+$$h=\frac{b-a}{n}$$
+L’idea dell’estrapolazione è usare **più formule dei trapezi**, calcolate con passi diversi, per ottenere una nuova approssimazione dell’integrale più accurata delle singole approssimazioni di partenza
+
+Sia quindi
+$$f:[a,b]\to\mathbb{R}$$
+una funzione integrabile e siano
+$$I_{n_0},I_{n_1},\ldots,I_{n_m}$$
+
+le formule dei trapezi di ordini distinti
+$$n_0,n_1,\ldots,n_m$$
+dove a ciascun ordine $n_i$corrisponde il passo
+$$h_i=\frac{b-a}{n_i}$$
+Quindi abbiamo le approssimazioni
+$$I_{n_0},I_{n_1},\ldots,I_{n_m}$$
+dell’integrale esatto
+$$\int_a^b f(x)\,dx$$
+A questo punto costruiamo il polinomio di interpolazione $$p(x)\in\mathbb{R}$$dei dati
+$$(h_0^2,I_{n_0}),\ (h_1^2,I_{n_1}),\ldots,(h_m^2,I_{n_m})$$
+
+Cioè $p(x)$ è l’unico polinomio di grado al più $m$ tale che
+$$p(h_i^2)=I_{n_i}, \qquad i=0,\ldots ,m$$
+Questo polinomio esiste ed è unico perché i nodi
+$$h_0^2,h_1^2,\ldots,h_m^2$$​
+sono distinti. Infatti gli ordini $n_0,\ldots,n_m$​ sono distinti, quindi anche i passi $h_i=\frac{b-a}{n_i}$​ sono distinti, e quindi sono distinti anche i loro quadrati.
+A questo punto si considera il valore
+$p(0)$
+sapendo che $p(0)$ fornisce un’approssimazione dell’integrale generalmente molto più accurata delle singole formule dei trapezi 
+Si parla di estrapolazione perché valutiamo il polinomio interpolante in un punto esterno all’intervallo dei nodi di interpolazione. In particolare, i nodi sono$h_i^2>0$, mentre noi valutiamo il polinomio in $0$
+
+### Definizioni matriciali
+##### Traccia, determinante, raggio spettrale e autovalori
+Sia
+$$A\in \mathbb{C}^{n\times n}$$
+una matrice quadrata complessa, e siano
+$$\lambda_1,\lambda_2,\ldots,\lambda_n$$
+i suoi autovalori, contati con la loro molteplicità algebrica, cioè contando ogni autovalore tante volte quante è la sua molteplicità come radice del polinomio caratteristico
+###### Autovalori
+Gli autovalori di $A$ sono i numeri $\lambda$ associati alla matrice che descrivono, in un certo senso, alcune direzioni fondamentali su cui l’azione di $A$ si comporta come una semplice moltiplicazione
+In modo operativo, si trovano come radici del polinomio caratteristico:
+$det(A-\lambda I)=0$
+Quindi, quando scriviamo
+$\lambda_1,\lambda_2,\ldots,\lambda_n$
+intendiamo tutti gli autovalori della matrice, ripetuti secondo la loro molteplicità algebrica.
+###### Traccia
+La traccia di una matrice quadrata è la somma degli autovalori 
+$$\operatorname{traccia}(A) = \lambda_1+\lambda_2+\cdots+\lambda_n$$
+Quindi la traccia è uguale alla somma degli autovalori, contati con molteplicità algebrica
+###### Determinante
+Il determinante è un numero associato a una matrice quadrata. Dal punto di vista pratico può essere calcolato, ad esempio, con il metodo di Laplace, scegliendo una riga o una colonna e sviluppando il determinante con la regola dei segni. Le dispense ricordano anche il teorema di Binet:
+$$\det(AB)=\det(A)\det(B)$$
+e il fatto che per una matrice quadrata vale che
+$$\det(A)=\det(A^T)$$
+
+Rispetto agli autovalori, vale la proprietà fondamentale:
+$$\det(A)=\lambda_1\lambda_2\cdots\lambda_n$$
+Quindi il determinante è il prodotto degli autovalori, sempre contati con molteplicità algebrica
+###### Raggio spettrale
+Il raggio spettrale di $A$, indicato con
+$\rho(A)$
+è definito come il massimo dei moduli degli autovalori:
+$$\rho(A) = \max\left(|\lambda_1|,|\lambda_2|,\ldots,|\lambda_n|\right)$$
+Quindi misura quanto è “grande”, in modulo, l’autovalore più grande della matrice
+
+
+>[!info]-  ##### Osservazione a pagina 27 sugli autovalori
+>  Osservazione — Esistenza di un autovalore con parte immaginaria $(\ge \frac14)$
+> 
+> Nell’Esempio 3.2 si considera la matrice
+> $$\begin{pmatrix} 2 & 4 & -1 & 0\\ 0 & 1+i & 0 & 7\\ 1 & -1 & 1 & -2i\\ 3 & -1 & 0 & -12 \end{pmatrix}$$
+> 
+> La matrice è $4\times 4$, quindi ha quattro autovalori, che indichiamo con
+> La matrice è ($4\times 4$), quindi ha quattro autovalori, che indichiamo con
+> $\lambda_1,\lambda_2,\lambda_3,\lambda_4$ 
+> Dal richiamo teorico sappiamo che la traccia di una matrice è uguale alla somma dei suoi autovalori, contati con molteplicità algebrica:
+> $$\operatorname{tr}(A)=\lambda_1+\lambda_2+\lambda_3+\lambda_4.  $$
+> Nel libro viene calcolato che 
+> $$\operatorname{tr}(A)=-8+i.  $$
+> 
+> Quindi la parte immaginaria della traccia è
+> $$\operatorname{Im}(\operatorname{tr}(A))=1 $$
+> Vogliamo dimostrare che esiste almeno un autovalore $\lambda_j$ tale che
+> $\operatorname{Im}(\lambda_j)\ge \frac14$
+> Cioè vogliamo dimostrare che almeno uno degli autovalori ha parte immaginaria maggiore o uguale a ($\frac14$)
+> 
+> Supponiamo per assurdo che nessun autovalore abbia parte immaginaria maggiore o uguale a $(\frac14)$.
+> Allora tutti e quattro gli autovalori avrebbero parte immaginaria strettamente minore di $(\frac14)$:
+> $\operatorname{Im}(\lambda_1)<\frac14$
+> $\operatorname{Im}(\lambda_2)<\frac14$
+> $\operatorname{Im}(\lambda_3)<\frac14$
+> $\operatorname{Im}(\lambda_4)<\frac14$
+> Ora usiamo il fatto che
+> $$\operatorname{tr}(A)=\lambda_1+\lambda_2+\lambda_3+\lambda_4$$
+> Prendiamo la parte immaginaria di entrambi i membri:
+> $\operatorname{Im}(\operatorname{tr}(A))$
+> $\operatorname{Im}(\lambda_1+\lambda_2+\lambda_3+\lambda_4)$
+> La parte immaginaria della somma è la somma delle parti immaginarie, quindi
+> $\operatorname{Im}(\operatorname{tr}(A))$
+> $\operatorname{Im}(\lambda_1)$
+> $\operatorname{Im}(\lambda_2)$
+> $\operatorname{Im}(\lambda_3)$  
+> $\operatorname{Im}(\lambda_4)$
+> Per l’ipotesi assurda, ciascun termine è minore di $(\frac14)$ Quindi
+> $$\operatorname{Im}(\operatorname{tr}(A))  
+> <  
+> \frac14+\frac14+\frac14+\frac14$$
+> Ma
+> $\frac14+\frac14+\frac14+\frac14=1$
+> Dunque avremmo
+> $\operatorname{Im}(\operatorname{tr}(A))<1$
+> Però sappiamo che
+> $\operatorname{tr}(A)=-8+i,$
+> quindi
+> $\operatorname{Im}(\operatorname{tr}(A))=1$
+> Abbiamo ottenuto una contraddizione:
+> $1<1$
+> che è impossibile.
+> Quindi l’ipotesi assurda era falsa.
+> Pertanto deve esistere almeno un autovalore ($\lambda_j$) tale che
+> $\operatorname{Im}(\lambda_j)\ge \frac14$
+##### Matrici invertibili
+Una matrice $A ∈ \mathbb{C}^{n×n}$ si dice invertibile se esiste una matrice $B ∈ \mathbb{C}^{n \times n}$ tale che $AB = BA = I$. 
+In tal caso, la matrice $B$ è univocamente determinata, prende il nome di **matrice inversa di A** e viene denotata con $A^{−1}$ 
+Ricordiamo che una matrice $A ∈ \mathbb{C}^{n×n}$ è invertibile **se e solo se det(A) != 0**, ossia **se e solo se 0 non è un autovalore di A**. 
+##### Matrici diagonalizzabili
+Una matrice $A ∈ \mathbb{C}^{n×n}$ si dice diagonalizzabile se esistono una matrice invertibile $X ∈ \mathbb{C}^{n×n}$ e una matrice diagonale $D = diag(λ_{1}, λ_{2}, \dots , λ_{n}) ∈ \mathbb{C}^{n×n}$ tali che $$A = XDX^{−1}$$
+se indichiamo con $\lambda_1,\ldots,\lambda_n$ gli elementi diagonali di $D$ e con $x_1,\ldots,x_n$ le colonne della matrice $X$, allora nella formula sopra
+
+c’è scritto che per ogni $i=1,\ldots,n$,    $\lambda_i$ è un autovalore di $A$ con corrispondente autovettore $x_i$.
+*Dimostrazione*
+Partiamo da
+$$
+A=XDX^{-1}
+$$
+moltiplichiamo entrambi i membri a destra per $X$:
+$$
+AX=XD
+$$
+adesso guardiamo questa equazione colonna per colonna.
+La matrice $X$ ha colonne
+$$
+x_1,x_2,\ldots,x_n
+$$
+quindi
+$$
+X=
+\begin{pmatrix}
+| & | & & |\\
+x_1 & x_2 & \cdots & x_n\\
+| & | & & |
+\end{pmatrix}
+$$
+La prima colonna di $AX$ è
+$$
+Ax_1
+$$
+la seconda colonna di $AX$ è
+$$
+Ax_2
+$$
+e in generale la colonna $i$-esima di $AX$ è
+$$
+Ax_i
+$$
+Ora guardiamo $XD$.
+Poiché $D$ è diagonale,
+$$
+D=
+\begin{pmatrix}
+\lambda_1 & 0 & \cdots & 0\\
+0 & \lambda_2 & \cdots & 0\\
+\vdots & \vdots & & \vdots\\
+0 & 0 & \cdots & \lambda_n
+\end{pmatrix}
+$$
+moltiplicare $X$ per $D$ significa moltiplicare ogni colonna $x_i$ di $X$ per il corrispondente elemento diagonale $\lambda_i$.
+Quindi
+$$
+XD=
+\begin{pmatrix}
+| & | & & |\\
+\lambda_1x_1 & \lambda_2x_2 & \cdots & \lambda_nx_n\\
+| & | & & |
+\end{pmatrix}
+$$
+siccome
+$$
+AX=XD
+$$
+le colonne corrispondenti devono essere uguali.
+Quindi, per ogni $i=1,\ldots,n$,
+$$
+Ax_i=\lambda_i x_i
+$$
+questa è proprio la definizione di autovalore e autovettore.
+Quindi $\lambda_i$ è un autovalore di $A$ e $x_i$ è un autovettore associato a $\lambda_i$
+##### Matrici hermitiane e simmetriche
+una matrice $A\in\mathbb{C}^{n\times n}$ si dice hermitiana se
+
+$$
+A^*=A
+$$
+
+indichiamo con $A^*$ la trasposta coniugata di $A$
+
+ricordiamo che, se $z\in\mathbb{C}$ e
+$$
+z=\alpha+i\beta
+$$
+allora il suo coniugato è
+$$
+\overline{z}=\alpha-i\beta
+$$
+- inoltre sappiamo che
+	- se le componenti di $A$ sono reali, allora $A^*=A^T$
+	- quindi, se $A\in\mathbb{R}^{n\times n}$, dire che $A$ è hermitiana equivale a dire che $A$ è simmetrica
+cioè
+$$
+A^T=A
+$$
+###### gli autovalori di una matrice hermitiana sono reali
+*Dimostrazione*
+Sia $A\in\mathbb{C}^{n\times n}$ hermitiana e sia $\lambda$ un suo autovalore generico.
+Allora esiste un autovettore
+$$
+x\in\mathbb{C}^n\setminus\{0\}
+$$
+associato a $\lambda$, cioè
+$$
+Ax=\lambda x
+$$
+Moltiplichiamo entrambi i membri a sinistra per $x^*$ coniugato trasposto:
+$$
+x^*Ax=x^*(\lambda x)$$
+poiché $\lambda$ è uno scalare, posso portarlo fuori:
+$$
+x^*Ax=\lambda x^*x
+$$
+Ora sappiamo che il prodotto tra un vettore x coniugato trasposto e il prodotto del vettore x è la sommatoria
+$$
+x^*x=\sum_{i=1}^n \overline{x_i}x_i
+$$
+ma questo prodotto è uguale al modulo al quadrato
+$$
+\overline{x_i}x_i=|x_i|^2
+$$
+quindi
+$$
+x^*x=\sum_{i=1}^n |x_i|^2
+$$
+siccome $x\neq 0$, almeno una componente $x_i$ è diversa da $0$, quindi
+$$
+\sum_{i=1}^n |x_i|^2>0
+$$
+Dunque possiamo dire che
+$$
+x^*Ax=\lambda \sum_{i=1}^n |x_i|^2
+$$
+e quindi isolando lambda otteniamo che 
+$$
+\lambda=
+\frac{x^*Ax}{\sum_{i=1}^n |x_i|^2}
+$$
+il denominatore è un numero reale strettamente positivo come detto in precedenza
+
+Ora dobbiamo dimostrare che anche il numeratore $x^*Ax$ è reale
+
+Osserviamo che $x^*Ax$ è uno scalare, cioè una matrice 1x1
+
+Per dimostrare che questo scalare è reale dobbiamo verificare che coincide proprio con il suo coniugato
+$$
+\overline{x^*Ax}=(x^*Ax)
+$$
+Per uno scalare, fare il coniugato coincide con fare la trasposta coniugata, quindi
+$$
+\overline{x^*Ax}=(x^*Ax)^*
+$$
+usando la proprietà della trasposta coniugata del prodotto:
+$$
+(x^*Ax)^*=x^*A^*(x^*)^*
+$$
+ma
+$$
+(x^*)^*=x
+$$
+e, siccome $A$ è hermitiana,
+$$
+A^*=A
+$$
+quindi
+$$
+(x^*Ax)^*=x^*Ax
+$$
+cioè
+$$
+\overline{x^*Ax}=x^*Ax
+$$
+quindi $x^*Ax$ è uguale al suo coniugato, e perciò è reale.
+
+Abbiamo allora
+$$
+\lambda=
+\frac{x^*Ax}{\sum_{i=1}^n |x_i|^2}
+$$
+dove il numeratore è reale e il denominatore è reale positivo.
+
+Quindi
+$$
+\lambda\in\mathbb{R}
+$$
+e abbiamo dimostrato che ogni autovalore di una matrice hermitiana è reale.
+
+##### Matrici definite positive
+$A\in\mathbb{C}^{n\times n}$ si dice definita positiva se
+
+$$
+\operatorname{Re}(x^*Ax)>0
+$$
+per ogni vettore
+$$
+x\in\mathbb{C}^n\setminus\{0\}
+$$
+dove $\operatorname{Re}$ indica la parte reale
+
+la parte reale di A
+$$
+\operatorname{Re}(A)=\frac{A+A^*}{2}
+$$
+mentre la parte immaginaria come
+$$
+\operatorname{Im}(A)=\frac{A-A^*}{2i}
+$$
+per dimostrare la parte reale di A è proprio questa partiamo dal suo scalare complesso e definiamo la sua parte reale
+$$
+\operatorname{Re}(x^*Ax)=\frac{x^*Ax+\overline{x^*Ax}}{2}
+$$
+ma, essendo $x^*Ax$ uno scalare, il suo coniugato coincide con la sua trasposta coniugata:
+$$
+\overline{x^*Ax}=(x^*Ax)^*
+$$
+e quindi
+$$
+(x^*Ax)^*=x^*A^*x
+$$
+perciò
+$$
+\operatorname{Re}(x^*Ax)=\frac{x^*Ax+x^*A^*x}{2}
+$$
+raccogliamo $x^*$ a sinistra e $x$ a destra:
+$$
+\operatorname{Re}(x^*Ax)
+=
+x^*\left(\frac{A+A^*}{2}\right)x
+$$
+la matrice tra $x^*$ e $x$ è la parte reale della matrice $A$, cioè
+$$
+\operatorname{Re}(A)=\frac{A+A^*}{2}
+$$
+quindi
+$$
+\operatorname{Re}(x^*Ax)=x^*\operatorname{Re}(A)x
+$$
+la parte immaginaria della matrice $A$ è invece
+$$
+\operatorname{Im}(A)=\frac{A-A^*}{2i}
+$$
+inoltre sappiamo che 
+######  $\operatorname{Re}(A)$ e $\operatorname{Im}(A)$ sono sempre matrici hermitiane.
+Infatti
+$$
+\operatorname{Re}(A)=\frac{A+A^*}{2}
+$$
+e facendo la trasposta coniugata:
+$$
+\operatorname{Re}(A)^*
+=
+\left(\frac{A+A^*}{2}\right)^*
+=
+\frac{A^*+(A^*)^*}{2}
+=
+\frac{A^*+A}{2}
+=
+\operatorname{Re}(A)
+$$
+quindi $\operatorname{Re}(A)$ è hermitiana
+dobbiamo verificare che $Im(A)$ è hermitiana
+
+$\operatorname{Im}(A)^*=\operatorname{Im}(A)$$
+
+Partiamo da sinistra:
+$$\operatorname{Im}(A)^* = \left(\frac{A-A^*}{2i}\right)^*$$
+Possiamo vedere il fattore davanti $1/2i$ come uno scalare
+$$\frac{1}{2i}(A-A^*)$$
+Quindi:
+$$\left(\frac{A-A^*}{2i}\right)^* = \left(\frac{1}{2i}(A-A^*)\right)^*$$
+Ora usiamo la proprietà:
+$$(\alpha B)^*=\overline{\alpha}B^*$$
+Qui abbiamo che
+$$\alpha=\frac{1}{2i}, \qquad B=A-A^*$$
+Quindi sapendo questo possiamo scrivere che
+$$\left(\frac{1}{2i}(A-A^*)\right)^* = \overline{\frac{1}{2i}}(A-A^*)^*$$
+Ora calcoliamo i due pezzi.
+
+Prima lo scalare moltiplichiamo e dividiamo per $i$ successivamente sappiamo che $i^2$ è -1 quindi otteniamo che
+$$\frac{1}{2i}=-\frac{i}{2}$$
+Quindi il suo coniugato è
+$$\overline{\frac{1}{2i}} = \overline{-\frac{i}{2}} = \frac{i}{2}$$
+Ma moltiplicando per -1 otteniamo che 
+$$\frac{i}{2}=-\frac{1}{2i}$$
+Quindi possiamo dire che
+$$\overline{\frac{1}{2i}}=-\frac{1}{2i}$$
+Adesso calcoliamo la matrice:
+$$(A-A^*)^* = A^*-(A^*)^*$$
+Poiché
+$$(A^*)^*=A$$
+otteniamo
+$$(A-A^*)^* = A^*-A = -(A-A^*)$$
+Allora ritornando alla formula completa abbiamo che
+$$\operatorname{Im}(A)^* = \left(\frac{1}{2i}(A-A^*)\right)^*$$
+ma avevamo calcolato che la parte coniugata trasposta di $1/2i$ è
+$$= \overline{\frac{1}{2i}}(A-A^*)^*$$
+e quindi abbiamo che 
+$$= \left(-\frac{1}{2i}\right)\left(-(A-A^*)\right)$$
+
+I due segni meno si cancellano:
+$$= \frac{1}{2i}(A-A^*)$$
+Quindi:
+$$\operatorname{Im}(A)^* = \frac{A-A^*}{2i} = \operatorname{Im}(A)$$
+
+Abbiamo dimostrato che
+$\operatorname{Im}(A)$ è hermitiana
+###### Condizioni per cui A è definita positiva
+Dalla relazione precedente segue:
+![[Pasted image 20260715120002.png]]
+
+>[!tip] Il terzo passaggio vale perché $\operatorname{Re}(A)$ è hermitiana e dunque $x^*\operatorname{Re}(A)x$ è reale.
+###### A è invertibile se definita positiva
+se $A\in\mathbb{C}^{n\times n}$ è definita positiva, allora i suoi autovalori hanno parte reale positiva e di conseguenza $A$ è invertibile, perché $0$ non può essere un autovalore di $A$
+
+sia $A\in\mathbb{C}^{n\times n}$ definita positiva e sia $\lambda$ un generico autovalore di $A$.
+Allora esiste un autovettore
+$$
+x\in\mathbb{C}^n\setminus\{0\}
+$$
+associato a $\lambda$, cioè
+$$
+Ax=\lambda x
+$$
+moltiplichiamo a sinistra per $x^*$:
+$$
+x^*Ax=x^*(\lambda x)
+$$
+siccome $\lambda$ è uno scalare, posso portarlo fuori:
+$$
+x^*Ax=\lambda x^*x
+$$
+ma
+$$
+x^*x=\sum_{i=1}^n \overline{x_i}x_i=\sum_{i=1}^n |x_i|^2
+$$
+quindi
+$$
+x^*Ax=\lambda\sum_{i=1}^n |x_i|^2
+$$
+da cui
+$$
+\lambda=
+\frac{x^*Ax}{\sum_{i=1}^n |x_i|^2}
+$$
+il denominatore è reale e strettamente positivo perché $x\neq 0$.
+Ora prendiamo la parte reale:
+$$
+\operatorname{Re}(\lambda)
+=
+\frac{\operatorname{Re}(x^*Ax)}{\sum_{i=1}^n |x_i|^2}
+$$
+siccome $A$ è definita positiva,
+$$
+\operatorname{Re}(x^*Ax)>0
+$$
+e siccome il denominatore è positivo, otteniamo
+$$
+\operatorname{Re}(\lambda)>0
+$$
+questo perché se un numero complesso ha parte reale positiva, dividendo per un numero reale positivo la parte reale resta positiva.
+
+Infatti se
+$$
+z=\alpha+i\beta
+$$
+con $\alpha>0$ e $r>0$, allora
+$$
+\frac{z}{r}=\frac{\alpha}{r}+i\frac{\beta}{r}
+$$
+e quindi
+$$
+\operatorname{Re}\left(\frac{z}{r}\right)=\frac{\alpha}{r}>0
+$$
+dunque tutti gli autovalori di $A$ hanno parte reale positiva. In particolare nessun autovalore può essere $0$, quindi $A$ è invertibile.
+
+
 #### TEOREMA 3.1
 sia $A\in\mathbb{C}^{n\times n}$ una matrice hermitiana e siano $A_1,A_2,\ldots,A_n$ le sue sottomatrici principali di testa
 $$
@@ -1511,6 +2098,9 @@ $$
 $$
 
 quindi gli autovalori sono reali e positivi
+
+
+
 #### Esercizio 3.4
 Sia $A \in \mathbb{C}^{n \times n}$ una matrice hermitiana definita positiva
 Dimostrare che gli elementi diagonali di $A$ sono tutti positivi ovvero
@@ -1603,6 +2193,10 @@ e_i^*Ae_j=a_{ij}.
 $$
 Infatti $(Ae_j)$ seleziona la colonna $(j)-esima$, mentre $(e_i^*)$ ne seleziona la componente $(i)$-esima. Ponendo $(j=i)$, otteniamo proprio
 $$e_i^*Ae_i=a_{ii}$$
+
+
+##### Polinomi di matrici
+##### Matrici irriducibili
 
 #### TEOREMA 3.2
 sia $p(\lambda)$ un polinomio e sia $A\in\mathbb{C}^{n\times n}$ una matrice con autovalori
