@@ -10,12 +10,10 @@ $$
 
 ricordiamo che l’integrale rappresenta l’area sottesa dal grafico della funzione, più precisamente l’area con segno: se la funzione è sopra l’asse $x$ l’area contribuisce positivamente, se è sotto contribuisce negativamente.
 
-A tal fine si suddivide l’intervallo $[a,b]$ in $n\geq 1$ sottointervalli tutti della stessa ampiezza
-
+A tal fine si suddivide l’intervallo $[a,b]$ in $n\geq 1$ sotto-intervalli tutti della stessa ampiezza
 $$
 h=\frac{b-a}{n}
 $$
-
 dove $h$ si chiama passo di discretizzazione.
 
 grafico fatto dal prof
