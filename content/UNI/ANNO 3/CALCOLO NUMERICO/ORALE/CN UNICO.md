@@ -34,7 +34,7 @@ $$
 per ogni $i=0,\ldots,n$
 
 ##### Polinomio in forma canonica
-siano
+siano definite delle coppie di numeri
 $$
 (x_0,y_0),\ldots,(x_n,y_n)\in\mathbb{R}^2
 $$
@@ -52,7 +52,9 @@ la prima dimostrazione del teorema precedente ci dice che $p(x)$ si scrive in fo
 $$
 p(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n
 $$
+data da coefficienti e la variabile del polinomio 
 questa si chiama forma canonica di $p(x)$
+
 con vettore dei coefficienti dato da
 $$
 \begin{pmatrix}
@@ -203,11 +205,11 @@ d_3=
 1 & x_3 & x_3^2 & x_3^3
 \end{vmatrix}
 $$
+vogliamo avere degli zeri sull'ultima riga quindi facciamo delle operazioni che non modificano il determinante
 partendo dalla colonna più a destra facciamo
 $$
 C_4\leftarrow C_4-x_3C_3
 $$
-
 quindi
 
 $$
@@ -219,15 +221,11 @@ d_3=
 1 & x_3 & x_3^2 & 0
 \end{vmatrix}
 $$
-
 poi facciamo la stessa cosa sulla terza colonna
-
 $$
 C_3\leftarrow C_3-x_3C_2
 $$
-
 e otteniamo
-
 $$
 d_3=
 \begin{vmatrix}
@@ -237,6 +235,7 @@ d_3=
 1 & x_3 & 0 & 0
 \end{vmatrix}
 $$
+inoltre raccogliamo anche la colonna tutta a destra per $x_0$
 
 poi facciamo la stessa cosa sulla seconda colonna
 
@@ -244,8 +243,7 @@ $$
 C_2\leftarrow C_2-x_3C_1
 $$
 
-e otteniamo
-
+e otteniamo e raccogliamo anche
 $$
 d_3=
 \begin{vmatrix}
@@ -257,6 +255,29 @@ d_3=
 $$
 
 ora che abbiamo questa matrice usiamo Laplace per calcolare il determinante lungo l’ultima riga
+come segno associato alla posizione dell'ultimo 1 abbiamo
+$(-1)^{i+j}$
+Qui $i=4$$j=1$, quindi
+$(-1)^{4+1}=(-1)^5$
+lo scriviamo però come
+$(-1)^3$
+È la stessa cosa 
+rimane il minore ottenuto eliminando quarta riga e prima colonna:
+$$\begin{vmatrix} x_0-x_3 & x_0(x_0-x_3) & x_0^2(x_0-x_3)\\ x_1-x_3 & x_1(x_1-x_3) & x_1^2(x_1-x_3)\\ x_2-x_3 & x_2(x_2-x_3) & x_2^2(x_2-x_3) \end{vmatrix}$$
+Qui si vede bene il motivo.
+Nella **prima riga** tutti gli elementi hanno in comune il fattore
+$x_0-x_3$
+Infatti: 
+$x_0-x_3=(x_0-x_3)\cdot 1$
+Quindi dalla prima riga posso raccogliere $x_0-x_3$
+Nella **seconda riga** raccolgo $x_1-x_3$
+Nella **terza riga** raccolgo $x_2-x_3$
+Quindi il determinante diventa portando fuori:
+$$(x_0-x_3)(x_1-x_3)(x_2-x_3) \begin{vmatrix} 1 & x_0 & x_0^2\\ 1 & x_1 & x_1^2\\ 1 & x_2 & x_2^2 \end{vmatrix}$$
+Ma questo determinante$3\times 3$ è proprio
+$d_2=\det V(x_0,x_1,x_2)$
+
+Perciò otteniamo:
 quindi
 $$
 d_3
@@ -301,7 +322,6 @@ $$
 d_0=1
 $$
 quindi
-
 $$
 d_3
 =
@@ -343,10 +363,8 @@ $$
 abbiamo quindi n+1 polinomi
 vogliamo dimostrare che 
 $L_0(x),...,L_n(x)\in base(\mathbb{R}_n(x))$
+
 perché così ogni polinomio di grado al più $n$ si può scrivere come combinazione lineare di essi
-$$
- q(x)=\beta_1v_1(x)+\cdots+\beta_rv_r(x)
- $$
 andiamo quindi a dimostrare che 
 
 n+1 elementi sono base di $\mathbb{R}_n[x]$ se e solo se sono linearmente indipendenti tra loro
@@ -397,11 +415,16 @@ perché l’unica combinazione lineare che dà il polinomio nullo è quella con 
 
 essendo linearmente indipendenti allora sono base di $\mathbb{R}_n[x]$
 
+Poiché $L_0(x),\ldots,L_n(x)$ formano una base di $\mathbb{R}_n$ possiamo costruire un polinomio in $\mathbb{R}_n[x]$ come combinazione lineare di questi polinomi. 
+
+L’idea è scegliere come coefficienti proprio i valori $y_0,\ldots,y_n$, perché ogni $L_j$​ vale $1$ nel proprio nodo $x_j$ e vale $0$ negli altri nodi
+
 sia quindi $p(x)\in \mathbb{R}_n[x]$ polinomio interpolante definito come 
 $$
 p(x)=y_0L_0(x)+y_1L_1(x)+\cdots+y_nL_n(x)
 $$
 sappiamo che $p(x)\in \mathbb{R}_n[x]$ poiché è combinazione lineare di polinomi che stanno in $\mathbb{R}_n[x]$, quindi anche $p(x)$ resta in $\mathbb{R}_n[x]$
+
 vogliamo dimostrare ora che 
 $$
 p(x_i)=y_i
@@ -426,6 +449,7 @@ sia $q(x)\in\mathbb{R}_n[x]$ un altro polinomio t.c
 $$
 q(x_i)=y_i \ \forall i=0,...,n$$
 siccome $q(x)$ è un polinomio in $\mathbb{R}_n[x]$ e sappiamo che $L_0(x),L_1(x),\ldots,L_n(x)$ sono una base di $\mathbb{R}_n[x]$, allora posso scrivere $q(x)$ come combinazione lineare degli elementi della base
+
 quindi esistono $\beta_0,\beta_1,\ldots,\beta_n\in\mathbb{R}$ tali che
 $$
 q(x)=\beta_0L_0(x)+\beta_1L_1(x)+\cdots+\beta_nL_n(x)
