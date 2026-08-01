@@ -10,23 +10,23 @@ MATTINA
 - [x] Teorema 2.1
 - [x] Osservazione 2.1
 - [x] Osservazione pagina 27 con dimostrazione da fare
-
-- [ ] Teorema 3.1
-- [ ] Esercizio 3.4
-- [ ] Teorema 3.2
-- [ ] Teorema 3.3
-- [ ] Teorema 3.4
-- [ ] Teorema 3.5
-- [ ] Teorema 3.6
-- [ ] Teorema 3.7
-- [ ] Teorema 3.8
-
 POMERIGGIO
-- [ ] sulla velocità delle norme
+- [x] Teorema 3.1
+- [x] Esercizio 3.4
+- [x] Teorema 3.2
+- [x] Teorema 3.3
+- [x] Teorema 3.4
+- [x] Teorema 3.5
+- [x] Teorema 3.6
+- [x] Teorema 3.7
+- [x] Teorema 3.8
+- [x] sulla convergenza delle norme
 - [ ] Teorema 3.9
 - [ ] Teorema 3.10
 - [ ] Teorema 3.11
 - [ ] Teorema 3.12
+
+DOMANI
 - [ ] Osservazione 4.1
 - [ ] Teorema 4.1
 - [ ] Corollario 4.1
@@ -37,7 +37,6 @@ POMERIGGIO
 - [ ] Osservazione 4.6
 - [ ] Osservazione 4.7
 - [ ] Osservazione 4.8
-DOMANI
 - [ ] Teorema 4.3
 - [ ] Osservazione 4.9
 - [ ] Teorema 4.4

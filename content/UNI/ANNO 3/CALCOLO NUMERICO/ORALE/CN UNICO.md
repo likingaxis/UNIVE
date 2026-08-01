@@ -2000,24 +2000,18 @@ $$
 A_n=A
 $$
 Allora, se $A$ è hermitiana, le seguenti condizioni sono equivalenti:
-1. $A$ è definita positiva
+1. $A$ è definita positiva quindi $Re(x^*Ax)>0$ 
 2. $x^*Ax>0$ per ogni $x\in\mathbb{C}^n\setminus\{0\}$
 3. gli autovalori di $A$ sono reali e positivi
 4. $\det(A_k)>0$ per ogni $k=1,\ldots,n$
 ##### Dimostrazione
-
-$$
-\operatorname{Re}(A)=\frac{A+A^*}{2}
-$$
-
-Dimostrazione di $1\iff 2$
+si vuole iniziare con la dimostrazione che la proprietà 1 vale se e solo se vale la proprietà 2
+ $1\iff 2$
 
 siccome $A$ è hermitiana, sappiamo che
-
 $$
 x^*Ax\in\mathbb{R}
 $$
-
 per ogni $x\in\mathbb{C}^n$.
 
 Quindi
@@ -2032,93 +2026,77 @@ $$
 \operatorname{Re}(x^*Ax)>0
 $$
 
-per ogni $x\neq 0$, ma questo è equivalente a dire
-
+per ogni $x\neq 0$, ma visto che $x^*Ax$ è reale allora questo è equivalente a dire
 $$
 x^*Ax>0
 $$
-
 per ogni $x\neq 0$.
 
-Dimostrazione di $1\Rightarrow 3$
+vogliamo ora dimostrare che $1\Rightarrow 3$
 
 supponiamo che $A$ sia hermitiana e definita positiva.
 
-Sappiamo già che gli autovalori di una matrice hermitiana sono reali.
+Sappiamo già che gli autovalori di una matrice hermitiana sono reali
 
-Dobbiamo dimostrare che sono anche positivi.
+Dobbiamo dimostrare che sono anche positivi
 
 Sia $\lambda$ un autovalore di $A$ e sia
-
 $$
 x\in\mathbb{C}^n\setminus\{0\}
 $$
-
-un autovettore associato, quindi
-
+un autovettore associato, quindi abbiamo che
 $$
 Ax=\lambda x
 $$
-
-moltiplichiamo per $x^*$ a sinistra:
-
+moltiplichiamo per $x^*$ a sinistra e a destra
 $$
 x^*Ax=x^*(\lambda x)=\lambda x^*x
 $$
 
-quindi
-
+quindi sapendo che $x^*x$ è uguale alla sommatoria dopo lambda possiamo scrivere che
 $$
 x^*Ax=\lambda\sum_{i=1}^n |x_i|^2
 $$
-
-da cui
-
+da cui possiamo isolare lambda e ottenere
 $$
 \lambda=
 \frac{x^*Ax}{\sum_{i=1}^n |x_i|^2}
 $$
-
 siccome $A$ è definita positiva e hermitiana, abbiamo
-
 $$
 x^*Ax>0
 $$
-
 e siccome
-
 $$
 \sum_{i=1}^n |x_i|^2>0
 $$
-
+perché x è un vettore non nullo quindi in almeno una posizione non abbiamo 0
 otteniamo
 
 $$
 \lambda>0
 $$
-
-quindi gli autovalori sono reali e positivi
-
-
-
+quindi gli autovalori sono sia reali che positivi
 #### Esercizio 3.4
 Sia $A \in \mathbb{C}^{n \times n}$ una matrice hermitiana definita positiva
-Dimostrare che gli elementi diagonali di $A$ sono tutti positivi ovvero
+Si vuole dimostrare che gli elementi diagonali di $A$ sono tutti positivi ovvero
 $$
 a_{ii}>0
 \qquad \text{per ogni } i=1,\dots,n.
 $$
 Prendiamo il vettore ($e_i$) della base canonica di $\mathbb{C}^n$ 
 - cioè il vettore che ha $(1)$ nella posizione (i)-esima e (0) in tutte le altre posizioni.
-Poiché ($A$) è definita positiva, per ogni vettore non nullo $(x)$ vale
+Poiché ($A$) è definita positiva, per ogni vettore non nullo $(x)$ sappiamo la seguente proprietà
+per ogni x non nullo vale che 
 $$x^*Ax>0.$$
-In particolare possiamo scegliere
+In particolare possiamo scegliere come autovettore proprio il vettore della base canonica
 $$x=e_i$$
 Quindi
 $$e_i^*Ae_i>0$$
 Ora vediamo quanto vale questo prodotto
-Calcoliamo ora il prodotto ($e_i^*Ae_i$).
+Calcoliamo ora il prodotto $e_i^*Ae_i$
 Prima calcoliamo
+
 $Ae_i$
 Poiché ($e_i$) ha tutti zeri tranne un ($1$) nella posizione ($i$)-esima, il prodotto ($Ae_i$) seleziona la colonna ($i$)-esima di (A):
 $$Ae_i=  
@@ -2153,7 +2131,6 @@ a_{ni}
 \end{pmatrix}.  
 $$
 Eseguendo il prodotto scalare, tutti i termini vengono moltiplicati per (0), tranne la componente (i)-esima, che viene moltiplicata per (1):
-
 $$0\cdot a_{1i}  
 +\cdots+  
 1\cdot a_{ii}  
@@ -2191,12 +2168,29 @@ In generale si possono usare due indici $i,j\in{1,...,n}$
 $$
 e_i^*Ae_j=a_{ij}.
 $$
-Infatti $(Ae_j)$ seleziona la colonna $(j)-esima$, mentre $(e_i^*)$ ne seleziona la componente $(i)$-esima. Ponendo $(j=i)$, otteniamo proprio
+Infatti $(Ae_j)$ seleziona la colonna $(j)-esima$, mentre $(e_i^*)$ ne seleziona la componente $(i)$-esima. Ponendo $(j=i)$, otteniamo proprio un elemento diagonale
 $$e_i^*Ae_i=a_{ii}$$
-
-
 ##### Polinomi di matrici
-##### Matrici irriducibili
+Sia
+$$
+p(\lambda)=a_0+a_1\lambda+a_2\lambda^2+\cdots+a_m\lambda^m
+$$
+
+un polinomio a coefficienti complessi, cioè
+$$a_1,\ldots,a_m\in\mathbb{C}$$
+Usiamo la variabile $\lambda$ perché nel contesto delle matrici è naturale collegarsi agli autovalori, ma formalmente è solo una variabile
+Sia ora
+$$A\in\mathbb{C}^{n\times n}$$
+
+una matrice quadrata. Definiamo il polinomio $p$ applicato alla matrice $A$ ponendo
+$$p(A)=a_0I+a_1A+a_2A^2+\cdots+a_mA^m$$
+In pratica, sostituiamo la matrice $A$ alla variabile $\lambda$ Il termine costante $a_0$​ diventa $a_0I$ perché dobbiamo sommare matrici della stessa dimensione.
+Poiché
+$$A,A^2,\ldots,A^m$$
+
+sono tutte matrici $n\times n$ e i coefficienti $a_i$ sono scalari, anche $p(A)$ è una matrice $n\times n$
+Quindi
+$$p(A)\in\mathbb{C}^{n\times n}$$
 
 #### TEOREMA 3.2
 sia $p(\lambda)$ un polinomio e sia $A\in\mathbb{C}^{n\times n}$ una matrice con autovalori
@@ -2209,20 +2203,17 @@ p(\lambda_1),\ldots,p(\lambda_n)
 $$
 con $p(A)=a_0I+a_1A+a_2A^2+...+a_nA^n$
 ##### Dimostrazione
-questa dimostrazione è divisa in 3 casi
+questa dimostrazione la dimostriamo soltanto in 3 casi
 
 - caso 1
+partiamo dal caso più semplice, cioè il caso in cui il polinomio $p$ è costante e non dipende da $\lambda$ 
 
-$p(\lambda)=a_0$ è costante.
-
+$p(\lambda)=a_0$
 In tal caso
-
 $$
 p(A)=a_0I
 $$
-
-quindi
-
+quindi abbiamo la matrice di $p(A)$ con solo i valori $a_0$ in diagonale
 $$
 p(A)=
 \begin{pmatrix}
@@ -2232,312 +2223,190 @@ a_0 & 0 & \cdots & 0\\
 0 & 0 & \cdots & a_0
 \end{pmatrix}
 $$
-
-gli autovalori di questa matrice sono
-
+gli autovalori di questa matrice sono tutti
 $$
 a_0,\ldots,a_0
 $$
-
-ripetuto $n$ volte.
+ripetuto $n$ volte
 
 Questo coincide con
-
 $$
 p(\lambda_1),\ldots,p(\lambda_n)
 $$
-
 perché, essendo $p$ costante, vale
-
 $$
 p(\lambda_i)=a_0
 $$
-
 per ogni $i$.
-
-Piccola spiegazione aggiuntiva.
-
-Chiediamoci quali sono gli autovalori di $a_0I$.
-
-Ricordiamo la definizione: $\lambda$ è autovalore di una matrice $B$ se esiste un vettore $v\neq 0$ tale che
-
-$$
-Bv=\lambda v
-$$
-
-nel nostro caso
-
-$$
-B=a_0I
-$$
-
-quindi
-
-$$
-Bv=a_0Iv
-$$
-
-ma la matrice identità lascia invariato ogni vettore:
-
-$$
-Iv=v
-$$
-
-quindi
-
-$$
-a_0Iv=a_0v
-$$
-
-e questo ha proprio la forma
-
-$$
-Bv=\lambda v
-$$
-
-con
-
-$$
-\lambda=a_0
-$$
-
-quindi l’unico autovalore è $a_0$, ripetuto $n$ volte.
+quindi caso 1 verificato
 
 - caso 2
+per il caso 2 vediamo invece he il nostro polinomio $p$ è di grado $1$ definito come
 
-$p(\lambda)=a_0+a_1\lambda$ ha grado $1$.
+$p(\lambda)=a_0+a_1\lambda$ 
 
-Qui assumiamo $a_1\neq 0$, altrimenti ricadiamo nel caso costante.
+Qui assumiamo $a_1\neq 0$, altrimenti ricadiamo nel caso 1 descritto in precedenza
 
-In questo caso
-
+In questo caso il polinomio valutato in $A$ sarebbe
 $$
 p(A)=a_0I+a_1A
 $$
 
-il polinomio caratteristico di $p(A)$ e quello di $A$ sono legati dalla seguente relazione.
-
-Per ogni $\lambda\in\mathbb{C}$,
-
+ora per determinare gli autovalori di $p(A)$ definiamo il suo polinomio caratteristico di $p(A)$, valutato in $\lambda$               $\forall \lambda \in \mathbb{C}$
 $$
 C_{p(A)}(\lambda)=\det(\lambda I-p(A))
 $$
-
-quindi
-
+sostituendo $p(A)$ abbiamo
 $$
 C_{p(A)}(\lambda)=\det(\lambda I-(a_0I+a_1A))
 $$
-
-raccogliendo i termini con $I$:
-
+raccogliendo i primi due termini per $I$:
 $$
 C_{p(A)}(\lambda)=\det((\lambda-a_0)I-a_1A)
 $$
-
-ora raccogliamo $a_1$:
-
+ora raccogliamo $a_1$
 $$
 (\lambda-a_0)I-a_1A
 =
 a_1\left(\frac{\lambda-a_0}{a_1}I-A\right)$$
 quindi
-
 $$
 C_{p(A)}(\lambda)
 =
 \det\left(a_1\left(\frac{\lambda-a_0}{a_1}I-A\right)\right)
 $$
-
-ricordiamo che, per ogni $\alpha\in\mathbb{C}$ e ogni $B\in\mathbb{C}^{n\times n}$,
-
+ricordiamo la seguente proprietà del determinante ovvero che, per ogni $\alpha\in\mathbb{C}$ e ogni $B\in\mathbb{C}^{n\times n}$,
 $$
 \det(\alpha B)=\alpha^n\det(B)
 $$
-
 perciò
-
 $$
 C_{p(A)}(\lambda)
 =
 a_1^n\det\left(\frac{\lambda-a_0}{a_1}I-A\right)
 $$
-
-ma
-
-$$
-C_A(z)=\det(zI-A)
-$$
-
-quindi, mettendo
-
+ma questo determinante si può riconoscere come il polinomio caratteristico di A valutato in quel determinato punto che possiamo chiamare $z$ 
 $$
 z=\frac{\lambda-a_0}{a_1}
 $$
+per cui il polinomio caratteristico di A valutato in z può essere definito come
+$$
+C_A(z)=\det(zI-A)
+$$
+quindi, mettendo questo come sostituzione
 
 otteniamo
-
 $$
 C_{p(A)}(\lambda)
 =
 a_1^n C_A\left(\frac{\lambda-a_0}{a_1}\right)
 $$
-
-gli autovalori di $p(A)$ sono gli zeri del suo polinomio caratteristico:
-
+gli autovalori di $p(A)$ sono gli zeri del suo polinomio caratteristico che in insiemistica possiamo definire questi autovalori come:
 $$
 \{\lambda\in\mathbb{C}:C_{p(A)}(\lambda)=0\}
 $$
-
-quindi
-
+quindi possiamo dire che il polinomio caratteristico di $p(A)$ valutato in $\lambda$ è uguale a 0 se e solo se il polinomio caratteristico di A valutato in quel punto $z$ è uguale a 0
 $$
 C_{p(A)}(\lambda)=0
 \iff
 C_A\left(\frac{\lambda-a_0}{a_1}\right)=0
 $$
-
-il polinomio caratteristico di $A$ si annulla quando il suo argomento è uno degli autovalori di $A$.
+il polinomio caratteristico di $A$ si annulla quando il suo argomento è uno degli autovalori di $A$
 
 Quindi
-
 $$
 \frac{\lambda-a_0}{a_1}\in\{\lambda_1,\ldots,\lambda_n\}
 $$
-
 cioè
-
 $$
 \frac{\lambda-a_0}{a_1}=\lambda_i
 $$
-
 per qualche $i$.
 
-Da qui
-
+Da qui possiamo risolvere rispetto a lambda ottenendo che
 $$
 \lambda=a_0+a_1\lambda_i
 $$
 
 quindi gli autovalori di $p(A)$ sono
-
 $$
 a_0+a_1\lambda_1,\ldots,a_0+a_1\lambda_n
 $$
-
-cioè
-
+ma visto che $p(\lambda_i)=a_0+a_1\lambda_i$  allora questi sono proprio i vari polinomi valutati negli autovalori
 $$
 p(\lambda_1),\ldots,p(\lambda_n)
 $$
 
-
 - caso 3
+assumiamo che $A$ sia diagonalizzabile
 
-assumiamo che $A$ sia diagonalizzabile.
-
-Allora esistono una matrice invertibile
-
+Allora sappiamo che esistono una matrice invertibile
 $$
 X\in\mathbb{C}^{n\times n}
 $$
-
 e una matrice diagonale
-
 $$
 D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)
 $$
-
 con gli autovalori di $A$ sulla diagonale, tali che
-
 $$
 A=XDX^{-1}
 $$
-
 Allora
-
 $$
 A^2=(XDX^{-1})(XDX^{-1})
 $$
-
-siccome
-
+ma visto che
 $$
 X^{-1}X=I
 $$
-
 otteniamo
-
 $$
 A^2=XD^2X^{-1}
 $$
-
-Analogamente
-
+stessa cosa per $A^3$
 $$
 A^3=(XDX^{-1})(XDX^{-1})(XDX^{-1})=XD^3X^{-1}
 $$
-
-e in generale
-
+e in generale per ogni $k\geq 1$ possiamo dire che
 $$
 A^k=XD^kX^{-1}
 $$
-
-per ogni $k\geq 1$.
-
-Per $k=0$, ricordiamo che
-
+Per $k=0$, ricordiamo che invece abbiamo
 $$
 A^0=I
 $$
-
 e si può scrivere anche
-
 $$
 I=XIX^{-1}
 $$
 
-vogliamo dimostrare il risultato per
-
+vogliamo dimostrare il risultato per un certo polinomio fissato definito come
 $$
 p(\lambda)=a_0+a_1\lambda+\cdots+a_m\lambda^m
 $$
-
-il polinomio nella matrice è
-
+il polinomio valutato per la matrice sarà
 $$
 p(A)=a_0I+a_1A+a_2A^2+\cdots+a_mA^m
 $$
-
 sostituiamo le potenze di $A$ usando la diagonalizzazione:
-
 $$
 p(A)=a_0XIX^{-1}+a_1XDX^{-1}+a_2XD^2X^{-1}+\cdots+a_mXD^mX^{-1}
 $$
-
 raccogliamo $X$ a sinistra e $X^{-1}$ a destra:
-
 $$
 p(A)=X(a_0I+a_1D+a_2D^2+\cdots+a_mD^m)X^{-1}
 $$
-
-la matrice al centro è proprio
-
+la matrice al centro è proprio il polinomio valutato per la matrice $D$
 $$
 p(D)
 $$
-
 quindi
-
 $$
 p(A)=Xp(D)X^{-1}
 $$
-
-Ora vediamo com’è fatta $p(D)$.
-
-Siccome
-
+Ora verifichiamo com’è fatto davvero $p(D)$
+Siccome D è la matrice che in diagonale ha gli autovalori
 $$
 D=
 \begin{pmatrix}
@@ -2548,8 +2417,7 @@ D=
 \end{pmatrix}
 $$
 
-allora
-
+allora abbiamo D alla seconda come matrice con in diagonale gli autovalori alla seconda
 $$
 D^2=
 \begin{pmatrix}
@@ -2559,9 +2427,7 @@ D^2=
 0 & 0 & \cdots & \lambda_n^2
 \end{pmatrix}
 $$
-
-e in generale
-
+e in generale alla m
 $$
 D^m=
 \begin{pmatrix}
@@ -2571,15 +2437,12 @@ D^m=
 0 & 0 & \cdots & \lambda_n^m
 \end{pmatrix}
 $$
-
-quindi
-
+quindi il polinomio valutato in D sarà definito proprio come
 $$
 p(D)=a_0I+a_1D+a_2D^2+\cdots+a_mD^m
 $$
-
-cioè
-
+visto che la loro somma è di matrici diagonali allora anche la loro somma sarà diagonale
+infatti abbiamo una matrice con ogni elemento diagonale è definito dal polinomio valutato per un certo $\lambda_i$
 $$
 p(D)=
 \begin{pmatrix}
@@ -2589,8 +2452,7 @@ a_0+a_1\lambda_1+a_2\lambda_1^2+\cdots+a_m\lambda_1^m & 0 & \cdots & 0\\
 0 & 0 & \cdots & a_0+a_1\lambda_n+a_2\lambda_n^2+\cdots+a_m\lambda_n^m
 \end{pmatrix}
 $$
-
-ma ciascun elemento diagonale è proprio il polinomio valutato nell’autovalore corrispondente:
+scritto in modo più tranquillo abbiamo che
 
 $$
 p(D)=
@@ -2603,23 +2465,101 @@ p(\lambda_1) & 0 & \cdots & 0\\
 $$
 
 ora abbiamo dimostrato che
-
 $$
 p(A)=Xp(D)X^{-1}
 $$
-quindi
-- $p(A) è diagonalizzabile$ 
-- gli autovalori di $p(A)$ sono $p(D)$ con autovettori $x_1,...,x_n$ come quelli di $A$ 
 
-quindi $x_i$ è autovettore di $p(A)$ associato all’autovalore $p(\lambda_i)$
+visto questo e visto che $p(D)$ ha come elementi diagonali proprio il polinomio dei vari lambda
+e che $p(A)$ come è scritto sopra ovvero come prodotto di x e $p(D)$
+visto che $p(D)$ è diagonale allora gli autovalori di $p(A)$ sono proprio gli elementi diagonali di $p(D)$ 
 $$\square$$
-#### TEOREMA 3.3 primo teorema di Gershgorin
-Gli autovalori di una matrice
 
+##### Grafi
+prima di parlare di Matrici irriducibili definiamo brevemente cosa rappresenta esattamente un grafo
+
+Un grafo è un diagramma formato da un certo numero di nodi e da un certo numero di archi
+Un arco è una freccia che va da un nodo a un altro in modo orientato
+l’arco che va da $i$ a $j$ viene denotato con
+$$
+i\to j
+$$
+Un cammino all’interno di un grafo è un percorso che parte da un nodo $i$ e arriva a un nodo $j$ seguendo gli archi del grafo
+Se il nodo di arrivo $j$ coincide con il nodo di partenza $i$, allora il cammino si chiama anche ciclo
+- un grafo è fortemente connesso se vale una delle seguenti due condizioni equivalenti:
+	- 1. per ogni coppia di nodi $i$ e $j$ esiste un cammino nel grafo che va da $i$ a $j$
+	- 2. esiste un ciclo nel grafo che tocca tutti i nodi
+dimostriamo che sono equivalenti:
+Se per ogni coppia di nodi esiste un cammino, possiamo concatenare un cammino da $1$ a $2$, da $2$ a $3$, e così via, fino a tornare da $n$ a $1$. Otteniamo così un ciclo che tocca tutti i nodi.
+
+Viceversa, se esiste un ciclo che tocca tutti i nodi, fissati due nodi qualsiasi $i$ e $j$, basta partire da $i$ e seguire il ciclo fino a raggiungere $j$
+
+##### Grafo associato alla matrice
+per grafo associato alla matrice si intende un grafo che data una matrice
+Data una certa matrice
 $$
 A\in\mathbb{C}^{n\times n}
 $$
+il grafo associato ad $A$ è il grafo così definito:
+- i nodi sono $1,2,\ldots,n$
+- gli archi sono le frecce $i\to j$ tali che
+$$
+a_{ij}\neq 0
+$$
+quindi nel grafo di $A$ metto una freccia da $i$ a $j$ se e solo se l’elemento della matrice in posizione $(i,j)$ è diverso da zero.
+##### Matrici irriducibili
+$A\in\mathbb{C}^{n\times n}$ si dice irriducibile se il suo grafo associato è fortemente connesso
+Quindi:
+$$
+A \text{ irriducibile}
+\Longleftrightarrow
+\text{il grafo associato ad } A \text{ è fortemente connesso}
+$$
+##### Localizzazione degli autovalori
+Per localizzare gli autovalori utilizziamo i cerchi di Gershgorin nel piano complesso indicando con
+$$
+\mathcal{C}(z_0,r)=\{z\in\mathbb{C}: |z-z_0|\leq r\}
+$$
+un cerchio in $\mathbb{C}$ di centro $z_0\in\mathbb{C}$ e raggio $r\geq 0$.
+Ricordando che
+$$
+|z-z_0|
+$$
+è la distanza tra un punto $z$ e il centro $z_0$
 
+ $\mathcal{C}(z_0,r)$ è l’insieme di tutti i punti del piano complesso che distano da $z_0$ al massimo $r$
+ 
+Sia allora definita una matrice
+$$
+A\in\mathbb{C}^{n\times n}
+$$
+i cerchi di Gershgorin di $A$ sono i cerchi
+$$
+K_1,\ldots,K_n
+$$
+definiti come
+Per ogni $i=1,\ldots,n$,
+$$
+K_i=\mathcal{C}\left(a_{ii},\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|\right)
+$$
+quindi $K_i$ è il cerchio con:
+- centro $a_{ii}$
+- raggio $\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|$
+cioè la somma dei moduli degli elementi della riga $i$-esima, escluso l’elemento diagonale.
+I cerchi $K_1,\ldots,K_n$ si chiamano anche cerchi di Gershgorin per riga di $A$.
+Esistono anche i cerchi di Gershgorin per colonna, indicati con
+$$
+H_1,\ldots,H_n
+$$
+In questo caso, per ogni colonna $j$, si prende centro $a_{jj}$ e raggio dato dalla somma dei moduli degli elementi della colonna $j$-esima, escluso l’elemento diagonale:
+$$
+H_j=\mathcal{C}\left(a_{jj},\sum_{\substack{i=1\\i\neq j}}^n |a_{ij}|\right)
+$$
+
+#### TEOREMA 3.3 primo teorema di Gershgorin
+Gli autovalori di una matrice
+$$
+A\in\mathbb{C}^{n\times n}
+$$
 stanno tutti nell’unione dei cerchi di Gershgorin di $A$.
 
 Cioè, se $\lambda$ è un autovalore di $A$, allora
@@ -2630,7 +2570,6 @@ $$
 
 questo si dice localizzazione degli autovalori, perché abbiamo identificato una regione del piano complesso dentro cui stanno tutti gli autovalori
 ##### Dimostrazione
-
 sia $\lambda$ un autovalore di $A$.
 
 Mostriamo che $\lambda$ appartiene ad almeno un cerchio di Gershgorin di $A$, e quindi sta nell’unione dei cerchi.
@@ -2640,81 +2579,59 @@ Siccome $\lambda$ è autovalore, esiste un autovettore corrispondente
 $$
 u\neq 0
 $$
-
 tale che
-
 $$
 Au=\lambda u
 $$
 
-Due vettori sono uguali se e solo se sono uguali componente per componente, quindi
-
-$$
-Au=\lambda u
-$$
-
-equivale a dire
-
+Due vettori sono uguali se e solo se sono uguali componente per componente, quindi possiamo scrivere quello sopra come
 $$
 (Au)_i=(\lambda u)_i
 $$
-
-per ogni $i=1,\ldots,n$.
-
-Ma
-
+per ogni $i=1,\ldots,n$
+Ma sappiamo che la componente i esima del vettore $Au$ si ottiene facendo il prodotto scalare per la riga $i$ di $A$ e il vettore $u$
 $$
 (Au)_i=\sum_{j=1}^n a_{ij}u_j
 $$
-
-e
-
+e a destra scriviamo che
 $$
 (\lambda u)_i=\lambda u_i
 $$
-
 quindi
-
 $$
 \sum_{j=1}^n a_{ij}u_j=\lambda u_i
 $$
 
 per ogni $i=1,\ldots,n$.
 
-Scegliamo l’indice $i_0\in\{1,\ldots,n\}$ tale che $u_{i_0}$ sia una componente di modulo massimo, cioè
-
+Scegliamo un certo indice $i\in\{1,\ldots,n\}$ tale che $u$ sia una componente di modulo massimo, cioè
 $$
-|u_{i_0}|=\max\{|u_1|,\ldots,|u_n|\}
+|u|=\max\{|u_1|,\ldots,|u_n|\}
 $$
-
 siccome $u\neq 0$, almeno una componente di $u$ è diversa da zero, quindi
 
 $$
 |u_{i_0}|>0
 $$
 
-Ora prendiamo l’equazione corrispondente all’indice $i_0$:
+Ora prendiamo l’equazione corrispondente all’indice $i$ scelto:
 
 $$
-\sum_{j=1}^n a_{i_0j}u_j=\lambda u_{i_0}
+\sum_{j=1}^n a_{ij}u_j=\lambda u_{i}
 $$
 
-separiamo dalla sommatoria il termine con $j=i_0$:
+separiamo dalla sommatoria il termine con $j=i$ per cui abbiamo come somma a se stante l'elemento diagonale di $a$ e $u_i$
 
 $$
-a_{i_0i_0}u_{i_0}+\sum_{\substack{j=1\\j\neq i_0}}^n a_{i_0j}u_j=\lambda u_{i_0}
+a_{ii}u_{i}+\sum_{\substack{j=1\\j\neq i}}^n a_{ij}u_j=\lambda u_{i}
 $$
-
-portiamo il termine diagonale dall’altra parte:
-
+portiamo il termine con $\lambda u_{i}$ dall’altra parte e raccogliamo per $u_i$
 $$
-(\lambda-a_{i_0i_0})u_{i_0}
+(\lambda-a_{ii})u_{i}
 =
-\sum_{\substack{j=1\\j\neq i_0}}^n a_{i_0j}u_j
+\sum_{\substack{j=1\\j\neq i}}^n a_{ij}u_j
 $$
-
 ora facciamo il modulo di entrambi i membri:
-
 $$
 |\lambda-a_{i_0i_0}||u_{i_0}|
 =
@@ -2722,89 +2639,70 @@ $$
 \sum_{\substack{j=1\\j\neq i_0}}^n a_{i_0j}u_j
 \right|
 $$
-
-usiamo la disuguaglianza triangolare:
-
+per la disuguaglianza triangolare possiamo dire che:
 $$
 \left|
-\sum_{\substack{j=1\\j\neq i_0}}^n a_{i_0j}u_j
+\sum_{\substack{j=1\\j\neq i}}^n a_{ij}u_j
 \right|
 \leq
-\sum_{\substack{j=1\\j\neq i_0}}^n |a_{i_0j}u_j|
+\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}u_j|
 $$
-
-e siccome
-
+e possiamo separare il prodotto nel modulo come due moduli per proprietà dei moduli per cui
 $$
-|a_{i_0j}u_j|=|a_{i_0j}||u_j|$$
+|a_{ij}u_j|=|a_{ij}||u_j|$$
 otteniamo
-
 $$
-|\lambda-a_{i_0i_0}||u_{i_0}|
+|\lambda-a_{ii}||u_{i}|
 \leq
-\sum_{\substack{j=1\\j\neq i_0}}^n |a_{i_0j}||u_j|
+\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}||u_j|
 $$
-
-ma $|u_{i_0}|$ è il massimo tra i moduli delle componenti di $u$, quindi
-
+ma abbiamo che $|u_{i}|$ è il massimo tra i moduli delle componenti di $u$, quindi
 $$
-|u_j|\leq |u_{i_0}|
+|u_j|\leq |u_{i}|
 $$
+per ogni $j$
 
-per ogni $j$.
-
-Allora
-
+Allora possiamo porre il seguente bound
 $$
-\sum_{\substack{j=1\\j\neq i_0}}^n |a_{i_0j}||u_j|
+\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}||u_j|
 \leq
-\sum_{\substack{j=1\\j\neq i_0}}^n |a_{i_0j}||u_{i_0}|
+\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}||u_{i}|
 $$
-
-portiamo fuori $|u_{i_0}|$:
-
+portiamo fuori $|u_{i}|$ e ci rimane che
 $$
-|\lambda-a_{i_0i_0}||u_{i_0}|
+|\lambda-a_{ii}||u_{i}|
 \leq
-|u_{i_0}|\sum_{\substack{j=1\\j\neq i_0}}^n |a_{i_0j}|
+|u_{i}|\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
 $$
-
-siccome $|u_{i_0}|>0$, possiamo semplificare:
-
+siccome $|u_{i}|>0$, possiamo moltiplicare per $1/|u_i|$
 $$
-|\lambda-a_{i_0i_0}|
+|\lambda-a_{ii}|
 \leq
-\sum_{\substack{j=1\\j\neq i_0}}^n |a_{i_0j}|
+\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
 $$
 
-ma $a_{i_0i_0}$ è il centro del cerchio $K_{i_0}$ e
-
+ma $a_{ii}$ è il centro del cerchio di Gershgorin $K_{i}$ e invece
 $$
-\sum_{\substack{j=1\\j\neq i_0}}^n |a_{i_0j}|
+\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
 $$
+è il suo raggio
 
-è il suo raggio.
-
-Quindi
-
+Quindi sappiamo che la distanza dal centro di lambda è minore o uguale del raggio del cerchio di Gershgorin $K_i$
 $$
-|\lambda-a_{i_0i_0}|\leq r_{i_0}
+|\lambda-a_{ii}|\leq r_{i}
 $$
 
 cioè $\lambda$ dista dal centro $a_{i_0i_0}$ una quantità minore o uguale al raggio.
-
 Dunque
-
 $$
-\lambda\in K_{i_0}
+\lambda\in K_{i}
 $$
-
-e quindi $\lambda$ sta nell’unione dei cerchi di Gershgorin.
+e quindi $\lambda$ sta nell’unione dei cerchi di Gershgorin
 
 #### TEOREMA 3.4 secondo teorema di Gershgorin
+Supponendo che l’unione di $k$ cerchi di Gershgorin di $A \in \mathbb{C}^{n \times n}$ sia disgiunta dall’unione degli altri $n-k$ cerchi
 
-Supponiamo che l’unione di $k$ cerchi di Gershgorin di $A$ sia disgiunta dall’unione degli altri $n-k$ cerchi.
-Allora $k$ autovalori di $A$ stanno nella prima unione e $n-k$autovalori stanno nella seconda unione.
+Allora $k$ autovalori di $A$ stanno nella prima unione e $n-k$ autovalori stanno nella seconda unione
 #### Teorema 3.5 terzo teorema di Gershgorin(forte)
 supponiamo che
 
@@ -2812,20 +2710,77 @@ $$
 A\in\mathbb{C}^{n\times n}
 $$
 sia irriducibile.
-Allora i punti che stanno sul bordo di quei cerchi di Gershgorin a cui appartengono, ma non sul bordo di tutti i cerchi, non sono autovalori di $A$.
+Allora i punti che stanno sul bordo di quei cerchi di Gershgorin a cui appartengono, ma non sul bordo di tutti i cerchi, non sono autovalori di $A$
 ![[Pasted image 20260729112808.png]]
 #### TEOREMA 3.6 terzo teorema di Gershgorin(debole)
 supponiamo che
-
 $$
 A\in\mathbb{C}^{n\times n}
 $$
-
 sia irriducibile e sia $B$ il bordo dell’unione dei cerchi di Gershgorin
 Allora i punti di $B$ che non stanno sul bordo di tutti i cerchi non sono autovalori di $A$ 
 ##### Dimostrazione
 ogni punto di $B$ sta nei bordi dell'unione dei cerchi, quindi soddisfa le ipotesi del 3 teorema di Gershgorin forte
-quindi è escluso dagli autovalori di A
+quindi ogni punto di $B$ è escluso dagli autovalori di A
+##### Matrice a diagonale dominante
+Sia $A\in\mathbb{C}^{n\times n}$ una matrice.
+Si dice che $A$ è a **diagonale dominante per righe** se valgono queste due condizioni:
+- 1. in ogni riga, il modulo dell’elemento diagonale è maggiore o uguale della somma dei moduli degli elementi fuori diagonale
+$$
+|a_{ii}|\geq \sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
+\qquad \forall i=1,\ldots,n
+$$
+
+- 2. almeno in una riga la disuguaglianza è stretta
+
+esiste almeno un indice $k\in\{1,\ldots,n\}$ tale che
+$$
+|a_{kk}|>\sum_{\substack{j=1\\j\neq k}}^n |a_{kj}|
+$$
+
+La prima condizione si può interpretare con i cerchi di Gershgorin.
+Ricordiamo che il cerchio $K_i$ ha centro $a_{ii}$ e raggio
+$$
+r_i=\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
+$$
+quindi la condizione
+$$
+|a_{ii}|\geq r_i
+$$
+significa che la distanza del centro $a_{ii}$ dall’origine è maggiore o uguale del raggio del cerchio.
+
+
+Si dice invece che $A$ è a **diagonale dominante in senso stretto** per righe se
+
+$$
+|a_{ii}|>\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
+\qquad \forall i=1,\ldots,n
+$$
+cioè la disuguaglianza è stretta per tutte le righe
+
+**PER COLONNE**
+Per colonne specifichiamo invece che $A$ è a diagonale dominante per colonne se:
+- 1. in ogni colonna, il modulo dell’elemento diagonale è maggiore o uguale della somma dei moduli degli elementi fuori diagonale della stessa colonna
+
+$$
+|a_{jj}|\geq \sum_{\substack{i=1\\i\neq j}}^n |a_{ij}|
+\qquad \forall j=1,\ldots,n
+$$
+
+Questa condizione riguarda i cerchi di Gershgorin per colonna.
+- 2. cioè almeno in una colonna la disuguaglianza è stretta
+esiste almeno un indice $k\in\{1,\ldots,n\}$ tale che
+
+$$
+|a_{kk}|>\sum_{\substack{i=1\\i\neq k}}^n |a_{ik}|
+$$
+
+Si dice invece che $A$ è a **diagonale dominante in senso stretto per colonne** se
+
+$$
+|a_{jj}|>\sum_{\substack{i=1\\i\neq j}}^n |a_{ij}|
+\qquad \forall j=1,\ldots,n
+$$
 #### TEOREMA 3.7
 Sia una matrice $A\in\mathbb{C}^{n\times n}$ tale che soddisfi almeno una delle seguenti condizioni:
 
@@ -2838,181 +2793,210 @@ Allora $A$ è invertibile
 ##### Dimostrazioni
 ##### Dimostrazione 1
 
-Supponiamo che $A$ sia a diagonale dominante per righe e irriducibile.
+Supponiamo che $A$ sia a diagonale dominante per righe e irriducibile
+Vogliamo dimostrare che $A$ è invertibile
 
-Vogliamo dimostrare che $A$ è invertibile.
+Ricordiamo che una matrice è invertibile se e solo se $0$ non è un suo autovalore
+Quindi per farlo dimostriamo che $0$ non è autovalore di $A$, usando il terzo teorema di Gershgorin forte
 
-Per farlo dimostriamo che $0$ non è autovalore di $A$, usando il terzo teorema di Gershgorin forte.
+Verifichiamo che $0$ soddisfa le ipotesi del terzo teorema di Gershgorin forte
+- $0$ sta sul bordo di quei cerchi di Gershgorin a cui appartiene
 
-Ricordiamo che una matrice è invertibile se e solo se $0$ non è un suo autovalore.
+visto che $A$ è a diagonale dominante per righe
 
-Verifichiamo che $0$ soddisfa le ipotesi del terzo teorema di Gershgorin forte.
-
-- $0$ sta sul bordo di quei cerchi di Gershgorin a cui appartiene.
-
-Questo è vero per la condizione 1 della diagonale dominante per righe.
-
-Infatti, per ogni $i$,
-
+Infatti, per ogni $i$ abbiamo che il modulo dell'elemento in diagonale è maggiore uguale del raggio
 $$
 |a_{ii}|\geq r_i
 $$
-
-dove
-
+dove il raggio è definito come
 $$
 r_i=\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
 $$
-
-Quindi $0$ non può stare dentro nessun cerchio $K_i$.
-
-Può solo stare fuori oppure sul bordo.
-
-Se $0$ appartiene a un cerchio $K_i$, non può esserne interno, quindi deve stare per forza sul bordo.
-
-- $0$ non sta sul bordo di tutti i cerchi.
-
-Questo è vero per la condizione 2 della diagonale dominante per righe.
-
-Infatti esiste almeno un indice $k$ tale che
-
+Quindi $0$ non può stare dentro nessun cerchio $K_i$
+sappiamo infatti che essendo A diagonale dominante per righe
+esiste almeno un indice $k$ tale che il modulo dell'elemento in diagonale è strettamente maggiore del raggio $r_k$ 
 $$
 |a_{kk}|>r_k
 $$
+quindi $0$ sta fuori dal cerchio di Gershgorin $K_k$, non sul bordo
 
-quindi $0$ sta fuori dal cerchio $K_k$, non sul bordo.
+Quindi $0$ non sta sul bordo di tutti i cerchi
+- inoltre $A$ è irriducibile per ipotesi
 
-Quindi $0$ non sta sul bordo di tutti i cerchi.
-
-- $A$ è irriducibile per ipotesi.
-
-Sono quindi soddisfatte le ipotesi del terzo teorema di Gershgorin forte.
-
-Perciò $0$ non è autovalore di $A$.
-
-Quindi $A$ è invertibile.
-
+Sono quindi soddisfatte le ipotesi del terzo teorema di Gershgorin forte
+Perciò $0$ non è autovalore di $A$
+Quindi $A$ è invertibile
 $$
 \square
 $$
 ##### Dimostrazione 2
-
 Supponiamo che $A$ sia a diagonale dominante in senso stretto per righe.
-
-Allora per ogni $i=1,\ldots,n$ vale
-
+Allora per ogni $i=1,\ldots,n$ vale che il modulo dell'elemento diagonale e  maggiore del raggio $r_i$
 $$
 |a_{ii}|>\sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
 $$
-
 cioè
-
 $$
 |a_{ii}|>r_i
 $$
 
 dove $r_i$ è il raggio del cerchio di Gershgorin $K_i$.
 
-Questo significa che la distanza di $0$ dal centro $a_{ii}$ è maggiore del raggio.
+Questo significa che la distanza di $0$ dal centro $a_{ii}$ è maggiore del raggio
 
 Quindi $0$ sta fuori da ogni cerchio di Gershgorin $K_i$.
 
 Per il primo teorema di Gershgorin, tutti gli autovalori di $A$ stanno nell’unione dei cerchi:
-
 $$
 K_1\cup\cdots\cup K_n
 $$
-
-ma $0$ non appartiene a nessuno di questi cerchi, quindi $0$ non può essere autovalore di $A$.
+ma $0$ non appartiene a nessuno di questi cerchi, quindi $0$ non può essere autovalore di $A$
 
 Allora $A$ è invertibile.
-
 $$
 \square
 $$
 ##### Dimostrazione 3
-
-Supponiamo che $A$ sia a diagonale dominante per colonne e irriducibile.
+Supponiamo che $A$ sia a diagonale dominante per colonne e irriducibile
 
 Dire che $A$ è a diagonale dominante per colonne equivale a dire che $A^T$ è a diagonale dominante per righe.
 
-Infatti le colonne di $A$ diventano le righe di $A^T$.
+Infatti le colonne di $A$ diventano le righe di $A^T$
 
 Inoltre $A$ è irriducibile se e solo se $A^T$ è irriducibile.
 
-Quindi $A^T$ è a diagonale dominante per righe e irriducibile.
+Quindi $A^T$ è a diagonale dominante per righe e irriducibile
 
-Per la dimostrazione del caso 1, applicata ad $A^T$, otteniamo che $A^T$ è invertibile.
+Per la dimostrazione del caso 1, applicata ad $A^T$, otteniamo che $A^T$ è invertibile
 
 Ma
-
 $$
 \det(A^T)=\det(A)
 $$
-
-quindi se $A^T$ è invertibile, allora anche $A$ è invertibile.
-
+quindi se $A^T$ è invertibile, allora anche $A$ è invertibile
 $$
 \square
 $$
 ##### Dimostrazione 4
-
 Dimostrazione della quarta ipotesi.
-
-Supponiamo che $A$ sia a diagonale dominante in senso stretto per colonne.
+Supponiamo che $A$ sia a diagonale dominante in senso stretto per colonne
 
 Allora $A^T$ è a diagonale dominante in senso stretto per righe.
-
 Per la dimostrazione del caso 2, applicata ad $A^T$, segue che $A^T$ è invertibile.
-
 Ma
-
 $$
 \det(A^T)=\det(A)
 $$
-
 quindi anche $A$ è invertibile.
-
 $$
 \square
 $$
+##### Norme Vettoriali
+Una funzione
+$$
+\|\cdot\|:\mathbb{C}^n\to\mathbb{R}
+$$
+si dice norma vettoriale se soddisfa le seguenti proprietà:
+a) positività
+$$
+\|x\|\geq 0
+\qquad \forall x\in\mathbb{C}^n
+$$
+e
+$$
+\|x\|=0 \iff x=0
+$$
+b) omogeneità
+$$
+\|\alpha x\|=|\alpha|\|x\|
+\qquad \forall \alpha\in\mathbb{C},\ \forall x\in\mathbb{C}^n
+$$
+c) disuguaglianza triangolare
+$$
+\|x+y\|\leq \|x\|+\|y\|
+\qquad \forall x,y\in\mathbb{C}^n
+$$
+Allo stesso modo, data una norma vettoriale
+$$
+\|\cdot\|:\mathbb{C}^n\to\mathbb{R}
+$$
+definiamo la distanza tra due vettori $x,y\in\mathbb{C}^n$ come
+$$
+\|x-y\|
+$$
 
+###### Definiamo norme $1$, $2$ e infinito
+Dato un vettore
+$$
+x=
+\begin{pmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{pmatrix}
+\in\mathbb{C}^n
+$$
+definiamo:
+norma $1$ come la soma dei moduli di quel vettore:
+$$
+\|x\|_1=|x_1|+|x_2|+\cdots+|x_n|
+$$
+norma $2$:
+$$
+\|x\|_2=\sqrt{|x_1|^2+|x_2|^2+\cdots+|x_n|^2}
+$$
+norma infinito:
+$$
+\|x\|_\infty=\max\{|x_1|,|x_2|,\ldots,|x_n|\}
+$$
+tutte queste rispettano le proprietà precedenti.
+Le relative distanze sono definite nel modo seguente:
+$$
+\|x-y\|_1=
+|x_1-y_1|+|x_2-y_2|+\cdots+|x_n-y_n|
+$$
+$$
+\|x-y\|_2=
+\sqrt{|x_1-y_1|^2+|x_2-y_2|^2+\cdots+|x_n-y_n|^2}
+$$
+$$
+\|x-y\|_\infty=
+\max\{|x_1-y_1|,|x_2-y_2|,\ldots,|x_n-y_n|\}
+$$
+
+
+###### Equivalenza delle norme vettoriali
 #### TEOREMA 3.8
-
 Tutte le norme vettoriali in $\mathbb{C}^n$ sono equivalenti.
 
-Questo significa che, se prendiamo due norme qualunque
-
+Questo significa che, se prendiamo due norme qualsiasi
 $$
 \|\cdot\|'
 $$
-
 e
-
 $$
 \|\cdot\|''
 $$
-
 su $\mathbb{C}^n$, allora esistono due costanti positive $\alpha,\beta>0$, indipendenti da $x$, tali che
 
 $$
 \alpha\|x\|''\leq \|x\|'\leq \beta\|x\|''
 $$
-
 per ogni $x\in\mathbb{C}^n$
-##### Esempio
+##### Vediamo un esempio
 Verifichiamo che la norma $1$ e la norma infinito sono equivalenti
-Per ogni $x\in\mathbb{C}^n$ vale
+Per ogni $x\in\mathbb{C}^n$ sappiamo che vale che 
 $$
 \|x\|_\infty\leq \|x\|_1\leq n\|x\|_\infty
 $$
 Infatti:
-- $\|x\|_\infty\leq \|x\|_1$, perché il massimo dei moduli delle componenti è sicuramente minore o uguale della somma di tutti i moduli;
+- $\|x\|_\infty\leq \|x\|_1$, perché il massimo dei moduli delle componenti è sicuramente minore o uguale della somma di tutti i moduli
 - $\|x\|_1\leq n\|x\|_\infty$, perché ogni componente soddisfa
 $$
 |x_i|\leq \|x\|_\infty
 $$
-quindi
+quindi possiamo porre la norma 1 come minore uguale della somma delle norme di x infinito per n volte
 $$
 \|x\|_1=|x_1|+\cdots+|x_n|
 \leq
@@ -3037,7 +3021,6 @@ $$
 \alpha=1,\qquad \beta=n
 $$
 perché
-
 $$
 1\cdot\|x\|_\infty\leq \|x\|_1\leq n\|x\|_\infty
 $$
@@ -3046,7 +3029,7 @@ Se invece voglio mettere al centro la norma infinito, parto sempre da
 $$
 \|x\|_\infty\leq \|x\|_1\leq n\|x\|_\infty
 $$
-dalla seconda disuguaglianza ottengo
+dalla seconda disuguaglianza divido per n da una parte e l'altra e ottengo
 $$
 \frac{1}{n}\|x\|_1\leq \|x\|_\infty
 $$
@@ -3066,35 +3049,8 @@ le costanti sono
 $$
 \alpha=\frac{1}{n},\qquad \beta=1
 $$
-Questo spiega perché prima avevamo $\alpha=1,\beta=n$, mentre invertendo l’ordine delle norme otteniamo $\alpha=\frac{1}{n},\beta=1$.
-In generale, dalla formula
-$$
-\alpha\|x\|''\leq \|x\|'\leq \beta\|x\|''
-$$
-possiamo anche isolare $\|x\|''$:
-dalla parte destra
-$$
-\|x\|'\leq \beta\|x\|''
-$$
-otteniamo
-$$
-\frac{1}{\beta}\|x\|'\leq \|x\|''
-$$
-dalla parte sinistra
-$$
-\alpha\|x\|''\leq \|x\|'
-$$
-otteniamo
-$$
-\|x\|''\leq \frac{1}{\alpha}\|x\|'
-$$
-quindi
-$$
-\frac{1}{\beta}\|x\|'\leq \|x\|''\leq \frac{1}{\alpha}\|x\|'
-$$
 
 #### Successioni di vettori
-
 Una successione di vettori
 
 $$
@@ -3102,36 +3058,23 @@ x^{(0)},x^{(1)},x^{(2)},\ldots
 $$
 
 in $\mathbb{C}^n$ si dice convergente al vettore $x\in\mathbb{C}^n$ rispetto alla norma $\|\cdot\|$ se
-
-$$
+$$ lim_{k->\infty}
 \|x^{(k)}-x\|\to 0
 $$
 
-per
-
-$$
-k\to+\infty
-$$
-
-Il teorema di equivalenza delle norme ci permette di dire che, poiché tutte le norme sono equivalenti in $\mathbb{C}^n$, se una successione di vettori converge a $x$ rispetto a una norma, allora converge a $x$ rispetto a tutte le norme.
-
-Dimostrazione.
-
+Il teorema di equivalenza delle norme ci permette di dire che, poiché tutte le norme sono equivalenti in $\mathbb{C}^n$, se una successione di vettori converge a $x$ rispetto a una norma, allora converge a $x$ rispetto a tutte le norme
+##### Dimostrazione
 Supponiamo che
-
 $$
 x^{(k)}\to x
 $$
-
-rispetto alla norma $\|\cdot\|$.
+rispetto alla norma $\|\cdot\|$
 
 Questo significa che
-
 $$
 \|x^{(k)}-x\|\to 0
 $$
-
-Sia $\|\cdot\|'$ un’altra norma.
+Sia $\|\cdot\|'$ un’altra norma
 
 Poiché le due norme sono equivalenti, esistono due costanti positive $\alpha,\beta>0$ tali che
 
@@ -3139,16 +3082,13 @@ $$
 \alpha\|y\|\leq \|y\|'\leq \beta\|y\|
 $$
 
-per ogni $y\in\mathbb{C}^n$.
+per ogni $y\in\mathbb{C}^n$
 
 Sostituiamo
-
 $$
 y=x^{(k)}-x
 $$
-
 e otteniamo
-
 $$
 \alpha\|x^{(k)}-x\|
 \leq
@@ -3156,47 +3096,34 @@ $$
 \leq
 \beta\|x^{(k)}-x\|
 $$
-
 Poiché
-
 $$
 \|x^{(k)}-x\|\to 0
 $$
-
 anche
-
 $$
 \alpha\|x^{(k)}-x\|\to 0
 $$
-
 e
-
 $$
 \beta\|x^{(k)}-x\|\to 0
 $$
-
-Per il teorema del confronto, o teorema dei carabinieri, otteniamo
-
+Per il teorema del confronto, o teorema dei carabinieri, otteniamo che anche al centro
 $$
 \|x^{(k)}-x\|'\to 0
 $$
-
-quindi
-
+quindi l'ipotesi è valida
 $$
 x^{(k)}\to x
 $$
 
-anche rispetto alla norma $\|\cdot\|'$.
 
+##### Successione di vettori convergente componente per componente
 Una successione di vettori
-
 $$
 x^{(0)},x^{(1)},x^{(2)},\ldots
 $$
-
 in $\mathbb{C}^n$ si dice convergente componente per componente al vettore
-
 $$
 x=
 \begin{pmatrix}
@@ -3206,9 +3133,7 @@ x_2\\
 x_n
 \end{pmatrix}
 $$
-
 se, scrivendo
-
 $$
 x^{(k)}=
 \begin{pmatrix}
@@ -3218,74 +3143,162 @@ x_2^{(k)}\\
 x_n^{(k)}
 \end{pmatrix}
 $$
-
-vale
-
+vale che ogni componente del vettore nella successione k esima x di quell'elemento converge alla componente corrispondente di x
 $$
 x_i^{(k)}\to x_i
 $$
-
 per ogni
-
 $$
 i=1,\ldots,n
 $$
-
 cioè
-
 $$
 x_1^{(k)}\to x_1
 $$
-
 $$
 x_2^{(k)}\to x_2
 $$
-
 $$
 \vdots
 $$
-
 $$
 x_n^{(k)}\to x_n
 $$
-
 equivalentemente,
-
 $$
 x_i^{(k)}-x_i\to 0
 $$
-
 per ogni $i=1,\ldots,n$.
 
-Questo è equivalente a dire che
-
+Questo è equivalente a dire che la massima distanza tra una componente di $x^{(k)}$ e la componente corrispondente di $x$ tende a zero
 $$
 \max_{i=1,\ldots,n}|x_i^{(k)}-x_i|\to 0
 $$
-
-ma
-
+ma è proprio la norma infinito
 $$
 \max_{i=1,\ldots,n}|x_i^{(k)}-x_i|
 =
 \|x^{(k)}-x\|_\infty
 $$
-
-quindi la convergenza componente per componente coincide con la convergenza rispetto alla norma infinito.
+quindi la convergenza componente per componente coincide con la convergenza rispetto alla norma infinito
 
 Allora, ricordando l’equivalenza di tutte le norme in $\mathbb{C}^n$, dire
-
 $$
 x^{(k)}\to x
 $$
-
-componente per componente è lo stesso che dire
-
+componente per componente è lo stesso che dire rispetto a una qualsiasi norma vettoriale abbiamo una convergenza componente per componente
 $$
 x^{(k)}\to x
 $$
+##### Norme matriciali
+Si vuole introdurre un concetto di distanza sullo spazio delle matrici per misurare la vicinanza tra due matrici
+$$
+A,B\in\mathbb{C}^{n\times n}
+$$
+Una funzione
+$$
+\|\cdot\|:\mathbb{C}^{n\times n}\to\mathbb{R}
+$$
+si dice norma matriciale se soddisfa le seguenti proprietà:
+a) positività
+$$
+\|A\|\geq 0
+\qquad \forall A\in\mathbb{C}^{n\times n}
+$$
+e
+$$
+\|A\|=0 \iff A=0
+$$
+b) omogeneità
+$$
+\|\alpha A\|=|\alpha|\|A\|
+\qquad \forall \alpha\in\mathbb{C},\ \forall A\in\mathbb{C}^{n\times n}
+$$
+c) disuguaglianza triangolare
+$$
+\|A+B\|\leq \|A\|+\|B\|
+\qquad \forall A,B\in\mathbb{C}^{n\times n}
+$$
+Data una norma matriciale
+$$
+\|\cdot\|:\mathbb{C}^{n\times n}\to\mathbb{R}
+$$
+definiamo la distanza tra due matrici $A,B\in\mathbb{C}^{n\times n}$ come
+$$
+\|A-B\|
+$$
+Un modo intuitivo per definire una norma matriciale su $\mathbb{C}^{n\times n}$ consiste nell’interpretare una matrice $A$ come un vettore di $n^2$ componenti e usare una norma vettoriale.
 
-rispetto a una qualsiasi norma vettoriale.
+Per esempio, data
+
+$$
+A=(a_{ij})_{i,j=1}^n
+$$
+
+potremmo definire
+
+$$
+|A|_\infty=\max_{i,j=1,\ldots,n}|a_{ij}|
+$$
+
+Questa è analoga alla norma infinito per i vettori, perché prende il massimo tra i moduli di tutte le componenti della matrice
+ma questa norma non è sub-moltiplicativa
+Infatti non è detto che valga
+$$
+|AB|_\infty\leq |A|_\infty |B|_\infty
+$$
+per questo si introducono le
+##### Norme matriciali INDOTTE
+Data una norma vettoriale
+$$
+\|\cdot\|:\mathbb{C}^n\to\mathbb{R}
+$$
+e una matrice
+$$
+A\in\mathbb{C}^{n\times n}
+$$
+definiamo la norma matriciale indotta da quella norma vettoriale come
+$$
+\|A\|=\max_{x\in\mathbb{C}^n,\ x\neq 0}\frac{\|Ax\|}{\|x\|}
+$$
+cioè guardiamo quanto la matrice $A$ può “amplificare” un vettore $x$.
+
+Questa formula si può riscrivere usando solo vettori di norma $1$
+Poiché $x\neq 0$, abbiamo $\|x\|>0$, quindi possiamo dividere per $\|x\|$
+
+posso scrivere la divisione spezzandola in un prodotto
+$$\frac{\|Ax\|}{\|x\|} = \frac{1}{\|x\|}\|Ax\|$$
+Ora uso una proprietà della norma:
+$$\|\alpha v\|=|\alpha|\|v\|$$
+Nel nostro caso prendiamo
+$$\alpha=\frac{1}{\|x\|}, \qquad v=Ax$$
+Siccome  $x\neq 0$ allora $\|x\|>0$
+
+quindi
+$$\left|\frac{1}{\|x\|}\right| = \frac{1}{\|x\|}$$
+Allora posso scrivere:
+$$\frac{1}{\|x\|}\|Ax\| = \left\|\frac{1}{\|x\|}Ax\right\|$$
+Quindi abbiamo:
+$$\frac{\|Ax\|}{\|x\|} = \left\|\frac{1}{\|x\|}Ax\right\|$$
+Adesso uso la linearità della matrice $A$ Siccome 
+$$\frac{1}{\|x\|}$$​ 
+è uno scalare, posso portarlo dentro l’argomento di $A$:
+$$\frac{1}{\|x\|}Ax = A\left(\frac{1}{\|x\|}x\right)$$
+E abbiamo che
+$$\frac{1}{\|x\|}x = \frac{x}{\|x\|}$$
+Quindi:
+$$\left\|\frac{1}{\|x\|}Ax\right\| = \left\|A\left(\frac{x}{\|x\|}\right)\right\|$$
+Adesso si pone
+$$y=\frac{x}{\|x\|}$$
+E si osserva che
+$$\|y\| = \left\|\frac{x}{\|x\|}\right\| = \frac{1}{\|x\|}$$
+Quindi ogni rapporto
+$$\frac{\|Ax\|}{\|x\|}$$​
+può essere visto come $\|Ay\|$ con $y$ di norma $1$
+
+Quindi si ottiene che:
+$$\|A\| = \max_{x\neq 0}\frac{\|Ax\|}{\|x\|} = \max_{\|y\|=1}\|Ay\|$$
+
 ##### Teorema 3.9
 Sia
 $$
