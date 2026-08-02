@@ -41,5 +41,5 @@ DOPO PRANZO
 - [x] Osservazione 4.8
 - [x] Teorema 4.3
 - [x] Osservazione 4.9
-- [ ] Teorema 4.4
-- [ ] Osservazione 4.10
+- [x] Teorema 4.4
+- [x] Osservazione 4.10
