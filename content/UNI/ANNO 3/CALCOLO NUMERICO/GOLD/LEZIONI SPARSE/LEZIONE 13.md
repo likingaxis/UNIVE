@@ -1,71 +1,48 @@
 #### Metodi iterativi per risoluzione di sistemi lineari
-
 È dato un sistema lineare
-
 $$
 Ax=b
 $$
-
 che chiamiamo $S$, con
-
 $$
 A\in\mathbb{C}^{n\times n},\qquad b\in\mathbb{C}^n
 $$
-
-e supponiamo che $A$ sia invertibile.
-
+e supponiamo che $A$ sia invertibile
 Se $A$ è invertibile, allora il sistema $S$ ha un’unica soluzione, per il teorema di Rouché-Capelli, e tale soluzione è
-
 $$
 x=A^{-1}b
 $$
-
 Ci proponiamo di risolvere il sistema $S$ con un metodo iterativo, cioè un metodo che, a partire da un vettore iniziale
-
 $$
 x^{(0)}\in\mathbb{C}^n
 $$
-
 scelto dall’utente, costruisce una successione di vettori
-
 $$
 x^{(0)},x^{(1)},x^{(2)},\ldots
 $$
-
-Vogliamo che tale successione sia facile da costruire e converga alla soluzione esatta $x$ del sistema $S$, qualunque sia il vettore iniziale $x^{(0)}$ scelto.
-
-Per risolvere $S$ consideriamo solo metodi iterativi stazionari, cioè metodi della forma
-
+Vogliamo che tale successione sia facile da costruire e converga alla soluzione esatta $x$ del sistema $S$, qualunque sia il vettore iniziale $x^{(0)}$ scelto
+Per risolvere $S$ consideriamo solo metodi M iterativi stazionari, cioè metodi della forma
 $$
 x^{(0)}\in\mathbb{C}^n \text{ dato}
 $$
-
 $$
 x^{(k+1)}=Px^{(k)}+q,\qquad k=0,1,2,\ldots
 $$
-
 dove
-
 $$
 P\in\mathbb{C}^{n\times n}
 $$
-
 è una matrice fissata, che si chiama matrice di iterazione, e
-
 $$
 q\in\mathbb{C}^n
 $$
+è un vettore fissato
 
-è un vettore fissato.
-
-Osservazione.
-
+Osservazione
 Sia
-
 $$
 x^{(0)},x^{(1)},x^{(2)},\ldots
 $$
-
 una successione generata dal metodo $M$ e supponiamo che
 
 $$
@@ -439,44 +416,32 @@ $$
 $$
 
 ##### Corollario 4.2, CN, condizioni necessarie di convergenza
-
-Supponiamo che il metodo $M$ sia consistente con il sistema $S$.
-
+Supponiamo che il metodo $M$ sia consistente con il sistema $S$
 - se
-
 $$
 |\operatorname{traccia}(P)|\geq n
 $$
-
-allora il metodo $M$ non è convergente;
-
+allora il metodo $M$ non è convergente
 - se
-
 $$
 |\det(P)|\geq 1
 $$
+allora il metodo $M$ non è convergente
 
-allora il metodo $M$ non è convergente.
-
-Quindi le condizioni
-
+Quindi possiamo vedere le condizioni anche come che il fatto che 
 $$
 |\operatorname{traccia}(P)|<n
 $$
-
 e
-
 $$
 |\det(P)|<1
 $$
+sono delle condizioni necessarie per la convergenza
 
-sono condizioni necessarie per la convergenza.
+Vuol dire che se il metodo converge, allora devono valere
+Però il fatto che valgano non garantisce da solo che il metodo converga
 
-Attenzione: sono condizioni necessarie, non sufficienti.
-
-Vuol dire che se il metodo converge, allora devono valere. Però il fatto che valgano non garantisce da solo che il metodo converga.
-
-Dimostrazione della condizione sulla traccia.
+##### Dimostrazione sulla traccia
 
 Supponiamo che
 
