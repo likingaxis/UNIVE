@@ -394,4 +394,4 @@ $$
 
 Per questo motivo, quando si implementa un metodo iterativo, è indispensabile fissare sempre un numero massimo di iterazioni consentite.
 
-Questo serve anche ad arrestare le iterazioni quando non c’è convergenza.
+Questo serve anche ad arrestare le iterazioni quando non c’è convergenza

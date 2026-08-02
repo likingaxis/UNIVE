@@ -1848,7 +1848,7 @@ $$
 quindi $\operatorname{Re}(A)$ è hermitiana
 dobbiamo verificare che $Im(A)$ è hermitiana
 
-$\operatorname{Im}(A)^*=\operatorname{Im}(A)$$
+$\operatorname{Im}(A)^*=\operatorname{Im}(A)$
 
 Partiamo da sinistra:
 $$\operatorname{Im}(A)^* = \left(\frac{A-A^*}{2i}\right)^*$$
@@ -3310,22 +3310,15 @@ A,B\in\mathbb{C}^{n\times n}
 $$
 
 valgono le seguenti proprietà:
+1. $\|I\|=1$ la norma matriciale indotta della matrice identità è 1
 
-1. 
-
-$$
-\|I\|=1
-$$
-
-2. 
-
+2. la norma di Ax è <= della norma matriciale indotta di A e della norma vettoriale di x
 $$
 \|Ax\|\leq \|A\|\|x\|
 \qquad \forall x\in\mathbb{C}^n
 $$
 
 3. $\|A\|$ è la più piccola costante $C$ che soddisfa
-
 $$
 \|Ax\|\leq C\|x\|
 \qquad \forall x\in\mathbb{C}^n
@@ -3342,15 +3335,13 @@ $$
 $$
 \rho(A)\leq \|A\|
 $$
-
 dove
-
 $$
 \rho(A)=\max\{|\lambda|:\lambda \text{ autovalore di } A\}
 $$
 ##### Dimostrazioni
 ##### Dimostrazione 1
-Per definizione di norma indotta,
+Per definizione di norma indotta sappiamo che la norma di $I$ è uguale al massimo di $\|Ix\|$, al variare di tutti i vettori $x$ con norma uguale a $1$
 $$
 \|I\|=\max_{\|x\|=1}\|Ix\|
 $$
@@ -3363,93 +3354,71 @@ $$
 \|I\|=\max_{\|x\|=1}\|x\|=1
 $$
 ##### Dimostrazione 2
+qui dividiamo la dimostrazione in 2 casi una dove x è diverso da 0 e una dove x è uguale a 0
 
-Per ogni $x\neq 0$ si ha
-
+Per ogni $x\neq 0$ si ha che la nostra norma con Ax/ norma di x è minore uguale 
+del massimo della norma di $Ay/ norma di y$ per ogni vettore $y$ diverso da zero
 $$
 \frac{\|Ax\|}{\|x\|}
 \leq
 \max_{y\neq 0}\frac{\|Ay\|}{\|y\|}
 $$
-
-per definizione di massimo.
-
-Il termine a destra è proprio
+per definizione di massimo sappiamo che il massimo è proprio la norma di A
 
 $$
 \|A\|
 $$
-
 quindi
-
 $$
 \frac{\|Ax\|}{\|x\|}\leq \|A\|
 $$
-
 moltiplicando per $\|x\|>0$ otteniamo
-
 $$
 \|Ax\|\leq \|A\|\|x\|
 $$
 
-Se invece $x=0$, allora
-
+Se invece $x=0$, allora abbiamo questo qui
 $$
 \|A0\|=\|0\|=0
 $$
-
-e
-
+e sappiamo che 
 $$
 \|A\|\|0\|=0
 $$
-
 quindi la disuguaglianza diventa
-
 $$
 0\leq 0
 $$
-
-ed è vera.
+ed è valida quindi verificata
 ##### Dimostrazione 3
-
 Sia $C$ una costante tale che
-
 $$
 \|Ax\|\leq C\|x\|
 $$
 
 per ogni $x\in\mathbb{C}^n$.
 
-Per ogni $x\neq 0$, dividendo per $\|x\|$, otteniamo
-
+Per ogni $x\neq 0$, dividendo per $\|x\|$ da una parte e l'altra , otteniamo
 $$
 \frac{\|Ax\|}{\|x\|}\leq C
 $$
-
 siccome questa disuguaglianza vale per ogni $x\neq 0$, vale anche per il massimo:
-
 $$
 \max_{x\neq 0}\frac{\|Ax\|}{\|x\|}\leq C
 $$
-
-ma
-
+ma sappiamo anche qui che il massimo è proprio
 $$
 \max_{x\neq 0}\frac{\|Ax\|}{\|x\|}=\|A\|
 $$
-
 quindi
-
 $$
 \|A\|\leq C
 $$
-
 Questo significa che $\|A\|$ è la più piccola costante possibile che soddisfa
-
 $$
 \|Ax\|\leq C\|x\|
 $$
+Quindi $C$ deve essere almeno grande quanto il massimo
 ##### Dimostrazione 4
 Per ogni $x\in\mathbb{C}^n$, usando il punto 2 due volte, abbiamo
 $$
@@ -3467,16 +3436,16 @@ $$
 \leq
 \|A\|\|B\|\|x\|
 $$
-Questo significa che la costante
+Questo significa che mettendo come costante $C$
 $$
 C=\|A\|\|B\|
 $$
-soddisfa
+Questo soddisfa la condizione che
 $$
 \|ABx\|\leq C\|x\|
 \qquad \forall x\in\mathbb{C}^n
 $$
-Per il punto 3, $\|AB\|$ è la più piccola costante con questa proprietà.
+Per il punto 3, $\|AB\|$ è la più piccola costante con questa proprietà
 Quindi
 $$
 \|AB\|\leq \|A\|\|B\|
@@ -3486,7 +3455,7 @@ Sia $\lambda$ un autovalore di $A$ tale che
 $$
 |\lambda|=\rho(A)
 $$
-e sia $x\neq 0$ un corrispondente autovettore.
+e sia $x\neq 0$ un corrispondente autovettore
 Allora
 $$
 Ax=\lambda x
@@ -3495,7 +3464,7 @@ quindi
 $$
 \|Ax\|=\|\lambda x\|
 $$
-per omogeneità della norma vettoriale,
+per omogeneità della norma vettoriale possiamo scrivere che la norma di lambda x è il modulo di lambda che è uno scalare per la norma vettoriale di x
 $$
 \|\lambda x\|=|\lambda|\|x\|
 $$
@@ -3503,15 +3472,15 @@ quindi
 $$
 \|Ax\|=|\lambda|\|x\|
 $$
-cioè
+sappiamo che il raggio spettrale di A è proprio il modulo di lambda quindi possiamo scrivere che
 $$
 \|Ax\|=\rho(A)\|x\|
 $$
-dividendo per $\|x\|>0$,
+dividendo per $\|x\|>0$ da una parte e l'altra abbiamo che
 $$
 \rho(A)=\frac{\|Ax\|}{\|x\|}
 $$
-ma
+ma abbiamo un bound sulla norma di Ax/ norma di x per cui
 $$
 \frac{\|Ax\|}{\|x\|}
 \leq
@@ -3523,19 +3492,34 @@ quindi
 $$
 \rho(A)\leq \|A\|
 $$
+##### Norme 1, 2, ∞ matriciali indotte
+Le norme matriciali indotte più importanti sono:
+$$
+\|A\|_1=
+\max_{x\neq 0}\frac{\|Ax\|_1}{\|x\|_1}
+$$
+$$
+\|A\|_2=
+\max_{x\neq 0}\frac{\|Ax\|_2}{\|x\|_2}
+$$
+$$
+\|A\|_\infty=
+\max_{x\neq 0}\frac{\|Ax\|_\infty}{\|x\|_\infty}
+$$
+e con il teorema successivo possiamo definire delle formule per calcolarle
 #### TEOREMA 3.10
 Per ogni
 $$
 A\in\mathbb{C}^{n\times n}
 $$
-valgono le seguenti formule.
+valgono le seguenti formule
 Norma $1$:
 $$
 \|A\|_1=
 \max_{j=1,\ldots,n}
 \sum_{i=1}^n |a_{ij}|
 $$
-cioè la norma $1$ matriciale indotta è il massimo delle somme dei moduli degli elementi sulle colonne.
+cioè la norma $1$ matriciale indotta è il massimo delle somme dei moduli degli elementi sulle colonne
 Se indichiamo con $A^{[j]}$ la colonna $j$-esima di $A$, allora
 $$
 \|A\|_1=
@@ -3546,29 +3530,39 @@ $$
 \|A\|_2=
 \sqrt{\rho(A^*A)}
 $$
-dove $A^*$ è la trasposta coniugata di $A$.
-Attenzione: non è $\sqrt{\rho(A\cdot A)}$, ma
-$$
-\sqrt{\rho(A^*A)}
-$$
+dove $A^*$ è la trasposta coniugata di $A$
 Norma infinito:
 $$
 \|A\|_\infty=
 \max_{i=1,\ldots,n}
 \sum_{j=1}^n |a_{ij}|
 $$
+cioè la norma infinito matriciale indotta è il massimo delle somme dei moduli degli elementi sulle righe
 
-cioè la norma infinito matriciale indotta è il massimo delle somme dei moduli degli elementi sulle righe.
 Se indichiamo con $A_{[i]}$ la riga $i$-esima di $A$, allora
 $$
 \|A\|_\infty=
 \max\left(\|A_{[1]}\|_1,\|A_{[2]}\|_1,\ldots,\|A_{[n]}\|_1\right)
 $$
-Attenzione alla differenza:
-- $\|A\|_1$ guarda le colonne;
-- $\|A\|_\infty$ guarda le righe.
+
+- $\|A\|_1$ è definita rispetto le colonne
+- $\|A\|_\infty$ è definita rispetto le righe
+##### Successione di matrici 
+Una successione di matrici
+$$
+A^{(0)},A^{(1)},A^{(2)},\ldots
+$$
+in $\mathbb{C}^{n\times n}$ si dice convergente alla matrice
+$$
+A\in\mathbb{C}^{n\times n}
+$$
+rispetto alla norma matriciale $\|\cdot\|$ se
+$$ lim_{k->\infty} \ 
+\|A^{(k)}-A\|\to 0
+$$
+Siccome tutte le norme matriciali sono equivalenti, se una successione di matrici converge ad $A$ rispetto a una norma, allora converge ad $A$ rispetto a tutte le norme
 #### TEOREMA 3.11
-Tutte le norme matriciali, sia indotte sia non indotte, in $\mathbb{C}^{n\times n}$ sono equivalenti.
+Tutte le norme matriciali, sia indotte sia non indotte, in $\mathbb{C}^{n\times n}$ sono equivalenti
 Questo significa che, se prendiamo due norme matriciali qualsiasi
 $\|\cdot\|'$ e $\|\cdot\|''$
 da $\mathbb{C}^{n\times n}$ in $\mathbb{R}$, allora esistono due costanti positive
@@ -3583,7 +3577,8 @@ per ogni
 $$
 A\in\mathbb{C}^{n\times n}
 $$
-dimostrazione analoga alla 3.7.4
+dimostrazione analoga alla 3.7.4 
+
 #### TEOREMA 3.12
 Sia
 $$
@@ -3597,12 +3592,11 @@ cioè la potenza $k$-esima di $A$ tende alla matrice nulla, se e solo se
 $$
 \rho(A)<1
 $$
-dove $\rho(A)$ è il raggio spettrale di $A$.
+dove $\rho(A)$ è il raggio spettrale di $A$
 
 #####  Dimostrazione
-Dimostriamo il teorema nel caso in cui $A$ sia diagonalizzabile
-Allora esistono una matrice invertibile
-
+Dimostriamo il teorema  solo nel caso in cui $A$ è diagonalizzabile
+essendo diagonalizzabile allora esistono una matrice invertibile
 $$
 X\in\mathbb{C}^{n\times n}
 $$
@@ -3614,28 +3608,28 @@ avente sulla diagonale gli autovalori di $A$ t.c
 $$
 A=XDX^{-1}
 $$
-Allora
-
-$A^2=(XDX^{-1})(XDX^{-1})$ siccome $X^{-1}X=I$
-otteniamo $A^2=XD^2X^{-1}$
-
-Analogamente $A^3=XD^3X^{-1}$ e in generale
+Allora possiamo dire che il quadrato di A è
+$$A^2=(XDX^{-1})(XDX^{-1})$$ siccome 
+$$X^{-1}X=I$$
+otteniamo 
+$$A^2=XD^2X^{-1}$$
+Analogamente $A^3=XD^3X^{-1}$ e in generale per una certa potenza $k$ possiamo dire che
 $$
 A^k=XD^kX^{-1}
 $$
 ##### Dimostrazione 1
+dimostriamo prima la parte seguente del se e solo se
 $$
 \rho(A)<1 \Longrightarrow A^k\to 0
 $$
-
-Usiamo una norma matriciale indotta, per esempio la norma infinito.
-Abbiamo
+Usiamo una norma matriciale indotta, per esempio la norma infinito
+Abbiamo che la norma di $A^k$
 $$
 \|A^k\|_\infty
 =
 \|XD^kX^{-1}\|_\infty
 $$
-per submoltiplicatività,
+per submoltiplicatività applicandola 2 volte abbiamo prima che
 $$
 \|XD^kX^{-1}\|_\infty
 \leq
@@ -3653,22 +3647,22 @@ $$
 \leq
 \|X\|_\infty \|D^k\|_\infty \|X^{-1}\|_\infty
 $$
-Ora
+Ora sappiamo che $D^k$ è una matrice con gli elementi in diagonale come autovalori di A elevati alla $k$
 $$
 D^k=
 \operatorname{diag}(\lambda_1^k,\ldots,\lambda_n^k)
 $$
-quindi
+quindi la sua norma matriciale indotta infinito è il massimo lambda elevato alla $k$ sotto modulo
 $$
 \|D^k\|_\infty
 =
 \max_{i=1,\ldots,n}|\lambda_i^k|
 $$
-ma
+ma per il modulo possiamo portare fuori la potenza
 $$
 |\lambda_i^k|=|\lambda_i|^k
 $$
-perciò
+perciò il massimo di tutti i lambda sotto modulo con fuori elevazione alla $k$
 $$
 \|D^k\|_\infty
 =
@@ -3676,52 +3670,53 @@ $$
 =
 \left(\max_{i=1,\ldots,n}|\lambda_i|\right)^k
 $$`
-cioè
+quel max è proprio il raggio spettrale di $A$ elevato alla $k$ infatti
 $$
 \|D^k\|_\infty=\rho(A)^k
 $$
-quindi
+quindi possiamo mettere il raggio spettrale
 $$
 \|A^k\|_\infty
 \leq
 \|X\|_\infty \|X^{-1}\|_\infty \rho(A)^k
 $$
-siccome
+siccome per ipotesi
 $$
 \rho(A)<1
 $$
 allora
-$$
+$$ lim_{k->\infty}\ 
 \rho(A)^k\to 0
 $$
-per $k\to+\infty$.
-Dato che $\|X\|_\infty$ e $\|X^{-1}\|_\infty$ sono costanti, otteniamo
+
+Dato che $\|X\|_\infty$ e $\|X^{-1}\|_\infty$ sono costanti, otteniamo che il limite per k che tende a infinito di tutto questo
 $$
 \|X\|_\infty \|X^{-1}\|_\infty \rho(A)^k\to 0
 $$
-Inoltre
+Inoltre sappiamo che la norma di $A^k$ è maggiore uguale di 0 quindi
 $$
 0\leq \|A^k\|_\infty
 \leq
 \|X\|_\infty \|X^{-1}\|_\infty \rho(A)^k
 $$
-quindi, per il teorema del confronto,
+quindi, per il teorema del confronto possiamo dire che anche il limite della norma infinito di $A^k$ tende a 0
 $$
 \|A^k\|_\infty\to 0
 $$
-e dunque
+e dunque che
 $$
 A^k\to 0
 $$
 ##### Dimostrazione 2
+ora si vuole dimostrare l'altro verso 
 $$
 A^k\to 0 \Longrightarrow \rho(A)<1
 $$
-Supponiamo che
+per ipotesi quindi sappiamo che
 $$
 A^k\to 0
 $$
-cioè
+allora anche la sua norma infinito matriciale indotta tenderà a 0
 $$
 lim_{k->\infty} \ \|A^k\|_\infty\to 0
 $$
@@ -3729,11 +3724,11 @@ Poiché
 $$
 A^k=XD^kX^{-1}
 $$
-moltiplichiamo a sinistra per $X^{-1}$ e a destra per $X$:
+moltiplichiamo a sinistra e a destra per $X^{-1}$ e per $X$:
 $$
 X^{-1}A^kX=D^k
 $$
-quindi
+quindi abbiamo che
 $$
 D^k=X^{-1}A^kX
 $$
@@ -3743,7 +3738,7 @@ $$
 =
 \|X^{-1}A^kX\|_\infty
 $$
-per submoltiplicatività,
+per submoltiplicatività applicata 2 volte abbiamo che 
 $$
 \|X^{-1}A^kX\|_\infty
 \leq
@@ -3761,7 +3756,7 @@ $$
 \leq
 \|X^{-1}\|_\infty \|A^k\|_\infty \|X\|_\infty
 $$
-ma
+ma il limite della norma di $A^k$ tende a 0
 $$
 \|A^k\|_\infty\to 0
 $$
@@ -3773,7 +3768,7 @@ D’altra parte abbiamo già visto che
 $$
 \|D^k\|_\infty=\rho(A)^k
 $$
-quindi
+quindi sappiamo che il limite di k che tende a infinito del raggio spettrale elevato alla k tende a 0
 $$
 \rho(A)^k\to 0
 $$
@@ -3802,6 +3797,46 @@ $$
 $$
 \square
 $$
+##### Metodi iterativi per risoluzione di sistemi lineari
+il problema che si vuole risolvere con i metodi iterativi è
+Dato un sistema lineare
+$$
+Ax=b
+$$
+che chiamiamo $S$, con
+$$
+A\in\mathbb{C}^{n\times n},\qquad b\in\mathbb{C}^n
+$$
+e supponiamo che $A$ sia invertibile
+Se $A$ è invertibile, allora il sistema $S$ ha un’unica soluzione, per il teorema di Rouché-Capelli, e tale soluzione è
+$$
+x=A^{-1}b
+$$
+Ci proponiamo di risolvere il sistema $S$ con un metodo iterativo, cioè un metodo che, a partire da un vettore iniziale
+$$
+x^{(0)}\in\mathbb{C}^n
+$$
+scelto dall’utente, costruisce una successione di vettori
+$$
+x^{(0)},x^{(1)},x^{(2)},\ldots
+$$
+Vogliamo che tale successione sia facile da costruire e converga alla soluzione esatta $x$ del sistema $S$, qualunque sia il vettore iniziale $x^{(0)}$ scelto
+Per risolvere $S$ consideriamo solo metodi M iterativi stazionari, cioè metodi della forma
+$$
+x^{(0)}\in\mathbb{C}^n \text{ dato}
+$$
+$$
+x^{(k+1)}=Px^{(k)}+q,\qquad k=0,1,2,\ldots
+$$
+dove
+$$
+P\in\mathbb{C}^{n\times n}
+$$
+è una matrice fissata, che si chiama matrice di iterazione, e
+$$
+q\in\mathbb{C}^n
+$$
+è un vettore fissato
 ##### Osservazione 4.1
 Se una successione ${x^{(k)}}_{k=0,1,2,...}$ generata dal metodo 
 $$
@@ -3811,12 +3846,14 @@ $$
 x^{(k+1)}=Px^{(k)}+q,\qquad k=0,1,2,\ldots
 $$
 dove $P\in\mathbb{C}^{n\times n}$ è una matrice fissata, che si chiama matrice di iterazione, e $q\in\mathbb{C}^n$ è un vettore fissato
-converge a un vettore $x^{(\infty)}$ allora $x^{(\infty)}$ soddisfa l'equazione
+converge a un vettore $x^{(\infty)}$ allora questo vettore $x^{(\infty)}$ soddisfa l'equazione
+$$x^{(∞)}=Px^{(∞)}+q$$
+
 Supponiamo che la successione converga a un vettore $(x^{(\infty)})$, cioè
 $$ 
 x^{(k)}\to x^{(\infty)}  
 \qquad \text{per } k\to\infty.  $$
-Allora anche la successione ($x^{(k+1)}$) converge allo stesso limite:
+Allora anche la successione successiva ($x^{(k+1)}$) converge allo stesso limite:
 $$ 
 x^{(k+1)}\to x^{(\infty)}.  $$
 Passando al limite nell’equazione del metodo iterativo, otteniamo
@@ -3825,25 +3862,47 @@ $$ \lim_{k\to\infty}x^{(k+1)}=
 Poiché (P) e (q) non dipendono da (k), possiamo portare il limite all’interno:
 $$P\left(\lim_{k\to\infty}x^{(k)}\right)+q$$
 Dato che
-$\lim_{k\to\infty}x^{(k)}=x^{(\infty)}$, 
-segue che
-$\boxed{x^{(\infty)}=Px^{(\infty)}+q}$
+$$\lim_{k\to\infty}x^{(k)}=x^{(\infty)}$$
+segue che 
+$$\boxed{x^{(\infty)}=Px^{(\infty)}+q}$$
 Quindi, se una successione generata dal metodo iterativo converge, il suo limite deve necessariamente soddisfare l’equazione
-$x=Px+q$
+$$x=Px+q$$
 Di conseguenza, se la soluzione (x) del sistema iniziale non soddisfa
-$x=Px+q$
+$$x=Px+q$$
 allora nessuna successione generata dal metodo
-$x^{(k+1)}=Px^{(k)}+q$  
-può convergere a quella soluzione.
-Dire che (x) soddisfa
-$x=Px+q$
+$$x^{(k+1)}=Px^{(k)}+q$$
+può convergere a quella soluzione x
+Dove in sostanza dire che (x) soddisfa l'equazione
+$$x=Px+q$$
 significa dire che (x) è un **punto fisso** della funzione
 $g(y)=Py+q$
 perché
-$g(x)=Px+q=$
-In conclusione, affinché il metodo iterativo possa convergere alla soluzione del sistema, è necessario che tale soluzione sia un punto fisso della funzione (g)
+$g(x)=Px+q$
+In conclusione, affinché il metodo iterativo possa convergere alla soluzione del sistema, è necessario che tale soluzione sia un punto fisso della funzione ($g$)
+##### Definizione di consistenza di un metodo iterativo
+Il metodo $M$ si dice consistente con il sistema $S$ se la soluzione $x$ di $S$ soddisfa l’equazione del metodo, cioè
+$$
+x=Px+q
+$$
+
+Quindi la consistenza significa che la soluzione esatta del sistema è un punto fisso del metodo iterativo
+##### Definizione di convergenza di un metodo iterativo
+Il metodo $M$ per risolvere il sistema $S$ si dice convergente se, per ogni scelta del vettore iniziale
+$$
+x^{(0)}\in\mathbb{C}^n
+$$
+la successione prodotta dal metodo
+$$
+x^{(0)},x^{(1)},x^{(2)},\ldots
+$$
+converge alla soluzione $x$ di $S$.
+Cioè
+$$ lim_{k->\infty} \ \ 
+x^{(k)}\to x
+$$
+per ogni scelta di $x^{(0)}$
 #### TEOREMA 4.1, CNS, condizione necessaria e sufficiente di convergenza
-Sia M metodo definito come iterativo
+Sia $M$ un metodo iterativo
 Supponiamo che il metodo $M$ sia consistente con il sistema $S$
 Allora il metodo $M$ è convergente se e solo se
 $$
@@ -3883,13 +3942,13 @@ Dimostriamo solo la direzione
 $$
 \rho(P)<1\Longrightarrow M \text{ convergente}
 $$
-Dobbiamo dimostrare che il metodo $M$ è convergente, cioè che la successione generata dal metodo converge alla soluzione $x$ di $S$, indipendentemente dalla scelta di $x^{(0)}$.
+Dobbiamo dimostrare che il metodo $M$ è convergente, cioè che la successione generata dal metodo converge alla soluzione $x$ di $S$, indipendentemente dalla scelta di $x^{(0)}$ 
 Poiché $M$ è consistente con $S$ per ipotesi, vale
 $$
 x=Px+q
 $$
-chiamiamo questa equazione $(a)$.
-Inoltre, la successione generata dal metodo soddisfa
+chiamiamo questa equazione $(a)$
+Inoltre,  sappiamo che la successione generata dal metodo soddisfa che
 $$
 x^{(k+1)}=Px^{(k)}+q
 $$
@@ -3899,12 +3958,12 @@ Sottraendo membro a membro $(a)$ da $(b)$ otteniamo
 $$
 x^{(k+1)}-x=Px^{(k)}+q-(Px+q)
 $$
-quindi
+quindi possiamo togliere $q$ e raccogliere per $P$ in comune
 $$
 x^{(k+1)}-x=P(x^{(k)}-x)
 $$
 per ogni $k=0,1,2,\ldots$
-Definiamo l’errore al passo $k$ come
+Si definisce $e^{(k)}$ come l’errore al passo $k$ definito come
 $$
 e^{(k)}=x^{(k)}-x
 $$
@@ -3914,7 +3973,7 @@ e^{(k+1)}=Pe^{(k)}
 $$
 per ogni $k=0,1,2,\ldots$
 questa è l’equazione dell’errore
-Sviluppiamo per ricorrenza:
+Sviluppando per ricorrenza quindi prima per k=0 poi k=1 k=2 e così via otteniamo che
 per $k=0$,
 $$
 e^{(1)}=Pe^{(0)}
@@ -3927,12 +3986,11 @@ per $k=2$,
 $$
 e^{(3)}=Pe^{(2)}=P(P^2e^{(0)})=P^3e^{(0)}
 $$
-e quindi, in generale,
+e quindi, in generale come formula esplicita abbiamo che per ogni $k=0,1,2,\ldots$
 $$
 e^{(k)}=P^ke^{(0)}
 $$
-per ogni $k=0,1,2,\ldots$
-anche per $k=0$ la formula è vera, perché
+per $k=0$ proviamo la formula esplicita e otteniamo che
 $$
 P^0=I
 $$
@@ -3940,14 +3998,13 @@ e quindi
 $$
 P^0e^{(0)}=Ie^{(0)}=e^{(0)}
 $$
-per il teorema 3.12 abbiamo che
-
+per il teorema 3.12 sappiamo che
 data una matrice
 $$
 P\in\mathbb{C}^{n\times n}
 $$
 si ha
-$$
+$$ lim_{k->\infty}\ \ 
 P^k\to 0
 $$
 se e solo se
@@ -3958,15 +4015,16 @@ Siccome per ipotesi
 $$
 \rho(P)<1
 $$
-allora
-$$
+allora visto che
+$$lim_{k->\infty}\ \ 
 P^k\to 0
 $$
 Quindi
-$$
+$$ lim_{k->\infty}\ \ 
 e^{(k)}=P^ke^{(0)}\to 0
 $$
-Infatti, intuitivamente, una matrice che tende alla matrice nulla, moltiplicata per un vettore fissato $e^{(0)}$, dà un vettore che tende al vettore nullo.
+Infatti, intuitivamente, una matrice che tende alla matrice nulla, moltiplicata per un vettore fissato $e^{(0)}$, dà un vettore che tende al vettore nullo
+
 Dunque
 $$
 e^{(k)}\to 0
@@ -3983,24 +4041,25 @@ e perciò
 $$
 x^{(k)}\to x
 $$
-Abbiamo dimostrato che la successione converge alla soluzione $x$, qualunque sia $x^{(0)}$.
-Quindi il metodo $M$ è convergente.
+Abbiamo dimostrato che la successione converge alla soluzione $x$, qualunque sia il vettore al passo iniziale $x^{(0)}$
+Quindi il metodo $M$ è convergente
 $$
 \square
 $$
 ##### COROLLARIO 4.1, CS, condizione sufficiente di convergenza
-Supponiamo che il metodo $M$ sia consistente con il sistema $S$.
+Supponiamo che il metodo $M$ sia consistente con il sistema $S$
 Se esiste una norma matriciale indotta $\|\cdot\|$ tale che
 $$
 \|P\|<1
 $$
-allora il metodo $M$ è convergente.
+dove $P$ è la matrice di iterazione
+allora il metodo $M$ è un metodo convergente
 ##### Dimostrazione
-Sappiamo che, per ogni norma matriciale indotta,
+Sappiamo che, per ogni norma matriciale indotta
 $$
 \rho(P)\leq \|P\|
 $$
-Se
+Se per ipotesi avevamo che
 $$
 \|P\|<1
 $$
@@ -4012,38 +4071,34 @@ quindi
 $$
 \rho(P)<1
 $$
-Per il teorema 4.1, cioè per la condizione necessaria e sufficiente di convergenza, il metodo $M$ è convergente.
+e Per il teorema 4.1, cioè per la condizione necessaria e sufficiente di convergenza, visto che $\rho(P)<1$ il metodo $M$ è convergente
 $$
 \square
 $$
 
 ##### COROLLARIO 4.2, CN, condizioni necessarie di convergenza
-chiedere a Samuele se le dimostrazioni se le sta scrivendo anche su obsidian
-
 Supponiamo che il metodo $M$ sia consistente con il sistema $S$.
+- se $|\operatorname{traccia}(P)|\geq n$ allora il metodo $M$ non è convergente
+- se $|\det(P)|\geq 1$ allora il metodo $M$ non è convergente
 
-- se $|\operatorname{traccia}(P)|\geq n$ allora il metodo $M$ non è convergente;
-- se $|\det(P)|\geq 1$ allora il metodo $M$ non è convergente.
-Quindi le condizioni
-
+Quindi possiamo vedere le condizioni anche come che il fatto che 
 $|\operatorname{traccia}(P)|<n$ e $|\det(P)|<1$
 
-sono condizioni necessarie per la convergenza.
-Attenzione: sono condizioni necessarie, non sufficienti
+sono delle condizioni necessarie per la convergenza
 
-Vuol dire che se il metodo converge, allora devono valere. Però il fatto che valgano non garantisce da solo che il metodo converga
+Vuol dire che se il metodo converge, allora devono valere
+Però il fatto che valgano non garantisce da solo che il metodo converga
 ##### Dimostrazione sulla |traccia(P)|
 Supponiamo che
 $$
 |\operatorname{traccia}(P)|\geq n
 $$
-allora M non è convergente
-Siano $\lambda_1,\ldots,\lambda_n$
+allora implica che M non è convergente
+Siano $\lambda_1,\ldots,\lambda_n$ gli autovalori di $P$
 sappiamo che
 $$
 \operatorname{traccia}(P)=\lambda_1+\cdots+\lambda_n
 $$
-
 Supponiamo per assurdo che tutti gli autovalori abbiano modulo strettamente minore di $1$, cioè
 $$
 |\lambda_i|<1 \ \ \ \ \ \ \ \ \ \forall  i=1,\ldots,n
@@ -4056,7 +4111,7 @@ $$
 \leq
 |\lambda_1|+\cdots+|\lambda_n|
 $$
-ma, siccome ogni $|\lambda_i|<1$, otteniamo
+ma, siccome ogni $|\lambda_i|<1$, otteniamo che la somma di questi moduli è strettamente minore del numero di autovalori
 $$
 |\lambda_1|+\cdots+|\lambda_n|<n
 $$
@@ -4076,32 +4131,29 @@ Allora
 $$
 \rho(P)\geq 1
 $$
-e quindi, per il teorema 4.1, il metodo $M$ non è convergente
+e quindi, per la condizione necessaria e sufficiente di convergenza, visto che il raggio spettrale non è $<1$ il metodo $M$ non è convergente
 ##### Dimostrazione sul |Det(P)|
 Supponiamo che
 $$
 |\det(P)|\geq 1
 $$
-Sappiamo che
+Sappiamo che il determinante della matrice di iterazione $P$ è il prodotto
 $$
 \det(P)=\lambda_1\lambda_2\cdots\lambda_n
 $$
-quindi
-
+quindi il modulo del determinante
 $$
 |\det(P)|=|\lambda_1\lambda_2\cdots\lambda_n|
 $$
-
 e usando la proprietà del modulo del prodotto,
-
 $$
 |\det(P)|=|\lambda_1||\lambda_2|\cdots|\lambda_n|
 $$
-Se tutti gli autovalori avessero modulo strettamente minore di $1$, cioè
+Per assurdo se tutti gli autovalori avessero modulo strettamente minore di $1$, cioè
 $$
 |\lambda_i|<1
 $$
-per ogni $i=1,\ldots,n$, allora anche il prodotto dei loro moduli sarebbe strettamente minore di $1$:
+per ogni $i=1,\ldots,n$, allora anche il prodotto dei loro moduli sarebbe strettamente minore di $1$
 $$
 |\lambda_1||\lambda_2|\cdots|\lambda_n|<1
 $$
@@ -4117,27 +4169,237 @@ Dunque deve esistere almeno un autovalore $\lambda_i$ tale che
 $$
 |\lambda_i|\geq 1
 $$
-quindi
+quindi visto che un autovalore è almeno $\geq1$ allora
 $$
 \rho(P)\geq 1
 $$
-Per il teorema 4.1, il metodo $M$ non è convergente.
+Per la condizione necessaria e sufficiente di convergenza, il raggio spettrale non è <1 quindi il metodo $M$ non è convergente
 $$
 \square
 $$
 ##### OSSERVAZIONE 4.2
 Si può dimostrare che se il metodo iterativo non è convergente allora ogni scelta del vettore $x^{(0)}$ produce una successione che non converge alla soluzione $x$ del sistema
 
-L’Osservazione 4.2 non viene dimostrata nel dettaglio. Si basa sull’equazione dell’errore $$e(0)e^{(k)}=P^k e^{(0)}$$Poiché il comportamento asintotico delle potenze $P^k$ è governato dal raggio spettrale $\rho(P)$, l’errore si comporta, per $k$ grande, come $Ck^m\rho(P)^k$ Perciò, tra due metodi convergenti, quello con raggio spettrale più piccolo converge più velocemente
-#### TEOREMA 4.2 PRIMA (Costruzione metodo iterativo)
-Un metodo iterativo per risolvere $Ax=b$
+##### Velocità di convergenza
+Consideriamo il metodo $M$ per risolvere il sistema $S$ e supponiamo che sia convergente, cioè
+$$
+x=Px+q
+$$
+e che il suo raggio spettrale della matrice di iterazione è
+$$
+\rho(P)<1
+$$
+Usando l’equazione dell’errore
+$$
+e^{(k)}=P^ke^{(0)}
+$$
+per ogni
+$$
+k=0,1,2,\ldots
+$$
+sappiamo il seguente fatto
+Fissiamo una qualsiasi norma vettoriale $\|\cdot\|$. Per quasi tutti i vettori iniziali
+$$
+x^{(0)}\in\mathbb{C}^n
+$$
+l’errore
+$$
+e^{(k)}=x^{(k)}-x
+$$
+commesso dal metodo $M$ al passo $k$ soddisfa una stima dove la sua norma vettoriale è circa uguale a 
+$$
+\|e^{(k)}\|\approx C k^m \rho(P)^k
+$$
+per $k$ abbastanza grande, anche se nella pratica questa stima descrive spesso bene il comportamento anche per valori piccoli di $k$.
+Qui:
+- $C$ è una costante indipendente da $k$
+- $m$ è un numero intero compreso tra $0$ e $n-1$
+- $m$ dipende solo dalla matrice $P$
+
+##### Definizione di confronto tra due metodi di iterazione
+Dati due metodi $\alpha$ e $\beta$ della forma
+$$
+x^{(k+1)}=Px^{(k)}+q
+$$
+per risolvere lo stesso sistema $S$, entrambi convergenti, diremo che $\alpha$ converge più velocemente di $\beta$ se facendo un confronto dei due raggi spettrali abbiamo che
+$$
+\rho(P_\alpha)<\rho(P_\beta)
+$$
+dove $P_\alpha$ e $P_\beta$ sono le matrici di iterazione associate rispettivamente ai metodi $\alpha$ e $\beta$.
+##### Criterio del resto del residuo
+Consideriamo il metodo $M$ per risolvere il sistema $S$
+La successione
+$$
+x^{(0)},x^{(1)},x^{(2)},\ldots
+$$
+generata da $M$, anche quando risulta convergente, deve essere prima o poi arrestata
+Il criterio di arresto più usato è quello del residuo
+Si sceglie una norma vettoriale $\|\cdot\|$, tipicamente
+$$
+\|\cdot\|_1,\qquad \|\cdot\|_2,\qquad \|\cdot\|_\infty
+$$
+e si arresta la successione al primo vettore $x^{(K)}$ che soddisfa la seguente condizione del residuo che prevede due norme vettoriali
+$$
+\frac{\|r^{(K)}\|}{\|b\|}\leq \varepsilon
+$$
+dove
+$$
+r^{(K)}=b-Ax^{(K)}
+$$
+è il residuo del sistema $S$ relativo al passo $K$, 
+ed $\varepsilon>0$ è una soglia di precisione prefissata
+Ricordiamo che $b$ è il vettore dei termini noti del sistema lineare
+$$
+Ax=b
+$$
+Per avere una forma equivalente ci basta prendere la formula della condizione del residuo però con il segno cambiato moltiplicando per -1 e tanto la norma non cambia per -1 abbiamo quindi che possiamo scriverlo anche come
+$$
+\frac{\|Ax^{(K)}-b\|}{\|b\|}
+$$
+
+A questo punto vogliamo collegare questa quantità all’errore relativo sulla soluzione, cioè
+$$
+\frac{\|x-x^{(K)}\|}{\|x\|}
+$$
+dove $x$ è la soluzione esatta del sistema
+
+Siccome
+$$
+Ax=b
+$$
+e
+$$
+r^{(K)}=b-Ax^{(K)}
+$$
+abbiamo
+$$
+r^{(K)}=Ax-Ax^{(K)}
+$$
+quindi raccogliendo per A abbiamo che
+$$
+r^{(K)}=A(x-x^{(K)})
+$$
+
+successivamente moltiplicando per $A^{-1}$ otteniamo che 
+$$
+x-x^{(K)}=A^{-1}r^{(K)}
+$$
+Allora sostituendo questo al posto di $r^{(k)}$ abbiamo che
+$$
+\frac{\|x-x^{(K)}\|}{\|x\|}
+=
+\frac{\|A^{-1}r^{(K)}\|}{\|x\|}$$
+Usiamo la proprietà di sub moltiplicatività abbiamo al numeratore che:
+$$
+\|A^{-1}r^{(K)}\|\leq \|A^{-1}\|\|r^{(K)}\|
+$$
+quindi
+$$
+\frac{\|x-x^{(K)}\|}{\|x\|}
+\leq
+\frac{\|A^{-1}\|\|r^{(K)}\|}{\|x\|}
+$$
+Ora vogliamo far comparire $\|b\|$ al denominatore, perché il criterio di arresto usa proprio b al denominatore
+$$
+\frac{\|r^{(K)}\|}{\|b\|}
+$$
+Ricordiamo che
+$$
+b=Ax
+$$
+quindi
+$$
+\|b\|=\|Ax\|
+$$
+Inoltre, sempre per la proprietà delle norme indotte,
+$$
+\|Ax\|\leq \|A\|\|x\|
+$$
+cioè
+
+$$
+\|b\|\leq \|A\|\|x\|
+$$
+da cui possiamo quindi dire che dividendo per la norma di b e dividendo poi per la norma di x otteniamo che
+$$
+\frac{1}{\|x\|}
+\leq
+\frac{\|A\|}{\|b\|}
+$$
+Quindi sostituendo che 1/ la norma di x è minore o uguale possiamo porre questo bound al bound precedente
+$$
+\frac{\|A^{-1}\|\|r^{(K)}\|}{\|x\|}
+\leq
+\|A^{-1}\|\|r^{(K)}\|\frac{\|A\|}{\|b\|}
+$$
+
+infatti togliendo il bound precedente ci rimane che
+$$
+\frac{\|x-x^{(K)}\|}{\|x\|}
+\leq
+\|A\|\|A^{-1}\|
+\frac{\|r^{(K)}\|}{\|b\|}
+$$
+Definiamo un numero di condizionamento della matrice $A$ come 
+$$
+\mu(A)=\|A\|\|A^{-1}\|
+$$
+Quindi otteniamo
+$$
+\frac{\|x-x^{(K)}\|}{\|x\|}
+\leq
+\mu(A)
+\frac{\|r^{(K)}\|}{\|b\|}
+$$
+Se avevamo detto che arrestiamo il metodo quando
+$$
+\frac{\|r^{(K)}\|}{\|b\|}\leq \varepsilon
+$$
+allora segue che in questo caso 
+$$
+\frac{\|x-x^{(K)}\|}{\|x\|}
+\leq
+\mu(A)\varepsilon
+$$
+Quindi il criterio del residuo controlla l’errore relativo sulla soluzione, ma con un fattore moltiplicativo dato dal numero di condizionamento $\mu(A)$
+dove noi vogliamo fondamentalmente che questo numero
+$$
+\mu(A)
+$$
+sia il più piccolo possibile
+
+
+##### Osservazione 4.4 sui tempi di convergenza
+La successione di vettori
+$$
+x^{(0)},x^{(1)},x^{(2)},\ldots
+$$
+generata dal metodo, anche quando risulta convergente alla soluzione $x$ del sistema, potrebbe impiegare troppo tempo a convergere.
+In tal caso potrebbero volerci troppe iterazioni prima che venga soddisfatta la condizione di arresto del residuo
+$$
+\frac{\|r^{(K)}\|}{\|b\|}\leq \varepsilon
+$$
+Per questo motivo, quando si implementa un metodo iterativo, è indispensabile fissare sempre un numero massimo di iterazioni consentite.
+Questo serve anche ad arrestare le iterazioni quando non c’è convergenza
+
+##### Procedura di costruzione di metodi iterativi mediante decomposizione della matrice
+Vediamo una procedura generale per costruire metodi iterativi della forma
+$$
+x^{(k+1)}=Px^{(k)}+q
+$$
+per risolvere il sistema
+$$
+Ax=b
+$$
+che chiamiamo $S$
 Si considera una decomposizione della matrice
 $$
 A=M-(M-A)
 $$
-con $M\in\mathbb{C}^{n\times n}$ invertibile detta matrice di precondizionamento
+con $M\in\mathbb{C}^{n\times n}$ invertibile
+La matrice $M$ viene detta precondizionatore
 
-L’idea è questa: invece di usare direttamente $A$, scegliamo una matrice $M$ che assomigli ad $A$, ma che sia molto più facile da usare nei calcoli, cioè tale che i sistemi lineari con matrice $M$ siano facili da risolvere
+Quindi invece di usare direttamente $A$, scegliamo una matrice $M$ che assomigli ad $A$, ma che sia molto più facile da usare nei calcoli, cioè tale che i sistemi lineari con matrice $M$ siano facili da risolvere
 
 Osserviamo che il sistema
 $$
@@ -4151,171 +4413,171 @@ infatti
 $$
 Ax=b
 $$
-diventa
+diventa quindi
 $$
-[M-(M-A)]x=b
+(M-(M-A))x=b
 $$
-cioè
+moltiplicando per $x$ alla $m$ e alla parentesi abbiamo
 $$
 Mx-(M-A)x=b
 $$
-portando il secondo termine a destra:
+portando a destra la parentesi per $x$ abbiamo che
 $$
 Mx=(M-A)x+b
 $$
-siccome $M$ è invertibile, moltiplichiamo per $M^{-1}$:
+siccome $M$ è invertibile, moltiplichiamo per $M^{-1}$ da una parte e dall'altra
 $$
 x=M^{-1}(M-A)x+M^{-1}b
 $$
-questa è una forma a punto fisso.
-Possiamo anche riscriverla in un altro modo:
+A questo punto abbiamo riscritto il sistema nella forma di punto fisso
+$$x=Px+q$$
+dove sarebbe
+$$P=M^{-1}(M-A), \qquad q=M^{-1}b$$
+
+Ora vogliamo scrivere il tutto in una forma che metta in evidenza il residuo
+$$
+r(x)=b-Ax
+$$
+Quindi iniziamo con la stessa formula di prima
 $$
 x=M^{-1}(M-A)x+M^{-1}b
 $$
-sviluppiamo
+sviluppiamo il prodotto dentro la parentesi ottenendo quindi
 $$
 M^{-1}(M-A)=M^{-1}M-M^{-1}A=I-M^{-1}A
 $$
-
 quindi
 $$
 x=(I-M^{-1}A)x+M^{-1}b
 $$
-cioè
+moltiplichiamo il vettore x nella parentesi
 $$
 x=x-M^{-1}Ax+M^{-1}b
 $$
-raccogliendo $M^{-1}$:
+raccogliendo $M^{-1}$
 $$
 x=x+M^{-1}(b-Ax)
 $$
-per cui $\forall y \in \mathbb{C}^n$ definiamo $r(y)=b-Ay$ 
+ora abbiamo che $b-Ax$ è proprio il residuo del sistema nel punto $x$
+e quindi mettendo il residuo
+Abbiamo che
+$$
+x=x+M^{-1}(r(x))
+$$
+Definendo per un vettore qualsiasi $y$, quindi per ogni $y\in\mathbb{C}^n$,
+$$
+r(y)=b-Ay
+$$
+è il residuo in $y$ per il sistema $S$
 
-il residuo del sistema nel punto $y$
-
-per cui $x=x+M^{-1}r(x)$ 
-
-A partire da questa riscrittura, si definisce il metodo iterativo:
+A partire da questa riscrittura, si definisce il metodo iterativo per un $y=x^{(k)}$ 
+come
 $$
 x^{(0)}\in\mathbb{C}^n \text{ dato}
 $$
+e per il passo k+1
+
 $$
 x^{(k+1)}=M^{-1}(M-A)x^{(k)}+M^{-1}b
 $$
-per $k=0,1,2,\ldots$
-equivalentemente,
+per
+$$
+k=0,1,2,\ldots
+$$
+oppure con il residuo avevamo che 
+
 $$
 x^{(k+1)}=x^{(k)}+M^{-1}r^{(k)}
 $$
-dove $r^{(k)}=r(x^{(k)})=b-Ax^{(k)}$
-e come matrice di iterazione abbiamo
-$M^{-1}(M-A)=I-M^{-1}A$ 
-Il metodo costruito qui è consistente con il sistema $S$ $Ax=b$ dove
+dove per il residuo avevamo che
+$$
+r^{(k)}=b-Ax^{(k)}
+$$
 
-$Ax=b$   -> $b-Ax=0$ quindi
+
+Il metodo costruito qui è consistente con il sistema $S$ $Ax=b$ 
+dobbiamo verificare che se $x$ è soluzione esatta del sistema, allora applicando il metodo a $x$, $x$ rimane uguale a sé stesso
+
+$Ax=b$   -> $b-Ax=0$ quindi sappiamo che questo è proprio il residuo $r(x)$ 
+che dovrà valere 0 se x è la soluzione esatta
+
+mettiamo $b-Ax$ nel metodo
 
 $x+M^{-1}(b-Ax)=x+M^{-1}0=x$ 
+sapendo che fa zero mettiamo zero
 
 per cui $x=x+M^{-1}(b-Ax)$
 
-un punto fisso del metodo
-
-#### TEOREMA 4.2 DOPO
+Questo significa che la soluzione esatta $x$ è un **punto fisso** del metodo
+##### TEOREMA 4.2
 Il metodo Costruito per risolvere $Ax=b$
-è convergente se e solo se 
+è convergente se e solo se il raggio spettrale della matrice iterativa del metodo è <1
 $$
 \rho(I-M^{-1}A)<1
 $$
-sappiamo che il metodo è 
-$$
-x^{(k+1)}=x^{(k)}+M^{-1}(b-Ax^{(k))})
-$$
-nella forma del teorema della convergenza abbiamo
-$$x^{(k+1)}=x^{k}b-M^{-1}Ax^{(k)}$$
-dove poi abbiamo
-$$x^{(k+1)}=(I-M^{-1}A)x^{(k)}+M^{-1}b$$
-la prima parte è P la seconda é q
-il metodo converge se e solo se $$\rho(P) < 1$$
-Quindi $\rho(I-M^{-1}A) < 1$
 ##### Osservazione 4.5 (SMART)
-
-Il polinomio caratteristico di
+Il polinomio caratteristico della matrice di iterazione
 $$
 I-M^{-1}A
 $$
-è
+è definita come
 $$
 C_{I-M^{-1}A}(\lambda)
 =
 \det(\lambda I-(I-M^{-1}A))
 $$
-quindi
+quindi cambiando i vari segni moltiplicando per - abbiamo
 $$
 C_{I-M^{-1}A}(\lambda)
 =
 \det(\lambda I-I+M^{-1}A)
 $$
+
 Ora vogliamo evitare di calcolare esplicitamente $M^{-1}$.
-Osserviamo che
+Osserviamo che possiamo raccogliere per la matrice identità
 $$
 \lambda I-I+M^{-1}A
 =
 (\lambda-1)I+M^{-1}A
 $$
-possiamo raccogliere $M^{-1}$ scrivendo
+possiamo raccogliere poi per $M^{-1}$ scrivendo la cosa in modo che il prodotto poi faccia la matrice identità
 $$
 (\lambda-1)I+M^{-1}A
 =
 M^{-1}[(\lambda-1)M+A]
 $$
-infatti
-$$
-M^{-1}[(\lambda-1)M+A]
-=
-(\lambda-1)M^{-1}M+M^{-1}A
-=
-(\lambda-1)I+M^{-1}A
-$$
-quindi
+quindi abbiamo il seguente determinante dopo questi raccoglimenti e semplificazioni
 $$
 C_{I-M^{-1}A}(\lambda)
 =
 \det(M^{-1}[(\lambda-1)M+A])
 $$
-per Binet:
+per Binet possiamo dire che il determinante di due prodotti si può scrivere come il prodotto dei due determinanti
 $$
 C_{I-M^{-1}A}(\lambda)
 =
 \det(M^{-1})\det((\lambda-1)M+A)
 $$
-cioè
+poi moltiplichiamo M al secondo determinante ottenendo
 $$
 C_{I-M^{-1}A}(\lambda)
 =
 \det(M^{-1})\det(\lambda M-M+A)
 $$
-Il primo determinante
+Sappiamo che il primo determinante
 $$
 \det(M^{-1})
 $$
-è diverso da zero perché $M$ è invertibile.
-Infatti
-$$
-\det(M)\neq 0
-$$
-e quindi
-$$
-\det(M^{-1})=\frac{1}{\det(M)}\neq 0
-$$
-Allora
+è diverso da zero perché $M$ è invertibile
+Allora il polinomio caratteristico della matrice di iterazione valutato in un certo lambda è uguale a zero
 $$
 C_{I-M^{-1}A}(\lambda)=0
 $$
-se e solo se
+se e solo se il determinante 
 $$
 \det(\lambda M-M+A)=0
 $$
-Questa è l’equazione smart.
+Questa la possiamo chiamare equazione smart
 Serve per calcolare gli autovalori e quindi il raggio spettrale di
 $$
 I-M^{-1}A
@@ -4328,10 +4590,11 @@ né
 $$
 I-M^{-1}A
 $$
-Quindi, invece di costruire la matrice di iterazione e poi calcolarne gli autovalori, possiamo risolvere direttamente
+Quindi, invece di costruire la matrice di iterazione e poi calcolarne gli autovalori, possiamo risolvere direttamente il seguente determinante
 $$
 \det(\lambda M-M+A)=0
 $$
+utile per trovare ad esempio il raggio spettrale in modo più semplice
 ##### OSSERVAZIONE 4.6
 L’iterazione $k$-esima del metodo viene calcolata con la formula
 $$
@@ -4341,9 +4604,9 @@ e richiede il calcolo del vettore
 $$
 z^{(k)}=M^{-1}r^{(k)}
 $$
-detto residuo precondizionato.
-In pratica, però, non si calcola mai esplicitamente $M^{-1}$.
-Il calcolo di $z^{(k)}$ si fa risolvendo il sistema lineare
+detto residuo precondizionato
+In pratica, però, non si calcola mai esplicitamente $M^{-1}$
+Il calcolo di $z^{(k)}$ si fa risolvendo il sistema lineare moltiplicando per M da una parte e l'altra
 $$
 Mz^{(k)}=r^{(k)}
 $$
@@ -4364,14 +4627,14 @@ deve essere più rapido da risolvere del sistema originario
 $$
 Ax=b
 $$
-altrimenti non converrebbe usare questo metodo iterativo.
+altrimenti non converrebbe usare questo metodo iterativo
 ##### OSSERVAZIONE 4.7
 Intuitivamente, quanto più il precondizionatore $M$ assomiglia alla matrice $A$, tanto più il metodo dovrebbe convergere velocemente.
 La velocità dipende dal raggio spettrale della matrice di iterazione
 $$
 P=I-M^{-1}A
 $$
-Se
+Se la matrice precondizionatore $M$
 $$
 M\approx A
 $$
@@ -4379,29 +4642,31 @@ allora
 $$
 M-A\approx 0
 $$
-e quindi
+e quindi moltiplicando per $M^{-1}$ da una parte e l'altra abbiamo che
 $$
 M^{-1}(M-A)\approx 0
 $$
-cioè
+moltiplicando per la parentesi
 $$
 I-M^{-1}A\approx 0
 $$
-per cui ci si aspetta un raggio spettrale piccolo.
+per cui ci si aspetta un raggio spettrale piccolo
+
 Il caso limite è
 $$
 M=A
 $$
-In questo caso
+In questo caso avremmo che sostituendo M come se fosse A la somiglianza sarebbe identica e quindi avremmo una differenza a 0 delle due
 $$
 I-M^{-1}A=I-A^{-1}A=I-I=0
 $$
-quindi la matrice di iterazione è nulla.
-Il metodo diventa
+quindi la matrice di iterazione è nulla
+
+Il metodo con $M=A$ diventerebbe
 $$
 x^{(k+1)}=x^{(k)}+A^{-1}(b-Ax^{(k)})
 $$
-cioè
+cioè moltiplicando nella parentesi
 $$
 x^{(k+1)}=x^{(k)}+A^{-1}b-A^{-1}Ax^{(k)}
 $$
@@ -4409,28 +4674,258 @@ quindi
 $$
 x^{(k+1)}=x^{(k)}+A^{-1}b-x^{(k)}
 $$
-e dunque
+e dunque togliendo i due $x^{(k)}$ rimarrebbe una cosa che è uguale proprio ad $x$
 $$
 x^{(k+1)}=A^{-1}b=x
 $$
-cioè converge in una sola iterazione alla soluzione esatta.
+cioè converge in una sola iterazione alla soluzione esatta
 Il problema è che questa unica iterazione richiede di risolvere un sistema con matrice $A$, quindi costa come risolvere direttamente il sistema originale
 $$
 Ax=b
 $$
-Conclusione: nella scelta del precondizionatore $M$ occorre mediare fra due cose:
+Quindi nella scelta del precondizionatore $M$ occorre mediare fra due cose:
 - qualità dell’approssimazione $M\approx A$
 - facilità e rapidità della risoluzione di un sistema lineare con matrice $M$
-Una buona approssimazione
+
+### due **metodi iterativi per risolvere sistemi lineari**
+#### Metodo di Jacobi
+Supponiamo che $A$ abbia elementi diagonali non nulli, cioè
+
 $$
-M\approx A
+a_{ii}\neq 0
+\qquad i=1,\ldots,n
 $$
-generalmente assicura una buona velocità di convergenza.
-La facilità e rapidità della risoluzione di
+Allora la parte diagonale di $A$, cioè la matrice
+
 $$
-Mz=r
+D=
+\begin{pmatrix}
+a_{11} & 0 & \cdots & 0\\
+0 & a_{22} & \cdots & 0\\
+\vdots & \vdots & & \vdots\\
+0 & 0 & \cdots & a_{nn}
+\end{pmatrix}
 $$
-assicura invece che ogni iterazione del metodo sia veloce.
+è invertibile
+Infatti $D$ è diagonale e
+$$
+\det(D)=a_{11}a_{22}\cdots a_{nn}
+$$
+siccome tutti gli elementi diagonali sono non nulli, il determinante è diverso da zero
+Dunque posso definire il metodo di Jacobi scegliendo come precondizionatore
+$$
+M=D
+$$
+
+Il metodo è definito come
+
+$$
+x^{(0)}\in\mathbb{C}^n \text{ dato}
+$$
+per ricorsione abbiamo invece
+$$
+x^{(k+1)}=D^{-1}(D-A)x^{(k)}+D^{-1}b
+$$
+equivalentemente si può scrivere anche come
+$$
+x^{(k+1)}=x^{(k)}+D^{-1}r^{(k)}
+$$
+per
+$$
+k=0,1,2,\ldots
+$$
+dove si ha come residuo
+$$
+r^{(k)}=b-Ax^{(k)}
+$$
+La matrice di iterazione del metodo di Jacobi è in questo caso
+$$
+J=D^{-1}(D-A)
+$$
+cioè moltiplicando $D^{-1}$ si ha
+$$
+J=I-D^{-1}A
+$$
+Il metodo di Jacobi è convergente se e solo se
+$$
+\rho(J)<1
+$$
+cioè
+$$
+\rho(I-D^{-1}A)<1
+$$
+Possiamo inoltre dire che l’iterazione $k$-esima di Jacobi richiede di calcolare il vettore
+$$
+z^{(k)}=D^{-1}r^{(k)}
+$$
+possiamo moltiplicare per D e avere che
+$$
+Dz^{(k)}=r^{(k)}
+$$
+Questo sistema è facilissimo da risolvere, perché D è diagonale
+$$
+\begin{cases}
+a_{11}z_1^{(k)}=r_1^{(k)}\\
+a_{22}z_2^{(k)}=r_2^{(k)}\\
+\vdots\\
+a_{nn}z_n^{(k)}=r_n^{(k)}
+\end{cases}
+$$
+infatti Il costo del calcolo di $z^{(k)}$ è
+
+$$
+nD
+$$
+
+cioè $n$ divisioni
+#### Metodo di Gauss-Seidel
+Supponiamo ancora che $A$ abbia elementi diagonali non nulli
+$$
+a_{ii}\neq 0
+\qquad i=1,\ldots,n
+$$
+Allora la parte triangolare inferiore di $A$, cioè la matrice $E$ ottenuta ricopiando la parte triangolare inferiore di $A$ inclusa la diagonale, è invertibile
+Quindi
+$$
+E=
+\begin{pmatrix}
+a_{11} & 0 & 0 & \cdots & 0\\
+a_{21} & a_{22} & 0 & \cdots & 0\\
+a_{31} & a_{32} & a_{33} & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & a_{n3} & \cdots & a_{nn}
+\end{pmatrix}
+$$
+Essendo triangolare inferiore,
+$$
+\det(E)=a_{11}a_{22}\cdots a_{nn}
+$$
+e siccome gli elementi diagonali sono non nulli,
+$$
+\det(E)\neq 0
+$$
+quindi $E$ è invertibile.
+
+Dunque posso definire il metodo di Gauss-Seidel, che è il metodo costruito scegliendo come precondizionatore
+$$
+M=E
+$$
+Il metodo è
+$$
+x^{(0)}\in\mathbb{C}^n \text{ dato}
+$$
+$$
+x^{(k+1)}=E^{-1}(E-A)x^{(k)}+E^{-1}b
+$$
+equivalentemente posso anche scrivere come
+$$
+x^{(k+1)}=x^{(k)}+E^{-1}r^{(k)}
+$$
+per
+$$
+k=0,1,2,\ldots
+$$
+dove si ha come residuo
+$$
+r^{(k)}=b-Ax^{(k)}
+$$
+La matrice di iterazione di Gauss-Seidel è
+$$
+G=E^{-1}(E-A)
+$$
+cioè moltiplicando la parentesi
+$$
+G=I-E^{-1}A
+$$
+Il metodo di Gauss-Seidel è convergente se e solo se
+$$
+\rho(G)<1
+$$
+cioè
+$$
+\rho(I-E^{-1}A)<1
+$$
+L’iterazione $k$-esima di Gauss-Seidel richiede di calcolare il vettore
+$$
+z^{(k)}=E^{-1}r^{(k)}
+$$
+moltiplicando per E a sinistra e a destra abbiamo
+$$
+Ez^{(k)}=r^{(k)}
+$$
+Questo è facile, ma meno immediato rispetto al caso diagonale
+Un sistema triangolare inferiore si risolve con la sostituzione in avanti
+Infatti
+$$
+Ez^{(k)}=r^{(k)}
+$$
+equivale ad avere un sistema del seguente tipo
+$$
+\begin{cases}
+a_{11}z_1^{(k)}=r_1^{(k)}\\
+a_{21}z_1^{(k)}+a_{22}z_2^{(k)}=r_2^{(k)}\\
+a_{31}z_1^{(k)}+a_{32}z_2^{(k)}+a_{33}z_3^{(k)}=r_3^{(k)}\\
+\vdots\\
+a_{n1}z_1^{(k)}+a_{n2}z_2^{(k)}+\cdots+a_{nn}z_n^{(k)}=r_n^{(k)}
+\end{cases}
+$$
+che portando a destra $a$ abbiamo
+$$
+\begin{cases}
+z_1^{(k)}=\dfrac{r_1^{(k)}}{a_{11}}\\[6pt]
+z_2^{(k)}=\dfrac{r_2^{(k)}-a_{21}z_1^{(k)}}{a_{22}}\\[6pt]
+z_3^{(k)}=\dfrac{r_3^{(k)}-a_{31}z_1^{(k)}-a_{32}z_2^{(k)}}{a_{33}}\\
+\vdots\\
+z_n^{(k)}=\dfrac{r_n^{(k)}-a_{n1}z_1^{(k)}-a_{n2}z_2^{(k)}-\cdots-a_{n,n-1}z_{n-1}^{(k)}}{a_{nn}}
+\end{cases}
+$$
+In generale, per ogni
+$$
+i=1,\ldots,n
+$$
+si ha
+$$
+z_i^{(k)}
+=
+\frac{
+r_i^{(k)}
+-
+a_{i1}z_1^{(k)}
+-
+a_{i2}z_2^{(k)}
+-
+\cdots
+-
+a_{i,i-1}z_{i-1}^{(k)}
+}{a_{ii}}
+$$
+
+Il costo del calcolo di $z_i^{(k)}$ è dunque
+$$
+1D+(i-1)M+(i-1)A
+$$
+perché:
+- serve una divisione per $a_{ii}$
+- servono $(i-1)$ moltiplicazioni per i termini $a_{ij}z_j^{(k)}$
+- servono $(i-1)$ addizioni/sottrazioni per combinarli con $r_i^{(k)}$
+
+Quindi il costo complessivo del calcolo di tutto $z^{(k)}$ è la sommatoria del costo dei singoli $z_i^{(k)}$
+$$
+\sum_{i=1}^n \left[1D+(i-1)M+(i-1)A\right]
+$$
+cioè risolvendo la sommatoria di 1D abbiamo $n$
+$$
+nD+\left(\sum_{i=1}^n(i-1)\right)M+\left(\sum_{i=1}^n(i-1)\right)A
+$$
+sapendo che la somma dei primi n-1 numeri naturali è
+$$
+\sum_{i=1}^n(i-1)=0+1+\cdots+(n-1)=\frac{n(n-1)}{2}
+$$
+otteniamo quindi
+$$
+nD+\frac{n(n-1)}{2}M+\frac{n(n-1)}{2}A
+$$
+Questo costo può ridursi se la parte triangolare inferiore $E$ di $A$ ha molti zeri
 ##### OSSERVAZIONE 4.8
 Confrontando i precondizionatori $D$ ed $E$ dei metodi di Jacobi e Gauss-Seidel, osserviamo quanto segue
 - L’approssimazione
@@ -4441,8 +4936,8 @@ $$
 $$
 D\approx A
 $$
-perché $E$ contiene più informazioni di $A$ rispetto a $D$.
-Infatti $D$ contiene solo la diagonale di $A$, mentre $E$ contiene tutta la parte triangolare inferiore, inclusa la diagonale.
+perché $E$ contiene più informazioni di $A$ rispetto a $D$
+Infatti $D$ contiene solo la diagonale di $A$, mentre $E$ contiene tutta la parte triangolare inferiore, inclusa la diagonale
 Inoltre
 $$
 E-A
@@ -4451,19 +4946,19 @@ ha più zeri rispetto a
 $$
 D-A
 $$
-Questo spiega perché molto spesso il metodo di Gauss-Seidel converge più velocemente del metodo di Jacobi, cioè spesso
+Questo spiega perché molto spesso il metodo di Gauss-Seidel converge più velocemente del metodo di Jacobi, cioè spesso confrontando i due ragi spettrali delle due matrici di iterazione abbiamo
 $$
 \rho(G)<\rho(J)
 $$
-dove $J$ e $G$ sono rispettivamente le matrici di iterazione di Jacobi e Gauss-Seidel.
-- Però la risoluzione di un sistema lineare con matrice $E$ è più costosa della risoluzione di un sistema lineare con matrice $D$.
+
+Però la risoluzione di un sistema lineare con matrice $E$ è più costosa della risoluzione di un sistema lineare con matrice $D$.
 Infatti:
 - con $D$ basta risolvere un sistema diagonale, cioè fare $n$ divisioni;
 - con $E$ bisogna risolvere un sistema triangolare inferiore, usando sostituzione in avanti.
-Pertanto, una iterazione di Gauss-Seidel costa di più di una iterazione di Jacobi.
+Pertanto, una iterazione di Gauss-Seidel costa di più di una iterazione di Jacobi
 Quindi il confronto è questo:
-- Jacobi: iterazioni più economiche, ma spesso convergenza più lenta;
-- Gauss-Seidel: iterazioni più costose, ma spesso convergenza più veloce.
+- Jacobi: iterazioni più economiche, ma spesso convergenza più lenta
+- Gauss-Seidel: iterazioni più costose, ma spesso convergenza più veloce
 #### TEOREMA 4.3
 Supponiamo che $A\in\mathbb{C}^{n\times n}$ soddisfi almeno una delle seguenti condizioni:
 - $A$ è a diagonale dominante per righe e irriducibile
@@ -4473,13 +4968,14 @@ Supponiamo che $A\in\mathbb{C}^{n\times n}$ soddisfi almeno una delle seguenti c
 Allora i metodi di Jacobi e Gauss-Seidel per risolvere un sistema lineare di matrice $A$ sono convergenti
 ##### Osservazione 4.9
 Se $A\in\mathbb{C}^{n\times n}$ soddisfa almeno una delle quattro condizioni del teorema, allora:
-- $A$ è invertibile per il Teorema 3.7
-- gli elementi diagonali di $A$ sono diversi da $0$
+- $A$ è invertibile per il Teorema 3.7 
+	- poiché a diagonale dominante e irriducibile
+- gli elementi diagonali di $A$ sono diversi da $0$ 
 Infatti, se per assurdo ci fosse un elemento diagonale nullo, ad esempio
 $$
 a_{ii}=0
 $$
-allora, nel caso di dominanza diagonale per righe, avremmo
+allora, nel caso di dominanza diagonale per righe, avremmo che il modulo dell'elemento diagonale è maggiore della somma di tutti gli altri elementi per stessa riga
 $$
 0=|a_{ii}|\geq \sum_{\substack{j=1\\j\neq i}}^n |a_{ij}|
 $$
@@ -4487,7 +4983,6 @@ quindi necessariamente
 $$
 a_{ij}=0 \qquad \forall j\neq i
 $$
-
 cioè tutta la riga $i$-esima sarebbe nulla. Questo è impossibile se $A$ è invertibile
 Analogamente, nel caso di dominanza per colonne, se $a_{jj}=0$, allora tutta la colonna $j$-esima sarebbe nulla, quindi $A$ non potrebbe essere invertibile
 
@@ -4496,10 +4991,11 @@ se $A$ soddisfa almeno una delle quattro condizioni del Teorema 4.3, allora i me
 
 ##### Dimostrazione Teorema 4.3
 ##### Dimostrazione 1 per il metodo di Gauss-Seidel a diagonale dominante per righe e irriducibile
-per dimostrare che  il metodo di Gauss-Seidel converge dobbiamo dimostrare che $\rho(G)<1$
+per dimostrare che  il metodo di Gauss-Seidel converge dobbiamo dimostrare che il raggio spettrale della sua matrice di iterazione è $\rho(G)<1$
 con $G=I-E^{-1}A$ come matrice di iterazione di Gauss-Seidel
-per osservazione smart gli autovalori di G sono dati dall'equazione del $det(\lambda E+A-E)=0$
-ipotizzando un caso dove n=4 abbiamo che 
+per osservazione smart gli autovalori di G sono dati dall'equazione del 
+$$det(\lambda E+A-E)=0$$
+ipotizzando un caso dove n=4 abbiamo che la matrice di precondizionamento
 $$
 E=
 \begin{pmatrix}
@@ -4519,46 +5015,49 @@ $$
 \lambda a_{41} & \lambda a_{42} & \lambda a_{43} & \lambda a_{44}
 \end{pmatrix}
 $$
-si vuole dimostrare che nessun $|\lambda|\geq 1$ è in G 
+ragionando per esclusione si vuole dimostrare che nessun autovalore $|\lambda|\geq 1$ è in G così da rispettare che $\rho(G)<1$
+
 per questo vogliamo dimostrare che $\lambda E+A-E$ è invertibile $\forall \lambda \geq 1$ 
+
 se questo è invertibile allora significa che il suo determinante è diverso da 0 perciò quel $\lambda$ non è autovalore di G
-per il teorema 3.7 se A è a diagonale dominante e irriducibile allora A è invertibile visto che $|\lambda| \geq 1$ 
 
-abbiamo $\lambda\neq 0$, quindi moltiplicare certi elementi di $A$ per $\lambda$ non cambia il fatto che siano nulli o non nulli
+vogliamo sfruttare un teorema 3.7 per dire che è invertibile e per farlo dobbiamo verificare che 
+- $\lambda E+A-E$ è a diagonale dominante e irriducibile
 
-Gli zeri della matrice $\lambda E+A-E$ stanno nelle stesse posizioni degli zeri di $A$
-Quindi le due matrici hanno lo stesso grafo associato
-Siccome $A$ è irriducibile, il grafo di $A$ è fortemente connesso, e quindi anche il grafo di $\lambda E+A-E$ è fortemente connesso
+sappiamo che $A$ è irriducibile
+visto che $|\lambda| \geq 1$ allora le due matrici hanno stesso grafo associato che è fortemente connesso 
+quindi anche $\lambda E + A-E$ è irriducibile
 
-quindi $\lambda E + A-E$ è irriducibile
+
 per dimostrare invece che $\lambda E + A-E$ è a diagonale dominante per righe
-Fissiamo una riga $i$.
+Fissiamo una riga $i$
 L’elemento diagonale della riga $i$ è
 $$
 \lambda a_{ii}
 $$
-quindi il suo modulo è
+quindi il suo modulo è 
 $$
 |\lambda a_{ii}|=|\lambda||a_{ii}|
 $$
 Gli elementi fuori diagonale della riga $i$ sono:
-- quelli con $j<i$, cioè sotto la diagonale, moltiplicati per $\lambda$;
-- quelli con $j>i$, cioè sopra la diagonale, lasciati invariati.
-Quindi la somma dei moduli degli elementi fuori diagonale della riga $i$ della matrice $\lambda E+A-E$ è
+- quelli con $j<i$, cioè sotto la diagonale, moltiplicati per $\lambda$
+- quelli con $j>i$, cioè sopra la diagonale, lasciati invariati
+
+Quindi la somma dei moduli degli elementi fuori diagonale della riga $i$ della matrice $\lambda E+A-E$ è divisa in due gruppi di sommatorie
 $$
 \sum_{j=1}^{i-1}|\lambda a_{ij}|+\sum_{j=i+1}^n |a_{ij}|
 $$
-cioè
+portando fuori il lambda e mettendolo a modulo
 $$
 |\lambda|\sum_{j=1}^{i-1}|a_{ij}|+\sum_{j=i+1}^n |a_{ij}|
 $$
-Ora, siccome $A$ è a diagonale dominante per righe,
+Ora, siccome $A$ è a diagonale dominante per righe sappiamo che per ogni riga $i$ l’elemento diagonale domina tutta la riga
 $$
 |a_{ii}|
 \geq
 \sum_{j=1}^{i-1}|a_{ij}|+\sum_{j=i+1}^n |a_{ij}|
 $$
-moltiplichiamo per $|\lambda|$:
+moltiplichiamo per $|\lambda|$ da una parte e dall'altra ottenendo 
 $$
 |\lambda||a_{ii}|
 \geq
@@ -4566,14 +5065,14 @@ $$
 +
 |\lambda|\sum_{j=i+1}^n |a_{ij}|
 $$
-siccome $|\lambda|\geq 1$
-abbiamo
+il nostro obiettivo però è togliere dalla seconda soma $\lambda$ quindi
+abbiamo visto che $|\lambda|\geq 1$ allora per forza di cose abbiamo il seguente lower bound
 $$
 |\lambda|\sum_{j=i+1}^n |a_{ij}|
 \geq
 \sum_{j=i+1}^n |a_{ij}|
 $$
-quindi
+quindi possiamo scrivere che 
 $$
 |\lambda||a_{ii}|
 \geq
@@ -4581,7 +5080,7 @@ $$
 +
 \sum_{j=i+1}^n |a_{ij}|
 $$
-cioè
+cioè portando dentro il lambda abbiamo che
 $$
 |\lambda a_{ii}|
 \geq
@@ -4591,21 +5090,24 @@ $$
 $$
 Questa è esattamente la dominanza diagonale per righe della matrice $\lambda E+A-E$
 
-definire dominanza diagonale implica anche che per una riga k si ha che 
-
+definire dominanza diagonale implica anche che per una riga k 
+visto che A è a diagonale dominante stretta allora sappiamo che
 $$
 |a_{kk}|>
 \sum_{\substack{j=1\\j\neq k}}^n |a_{kj}|
 $$
-per cui  per $\lambda E+A-E$ abbiamo che 
+per cui considerando  abbiamo che la cosa vale anche per $\lambda E+A-E$
 $$
 |\lambda||a_{kk}|>
 |\lambda|\sum_{\substack{j=1\\j\neq k}}^n |a_{kj}|
 $$
-quindi per il teorema 3.7 $\lambda E+A-E$ è invertibile
-quindi $det(\lambda E+ A -E)\ \neq 0 \ \ \ \forall |\lambda| \geq 1$
-Conclusione: tutte le radici hanno modulo minore di $1$.
-Ma queste radici sono gli autovalori di $G$.
+quindi per il teorema 3.7 
+$\lambda E+A-E$ è invertibile
+essendo invertibile allora $det(\lambda E+ A -E)\ \neq 0 \ \ \ \forall |\lambda| \geq 1$
+
+Conclusione: tutte le radici hanno modulo minore di $1$
+
+Ma queste radici sono gli autovalori di $G$
 Quindi tutti gli autovalori di $G$ hanno modulo minore di $1$, e dunque
 $$
 \rho(G)<1
@@ -4646,14 +5148,17 @@ Infatti, in questo caso non serve usare l’irriducibilità. La dominanza strett
 
 Per esempio, se una matrice $B$ è a diagonale dominante in senso stretto per righe, allora per ogni riga $i$ vale
 $$|b_{ii}|>\sum_{j\neq i}|b_{ij}|$$
-Questo significa che, nel cerchio di Gershgorin $K_i$, la distanza dello zero dal centro $b_{ii}$​ è maggiore del raggio. 
+Questo significa che, nel cerchio di Gershgorin $K_i$, la distanza dello zero dal centro $b_{ii}$​ è maggiore del raggio
 
 Quindi $0\notin K_i \qquad \forall i$
 
-Per il primo teorema di Gershgorin, tutti gli autovalori di $B$ stanno nell’unione dei cerchi di Gershgorin. Poiché lo zero non appartiene a nessun cerchio, lo zero non è autovalore di $B$. Quindi $B$ è invertibile.
+Per il primo teorema di Gershgorin, tutti gli autovalori di $B$ stanno nell’unione dei cerchi di Gershgorin. 
+Poiché lo zero non appartiene a nessun cerchio, lo zero non è autovalore di $B$. Quindi $B$ è invertibile.
 Applicando questo alla matrice ausiliaria $\lambda E+A-E$
 oppure $\lambda D+A-D$
-si conclude ancora che, per ogni $\lambda$ con $|\lambda|\geq 1$, tale matrice è invertibile. Quindi quel $\lambda$ non è autovalore della matrice di iterazione. 
+
+si conclude ancora che, per ogni $\lambda$ con $|\lambda|\geq 1$, tale matrice è invertibile. Quindi quel $\lambda$ non è autovalore della matrice di iterazione.
+
 Di conseguenza tutti gli autovalori della matrice di iterazione hanno modulo minore di 1, cioè $\rho(G)<1$
 oppure $\rho(J)<1$
 Per il Teorema 4.1, il metodo converge
@@ -4663,40 +5168,41 @@ $$
 A\in\mathbb{C}^{n\times n}
 $$
 HDP, cioè hermitiana definita positiva.
-Allora il metodo di Gauss-Seidel per risolvere un sistema lineare di matrice $A$ è convergente.
+Allora il metodo di Gauss-Seidel per risolvere un sistema lineare di matrice $A$ è convergente
 ##### Osservazione 4.10
-Se $A\in\mathbb{C}^{n\times n}$ è HDP, allora:
-- $A$ è invertibile, perché i suoi autovalori sono reali e positivi, quindi $0$ non è autovalore di $A$;
+Se $A\in\mathbb{C}^{n\times n}$ è HDP, allora possiamo dire che:
+- $A$ è invertibile, perché i suoi autovalori sono reali e positivi, quindi $0$ non è autovalore di $A$
 - gli elementi diagonali di $A$ sono positivi, infatti
 $$
 a_{ii}=e_i^*Ae_i>0
 $$
-dove $e_i$ è l’$i$-esimo vettore della base canonica.
-Ricorda: autovalori ed elementi diagonali sono due cose diverse.
+dove $e_i$ è l’$i$-esimo vettore della base canonica
+Ricorda: autovalori ed elementi diagonali sono due cose diverse
 Il fatto che $A$ sia HDP implica sia positività degli autovalori sia positività degli elementi diagonali, ma sono due proprietà diverse.
+
+Significa dunque che i metodi di Gauss-Seidel e Jacobi si possono utilizzare per risolvere un sistema lineare di matrice $A$ 
 ##### Dimostrazione
 Dobbiamo dimostrare che
 $$
 \rho(G)<1
 $$
-dove
+dove abbiamo come matrice di iterazione di Gauss-Seidel
 $$
 G=I-E^{-1}A
 $$
-è la matrice di iterazione di Gauss-Seidel.
-La dimostrazione si divide in due parti.
+La dimostrazione si divide in due parti
 ###### Parte 1
 Dimostriamo che
 $$
 A-G^*AG
 $$
-è HDP.
-Prima dimostriamo che è hermitiana.
+è Hermitiana Definita Positiva
+Prima dimostriamo che è hermitiana
 Siccome $A$ è hermitiana, abbiamo
 $$
 A^*=A
 $$
-Calcoliamo la trasposta coniugata:
+Calcoliamo la trasposta coniugata di $A-G^*AG$ così da vedere se risulta uguale
 $$
 (A-G^*AG)^*
 =
@@ -4706,7 +5212,7 @@ usando la proprietà
 $$
 (XY)^*=Y^*X^*
 $$
-otteniamo
+otteniamo che la parentesi dopo il $-$ è
 $$
 (G^*AG)^*=G^*A^*G
 $$
@@ -4714,8 +5220,8 @@ perché
 $$
 (G^*)^*=G
 $$
-e poi l’ordine si ricompone nello stesso modo.
-Siccome $A^*=A$, segue
+e poi l’ordine si ricompone nello stesso modo
+Siccome $A^*=A$ poiché hermitiana, segue che
 $$
 (G^*AG)^*=G^*AG
 $$
@@ -4723,47 +5229,22 @@ quindi
 $$
 (A-G^*AG)^*=A-G^*AG
 $$
-dunque $A-G^*AG$ è hermitiana.
-Ora dimostriamo che è definita positiva.
+dunque $A-G^*AG$ è hermitiana
+Ora dimostriamo che è *definita positiva*
+
+ricordando che la matrice di iterazione
+$$
+G=I-E^{-1}A
+$$
 Poniamo
 $$
 F=E^{-1}A
 $$
-Allora
+Allora sostituiamo $F$
 $$
 G=I-E^{-1}A=I-F
 $$
-Osserviamo che $F$ è invertibile perché è prodotto di matrici invertibili:
-$$
-F=E^{-1}A
-$$
-infatti $E$ è invertibile perché ha diagonale positiva, e $A$ è invertibile perché è HDP.
-Inoltre
-$$
-F^{-1}=A^{-1}E
-$$
-Infatti
-$$
-F^{-1}=(E^{-1}A)^{-1}=A^{-1}E
-$$
-Usiamo anche la notazione
-$$
-F^{-*}=(F^{-1})^*=(F^*)^{-1}
-$$
-Questa notazione ha senso perché
-$$
-(F^{-1})^*
-$$
-è proprio l’inversa di $F^*$.
-Infatti
-$$
-(F^{-1})^*F^*=(FF^{-1})^*=I^*=I
-$$
-e
-$$
-F^*(F^{-1})^*=(F^{-1}F)^*=I^*=I
-$$
-Ora sviluppiamo
+Ora sviluppiamo 
 $$
 A-G^*AG
 $$
@@ -4771,129 +5252,62 @@ siccome
 $$
 G=I-F
 $$
-abbiamo
+possiamo scrivere che 
 $$
 A-G^*AG=A-(I-F)^*A(I-F)
 $$
-cioè
+possiamo portare dentro il coniugato trasposto perché per la matrice identità non la cambia
 $$
 A-G^*AG=A-(I-F^*)A(I-F)
 $$
-sviluppiamo il prodotto:
+sviluppiamo il prodotto a destra di A
 $$
 (I-F^*)A(I-F)=A-AF-F^*A+F^*AF
 $$
-quindi
+quindi abbiamo
 $$
 A-G^*AG=A-\left(A-AF-F^*A+F^*AF\right)
 $$
-da cui
+cambiando i segni abbiamo che si semplifica $A-A$ 
 $$
 A-G^*AG=AF+F^*A-F^*AF
 $$
-Adesso vogliamo riscrivere questa espressione raccogliendo $F^*$ a sinistra e $F$ a destra:
+Adesso vogliamo riscrivere questa espressione raccogliendo $F^*$ a sinistra e $F$ a destra 
+Osserviamo infatti che $F$ è invertibile perché è definita come prodotto di matrici invertibili
+$$
+F=E^{-1}A
+$$
+possiamo quindi con questo raccoglimento scrivere
 $$
 AF+F^*A-F^*AF
 =
 F^*(F^{-*}A+AF^{-1}-A)F
 $$
-Verifichiamo i tre termini:
-$$
-F^*F^{-*}AF=AF
-$$
-perché
-$$
-F^*F^{-*}=I
-$$
-poi
-$$
-F^*AF^{-1}F=F^*A
-$$
-e infine resta
-$$
--F^*AF
-$$
-Quindi
-$$
-A-G^*AG
-=
-F^*(F^{-*}A+AF^{-1}-A)F
-$$
-Ora calcoliamo i due termini dentro la parentesi.
-Siccome
-$$
-F^{-1}=A^{-1}E
-$$
-abbiamo
-$$
-AF^{-1}=A(A^{-1}E)=E
-$$
-Inoltre
-$$
-F^{-*}A=(F^{-1})^*A
-$$
-ma
-$$
-F^{-1}=A^{-1}E
-$$
-quindi
-$$
-(F^{-1})^*=(A^{-1}E)^*=E^*(A^{-1})^*
-$$
-siccome $A$ è hermitiana, anche $A^{-1}$ è hermitiana, quindi
-$$
-(A^{-1})^*=A^{-1}
-$$
-perciò
-$$
-(F^{-1})^*=E^*A^{-1}
-$$
-e dunque
-$$
-F^{-*}A=E^*A^{-1}A=E^*
-$$
-Quindi
-$$
-F^{-*}A+AF^{-1}-A=E^*+E-A
-$$
-Ora ricordiamo che $E$ è la parte triangolare inferiore di $A$ inclusa la diagonale.
-Poiché $A$ è hermitiana, la parte triangolare superiore di $A$ è la trasposta coniugata della parte triangolare inferiore.
+sappiamo che l'inversa di F è 
+$$F^{-1}=A^{-1}E$$
+abbiamo quindi poi semplificato (vedi tablet) per cui rimane dentro le parentesi
+$$e^{*}+E-A$$
+Ora ricordiamo che $E$ è la parte triangolare inferiore di $A$ inclusa la diagonale
+Poiché $A$ è hermitiana, la parte triangolare superiore di $A$ è la trasposta coniugata della parte triangolare inferiore
 Quindi
 $$
 E+E^*=A+D
 $$
-dove $D$ è la parte diagonale di $A$:
-$$
-D=
-\begin{pmatrix}
-a_{11} & 0 & \cdots & 0\\
-0 & a_{22} & \cdots & 0\\
-\vdots & \vdots & & \vdots\\
-0 & 0 & \cdots & a_{nn}
-\end{pmatrix}
-$$
-Infatti, fuori dalla diagonale, $E+E^*$ ricostruisce $A$, mentre sulla diagonale conta due volte gli elementi diagonali. Per questo
-$$
-E+E^*=A+D
-$$
-e quindi
+e quindi spostando a sinistra A
 $$
 E^*+E-A=D
 $$
-Allora
+Allora moltiplicando per le F che erano fuori dalla parentesi
 $$
 A-G^*AG=F^*DF
 $$
-Abbiamo scoperto quindi che
-$$
-A-G^*AG=F^*DF
-$$
-Ora dimostriamo la positività.
-Per ogni
+
+Ora dimostriamo la positività con questa nuova forma
+Per ogni vettore
 $$
 y\in\mathbb{C}^n\setminus\{0\}
 $$
-abbiamo
+abbiamo per positività che, sostituendo la nuova forma di $A-G^*AG$
 $$
 y^*(A-G^*AG)y
 =
@@ -4903,7 +5317,7 @@ poniamo
 $$
 u=Fy
 $$
-Allora
+Allora raccogliendo le $Fy$ e sostituendole per $u$ abbiamo
 $$
 y^*F^*DFy=(Fy)^*D(Fy)=u^*Du
 $$
@@ -4911,7 +5325,7 @@ Siccome $F$ è invertibile e $y\neq 0$, allora
 $$
 u=Fy\neq 0
 $$
-Ora
+Ora sappiamo che il seguente prodotto riga per colonna di una matrice diagonale restituisce
 $$
 u^*Du
 =
@@ -4922,12 +5336,12 @@ $$
 a_{ii}>0
 $$
 per ogni $i=1,\ldots,n$.
-Inoltre $u\neq 0$, quindi almeno una componente $u_i$ è diversa da zero.
-Dunque
+Inoltre $u\neq 0$, quindi almeno una componente $u_i$ è diversa da zero
+Dunque la sommatoria è 
 $$
 \sum_{i=1}^n a_{ii}|u_i|^2>0
 $$
-quindi
+quindi di conseguenza anche 
 $$
 y^*(A-G^*AG)y>0
 $$
@@ -4936,13 +5350,13 @@ Abbiamo quindi dimostrato che
 $$
 A-G^*AG
 $$
-è hermitiana definita positiva.
+è hermitiana definita positiva
 ###### Parte 2
-Dimostriamo ora che il metodo è convergente, cioè che
+Dimostriamo ora che il metodo è convergente, cioè che il raggio spettrale della matrice di iterazione
 $$
 \rho(G)<1
 $$
-Sia $\lambda$ un autovalore di $G$.
+Sia $\lambda$ un autovalore di $G$
 Vogliamo mostrare che
 $$
 |\lambda|<1
@@ -4959,11 +5373,11 @@ Siccome dalla Parte 1 sappiamo che
 $$
 A-G^*AG
 $$
-è HDP, allora
+è HDP, allora possiamo dire che
 $$
 y^*(A-G^*AG)y>0
 $$
-Sviluppiamo:
+Sviluppiamo il prodotto 
 $$
 y^*(A-G^*AG)y
 =
@@ -4972,7 +5386,7 @@ $$
 ma
 $$
 y^*G^*=(Gy)^*$$
-quindi
+quindi possiamo riscrivere la parte destra della sottrazione con questa forma
 $$
 y^*G^*AGy=(Gy)^*A(Gy)
 $$
@@ -4981,28 +5395,28 @@ Siccome
 $$
 Gy=\lambda y
 $$
-abbiamo
+abbiamo risolvendo solo la parte a destra che
 $$
 (Gy)^*A(Gy)
 =
 (\lambda y)^*A(\lambda y)
 $$
-Ora
+Ora il coniugato trasposto di uno scalare è il suo coniugato visto che non si può trasporre
 $$
 (\lambda y)^*=\overline{\lambda}y^*
 $$
-quindi
+quindi possiamo anche scrivere come
 $$
 (\lambda y)^*A(\lambda y)
 =
 \overline{\lambda}y^*A(\lambda y)
 $$
-portiamo fuori anche $\lambda$:
+portiamo fuori dal prodotto $\lambda$ 
 $$
 =
 \overline{\lambda}\lambda y^*Ay
 $$
-cioè
+per la regola del prodotto di un coniugato e di un non coniugato possiamo scrivere che è il modulo alla seconda
 $$
 =
 |\lambda|^2y^*Ay
@@ -5013,7 +5427,7 @@ y^*(A-G^*AG)y
 =
 y^*Ay-|\lambda|^2y^*Ay
 $$
-cioè
+cioè raccogliendo
 $$
 y^*(A-G^*AG)y
 =
@@ -5036,15 +5450,15 @@ ma
 $$
 y^*Ay>0
 $$
-perciò deve essere
+perciò deve essere che la parte a sinistra allora è
 $$
 1-|\lambda|^2>0
 $$
-cioè
+cioè risolvendo abbiamo che
 $$
 |\lambda|^2<1
 $$
-e dunque
+e dunque facendo la radice
 $$
 |\lambda|<1
 $$

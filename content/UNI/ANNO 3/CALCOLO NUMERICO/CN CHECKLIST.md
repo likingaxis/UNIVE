@@ -21,23 +21,25 @@ POMERIGGIO
 - [x] Teorema 3.7
 - [x] Teorema 3.8
 - [x] sulla convergenza delle norme
-- [ ] Teorema 3.9
-- [ ] Teorema 3.10
-- [ ] Teorema 3.11
-- [ ] Teorema 3.12
+- [x] Teorema 3.9
+- [x] Teorema 3.10
+- [x] Teorema 3.11
+- [x] Teorema 3.12
 
 DOMANI
-- [ ] Osservazione 4.1
-- [ ] Teorema 4.1
-- [ ] Corollario 4.1
-- [ ] Corollario 4.2
-- [ ] Osservazione 4.2
-- [ ] Teorema 4.2
-- [ ] Osservazione 4.5 (SMART)
-- [ ] Osservazione 4.6
-- [ ] Osservazione 4.7
-- [ ] Osservazione 4.8
-- [ ] Teorema 4.3
-- [ ] Osservazione 4.9
+- [x] Osservazione 4.1
+- [x] Teorema 4.1
+- [x] Corollario 4.1
+- [x] Corollario 4.2
+- [x] Osservazione 4.2
+- [x] Osservazione 4.4
+- [x] Teorema 4.2
+- [x] Osservazione 4.5 (SMART)
+- [x] Osservazione 4.6
+- [x] Osservazione 4.7
+DOPO PRANZO
+- [x] Osservazione 4.8
+- [x] Teorema 4.3
+- [x] Osservazione 4.9
 - [ ] Teorema 4.4
 - [ ] Osservazione 4.10

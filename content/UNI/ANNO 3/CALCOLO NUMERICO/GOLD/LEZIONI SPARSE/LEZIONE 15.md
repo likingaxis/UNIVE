@@ -530,14 +530,12 @@ $$
 assicura invece che ogni iterazione del metodo sia veloce.
 
 #### Metodo di Jacobi
-
 Supponiamo che $A$ abbia elementi diagonali non nulli, cioè
 
 $$
 a_{ii}\neq 0
 \qquad i=1,\ldots,n
 $$
-
 Allora la parte diagonale di $A$, cioè la matrice
 
 $$
