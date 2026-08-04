@@ -682,6 +682,11 @@ $$
 ### Costo
 Per ogni differenza divisa servono due sottrazioni e una divisione.
 Dato che $f[x_i] \qquad i=0,\dots,n,$ sono già note, le operazioni complessive sono
+il numero di elementi da calcolare è
+$$
+1+2+\cdots+n=\frac{n(n+1)}{2}
+$$
+Quindi
 $$
 C_1(n)
 =
@@ -1698,7 +1703,7 @@ Per una matrice hermitiana le seguenti condizioni sono equivalenti:
 4. $\det(A_k)>0$ per ogni $k=1,\dots,n$.
 	- I determinanti di ogni sottomatrice sono positivi.
 
-### Dimostrazione di $1\Rightarrow 2$
+### Dimostrazione di $1\iff 2$
 Per definizione, $A$ è definita positiva se
 $$
 \operatorname{Re}(x^*Ax)>0
@@ -2881,22 +2886,22 @@ $$
 Tutte le norme vettoriali su $\mathbb{C}^n$ sono equivalenti.
 Questo significa che, date due norme $\|\cdot\|'$ e $\|\cdot\|''$, esistono due costanti $\alpha>0$ e $\beta>0$, indipendenti da $x$, tali che
 $$
-\alpha\|x\|'
+\alpha\|x\|''
 \leq
-\|x\|''
+\|x\|'
 \leq
-\beta\|x\|'
+\beta\|x\|''
 \qquad
 \forall x\in\mathbb{C}^n.
 $$
 
 In funzione di $\|x\|''$ sarebbe
 $$
-\frac{1}{\beta}\|x\|''
+\frac{1}{\beta}\|x\|'
 \leq
-\|x\|'
+\|x\|''
 \leq
-\frac{1}{\alpha}\|x\|''.
+\frac{1}{\alpha}\|x\|'.
 $$
 
 ### Dimostrazione: equivalenza tra $\|\cdot\|_1$ e $\|\cdot\|_\infty$
@@ -3644,7 +3649,7 @@ Vogliamo che
 - e converga a `x` (componente per componente) rispetto a una qualsiasi norma, qualunque sia $x^{(0)}$ scelto
 
 
-## Metodi iterativi stazionari (gli unici che consideriamo)
+## Metodi iterativi stazionari
 Consideriamo metodi della forma:
 $$
 (m) \qquad
@@ -4393,19 +4398,32 @@ Per ogni componente $z_i^{(k)}$ servono:
 - $i-1$ moltiplicazioni;
 - $i-1$ addizioni o sottrazioni;
 - una divisione.
-Il costo complessivo è
-![[Pasted image 20260723134150.png]]
-Ossia
+Il costo del calcolo di $z_i^{(k)}$ è dunque
 $$
-n \text{ divisioni} \qquad e \qquad \frac{n(n-1)}2 \text{ moltiplicazioni e addizioni}
+1D+(i-1)M+(i-1)A
 $$
+perché:
+- serve una divisione per $a_{ii}$
+- servono $(i-1)$ moltiplicazioni per i termini $a_{ij}z_j^{(k)}$
+- servono $(i-1)$ addizioni/sottrazioni per combinarli con $r_i^{(k)}$
 
-Quindi:
+Quindi il costo complessivo del calcolo di tutto $z^{(k)}$ è la sommatoria del costo dei singoli $z_i^{(k)}$
 $$
-nD + \frac{{n(n-1)}}{2}A + \frac{{n(n-1)}}{2}M
+\sum_{i=1}^n \left[1D+(i-1)M+(i-1)A\right]
 $$
-
-
+cioè risolvendo la sommatoria di 1D abbiamo $n$
+$$
+nD+\left(\sum_{i=1}^n(i-1)\right)M+\left(\sum_{i=1}^n(i-1)\right)A
+$$
+sapendo che la somma dei primi n-1 numeri naturali è
+$$
+\sum_{i=1}^n(i-1)=0+1+\cdots+(n-1)=\frac{n(n-1)}{2}
+$$
+otteniamo quindi
+$$
+nD+\frac{n(n-1)}{2}M+\frac{n(n-1)}{2}A
+$$
+Questo costo può ridursi se la parte triangolare inferiore $E$ di $A$ ha molti zeri
 ## Confronto tra Jacobi e Gauss-Seidel (oss. 4.8)
 ### Velocità e costo
 Il precondizionatore $E$ approssima normalmente $A$ meglio di $D$.
@@ -4439,7 +4457,7 @@ Se $A\in\mathbb{C}^{n\times n}$ rispetta una delle condizioni sopra, allora:
 	Allora, dato che $A$ rispetta per forza una delle condizioni precedenti, tutta la corrispondente riga o colonna è tutta uguale a zero, e di conseguenza il determinante sarebbe 0.
 	Ciò è impossibile perché $A$ è invertibile.
 
-### Dimostrazione teorema CASO DEL PROF
+### Dimostrazione teorema Diagonale dominante per righe e Gauss-Seidel
 La dimostrazione viene svolta:
 - per il metodo di Gauss-Seidel;
 - con $A$ a diagonale dominante per righe;
