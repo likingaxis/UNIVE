@@ -5750,21 +5750,6 @@ F
 
 \color{cyan}{
 \substack{
-\text{Riordino i termini nella somma}
-}}
-&\Big\vert&
-\\[-0.2em]
-
-&=&
-F^*
-\left(
-AF^{-1}+F^{-*}A-A
-\right)
-F
-\\[1em]
-
-\color{cyan}{
-\substack{
 F^{-1}=A^{-1}E,\\
 AF^{-1}=AA^{-1}E=E
 }}
@@ -5774,7 +5759,7 @@ AF^{-1}=AA^{-1}E=E
 &=&
 F^*
 \left(
-E+F^{-*}A-A
+F^{-*}A + E -A
 \right)
 F
 \\[1em]
@@ -5792,7 +5777,7 @@ F^{-*}=(F^{-1})^*=(A^{-1}E)^*
 &=&
 F^*
 \left(
-E+E^*-A
+E^*+E-A
 \right)
 F
 \\[1em]
@@ -5817,6 +5802,7 @@ F^*DF
 
 \end{array}
 $$
+
 
 Pertanto, per ogni $y\in\mathbb{C}^{n},\qquad y\neq 0,$ si ha
 $$
