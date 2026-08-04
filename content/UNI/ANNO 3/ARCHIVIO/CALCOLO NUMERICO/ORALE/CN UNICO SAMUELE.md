@@ -936,6 +936,7 @@ $$
 $$
 
 ## Lemma 2.1
+*LO SENTO MALE DEVI TOGLIERE LA RIDUZIONE DEL RUMORE PERCHÈ LO SENTO DALL'ECO*
 Siano $w,\alpha,\beta:[a,b]\to\mathbb{R}$ tali che:
 - $w$ è continua e $w\geq 0$ su $[a,b]$;
 - $\alpha(x)$ e $\beta(x)\omega(x)$ sono continue su $[a,b]$;
@@ -949,7 +950,7 @@ m=\min_{x\in[a,b]}\beta(x),
 \qquad
 M=\max_{x\in[a,b]}\beta(x).
 $$
-
+forse è di *alfa* se ti chiede di correggere digli alfa ALFA
 Allora esiste un punto $\eta\in[a,b]$ tale che
 $$
 \int_a^b \beta(x)\omega(x)\,dx
@@ -1006,6 +1007,10 @@ $$
 z(\eta)
 =
 \int_a^b \beta(x)\omega(x)\,dx.
+$$
+ma al posto di y metti eta quindi c'è uguaglianza
+$$
+z(y)=\alpha(y)\int_a^b w(x)\,dx.
 $$
 
 ## Teorema 2.1
@@ -1483,7 +1488,7 @@ Ricordiamo inoltre che il prodotto AB di due matrici $A, B ∈ \mathbb{C}^{n×n}
 Una matrice $A ∈ \mathbb{C}^{n×n}$ si dice diagonalizzabile se esistono una matrice invertibile $X ∈ \mathbb{C}^{n×n}$ e una matrice diagonale $D = diag(λ_{1}, λ_{2}, \dots , λ_{n}) ∈ \mathbb{C}^{n×n}$ tali che $$A = XDX^{−1}$$
 Dalla formula sappiamo che $\forall i = 1,\dots,n$ l'elemento diagonale $\lambda_{i}$ è un autovalore di A con corrispondente autovalore $x_{i} =$ i-esima colonna di X.
 Questo lo si vede moltiplicando a destra entrambi i membri e ottenendo $$AX = XD$$e da qui si nota che la colonna i-esima di AX è $AX_{i}$ e la colonna i-esima di XD è $\lambda_{i}x_{i}$, per cui $$Ax_{i} = \lambda_{i}x_{i}$$Ricordiamo che ogni matrice $A \in \mathbb{C}^{n \times n}$ che possiede `n` autovalori *distinti* è **diagonalizzabile**.
-
+Questo mostra che **$x_i$ è un autovettore di $A$** associato all’**autovalore $\lambda_i$**.
 
 ## Matrice Hermitiana e simmetrica
 Data una matrice $A \in \mathbb{C}^{m \times n}$, indichiamo con $A^{*}$ la **trasposta coniugata di `A`**.
@@ -1702,7 +1707,6 @@ Per una matrice hermitiana le seguenti condizioni sono equivalenti:
 3. gli autovalori di $A$ sono reali e positivi;
 4. $\det(A_k)>0$ per ogni $k=1,\dots,n$.
 	- I determinanti di ogni sottomatrice sono positivi.
-
 ### Dimostrazione di $1\iff 2$
 Per definizione, $A$ è definita positiva se
 $$
