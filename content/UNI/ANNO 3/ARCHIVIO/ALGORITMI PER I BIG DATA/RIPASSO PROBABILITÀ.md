@@ -1,4 +1,4 @@
-##### SPAZIO PROBABILISTICO
+ ##### SPAZIO PROBABILISTICO
 Uno spazio probabilistico è una tripla $(Ω, F, Pr)$ dove:  
 - $Ω$ = insieme di tutti i possibili esiti (sample space)  
 - $F$ = insieme degli eventi (sottoinsiemi di Ω)  
