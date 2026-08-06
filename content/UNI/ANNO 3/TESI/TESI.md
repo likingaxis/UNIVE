@@ -1,6 +1,0 @@
-- Cercare Danilo dell'orco lavori fatti
-- Domande da fare
-	- crediti D
-	- sicurezza per la tesi, è sicuro che posso farla con lui?
-	- progetti di sicurezza e agentica, cerchiamo di creare una buona base di conoscenza per intrattenere un discorso con lui prima di sabato su questo
-	- fatti un'idea anche con i suoi lavori mandandoli a chat gpt

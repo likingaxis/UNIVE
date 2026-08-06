@@ -5,14 +5,15 @@ Mi chiamo Luca Gugliotta e studio presso [l'università di Tor Vergata informati
 
 # Gli esami:
 
-## CRITTOGRAFIA 🔒
-appunti del corso: [[CRITTOGRAFIA INDICE]]
+## CALCOLO NUMERICO🔒
+[[CN UNICO]]
 ## INGEGNERIA DEL SOFTWARE 🧩
 [[IS INDICE]]
 ## INTELLIGENZA ARTIFICIALE 🤖
 [[IA INDICE]]
 ## BIG DATA 📊
 [[BIG DATA INDICE]]
+
 
 # COLLEZIONE ANNI PRECEDENTI
 ### [[ANNO 1 INDICE|CORSI ANNO 1]]
