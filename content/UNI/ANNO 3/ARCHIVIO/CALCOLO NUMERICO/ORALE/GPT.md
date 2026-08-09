@@ -1,0 +1,4 @@
+- se inizia a parlare di un argomento scrivi "il prof sta parlando di questo leggi il pdf attentamente su questo determinato pezzo"
+- se il prof fa una domanda digli "ecco la domanda del prof rispondi basandoti sul testo "
+- prompt per risposta da orale comprensibile ben fatta
+- se uno si blocca un po' si copia e incolla quella parte del teorema o altro e si chiede una spiegazione chiara con i passaggi ben definiti di quel pezzo dove uno si blocca

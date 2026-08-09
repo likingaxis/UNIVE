@@ -1,6 +1,6 @@
-- creare una dispensa d'esame da tante pagine basandosi sui 3 pdf
-	- creare un RAG con un agente che ha il compito di fare tutto
-	- informarsi su come creare un agente che scriva gli appunti a modo tuo
-		- ha senso dare in pasto vecchie dispense di altri esami per capire come faccio?
-- creare un master note
-- creare infine un cheat sheet
+- divisione modulo 1 
+	- 40 pagine 40 pagine
+	- 4 giorni 10 pagine al giorno peak
+		- progetto da posizionare nella settimana
+- divisione modulo 2
+	- mano a mano con le lezioni
