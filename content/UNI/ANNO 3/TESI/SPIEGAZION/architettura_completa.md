@@ -37,12 +37,12 @@ flowchart LR
 
 ### Chi fa cosa
 
-| Componente | Chi lo esegue | Cosa produce |
-|---|---|---|
-| VulcaMind | Agente IA (tramite chat) | `STORYLINE.md`, domande CTF, writeup |
-| VulcaForge (parte agentica) | Agente IA (tramite chat) | `machine.yaml` + moduli YAML nel registry |
+| Componente                        | Chi lo esegue             | Cosa produce                                            |
+| --------------------------------- | ------------------------- | ------------------------------------------------------- |
+| VulcaMind                         | Agente IA (tramite chat)  | `STORYLINE.md`, domande CTF, writeup                    |
+| VulcaForge (parte agentica)       | Agente IA (tramite chat)  | `machine.yaml` + moduli YAML nel registry               |
 | VulcaForge (parte deterministica) | Script Python (`main.py`) | `setup_machine.yml`, `Dockerfile`, `verify_solution.sh` |
-| VulcaShip | CLI/Script | Deploy su Proxmox (produzione) |
+| VulcaShip                         | CLI/Script                | Deploy su Proxmox (produzione)                          |
 
 > **Nota**: tu come tesista non scrivi direttamente `machine.yaml` o i moduli registry — lo fa l'agente IA guidato dai workflow. Il tuo ruolo è capire come funziona il tutto per poter debuggare, modificare il generatore Python e implementare VulcaTest.
 
