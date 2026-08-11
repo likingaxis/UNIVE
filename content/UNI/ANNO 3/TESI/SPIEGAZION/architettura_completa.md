@@ -699,7 +699,6 @@ Modulo registry (verification:)
 ## 7. Obiettivo 1 — VulcaTest (Da Implementare)
 
 Il tuo lavoro di tesi. L'idea è aggiungere un ciclo di **QA e Self-Healing IaC** *(l'infrastruttura si auto-ripara quando un test fallisce)*.
-
 ```mermaid
 flowchart TD
     A["VulcaForge genera\nsetup_machine.yml"] --> B["Deploy\n(docker build + run)"]
