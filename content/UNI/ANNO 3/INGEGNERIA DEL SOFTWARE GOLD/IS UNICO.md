@@ -15,3 +15,4 @@ altrimenti lo sviluppo potrebbe incappare in
 l'obiettivo quindi dell'ingegneria del Software è risolvere il problema della software crisis, dove la difficoltà nel produrre software di grandi dimensioni aumentava
 
 #### Cosa si intende per Prodotto software
+2
