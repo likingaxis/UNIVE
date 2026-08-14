@@ -227,3 +227,46 @@ L'idea è:
 
 Il problema è che nel Build & Fix le modifiche non sono inserite in una struttura progettuale controllata comportando un prodotto difficile da comprendere e mantenere
 ### Modello Waterfall
+Di tipo sequenziale e funziona a cascata dove ogni fase consegue la successiva
+molto più disciplinato di Build & Fix poiché obbliga la documentazione capire il problema progettare e verificare i vari output delle fasi
+
+
+![[assets/p005-fig-004.png|520]]
+
+- requisiti;
+- specifica;
+- progettazione;
+- implementazione;
+- integrazione;
+- modalità operativa;
+- dismissione.
+il problema che si ha con il waterfall è che non è detto che ci sia sempre questa rigidità, le fasi possono cambiare e si può avere ad esempio una modifica dei requisiti
+Se si scopre un problema molto tardi, tornare indietro può essere costoso perché le fasi successive sono già state costruite sulla base delle decisioni precedenti
+infatti si ha un feedback dall'utente in estremo ritardo
+### Modello con Rapid Prototyping Model
+nasce per affrontare un problema della fase dei requisiti:
+cliente e sviluppatore utilizzano le stesse parole ma immaginano cose differenti
+utilizzare un prototipo permette all'utente di provare una rappresentazione preliminare del sistema e dare un feedback
+
+![[assets/p007-fig-006.png|520]]
+
+
+Cosa si intende per prototipo?
+è una realizzazione rapida e semplificata di alcune parti del prodotto, costruita principalmente per comprendere meglio ciò che l'utente desidera
+Il prototipo permette di svolgere due attività fondamentali:
+- **Requirements Elicitation**: far emergere requisiti che l'utente non aveva espresso chiaramente;
+- **Requirements Validation**: verificare che ciò che abbiamo capito corrisponda davvero alle esigenze dell'utente.
+Per realizzare un singolo prototipo si seguono i seguenti step
+
+![[assets/p007-fig-007.png|520]]
+
+La realizzazione di un prototipo completo invece vede il seguente ciclo
+- definizione di obiettivi o requisiti iniziali
+- sviluppo rapido del prototipo
+- valutazione dell'utente
+- identificazione di problemi o nuovi requisiti
+- modifica del prototipo
+- ciclo fino a quando i requisiti risultano chiari
+ 
+ Il prototipo deve essere Throw-away
+ 
