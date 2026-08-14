@@ -223,45 +223,83 @@ Può avvenire, per esempio, perché:
 
 ---
 
-# Testing, verifica e validazione
+Durante il ciclo di vita non basta produrre artefatti: bisogna anche controllare continuamente che ciò che viene prodotto sia corretto e che il prodotto finale soddisfi davvero le esigenze dell’utente.  
+Per questo, accanto alle fasi di sviluppo, si svolgono attività di **Verification & Validation (V&V)**.
 
-Il **testing** non deve essere pensato soltanto come una fase che avviene alla fine della programmazione.
+La **verifica** controlla che ogni prodotto intermedio sia coerente con ciò che doveva essere realizzato in quella fase.  
+La **validazione** controlla invece che il prodotto soddisfi realmente i bisogni dell’utente.
 
-Nel corso viene presentato come un'attività che accompagna l'intero sviluppo: ciò che viene prodotto in ciascuna fase deve essere controllato prima di diventare la base per il lavoro successivo.
+Il **testing** è uno degli strumenti principali usati nelle attività di V&V, soprattutto quando il software può essere eseguito. Non è quindi una fase isolata del ciclo di vita, ma un’attività trasversale che accompagna lo sviluppo.
+### Verification, Validation e Testing
 
-Questo è importante perché un errore individuato tardi può costringere a modificare molti artefatti prodotti dopo di esso.
+Durante il ciclo di vita del software, ogni fase produce qualcosa:
 
-Per esempio, un requisito sbagliato può propagarsi nella specifica, nel progetto e nel codice. Correggerlo quando il software è già stato realizzato può quindi essere molto più costoso che individuarlo subito.
+- requisiti;
+- specifiche;
+- documenti di progetto;
+- codice;
+- componenti integrati;
+- prodotto finale.
 
-## Verifica
+Non basta però produrre questi artefatti: bisogna anche controllare che siano corretti.
 
-La **verifica** controlla se un prodotto è stato costruito correttamente rispetto alle informazioni che aveva in ingresso.
+Per questo, durante lo sviluppo vengono svolte attività di **Verification & Validation (V&V)**.
 
-Domanda intuitiva:
+#### Verification
 
-**"Stiamo costruendo bene il prodotto?"**
+La **Verification** controlla che ciò che viene prodotto in una fase sia corretto rispetto a ciò che quella fase aveva ricevuto in input.
+
+In altre parole:
+
+**“Are we building the product right?”**
 
 Esempio:
 
-- la fase di progettazione riceve come input una specifica;
-- la verifica controlla se il progetto rispetta quella specifica.
+- dai requisiti viene prodotta una specifica;
+- la verifica controlla che la specifica rappresenti correttamente i requisiti;
+- dal progetto viene prodotto il codice;
+- la verifica controlla che il codice sia coerente con il progetto.
 
-Quindi la verifica confronta principalmente un artefatto con ciò che avrebbe dovuto produrre la fase precedente.
+La verifica può essere effettuata anche su artefatti non eseguibili, tramite:
 
-## Validazione
+- revisioni;
+- ispezioni;
+- analisi documentale;
+- analisi statica.
 
-La **validazione** controlla invece se il prodotto soddisfa realmente gli obiettivi e le esigenze dell'utente.
+#### Validation
 
-Domanda intuitiva:
+La **Validation** controlla invece che il prodotto realizzato soddisfi realmente le necessità dell’utente.
 
-**"Stiamo costruendo il prodotto giusto?"**
+In altre parole:
 
-Un sistema potrebbe quindi essere:
+**“Are we building the right product?”**
 
-- **corretto rispetto alla specifica**, ma
-- **non valido rispetto alle vere necessità dell'utente**.
+Un software può quindi essere:
 
-Questo può accadere se la specifica stessa rappresentava male ciò che l'utente desiderava.
+- corretto rispetto alla specifica;
+- ma non valido rispetto alle esigenze reali dell’utente.
+
+Questo può accadere, ad esempio, se la specifica iniziale era incompleta o non rappresentava correttamente ciò che l’utente voleva.
+
+#### Testing
+
+Il **testing** consiste nel sottoporre il software a controlli per individuare problemi e verificare il suo comportamento.
+
+Non viene considerato semplicemente come una fase isolata dopo la codifica, perché i controlli devono accompagnare l’intero sviluppo. Gli appunti infatti sottolineano che il testing è trasversale alle varie fasi del ciclo di vita.
+
+Quando il software è eseguibile, il testing può essere svolto in modo dinamico, cioè:
+
+- si esegue il software;
+- si forniscono determinati input;
+- si osservano gli output;
+- si confronta il comportamento ottenuto con quello atteso.
+
+In questo senso, il testing dinamico è particolarmente importante per la **validazione**.
+
+La frase chiave che userei per collegare tutto è questa:
+
+**Verifica e validazione descrivono cosa vogliamo controllare; il testing è uno degli strumenti con cui effettuiamo questi controlli.**
 
 ![[assets/p006-fig-005.png|550]]
 
@@ -503,6 +541,30 @@ La disponibilità dipende quindi almeno da due aspetti:
 
 ---
 
+Il **ciclo di vita del software** descrive le grandi fasi attraversate dal prodotto, dalla nascita fino alla dismissione.
+
+Per realizzare concretamente il software, però, bisogna stabilire **quali attività svolgere, in quale ordine e con quali modalità**. 
+Questo insieme organizzato prende il nome di **processo software**.
+Un **processo software** è l'insieme organizzato delle attività necessarie per sviluppare, mantenere e gestire un prodotto software, cercando di rispettare:
+
+- tempi;
+- costi;
+- requisiti;
+- qualità attesa.
+
+All'interno di un processo software, una **attività** è un insieme organizzato di operazioni svolte per ottenere un determinato risultato.
+
+Per esempio:
+
+- raccogliere e analizzare i requisiti;
+- progettare il sistema;
+- scrivere il codice;
+- verificare quanto prodotto;
+- integrare i componenti.
+
+Quindi il rapporto diventa chiaro:
+
+**ciclo di vita** → ci dice _quali grandi fas_
 # Dal ciclo di vita al processo software
 
 ## Che cos'è un'attività
@@ -891,7 +953,7 @@ Nel modello a spirale un prototipo può invece essere costruito per **ridurre un
 Esempio: se non sappiamo se una tecnologia sarà abbastanza veloce, possiamo costruire un prototipo soltanto per misurarne le prestazioni prima di progettare l'intero sistema attorno a quella tecnologia.
 
 ---
-
+QUI
 # Risk Management
 
 Il **rischio** è la possibilità che si verifichi un evento o una circostanza avversa con conseguenze negative sul progetto, sul prodotto o sull'organizzazione.

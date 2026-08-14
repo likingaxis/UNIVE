@@ -1,0 +1,21 @@
+{
+	"name": "pen-highlighter",
+	"version": "1.0.0",
+	"description": "Highlight text and format it with a pen on Android.",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "node esbuild.config.mjs production"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^16.11.29",
+		"builtin-modules": "^5.3.0",
+		"esbuild": "0.17.3",
+		"obsidian": "latest",
+		"tslib": "2.4.0",
+		"typescript": "4.9.5"
+	}
+}
