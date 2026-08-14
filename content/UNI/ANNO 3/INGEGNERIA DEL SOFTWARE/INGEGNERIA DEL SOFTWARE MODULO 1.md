@@ -1636,17 +1636,13 @@ Ecco una panoramica dei due approcci:
 
 Le **Petri Net** sono un modello matematico e grafico utilizzato per rappresentare il comportamento di sistemi in cui più attività possono avvenire in modo concorrente.
 Sono costituite principalmente da:
-- **Place**
-	- rappresentano condizioni o stati del sistema;
-- **Transition**
+- **Place(cerchio)**
+	- rappresenta una componente software o una condizione;
+- **Transition(barre)**
 	- rappresentano eventi o azioni che modificano lo stato del sistema;
-- **Arc**
+- **Arc(frecce)**
 	- collegano *place* e *transition*;
 	- indicano come avviene il passaggio tra le diverse condizioni del sistema.
-Graficamente:
-- i *place* sono rappresentati con cerchi;
-- le *transition* con rettangoli o barre;
-- gli *arc* con frecce.
 
 Le Petri Net permettono quindi di rappresentare in modo preciso il flusso delle attività e le condizioni necessarie affinché determinati eventi possano avvenire.
 
