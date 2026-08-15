@@ -421,3 +421,5 @@ se questo viene fatto bene si ha una riduzione del tempo complessivo
 
 ### Modelli basati su metodi formali
 Un'altra famiglia di approcci utilizza specifiche formali descrizioni espresse con linguaggi dotati di una base matematica precisa cercando di ridurre le ambiguità
+Questi approcci sono particolarmente importanti nei **sistemi critici**, nei quali un comportamento errato può avere conseguenze molto gravi
+comportando però costi elevati dovuti a richieste di competenze specialistiche più tempo nella fase di specifica 
