@@ -422,4 +422,50 @@ se questo viene fatto bene si ha una riduzione del tempo complessivo
 ### Modelli basati su metodi formali
 Un'altra famiglia di approcci utilizza specifiche formali descrizioni espresse con linguaggi dotati di una base matematica precisa cercando di ridurre le ambiguità
 Questi approcci sono particolarmente importanti nei **sistemi critici**, nei quali un comportamento errato può avere conseguenze molto gravi
-comportando però costi elevati dovuti a richieste di competenze specialistiche più tempo nella fase di specifica 
+comportando però costi elevati dovuti a richieste di competenze specialistiche più tempo nella fase di specifica ecc...
+### Modelli corporate
+Molti modelli classici vengono descritti pensando a un software a contratto dove esiste un cliente che commissiona e poi fornisce feedback e requisiti
+un;azienda che sviluppa un prodotto per il mercato si trova in una situazione differente dove
+- non esiste un singolo cliente per i requisiti
+- bisogna anticipare i bisogni del mercato
+- la data di rilascio può avere grande importanza commerciale
+
+vi sono due esempi di modelli
+#### Modello Microsoft- Synchronize and Stabilize
+Il seguente modello combina caratteristiche:
+- iterative
+- incrementali
+- concorrenti
+consente a piccoli gruppi di lavorare in autonomia ma sincronizzando continuamente il loro lavoro
+- Gli sviluppatori in piccoli team lavorano quotidianamente a delle daily build(versioni del prodotte costruite integrando il codice sviluppato fino a quel momento)
+- se una modifica rompe la build il problema viene individuato quasi immediatamente perchè si lavora su daily build
+
+Periodicamente il progetto se raggiunge un punto significativo di avanzamento raggiunge una milestone
+dove viene prodotta una versione stabile e completa
+##### Ciclo di sviluppo microsoft
+- planning
+	- si costruisce una product vision ovvero una descrizione degli obiettivi generali del prodotto
+- development
+	- il progetto viene suddiviso in sottoprogetti associati a milestone
+	- Si progettano implementano e correggono le funzionalità
+- stabilization
+	- prima del rilascio commerciale viene eseguita una fase specifica di stabilizzazione
+	- dove si fa testing interno come alpha testing
+	- beta testing
+	- correzione dei difetti
+![[assets/p019-fig-023.png|500]]
+#### Modello Netscape
+Organizzazione che adottava un modello simile ma per prodotti internet
+- meno tester
+- meno pianificazione
+- documentazione incompleta
+
+La product vision nasceva tramite riunioni di pianificazione avanzata nelle quali venivano considerate le opportunità di mercato
+successivamente
+- veniva definita una specifica funzionale
+- venivano allocate risorse
+- lo sviluppo veniva controllato con meeting periodici
+- venivano prodotte alpha e beta
+- la versione definitiva veniva indicata con RTM - Release to Manufacturing
+
+L'esempio viene utilizzato soprattutto per sottolineare l'importanza di prendere decisioni basandosi su dati e processi di controllo, non soltanto sull'esperienza individuale

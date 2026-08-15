@@ -1,0 +1,9 @@
+{
+  "flowershowToken": "fs_pat_ozEQ9SsfOzZBAwf-1VELVshOfszMqWZRgca6KfDuHtc",
+  "siteName": "Luca-Uni",
+  "rootDir": "content",
+  "excludePatterns": [
+    "^content/UNI/ANNO 3/TESI/"
+  ],
+  "lastSeenVersion": ""
+}
