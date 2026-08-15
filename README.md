@@ -1,18 +1,51 @@
-# Quartz v4
+# 🌸 Appunti Universitari (UNIVE)
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+Appunti e note universitarie di Informatica - Università degli Studi di Roma "Tor Vergata", pubblicati tramite **[Flowershow](https://flowershow.app/)**.
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
-Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility and ease-of-use.
+---
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+## 🚀 Come Pubblicare il Sito
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+Puoi gestire e aggiornare il tuo sito web in due modi:
 
-## Sponsors
+### Metodo 1: Plugin Ufficiale Obsidian (Consigliato ⭐)
+1. Apri **Obsidian** $\rightarrow$ **Settings** $\rightarrow$ **Community Plugins**.
+2. Cerca e installa il plugin **"Flowershow"** e attivalo.
+3. Vai su [cloud.flowershow.app](https://cloud.flowershow.app), crea il tuo account gratuito e genera un **Personal Access Token (PAT)** nelle impostazioni.
+4. Incolla il token nelle impostazioni del plugin Flowershow su Obsidian.
+5. Clicca sull'icona di Flowershow nella barra laterale di Obsidian (o premi `Ctrl+P` $\rightarrow$ *Publish to Flowershow*) per pubblicare/sincronizzare il tuo vault in 1 click!
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+---
+
+### Metodo 2: Tramite Riga di Comando (CLI)
+
+Se preferisci usare il terminale:
+
+1. **Login (solo la prima volta):**
+   ```bash
+   npm run login
+   ```
+2. **Pubblicazione iniziale:**
+   ```bash
+   npm run publish
+   ```
+3. **Sincronizzazione modifiche successive:**
+   ```bash
+   npm run sync
+   ```
+
+---
+
+## ⚙️ Personalizzazione (`config.json`)
+
+Le impostazioni del sito (titolo, descrizione, tema, menu di navigazione) sono configurabili nel file [`content/config.json`](./content/config.json):
+
+```json
+{
+  "title": "Appunti Universitari | Luca Gugliotta",
+  "description": "Appunti e note universitarie di Informatica",
+  "theme": "letterpress",
+  "showEditLink": false,
+  "author": "Luca Gugliotta"
+}
+```

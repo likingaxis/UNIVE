@@ -1,0 +1,13 @@
+{
+  "title": "Appunti Universitari | Luca Gugliotta",
+  "description": "Appunti e note universitarie di Informatica - Università di Roma Tor Vergata",
+  "theme": "letterpress",
+  "showEditLink": false,
+  "author": "Luca Gugliotta",
+  "nav": [
+    {
+      "title": "Home",
+      "url": "/"
+    }
+  ]
+}

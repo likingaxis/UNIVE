@@ -268,5 +268,156 @@ La realizzazione di un prototipo completo invece vede il seguente ciclo
 - modifica del prototipo
 - ciclo fino a quando i requisiti risultano chiari
  
- Il prototipo deve essere Throw-away
- 
+ Il prototipo deve essere Throw-away(usa e getta)
+ - viene utilizzato come strumento per comprendere i requisiti e poi abbandonato
+- questo perchè il prototipo viene costruito privilegiando la rapidità non necessariamente rispettando standard qualitativi sull'architettura, l'efficienza la sicurezza ecc...
+
+![[assets/p008-fig-008.png|520]]
+
+Un'interfaccia che sembra pronta dopo pochi giorni può inoltre creare nel cliente una falsa percezione quando invece tutta la parte dietro deve ancora essere realizzata
+
+## Modelli basati su iterazione dei processi
+Come detto in precedenza i limiti del Waterfall portano a una idea più generale che li risolve
+- trattare lo sviluppo come una ripetizione di alcune attività su parti più piccole del progetto
+Questo viene indicato come process iteration dove
+- per iterazione si intende una ripetizione controllata di una sequenza di attività con lo scopo di produrre una versione più completa o più precisa del prodotto
+
+Due modelli importanti basati sull'iterazione sono:
+- sviluppo incrementale 
+- sviluppo a spirale
+
+### Modello a Sviluppo Incrementale
+Il prodotto viene costruito e consegnato attraverso una successione di incrementi chiamati build
+- build ovvero una versione del prodotto che contiene una parte delle funzionalità previste
+- ogni build aggiunge progressivamente funzionalità fino ad arrivare al sistema completo
+
+il vantaggio di farlo a incrementi è che non bisogna aspettare la fine dell'intero progetto per ottenere qualcosa di utilizzabile permettendo 
+- feedback frequenti del cliente 
+- individuazione di errori nei requisiti
+- sviluppo parallelo da parte di più team
+
+Il processo a sviluppo incrementale può partire da una outline description(descrizione generale del prodotto)
+e poi si prendono le parti da sviluppare progressivamente
+![[assets/p008-fig-009.png|520]]
+#### Modello incrementale con Overall Architecture
+- versione più conservativa
+- si realizza una progettazione architetturale complessiva del prodotto
+- l'architettura software descrive le principali componenti del sistema e le relazioni tra esse
+dopo aver definito questa struttura si procede con varie build incrementali sulle singole componenti
+
+così già sappiamo dei dettagli importanti sulle componenti riducendo problemi di integrazione tra esse
+![[assets/p009-fig-010.png|520]]
+#### Incrementale senza Overall Architecture
+- in questa variante invece si parte direttamente dai requisiti con maggiore priorità
+ogni build viene sviluppata quasi come un progetto indipendente
+il vantaggio è maggiore velocità iniziale ma poi si rischia una maggior complessità ad ogni build successiva soprattutto per integrazione delle componenti software
+
+![[assets/p010-fig-011.png|650]]
+
+###### Problema del modello incrementale
+Suddividere il prodotto in molti incrementi ha effetti opposti sui costi
+- con più build una modifica interessa una porzione più piccola del prodotto
+- ma prevede integrazioni da dover fare
+
+possiamo vedere nel grafico sotto due tendenze:
+- costo delle build/modifiche che diminuisce aumentando il numero di incrementi
+- costo di integrazione che aumenta quando ci sono build numerose
+la loro somma genera una regione di ***costo minimo***
+![[assets/p010-fig-012.png|520]]
+### Modello a spirale
+- modello iterativo che introduce come elemento centrale la gestione del rischio
+ad ogni giro della spirale si fa una iterazione del progetto
+
+distanziarsi dal centro della spirale aumentano i costi accumulati
+in una iterazione viene fatto:
+- Customer communication - confronto con il cliente
+- Planning- pianificazione delle attività
+- Risk Analysis - identificazione e valutazione dei rischi
+- Engineering - attività tecniche di specifica e progettazione
+- Construction & Release - costruzione a rilascio
+- Customer Evaluation - valutazione del risultato da parte del cliente
+
+prima di investire ulteriormente si analizzano i rischi per progetti insostenibili non si prosegue nella progettazione
+
+![[assets/p011-fig-013.png|520]]
+
+>[!info]- è possibile modificare il sistema Waterfall aggiungendo una parte di Risk analysis
+>
+>
+>![[assets/p012-fig-014.png|500]]
+
+
+#### Modello a spirale di Boehm
+![[assets/p013-fig-015.png|650]]
+
+Nella rappresentazione classica di Boehm, il rischio rimane il principio che guida la scelta delle attività da svolgere in ogni iterazione
+possono essere utilizzati:
+- prototipi
+	- con una funzione diversa del Rapid Prototyping
+		- Il prototipo lì serviva per comprendere e validare i requisiti dell'utente
+		- qui invece viene costruito per ridurre un rischio specifico
+			- es:(se non sappiamo la velocità di una certa tecnologia possiamo costruire un prototipo solo per misurarne le prestazioni)
+- simulazioni
+- benchmark
+- test esplorativi
+
+Da qui nasce una parentesi che va ad approfondire tutto il concetto di Gestione dei rischi
+### Risk Management
+Il rischio è la possibilità che si verifichi un evento o una circostanza avversa con conseguenze negative sul progetto, sul prodotto o sull'organizzazione
+un rischio deve essere valutato su una base probabilistica e di impatto
+un evento molto grave ma estremamente improbabile e un evento moderato ma molto probabile devono essere valutati in modo differente
+#### Tipologie di rischio
+- Project Risk
+	- rischi sul progetto portando effetti di costo tempi personale ecc...
+	- es: una persona brava nel team abbandona l'organizzazione
+- Product Risk
+	- Influenza il prodotto finale con effetti sulla qualità le prestazioni la sicurezza ecc...
+- Business Risk
+	- influenza l'organizzazione che sta sviluppando il software
+	- es: prodotto perfetto ma il mercato cambia, quindi il prodotto non vende
+#### Processo di Risk Management
+Il processo di gestione dei rischi viene descritto da 4 attività principali:
+- identificazione
+	- individuare i problemi con una lista dei possibili rischi
+- analisi
+	- per ogni rischio si valuta la probabilità di occorrenza e la gravità dell'effetto dando una priorità su queste basi con presenza dei top risks(rischi prioritari)
+- planning
+	- per rischi importanti si decide come reagire attraverso tre strategie fondamentali:
+		- Avoidance
+			- ridurre la probabilità che il rischio si verifichi
+		- Minimisation
+			- ridurre l'impatto se il rischio si verifica
+		- Contingency Plan
+			- predisporre un piano alternativo da applicare se il problema si manifesta
+- monitoring
+	- i rischi non vengono analizzati una sola volta durante il progetto bisogna controllare cambiamenti sui rischi andando a monitorarli come:
+		- se la probabilità di un rischio è cambiata
+		- se il suo impatto è cambiato
+		- se sono comparsi nuovi rischi
+
+Quindi il Risk Management è un processo **continuo**, non una lista compilata all'inizio e poi dimenticata.
+
+### Modello Object Oriented detto anche a fontana
+Tornando ai modelli di progettazione vi è un modello con un approccio orientato agli oggetti con analisi dei requisiti e progettazione object oriented
+
+il linguaggio di programmazione finale utilizzato non deve essere object oriented
+
+vedendo il grafico sotto si nota come alcune fasi sono sovrapposte parzialmente questo evidenzia l'idea di fare progetti con:
+- Concorrenza
+	- più attività possono essere svolte nello stesso periodo
+- Iterazione
+	- una fase viene ripetuta per migliorarne il risultato con iterazioni intra-fase(attività interne alla stessa fase) e inter-fase(una fase successiva può portare a una revisione delle precedenti)
+![[assets/p016-fig-021.png|313]]
+
+### Ingegneria simultanea o concorrente
+L'ingegneria Concorrente cerca di ridurre tempi e costi facendo coesistere attività che in un modello strettamente sequenziale sarebbero svolte una dopo l'altra ma senza caos
+dove i due team che lavorano contemporaneamente su due parti collegate devono avere 
+- strumenti di condivisione 
+- gestione di versioni
+- comunicazione frequente
+- coordinamento
+- project management efficace
+se questo viene fatto bene si ha una riduzione del tempo complessivo
+
+### Modelli basati su metodi formali
+Un'altra famiglia di approcci utilizza specifiche formali descrizioni espresse con linguaggi dotati di una base matematica precisa cercando di ridurre le ambiguità

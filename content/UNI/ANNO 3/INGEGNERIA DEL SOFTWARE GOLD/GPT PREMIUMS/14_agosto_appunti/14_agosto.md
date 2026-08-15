@@ -812,6 +812,7 @@ Il processo può partire da una **outline description**, cioè una descrizione g
 Da questa visione complessiva si individuano le parti da sviluppare progressivamente.
 
 ---
+L'approccio incrementale può essere organizzato in **due versioni**, a seconda che venga definita oppure no un'architettura complessiva del sistema prima di iniziare lo sviluppo delle singole build.
 
 ## Incrementale con Overall Architecture
 
