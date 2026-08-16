@@ -817,3 +817,38 @@ un modello di sistema non rappresenta una intera specifica ma viene divisa in 3 
 - modello dinamico
 	- descrive l'evoluzione del sistema nel tempo ad esempio con State Diagram nell'approccio UML
 #### ERD e DFD 
+sono due tecniche di specifica semi formale ma rappresentano due aspetti differenti
+ERD struttura dei dati e relazioni tra entità
+DFD flusso dei dati attraverso i processi del sistema
+##### ERD Entity Relationship Diagram
+rappresenta le entità rilevanti e le relazioni esistenti tra esse
+![[assets/p038-fig-038.png|300]]
+- entità -> oggetti o concetti di cui interessa memorizzare informazioni
+- attributi -> proprietà delle entità
+- relazioni -> collegamenti logici tra entità
+
+quindi si ha una vista statica dei dati
+##### DFD Data Flow Diagram
+Descrive come i dati entrano nel sistema vengono elaborati memorizzati e inviati ad altre destinazioni
+- **source/destination of data** → entità esterne da cui arrivano o verso cui vanno i dati;
+- **data flow** → flussi di dati, rappresentati da frecce;
+- **process** → funzione che trasforma i dati;
+- **data store** → archivio in cui i dati vengono memorizzati.
+
+non rappresenta l'ordine temporale delle operazioni
+può essere inizialmente molto generale ma poi si può raffinare con più processi
+![[assets/p038-fig-039.png|224]]
+#### SSA Structured System Analysis 
+anche questa è una tecnica per analisi e non rappresentazione di specifiche semi formali
+
+Il principio centrale è lo step-wise refinement 
+invece di tentare di descrivere immediatamente il sistema nel massimo dettaglio viene progressivamente raffinato
+
+SSA può essere descritto da 9 step principali
+- step 1 costruzione del Data Flow Diagram
+	- partendo dai requisiti utente o un prototipo si identificano la sorgente dei dati destinazioni flussi o processi che trasformano i dati
+	- viene raffinato il DFD di volta in volta
+- Decidere cosa automatizzare e con quale modalità
+	- non tutte le attività del dominio devono essere automatizzate
+	- si analizza con costi benefici quali conviene automatizzare
+	- online processing: elaborazione effettuata in risposta all'interazione o all'arrivo dei dati
