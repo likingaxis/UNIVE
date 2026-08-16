@@ -735,4 +735,85 @@ Come detto in precedenza le specifiche si dividono in informali semi formali e f
 
 avere specifiche formali comporta maggior preparazione del personale e maggior costo ma con una maggior precisione e analisi automatica dovuta all'uso di modelli matematici con sintassi e semantiche rigorose
 ##### Esempio 1 Petri Net
-Modello matematico e grafico utile per descrivere
+Modello matematico e grafico utile per descrivere sistemi in cui possono verificarsi più attività concorrenti e in cui serve rappresentare condizioni di sincronizzazione
+- sistema: ciò di cui vogliamo descrivere il comportamento
+- situazione: determinato istante in cui si trova il sistema
+- evento o azione: qualcosa che può accadere e che porta il sistema da una situazione a un'altra
+
+La petri net serve per rappresentare quali eventi possono accadere in una certa situazione e come questi eventi modificano la situazione del sistema
+Di base utilizza tre elementi grafici
+- Place
+	- sono dei cerchi rappresentano le condizioni o una posizione logica significativa del sistema
+- Transition
+	- è una barra rappresenta un evento o un'azione che può modificare la situazione del sistema descrive il cambiamento
+- Arc
+	- rappresentati da frecce orientate collegano place e transition
+	- indicano quali place forniscono le condizioni necessarie a una transition
+	- quali place ricevono token dopo l'esecuzione della transition
+
+![[assets/p033-fig-033.png|650]]
+
+
+- token
+	- marcatore inserito all'interno di un place indica che nella situazione corrente la condizione o risorsa rappresentata da quel place è disponibile nella quantità indicata
+- marcatura 
+	- la distribuzione dei token nei vari place in un certo istante
+	- una transition si dice abilitata se la marcatura corrente soddisfa le condizioni necessarie perchè possa essere eseguita
+- firing
+	- è l'esecuzione effettiva di una transition abilitata
+
+**transition enabled → firing → modifica dei token → nuova marcatura → nuovo stato rappresentato**
+
+![[assets/p034-fig-034.png|650]]
+
+Negli esempi del corso si parte da una marcatura iniziale e si provano differenti transition abilitate. Se più transition sono abilitate contemporaneamente, possono esistere più possibili evoluzioni della rete
+- l'inhibitor arc esprime una condizione negativa
+	- usato quando una transition deve poter scattare solo in assenza di token in un determinato place
+	- controlla la presenza di un token per inibire il firing della transition
+
+sono utili per rappresentare concorrenza sincronizzazione dipendenze
+
+il problema è che non vengono specificate delle durate esplicite per una transition per cui ci sono due estensioni che permettono miglioramenti
+- GSPN
+- CPN
+
+##### Esempio 2 Finite State Machine
+rappresentano il comportamento di un sistema mediante un insieme finito di stati e di transizioni di stati
+rispetto alla Petri Net lo stato viene rappresentato diversamente
+- sulla petri net lo stato è implicito nella marcatura cioè nella distribuzione dei token
+- nella FSM lo stato è rappresentato come primitiva del modello infatti
+
+Una FSM contiene quindi:
+
+- **stati** → situazioni discrete in cui il sistema può trovarsi;
+- **transizioni** → passaggi da uno stato a un altro;
+- **eventi/input** → ciò che provoca o abilita il passaggio;
+- uno **stato iniziale**;
+- eventualmente uno o più **stati finali**.
+
+##### Esempio 3 Linguaggio Z
+Linguaggio di specifica formale pensato specificatamente per descrivere sistemi mediante notazione matematica
+viene usato uno schema che raggruppa
+- un **nome**;
+- **dichiarazioni** di variabili e relativi tipi;
+- **predicati**, cioè proprietà e vincoli che devono valere sulle variabili.
+In questo modo uno schema può essere usato per descrivere sia:
+
+- lo **stato** del sistema;
+- le **operazioni** che modificano quello stato.
+
+![[assets/p036-fig-036.png|650]]
+
+Nell'esempio dei pulsanti dell'ascensore vengono definiti insiemi di pulsanti e vincoli tra questi insiemi. La parte dichiarativa dice **quali elementi esistono e di che tipo sono**; la parte dei predicati dice **quali relazioni devono essere vere**.
+
+#### Specifiche semi formali e modelli del sistema
+l'idea è rappresentare specifiche semi formali più economiche e un compromesso tra un linguaggio matematico e naturale mediante l'uso di modelli
+un modello del sistema è una rappresentazione astratta che mette in evidenza alcuni aspetti del sistema e ne trascura altri
+un modello di sistema non rappresenta una intera specifica ma viene divisa in 3 punti complementari che rappresentano diversi punti di vista
+- modello dei dati
+	- descrive aspetti statici e strutturali dei dati
+- modello comportamentale
+	- descrive le funzioni e i servizi del sistema come i dati vengono elaborati o come gli attori interagiscono con le funzionalità
+- modello dinamico
+	- descrive l'evoluzione del sistema nel tempo ad esempio con State Diagram nell'approccio UML
+#### ERD e DFD 
