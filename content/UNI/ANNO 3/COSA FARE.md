@@ -3,4 +3,5 @@
 
 
 finisci 15 agosto IS entro oggi
-domani pensa alla tesi durante il viaggio
+domani finisci 16 agosto
+18 pensa alla tesi durante il viaggio
