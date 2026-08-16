@@ -469,5 +469,103 @@ successivamente
 - la versione definitiva veniva indicata con RTM - Release to Manufacturing
 
 L'esempio viene utilizzato soprattutto per sottolineare l'importanza di prendere decisioni basandosi su dati e processi di controllo, non soltanto sull'esperienza individuale
-### Metodi Agile
-I metodi Agile nascono come reazione a processi 
+### Modelli con approccio Agile
+I metodi Agile nascono come reazione a processi eccessivamente pesanti e rigidi
+con un processo di realizzazione Software leggero ma intenzionalmente organizzato, iterativo e basato su feedback frequente 
+#### Quattro valori del manifesto Agile
+- Individui e interazioni più che processi e strumenti
+	- Processi e strumenti sono utili ma non sostituiscono una buona comunicazione e collaborazione
+- Software funzionante più che documentazione esaustiva
+	- meno documentazioni(non zero) più disponibilità di software funzionante
+- Collaborazione con il cliente più che negoziazione contrattuale
+	- instaurare con il cliente una collaborazione continua adattando il prodotto a nuove necessità e informazioni senza essere legati da un contratto pregresso
+- Rispondere al cambiamento più che seguire un piano
+	- reagire a cambiamenti reali nei requisiti o nel contesto
+
+Esistono inoltre 12 principi Agile che sviluppano ancora meglio idee del tipo:
+- consegna frequente di software funzionante
+- collaborazione continua
+- team motivati 
+- semplicità
+#### Modello Scrum
+uno dei framework più noti utilizzati nell'ambito Agile
+Un framework è una struttura generale di lavoro che definisce ruoli eventi artefatti e regole fondamentali lasciando al team libertà su molte decisioni tecniche e concrete
+Scrum organizza il lavoro in cicli brevi chiamati Sprint
+- intervallo di lavoro a durata limitata nel quale il team cerca di produrre un nuovo incremento del prodotto
+	- circa 2-4 settimane cercando di ridurre il tempo tra decisione -> sviluppo -> risultato funzionante -> feedback
+	- ogni giorno avviene il Daily Scrum un incontro che aiuta il gruppo a sincronizzare il lavoro e a identificare rapidamente ostacoli e problemi
+	- alla fine dello sprint il risultato viene mostrato e discusso con le persone interessante facendo uno sprint review e aggiornando eventualmente il product backlog(vedi sotto)
+	- poi si fa uno sprint retrospective dove il team rivede il modo in cui ha lavorato riflettendo su cosa ha funzionato bene e quali problemi sono emersi
+	- uno sprint non si prolunga ciò che non viene fatto si rimanda allo sprint successivo
+Se abbiamo capito male un requisito, è meglio scoprirlo dopo poche settimane che dopo un anno
+Ruoli presenti
+- product owner
+	- gestisce le priorità e rappresenta le esigenze del prodotto
+	- responsabile del product backlog, insieme ordinato del lavoro desiderato per il prodotto
+- scrum master
+	- aiuta il gruppo a comprendere e applicare lo scrum correttamente, non deve essere pensato come un capo che assegna i compiti ma facilita il tutto rimuovendo ostacoli organizzativi e supportando il team e il product owner
+- development team
+	- gruppo che svolge concretamente il lavoro tecnico necessario realizzando incrementi con progettazione codifica testing e integrazione
+
+- il product backlog contiene il lavoro che potrebbe essere necessario per evolvere il prodotto con funzionalità miglioramenti correzioni requisiti ecc...
+	- da una parte di esso si fa il planning di uno sprint per capire su quale parte del backlog fare uno sprint facendo così si ha uno sprint backlog
+
+- per Definition of Done si riferisce a tutti quei criteri per cui un lavoro possa essere considerato completo
+![[assets/p022-fig-025.png|520]]
+### User Story
+Per descrivere il bisogno dal punto di vista dell'utente si può utilizzare questo formato non prendendolo come una vera e propria specifica ma come una cosa compatta che può far discutere i bisogni dell'utente
+`As a <role>, I want <goal> so that <benefit>`
+cioè:
+- **role** -> chi ha il bisogno;
+- **goal** -> cosa vuole ottenere;
+- **benefit** -> perché quella funzione produce valore.
+Esempio:
+`As a student, I want to see my exam results so that I can monitor my academic progress.`
+
+Una storia troppo grande per essere affrontata direttamente può essere chiamata **Epic** e successivamente suddivisa in User Stories più piccole.
+possono essere usate nei product backlog per Scrum
+### Dal prodotto al processo dell'organizzazione
+Dopo aver discusso come organizzare lo sviluppo di un singolo prodotto come possiamo valutare quanto un'organizzazione sia capace di sviluppare software in modo sistematico e controllato?
+Per questo nasce un modello detto CMM che valuta la maturità del processo di organizzazione al di là di quanto sono bravi i singoli programmatori o le tecnologie usate
+#### Modello CMM- Capability Maturity Model
+modello per descrivere la maturità del processo software di un'organizzazione
+la maturità indica quanto il processo sia:
+- definito
+- ripetibile
+- controllato
+- misurabile
+- migliorabile
+il modello è organizzato in 5 livelli
+- 1. Initial
+	- il processo è ad hoc dove il successo dipende da persone fortemente competenti detti heroes questo rende
+		- cose instabili
+		- risultati difficili da prevedere
+		- modalità di lavoro fortemente dipendente dalle persone
+- 2. Repeatable
+	- vengono introdotte pratiche fondamentali di project management come 
+		- pianficare
+		- monitorare
+		- controllare aspetti fondamentali del progetto
+	- ciò rende le cose parzialmente riproducibili poiché documentate
+- 3. Defined
+	- il processo diventa documentato, standardizzato e integrato a livello organizzativo
+- 4. Managed
+	- l progetto viene gestito anche attraverso misure quantitative non limitandosi a seguire procedure ma a raccogliere dati e capire come il processo sta funzionando
+- 5. Optimizing
+	- l'organizzazione utilizza ciò che misura per migliorare continuamente il processo andando a fare Defect Prevention(analizzare cause che producono i difetti)
+
+Il CMM è un modello additivo, un'organizzazione che raggiunge un livello elevato deve aver soddisfatto le capacità richieste dai livelli precedenti
+##### KPA
+Nel CMM classico i livelli sono associati a Key Process Areas (KPA)
+aree di processo considerate fondamentali per raggiungere un determinato livello di maturità
+Una KPA specifica aspetti come:
+- obiettivi;
+- responsabilità;
+- risorse;
+- attività da svolgere;
+- modalità di monitoraggio;
+- modalità di verifica.
+Negli appunti vengono richiamate complessivamente **18 KPA** nel modello classico.
+
+ il livello di maturità viene valutato osservando **come l'organizzazione lavora concretamente**, non soltanto la qualità apparente di un singolo programma prodotto
+ 

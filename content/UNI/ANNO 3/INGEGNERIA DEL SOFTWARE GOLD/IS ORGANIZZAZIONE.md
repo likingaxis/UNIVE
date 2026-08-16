@@ -1,6 +1,6 @@
 # Checklist Studio ISW (15–23 Agosto)
 
-- [ ] **15 Agosto:** 24 pagine *(pp. 1–24)* — Fondamenti e modelli di processo
+- [x] **15 Agosto:** 24 pagine *(pp. 1–24)* — Fondamenti e modelli di processo
 - [ ] **16 Agosto:** 16 pagine *(pp. 25–40)* — Requisiti e specifiche formali
 - [ ] **17 Agosto:** 27 pagine *(pp. 41–67)* — OOA e diagrammi UML
 - [ ] **18 Agosto:** 20 pagine *(pp. 68–87)* — Pianificazione, stime e principi di design
