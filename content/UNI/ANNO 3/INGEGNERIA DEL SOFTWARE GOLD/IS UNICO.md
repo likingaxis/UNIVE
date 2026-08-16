@@ -568,4 +568,171 @@ Una KPA specifica aspetti come:
 Negli appunti vengono richiamate complessivamente **18 KPA** nel modello classico.
 
  il livello di maturità viene valutato osservando **come l'organizzazione lavora concretamente**, non soltanto la qualità apparente di un singolo programma prodotto
- 
+
+# Verso il Requirements Engineering
+Nel ciclo di vita abbiamo visto che lo sviluppo del software parte dai requisiti e dalla loro successiva specifica.
+Prima di progettare o scrivere codice bisogna capire con precisione cosa deve fare il sistema e quali vincoli ha
+questa cosa non è affatto banale ed è necessario un processo sistematico che permetta di identificare, analizzare, documentare, controllare e gestire i requisiti
+Questo processo è proprio Requirements Engineering dove per Requisiti Software si intende:
+### Requisiti Software
+Descrive una condizione o capacità necessaria all'utente per risolvere un problema o raggiungere un obiettivo
+Per condizione o capacità si intende qualcosa che deve essere vero o che il sistema deve essere in grado di fare
+
+Esempi:
+- capacità: il sistema deve permettere all'utente di cercare un documento
+- condizione: il tempo di risposta deve essere inferiore a una certa soglia
+- vincolo: i documenti prodotti devono rispettare uno standard imposto dal cliente
+
+quindi non deve essere per forza una funzione ma anche una descrizione differente
+#### astrazione e categoria
+I requisiti si possono osservare su due dimensioni differenti:
+- livello di astrazione 
+	- quanto il requisito è generale o dettagliato 
+		- requisito utente o requisito di sistema
+- categoria 
+	- che tipo di informazione esprime
+		- funzionale o non funzionale
+
+Queste due dimensioni sono indipendenti tra loro
+##### Astrazione
+Per la dimensione sul livello di astrazione si possono spiegare i requisiti utente o di sistema
+- Requisiti utente
+	- descrivono ad alto livello i servizi e i vincoli del sistema
+	- pensati per essere comprensibile a persone che non devono conoscere dettagli tecnici con linguaggio naturale e diagrammi
+	- utile per esprimere cosa serve senza entrare nel dettaglio tecnico
+- Requisiti di sistema
+	- descrivono servizi e vincoli a un livello molto più dettagliato
+	- devono essere abbastanza precisi da diventare una base concreta per le successive attività di progettazione e sviluppo
+	- il requisito utente può essere suddiviso in tanti requisiti di sistema più avanzati
+Sono entrambi utili perchè hanno due destinatari diversi 
+##### Categoria
+Per una dimensione per categoria andiamo a definire cosa descrive un determinato requisito
+- funzionale
+	- descrivono i servizi che il sistema deve offrire e il comportamento che deve assumere in presenza di determinati input o situazioni risponde alla domanda
+	- **Che cosa deve fare il sistema?**
+- non funzionale
+	- descrivono proprietà qualità o vincoli che il sistema o il processo di sviluppo devono rispettare
+	- non definiscono quale funzione deve esistere ma possono stabilire come deve comportarsi il sistema
+	- descrivono cose relative al
+		- prodotto
+			- performance e sicurezza
+		- organizzazione/processo
+			- standard aziendali da rispettare e linguaggi imposti
+		- vincoli esterni
+			- tipo leggi e privacy
+##### Dominio
+Poi ci sono i requisiti di dominio che sono sempre una categoria ma non completamente separata 
+- Un requisito di dominio dipende dal dominio applicativo in cui il software verrà utilizzato
+	- dominio applicativo ovvero il settore reale nel quale opera il sistema
+- un requisito di dominio può essere 
+	- funzionale, se l'ambiente impone una particolare funzione
+	- non funzionale, se l'ambiente impone un vincolo o una proprietà
+##### Requisiti scritti male
+I requisiti devono essere scritti bene altrimenti si può incorrere in
+- Ambiguità
+	- quando può essere interpretato in modi più ragionevoli
+- Incompletezza
+	- quando non descrive tutte le caratteristiche necessarie del sistema
+- Inconsistenza
+	- quando ci sono due requisiti che impongono condizioni incompatibili
+- Mancanza di verificabilità
+	- quando non possiamo stabilire in modo oggettivo se il prodotto lo soddisfa oppure no
+		- "il sistema deve essere facile da usare"(totalmente non verificabile con un requisito così)
+	- meglio associare una proprietà a una metrica ad esempio il tempo massimo di risposta il numero massimo di errori training time per un nuovo utente a prendere familiarità ecc...
+##### Il PDL
+quando si parla di requisito si intende un singolo dettaglio o descrizione
+l'insieme di requisiti forma una specifica
+Per rendere una specifica più precisa si può usare un linguaggio simile a uno pseudocodice come PDL
+
+![[assets/p030-fig-031.png|650]]
+
+Il vantaggio è ridurre l'ambiguità rispetto al linguaggio naturale.
+l'ideale è utilizzarlo non per cose troppo interne ma per interfacce o simili altrimenti si rischia di dire
+- come si deve implementare quel requisito invece l'obiettivo è dire
+- cosa deve fare il sistema
+#### Cosa si intende per Specifica
+Documento di specifica o documento di analisi dei requisiti è la raccolta in un documento di tutti i requisiti raccolti per un certo dominio del problema
+- non descrive quindi il problema della soluzione ovvero cosa bisogna fare ma solo quali sono i problemi
+	- poi per risolvere il dominio della soluzione si attuano delle progettazioni avanzate
+I requisiti devono essere facili da tracciare soprattutto se ci sono delle relazioni tra più di questi
+così se un requisito cambia possiamo valutare quali parti del progetto vanno modificate
+
+Lo standard usato come template per fare un documento di specifica è **IEEE 830-1998** così strutturato:
+- **Preface**:
+	- lettori previsti;
+	- cronologia delle versioni;
+	- modifiche principali;
+- **Introduction**:
+	- scopo;
+	- descrizione generale del sistema;
+	- relazioni con altri sistemi;
+- **Glossary**:
+	- termini tecnici e definizioni;
+- **User Requirements Definition**:
+	- requisiti utente funzionali e non funzionali;
+- **System Architecture**:
+	- visione di alto livello dei componenti;
+- **System Requirements**:
+	- requisiti di sistema dettagliati;
+- **System Models**:
+	- modelli che descrivono il sistema e le relazioni con l'ambiente;
+- **System Evolution**:
+	- ipotesi sull'evoluzione futura;
+- **Appendices**:
+	- informazioni specifiche dell'applicazione;
+- **Index**.
+## Requirements Engineering
+Dopo aver visto cosa sono i requisiti e come possono essere documentati come possiamo raggiungere ad un punto dove i requisiti sono effettivamente corretti e come li manteniamo validi durante le evoluzioni del progetto?
+A tal proposito nasce la Requirements Engineering
+- come vengono studiati i requisiti lungo il ciclo di vita del Software
+
+Il processo viene suddiviso in 5 grandi attività
+
+- ***Studio di fattibilità***
+	- avviene prima di investire seriamente nello sviluppo valutando costi tempi risorse risponde alla domanda
+	- **Ha senso realizzare questo sistema?**
+	- si ha quindi in output un report di fattibilità dopo svariati colloqui tra i membri che mettono mano al progetto
+- ***Identificazione e analisi dei requisiti***
+	- Se il progetto è considerato fattibile bisogna capire che cosa serve agli interessati(stakeholder)
+	- gli stakeholder non sono per forza l'utente finale ma persone gruppi o organizzazioni che hanno un interesse nel sistema 
+	- Step per identificare e analizzare i requisiti
+		- Dominio applicativo ->prima di interpretare le esigenze degli interessati si deve capire il dominio applicativo poi si fa
+		- Requirements elicitation -> attività con cui si fanno emergere le esigenze degli stakeholder(Raccolta dei requisiti)
+		- Classificazione -> organizzare in gruppi i requisiti
+		- Risoluzione dei conflitti -> creare compatibilità tra stakeholder diversi che magari hanno idee differenti
+		- Assegnare priorità tra i requisiti
+		- Verificare i requisiti -> vengono individuati problemi di inconsistenza ambiguità ecc...
+	- Tecniche di identificazione dei requisiti
+		- far vedere un prototipo agli utenti
+		- descrivere situazioni concrete di utilizzo
+		- etnografia, analisi del lavoro degli utenti nel contesto reale per capire come sono abituati ora
+- ***Specifica dei requisiti***
+	- trasforma quanto emerso dalla elicitation e analisi in una rappresentazione abbastanza precisa per guidare le fasi successive
+	- una specifica può essere
+		- informale -> linguaggio naturale
+		- semi formale -> modelli e notazioni grafiche con regole
+		- formale -> notazioni matematiche con semantica rigorosa
+- ***Convalida dei Requisiti***
+	- cerca di capire se i requisiti descritti rappresentano ciò che gli stakeholder necessitano e se sono utilizzabili come base affidabile per lo sviluppo
+	- convalida mediante le seguenti tecniche:
+		- informali -> altre persone esaminano i requisiti e cercano problemi
+		- formali -> si fanno walkthrough(esamina passo passo del documento) e ispezioni(esamina ma più rigorosa)
+		- prototipazione -> il prototipo permette di verificare con gli utenti se quanto specificato corrisponde alle loro esigenze
+		- Generazione dei test case -> si cerca di capire se i requisiti sono vaghi o incompleti
+		- analisi automatizzata sulla consistenza -> utilizzo di tool per vedere la consistenza
+- ***Gestione dei Requisiti***
+	- I requisiti non restano necessariamente fermi dopo l'approvazione del documento quindi si svolge una attività dove i requisiti vengono cambiati in base alle esigenze durante il ciclo di vita del progetto
+
+##### Requisiti stabili e volatili
+in base alla probabilità di cambiamento abbiamo requisiti che possono essere stabili o volatili
+i requisiti volatili si distinguono in
+- mutabili -> cambiano per modifiche dell'ambiente
+- emergenti -> emergono quando aumenta la comprensione del sistema e delle esigenze
+- consequenziali -> nascono come conseguenza dell'introduzione stessa del nuovo sistema
+- di compatibilità -> cambiano per mantenere compatibilità con altri sistemi
+#### Esempi di specifiche formali
+Come detto in precedenza le specifiche si dividono in informali semi formali e formali
+
+avere specifiche formali comporta maggior preparazione del personale e maggior costo ma con una maggior precisione e analisi automatica dovuta all'uso di modelli matematici con sintassi e semantiche rigorose
+##### Esempio 1 Petri Net
+Modello matematico e grafico utile per descrivere

@@ -1,3 +1,4 @@
 {
-  "requirePen": false
+  "requirePen": false,
+  "enableShortcuts": true
 }

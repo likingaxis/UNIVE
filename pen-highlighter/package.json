@@ -1,6 +1,6 @@
 {
 	"name": "pen-highlighter",
-	"version": "1.0.0",
+	"version": "1.2.0",
 	"description": "Highlight text and format it with a pen on Android.",
 	"main": "main.js",
 	"scripts": {
@@ -11,6 +11,8 @@
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
+		"@codemirror/state": "^6.7.1",
+		"@codemirror/view": "^6.43.9",
 		"@types/node": "^16.11.29",
 		"builtin-modules": "^5.3.0",
 		"esbuild": "0.17.3",

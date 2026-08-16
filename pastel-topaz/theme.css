@@ -1,0 +1,472 @@
+/* ============================================================
+   🌸 FLOWERSHOW THEME: PASTEL TOPAZ (Blue Topaz Pastel)
+   
+   Inspired by Obsidian's "Blue Topaz" theme + Pastel Palette:
+   - Rainbow pastel headings (H1 Rose, H2 Peach, H3 Sage, H4 Sky, H5 Lavender, H6 Honey)
+   - Lavender primary accent (#9b8ec4)
+   - Colored inline emphasis (**bold** caramel, *italic* olive sage)
+   - Custom pastel callouts, badges, and soft rounded components
+   - Full Light & Dark mode support
+   ============================================================ */
+
+/* =======================
+    1. FONTS & IMPORTS
+========================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* =======================
+    2. ROOT & COLOR SCHEME
+========================== */
+:root {
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* =======================
+    3. TYPOGRAPHY SCALES
+========================== */
+:root {
+  /* FONT WEIGHTS */
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-normal: 500;
+  --font-weight-medium: 600;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* TYPOGRAPHY SETTINGS (Obsidian font-weight: 600 for readability) */
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --font-weight-body: 500;
+  --font-weight-bold-body: 700;
+  --font-weight-headings: 700;
+
+  --font-size-base: 1.0625rem;
+  --font-line-height-body: 1.65;
+  --font-line-height-headings: 1.25;
+
+  /* WIDTHS */
+  --width-content: 48rem;
+  --width-content-toc: 82rem;
+  --width-content-toc-sidebar: 88rem;
+  --width-sidebar: 16rem;
+  --width-toc: 15rem;
+}
+
+/* =======================
+    4. COLOR PALETTE
+========================== */
+:root {
+  /* BASE PASTEL COLORS */
+  --color-pastel-rose: #d4829a;
+  --color-pastel-peach: #d4a373;
+  --color-pastel-sage: #8ab17d;
+  --color-pastel-sky: #7aaed4;
+  --color-pastel-lavender: #a18cd1;
+  --color-pastel-honey: #c9b458;
+  --color-pastel-accent: #9b8ec4;
+  --color-pastel-accent-hover: #8a7db8;
+
+  /* LIGHT THEME */
+  --color-l-background: #faf9fc;
+  --color-l-foreground: #1a1a1a;
+  --color-l-accent: #9b8ec4;
+
+  /* DARK THEME */
+  --color-d-background: #18181f;
+  --color-d-foreground: #ececef;
+  --color-d-accent: #b8abdf;
+}
+
+/* --- LIGHT MODE --- */
+:root,
+:root[data-theme="light"] {
+  --color-background: var(--color-l-background);
+  --color-background-surface: #f0eef5;
+  --color-background-surface-subtle: #f5f4f8;
+  --color-border: #e0dbe8;
+  --color-border-subtle: #ece8f2;
+
+  --color-foreground: var(--color-l-foreground);
+  --color-foreground-muted: #555562;
+  --color-foreground-faint: #787888;
+
+  --color-accent: var(--color-l-accent);
+  --color-accent-hover: #8a7db8;
+  --color-accent-subtle: #e8e3f4;
+  --color-accent-text: #6a5e98;
+
+  /* Heading Colors */
+  --color-h1: var(--color-pastel-rose);
+  --color-h2: var(--color-pastel-peach);
+  --color-h3: var(--color-pastel-sage);
+  --color-h4: var(--color-pastel-sky);
+  --color-h5: var(--color-pastel-lavender);
+  --color-h6: var(--color-pastel-honey);
+
+  /* Inline emphasis */
+  --color-bold: #e6a85c;
+  --color-italic: #a9b665;
+  --color-bold-italic: #d8a657;
+
+  /* Code */
+  --color-code-bg: #ece9f2;
+  --color-code-text: #b06020;
+}
+
+/* --- DARK MODE --- */
+:root[data-theme="dark"] {
+  --color-background: var(--color-d-background);
+  --color-background-surface: #22222b;
+  --color-background-surface-subtle: #1c1c24;
+  --color-border: #323240;
+  --color-border-subtle: #292934;
+
+  --color-foreground: var(--color-d-foreground);
+  --color-foreground-muted: #a6a6b8;
+  --color-foreground-faint: #78788c;
+
+  --color-accent: var(--color-d-accent);
+  --color-accent-hover: #c9bdeb;
+  --color-accent-subtle: #302d42;
+  --color-accent-text: #d4caef;
+
+  /* Heading Colors (tuned for dark contrast) */
+  --color-h1: #e29ab0;
+  --color-h2: #e0b48a;
+  --color-h3: #9dc490;
+  --color-h4: #8ec0e4;
+  --color-h5: #b5a2df;
+  --color-h6: #d8c772;
+
+  /* Inline emphasis */
+  --color-bold: #f0b773;
+  --color-italic: #bac779;
+  --color-bold-italic: #e5b66d;
+
+  /* Code */
+  --color-code-bg: #252532;
+  --color-code-text: #e88d4d;
+}
+
+/* ============================================================
+    5. BASE DOCUMENT & TYPOGRAPHY STYLING
+============================================================ */
+body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-body);
+  line-height: var(--font-line-height-body);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Rainbow Headings */
+h1, .rendered-mdx h1 {
+  color: var(--color-h1) !important;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2, .rendered-mdx h2 {
+  color: var(--color-h2) !important;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+h3, .rendered-mdx h3 {
+  color: var(--color-h3) !important;
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+h4, .rendered-mdx h4 {
+  color: var(--color-h4) !important;
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+h5, .rendered-mdx h5 {
+  color: var(--color-h5) !important;
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+h6, .rendered-mdx h6 {
+  color: var(--color-h6) !important;
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* Inline Emphasis (Pastel Blue Topaz Style) */
+strong, b, .rendered-mdx strong {
+  color: var(--color-bold);
+  font-weight: 700;
+}
+
+em, i, .rendered-mdx em {
+  color: var(--color-italic);
+  font-style: italic;
+}
+
+strong em, em strong, .rendered-mdx strong em, .rendered-mdx em strong {
+  color: var(--color-bold-italic);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Links */
+a, .rendered-mdx a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+a:hover, .rendered-mdx a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Inline Code & Code Blocks */
+code:not(pre code), .rendered-mdx code:not(pre code) {
+  font-family: var(--font-mono);
+  background-color: var(--color-code-bg);
+  color: var(--color-code-text);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.88em;
+  font-weight: 600;
+}
+
+pre, .rendered-mdx pre {
+  background-color: var(--color-background-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+}
+
+/* Blockquotes */
+blockquote, .rendered-mdx blockquote {
+  border-left: 4px solid var(--color-accent);
+  background-color: var(--color-accent-subtle);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+/* Lists */
+.rendered-mdx ul > li::marker {
+  color: var(--color-pastel-peach);
+}
+
+.rendered-mdx ol > li::marker {
+  color: var(--color-pastel-sky);
+  font-weight: 600;
+}
+
+/* Tables */
+table, .rendered-mdx table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+th, .rendered-mdx th {
+  background-color: var(--color-background-surface);
+  color: var(--color-foreground);
+  font-weight: 700;
+  border: 1px solid var(--color-border);
+  padding: 0.6rem 1rem;
+}
+
+td, .rendered-mdx td {
+  border: 1px solid var(--color-border);
+  padding: 0.55rem 1rem;
+}
+
+tr:nth-child(even) {
+  background-color: var(--color-background-surface-subtle);
+}
+
+/* ============================================================
+    6. TAILWIND PROSE ADAPTATION (FLOWERSHOW CORE)
+============================================================ */
+.rendered-mdx:not(.is-plain) {
+  --tw-prose-body: var(--color-foreground);
+  --tw-prose-headings: var(--color-foreground);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-bold: var(--color-bold);
+  --tw-prose-quotes: var(--color-foreground);
+  --tw-prose-quote-borders: var(--color-accent);
+  --tw-prose-code: var(--color-code-text);
+  --tw-prose-hr: var(--color-border);
+}
+
+/* ============================================================
+    7. FLOWERSHOW NAVIGATION & SHELL
+============================================================ */
+/* Header / Navbar */
+.site-navbar, header nav {
+  background-color: var(--color-background-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-navbar-site-name, .site-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: var(--color-accent-text) !important;
+}
+
+.site-navbar-link:hover, nav a:hover {
+  color: var(--color-accent) !important;
+}
+
+/* Sidebar & TOC */
+.sidebar, .site-sidebar, .toc, nav.toc {
+  font-size: 0.92rem;
+}
+
+.sidebar a, .site-sidebar a {
+  color: var(--color-foreground-muted);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.sidebar a:hover, .site-sidebar a:hover {
+  color: var(--color-accent-text);
+  background-color: var(--color-accent-subtle);
+  text-decoration: none;
+}
+
+.sidebar a.is-active, .site-sidebar a.active {
+  color: var(--color-accent-text);
+  background-color: var(--color-accent-subtle);
+  font-weight: 700;
+}
+
+/* Tag Badges (Obsidian pill style) */
+.tag, a[href*="/tags/"], .badge {
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent-text) !important;
+  border: 1px solid var(--color-border);
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none !important;
+}
+
+.tag:hover, a[href*="/tags/"]:hover, .badge:hover {
+  background-color: var(--color-accent);
+  color: #ffffff !important;
+}
+
+/* ============================================================
+    8. CALLOUTS PASTELLO (NATIVE OBSIDIAN STYLE)
+============================================================ */
+.callout, [data-callout] {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1.15rem;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background-color: var(--color-background-surface);
+}
+
+.callout-title {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Note / Info (Sky Blue) */
+.callout[data-callout="note"], .callout-note,
+.callout[data-callout="info"], .callout-info {
+  border-color: var(--color-pastel-sky);
+  background-color: rgba(122, 174, 212, 0.12);
+}
+.callout[data-callout="note"] .callout-title,
+.callout[data-callout="info"] .callout-title {
+  color: var(--color-pastel-sky);
+}
+
+/* Tip / Important (Lavender) */
+.callout[data-callout="tip"], .callout-tip,
+.callout[data-callout="important"], .callout-important,
+.callout[data-callout="hint"], .callout-hint {
+  border-color: var(--color-pastel-lavender);
+  background-color: rgba(161, 140, 209, 0.12);
+}
+.callout[data-callout="tip"] .callout-title,
+.callout[data-callout="important"] .callout-title {
+  color: var(--color-pastel-lavender);
+}
+
+/* Success / Check / Done (Sage Green) */
+.callout[data-callout="success"], .callout-success,
+.callout[data-callout="check"], .callout-check,
+.callout[data-callout="done"], .callout-done {
+  border-color: var(--color-pastel-sage);
+  background-color: rgba(138, 177, 125, 0.12);
+}
+.callout[data-callout="success"] .callout-title {
+  color: var(--color-pastel-sage);
+}
+
+/* Warning / Caution (Peach Orange) */
+.callout[data-callout="warning"], .callout-warning,
+.callout[data-callout="caution"], .callout-caution {
+  border-color: var(--color-pastel-peach);
+  background-color: rgba(212, 163, 115, 0.12);
+}
+.callout[data-callout="warning"] .callout-title {
+  color: var(--color-pastel-peach);
+}
+
+/* Danger / Error / Bug (Pastel Rose) */
+.callout[data-callout="danger"], .callout-danger,
+.callout[data-callout="error"], .callout-error,
+.callout[data-callout="failure"], .callout-failure,
+.callout[data-callout="bug"], .callout-bug {
+  border-color: var(--color-pastel-rose);
+  background-color: rgba(212, 130, 154, 0.12);
+}
+.callout[data-callout="danger"] .callout-title {
+  color: var(--color-pastel-rose);
+}
+
+/* Question / FAQ (Honey Yellow) */
+.callout[data-callout="question"], .callout-question,
+.callout[data-callout="faq"], .callout-faq {
+  border-color: var(--color-pastel-honey);
+  background-color: rgba(201, 180, 88, 0.12);
+}
+.callout[data-callout="question"] .callout-title {
+  color: var(--color-pastel-honey);
+}
