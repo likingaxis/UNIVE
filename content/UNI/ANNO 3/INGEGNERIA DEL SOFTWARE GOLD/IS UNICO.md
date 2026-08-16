@@ -469,3 +469,5 @@ successivamente
 - la versione definitiva veniva indicata con RTM - Release to Manufacturing
 
 L'esempio viene utilizzato soprattutto per sottolineare l'importanza di prendere decisioni basandosi su dati e processi di controllo, non soltanto sull'esperienza individuale
+### Metodi Agile
+I metodi Agile nascono come reazione a processi 
