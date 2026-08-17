@@ -301,7 +301,7 @@ La frase chiave che userei per collegare tutto è questa:
 
 **Verifica e validazione descrivono cosa vogliamo controllare; il testing è uno degli strumenti con cui effettuiamo questi controlli.**
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p006-fig-005.png|550]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p006-fig-005.png|550]]
 
 Il diagramma evidenzia proprio questa differenza: la verifica mette in relazione le fasi vicine del processo, mentre la validazione collega il prodotto sviluppato agli obiettivi dell'utente.
 
@@ -504,7 +504,7 @@ Per questo, dopo una modifica, l'affidabilità può aumentare ma non è garantit
 
 L'obiettivo è una **crescita dell'affidabilità**, cioè una progressiva riduzione della frequenza dei guasti attraverso correzioni e miglioramenti.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-001.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-001.png|520]]
 
 Nel grafico hardware si riconoscono tre zone concettuali:
 
@@ -512,7 +512,7 @@ Nel grafico hardware si riconoscono tre zone concettuali:
 - una fase relativamente stabile;
 - una fase finale in cui l'usura fa aumentare i guasti.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-002.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-002.png|520]]
 
 Nel software l'andamento è differente: idealmente le correzioni dovrebbero far diminuire progressivamente la frequenza di guasto. Nella pratica, ogni modifica può introdurre nuovi difetti e causare temporanei aumenti della frequenza di guasto.
 
@@ -640,7 +640,7 @@ L'idea è:
 3. la si modifica in base ai problemi e alle richieste;
 4. si continua a correggerla finché il cliente non è soddisfatto.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|480]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|480]]
 
 Il problema non è il fatto di modificare il software. La modifica è normale e inevitabile.
 
@@ -668,7 +668,7 @@ La sua caratteristica fondamentale è la **sequenzialità**.
 
 Le attività vengono organizzate come una cascata: l'output di una fase diventa l'input della successiva e si procede dopo aver completato e verificato la fase corrente.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|520]]
 
 Nel diagramma si riconoscono le principali fasi:
 
@@ -719,7 +719,7 @@ Il **Rapid Prototyping Model** nasce soprattutto per affrontare un problema dell
 
 Descrivere un'interfaccia soltanto a parole può essere ambiguo. Un prototipo permette invece all'utente di **provare concretamente una rappresentazione preliminare del sistema**.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|520]]
 
 ## Che cos'è un prototipo
 
@@ -732,7 +732,7 @@ Il prototipo permette di svolgere due attività fondamentali:
 - **Requirements Elicitation**: far emergere requisiti che l'utente non aveva espresso chiaramente;
 - **Requirements Validation**: verificare che ciò che abbiamo capito corrisponda davvero alle esigenze dell'utente.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-007.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-007.png|520]]
 
 ## Ciclo del prototipo
 
@@ -762,7 +762,7 @@ Perché il prototipo viene costruito privilegiando la **rapidità**, non necessa
 - completezza;
 - robustezza.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-008.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-008.png|520]]
 
 Un'interfaccia che sembra pronta dopo pochi giorni può inoltre creare nel cliente una falsa percezione: può sembrare che il prodotto sia quasi completo, mentre la parte più difficile - logica, architettura, integrazione, prestazioni, sicurezza - deve ancora essere realizzata.
 
@@ -791,7 +791,7 @@ Una **build** è una versione del prodotto che contiene una parte delle funziona
 
 La prima build può essere molto limitata. Le build successive aggiungono progressivamente funzionalità fino ad arrivare al sistema completo.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|520]]
 
 ## Perché usare incrementi
 
@@ -824,7 +824,7 @@ L'**architettura software** descrive le principali componenti del sistema e le r
 
 Solo dopo aver definito questa struttura generale si procede in modo incrementale sulle singole componenti.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|520]]
 
 Il vantaggio è che, quando sviluppiamo una componente, conosciamo già:
 
@@ -842,7 +842,7 @@ In questa variante si parte direttamente dai requisiti di maggiore priorità.
 
 Ogni build viene sviluppata quasi come un piccolo progetto indipendente.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
 
 Il vantaggio è una maggiore velocità iniziale.
 
@@ -861,7 +861,7 @@ Con più build:
 - una modifica interessa mediamente una porzione più piccola del prodotto;
 - ma aumenta il numero di integrazioni da eseguire.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
 
 Il grafico mostra quindi due tendenze:
 
@@ -903,7 +903,7 @@ Il **modello a spirale** è anch'esso iterativo, ma introduce come elemento cent
 
 Ogni giro della spirale rappresenta un'iterazione del progetto.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|520]]
 
 Nel diagramma:
 
@@ -926,7 +926,7 @@ La caratteristica decisiva è che **prima di investire ulteriormente si analizza
 
 Se un rischio rende il progetto troppo pericoloso o economicamente insostenibile, si può decidere di non proseguire.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p012-fig-014.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p012-fig-014.png|500]]
 
 Questa seconda rappresentazione evidenzia la differenza dal Waterfall: prima delle principali fasi viene inserita esplicitamente una valutazione del rischio.
 
@@ -934,7 +934,7 @@ Questa seconda rappresentazione evidenzia la differenza dal Waterfall: prima del
 
 ## Modello a spirale di Boehm
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|650]]
 
 Nella rappresentazione classica di Boehm, il rischio rimane il principio che guida la scelta delle attività da svolgere in ogni iterazione.
 
@@ -998,7 +998,7 @@ Influenza l'organizzazione che sta sviluppando il software.
 
 Esempio: viene sviluppato un prodotto tecnicamente corretto ma il mercato cambia e non esiste più una domanda sufficiente.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p014-fig-016.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p014-fig-016.png|650]]
 
 ---
 
@@ -1021,7 +1021,7 @@ Categorie tipiche richiamate negli appunti:
 - requisiti;
 - stime.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p014-fig-017.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p014-fig-017.png|520]]
 
 ### 2. Risk Analysis
 
@@ -1034,7 +1034,7 @@ Per ciascun rischio si valuta:
 
 Da questa valutazione nasce una **priorità**.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p015-fig-018.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p015-fig-018.png|650]]
 
 I rischi più importanti vengono affrontati per primi. Negli appunti viene richiamata l'idea dei **top risks**, cioè un insieme ristretto di rischi prioritari sui quali concentrare l'attenzione.
 
@@ -1048,7 +1048,7 @@ Tre strategie fondamentali:
 - **Minimisation**: ridurre l'impatto se il rischio si verifica;
 - **Contingency Plan**: predisporre un piano alternativo da applicare se il problema si manifesta.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p015-fig-019.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p015-fig-019.png|520]]
 
 Esempio:
 
@@ -1069,7 +1069,7 @@ Durante il progetto bisogna controllare periodicamente:
 - se sono comparsi nuovi rischi;
 - se esistono indicatori che mostrano che un rischio sta iniziando a concretizzarsi.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-020.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-020.png|500]]
 
 Quindi il Risk Management è un processo **continuo**, non una lista compilata all'inizio e poi dimenticata.
 
@@ -1082,7 +1082,7 @@ Il modello Object Oriented presentato negli appunti applica l'approccio orientat
 - analisi dei requisiti;
 - progettazione.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|500]]
 
 Il fatto che analisi e progettazione siano object-oriented **non impone necessariamente** che il linguaggio di programmazione finale debba essere object-oriented.
 
@@ -1226,7 +1226,7 @@ Comprende:
 - correzione dei difetti;
 - preparazione della versione finale.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p019-fig-022.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p019-fig-022.png|650]]
 
 Il grafico degli appunti mostra l'andamento giornaliero di diversi indicatori legati ai bug:
 
@@ -1236,7 +1236,7 @@ Il grafico degli appunti mostra l'andamento giornaliero di diversi indicatori le
 
 L'aspetto importante è l'uso di misure frequenti per osservare lo stato del prodotto.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p019-fig-023.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p019-fig-023.png|500]]
 
 Il secondo diagramma mostra come la specifica continui a evolvere durante lo sviluppo, mentre il progetto viene suddiviso in cicli che terminano con milestone e versioni progressivamente più mature.
 
@@ -1328,7 +1328,7 @@ Un **framework** è una struttura generale di lavoro che definisce ruoli, eventi
 
 Scrum organizza il lavoro in cicli brevi chiamati **Sprint**.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|520]]
 
 ## Sprint
 
@@ -1534,7 +1534,7 @@ La maturità indica quanto il processo sia:
 
 Il modello classico è organizzato in **cinque livelli**.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p024-fig-026.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p024-fig-026.png|650]]
 
 ## Livello 1 - Initial
 
@@ -1642,7 +1642,7 @@ Negli appunti vengono richiamate complessivamente **18 KPA** nel modello classic
 
 L'idea importante non è semplicemente memorizzare un elenco, ma comprendere che il livello di maturità viene valutato osservando **come l'organizzazione lavora concretamente**, non soltanto la qualità apparente di un singolo programma prodotto.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p024-fig-027.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p024-fig-027.png|650]]
 
 Il grafico conclusivo serve a rafforzare l'idea generale del CMM: aumentando la maturità del processo si cerca di ridurre il rischio e aumentare prevedibilità e qualità.
 

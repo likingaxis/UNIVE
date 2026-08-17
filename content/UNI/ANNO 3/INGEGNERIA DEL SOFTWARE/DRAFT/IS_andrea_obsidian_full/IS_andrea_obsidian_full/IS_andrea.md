@@ -100,7 +100,7 @@ Affidabilità e Profilo Operativo: L'affidabilità osservata del software dipend
 ## ANDAMENTO FREQUENZA DI GUASTO HW
 Sulle ascisse c’è il tempo, l’istante 0 corrisponde al momento in cui il prodotto viene rilasciato al cliente o sul mercato. Sulle ordinate c’è la frequenza di guasto. Quando viene rilasciato un prodotto è molto probabile che questo manifesti dei malfunzionamenti (mortalità infantile – corrisponde ai 10 giorni per il cambio). Dopo, se si segue un corretto piano di manutenzione, l’affidabilità rimane stabile. Passato un certo numero di anni entra in gioco l’usura che incrementa la frequenza di guasto.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p006-fig-001.png|600]]
+![[p006-fig-001.png|600]]
 
 ## ANDAMENTO FREQUENZA DI GUASTO SW
 Il comportamento ideale è una curva che parte con una frequenza di guasto molto alta in corrispondenza del lancio, poi dopo le modifiche del sw la frequenza di guasto diminuisce tendendo a zero. Il comportamento reale, invece, ha la mortalità infantile ma, in corrispondenza di ogni modifica del sw, la frequenza di guasto ritorna a come se fosse un prodotto appena rilasciato.
@@ -135,14 +135,14 @@ Secondo la definizione dello standard IEEE Std 610-12, il ciclo di vita del soft
 ## BUILD & FIX
 L'assenza di un modello del ciclo di vita corrisponde ad una modalità di sviluppo detta "Build & Fix" (o "fix-it-later"), in cui il prodotto software viene sviluppato e successivamente rilavorato fino a soddisfare le necessità del cliente. Questa è una modalità di sviluppo molto costosa e poco utilizzata. BUILD FIRST VERSION = codifica prodotto MODIFY UNTIL CLIENT IS SATISFIED = prodotto rilasciato al cliente e rilavorato fino a quando il cliente non è soddisfatto OPERATION MODE = prodotto entra in modalità operativa quando è accettato dal cliente RETIREMENT = prodotto viene dismesso
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p007-fig-003.jpeg|600]]
+![[p007-fig-003.jpeg|600]]
 
 <!-- Pagina PDF 8 -->
 
 ## MODELLO WATERFALL
 Il modello Waterfall è uno dei primi e più noti modelli di ciclo di vita del software. Esso rappresenta un approccio sequenziale allo sviluppo del software, dove le attività vengono eseguite in modo lineare e sequenziale, come una cascata, passando da una fase all'altra in modo graduale e unidirezionale. Ecco una spiegazione dettagliata di ciascuna fase:
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p008-fig-004.png|600]]
+![[p008-fig-004.png|600]]
 
 - **Definizione dei Requisiti:** 
 
@@ -176,7 +176,7 @@ Il modello Waterfall è uno dei primi e più noti modelli di ciclo di vita del s
 
 ## RAPID PROTOTYPING MODEL
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p009-fig-005.png|450]]
+![[p009-fig-005.png|450]]
 
 Il modello Rapid Prototyping è un approccio di sviluppo del software che si concentra sulla creazione di prototipi rapidi e iterativi del software per ottenere un feedback tempestivo dal cliente o dagli utenti finali. Questo approccio è particolarmente utile quando i requisiti non sono ben definiti o possono cambiare durante lo sviluppo.
 - **Definizione dei Requisiti Iniziali:** o Inizia con la raccolta dei requisiti iniziali, ma questi possono essere meno dettagliati
@@ -247,7 +247,7 @@ La programmazione visuale rappresenta un approccio allo sviluppo software che si
 ## MODELLO INCREMENTALE
 Il modello incrementale è un approccio allo sviluppo software in cui il prodotto viene sviluppato e rilasciato per incrementi successivi. Ogni incremento aggiunge nuove funzionalità al prodotto. Questo modello include aspetti tipici del modello basato su rapid prototyping (l’utente può sperimentare l’utilizzo del prodotto contenente gli incrementi consegnati, mentre i restanti sono ancora in fase di sviluppo). Può essere implementato in due versioni: con o senza overall architecture (architettura generale).
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p011-fig-006.jpeg|600]]
+![[p011-fig-006.jpeg|600]]
 
 La versione con overall architecture si riferisce a un approccio nel modello incrementale in cui viene stabilita una struttura di architettura generale prima dell'inizio dello sviluppo incrementale. In altre parole, prima di iniziare a creare i singoli incrementi, si definisce un quadro architetturale che fornisce una visione globale di come il prodotto finale sarà strutturato.
 - **Definizione dell'Architettura:** Prima di iniziare a sviluppare i singoli incrementi, viene definita un'architettura generale che stabilisce come le diverse parti del sistema interagiranno tra loro.

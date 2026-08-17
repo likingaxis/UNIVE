@@ -1,0 +1,9 @@
+{
+  "id": "quartz-git-manager",
+  "name": "Quartz & Git Sync Manager",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Sincronizzazione Git & Quartz con auto-pull all'avvio, protezione push in produzione e controllo modifiche prima della chiusura.",
+  "author": "Antigravity",
+  "isDesktopOnly": true
+}

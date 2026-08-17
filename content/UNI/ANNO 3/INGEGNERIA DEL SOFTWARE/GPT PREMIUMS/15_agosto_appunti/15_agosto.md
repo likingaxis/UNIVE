@@ -172,7 +172,7 @@ Nel corso vengono ricondotti a tre grandi sorgenti:
   - privacy;
   - vincoli etici o regolamentari.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p027-fig-028.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p027-fig-028.png|700]]
 
 Il diagramma mostra proprio questa idea: i requisiti non funzionali non formano un unico blocco omogeneo, ma comprendono vincoli provenienti dal prodotto, dall'organizzazione e dall'ambiente esterno.
 
@@ -293,7 +293,7 @@ Per ridurre i problemi del linguaggio naturale si seguono alcune regole:
 - evidenziare le parti fondamentali;
 - collegare ogni requisito alle motivazioni e ai requisiti più dettagliati che lo raffinano.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p028-fig-029.png|600]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p028-fig-029.png|600]]
 
 L'esempio nell'immagine mostra un requisito utente strutturato. Oltre alla frase principale compaiono informazioni come:
 
@@ -307,7 +307,7 @@ Questa struttura è utile perché il requisito non rimane una frase isolata: vie
 
 Quando si passa ai requisiti di sistema aumenta la precisione richiesta. Il linguaggio naturale può ancora essere utilizzato, ma diventa più strutturato.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p029-fig-030.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p029-fig-030.png|700]]
 
 L'esempio mostra una specifica nella quale non viene descritta soltanto la funzione in modo generico. Vengono indicati, tra le altre cose:
 
@@ -333,7 +333,7 @@ Queste informazioni sono importanti perché specificano il comportamento atteso 
 
 Per rendere una specifica ancora più precisa si può usare un linguaggio simile a uno pseudocodice, indicato negli appunti come **PDL**.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|650]]
 
 Il vantaggio è ridurre l'ambiguità rispetto al linguaggio naturale.
 
@@ -341,7 +341,7 @@ Il rischio, però, è anticipare decisioni che appartengono alla progettazione. 
 
 Per questo il PDL è particolarmente utile quando viene usato per descrivere **interfacce e comportamento osservabile**, mantenendosi lontano dai dettagli algoritmici non ancora necessari.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-032.png|600]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-032.png|600]]
 
 La specifica di interfaccia nell'immagine rende bene il confine: vengono dichiarate le operazioni disponibili e i relativi parametri, senza descrivere l'algoritmo interno che le realizzerà.
 
@@ -741,7 +741,7 @@ Gli archi indicano:
 - quali place forniscono le condizioni necessarie a una transition;
 - quali place ricevono token dopo l'esecuzione della transition.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|650]]
 
 Nella figura si vedono place, transition e archi. I pallini neri presenti nei place introducono il concetto successivo: i **token**.
 
@@ -799,7 +799,7 @@ La catena concettuale è:
 
 **transition enabled → firing → modifica dei token → nuova marcatura → nuovo stato rappresentato**
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p034-fig-034.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p034-fig-034.png|650]]
 
 Negli esempi del corso si parte da una marcatura iniziale e si provano differenti transition abilitate. Se più transition sono abilitate contemporaneamente, possono esistere più possibili evoluzioni della rete. Analizzarle serve proprio a verificare se alcune sequenze portino a comportamenti indesiderati.
 
@@ -844,7 +844,7 @@ Negli appunti vengono citate alcune estensioni:
   - associa informazioni o "colori" ai token;
   - permette di distinguere classi diverse di token senza replicare inutilmente parti della rete.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p035-fig-035.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p035-fig-035.png|700]]
 
 La parte superiore della pagina introduce anche il formalismo successivo: le **Finite State Machine**.
 
@@ -896,11 +896,11 @@ In questo modo uno schema può essere usato per descrivere sia:
 - lo **stato** del sistema;
 - le **operazioni** che modificano quello stato.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p036-fig-036.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p036-fig-036.png|650]]
 
 Nell'esempio dei pulsanti dell'ascensore vengono definiti insiemi di pulsanti e vincoli tra questi insiemi. La parte dichiarativa dice **quali elementi esistono e di che tipo sono**; la parte dei predicati dice **quali relazioni devono essere vere**.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p037-fig-037.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p037-fig-037.png|650]]
 
 Quando lo schema descrive un'operazione, vengono specificati anche gli input e l'effetto sullo stato.
 
@@ -985,7 +985,7 @@ ERD e DFD vengono spesso mostrati insieme, ma rappresentano due aspetti differen
 
 Un **ERD** (*Entity Relationship Diagram*) rappresenta le entità rilevanti e le relazioni esistenti tra esse.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-038.png|450]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-038.png|450]]
 
 I concetti fondamentali sono:
 
@@ -999,7 +999,7 @@ L'ERD fornisce quindi soprattutto una vista **statica** dei dati.
 
 Un **DFD** (*Data Flow Diagram*) descrive invece come i dati entrano nel sistema, vengono elaborati, memorizzati e inviati verso altre destinazioni.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|500]]
 
 Nel corso vengono utilizzati quattro elementi principali:
 
@@ -1060,7 +1060,7 @@ Si effettua quindi un'analisi costi-benefici e, per le attività automatizzate, 
 - **online processing** → elaborazione effettuata in risposta all'interazione o all'arrivo dei dati;
 - **batch processing** → dati accumulati e processati successivamente in gruppi.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p039-fig-040.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p039-fig-040.png|700]]
 
 L'esempio mostra come alcuni processi possano essere trattati online mentre altri vengano differiti e gestiti in batch.
 
@@ -1083,7 +1083,7 @@ Dopo aver identificato un processo nel DFD bisogna specificarne il comportamento
 
 Una tecnica possibile è l'uso di un **decision tree**, che mostra quali decisioni vengono prese in base alle condizioni disponibili.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p039-fig-041.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p039-fig-041.png|500]]
 
 ## Step 5 - Definire i Data Store
 
@@ -1095,7 +1095,7 @@ Si specifica il contenuto degli archivi:
 
 Negli appunti viene mostrato un **DIAD - Data Immediate Access Diagram** come tecnica utilizzabile per questo scopo.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p040-fig-042.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p040-fig-042.png|500]]
 
 L'esempio indica, tra le altre cose, quali campi consentono un accesso diretto ai record.
 

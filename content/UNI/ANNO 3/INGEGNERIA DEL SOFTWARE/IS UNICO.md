@@ -85,7 +85,7 @@ viene fatto durante l'intero sviluppo
 
 **Verifica e validazione descrivono cosa vogliamo controllare; il testing è uno degli strumenti con cui effettuiamo questi controlli.**
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p006-fig-005.png|315]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p006-fig-005.png|315]]
 
 Il diagramma evidenzia proprio questa differenza: la verifica mette in relazione le fasi vicine del processo, mentre la validazione collega il prodotto sviluppato agli obiettivi dell'utente
 
@@ -163,7 +163,7 @@ Si vuole distinguere la differenza tra le due, entrambi possono manifestare guas
 	- ma possiamo per sbaglio metterne un'altro
 Ora si analizzano due grafici uno del guasto hardware e uno software
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-001.png|371]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-001.png|371]]
 
 Nel grafico hardware si riconoscono tre zone concettuali:
 
@@ -171,7 +171,7 @@ Nel grafico hardware si riconoscono tre zone concettuali:
 - una fase relativamente stabile;
 - una fase finale in cui l'usura fa aumentare i guasti.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-002.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-002.png|520]]
 
 Nel software l'andamento è differente:
 - le correzioni dovrebbero far diminuire la frequenza di guasto ma in realtà
@@ -223,7 +223,7 @@ L'idea è:
 3. la si modifica in base ai problemi e alle richieste;
 4. si continua a correggerla finché il cliente non è soddisfatto.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|480]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|480]]
 
 Il problema è che nel Build & Fix le modifiche non sono inserite in una struttura progettuale controllata comportando un prodotto difficile da comprendere e mantenere
 ### Modello Waterfall
@@ -231,7 +231,7 @@ Di tipo sequenziale e funziona a cascata dove ogni fase consegue la successiva
 molto più disciplinato di Build & Fix poiché obbliga la documentazione capire il problema progettare e verificare i vari output delle fasi
 
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|520]]
 
 - requisiti;
 - specifica;
@@ -248,7 +248,7 @@ nasce per affrontare un problema della fase dei requisiti:
 cliente e sviluppatore utilizzano le stesse parole ma immaginano cose differenti
 utilizzare un prototipo permette all'utente di provare una rappresentazione preliminare del sistema e dare un feedback
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|520]]
 
 
 Cosa si intende per prototipo?
@@ -258,7 +258,7 @@ Il prototipo permette di svolgere due attività fondamentali:
 - **Requirements Validation**: verificare che ciò che abbiamo capito corrisponda davvero alle esigenze dell'utente.
 Per realizzare un singolo prototipo si seguono i seguenti step
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-007.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-007.png|520]]
 
 La realizzazione di un prototipo completo invece vede il seguente ciclo
 - definizione di obiettivi o requisiti iniziali
@@ -272,7 +272,7 @@ La realizzazione di un prototipo completo invece vede il seguente ciclo
  - viene utilizzato come strumento per comprendere i requisiti e poi abbandonato
 - questo perchè il prototipo viene costruito privilegiando la rapidità non necessariamente rispettando standard qualitativi sull'architettura, l'efficienza la sicurezza ecc...
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-008.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-008.png|520]]
 
 Un'interfaccia che sembra pronta dopo pochi giorni può inoltre creare nel cliente una falsa percezione quando invece tutta la parte dietro deve ancora essere realizzata
 
@@ -298,7 +298,7 @@ il vantaggio di farlo a incrementi è che non bisogna aspettare la fine dell'int
 
 Il processo a sviluppo incrementale può partire da una outline description(descrizione generale del prodotto)
 e poi si prendono le parti da sviluppare progressivamente
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|520]]
 #### Modello incrementale con Overall Architecture
 - versione più conservativa
 - si realizza una progettazione architetturale complessiva del prodotto
@@ -306,13 +306,13 @@ e poi si prendono le parti da sviluppare progressivamente
 dopo aver definito questa struttura si procede con varie build incrementali sulle singole componenti
 
 così già sappiamo dei dettagli importanti sulle componenti riducendo problemi di integrazione tra esse
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|520]]
 #### Incrementale senza Overall Architecture
 - in questa variante invece si parte direttamente dai requisiti con maggiore priorità
 ogni build viene sviluppata quasi come un progetto indipendente
 il vantaggio è maggiore velocità iniziale ma poi si rischia una maggior complessità ad ogni build successiva soprattutto per integrazione delle componenti software
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
 
 ###### Problema del modello incrementale
 Suddividere il prodotto in molti incrementi ha effetti opposti sui costi
@@ -323,7 +323,7 @@ possiamo vedere nel grafico sotto due tendenze:
 - costo delle build/modifiche che diminuisce aumentando il numero di incrementi
 - costo di integrazione che aumenta quando ci sono build numerose
 la loro somma genera una regione di ***costo minimo***
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
 ### Modello a spirale
 - modello iterativo che introduce come elemento centrale la gestione del rischio
 ad ogni giro della spirale si fa una iterazione del progetto
@@ -339,16 +339,16 @@ in una iterazione viene fatto:
 
 prima di investire ulteriormente si analizzano i rischi per progetti insostenibili non si prosegue nella progettazione
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|520]]
 
 >[!info]- è possibile modificare il sistema Waterfall aggiungendo una parte di Risk analysis
 >
 >
->![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p012-fig-014.png|500]]
+>![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p012-fig-014.png|500]]
 
 
 #### Modello a spirale di Boehm
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|650]]
 
 Nella rappresentazione classica di Boehm, il rischio rimane il principio che guida la scelta delle attività da svolgere in ogni iterazione
 possono essere utilizzati:
@@ -407,7 +407,7 @@ vedendo il grafico sotto si nota come alcune fasi sono sovrapposte parzialmente 
 	- più attività possono essere svolte nello stesso periodo
 - Iterazione
 	- una fase viene ripetuta per migliorarne il risultato con iterazioni intra-fase(attività interne alla stessa fase) e inter-fase(una fase successiva può portare a una revisione delle precedenti)
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|313]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|313]]
 
 ### Ingegneria simultanea o concorrente
 L'ingegneria Concorrente cerca di ridurre tempi e costi facendo coesistere attività che in un modello strettamente sequenziale sarebbero svolte una dopo l'altra ma senza caos
@@ -453,7 +453,7 @@ dove viene prodotta una versione stabile e completa
 	- dove si fa testing interno come alpha testing
 	- beta testing
 	- correzione dei difetti
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p019-fig-023.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p019-fig-023.png|500]]
 #### Modello Netscape
 Organizzazione che adottava un modello simile ma per prodotti internet
 - meno tester
@@ -511,7 +511,7 @@ Ruoli presenti
 	- da una parte di esso si fa il planning di uno sprint per capire su quale parte del backlog fare uno sprint facendo così si ha uno sprint backlog
 
 - per Definition of Done si riferisce a tutti quei criteri per cui un lavoro possa essere considerato completo
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|520]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|520]]
 ### User Story
 Per descrivere il bisogno dal punto di vista dell'utente si può utilizzare questo formato non prendendolo come una vera e propria specifica ma come una cosa compatta che può far discutere i bisogni dell'utente
 `As a <role>, I want <goal> so that <benefit>`
@@ -644,7 +644,7 @@ quando si parla di requisito si intende un singolo dettaglio o descrizione
 l'insieme di requisiti forma una specifica
 Per rendere una specifica più precisa si può usare un linguaggio simile a uno pseudocodice come PDL
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|650]]
 
 Il vantaggio è ridurre l'ambiguità rispetto al linguaggio naturale.
 l'ideale è utilizzarlo non per cose troppo interne ma per interfacce o simili altrimenti si rischia di dire
@@ -753,7 +753,7 @@ Di base utilizza tre elementi grafici
 	- indicano quali place forniscono le condizioni necessarie a una transition
 	- quali place ricevono token dopo l'esecuzione della transition
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|650]]
 
 
 - token
@@ -766,7 +766,7 @@ Di base utilizza tre elementi grafici
 
 **transition enabled → firing → modifica dei token → nuova marcatura → nuovo stato rappresentato**
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p034-fig-034.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p034-fig-034.png|650]]
 
 Negli esempi del corso si parte da una marcatura iniziale e si provano differenti transition abilitate. Se più transition sono abilitate contemporaneamente, possono esistere più possibili evoluzioni della rete
 - l'inhibitor arc esprime una condizione negativa
@@ -804,7 +804,7 @@ In questo modo uno schema può essere usato per descrivere sia:
 - lo **stato** del sistema;
 - le **operazioni** che modificano quello stato.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p036-fig-036.png|650]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p036-fig-036.png|650]]
 
 Nell'esempio dei pulsanti dell'ascensore vengono definiti insiemi di pulsanti e vincoli tra questi insiemi. La parte dichiarativa dice **quali elementi esistono e di che tipo sono**; la parte dei predicati dice **quali relazioni devono essere vere**.
 
@@ -824,7 +824,7 @@ ERD struttura dei dati e relazioni tra entità
 DFD flusso dei dati attraverso i processi del sistema
 ##### ERD Entity Relationship Diagram
 rappresenta le entità rilevanti e le relazioni esistenti tra esse
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-038.png|300]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-038.png|300]]
 - entità -> oggetti o concetti di cui interessa memorizzare informazioni
 - attributi -> proprietà delle entità
 - relazioni -> collegamenti logici tra entità
@@ -839,7 +839,7 @@ Descrive come i dati entrano nel sistema vengono elaborati memorizzati e inviati
 
 non rappresenta l'ordine temporale delle operazioni
 può essere inizialmente molto generale ma poi si può raffinare con più processi
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|224]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|224]]
 ### SSA Structured System Analysis 
 SSA è una tecnica di analisi che porta alla costruzione di una specifica semi-formale, usando modelli come DFD e altre rappresentazioni strutturate.
 
