@@ -45,9 +45,9 @@ La curva di frequenza di guasto del software idealizzata dovrebbe partire alta (
 <!-- Pagina PDF 3 -->
 Per migliorare la curva e stabilizzare il software, si può ricorrere alla software rejuvenation, definendo un periodo per "resettare" il software a uno stato più stabile. Sebbene il software non si usuri di per sé, l'interazione con l'ambiente del sistema operativo può contribuire a malfunzionamenti.
 
-![[p003-fig-001.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p003-fig-001.png|500]]
 
-![[p003-fig-002.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p003-fig-002.png|500]]
 
 ## Disponibilità del Software (Sw Availability)
 È la percentuale di tempo in cui il software è risultato usabile nel corso della sua vita. Dipende dal numero di guasti e dal tempo necessario per ripararli. È una metrica importante per sistemi dove la caduta del servizio causa perdite economiche e di sicurezza. Per verificare l'affidabilità del software si usa il Statistical Testing, dove il software viene testato per un periodo, registrando i fallimenti, per stimare l'affidabilità in base al tempo di utilizzo.
@@ -89,12 +89,12 @@ Il ciclo di vita del prodotto software come intervallo di tempo dalla nascita de
 queste attività e il loro ordine. Non esiste un modello migliore in assoluto; la scelta dipende dalla natura dell'applicazione, dalla maturità dell'organizzazione, dai vincoli del cliente ….
 Modelli di Ciclo di Vita del Software L'assenza di un modello porta alla modalità di sviluppo "Build & Fix" o "Fix-it-Later", dove il software viene sviluppato e rilavorato finché non soddisfa il cliente, potendo portare a una "crisi del software" se si itera continuamente
 
-![[p005-fig-003.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p005-fig-003.png|350]]
 
 ## Modello Waterfall
 Un primo modello nato nel 1970, due anni dopo la nascita dell'ISW, è il Modello Waterfall.
 
-![[p005-fig-004.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p005-fig-004.png|500]]
 
 ---
 
@@ -103,7 +103,7 @@ Le attività sono svolte in rigida sequenza: si passa alla fase successiva solo 
 **Limiti:**
 Assume che una volta finita la specifica, non si tornerà più sui requisiti, il che è irrealistico (es. modifiche normative). Assenza di feedback continuo dal cliente, che è coinvolto solo all'inizio e alla fine, rischiando un prodotto che non soddisfa pienamente le esigenze. I modelli successivi cercano di sfruttare i vantaggi e andare oltre gli svantaggi del modello waterfall.
 
-![[p006-fig-005.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p006-fig-005.png|500]]
 
 Prima di passare agli altri modelli distinguiamo verifica e validazione:
 - Verifica: Controlla la correttezza del progetto rispetto al documento di specifica ricevuto in input. Si occupa di "fare bene il prodotto".
@@ -115,11 +115,11 @@ In basso a sinistra Certificazione: è la dichiarazione formale relativa alla qu
 <!-- Pagina PDF 7 -->
 Il modello a Prototipo Rapido è stato il primo modello migliorativo post waterfall.
 
-![[p007-fig-006.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p007-fig-006.png|500]]
 
 Si concentra sulla prima fase, chiamata Rapid Prototype, per superare le ambiguità nella comunicazione dei requisiti con il cliente. Il prototipo è l'implementazione dell'interfaccia del prodotto, fornito rapidamente (max una settimana/10 giorni). Ha come Obiettivo: Tirare fuori (Requirements Elicitation) e convalidare (Requirements Validation) i requisiti, permettendo all'utente di sperimentare il sistema.
 
-![[p007-fig-007.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p007-fig-007.png|500]]
 
 A partire da questo modello si è pensato di usare il prototipo anche come strumento di specifica, ossia come qualcosa da cui partire per poi sviluppare piano piano il progetto. Ma i requisiti non funzionali non possono essere adeguatamente testati con il prototipo, l'implementazione non ha valenza legale e funzioni critiche di sicurezza potrebbero essere impossibili da soddisfare per un semplice prototipo.
 
@@ -129,7 +129,7 @@ A partire da questo modello si è pensato di usare il prototipo anche come strum
 Il prototipo dovrebbe essere "Usa e Getta": utilizzato solo per la fase dei requisiti, dopodiché il progetto vero e proprio segue un modello Waterfall, perciò non deve essere considerato come prodotto finale.
 Alcuni dei componenti del prototipo potranno essere in alcuni casi utilizzati per la realizzazione dell'interfaccia grafica finale.
 
-![[p008-fig-008.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p008-fig-008.png|500]]
 
 Principale svantaggio Rapid Prototype Model: È difficile convincere l'utente della complessità del progetto effettivo dopo aver visto un prototipo rapido, mettendo pressione al team.
 Si usano tecniche di Visual Programming (drag & drop) per la rapidità. Importante far capire al cliente che il progetto vero e proprio non può basarsi solo su questa tecnologia ma è molto più complesso e richiede molto più tempo, infatti non sono adatte per lavori di gruppo o ottimizzazione del codice, rendendo difficile la manutenzione.
@@ -137,7 +137,7 @@ Con il tempo, invece di modificare l'approccio Waterfall per migliorarlo, si son
 ## Sviluppo Incrementale
 L'idea dello sviluppo incrementale è sviluppare e consegnare il prodotto in incrementi successivi (build). Oltre ai costi ridotti un altro vantaggio sta nel fatto che il cliente vede continuamente i progressi e riceve feedback continuo. Inoltre non si perdono nemmeno i benefici Waterfall dal momento che ciò viene fatto con un approccio rigoroso e strutturato.
 
-![[p008-fig-009.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p008-fig-009.png|500]]
 
 ---
 
@@ -146,7 +146,7 @@ Si parte da una outline description (descrizione d'insieme) del prodotto e ogni 
 L'approccio Incrementale può essere realizzato in due versioni alternative: 
 - Overall Architecture (più conservativa): dentica al Waterfall fino alla progettazione architetturale, poi procede in modo incrementale a partire dalla progettazione dettagliata. Le componenti dell'architettura sono trattate come build. (Ogni fase di progettazione è divisa in architetturale o preliminare e di dettaglio. Nella prima si progetta l'architettura del software, individuando le componenti principali del prodotto software e le relazioni che esistono tra loro. Dopo averle individuate, questa versione considera ciascuna componente come se fosse una build procedendo quindi con l'approccio incrementale). Dopodiché si va in modalità operativa (manutenzione finché il prodotto non viene dismesso).
 
-![[p009-fig-010.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p009-fig-010.png|500]]
 
 - Senza Overall Architecture (più rischiosa): build sono identificati dai requisiti di alto livello con priorità. Si lavora sul Build 1 come fosse Waterfall, poi sul Build 2, ecc.. Sebbene più veloce all'inizio con team paralleli, presenta rischi di integrazione con build precedenti,
 
@@ -155,12 +155,12 @@ L'approccio Incrementale può essere realizzato in due versioni alternative:
 <!-- Pagina PDF 10 -->
 poiché non si hanno informazioni sull'interazione delle componenti.
 
-![[p010-fig-011.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p010-fig-011.png|700]]
 
 Con l'architettura software sapevo esattamente quali componenti interagissero tra loro e come integrarli di conseguenza. Senza architettura non ho queste informazioni ed è possibile che alla k-esima build scopro problemi di integrazione con build che avevo già consegnato.
 A questo punto per l'approccio incrementale si deve sapere quale sia il numero di build più conveniente in cui suddividere il prodotto. Si sceglie in base all'impatto sui costi: più build, minor costo per modifica, ma maggiore costo di integrazione. Si cerca una regione di costo minimo.
 
-![[p010-fig-012.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p010-fig-012.png|500]]
 
 Facciamo un confronto tra Waterfall e Incrementale.  Nel modello Waterfall è più difficile accomodare modifiche ai requisiti, mentre in quello incrementale requisiti suddivisi in classi di priorità e facilmente modificabili (modificare un requisito che ha impatto sul singolo build significa lavorare su una più piccola parte di codice).  Nel primo si può avere feedback dal cliente solo una volta terminato lo sviluppo, nel secondo continuo feedback dal momento che gli mando continuamente roba.  Nel primo le fasi sono condotte in rigida sequenza (l'output di una costituisce l'input per la
 
@@ -171,7 +171,7 @@ successiva e si passa alla prossima solo dopo verifica), nel secondo le fasi pos
 ## Sviluppo a Spirale 
 Si parte dalla spirale più piccola andando sempre in esterno. La dimensione radiale rappresenta l'incremento dei costi, quella angolare l'avanzamento del tempo (dalla spirale più interna all'inizio fino a quella più esterna alla fine). Ad ogni cerchio della spirale faccio sempre le stesse attività iterativamente. 
 
-![[p011-fig-013.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p011-fig-013.png|500]]
 
 Si divide il piano in vari settori:  Si parte da dove stanno le frecce iniziando quindi con la Customer Communication cioè l'interazione con il cliente,  Poi si Pianificano le attività da svolgere,  Per arrivare a un settore che è caratteristica peculiare di questo modello: la Risk Analysis. Se questa analisi porta a una valutazione secondo la quale i rischi sono eccessivi allora potrebbe essere conveniente valutare l'idea di fermare il progetto (e questo vale per ogni iterazione).  Se conviene procedere si passa all'Ingegnerizzazione (specifica, progettazione etc..),  poi si fa Costruzione e Rilascio (codifica, costruzione e rilascio) e infine  Customer Evaluation (si consegna al cliente quella che può essere una build) per poi ripartire.
 Ogni cerchio corrisponde a una build; anche la manutenzione è considerata un cerchio aggiuntivo. Esiste anche questa rappresentazione del modello a spirale semplificata che è utile per mostrare la differenza rispetto al Waterfall: ad ogni blocco viene aggiunta inizialmente una
@@ -181,14 +181,14 @@ Ogni cerchio corrisponde a una build; anche la manutenzione è considerata un ce
 <!-- Pagina PDF 12 -->
 fase di risk analysis che deve essere effettuata prima di passare alla successiva. 
 
-![[p012-fig-014.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p012-fig-014.png|500]]
 
 ---
 
 <!-- Pagina PDF 13 -->
 Un altra rappresentazione del modello a spirale è quello di Bohem (la prima versione del modello a spirale)
 
-![[p013-fig-015.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p013-fig-015.png|700]]
 
 Anche qui centrale la fase di analisi dei rischi, dove vediamo nella spirale dei Prototipi. Questi sono ovviamente diversi da quanto visto nel modello a prototipo rapido, sono infatti prototipi creati appositamente per facilitare l'analisi dei rischi.  Nella fasi di Develop invece si fa uso di simulazioni, test e benchmark per aiutarsi, infatti è applicato con successo solo per software di tipo interno (es. software scientifici per la NASA), non per software a contratto. Non ha senso dire al cliente a un mese dalla consegna che l'analisi dei rischi suggerisce problemi, dato che ci sono questioni legali e di contratto. Un'altra caratteristica è che si devono avere persone molto competenti per l'attività di analisi di rischi. In realtà questa attività viene ovviamente fatta in un qualsiasi progetto software, ma nel modello a spirale diventa un elemento chiave.
 ## Risk Management 
@@ -202,14 +202,14 @@ In ogni tipo di progetto, non solo software, viene realizzata l'attività di ris
 <!-- Pagina PDF 14 -->
 - Business Risks: Effetti sull'organizzazione che sviluppa il software.
 
-![[p014-fig-016.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p014-fig-016.png|700]]
 
 Bisogna considerare quindi tutto ciò che potrebbe avere impatto negativo sul progetto e la probabilità che accada.  Il risk management è un sottoprocesso del processo software con diverse attività
 **sequenziali:**
 1. Risk Identification: Output è un documento con tutti i possibili rischi.
 Rischi tipici nel software: tecnologia, persone, organizzazione, tool di supporto, requisiti, stima.
 
-![[p014-fig-017.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p014-fig-017.png|500]]
 
 2. Risk Analysis: Output è una lista di rischi con priorità. Si associa probabilità di occorrenza (very low, low, moderate, high, very high) ed effetto (catastrofico, serio, tollerabile,
 
@@ -218,7 +218,7 @@ Rischi tipici nel software: tecnologia, persone, organizzazione, tool di support
 <!-- Pagina PDF 15 -->
 insignificante) per ogni rischio.
 
-![[p015-fig-018.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p015-fig-018.png|700]]
 
 I rischi ad alta priorità sono quelli con effetto catastrofico o serio con probabilità almeno alta. Si identificano poi i "top-ten risks" (possono essere anche di più), classificandoli in ordine di importanza.
 3. Risk Planning: Ci si concentra sui rischi a priorità maggiore e si pensano strategie per reagire.
@@ -226,19 +226,19 @@ I rischi ad alta priorità sono quelli con effetto catastrofico o serio con prob
 - Minimisation Strategies: Ridurre l'effetto del rischio sul progetto o prodotto.
 Sarebbe ideale applicare entrambe le strategie ad ogni rischio ma ogni rischio è diverso e per alcuni è conveniente usare una strategia piuttosto che un'altra.  Se nessuna delle due è possibile, si adottano Contingency Plans (piani B).
 
-![[p015-fig-019.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p015-fig-019.png|500]]
 
 ---
 
 <!-- Pagina PDF 16 -->
 4. Risk Monitoring: Effettuato periodicamente durante lo sviluppo per rianalizzare rischi cambiati o identificare nuovi fattori di rischio ("campanelli d'allarme").
 
-![[p016-fig-020.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p016-fig-020.png|500]]
 
 ## Modello Object Oriented o a Fontana
 Prevede un approccio object oriented all'analisi dei requisiti e alla progettazione del software. 
 
-![[p016-fig-021.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p016-fig-021.png|500]]
 
 Guardando la figura l'etichetta object-oriented sta soltanto sulla fase di analisi dei requisiti e sulla fase di progettazione. Infatti un software progettato secondo questo approccio potrebbe essere implementato anche facendo uso di un linguaggio di programmazione non object oriented. Si differenzia dal Waterfall per la possibilità per ogni fase (cerchio) di essere sviluppata in modo concorrente e iterativo (la concorrenza viene messa in evidenza in quanto le fasi (i cerchi) non sono distinte l'una dall'altra ma si sovrappongono, ossia ad esempio mentre faccio la fase di definizione requisiti posso già iniziare anche l'analisi dei
 
@@ -269,11 +269,11 @@ La seconda strategia riguarda lo sviluppo e la consegna dei prodotti e consiste 
 ---
 
 <!-- Pagina PDF 19 -->
-![[p019-fig-022.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p019-fig-022.png|700]]
 
 Quindi le metriche sono alla fine limitate, e lo si capisce dal seguente grafico: sulle ascisse le date, le barre rappresentano i dati raccolti ogni giorno relativamente a tre elementi dal punto di vista della qualità del software:  barra nera == opened bugs (problemi riscontrati durante la giornata nel compilare il daily build),  barra rossa == Resolved Bugs post debugging ho capito qual è il problema  barra verde == Fixed Bugs ho effettivamente risolto il problema aggiustando il codice. La barretta contorta che attraversa il grafico indicherebbe il numero atteso di difetti attivi, ossia quelli che ancora devo scovare. Sebbene si stabilisca un obiettivo di qualità legato ai difetti attivi, il prodotto viene consegnato anche con molti difetti se la data promessa è vicina, poiché rispettare la data è prioritario per l'immagine aziendale.
 
-![[p019-fig-023.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p019-fig-023.png|500]]
 
 Nel grafico vediamo come si parta dalla vision per poi avere una specifica che va avanti durante l'intero sviluppo a differenza del waterfall. In questo caso vediamo come il progetto sia diviso in tre cicli di sviluppo, la fine di ognuno delle quali rappresenta una milestone. In
 
@@ -282,7 +282,7 @@ Nel grafico vediamo come si parta dalla vision per poi avere una specifica che v
 <!-- Pagina PDF 20 -->
 ognuno di questi cicli si procede chiaramente con la fase di develpoment, poi c'è un buffer time (nella fase iniziale si definisce lo scheduling di ciò che si farà e si usano tecniche di stima di tempi, costi.. per capire quando l'azienda sarà in grado di rilasciare il prodotto. Nonostante queste stime siano abbastanza precise, durante lo sviluppo spesso le cose non vanno come pianificato e quindi a ogni milestone si aggiunge un buffer time per cercare di risolvere eventuali ritardi). Si ricorda che il primo sottoprogetto deve contenere le funzionalità critiche affinché se qualcosa non andasse non si è andati troppo avanti. Dopo la prima milestone esce l'alpha release per il testing interno, nel secondo milestone si rilascia la versione Beta e infine dopo la terza milestone si arriva a Feature Complete, non si potranno aggiungere funzionalità, poi ancora rilascio versione beta e poi la UI freeze (congelamento della user interface. La prima cosa su cui si lavora infatti è l'interfaccia utente, che viene verificata in laboratori di usabilità molto avanzati presenti in sede microsoft e che una volta superati i controlli "congela" ossia non potrà più essere toccata fino al rilascio). Si arriva poi al rilascio definitivo.
 
-![[p020-fig-024.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p020-fig-024.png|700]]
 
 ## Modello Netspace
 Anche alla Netscape (browser competitor di microsoft e altri prodotti simili a microsoft) adottava un modello simile a synchronize-and-stabilize, adattato alle applicazioni Internet (browser e server):  In Netscape già la dimensione dello staff cambiava: 3 sviluppatori per un tester (vs 1:1 in Microsoft). Riguardo il processo software vi era invece scarso effort di pianificazione (eccetto che sui prodotti server che erano la fonte di guadagno dell'azienda.). Documentazione incompleta (attività considerate marginali evitate) e scarso controllo sullo stato di avanzamento del progetto (lasciato all'esperienza e influenza dei PM). Scarso controllo sulle ispezioni del codice (meno tester) e pochi dati storici per il supporto alle decisioni.
@@ -305,7 +305,7 @@ Tra i valori:  Individui e interazioni contano di più che processi e strumenti,
 <!-- Pagina PDF 22 -->
 Uno dei metodi agili più in auge è Scrum.
 
-![[p022-fig-025.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p022-fig-025.png|500]]
 
 Basato sul concetto di knowledge-management. Tre ruoli principali: 
 - Scrum Master: Assicura che la metodologia sia compresa bene e implementata correttamente dal team di sviluppo e dal product owner, non partecipa direttamente alle attività di sviluppo ma garantisce il rispetto delle regole scrum interagendo con i team. 
@@ -344,12 +344,12 @@ La certificazione CMMI è richiesta come vincolo in vari domini applicativi. Pi�
 ---
 
 <!-- Pagina PDF 24 -->
-![[p024-fig-026.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p024-fig-026.png|700]]
 
 A lvl 2 devo dimostrare di eseguire correttamente 6 delle 18 KPA definite: tra queste software configuration management (capacità di gestire la configurazione dei prodotti come controllo delle versioni), software quality assurance (attività di verifica e convalida), software subcontract management (se prendo un contratto di grandi dimensioni devo poter appaltare parti del progetto a terze parti garantendo al contempo la qualità di quanto fatto da loro), … A lvl 3 Peer Reviews (tecniche formali di verifica), Training Program (corretta formazione del personale) etc…  A lvl 5 Defect Prevention: si è in grado di utilizzare approcci formali per prevenire l'introduzione di difetti nel software. 
 Le statistiche suggeriscono come lvl 5 per aziende che necessitano software sicuri per attività critiche (vedi Boeing). Chiaramente si certifica il reparto software dell'azienda e non l'azienda nella sua interezza. La maggior parte delle organizzazioni sono certificate a lvl 3 perché per buona parte dei domini di mercato il vincolo è quello.
 
-![[p024-fig-027.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p024-fig-027.png|700]]
 
 ---
 
@@ -395,7 +395,7 @@ Es 1 (saltare): "Il tempo di risposta del sistema all'inserimento della password
 Requisiti di Dominio: "terza" categoria di requisiti, che si sovrappone con le altre due. Infatti un requisito di dominio rappresenta un requisito funzionale o non funzionale che deriva dal dominio applicativo.  Es: "I documenti di rendiconto contabile, secondo la normativa ABC, devono essere stampati alla ricezione e cancellati immediatamente".
 I requisiti non funzionali sono più difficili da trattare rispetto a quelli funzionali a causa della loro ampia gamma rispetto a quelli funzionali, ma soprattutto perché per identificare le caratteristiche che il mio software dovrà assumere (quindi i relativi requisiti non funzionali) devo far riferimento a un modello di qualità, che le descrive in modo preciso.  Qui di seguito una gerarchia dei requisiti non funzionali
 
-![[p027-fig-028.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p027-fig-028.png|700]]
 
 Non esiste comunque una strategia migliore per l'identificazione dei requisiti non funzionali: si può prima decidere di scrivere i funzionali ma spesso si opera in modo congiunto. La cosa importante è però essere molto attenti a definire questi requisiti fin dall'inizio dal momento che questi tipicamente sono scritti in linguaggio naturale e quindi possono comportare problemi.
 Problemi Comuni nella Definizione dei Requisiti: 
@@ -413,7 +413,7 @@ Alcuni requisiti sono facili da misurare come efficienza (speed) e dimensioni, m
 Ulteriore requisito difficile da definire in termini di misure è la Portabilità: facilità nel portare un prodotto software in esecuzione su una piattaforma differente rispetto a quella nativa per cui è stata sviluppata (da iOS a Windows). Una misura potrebbe essere la percentuale di istruzioni dipendenti dalla piattaforma nativa (come requisito dico di far sì che questa percentuale non superi un tot affinché in futuro possa sistemare il codice per spostarmi in un'altra piattaforma).
 Come scriviamo i requisiti? Sono tipicamente espressi in linguaggio naturale seguendo però alcune linee guida per evitare problemi, tra cui evitare l'uso di termini tecnici, usare un formato standard per ogni requisito, evidenziare le parti fondamentali per ogni requisito, utilizzare il linguaggio naturale in modo consistente (es. uso di "deve" per requisiti necessari e "dovrebbe" per quelli desiderabili).
 
-![[p028-fig-029.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p028-fig-029.png|500]]
 
 Qui un esempio di standard per definire requisito utente, numerazione rigorosa e roba importante in grasetto, poi man mano che scendo specifica di come si vorrebbe ad alto livello che si comporti il software in accordo con il requisito.  Poi Rationale che sarebbe il perché esiste quel requisito e Specification che è un puntatore al corrispondente requisito sistema (alla specifica di questo requisito utente).
 Quando invece si arriva a scrivere i requisiti di sistema la possibile scelta di linguaggio è molto più ampia rispetto al naturale dei requisiti utente ,richiedono molta precisione in quanto saranno questi i requisiti usati come base per il progetto software. 
@@ -423,19 +423,19 @@ Quando invece si arriva a scrivere i requisiti di sistema la possibile scelta di
 <!-- Pagina PDF 29 -->
 Diverse possibili notazioni:  Si considera informale l'utilizzo di linguaggio naturale strutturato (comunque più specifico di quello utente) e formale quello di specifiche matematiche (non ambigue per definizione e verificabili in modo automatico, utilizzate per software critici in quanto molto costosi), e tra questi due estremi le notazioni semi-formali: PDL come pseudocodice, poi utilizzo di notazioni grafiche.
 
-![[p029-fig-030.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p029-fig-030.png|700]]
 
 Anzitutto vediamo il passaggio dal requisito utente di prima al corrispettivo requisito di sistema in linguaggio naturale strutturato. Si tratta di definire nei dettagli cosa devo realizzare, intuitivamente la "dichiarazione" della funzione (so esclusivamente la firma: parametri di input e output).  Infatti si legge nell'esempio solo la descrizione, gli input, output (design identifier sta a rappresentare il fatto che si aggiorna il progetto con il nuovo nodo), Source come sorgente dei valori dei parametri in input, destination (database del progetto perché il progetto deve essere aggiornato in relazione all'aggiunta del nodo),  Requisiti (l'utente deve avere un progetto aperto, identificato da un certo design identifier),  Pre-condizione (condizione che deve essere vera affinché possa eseguire la funzione, in questo caso quando il progetto è aperto e mostrato sullo schermo),  Post-condizione (condizione che deve essere vera dopo aver eseguito la funzione, cambia solo l'aggiunta del nodo),  Effetti collaterali e Definition che punta al requisito utente corrispettivo. Starà allo sviluppatore realizzare la "definizione" della funzione. Nonostante questa specifica sia comunque vicina a quanto necessario per descrivere la funzione, può comunque comportare problemi di ambiguità e per questo spesso si preferisce far riferimento a linguaggi semi-formali come PDL.
 
 ---
 
 <!-- Pagina PDF 30 -->
-![[p030-fig-031.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p030-fig-031.png|700]]
 
 Si descrive il comportamento per l'implementazione del comportamento di un ATM. Viene descritto in java-like cosa succede quando metto la carta (quindi anzitutto potrebbe non leggerla come valida, poi provo il pin e ogni pin corrisponde a un tentativo per un massimo di 3, poi se scrivo bene il pin arrivo alla schermata per gestire il mio conto etc…
 Usando pseudocodice evito ambiguità che potrebbero esservi nell'uso di linguaggio naturale strutturato. Tuttavia PDL ha uno svantaggio: ci troviamo ancora nella fase di specifica del software e quindi della descrizione di cosa deve fare il software e non come deve essere implementato (ciò sarà a carico dalla fase di progettazione in poi). Il rischio che quindi si corre con PDL è che si pesti i piedi al lavoro dei progettisti, si deve usare lo pseudocodice non per dettagli algoritmici.  Quindi più che un esempio visto sopra di solito è conveniente usare PDL esclusivamente per la definizione di interfaccia, che si limitano a dire cosa fare invece di come (equivalenza di dichiarazione di funzione piuttosto che definizione).
 
-![[p030-fig-032.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p030-fig-032.png|500]]
 
 Quanto viene scritto sia per i requisiti utente (definizione) che per requisiti di sistema (specifica) viene inserito nel documento guida di ogni progetto di sviluppo software: il Documento di Analisi dei Requisiti (o Documento di Specifica). 
 
@@ -510,7 +510,7 @@ Esempi di specifiche formali: (spesso sono affiancate da una sintassi visuale pi
 ## Petri Net
 Introdotte ancor prima della nascita della isw per specificare sistemi con elevato grado di concorrenza e problemi di temporizzazione e sincronizzazione come le telecomunicazioni. La versione originale fornisce una sintassi visuale nella quale esistono tre costrutti fondamentali:  Place (cerchio): rappresenta una componente software o una condizione,  Transitions (barre): Rappresentano un'azione o un evento,  Archi Orientati: (frecce) collegano sempre o posti a transizioni o transizioni a posti, indicando input e output.
 
-![[p033-fig-033.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p033-fig-033.png|500]]
 
 Questo sistema formale serve a capire come un certo sistema evolve nel tempo in fase di esecuzione. Per rappresentare l'evoluzione del sistema in questo senso si utilizza un altro elemento, il Token (pallini neri inseriti all'interno dei places). L'operazione per cui inserisco token nei places è detta Marking, che può essere iniziale (distribuzione iniziale di token), intermedi e marking finale.  Per definire l'evoluzione del sistema è necessario definire delle regole. Anzitutto diremo che una Transizione è Abilitata sse esiste almeno un token all'interno di ogni posto collegato in ingresso. (Nel caso sopra sia t1 che t2 sono abilitate)  Ora l'idea è che a partire dallo stato iniziale il sistema potrebbe evolvere svolgendo la
 
@@ -520,7 +520,7 @@ Questo sistema formale serve a capire come un certo sistema evolve nel tempo in 
 transizione t1 o la t2, l'idea è di svolgerle tutte per trovare eventuali inconsistenze.  Si definisce ora come Firing di una transizione come il prelievo da parte del place in ingresso e consegna al place in uscita di tanti token quanti sono gli archi uscenti.  (esempio: se è t1 a scattare allora si tolgono un token da p2 e uno da p4 e se ne mette uno a p1 (uno solo perché un solo arco in uscita).  Quindi stato iniziale S0 = (1, 2, 0, 1) (dentro p1 1 token, in p2 2 etc..).  Quindi stato S1 = (2, 1, 0, 0). A questo punto t1 non è più abilitata perché in p4 non ci sono più token ma resta abilitata t2 perché 1 token in p2. A questo punto scatta t2 e quindi p2 avrà 0 token e p3 2 token poiché 2 archi in uscita.  Quindi S2 = (2, 0, 2, 0) e a questo punto dato che non ci sono più transizioni abilitate S2 è stato finale.  Facendo invece partire prima t2 avrò S1 = (1, 1, 2, 1), ancora una volta mi accorgo di avere un bivio poiché sia t1 che t2 sono abilitate, scelgo t1 S2 = (2, 0, 2, 0) ed è finale. Se facevo scattare t2 invece S2 = (1, 0, 4, 1) anch'esso finale.) Un altro elemento della Petri Net è l'arco inibitore (pallino bianco con barra): la transizione è abilitata sse non cè nessun token in ingresso. L'obiettivo del modello in definitiva è verificare che in tutte le possibile esecuzioni il sistema funzioni correttamente.
 (Es: saltare) Dopo aver capito le regole generale della rete di Petri vediamole applicate al caso specifico di un software.  Ipotizziamo ad esempio di voler analizzare il comportamento di un software che regola la centralina di controllo di un ascensore (considerabile sistema critico in quanto un danno potrebbe comportare danni a persone).
 
-![[p034-fig-034.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p034-fig-034.png|500]]
 
 Viene esplicitato via rete di Petri un requisito in particolare: se l'ascensore si trova al piano terra e un utente lo chiama dal primo piano deve andare al primo piano. Si necessitano in questo caso 3 posti:  Fg == ascensore al ground floor,  Ff == ascensore al first floor e  EBf == elevator button first floor (si chiama l'ascensore al primo piano).  Il token al posto Fg specifica che l'ascensore si trova al piano terra, mentre il token in Ebf specifica che il pulsante è stato premuto. Per rappresentare il fatto che l'ascensore si muove uso la transizione elevator in action: tale transizione è abilitata come detto nelle regole se esiste almeno un token sugli archi in ingresso. Nel nostro caso vediamo che è abilitata, quindi si arriva al nuovo stato per cui non vi è alcun token in Ebf o Fg ma un token in Ff. Ci serve una transizione che specifichi la pressione del pulsante al primo piano Ebf, a questo serve Ebf pressed dove è presente un arco inibitore.  Quando quindi Ebf non ha alcun token per rappresentare il fatto che qualcuno preme il
 
@@ -534,7 +534,7 @@ A fronte di alcune limitazioni della Petri Net, nel corso del tempo sono stati s
 Tale limitazione è superata da un dialetto chiamato GSPN (generalised stocastic petri net): Associa un tempo ad ogni transizione per convalidare tempi prestazionali del sistema (basarsi anche sul tempo di esecuzione di specifiche funzioni del software).  Un altro ancora è CPN (colored PN):Introduce colori per i token per descrivere comportamenti diversi per classi di utenti (in base a chi lo utilizza).  Un'altra caratteristica della PN è che il concetto di stato è rappresentato indirettamente (per conoscerlo devo vedere la distribuzione di token nei place).
 La notazione che ora vediamo invece prevede un altro approccio: Specifica Formale con Macchine a Stati Finiti FSM.
 
-![[p035-fig-035.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p035-fig-035.png|700]]
 
 L'obiettivo è, come per PN, rappresentare la dinamica (evoluzione) di un sistema attraverso un insieme di stati. La differenza principale è che la primitiva di base permette di rappresentare direttamente lo stato del sistema. 
 
@@ -546,7 +546,7 @@ Un problema, come in PN, è che rappresentando un sistema molto complesso posso 
 Sia FSM che PN non sono notazioni create per la specifica di software, una notazione formale creata appositamente è il linguaggio Z. La primitiva di base è il concetto di schema. Sia con PN che con FSM i due concetti fondamentali erano stato e azione per descrivere l'evoluzione del sistema, in questo caso lo schema basta a rappresentare entrambe.  Ogni schema Z ha il seguente formato: Nome, dichiarazioni di variabili e predicati che agiscono sulle variabili.
 (ES: saltare)Vediamo un esempio sia per rappresentare lo stato che l'azione. Si specifica lo schema del bottone di un ascensore. 
 
-![[p036-fig-036.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p036-fig-036.png|350]]
 
 Si distinguono i bottoni dentro l'ascensore e sui piani per chiamarlo. Si definiscono le variabili con il nome e per definire il tipo si usa la notazione ": P Button" dove in questo caso Button è l'insieme di tutti i pulsanti e P denota l'insieme potenza (insieme di tutti i possibili sottinsiemi).  Di questo tipo si definiscono i bottoni dentro e fuori ascensore, i bottoni e i bottoni premuti.  Si definisce lo stato iniziale come "Button_init := [Button_State' | pushed' = 0]" (nello stato iniziale l'insieme dei bottoni dell'ascensore ha stato tale per cui non è premuto, l'insieme pushed è vuoto).  Nella parte dei predicati specifico come deve comportarsi lo stato del bottone: l'intersezione delle variabili floor buttons e elevator buttons è vuoto (sono pulsanti distinti) mentre la loro unione sono tutti i bottoni.
 
@@ -555,7 +555,7 @@ Si distinguono i bottoni dentro l'ascensore e sui piani per chiamarlo. Si defini
 <!-- Pagina PDF 37 -->
 Vediamo invece l'utilizzo dello schema per un'azione: premere il bottone. 
 
-![[p037-fig-037.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p037-fig-037.png|500]]
 
 Delta rappresenta gli stati su cui agisce l'azione (in questo caso lo schema definito prima). Nella parte declarations, trattandosi di un'operazione (funzione), definisco i parametri della funzione (Button). Il fatto che sia parametro di input è evidenziato da ? (output sarebbe stato !). Nella zona predicati definisco invece come agisce quest'operazione sulle variabili dello stato che prende in considerazione (button_state). La prima riga mi dice che il parametro di input deve appartenere all'insieme dei buttons, messo in AND con ciò che specifica che se il bottone è spento si accende, se è già acceso invece non si fa nulla. (se il bottone non appartiene a pushed allora ("implicito" nell'and) il nuovo valore dell'insieme di pushed (nuovo valore perché ') è uguale al vecchio valore + il bottone che ho appena premuto, oppure se il bottone appartiene a pushed allora il nuovo insieme è uguale al precedente). (FINE esempio)
 Specifiche semi-formali (livello intermedio tra linguaggio naturale e specifiche formali).  L'approccio principale è costruire un modello del sistema (rappresentazione astratta) per facilitare la comprensione del suo funzionamento. Per descrivere completamente il sistema è necessario costruire diversi modelli, che lo rappresentino da vari punti di vista (informazioni, funzioni e comportamento dinamico (evoluzione)).  Esistono due principali metodi di specifica semiformale; 
@@ -574,9 +574,9 @@ l'approccio Object Oriented. I not UML sono linguaggi di modellazione che veniva
 ## ERD (Entity Relationship Diagram) diagramma entità relazione per costruire modello dei
 dati. Il Data Flow Diagram invece serve a definire modelli comportamentali. (come a basi di dati entità-relazione). In particolare DFD utilizza quattro costrutti per rappresentare le varie funzioni del software e come elaborano i dati, come partano da una sorgente e arrivino ad una destinazione. Il diagramma non deve essere letto in ordine temporale, ma solo in termini di come i dati viaggiano all'interno del software. Normalmente si costruisce una gerarchia di DFD dove per ogni raffinamento si ha un dettaglio maggiore.  (ERD e DFD)
 
-![[p038-fig-038.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p038-fig-038.png|350]]
 
-![[p038-fig-039.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p038-fig-039.png|350]]
 
 Uno dei metodi di analisi strutturata più usati prima dell'avvento degli object oriented era lo
 ## SSA (Structured System Analysis). Composto da 9 step e basato sul concetto di step-wise
@@ -590,21 +590,21 @@ Step 2: Decidere quali sezioni devono essere automatizzate e come.  Si parte dal
 <!-- Pagina PDF 39 -->
 (ES: saltare)
 
-![[p039-fig-040.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p039-fig-040.png|700]]
 
 Nell'esempio di DFD con secondo raffinamento di prima il processo "verify order is valid" è sicuramente online, mentre "place order at software supplier" batch (infatti archivio i dettagli ordine nel pending orders per poi magari successivamente chiamare i fornitori "software supplier" per inviare gli ordini). (FINE es) I successivi tre passi sono relativi rispettivi a un raffinamento di data flow, processi e data stores.
 Step 3: Prevede quindi di determinare i dettagli del data flow. (ES: saltare) nel DFD di prima ho un arco "order" da cliente a processo, devo raffinarlo per capirne la vera e propria struttura ottenendo quindi dettagli come order_identification, customer_details, package_details. Si procede poi ad approfondire ulteriormente questi dati per vedere se sono dati elementari o ancora di tipo strutturato. order_identification ad esempio è un intero a 12 interi, costumer_details è invece informazione strutturata composta da customer_name, customer_address etc… Devo fare l'operazione fino a definire tutto come dato elementare per ogni data flow. (FINE es)
 Step 4: Prevede di definire la logica processi.  Utilizzando ad esempio un albero decisionale per definire il comportamento di una funzione
 **(es give_educational_discount):**
 
-![[p039-fig-041.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p039-fig-041.png|500]]
 
 Step 5: Si occupa dei dettagli dei data store, si definisce il contenuto esatto di ogni archivio e come rappresentarlo (secondo il formato specifico di un certo linguaggio di programmazione).  Ad esempio tramite l'utilizzo di DIAD (data-immediate-access diagram).
 
 ---
 
 <!-- Pagina PDF 40 -->
-![[p040-fig-042.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p040-fig-042.png|350]]
 
 Per memorizzare i dettagli di un package li organizzo per nome, prezzo, funzione e machine (sistema operativo). Il DIAD specifica quali sono i campi utilizzabili per effettuare ricerche dirette sui dati (in questo caso name, function e machine, per cui posso chiedere ad esempio quali sono tutti i software di un certo nome, oppure che girano su windows, o che sono elaboratori di testo, ma non in base al prezzo).
 Step 6: Prevede di definire le risorse fisiche.  Oggi si sfrutta un DBMS per l'archiviazione di dati vs il vecchio file system. In tal caso ne andava specificato il nome, l'organizzazione in termini di accesso (sequenziale, indicizzato…), il mezzo di memorizzazione, i record il tutto arrivando a livello di dettaglio "field level" (es. il nome lo specifico come una stringa di 30 caratteri…)
@@ -675,7 +675,7 @@ Si ha infine il caso di telemarketing. In questo caso si guarda un'azienda che v
 <!-- Pagina PDF 44 -->
 Vediamo ora la prima applicazione per l'University Enrolment (A.1 == prima iterazione). Consideriamo il seguente requisito e identifichiamo usando noun phrase le classi candidate: "Each university degree has a number of compulsory courses and a number of elective courses." I sostantivi di questa frase si ha laurea, numero e corsi. Corsi e lauree sono rilevanti, infatti il sistema ne dovrà mantenere informazione. Quindi sicuramente faranno parte del class diagram. Number d'altro canto è irrilevante, concetto generico. Gli altri due concetti sono corso obbligatorio e corso opzionale, che sicuramente sono informazioni da mantenere nel nostro sistema. Tuttavia per memorizzare queste informazioni è davvero necessario introdurre classi a parte o mi basta usare un attributo tipo? Allora per adesso lascio in Fuzzy.  "Each course is at a given level and has a credit-point value, A course can be part of any number of degrees, Each degree specifies minimum total credit points value required for degree completion, Students may combine course offerings into programs of study suited to their individual needs and leading to the degree in which enrolled" Nella seconda parte si vuole sapere un certo corso in quali lauree è incluso, questa è una tipica associazione, il numero minimo di crediti per laurearsi, etc.. (nel class diagram attributi, classi e associazioni tra classi). Si prende quindi ogni requisito, si utilizza lo stesso approccio dove si identificano le classi rilevanti e non e dove si è indecisi si mette nelle classi Fuzzy. Vedremo come le associazioni sono implementate come attributi. Ultimo requisito: studente rilevante, course offering (corso erogato in diverse istante durante l'anno a diversi canali) fuzzy perché potrebbe essere interessante avere informazioni sull'offerta di un certo corso, programs of study rilevante.
 
-![[p044-fig-043.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p044-fig-043.png|350]]
 
 Quanto viene detto dall'analista è leggermente diverso: StudyProgram in fuzzy perché l'obiettivo è comuque minimizzare il numero di classi e probabilmente posso gestire l'informazione in un altro modo.
 Passiamo ora a B, prima iterazione del caso di studio Video Store. Primo Requisito:  "The video store keeps in stock an extensive library of current and popular movie titles. A particular movie may be held on video tapes or disks."  Video store, stock, library, movies, tapes e disks sostantivi. Videostore irrilevante perchè le linee guida dicevano che per identificare una classe è necessario identificare un certo insieme di istanze, e poiché il software è dedicato a un singolo negozietto e non a una catena non ha senso identificare la classe. MovieTitle, VideoTape e VideoDisk sono rilevanti in quanto bisogna memorizzare il codice a barre per ognuno di questi. Stock e Library sono generici. Altri requisiti: "Video tapes are in either "Beta" or "VHS" format, Video disks are in DVD format, Each movie has a particular rental period (expressed in days), with a rental charge to
@@ -685,13 +685,13 @@ Passiamo ora a B, prima iterazione del caso di studio Video Store. Primo Requisi
 <!-- Pagina PDF 45 -->
 that period, The video store must be able to immediately answer any inquiries about a movie's stock availability and how many tapes and/or disks are available for rental, The current condition of each tape and disk must be known and recorded".
 
-![[p045-fig-044.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p045-fig-044.png|350]]
 
 Betatape, VHStape non come attributi ma come classi dal momento che evidentemente necessito di stabilirne diverse proprietà.Videomedium scelta dell'analista di creare una classe dove inserire tutte le proprietà comuni sia a dischi che a cassette come se fosse una gerarchia (figli sono beta e vhs). RentalConditions come fuzzy perché il prestito potrebbe esser gestito sia come classe che come attributi, ancora da decidere.
 **Passiamo alla prima iterazione Contact Management:**
 "To "keep in touch" with current and prospective customer base, To store the names, phone numbers, postal and courier addresses, etc. of organizations and contact persons in these organizations, To schedule tasks and events for the employees with regard to relevant contact persons, Employees can schedule tasks and events for other employees or for themselves, A task is a group of events that take place to achieve a result (e.g. to solve customer's problem), Typical types of events are: phone call, visit, sending a fax, arranging for training, etc".
 
-![[p045-fig-045.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p045-fig-045.png|350]]
 
 L'idea è di specificare il concetto di cliente (generico) usando le classi più specifiche Organization e Contact. Similmente a quanto visto con l'uni per corsi obbligatori e non, qua si parla di clienti potenziali o attuali che potrei implementare come classi o con attributi perciò li metto in fuzzy. L'ultimo requisito sembrava evidente dover essere implementato tramite l'uso di attributi, ma postaladdress e courieraddress sono state messe in fuzzy in quanto variano in base all'uso del software: attributi se me la cavo a specificare l'indirizzo come semplice stringa, altrimenti potrebbe essermi utile implementarla con tanti campi diversi come classe.
 Vediamo adesso la prima iterazione per il Telemarketing dove invece sfruttiamo l'approccio Use Case Driven: business use case diagram sotto riportato.
@@ -701,7 +701,7 @@ Vediamo adesso la prima iterazione per il Telemarketing dove invece sfruttiamo l
 <!-- Pagina PDF 46 -->
 Si parla di Business use case diagram dal momento che il livello di astrazione è molto alto. Come già detto in precedenza l'use case diagram mi permette di specificare i possibili scenari di utilizzo del software. 
 
-![[p046-fig-046.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p046-fig-046.png|350]]
 
 Le ellissi rappresentano la primitiva di caso d'uso, poi si ha l'omino che rappresenta la primitiva attore, ossia colui (o qualcosa, non è detto che sia un essere umano) con cui il software interagisce. In questo caso si hanno due attori: telemarketer (che chiama) e supporter (colui che eventualmente compra biglietti della lotteria). In particolare in questo diagramma il telemarketer rappresenta l'utente di questo diagramma in quanto come vedremo è colui che attiva i 3 casi d'uso, mentre il supporter è un attore che può essere coinvolto durante la loro esecuzione.  Come avevamo specificato inizialmente i telemarketer effettuano le chiamate e alla fine di esse devono registrare i risultati della chiamata -> i due casi d'uso principali sono quello in alto e in basso. Il primo si attiva quando deve fare la chiamata al supporter, il secondo a fine chiamata. Si ha poi un caso d'uso nel mezzo: CRUD Dettagli Campagna e Supporter. CRUD == Create, Read, Update, Delete (le 4 operazioni base che si possono fare con i dati), questo caso d'uso mi serve quando devo compiere una di queste operazioni per i dati relativi sia la campagna che il supporter (es. se il supporter acquista 3 biglietti devo segnare indirizzo, numero etc… e devo aggiornare il fatto che 3 biglietti sono stati venduti). I casi d'uso e gli attori sono connessi da delle linee che rappresentano il coinvolgimento dell'attore o l'attivazione da parte dell'attore di quel caso d'uso. Quando scenderemo a livello d'astrazione specifica vedremo come dovremo introdurre le frecce e non sarà sufficiente l'uso generico di linee. Appare poi il collegamento tra i primi due casi d'uso (la freccia) e indica la relazione generica tra due elementi UML. In questo caso rappresenta il fatto che mentre faccio una chiamata può nascere l'esigenza di aggiornare i dati (CRUD). Come avevamo anticipato non è effettivamente scritto nel diagramma cosa deve fare il software una volta attivato il caso d'uso. Per questa ragione affianco al diagramma per ogni caso d'uso specificato va inclusa una nota testuale in linguaggio naturale specifichi cosa fa il software quando si verifica un caso d'uso.  Ora, dal punto di vista della ricerca di entity classes, tutti gli attori diventano automaticamente delle classi entity. Oltre a questo devo far riferimento alla notazione testuale: Si procede come nel noun phrase evidenziando i sostantivi e ragionandoci sopra.  "The telemarketer requests the system that the phone call to a supporter be scheduled and dialed up, Upon successful connection, the telemarketer offers lottery tickets to the supporter. During a conversation, the telemarketer may need to access and modify both
 
@@ -710,12 +710,12 @@ Le ellissi rappresentano la primitiva di caso d'uso, poi si ha l'omino che rappr
 <!-- Pagina PDF 47 -->
 campaign and supporter details (CRUD, create - read - update - delete), Finally, the telemarketer enters the conversation outcome, i.e. the successful or unsuccessful results of the telemarketing action".
 
-![[p047-fig-047.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p047-fig-047.png|500]]
 
 Per la prima volta vediamo la soluzione presentata con il formalismo del class diagram (nome, attributi, operazioni, gli ultimi due per ora vuoti).
 Si passa alla seconda iterazione dell'università.  "A student's choice of courses may be restricted by timetable clashes and by limitations on the number of students who can be enrolled in the current course offering." Per questo requisito mi è sufficiente introdurre gli attributi per CourseOffering già definito in precedenza dove enrolment_quota == numero max di studenti.  "A student's proposed program of study is entered in the on-line enrolment system, The system checks the program's consistency and reports any problems, The problems need to be resolved with the help of an academic adviser, The final program of study is subject to academic approval by the delegate of the Head of Division and it is then forwarded to the Registrar". Vi è, visti i nuovi requisiti, la necessità di introdurre StudyProgram come classe e non come semplice attributo (dubbio perché stava in fuzzy). 
 
-![[p047-fig-048.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p047-fig-048.png|500]]
 
 Questi attributi non fanno riferimento solo ai requisiti appena letti, ma anche a quelli della prima iterazione (es. per ogni corso era stato specificato di dover conoscere i crediti -> credit_points in Course). CumpolsoryCourse e ElectiveCourse stavano in Fuzzy ma non riappaiono -> conveniva toglierli.  Ci si accorge inoltre che come prefisso di alcuni attributi vi sono <<PK>> Primary Key e <<CK>> Candidate Key dove i simboletti <<>> sono chiamati Stereotipi in UML. Una caratteristica importante in UML abbiamo detto essere la possibilità di estensione standard creando un Profilo (es. estendo UML nel settore finanza con il profilo Finanza dove creo primitive UML specifiche per quel dominio). Un profilo rappresenta null'altro che un insieme
 
@@ -726,7 +726,7 @@ di stereotipi.  In questo caso specifico si sta dicendo di voler introdurre un P
 **Seconda iterazione per VideoStore:**
 "The rental charge differs depending on video medium: tape or disk (but it is the same for the two categories of tapes: Beta and VHS), The system should accommodate future video storage formats in addition to VHS tapes, Beta tapes and DVD disks, The employees frequently use a movie code, instead of movie title, to identify the movie, The same movie title may have more than one release by different directors".
 
-![[p048-fig-049.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p048-fig-049.png|500]]
 
 Chiaramente movie code e title sono attributi della classe movie, e anche director. Capiamo già da come sono posizionate le classi che esiste una sorta di gerarchia. Inoltre il requisito per cui si potrebbero dover introdurre nuove tecnologie per cassette e dvd è soddisfatto introducendo videodisk e videotape come "generalizzazioni". Is_in_stock deriva da un requisito della prima iterazione: il software deve essere utilizzato per rispondere alla query del cliente se un certo film è disponibile o meno. / is_in_stock ha il simbolo / che è standard
 ## UML e rappresenta derived attribute: il valore dell'attributo non è inserito dall'utente ma
@@ -738,7 +738,7 @@ Tornando all'esempio di Contact Management:  "A customer is considered current i
 <!-- Pagina PDF 49 -->
 can be stored, Events for the employee are displayed on the employee's screen in the calendar-like pages (one day per page), The priority of each event (low, medium or high) is visually distinguished on the screen, Not all events have a "due time" - some are "untimed", Event creation time cannot be changed, but the due time can, Event completion date and time are recorded, The system stores identifications of employees who created tasks and events, who are scheduled to do the event ("due employee"), and who completed the event" L'ultimo requisito sarà importante per la terza iterazione in quanto si vogliono identificare gli impiegati che hanno creato task e eventi, a cui sono stati assegnati e che li hanno completati.
 
-![[p049-fig-050.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p049-fig-050.png|500]]
 
 Contract non è classe importante per il mio software, per stabilire se è attuale aggiungo l'attributo is_current a organization. Forse conviene utilizzare informazione strutturata per l'indirizzo creando una classe a parte visto che si vogliono cercare i clienti per post code (primo requisito). PostalAddress e CourierAddress introdotti come classi a parte, task ed evento hanno attributi created_dt. due_dt e completed_dt di tipo Date e value per task di tipo Currency (tipi di dato base in UML). Per definire la priorità degli eventi è presente l'attributo priority di tipo Byte (si voleva low medium o high, un boolean non bastava quindi uso byte).
 La seconda iterazione per il Telemarketing:  "Each campaign: Has a title that is generally used for referring to it, Has also a unique code for internal reference, Runs over a fixed period of time. Soon after the campaign is closed, the prizes are drawn and the holders of winning tickets are advised. Tickets are uniquely numbered within each campaign. The total number of tickets in a campaign, number of tickets sold so far, and the current status of each ticket are known (e.g. available, ordered, paid for, prize winner). To determine the performance of the society's telemarketers, the duration of calls and the successful call outcomes (i.e. resulting in ordered tickets) are recorded. Extensive information about supporters is maintained: Contact details (address, phone number, etc.), Historical details such as the first and most recent dates when a supporter had participated in a campaign, Any known supporter's preferences and constraints (e.g. times not to call, usual credit card number). Telemarketing calls are made
@@ -748,7 +748,7 @@ La seconda iterazione per il Telemarketing:  "Each campaign: Has a title that is
 <!-- Pagina PDF 50 -->
 according to their priorities. Calls which are unanswered or where an answering machine was found, are rescheduled: Times of repeat calls are alternated, Number of repeat calls is limited. Limits may be different for different call types (e.g. a normal "solicitation" call may have different limit than a call to remind a supporter of an outstanding payment). Call outcomes are categorized - success (i.e. tickets ordered), no success, call back later, no answer, engaged, answering machine, fax machine, wrong number, disconnected".
 
-![[p050-fig-051.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p050-fig-051.png|700]]
 
 Guardando i nuovi requisiti è conveniente inserire una classe "Prize" per indicare cosa vince chi vince la lotteria. Per lavorare sul terzo requisito devo lavorare sull'associazione tra telemarketer, chiamata da fare e risultato chiamata (lo faccio per ogni chiamata di un certo telemarketer e capisco così le sue prestazioni). average_per_hour e success_per_hour sono gli attributi di telemarketer che ne indicano le prestazioni di cui parlavamo prima, ed il valore di essi dipende dall'associazione che esiste tra Telemarketer, CallScheduled e CallOutcome. Una cosa che probabilmente manca in CallScheduled è la durata della chiamata, fattore che serve per determinare le performance del telemarketer. Un'osservazione è da fare sulle classi CallOutcome e OutcomeType. Si era ipotizzato di inserire OutcomeType come attributo di CallOutcome, invece è stata creata una classe a parte con un occhio di riguardo proprio all'implementazione. Sapendo infatti che all'ora vengono fatte ad esempio 500 chiamate tra tutti i telemarketer, la seconda soluzione permette di utilizzare molta meno memoria. Mettendo gli attributi in una sola classe avrei dovuto memorizzare per ogni CallScheduled 5 attributi, con due classi distinte invece di oggetti OutcomeType non ne creo 500 all'ora, ma solo un numero pari al numero possibile di outcome. Ora ognuna delle 500 CallOutCome sarà associata al rispettivo OutcomeType -> di outcometype ne ho tipo 15, ho risparmiato un sacco.
 Con la prima iterazione abbiamo identificato le prime entity classes, con la seconda definito eventualmente ulteriori classi e gli attributi, con la terza definiamo le associazioni per finire la definizione del modello di dati prima di passare al comportamentale. Quando si incontra un
@@ -760,9 +760,9 @@ attributo che ha come tipo di dato una classe, quell'attributo avrà come valore
 Così come detto per classi e attributi, anche le associazioni devono avere nomi significativi e devono usare ovviamente la stessa convenzione usata per gli attributi. Inoltre è fondamentale esprimere la molteplicità delle associazioni, che come negli schemi ER deve essere espressa ad entrambe le estremità. Infine è importante assegnare i nomi di ruolo (rolename) alle estremità delle associazioni, specificano il ruolo giocato dagli oggetti di ciascuna classe che partecipano a quella associazione.
 Si aggiungono le associazioni Partiamo dalla terza iterazione di Contact Management. Il requisto: "The system allows producing various reports on our contacts based on postal and courier addresses".
 
-![[p051-fig-052.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p051-fig-052.png|500]]
 
-![[p051-fig-053.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p051-fig-053.png|500]]
 
 Vediamo una delle limitazioni di UML se vogliamo porre il vincolo affinché ogni contatto abbia un solo indirizzo tra CourierAddress e PostalAddress (solo uno dei due). Per risolvere la cosa posso farlo informalmente aggiungendo una nota testuale, altrimenti in modo formale si può utilizzare un linguaggio detto OCL che permette di associare dei vincoli ai diagrammi UML.  Qui vediamo l'esempio di un'associazione completamente specificata: abbiamo infatti nella associazione sotto nome (org_con), specificità e nome di ruolo. L'associazione mette in relazione Contact e Organization e ha le seguenti molteplicità: fissato un Contatto questo lavora in una e una sola organizzazione (uno a sx) mentre fissata l'organizzazione questa è costituita da almeno 1 ma anche più contatti che vi lavorano  Ora vediamo i role_name, che sono i nomi che esprimono il ruolo con cui gli oggetti di una classe partecipano all'associazione e normalmente sono quelli utilizzati per implementare
 
@@ -789,7 +789,7 @@ Quindi quando un requisito implica il contenimento di una classe in un'altra uso
 **Terza Iterazione per Università:**
 "The student's academic record to be available on demand. The record to include information about the student's grades in each course that the student enrolled in (and has not withdrawn without penalty). Each course has one academic in charge of a course, but additional academics may also teach in it: There may be a different academic in charge of a course each semester, There may be different academics for each course each semester"
 
-![[p053-fig-054.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p053-fig-054.png|500]]
 
 AcademicRecord come classe per registrare la carriera universitaria dello studente dove ogni volta che lo studente supera l'esame ne creo un nuovo oggetto. Fissato lo studente, questo può fare da 0 a N esami (0..*). Takes è l'associazione tra Student e i corsi che sta seguendo in quel momento (* sta per molteplicità 1:N).  AcademicInCharge sta per docente, fissato il docente questo può insegnare 0..* corsi "offerti, fissato il corso questo (secondo l'ultimo requisito sopra) in realtà dovrebbe poter essere insegnato anche da più docenti e sicuramente da almeno 1, quindi non 0..1 ma 1..*.
 
@@ -806,7 +806,7 @@ Passiamo al Modello Comportamentale, vedremo che lavorare su di esso ci permette
 ---
 
 <!-- Pagina PDF 55 -->
-![[p055-fig-055.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p055-fig-055.png|500]]
 
 Lo studente Don Donaldson ha superato due esami: COMP225 e COMP326, il fatto che esistesse la relazione di Composition viene esplicitato dal fatto che gli AcademicRecord sono contenuti in Student (se cancello lo studente cancello anche gli esami che ha fatto). Dall'altra parte l'associazione tra l'oggetto corso e courseoffering è rappresentata normalmente (semantica di riferimento come visto).  In realtà questo esempio sarebbe sbagliato in riferimento all'esempio A.3 in quanto in tale diagramma non vi era relazione diretta tra studente e corso, ma solo con CourseOffering. Si ricorda che stiamo usando una specifica semiformale quindi vogliamo costruire un modello del software che lo rappresenti da tutti i punti di vista: statico (dati), funzionale (comportamentale) e di controllo (dinamico).
 ## (FINE ESEMPIO)
@@ -834,7 +834,7 @@ La sintassi fornita da UML prevede graficamente come l'attore (omino) e caso d'u
 Se A <<include>> B, allora se un attore attiva A affinché A venga completato dovrò necessariamente attivare (da un attore differente o lo stesso) e completare B.  Se A <<extend>> B, allora quando un attore attiva B potrei (ma non necessariamente!) attivare (da un attore differente o lo stesso) anche A. 
 - Generalizzazione: Relazione tra attori, dove un sotto-attore può attivare tutti i casi d'uso del super-attore più i suoi specifici.
 
-![[p056-fig-056.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p056-fig-056.png|500]]
 
 (ES: saltare fino a pag 59) Abbiamo detto che il software per l'università deve prima dell'iscrizione dello studente inviargli le istruzioni per iscriversi insieme ai risultati dell'ultimo semestre. Durante l'iscrizione lo studente consegna il piano di studi e la tizia in segreteria lo inserisce nel software che lo convalida. Questi scenari di funzionamento sono descritti dai quattro casi d'uso presenti in figura. Gli attori sono gli impiegati della segreteria studenti (student office) che manda le istruzioni insieme ai voti, impiegati segreteria didattica per i corsi di studio specifici (registrar office) che riceve e i piani di studio e li convalida, data entry person che fa parte della segreteria e inserisce i dati dello studente nel sistema ed infine lo studente in sé.  I primi tre sono attori che attivano casi d'uso, lo student è attore coinvolto dall'esecuzione di
 
@@ -843,7 +843,7 @@ Se A <<include>> B, allora se un attore attiva A affinché A venga completato do
 <!-- Pagina PDF 57 -->
 alcuni casi d'uso (es. provide examination results verranno mandati per email allo studente). Vediamo ora extend e include. Enter program study include validate program study significa che per completare l'enter devo completare il validate, starebbe a significare che non posso inserire un piano di studi e lasciarlo là senza sapere se è valido o meno, corretto. Provide Examination Result extend provide enrolment instructions, ossia se mando il secondo potrei anche inviare i dati legati ai risultati dell'ultimo semestre (ma non necessariamente). Corretto in quanto se uno studente si iscrive al primo anno sicuramente riceve le istruzioni sul come iscriversi ma non ha risultati dello scorso semestre quindi il primo caso d'uso non si attiva, al contrario potrebbe attivarsi se si parla di uno studente che si iscrive dal secondo anno in poi.
 
-![[p057-fig-057.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p057-fig-057.png|500]]
 
 Rircordiamo che il software di contact management aveva l'obiettivo di gestire i contatti dell'azienda che si occupa di ricerca di mercato. Gestire un contatto nel software significava creare task relativi ad attività di contact management, ogni task presenta diversi eventi. Quindi casi d'uso Create Task, Schedule Event, Complete Event, Mantain Organization e Maintain Contact (le ultime due tutte le operazioni di base (CRUD) che possono essere fatte sia sulle operazioni che sui contatti). Create Task include Schedule Event, quindi quando attivo il primo deve essere attivato e portato a termine anche il secondo (corretto perché quando creo un task questo è formato da eventi che devono essere schedulati). Maintain Contact e Maintain Organization sono in extend con Complete Event, anche questo ha senso perchè quando attivo Complete Event (mentre sto completando un evento) potrei aver necessità di gestire le informazioni di una contact person o di un'organizzazione a cui sto facendo riferimento. Riguardo gli attori, questo software poteva essere usato da tutti gli impiegati con accessibilità diversa in base al grado. Si osserva quindi come l'impiegato generico possa attivare i casi d'uso Mantain Contact e Organization per recuperare le informazioni basi di organizzazioni/contact person. Poi l'attore Customer Services Employee (già più specifico) che può schedulare gli eventi e completarli. Vi è infine un ultimo attore, il Customer Services Manager, l'unico che può creare task.  Generalizzazioni: l'impiegato può essere specializzato in un impiegato delle risorse clienti, che a sua volta può essere manager del reparto. Gli attori più specifici in questa gerarchia possono fare quanto fanno gli attori generici più alcune cose specifiche che fa in quanto specializzato (da qui l'attivazione di certi casi d'uso), quindi un superattore come CSM può non solo creare task, ma anche schedulare eventi e accedere a informazioni di organizzazioni e contact person (ereditarietà). Similmente a quanto visto nel modello dei dati
 
@@ -852,11 +852,11 @@ Rircordiamo che il software di contact management aveva l'obiettivo di gestire i
 <!-- Pagina PDF 58 -->
 anche qui avrei potuto evitare la generalizzazione collegando tutto e facendo un macello, ma avrei mancato di semantica per capire le relazioni tra attori coinvolti nei casi d'uso.
 
-![[p058-fig-058.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p058-fig-058.png|500]]
 
 Tornando ora al caso di studio VideoStore, l'attore principale è sicuramente Employee che usa il software per gestire tutto, ma vediamo un secondo attore Scanning Device che è collegato all'impiegato con una relazione <<depends on>> (anche questa associazione generale, tratteggiata in realtà e non continua come si vede). Tale relazione indica che la pistola per scannerizzare è "dipendente" dall'impiegato, necessita l'impiegato perché si attivino e completino i casi d'uso associati ad essa, nb non è generalizzazione! Quindi è come se fosse l'impiegato ad essere associato a Rent e Return Video, ma serve lo strumento/attore di scanning per farlo. 
 
-![[p058-fig-059.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p058-fig-059.png|500]]
 
 Prima di vedere l'approccio formale vediamo per completezza il diagramma casi d'uso del Telemarketing. Schedule and Make Next Call e Record Call Outcome due casi d'uso fondamentali che fa il Telemarketer. Display Call Details attivato a fronte di una telefonata perché il telemarketer sappia chi sta chiamando e perché. Diversi casi d'uso in extend: per quel che riguarda i risultati telefonata Record Ticket Sale (se il cliente acquista biglietti) e Schedule Callback (se si vuole ripianificare la chiamata al supporter). Per quanto riguarda
 
@@ -876,7 +876,7 @@ Ora passiamo all'approccio formale, per ogni caso d'uso dovrei definire il Diagr
 <!-- Pagina PDF 60 -->
 decisionali (branch/merge diamonds, rombi). Importante l'utilizzo di questi diagrammi in quanto mentre con il linguaggio naturale è possibile ambiguità qui l'interpretazione è una. Descriviamo l'esempio sotto.
 
-![[p060-fig-060.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p060-fig-060.png|500]]
 
 (ES: saltare fino a pag 61) Nodo iniziale cerchietto pieno (corrisponde all'attore che attiva il caso d'uso), finale cerchietto pieno cerchiato. Troviamo subito una barra che è di fork (in quanto il numero di archi in uscita è maggiore degli entranti) che quindi ci dice che vi sono due flussi in parallelo, il primo scannerizza i video medium noleggiati dal cliente e da qui due possibili uscite, la prima self transiction (se il cliente arriva con 5 video devo scannerizzarli tutti) e la seconda mi porta all'attività successiva. La seconda attività sopra è scannerizzare la carta del cliente per poi eseguire l'attività verifica cliente (se è delinquente o meno). Dopo verify customer c'è un nodo decisionale: cliente affidabile allora inizio la transazione di prestito, se delinquente arrivo al nodo finale e finisce la storia, se inaffidabile richiedo il deposito, se rifiutato allora arrivo allo stato finale, se accettato allora lo faccio pagare. NB ogni arco uscente da un rombo (flusso alternativo) deve specificare una condizione, al limite posso lasciarne uno solo vuoto in caso non si verifichino le altre due condizioni (es. in questo caso cliente affidabile o <= 8 videos). Tornando al cliente affidabile dopo aver inizializzato la transazione devo verificare che il numero in noleggio sia <= 8, se così non è allora ne rimuovo finché e torno a Initialize Rent Transaction finché la condizione è verificata e scendo a Accept Payment. A questo punto di nuovo fork: il software aggiorna lo stock e allo stesso tempo stampa la ricevuta. Dopodiché join: ciò significa che anche se l'update stock fa prima della stampa ricevuta prima di passare alla fase successiva si deve aspettare. C'è infine la conferma della transazione che porta allo stato finale. 
 
@@ -885,11 +885,11 @@ decisionali (branch/merge diamonds, rombi). Importante l'utilizzo di questi diag
 <!-- Pagina PDF 61 -->
 Il diagramma d'esempio presenta vari problemi sia sintattici che semantici: chiaramente la freccia del ciclo deve andare da Remove One Medium a Inizialize Rent Transiction e non viceversa. Un altro problema è che se il cliente è considerato indaffidabile non effettuo il controllo sul numero di video, altro problema sta in Scan Video Medium: non esistono condizioni di guardia che mi dicano quando devo ciclare e quando devo passare all'attività successiva. Normalmente per rappresentare il ciclo sul singolo nodo mi serve un nodo di branch (rombo che torna all'attività se devo riscannerizzare altrimenti prosegue), in UML posso rappresentare ciò con la forma vista sopra ma devo necessariamente in tal caso anche esplicitare la condizione di guardia che mi permetta di capire come comportarmi. Ulteriore problema sta nel fatto che Initialize Rent Transaction può essere attivata due volte: sia quando il flusso arriva da Scan Video Medium che quando arriva dal branch post Verify Customer per cui il cliente è affidabile. Serviva sfruttare una join affinché l'attività avvenisse solo quando entrambi erano conclusi.  Da questi ragionamenti si deriva la versione corretta: 
 
-![[p061-fig-061.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p061-fig-061.png|350]]
 
 Si noti la differenza tra merge e join: uso merge con il rombo quando o vale una condizione o vale l'altra, la join invece con la barra se devo aspettare entrambi i flussi.  Questa versione è sicuramente corretta ma potrebbe essere ancora migliorata, es. il fatto di definire le attività concorrenti iniziali di scan non è conveniente visto che l'impiegato deve scannerizzarle una alla volta.
 
-![[p061-fig-062.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p061-fig-062.png|350]]
 
 ## (FINE ESEMPIO)
 
@@ -904,7 +904,7 @@ I messaggi possono essere di due tipi:
 - Call (sincrona): rappresenta una richiesta di tipo send-reply in quanto l'oggetto mittente blocca l'esecuzione dopo aver inviato il messaggio in attesa di risposta da parte dell'oggetto destinatario.
 - Flat: se ancora in fase di specifica per certe interazioni non si è scelto in modo definitivo Dal punto di vista visuale la notazione è la seguente:
 
-![[p062-fig-063.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p062-fig-063.png|500]]
 
 I rettangoli (orizzontali) rappresentano gli oggetti che interagiscono, per ognuno devo dire nome e classe che lo genera. Per ogni oggetto si identifica la lifeline (corso di vita dell'oggetto) dove l'oggetto scambia informazioni con altri, e questo scambio si rappresenta con archi orientati. Quando un oggetto è attivo (in esecuzione/manda messaggi etc..) allora ciò è specificato tramite gli activation box (rettangoli verticali). Importante il fatto che un activation box più piccolo NON implica il fatto che questo rappresenti un arco temporale minore poiché in UML non è definito il concetto di tempo (infatti esistono profili separati per estendere UML con caratteristiche temporali). Con il sequence diagram mi limito a conoscere le sequenze temporali.
 - Collaboration Diagram: usato principalmente in fase di progettazione (OOD) e descrive lo scambio di messaggi tra oggetti mediante relazioni tra gli oggetti stessi.
@@ -915,7 +915,7 @@ I rettangoli (orizzontali) rappresentano gli oggetti che interagiscono, per ognu
 Si tratta di rappresentazioni equivalenti e possono essere generati automaticamente l'uno dall'altro. Esiste la differenza perché il primo rende esplicito l'ordine temporale, mentre il secondo si focalizza proprio sui messaggi che si scambiano gli oggetti. Questi diagrammi sono importanti perché è grazie a loro che siamo in grado di identificare le operazioni delle classi nel class diagram (ed eventuali classi aggiuntive).
 (ES: saltare) Nell esempio precedente es. call method1() significa che l'oggetto1 chiede a oggetto2 di eseguire metodo1, ciò viene fatto tramite call() freccia piena, quindi attende la risposta e non fa niente nell'attesa. Il secondo oggetto invia la risposta Return() al primo tramite signal (freccia con aletta a metà) per cui continua l'esecuzione dopo aver risposto, il primo oggetto allora riprende l'esecuzione. Poi il primo manda una signal method2() per cui non si ferma e come successiva esecuzione call method3() call su se stesso.
 
-![[p063-fig-064.png|700]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p063-fig-064.png|700]]
 
 Gli oggetti coinvolti dal sequence diagram sono creati dalle classi che conosciamo Student, Course e CourseOffering. Viene anche creato un altro oggetto Program EntryWindow da una classe senza nome che non abbiamo considerato in quanto si tratta di una classe boundary, ossia classi che non gestiscono informazioni ma che si occupano di implementare l'interfaccia tra software e utente. Infine si ha l'attore che scatena la sequenza di interazioni tra oggetti. Si descrive ciò che avviene quando dopo che lo studente ha consegnato il piano di studi il data entry person deve inserirlo nel sistema. L'attore chiede al software tramite l'interfaccia di aggiungere un certo studente std a un certo corso crs in un certo semestre sem. Per rispondere alla richiesta l'oggetto di interfaccia interagirà con gli altri oggetti entity che conosciamo. Per prima cosa si verifica che lo studente sia correttamente iscritto (valid), poi se il corso accetta ancora studenti. Se le cose vanno bene aggiungerò lo studente. Anzitutto l'oggetto interfaccia (boundary) chiede all'oggetto studente se è valido, quindi chiamata al metodo areYouValid con parametro di output s_check (lo passo vuoto, mi aspetto risposta s_check booleana). If s_check no allora boundary fa una call a se stesso "destroy" di modo che l'attore capisca di non poter inserire i dati (ovviamente apparirà un messaggio a schermo), else boundary chiede all'oggetto corso se è ancora aperto (out c_check) (condizione di guardia!). Ora l'oggetto corso non mantiene le informazioni di tutte le istanze del corso quindi a sua volta chiede all'istanza del corso per quel semestre
 
@@ -939,12 +939,12 @@ anche di Course Oltre che costruire i modelli comportamentale e di dati tuttavia
 ## Modello Dinamico (State Diagrams)
 Rappresenta il comportamento dinamico (evoluzione) degli oggetti di una classe in termini di stati possibili, eventi e condizioni che originano transizioni di stato. Molto simile agli Activity Diagram, ma Activity Diagram è un caso particolare di State Diagram.
 
-![[p065-fig-065.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p065-fig-065.png|500]]
 
 Normalmente il Modello dinamico viene costruito solo per le cose per cui è interessante descriverne il comportamento dinamico, come le classi di controllo (finora abbiamo visto entity classes che gestiscono l'accesso ai dati e boundary classes per l'interfaccia utente, le control classes gestiscono la logica dell'applicazione).  Principalmente quindi questo modello è usato per software per cui è importante conoscere l'evoluzione, come applicazioni real-time e scientifiche (mentre è meno frequente nello sviluppo di applicazioni gestionali).
 (ES: saltare) Vediamo soltanto un esempio visto che nei nostri casi di studio abbiamo visto software di stampo gestionale per capire come viene applicato il diagramma degli stati.
 
-![[p065-fig-066.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p065-fig-066.png|500]]
 
 Si vuole quindi rappresentare l'evoluzione dei possibili stati in cui si può trovare l'oggetto creato dalla classe MovieTitle. Qui manca in realtà nodo iniziale e finale, è facile immaginare l'iniziale collegato a Available (creo un oggetto film perché è arrivato e disponibile in magazzino). L'unico arco in uscita da Available porta a Not In Stock con transizione avente notazione completa in quanto ha evento, azione e condizione. Quindi affinché si passi da
 
@@ -955,13 +955,13 @@ Available a Not In Stock è necessario che sia noleggiato l'ultimo elemento disp
 ## (FINE ESEMPIO)
 La Gestione della Complessità nei modelli di OOA.  Per sistemi software di grandi dimensioni, la complessità dei modelli (interconnessioni tra classi) deve essere gestita. Le associazioni tra classi nel modello dei dati generano complesse reti di interconnessione, in cui i cammini di comunicazione crescono in modo esponenziale con l'aggiunta di nuove classi. L'approccio utilizzato per far fronte alla complessità è la stratificazione: meccanismo che permette di isolare elementi tenendo conto di come essi devono interagire. In particolare gli elementi che fanno parte di un certo strato possono interagire solo con elementi dello stesso strato o di strati adiacenti. Tramite l'introduzione di questa gerarchia di classi, si passa da complessità esponenziale a polinomiale.
 
-![[p066-fig-067.png|350]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p066-fig-067.png|350]]
 
-![[p066-fig-068.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p066-fig-068.png|500]]
 
 Per poter raggruppare gli elementi in UML si sfrutta la nozione di Package (in un package raggruppo quindi non solo classi ma anche altri elementi UML come use case).  I package possono anche essere annidati (gerarchie di package, il più esterno ha accesso a quelli interni), una classe può appartenere ad un solo package ma comunicare con classi appartenenti ad altri package. Si effettua una dichiarazione di visibilità (public, private, protected) per definire la visibilità delle classi presenti nel package.
 
-![[p066-fig-069.png|500]]
+![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE GOLD/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p066-fig-069.png|500]]
 
 ---
 
