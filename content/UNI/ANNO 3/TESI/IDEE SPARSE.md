@@ -1,7 +1,19 @@
 ### Obiettivo 1 idee
+
 - da quello che ho capito obiettivo 1 è diviso in 2 parti
 	- verifica della macchina e fix
 	- verifica di unintended ways
+
+- scrivere un toolbox.md che prende `yaml+file` mio md con comandi consigliati da usare(forse utile per la parte 2)
+#### Agente di verifica macchina e fix
+- script in python che prende
+	- STORYLINE_STND.md oppure STORYLINE_B2R.md
+	- lo formatta nel miglior modo possibile per l'agente
+- l'agente prova attacca la macchina scrivendo un suo writeup.md
+	- si confronta writeup_attackwhite.md con writeup.md
+	- per progettare questo agente devo fare semplice brainstorming e reasoning con ai per generare un prompt giusto? un agente dentro si fa semplicemente a partire da un prompt e ho finito?
+
+#### Agente di verifica unintended ways
 - Strutturare VulcaTEST in almeno 2 agenti
 	- 1 scrive linee guida su cosa eseguire(pianificazione) basandosi su STORYLINE.md
 		- scrivendo un file chiamato ATTACK_PLAN.md
@@ -14,6 +26,8 @@
 	- basandoti sugli yaml e sul mio file che avevo fatto per l'esame
 
 - **(Opzionale / Fase 2)**: Passare queste discrepanze a un Agente Riparatore per eseguire il _Self-Healing_ (auto-correzione del codice sorgente Ansible
+
+
 
 #### SOLUZIONE
 DIVIDO IN FASI COSA VA FATTO
