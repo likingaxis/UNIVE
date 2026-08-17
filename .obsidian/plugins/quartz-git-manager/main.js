@@ -178,6 +178,71 @@ class GitService {
     return res.stdout.split('\n').map(b => b.replace('*', '').trim()).filter(Boolean);
   }
 
+  async getDetailedBranches() {
+    // Aggiornamento branch remoti in background (timeout breve per non bloccare se offline)
+    await this.execGit(['fetch', '--prune', 'origin'], { timeout: 8000 });
+
+    const currentBranch = await this.getCurrentBranch();
+
+    // Branch locali con eventuale upstream
+    const localRes = await this.execGit(['branch', '--format=%(refname:short)|%(upstream:short)']);
+    const allBranches = new Map();
+
+    if (localRes.success && localRes.stdout) {
+      localRes.stdout.split('\n').filter(Boolean).forEach(line => {
+        const [name, upstream] = line.split('|');
+        if (name) {
+          const trimmed = name.trim();
+          allBranches.set(trimmed, {
+            name: trimmed,
+            isLocal: true,
+            isRemote: false,
+            upstream: upstream ? upstream.trim() : null
+          });
+        }
+      });
+    }
+
+    // Branch remoti
+    const remoteRes = await this.execGit(['branch', '-r', '--format=%(refname:short)']);
+    if (remoteRes.success && remoteRes.stdout) {
+      remoteRes.stdout.split('\n').filter(Boolean).forEach(line => {
+        const fullRemote = line.trim();
+        if (fullRemote.includes('HEAD') || fullRemote === 'origin') return;
+        const cleanName = fullRemote.replace(/^origin\//, '');
+        if (allBranches.has(cleanName)) {
+          const item = allBranches.get(cleanName);
+          item.isRemote = true;
+          item.remoteName = fullRemote;
+        } else {
+          allBranches.set(cleanName, {
+            name: cleanName,
+            isLocal: false,
+            isRemote: true,
+            remoteName: fullRemote
+          });
+        }
+      });
+    }
+
+    const list = Array.from(allBranches.values()).map(b => ({
+      ...b,
+      isCurrent: (b.name === currentBranch)
+    }));
+
+    // Ordina: branch corrente in cima, poi alfabetico
+    list.sort((a, b) => {
+      if (a.isCurrent) return -1;
+      if (b.isCurrent) return 1;
+      return a.name.localeCompare(b.name);
+    });
+
+    return {
+      currentBranch,
+      branches: list
+    };
+  }
+
   async fetch() {
     return await this.execGit(['fetch', 'origin']);
   }
@@ -195,6 +260,10 @@ class GitService {
     } else {
       return await this.execGit(['switch', '-c', targetBranch, '--track', `origin/${targetBranch}`]);
     }
+  }
+
+  async createAndSwitchBranch(newBranchName) {
+    return await this.execGit(['switch', '-c', newBranchName]);
   }
 
   async commitAndPush(message, branch) {
@@ -798,45 +867,102 @@ class SwitchBranchModal extends Modal {
 
     contentEl.createEl('h2', { text: '🔀 Cambio Branch Git' });
 
-    const status = await this.plugin.git.getStatus();
-    const draft = this.plugin.settings.draftBranch;
-    const prod = this.plugin.settings.defaultBranch;
+    const loadingEl = contentEl.createEl('div', { cls: 'qgm-info-card' });
+    loadingEl.innerHTML = '<span class="qgm-loading-spinner"></span> Scansione branch locali e remoti in corso...';
 
-    contentEl.createEl('div', {
-      text: `Branch corrente: ${status.branch}`,
-      cls: 'qgm-info-card'
-    });
+    const [status, branchData] = await Promise.all([
+      this.plugin.git.getStatus(),
+      this.plugin.git.getDetailedBranches()
+    ]);
+
+    loadingEl.remove();
+
+    // Card informativo
+    const infoCard = contentEl.createEl('div', { cls: 'qgm-info-card' });
+    const row1 = infoCard.createEl('div', { cls: 'qgm-info-row' });
+    row1.createEl('span', { text: 'Branch Attivo:', cls: 'qgm-info-label' });
+    row1.createEl('span', { text: `🌿 ${branchData.currentBranch}`, cls: 'qgm-info-value qgm-badge-draft' });
+
+    const row2 = infoCard.createEl('div', { cls: 'qgm-info-row' });
+    row2.createEl('span', { text: 'Branch Rilevati:', cls: 'qgm-info-label' });
+    row2.createEl('span', { text: `${branchData.branches.length} branch totali nel repository`, cls: 'qgm-info-value' });
 
     if (!status.isClean) {
       const alertBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
       alertBox.innerHTML = `⚠️ <b>Modifiche locali non salvate (${status.files.length} file)</b>.<br>Cambiare branch con modifiche pendenti potrebbe causare conflitti. Si raccomanda di committare prima di cambiare branch.`;
     }
 
-    const switchContainer = contentEl.createEl('div', { cls: 'qgm-actions-list' });
+    contentEl.createEl('div', { text: 'Branch disponibili nel repository:', cls: 'qgm-info-label', attr: { style: 'margin-top: 10px;' } });
 
-    // Scelta Draft
-    new Setting(switchContainer)
-      .setName(`🌿 Branch: ${draft}`)
-      .setDesc('Branch di lavoro per appunti e bozze')
-      .addButton(btn => btn
-        .setButtonText(status.branch === draft ? 'Sei già qui' : `Passa a ${draft}`)
-        .setDisabled(status.branch === draft)
-        .onClick(async () => {
-          await this.performSwitch(draft);
-        })
-      );
+    // Lista Branch Dinamica
+    const branchListEl = contentEl.createEl('div', { cls: 'qgm-branch-list' });
 
-    // Scelta Default/Main
-    new Setting(switchContainer)
-      .setName(`🌿 Branch: ${prod}`)
-      .setDesc('Branch principale del repository')
-      .addButton(btn => btn
-        .setButtonText(status.branch === prod ? 'Sei già qui' : `Passa a ${prod}`)
-        .setDisabled(status.branch === prod)
-        .onClick(async () => {
-          await this.performSwitch(prod);
-        })
-      );
+    if (branchData.branches.length === 0) {
+      branchListEl.createEl('div', { text: 'Nessun branch rilevato.', cls: 'qgm-info-card' });
+    } else {
+      branchData.branches.forEach(b => {
+        const card = branchListEl.createEl('div', { cls: `qgm-branch-card ${b.isCurrent ? 'is-current' : ''}` });
+        
+        const info = card.createEl('div', { cls: 'qgm-branch-info' });
+        info.createEl('span', { text: `🌿 ${b.name}`, cls: 'qgm-branch-name' });
+
+        if (b.isCurrent) {
+          info.createEl('span', { text: 'Attivo', cls: 'qgm-tag qgm-tag-current' });
+        } else if (b.isLocal && b.isRemote) {
+          info.createEl('span', { text: 'Locale + origin', cls: 'qgm-tag qgm-tag-both' });
+        } else if (b.isLocal) {
+          info.createEl('span', { text: 'Solo Locale', cls: 'qgm-tag qgm-tag-local' });
+        } else if (b.isRemote) {
+          info.createEl('span', { text: 'Remoto origin', cls: 'qgm-tag qgm-tag-remote' });
+        }
+
+        const btn = card.createEl('button', {
+          text: b.isCurrent ? 'Attuale' : (b.isLocal ? 'Passa a questo' : 'Scarica e passa'),
+          cls: b.isCurrent ? '' : 'qgm-btn-success'
+        });
+
+        if (b.isCurrent) {
+          btn.disabled = true;
+        } else {
+          btn.addEventListener('click', async () => {
+            await this.performSwitch(b.name);
+          });
+        }
+      });
+    }
+
+    // Sezione Crea Nuovo Branch
+    const newBranchBox = contentEl.createEl('div', { cls: 'qgm-new-branch-box' });
+    newBranchBox.createEl('div', { text: 'Oppure crea e attiva un nuovo branch:', cls: 'qgm-info-label' });
+    
+    const newBranchRow = newBranchBox.createEl('div', { attr: { style: 'display: flex; gap: 8px; margin-top: 6px;' } });
+    const newBranchInput = newBranchRow.createEl('input', {
+      type: 'text',
+      placeholder: 'es. feature/nuovi-appunti',
+      attr: { style: 'flex: 1; padding: 6px;' }
+    });
+    
+    const createBtn = newBranchRow.createEl('button', { text: '➕ Crea & Passa' });
+    createBtn.addEventListener('click', async () => {
+      const newName = newBranchInput.value.trim().replace(/\s+/g, '-');
+      if (!newName) {
+        new Notice('Inserisci un nome valido per il nuovo branch.');
+        return;
+      }
+      createBtn.disabled = true;
+      createBtn.innerHTML = '<span class="qgm-loading-spinner"></span> Creazione...';
+
+      const res = await this.plugin.git.createAndSwitchBranch(newName);
+      if (res.success) {
+        new Notice(`✅ Creato e attivato nuovo branch: ${newName}!`, 5000);
+        this.plugin.refreshStatusBar();
+        this.close();
+      } else {
+        createBtn.disabled = false;
+        createBtn.innerText = '➕ Crea & Passa';
+        new Notice(`❌ Impossibile creare il branch:\n${res.stderr || res.error}`, 8000);
+      }
+    });
 
     const btnGroup = contentEl.createEl('div', { cls: 'qgm-button-group' });
     btnGroup.createEl('button', { text: 'Chiudi' }).addEventListener('click', () => this.close());
@@ -844,9 +970,8 @@ class SwitchBranchModal extends Modal {
 
   async performSwitch(targetBranch) {
     this.close();
-    new Notice(`🔄 Recupero info da origin e passaggio a ${targetBranch}...`, 3000);
+    new Notice(`🔄 Passaggio al branch ${targetBranch}...`, 3000);
     
-    await this.plugin.git.fetch();
     const switchRes = await this.plugin.git.switchBranch(targetBranch);
 
     if (switchRes.success) {
@@ -855,7 +980,7 @@ class SwitchBranchModal extends Modal {
 
       const pullRes = await this.plugin.git.pull(targetBranch);
       if (pullRes.success && !pullRes.stdout.includes('Already up to date')) {
-        new Notice(`📥 Branch ${targetBranch} sincronizzato con le ultime modifiche remote!`, 5000);
+        new Notice(`📥 Branch ${targetBranch} sincronizzato con le modifiche remote!`, 5000);
       }
     } else {
       new Notice(`❌ Errore durante il cambio branch:\n${switchRes.stderr || switchRes.error}`, 10000);
