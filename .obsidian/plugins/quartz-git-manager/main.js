@@ -1,16 +1,17 @@
 const { Plugin, PluginSettingTab, Setting, Modal, Notice } = require('obsidian');
 const { execFile } = require('child_process');
 const path = require('path');
+const fs = require('fs');
 
-// Default Settings
+// Impostazioni Predefinite
 const DEFAULT_SETTINGS = {
   defaultBranch: 'v4',
   draftBranch: 'draft',
   autoPullOnStartup: true,
   enableExitGuard: true,
-  warnOnProductionPush: true,
   autoCommitPrefix: 'Backup appunti: ',
-  customGitPath: ''
+  customGitPath: '',
+  warnOnLargeFiles: true
 };
 
 // ==========================================================
@@ -88,6 +89,8 @@ class GitService {
         ahead: 0,
         behind: 0,
         files: [],
+        hasConflicts: false,
+        largeFiles: [],
         rawError: res.stderr || res.error
       };
     }
@@ -95,7 +98,9 @@ class GitService {
     const lines = res.stdout.split('\n').map(l => l.trimEnd()).filter(Boolean);
     let ahead = 0;
     let behind = 0;
+    let hasConflicts = false;
     const files = [];
+    const largeFiles = [];
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -106,15 +111,45 @@ class GitService {
         if (behindMatch) behind = parseInt(behindMatch[1], 10);
       } else {
         const code = line.substring(0, 2);
-        const filePath = line.substring(3).trim();
-        let status = 'M';
-        if (code.includes('?')) status = '?';
-        else if (code.includes('A')) status = 'A';
-        else if (code.includes('D')) status = 'D';
-        else if (code.includes('U')) status = 'U';
-        else if (code.includes('M')) status = 'M';
+        let filePath = line.substring(3).trim();
+        if (filePath.startsWith('"') && filePath.endsWith('"')) {
+          filePath = filePath.slice(1, -1);
+        }
 
-        files.push({ code, status, path: filePath });
+        let status = 'M';
+        let statusLabel = 'Modificato';
+        if (code.includes('?')) {
+          status = '?';
+          statusLabel = 'Nuovo';
+        } else if (code.includes('A')) {
+          status = 'A';
+          statusLabel = 'Aggiunto';
+        } else if (code.includes('D')) {
+          status = 'D';
+          statusLabel = 'Eliminato';
+        } else if (code.includes('U') || code === 'AA' || code === 'DD') {
+          status = 'U';
+          statusLabel = 'Conflitto';
+          hasConflicts = true;
+        }
+
+        // Controllo dimensione file
+        if (this.plugin.settings.warnOnLargeFiles && status !== 'D') {
+          try {
+            const fullPath = path.join(this.vaultPath, filePath);
+            if (fs.existsSync(fullPath)) {
+              const stat = fs.statSync(fullPath);
+              const sizeMb = (stat.size / (1024 * 1024)).toFixed(1);
+              if (stat.size > 25 * 1024 * 1024) {
+                largeFiles.push({ path: filePath, sizeMb });
+              }
+            }
+          } catch (e) {
+            // Stat non critico
+          }
+        }
+
+        files.push({ code, status, statusLabel, path: filePath });
       }
     }
 
@@ -125,6 +160,8 @@ class GitService {
       ahead,
       behind,
       files,
+      hasConflicts,
+      largeFiles,
       rawError: null
     };
   }
@@ -168,9 +205,9 @@ class GitService {
 
     const commitRes = await this.execGit(['commit', '-m', message]);
     if (!commitRes.success) {
-      // Se non c'erano modifiche effettive
+      // Se non c'erano modifiche da committare ma ci sono commit pendenti
       if (commitRes.stdout.includes('nothing to commit') || commitRes.stderr.includes('nothing to commit')) {
-        // procediamo al push se ci sono commit pendenti
+        // ok, procediamo al push
       } else {
         return { success: false, step: 'git commit', error: commitRes.stderr || commitRes.error };
       }
@@ -182,6 +219,20 @@ class GitService {
     }
 
     return { success: true };
+  }
+
+  formatError(errText) {
+    if (!errText) return 'Errore sconosciuto durante l\'operazione Git.';
+    if (errText.includes('Could not resolve host') || errText.includes('Failed to connect') || errText.includes('Network is unreachable')) {
+      return '🌐 <b>Dispositivo Offline</b>: Connessione a GitHub non disponibile. Le modifiche rimangono salvate in locale sul tuo PC.';
+    }
+    if (errText.includes('Automatic merge failed') || errText.includes('conflict')) {
+      return '🛑 <b>Conflitto di Merge</b>: Sono presenti modifiche contrastanti tra locale e remoto. Risolvi i file in conflitto prima di procedere.';
+    }
+    if (errText.includes('Permission denied') || errText.includes('Authentication failed')) {
+      return '🔑 <b>Errore di Autenticazione</b>: Credenziali Git o chiave SSH non valide o scadute.';
+    }
+    return errText;
   }
 }
 
@@ -204,14 +255,14 @@ class QuartzGitManagerPlugin extends Plugin {
     });
 
     // Aggiunta icona Ribbon
-    this.addRibbonIcon('git-pull-request', 'Quartz & Git Manager', () => {
+    this.addRibbonIcon('git-pull-request', 'Git Sync Manager', () => {
       new MainManagerModal(this.app, this).open();
     });
 
     // Registrazione Comandi
     this.addCommand({
       id: 'open-manager',
-      name: 'Apri Gestore Quartz & Git',
+      name: 'Apri Pannello di Controllo Git Sync',
       callback: () => new MainManagerModal(this.app, this).open()
     });
 
@@ -223,19 +274,19 @@ class QuartzGitManagerPlugin extends Plugin {
 
     this.addCommand({
       id: 'commit-push',
-      name: 'Esegui Commit & Push',
+      name: 'Esegui Commit & Push delle note',
       callback: () => new CommitPushModal(this.app, this).open()
     });
 
     this.addCommand({
       id: 'switch-branch',
-      name: 'Cambia Branch (draft <-> v4)',
+      name: 'Cambia Branch di lavoro',
       callback: () => new SwitchBranchModal(this.app, this).open()
     });
 
     this.addCommand({
       id: 'view-status-log',
-      name: 'Mostra Stato Git & Log',
+      name: 'Mostra Stato Git & Cronologia Commit',
       callback: () => new StatusLogModal(this.app, this).open()
     });
 
@@ -253,8 +304,8 @@ class QuartzGitManagerPlugin extends Plugin {
       }
     }, 1500);
 
-    // Refresh periodico status bar (ogni 60s)
-    this.registerInterval(window.setInterval(() => this.refreshStatusBar(), 60000));
+    // Refresh periodico status bar (ogni 45s)
+    this.registerInterval(window.setInterval(() => this.refreshStatusBar(), 45000));
   }
 
   onunload() {
@@ -275,10 +326,9 @@ class QuartzGitManagerPlugin extends Plugin {
   setupExitGuard() {
     this.beforeUnloadHandler = (event) => {
       if (this.isClosing || !this.settings.enableExitGuard) {
-        return; // Permetti la chiusura immediata
+        return; // Permetti chiusura
       }
 
-      // Blocca la chiusura standard e verifica lo stato
       event.preventDefault();
       event.returnValue = '';
 
@@ -287,11 +337,11 @@ class QuartzGitManagerPlugin extends Plugin {
 
       this.git.getStatus().then((status) => {
         if (status.isClean && (!status.ahead || status.ahead === 0)) {
-          // Nessuna modifica né commit pendenti: chiudi in sicurezza
+          // Tutto pulito e sincronizzato
           this.isClosing = true;
           window.close();
         } else {
-          // Modifiche presenti o commit da inviare: apri il modal di blocco
+          // Modifiche locali o commit in sospeso
           new ExitGuardModal(this.app, this, status).open();
         }
       }).catch(() => {
@@ -310,27 +360,23 @@ class QuartzGitManagerPlugin extends Plugin {
 
     if (!status.success) {
       this.statusBarEl.createEl('span', {
-        text: '⚠️ Git: Non rilevato',
+        text: '⚠️ Git: Errore stato',
         cls: 'qgm-badge-draft'
       });
       return;
     }
 
-    const isProd = (status.branch.toLowerCase() === this.settings.defaultBranch.toLowerCase());
     const isClean = status.isClean;
 
     // Dot
-    const dot = this.statusBarEl.createEl('span', {
+    this.statusBarEl.createEl('span', {
       cls: `qgm-status-dot ${isClean ? 'clean' : 'dirty'}`
     });
 
-    // Badge Branch
-    const icon = isProd ? '🚀 ' : '🌿 ';
-    const modeLabel = isProd ? `PROD (${status.branch})` : status.branch;
-
-    const label = this.statusBarEl.createEl('span', {
-      text: `${icon}${modeLabel}`,
-      cls: isProd ? 'qgm-badge-prod' : 'qgm-badge-draft'
+    // Label Branch
+    this.statusBarEl.createEl('span', {
+      text: `🌿 ${status.branch}`,
+      cls: 'qgm-badge-draft'
     });
 
     if (!isClean) {
@@ -340,53 +386,78 @@ class QuartzGitManagerPlugin extends Plugin {
       });
     }
 
+    if (status.behind > 0) {
+      this.statusBarEl.createEl('span', {
+        text: ` ↓${status.behind}`,
+        cls: 'qgm-badge-prod',
+        attr: { title: `${status.behind} commit da scaricare dal server (esegui pull)` }
+      });
+    }
+
     if (status.ahead > 0) {
       this.statusBarEl.createEl('span', {
         text: ` ↑${status.ahead}`,
+        cls: 'qgm-badge-draft',
+        attr: { title: `${status.ahead} commit locali non ancora inviati` }
+      });
+    }
+
+    if (status.hasConflicts) {
+      this.statusBarEl.createEl('span', {
+        text: ' 🛑 CONFLITTO',
         cls: 'qgm-badge-prod'
       });
     }
 
-    this.statusBarEl.setAttribute('title', `Quartz Manager\nBranch: ${status.branch}\nStato: ${isClean ? 'Pulito' : status.files.length + ' file modificati'}\nClicca per aprire il menu.`);
+    this.statusBarEl.setAttribute(
+      'title',
+      `Git Sync Manager\nBranch: ${status.branch}\nStato: ${isClean ? 'Working tree pulito' : status.files.length + ' file con modifiche'}\nSincronizzazione: ↑${status.ahead} da inviare, ↓${status.behind} da scaricare\nClicca per aprire il menu rapido.`
+    );
   }
 
   async runStartupAutoPull() {
     const status = await this.git.getStatus();
     if (!status.success) {
-      new Notice(`⚠️ [Quartz Manager] Impossibile verificare lo stato Git all'avvio:\n${status.rawError}`, 8000);
+      new Notice(`⚠️ [Git Sync] Impossibile verificare lo stato Git all'avvio:\n${status.rawError}`, 8000);
       return;
     }
 
     if (!status.isClean) {
-      new Notice(`⚠️ [Quartz Manager] Modifiche locali rilevate (${status.files.length} file). Pull all'avvio sospeso per prevenire conflitti.`, 8000);
+      new Notice(`⚠️ [Git Sync] Rilevate ${status.files.length} modifiche locali. Pull all'avvio sospeso per proteggere il tuo lavoro locale.`, 8000);
       return;
     }
 
-    new Notice(`🔄 [Quartz Manager] Controllo aggiornamenti per origin/${status.branch}...`, 2500);
+    if (status.hasConflicts) {
+      new Notice(`🛑 [Git Sync] ATTENZIONE: Sono presenti file in conflitto non risolti!`, 10000);
+      return;
+    }
+
+    new Notice(`🔄 [Git Sync] Controllo aggiornamenti su origin/${status.branch}...`, 2500);
     const pullRes = await this.git.pull(status.branch);
 
     if (pullRes.success) {
       if (pullRes.stdout.includes('Already up to date')) {
-        new Notice(`✅ [Quartz Manager] Vault già aggiornato (${status.branch}).`, 3000);
+        new Notice(`✅ [Git Sync] Vault aggiornato (${status.branch}).`, 3000);
       } else {
-        new Notice(`📥 [Quartz Manager] Nuove note sincronizzate con successo da origin/${status.branch}!`, 6000);
+        new Notice(`📥 [Git Sync] Nuove note scaricate con successo da origin/${status.branch}!`, 6000);
       }
       this.refreshStatusBar();
     } else {
-      new Notice(`❌ [Quartz Manager] Errore sincronizzazione all'avvio:\n${pullRes.stderr || pullRes.error}`, 10000);
+      const formatted = this.git.formatError(pullRes.stderr || pullRes.error);
+      new Notice(`⚠️ [Git Sync] Sincronizzazione all'avvio non riuscita:\n${pullRes.stderr || pullRes.error}`, 9000);
     }
   }
 
   async executePull() {
     const branch = await this.git.getCurrentBranch();
-    new Notice(`🔄 [Quartz Manager] Pull da origin/${branch} in corso...`);
+    new Notice(`🔄 [Git Sync] Pull da origin/${branch} in corso...`);
     const pullRes = await this.git.pull(branch);
 
     if (pullRes.success) {
-      new Notice(`✅ [Quartz Manager] Pull completato su ${branch}:\n${pullRes.stdout}`);
+      new Notice(`✅ [Git Sync] Pull completato su ${branch}!`);
       this.refreshStatusBar();
     } else {
-      new Notice(`❌ [Quartz Manager] Errore durante il pull:\n${pullRes.stderr || pullRes.error}`, 10000);
+      new Notice(`❌ [Git Sync] Errore durante il pull:\n${pullRes.stderr || pullRes.error}`, 10000);
     }
   }
 }
@@ -405,11 +476,27 @@ class MainManagerModal extends Modal {
     contentEl.empty();
     contentEl.addClass('qgm-modal');
 
-    contentEl.createEl('h2', { text: '⚡ Quartz & Git Sync Manager' });
+    contentEl.createEl('h2', { text: '⚡ Git Sync Manager' });
 
     const status = await this.plugin.git.getStatus();
-    const isProd = (status.branch.toLowerCase() === this.plugin.settings.defaultBranch.toLowerCase());
-    const isDraft = (status.branch.toLowerCase() === this.plugin.settings.draftBranch.toLowerCase());
+
+    // Avviso Conflitti
+    if (status.hasConflicts) {
+      const conflictBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-danger' });
+      conflictBox.innerHTML = '🛑 <b>CONFLITTO DI MERGE RILEVATO</b>: Ci sono note con conflitti non risolti. Apri i file contrassegnati e rimuovi i marcatori di conflitto prima di sincronizzare.';
+    }
+
+    // Avviso Remote Ahead (Behind)
+    if (status.behind > 0) {
+      const behindBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
+      behindBox.innerHTML = `⚠️ <b>Repository Remoto più Recente</b>: Ci sono <b>${status.behind} commit</b> sul server da scaricare.<br>💡 <i>Consiglio: Esegui prima un <b>Pull</b> per evitare divergenze.</i>`;
+    }
+
+    // Avviso File Grandi
+    if (status.largeFiles && status.largeFiles.length > 0) {
+      const largeBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
+      largeBox.innerHTML = `⚠️ <b>File Pesanti Rilevati (>25MB)</b>:<br>` + status.largeFiles.map(f => `• <code>${f.path}</code> (${f.sizeMb} MB)`).join('<br>');
+    }
 
     // Card informativo
     const infoCard = contentEl.createEl('div', { cls: 'qgm-info-card' });
@@ -419,48 +506,35 @@ class MainManagerModal extends Modal {
     row1.createEl('span', { text: this.plugin.app.vault.getName(), cls: 'qgm-info-value' });
 
     const row2 = infoCard.createEl('div', { cls: 'qgm-info-row' });
-    row2.createEl('span', { text: 'Branch Attuale:', cls: 'qgm-info-label' });
-    row2.createEl('span', {
-      text: `${isProd ? '🚀 ' : '🌿 '}${status.branch}`,
-      cls: `qgm-info-value ${isProd ? 'qgm-badge-prod' : 'qgm-badge-draft'}`
-    });
+    row2.createEl('span', { text: 'Branch Attivo:', cls: 'qgm-info-label' });
+    row2.createEl('span', { text: `🌿 ${status.branch}`, cls: 'qgm-info-value qgm-badge-draft' });
 
     const row3 = infoCard.createEl('div', { cls: 'qgm-info-row' });
-    row3.createEl('span', { text: 'Modalità:', cls: 'qgm-info-label' });
+    row3.createEl('span', { text: 'Stato File Locali:', cls: 'qgm-info-label' });
     row3.createEl('span', {
-      text: isProd ? 'PRODUZIONE (Push = deploy sito Quartz)' : (isDraft ? 'DRAFT (Bozze non pubblicate)' : 'Branch Personalizzato'),
+      text: status.isClean ? '🟢 Nessuna modifica locale (pulito)' : `🟠 ${status.files.length} file modificati/nuovi`,
       cls: 'qgm-info-value'
     });
 
     const row4 = infoCard.createEl('div', { cls: 'qgm-info-row' });
-    row4.createEl('span', { text: 'Stato Modifiche:', cls: 'qgm-info-label' });
-    row4.createEl('span', {
-      text: status.isClean ? '🟢 Nessuna modifica locale (pulito)' : `🟠 ${status.files.length} file modificati`,
-      cls: 'qgm-info-value'
-    });
-
-    if (status.ahead > 0 || status.behind > 0) {
-      const row5 = infoCard.createEl('div', { cls: 'qgm-info-row' });
-      row5.createEl('span', { text: 'Sincronizzazione Remota:', cls: 'qgm-info-label' });
-      row5.createEl('span', {
-        text: `${status.ahead > 0 ? `↑ ${status.ahead} commit da inviare ` : ''}${status.behind > 0 ? `↓ ${status.behind} commit da scaricare` : ''}`,
+    row4.createEl('span', { text: 'Sincronizzazione Server:', cls: 'qgm-info-label' });
+    if (status.ahead === 0 && status.behind === 0) {
+      row4.createEl('span', { text: '✅ Perfettamente allineato con origin', cls: 'qgm-info-value' });
+    } else {
+      row4.createEl('span', {
+        text: `${status.ahead > 0 ? `↑ ${status.ahead} commit da inviare  ` : ''}${status.behind > 0 ? `↓ ${status.behind} commit da scaricare` : ''}`,
         cls: 'qgm-info-value'
       });
-    }
-
-    if (isProd) {
-      const alertBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
-      alertBox.innerHTML = '⚠️ <b>Branch di Produzione Attivo</b>: Ricorda che inviare modifiche su questo branch aggiorna il sito web Quartz pubblico.';
     }
 
     // Bottoni Azioni
     const actionsContainer = contentEl.createEl('div', { cls: 'qgm-actions-list' });
 
     new Setting(actionsContainer)
-      .setName('📥 Sincronizza (Pull)')
+      .setName('📥 Sincronizza / Scarica (Pull)')
       .setDesc(`Scarica gli ultimi aggiornamenti da origin/${status.branch}`)
       .addButton(btn => btn
-        .setButtonText('Esegui Pull')
+        .setButtonText(status.behind > 0 ? `Esegui Pull (↓${status.behind})` : 'Esegui Pull')
         .setCta()
         .onClick(async () => {
           this.close();
@@ -469,11 +543,11 @@ class MainManagerModal extends Modal {
       );
 
     new Setting(actionsContainer)
-      .setName('📤 Commit & Push')
-      .setDesc('Salva e invia le modifiche sul branch corrente con protezione')
+      .setName('📤 Salva & Invia (Commit + Push)')
+      .setDesc('Crea un commit e carica le modifiche sul server')
       .addButton(btn => btn
         .setButtonText('Commit & Push')
-        .setClass(isProd ? 'qgm-btn-warning' : 'qgm-btn-success')
+        .setClass('qgm-btn-success')
         .onClick(() => {
           this.close();
           new CommitPushModal(this.app, this.plugin, status).open();
@@ -482,7 +556,7 @@ class MainManagerModal extends Modal {
 
     new Setting(actionsContainer)
       .setName('🔀 Cambia Branch')
-      .setDesc(`Passa rapidamente tra ${this.plugin.settings.draftBranch} e ${this.plugin.settings.defaultBranch}`)
+      .setDesc('Passa ad un altro branch locale o remoto')
       .addButton(btn => btn
         .setButtonText('Switch Branch')
         .onClick(() => {
@@ -492,8 +566,8 @@ class MainManagerModal extends Modal {
       );
 
     new Setting(actionsContainer)
-      .setName('📊 Stato Git & Storico Commit')
-      .setDesc('Visualizza i file modificati e gli ultimi commit registrati')
+      .setName('📊 Stato File & Cronologia Commit')
+      .setDesc('Visualizza nel dettaglio i file modificati e gli ultimi commit')
       .addButton(btn => btn
         .setButtonText('Vedi Dettagli')
         .onClick(() => {
@@ -504,8 +578,7 @@ class MainManagerModal extends Modal {
   }
 
   onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
+    this.contentEl.empty();
   }
 }
 
@@ -527,7 +600,6 @@ class CommitPushModal extends Modal {
     contentEl.createEl('h2', { text: '📤 Commit & Push delle Modifiche' });
 
     const status = this.preloadedStatus || await this.plugin.git.getStatus();
-    const isProd = (status.branch.toLowerCase() === this.plugin.settings.defaultBranch.toLowerCase());
 
     if (status.isClean && status.ahead === 0) {
       contentEl.createEl('div', {
@@ -539,9 +611,16 @@ class CommitPushModal extends Modal {
       return;
     }
 
-    if (isProd && this.plugin.settings.warnOnProductionPush) {
-      const prodWarning = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
-      prodWarning.innerHTML = `⚠️ <b>ATTENZIONE PUBBLICAZIONE QUARTZ</b>: Stai per effettuare il push sul branch <b>${status.branch}</b>.<br>Questo attiverà la GitHub Action e aggiornerà il tuo sito web online.`;
+    // Avviso se il remoto ha commit non scaricati
+    if (status.behind > 0) {
+      const behindAlert = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
+      behindAlert.innerHTML = `⚠️ <b>Attenzione</b>: Il server ha <b>${status.behind} commit</b> che non hai ancora scaricato.<br>Ti raccomandiamo di fare prima <b>Pull</b> per prevenire rifiuti di push o conflitti.`;
+    }
+
+    // Avviso file grandi
+    if (status.largeFiles && status.largeFiles.length > 0) {
+      const largeAlert = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
+      largeAlert.innerHTML = `⚠️ <b>File voluminosi inclusi</b>: ` + status.largeFiles.map(f => `<code>${f.path}</code> (${f.sizeMb}MB)`).join(', ');
     }
 
     // Lista file modificati
@@ -550,7 +629,7 @@ class CommitPushModal extends Modal {
       const fileList = contentEl.createEl('div', { cls: 'qgm-file-list' });
       status.files.forEach(f => {
         const item = fileList.createEl('div', { cls: 'qgm-file-item' });
-        item.createEl('span', { text: `[${f.status}]`, cls: `qgm-file-status qgm-status-${f.status}` });
+        item.createEl('span', { text: `[${f.statusLabel}]`, cls: `qgm-file-status qgm-status-${f.status}` });
         item.createEl('span', { text: f.path });
       });
     }
@@ -576,7 +655,7 @@ class CommitPushModal extends Modal {
 
     const submitBtn = btnGroup.createEl('button', {
       text: `Invia su origin/${status.branch}`,
-      cls: isProd ? 'qgm-btn-warning' : 'qgm-btn-success'
+      cls: 'qgm-btn-success'
     });
 
     submitBtn.addEventListener('click', async () => {
@@ -599,7 +678,8 @@ class CommitPushModal extends Modal {
         submitBtn.disabled = false;
         submitBtn.innerText = `Riprova Invio (${status.branch})`;
         const errBox = errorContainer.createEl('div', { cls: 'qgm-alert qgm-alert-danger' });
-        errBox.innerHTML = `<b>Errore durante ${res.step}:</b><br><pre style="white-space: pre-wrap; font-size: 11px;">${res.error}</pre>`;
+        const formattedErr = this.plugin.git.formatError(res.error);
+        errBox.innerHTML = `<b>Errore durante ${res.step}:</b><br>${formattedErr}<br><pre style="white-space: pre-wrap; font-size: 11px; margin-top: 6px;">${res.error}</pre>`;
       }
     });
   }
@@ -626,17 +706,15 @@ class ExitGuardModal extends Modal {
 
     contentEl.createEl('h2', { text: '🛑 Salvaguardia Chiusura: Modifiche Rilevate' });
 
-    const isProd = (this.status.branch.toLowerCase() === this.plugin.settings.defaultBranch.toLowerCase());
-
     const alertBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
-    alertBox.innerHTML = `Hai <b>${this.status.files.length} file modificati</b> o commit non inviati sul branch <b>${this.status.branch}</b>.<br>Vuoi salvare e sincronizzare prima di uscire da Obsidian?`;
+    alertBox.innerHTML = `Hai <b>${this.status.files.length} modifiche locali</b> o commit non inviati sul branch <b>${this.status.branch}</b>.<br>Vuoi salvare e sincronizzare su GitHub prima di chiudere Obsidian?`;
 
     // Lista file
     if (this.status.files.length > 0) {
       const fileList = contentEl.createEl('div', { cls: 'qgm-file-list' });
       this.status.files.forEach(f => {
         const item = fileList.createEl('div', { cls: 'qgm-file-item' });
-        item.createEl('span', { text: `[${f.status}]`, cls: `qgm-file-status qgm-status-${f.status}` });
+        item.createEl('span', { text: `[${f.statusLabel}]`, cls: `qgm-file-status qgm-status-${f.status}` });
         item.createEl('span', { text: f.path });
       });
     }
@@ -673,7 +751,7 @@ class ExitGuardModal extends Modal {
 
     const saveAndExitBtn = btnGroup.createEl('button', {
       text: `💾 Salva, Pusha ed Esci (${this.status.branch})`,
-      cls: isProd ? 'qgm-btn-warning' : 'qgm-btn-success'
+      cls: 'qgm-btn-success'
     });
 
     saveAndExitBtn.addEventListener('click', async () => {
@@ -684,7 +762,7 @@ class ExitGuardModal extends Modal {
 
       const res = await this.plugin.git.commitAndPush(msg, this.status.branch);
       if (res.success) {
-        new Notice('✅ Sincronizzazione completata! Chiusura di Obsidian in corso...', 2000);
+        new Notice('✅ Sincronizzazione completata! Chiusura di Obsidian...', 2000);
         this.plugin.isClosing = true;
         this.close();
         setTimeout(() => window.close(), 500);
@@ -692,7 +770,8 @@ class ExitGuardModal extends Modal {
         saveAndExitBtn.disabled = false;
         saveAndExitBtn.innerText = 'Riprova Salva & Push';
         const errBox = errorContainer.createEl('div', { cls: 'qgm-alert qgm-alert-danger' });
-        errBox.innerHTML = `<b>Errore durante il push (${res.step}):</b><br><pre style="white-space: pre-wrap; font-size: 11px;">${res.error}</pre>Puoi riprovare oppure scegliere "Esci senza inviare".`;
+        const formattedErr = this.plugin.git.formatError(res.error);
+        errBox.innerHTML = `<b>Errore durante il push (${res.step}):</b><br>${formattedErr}<br><pre style="white-space: pre-wrap; font-size: 11px; margin-top: 6px;">${res.error}</pre>Puoi riprovare oppure scegliere "Esci senza inviare".`;
       }
     });
   }
@@ -730,15 +809,15 @@ class SwitchBranchModal extends Modal {
 
     if (!status.isClean) {
       const alertBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
-      alertBox.innerHTML = `⚠️ <b>Modifiche locali non salvate (${status.files.length} file)</b>.<br>Cambiare branch con modifiche in sospeso potrebbe generare conflitti. Si raccomanda di committare prima di cambiare branch.`;
+      alertBox.innerHTML = `⚠️ <b>Modifiche locali non salvate (${status.files.length} file)</b>.<br>Cambiare branch con modifiche pendenti potrebbe causare conflitti. Si raccomanda di committare prima di cambiare branch.`;
     }
 
     const switchContainer = contentEl.createEl('div', { cls: 'qgm-actions-list' });
 
     // Scelta Draft
     new Setting(switchContainer)
-      .setName(`🌿 Branch Bozze: ${draft}`)
-      .setDesc('Ambiente di lavoro per appunti e bozze. Non pubblica online su Quartz.')
+      .setName(`🌿 Branch: ${draft}`)
+      .setDesc('Branch di lavoro per appunti e bozze')
       .addButton(btn => btn
         .setButtonText(status.branch === draft ? 'Sei già qui' : `Passa a ${draft}`)
         .setDisabled(status.branch === draft)
@@ -747,13 +826,12 @@ class SwitchBranchModal extends Modal {
         })
       );
 
-    // Scelta Produzione
+    // Scelta Default/Main
     new Setting(switchContainer)
-      .setName(`🚀 Branch Produzione: ${prod}`)
-      .setDesc('Branch principale. Il push su questo branch pubblica il sito web Quartz.')
+      .setName(`🌿 Branch: ${prod}`)
+      .setDesc('Branch principale del repository')
       .addButton(btn => btn
         .setButtonText(status.branch === prod ? 'Sei già qui' : `Passa a ${prod}`)
-        .setClass('qgm-btn-warning')
         .setDisabled(status.branch === prod)
         .onClick(async () => {
           await this.performSwitch(prod);
@@ -775,7 +853,6 @@ class SwitchBranchModal extends Modal {
       new Notice(`✅ Ora sei sul branch ${targetBranch}!`, 4000);
       this.plugin.refreshStatusBar();
 
-      // Proponi pull
       const pullRes = await this.plugin.git.pull(targetBranch);
       if (pullRes.success && !pullRes.stdout.includes('Already up to date')) {
         new Notice(`📥 Branch ${targetBranch} sincronizzato con le ultime modifiche remote!`, 5000);
@@ -816,7 +893,7 @@ class StatusLogModal extends Modal {
       const fileList = contentEl.createEl('div', { cls: 'qgm-file-list' });
       status.files.forEach(f => {
         const item = fileList.createEl('div', { cls: 'qgm-file-item' });
-        item.createEl('span', { text: `[${f.status}]`, cls: `qgm-file-status qgm-status-${f.status}` });
+        item.createEl('span', { text: `[${f.statusLabel}]`, cls: `qgm-file-status qgm-status-${f.status}` });
         item.createEl('span', { text: f.path });
       });
     }
@@ -858,11 +935,11 @@ class QuartzGitSettingTab extends PluginSettingTab {
     const { containerEl } = this;
     containerEl.empty();
 
-    containerEl.createEl('h2', { text: 'Impostazioni Quartz & Git Sync Manager' });
+    containerEl.createEl('h2', { text: 'Impostazioni Git Sync Manager' });
 
     new Setting(containerEl)
-      .setName('Branch di Produzione (Quartz)')
-      .setDesc('Il branch che attiva la pubblicazione online del sito web Quartz.')
+      .setName('Branch Principale')
+      .setDesc('Il branch principale di sincronizzazione (es. v4 o main).')
       .addText(text => text
         .setValue(this.plugin.settings.defaultBranch)
         .onChange(async (value) => {
@@ -873,7 +950,7 @@ class QuartzGitSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Branch Bozze (Draft)')
-      .setDesc('Il branch di lavoro per note e appunti privati/non pubblicati.')
+      .setDesc('Branch di lavoro alternativo per bozze e appunti separati.')
       .addText(text => text
         .setValue(this.plugin.settings.draftBranch)
         .onChange(async (value) => {
@@ -905,19 +982,19 @@ class QuartzGitSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName('Avviso di Sicurezza su Branch Produzione')
-      .setDesc('Mostra un banner in evidenza prima di confermare il push su produzione.')
+      .setName('Controllo File di Grandi Dimensioni (>25MB)')
+      .setDesc('Avvisa prima del commit se sono stati inseriti file pesanti che potrebbero rallentare il sync o essere rifiutati da GitHub.')
       .addToggle(toggle => toggle
-        .setValue(this.plugin.settings.warnOnProductionPush)
+        .setValue(this.plugin.settings.warnOnLargeFiles)
         .onChange(async (value) => {
-          this.plugin.settings.warnOnProductionPush = value;
+          this.plugin.settings.warnOnLargeFiles = value;
           await this.plugin.saveSettings();
         })
       );
 
     new Setting(containerEl)
       .setName('Prefisso Messaggio Commit Automatico')
-      .setDesc('Prefisso usato quando si effettua il salvataggio rapido (seguito da data e ora).')
+      .setDesc('Prefisso usato per il messaggio di salvataggio automatico (seguito da data e ora).')
       .addText(text => text
         .setValue(this.plugin.settings.autoCommitPrefix)
         .onChange(async (value) => {
