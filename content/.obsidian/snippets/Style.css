@@ -1,0 +1,493 @@
+/* ============================================================
+   🎨 TEMA PASTELLO - Override per Blue Topaz
+   ============================================================ */
+
+/* ============================================================
+   0. FONT PIÙ GRASSETTO PER LETTURA
+   ============================================================ */
+
+/* Testo normale più spesso in editing e reading */
+body {
+  --font-weight-normal: 600 !important;
+}
+
+.markdown-source-view,
+.markdown-preview-view,
+.markdown-rendered {
+  font-weight: 600 !important;
+}
+
+/* ============================================================
+   1. SFONDO GRIGIO + TESTO NERO SCURO
+   Lo sfondo principale è gestito tramite Style Settings
+   (data.json: background-*-bg-4-bt).
+   Qui mettiamo gli override supplementari.
+   ============================================================ */
+
+.theme-light {
+  /* Testo nero scuro */
+  --text-normal: #1a1a1a !important;
+  --text-muted: #4a4a4a !important;
+  --text-faint: #6a6a6a !important;
+  --text-folder-file: #1e1e1e !important;
+  --search-text: #1a1a1a !important;
+  --folder-title: #1a1a1a !important;
+
+  /* Bordi morbidi */
+  --background-modifier-border: #c8c8c8 !important;
+  --background-modifier-border-hr: #b8b8b8 !important;
+  --panel-border-color: #c0c0c0 !important;
+
+  /* Accent pastello (lavanda) */
+  --color-accent: #9b8ec4 !important;
+  --color-accent-2: #8a7db8 !important;
+  --interactive-accent: #9b8ec4 !important;
+  --interactive-accent-rgb: 155, 142, 196 !important;
+  --interactive-accent-hover: #8a7db8 !important;
+
+  /* Selezione testo */
+  --text-selection: #c3b8e855 !important;
+  --text-highlight-bg: #f0e6a040 !important;
+  --text-search-highlight-bg: #f0c6d0 !important;
+
+  /* Code blocks */
+  --background-code: #d8d8d880 !important;
+  --background-code-2: #cccccc70 !important;
+  --text-color-code: #b06020 !important;
+  --code-normal: #2a2a2a !important;
+
+  /* Blockquote */
+  --background-blockquote: #d0d0d040 !important;
+
+  /* Scrollbar */
+  --scrollbar-thumb-bg: #c0c0c0aa !important;
+  --scrollbar-active-thumb-bg: #b0b0b0cc !important;
+
+  /* Interactive elements */
+  --interactive-normal: #dcdcdc !important;
+  --interactive-hover: #d0d0d0 !important;
+
+  /* Table */
+  --table-background-color: #e0e0e060 !important;
+  --table-background-color-odd: #d8d8d850 !important;
+  --table-border-color: #b0b0b0 !important;
+
+  /* Embed */
+  --embed-color: #d4ccee20 !important;
+
+  /* Ribbon/Tab bar */
+  --ribbon-background: #d6d6d6 !important;
+  --ribbon-background-collapsed: #d6d6d6 !important;
+
+  /* Transparents */
+  --background-transparent-black-or-white-1: #e0e0e0b0 !important;
+  --background-transparent-black-or-white-2: #e4e4e4ca !important;
+  --background-transparent-black-or-white-3: #d8d8d891 !important;
+}
+
+/* ============================================================
+   2. HEADING PASTELLO — ogni livello un colore distinto
+   ============================================================ */
+
+.theme-light {
+  /* H1: Rosa pastello */
+  --h1-color: #d4829a !important;
+  /* H2: Arancione pesca pastello */
+  --h2-color: #d4a373 !important;
+  /* H3: Verde salvia pastello */
+  --h3-color: #8ab17d !important;
+  /* H4: Azzurro cielo pastello */
+  --h4-color: #7aaed4 !important;
+  /* H5: Lavanda pastello */
+  --h5-color: #a18cd1 !important;
+  /* H6: Giallo miele pastello */
+  --h6-color: #c9b458 !important;
+
+  /* Sfondi heading derivati */
+  --h1-bg-color: #d4829a18 !important;
+  --h2-bg-color: #d4a37318 !important;
+  --h3-bg-color: #8ab17d18 !important;
+  --h4-bg-color: #7aaed418 !important;
+  --h5-bg-color: #a18cd118 !important;
+  --h6-bg-color: #c9b45818 !important;
+  --inline-title-bg-color: #d4829a18 !important;
+}
+
+/* Heading in modalità reading */
+.theme-light .markdown-rendered h1,
+.theme-light .markdown-preview-view h1 {
+  color: #d4829a !important;
+}
+.theme-light .markdown-rendered h2,
+.theme-light .markdown-preview-view h2 {
+  color: #d4a373 !important;
+}
+.theme-light .markdown-rendered h3,
+.theme-light .markdown-preview-view h3 {
+  color: #8ab17d !important;
+}
+.theme-light .markdown-rendered h4,
+.theme-light .markdown-preview-view h4 {
+  color: #7aaed4 !important;
+}
+.theme-light .markdown-rendered h5,
+.theme-light .markdown-preview-view h5 {
+  color: #a18cd1 !important;
+}
+.theme-light .markdown-rendered h6,
+.theme-light .markdown-preview-view h6 {
+  color: #c9b458 !important;
+}
+
+/* Heading in modalità source/editing (CodeMirror 6) */
+.theme-light .cm-s-obsidian .cm-header-1,
+.theme-light .cm-header-1 {
+  color: #d4829a !important;
+}
+.theme-light .cm-s-obsidian .cm-header-2,
+.theme-light .cm-header-2 {
+  color: #d4a373 !important;
+}
+.theme-light .cm-s-obsidian .cm-header-3,
+.theme-light .cm-header-3 {
+  color: #8ab17d !important;
+}
+.theme-light .cm-s-obsidian .cm-header-4,
+.theme-light .cm-header-4 {
+  color: #7aaed4 !important;
+}
+.theme-light .cm-s-obsidian .cm-header-5,
+.theme-light .cm-header-5 {
+  color: #a18cd1 !important;
+}
+.theme-light .cm-s-obsidian .cm-header-6,
+.theme-light .cm-header-6 {
+  color: #c9b458 !important;
+}
+
+/* Inline title (titolo della nota in alto) */
+.theme-light .inline-title {
+  color: #d4829a !important;
+}
+
+/* ============================================================
+   3. FILE EXPLORER — Colori pastello
+   ============================================================ */
+
+/* Cartelle: icona e testo */
+.theme-light .nav-folder-title {
+  color: #7a6ea8 !important;
+}
+.theme-light .nav-folder-title .nav-folder-title-content {
+  color: #7a6ea8 !important;
+}
+
+/* Colore dell'icona chevron/freccia delle cartelle */
+.theme-light .nav-folder-title .nav-folder-collapse-indicator svg {
+  color: #a18cd1 !important;
+}
+
+/* File: testo */
+.theme-light .nav-file-title {
+  color: #5a7a8a !important;
+}
+.theme-light .nav-file-title .nav-file-title-content {
+  color: #5a7a8a !important;
+}
+
+/* Hover su file e cartelle */
+.theme-light .nav-file-title:hover,
+.theme-light .nav-folder-title:hover {
+  background-color: #c8bfe820 !important;
+}
+
+/* File/cartella attiva */
+.theme-light .nav-file-title.is-active {
+  background-color: #c8bfe830 !important;
+  color: #6a5e98 !important;
+}
+.theme-light .nav-file-title.is-active .nav-file-title-content {
+  color: #6a5e98 !important;
+}
+
+/* Cartella root */
+.theme-light .nav-folder.mod-root > .nav-folder-title {
+  color: #8a7db8 !important;
+}
+
+/* Tag pastello arcobaleno nell'explorer */
+.theme-light {
+  --tag1: #d4829a !important;
+  --tag2: #d4a373 !important;
+  --tag3: #8ab17d !important;
+  --tag4: #7aaed4 !important;
+  --tag5: #a18cd1 !important;
+}
+
+/* Tag badges inline */
+.theme-light .tag {
+  background-color: #c8bfe830 !important;
+  color: #7a6ea8 !important;
+  border: 1px solid #c8bfe850 !important;
+}
+
+/* Stags (tag speciali) */
+.theme-light {
+  --stag1: #e8a0b0 !important;
+  --stag1-bg: #d4829a !important;
+  --stag2: #e8c08a !important;
+  --stag2-bg: #d4a373 !important;
+  --stag3: #a0cca0 !important;
+  --stag3-bg: #8ab17d !important;
+}
+
+/* ============================================================
+   4. LINK PASTELLO
+   ============================================================ */
+
+.theme-light {
+  --internal-link-color: #9b8ec4 !important;
+  --external-link-color: #7aaed4 !important;
+}
+.theme-light a.internal-link {
+  color: #9b8ec4 !important;
+}
+.theme-light a.external-link {
+  color: #7aaed4 !important;
+}
+
+/* ============================================================
+   5. LISTE — marker pastello
+   ============================================================ */
+
+.theme-light {
+  --list-ul-block-color: #d4a373 !important;
+  --list-ul-disc-color: #d4a373 !important;
+  --list-ul-hover: #c89060 !important;
+  --list-ol-block-color: #7aaed4 !important;
+  --list-ol-hover: #6898c0 !important;
+  --list-marker-color-collapsed: #a18cd1 !important;
+}
+
+/* ============================================================
+   6. GRAPH VIEW — Colori pastello
+   ============================================================ */
+
+.theme-light {
+  --graph-text-color: #5a5a5a !important;
+  --graph-tag: #8ab17dcc !important;
+  --graph-attach: #7aaed4cc !important;
+  --graph-circle: #9b8ec4cc !important;
+  --graph-line: #c0c0c0 !important;
+  --graph-unresolved: #d4829acc !important;
+  --graph-arrow: #d4a373 !important;
+}
+
+/* ============================================================
+   7. CALLOUT PASTELLO 🎯
+   Ogni tipo di callout ha il suo colore pastello distinto.
+   Il formato è RGB (r, g, b) perché Obsidian lo usa per
+   generare automaticamente sfondo, bordo e icona.
+   ============================================================ */
+
+/* 📝 NOTE — Azzurro cielo pastello */
+.theme-light .callout[data-callout="note"] {
+  --callout-color: 122, 174, 212 !important;
+}
+
+/* 📋 ABSTRACT / SUMMARY / TLDR — Verde menta pastello */
+.theme-light .callout[data-callout="abstract"],
+.theme-light .callout[data-callout="summary"],
+.theme-light .callout[data-callout="tldr"] {
+  --callout-color: 130, 195, 170 !important;
+}
+
+/* ℹ️ INFO — Azzurro pervinca pastello */
+.theme-light .callout[data-callout="info"] {
+  --callout-color: 130, 160, 210 !important;
+}
+
+/* 🔥 TIP / HINT / IMPORTANT — Lavanda pastello */
+.theme-light .callout[data-callout="tip"],
+.theme-light .callout[data-callout="hint"],
+.theme-light .callout[data-callout="important"] {
+  --callout-color: 161, 140, 209 !important;
+}
+
+/* ✅ SUCCESS / CHECK / DONE — Verde salvia pastello */
+.theme-light .callout[data-callout="success"],
+.theme-light .callout[data-callout="check"],
+.theme-light .callout[data-callout="done"] {
+  --callout-color: 138, 177, 125 !important;
+}
+
+/* ❓ QUESTION / FAQ / HELP — Giallo miele pastello */
+.theme-light .callout[data-callout="question"],
+.theme-light .callout[data-callout="faq"],
+.theme-light .callout[data-callout="help"] {
+  --callout-color: 201, 180, 88 !important;
+}
+
+/* ⚠️ WARNING / CAUTION / ATTENTION — Arancione pesca pastello */
+.theme-light .callout[data-callout="warning"],
+.theme-light .callout[data-callout="caution"],
+.theme-light .callout[data-callout="attention"] {
+  --callout-color: 212, 163, 115 !important;
+}
+
+/* 🚫 FAILURE / FAIL / MISSING — Rosa salmone pastello */
+.theme-light .callout[data-callout="failure"],
+.theme-light .callout[data-callout="fail"],
+.theme-light .callout[data-callout="missing"] {
+  --callout-color: 200, 140, 140 !important;
+}
+
+/* ❌ DANGER / ERROR — Rosa pastello */
+.theme-light .callout[data-callout="danger"],
+.theme-light .callout[data-callout="error"] {
+  --callout-color: 212, 130, 154 !important;
+}
+
+/* 🐛 BUG — Rosa lampone pastello */
+.theme-light .callout[data-callout="bug"] {
+  --callout-color: 195, 125, 145 !important;
+}
+
+/* 📌 EXAMPLE — Malva/viola pastello */
+.theme-light .callout[data-callout="example"] {
+  --callout-color: 175, 150, 200 !important;
+}
+
+/* 💬 QUOTE / CITE — Grigio caldo pastello */
+.theme-light .callout[data-callout="quote"],
+.theme-light .callout[data-callout="cite"] {
+  --callout-color: 160, 155, 150 !important;
+}
+
+/* 📎 TODO — Azzurro pastello */
+.theme-light .callout[data-callout="todo"] {
+  --callout-color: 130, 180, 210 !important;
+}
+
+/* === Stile callout migliorato: sfondo più visibile + bordo colorato === */
+.theme-light .callout {
+  background-color: rgba(var(--callout-color), 0.10) !important;
+  border-left: 4px solid rgba(var(--callout-color), 0.6) !important;
+  border-radius: 6px !important;
+}
+
+/* Titolo callout: sfondo leggermente più saturo */
+.theme-light .callout .callout-title {
+  background-color: rgba(var(--callout-color), 0.12) !important;
+  color: #2a2a2a !important;
+}
+
+/* Icona callout */
+.theme-light .callout .callout-title .callout-icon .svg-icon {
+  color: rgb(var(--callout-color)) !important;
+}
+
+/* ============================================================
+   8. CHECKBOX PASTELLO
+   ============================================================ */
+
+.theme-light input[type="checkbox"]:checked {
+  background-color: #9b8ec4 !important;
+  border-color: #9b8ec4 !important;
+}
+
+/* ============================================================
+   9. CALENDAR/DAY PLANNER PASTELLO
+   ============================================================ */
+
+.theme-light {
+  --calendar-week-color: #8ab17d !important;
+  --calendar-week-hover: #e8f0e4 !important;
+  --calendar-week-background-color: #d6e0d0 !important;
+  --calendar-today-background-color: #c8bfe840 !important;
+}
+
+/* ============================================================
+   10. TAB — Solo titoli pastello (sfondo originale Blue Topaz)
+   ============================================================ */
+
+/* Titolo tab inattivi — viola tenue */
+.theme-light .workspace-tab-header:not(.is-active) .workspace-tab-header-inner-title {
+  color: #8a7db8 !important;
+}
+
+/* Titolo tab attivo — lavanda piena */
+.theme-light .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: #7a6ea8 !important;
+}
+
+/* Icona tab attivo — lavanda */
+.theme-light .workspace-tab-header.is-active .workspace-tab-header-inner-icon svg {
+  color: #9b8ec4 !important;
+}
+
+/* ============================================================
+   11. CORSIVO / GRASSETTO / CORSIVO+GRASSETTO — Quadretti 🎯
+   (Mantenuti dalla configurazione originale)
+   ============================================================ */
+
+/* Corsivo: *testo* - verde pastello */
+body .markdown-source-view.mod-cm6 .cm-line .cm-em:not(.cm-strong),
+body .markdown-rendered em:not(strong em) {
+  color: #a9b665 !important;
+  font-style: italic !important;
+  font-weight: normal !important;
+}
+
+/* Grassetto: **testo** - arancione pastello */
+body .markdown-source-view.mod-cm6 .cm-line .cm-strong:not(.cm-em),
+body .markdown-rendered strong:not(em strong) {
+  color: #e6a85c !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+/* Corsivo + grassetto: ***testo*** - pesca/dorato */
+body .markdown-source-view.mod-cm6 .cm-line .cm-em.cm-strong,
+body .markdown-source-view.mod-cm6 .cm-line .cm-strong.cm-em,
+body .markdown-rendered em strong,
+body .markdown-rendered strong em {
+  color: #d8a657 !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+}
+
+/* ============================================================
+   12. TOOLTIP / POPUP PASTELLO
+   ============================================================ */
+
+.theme-light .tooltip {
+  background-color: #d6d6d6 !important;
+  color: #1a1a1a !important;
+  border: 1px solid #c0c0c0 !important;
+}
+
+/* ============================================================
+   13. SETTINGS / MODAL PASTELLO
+   ============================================================ */
+
+.theme-light .modal {
+  background-color: #e4e4e4 !important;
+  border: 1px solid #c0c0c0 !important;
+}
+.theme-light .setting-item {
+  border-top: 1px solid #d0d0d0 !important;
+}
+
+/* ============================================================
+   14. PROMPT / COMMAND PALETTE
+   ============================================================ */
+
+.theme-light .prompt {
+  background-color: #e4e4e4 !important;
+  border: 1px solid #c0c0c0 !important;
+}
+.theme-light .suggestion-item.is-selected {
+  background-color: #c8bfe830 !important;
+  color: #6a5e98 !important;
+}

@@ -208,7 +208,7 @@ Successivamente le candidate vengono classificate in:
 
 Il punto importante è che il metodo non termina con l'individuazione dei sostantivi: serve sempre una valutazione dell'analista.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p044-fig-043.png|500]]
+![[assets/p044-fig-043.png|500]]
 
 L'esempio dell'università mostra proprio questo passaggio: termini come `Course` o `Degree` possono diventare classi rilevanti, mentre concetti generici come `number` non lo diventano automaticamente.
 
@@ -237,7 +237,7 @@ In particolare, nel metodo presentato nel corso:
 
 Questo metodo funziona bene se i Use Case rappresentano in modo sufficientemente completo gli scenari del sistema.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p046-fig-046.png|500]]
+![[assets/p046-fig-046.png|500]]
 
 Nell'esempio del telemarketing, gli attori `Telemarketer` e `Supporter` diventano quindi classi rilevanti per il modello dei dati.
 
@@ -285,9 +285,9 @@ La risposta dipende dalla quantità di informazione e dal ruolo che quel concett
 
 Se un dato ha solo un valore semplice, può bastare un attributo. Se invece possiede una propria struttura, più proprietà e relazioni con altri oggetti, diventa più naturale modellarlo come classe.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p045-fig-044.png|500]]
+![[assets/p045-fig-044.png|500]]
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p045-fig-045.png|500]]
+![[assets/p045-fig-045.png|500]]
 
 Gli esempi Video Store e Contact Management mostrano proprio candidati che inizialmente vengono lasciati come **Fuzzy**, perché non è ancora chiaro se rappresentarli come classe autonoma oppure come attributo.
 
@@ -318,9 +318,9 @@ Gli attributi vengono aggiunti quando rappresentano informazioni necessarie a de
 
 Durante le iterazioni successive i requisiti possono far emergere nuovi attributi oppure mostrare che un concetto inizialmente pensato come attributo deve diventare una classe.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p047-fig-047.png|550]]
+![[assets/p047-fig-047.png|550]]
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p047-fig-048.png|550]]
+![[assets/p047-fig-048.png|550]]
 
 L'esempio universitario mostra questo raffinamento: nuove informazioni fanno evolvere il Class Diagram e alcuni concetti inizialmente incerti vengono promossi a vere classi.
 
@@ -335,7 +335,7 @@ Nel materiale compaiono anche annotazioni usate per esprimere proprietà partico
 
 Gli stereotipi `<<...>>` sono un meccanismo con cui UML può essere esteso per rappresentare informazioni specifiche di un dominio o di un profilo.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p048-fig-049.png|550]]
+![[assets/p048-fig-049.png|550]]
 
 ---
 
@@ -377,7 +377,7 @@ Il **role name** descrive il ruolo che gli oggetti assumono nell'associazione.
 
 È utile anche dal punto di vista implementativo, perché può corrispondere al nome del riferimento con cui un oggetto mantiene il collegamento verso l'altro.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p051-fig-052.png|650]]
+![[assets/p051-fig-052.png|650]]
 
 L'immagine mostra un modello in cui associazioni, molteplicità e role name vengono progressivamente specificati.
 
@@ -438,7 +438,7 @@ La differenza fondamentale da ricordare è quindi:
 - **Aggregation** → la parte può vivere anche senza il contenitore;
 - **Composition** → la parte dipende dal contenitore per la propria esistenza nel modello.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p053-fig-054.png|550]]
+![[assets/p053-fig-054.png|550]]
 
 L'esempio universitario mette a confronto i due casi: la carriera accademica può essere modellata come parte fortemente legata allo studente, mentre altre relazioni richiedono un legame meno forte.
 
@@ -481,7 +481,7 @@ Una classe astratta:
 - serve come livello generale della gerarchia;
 - non viene usata direttamente per creare oggetti concreti.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p048-fig-049.png|550]]
+![[assets/p048-fig-049.png|550]]
 
 Nel Video Store, classi generali permettono di raccogliere caratteristiche comuni dei diversi supporti, evitando di duplicare attributi e associazioni nelle classi concrete.
 
@@ -508,7 +508,7 @@ Può essere usato per:
 - mostrare come gli oggetti sono collegati in uno scenario specifico;
 - illustrare una configurazione del sistema in un dato istante.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p055-fig-055.png|500]]
+![[assets/p055-fig-055.png|500]]
 
 L'immagine mostra oggetti specifici dello scenario universitario e rende concrete relazioni che nel Class Diagram erano espresse a livello di classe.
 
@@ -602,17 +602,17 @@ Un attore più specifico:
 - eredita le possibilità di interazione dell'attore più generale;
 - può avere inoltre casi d'uso propri.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p056-fig-056.png|550]]
+![[assets/p056-fig-056.png|550]]
 
 Nell'esempio universitario si vedono sia `include` sia `extend`: il diagramma mostra quindi non solo quali servizi esistono, ma anche quali scenari sono obbligatoriamente collegati e quali si attivano soltanto in certi casi.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p057-fig-057.png|550]]
+![[assets/p057-fig-057.png|550]]
 
 L'esempio Contact Management mostra invece bene la generalizzazione tra attori con responsabilità differenti.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p058-fig-058.png|500]]
+![[assets/p058-fig-058.png|500]]
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p058-fig-059.png|650]]
+![[assets/p058-fig-059.png|650]]
 
 Gli esempi Video Store e Telemarketing evidenziano anche un punto importante: un attore può essere un dispositivo e un diagramma deve rendere chiaro quali attori attivano realmente ciascun caso d'uso.
 
@@ -687,15 +687,15 @@ Questa differenza è fondamentale:
 - **merge** → riunisce alternative;
 - **join** → sincronizza attività parallele.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p060-fig-060.png|650]]
+![[assets/p060-fig-060.png|650]]
 
 L'esempio del noleggio video mostra branch, cicli, fork e join all'interno dello stesso scenario.
 
 Nel materiale viene poi criticata una prima versione del diagramma perché alcune condizioni e sincronizzazioni non sono corrette. Questo è utile per capire che un Activity Diagram non serve solo a "disegnare frecce": deve rappresentare senza ambiguità il flusso reale.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p061-fig-061.png|450]]
+![[assets/p061-fig-061.png|450]]
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p061-fig-062.png|450]]
+![[assets/p061-fig-062.png|450]]
 
 Le versioni corrette mostrano meglio dove servono decisioni, merge e sincronizzazioni.
 
@@ -755,7 +755,7 @@ Il corso distingue:
 - **Signal** → comunicazione asincrona: il mittente invia il messaggio e può continuare l'esecuzione;
 - **Flat** → forma usata quando, durante la specifica, non è ancora stato deciso il tipo preciso di interazione.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p062-fig-063.png|600]]
+![[assets/p062-fig-063.png|600]]
 
 Il diagramma rende quindi visibile non solo chi comunica con chi, ma soprattutto **in quale ordine**.
 
@@ -794,7 +794,7 @@ Quindi:
 
 `messaggio ricevuto dall'oggetto -> operazione richiesta alla sua classe`
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p063-fig-064.png|700]]
+![[assets/p063-fig-064.png|700]]
 
 Nell'esempio universitario, se un oggetto `Student` riceve un messaggio come `areYouValid()`, allora la classe `Student` deve offrire quell'operazione.
 
@@ -816,9 +816,7 @@ Il principio di **Information Hiding** prevede che i dettagli interni vengano na
 L'**interfaccia pubblica della classe** è quindi l'insieme delle operazioni che la classe mette a disposizione degli altri oggetti.
 
 ## Accessor Methods
-
 Per leggere o modificare gli attributi si usano spesso metodi di accesso:
-
 - **getter** → restituisce il valore di un attributo;
 - **setter** → modifica il valore di un attributo.
 
@@ -890,13 +888,13 @@ Nel corso una transizione può essere descritta tramite:
 - **condizione** → vincolo che deve essere vero affinché il passaggio avvenga;
 - **azione** → attività eseguita in conseguenza della transizione.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-065.png|450]]
+![[assets/p065-fig-065.png|450]]
 
 Il diagramma distingue inoltre uno stato iniziale e uno stato finale.
 
 ## Esempio MovieTitle
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-066.png|650]]
+![[assets/p065-fig-066.png|650]]
 
 L'esempio del Video Store mostra come uno stesso oggetto `MovieTitle` possa passare tra stati come:
 
@@ -930,7 +928,7 @@ L'idea è organizzare gli elementi in gruppi e limitare le comunicazioni:
 
 In questo modo la struttura diventa più gestibile.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|500]]
+![[assets/p066-fig-067.png|500]]
 
 La figura confronta una rete di connessioni molto fitta con una struttura stratificata più controllata.
 
@@ -967,7 +965,7 @@ Le dipendenze possono rappresentare diversi tipi di accesso o uso e possono esse
 
 Il materiale sottolinea inoltre che i Package possono essere rappresentati all'interno di diagrammi come Class Diagram e Use Case Diagram: non vengono trattati come un formalismo completamente separato dagli altri modelli.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-068.png|550]]
+![[assets/p066-fig-068.png|550]]
 
 ---
 
@@ -1033,7 +1031,7 @@ Questo mantiene separate:
 - logica applicativa;
 - dati.
 
-![[content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-069.png|550]]
+![[assets/p066-fig-069.png|550]]
 
 L'idea è vicina alla separazione delle responsabilità che ritroviamo anche in architetture come MVC: i nomi e le regole non coincidono perfettamente, ma il principio comune è evitare che interfaccia, logica e dati diventino un unico blocco fortemente accoppiato.
 

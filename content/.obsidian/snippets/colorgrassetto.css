@@ -1,0 +1,21 @@
+/* Corsivo: *testo* - verde pastello */
+body .markdown-source-view.mod-cm6 .cm-line .cm-em:not(.cm-strong) {
+  color: #a9b665 !important;
+  font-style: italic !important;
+  font-weight: normal !important;
+}
+
+/* Grassetto: **testo** - arancione pastello */
+body .markdown-source-view.mod-cm6 .cm-line .cm-strong:not(.cm-em) {
+  color: #e6a85c !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+/* Corsivo + grassetto: ***testo*** - pesca/rosa tenue */
+body .markdown-source-view.mod-cm6 .cm-line .cm-em.cm-strong,
+body .markdown-source-view.mod-cm6 .cm-line .cm-strong.cm-em {
+  color: #d8a657 !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+}

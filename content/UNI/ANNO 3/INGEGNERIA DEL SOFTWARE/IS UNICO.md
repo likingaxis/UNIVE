@@ -892,3 +892,435 @@ SSA può essere descritto da 9 step principali
         - terminali;
         - dispositivi di output;
         - hardware necessario.
+# OOA e OOD
+Si parla sempre di specifica semi formale e di modelli che descrivono questa specifica
+
+Quando sviluppiamo un software seguendo il paradigma orientato agli oggetti dividiamo il lavoro in due fasi concettuali principali:
+- Object Oriented Analysis (OOA): definisce COSA il prodotto software deve fare
+- Object Oriented design (OOD): definisce COME il prodotto software lo deve fare
+
+In questa prima parte daremo un focus sulla OOA
+- un metodo OOA ha il seguente paradigma input e output
+	- in Input si hanno requisiti utente e informazioni raccolte durante la Requirements Engineering
+	- in output si fornisce un insieme di modelli del sistema che costituiscono la specifica software
+
+
+i modelli utilizzati per fare OOA devono dare tre viste dello stesso sistema
+- punto di vista della struttura dati -> quali oggetti esistono e come sono collegati
+- punto di vista comportamentale -> quali servizi devono essere offerti e come gli oggetti collaborano
+- punto di vista dinamico -> come alcuni oggetti cambiano durante l'esecuzione
+
+- si vuole precisare inoltre che la costruzione di questi modelli non avviene in modo sequenziale e rigido bensì segue la prassi
+	- iterativa dove i modelli vengono raffinati progressivamente
+	- incrementale dove a ogni iterazione vengono aggiunti nuovi dettagli
+	- parallela dove i modelli si influenzano a vicenda
+
+## UML (Unified Modelling Language)
+Prima di UML esistevano diversi metodi Object Oriented, ciascuno con proprie tecniche e notazioni.
+Il problema era che metodi differenti usavano simboli e notazioni differenti per rappresentare concetti simili.
+Da questa esigenza nasce **UML - Unified Modeling Language**.
+
+un linguaggio standard di modellazione visuale per sistemi orientati agli oggetti
+ci tengo a precisare che UML è un linguaggio con cui rappresentiamo graficamente il sistema seguendo nove formalismi fondamentali
+
+- Diagrammi Strutturali (Modello dei Dati e Architettura)
+	- Class Diagram
+		- rappresenta le classi i loro attributi le operazioni e le associazioni che le legano
+	- Object Diagram
+		- mostra una istantanea del sistema in un dato momento rappresentando specifici oggetti come (istanze delle classi) e i loro legami
+	- Component Diagram
+		- evidenzia struttura e dipendenze fisiche tra le varie componenti software
+	- Deployment Diagram
+		- mostra l'architettura fisica come i nodi di elaborazione (PC, Server) e come i componenti software sono installati su di essi
+- Diagrammi Comportamentali e Dinamici
+	- Use Case Diagram
+		- descrivono cosa fa il sistema dal punto di vista dell'utente mostrano le modalità(i casi d'uso) con cui gli utenti (attori) interagiscono con il sistema
+	- State Diagram
+		- mostrano la vita di un singolo oggetto illustrando tutti i suoi stati possibili e come transita da uno all'altro in risposta di eventi
+	- Activity Diagram
+		- simili a diagrammi di flusso usati per modellare sequenze di azioni (work-flow)
+	- Sequence Diagram
+		- diagrammi di interazione che mostrano lo scambio di messaggi tra oggetti nel tempo per realizzare un caso d'uso
+	- Collaboration Diagram
+		- diagrammi di interazione equivalenti ai sequence diagram ma si focalizzano sulle relazioni strutturali tra gli oggetti che comunicano anziché sul tempo
+### Modello dei Dati con il Class Diagram
+Il software nel paradigma Object Oriented è visto come un insieme di oggetti classificati che collaborano tra loro.
+ma prima di capire come lo fanno bisogna definire quali oggetti devono esistere cosa devono contenere e che relazioni hanno tra di loro
+Per questo è necessario il modello dei dati costruito tramite il Class Diagram
+
+per Classe si intende un insieme di oggetti dello stesso tipo specificano le caratteristiche comuni che possiedono
+un oggetto invece è una singola istanza concreta dela classe
+Nel Class Diagram una classe può contenere:
+- **nome**
+	- il nome della classe
+- **attributi**
+	- le informazioni che descrivono lo stato di un oggetto come `student_name` di una classe `student`
+- **operazioni**
+	- i servizi che gli oggetti della classe mettono a disposizione
+	- non si conoscono tutte subito quindi verranno aggiunge in seguito
+
+Quindi la costruzione del Class Diagram procede progressivamente:
+1. identificazione delle classi
+2. identificazione degli attributi
+3. identificazione delle associazioni
+4. successivamente, aggiunta delle operazioni
+
+inizialmente si identificano le Entity Classes le entità del dominio base come studente fattura ecc
+poi si aggiungono le Control Classes che gestiscono la logica
+poi si aggiungono le Boundary Classes che gestiscono le interazioni
+#### Identificazione delle Entity Classes
+Per individuare le classi non basta trasformare ogni sostantivo dei requisiti in una classe
+bisogna trovare concetti di dominio che il software deve rappresentare tramite oggetti
+
+ci sono diversi approcci per farlo ma sono tutti combinabili o alternative
+##### Noun Phase Approach
+Si parte dal testo dei requisiti e si individuano le frasi nominali in particolare i sostantivi
+Ogni sostantivo viene inizialmente trattato come classe candidata
+Successivamente le candidate vengono classificate in rilevanti non rilevanti o fuzzy(non si sa se sceglierle)
+![[assets/p044-fig-043.png|500]]
+
+L'esempio dell'università mostra proprio questo passaggio: termini come `Course` o `Degree` possono diventare classi rilevanti, mentre concetti generici come `number` non lo diventano automaticamente.
+
+##### Common Class Patterns Approach
+Questo approccio non inizia subito con la ricerca nei requisiti ma da categorie ricorrenti nel dominio ad esempio
+- Events
+- Organizations
+- People
+poi l'analista prende queste categorie e ne ricerca le classi può introdurre ambiguità ma non si basa solo sui requisiti
+##### Use Case Driven
+Le classi vengono cercate a partire dagli scenari descritti negli Use Case
+- gli attori individuati nei Use Case diventano automaticamente candidate Entity classes
+- il testo che descrive il caso d'uso viene poi analizzato per trovare altre classi
+
+
+![[assets/p046-fig-046.png|500]]
+
+Nell'esempio del telemarketing, gli attori `Telemarketer` e `Supporter` diventano quindi classi rilevanti per il modello dei dati
+
+##### CRC - Class Responsibility Collaborators
+il metodo CRC utilizza apposite card su cui vengono indicati 
+- il nome della classe
+- responsabilità della classe
+- classi con cui deve collaborare
+
+È particolarmente utile quando esiste già una prima idea delle classi e si vuole verificare se le responsabilità e le collaborazioni sono sensate.
+
+##### Approccio mixed
+Nella pratica è possibile combinare più tecniche.
+ad esempio
+1. prima identificazione tramite Common Class Patterns;
+2. aggiunta di altre classi tramite Noun Phrase e Use Case Driven;
+3. verifica delle responsabilità con CRC.
+
+Il vantaggio è che nessuna singola tecnica deve sostenere da sola tutto il lavoro di identificazione.
+
+#### Quando un concetto merita di diventare una classe
+Una classe candidata diventa una classe effettiva quando
+
+1. Deve avere uno **statement of purpose** chiaro: devi saper spiegare in una frase a cosa serve.
+2. Deve avere **più istanze** (oggetti). Se prevedi che ne esista solo una (singleton), solitamente non è una buona entity class.
+3. Deve avere un **insieme di attributi**. Se ha un solo attributo, probabilmente dovrebbe essere modellata come attributo di un'altra classe, non come classe a sé stante.
+4. Deve fornire **servizi/operazioni** (anche se all'inizio non li scrivi nel diagramma, devono essere deducibili dal suo scopo).
+#### Specifica delle classi
+una volta identificate le classi bisogna descriverle in modo coerente
+Nomi
+- **Nomi di classe:** Devono essere significativi nel dominio applicativo. È fondamentale adottare una convenzione standard:
+	- si usa il nome singolare, e se ci sono parole multiple si uniscono mettendo l'iniziale di ciascuna parola in maiuscolo (es. `PostalAddress`).
+- **Attributi:** All'inizio dell'analisi (OOA), ci concentriamo solo sugli attributi che definiscono stati di reale interesse per il sistema. 
+	- Anche qui serve una convenzione: si scrivono in minuscolo e le parole si separano con l'underscore (es. `street_name`).
+- **Operazioni:** Come accennato nella parte precedente, l'aggiunta delle operazioni (i metodi della classe) viene ritardata. 
+	- Si aspetta di avere a disposizione il _modello comportamentale_, perché è da lì (es. dai sequence diagram) che capiremo quali azioni la classe deve effettivamente compiere.
+
+![[assets/p047-fig-048.png|550]]
+
+L'esempio universitario mostra questo raffinamento: nuove informazioni fanno evolvere il Class Diagram e alcuni concetti inizialmente incerti vengono promossi a vere classi.
+in questo esempio qua sopra si può notare come vengono espresse alcune proprietà
+- `<<PK>>` → Primary Key;
+- `<<CK>>` → Candidate Key;
+- `/attributo` → **derived attribute**, valore calcolato invece di essere memorizzato direttamente;
+- `$ attributo` → attributo con **class/static scope**, condiviso dalle istanze della classe.
+
+Gli stereotipi `<<...>>` sono un meccanismo con cui UML può essere esteso per rappresentare informazioni specifiche di un dominio o di un profilo.
+
+#### Associazioni tra classi
+dobbiamo rappresentare come gli oggetti possono essere collegati tra loro
+una associazione è una relazione strutturale tra classi
+
+Un indizio importante è la presenza di un attributo il cui tipo non è un tipo elementare ma un'altra classe: in quel caso quell'informazione rappresenta concettualmente un legame tra oggetti
+- nome 
+	- della relazione
+- molteplicità alle estremità
+	- indica quante istanze di una classe possono essere collegate a una singola istanza dell'altra
+		- `1` → esattamente una;
+		- `0..1` → zero oppure una;
+		- `1..*` → almeno una;
+		- `0..*` oppure `*` → zero o più.
+- quando utile, role name
+	- descrive il ruolo che gli oggetti assumono nell'associazione
+
+L'immagine mostra un modello in cui associazioni, molteplicità e role name vengono progressivamente specificati.
+![[assets/p051-fig-052.png|650]]
+
+è importante in una relazione evitare associazioni ternarie dove una relazione coinvolge tre classi
+- bisogna trasformarla in una rete di associazioni binarie
+
+##### Relazioni di tipo Aggregation e Composition
+Alcune associazioni esprimono una relazione whole-part
+- servono a dire che un oggetto è formato da altri oggetti
+- si distingue un oggetto **whole** (“il tutto”) e uno o più oggetti **part** (“le parti”);
+	- esempio:
+	    - `Auto` = whole;
+	    - `Motore`, `Ruota`, `Sedile` = parti/componenti dell’auto.
+UML distingue due forme principali di relazioni di questo tipo
+- **Aggregation** 
+	- rappresentata con un rombo vuoto dalla parte del contenitore descrive una relazione debole
+	- la parte può esistere anche indipendentemente dal tutto
+	- tratta i casi di Has e Member
+- **Composition** 
+	- rappresentata con un rombo pieno dalla parte del contenitore
+	- se il tutto viene eliminato, anche la parte perde senso/esistenza nel modello
+	- tratta i casi di Owns e Exclusive Owns
+![[assets/p053-fig-054.png|550]]
+
+L'esempio universitario mette a confronto i due casi: la carriera accademica può essere modellata come parte fortemente legata allo studente, mentre altre relazioni richiedono un legame meno forte.
+##### Generalizzazione ed Ereditarietà 
+un altro tipo di relazione è la generalizzazione
+Si usa quando una classe più specifica rappresenta un caso particolare di una classe più generale.
+- classe generale → **superclasse**
+- classe specializzata → **sottoclasse**
+
+La sottoclasse eredita attributi e operazioni definiti nella superclasse e può aggiungerne di propri
+In UML si disegna con una linea continua che termina con una **freccia vuota** che punta verso la superclasse.
+
+Due concetti teorici fondamentali:
+- **Sostituibilità:** Un oggetto di una sottoclasse deve poter essere inserito ovunque il sistema si aspetti un oggetto della superclasse, senza far crollare nulla. 
+	- Esempio: se una funzione richiede un oggetto di tipo "Frutta", passargli un oggetto di tipo "Mela" (sottoclasse di Frutta) è perfettamente legale e il programma funzionerà.
+- **Polimorfismo:** La stessa operazione (metodo) definita nella superclasse può avere implementazioni (algoritmi) completamente differenti nelle sottoclassi.
+#### Object Diagram
+Dopo aver modellato le classi, può essere utile vedere un esempio concreto di oggetti realmente esistenti in un determinato momento
+
+L'**Object Diagram** rappresenta:
+- istanze di classi
+- valori o stato di oggetti specifici
+- collegamenti tra quelle istanze
+![[assets/p055-fig-055.png|393]]
+
+L'immagine mostra oggetti specifici dello scenario universitario e rende concrete relazioni che nel Class Diagram erano espresse a livello di classe.
+### Modello comportamentale
+Il Class Diagram ci dice quali oggetti possono esistere e come sono collegati ma non basta per spiegare come il sistema offre i propri servizi
+Un software Object Oriented funziona perché gli oggetti collaborano tra di loro
+Questa collaborazione avviene attraverso lo scambio di **messaggi**, cioè richieste con cui un oggetto chiede a un altro di eseguire una determinata operazione
+Per capire quali funzionalità deve offrire il sistema e come vengono realizzate dagli oggetti, passiamo quindi al **modello comportamentale**
+
+Il primo e più importante diagramma in questa fase è lo **Use Case Diagram**. In fase di OOA, si concentra su **COSA** il sistema deve fare creando scenari di funzionamento
+Il corso usa principalmente:
+
+- **Use Case Diagram** → quali scenari e servizi sono disponibili;
+- **Activity Diagram** → quale flusso di attività realizza uno scenario;
+- **Sequence Diagram** → come collaborano gli oggetti e in quale ordine temporale;
+- **Collaboration Diagram** → come collaborano gli oggetti mettendo in evidenza le loro relazioni.
+
+ogni livello aggiunge informazioni che possono ritornare a modificare il Class Diagram
+#### Use Case Diagram
+Un **Use Case** descrive uno scenario completo in cui un attore utilizza il sistema per ottenere un risultato significativo
+
+**Caratteristiche di un Caso d'Uso:**
+- Rappresenta una funzionalità completa e visibile dall'esterno (include il flusso principale, ma anche le alternative e le eccezioni).
+- È originato da un **Attore** (un utente umano, un device esterno, o un altro sistema).
+- Produce sempre un risultato _significativo_ e di valore per l'attore che lo ha attivato.
+- È ortogonale: in teoria, ogni caso d'uso viene eseguito in modo indipendente dagli altri.
+
+**Le Relazioni nello Use Case Diagram:**
+- **Associazione:** La linea semplice che collega l'omino (l'Attore) all'ovale (il Caso d'Uso).
+- **`<<include>>`:** Un caso d'uso "A" include un caso d'uso "B". 
+	- Significa che "B" è _obbligatorio e necessario_ per completare "A".
+		- _Esempio: Il caso d'uso "Preleva Contanti" include sempre "Verifica PIN"._
+- **`<<extend>>`:** Un caso d'uso "B" estende "A". 
+- Significa che "B" aggiunge un comportamento ad "A", ma è _opzionale_. 
+	- L'attivazione di "B" non è necessaria per far funzionare "A" con successo. 
+		- _Esempio: "Prenota Volo" può essere esteso da "Aggiungi Assicurazione di Viaggio"._
+- **Generalizzazione:** Come per le classi, un caso d'uso "padre" può avere casi d'uso "figli" più specifici, o un Attore generico (es. Utente) può essere specializzato (es. Amministratore).
+
+La differenza fondamentale è:
+- **include** → comportamento necessario
+- **extend** → comportamento eventuale
+
+![[assets/p056-fig-056.png|401]]
+
+Nell'esempio universitario si vedono sia `include` sia `extend`: il diagramma mostra quindi non solo quali servizi esistono, ma anche quali scenari sono obbligatoriamente collegati e quali si attivano soltanto in certi casi.
+![[assets/p057-fig-057.png|401]]
+
+L'esempio Contact Management mostra invece bene la generalizzazione tra attori con responsabilità differenti.
+La **generalizzazione** è nelle frecce con **triangolo vuoto** tra gli attori
+- ogni `Customer Services Employee` è anche un `Employee`
+- ogni `Customer Services Manager` è anche un `Customer Services Employee`, e quindi indirettamente anche un `Employee`
+
+Il diagramma individua **quali scenari esistono**, ma non descrive in dettaglio cosa accade durante l'esecuzione di ciascuno per farlo si possono fare due cose
+- descrizione **informale** in linguaggio naturale
+- descrizione più strutturata tramite **Activity Diagram**
+#### Activity Diagram
+Nel contesto dell'OOA viene usato soprattutto per descrivere **come si sviluppa il flusso di un singolo Use Case**
+i suoi elementi sono
+- **nodo iniziale** → punto di inizio del flusso;
+- **attività** → azione o passo che deve essere svolto;
+- **transizioni** → passaggio da un'attività alla successiva;
+- **nodo finale** → conclusione del flusso;
+- **guard condition** → condizione che stabilisce quando una transizione può essere percorsa;
+- **branch/merge** → gestione di flussi alternativi;
+- **fork/join** → gestione di flussi concorrenti.
+
+Il **branch** introduce un'alternativa:
+- da un punto partono più possibili percorsi
+- la condizione di guardia determina quale viene seguito
+Il **merge** riunisce flussi alternativi:
+- non aspetta che arrivino tutti
+- basta che arrivi il percorso effettivamente seguito
+
+Il **fork** crea flussi concorrenti:
+- da un unico flusso ne partono più di uno;
+- le attività possono procedere in parallelo.
+La **join** sincronizza flussi concorrenti:
+- aspetta che siano stati completati tutti i flussi richiesti;
+- solo dopo permette di proseguire.
+
+Questa differenza è fondamentale:
+- **merge** → riunisce alternative;
+- **join** → sincronizza attività parallele.
+
+![[assets/p060-fig-060.png|425]]
+
+L'esempio del noleggio video mostra branch, cicli, fork e join all'interno dello stesso scenario.
+L'Activity Diagram ci dice **quali attività devono essere svolte**
+Ma dobbiamo aggiungere come collaborano tra loro gli oggetti che si scambiano messaggi tra loro
+ci sono due diagrammi per rappresentare ciò:
+- **Sequence Diagram**
+- **Collaboration Diagram**
+
+#### Sequence Diagram
+È il più usato in fase di OOA. 
+Descrive lo scambio di messaggi tra gli oggetti seguendo un rigoroso **ordine temporale** (dall'alto verso il basso).
+- **Lifeline (Linea di vita):** Ogni oggetto è rappresentato in alto, con una linea tratteggiata verticale che scende verso il basso, a indicare il tempo che passa.
+- **Activation Box:** Sulla lifeline compare un rettangolino verticale stretto e lungo quando l'oggetto è "attivo", cioè sta eseguendo un'operazione.
+- **Messaggi:** Le frecce orizzontali tra le lifeline rappresentano i messaggi (che derivano dalle azioni dell'Activity Diagram). 
+	- Ogni messaggio inviato a un oggetto diventa automaticamente un metodo della classe di quell'oggetto
+	- Call il mittente invia una richiesta e attende una risposta prima di proseguire (sincrona)
+	- Signal il mittente invia il messaggio e può continuare l'esecuzione (asincrona)
+	- Flat quando ancora non è definita l'interazione
+
+Il diagramma rende quindi visibile non solo chi comunica con chi, ma soprattutto **in quale ordine**.
+
+![[Pasted image 20260420190701.png|525]]
+#### Collaboration Diagram
+Più usato in fase di OOD.
+Invece di avere la linea del tempo, mostra gli oggetti disposti nello spazio e collegati dalle relazioni strutturali che esistono tra loro.
+I messaggi viaggiano su questi collegamenti e sono numerati (1, 1.1, 1.2, 2...) per far capire in che ordine avvengono
+#### Interfaccia pubblica di una classe
+Una classe non dovrebbe permettere agli altri oggetti di modificare liberamente il proprio stato interno.
+Il principio di **Information Hiding** prevede che i dettagli interni vengano nascosti e che l'accesso avvenga attraverso operazioni controllate.
+L'**interfaccia pubblica della classe** è quindi l'insieme delle operazioni che la classe mette a disposizione degli altri oggetti
+
+mediante Accessor Methods
+- **getter** → restituisce il valore di un attributo;
+- **setter** → modifica il valore di un attributo.
+
+Per ogni operazione definiamo quindi soprattutto la **signature**:
+- nome;
+- parametri;
+- eventuale valore di ritorno.
+L'algoritmo interno verrà progettato successivamente in OOD
+
+Un'operazione può avere:
+- **Instance scope:** Il metodo agisce su un oggetto specifico (es. `MarioRossi.calcolaMedia()`).
+- **Class / Static scope:** Il metodo appartiene alla classe in generale, non a un singolo oggetto. 
+	- In UML si indica mettendo un `$` davanti al nome (es. `$trovaStudente()`).
+
+
+_Suggerimento Pratico:_ Oltre ai Sequence Diagram, per trovare le operazioni le classi devono rispettare il **criterio CRUD**. Ogni entità importante deve avere metodi per:
+- **C**reate (creare una nuova istanza)
+- **R**ead (leggere il suo stato)
+- **U**pdate (aggiornarne i dati)
+- **D**elete (eliminarla)
+#### State Diagram
+abbiamo definito
+- struttura degli oggetti → modello dei dati
+- servizi e collaborazioni → modello comportamentale
+Per descrivere come il loro stato cambia nel tempo per alcuni oggetti ad esempio per software real-time abbiamo
+**Stato**
+- Lo stato di un oggetto rappresenta una condizione in cui l'oggetto si trova e influisce sul suo comportamento
+**Transizione**
+- Una **transizione** rappresenta il passaggio da uno stato a un altro
+- descritta con evento condizione e azione
+
+![[assets/p065-fig-065.png|450]]
+#### Gestire la complessità dei modelli OOA
+Quando si progetta un sistema software reale, il Class Diagram diventa rapidamente un groviglio incomprensibile
+Se tutte le classi potessero comunicare liberamente con tutte le altre, il modello diventerebbe rapidamente difficile da comprendere e mantenere
+Per questo si introduce un principio di **stratificazione**
+Si organizzano gli elementi in gruppi e si limitano le comunicazioni
+- elementi dello stesso strato possono collaborare
+- gli strati comunicano secondo regole definite
+- si evitano collegamenti arbitrari tra ogni parte del sistema
+
+così diventa tutto più gestibile
+![[assets/p066-fig-067.png|500]]
+
+Per raggruppare fisicamente e logicamente queste classi, UML usa i **Package** (raffigurati come delle cartelline).
+- I package possono essere annidati l'uno dentro l'altro
+- Una classe appartiene a un solo package
+- La comunicazione tra package diversi è strettamente controllata tramite le regole di visibilità (private, protected, public) delle classi al loro interno
+- _Nota tecnica:_ Non esiste un vero e proprio "Package Diagram" ufficiale in UML, ma i package si disegnano direttamente all'interno dei Class Diagram o degli Use Case Diagram. Tra i package si possono definire relazioni di dipendenza (se modifico il Package A, potrei rompere il Package B).
+#### Approccio BCE
+Per organizzare le classi si classificano in tre categorie
+- Boundary
+	- Contiene le classi che si interfacciano con l'attore (l'utente o un sistema esterno). Queste classi prendono i dati dal sistema e li presentano all'utente (es. una pagina Web, una maschera di inserimento dati, un menu).
+- Control
+	- È il "cervello" operativo. Le classi di controllo intercettano gli input in arrivo dalle Boundary, applicano le regole di business e coordinano l'esecuzione dei casi d'uso. Dicono alle entità cosa fare.
+- Entity
+	- Contiene le entity classes vere e proprie che abbiamo visto all'inizio (il Modello dei Dati). Corrispondono alle strutture dati salvate nel database (es. `Studente`, `Corso`, `Fattura`).
+
+**Il flusso tipico è questo:** 
+L'Utente interagisce con una _Boundary_ -> 
+La Boundary passa il comando al _Control_ -> 
+Il Control applica la logica e legge/scrive i dati sulle _Entity_. 
+Questo isola i dati dall'interfaccia utente, rendendo il software manutenibile e scalabile
+`Actor <-> Boundary <-> Control <-> Entity`
+
+# Casi di studio
+## Caso di Studio A: University Enrolment (Sistema di Iscrizione Universitaria)
+
+Questo sistema deve gestire le iscrizioni di studenti a corsi di laurea (Undergraduate e Postgraduate), verificando propedeuticità, conflitti di orario e limiti di posti.
+### A.1 - Identificazione delle Classi (Approccio Noun Phrase)
+
+Partendo dai requisiti testuali (es. "Ogni corso di laurea ha corsi obbligatori ed elettivi"), si estraggono i sostantivi.
+- **Classi Rilevanti confermate:** `Course` (Corso), `Degree` (Corso di Laurea), `Student` (Studente), `CourseOffering` (L'erogazione di un corso in un dato semestre).
+- **Classi Fuzzy (Da rivedere):** `CompulsoryCourse` ed `ElectiveCourse` vengono per ora messe in sospeso, così come `StudyProgram`.
+### A.2 - Specifica degli Attributi
+
+Analizzando regole più specifiche (es. vincoli sui posti disponibili e approvazioni), le classi prendono forma.
+- Vengono assegnati gli attributi con i rispettivi tipi di dato. Ad esempio, `Course` riceve `course_code` (marcato come `<<PK>>`, Primary Key) e `credit_points`. `CourseOffering` riceve `year`, `semester` ed `enrolment_quota`.
+
+![[Pasted image 20260420185048.png|466]]
+### A.3 - Aggiunta delle Aggregazioni
+
+Il sistema richiede di mantenere uno storico accademico (`AcademicRecord`) e di sapere quale docente è responsabile di un corso (`AcademicInCharge`).
+- Si crea una **composizione** (rombo pieno, legame vitale) tra `Student` e `AcademicRecord`: lo storico non ha senso di esistere senza lo studente.
+- Si crea un'**aggregazione** (rombo vuoto) tra `Course` e `CourseOffering`: il corso logico "contiene" le sue edizioni annuali.
+
+![[Pasted image 20260420185527.png|441]]
+### A.5 - Use Case Diagram (Casi d'Uso)
+
+Si mappano gli attori e le loro azioni.
+- L'attore `Student` può "Fornire i risultati degli esami".
+- L'attore `Student Office` può "Fornire le istruzioni di iscrizione" (che **estende** `<<extend>>` il caso d'uso precedente, essendo un'azione opzionale).
+- L'inserimento del piano di studi (`Enter Program of Study`) **include** sempre `<<include>>` la sua validazione (`Validate Program of Study`).
+
+![[Pasted image 20260420185827.png|471]]
+### A.6 e A.7 - Sequence Diagram e Identificazione Operazioni
+
+Per capire come inserire un piano di studi, si modella l'interazione.
+- L'interfaccia invia il messaggio asincrono `add(std, crs, sem)` al sistema.
+- Si verificano i requisiti tramite chiamate sincrone come `areYouValid()` (inviata allo Studente) e `areYouOpen()` (inviata all'Offerta Formativa).
+- **Risultato (A.7):** Grazie a questi messaggi, nel Class Diagram compaiono finalmente i metodi! La classe `Course` riceve l'operazione `areYouOpen()`, e `CourseOffering` riceve `areYouOpen()` e `addStudent()`.
+
+![[Pasted image 20260420190733.png|452]]
+

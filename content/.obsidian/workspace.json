@@ -1,0 +1,288 @@
+{
+  "main": {
+    "id": "e8c9b69ebf7abc6d",
+    "type": "split",
+    "children": [
+      {
+        "id": "1ae0e4a28c00b311",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b5bed211a1006466",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "IS UNICO"
+            }
+          },
+          {
+            "id": "618b7cc389083c3a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/IS_andrea.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "IS_andrea"
+            }
+          },
+          {
+            "id": "0f6731c1a80e42f1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/COSA FARE.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "COSA FARE"
+            }
+          },
+          {
+            "id": "b90b8a6641610b1a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "IS ORGANIZZAZIONE"
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "4dcbd7a44bc18101",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fc3eabb32bfa568c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/16_agosto.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "16_agosto"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8c649e01d9c2039f",
+    "type": "split",
+    "children": [
+      {
+        "id": "05b4b8e318f008e1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "385e3b437a6aac05",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "50eb2a07bea6e603",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "byModifiedTime"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "5fe4e8fa2ced3fe5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 388.70001220703125
+  },
+  "right": {
+    "id": "0d2714675d21ba90",
+    "type": "split",
+    "children": [
+      {
+        "id": "f92aa19dde577a3d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cd7e105a778e6e24",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "UNI/ANNO 3/INFORMATION RETRIEVAL/LISTA INFORMATION RETRIEVAL.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for LISTA INFORMATION RETRIEVAL"
+            }
+          },
+          {
+            "id": "cdd16b129b4116b2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "2553af4684b6af5a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "f33eec74ebedd4f2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "UNI/ANNO 3/CALCOLO NUMERICO/ORALE/CN UNICO.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "webpage-html-export:Export as HTML": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "quartz-git-manager:Git Sync Manager": false
+    }
+  },
+  "active": "618b7cc389083c3a",
+  "lastOpenFiles": [
+    "UNI/ANNO 3/COSA FARE.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/IS_andrea.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/05. OOA.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/16_agosto.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/ISW.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/ORGANIZZAZIONE PROGETTO.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/6. (TODO) OOA - esercizio.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/02. Processo software.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/01. Introduzione.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/03. Requisiti software.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/04. Ingegneria dei requisiti.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/PDF/12-Metriche di struttura.pdf",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/PDF/Senza nome.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/PDF/09a-SOA_casestudy.pdf",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260430115826.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/PDF/04-Req Engineering.pdf",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260430105819.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260430103849.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260428102131.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260428101022.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260428095208.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260427182915.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260428095148.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260428095009.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini/Pasted image 20260428094834.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/PDF",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/Immagini",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/18. BP Simulation.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/17. M&S Intro.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/16. BPMN.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/15. BPM altro.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/15. BPM.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/14. Testing.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/13. Qualità del software.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/12. Metriche di struttura.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/11. (TODO) Design Pattern - esempi.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/10b. (TODO) Design Pattern - esercizi.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/09b. OOD.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/10a. Design Pattern.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI",
+    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/TEOREMI E DEFINIZIONI",
+    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/LEZIONI SPARSE",
+    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/ESEMPI DELLE LEZIONI",
+    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT"
+  ]
+}
