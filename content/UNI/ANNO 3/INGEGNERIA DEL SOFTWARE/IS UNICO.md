@@ -1324,3 +1324,441 @@ Per capire come inserire un piano di studi, si modella l'interazione.
 
 ![[Pasted image 20260420190733.png|452]]
 
+
+## Software Project Management
+prima di realizzare effettivamente il lavoro e sapere cosa bisogna fare è necessaria una parte che organizza il lavoro necessario per realizzarlo da questo nasce la Software Project Management ovvero la gestione del progetto software dove la pianificazione è una delle sue attività fondamentali
+
+Comprende la pianificazione, il monitoraggio e il controllo delle persone, delle attività e delle risorse coinvolte nello sviluppo del software
+la gestione di un progetto software viene ricondotta alle quattro P:
+- People
+	- organizzazione dei team responsabilità e comunicazione
+- Product
+	- comprendere obiettivi, funzioni, dati e caratteristiche
+- Process
+	- stabilisce il quadro generale secondo cui verrà sviluppato il prodotto definendo il modello e le attività del processo software
+- Project
+	- organizzazione concreta del lavoro comprende task, persone, tempi e costi
+
+Le quattro P sono collegate: non è possibile stimare correttamente tempi e costi senza conoscere il prodotto, il processo scelto e le persone che dovranno svolgere il lavoro
+### Organizzazione delle persone
+Non è detto che aggiungere persone a un progetto equivalga a ridurne la sua durata
+Il lavoro software richiede comunicazione, coordinamento e condivisione di decisioni. Se il numero di persone aumenta, aumentano anche le interazioni necessarie tra loro
+##### La legge di Brooks
+a tal proposito la seguente legge attesta che
+> aggiungere personale a un progetto software già in ritardo può farlo ritardare ulteriormente.
+
+Perché succede questo? Per i seguenti motivi:
+1. **Indivisibilità:** Non tutti i compiti possono essere parallelizzati (se un modulo dipende da un altro, devi aspettare che sia finito).
+2. **Overhead di interazione:** 4 persone devono parlarsi continuamente per integrare il loro lavoro. Aumentano i canali di comunicazione, aumentando la probabilità di incomprensioni ed errori.
+#### Due modelli di organizzazione del team
+Vengono presentati due approcci opposti utili per capire il trade-off tra collaborazione orizzontale e controllo gerarchico
+Team democratico
+- il modello democratico o orizzontale prevede alla base una idea di programmazione senza ego
+	- il codice è prodotto del team e la ricerca dei difetti non è una critica personale ma un modo per migliorarsi
+	- favorisce il confronto e la correzione degli errori ma può essere difficile da adattare e imporre
+Team con Chief Programmer
+- approccio gerarchico che riduce la complessità delle comunicazioni
+- ogni partecipante ha un suo ruolo specializzato e gli sviluppatori comunicano con un capo sviluppatore
+	- riduzione dei canali di comunicazione ma richiede persone estremamente competenti
+![[assets/p068-fig-070.png|385]]
+date le limitazioni viene poi evoluto il modello con una divisione delle responsabilità tra due team
+- team Leader per gli aspetti tecnici
+- team Manager per gli aspetti gestionali
+
+Si introducono quindi:
+- aree di responsabilità condivise;
+- livelli superiori di coordinamento;
+- canali di comunicazione tra team;
+- forme di *decision making* più decentralizzate.
+![[assets/p069-fig-071.png|700]]
+Il punto importante non è memorizzare un unico modello organizzativo “corretto”, ma capire che **la struttura del team influenza comunicazione, coordinamento e quindi tempi e costi del progetto**.
+
+### Che cosa deve stabilire una pianificazione
+L'**obiettivo** della pianificazione è avere un quadro di riferimento per controllare l'avanzamento dei lavori e rispettare costi, tempi e qualità. Si articola in 5 componenti fondamentali:
+1. **Scoping:** Comprendere a fondo il problema e tracciare i confini di ciò che va (e non va) sviluppato.
+2. **Stime:** Prevedere quanto tempo, costo ed _effort_ (sforzo umano) servirà.
+3. **Rischi:** Analizzare preventivamente cosa potrebbe andare storto e come gestirlo.
+4. **Schedule:** Allocare le risorse nel tempo e fissare i traguardi (milestone).
+5. **Control strategy:** Stabilire come gestire i cambiamenti dei requisiti (e ci saranno sempre) e il controllo qualità.
+
+Il Risk Management è già stato approfondito. Qui ci concentriamo soprattutto su **stime** e **pianificazione temporale**
+### Stime nei progetti software
+Una stima cerca di prevedere prima dello sviluppo una quantità che conosceremo con precisione più avanti
+le grandezze che si possono stimare sono
+- *dimensione del software*
+- *effort necessario*
+	- quantità complessiva di lavoro necessaria per svolgere un'attivita o sviluppare il prodotto spesso espresso in Man-Months per definire quante persone e quanti mesi di lavoro
+		- (10 mesi di lavoro di 1 persona è diverso da 10 mesi divisi in 2 persone)
+- *durata dello sviluppo*
+- *costo*
+le stime si vedono in 3 approcci principali
+- ***per analogia***
+- ***tecniche di scomposizione***
+- ***modelli algoritmici empirici***
+
+#### Per antologia
+- si confronta un nuovo progetto con progetti già fatti e si cercano caratteristiche in comune
+- se il nuovo progetto differisce allora diventa meno affidabile la stima sulle grandezze definite sopra
+#### tecniche di scomposizione
+- quando il progetto è troppo grande si applica un principio di divide et impera per calcolare delle sue stime
+	- si divide in parti più piccole
+	- si stima ogni parte
+	- si combinano le stime
+Il principio è *bottom-up*: si parte dai componenti per arrivare alla stima complessiva.
+Una tecnica mostrata negli appunti utilizza per ciascun componente:
+- **Estimated LOC** → righe di codice stimate;
+- **LOC/pm** → produttività, cioè quante linee di codice vengono prodotte mediamente in un mese-persona;
+- **$/LOC** → costo medio per linea di codice.
+calcolando così
+- **Effort**:
+
+$$Effort = \frac{Estimated\ LOC}{LOC/pm}$$
+- **Cost**:
+$$Cost = Estimated\ LOC \times \$/LOC$$
+
+![[assets/p070-fig-072.png|443]]
+
+problema: 
+bisogna stimare le LOC prima che il codice esista e inoltre dipende dal linguaggio di programmazione usato
+
+per questo viene usata una misura meno dipendente dal linguaggio usato
+
+##### Function Point
+cercano di misurare in modo pesato la dimensione funzionale del software a partire da ciò che il sistema deve fare attraverso le specifiche, che descrivono le funzionalità che il sistema dovrà offrire
+
+il conteggio avviene per 2 fasi:
+- calcolo del conteggio funzionale non aggiustato
+- correzione del valore considerando la complessità tecnica
+$$FP = UFC \times TCF$$
+- **UFC** considera la funzionalità;
+- **TCF — Technical Complexity Factor** corregge il valore tenendo conto della difficoltà tecnica.
+
+Per calcolare UFC vediamo il suo boundary ovvero il confine che separa il software dal mondo esterno considerando come
+***Dati***
+- *ILF*- Internal Logical Files
+	- le informazioni che il software gestisce internamente
+- *EIF*- External Interface Files
+	- gruppi logici di dati utilizzati dal sistema ma condivisi o gestiti attraverso altre applicazioni
+ricordando che file non è un singolo file nel file system ma Indica un **gruppo logico di informazioni correlate**
+
+***Interazioni con l'esterno***
+- EI- External Input
+	- dati di input che entrano nel software
+- EO- External Output
+	- dati che escono dal software
+- EQ- External Inquiry
+	- un input che genera immediatamente un output senza modificare archivi interni
+![[assets/p071-fig-073.png|600]]
+
+non è sufficiente contarli per ciascuno bisogna determinare una classe di complessità e si applica il peso previsto dalla tecnica
+
+![[assets/p073-fig-075.png|373]]
+La somma dei valori ponderati produce il conteggio non aggiustato **UFC**.
+Finora abbiamo però misurato soltanto **la complessità funzionale**
+Non abbiamo ancora considerato quanto il prodotto sia tecnicamente difficile da realizzare
+Il **TCF** tiene conto di fattori tecnici che possono rendere il sistema più o meno difficile da sviluppare.
+Gli appunti considerano **14 Degree of Influence**. Per ciascun fattore viene assegnato un valore da:
+- `0` → influenza irrilevante;
+- `5` → influenza essenziale.
+
+Il fattore complessivo viene calcolato attraverso la formula riportata negli appunti:
+![[assets/p074-fig-076.png|285]]
+Il TCF non sostituisce il conteggio funzionale: lo **aggiusta** in base alla difficoltà tecnica.
+
+##### Un ponte tra Functional Point e LOC il Backfiring
+Rimane però un'altra difficoltà: diversi modelli di stima utilizzano come input le **LOC**
+
+Il **Backfiring** utilizza tabelle empiriche che associano a ciascun linguaggio un numero indicativo di LOC per Function Point
+Questa conversione non rende FP e LOC la stessa misura:
+
+- FP misura la dimensione dal punto di vista della funzionalità;
+- LOC misura la dimensione del codice;
+- il backfiring permette di passare empiricamente dall'una all'altra quando un modello richiede LOC.
+![[assets/p074-fig-077.png|280]]
+
+
+Una volta ottenuta una stima dimensionale in LOC, possiamo usarla come input per un modello algoritmico. Negli appunti il modello principale è **COCOMO**
+
+#### modelli algoritmici empirici
+dopo aver definito le tecniche di scomposizione si usano algoritmi complessi per stimare effort
+##### Algoritmo COCOMO - COnstructive COst mOdel
+è un modello algoritmico empirico utilizzato per stimare l'effort di sviluppo
+dal quale poi si deriveranno a cascata la durata temporale del progetto e i costi di sviluppo
+
+Il COCOMO non è un modello unico, ma si divide in 3 livelli di precisione crescente:
+1. **Basic:** Usato per stime iniziali e molto grezze.
+2. **Intermediate:** Più preciso, si applica dopo aver scomposto il sistema in sotto-sistemi.
+3. **Advanced:** Il più dettagliato, si usa quando il sistema è già stato diviso in singoli moduli.
+
+La stima dipende anche dai modi di sviluppo
+- **Organic**
+	- prodotti piccoli
+- **Semidetached**
+	- prodotti di dimensione e difficoltà intermedie
+- **Embedded**
+	- prodotti complessi e con vincoli maggiori
+
+Quindi, prima di applicare la formula, bisogna stabilire:
+
+1. quale versione del modello si sta utilizzando;
+2. quale modo di sviluppo rappresenta il progetto;
+3. quante KLOC sono previste.
+dove per KLOC si intende una misura espressa come Kilo Lines of Code 
+- `20 KLOC` = circa `20 000 LOC`.
+
+l'effort si calcola a 2 livelli di precisione
+- ***Nominale***
+	- considera la dimensione ma non ha ancora tutte le caratteristiche specifiche del progetto
+	- si calcola con la formula $Effort_{nominale} = a \times (KLOC)^b$
+	- dove a e b sono il modello e il modo di sviluppo
+	- con risultato espresso in **Man-Months**
+- ***Cost Drivers***
+	- si corregge quello nominale tenendo conto di cose che possono cambiare anche se si ha la stessa quantità di codice
+	- si considerano 15 fattori suddivisi in gruppi relativi a:
+		- **Product**
+		- **Platform**
+		- **Personnel**
+		- **Project**
+	- ciascun fattore ha un punteggio e poi si calcola il fattore complessivo come prodotto dei singoli cost driver
+		- $C = \prod_i C_i$ e poi
+		- $Effort = Effort_{nominale} \times C$
+
+da questo deriviamo quindi l'effort che ci dice quanto lavoro complessivo abbiamo ma non ci dice ancora quanto tempo di calendario durerà il progetto
+
+COCOMO permette quindi di stimare anche la durata attraverso una relazione del tipo:
+$$Time = c \times Effort^d$$
+dove `c` e `d` dipendono dal modo di sviluppo.
+
+inoltre poi si può anche calcolare il costo basandosi su 
+$$Costo\ totale = \sum (Effort_{ruolo} \times Costo\ per\ MM_{ruolo})$$
+Manca però ancora una cosa: **disporre concretamente le attività nel tempo rispettando le loro dipendenze**
+#### Pianificazione temporale
+La **pianificazione temporale** organizza i task del progetto nel tempo
+i task non sono tutti indipendenti alcuni possono iniziare soltanto dopo che altri sono terminati
+la pianificazione deve considerare
+- **Ripartizione:** Dividere il problema grande in task piccoli (tecnica "Divide et Impera").
+- **Interdipendenza:** Capire cosa va fatto _prima_ di qualcos'altro (es. non posso testare il login se non ho creato il database).
+- **Allocazione:** Assegnare persone, sforzo e date di inizio/fine ai task.
+- **Responsabilità definite:** Individuazione delle responsabilità assegnate a ciascun task.
+- **Risultati previsti:** Definizione dei risultati prodotti al termine di ogni task.
+- **Milestone:** Fissare punti di controllo intermedi per verificare la qualità.
+
+Due strumenti complementari aiutano a rappresentare questa pianificazione: **PERT** e **Gantt**.
+
+##### PERT - Program Evaluation and Review Technique
+rappresenta i task e le loro dipendenze come una rete
+
+- i nodi rappresentano i task;
+- gli archi rappresentano i vincoli di precedenza.
+
+permette di capire quali attività possono procedere in parallelo e quali devono attendere il completamento di altre
+
+Il **cammino critico** è la sequenza di task che determina la durata minima possibile del progetto.
+
+Quindi PERT risponde bene alla domanda:
+
+> **quali dipendenze tra task condizionano la durata del progetto?**
+![[assets/p078-fig-080.png|600]]
+
+Non rende però altrettanto immediato capire **in quali date di calendario** si svolgono le singole attività.
+Per questo viene affiancato dal diagramma di Gantt.
+
+##### Diagramma di Gantt
+
+Il **Gantt** rappresenta le attività su una scala temporale calendariale.
+
+Permette di vedere:
+- quando inizia un task;
+- quando termina;
+- quanto dura;
+- quali attività si sovrappongono.
+
+![[Pasted image 20260421100613.png]]
+
+### Documento SPMP - Software Project Management Plan
+
+Tutte queste stime, i diagrammi di Gantt, l'organizzazione del team e i calcoli dei rischi, dove finiscono? Finiscono nel **Software Project Management Plan (SPMP)**. È il documento ufficiale che certifica il contratto operativo del progetto, coprendo: Scoping, Stime, Rischi, Schedule e Strategie di controllo.
+
+Un SPMP ben fatto (secondo la logica IEEE) è composto da queste anime:
+1. **Overview (Panoramica):** Qual è lo scopo del software, quali sono gli obiettivi, i vincoli (es. hardware limitato) e i "deliverable" (cosa consegneremo fisicamente al cliente: codice, manuali, ecc.).
+2. **Project Organization (Organizzazione):** Chi fa cosa. Interfacce interne (come comunicano i team) ed esterne (come comunichiamo col cliente), ruoli e responsabilità.
+3. **Managerial Process Plans (Piano Manageriale):** È il cuore gestionale. Contiene il piano di stima (COCOMO), il piano di assunzione del personale (Staffing), l'allocazione del budget e delle scadenze (Gantt), e il fondamentale piano di **gestione dei rischi**.
+4. **Technical Process Plans (Piano Tecnico):** Quali metodi, modelli di ciclo di vita (es. Waterfall, Agile), strumenti (IDE, framework) e infrastrutture fisiche useremo.
+5. **Supporting Process Plans (Piani di Supporto):** Include processi vitali che accompagnano lo sviluppo, come il **Configuration Management** (chi autorizza le modifiche al codice e come si gestiscono le versioni tramite Git/SVN), la Quality Assurance (QA) e i piani di Verifica e Validazione (Testing).
+## Progettazione Software
+dopo aver visto la pianificazione ora passiamo alla fase in cui si passa dal dominio del problema al dominio della soluzione
+
+L'input principale è il **Documento di Specifica**
+L'output è il **Documento di Progetto**
+
+La progettazione viene divisa in 2 livelli principali
+- Progetto architetturale o preliminare
+	- individua le componenti principali del sistema
+		- stabilisce come il prodotto viene suddiviso
+- Progetto Dettagliato
+	- entra all'interno delle singole componenti
+	- definisce strutture dati, algoritmi e dettagli necessari all'implementazione
+
+Prima di vedere tecniche specifiche di OOD e architetture, bisogna chiarire alcuni principi generali che guidano una buona progettazione
+
+Per affrontare la fase di progetto in modo ingegneristico e non improvvisato, ci affidiamo a sei principi fondamentali:
+- **Stepwise refinement (Raffinamento per passi successivi):** Utilizzato anche nella fase di analisi dei requisiti.
+- **Astrazione:** Anch'esso impiegato nell'analisi dei requisiti.
+- **Decomposizione modulare** 
+- **Modularità** 
+- **Information hiding (Occultamento delle informazioni)**
+- **Riusabilità**
+
+### Astrazione e Stepwise Refinement
+**Astrazione** significa concentrarsi esclusivamente sugli aspetti essenziali di una certa entità (un oggetto, un modulo), ignorando deliberatamente i dettagli secondari o implementativi.
+utilizziamo un'operazione sapendo:
+- cosa riceve
+- cosa produce
+- quale servizio offre
+si distinguono principalmente:
+- astrazione procedurale
+	- si considera un'operazione attraverso il servizio che offre
+- astrazione dei dati
+	- si lavora con una struttura dati attraverso le operazioni che mette a disposizione ma con una rappresentazione interna nascosta
+
+Lo **Stepwise Refinement** procede in modo complementare
+1. si parte da una descrizione ad alto livello;
+2. si sceglie una parte;
+3. si aggiungono dettagli;
+4. il processo viene ripetuto finché si raggiunge il livello necessario per l'implementazione.
+
+- l'astrazione permette di **salire** di livello e ignorare dettagli
+- il refinement permette di **scendere** progressivamente nei dettagli
+
+invece di trattare il software come un unico blocco, possiamo suddividerlo in parti più piccole
+### Modularità e decomposizione modulare
+La decomposizione modulare consiste nel suddividere il sistema in componenti più piccoli chiamati moduli
+ridurre la complessità rendendo possibile ragionare su una parte del sistema alla volta
+
+un modulo software è un'unità che contiene 
+- istruzioni 
+- logica di elaborazione 
+- strutture dati 
+che può inoltre 
+- essere compilato da solo 
+- essere incluso in un programma
+- utilizzare altri moduli
+
+Funzioni e classi sono esempi di elementi che possono svolgere il ruolo di modulo.
+
+La **modularità** indica il grado con cui il software è organizzato in componenti discrete tali che una modifica a un componente abbia un impatto limitato sugli altri.
+
+La decomposizione deve quindi puntare a creare moduli **quanto più indipendenti possibile**
+così facendo:
+- un modulo indipendente è più facile da comprendere
+- una modifica locale ha meno effetti sul resto del sistema
+- il testing è più gestibile
+- aumenta la possibilità di riutilizzo
+
+La suddivisione in moduli di un sistema software (**decomposizione modulare**) produce una mappa chiamata **structure chart** (architettura dei moduli), che descrive la struttura gerarchica dei moduli, come interagiscono tra loro e come i dati fluiscono attraverso di essi.
+
+> [!NOTE] Dimostrazione della decomposizione
+> Dati due problemi $p1$ e $p2$, $C$ la complessità ed $E$ lo sforzo (effort). 
+> Se $C(p1) > C(p2) \Rightarrow E(p1) > E(p2)$ (più complesso = più sforzo). 
+> Si afferma che la complessità del problema intero è maggiore della somma delle singole complessità: $C(p1+p2) > C(p1) + C(p2)$. 
+> Di conseguenza: $E(p1+p2) > E(p1) + E(p2)$. 
+> Questo dimostra che risolvere due problemi piccoli separatamente costa meno fatica che risolvere il problema intero in un colpo solo.
+> 
+![[assets/p082-fig-083.png|450]]
+
+Ma come possiamo capire se abbiamo suddiviso bene il sistema?
+Servono due criteri complementari:
+- **coesione** interna ai moduli
+- **coupling** tra moduli
+
+#### Coesione e Coupling
+La **coesione** misura quanto le attività contenute nello stesso modulo siano correlate tra loro.
+un modulo ad alta coesione
+- ha uno scopo chiaro
+- raggruppa attività strettamente connesse
+- è più facile da comprendere e modificare
+
+Si presentano sette livelli, dal peggiore al migliore
+1. **Coincidental (Casuale - Livello 1, Pessima):** Nessuna relazione concettuale tra gli elementi del modulo. Sono stati messi lì per caso o per pigrizia.
+    - _Esempio:_ Un modulo che stampa la riga successiva, inverte i caratteri di una stringa, aggiunge 7 a un parametro ed esegue una conversione int-double. Un vero "cestino" del codice.
+2. **Logical (Logica - Livello 2):** Gli elementi svolgono funzioni che rientrano nella stessa categoria logica generale, ed è il modulo chiamante che passa un flag per decidere quale pezzo di codice eseguire.
+    - _Esempio:_ Un "Super-modulo di Input/Output" che contiene il codice per leggere da disco, scrivere su nastro, stampare a video, ecc.. Fa troppe cose, anche se concettualmente simili.
+3. **Temporal (Temporale - Livello 3):** Le operazioni sono raggruppate perché devono essere eseguite nello stesso lasso di tempo, non perché abbiano un legame logico forte.
+    - _Esempio:_ Un modulo di inizializzazione generica che apre il file master, apre il file transazioni, apre le code di stampa, inizializza le tabelle, legge i primi record, ecc. all'avvio del programma.
+4. **Procedural (Procedurale - Livello 4):** Gli elementi sono raggruppati perché fanno parte di una specifica sequenza predefinita di esecuzione.
+    - _Esempio:_ Leggere il numero di serie di una parte dal database, e subito dopo usare quel numero per aggiornare il file di manutenzione. (Ottimale per il paradigma procedurale classico ).
+5. **Communicational (Comunicazionale - Livello 5):** Come la procedurale, ma con in più il fatto che i passi operano sulla _stessa struttura dati_ in ingresso o in uscita.
+    - _Esempio 1:_ Aggiornare il Record_A nel DB e poi scrivere lo stesso Record_A nel file di traiettoria.
+    - _Esempio 2:_ Calcolare una nuova traiettoria e poi inviarla alla stampante.
+6. **Informational (Informazionale - Livello 6):** Più operazioni indipendenti, ciascuna con il proprio punto di ingresso/uscita (entry/exit point), che manipolano e condividono la _stessa struttura dati_ nascosta.
+    - _Esempio:_ Definizione della tabella "sales_region". Sotto ci sono punti di accesso indipendenti per "Inizializza tabella", "Aggiorna tabella" e "Stampa tabella". (Ottimale per il paradigma Object-Oriented ).
+7. **Functional (Funzionale - Livello 7, Eccellente):** Tutti gli elementi del modulo contribuiscono ad una, e una sola, funzione ben definita.
+    - _Esempio in uno Structure Chart:_ Un modulo root "Calcola le temperature medie di vari siti" chiama dei sottomoduli. Sottomoduli funzionali sono "Leggi sito, orario e temperatura", "Crea nuovo record temperatura", "Salva record temperatura".
+
+- **Functional Cohesion** alla programmazione strutturata;
+- **Informational Cohesion** al paradigma Object Oriented.
+
+Il **coupling** misura il grado di dipendenza tra moduli differenti.
+con l'obiettivo di minimizzarlo
+
+Un coupling elevato significa che:
+- un modulo conosce molti dettagli di un altro
+- una modifica può propagarsi facilmente
+- comprendere un modulo richiede conoscere anche altri moduli
+
+Si presentano cinque livelli, dal peggiore al migliore
+1. **Content (di Contenuto - Livello 1, Pessimo):** Un modulo entra a gamba tesa nell'implementazione dell'altro. Modifica il contenuto di un altro modulo, legge le sue variabili locali tramite spostamenti in memoria (offset), o effettua salti (branch) verso label interne dell'altro modulo. È disastroso.
+2. **Common (Comune - Livello 2):** Due o più moduli accedono a variabili globali in memoria.
+    - _Esempio:_ Due moduli `cca` e `ccb` modificano e leggono una `global variable`. Un ciclo del tipo `while(global_variable == 0)` dipende totalmente da chi altro nel sistema la tocca.
+      ![[Pasted image 20260422175604.png|452]]
+      
+3. **Control (di Controllo - Livello 3):** Un modulo passa un "flag di controllo" ad un altro modulo per pilotarne esplicitamente l'esecuzione interna.
+    - _Esempio:_ Il Modulo P chiama Q per fargli fare una cosa. Q ritorna un flag (es. "task non completato") imponendo a P di compiere un'azione specifica di conseguenza (es. "stampa messaggio di errore"). P e Q sono intimamente legati dalla logica di controllo.
+4. **Stamp (di Struttura - Livello 4):** Si passa un'intera e complessa struttura dati (come un record enorme o un oggetto complesso) tra due moduli, ma il modulo ricevente ne usa solo una minuscola parte. Crea dipendenze artificiali su dati non necessari.
+5. **Data (di Dati - Livello 5, Ottimale):** Due moduli comunicano passandosi argomenti semplici o strutture dati ma utilizzandone rigorosamente _tutti_ gli elementi. È l'accoppiamento più pulito: si passa solo il necessario, senza retroscena nascosti o passaggi inutili.
+
+
+
+Una scomposizione è ben fatta se, e solo se, permette di ottenere:
+1. **Massima Coesione (Cohesion) interna ai moduli**
+2. **Minimo Accoppiamento (Coupling) tra i moduli**
+Questi due concetti osservano il sistema da direzioni differenti:
+- **Cohesion** → guarda *dentro* il modulo;
+- **Coupling** → guarda *tra* moduli diversi.
+![[assets/p082-fig-084.png|600]]
+
+
+
+Anche con un basso coupling, un modulo può esporre più dettagli del necessario.
+
+L'**Information Hiding** stabilisce che ogni modulo dovrebbe rendere visibile all'esterno **solo ciò che gli altri moduli devono conoscere**, nascondendo i dettagli implementativi non necessari.
+In pratica si separano:
+- **interfaccia pubblica** → ciò che gli altri possono utilizzare;
+- **implementazione interna** → come il modulo realizza realmente il servizio.
+
+
+La **riusabilità** consiste nell'utilizzare in un nuovo prodotto elementi già sviluppati in precedenza.
+Il riuso non riguarda soltanto porzioni di codice. Negli appunti il concetto viene esteso anche a:
+- moduli software;
+- parti di progetto;
+- documentazione;
+- test data;
+- stime di tempi e costi.
+I principali vantaggi sono:
+
+- riduzione dei tempi di sviluppo;
+- riduzione dei costi;
+- maggiore affidabilità quando vengono riutilizzati componenti già convalidati.
+
+Nella fase di progettazione il riuso può avvenire a diversi livelli:
+- **moduli software**;
+- **Application Framework**;
+- **Design Pattern**;
+- **architetture software**.
+
+![[assets/p087-fig-089.png|600]]
+
+Con questi principi abbiamo definito **come deve essere strutturata una buona soluzione software a livello generale**.
+
+Il passo successivo sarà entrare nella progettazione Object Oriented e nelle diverse **architetture software**, cioè vedere concretamente come organizzare le componenti individuate durante la progettazione preliminare.
+

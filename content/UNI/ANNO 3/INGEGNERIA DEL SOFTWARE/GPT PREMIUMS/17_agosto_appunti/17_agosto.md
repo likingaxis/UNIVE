@@ -227,15 +227,14 @@ A partire da questi valori si possono ricavare:
 
 - **Effort**:
 
-\[
-Effort = \frac{Estimated\ LOC}{LOC/pm}
-\]
+$$Effort = \frac{Estimated\ LOC}{LOC/pm}$$
+
 
 - **Cost**:
 
-\[
-Cost = Estimated\ LOC \times \$/LOC
-\]
+
+$$Cost = Estimated\ LOC \times \$/LOC$$
+
 
 La tecnica è semplice, ma mette in evidenza il vero problema: **bisogna stimare le LOC prima che il codice esista**.
 
@@ -283,9 +282,7 @@ Negli appunti il primo valore viene indicato come **UFC — Unadjusted Function 
 
 La relazione complessiva è:
 
-\[
-FP = UFC \times TCF
-\]
+$$FP = UFC \times TCF$$
 
 dove:
 
@@ -394,6 +391,8 @@ Questa conversione non rende FP e LOC la stessa misura:
 
 Una volta ottenuta una stima dimensionale in LOC, possiamo usarla come input per un modello algoritmico. Negli appunti il modello principale è **COCOMO**.
 
+
+***modelli algoritmici empirici***
 # COCOMO
 
 **COCOMO — COnstructive COst MOdel** è un modello algoritmico empirico utilizzato per stimare l'effort di sviluppo.
@@ -447,12 +446,8 @@ Esempio:
 COCOMO utilizza la dimensione in KLOC per calcolare l'effort.
 
 ## Effort nominale
-
 La forma generale presentata negli appunti è:
-
-\[
-Effort_{nominale} = a \times (KLOC)^b
-\]
+$$Effort_{nominale} = a \times (KLOC)^b$$
 
 I coefficienti `a` e `b` dipendono dal modello e dal modo di sviluppo.
 
@@ -460,9 +455,7 @@ L'effort viene detto **nominale** perché considera la dimensione, ma non ha anc
 
 Per esempio, negli appunti per il caso *Intermediate Organic* viene riportato:
 
-\[
-Effort_{nominale} = 3.2 \times (KLOC)^{1.05}
-\]
+$$Effort_{nominale} = 3.2 \times (KLOC)^{1.05}$$
 
 con risultato espresso in **Man-Months**.
 
@@ -499,13 +492,13 @@ Il valore nominale è `1`:
 Il fattore complessivo `C` deriva dal prodotto dei singoli cost driver:
 
 \[
-C = \prod_i C_i
+$$C = \prod_i C_i$$
 \]
 
 e quindi:
 
 \[
-Effort = Effort_{nominale} \times C
+$$Effort = Effort_{nominale} \times C$$
 \]
 
 ![[assets/p077-fig-079.png|700]]
@@ -522,7 +515,7 @@ L'effort ci dice **quanto lavoro complessivo** è necessario. Non ci dice ancora
 COCOMO permette quindi di stimare anche la durata attraverso una relazione del tipo:
 
 \[
-Time = c \times Effort^d
+$$Time = c \times Effort^d$$
 \]
 
 dove `c` e `d` dipendono dal modo di sviluppo.
@@ -551,7 +544,7 @@ Il costo di una persona per mese non coincide semplicemente con il suo stipendio
 In forma concettuale:
 
 \[
-Costo\ totale = \sum (Effort_{ruolo} \times Costo\ per\ MM_{ruolo})
+$$Costo\ totale = \sum (Effort_{ruolo} \times Costo\ per\ MM_{ruolo})$$
 \]
 
 A questo punto abbiamo una stima di dimensione, effort, durata e costo. Manca però ancora una cosa: **disporre concretamente le attività nel tempo rispettando le loro dipendenze**.

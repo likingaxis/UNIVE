@@ -2,11 +2,9 @@
 
 
 
-- [ ] 19 agosto mattina finisco 16 agosto pomeriggio faccio 17 agosto
+- [x] 19 agosto mattina finisco 16 agosto pomeriggio faccio 17 agosto
 - [ ] 20 agosto 18 agosto 19 agosto
-- [ ]  21 agosto 20 agosto
-- [ ] 22 agosto  21 agosto
-
+- [ ]  21 agosto 20 agosto 21 agosto
 
 8 giorni per ripassare tutto+ progetto
 
