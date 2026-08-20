@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "9eaa7dc362b5a1a2",
+        "id": "d0c13fe3775cb421",
         "type": "tabs",
         "children": [
           {
-            "id": "11cf1c180285059d",
+            "id": "685690a7113fe8c3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/ANNO 3/COSA FARE.md",
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/19_agosto.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "COSA FARE"
+              "title": "19_agosto"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 266.3000183105469
+    "width": 502.29998779296875
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -173,12 +173,20 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "11cf1c180285059d",
+  "active": "385e3b437a6aac05",
   "lastOpenFiles": [
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
-    "UNI/ANNO 3/TESI/EMAIL AL PASQUALE 2.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/plan-giorni.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/infoprof.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/guida-operativa.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/guida-git.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/divisione-compiti.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/Untitled.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/09b. OOD.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/19_agosto.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+    "UNI/ANNO 3/COSA FARE.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
+    "UNI/ANNO 3/TESI/EMAIL AL PASQUALE 2.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p119-fig-128.png",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p118-fig-127.png",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p111-fig-118.png",
@@ -194,7 +202,6 @@
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti.zip",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Unconfirmed 521347.crdownload",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/09b. OOD.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/18_agosto.md",
     "UNI/ANNO 3/TESI/PDF DI SPIEGAZIONE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/08. Progetto.md",
@@ -203,7 +210,6 @@
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti.zip",
-    "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS INDICE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/07. Pianificazione.md",
     "UNI/ANNO 3/TESI/EMAIL AL PASQUALE.md",
@@ -214,11 +220,6 @@
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/16_agosto.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/ISW.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/ORGANIZZAZIONE PROGETTO.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/6. (TODO) OOA - esercizio.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/02. Processo software.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/01. Introduzione.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/03. Requisiti software.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/04. Ingegneria dei requisiti.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/PDF/Senza nome.md"
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/6. (TODO) OOA - esercizio.md"
   ]
 }
