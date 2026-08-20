@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS IDEA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "IS UNICO"
+              "title": "IS IDEA"
             }
           },
           {
@@ -35,8 +35,7 @@
               "title": "IS_andrea"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -188,9 +187,10 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "9a74c19159ed739d",
+  "active": "685690a7113fe8c3",
   "lastOpenFiles": [
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS IDEA.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/IS_andrea.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/guida-operativa.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/guida-progetto.md",
@@ -234,7 +234,6 @@
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/05. OOA.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/16_agosto.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/ISW.md"
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/16_agosto.md"
   ]
 }
