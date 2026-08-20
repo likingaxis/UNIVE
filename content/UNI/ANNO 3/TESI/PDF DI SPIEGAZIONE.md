@@ -15,3 +15,8 @@ Il compito di VulcaTest sarà quello di eseguire un’operazione di validazione 
 #### 4. Feedback loop e possibili sviluppi futuri
 In caso di fallimento, VulcaTest dovrà raccogliere le problematiche riscontrate e consentire una correzione automatica (Self-Healing), attraverso un ciclo iterativo che termina una volta raggiunto il comportamento atteso oppure sotto determinate condizioni.
 Una volta completata questa parte, si portranno esplorare migliorie avanzate, come la ricerca di percorsi di attacco alternativi rispetto a quelli previsti e ulteriori controlli automatici per verificare la qualità e la correttezza delle macchine generate
+
+#### 5. Valutazione sperimentale e confronto degli approcci
+Oltre ad implementare VulcaTest, il lavoro di tesi dovrà avere una forte impronta nella valutazione delle diverse scelte progettuali da adottare, confrontando vari approcci e variando la struttura del workflow e le informazioni fornite all'agente durante il pentesting.
+Verranno inoltre analizzate l'efficacia delle diverse soluzioni, la frequenza e la tipologia degli errori commessi e l'affidabilità complessiva del processo di validazione.
+Quindi, oltre alla vera e propria implementazione, ci sarà anche una fase significativa composta da benchmark, test e miglioramenti, con l'obiettivo di adottare le strategie più efficaci e motivare le scelte progettuali sulla base dei risultati ottenuti.

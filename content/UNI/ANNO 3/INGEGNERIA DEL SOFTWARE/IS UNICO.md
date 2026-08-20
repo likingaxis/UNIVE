@@ -1762,3 +1762,443 @@ Con questi principi abbiamo definito **come deve essere strutturata una buona so
 
 Il passo successivo sarà entrare nella progettazione Object Oriented e nelle diverse **architetture software**, cioè vedere concretamente come organizzare le componenti individuate durante la progettazione preliminare.
 
+## SOA
+
+## OOD - Object Oriented Design
+la specifica descrive cosa deve fare il sistema mentre il progetto stabilisce come organizzarlo per realizzare quei requisiti
+Questa fase prende il nome di OOD e riutilizza quanto costruito durante l'OOA aggiungendo i dettagli necessari per arrivare all'implementazione
+L'OOD è quindi collegato direttamente all'OOA:
+
+- **OOA** → modella il problema e descrive il sistema dal punto di vista dei requisiti
+- **OOD** → trasforma e raffina quei modelli per definire la soluzione software
+
+L'OOD è un processo **iterativo e incrementale** e viene diviso in due sottofasi principali:
+
+- **Progettazione Preliminare**, detta anche *Architectural Design* o *System Design*:
+  - definisce l'organizzazione complessiva del software;
+  - individua le componenti principali;
+  - stabilisce le relazioni tra esse;
+  - sceglie quindi l'**architettura di sistema**;
+- **Progettazione Dettagliata**, detta anche *Object Design*:
+  - entra all'interno delle componenti individuate;
+  - definisce classi, strutture dati, algoritmi e dettagli necessari all'implementazione.
+
+quindi si ha **OOA → OOD preliminare → architettura del sistema → OOD dettagliata**
+
+ci concentriamo principalmente sulla parte preliminare prima di definire nei dettagli ogni classe bisogna decidere come oranizzare l'intero sistema
+### Architettura di sistema
+L'**architettura di sistema** descrive:
+- quali sono le componenti principali del software
+- come sono organizzate
+- quali relazioni esistono tra esse
+- come collaborano durante l'esecuzione
+ È una descrizione ad alto livello della struttura complessiva della soluzione
+ 
+ Negli appunti viene mostrata un'evoluzione da architetture più **centralizzate** ad architetture sempre più **distribuite**
+#### Architetture centralizzate
+Le prime architetture presentate sono centralizzate perché il lavoro applicativo viene svolto su un unico nodo principale
+##### Mainframe-based Architecture
+Un mainframe è un elaboratore centrale molto potente che esegue le applicazioni e supporta più utenti
+##### File Sharing Architecture
+Nel modello **File Sharing** più PC sono collegati in rete e possono condividere file, ma l'esecuzione di una determinata applicazione rimane localizzata su un singolo nodo.
+Il fatto che i dati possano essere condivisi in rete, quindi, **non rende automaticamente distribuita l'elaborazione**.
+
+Finora l'elaborazione è rimasta concentrata. Per ottenere una vera architettura distribuita bisogna invece permettere a più nodi di partecipare all'esecuzione dello stesso sistema.
+#### Architetture distribuite
+Un **sistema software distribuito** suddivide l'elaborazione tra più nodi di esecuzione indipendenti collegati da una rete, che può essere locale o geografica.
+Avere questa distribuzione deve risultare trasparente, usare una risorsa remota deve sembrare quasi come se sia locale
+La distribuzione porta diversi vantaggi:
+- **condivisione di dati e risorse** tra nodi
+- **openness** → possibilità di integrare risorse e piattaforme eterogenee
+- **concurrency** → più elementi possono essere eseguiti contemporaneamente
+- **scalability** → è possibile aumentare le risorse aggiungendo nodi
+- **load balancing** → il carico può essere distribuito tra più macchine
+- **fault tolerance** → un nodo di backup può sostituire un nodo guasto
+- **trasparenza** → l'utente non deve necessariamente conoscere la posizione reale delle risorse
+
+La distribuzione introduce però anche difficoltà:
+- qualità del servizio e prestazioni dipendono anche dalla rete
+- l'interoperabilità tra piattaforme differenti è più complessa
+- aumenta il problema della sicurezza perché dati e operazioni attraversano più nodi
+
+
+Queste difficoltà fanno emergere una necessità:
+Come posso permettere a processi eseguiti su macchine diverse a comunicare senza costringere ogni applicazione a gestire tutti i dettagli della rete?
+con i middleware
+##### Middleware
+Il **middleware** è uno strato software che fornisce servizi di comunicazione e connettività alle applicazioni distribuite.
+Si colloca concettualmente tra:
+
+- applicazioni
+- sistema operativo e infrastruttura di rete
+
+nasconde parte della complessità della comunicazione remota
+Per esempio, con una **RPC — Remote Procedure Call**, un processo può richiedere l'esecuzione di una procedura su un altro nodo. L'applicazione non deve gestire direttamente tutti i dettagli necessari per:
+- inviare la richiesta;
+- raggiungere il nodo remoto;
+- eseguire l'operazione;
+- ricevere il risultato.
+
+Il middleware non è quindi una specifica architettura applicativa: è una **tecnologia di supporto** che rende praticabili molte architetture distribuite.
+
+##### Architettura Client/Server
+L'architettura **Client/Server** divide i processi in base al ruolo che svolgono durante l'interazione.
+
+- **Client**:
+  - interagisce con l'utente;
+  - raccoglie una richiesta;
+  - la invia a un server;
+  - riceve e presenta la risposta;
+- **Server**:
+  - attende richieste provenienti dai client;
+  - esegue il servizio richiesto;
+  - restituisce il risultato;
+  - può a sua volta rivolgersi ad altri server.
+
+Un processo può anche svolgere entrambi i ruoli in interazioni differenti.
+
+Per capire bene come distribuire le responsabilità tra client e server si divide l'applicazione in **tre layer logici**
+
+Questa suddivisione riprende la logica BCE già vista nell'OOA:
+- **Presentation Layer** → corrisponde alla Boundary:
+  - gestisce la presentazione;
+  - interagisce con l'utente;
+- **Application Processing Layer** → corrisponde al Control:
+  - contiene la logica applicativa;
+  - coordina l'esecuzione delle operazioni;
+- **Data Management Layer** → corrisponde alla Entity:
+  - gestisce dati e accesso alle informazioni.
+**su quali nodi devono essere collocati questi tre layer?**
+
+***Two-Tier Architecture***
+Una Two-Tier Architecture utilizza due livelli fisici principali: client e server
+Esistono due configurazioni estreme della seguente architettura
+**Thin Client**
+- client → Presentation Layer;
+- server → Application Processing + Data Management.
+Il client è leggero, ma il server concentra una quantità maggiore di lavoro.
+
+**Fat Client**
+- client → Presentation + Application Processing;
+- server → Data Management.
+Il client svolge quindi una parte maggiore dell'elaborazione.
+
+Thin e Fat Client sono estremi: esistono configurazioni intermedie in cui l'Application Processing viene diviso tra client e server
+
+***3-Tier e N-Tier***
+La Two-Tier separa client e server, ma può diventare poco flessibile quando la logica applicativa cresce
+La **3-Tier Architecture** introduce quindi un livello intermedio specifico:
+- client → Presentation
+- application server → Application Processing
+	- si comporta da client verso il server dati facendo da intermediario
+- backend server → Data Management
+
+La **N-Tier Architecture** estende ulteriormente questa idea introducendo altri livelli specializzati, per esempio server dedicati all'autenticazione
+
+Queste architetture non sono basate a oggetti ognuno ha una responsabilità ma si può avere un singolo oggetto che può richiedere o offrire servizi da qui nasce una nuova architettura
+##### Architettura a Oggetti Distribuiti
+In questo paradigma, scompare la rigida distinzione tra client e server. Ogni oggetto distribuito può agire sia da client sia da server
+La comunicazione remota è resa invisibile e trasparente grazie a un middleware basato sul concetto di **Software Bus** (spesso chiamato **Object Request Broker**). Questo bus si divide in:
+- **Bus astratto**: Specifica l'interfaccia che fornisce i servizi di comunicazione e scambio dati.
+- **Implementazione del bus**: È la realizzazione pratica del bus astratto per una specifica piattaforma hardware/software (garantendo la separazione tra interfaccia e implementazione).
+
+L'architettura a oggetti distribuiti continua a ragionare soprattutto in termini di oggetti. Il passo successivo consiste nel rendere riutilizzabili unità software più grandi e più astratte: le **componenti**
+
+##### Component-Based Architecture
+L'approccio **Component Based** costruisce il software assemblando componenti preconfezionati che realizzano determinate funzionalità
+
+Una **componente software** è un'unità astratta caratterizzata da una separazione netta tra:
+- **interfaccia** → ciò che la componente offre
+- **implementazione** → come realizza internamente il servizio
+
+Il riuso è quindi di tipo **black box**: per utilizzare una componente non è necessario conoscerne l'implementazione interna; è sufficiente sapere quale interfaccia realizza
+
+Le proprietà centrali sono:
+- **incapsulamento** di strutture software
+- **variabilità** → una componente può essere implementata o configurata in modi differenti
+- **adattabilità** → componenti differenti possono essere assemblati tramite interfacce e scambio di messaggi
+
+La differenza principale tra oggetti e componenti è che:
+- un **oggetto** è un’entità concreta del modello OO, con **identità, stato e comportamento**;
+- un **componente** è invece un’**unità software più astratta e riusabile**, usata come blocco di costruzione del sistema e utilizzata principalmente attraverso la sua **interfaccia**
+
+
+Un **Component Framework** fornisce una base riutilizzabile per costruire applicazioni appartenenti a uno stesso dominio.
+
+Può includere:
+- una libreria di componenti
+- una struttura architetturale generica
+- requisiti comuni al dominio applicativo
+
+1. si considerano i requisiti specifici della nuova applicazione;
+2. si confrontano con quelli generici coperti dal framework;
+3. si riusano i componenti già disponibili;
+4. si implementano soltanto quelli mancanti;
+5. i nuovi componenti possono arricchire il framework per utilizzi futuri.
+
+![[assets/p091-fig-090.png|500]]
+
+
+Viene evidenziata anche un'evoluzione tra UML 1 e UML 2.
+
+- in **UML 1** la componente era trattata soprattutto come un'entità fisica di implementazione
+- in **UML 2** la componente esiste già a livello di progetto ed è descritta attraverso l'interfaccia che realizza
+
+Una componente viene rappresentata come un elemento con stereotipo `<<component>>` che realizza una determinata interfaccia.
+
+![[assets/p091-fig-091.png|383]]
+
+##### SOA - Service-Oriented Architecture
+
+Una Service Oriented Architecture (SOA) è un'architettura distribuita composta da molteplici **servizi autonomi**. L'obiettivo di SOA è sviluppare applicazioni componendo servizi distribuiti, i quali possono essere eseguiti su piattaforme diverse e scritti in linguaggi di programmazione differenti.
+
+Ogni servizio possiede una **descrizione** che specifica le informazioni necessarie per poterlo trovare e utilizzare.
+
+I due ruoli principali ricordano Client/Server:
+- **Service Provider** → mette a disposizione il servizio
+- **Service Consumer / Requester** → cerca e utilizza il servizio
+
+***Principi della SOA***
+
+I servizi in SOA sono pensati per essere componenti autonomi e riutilizzabili. I principi fondamentali sono:
+- **Loose coupling (Accoppiamento debole)**: Le dipendenze tra i servizi sono ridotte al minimo indispensabile.
+- **Autonomy (Autonomia)**.
+- **Abstraction (Astrazione)**.
+- **Reusability (Riutilizzabilità)**.
+- **Composability (Componibilità)**.
+- **Statelessness (Assenza di stato)**: I servizi generalmente non mantengono memoria delle interazioni passate, rendendoli più scalabili.
+- **Discoverability (Rintracciabilità)**: I servizi possono essere "scoperti" dinamicamente dai client.
+
+L'ultimo principio crea però un problema pratico: **come può un consumer trovare un provider che non conosce già?**
+
+Per risolverlo viene introdotta una terza entità: il **Service Broker**.
+
+Il ***Service Broker*** è un intermediario tra provider e consumer.
+La relazione generale diventa:
+**Service Provider ↔ Broker ↔ Service Consumer**
+Il broker mantiene un registro delle informazioni sui servizi disponibili.
+
+Il provider deve comunicare al broker l'esistenza del servizio
+
+Per gestire questa comunicazione intermediata, esistono diversi **Broker Patterns**:
+
+***Service Registration Pattern***
+1. il provider invia al broker le informazioni sul servizio;
+2. comunica nome, descrizione e posizione/interfaccia di rete;
+3. il broker registra il servizio;
+4. il provider riceve conferma dell'avvenuta registrazione.
+
+![[assets/p093-fig-092.png|265]]
+
+La registrazione rende concretamente possibile la **Discoverability**.
+
+Una volta registrato il servizio, il consumer può utilizzarlo. Il broker può però partecipare all'interazione in modi differenti.
+
+***Broker Forwarding e Broker Handle***
+Questi due pattern rispondono allo stesso problema: il consumer conosce il servizio che vuole usare ma deve raggiungerlo.
+
+*Broker Forwarding Pattern*
+Nel **Broker Forwarding** il broker rimane coinvolto in ogni richiesta:
+
+1. il consumer invia la richiesta al broker;
+2. il broker individua il provider;
+3. inoltra la richiesta al provider;
+4. riceve la risposta;
+5. la inoltra al consumer.
+
+![[assets/p094-fig-093.png|346]]
+
+
+- migliore **Location Transparency**, perché eventuali cambiamenti della posizione del provider vengono gestiti dal broker ma ogni interazione passa attraverso il broker aumentando gli scambi
+
+*Broker Handle Pattern*
+
+Nel **Broker Handle** il broker interviene soltanto nella fase iniziale:
+
+1. il consumer chiede al broker dove si trova il servizio;
+2. il broker restituisce un riferimento, o **service handle**;
+3. consumer e provider comunicano poi direttamente.
+
+![[assets/p094-fig-094.png|275]]
+
+- se cambia la posizione del servizio, la Location Transparency è meno forte rispetto al Forwarding.
+
+
+Finora il consumer conosceva **quale specifico servizio** voleva utilizzare. Può però verificarsi una situazione diversa: conosce soltanto **il tipo di servizio necessario**.
+
+*Service Discovery Pattern*
+
+Il **Service Discovery Pattern** viene paragonato alle *pagine gialle*.
+
+1. il consumer chiede al broker una certa **tipologia di servizio**;
+2. il broker cerca nel registro;
+3. restituisce una lista dei servizi compatibili;
+4. il consumer sceglie quale utilizzare;
+5. da quel momento può proseguire con una delle modalità di interazione viste prima.
+
+![[assets/p095-fig-095.png|330]]
+
+I provider e consumer possono essere realizzati con tecnologie diverse quindi serve uno standard di comunicazione per scambiare messaggi
+
+*Web Services*
+
+Un **Web Service** è un servizio accessibile attraverso protocolli standard Internet e descritto tramite standard che permettono l'interazione tra applicazioni differenti.
+
+con il ***modello SOAP/WDSL***
+la tecnologia dei Web Services viene collegata a tre problemi distinti:
+- **come registrare e scoprire il servizio** → UDDI
+- **come descrivere il servizio** → WSDL
+- **come scambiare i messaggi** → SOAP
+
+**XML — Extensible Markup Language** viene usato come formato strutturato per rappresentare dati e messaggi in modo indipendente dalla piattaforma.
+
+**SOAP — Simple Object Access Protocol** è il protocollo usato per lo scambio di informazioni tra consumer e provider.
+- Il messaggio SOAP è basato su XML e può essere trasportato attraverso protocolli Internet, tipicamente HTTP.
+- viene descritto attraverso tre elementi
+	- una **envelope** che definisce la struttura del messaggio
+	- regole per codificare i dati scambiati
+	- un modo per rappresentare richieste e risposte relative alle operazioni remote
+
+
+**WSDL — Web Services Description Language** descrive il servizio e fornisce al consumer le informazioni necessarie per utilizzarlo
+La descrizione specifica, in particolare:
+- quali operazioni sono disponibili
+- quali messaggi di input/output sono previsti
+- dove si trova il servizio
+- come deve essere invocato
+
+WSDL svolge quindi un ruolo analogo all'interfaccia pubblica di una classe: descrive **come usare il servizio senza esporne l'implementazione interna**
+
+![[assets/p097-fig-099.png|347]]
+
+
+**UDDI — Universal Description, Discovery and Integration** realizza il concetto di registro dei Web Services.
+
+Permette quindi di:
+- pubblicare un servizio
+- registrare la sua descrizione
+- ricercare servizi disponibili
+- ottenere le informazioni necessarie per raggiungerli
+
+Il flusso complessivo diventa:
+1. il provider registra il servizio;
+2. il broker/registry conserva le informazioni;
+3. il consumer effettua una ricerca;
+4. riceve il riferimento al documento WSDL;
+5. legge come invocare il servizio;
+6. invia la richiesta SOAP al provider;
+7. riceve la risposta SOAP.
+
+![[assets/p096-fig-096.png|320]]
+
+con il modello ***REST***
+
+**REST — Representational State Transfer** viene presentato nel corso come uno **stile architetturale** per sistemi distribuiti basati sul Web.
+
+
+REST mette al centro le **risorse**:
+
+- una risorsa è un'entità identificabile messa a disposizione in rete;
+- ogni risorsa è identificata tramite un URL/URI;
+- il client interagisce con le risorse usando un'interfaccia uniforme basata su HTTP.
+
+REST ha i seguenti principi
+
+**REST** si basa su alcuni principi rigidi:
+1. **Client-Server**: Stile di interazione "pull" (il client richiede, il server fornisce).
+2. **Stateless (Senza stato)**: _Fondamentale_. Il server non memorizza alcun contesto (stato) del client tra una richiesta e l'altra. Ogni richiesta HTTP contiene tutte le informazioni necessarie per essere compresa dal server.
+3. **Uniform Interface (Interfaccia Uniforme)**: Si usano esclusivamente i verbi standard del protocollo HTTP per eseguire le operazioni CRUD (Create, Read, Update, Delete).
+4. **Named Resources (Risorse Nominate)**: Ogni risorsa è identificata univocamente da una URL/URI (es. `http://api.miosito.com/utenti/123`).
+5. **Interconnected resource representations**: Le risorse sono collegate tramite link, permettendo al client di navigare da uno stato all'altro dell'applicazione (Hypermedia).
+
+Negli appunti le **RESTful API** vengono collegate alle operazioni fondamentali:
+- `GET` → leggere una risorsa o una collezione;
+- `POST` → aggiungere un nuovo elemento a una collezione;
+- `PUT` → aggiornare un elemento identificato;
+- `DELETE` → eliminare un elemento identificato.
+![[assets/p098-fig-100.png|265]]
+
+![[assets/p098-fig-101.png|277]]
+
+quando **una singola funzione logica richiede più operazioni o addirittura più servizi**: cosa succede se alcune operazioni riescono e altre falliscono?
+##### Software Architectural Transaction Patterns
+Una **transazione** è una richiesta che comprende due o più operazioni che, insieme, realizzano una singola funzione logica, non fanno pare solo della parte web services ma in generale delle architetture distribuite
+
+
+Le proprietà principali vengono raccolte nell'acronimo **ACID**:
+
+- **Atomicity**:
+  - la transazione viene considerata indivisibile;
+  - o viene completata interamente (*commit*) oppure viene annullata (*rollback*)
+- **Consistency**:
+  - al termine della transazione il sistema deve trovarsi in uno stato consistente
+- **Isolation**:
+  - una transazione non deve essere compromessa dalle altre transazioni eseguite contemporaneamente
+- **Durability**:
+  - dopo il commit, gli effetti della transazione devono rimanere permanenti anche in presenza di guasti successivi
+
+Queste proprietà descrivono l'obiettivo generale. I pattern successivi mostrano invece **come organizzare transazioni con caratteristiche differenti**
+
+***Two-Phase Commit Protocol (Protocollo a due fasi)***
+
+Se devo trasferire 100€ dal _Servizio Banca A_ al _Servizio Banca B_, ho un problema: i due database sono su computer diversi. Come garantisco l'atomicità? Utilizzando il pattern **Two-Phase Commit**. C'è un intermediario chiamato _CommitCoordinator_.
+- **Fase 1 (Prepare):** Il Coordinator chiede a Banca A (debito) e Banca B (credito) di prepararsi. Entrambe le banche _bloccano_ (Lock) le risorse necessarie (i due conti correnti), simulano l'operazione e rispondono "Sono pronto a committare" (Ready To Commit).
+- **Fase 2 (Commit o Rollback):** Se _entrambe_ le banche hanno risposto di essere pronte, il Coordinator ordina il "Commit" definitivo. I dati vengono scritti e i database sbloccati (Unlock). Se anche una sola banca dice "Non posso farlo" o non risponde, il Coordinator ordina un "Rollback" generale e nulla viene modificato.
+
+Le transazioni piatte (flat) tipo "tutto-o-niente" vanno bene per un bonifico, ma in scenari complessi servono pattern più evoluti:
+***Compound Transaction Pattern***
+Una **Compound Transaction** divide una transazione complessa in più sottotransazioni.
+
+La differenza rispetto a una transazione completamente atomica è che può essere possibile conservare le sottotransazioni già concluse con successo e annullare soltanto quelle fallite.
+- _Esempio:_ Un'agenzia di viaggi prenota per te il volo, l'hotel e l'auto a noleggio. Se l'auto a noleggio non è disponibile, non vuoi che il sistema ti cancelli automaticamente in blocco (rollback) anche il volo verso le Maldive! Il pattern permette "rollback parziali" e modifiche modulari.
+
+![[Pasted image 20260424172132.png|322]]
+***Long-Living Transaction Pattern***
+
+Alcune transazioni non possono essere completate rapidamente perché includono un **human in the loop**, cioè una decisione umana durante l'esecuzione
+
+Il problema è che, durante l'attesa:
+- le risorse possono cambiare;
+- altri utenti possono effettuare operazioni concorrenti;
+- non è realistico mantenere indefinitamente una normale transazione atomica aperta.
+
+Il **Long-Living Transaction Pattern** divide quindi il processo in più sottotransazioni separate da periodi di attesa
+
+Prima di completare l'operazione può essere necessario effettuare un **recheck** delle condizioni precedentemente osservate
+
+In altri casi il client può invece esprimere una richiesta **negoziabile** e accettare soluzioni alternative
+
+
+***Negotiation Pattern***
+Il **Negotiation Pattern**, chiamato anche **Agent-Based Negotiation**, introduce agenti software che agiscono per conto delle parti coinvolte.
+
+- **Client Agent**:
+  - agisce per conto del cliente
+  - esprime richieste o proposte
+- **Service Agent**:
+  - agisce per conto del servizio
+  - cerca soluzioni e formula offerte
+
+Per costruire realmente un'applicazione SOA rimangono però due problemi di progettazione:
+
+1. **quali operazioni deve esporre ogni servizio?**
+2. **come devono essere coordinati più servizi durante l'esecuzione?**
+##### Service Interface Design
+Un servizio deve essere utilizzabile dall'esterno attraverso un'interfaccia ben definita.
+L'obiettivo è mantenere separati:
+- **interno del servizio**
+- **contratto/interfaccia visibile ai consumer**
+
+Il principio è quindi ancora quello dell'Information Hiding: il consumer deve conoscere **come usare il servizio**, non come è implementato internamente
+##### Service Coordination
+Un'applicazione SOA può utilizzare più servizi contemporaneamente. Non basta quindi progettare correttamente le singole interfacce: bisogna stabilire **chi controlla l'ordine e le interazioni tra i servizi**.
+
+Gli appunti distinguono due forme principali di coordinamento.
+
+***Orchestrazione***
+Nell'**orchestrazione** esiste un elemento centralizzato, l'**orchestratore**, che controlla il flusso delle attività.
+***Coreografia***
+Nella **coreografia** non esiste un unico coordinatore centrale
+- ogni servizio conosce le interazioni che deve effettuare
+- i servizi collaborano direttamente
+- il controllo è distribuito
