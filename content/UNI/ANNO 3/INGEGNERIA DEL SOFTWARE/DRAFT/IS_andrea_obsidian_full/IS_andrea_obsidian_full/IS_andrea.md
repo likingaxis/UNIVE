@@ -1770,7 +1770,8 @@ La configurazione della piattaforma descrive la soluzione hardware/software che 
 
 Deployment Model Modeling Elements (Elementi di Modellazione del Modello di Deployment):
 - **Node (Nodo):** Rappresenta una risorsa computazionale in esecuzione a livello fisico, come un nodo di elaborazione o un dispositivo. I nodi possono essere processori che eseguono il software di sistema o dispositivi controllati da un processore.
-- **Connection (Connessione):** Rappresenta un meccanismo di comunicazione, inclusi il mezzo fisico e il protocollo software. Cos'è un Nodo? Rappresenta una risorsa computazionale in esecuzione e generalmente ha almeno la memoria e spesso la capacità di elaborazione. Può essere un dispositivo fisico o un ambiente di esecuzione specifico. Cos'è un Connector? Un connector rappresenta un meccanismo di comunicazione descritto da un mezzo fisico e da un protocollo software. Cos'è il Deployment? Il deployment è l'assegnazione o la mappatura degli artefatti* software ai nodi fisici durante l'esecuzione. Gli artefatti sono le entità che vengono deployate sui nodi fisici, come processi assegnati a computer o file, eseguibili, tabelle del database, pagine web, ecc. Cos'è la Manifestazione? La manifestazione è l'implementazione fisica di un elemento di modello come un artefatto. È la relazione tra l'elemento di modello e l'artefatto che lo implementa. Gli elementi di modello sono tipicamente implementati come un insieme di artefatti, come file sorgenti, file eseguibili, file di documentazione, ecc. Cos'è una Deployment Specification? Una Deployment Specification è una specifica dettagliata dei parametri del deployment di un artefatto su un nodo. Può definire valori che parametrizzano l'esecuzione dell'artefatto. ** Artefatti = entità che vengono distribuite sui nodi fisici**
+- **Connection (Connessione):** Rappresenta un meccanismo di comunicazione, inclusi il mezzo fisico e il protocollo software. Cos'è un Nodo? Rappresenta una risorsa computazionale in esecuzione e generalmente ha almeno la memoria e spesso la capacità di elaborazione. Può essere un dispositivo fisico o un ambiente di esecuzione specifico. Cos'è un Connector? Un connector rappresenta un meccanismo di comunicazione descritto da un mezzo fisico e da un protocollo software. Cos'è il Deployment? Il deployment è l'assegnazione o la mappatura degli artefatti* software ai nodi fisici durante l'esecuzione. Gli artefatti sono le entità che vengono deployate sui nodi fisici, come processi assegnati a computer o file, eseguibili, tabelle del database, pagine web, ecc. Cos'è la Manifestazione? La manifestazione è l'implementazione fisica di un elemento di modello come un artefatto. È la relazione tra l'elemento di modello e l'artefatto che lo implementa. Gli elementi di modello sono tipicamente implementati come un insieme di artefatti, come file sorgenti, file eseguibili, file di documentazione, ecc. Cos'è una Deployment Specification? Una Deployment Specification è una specifica dettagliata dei parametri del deployment di un artefatto su un nodo. Può definire valori che parametrizzano l'esecuzione dell'artefatto. 
+- **Artefatti = entità che vengono distribuite sui nodi fisici**
 
 ![[p066-fig-030.png|450]]
 
@@ -1858,7 +1859,8 @@ Il Factory Method è un pattern creazionale che ha come scopo principale quello 
 
 <!-- Pagina PDF 70 -->
 
-Classificazione: Il Factory Method è un pattern creazionale basato su classi, poiché coinvolge la definizione di classi per creare oggetti. Applicabilità:
+Classificazione: Il Factory Method è un pattern creazionale basato su classi, poiché coinvolge la definizione di classi per creare oggetti. 
+Applicabilità:
 
 - Una classe non è in grado di sapere in anticipo le classi di oggetti che deve creare.
 - Una classe vuole che le sue sottoclassi scelgano gli oggetti da creare.

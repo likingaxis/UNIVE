@@ -2206,9 +2206,687 @@ Se l'OOD Preliminare definisce l'architettura generale (i server, i nodi, i fram
 Se l'OOA era guidata dai Casi d'Uso (Use Cases), l'OOD Dettagliato è guidato dalle **Collaborazioni**. Un singolo caso d'uso viene ora realizzato da un insieme di classi che collaborano tra loro. Una collaborazione ha sempre due facce:
 1. **Parte comportamentale (Dinamica):** Spiega _come_ gli elementi comunicano nel tempo. Si modella usando i _Communication Diagram_ o i _Sequence Diagram_.
 2. **Parte strutturale (Statica):** Rappresenta la struttura vera e propria, aggiungendo dettagli implementativi al Class Diagram, trasformandolo spesso in un _Composite Structure Diagram_.
-### Distribuire le responsabilità 
-Quando si definisce una collaborazione non basta che il comportamento finale sia corretto. È importante anche stabilire quale oggetto debba assumersi ciascuna responsabilità.
-Nel modello BCE le responsabilità sono separate tra
-- **Boundary** → gestiscono l’interazione con l’esterno e inoltrano le richieste;
-- **Control** → contengono la logica di controllo dell’applicazione;
-- **Entity** → mantengono le informazioni del dominio.
+
+#### Legge di Demetra
+Riprendiamo il concetto di BCE
+Vediamo un problema classico di OOD: come gestiamo il controllo delle operazioni tra gli oggetti? Nelle slide viene fatto l'esempio dell'iscrizione di uno studente (`Student`) a un corso (`CourseOffering`) tramite una schermata (`EnrolmentWindow`). Bisogna prima controllare i prerequisiti del corso e poi verificare che lo studente li abbia soddisfatti.
+
+Chi gestisce questa logica? Le slide mostrano 4 soluzioni, ognuna con un diverso livello di **Coupling** (accoppiamento):
+1. **Soluzione 1 & 2:** Demandano il controllo alle classi entità (o il Corso o lo Studente guidano l'operazione). _Svantaggio:_ Sporcano le classi dati con logiche applicative.
+2. **Soluzione 3 ("God" class):** L'oggetto della schermata (`EnrolmentWindow`) gestisce tutto. _Svantaggio:_ Crea un "oggetto Dio" onnisciente, legando fortemente l'interfaccia utente alla logica di business.
+3. **Soluzione 4 (L'Approccio BCE - Boundary-Control-Entity):** Questa è la soluzione corretta. Si inserisce un oggetto intermedio, un controllore (es. `EnrolmentPolicy`). La schermata (Boundary) dice al Control cosa l'utente vuole fare. Il Control interroga il Corso (Entity) per i prerequisiti, poi interroga lo Studente (Entity) per il libretto, valuta la logica, e infine esegue l'iscrizione.
+
+
+L'approccio BCE ci insegna che l'**Intra-layer coupling** (accoppiamento tra oggetti dello stesso strato) è accettabile, ma l'**Inter-layer coupling** (tra strati diversi) deve essere ridotto al minimo. Per scrivere codice poco accoppiato, usiamo la **Legge di Demetra (Law of Demeter)**.
+un oggetto dovrebbe comunicare solo con i suoi vicini immediati e non "parlare agli estranei". Ciò significa che un oggetto dovrebbe limitare le sue dipendenze agli oggetti con cui ha una relazione diretta, come il proprio oggetto stesso, gli oggetti passati come argomenti al metodo, gli oggetti a cui fa riferimento tramite i suoi attributi, gli oggetti creati dal metodo o gli oggetti a cui fa riferimento tramite una variabile globale. La Legge di Demeter mira a migliorare la manutenibilità e la flessibilità del codice, riducendo la dipendenza tra le classi e favorendo una struttura più modulare e comprensibile.
+### UML Structured Class
+In UML avanzato, per nascondere i dettagli di implementazione, si usano le **Structured Classes** (Classi Strutturate) e i **Composite Structure Diagram** (Diagrammi di Struttura Composita).
+
+Una **Structured Class** è una classe che contiene elementi interni, chiamati **roles** o **parts**, che partecipano alla realizzazione del suo comportamento.
+
+L’idea è quella di considerare la classe come una **black box**:
+
+- dall’esterno espone servizi tramite la propria interfaccia
+- all’interno può essere composta da altre parti che collaborano per realizzare quei servizi
+- i dettagli interni rimangono nascosti agli utilizzatori della classe
+
+Gli elementi fondamentali usati nella struttura interna sono:
+
+- **Part** → rappresenta una parte appartenente alla struttura della classe;
+- **Role** → rappresenta il ruolo svolto da un elemento nella collaborazione;
+- **Connector** → collega le parti o i ruoli e indica i percorsi attraverso cui possono comunicare;
+- **Port** → rappresenta un punto di interazione tra la classe e ciò che si trova all’esterno.
+Le interazioni avvengono tramite messaggi, mantenendo quindi una netta separazione tra l’interfaccia visibile e l’implementazione interna.
+![[assets/p107-fig-111.png|383]]
+
+#### Class Diagram e Composite Structure Diagram
+
+A questo punto è importante distinguere due diagrammi che possono sembrare simili.
+
+Il **Class Diagram** descrive principalmente le classi e le relazioni tra esse. Il **Composite Structure Diagram**, invece, entra **all’interno di una classe strutturata** e mostra le parti concrete che collaborano per realizzarne il comportamento.
+
+![[assets/p108-fig-112.png|750]]
+
+- con il Class Diagram ragioniamo sulle relazioni tra tipi e classi
+- con il Composite Structure Diagram osserviamo la struttura interna di un particolare elemento di progettazione
+
+**su quali risorse hardware e software verranno eseguiti questi elementi?**
+
+Da questa necessità nasce il **Deployment Modeling**
+
+La configurazione della piattaforma descrive come le funzionalità hardware e software vengono distribuite sui nodi su cui il sistema sarà eseguito.
+
+Il passaggio viene affrontato in due momenti:
+1. si rappresenta la piattaforma di esecuzione tramite il **Deployment Diagram**
+2. si stabilisce come gli elementi software vengono allocati sui nodi della piattaforma
+In questo modo la progettazione collega ciò che abbiamo modellato come software alla struttura fisica sulla quale quel software dovrà funzionare
+#### Deployment Diagram
+Il **Deployment Diagram** rappresenta la configurazione della piattaforma di esecuzione e le connessioni tra le risorse coinvolte
+
+- **Artifacts (Artefatti):** Sono i file fisici veri e propri (es. `StudentApplication.exe`, file di configurazione, file HTML, tabelle del DB).
+- **Manifestation (Manifestazione):** È la relazione che spiega come un elemento logico del modello (es. la classe `MainStudentForm`) si _manifesta_ fisicamente in un artefatto (es. il file sorgente `MainStudentForm.src`).
+- **Node (Nodo):** È una risorsa computazionale a runtime. Si divide in:
+    - _Processor:_ Ha capacità di calcolo ed esegue il software (es. un Server, un PC). Può contenere _Execution Environments_.
+    - _Device:_ Una risorsa hardware spesso controllata da un processore (es. una stampante, un lettore di codici a barre).
+- **Connector:** Nei diagrammi di deployment, i connettori non sono più riferimenti software, ma connessioni fisiche o protocolli di rete (es. cavo Ethernet, RS-232, HTTP su TCP/IP)
+- **Deployment:** L'azione di mappare e assegnare un Artefatto su un Nodo specifico
+
+![[p066-fig-030.png|171]]
+
+
+Una volta definita la piattaforma, bisogna decidere **quali processi debbano essere eseguiti su quali nodi**. Questa attività prende il nome di **Process-to-Node Allocation**.
+
+![[assets/p110-fig-115.png|424]]
+
+**separare interfaccia e implementazione**.
+Per ogni componente occorre quindi distinguere:
+- **interfaccia** → quali servizi mette a disposizione o richiede;
+- **implementazione** → come quei servizi vengono effettivamente realizzati.
+
+UML rappresenta le interfacce fornite e richieste attraverso porte e apposite notazioni grafiche.
+
+![[assets/p117-fig-126.png|550]]
+
+Una **provided interface** descrive una funzionalità che il componente mette a disposizione degli altri; una **required interface** descrive invece una funzionalità di cui il componente ha bisogno.
+
+
+Definire un’interfaccia significa specificare le operazioni accessibili dall’esterno e, per ciascuna operazione, i relativi parametri di input e output.
+
+
+Finora abbiamo visto come rendere riutilizzabili **componenti concreti**. Ma durante la progettazione ricorrono anche problemi più astratti: modi di creare oggetti, organizzare strutture o distribuire responsabilità che compaiono in molti sistemi diversi.
+
+Per evitare di reinventare ogni volta una soluzione già nota, vengono introdotti i **Design Pattern**.
+
+## Design Pattern
+Nella progettazione Object-Oriented non basta individuare classi e oggetti: bisogna anche stabilire come crearli, organizzarli e farli collaborare in modo corretto e riusabile. Poiché molti di questi problemi ricorrono in progetti diversi, vengono introdotti i Design Pattern come soluzioni progettuali riutilizzabili.
+uno **schema di soluzione** che indica quali elementi utilizzare, quali responsabilità assegnare e come farli collaborare
+Il valore del pattern nasce proprio dalla riusabilità del **design**:
+
+- evita di affrontare da zero problemi già studiati
+- fornisce soluzioni progettuali consolidate
+- crea un linguaggio comune tra progettisti
+- può rendere più semplice la manutenzione del software
+
+
+Prima di studiare i singoli pattern bisogna capire **secondo quali criteri vengono organizzati**. La classificazione utilizzata considera due dimensioni indipendenti: **Purpose** e **Scope**
+
+***Purpose***
+Il **Purpose** descrive il tipo di problema progettuale affrontato dal pattern.
+- **Creazionali**: i pattern di questo tipo sono relativi alle operazioni di creazione di oggetti.
+- **Strutturali**: sono utilizzati per definire la struttura del sistema in termini della composizione di classi ed oggetti. Si basano sui concetti OO di ereditarietà e polimorfismo.
+- **Comportamentali**: permettono di modellare il comportamento del sistema definendo le responsabilità delle sue componenti e definendo le modalità di interazione.
+***Scope***
+Lo **Scope** indica invece su quali elementi agisce principalmente il pattern
+
+Si distinguono:
+- **Class scope** → riguarda relazioni tra classi e sottoclassi; tali relazioni sono prevalentemente statiche e legate all’ereditarietà
+- **Object scope** → riguarda relazioni tra oggetti, che possono essere configurate più dinamicamente durante l’esecuzione
+
+Per poter confrontare pattern diversi viene usata una struttura descrittiva comune. Nel materiale vengono indicati i seguenti elementi:
+
+- **Nome e classificazione** → identifica il pattern e la sua posizione rispetto a Purpose e Scope
+- **Motivazione** → spiega quale problema ha portato alla nascita del pattern
+- **Applicabilità** → chiarisce in quali situazioni ha senso utilizzarlo
+- **Struttura** → mostra la configurazione astratta della soluzione
+- **Partecipanti** → identifica classi e oggetti coinvolti e le loro responsabilità
+- **Conseguenze** → descrive vantaggi, svantaggi e compromessi introdotti
+- **Implementazione** → raccoglie indicazioni utili per realizzare concretamente il pattern
+- **Codice di esempio** → mostra una possibile implementazione
+- **Usi conosciuti** → riporta applicazioni reali del pattern
+- **Pattern correlati** → collega il pattern ad altre soluzioni che possono essere alternative o complementari
+###  Framework e Design Pattern
+
+Prima di passare ai singoli pattern è utile distinguere i Design Pattern dai **Framework**
+perché entrambi riguardano il riuso ma a livelli differenti.
+
+Un **Framework** è un design riutilizzabile che costituisce lo scheletro di un sistema o di una sua parte. Non è quindi una semplice raccolta di funzioni: stabilisce una struttura entro cui lo sviluppatore costruisce la propria applicazione.
+- un **Design Pattern** descrive una soluzione astratta a un problema progettuale ricorrente;
+- un **Framework** fornisce una struttura riutilizzabile più ampia, composta da classi e relazioni concrete da specializzare;
+
+- i Design Pattern possono essere utilizzati come **mattoni progettuali** nella costruzione di un framework.
+#### Pattern creazionali
+I pattern creazionali servono quando il problema non è semplicemente *creare un oggetto*, ma **evitare che il client dipenda troppo dalle classi concrete da istanziare**.
+
+**Abstract Factory** e **Factory Method**
+Entrambi separano la logica di creazione dal codice che usa gli oggetti, ma lo fanno a livelli differenti
+
+L'**Abstract Factory** fornisce un'interfaccia per creare **famiglie di oggetti correlati** senza specificarne direttamente le classi concrete
+Il problema tipico nasce quando un'applicazione deve funzionare con più famiglie compatibili di prodotti. Il client dovrebbe poter cambiare famiglia senza essere riscritto.
+
+![[assets/p069-fig-032.png|536]]
+
+I ruoli principali sono:
+
+- **AbstractFactory** → dichiara le operazioni per creare i prodotti;
+- **ConcreteFactory** → crea una specifica famiglia di prodotti concreti;
+- **AbstractProduct** → definisce l'interfaccia comune di un tipo di prodotto;
+- **ConcreteProduct** → implementa concretamente quel prodotto;
+- **Client** → usa factory e prodotti attraverso le loro interfacce astratte.
+
+Il vantaggio principale è che il client rimane indipendente dalle classi concrete. Cambiare un'intera famiglia di prodotti richiede principalmente di cambiare la factory utilizzata.
+ **aggiungere un nuovo tipo di prodotto può richiedere modifiche all'interfaccia della factory e alle factory concrete**.
+
+Il **Factory Method** affronta un problema simile, ma non crea una famiglia completa. Definisce invece un metodo per creare un prodotto e lascia alle **sottoclassi** la scelta della classe concreta da istanziare.
+
+![[assets/p069-fig-033.png|650]]
+
+I ruoli principali sono:
+- **Product** → interfaccia comune degli oggetti prodotti;
+- **ConcreteProduct** → implementazione concreta;
+- **Creator** → dichiara il Factory Method;
+- **ConcreteCreator** → ridefinisce il Factory Method e decide quale ConcreteProduct creare.
+È utile quando una classe conosce il tipo generale di oggetto di cui ha bisogno, ma **non può o non vuole fissarne in anticipo la classe concreta**.
+
+#### Pattern strutturali
+Una volta creati gli oggetti, bisogna decidere **come farli collaborare e comporre senza introdurre dipendenze inutili**. I pattern strutturali affrontano proprio questo livello del progetto.
+
+L'**Adapter** permette di riutilizzare una classe esistente quando la sua interfaccia è incompatibile con quella richiesta dal client.
+Il problema è quindi di compatibilità, non di funzionalità: la classe esistente svolge già il lavoro necessario, ma il client non sa utilizzarla nel formato in cui si presenta.
+
+![[assets/p070-fig-034.png|650]]
+
+I partecipanti sono:
+- **Client** → usa l'interfaccia attesa;
+- **Target** → interfaccia richiesta dal client;
+- **Adaptee** → classe esistente da riutilizzare;
+- **Adapter** → traduce le richieste del Target nell'interfaccia dell'Adaptee.
+L'Adapter introduce quindi un **ponte tra due interfacce incompatibili**, evitando di modificare direttamente la classe già esistente.
+
+Il **Composite** serve quando bisogna rappresentare una struttura gerarchica composta da elementi semplici e gruppi di elementi, ma il client dovrebbe poterli trattare **allo stesso modo**.
+
+![[assets/p071-fig-035.png|469]]
+
+I ruoli fondamentali sono:
+
+- **Component** → interfaccia comune;
+- **Leaf** → elemento semplice senza figli;
+- **Composite** → elemento composto che contiene altri Component;
+- **Client** → opera sull'interfaccia Component senza dover distinguere continuamente Leaf e Composite.
+L'idea centrale è quindi:
+> **oggetti singoli e composizioni di oggetti condividono la stessa interfaccia.**
+
+
+Questo permette di costruire strutture ad albero e di manipolarle in maniera uniforme.
+
+Il **Decorator** permette di aggiungere dinamicamente nuove responsabilità a un oggetto **senza modificarne la classe di base** e senza creare una grande gerarchia di sottoclassi.
+![[assets/p071-fig-036.png|452]]
+
+I ruoli principali sono:
+- **Component** → interfaccia comune;
+- **ConcreteComponent** → oggetto base da estendere;
+- **Decorator** → mantiene un riferimento a un Component e ne condivide l'interfaccia;
+- **ConcreteDecorator** → aggiunge una specifica responsabilità.
+
+Il decoratore *avvolge* l'oggetto originale: dall'esterno continua a essere visto come un Component, ma il suo comportamento può essere arricchito.
+
+#### Pattern comportamentali
+I pattern comportamentali entrano in gioco quando la struttura degli oggetti è già definita, ma bisogna organizzare **come si distribuisce il comportamento e come gli oggetti comunicano tra loro**.
+
+L'**Observer** definisce una dipendenza **uno-a-molti** tra oggetti: quando cambia lo stato di un oggetto, gli altri oggetti interessati vengono notificati automaticamente.
+
+![[assets/p072-fig-037.jpeg|360]]
+
+I ruoli principali sono:
+- **Subject** → mantiene l'elenco degli observer e fornisce operazioni per registrarli o rimuoverli
+- **ConcreteSubject** → contiene lo stato osservato
+- **Observer** → definisce l'interfaccia di aggiornamento
+- **ConcreteObserver** → reagisce alle notifiche del Subject
+
+La sequenza logica è:
+1. un Observer si registra presso il Subject
+2. lo stato del Subject cambia
+3. il Subject notifica gli Observer registrati
+4. ogni Observer aggiorna il proprio stato o comportamento
+
+
+Il **Template Method** definisce nella superclasse la **struttura generale di un algoritmo**, lasciando alle sottoclassi l'implementazione di alcuni passaggi.
+
+![[assets/p073-fig-038.png|600]]
+
+Il pattern separa quindi:
+- una parte **invariante** dell'algoritmo, definita una volta nella classe astratta;
+- alcuni passi **variabili**, che vengono ridefiniti nelle sottoclassi.
+
+I ruoli principali sono:
+- **AbstractClass** → contiene il Template Method e dichiara le operazioni che possono essere ridefinite;
+- **ConcreteClass** → implementa i passi specifici.
+Il vantaggio è evitare di duplicare la struttura generale dell'algoritmo in più classi.
+
+Lo **Strategy** serve quando esistono più algoritmi alternativi per svolgere la stessa operazione e vogliamo poterli sostituire senza modificare il client.
+![[assets/p074-fig-039.png|434]]
+
+I ruoli principali sono:
+- **Strategy** → interfaccia comune degli algoritmi;
+- **ConcreteStrategy** → implementazioni alternative;
+- **Client** → utilizza una Strategy senza dipendere direttamente dai dettagli dell'algoritmo scelto.
+
+L'idea è quindi **incapsulare ogni algoritmo in un oggetto separato** e renderli intercambiabili.
+
+## Metriche Software
+Le **metriche software** servono proprio a trasformare alcune caratteristiche del progetto o del codice in valori misurabili. In questa parte del corso l'attenzione è sulle **metriche di struttura**.
+
+Le misure vengono distinte in due grandi categorie:
+
+- **intermodulari** → misurano relazioni e dipendenze **tra moduli**
+- **intramodulari** → misurano caratteristiche **interne al singolo modulo**
+
+### Structure Chart
+
+L'architettura dei moduli può essere rappresentata mediante una **Structure Chart**, cioè un grafo:
+$$S = \{N,R\}$$
+- `N` è l'insieme dei nodi, ciascuno corrispondente a un modulo;
+- `R` è l'insieme delle relazioni tra i moduli, per esempio chiamate o flussi di dati.
+
+Gli attributi principali considerati sono:
+
+- **coesione** → quanto un modulo svolge un compito ben definito;
+- **coupling** → quanto i moduli dipendono gli uni dagli altri;
+- **morfologia** → forma complessiva dell'architettura;
+- **Information Flow** → quantità e direzione delle informazioni scambiate tra moduli.
+
+#### MORFOLOGIA
+La **morfologia** descrive la forma complessiva della Structure Chart.
+Viene osservata attraverso:
+- **Size** → numero di nodi e archi
+- **Depth** → distanza massima dalla radice ai livelli più profondi
+- **Width** → massimo numero di nodi presenti allo stesso livello
+- **Edge-to-Node Ratio** → rapporto tra archi e nodi, utile per valutare quanto il grafo sia densamente connesso
+
+In generale una struttura molto interconnessa è più difficile da comprendere e modificare. Per questo viene introdotta una misura più specifica: la **Tree Impurity**
+##### Tree Impurity
+La **Tree Impurity** misura quanto la Structure Chart si discosta dalla forma di un albero
+
+Un albero rappresenta una struttura relativamente semplice: tra i moduli esistono pochi collegamenti e non compaiono molte dipendenze incrociate.
+
+Il valore `m(G)` varia tra `0` e `1`:
+
+- `m(G) = 0` → il grafo è un albero;
+- valori crescenti → il grafo si allontana dalla struttura ad albero
+- valori elevati → maggiore presenza di collegamenti aggiuntivi e quindi maggiore complessità strutturale
+##### Internal Reuse
+L'**Internal Reuse** misura il riuso dei moduli **all'interno dello stesso prodotto software**.
+$$r(G) = e - n + 1$$
+
+- `e` = numero di archi;
+- `n` = numero di nodi.
+Il punto da ricordare non è soltanto la formula: un modulo riutilizzato internamente crea più relazioni nell'architettura e quindi aumenta anche l'interdipendenza tra le parti
+- non considera quante volte una stessa relazione viene effettivamente utilizzata;
+- non considera la dimensione dei moduli coinvolti.
+#### Information Flow
+La morfologia osserva **la forma delle connessioni**. Non dice ancora quanto un modulo sia effettivamente coinvolto nello scambio di informazioni
+
+L'**Information Flow** completa quindi l'analisi misurando il flusso di informazioni tra un modulo e il resto del sistema
+
+I due concetti fondamentali sono:
+
+- **fan-in** → quantità di flussi che arrivano al modulo
+- **fan-out** → quantità di flussi che partono dal modulo
+
+- fan-in elevato → molti elementi del sistema dipendono da informazioni che arrivano al modulo o che esso fornisce;
+- fan-out elevato → il modulo interagisce o influenza molti altri elementi;
+- entrambi elevati → il modulo occupa una posizione molto centrale e può diventare un punto critico dell'architettura.
+
+![[assets/p078-fig-040.jpeg|299]]
+
+$$IF(M_i) = [fan\text{-}in(M_i) \times fan\text{-}out(M_i)]^2$$
+Un valore alto segnala un modulo fortemente connesso all'ambiente circostante e quindi potenzialmente più complesso da comprendere, modificare e testare
+
+#### FlowGraph
+
+Finora abbiamo osservato soprattutto l'architettura e le dipendenze tra moduli. Per misurare la complessità **interna** di un modulo dobbiamo invece rappresentare il suo flusso di controllo.
+
+Da questa necessità nasce il **Flowgraph**.
+
+Il **Flowgraph**, o grafo di flusso, rappresenta il flusso di controllo di un programma mediante un grafo diretto:
+$$FG = \{N,E\}$$
+
+- i **nodi** rappresentano blocchi o istruzioni del programma;
+- gli **archi** rappresentano i possibili passaggi del controllo da un nodo all'altro.
+
+
+- sequenze;
+- selezioni;
+- iterazioni;
+- chiamate a procedure o funzioni;
+- ricorsione;
+- concorrenza.
+
+![[assets/p079-fig-041.png|600]]
+
+##### Complessità ciclomatica
+
+La **Cyclomatic Complexity di McCabe** misura la complessità del flusso di controllo di un programma attraverso il suo flowgraph.
+- `e` archi;
+- `n` nodi;
+
+la formula è:
+
+Può essere calcolata in due modi:
+1. **Basata sul Flowgraph (Grafo)**: Data la formula $v(F) = e - n + 2$.
+    - $e$ = numero di archi (edges)
+    - $n$ = numero di nodi (nodes)
+2. **Basata sul Codice (Logica Rapida)**: Esiste una scorciatoia utilissima: $v(F) = 1 + d$
+    - $d$ = numero di **nodi predicato** (i punti di decisione come `if`, `while`, `for`)
+
+
+La complessità ciclomatica rappresenta il **numero di percorsi linearmente indipendenti** del flowgraph.
+- valore basso → pochi percorsi alternativi;
+- valore alto → più decisioni e percorsi;
+- più percorsi → maggiore difficoltà di comprensione, manutenzione e testing.
+
+
+La complessità ciclomatica fornisce una misura quantitativa utile, ma non esaurisce il concetto di complessità software:
+
+- è particolarmente adatta al livello del singolo componente;
+- programmi con lo stesso valore possono richiedere effort molto diverso;
+- per calcolarla bisogna conoscere abbastanza bene il design dettagliato o il codice.
+## Qualità del software, SQA e Testing
+Con le metriche abbiamo visto **come misurare alcune proprietà della struttura del software**. Questo, però, non basta ancora a dire se il prodotto è complessivamente di buona qualità.
+ tre blocchi:
+- **Quality Model** → definisce quali aspetti concorrono alla qualità
+- **Software Quality Assurance (SQA)** → controlla sistematicamente che processo e prodotto rispettino standard e procedure
+- **Verification, Validation e Testing** → controllano concretamente gli artefatti e il comportamento del software
+### Qualità del software
+La **qualità del software** è il grado con cui il software possiede una combinazione di attributi desiderabili
+
+
+Non esiste quindi una proprietà unica chiamata “qualità”: il giudizio dipende da quali caratteristiche stiamo osservando.
+quattro punti di vista:
+- **trascendentale** → qualità come eccellenza intrinseca del prodotto
+- **utente** → quanto il software permette all'utente di raggiungere i propri obiettivi
+- **prodotto** → qualità delle caratteristiche del software, come correttezza e affidabilità
+- **organizzazione** → benefici per l'organizzazione, ad esempio costi, profitti ed efficacia
+
+Per l'Ingegneria del Software interessa soprattutto trasformare caratteristiche che potrebbero sembrare soggettive in **valutazioni quanto più possibile oggettive e misurabili**
+
+#### Quality Model di McCall
+Il modello di **McCall** considera la qualità come combinazione di più fattori e li mette in relazione con le attività svolte sul prodotto durante il suo ciclo di vita.
+Il **Quality Triangle** distingue tre famiglie di attività:
+
+- **Operation** → uso effettivo del prodotto
+- **Revision** → modifica e manutenzione del prodotto
+- **Transition** → adattamento o trasferimento del prodotto verso nuovi contesti e utilizzi
+
+![[assets/p146-fig-167.png|330]]
+
+Il punto del triangolo non è soltanto classificare le attività. Serve a mostrare che **la qualità continua a essere rilevante dopo il rilascio**
+
+
+McCall associa alle tre famiglie di attività **12 indici di qualità**
+
+##### Operation
+Descrivono la qualità mentre il prodotto viene utilizzato:
+- **Correttezza** → grado con cui il prodotto soddisfa specifiche e obiettivi dell'utente
+- **Affidabilità** → grado con cui esegue le funzioni con la precisione richiesta
+- **Efficienza** → quantità di risorse di calcolo necessarie
+- **Integrità** → protezione da accessi esterni indesiderati
+- **Usabilità** → impegno richiesto all'utente per utilizzare il prodotto
+##### Revision
+Descrivono quanto facilmente il prodotto può essere controllato e modificato:
+- **Manutenibilità** → impegno richiesto per individuare e correggere difetti
+- **Testabilità** → impegno necessario per verificare il comportamento del prodotto
+- **Flessibilità** → impegno richiesto per modificarlo
+##### Transition
+Descrivono la capacità del software di adattarsi a nuovi utilizzi:
+- **Portabilità** → impegno necessario per trasferirlo in un altro ambiente operativo
+- **Riusabilità** → possibilità di riutilizzare il prodotto o sue parti
+- **Interoperabilità** → capacità di interagire con altri prodotti
+- **Evolubilità** → effort richiesto per adeguarlo a nuovi requisiti
+
+
+Si riportano dieci ***attributi*** utilizzabili per costruire gli indici:
+
+- **Complessità** → livello di comprensibilità del software;
+- **Accuratezza** → precisione dei risultati
+- **Completezza** → grado con cui le funzionalità richieste sono state implementate
+- **Consistenza** → uniformità degli approcci di progettazione adottati
+- **Error Tolerance** → capacità di continuare a funzionare in presenza di malfunzionamenti
+- **Tracciabilità** → possibilità di mettere in relazione prodotti diversi dello sviluppo, ad esempio requisito e codice
+- **Espandibilità** → possibilità di estendere storage e funzionalità
+- **Generalità** → ampiezza dei possibili contesti di utilizzo
+- **Modularità** → indipendenza tra moduli
+- **Auto-documentation** → capacità del software di supportare l'utente attraverso informazioni e help
+
+Un attributo può contribuire a più indici e può avere un impatto:
+
+- **positivo** → un valore maggiore migliora l'indice
+- **negativo** → un valore maggiore lo peggiora
+
+![[assets/p148-fig-168.png|486]]
+
+Gli attributi non sono sempre misurabili direttamente con una formula. Per rendere più sistematica la valutazione viene introdotto il **Checklist Method**.
+
+Una checklist contiene una serie di domande relative a un attributo. Alle risposte vengono associati valori che permettono di ottenere un punteggio complessivo.
+
+Le domande possono anche essere indicate come:
+
+- **Non Applicabili** → non devono contribuire al calcolo
+- **Non Valutabili** → non è possibile valutarle con le informazioni disponibili
+
+La valutazione non viene affidata a una sola persona ma vi è un **Checklist Evaluation Team** composto da persone con ruoli e competenze differenti.
+
+Ogni membro esamina inizialmente il materiale in modo indipendente. Successivamente, attraverso **Walkthrough** o **Inspection**, il team confronta le risposte e cerca di arrivare a una valutazione condivisa.
+
+![[assets/p152-fig-177.png|396]]
+
+l progetto ha bisogno di qualcosa di più generale: un'attività che controlli in modo continuativo **come il software viene prodotto e se vengono rispettate le regole definite dall'organizzazione**.
+
+Da qui nasce la Software Quality Assurance
+### Software Quality Assurance — SQA
+La **Software Quality Assurance (SQA)** è un approccio pianificato e sistematico per assicurare che **processo software e prodotto software** siano conformi agli standard, ai processi e alle procedure stabilite.
+
+Il suo obiettivo non è “scrivere il software al posto degli sviluppatori”, ma **controllare che il lavoro venga svolto correttamente e che eventuali deviazioni vengano individuate in tempo**.
+
+Il team SQA controlla, tra le altre cose, che:
+
+- venga adottata una metodologia di sviluppo appropriata
+- vengano seguiti standard e procedure
+- siano effettuate review adeguate
+- sia prodotta documentazione utile alla manutenzione
+- sia garantita la tracciabilità dei prodotti
+- venga svolto il testing previsto
+- deviazioni e problemi vengano segnalati al management
+
+La SQA richiede personale, tempo ed effort e quindi ha un costo. Per essere introdotta efficacemente deve essere sostenuta dal management attraverso un **SQA Plan**, nel quale vengono stabiliti gli standard e le attività di controllo da applicare.
+
+In SQA si distinguono
+- **standard** → definiscono **che cosa** dovrebbe essere fatto o rispettato;
+- **procedure** → descrivono **come** svolgere concretamente determinate attività.
+### Verification, Validation e Testing.
+Finora abbiamo visto come definire e assicurare la qualità a livello generale. Per verificare concretamente gli artefatti prodotti durante lo sviluppo servono le attività di **Verification & Validation (V&V)**.
+
+- **Verification** e **Validation** descrivono **che cosa vogliamo controllare**
+- **Inspection** e **Testing** sono strumenti con cui possiamo effettuare questi controlli
+
+La **Verification** controlla se il prodotto viene costruito correttamente rispetto agli artefatti e alle specifiche di riferimento
+
+La **Validation** controlla se il prodotto costruito soddisfa realmente le esigenze dell'utente
+
+Le **Software Inspections** sono controlli statici: si analizzano artefatti senza eseguire il software
+
+Il **Software Testing** è invece dinamico: si esegue il software o un suo componente e se ne osserva il comportamento
+
+Il documento che pianifica le attività di testing è il **Test Plan**
+
+
+Il testing non ha sempre lo stesso obiettivo. Gli appunti distinguono soprattutto tre forme.
+
+#### Validation Testing
+Il **Validation Testing** cerca di dimostrare che il software soddisfa i requisiti dell'utente.
+È particolarmente naturale nelle fasi finali, quando esiste una versione eseguibile del prodotto da confrontare con i requisiti e con i criteri di accettazione.
+
+Un validation test ha successo quando il sistema **si comporta come previsto**.
+#### Defect Testing
+Il **Defect Testing** ha l'obiettivo opposto: cerca di scoprire difetti latenti.
+
+Qui un test ha successo quando **fa emergere un comportamento errato**, perché ha permesso di individuare un problema che dovrà essere corretto.
+
+Il Defect Testing viene applicato prima ai singoli elementi e poi alle loro interazioni.
+
+si divide in due testing
+
+Il **Component Testing** riguarda unità e moduli considerati separatamente.
+
+È normalmente svolto dallo sviluppatore del componente e serve a verificare che l'unità funzioni correttamente in isolamento.
+
+L'**Integration Testing** verifica gruppi di componenti collegati tra loro fino ad arrivare a sottosistemi e sistema completo.
+
+Lo **User Testing**, invece, non appartiene al Defect Testing: serve a verificare dal punto di vista dell'utente che il sistema faccia ciò che è atteso e rientra quindi nella logica della validazione.
+
+#### Statistical Testing
+
+Lo **Statistical Testing** cerca di riprodurre statisticamente il modo in cui il software verrà utilizzato nella realtà.
+
+È particolarmente utile per valutare requisiti di **affidabilità**, perché non è realistico osservare il software per anni per sapere direttamente quanto spesso fallirà.
+
+Si costruisce quindi un **Operational Profile**, cioè una rappresentazione della frequenza con cui i diversi tipi di utenti producono determinati input. I risultati dei test vengono poi usati per stimare l'affidabilità.
+**costoso**
+
+
+#### Politiche di Testing
+
+Un testing esaustivo richiederebbe di provare tutte le combinazioni di input, condizioni e percorsi possibili. Per software non banali questo è impraticabile.
+
+Di conseguenza il problema reale diventa:
+
+> **come scegliere un insieme limitato di test che abbia comunque una buona probabilità di trovare difetti?**
+
+
+- **Test Case** → specifica l'input da fornire e l'output atteso se il sistema si comporta correttamente
+- **Test Data** → dati concreti utilizzati per esercitare il software e cercare di far emergere difetti
+
+##### Black Box Testing
+Nel **Black Box Testing**, o **Functional Testing**, il tester considera il software come una scatola nera:
+- conosce la specifica;
+- fornisce input;
+- osserva gli output;
+I Test Case derivano quindi principalmente dalla **specifica del sistema**
+
+Dato che non possiamo provare tutti gli input, l'**Equivalence Partitioning** divide gli input e gli output in **classi di equivalenza**.
+
+Una classe raccoglie valori per i quali ci si aspetta un comportamento simile del programma.
+
+Le **Testing Guidelines** applicano lo stesso principio a strutture come liste e array, suggerendo di provare casi significativi come:
+
+- sequenza vuota;
+- sequenza con un solo elemento;
+- sequenze di dimensioni differenti;
+- accesso al primo, all'ultimo e a un elemento intermedio
+##### White Box testing
+
+Il Black Box parte dalla specifica ma non ci dice quanto codice interno sia stato realmente esercitato.
+
+Per osservare anche questo aspetto serve il **White Box Testing**, chiamato anche **Structural Testing**.
+
+Qui il tester conosce la struttura interna del programma e costruisce i Test Case a partire dal **codice**.
+
+L'obiettivo non è necessariamente percorrere ogni combinazione possibile, ma ottenere una determinata **Testing Coverage**, cioè la percentuale di istruzioni o parti della struttura che vengono effettivamente attraversate dai test.
+
+##### Path Testing e complessità ciclomatica
+
+Lo **Structural Testing** porta naturalmente al problema dei percorsi di esecuzione.
+
+Il **Path Testing** usa il flowgraph del programma per individuare percorsi significativi e progettare Test Case che li attraversino.
+
+Il testing di tutti i percorsi possibili è generalmente impraticabile, soprattutto in presenza di cicli. Si cercano quindi **percorsi indipendenti**, cioè percorsi che introducono almeno un nuovo arco rispetto a quelli già considerati.
+
+Qui si ricollega la **complessità ciclomatica** studiata con le metriche:
+
+> il numero di percorsi linearmente indipendenti del flowgraph corrisponde alla complessità ciclomatica.
+
+Quindi la complessità ciclomatica non serve soltanto a descrivere la complessità strutturale del codice: può anche indicare **quanti percorsi indipendenti devono essere considerati per costruire un insieme di test di base**.
+
+![[assets/p157-fig-178.png|469]]
+
+
+#### Integration Testing
+
+Quando i singoli componenti sono stati testati, bisogna controllare che funzionino correttamente **quando vengono combinati**.
+
+L'Integration Testing può essere organizzato in modo incrementale secondo due strategie principali.
+##### Top-down
+Si parte dalle componenti di livello più alto e si integrano progressivamente quelle inferiori.
+
+Se una componente di basso livello non è ancora disponibile viene sostituita da uno **stub**, cioè un elemento semplificato che ne imita l'interfaccia e parte del comportamento.
+##### Bottom-up
+Si parte dalle componenti di livello più basso e le si integra progressivamente fino a costruire il sistema completo.
+
+Per esercitare componenti che non hanno ancora i moduli superiori che le chiameranno si usano **test driver**, cioè programmi che simulano il chiamante.
+
+##### Interface Testing
+
+L'Integration Testing controlla le relazioni tra componenti. Una parte particolarmente delicata è la loro **interfaccia**.
+
+- passaggio di **parametri**;
+- accesso a **memoria condivisa**;
+- **interfaccia procedurale**;
+- scambio di **messaggi**.
+
+Il punto da ricordare è che l'Interface Testing non entra necessariamente nella struttura interna del componente: verifica soprattutto che **il contratto di comunicazione tra componenti venga utilizzato correttamente**.
+
+#### Stress Testing
+Lo **Stress Testing** incrementa progressivamente il carico sul sistema fino a quando le prestazioni diventano inaccettabili.
+#### Object Oriented Testing
+Nei sistemi Object Oriented l'unità fondamentale non è una semplice funzione isolata, ma una **classe** che incapsula stato e operazioni e i cui oggetti interagiscono tramite messaggi.
+
+Per questo il testing procede per livelli:
+
+1. **metodi** individuali;
+2. **oggetto/classe** nel suo complesso;
+3. **cluster di oggetti** che collaborano;
+4. **sistema Object Oriented** completo.
+
+L'**ereditarietà** complica il testing perché un comportamento ereditato può dover essere verificato anche nelle sottoclassi che lo utilizzano o lo specializzano.
+#### Cluster Testing
+Quando si passa dall'oggetto singolo alle interazioni tra oggetti si parla di **Cluster Testing**.
+tre approcci:
+
+- **Use-case / Scenario Testing** → deriva i test dalle interazioni descritte dai casi d'uso;
+- **Thread Testing** → verifica la risposta del sistema a una specifica sequenza di eventi;
+- **Object Interaction Testing** → controlla una sequenza di messaggi scambiati tra oggetti.
+
+## BPM e BPMN
+Con il testing termina il blocco dedicato alla qualità del prodotto software. Le ultime pagine degli appunti introducono invece un tema più ampio: la rappresentazione dei **processi aziendali**.
+
+Un **Business Process (BP)** è un insieme di attività logicamente correlate e coordinate per raggiungere un obiettivo aziendale e produrre un risultato di valore per un cliente del processo.
+
+Quando un processo aziendale viene automatizzato, in tutto o in parte, da un sistema software si parla di **Workflow**.
+Le organizzazioni devono quindi poter:
+
+- identificare i propri processi;
+- rappresentarli;
+- analizzarli;
+- migliorarli;
+- monitorarne l'esecuzione.
+
+Questa è la logica del **Business Process Management (BPM)**.
+
+
+**BPMN — Business Process Model and Notation** è una notazione standard per rappresentare graficamente i processi aziendali.
+
+I suoi elementi di base sono:
+
+- **Start Event** → punto di inizio;
+- **End Event** → punto di conclusione;
+- **Task** → attività atomica;
+- **Sequence Flow** → ordine delle attività;
+- **Gateway** → controlla diramazioni e ricongiungimenti del flusso.
+
+I gateway principali sono:
+
+- **Exclusive Gateway (XOR)** → viene scelto un solo percorso alternativo;
+- **Parallel Gateway (AND)** → più percorsi vengono eseguiti in parallelo;
+- **Inclusive Gateway (OR)** → possono essere attivati uno o più percorsi in funzione delle condizioni.
+
+Per rappresentare chi svolge le attività si usano:
+
+- **Pool** → partecipanti o organizzazioni indipendenti;
+- **Lane** → ruoli o unità organizzative interne a uno stesso partecipante.
+
+I **Message Flow** rappresentano invece i messaggi scambiati tra partecipanti distinti.
+
+BPMN distingue inoltre:
+
+- **Orchestrazione** → processo interno controllato da una singola organizzazione;
+- **Collaborazione** → interazione tra più partecipanti tramite messaggi;
+- **Coreografia** → descrizione delle interazioni tra partecipanti senza porre un unico processo centrale al comando.
