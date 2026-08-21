@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "03a00eb5621fa5fb",
+        "id": "1f6e879734de9ed7",
         "type": "tabs",
         "children": [
           {
-            "id": "2802ce76d01a0210",
+            "id": "799f8b460da05f9b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -173,8 +173,9 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "2802ce76d01a0210",
+  "active": "799f8b460da05f9b",
   "lastOpenFiles": [
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/21_agosto.md",
@@ -190,7 +191,6 @@
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Unconfirmed 586004.crdownload",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/12. Metriche di struttura.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/20_agosto.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/10a. Design Pattern.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p081-fig-045.jpeg",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p080-fig-042.jpeg",

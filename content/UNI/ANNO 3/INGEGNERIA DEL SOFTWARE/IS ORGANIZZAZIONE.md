@@ -1,5 +1,7 @@
 Sì, **in 3 giorni puoi riuscire a rivedere tutto il programma**, soprattutto perché non stai partendo da zero: hai già un file unico molto ricco e ordinato per grandi blocchi. Quello che farei adesso non è “ristudiare tutto da capo”, ma costruire la **versione short definitiva** mentre ripassi. Il tuo `IS UNICO` parte dai fondamenti e arriva fino a qualità/testing/BPMN, quindi il programma si presta bene a essere diviso in tre macro-blocchi logici.
 
+rivedere bene anche l'esercizio
+
 La divisione che ti consiglio è questa:
 
 - **Giorno 1 — fino a SSA compresa**
