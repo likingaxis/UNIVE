@@ -6,12 +6,12 @@ I prezzi sono **stime prudenziali**, non prezzi garantiti: cambiano per città, 
 
 ### Ortofrutta
 
-| Prodotto | Quantità da usare | Formato pratico | Stima |
-|---|---:|---:|---:|
-| Banane | 5, circa 700–800 g | 1 casco | €1,50–2,00 |
-| Patate | 1.050 g | Sacco da 1,5 kg | €2,00–2,80 |
-| Zucchine e peperoni stagionali | 700 g | Circa 1 kg misto | €2,00–3,50 |
-| Cipolle | 100 g | Confezione piccola | €0,80–1,30 |
+| Prodotto                       |  Quantità da usare |    Formato pratico |      Stima |
+| ------------------------------ | -----------------: | -----------------: | ---------: |
+| Banane                         | 5, circa 700–800 g |            1 casco | €1,50–2,00 |
+| Patate                         |            1.050 g |    Sacco da 1,5 kg | €2,00–2,80 |
+| Zucchine e peperoni stagionali |              700 g |   Circa 1 kg misto | €2,00–3,50 |
+| Cipolle                        |              100 g | Confezione piccola | €0,80–1,30 |
 
 ### Proteine e latticini
 
@@ -59,16 +59,16 @@ Il costo effettivamente consumato nei cinque giorni è inferiore, indicativament
 
 ## Ordine rapido per il supermercato
 
-- [ ] Banane
-- [ ] Patate
-- [ ] Zucchine e peperoni
-- [ ] 6 uova
-- [ ] 1 tofu
-- [ ] 1 fiocchi di latte
-- [ ] 1 mozzarella
-- [ ] 1 ricotta
-- [ ] 1 pane
-- [ ] 1 burro d’arachidi
+- [x] Banane
+- [x] Patate
+- [x] Zucchine e peperoni
+- [x] 6 uova
+- [x] 1 tofu
+- [x] 1 fiocchi di latte
+- [x] 1 mozzarella
+- [x] 1 ricotta
+- [x] 1 pane
+- [x] 1 burro d’arachidi
 
 ## Prima di uscire
 
