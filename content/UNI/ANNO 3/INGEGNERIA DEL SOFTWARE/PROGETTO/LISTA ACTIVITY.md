@@ -2,9 +2,9 @@
 
 **Utente non registrato / Utente di sistema**   SAMUELE
 
-1. Registrarsi come cittadino
-2. Registrarsi tramite codice invito
-3. Effettuare accesso
+1. Registrarsi come cittadino FATTO
+2. Registrarsi tramite codice invito FATTO
+3. Effettuare accesso FATTO
 
 **Cittadino**  DAVIDE
 4. Richiedere ritiro a domicilio  
@@ -17,13 +17,13 @@
 11. Valutare il servizio
 
 **Autista AMA**  LUCA
-12. Visualizzare ritiri assegnati / Consultare dettagli del ritiro  si
-13. Registrare esito del ritiro  
-14. Chiamare cittadino
+12. Visualizzare ritiri assegnati / Consultare dettagli del ritiro  FATTO
+13. Registrare esito del ritiro   FATTO
+14. Chiamare cittadino FATTO
 
 **Operatore di sede AMA**  LUCA
-15. Visualizzare prenotazioni della sede / Consultare dettagli  
-16. Verificare prenotazione del cittadino  
+15. Visualizzare prenotazioni della sede / Consultare dettagli  FATTO
+16. Verificare prenotazione del cittadino  FATTO
 17. Registrare esito del conferimento
 
 **Amministratore di sede AMA**  ALFREDO
@@ -35,5 +35,5 @@
 23. Rimuovere personale
 
 **Amministratore generale AMA**  SAMUELE
-24. Generare codice amministratore di sede  
-25. Rimuovere amministratore di sede AMA
+24. Generare codice amministratore di sede   FATTO
+25. Rimuovere amministratore di sede AMA FATTO
