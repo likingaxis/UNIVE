@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "647b7f08e597a054",
+        "id": "bd156c8972ae9a4e",
         "type": "tabs",
         "children": [
           {
-            "id": "54b9c58e513e7a7f",
+            "id": "d45ddd1f186f237f",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -173,15 +173,16 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "54b9c58e513e7a7f",
+  "active": "d45ddd1f186f237f",
   "lastOpenFiles": [
+    "UNI/PROGETTI/MY COOK/lista-spesa.md",
+    "UNI/PROGETTI/MY COOK/Unconfirmed 69323.crdownload",
     "UNI/PROGETTI/MY COOK/Unconfirmed 233181.crdownload",
     "UNI/PROGETTI/MY COOK/Unconfirmed 263281.crdownload",
     "UNI/PROGETTI/MY COOK/Unconfirmed 947398.crdownload",
     "UNI/PROGETTI/MY COOK/ssh-key-2026-08-22.key",
     "UNI/PROGETTI/MY COOK/Unconfirmed 385313.crdownload",
     "UNI/PROGETTI/MY COOK/Persona.md",
-    "UNI/PROGETTI/MY COOK/lista-spesa.md",
     "UNI/PROGETTI/MY COOK/ricette.md",
     "UNI/PROGETTI/MY COOK/Unconfirmed 40440.crdownload",
     "UNI/PROGETTI/MY COOK/Unconfirmed 610595.crdownload",
@@ -189,11 +190,9 @@
     "UNI/PROGETTI/MY COOK/Unconfirmed 748220.crdownload",
     "UNI/PROGETTI/MY COOK/Unconfirmed 892832.crdownload",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
-    "UNI/PROGETTI/MY COOK",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/LISTA ACTIVITY.md",
     "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore generale AMA.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Unconfirmed 405481.crdownload",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore di sede AMA.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/guida-operativa.md",

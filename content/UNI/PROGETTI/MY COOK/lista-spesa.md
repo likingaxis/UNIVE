@@ -62,14 +62,11 @@ Il costo effettivamente consumato nei cinque giorni è inferiore, indicativament
 - [ ] Banane
 - [ ] Patate
 - [ ] Zucchine e peperoni
-- [ ] Cipolle
 - [ ] 6 uova
 - [ ] 1 tofu
 - [ ] 1 fiocchi di latte
 - [ ] 1 mozzarella
 - [ ] 1 ricotta
-- [ ] 1 formaggio grattugiato
-- [ ] 1 couscous
 - [ ] 1 pane
 - [ ] 1 burro d’arachidi
 
