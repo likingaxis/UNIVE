@@ -1,0 +1,19 @@
+# Documentazione Use Case — Amministratore generale AMA
+
+| **Use Case** **Generare codice amministratore di sede** |  |
+| --- | --- |
+| **Descrizione** | **Passo azione**<br><br>**1.** L’amministratore generale AMA accede alla funzionalità per la generazione dei codici invito.<br><br>**2.** Il sistema verifica che l’amministratore generale disponga dei permessi necessari.<br><br>**3.** L’amministratore generale seleziona la generazione di un codice destinato alla registrazione di un nuovo amministratore di sede AMA.<br><br>**4.** Il sistema genera un codice invito associato al ruolo di amministratore di sede AMA.<br><br>**5.** Il sistema mostra il codice generato all’amministratore generale.<br><br>**6.** L’amministratore generale può comunicare il codice al futuro amministratore di sede, che potrà utilizzarlo durante la registrazione. |
+| **Attori** | Amministratore generale AMA |
+| **Precondizioni** | L’amministratore generale AMA ha effettuato l’accesso al sistema e dispone dei permessi necessari per generare codici invito destinati alla registrazione di amministratori di sede AMA. |
+| **Scenario principale** | L’amministratore generale richiede la generazione di un nuovo codice invito per un amministratore di sede. Il sistema verifica i permessi, genera correttamente il codice e lo rende disponibile all’amministratore generale. |
+| **Scenari alternativi** | L’amministratore generale non dispone dei permessi necessari: il sistema impedisce la generazione del codice.<br><br>Si verifica un errore durante la generazione: il sistema informa l’amministratore generale e non produce alcun codice valido. |
+| **Post-condizioni** | È stato generato un codice invito valido associato al ruolo di amministratore di sede AMA, utilizzabile da un utente non registrato per completare la relativa procedura di registrazione. |
+
+| **Use Case** **Rimuovere amministratori di sede AMA** |  |
+| --- | --- |
+| **Descrizione** | **Passo azione**<br><br>**1.** L’amministratore generale AMA accede alla sezione dedicata alla gestione degli amministratori di sede.<br><br>**2.** Il sistema mostra l’elenco degli amministratori di sede AMA registrati nel sistema.<br><br>**3.** L’amministratore generale seleziona l’amministratore di sede che intende rimuovere.<br><br>**4.** Il sistema mostra le informazioni relative all’amministratore selezionato.<br><br>**5.** L’amministratore generale richiede la rimozione dell’amministratore di sede.<br><br>**6.** Il sistema richiede conferma dell’operazione.<br><br>**7.** L’amministratore generale conferma la rimozione.<br><br>**8.** Il sistema rimuove o disabilita l’associazione dell’utente al ruolo di amministratore di sede AMA e conferma l’operazione. |
+| **Attori** | Amministratore generale AMA |
+| **Precondizioni** | L’amministratore generale AMA ha effettuato l’accesso al sistema e l’amministratore di sede selezionato risulta registrato e attivo nel sistema. |
+| **Scenario principale** | L’amministratore generale seleziona un amministratore di sede, ne richiede la rimozione e conferma l’operazione. Il sistema aggiorna correttamente le informazioni relative al ruolo dell’utente. |
+| **Scenari alternativi** | L’amministratore selezionato non risulta più presente o attivo nel sistema: il sistema informa l’amministratore generale e non effettua modifiche.<br><br>L’amministratore generale interrompe l’operazione prima della conferma: nessuna modifica viene effettuata.<br><br>Il sistema non riesce a completare la rimozione: l’operazione viene annullata e viene mostrato un messaggio di errore. |
+| **Post-condizioni** | L’utente selezionato non risulta più abilitato a operare come amministratore di sede AMA nel sistema. |

@@ -1,11 +1,7 @@
 - fregatene dei voti, stai costruendo la persona che sarai in magistrale, lì puoi grindare di brutto sei bravo in quelle cose e inoltre farai esperienze come erasmus ecc... (Se ti impegni davvero)
 
+fai controllare system requirements basandosi su activity diagram e su use case requirements
 
-
-- [x] 19 agosto mattina finisco 16 agosto pomeriggio faccio 17 agosto
-- [x] 20 agosto 18 agosto
-- [ ]  21 agosto 19 agosto 20 agosto
-- [ ]  22 agosto 21 agosto
 
 
 8 giorni per ripassare tutto+ progetto
