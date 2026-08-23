@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/PROGETTI/MY COOK/lista-spesa.md",
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "lista-spesa"
+              "title": "IS UNICO"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 502.29998779296875
+    "width": 457.5
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -175,21 +175,27 @@
   },
   "active": "d45ddd1f186f237f",
   "lastOpenFiles": [
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS IDEA.md",
+    "UNI/PROGETTI/GYM TRACKER/Pasted image 20260715222427.png",
+    "UNI/PROGETTI/GYM TRACKER/Pasted image 20260715222202.png",
+    "UNI/PROGETTI/MY COOK/ricette.md",
+    "UNI/PROGETTI/GYM TRACKER/GYMTRACKER.md",
+    "UNI/PROGETTI/GYM TRACKER",
+    "UNI/PROGETTI/GYM TRACKER/Pasted image 20260715222229.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+    "UNI/PROGETTI/MY COOK/ssh-key-2026-08-23.key",
+    "UNI/PROGETTI/MY COOK/Unconfirmed 316575.crdownload",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS INDICE.md",
+    "UNI/PROGETTI/MY COOK/ssh-key-2026-08-22.key",
+    "UNI/PROGETTI/MY COOK/Unconfirmed 637685.crdownload",
     "UNI/PROGETTI/MY COOK/lista-spesa.md",
     "UNI/PROGETTI/MY COOK/Unconfirmed 69323.crdownload",
     "UNI/PROGETTI/MY COOK/Unconfirmed 233181.crdownload",
     "UNI/PROGETTI/MY COOK/Unconfirmed 263281.crdownload",
     "UNI/PROGETTI/MY COOK/Unconfirmed 947398.crdownload",
-    "UNI/PROGETTI/MY COOK/ssh-key-2026-08-22.key",
     "UNI/PROGETTI/MY COOK/Unconfirmed 385313.crdownload",
     "UNI/PROGETTI/MY COOK/Persona.md",
-    "UNI/PROGETTI/MY COOK/ricette.md",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 40440.crdownload",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 610595.crdownload",
     "UNI/PROGETTI/MY COOK/piano-5-giorni.md",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 748220.crdownload",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 892832.crdownload",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/LISTA ACTIVITY.md",
     "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore generale AMA.md",
@@ -211,14 +217,9 @@
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p081-fig-045.jpeg",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p080-fig-042.jpeg",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p079-fig-041.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p078-fig-040.jpeg",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p074-fig-039.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p073-fig-038.png",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/19_agosto.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/09b. OOD.md",
     "UNI/ANNO 3/TESI/TESI.md",
-    "UNI/ANNO 3/TESI/PDF DI SPIEGAZIONE.md",
-    "UNI/ANNO 3/TESI/EMAIL AL PASQUALE 2.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS INDICE.md"
+    "UNI/ANNO 3/TESI/PDF DI SPIEGAZIONE.md"
   ]
 }
