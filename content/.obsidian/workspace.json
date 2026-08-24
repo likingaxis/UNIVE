@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "bd156c8972ae9a4e",
+        "id": "b9581bbe49cefbd6",
         "type": "tabs",
         "children": [
           {
-            "id": "d45ddd1f186f237f",
+            "id": "5ea4a81ec35a90a5",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/IS_andrea.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "IS_andrea"
+              "title": "New tab"
             }
           }
         ]
@@ -80,7 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 457.5
+    "width": 452.70001220703125
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -173,52 +169,52 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "d45ddd1f186f237f",
+  "active": "385e3b437a6aac05",
   "lastOpenFiles": [
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/2_Glossario/2_Glossario.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/6_Design_Patterns/6_Design_Patterns.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/1_Introduzione/1_Introduzione.md",
+    "UNI/ANNO 3/tree.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/uc_utente_non_registrato.jpg",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/uc_operatore_sede.jpg",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/uc_autista.jpg",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/uc_cittadino.jpg",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/uc_amministratore_sede.jpg",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/uc_amministratore_generale.jpg",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/tor_vergata_logo.png",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/seq_Visualizzare_ritiri_assegnati.jpg",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/seq_Utente_non_Registrazione_cittadino.jpg",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/cover.pdf",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/5_Modelli_OOA/5_Modelli_OOA.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/3_User_Requirements/3_User_Requirements.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/4_System_Requirements/4_System_Requirements.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/README.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/6_Design_Patterns",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/5_Modelli_OOA",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/2_Glossario",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/4_System_Requirements",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/3_User_Requirements",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/1_Introduzione",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/IS_andrea.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS INDICE.md",
-    "UNI/PROGETTI/MY COOK/ssh-key-2026-08-23.key",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 348630.crdownload",
     "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
     "UNI/PROGETTI/MY COOK/piano-5-giorni.md",
     "UNI/PROGETTI/MY COOK/ricette.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS IDEA.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
-    "UNI/PROGETTI/GYM TRACKER/Pasted image 20260715222427.png",
-    "UNI/PROGETTI/GYM TRACKER/Pasted image 20260715222202.png",
     "UNI/PROGETTI/GYM TRACKER/GYMTRACKER.md",
-    "UNI/PROGETTI/GYM TRACKER",
-    "UNI/PROGETTI/GYM TRACKER/Pasted image 20260715222229.png",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 316575.crdownload",
-    "UNI/PROGETTI/MY COOK/ssh-key-2026-08-22.key",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 637685.crdownload",
     "UNI/PROGETTI/MY COOK/lista-spesa.md",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 69323.crdownload",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 233181.crdownload",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 263281.crdownload",
-    "UNI/PROGETTI/MY COOK/Unconfirmed 947398.crdownload",
     "UNI/PROGETTI/MY COOK/Persona.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/LISTA ACTIVITY.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore generale AMA.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore di sede AMA.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/guida-operativa.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/plan-giorni.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/21_agosto.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/IS_andrea.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/13. Qualità del software.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p157-fig-178.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p148-fig-168.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p152-fig-177.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p146-fig-167.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/12. Metriche di struttura.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/20_agosto.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/10a. Design Pattern.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p081-fig-045.jpeg",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p080-fig-042.jpeg",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p079-fig-041.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/19_agosto.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/CORSETTI/09b. OOD.md",
-    "UNI/ANNO 3/TESI/TESI.md"
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/21_agosto.md"
   ]
 }
