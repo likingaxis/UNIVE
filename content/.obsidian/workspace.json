@@ -11,10 +11,14 @@
             "id": "5ea4a81ec35a90a5",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "IS UNICO"
             }
           }
         ]
@@ -76,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 452.70001220703125
+    "width": 285.5
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -169,8 +173,11 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "385e3b437a6aac05",
+  "active": "5ea4a81ec35a90a5",
   "lastOpenFiles": [
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore generale AMA.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore di sede AMA.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/2_Glossario/2_Glossario.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/6_Design_Patterns/6_Design_Patterns.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/1_Introduzione/1_Introduzione.md",
@@ -206,13 +213,10 @@
     "UNI/PROGETTI/MY COOK/piano-5-giorni.md",
     "UNI/PROGETTI/MY COOK/ricette.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS IDEA.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
     "UNI/PROGETTI/GYM TRACKER/GYMTRACKER.md",
     "UNI/PROGETTI/MY COOK/lista-spesa.md",
     "UNI/PROGETTI/MY COOK/Persona.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/LISTA ACTIVITY.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore generale AMA.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore di sede AMA.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/guida-operativa.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/plan-giorni.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/21_agosto.md"
