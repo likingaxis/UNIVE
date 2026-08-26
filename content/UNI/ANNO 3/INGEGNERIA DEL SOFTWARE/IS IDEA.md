@@ -1,2 +1,0 @@
-- continuare e chiudere il modulo 2
-- ripartire da modulo 1 ma fare un riassunto molto all'osso sulle cose e spiegare bene i concetti dietro

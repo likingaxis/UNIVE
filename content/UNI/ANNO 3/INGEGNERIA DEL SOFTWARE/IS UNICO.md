@@ -130,7 +130,7 @@ si distinguono quindi 3 concetti
 	- anomalia che rimane nel prodotto come conseguenza dell'errore
 - Guasto
 	- comportamento scorretto del prodotto dovuta ad un difetto
-	- 
+
 Un punto fondamentale è che **un difetto non produce necessariamente sempre un guasto**.
 
 Se la parte di codice contenente il difetto non viene mai eseguita in una certa modalità d'uso, quel difetto rimane latente.
@@ -1713,7 +1713,7 @@ Si presentano cinque livelli, dal peggiore al migliore
       ![[CORSETTI/Immagini/Pasted image 20260422175604.png|452]]
       
 3. **Control (di Controllo - Livello 3):** Un modulo passa un "flag di controllo" ad un altro modulo per pilotarne esplicitamente l'esecuzione interna.
-    - _Esempio:_ Il Modulo P chiama Q per fargli fare una cosa. Q ritorna un flag (es. "task non completato") imponendo a P di compiere un'azione specifica di conseguenza (es. "stampa messaggio di errore"). P e Q sono intimamente legati dalla logica di controllo.
+    - _Esempio:_ Il Modulo P chiama Q per fargli fare una cosa. Q ritorna un flag (es. "task non completato") imponendo a P di compiere un'azione specifica di conseguenza (es. "stampa messaggio di errore"). P e Q sono intimamente legati dalla logica di controllo.~~~~~~~~
 4. **Stamp (di Struttura - Livello 4):** Si passa un'intera e complessa struttura dati (come un record enorme o un oggetto complesso) tra due moduli, ma il modulo ricevente ne usa solo una minuscola parte. Crea dipendenze artificiali su dati non necessari.
 5. **Data (di Dati - Livello 5, Ottimale):** Due moduli comunicano passandosi argomenti semplici o strutture dati ma utilizzandone rigorosamente _tutti_ gli elementi. È l'accoppiamento più pulito: si passa solo il necessario, senza retroscena nascosti o passaggi inutili.
 

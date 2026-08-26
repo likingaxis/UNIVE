@@ -1,6 +1,6 @@
-/* Corsivo: *testo* - verde pastello */
+/* Corsivo: *testo* - rosso pastello */
 body .markdown-source-view.mod-cm6 .cm-line .cm-em:not(.cm-strong) {
-  color: #a9b665 !important;
+  color: #ea6962 !important;
   font-style: italic !important;
   font-weight: normal !important;
 }
