@@ -1,4 +1,3 @@
-### MODULO 1
 # 📑 INDICE GENERALE DEFINITIVO: `IS UNICO SHORT`
 
 ### 🏛️ MODULO 1: Fondamenti, Economia e Affidabilità del Software
@@ -78,9 +77,9 @@
     * *Scatto:* consuma $w(p,t)$ token dai posti di input e genera $w(t,p)$ token nei posti di output.
   * Proprietà delle Reti di Petri: *Non determinismo*, *Liveness* (assenza di deadlock), *Boundedness / Safety* (capacità finita dei posti), *Reachability* (albero delle marcature raggiungibili).
   * Cenni ad altri formalismi: Finite State Machines (FSM) e Linguaggio Z (schemi basati su insiemi e logica del primo ordine).
-
+26
 ---
-
+27
 ### 🧩 MODULO 4: Analisi Orientata agli Oggetti (OOA) & UML
 * **4.1 Principi OOA & Architettura BCE**
   * Filosofia di analisi OO; Il pattern **BCE**:
@@ -136,9 +135,9 @@
   * Reti **PERT / CPM:** Calcolo dei tempi al più presto ($ES, EF$) e al più tardi ($LS, LF$); Identificazione del **Cammino Critico (*Critical Path*)** con slittamento nullo ($\text{Float} = LS - ES = 0$).
   * Diagramma di **Gantt:** Cronoprogramma a barre temporali e Milestone.
   * Struttura del documento **SPMP (*Software Project Management Plan*)** secondo standard IEEE 1058.
-
+27
 ---
-
+28
 ### 🏗️ MODULO 6: Progettazione Architetturale & Sistemi Distribuiti (OOD)
 * **6.1 Principi Fondamentali di Progettazione**
   * Astrazione, Stepwise Refinement, Modularità.
@@ -187,9 +186,9 @@
   6. **Observer** *(Comportamentale su Oggetti):* Dipendenza 1-a-molti (Publish-Subscribe); notifica automatica a tutti gli osservatori registrati quando cambia lo stato del soggetto.
   7. **Template Method** *(Comportamentale su Classi):* Scheletro invariante di un algoritmo nella classe base, con singoli passi variabili ridefiniti nelle sottoclassi concrete.
   8. **Strategy** *(Comportamentale su Oggetti):* Famiglia di algoritmi incapsulati in classi separate, resi intercambiabili a runtime tramite polimorfismo.
-
+28
 ---
-
+29
 ### 📐 MODULO 8: Metriche del Software & Misura della Complessità
 * **8.1 Metriche di Struttura Modulare (Structure Chart)**
   * Rappresentazione ad albero/grafo $S = \{N, R\}$.
@@ -247,3 +246,7 @@
     * *Gateway (Rombi):* **Exclusive Gateway (XOR, $\times$)**, **Parallel Gateway (AND, $+$)**, **Inclusive Gateway (OR, $\circ$)**.
     * *Flussi:* Sequence Flow (linea continua), Message Flow (linea tratteggiata tra pool).
     * *Swimlanes:* **Pool** (processi/attori indipendenti) e **Lane** (ruoli interni a una pool).
+29
+
+
+30 31 per ripetere tutto

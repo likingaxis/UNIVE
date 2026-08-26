@@ -10,7 +10,7 @@
 ### Profilo Docente & Dinamica dell'Interrogazione
 1. **Struttura a Macro-Argomento:** L'orale parte sempre da una domanda aperta su un tema ampio (*"Parlami del modello a spirale"*, *"Come si calcola la complessità ciclomativa?"*, *"Cosa sono i Component Framework?"*).
 2. **Discesa nel Dettaglio Tecnico:** Dalla macro-definizione, il docente scende verticalmente su formule matematiche, variabili, passaggi algoritmici, regole di scatto o notazioni UML.
-3. **Confronti e Trade-off:** Richiesta sistematica di differenze (*Class Adapter vs Object Adapter*, *Black-Box vs White-Box*, *Include vs Extend*, *Waterfall vs Spirale*, *LOC vs FP*).
+3. **Confronti e Trade-off:** Richiesta sistematica di differenze (*Class Adapter vs Object Adapter*, *Black-Box vs White-Box*, *Include vs Extend*, *Waterfall vs Spirale*, *LOC vs FP*, *Con vs Senza Overall Architecture*).
 4. **Collegamento al Progetto d'Esame:** Richiesta di contestualizzare le nozioni teoriche sulle scelte fatte nel progetto (es. esempi di requisiti non funzionali, diagrammi dei casi d'uso, gestione eccezioni).
 
 ### Regole di Generazione per l'Assistente AI
@@ -29,13 +29,21 @@
 
 ## 📐 2. FORMULARIO E SCHEMI MATEMATICI CRUCIALI
 
-### 1. Disponibilità del Software (Availability)
+### 1. Legge Quadratica del Costo & Giustificazione della Modularità
+$$C = a \cdot S^2$$
+- $C$ = costo/sforzo di sviluppo; $S$ = dimensione/complessità del software (LOC); $a$ = costante di produttività.
+- **Dimostrazione del Vantaggio Modulare:** Scomponendo un monolite di taglia $S$ in due moduli indipendenti di taglia $S/2$:
+  $$C_{\text{scomposto}} = a \left(\frac{S}{2}\right)^2 + a \left(\frac{S}{2}\right)^2 = \frac{a S^2}{4} + \frac{a S^2}{4} = \frac{a S^2}{2} = \frac{1}{2} C_{\text{monolitico}}$$
+  *(La modularizzazione dimezza formalmente i costi di sviluppo)*.
+- **Repliche:** costo marginale di copia nullo ($C \approx 0$).
+
+### 2. Disponibilità del Software (Availability)
 $$\text{Availability} = \frac{\text{MTBF}}{\text{MTBF} + \text{MTTR}}$$
 - **MTBF (Mean Time Between Failures):** Tempo medio tra due guasti consecutivi.
 - **MTTR (Mean Time To Repair):** Tempo medio necessario per ripristinare il sistema.
 - **Catena dell'Anomalia:** $\text{Errore umano} \to \text{Difetto (Defect/Bug statico)} \to \text{Guasto (Failure dinamico a runtime)}$.
 
-### 2. Function Point Analysis (FPA - Stima Dimensione)
+### 3. Function Point Analysis (FPA - Stima Dimensione)
 $$\text{FP} = \text{UFC} \times \text{TCF}$$
 - **UFC (Unadjusted Function Points):** Somma pesata di 5 componenti:
   - *Dati:* **ILF** (Internal Logical Files), **EIF** (External Interface Files).
@@ -44,7 +52,7 @@ $$\text{FP} = \text{UFC} \times \text{TCF}$$
   $$\text{TCF} = 0.65 + 0.01 \cdot \sum_{j=1}^{14} F_j \quad \Longrightarrow \quad \text{TCF} \in [0.65, 1.35] \quad (\pm 35\%)$$
 - **Backfiring:** Conversione empirica $\text{LOC} = \text{FP} \times \text{Gearing Ratio}(\text{Linguaggio})$.
 
-### 3. Modello Algoritmico COCOMO (Boehm)
+### 4. Modello Algoritmico COCOMO (Boehm)
 - **Livelli:** *Basic*, *Intermediate*, *Advanced*.
 - **Modalità di Sviluppo:** *Organic* (piccolo, esperto), *Semi-detached* (medio), *Embedded* (critico, vincolato).
 - **Formule:**
@@ -52,18 +60,18 @@ $$\text{FP} = \text{UFC} \times \text{TCF}$$
   $$\text{Effort} = \text{Effort}_{\text{nom}} \cdot \prod_{i=1}^{15} c_i \quad (c_i = \text{Cost Drivers})$$
   $$\text{Time} = c \cdot (\text{Effort})^d \quad [\text{Mesi}]$$
 
-### 4. Riuso Interno di Yin & Winchester (Structure Chart)
+### 5. Riuso Interno di Yin & Winchester (Structure Chart)
 $$r(G) = e - n + 1$$
 - $e$ = numero di archi (invocazioni tra moduli); $n$ = numero di nodi (moduli).
 - Struttura modulare $S = \{N, R\}$. *Tree Impurity* misura lo scostamento da un albero puro (radice unica, nodi con un solo padre).
 
-### 5. Information Flow di Henry & Kafura
+### 6. Information Flow di Henry & Kafura
 $$\text{IF}(M) = \text{Length}(M) \times (\text{Fan-In}(M) \times \text{Fan-Out}(M))^2$$
 - **Fan-In:** Numero di moduli chiamanti o flussi dati in ingresso a $M$.
 - **Fan-Out:** Numero di moduli chiamati o flussi dati in uscita da $M$.
 - **Length(M):** Dimensione del modulo (es. LOC o istruzioni).
 
-### 6. Complessità di McCabe sui Control Flowgraph (CFG)
+### 7. Complessità di McCabe sui Control Flowgraph (CFG)
 - **Complessità Ciclomatica $v(G)$:** (Numero di cammini linearmente indipendenti):
   $$v(G) = e - n + 2p = \text{Regioni del Grafo Planare} = \pi + 1$$
   - $e$ = archi; $n$ = nodi; $p$ = componenti connesse (solitamente $p=1$); $\pi$ = nodi predicativi (biforcazioni binarie).
@@ -72,7 +80,7 @@ $$\text{IF}(M) = \text{Length}(M) \times (\text{Fan-In}(M) \times \text{Fan-Out}
   - $m$ = numero di sottografi strutturati ($D_0, D_1, D_2, D_3$) collassati.
   *Teorema:* $ev(G) = 1 \iff$ il programma è perfettamente **D-strutturato** (privo di salti anomali / spaghetti code).
 
-### 7. Canali di Comunicazione del Team (Legge di Brooks)
+### 8. Canali di Comunicazione del Team (Legge di Brooks)
 $$C = \frac{n(n-1)}{2}$$
 - Enunciato: *"Aggiungere sviluppatori a un progetto in ritardo lo rende ancora più in ritardo"* a causa dell'overhead di training e della crescita quadratica dei canali di comunicazione.
 
@@ -82,19 +90,28 @@ $$C = \frac{n(n-1)}{2}$$
 
 ### MODULO 1: Fondamenti, Economia e Affidabilità
 - **Brooks No Silver Bullet (1986):** Problemi **Essenziali** (*Complessità, Conformità, Cambiabilità/Malleabilità, Invisibilità*) vs Problemi **Accidentali** (*linguaggi, IDE, strumenti*).
-- **Ciclo di Vita:** 3 Stadi (*Sviluppo, Manutenzione, Dismissione*); 6 Fasi (*Requisiti, Specifica, Pianificazione, Progetto, Codifica, Integrazione*).
-- **Manutenzione:** *Correttiva* (~60% costi), *Adattiva*, *Perfettiva*, *Preventiva*.
+- **Aspetti Economici:** Legge $C = a S^2$, vantaggio matematico della modularità, repliche a costo marginale nullo.
+- **Ciclo di Vita:** 3 Stadi (*Sviluppo [6 fasi: Requisiti, Specifica, Pianificazione, Progetto, Codifica, Integrazione], Manutenzione, Dismissione*).
+- **Manutenzione:** *Correttiva* (~60% costi totali del ciclo di vita), *Adattiva*, *Perfettiva*, *Preventiva*.
 - **Regola 10-90:** Il 90% del tempo di CPU è consumato dal 10% del codice (*core*).
-- **Affidabilità:** *Operational Profile*, $\text{Availability}$, *Software Critico* (Safety-critical vs Mission-critical).
+- **Affidabilità & Disponibilità:** *Operational Profile*, formula di $\text{Availability}$, *Software Critico* (Safety-critical vs Mission-critical).
 
 ### MODULO 2: Modelli di Processo e Ciclo di Vita
-- **Modelli Tradizionali:** *Build & Fix* (non ingegneristico); *Waterfall* (sequenziale, requisiti stabili); *Rapid Prototyping* (throwaway prototype); *Incrementale* (con/senza Overall Architecture).
+- **Modelli Tradizionali:**
+  - *Build & Fix:* non ingegneristico, sviluppo $\to$ modifiche fino a soddisfazione $\to$ *Operations mode* (produzione) con feedback $\to$ *Retirement*.
+  - *Waterfall:* sequenziale rigido; blocchi: *Requirements* $\to$ *Specification* $\to$ *Design phase* (Architetturale + Dettagliato con `Verify`) $\to$ *Implementation* (con `Test` unitario) $\to$ *Integration phase* (Integration/System test con `Test`) $\to$ *Operations mode*.
+  - *Rapid Prototyping:* prototipo gettabile (*throwaway prototype*) per chiarire requisiti ambigui.
+- **Modello a Sviluppo Incrementale:**
+  - *Concurrent activities:* *Specification, Development e Validation* avvengono in parallelo su build diversi.
+  - **Incrementale con Overall Architecture:** si progetta l'architettura globale a monte (moduli, interfacce, DB); ogni build sviluppa un incremento. Pro: integrazione solida, no spaghetti code, parallelismo sicuro; Contro: overhead iniziale.
+  - **Incrementale senza Overall Architecture:** si parte subito dai requisiti prioritari. Pro: rapido all'inizio; Contro: grave rischio di incompatibilità architetturali e costi crescenti.
+  - *Curva dei Costi:* costo delle build decresce con più incrementi, costo di integrazione cresce $\to$ regione di costo minimo.
 - **Modello a Spirale di Boehm:** 4 quadranti per iterazione (*Obiettivi/Vincoli $\to$ Analisi Rischi $\to$ Sviluppo/Verifica $\to$ Pianificazione*).
 - **Risk Management (4 Fasi):** Identificazione $\to$ Valutazione (Matrice $3 \times 3$) $\to$ Mitigazione (**Evitare, Ridurre, Trasferire, Accettare**) $\to$ Monitoraggio continuo.
-- **Corporate & Agili:** Modello Microsoft (*Synchronize-and-Stabilize*, daily build, milestone); *Scrum* (Ruoli: PO, SM, Dev; Eventi: Sprint, Planning, Daily, Review, Retro; Artefatti: Backlog, Increment; User Stories INVEST); *CMM* (5 livelli: Initial $\to$ Repeatable $\to$ Defined $\to$ Managed $\to$ Optimizing + KPA).
+- **Corporate & Agili:** Modello Microsoft (*Synchronize-and-Stabilize*, daily build, 3 fasi: planning, development in milestone, stabilization); *Scrum* (Ruoli: PO, SM, Dev; Eventi: Sprint, Planning, Daily, Review, Retro; Artefatti: Backlog, Increment; User Stories INVEST); *CMM* (5 livelli: Initial $\to$ Repeatable $\to$ Defined $\to$ Managed $\to$ Optimizing + KPA).
 
 ### MODULO 3: Requisiti & Specifiche (Semi-formali e Formali)
-- **Requisiti:** *Utente* (linguaggio naturale) vs *Sistema* (SRS); *Funzionali* vs *Non Funzionali* (prodotto, processo, esterni) vs *Dominio*.
+- **Requisiti:** *Utente* (linguaggio naturale) vs *Sistema* (SRS); *Funzionali* vs *Non Funzionali* (prodotto/affidabilità/prestazioni, processo, esterni) vs *Dominio*. Esempio principe non funzionale: specifica di affidabilità quantitativa ($\text{Availability} \ge 99.95\%$).
 - **Semi-formali:** ERD, DFD (livelli 0, 1, 2), **SSA (Structured System Analysis in 9 step)**.
 - **Reti di Petri (Petri Net):** $G = (P, T, A, w, M_0)$. Cerchi = Posti; Barre = Transizioni; Puntini = Token. Regola di scatto (abilitazione e consumo/generazione token). Proprietà: *Non determinismo, Liveness (no deadlock), Boundedness/Safety, Reachability*.
 
@@ -151,6 +168,8 @@ $$C = \frac{n(n-1)}{2}$$
 
 | Argomento A | Argomento B | Differenza Chiave da Esporre all'Orale |
 | :--- | :--- | :--- |
+| **Incr. con Overall Arch.** | **Incr. senza Overall Arch.** | Con OA: progettazione architettura globale a monte $\to$ integrazione solida, no degrado architetturale, ma overhead iniziale. Senza OA: partenza immediata sul primo build $\to$ grave rischio di incompatibilità e complessità esponenziale nei build successivi. |
+| **Top-Down Integration** | **Bottom-Up Integration** | Top-Down parte dai moduli di alto livello e usa **Stubs** (moduli fantoccio) per simulare quelli inferiori mancanti; Bottom-Up parte dai moduli foglia e usa **Drivers** (moduli chiamanti) per testare i componenti base. |
 | **Class Adapter** | **Object Adapter** | Class Adapter usa ereditarietà multipla (statico, vincolato a 1 sola classe); Object Adapter usa composizione/delega (dinamico, adatta una classe e tutte le sue sottoclassi). |
 | **Abstract Factory** | **Factory Method** | Factory Method crea *un singolo prodotto* delegando a un metodo virtuale nelle sottoclassi; Abstract Factory crea *famiglie intere di prodotti correlati* tramite un oggetto factory separato. |
 | **`<<include>>`** | **`<<extend>>`** | `<<include>>` è obbligatorio e incondizionato (la freccia punta all'incluso); `<<extend>>` è opzionale, si attiva solo su extension point/condizione (la freccia punta al caso base). |

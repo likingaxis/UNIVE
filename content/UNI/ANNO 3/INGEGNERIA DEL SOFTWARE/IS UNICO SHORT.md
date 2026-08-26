@@ -1,5 +1,5 @@
 ### MODULO 1
-### Introduzione ISW
+## Introduzione ISW
 - **Definizione di Ingegneria del software**
 	- è la disciplina che applica principi, metodi e pratiche dell'ingegneria alla realizzazione del software per risolvere problemi di cost overrun e time overrun
 - **Prodotto Software**= codice+ documentazione associata
@@ -113,4 +113,209 @@ Per **Software Critico** si intende un Software che se fallisce causa
 
 
 
-### Modelli di Ciclo di Vita e Processi Software
+## Modelli di Ciclo di Vita e Processi Software
+Modelli che descrivono come organizzare le attività dello sviluppo software
+### Modelli tradizionali
+#### Build & Fix
+Non è proprio un modello infatti è senza un processo strutturato ha le seguenti componenti:
+- **Build first Version**: si costruisce rapidamente
+- **Modify until client is satisfied**: si fa in loop
+- **Operations mode**: fase effettiva di operazione si nota una freccia di manutenzione per migliorare il tutto
+- **Retirement**: ritiro del prodotto
+
+***Pro***: 0 costi di manutenzione e rilascio immediato
+*Contro*: 0 scalabilità, troppi costi di manutenzione
+
+![[GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|360]]
+#### Modello Waterfall
+Modello di tipo sequenziale e più disciplinato del Build & Fix vede le seguenti componenti:
+- **Requirements phase e verifica**: vengono definiti i requisiti
+- **Specification phase e verifica**: viene fatto il documento di specifica che migliora il requirements
+- **Design phase e verifica**: viene fatta una progettazione del design strutturale del sistema software
+- **Implementation phase**: si scrive l'effettivo codice e si testa
+- **Integration phase**: si fa il merge delle componenti fatte in implementation phase e si testano
+- **Operations mode**: attività di effettivo utilizzo del sistema con eventuali cambi dei requisiti o aggiornamenti di alcune fasi precedenti
+- **Retirement**
+
+***Pro***: sequenziale e semplice
+***Contro***: Se si fa un fix per una fase troppo indietro i costi aumentano di molto
+
+![[GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|368]]
+#### Modello con Rapid Prototyping
+Correggi:
+**Rapid Prototyping = concetto generale**  
+→ può essere **Throw-away** oppure **Evolutionary**.
+
+
+Modello che utilizza dei **Prototipi Throw-away** durante la fase di sviluppo
+molto simile al modello waterfall ma nella fase di requisiti vengono creati questi prototipi che permettono:
+- **Requirements Elicitation**: emergono requisiti in più dall'utente
+- **Requirements Validation**: si consolida ciò che vuole davvero l'utente rispetto a ciò che avevamo capito
+
+***Pro***: con i prototipi si capiscono meglio i requisiti
+*Contro*: il cliente può avere una falsa percezione visto che poi manca tutta la parte strutturale dietro
+
+![[GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|364]]
+
+
+### Modelli basati su iterazione dei processi
+Modelli che trattano lo sviluppo come una ripetizione controllata di alcune attività su parti piccole del progetto per creare versioni sempre più complete e precise
+Due modelli importanti:
+#### Modello a Sviluppo Incrementale
+sviluppo composto da build, ogni build aggiunge una parte delle funzionalità fino ad arrivare al sistema completo
+- outline description: descrizione generale del prodotto
+- concurrent activities che in modo parallelo portano a delle differenti versioni come quelle a destra passando da build in build
+![[GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|412]]
+
+Il modello a Sviluppo Incrementale in realtà si divide in 2 tipologie:
+##### Con Overall Architecture
+Si ha una fase iniziale dove si fanno normalmente requirements specifiche architectural design ecc...
+- e poi si fanno i vari incrementi
+***Pro***: Si definiscono in fase preliminare la maggior parte dei dettagli riducendo problemi di integrazione
+*Contro*: Lentezza e Rigidità
+
+![[GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|332]]
+##### Senza Overall Architecture
+Si parte con lo sviluppo delle Build senza una fase di progettazione architetturale precedente
+***Pro***: Molto immediato
+*Contro*: Rischio di avere difficoltà nella fase di integrazione delle build e nel rispettare i requisiti richiesti dal cliente
+
+![[GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
+
+###### Problema del modello incrementale dei costi
+- con più incrementi diminuisce il costo delle singole build
+- ma aumenta il costo di integrazione quando ci sono tante build
+la loro somma genera una regione di ***costo minimo***
+![[GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
+#### Modello a spirale
+Modello di tipo sempre iterativo ma che aggiunge una parte di *Risk Management* si rappresenta con una spirale
+- **più ti allontani** dal centro *più aumentano i costi*
+- **Customer communication**: ti confronti con il cliente
+- **Planning**: organizzi le attività
+- **Risk Analysis**: identificazione e valutazione dei rischi
+- **Engineering**: progettazione specifica ecc
+- **Construction & Release**: costruzione del sistema e rilascio
+- **Customer Evaluation**: valutazione del risultato 
+
+prima di investire ulteriormente si vedono i rischi
+
+![[GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|378]]
+
+Poi c'è una versione di Boehm che aggiunge cose come prototipi, simulazioni, benchmark ecc...
+![[GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|469]]
+
+##### Parentesi sul Risk Management
+Nei modelli a spirale come abbiamo visto si introduce quella componente sulla gestione dei rischi
+###### Tipologie di rischio
+- Project Risk: influenza il progetto
+- Product Risk: influenza il prodotto in termini qualitativi o simili
+- Business Risk: influenza l'organizzazione che sviluppa il prodotto software
+###### Processo di Risk Management
+Per gestire un rischio viene descritto un processo fatto da 4 attività:
+- **Identificazione del rischio**: fare una lista dei rischi
+- **Analisi del rischio**: valutare la probabilità di occorrenza e la sua gravità
+	- esistenza dei top risks
+- **Planning**
+	- si attuano strategie per gestire un rischio ne conosciamo 3:
+		- *Avoidance*: ridurre la probabilità che si verifichi
+		- *Minimization*: ridurre l'impatto se si verifica
+		- *Contingency Plan*: piano alternativo se si verifica il rischio
+- **Monitoring**: analizzare nuovamente nuovi rischi e modificare la lista di analisi
+
+### Modelli a Oggetti, Concorrenti e Corporate
+#### Modelli Object Oriented
+Con i seguenti modelli si lavora sempre con classi e oggetti indipendentemente dalla fase di sviluppo senza descrivere tutte le varie componenti si può notare come ci sia
+- **Concorrenza**: più attività nello stesso periodo di tempo
+- **Iterazione**: fasi ripetute per migliorarne il risultato
+- **non obbligo** di usare linguaggi di programmazione ad oggetti
+
+Si vede dal basso verso l'alto come una fontana, poi quando sali influenzi le parti sotto
+![[GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|313]]
+
+#### Modelli concorrenti
+Si usano **modelli tradizionali** ma si **dividono parti collegate tra loro** dello sviluppo usando **software di comunicazione** tra team così da **ridurre** il **tempo** necessario
+#### Modelli corporate
+Fare un sistema software per il mercato non è come farlo per un cliente che te lo commissiona
+per questo esistono modelli differenti come
+##### Modello Microsoft - Synchronize and Stabilize
+- Piccoli team di sviluppatori lavorano a **daily build**
+	- se si presenta un problema di integrazione che rompe le build precedenti si risolve
+- appena si raggiunge un **punto significativo** **(milestone)** viene prodotta una versione stabile e completa del sistema software
+se vogliamo vederlo in fasi abbiamo:
+- **planning**
+- **development**
+- **stabilization**
+sono abbastanza esplicite
+
+##### Modello Netscape
+Organizzazione che adottava un modello **simile** a quello **Synchronize and Stabilize** ma per **prodotti internet**
+- *meno tester*
+- *meno planning*
+- *documentazione all'osso*
+
+veniva con delle riunioni definita la ***product vision*** e da lì venivano sviluppati i sistemi software
+### Metodi Agile
+I metodi Agile nascono come reazione a processi pesanti e rigidi ponendo un processo di realizzazione Software leggero ma organizzato, iterativo e basato su feedback frequenti
+#### Quattro valori del manifesto Agile
+- **priorità agli individui e alle interazioni che hanno** e in secondo piano gli strumenti utilizzati e i processi
+- **Software funzionante > documentazione esaustiva**
+- **Collaborare con il cliente** più che essere legati da un *contratto definito in principio*
+- **Reagire ai cambiamenti** più che seguire il piano ciecamente
+
+Esistono inoltre ***12 principi Agile*** che sviluppano ancora meglio idee del tipo:
+- **consegna frequente di software funzionante**
+- **collaborazione continua**
+- **team motivati**
+- **semplicità**
+#### Modello e framework Scrum
+il Modello ***Scrum*** si basa sulla filosofia Agile ed è generalizzato in queste fasi:
+- cicli brevi chiamati **Sprint** (2-4 settimane)
+	- a inizio Sprint si fa il **planning** producendo il **Product Backlog** e lo **Sprint backlog**
+		- il product backlog **contiene** le **informazioni sul prodotto**, come **migliorie** ecc da fare
+		- si sceglie una **parte del backlog** da **implementare** e si fa uno sprint su quella parte definendo così lo **sprint backlog**
+	- ogni giorno avviene il **Daily Scrum**, riunione per sincronizzare il lavoro e identificare ostacoli
+- alla fine dello Sprint si fa la **Sprint Review** dove si aggiorna il product backlog e si produce un incremento
+
+il framework è la parte strutturale del procedimento con le varie componenti come:
+- **Scrum Master**: aiuta il gruppo a comprendere e applicare l'approccio Scrum (non è il capo)
+- **Development Team**: gruppo che svolge il lavoro tecnico
+- **Product Owner**: gestisce product backlog, priorità e esigenze del prodotto
+
+![[GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|477]]
+
+#### User Story per metodologie Agile
+Per descrivere bene i bisogni di un utente e da cui derivare delle specifiche del progetto come il product backlog per Scrum si utilizzano le User Story
+`As a <role>, I want <goal> so that <benefit>`
+più User Stories= Epic
+
+### Maturità del processo software
+Valutare quanto un'organizzazione sia in grado di sviluppare software  in modo sistematico
+#### Modello CMM - Capability Maturity Model
+Modello che descrive la maturità del processo software di un'organizzazione
+il modello è organizzato in 5 livelli:
+- 1. Initial
+	- processo ad hoc(improvvisato)
+	- presenza di heroes che la carryano
+- 2. Repeatable
+	- pratiche di base di project management come pianificazione e monitoring
+- 3. Defined
+	- processo documentato e standardizzato
+- 4. Managed
+	- non segue solo procedure ma raccoglie dati per misure quantitative per capire se sta funzionando
+- 5. Optimizing
+	- Utilizza tutto ciò che misura per migliorare il processo andando a fare Defect Prevention(prevenzione di difetti)
+
+Il CMM è un modello additivo se stai al 5 devi aver rispettato i precedenti livelli
+![[Pasted image 20260826171330.png|418]]
+
+##### KPA (Key Process Areas)
+una *KPA* rappresenta una area specifica del processo di realizzazione software
+- un **certo livello** **CMM** deve **rispettare** determinate **KPA**
+in totale *sono 18* e lavorano su aspetti come:
+- **obiettivi**
+- **responsabilità**
+- **risorse**
+- **attività da svolgere**
+- **modalità di monitoraggio**
+- **modalità di verifica**
+
