@@ -98,7 +98,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -250,10 +250,10 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "fbe831791dac57ac",
+  "active": "402bfa394f455370",
   "lastOpenFiles": [
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/Modifiche all'indice.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DOMANDE PROF/risposte_domande_orali.pdf",
