@@ -419,3 +419,123 @@ dove
 
 **Linguaggio Z** basato su teoria degli insiemi e logica dei predicati)
 
+## Analisi Orientata agli Oggetti (OOA)
+L'OOA(Object Oriented Analysis) rappresenta una fase di specifica semi-formale dei requisiti seguendo il paradigma a oggetti.
+- bisogni informali diventano modelli strutturati e non ambigui
+definisce COSA deve fare il prodotto software
+#### Meccanismi OO(Object Oriented)
+- **incapsulamento**: avere nella stessa classe attributi e metodi
+- **information hiding**: dettagli implementativi interni non per forza visibili dall'utilizzatore
+- **astrazione**: separare dettagli implementativi e caratteristiche essenziali
+- **condivisione**: Ereditarietà che permette il riuso di attributi e Polimorfismo che consente di usare interfacce uguali ma con metodi interni differenti
+#### Principi Operativi dei metodi OOA
+- costruzione in parallelo: la fase di specifica dove si fanno i vari diagrammi avviene in parallelo e non in modo sequenziale, ogni diagramma arricchisce l'altro (tipo use case sequence diagram ecc)
+- Stepwise Refinement: si fanno iterazioni per raffinare i dettagli di ogni modello
+- Riduzione della complessità: lavorando con classi e layer si hanno meno comunicazioni tra le componenti
+### UML (Unified Modelling Language)
+Prima di UML esistevano diversi metodi di rappresentazione Object Oriented, era troppo confusionario quindi si fece un modelling language uniforme
+
+essendo specifiche semi- formali non basta un solo diagramma ne vengono fatti diversi per mostrare il sistema software sotto più aspetti divisi in:
+- **Diagrammi Strutturali**:
+	- si rappresentano i dati e la loro architettura
+- **Diagrammi Comportamentali e Dinamici**:
+	- si rappresenta il modo in cui il sistema si relaziona con l'utente e il modo in cui le componenti interne comunicano tra loro
+	- per quelli dinamici i cambiamenti di stato nel tempo del sistema
+vedremo a breve diversi diagrammi ognuno che fa parte di una di queste categorie
+##### BCE(Boundary Control Entity)
+Per descrivere le classi si utilizzano questi 3 pattern qui:
+- ***Boundary***: Classi di interfaccia verso gli utenti
+- ***Control***: Classi di logica e di coordinamento con controlli dei casi d'uso
+- ***Entity***: Classi di modellazione dei dati persistenti
+#### Class Diagram
+fa parte dei diagrammi strutturali descrive le entity classes della BCE
+contengono:
+- nomi, attributi, operazioni
+##### Relazioni tra classi
+Per mettere in relazione delle classi si può fare:
+- Associazione:
+	- linea con molteplicità `1..1` `1..*` `*..*` ecc
+	- `Docente 1 ----------- * Corso`
+- Aggregazione:
+	- rombo vuoto tra due classi indica una relazione ma debole
+		- la parte senza rombo può esistere anche senza la componente con il rombo
+		- `Squadra ◇--- Calciatore`
+- Composizione:
+	- rombo pieno indica un rapporto di esistenza
+		- se elimini la componente con il rombo si eliminano anche le parti
+		- `Edificio ◆--- Stanza`
+- Generalizzazione:
+	- freccia con triangolo vuoto indica una relazione di ereditarietà tra classi
+	- `Studente ---▷ Persona`
+- Dipendenza:
+	- freccia tratteggiata serve per definire quando una classe usa un'altra
+	- `Ordine - - -> Pagamento`
+##### Come identificare le classi entity per fare il Class Diagram
+1. **Noun Phrase (Analisi grammaticale):** estrarre i **sostantivi** dal testo dei requisiti (i sostantivi diventano *classi/attributi*, i verbi diventano *operazioni/associazioni*)
+2. **Common Patterns (Categorie di Dominio):** cercare categorie ricorrenti (ruoli di persone, luoghi fisici, dispositivi, transazioni/eventi)
+3. **Use Case Driven:** analizzare ciascun Caso d'Uso per identificare quali oggetti partecipano allo scenario
+4. **CRC Cards (*Class-Responsibility-Collaborator*):** schede che elencano per ogni classe il suo *Nome*, le sue *Responsabilità* e i *Collaboratori* (altre classi con cui interagisce)
+5. **Approccio Misto:** combinazione sistematica dei metodi precedenti (quello usato nella realtà)
+#### Use Case Diagram
+fa parte dei diagrammi comportamentali, si descrivono gli scenari di caso d'uso di attori composto da:
+- Attori che interagiscono con il sistema
+- Casi d'uso i servizi effettivi
+Questi due elementi si mettono in relazione mediante:
+- Associazioni: linea che collega omino e ovale
+- `<<include>>`: quando un caso d'uso per essere completato esegue **obbligatoriamente** un altro caso d'uso (riuso)
+	- la freccia parte dal caso base e **punta verso quello incluso** (il base dipende dall'incluso)
+	- `(Preleva Contanti) . - - <<include>> - - > (Autentica PIN)`
+- `<<extend>>`: quando un caso d'uso aggiunge un comportamento **opzionale** a un altro caso d'uso (solo se si verifica una certa condizione / extension point)
+	- la freccia parte dal comportamento opzionale e **punta verso il caso base** (il caso opzionale estende il base)
+	- `(Richiedi Ricevuta Cartacea) . - - <<extend>> - - > (Preleva Contanti)`
+- Generalizzazione: quando un attore (o caso d'uso) specializzato eredita le capacità di un altro più generale
+	- `[Amministratore] ---------▷ [Utente Registrato]`
+
+![[GPT PREMIUMS/16_agosto_appunti/assets/p057-fig-057.png|346]]
+
+
+#### Activity Diagram
+Usato per descrivere come si sviluppa il flusso di un singolo Use Case (prevalentemente dal lato interno del sistema)
+I suoi elementi sono:
+- **Nodo iniziale:** pallino nero pieno (`●`) che indica l'avvio del flusso
+- **Attività (Azione):** rettangolo con angoli arrotondati contenente l'azione da compiere
+- **Transizioni:** frecce orientate che collegano i nodi indicando il passaggio da un'attività alla successiva
+- **Nodo finale:** cerchio con dentro un punto nero ( `◎`)
+- **Decision Node (Branch) & Guard Condition:** 
+	- è un **rombo** ($\diamondsuit$) da cui escono più frecce alternative
+	- su ogni freccia c'è la **Guard Condition (Guardia)** scritta tra quadre `[condizione]` (es. `[saldo >= totale]` vs `[saldo < totale]`)
+- **Merge Node:** 
+	- è sempre un **rombo** ($\diamondsuit$) che riceve più percorsi alternativi in ingresso e ne fa uscire uno solo per ricongiungere i rami
+- **Fork (Barra di sincronizzazione):** 
+	- **barra nera piena** con 1 freccia in ingresso e più frecce in uscita $\to$ avvia attività in parallelo/concorrenza
+- **Join (Barra di sincronizzazione):** 
+	- **barra nera piena** con più frecce in ingresso e 1 sola in uscita $\to$ attende che **tutte** le attività parallele siano completate prima di proseguire
+![[GPT PREMIUMS/16_agosto_appunti/assets/p060-fig-060.png|374]]
+
+#### Sequence Diagram
+Diagrammi sempre di tipo comportamentale
+descrivono lo scambio di messaggi tra oggetti del sistema software
+gli elementi sono:
+- **Lifeline:** ogni oggetto è in alto e ognuno ha una linea tratteggiata che scende in verticale e che indica il tempo che passa
+- **Activation box:** sulla lifeline appaiono questi rettangoli stretti e lunghi 
+	- descrivono che in quel momento è attiva una azione
+- **Messaggi:** frecce che indicano lo scambio dei messaggi tra i vari lifeline in quel determinato tempo, messaggi come:
+	- **call()**: il mittente invia un messaggio **(sincrono)** e si blocca in attesa di risposta (freccia con punta piena)
+		- `--------►`
+	- **signal()**: il mittente invia un messaggio ma può fare altro nel frattempo **(asincrono)** (freccia con punta aperta a spina)
+		- `-------->`
+	- **flat()**: messaggio ancora non definito
+		- `-------->`
+	- **reply**: risposta al messaggio con linea tratteggiata
+		- `< - - - - `
+
+#### Collaboration Diagram
+Si usa in fase OOD principalmente
+è senza linea del tempo
+- per il resto ci sono messaggi tra oggetti come un sequence
+#### State Diagram
+Diagramma che descrive la parte dinamica delle specifiche semi-formali con elementi come:
+- **Stato**: descrive lo stato di un oggetto
+- **Transizione**: passaggio di stato di un oggetto rispetto ad un evento o azione che avviene
+
+![[GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-065.png|257]]

@@ -1,0 +1,335 @@
+.vault-rag-hit { display: flex; justify-content: space-between; padding: 4px 8px; cursor: pointer; border-radius: 4px; }
+.vault-rag-hit:hover { background: var(--background-modifier-hover); }
+.vault-rag-hit-score { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.vault-rag-empty { color: var(--text-muted); padding: 8px; }
+.vault-rag-search-input { width: 100%; margin-bottom: 8px; }
+.vault-rag-search-state { color: var(--text-muted); padding: 4px 0; }
+.vault-rag-chat-root { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+.vault-rag-chat-messages { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex: 1 1 auto; min-height: 0; padding-right: 4px; }
+.vault-rag-chat-msg { padding: 6px 8px; border-radius: 6px; white-space: pre-wrap; }
+.vault-rag-chat-msg.is-user { background: var(--background-modifier-hover); align-self: flex-end; }
+.vault-rag-chat-msg.is-assistant { background: var(--background-secondary); }
+.vault-rag-chat-sources { display: flex; flex-wrap: wrap; gap: 4px; }
+.vault-rag-chat-source { font-size: 11px; padding: 2px 6px; border-radius: 10px; background: var(--background-modifier-border); cursor: pointer; }
+.vault-rag-chat-state { color: var(--text-error); padding: 4px 0; }
+.vault-rag-chat-input-row { display: flex; gap: 4px; margin-top: 8px; flex: 0 0 auto; }
+.vault-rag-chat-input { flex: 1; resize: none; min-height: 60px; max-height: 180px; overflow-y: auto; }
+.vault-rag-chat-model-row { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; flex: 0 0 auto; }
+.vault-rag-chat-think-toggle { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; white-space: nowrap; }
+.vault-rag-chat-think-toggle.is-disabled { opacity: 0.6; pointer-events: none; }
+.vault-rag-chat-think-toggle.is-off { opacity: 0.55; }
+.vault-rag-chat-think-icon { display: inline-flex; }
+.vault-rag-chat-think-icon svg { width: 14px; height: 14px; }
+.vault-rag-cap { display: inline-flex; align-items: center; gap: 4px; margin-right: 10px; }
+.vault-rag-cap-icon { display: inline-flex; }
+.vault-rag-cap-icon svg { width: 14px; height: 14px; }
+.vault-rag-cap.is-dim { opacity: 0.6; }
+.vault-rag-info-value { color: var(--text-muted); font-size: 12px; }
+/* Status-Icon: Form (check / x / loader) trägt die Bedeutung, Farbe nur sekundär — barrierefrei bei Farbsehschwäche (WCAG 1.4.1). */
+.vault-rag-conn-dot { display: inline-flex; align-items: center; margin-right: 6px; vertical-align: middle; color: var(--text-muted); }
+.vault-rag-conn-dot svg { width: 14px; height: 14px; }
+.vault-rag-conn-dot.is-ok { color: var(--text-success); }
+.vault-rag-conn-dot.is-error { color: var(--text-error); }
+.vault-rag-conn-dot.is-checking { color: var(--text-muted); }
+/* Pro-Zeile-Status der Endpunkt-Fallback-Liste: Form trägt die Bedeutung, Farbe sekundär (WCAG 1.4.1). */
+.vault-rag-ep-status { display: inline-flex; align-items: center; margin-right: 8px; vertical-align: middle; color: var(--text-muted); }
+.vault-rag-ep-status svg { width: 14px; height: 14px; }
+.vault-rag-ep-status.is-ok { color: var(--text-success); }
+.vault-rag-ep-status.is-error { color: var(--text-error); }
+.vault-rag-ep-warn { display: inline-flex; align-items: center; margin-right: 8px; vertical-align: middle; color: var(--text-warning); }
+.vault-rag-ep-warn svg { width: 14px; height: 14px; }
+/* Drittanbieter-Hinweis (Schlüssel gesetzt): sachlicher Hinweis, keine Fehler-Warnung — bewusst
+   gedämpfter als .vault-rag-ep-warn, Bedeutung trägt das Dreieck + der Tooltip, nicht die Farbe. */
+.vault-rag-ep-thirdparty { display: inline-flex; align-items: center; margin-right: 8px; vertical-align: middle; color: var(--text-muted); }
+.vault-rag-ep-thirdparty svg { width: 14px; height: 14px; }
+/* Rolle der Zeile als Text unter den Feldern: „aktiv" / „erreichbar, aber Platz N" / … .
+   Erreichbarkeit trägt das Icon (Form), die Rolle dieser Text — keins von beiden über Farbe
+   allein (WCAG 1.4.1). Die frühere Auszeichnung saß auf dem Icon-Container und war wirkungslos:
+   font-weight greift auf einem SVG nicht.
+   flex-basis: 100% erzwingt den Umbruch im ohnehin umbrechenden .setting-item-control. */
+.vault-rag-ep-row .setting-item-control .vault-rag-ep-state {
+  flex: 0 0 100%;
+  /* stateEl wird VOR warnIcon/thirdPartyIcon angelegt (Erst-Render-Reihenfolge in
+     buildEndpointList) — ohne order würden die beiden Icons hinter die volle-Breite-Zeile
+     rutschen statt in der Feldreihe zu bleiben. order:1 hält die Rolle visuell zuletzt,
+     unabhängig davon, was später noch an controlEl angehängt wird. */
+  order: 1;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.vault-rag-ep-row .setting-item-control .vault-rag-ep-state.is-active {
+  color: var(--text-normal);
+  font-weight: var(--font-bold);
+}
+/* Speicher-/Lösch-Fenster: die gerenderten Zeilen-Indizes sind stale, bis der Re-Render kommt —
+   Eingaben und Icon-Buttons (divs, kein disabled) sind solange gesperrt. */
+.vault-rag-ep-busy { pointer-events: none; opacity: 0.6; }
+.vault-rag-sa-conn-refresh { margin-left: 6px; display: inline-flex; align-items: center; }
+.vault-rag-sa-conn-refresh svg { width: 14px; height: 14px; }
+.vault-rag-chat-status { font-size: 11px; color: var(--text-muted); cursor: pointer; padding: 2px 0; margin-bottom: 6px; flex: 0 0 auto; }
+.vault-rag-chat-working { font-size: 11px; color: var(--text-accent); padding: 4px 0; min-height: 16px; flex: 0 0 auto; }
+.vault-rag-chat-new { font-size: 12px; }
+.vault-rag-chat-context { border-top: 1px solid var(--background-modifier-border); padding-top: 6px; margin-top: 6px; flex: 0 0 auto; max-height: 30vh; overflow-y: auto; }
+.vault-rag-ctx-head { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; flex-wrap: wrap; }
+.vault-rag-ctx-k { display: flex; align-items: center; gap: 2px; }
+.vault-rag-ctx-list { display: flex; flex-wrap: wrap; gap: 4px; }
+.vault-rag-ctx-chip { font-size: 11px; padding: 2px 6px; border-radius: 10px; cursor: pointer; background: var(--background-modifier-border); }
+.vault-rag-ctx-chip.is-pinned { background: var(--interactive-accent); color: var(--text-on-accent); }
+.vault-rag-chat-reasoning { font-size: 12px; margin: 2px 0; }
+.vault-rag-chat-reasoning-sum { color: var(--text-muted); cursor: pointer; }
+.vault-rag-chat-reasoning-body { color: var(--text-faint); white-space: pre-wrap; font-style: italic; padding: 4px 0 4px 12px; border-left: 2px solid var(--background-modifier-border); }
+.vault-rag-chat-msg-actions { display: flex; gap: 4px; }
+.vault-rag-chat-copy.clickable-icon { color: var(--text-faint); padding: 2px 4px; height: auto; width: auto; }
+.vault-rag-chat-copy.clickable-icon:hover { color: var(--text-normal); }
+.vault-rag-chat-model { flex: 1; min-width: 0; font-size: 12px; }
+/* ── Smart Apply Cockpit ─────────────────────────────────────────────────── */
+.vault-rag-sa-root { display: flex; flex-direction: column; padding: 8px; gap: 8px; height: 100%; overflow: hidden; }
+.vault-rag-sa-body { flex: 1 1 auto; overflow-y: auto; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
+.vault-rag-sa-header { display: flex; flex-direction: column; gap: 6px; padding-bottom: 8px; border-bottom: 1px solid var(--background-modifier-border); margin-bottom: 8px; }
+.vault-rag-sa-header-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.vault-rag-sa-model { flex: 1; min-width: 0; font-size: 12px; }
+.vault-rag-sa-template { flex: 1; min-width: 0; font-size: 12px; }
+.vault-rag-sa-conn { font-size: 11px; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; width: 100%; }
+.vault-rag-sa-conn-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vault-rag-sa-think { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; white-space: nowrap; }
+.vault-rag-sa-think.is-disabled { opacity: 0.6; pointer-events: none; }
+.vault-rag-sa-think.is-off { opacity: 0.55; }
+.vault-rag-sa-think-icon { display: inline-flex; }
+.vault-rag-sa-think-icon svg { width: 14px; height: 14px; }
+.vault-rag-sa-think-label { font-size: 12px; }
+/* Modus-Segmented-Control (Task 10) — Form (Text) trägt die Bedeutung, nicht nur Farbe (WCAG 1.4.1) */
+.vault-rag-sa-mode { display: flex; gap: 4px; }
+.vault-rag-sa-mode-btn { flex: 1; font-size: 11px; padding: 4px 6px; border-radius: 4px; background: var(--background-secondary); border: 1px solid var(--background-modifier-border); color: var(--text-muted); cursor: pointer; }
+.vault-rag-sa-mode-btn:hover { color: var(--text-normal); background: var(--background-modifier-hover); }
+.vault-rag-sa-mode-btn.is-active { color: var(--text-on-accent); background: var(--interactive-accent); border-color: var(--interactive-accent); font-weight: 600; }
+.vault-rag-sa-mode-btn.is-disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+/* Audit-Trail-Toggle (Task 10) */
+.vault-rag-sa-audit { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+.vault-rag-sa-audit-check { cursor: pointer; }
+.vault-rag-sa-audit-label { cursor: default; }
+.vault-rag-sa-idle { color: var(--text-muted); }
+.vault-rag-sa-template-hint { color: var(--text-muted); font-size: 12px; font-style: italic; margin-top: 4px; }
+.vault-rag-sa-elapsed { font-size: 11px; color: var(--text-accent); }
+.vault-rag-sa-reasoning { font-size: 12px; margin: 2px 0; }
+.vault-rag-sa-reasoning-sum { color: var(--text-muted); cursor: pointer; }
+.vault-rag-sa-reasoning-body { color: var(--text-faint); white-space: pre-wrap; font-style: italic; padding: 4px 0 4px 12px; border-left: 2px solid var(--background-modifier-border); }
+.vault-rag-sa-stream-wrap { font-size: 11px; }
+.vault-rag-sa-stream-sum { color: var(--text-muted); cursor: pointer; font-size: 11px; }
+.vault-rag-sa-stream { font-size: 11px; color: var(--text-faint); white-space: pre-wrap; max-height: 160px; overflow-y: auto; background: var(--background-secondary); border-radius: 6px; padding: 6px; margin: 0; }
+/* Smart Apply v2 — Diff-Gate (semantische 3-Ebenen-Ansicht) */
+.vault-rag-sa-diff { display: flex; flex-direction: column; gap: 12px; font-size: var(--font-ui-small); }
+.vault-rag-sa-section-title { font-size: var(--font-ui-smaller); text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); margin-bottom: 4px; }
+
+/* Scan-Kopf */
+.vault-rag-sa-guard { display: flex; flex-direction: column; gap: 2px; padding: 8px; border-radius: 6px; background: var(--background-secondary); border-left: 3px solid var(--background-modifier-border); }
+.vault-rag-sa-guard.is-ok { border-left-color: var(--text-success); }
+.vault-rag-sa-guard.is-error { border-left-color: var(--text-error); }
+.vault-rag-sa-scan-status { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.vault-rag-sa-guard.is-ok .vault-rag-sa-scan-status { color: var(--text-success); }
+.vault-rag-sa-guard.is-error .vault-rag-sa-scan-status { color: var(--text-error); }
+.vault-rag-sa-scan-tpl, .vault-rag-sa-scan-stats { color: var(--text-muted); font-size: var(--font-ui-smaller); }
+.vault-rag-sa-guard-list { margin-top: 4px; }
+.vault-rag-sa-guard-fail { color: var(--text-error); font-size: var(--font-ui-smaller); }
+
+/* Frontmatter */
+.vault-rag-sa-fm-set { display: flex; flex-direction: column; gap: 3px; }
+.vault-rag-sa-fm-head { display: flex; align-items: center; gap: 6px; font-size: var(--font-ui-smaller); margin-bottom: 1px; }
+.vault-rag-sa-fm-head span { color: var(--text-muted); }
+.vault-rag-sa-fm-row { display: flex; align-items: center; gap: 6px; }
+.vault-rag-sa-fm-icon { display: inline-flex; color: var(--text-muted); }
+.vault-rag-sa-fm-row.is-neu .vault-rag-sa-fm-icon { color: var(--text-success); }
+.vault-rag-sa-fm-row.is-entfernt .vault-rag-sa-fm-icon { color: var(--text-error); }
+.vault-rag-sa-fm-key { font-weight: 600; min-width: 96px; }
+.vault-rag-sa-fm-orig { color: var(--text-muted); flex: 1; }
+.vault-rag-sa-fm-prop { color: var(--text-normal); flex: 1; }
+.vault-rag-sa-fm-muted { margin-top: 4px; color: var(--text-muted); }
+.vault-rag-sa-fm-muted-sum { cursor: pointer; font-size: var(--font-ui-smaller); }
+.vault-rag-sa-fm-muted .vault-rag-sa-fm-row { opacity: .75; }
+
+/* Konfidenz-Badges (Task 10) — Symbol+Text trägt die Bedeutung, Farbe ist sekundär (WCAG 1.4.1) */
+.vault-rag-sa-conf { font-size: var(--font-ui-smaller); white-space: nowrap; padding: 0 4px; border-radius: 3px; }
+.vault-rag-sa-conf.is-hoch { color: var(--text-success); }
+.vault-rag-sa-conf.is-mittel { color: var(--text-warning); }
+.vault-rag-sa-conf.is-niedrig { color: var(--text-muted); }
+.vault-rag-sa-conf-check { cursor: pointer; }
+
+/* Body-Reflow */
+.vault-rag-sa-reflow-row { padding: 4px 0; border-bottom: 1px solid var(--background-modifier-border); }
+.vault-rag-sa-reflow-row.is-empty { opacity: .55; }
+.vault-rag-sa-reflow-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.vault-rag-sa-reflow-heading { font-weight: 600; }
+.vault-rag-sa-reflow-count { color: var(--text-muted); font-size: var(--font-ui-smaller); white-space: nowrap; }
+.vault-rag-sa-reflow-prov { color: var(--text-muted); font-size: var(--font-ui-smaller); margin-top: 2px; padding-left: 8px; border-left: 2px solid var(--background-modifier-border); }
+.vault-rag-sa-leftover { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-weight: 600; }
+.vault-rag-sa-leftover.is-ok { color: var(--text-success); }
+.vault-rag-sa-leftover.is-warn { color: var(--text-warning); }
+.vault-rag-sa-leftover-list { margin-top: 2px; }
+.vault-rag-sa-leftover-item { color: var(--text-warning); font-size: var(--font-ui-smaller); padding-left: 8px; }
+
+/* Ergänzungen (additiv-Modus, Task 10) — eigene Zeile unter ihrer Ziel-Heading */
+.vault-rag-sa-add { display: flex; align-items: center; gap: 6px; margin-top: 4px; padding-left: 8px; border-left: 2px solid var(--text-accent); font-size: var(--font-ui-smaller); }
+.vault-rag-sa-add-marker { color: var(--text-accent); font-weight: 600; white-space: nowrap; }
+.vault-rag-sa-add-text { flex: 1; min-width: 0; color: var(--text-normal); }
+
+/* Rohtext on-demand */
+.vault-rag-sa-raw-sum { cursor: pointer; color: var(--text-muted); font-size: var(--font-ui-smaller); }
+.vault-rag-sa-surfaces { display: flex; gap: 8px; margin-top: 6px; }
+.vault-rag-sa-surface { flex: 1; min-width: 0; }
+.vault-rag-sa-surface-title { font-size: var(--font-ui-smaller); color: var(--text-muted); margin-bottom: 2px; }
+.vault-rag-sa-orig, .vault-rag-sa-prop { font-size: var(--font-ui-smaller); white-space: pre-wrap; background: var(--background-secondary); border-radius: 4px; padding: 6px; margin: 0; max-height: 320px; overflow-y: auto; }
+.vault-rag-sa-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.vault-rag-sa-applied { color: var(--text-success); display: flex; align-items: center; gap: 4px; }
+.vault-rag-sa-stale { color: var(--text-muted); }
+.vault-rag-sa-error { color: var(--text-error); }
+/* Smart Apply v2 — Relevanz-Rangliste */
+.vault-rag-sa-ranklist { display: flex; flex-direction: column; gap: 4px; margin: 6px 0; }
+.vault-rag-sa-rank-row { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 6px; cursor: pointer; }
+.vault-rag-sa-rank-row:hover { background: var(--background-modifier-hover); }
+.vault-rag-sa-rank-row.is-selected { background: var(--background-modifier-active-hover); }
+.vault-rag-sa-rank-radio { color: var(--text-accent); }
+.vault-rag-sa-rank-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vault-rag-sa-rank-bar { flex: 0 0 80px; height: 6px; border-radius: 3px; background: var(--background-modifier-border); position: relative; overflow: hidden; }
+.vault-rag-sa-rank-bar::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--vault-rag-sa-rank-pct, 0%); background: var(--text-accent); }
+.vault-rag-sa-rank-pct { flex: 0 0 auto; font-size: var(--font-smallest); color: var(--text-muted); min-width: 3.5em; text-align: right; }
+.vault-rag-sa-rank-note, .vault-rag-sa-rank-empty { font-size: var(--font-smallest); color: var(--text-muted); padding: 2px 6px; }
+.vault-rag-sa-rank-more { font-size: var(--font-smallest); color: var(--text-accent); cursor: pointer; padding: 2px 6px; }
+
+/* ── Hub-Tab-Leiste ──────────────────────────────────────────────────────── */
+.vault-rag-hub-root { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+.vault-rag-hub-tabs { display: flex; flex-wrap: wrap; gap: 2px; border-bottom: 1px solid var(--background-modifier-border); flex: 0 0 auto; }
+.vault-rag-hub-tab { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; gap: 4px; padding: 6px 8px; min-width: 0; background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); cursor: pointer; border-radius: 0; }
+.vault-rag-hub-tab-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vault-rag-hub-tab:hover { color: var(--text-normal); background: var(--background-modifier-hover); }
+.vault-rag-hub-tab.is-active { color: var(--text-normal); border-bottom-color: var(--interactive-accent); }
+.vault-rag-hub-tab-icon { display: inline-flex; }
+.vault-rag-hub-content { flex: 1 1 auto; min-height: 0; position: relative; overflow: hidden; }
+.vault-rag-hub-panel { height: 100%; overflow: auto; }
+.vault-rag-hub-panel.is-hidden { display: none; }
+
+.vault-rag-mcp-snippet {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-smaller);
+  background: var(--background-secondary);
+  border-radius: var(--radius-s);
+  padding: var(--size-4-2);
+  margin: var(--size-4-1) 0 var(--size-4-3);
+  user-select: text;
+}
+
+/* obsidian-kit: collapsible sections */
+.okit-collapsible-header {
+  display: flex; align-items: center; gap: var(--size-4-2);
+  cursor: pointer; padding: var(--size-4-2) 0;
+  font-weight: var(--font-semibold); color: var(--text-normal);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.okit-collapsible-header:hover { color: var(--text-accent); }
+.okit-collapsible-header:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-s);
+}
+.okit-collapsible-chevron { display: inline-flex; color: var(--text-muted); }
+.okit-collapsible-body { padding-top: var(--size-4-2); }
+.okit-collapsible-body.is-collapsed { display: none; }
+
+.vault-rag-reformat-original,
+.vault-rag-reformat-result {
+  max-height: 40vh;
+  overflow: auto;
+  white-space: pre-wrap;
+  background: var(--background-secondary);
+  padding: var(--size-4-2);
+  border-radius: var(--radius-s);
+}
+.vault-rag-reformat-label {
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--size-2-1);
+}
+/* Abschneide-Hinweis unter dem Ergebnis. Leer, solange es nichts zu melden gibt —
+   :empty haelt dann auch den Abstand aus dem Layout. */
+.vault-rag-reformat-notice {
+  margin-top: var(--size-2-2);
+  color: var(--text-warning);
+  font-size: var(--font-ui-smaller);
+}
+.vault-rag-reformat-notice:empty { display: none; }
+
+.vault-rag-reformat-instruction {
+  width: 100%;
+}
+
+.vault-rag-reformat-panel {
+  padding: var(--size-4-2);
+}
+.vault-rag-reformat-status {
+  margin-bottom: var(--size-4-3);
+  padding: var(--size-4-2);
+  background: var(--background-secondary);
+  border-radius: var(--radius-s);
+}
+.vault-rag-reformat-sel {
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+.vault-rag-reformat-meta,
+.vault-rag-reformat-blocked {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+.vault-rag-reformat-group-title {
+  margin: var(--size-4-3) 0 var(--size-2-2);
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  text-transform: uppercase;
+}
+.vault-rag-reformat-btn {
+  display: block;
+  width: 100%;
+  margin-bottom: var(--size-2-2);
+  text-align: left;
+}
+.vault-rag-reformat-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.vault-rag-reformat-panel-instruction {
+  width: 100%;
+  margin-bottom: var(--size-2-2);
+}
+
+/* Endpunkt-Zeile: drei Felder (Adresse · Schlüssel · Modell) brauchen die volle Breite.
+   Die Beschriftung steht als eigene Zeile darüber, deshalb ist der Info-Block hier leer und
+   darf keinen Platz beanspruchen — sonst quetscht er die Felder (gemeldet 2026-08-04). */
+.vault-rag-ep-row .setting-item-info {
+  display: none;
+}
+.vault-rag-ep-row .setting-item-control {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--size-4-2);
+  width: 100%;
+}
+.vault-rag-ep-row .setting-item-control input[type="text"],
+.vault-rag-ep-row .setting-item-control input[type="password"] {
+  flex: 1 1 12em;
+  min-width: 8em;
+}
+/* Reservierter Platz für das Modell-Dropdown (Auffüllen der Zeile erst nach dem geladenen
+   Promise, siehe buildEndpointList). Selbst ein Flex-Container, damit Dropdown/Freitext + der
+   „Modelle abrufen"-Knopf innerhalb genauso mitwachsen wie URL/Schlüssel daneben. */
+.vault-rag-ep-row .setting-item-control .vault-rag-model-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--size-4-1);
+  flex: 1 1 12em;
+  min-width: 10em;
+}
+.vault-rag-ep-row .setting-item-control .vault-rag-model-slot select,
+.vault-rag-ep-row .setting-item-control .vault-rag-model-slot input[type="text"] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
