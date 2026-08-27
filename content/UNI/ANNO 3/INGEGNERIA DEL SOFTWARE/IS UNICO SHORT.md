@@ -318,4 +318,104 @@ in totale *sono 18* e lavorano su aspetti come:
 - **attività da svolgere**
 - **modalità di monitoraggio**
 - **modalità di verifica**
+## Requisiti
+Descrivono una condizione o capacità necessaria all'utente per risolvere un problema o raggiungere un obiettivo.
+I requisiti si osservano su:
+#### 2 livelli di astrazione
+- **Requisiti utente**:
+	- requisiti ad alto livello che descrivono servizi e vincoli del sistema
+	- linguaggio naturale
+- **Requisiti di sistema**:
+	- descrivono servizi e vincoli in modo preciso e utile per chi deve progettare e sviluppare
+#### 3 categorie
+Una serie di requisiti possono essere
+- **Funzionali**
+	- descrivono i servizi che offre il sistema e il comportamento che deve assumere
+- **Non funzionale**
+	- descrivono proprietà qualità o vincoli che il sistema o il processo di sviluppo deve rispettare
+- **Dominio**
+	- definisce i vincoli che porta il settore applicativo su cui si sta facendo il sistema
+	- possono essere sia funzionali che non
+#### Stabili vs Volatili
+- **Stabili**
+	- è poco probabile che vengano cambiati una volta definiti
+- **Volatili**
+	- alta probabilità di cambiare nel tempo
+	- 4 categorie:
+		- **Mutabili**: causa cambiamento dell'ambiente operativo
+		- **Emergenti**: emergono dopo che il cliente sa di cosa ha bisogno
+		- **Consequenziali**: nascono come effetto dopo aver introdotto il nuovo software
+		- **Compatibilità**: quando cambiano i sistemi esterni utilizzati
+### Requirements Engineering
+Processo di costruzione dei requisiti si divide in 5 grandi attività
+- ***Studio di fattibilità***
+	- Valuta costi, benefici e risorse
+- ***Identificazione e analisi dei requisiti***
+	- si capiscono i bisogni degli stakeholder e vengono risolti conflitti
+	- stakeholder(persone o gruppi che hanno un interesse nel sistema di qualsiasi tipo)
+- ***Specifica dei requisiti***
+	- creazione di documenti più precisi di tipo informale, semi-formale o formale
+- ***Convalida dei Requisiti***
+	- verifica sulla completezza del documento e sulla consistenza
+- ***Gestione dei Requisiti***
+	- controllo e tracciamento delle modifiche sui requisiti durante il ciclo di vita del sistema software
+#### Tecniche di Specifica dei Requisiti
+Formalizzano i requisiti per evitare ambiguità prima della progettazione effettiva. Si dividono in 3 livelli
+##### Specifiche Informali
+Linguaggio stile Java in combinazione con parole del linguaggio naturale
+- non scrivi codice vero e proprio ma togli qualche ambiguità mettendo if else ecc
+![[GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|390]]
+
+##### Specifiche Semi-Formali
+Specifiche che vengono rappresentate con modelli grafici
+quando vengono definite possono dare 3 punti di vista differenti
+- sul modello dei dati
+	- requisiti relativi ai dati e alla loro organizzazione
+- sul modello comportamentale
+	- come il sistema interagisce con gli utenti e come diverse parti del sistema interagiscono tra di loro
+- sul modello dinamico
+	- come il sistema cambia stato e comportamento nel tempo
+###### Modello ERD (Entity Relationship Diagram)
+- Modella la struttura concettuale dei dati: **Entità** (rettangoli), **Attributi** (ovali), **Relazioni** (rombi) e cardinalità (`1:1`, `1:N`, `N:M`).
+![[GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|140]]
+###### Modello (DFD Data Flow Diagram)
+- Modella il cambiamento dei dati
+- si organizza il tutto a più livelli di raffinamento, dove all'inzio si ha un modello molto superficiale e man mano diventa sempre più approfondito
+
+- doppio quadrato= sorgente di dati
+- freccia= il flusso dei dati
+- quadrato arrotondato= processo che lavora i dati
+- rettangolo aperto= memoria che salva i dati(archivio)
+immagina questo come primo raffinamento poi diventa sempre più complesso e pieno di passaggi e figure
+![[Pasted image 20260319124621.png|291]]
+
+###### SSA (Structured System Analysis)
+Modello di decomposizione **top-down** ovvero scompone in 9 step il problema e ne costruisce un documento di specifica sempre più dettagliato partendo dal modello DFD
+- viene detto **step-wise refinement**
+##### Specifiche formali
+Usano formalismi a base matematica molto rigorosi, utili per sviluppo di sistemi critici
+###### Modello Petri Net
+Modello matematico usato per rappresentare sistemi concorrenti, distribuiti e asincroni
+è una tupla $G = (P, T, A, w, M_0)$
+dove 
+- Posti $P \ (cerchi)$: rappresentano condizioni, stati o risorse disponibili
+- Transizioni $T \ (barre)$: eventi o azioni che modificano lo stato del sistema
+- Archi orientati $A$: collegano posti a transizioni oppure viceversa ma non posto posto o transizione transizione(bipartito)
+	- possono essere pesati $w$
+- Token (puntini dentro i posti): rappresentano lo stato del sistema in quel momento, quante risorse ci sono in quel posto lo stato definito con $M$ 
+- $M_0$ è lo stato iniziale la fotografia di come sono disposti i token a tempo 0 e possono variare
+- Regole di Scatto(Firing Rule)
+	- per permettere il passaggio dei token da un posto all'altro vi è questa regola di Firing che si divide in 2 fasi
+	- Abilitazione (si consente il passaggio della transizione), si attiva se ad esempio il peso è uguale al numero dei token nel posto di arrivo
+	- Scatto(trasferimento effettivo dei token) si tolgono i token dal posto di inizio e si generano al posto di arrivo 
+![[GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|413]]
+- **Proprietà delle Reti di Petri:**
+	- **Non Determinismo:** più transizioni portano a una scelta di tipo deterministico se si abilita il Firing
+	- **Liveness (Vitalità):** non ci sono situazioni di stallo
+	- **Boundedness / Safety:** ciascun posto ha un limite di token che può avere
+	- **Reachability (Raggiungibilità):** capacità di determinare se una certa configurazione di stato (marcatura $M$) può essere raggiunta a partire dallo stato iniziale $M_0$.
+
+**FSM - Finite State Machines** basate su stati e transizioni con input/output
+
+**Linguaggio Z** basato su teoria degli insiemi e logica dei predicati)
 

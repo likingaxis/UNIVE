@@ -57,9 +57,9 @@
     5. *Optimizing* (miglioramento continuo e innovazione).
   * Concetto di **KPA (*Key Process Areas*)**.
   * Certificazione dei processi e dei produttori software: Standard ISO 9001, ISO/IEC 12207, CMMI, Certificazioni professionali (CSDP, ISTQB).
-
+26
 ---
-
+27
 ### 📋 MODULO 3: Ingegneria dei Requisiti & Tecniche di Specifica
 * **3.1 Tassonomia e Ingegneria dei Requisiti**
   * Definizione di Requisito Software; Requisiti **Utente** (linguaggio naturale) vs Requisiti di **Sistema** (documento formale/strutturato SRS).
@@ -77,9 +77,8 @@
     * *Scatto:* consuma $w(p,t)$ token dai posti di input e genera $w(t,p)$ token nei posti di output.
   * Proprietà delle Reti di Petri: *Non determinismo*, *Liveness* (assenza di deadlock), *Boundedness / Safety* (capacità finita dei posti), *Reachability* (albero delle marcature raggiungibili).
   * Cenni ad altri formalismi: Finite State Machines (FSM) e Linguaggio Z (schemi basati su insiemi e logica del primo ordine).
-26
 ---
-27
+
 ### 🧩 MODULO 4: Analisi Orientata agli Oggetti (OOA) & UML
 * **4.1 Principi OOA & Architettura BCE**
   * Filosofia di analisi OO; Il pattern **BCE**:
