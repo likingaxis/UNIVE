@@ -539,3 +539,13 @@ Diagramma che descrive la parte dinamica delle specifiche semi-formali con eleme
 - **Transizione**: passaggio di stato di un oggetto rispetto ad un evento o azione che avviene
 
 ![[GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-065.png|257]]
+#### Package (Diagramma dei Package)
+- **Cos'è:** Meccanismo per raggruppare elementi correlati (classi, use case) graficamente rappresentato come una cartella con linguetta.
+- **Scopi:** 
+  1. *Gestione complessità* (organizza grandi progetti in sottosistemi).
+  2. *Namespace* (evita conflitti di nomi, es. `Package::Classe`).
+  3. *Controllo visibilità* (espone solo le classi pubbliche nascondendo quelle interne).
+- **Dipendenza ($-->$):** il Package A dipende dal Package B se le sue classi usano elementi di B (base per l'architettura a livelli/Layer).
+
+![[GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|400]]
+
