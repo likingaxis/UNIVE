@@ -1,4 +1,4 @@
-### MODULO 1
+# MODULO 1
 ## Introduzione ISW
 - **Definizione di Ingegneria del software**
 	- è la disciplina che applica principi, metodi e pratiche dell'ingegneria alla realizzazione del software per risolvere problemi di cost overrun e time overrun
@@ -708,3 +708,297 @@ Utile per capire le effettive scalette temporali sul calendario
 ### Documento SPMP - Software Project Management Plan
 Si prendono stime, pianificazione temporale, organizzazione del team e rischi e si mettono in un documento che certifica il contratto operativo del progetto
 - ovvero il contratto che mette nero su bianco ogni cosa possibile per chi lavora sul progetto
+
+# MODULO 2
+## Progettazione Software
+si vuole passare dal documento di specifica al documento di progetto
+- dove si fanno effettivamente le cose(dominio della soluzione)
+
+Alla base di questa fase della progettazione vi sono 6 principi fondamentali:
+- **Stepwise refinement**: man mano si creano iterazioni sempre migliori del documento di progetto
+- **Astrazione**: consente di concentrarsi su determinati aspetti e escluderne altri si divide in:
+	- procedurale, si da un focus ai servizi che offre
+	- dei dati, si lavora con dei dati ma senza sapere la loro rappresentazione interna
+- **Decomposizione modulare**: si suddivide un problema in sotto problemi più piccoli e isolati, genera lo structure chart(artefatto prodotto dove si vede una gerarchia dei moduli con nodi e archi)
+	- *Dimostrazione dell'Effort*:
+	- Dati due problemi $p_1$ e $p_2$, sia $C$ la complessità ed $E$ lo sforzo (effort):
+	- Se $C(p_1) > C(p_2) \implies E(p_1) > E(p_2)$ *(più complesso = più sforzo)*
+	- Sapendo che la complessità è super-additiva: $C(p_1 + p_2) > C(p_1) + C(p_2)$
+	- Allora: $E(p_1 + p_2) > E(p_1) + E(p_2)$ *(dividere conviene sempre)*
+- **modularità**: suddivisione del sistema software in moduli proprio al livello architetturale
+	- per giudicare la qualità di una suddivisione del sistema software si valutano criteri di
+		- *cohesion*: quanto le attività contenute nello stesso modulo siano correlate tra loro(7 livelli di grado dal peggiore al migliore)
+			- coesione alta significa che i moduli hanno un loro scopo e si possono comprendere e modificare facilmente
+		- *coupling*: grado di dipendenza tra moduli differenti (5 livelli dal peggiore al migliore)
+			- un coupling alto significa dover conoscere bene gli altri moduli, e le modifiche su uno rischiano di romperne altri
+	- una scomposizione è ben fatta se si ha ***massima*** ***coesione*** e ***minimo*** ***coupling***
+
+![[GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-084.png|377]]
+- **information hiding**: ogni modulo deve rendere visibile solo ciò che gli altri moduli devono conoscere nascondendo altri dettagli implementativi
+- **riusabilità**: utilizzare un nuovo prodotto su elementi già sviluppati
+	- avviene su diversi livelli crescenti
+		- moduli software: riuso di singole funzioni o classi
+		- application framework: riuso di una struttura portante
+		- design pattern: riuso di schemi e relazioni tra classi
+		- architettura software: riuso dell'intera architettura
+![[GPT PREMIUMS/17_agosto_appunti/assets/p087-fig-089.png|331]]
+
+### OOD - Object Oriented Design (preliminare)
+Vi è una logica che riporta quella di requirements engineering per gli OOA ma la porta per la progettazione software con OOD, un processo iterativo e incrementale che si divide in 2 sottofasi:
+- preliminare
+- dettagliato
+come prima cosa che viene analizzata nella fase di OOD per capire COME deve fare il sistema e non più COSA deve fare il sistema vi è la sua architettura
+#### Architetture di sistema
+si descrive come devono essere messe le componenti del sistema e come devono collaborare si dividono in
+##### Centralizzate
+il sistema software gira su un solo nodo di calcolo(tipo un solo PC)
+- **Mainframe-based Architecture**
+	- un unico elaboratore che esegue il software e gestisce i dati
+	- gli utenti comunicano con questo calcolatore mediante terminale
+- **File-sharing**
+	- File condivisi tra pc ma che fanno calcoli a sè
+	- i pc non comunicano tra di loro e non condividono risorse di calcolo
+##### Distribuite
+si suddivide l'elaborazione tra più nodi porta diversi 
+- vantaggi come:
+	- scalabilità, load balancing, trasparenza, concorrenza
+- svantaggi come:
+	- latenza della rete, sicurezza, gestire differenza tra dispositivi diversi usati in rete
+prevedono l'uso di middleware, strato di software che fornisce servizi di comunicazione e connettività alle applicazioni distribuite si mette tra:
+- applicazioni
+- sistema operativo e infrastruttura di rete
+##### Client/Server
+Si divide l'architettura del sistema software in:
+- **Client**:
+	- si interfaccia con l'utente
+- **Server**:
+	- risponde al client e processa i servizi
+
+Il sistema software viene diviso in 3 layer concettuali per capire bene come strutturare il tutto seguendo i concetti BCE:
+- **Presentation Layer**: Boundary con l'utente
+- **Application Processing Layer**: Control, gestisce la logica applicativa e operazioni
+- **Data Management Layer**: Entity, gestisce dati e informazioni
+
+
+diverse tipologie di Client/Server
+***Two-Tier Architecture***
+- usa solo client e server e si concettualizza in 2 tipi di gestione del carico:
+	- **Thin Client**: dove il client gestisce solo la parte del Presentation Layer e tutto il resto lo fa il server
+	- **Fat Client**: il server gestisce la parte dei dati e il resto avviene sul client
+***3-Tier e N-Tier***
+è come Thin Client ma aggiunge un nuovo server detto 
+- **application server** che si occupa di processare i dati che richiede al
+- **backend server** che ha solo i dati
+N-Tier per aggiungere altri server come uno di autenticazione
+
+##### Architettura a Oggetti Distribuiti & ORB (Object Request Broker)
+- **Ruolo simmetrico**: non vi è più distinzione rigida tra client e server, ogni oggetto può agire come entrambi
+- **Trasparenza**: invocare un metodo su un oggetto remoto è identico all'invocazione locale (`obj.metodo()`)
+- **ORB (Object Request Broker)**: middleware basato su un *Software Bus*:
+	- *Bus astratto*: specifica l'interfaccia dei servizi di comunicazione (es. standard **CORBA**)
+	- *Implementazione del bus*: realizzazione concreta per hardware/SO specifici
+- **Meccanismo di funzionamento (Stub & Skeleton)**:
+	- **Client Stub**: proxy locale lato client che esegue il **Marshalling** (impacchetta la chiamata e i parametri in un flusso di byte da spedire sulla rete)
+	- **Server Skeleton**: riceve i byte dall'ORB lato server, esegue l'**Unmarshalling** (spacchetta i parametri) e invoca il metodo sull'oggetto reale
+- **IDL (Interface Definition Language)**: linguaggio neutro per definire le interfacce indipendentemente dal linguaggio di programmazione (poi compilato per generare Stub e Skeleton in Java, C++, ecc.)
+##### Component-Based
+**Impacchetta** il software mediante **componenti preconfezionate** che hanno una separazione netta tra *interfaccia e *implementazione*
+infatti vi è il concetto di **black box** (sufficiente sapere l'interfaccia esterna)
+vengono utilizzati **Component Framework** per fornire le basi per costruire applicazioni che fanno parte di uno stesso dominio
+![[GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-090.png|390]]
+
+##### SOA(Service Oriented Architecture) e Web Services
+Architettura di tipo distribuito che è composta da servizi autonomi
+Sviluppare applicazioni sfruttando questi servizi autonomi che possono essere scritti in qualsiasi linguaggio di programmazione, ognuno possiede una sua descrizione per poterlo utilizzare
+- **Service Provider**: mette a disposizione il servizio
+- **Service Consumer**: utilizza il servizio
+	- può diventare a sua volta un **Service Provider** esponendo un nuovo **Servizio Composto (_Composite Service_)** a livello più alto
+
+Per trovare i servizi un consumer si interfaccia con un Service Broker
+**Service Provider ↔ Broker ↔ Service Consumer**
+
+Questa comunicazione vede pattern complementari di comunicazione
+***Service Registration Pattern*** (pattern di registrazione del servizio)
+- Il broker ha le varie informazioni sui servizi e comunicano come in foto
+![[GPT PREMIUMS/18_agosto_appunti/assets/p093-fig-092.png|202]]
+***Broker Forwarding e Broker Handle*** (pattern di invocazione del servizio)
+- pattern che descrivono come il consumer si interfaccia con il broker
+- nel primo il broker fa da intermediario tra service e consumer
+![[GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-093.png|346]]
+
+- nel secondo possiamo vedere come il broker dica solo la posizione del servizio e poi il consumer deve parlare con il servizio(meno trasparenza)
+![[GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-094.png|275]]
+***Service Discovery Pattern*** (pattern di ricerca del servizio)
+- il consumer chiede al broker una tipologia di servizio non specifica e si mette in contatto con quel servizio
+![[GPT PREMIUMS/18_agosto_appunti/assets/p095-fig-095.png|330]]
+
+######  Web services
+è un determinato **servizio SOA** che utilizza protocolli di internet
+un servizio che segue il modello SOAP/WDSL ed è composto da 3 problemi distinti
+- **Come registrare e scoprire il servizio** con ***UDDI***(Universal Description, Discovery and Integration)
+	- puoi pubblicare un servizio, ricercare servizi ecc...
+
+![[GPT PREMIUMS/18_agosto_appunti/assets/p096-fig-096.png|244]]
+- **Come descrivere il servizio** con ***WSDL***(Web Services Description Language)
+	- permette di far vedere le operazioni possibili, quali input/output sono previsti, dove si trova ecc
+![[GPT PREMIUMS/18_agosto_appunti/assets/p097-fig-099.png|296]]
+- **Come scambiare messaggi con questi servizi** con ***SOAP*** (Simple Object Access Protocol)
+	- protocollo che usa XML e protocollo HTTP
+
+Un altro stile architetturale di Web Services sono quelli con il sistema REST
+1. **Client-Server**: Stile di interazione "pull" (il client richiede, il server fornisce).
+2. **Stateless (Senza stato)**: _Fondamentale_. Il server non memorizza alcun contesto (stato) del client tra una richiesta e l'altra. Ogni richiesta HTTP contiene tutte le informazioni necessarie per essere compresa dal server.
+3. **Uniform Interface (Interfaccia Uniforme)**: Si usano esclusivamente i verbi standard del protocollo HTTP per eseguire le operazioni CRUD (Create, Read, Update, Delete).
+4. **Named Resources (Risorse Nominate)**: Ogni risorsa è identificata univocamente da una URL/URI (es. `http://api.miosito.com/utenti/123`).
+5. **Interconnected resource representations**: Le risorse sono collegate tramite link, permettendo al client di navigare da uno stato all'altro dell'applicazione (Hypermedia).
+consente operazioni come GET, POST, PUT e DELETE
+![[GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-100.png|265]]
+##### Pattern per transazioni distribuite
+Non sono un'architettura a sé, ma **pattern di sicurezza/coordinamento** applicati all'interno di architetture distribuite (SOA e Client/Server) per garantire la consistenza dei dati su più server/DB indipendenti.
+
+Una **transazione** è una richiesta che raggruppa due o più operazioni in una singola unità logica e deve rispettare le proprietà **ACID**:
+- **Atomicity**: "tutto o niente" (se fallisce una parte, si annulla tutto con un *rollback*)
+- **Consistency**: il sistema passa da uno stato valido a un altro stato valido
+- **Isolation**: transazioni concorrenti non interferiscono tra loro
+- **Durability**: dopo il *commit*, le modifiche sono permanenti
+
+###### I 4 Pattern Architetturali di Transazione:
+1. **Two-Phase Commit Protocol (2PC)**:
+	- Garantisce l'atomicità tra database diversi tramite un **Commit Coordinator** in 2 fasi:
+		- *Fase 1 (Prepare)*: il coordinatore chiede a tutti i nodi di prepararsi bloccando le risorse (*lock*) e inviare il proprio voto (Sì/No).
+		- *Fase 2 (Commit o Abort)*: se **tutti** votano Sì $\to$ ordina il *Commit* definitivo; se anche **uno solo** vota No o va in timeout $\to$ ordina il *Rollback/Abort* a tutti.
+2. **Compound Transaction Pattern**:
+	- Evita il rollback totale drastico quando non serve (es. prenotazione *Volo + Hotel + Auto*).
+	- Divide la transazione complessa in **sottotransazioni modulari**, consentendo **rollback parziali** (se manca l'auto, non cancella il volo).
+3. **Long-Living Transaction Pattern**:
+	- Usato per transazioni che durano ore o giorni a causa di decisioni umane (**Human in the loop**, es. approvazione mutuo).
+	- Evita di tenere i database bloccati a lungo: spezza il processo in transazioni brevi e applica un **Recheck** delle condizioni prima della conferma finale.
+4. **Negotiation Pattern (Agent-Based)**:
+	- Agenti software (*Client Agent* e *Service Agent*) negoziano condizioni o risorse alternative se la richiesta iniziale non è disponibile.
+
+###### Coordinamento dei Servizi:
+Un'applicazione SOA può utilizzare più servizi contemporaneamente bisogna stabilire chi controlla l'ordine e le interazioni tra i servizi quindi vi è:
+- **Orchestrazione**: un coordinatore centrale (**orchestratore**) controlla e dirige l'ordine di esecuzione di tutti i servizi
+- **Coreografia**: nessun coordinatore centrale; i servizi collaborano e si scambiano messaggi direttamente in modo decentralizzato
+### OOD - Object Oriented Design (Di dettaglio)
+l'OOD dettagliato definisce la struttura interna delle classi prima della codifica, si rappresentano le cose sempre con diagrammi UML ma con un focus sui dettagli implementativi e di codice
+Ogni use case che era definito nella parte delle OOA è definito ora come delle classi che collaborano tra loro, collaborazione che hanno 2 parti:
+- Comportamentale (dinamica): Spiega come gli elementi comunicano nel tempo mediante Communication Diagram o Sequence Diagram
+- Strutturale(statica): rappresenta la struttura vera e propria aggiungendo dettagli al Class Diagram
+#### Principi di buon Design
+##### Legge di Demetra
+Afferma che un oggetto deve comunicare solo con i suoi vicini immediati e non con estranei, deve limitare le sue dipendenze agli oggetti con cui ha una relazione diretta per migliorare la manutenibilità e la flessibilità di codice
+Per ridurre l'inter-layer coupling (accoppiamento tra livelli diversi delle componenti) e usare soprattutto intra-layer coupling (accoppiamento tra oggetti dello stesso livello)
+###### Piccola parentesi sugli UML structured Class
+non sono direttamente collegati con i principi di buon design ma in UML abbiamo visto le class diagram standard, che descrivono le classi fuori
+poi ci sono le structured class che invece approfondiscono cosa vi è dentro
+da fuori però vengono ancora viste come delle black box e solo gli ingegneri vedono al suo interno, gli elementi principali sono:
+- **Part**: componente/oggetto interno appartenente alla classe
+- **Port**: punto di interazione con l'esterno (espone/richiede interfacce)
+- **Connector**: linea di comunicazione interna che collega le parti tra loro o alle porte
+- **Role**: ruolo ricoperto da un elemento nella collaborazione
+![[assets/p107-fig-111.png|383]]
+
+ricordiamo quindi che class diagram e structure diagram sono diversi
+![[assets/p108-fig-112.png|452]]
+###### Deployment Diagram
+Modella l'architettura fisica e il rilascio (*deployment*) del software a runtime:
+- **Nodi (cubi 3D)**: dispositivi hardware fisici o ambienti di esecuzione (es. *Server Web, Database Server, Smartphone*).
+- **Artefatti (`<<artifact>>`)**: i file eseguibili/binari concreti che vengono installati sui nodi (es. `app.jar`, `database.sql`, `setup.exe`).
+##### Design Pattern
+Servono per risolvere problemi ricorrenti nelle fasi di progettazione permettendo riutilizzo di strutture già collaudate.
+Si classificano su due dimensioni indipendenti
+***Purpose***
+- Descrive il tipo di problema progettuale che affronta il pattern e sono:
+	- Problemi **Creazionali**: Facilitare la creazione di oggetti
+	- Problemi **Strutturali**: Consentono la creazione di strutture più flessibili riprendendo concetti di ereditarietà e polimorfismo
+	- Problemi **Comportamentali**: Gestiscono gli algoritmi e i comportamenti che possono avere gli oggetti
+***Scope***
+- Specifica se il pattern si applica a classi o oggetti
+	- **Class Scope**: relazioni tra classi e sottoclassi riprendendo i concetti di ereditarietà
+	- **Object Scope**: relazioni tra oggetti
+
+Iniziamo descrivendo i Pattern di tipo creazionale:
+###### Factory Method (creazionale)
+Di tipo Creazionale e Class Scope sfruttando ereditarietà
+Consente di non specificare per forza quale classe creare
+- altrimenti una classe sarebbe obbligata a creare un determinato oggetto che è istanza di una determinata classe, così invece dipende dalla classe che lo estende
+Soluzione:
+- `Product interfaccia`: comune degli oggetti creati
+- `ConcreteProduct`:determinata implementazione del prodotto
+- `Creator`:classe di tipo abstract che dichiara il metodo `factoryMethod()`
+- `ConcreteCreator`:sotto classe che fa override di `factoryMethod` specificando il prodotto effettivo 
+![[assets/p069-fig-033.png|508]]
+###### Abstract Factory (creazionale)
+Di tipo Creazionale e Object Scope
+Permette di creare oggetti tra loro correlati come delle famiglie senza specificare le loro classi effettive ma che li rende perfettamente compatibili
+Soluzione:
+- `AbstractFactory`: interfaccia che dichiara i metodi di creazione dei prodotti possibili
+- `ConcreteFactory`: crea una determinata famiglia di oggetti a partire dalla abstract
+- `AbstractProduct`: definisce una interfaccia comune per un tipo di prodotto
+- `ConcreteProduct`:le effettive classi prodotte da quella factory concreta
+- `Client`: usa Abstract factory e Abstract Product senza conoscere le concrete
+![[assets/p069-fig-033.png|388]]
+
+passiamo ora ai pattern strutturali:
+
+###### Adapter (strutturale)
+Di tipo strutturale e sia Object che Class Scope
+Consente di riutilizzare una interfaccia di una classe per farla usare da altre classi che in realtà sono incompatibili con quella interfaccia
+Soluzione:
+- `Target`: interfaccia che può usare il client incompatibile
+- `Client`: colui che usa Target
+- `Adaptee`:classe esistente che si vuole riutilizzare
+- `Adapter`: fa da intermediario tra Adaptee e il Target convertendo le richieste
+nelle foto si nota come può essere sia Class che Object
+- Class: Adapter eredita tra target e adaptee
+- Object: eredita da target e contiene una istanza di Adaptee
+![[assets/p070-fig-034.png|650]]
+
+###### Composite (strutturale)
+Di tipo Strutturale e Object Scope
+Consente di comporre gli oggetti in strutture ad albero gerarchiche consentendo di trattare sia con le singole foglie che con i gruppi che si possono generare
+Soluzione:
+- `Component`: interfaccia comune per gli elementi dell'albero
+- `Leaf`: elementi terminali che implementano operazioni di base
+- `Composite`: elemento contenitore che ha una lista di Component figli
+- `Client`: interagisce con Component
+
+![[assets/p071-fig-035.png|469]]
+###### Decorator (strutturale)
+Di tipo Strutturale e Object Scope
+Aggiunge nuove funzionalità a un oggetto a runtime
+Soluzione:
+- `Component`: interfaccia comune per l'oggetto base e i decorator
+- `ConcreteComponent`: l'oggetto effettivo a cui vogliamo aggiungere funzionalità
+- `Decorator`: implementa l'interfaccia component e contiene un riferimento a un oggetto Component interno
+- `ConreteDecorator`: aggiunge le proprie funzionalità specifiche 
+![[assets/p071-fig-036.png|452]]
+
+
+passiamo ora ai pattern comportamentali
+###### Observer (comportamentale)
+Di tipo Comportamentale e Object Scope
+Consente di definire una dipendenza 1 a N dove se un oggetto cambia stato tutti gli oggetti dipendenti vengono aggiornati e notificati
+Soluzione:
+- `Subject`: classe base che contiene l'elenco degli observer e una lista delle operazioni per gestirli
+- `Observer`: interfaccia comune per tutti gli observer e contiene il metodo di aggiornamento
+- `ConcreteSubject`: oggetto effettivo che invoca i metodi e fa le cose e chiama notify e aggiorna ciascun observer
+- `ConcreteObserver`: riceve le notifiche e implementa update
+![[assets/p072-fig-037.jpeg|360]]
+
+###### Template Method (comportamentale)
+Di tipo comportamentale e Class Scope
+Consente di definire lo scheletro di un algoritmo delegando alle sottoclassi la definizione dei singoli passi che possono variare
+Soluzione:
+- `AbstractClass`:contiene il template con i passi fissi da fare
+- `ConcreteClass`: sottoclasse effettiva che implementa i singoli metodi
+![[assets/p073-fig-038.png|378]]
+###### Strategy (comportamentale)
+Di tipo comportamentale e Object Scope
+Consente di definire una famiglia di algoritmi che si possono intercambiare tra di loro mettendoli in una classe separata
+Soluzione:
+- `Strategy`: interfaccia comune degli algoritmi
+- `ConcreteStrategy`: le classi effettive che implementano quel determinato algoritmo
+- `Client`: utilizza una strategy
+![[assets/p074-fig-039.png|416]]`

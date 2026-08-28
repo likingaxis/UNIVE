@@ -164,9 +164,9 @@
 * **6.6 Pattern per Transazioni Distribuite**
   * Proprietà ACID; Protocollo **Two-Phase Commit (2PC)**: Fase 1 *Prepare* (raccolta voti), Fase 2 *Commit/Abort* globale.
   * *Compound Transaction Pattern*, *Long-Living Transaction Pattern*, *Negotiation Pattern*.
-
+MATTINA
 ---
-
+POMERIGGIO
 ### 🎨 MODULO 7: OOD di Dettaglio & I Design Pattern GoF
 * **7.1 Regole di Buon Design & Diagrammi di Dettaglio**
   * **Legge di Demetra (*Principle of Least Knowledge*):** Limitare l'invocazione di metodi solo a oggetti strettamente collegati (evitare concatenazioni `a.getB().getC().doIt()`).
