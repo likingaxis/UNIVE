@@ -100,7 +100,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -248,7 +248,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -264,14 +265,14 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "2d38bf528c52517f",
+  "active": "fbe831791dac57ac",
   "lastOpenFiles": [
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/ISW.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/Indice Corretto.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/NOTEBOOKLM.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/ISW.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/Indice Corretto.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/I parte ISW - SistSW/05a-OOA.pdf",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/09a-SOA_casestudy.pdf",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DOMANDE PROF/risposte_domande_orali.pdf",

@@ -106,9 +106,9 @@
     * *Collaboration Diagram:* enfasi sulla topologia e sulle relazioni strutturali tra oggetti (messaggi numerati progressivamente).
   * **State Diagram (Statechart di Harel):** Stati, Transizioni con sintassi `Evento [Guardia] / Azione`, Attività interne (`entry`, `do`, `exit`), Stati compositi e ortogonali.
   * **Activity Diagram:** Modellazione dei flussi procedurali, Azioni, Nodi di decisione/merge, Fork/Join per parallelismo, Swimlanes per ruoli e responsabilità.
-
+27
 ---
-
+28
 ### 📊 MODULO 5: Software Project Management, Pianificazione e Stime
 * **5.1 Organizzazione del Team & Legge di Brooks**
   * **Legge di Brooks:** *"Aggiungere personale a un progetto in ritardo lo rende ancora più in ritardo"*; Crescita quadratica dei canali di comunicazione:
@@ -134,9 +134,9 @@
   * Reti **PERT / CPM:** Calcolo dei tempi al più presto ($ES, EF$) e al più tardi ($LS, LF$); Identificazione del **Cammino Critico (*Critical Path*)** con slittamento nullo ($\text{Float} = LS - ES = 0$).
   * Diagramma di **Gantt:** Cronoprogramma a barre temporali e Milestone.
   * Struttura del documento **SPMP (*Software Project Management Plan*)** secondo standard IEEE 1058.
-27
+
 ---
-28
+
 ### 🏗️ MODULO 6: Progettazione Architetturale & Sistemi Distribuiti (OOD)
 * **6.1 Principi Fondamentali di Progettazione**
   * Astrazione, Stepwise Refinement, Modularità.

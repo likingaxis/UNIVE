@@ -549,3 +549,162 @@ Diagramma che descrive la parte dinamica delle specifiche semi-formali con eleme
 
 ![[GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|400]]
 
+## Software Project Management
+Consiste nella gestione del progetto software con una forte pianificazione.
+Si può ricondurre alle ***quattro P*** che sono tutte collegate tra loro:
+- **People**
+	- organizzare i team e le loro responsabilità
+- **Product**
+	- comprendere obiettivi, funzioni, dati e caratteristiche del prodotto software prima di realizzarlo
+- **Process**
+	- stabilisce il modo in cui verrà sviluppato il prodotto con modello e attività del processo di sviluppo software
+- **Project**
+	- organizzazione effettiva con task, tempi e costi
+### Organizzazione del team
+Alla base della logica dietro l'organizzazione del team vi è una legge
+#### Legge di Brooks
+> aggiungere personale a un progetto software già in ritardo può farlo ritardare ulteriormente.
+
+Questo avviene per diversi motivi:
+- le nuove persone vanno formate
+- non tutti i compiti si possono parallelizzare **(indivisibilità)**
+- La comunicazione tra le persone può aumentare a dismisura comportando maggiore possibilità di incorrere in errori o incomprensioni **(Overhead di interazione)**
+
+con questa formula sotto si può notare come il numero di canali di comunicazione $C$ è quadratico
+$$C = \frac{n(n-1)}{2}$$
+#### Due modelli di organizzazione del team
+Ora si vedono due modelli estremi, di solito si adattano delle vie di mezzo
+
+
+##### Team Democratico
+**Senza un capo**, le decisioni vengono prese a **maggioranza**
+- **egoless programming**, programmare con l'obiettivo di migliorarsi e il codice appartiene a tutti
+***Pro***: Alta motivazione, utile per problemi complessi o innovativi
+**Contro**: canali di comunicazione eccessivi
+
+##### Team con Chief programmer
+Di tipo gerarchico dove ogni partecipante ha un suo ruolo e ognuno di loro comunica con uno chief programmer
+***Pro***: canale di comunicazione ridotto
+***Contro***: sovraccarico del capo
+![[GPT PREMIUMS/17_agosto_appunti/assets/p068-fig-070.png|385]]
+
+Poi vi è anche una versione dove si divide il tutto in 2 team per evitare il Contro
+- team Leader per gli aspetti tecnici
+- team Manager per quelli gestionali
+### Stime nei progetti software
+Ci sono diverse grandezze che possiamo stimare per capire cosa ci aspetta nelle fasi successive dello sviluppo software:
+- *dimensione del software*
+- *effort necessario* spesso espressa in Man-Months ovvero $persone\ nel \ team\  \times \ \ mesi$
+- *durata dello sviluppo*
+- *costo*
+
+si calcolano con 3 approcci principali:
+- antologia: ci si basa su progetti passati, se sono simili ha senso sennò no
+- scomposizione
+- modelli algoritmici empirici
+
+analizziamo meglio gli ultimi 2
+##### Scomposizione
+###### Usando LOC
+Utile per progetti grandi, si scompone, si calcolano le stime e poi si combinano
+Si possono ad esempio calcolare:
+- **Effort**
+$$Effort=\frac{Estimated \ LOC}{LOC/pm}$$
+- **Cost**
+$$Cost=Estimated \ LOC \times \$/ LOC$$
+Dove: 
+- Estimated LOC: Linee di codice stimate
+- LOC/pm: Linee di codice prodotte in un Man-Month
+- $/LOC: costo medio per linea di codice
+
+![[GPT PREMIUMS/17_agosto_appunti/assets/p070-fig-072.png|380]]
+
+Problema: troppo dipendente dal linguaggio usato
+###### Function Point
+si da una misura effettuata in 2 passaggi
+- ***UFC***
+	- conteggio funzionale non aggiustato
+- ***TCF***
+	- correzione del valore con complessità tecniche
+Per poi fare
+$$FP = UFC \times TCF$$
+
+***UFC***
+valutiamo le seguenti misure
+- **Dati**
+	- *ILF*: dati gestiti internamente
+	- *EIF*: dati esterni gestiti da altre app ma condivise con il sistema software
+- Interazioni con l'esterno
+	- *EI(External Input)*: input che entrano nel software
+	- *EO(External Output)*: dati che escono dal software
+	- *EQ(External Query)*: input che genera un output senza modificare archivi
+
+![[GPT PREMIUMS/17_agosto_appunti/assets/p071-fig-073.png|320]]
+
+Si fa una somma dei valori ponderati producendo così UFC
+
+***TCF***
+si aggiungono 14 gradi di influenza con un valore da 0 a 5(irrilevante-essenziale)
+e poi si calcola tutto così
+![[GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-076.png|202]]
+
+poi si calcola infine la formula scritta sopra ovvero la moltiplicazione tra UFC E TCF
+
+###### Backfiring
+Problema: modelli possono usare LOC ma noi abbiamo usato FP
+- si usa una tabella per fare il passaggio da una parte all'altra
+- utile per fare calcoli con modelli algoritmici empirici
+$$\text{LOC} = \text{FP} \times \text{Gearing Ratio}$$
+![[GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-077.png|235]]
+#### modelli algoritmici empirici
+Abbiamo visto solo un tipo:
+###### COCOMO - COnstructive COst mOdel
+Utile per stimare l'effort di sviluppo, poi si possono derivare durate e costi
+Si dividono prima 3 livelli di precisione che si vogliono ottenere
+- **Basic**: Stime grezze e iniziali
+- **Intermediate**: Più preciso, si scompone il sistema in sotto-sistemi
+- **Advanced**: il più dettagliato, si divide il sistema in singoli moduli
+
+Si basa anche sul **modello del prodotto** 3 esempi:
+Organic->Semidetached->Embedded
+
+Dopo aver definito queste 2 cose si stimano le KLOC previste
+- Kilo Lines of Code  `20 KLOC` $\approx$ `20 000 LOC`
+
+si calcola con 2 livelli di precisione diversi:
+- Nominale:
+	- calcolo senza troppe caratteristiche
+	- $Effort_{nominale} = a \times (KLOC)^b$
+	- risultato in Man-Months
+	- a e b dipendono dalle cose scelte prima (livelli di precisione e modello del prodotto)
+- Cost Drivers
+	- si corregge quello nominale tenendo conto di cambiamenti
+	- si da un punteggio a questi 15 fattori e poi si fa il loro prodotto
+	- $C = \prod_i C_i$ 
+	- e poi $Effort = Effort_{nominale} \times C$
+
+Dopo aver trovato l'effort si deriva
+$$Time = c \times Effort^d$$
+- dove c e d sono in base al modo di sviluppo
+
+oppure anche
+$$Costo\ totale = \sum (Effort_{ruolo} \times Costo\ per\ MM_{ruolo})$$
+- costo per Man-Months
+### La pianificazione temporale
+Si organizzano i task del progetto nel tempo, non sono per forza indipendenti
+Si rappresenta con 2 strumenti complementari
+#### PERT - Program Evaluation and Review Technique
+rappresenta i task e le loro dipendenze con un grafo
+- **nodi**=task
+- **archi**=vincoli di precedenza
+si nota *come cammino* critico quel cammino di task che fa durare meno tempo lo sviluppo
+
+![[GPT PREMIUMS/17_agosto_appunti/assets/p078-fig-080.png|600]]
+#### Diagramma di Gantt
+Utile per capire le effettive scalette temporali sul calendario
+
+![[CORSETTI/Immagini/Pasted image 20260421100613.png|408]]
+
+### Documento SPMP - Software Project Management Plan
+Si prendono stime, pianificazione temporale, organizzazione del team e rischi e si mettono in un documento che certifica il contratto operativo del progetto
+- ovvero il contratto che mette nero su bianco ogni cosa possibile per chi lavora sul progetto
