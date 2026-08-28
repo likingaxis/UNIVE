@@ -1,0 +1,452 @@
+=== HEADERS IN IS UNICO.md ===
+# Modulo 1
+### Definizione di Ingegneria del Software
+##### Cosa si intende per Prodotto software
+##### Cosa si intende per artefatto
+##### Cosa si intende per sistema software
+##### Cosa si intende per Cliente, sviluppatore e utente
+### Ciclo di vita di un software
+##### Sviluppo
+##### Manutenzione
+###### Diversi tipi di manutenzione
+##### Dismissione
+### Verifica e Validazione
+#### Testing
+### Problemi accidentali ed essenziali del software
+### Aspetti economici del software
+### Affidabilità di un software
+###### 10-90
+# Affidabilità hardware e software
+### Disponibilità
+## Dal ciclo di vita al processo software
+## Modello di ciclo di vita
+### Modello Build & Fix
+### Modello Waterfall
+### Modello con Rapid Prototyping Model
+## Modelli basati su iterazione dei processi
+### Modello a Sviluppo Incrementale
+#### Modello incrementale con Overall Architecture
+#### Incrementale senza Overall Architecture
+###### Problema del modello incrementale
+### Modello a spirale
+#### Modello a spirale di Boehm
+### Risk Management
+#### Tipologie di rischio
+#### Processo di Risk Management
+### Modello Object Oriented detto anche a fontana
+### Ingegneria simultanea o concorrente
+### Modelli basati su metodi formali
+### Modelli corporate
+#### Modello Microsoft- Synchronize and Stabilize
+##### Ciclo di sviluppo microsoft
+#### Modello Netscape
+### Modelli con approccio Agile
+#### Quattro valori del manifesto Agile
+#### Modello Scrum
+### User Story
+### Dal prodotto al processo dell'organizzazione
+#### Modello CMM- Capability Maturity Model
+##### KPA
+# Verso il Requirements Engineering
+### Requisiti Software
+#### astrazione e categoria
+##### Astrazione
+##### Categoria
+##### Dominio
+##### Requisiti scritti male
+##### Il PDL
+#### Cosa si intende per Specifica
+## Requirements Engineering
+##### Requisiti stabili e volatili
+#### Esempi di specifiche formali
+##### Esempio 1 Petri Net
+##### Esempio 2 Finite State Machine
+##### Esempio 3 Linguaggio Z
+#### Specifiche semi formali e modelli del sistema
+#### ERD e DFD
+##### ERD Entity Relationship Diagram
+##### DFD Data Flow Diagram
+### SSA Structured System Analysis
+# OOA e OOD
+## UML (Unified Modelling Language)
+### Modello dei Dati con il Class Diagram
+#### Identificazione delle Entity Classes
+##### Noun Phase Approach
+##### Common Class Patterns Approach
+##### Use Case Driven
+##### CRC - Class Responsibility Collaborators
+##### Approccio mixed
+#### Quando un concetto merita di diventare una classe
+#### Specifica delle classi
+#### Associazioni tra classi
+##### Relazioni di tipo Aggregation e Composition
+##### Generalizzazione ed Ereditarietà
+#### Object Diagram
+### Modello comportamentale
+#### Use Case Diagram
+#### Activity Diagram
+#### Sequence Diagram
+#### Collaboration Diagram
+#### Interfaccia pubblica di una classe
+#### State Diagram
+#### Gestire la complessità dei modelli OOA
+#### Approccio BCE
+# Casi di studio
+## Caso di Studio A: University Enrolment (Sistema di Iscrizione Universitaria)
+### A.1 - Identificazione delle Classi (Approccio Noun Phrase)
+### A.2 - Specifica degli Attributi
+### A.3 - Aggiunta delle Aggregazioni
+### A.5 - Use Case Diagram (Casi d'Uso)
+### A.6 e A.7 - Sequence Diagram e Identificazione Operazioni
+## Software Project Management
+### Organizzazione delle persone
+##### La legge di Brooks
+#### Due modelli di organizzazione del team
+### Che cosa deve stabilire una pianificazione
+### Stime nei progetti software
+#### Per antologia
+#### tecniche di scomposizione
+##### Function Point
+##### Un ponte tra Functional Point e LOC il Backfiring
+#### modelli algoritmici empirici
+##### Algoritmo COCOMO - COnstructive COst mOdel
+#### Pianificazione temporale
+##### PERT - Program Evaluation and Review Technique
+##### Diagramma di Gantt
+### Documento SPMP - Software Project Management Plan
+## Progettazione Software
+### Astrazione e Stepwise Refinement
+### Modularità e decomposizione modulare
+#### Coesione e Coupling
+## OOD - Object Oriented Design
+### Architettura di sistema
+#### Architetture centralizzate
+##### Mainframe-based Architecture
+##### File Sharing Architecture
+#### Architetture distribuite
+##### Middleware
+##### Architettura Client/Server
+##### Architettura a Oggetti Distribuiti
+##### Component-Based Architecture
+##### SOA - Service-Oriented Architecture
+##### Software Architectural Transaction Patterns
+##### Service Interface Design
+##### Service Coordination
+## OOD - Object Oriented Design DETTAGLIATA
+#### Legge di Demetra
+### UML Structured Class
+#### Class Diagram e Composite Structure Diagram
+#### Deployment Diagram
+## Design Pattern
+###  Framework e Design Pattern
+#### Pattern creazionali
+#### Pattern strutturali
+#### Pattern comportamentali
+## Metriche Software
+### Structure Chart
+#### MORFOLOGIA
+##### Tree Impurity
+##### Internal Reuse
+#### Information Flow
+#### FlowGraph
+##### Complessità ciclomatica
+## Qualità del software, SQA e Testing
+### Qualità del software
+#### Quality Model di McCall
+##### Operation
+##### Revision
+##### Transition
+### Software Quality Assurance — SQA
+### Verification, Validation e Testing.
+#### Validation Testing
+#### Defect Testing
+#### Statistical Testing
+#### Politiche di Testing
+##### Black Box Testing
+##### White Box testing
+##### Path Testing e complessità ciclomatica
+#### Integration Testing
+##### Top-down
+##### Bottom-up
+##### Interface Testing
+#### Stress Testing
+#### Object Oriented Testing
+#### Cluster Testing
+## BPM e BPMN
+
+================================================================================
+=== HEADERS IN ISW.md (ISW_obsidian_full) ===
+# ISW
+## INTRODUZIONE
+## Definizioni
+## Affidabilità del Software (Sw Reliability)
+## Confronto tra Affidabilità Hardware (Hw) e Software (Sw)
+## Disponibilità del Software (Sw Availability)
+## Fasi della Produzione del Software
+## Caratteristiche del Software
+## PROCESSO SOFTWARE
+## Modello Waterfall
+## Sviluppo Incrementale
+## Sviluppo a Spirale
+## Risk Management
+## Modello Object Oriented o a Fontana
+## Modello Microsoft ("Synchronyze-And-Stabilize")
+## Strategie e Principi
+## Modello Netspace
+## Metodi Agili
+## CMM (Capability Maturity Model)
+## REQUISITI SOFTWARE
+## REQ ENGINEERING
+## IBM Doors)
+## Petri Net
+## (FINE Esempio)
+## UML (Unified Modeling Language) linguaggio standard di modellazione utilizzato per
+## ERD (Entity Relationship Diagram) diagramma entità relazione per costruire modello dei
+## SSA (Structured System Analysis). Composto da 9 step e basato sul concetto di step-wise
+## OOA (Object Oriented Analysis)
+## OOA fa principalmente uso di notazioni visuali (diagrammi), ma essendo semiformale queste
+## UML (Unified Modeling Language). UML non è un metodo né un processo di OOA, ma è
+## Software di tipo gestionale (rapporto con clienti frontend) Contact Management è una
+## UML e rappresenta derived attribute: il valore dell'attributo non è inserito dall'utente ma
+## (FINE ESEMPIO)
+## Tipi Particolari di Associazioni (Contenimento): UML fornisce due primitive per le relazioni di
+## (FINE ESEMPIO)
+## (FINE ESEMPIO)
+## (FINE ESEMPIO)
+## (FINE ESEMPIO)
+## (FINE ESEMPIO)
+## Modello Dinamico (State Diagrams)
+## (FINE ESEMPIO)
+## PIANIFICAZIONE
+## (FINE ESEMPIO)
+## FP = UFCxTFC
+## (FINE ESEMPIO)
+## PROGETTAZIONE
+## (FINE ESEMPIO)
+## Content Coupling: example
+## Common Coupling: example
+## Control Coupling: example
+## Stamp e Data Coupling
+## (FINE ESEMPIO)
+## (FINE ESEMPIO)
+## Information Hiding
+## OOD (Object Oriented Design)
+## a. Architetture Centralizzate
+## b. Architetture Distribuite
+## Application Layer
+## 4- Architettura ad Oggetti Distribuiti
+## 5- Component Based
+## Component framework
+## Componenti UML
+## 6- Architetture Service Oriented
+## Software Architectural Broker Patterns
+## Service Registration Pattern
+## SOAP.
+## (FINE ESEMPIO)
+## Software Architectural Transaction Patterns
+## (FINE ESEMPIO)
+## Compound Transaction Pattern
+## (FINE ESEMPIO)
+## Long Living Transaction
+## (FINE ESEMPIO)
+## Negotation Pattern
+## (FINE ESEMPIO)
+## Service Interface Design
+## Service Coordination
+## Progettazione dettagliata OOD
+## (FINE ESEMPIO)
+## Java e C++)
+## UML Structured Class
+## Class Diagram vs Composite Structure Diagram
+## Deploymend Diagram
+## Process-to-Node Allocation
+## UML permette di rappresentare l'interfaccia fornita da ciascun componente usando la
+## DESIGN PATTERNS
+## Abstract Factory Pattern
+## AbstractProduct, ConcreteProduct, Applicazione Client
+## Factory Method Pattern
+## Adapter Pattern
+## Composite Pattern
+## Decorator Pattern
+## Observer Pattern
+## Template Method Pattern
+## Strategy Method Pattern
+## ES ABSTRACT METHOD
+## ES FACTORY METHOD
+## ES ADAPTER
+## ES COMPOSITE
+## ES DECORATOR
+## OBSERVER
+## TEMPLETE METHOD
+## METRICHE DI STRUTTURA
+## Structural Measurements
+## Basic Control Structure
+## Flowgraph
+## QUALITÀ DEL SOFTWARE
+## Software Quality Assurance
+## TESTING
+## Testing dinamico: viene usato spesso per identificare le attività condotte in modo dinamico
+## Inspections
+## Testing statico quando devo eseguire il testing su artefatti non eseguibili (analisi
+## Defect Testing
+## Black Box Testing
+## Test Guidelines
+## Path Testing
+## Integration Testing
+## Interface Testing
+## architetture C/S)
+## BPMN
+## Pianificazione Eventi (Event Scheduling): Meccanismo per creare nuovi eventi nella
+
+================================================================================
+=== HEADERS IN IS_andrea.md (IS_andrea_obsidian_full) ===
+# INGEGNERIA DEL SOFTWARE
+## MODULO 1
+## INTRODUZIONE
+## INGEGNERIA DEL SOFTWARE
+## ASPETTI TIPICI DELL’INGEGNERIA DEL SOFTWARE – PROBLEMI ACCIDENTALI
+## CICLO DI VITA DEL SW
+## ASPETTI TIPICI DELL’INGEGNERIA DEL SOFTWARE – PROBLEMI ESSENZIALI
+## ASPETTI TIPICI DELL’INGEGNERIA DEL SOFTWARE – PROBLEMI DI COSTO
+## DEFINIZIONI E CONCETTI CHIAVE
+## AFFIDABILITA’ - RELIABILITY
+## CONFRONTO TRA AFFIDABILITA’ HW E SW
+## ANDAMENTO FREQUENZA DI GUASTO HW
+## ANDAMENTO FREQUENZA DI GUASTO SW
+## DISPONIBILITA’ - AVAILABILITY
+## PROCESSO SOFTWARE
+## TIPI DI MANUTENZIONE
+## MODELLI DI CICLO DI VITA
+## BUILD & FIX
+## MODELLO WATERFALL
+## RAPID PROTOTYPING MODEL
+## THROW-AWAY PROTOTYPING
+## VISUAL PROGRAMMING
+## ITERAZIONE DEL PROCESSO
+## MODELLO INCREMENTALE
+## MODELLO A SPIRALE
+## GESTIONE DEI RISCHI
+## MODELLO OBJECT-ORIENTED
+## MODELLO DI INGEGNERIA SIMULTANEA O CONCORRENTE
+## MODELLO BASATO SU METODI FORMALI
+## MODELLO MICROSOFT – APPROCCIO SYNCH-AND-STABILIZE
+## CICLO DI SVILUPPO A 3 FASI
+## STRATEGIE E PRINCIPI – MODELLO MICROSOFT
+## CONFRONTO TRA SYNCH-AND-STABILIZE E MODELLO A CASCATA
+## MODELLO NETSCAPE
+## METODI AGILI
+## SCRUM – METODO AGILE
+## CAPABILITY MATURITY MODEL – CMM
+## REQUISITI SOFTWARE
+## DOCUMENTO DI SPECIFICA
+## PROCESSO DI INGEGNERIA DEI REQUISITI
+## STUDIO DI FATTIBILITA’
+## ATTIVITA’ DI IDENTIFICAZIONE E ANALISI DEI REQUISITI
+## CONVALIDA DEI REQUISITI
+## GESTIONE DEI REQUISITI
+## SPECIFICHE FORMALI VS INFORMALI
+## SPECIFICHE FORMALI CON PETRI NET
+## SPECIFICHE FORMALI CON FINITE STATE MACHINE (FSM)
+## SPECIFICHE FORMALI CON LINGUAGGIO Z
+## SPECIFICHE SEMI-FORMALI: MODELLI DEL SISTEMA
+## ENTITY RELATIONSHIP DIAGRAM (ERD)
+## DATA FLOW DIAGRAM (DFD)
+## STRUCTURED SYSTEM ANALYSIS (SSA)
+## siconcentrasugli
+## strutturali
+## correttezzacompletezza e consistenza modellodeidati
+## SEI
+## comportamentale
+## aspettifunzionali
+## delsistema
+## dinamico
+## aspettidicontrollo
+## i
+## ANALISI ORIENTATA AGLI OGGETTI (OOA)
+## METODI DI OOA
+## requisitidisistema
+## UNIFIED MODELING LANGUAGE (UML)
+## MODELLO DEI DATI
+## APPROCCIO PER L’IDENTIFICAZIONE DELLE CLASSI
+## LINEE GUIDA PER L’IDENTIFICAZIONE DELLE ENTITY CLASSES
+## CASI DI STUDIO
+## LINEE GUIDA PER LA SPECIFICA DELLE CLASSI
+## IDENTIFICAZIONE DELLE ASSOCIAZIONI
+## AGGREGAZIONE
+## EREDITARIETA’ (GENERALIZZAZIONE)
+## OBJECT DIAGRAM
+## MODELLO COMPORTAMENTALE
+## USE CASE DIAGRAM
+## ACTIVITY DIAGRAM
+## DIAGRAMMI DI INTERAZIONE
+## INTERFACCIA PUBBLICA DI CLASSE
+## IDENTIFICAZIONE DELLE OPERAZIONI
+## MODELLO DINAMICO
+## GESTIONE DELLA COMPLESSITA’ NEI MODELLI DI OOA
+## UML PACKAGE
+## APPROCCIO BCE
+## PIANIFICAZIONE
+## GESTIONE DI PROGETTI SOFTWARE
+## STIME NEI PROGETTI SOFTWARE
+## FUNCTION POINT - FP
+## FP vs LOC
+## COCOMO
+## PIANIFICAZIONE TEMPORALE
+## SOFTWARE PROJECT MANAGEMENT PLAN (SPMP)
+## ESERCIZIO OOA: SISTEMA SW PER ONLINE SHOPPING – 09/01/2023
+## REQUISITI UTENTE
+## SVILUPPARE LA SPECIFICA SECONDO OOA
+## CLASS DIAGRAM
+## USE CASE DIAGRAM
+## DESCRIZIONE FLUSSO CON ACTIVITY DIAGRAM
+## SEQUENCE DIAGRAM
+## RAFFINAMENTO CLASS DIAGRAM
+## INGEGNERIA DEL SOFTWARE
+## MODULO 2
+## PROGETTO
+## FASE DI PROGETTO
+## PRINCIPI DI PROGETTAZIONE
+## OBJECT ORIENTED DESIGN - OOD
+## ARCHITETTURA DI SISTEMA
+## SERVICE ORIENTED ARCHITECTURE (SOA)
+## BROKER PATTERN
+## REST (REPRESENTATIONAL STATE TRANSFER)
+## SOFTWARE ARCHITECTURAL TRANSACTION PATTERNS
+## NEGOTIATION PATTERN
+## SERVICE INTERFACE DESIGN IN SOA
+## SERVICE COORDINATION IN SOA
+## LEGGE DI DEMETER
+## CLASSI STRUTTURATE
+## DIAGRAMMA DI DISTRIBUZIONE – DEPLOYMENT DIAGRAM
+## DESIGN PATTERNS
+## CLASSIFICAZIONE
+## DESCRIZIONE
+## FRAMEWORK
+## ABSTRACT FACTORY
+## FACTORY METHOD
+## ADAPTER
+## COMPOSITE
+## DECORATOR
+## OBSERVER
+## TEMPLATE METHOD
+## STRATEGY
+## METRICHE DI STRUTTURA
+## MISURE DI PROGETTAZIONE PRELIMINARE
+## ARCHITETTURA DEI MODULI – STRUCTURE CHART
+## MORFOLOGIA
+## TREE IMPURUTY
+## INTERNAL REUSE
+## INFORMATION FLOW – FLUSSO DI INFORMAZIONI
+## STRUTTURA DI MISURAZIONE
+## FLOWGRAPH – GRAFO DI FLUSSO
+## MISURAZIONE GERARCHICA
+## COMPLESSITA’ CICLOMATICA
+## QUALITA’ DEL SOFTWARE
+## INDICI E ATTRIBUTI DI QUALITA’ DEL SOFTWARE
+## METODO DELLA CHECKLIST
+## SOFTWARE QUALITY ASSURANCE – SQA
+## TESTING
+## POLITICHE DI TESTING
+## TESTING DELLE INTERFACCE
+## STRESS TESTING
+## TESTING ORIENTATO AGLI OGGETTI

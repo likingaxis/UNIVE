@@ -1,0 +1,363 @@
+=== DIRECTORY: content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/I parte ISW - SistSW ===
+
+FILE: 01-Introduzione.pdf (Totale slide: 39)
+Key Slide Titles:
+  - UniRoma2 - ISW/SSW 1
+  - UniRoma2 - ISW/SSW 2
+  - UniRoma2 - ISW/SSW 3
+  - UniRoma2 - ISW/SSW 4
+  - UniRoma2 - ISW/SSW 5
+  - UniRoma2 - ISW/SSW 6
+  - UniRoma2 - ISW/SSW 7
+  - UniRoma2 - ISW/SSW 8
+  - UniRoma2 - ISW/SSW 9
+  - UniRoma2 - ISW/SSW 10
+  - Defect
+  - UniRoma2 - ISW/SSW 12
+  - UniRoma2 - ISW/SSW 13
+  - UniRoma2 - ISW/SSW 14
+  - UniRoma2 - ISW/SSW 15
+
+FILE: 02-Processo software parte1.pdf (Totale slide: 60)
+Key Slide Titles:
+  - UniRoma2 - ISW/SSW 1
+  - UniRoma2 - ISW/SSW 2
+  - UniRoma2 - ISW/SSW 3
+  - UniRoma2 - ISW/SSW 4
+  - UniRoma2 - ISW/SSW 5
+  - UniRoma2 - ISW/SSW 6
+  - UniRoma2 - ISW/SSW 7
+  - UniRoma2 - ISW/SSW 8
+  - UniRoma2 - ISW/SSW 9
+  - UniRoma2 - ISW/SSW 10
+  - UniRoma2 - ISW/SSW 11
+  - UniRoma2 - ISW/SSW 12
+  - UniRoma2 - ISW/SSW 13
+  - UniRoma2 - ISW/SSW 14
+  - UniRoma2 - ISW/SSW 15
+
+FILE: 02-Processo software parte2.pdf (Totale slide: 19)
+Key Slide Titles:
+  - UniRoma2 - ISW/SSW 61
+  - UniRoma2 - ISW/SSW 62
+  - UniRoma2 - ISW/SSW 63
+  - UniRoma2 - ISW/SSW 64
+  - UniRoma2 - ISW/SSW 65
+  - Agile Methods
+  - Agile Manifesto (2001)
+  - Scrum
+  - Scrum Roles
+  - Sprints
+  - Definition of
+  - User Stories
+  - UniRoma2 - ISW/SSW 73
+  - UniRoma2 - ISW/SSW 74
+  - UniRoma2 - ISW/SSW 75
+
+FILE: 03-Requisiti software.pdf (Totale slide: 25)
+Key Slide Titles:
+  - UniRoma2 - ISW/SSW 1
+  - UniRoma2 - ISW/SSW 2
+  - UniRoma2 - ISW/SSW 3
+  - UniRoma2 - ISW/SSW 4
+  - UniRoma2 - ISW/SSW 5
+  - UniRoma2 - ISW/SSW 6
+  - UniRoma2 - ISW/SSW 7
+  - UniRoma2 - ISW/SSW 8
+  - UniRoma2 - ISW/SSW 9
+  - UniRoma2 - ISW/SSW 10
+  - UniRoma2 - ISW/SSW 11
+  - UniRoma2 - ISW/SSW 12
+  - UniRoma2 - ISW/SSW 13
+  - UniRoma2 - ISW/SSW 14
+  - UniRoma2 - ISW/SSW 15
+
+FILE: 04-Req Engineering.pdf (Totale slide: 38)
+Key Slide Titles:
+  - UniRoma2 - ISW/SSW 1
+  - UniRoma2 - ISW/SSW 2
+  - UniRoma2 - ISW/SSW 3
+  - UniRoma2 - ISW/SSW 4
+  - UniRoma2 - ISW/SSW 5
+  - UniRoma2 - ISW/SSW 6
+  - UniRoma2 - ISW/SSW 7
+  - UniRoma2 - ISW/SSW 8
+  - UniRoma2 - ISW/SSW 9
+  - UniRoma2 - ISW/SSW 10
+  - UniRoma2 - ISW/SSW 11
+  - UniRoma2 - ISW/SSW 12
+  - UniRoma2 - ISW/SSW 13
+  - UniRoma2 - ISW/SSW 14
+  - UniRoma2 - ISW/SSW 15
+
+FILE: 05-Richiami OOP.pdf (Totale slide: 15)
+Key Slide Titles:
+  - UniRoma2 - ISW/SSW 1
+  - UniRoma2 - ISW/SSW 2
+  - UniRoma2 - ISW/SSW 3
+  - UniRoma2 - ISW/SSW 4
+  - UniRoma2 - ISW/SSW 5
+  - UniRoma2 - ISW/SSW 6
+  - UniRoma2 - ISW/SSW 7
+  - UniRoma2 - ISW/SSW 8
+  - UniRoma2 - ISW/SSW 9
+  - UniRoma2 - ISW/SSW 10
+  - UniRoma2 - ISW/SSW 11
+  - UniRoma2 - ISW/SSW 12
+  - UniRoma2 - ISW/SSW 13
+  - UniRoma2 - ISW/SSW 14
+  - UniRoma2 - ISW/SSW 15
+
+FILE: 05a-OOA.pdf (Totale slide: 96)
+Key Slide Titles:
+  - Object Oriented Analysis
+  - Metodi di OOA
+  - Alcuni metodi di OOA (e OOD)
+  - Notazioni per OOA (e OOD)
+  - Diagrammi UML
+  - Formalismi UML
+  - Formalismi UML (2)
+  - Modello dei dati
+  - Modello dei dati (2)
+  - Approcci per
+  - Approccio
+  - Linee guida per
+  - Casi di studio (*)
+  - A. University Enrolment
+  - B. Video Store
+
+FILE: 05b-OOA_esercizio.pdf (Totale slide: 10)
+Key Slide Titles:
+  - UniRoma2 - ISW/SSW 1
+  - UniRoma2 - ISW/SSW 2
+  - UniRoma2 - ISW/SSW 3
+  - UniRoma2 - ISW/SSW 4
+  - UniRoma2 - ISW/SSW 5
+  - UniRoma2 - ISW/SSW 6
+  - UniRoma2 - ISW/SSW 7
+  - UniRoma2 - ISW/SSW 8
+  - UniRoma2 - ISW/SSW 9
+  - UniRoma2 - ISW/SSW 10
+
+FILE: 07-Pianificazione.pdf (Totale slide: 45)
+Key Slide Titles:
+  - UniRoma2 - ISW/SSW 1
+  - UniRoma2 - ISW/SSW 2
+  - UniRoma2 - ISW/SSW 3
+  - Approccio democratico
+  - Approccio con capo
+  - Evoluzione degli approcci
+  - Importanza
+  - UniRoma2 - ISW/SSW 13
+  - UniRoma2 - ISW/SSW 14
+  - UniRoma2 - ISW/SSW 15
+  - UniRoma2 - ISW/SSW 16
+  - UniRoma2 - ISW/SSW 17
+  - UniRoma2 - ISW/SSW 18
+  - UniRoma2 - ISW/SSW 19
+  - UniRoma2 - ISW/SSW 20
+
+=== DIRECTORY: content/UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW ===
+
+FILE: 08-Progetto.pdf (Totale slide: 35)
+Key Slide Titles:
+  - © UniRoma2 -Ingegneria del Software1
+  - © UniRoma2 -Ingegneria del Software2
+  - © UniRoma2 -Ingegneria del Software3
+  - © UniRoma2 -Ingegneria del Software4
+  - © UniRoma2 -Ingegneria del Software5
+  - © UniRoma2 -Ingegneria del Software6
+  - © UniRoma2 -Ingegneria del Software7
+  - © UniRoma2 -Ingegneria del Software8
+  - © UniRoma2 -Ingegneria del Software9
+  - © UniRoma2 -Ingegneria del Software10
+  - © UniRoma2 -Ingegneria del Software11
+  - © UniRoma2 -Ingegneria del Software12
+  - © UniRoma2 -Ingegneria del Software13
+  - © UniRoma2 -Ingegneria del Software14
+  - © UniRoma2 -Ingegneria del Software15
+
+FILE: 09-OOD.pdf (Totale slide: 124)
+Key Slide Titles:
+  - © UniRoma2 - Ingegneria del Software 1
+  - © UniRoma2 - Ingegneria del Software 2
+  - © UniRoma2 - Ingegneria del Software 3
+  - Example distributed software system
+  - © UniRoma2 - Ingegneria del Software 5
+  - © UniRoma2 - Ingegneria del Software 6
+  - © UniRoma2 - Ingegneria del Software 7
+  - © UniRoma2 - Ingegneria del Software 8
+  - © UniRoma2 - Ingegneria del Software 9
+  - © UniRoma2 - Ingegneria del Software 10
+  - © UniRoma2 - Ingegneria del Software 11
+  - © UniRoma2 - Ingegneria del Software 12
+  - © UniRoma2 - Ingegneria del Software 13
+  - Distributed object architectures (2)
+  - © UniRoma2 - Ingegneria del Software 15
+
+FILE: 09a-SOA_casestudy.pdf (Totale slide: 41)
+Key Slide Titles:
+  - © UniRoma2 - Ingegneria del Software
+
+FILE: 10-Design patterns.pdf (Totale slide: 94)
+Key Slide Titles:
+  - Design Patterns
+  - Introduzione
+  - Una lezione da imparare
+  - Design
+  - Desing Pattern:
+  - Riferimenti Bibliografici
+  - Classificazione
+  - Classificazione (2)
+  - Catalogo dei Pattern (GoF)
+  - Classificazione completa
+  - Descrizione dei Design Pattern
+  - Descrizione dei Design Pattern(2)
+  - Un concetto utile: i Framework
+  - I Framework (2)
+  - I Framework (3)
+
+FILE: 11-Design Patterns - Esempi.pdf (Totale slide: 74)
+Key Slide Titles:
+  - Design Patterns
+  - Adapter: esempio
+  - Adapter: esempio (2)
+  - Adapter: esempio (3)
+  - Adapter: esempio (4)
+  - Adapter: esempio (5)
+  - Adapter: esempio (6)
+  - Adapter: esempio (7)
+  - Adapter: esempio (8)
+  - Adapter: esempio (9)
+  - Adapter: esempio (10)
+  - Adapter: esempio (11)
+  - Adapter: esempio (12)
+  - Composite: esempio
+  - Composite: esempio (2)
+
+FILE: 12-Metriche di struttura.pdf (Totale slide: 49)
+Key Slide Titles:
+  - © UniRoma2 - Ingegneria del Software 1
+  - © UniRoma2 - Ingegneria del Software 2
+  - © UniRoma2 - Ingegneria del Software 3
+  - © UniRoma2 - Ingegneria del Software 4
+  - © UniRoma2 - Ingegneria del Software 5
+  - © UniRoma2 - Ingegneria del Software 6
+  - © UniRoma2 - Ingegneria del Software 7
+  - © UniRoma2 - Ingegneria del Software 8
+  - © UniRoma2 - Ingegneria del Software 9
+  - © UniRoma2 - Ingegneria del Software 10
+  - © UniRoma2 - Ingegneria del Software 11
+  - © UniRoma2 - Ingegneria del Software 12
+  - © UniRoma2 - Ingegneria del Software 13
+  - © UniRoma2 - Ingegneria del Software 14
+  - © UniRoma2 - Ingegneria del Software 15
+
+FILE: 13-Qualità del Software.pdf (Totale slide: 29)
+Key Slide Titles:
+  - © UniRoma2 -Ingegneria del Software1
+  - © UniRoma2 -Ingegneria del Software2
+  - © UniRoma2 -Ingegneria del Software3
+  - © UniRoma2 -Ingegneria del Software4
+  - © UniRoma2 -Ingegneria del Software5
+  - © UniRoma2 -Ingegneria del Software6
+  - © UniRoma2 -Ingegneria del Software7
+  - © UniRoma2 -Ingegneria del Software8
+  - © UniRoma2 -Ingegneria del Software9
+  - © UniRoma2 -Ingegneria del Software10
+  - © UniRoma2 -Ingegneria del Software11
+  - © UniRoma2 -Ingegneria del Software12
+  - © UniRoma2 -Ingegneria del Software13
+  - © UniRoma2 -Ingegneria del Software14
+  - © UniRoma2 -Ingegneria del Software16
+
+FILE: 14-Testing.pdf (Totale slide: 84)
+Key Slide Titles:
+  - © UniRoma2 - Ingegneria del Software 1
+  - © UniRoma2 - Ingegneria del Software 2
+  - © UniRoma2 - Ingegneria del Software 3
+  - © UniRoma2 - Ingegneria del Software 4
+  - © UniRoma2 - Ingegneria del Software 5
+  - © UniRoma2 - Ingegneria del Software 6
+  - © UniRoma2 - Ingegneria del Software 7
+  - © UniRoma2 - Ingegneria del Software 8
+  - © UniRoma2 - Ingegneria del Software 9
+  - © UniRoma2 - Ingegneria del Software 10
+  - © UniRoma2 - Ingegneria del Software 11
+  - © UniRoma2 - Ingegneria del Software 12
+  - © UniRoma2 - Ingegneria del Software 13
+  - © UniRoma2 - Ingegneria del Software 14
+  - © UniRoma2 - Ingegneria del Software 15
+
+FILE: 15-BPM.pdf (Totale slide: 45)
+Key Slide Titles:
+  - Background
+  - What we need
+  - Business Process
+  - Business Process Interactions
+  - Business Process Key Concepts
+  - Business Process Management
+  - BPM Related
+  - Stakeholders
+  - Stakeholders roles
+  - • There are different kind of business processes
+  - Business Process Levels
+  - Business Process Lifecycle
+  - Process
+  - Process Identification
+  - Designation Phase
+
+FILE: 16-BPMN.pdf (Totale slide: 50)
+Key Slide Titles:
+  - BPMN
+  - Modeling Language Components
+  - Business Process Model and
+  - Why BPMN
+  - BPMN Metamodel
+  - BPMN Metamodel (partial)
+  - BPMN Semantic
+  - Sequence Flow
+  - Start Event
+  - End Event
+  - Task
+  - Our First BPMN Model
+  - Gateway
+  - Exclusive Gateway
+  - Exclusive Gateway Example
+
+FILE: 17-M&S Intro.pdf (Totale slide: 99)
+Key Slide Titles:
+  - Introduction to
+  - • To simulate, in the scientific connotation, is:
+  - The nature of Simulation
+  - Simulation is just a part of the story..
+  - Why Simulation?
+  - Historical overview
+  - Computer-based simulation
+  - Some (not all) application areas
+  - Intended use: problem solving
+  - LVC taxonomy
+  - Intended use: training
+  - Simulation vs. execution platform
+  - Example multi-processor host
+  - Simulation speed record (Apr. 13)
+  - M&S Approaches
+
+FILE: 18-BP simulation.pdf (Totale slide: 89)
+Key Slide Titles:
+  - BPMN-BASED BUSINESS PROCESS
+  - M&S-based BP analysis
+  - M&S and BPM
+  - Challenge and solution
+  - BP Modeling – What is a process model?
+  - BP Modeling – Modeling Languages
+  - BP Modeling – Languages
+  - BP Modeling – BPMN
+  - Why BPMN?
+  - BPM Modeling – BPMN Metamodel
+  - BPMN Metamodel for Resources
+  - BP Simulation
+  - BP Simulation – Model Implementation
+  - Advantages of BP Simulation
+  - Drawbacks of BP Simulation
+

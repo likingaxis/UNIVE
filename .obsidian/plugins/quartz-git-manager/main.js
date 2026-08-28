@@ -278,7 +278,7 @@ class GitService {
       if (commitRes.stdout.includes('nothing to commit') || commitRes.stderr.includes('nothing to commit')) {
         // ok, procediamo al push
       } else {
-        return { success: false, step: 'git commit', error: commitRes.stderr || commitRes.error };
+        return { success: false, step: 'git commit', error: 'STDOUT: ' + commitRes.stdout + '\nSTDERR: ' + commitRes.stderr + '\nERR: ' + commitRes.error };
       }
     }
 
