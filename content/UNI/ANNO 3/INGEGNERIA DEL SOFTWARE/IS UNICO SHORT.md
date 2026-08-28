@@ -1002,3 +1002,77 @@ Soluzione:
 - `ConcreteStrategy`: le classi effettive che implementano quel determinato algoritmo
 - `Client`: utilizza una strategy
 ![[assets/p074-fig-039.png|416]]`
+## Metriche del Software e Misura della Complessità
+Servono misure quantitative e oggettive per valutare la complessità, l'affidabilità e la manutenibilità del progetto.
+Le misure utilizzate si dividono in 2 grandi categorie:
+- **intermodulari**: valutano le relazioni e le chiamate tra i moduli
+- **intramodulari**: valutano i moduli singolarmente
+
+### Structure Chart(intermodulare)
+l'architettura dei moduli può essere rappresentata mediante un grafo
+$$S = \{N,R\}$$
+dove:
+- `N` sono i moduli come nodi
+- `R` sono le relazioni tra i nodi e sono gli archi
+Viene utilizzato per misurare 4 attributi diversi di tipo qualitativo:
+- coesione: quanto un modulo svolge un compito specifico
+- coupling: il grado di dipendenza tra i moduli
+- morfologia: la forma complessiva del grafo(architettura)
+- information flow: quanti dati entrano ed escono dai moduli
+Si vogliono ora approfondire in particolare
+#### Morfologia
+l'architettura viene valutata attraverso
+- Size: numero di nodi e archi
+- Depth: distanza massima dalla radice ai livelli più profondi
+- Width: massimo numero di nodi in uno stesso livello
+- Edge-to-Node Ratio: rapporto tra archi e nodi
+
+Da questi attributi si usano 2 metriche:
+##### Internal Reuse
+misura il grado di riutilizzo dei moduli
+$$r(G) = e - n + 1$$
+se $r(G)=0$ è un albero puro 
+se $r(G)>0$ ci sono moduli riutilizzati
+
+##### tree impurity
+misura quanto il grafo si discosta da un albero perfetto
+$$m(G)=\frac{2(e−n+1)}{(n−1)(n−2)}​$$
+
+se $m(G)=0$ è un albero perfetto puro
+se $r(G)=1$ grafo è completamente connesso(disordine)
+
+#### Information Flow
+Serve per definire quanto flusso passa tra i moduli intermodulare(relazioni tra moduli)
+- **fan-in** → quantità di flussi che arrivano al modulo
+- **fan-out** → quantità di flussi che partono dal modulo
+$$IF(M_i) = [fan\text{-}in(M_i) \times fan\text{-}out(M_i)]^2$$
+![[assets/p078-fig-040.jpeg|299]]
+
+#### FlowGraph
+valuta flusso di entrata e uscita interna nelle componenti dei moduli intramodulare
+
+$$FG = \{N,E\}$$
+
+- i **nodi** rappresentano blocchi o istruzioni del programma;
+- gli **archi** rappresentano i possibili passaggi del controllo da un nodo all'altro.
+![[assets/p079-fig-041.png|364]]
+
+##### Complessità ciclomatica di McCabe
+usata con i flowgraph misura Il numero di **cammini di codice indipendenti** (quanti `if` e rami logici ci sono).
+Data dalla formula basata sui flowgraph 
+$$v(F) = e - n + 2$$
+- un valore basso implica pochi percorsi alternativi un valore alto più percorsi quindi più difficoltà di comprensione
+- **Soglia di rischio**: se $v(F) > 10$ il modulo è troppo complesso e va rifattorizzato/spezzato
+- Serve per il **Path Testing** (indica il numero minimo di test case necessari per coprire tutti i percorsi indipendenti)
+
+Poi esiste un trucchetto per misurare senza fare il flowgraph, basta vedere il numero di condizioni $d$ che appaiono nel codice e fare:
+$$v(F) = 1 + d$$
+(tipo 5 if è d=5)
+
+##### Complessità Essenziale di McCabe
+Misura il grado di **non-strutturazione** (presenza di spaghetti code o salti anomali).
+Si calcola collassando iterativamente i sottografi strutturati ($D_0, D_1, D_2, D_3$) in un unico nodo:
+$$ev(F) = v(F) - m$$
+- dove $m$ è il numero di sottografi strutturati collassati
+- **Teorema**: $ev(F) = 1 \iff$ il programma è perfettamente **D-strutturato** (pulito, senza salti anomali)
+## Qualità del software, SQA e Testing
