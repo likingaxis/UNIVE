@@ -48,7 +48,7 @@ dove:
 - *C*=costo
 - *S*=dimensione del sistema espressa in linee di codice(LOC) o complessità
 - *a*=costante legata alla produttività del team
-la dimensione di un sistema se raddoppiata fa quadruplicare l'effort necessario
+la dimensione di un sistema se raddoppiata fa quadruplicare il costo
 #### Il Ciclo di Vita del Software
 Intervallo di tempo che va dalla nascita dell'esigenza di realizzarlo fino alla sua dismissione si divide in 3 stadi:
 ##### Sviluppo
@@ -59,6 +59,8 @@ Fase di effettivo sviluppo del software si descrive meglio con 6 fasi:
 	- si riscrivono i requisiti in modo migliore
 - **Pianificazione**
 	- Come organizzare il progetto
+- **Progettazione**
+	- Definire propriamente il progetto
 - **Codifica**
 	- scrittura del codice
 - **Integrazione**
@@ -111,7 +113,7 @@ Per **Software Critico** si intende un Software che se fallisce causa
 - *Safety-Critical*: rischio per vite umane(es: dispositivi medici)
 - *Mission-Critical*: blocco delle attività o del business(es: sistemi bancari)
 
-
+***MODULO  2***
 
 ## Modelli di Ciclo di Vita e Processi Software
 Modelli che descrivono come organizzare le attività dello sviluppo software
@@ -123,7 +125,7 @@ Non è proprio un modello infatti è senza un processo strutturato ha le seguent
 - **Operations mode**: fase effettiva di operazione si nota una freccia di manutenzione per migliorare il tutto
 - **Retirement**: ritiro del prodotto
 
-***Pro***: 0 costi di manutenzione e rilascio immediato
+***Pro***: rapidità iniziale
 *Contro*: 0 scalabilità, troppi costi di manutenzione
 
 ![[GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|360]]
@@ -147,10 +149,14 @@ Correggi:
 → può essere **Throw-away** oppure **Evolutionary**.
 
 
-Modello che utilizza dei **Prototipi Throw-away** durante la fase di sviluppo
+Modello che utilizza dei **Prototipi** durante la fase di sviluppo
 molto simile al modello waterfall ma nella fase di requisiti vengono creati questi prototipi che permettono:
 - **Requirements Elicitation**: emergono requisiti in più dall'utente
 - **Requirements Validation**: si consolida ciò che vuole davvero l'utente rispetto a ciò che avevamo capito
+
+Si dividono in 2 tipologie:
+- Throw-away: il prototipo viene ogni volta gettato
+- Evolutionary: il prototipo viene usato come base di partenza
 
 ***Pro***: con i prototipi si capiscono meglio i requisiti
 *Contro*: il cliente può avere una falsa percezione visto che poi manca tutta la parte strutturale dietro
@@ -207,9 +213,9 @@ Poi c'è una versione di Boehm che aggiunge cose come prototipi, simulazioni, be
 ##### Parentesi sul Risk Management
 Nei modelli a spirale come abbiamo visto si introduce quella componente sulla gestione dei rischi
 ###### Tipologie di rischio
-- Project Risk: influenza il progetto
-- Product Risk: influenza il prodotto in termini qualitativi o simili
-- Business Risk: influenza l'organizzazione che sviluppa il prodotto software
+- *Project Risk*: influenza il progetto
+- *Product Risk*: influenza il prodotto in termini qualitativi o simili
+- *Business Risk*: influenza l'organizzazione che sviluppa il prodotto software
 ###### Processo di Risk Management
 Per gestire un rischio viene descritto un processo fatto da 4 attività:
 - **Identificazione del rischio**: fare una lista dei rischi
@@ -318,6 +324,7 @@ in totale *sono 18* e lavorano su aspetti come:
 - **attività da svolgere**
 - **modalità di monitoraggio**
 - **modalità di verifica**
+***MODULO 3***
 ## Requisiti
 Descrivono una condizione o capacità necessaria all'utente per risolvere un problema o raggiungere un obiettivo.
 I requisiti si osservano su:
@@ -367,14 +374,14 @@ Linguaggio stile Java in combinazione con parole del linguaggio naturale
 ![[GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|390]]
 
 ##### Specifiche Semi-Formali
-Specifiche che vengono rappresentate con modelli grafici
-quando vengono definite possono dare 3 punti di vista differenti
-- sul modello dei dati
-	- requisiti relativi ai dati e alla loro organizzazione
+Specifiche che vengono rappresentate con **modelli grafici**
+quando vengono definite possono dare **3 punti di vista differenti**
+- sul **modello dei dati**
+	- requisiti **relativi ai dati** e alla loro organizzazione
 - sul modello comportamentale
-	- come il sistema interagisce con gli utenti e come diverse parti del sistema interagiscono tra di loro
-- sul modello dinamico
-	- come il sistema cambia stato e comportamento nel tempo
+	- come il **sistema interagisce** **con** gli **utenti** e come diverse **parti** del **sistema** **interagiscono** **tra** di **loro**
+- sul **modello dinamico**
+	- come il **sistema** **cambia** **stato** e **comportamento** nel **tempo**
 ###### Modello ERD (Entity Relationship Diagram)
 - Modella la struttura concettuale dei dati: **Entità** (rettangoli), **Attributi** (ovali), **Relazioni** (rombi) e cardinalità (`1:1`, `1:N`, `N:M`).
 ![[GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|140]]
@@ -406,7 +413,7 @@ dove
 - $M_0$ è lo stato iniziale la fotografia di come sono disposti i token a tempo 0 e possono variare
 - Regole di Scatto(Firing Rule)
 	- per permettere il passaggio dei token da un posto all'altro vi è questa regola di Firing che si divide in 2 fasi
-	- Abilitazione (si consente il passaggio della transizione), si attiva se ad esempio il peso è uguale al numero dei token nel posto di arrivo
+	- Abilitazione (si consente il passaggio della transizione), una transizione è abilitata se, per ogni place di input, ci sono **almeno tanti token quanto richiesto dal peso dell’arco**.
 	- Scatto(trasferimento effettivo dei token) si tolgono i token dal posto di inizio e si generano al posto di arrivo 
 ![[GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|413]]
 - **Proprietà delle Reti di Petri:**
@@ -417,7 +424,9 @@ dove
 
 **FSM - Finite State Machines** basate su stati e transizioni con input/output
 
-**Linguaggio Z** basato su teoria degli insiemi e logica dei predicati)
+**Linguaggio Z** basato su teoria degli insiemi e logica dei predicati
+
+MODULO  4
 
 ## Analisi Orientata agli Oggetti (OOA)
 L'OOA(Object Oriented Analysis) rappresenta una fase di specifica semi-formale dei requisiti seguendo il paradigma a oggetti.
@@ -429,9 +438,9 @@ definisce COSA deve fare il prodotto software
 - **astrazione**: separare dettagli implementativi e caratteristiche essenziali
 - **condivisione**: Ereditarietà che permette il riuso di attributi e Polimorfismo che consente di usare interfacce uguali ma con metodi interni differenti
 #### Principi Operativi dei metodi OOA
-- costruzione in parallelo: la fase di specifica dove si fanno i vari diagrammi avviene in parallelo e non in modo sequenziale, ogni diagramma arricchisce l'altro (tipo use case sequence diagram ecc)
-- Stepwise Refinement: si fanno iterazioni per raffinare i dettagli di ogni modello
-- Riduzione della complessità: lavorando con classi e layer si hanno meno comunicazioni tra le componenti
+- **costruzione in parallelo**: la fase di specifica dove si fanno i vari diagrammi avviene in parallelo e non in modo sequenziale, ogni diagramma arricchisce l'altro (tipo use case sequence diagram ecc)
+- **Stepwise Refinement**: si fanno iterazioni per raffinare i dettagli di ogni modello
+- **Riduzione della complessità**: lavorando con classi e layer si hanno meno comunicazioni tra le componenti
 ### UML (Unified Modelling Language)
 Prima di UML esistevano diversi metodi di rappresentazione Object Oriented, era troppo confusionario quindi si fece un modelling language uniforme
 
@@ -481,7 +490,7 @@ fa parte dei diagrammi comportamentali, si descrivono gli scenari di caso d'uso 
 - Attori che interagiscono con il sistema
 - Casi d'uso i servizi effettivi
 Questi due elementi si mettono in relazione mediante:
-- Associazioni: linea che collega omino e ovale
+- `Associazioni`: linea che collega omino e ovale
 - `<<include>>`: quando un caso d'uso per essere completato esegue **obbligatoriamente** un altro caso d'uso (riuso)
 	- la freccia parte dal caso base e **punta verso quello incluso** (il base dipende dall'incluso)
 	- `(Preleva Contanti) . - - <<include>> - - > (Autentica PIN)`
@@ -549,6 +558,7 @@ Diagramma che descrive la parte dinamica delle specifiche semi-formali con eleme
 
 ![[GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|400]]
 
+MODULO  4 FINO A QUI
 ## Software Project Management
 Consiste nella gestione del progetto software con una forte pianificazione.
 Si può ricondurre alle ***quattro P*** che sono tutte collegate tra loro:
@@ -705,6 +715,7 @@ Utile per capire le effettive scalette temporali sul calendario
 
 ![[CORSETTI/Immagini/Pasted image 20260421100613.png|408]]
 
+MODULO  5 FINO A QUI
 ### Documento SPMP - Software Project Management Plan
 Si prendono stime, pianificazione temporale, organizzazione del team e rischi e si mettono in un documento che certifica il contratto operativo del progetto
 - ovvero il contratto che mette nero su bianco ogni cosa possibile per chi lavora sul progetto
@@ -880,6 +891,8 @@ Una **transazione** è una richiesta che raggruppa due o più operazioni in una 
 Un'applicazione SOA può utilizzare più servizi contemporaneamente bisogna stabilire chi controlla l'ordine e le interazioni tra i servizi quindi vi è:
 - **Orchestrazione**: un coordinatore centrale (**orchestratore**) controlla e dirige l'ordine di esecuzione di tutti i servizi
 - **Coreografia**: nessun coordinatore centrale; i servizi collaborano e si scambiano messaggi direttamente in modo decentralizzato
+
+MODULO  6 FINO A QUI
 ### OOD - Object Oriented Design (Di dettaglio)
 l'OOD dettagliato definisce la struttura interna delle classi prima della codifica, si rappresentano le cose sempre con diagrammi UML ma con un focus sui dettagli implementativi e di codice
 Ogni use case che era definito nella parte delle OOA è definito ora come delle classi che collaborano tra loro, collaborazione che hanno 2 parti:
@@ -1001,7 +1014,9 @@ Soluzione:
 - `Strategy`: interfaccia comune degli algoritmi
 - `ConcreteStrategy`: le classi effettive che implementano quel determinato algoritmo
 - `Client`: utilizza una strategy
-![[assets/p074-fig-039.png|416]]`
+![[assets/p074-fig-039.png|416]]
+
+MODULO  7 FINO A QUI
 ## Metriche del Software e Misura della Complessità
 Servono misure quantitative e oggettive per valutare la complessità, l'affidabilità e la manutenibilità del progetto.
 Le misure utilizzate si dividono in 2 grandi categorie:
@@ -1075,6 +1090,8 @@ Si calcola collassando iterativamente i sottografi strutturati ($D_0, D_1, D_2, 
 $$ev(F) = v(F) - m$$
 - dove $m$ è il numero di sottografi strutturati collassati
 - **Teorema**: $ev(F) = 1 \iff$ il programma è perfettamente **D-strutturato** (pulito, senza salti anomali)
+
+MODULO  8 FINO A QUI
 ## Qualità del software, SQA e Testing
 La qualità del software è la conformità del prodotto a quelli che sono i requisiti funzionali e prestazionali esplicitamente dichiarati, insieme anche agli standard di sviluppo stabiliti.
 Ci sono diversi modelli che esplorano la qualità del software in modi diversi
@@ -1221,3 +1238,4 @@ i **message flow** i messaggi scambiati tra i partecipanti
 qui il pool è patient e receptionist la lane non si vede
 
 
+MODULO  9 FINO A QUI
