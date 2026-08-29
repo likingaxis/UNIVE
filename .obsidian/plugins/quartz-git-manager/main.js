@@ -267,7 +267,7 @@ class GitService {
   }
 
   async commitAndPush(message, branch) {
-    const addRes = await this.execGit(['add', '.']);
+    const addRes = await this.execGit(['add', '-A']);
     if (!addRes.success) {
       return { success: false, step: 'git add', error: addRes.stderr || addRes.error };
     }
@@ -275,10 +275,16 @@ class GitService {
     const commitRes = await this.execGit(['commit', '-m', message]);
     if (!commitRes.success) {
       // Se non c'erano modifiche da committare ma ci sono commit pendenti
-      if (commitRes.stdout.includes('nothing to commit') || commitRes.stderr.includes('nothing to commit')) {
+      const stdoutLower = (commitRes.stdout || '').toLowerCase();
+      const stderrLower = (commitRes.stderr || '').toLowerCase();
+      if (
+        stdoutLower.includes('nothing to commit') || stderrLower.includes('nothing to commit') ||
+        stdoutLower.includes('no changes added to commit') || stderrLower.includes('no changes added to commit') ||
+        stdoutLower.includes('nothing added to commit') || stderrLower.includes('nothing added to commit')
+      ) {
         // ok, procediamo al push
       } else {
-        return { success: false, step: 'git commit', error: 'STDOUT: ' + commitRes.stdout + '\nSTDERR: ' + commitRes.stderr + '\nERR: ' + commitRes.error };
+        return { success: false, step: 'git commit', error: commitRes.stderr || commitRes.error };
       }
     }
 

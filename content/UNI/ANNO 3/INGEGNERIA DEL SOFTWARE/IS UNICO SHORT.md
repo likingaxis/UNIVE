@@ -921,13 +921,12 @@ Si classificano su due dimensioni indipendenti
 Iniziamo descrivendo i Pattern di tipo creazionale:
 ###### Factory Method (creazionale)
 Di tipo Creazionale e Class Scope sfruttando ereditarietà
-Consente di non specificare per forza quale classe creare
+Consente di non specificare per forza quale oggetto creare
 - altrimenti una classe sarebbe obbligata a creare un determinato oggetto che è istanza di una determinata classe, così invece dipende dalla classe che lo estende
 Soluzione:
-- `Product interfaccia`: comune degli oggetti creati
-- `ConcreteProduct`:determinata implementazione del prodotto
-- `Creator`:classe di tipo abstract che dichiara il metodo `factoryMethod()`
-- `ConcreteCreator`:sotto classe che fa override di `factoryMethod` specificando il prodotto effettivo 
+
+1. **`Creator`** dichiara il metodo di creazione (`factoryMethod()`) con tipo di ritorno astratto `Product`, **senza sapere né decidere quale oggetto concreto verrà creato**.
+2. **`ConcreteCreator`** (la sottoclasse) fa l'override del metodo ed **è l'unica che sa e decide quale classe concreta istanziare (`new ConcreteProduct()`)**.
 ![[assets/p069-fig-033.png|508]]
 ###### Abstract Factory (creazionale)
 Di tipo Creazionale e Object Scope
@@ -946,9 +945,9 @@ passiamo ora ai pattern strutturali:
 Di tipo strutturale e sia Object che Class Scope
 Consente di riutilizzare una interfaccia di una classe per farla usare da altre classi che in realtà sono incompatibili con quella interfaccia
 Soluzione:
-- `Target`: interfaccia che può usare il client incompatibile
+- `Target`: interfaccia che vuole usare il client
 - `Client`: colui che usa Target
-- `Adaptee`:classe esistente che si vuole riutilizzare
+- `Adaptee`:classe esistente che si vuole riutilizzare ma incompatibile per il client
 - `Adapter`: fa da intermediario tra Adaptee e il Target convertendo le richieste
 nelle foto si nota come può essere sia Class che Object
 - Class: Adapter eredita tra target e adaptee
@@ -958,10 +957,11 @@ nelle foto si nota come può essere sia Class che Object
 ###### Composite (strutturale)
 Di tipo Strutturale e Object Scope
 Consente di comporre gli oggetti in strutture ad albero gerarchiche consentendo di trattare sia con le singole foglie che con i gruppi che si possono generare
+**Trattare gli elementi singoli (foglie) e le composizioni di elementi (cartelle/rami) ESATTAMENTE ALLO STESSO MODO, facendogli condividere la stessa interfaccia comune `Component`**
 Soluzione:
-- `Component`: interfaccia comune per gli elementi dell'albero
-- `Leaf`: elementi terminali che implementano operazioni di base
-- `Composite`: elemento contenitore che ha una lista di Component figli
+- `Component`: interfaccia comune per gli elementi dell'albero sia foglie che elementi
+- `Leaf`: oggetti terminali che implementano operazioni di base
+- `Composite`: elemento contenitore che ha una lista di Component figli implementa l'operazione base in modo ricorsivo(quello della leaf)
 - `Client`: interagisce con Component
 
 ![[assets/p071-fig-035.png|469]]
@@ -1076,3 +1076,148 @@ $$ev(F) = v(F) - m$$
 - dove $m$ è il numero di sottografi strutturati collassati
 - **Teorema**: $ev(F) = 1 \iff$ il programma è perfettamente **D-strutturato** (pulito, senza salti anomali)
 ## Qualità del software, SQA e Testing
+La qualità del software è la conformità del prodotto a quelli che sono i requisiti funzionali e prestazionali esplicitamente dichiarati, insieme anche agli standard di sviluppo stabiliti.
+Ci sono diversi modelli che esplorano la qualità del software in modi diversi
+#### Quality Model di McCall
+Valuta la qualità del prodotto sotto 3 aspetti ognuna con diversi indici di qualità
+- Product Operation
+	- si valuta il prodotto rispetto all'uso quotidiano
+	- Correttezza: rispetta specifiche e obiettivi dell'utente?
+	- Affidabilità: quanto è operativo nel tempo?
+	- Efficienza: quanto consuma in termini di risorse di calcolo?
+	- Integrità: protegge i dati da accessi non autorizzati?
+	- Usabilità: è comprensibile per l'utente?
+- Product Revision
+	- quanto il prodotto può essere controllato e modificato
+	- Manutenibilità: è facile trovare e correggere difetti?
+	- Testabilità: il software è facile da verificare se funziona?
+	- Flessibilità: quanto è facile modificarlo?
+- Product Transition
+	- capacità di adattarsi a nuovi ambienti
+	- Portabilità: facile cambiare ambiente operativo?
+	- Riusabilità: facile riutilizzare il prodotto o sue parti?
+	- Interoperabilità: facile dialogare con altri sistemi software?
+	- Evolubilità: effort richiesto per adeguarlo a nuovi requisiti
+
+ognuno di questi 12 fattori viene calcolato a loro volta basandosi su 10 attributi che attraverso il Checklist Method viene valutato come positivo o negativo
+
+![[assets/p148-fig-168.png|298]]
+
+questa checklist non viene fatta solo da una persona ma da un team di evaluation variegato
+attraverso Walkthrough o inspection il team si confronta per arrivare a una valutazione condivisa
+![[assets/p152-fig-177.png|346]]
+#### Software Quality Assurance — SQA
+Utilizzato per capire in modo sistematico se prodotto software e processo di sviluppo software siano conformi agli standard
+Queste verifiche vengono fatte da un team a se (comporta dei costi)
+- Team SQA: si assicura che la documentazione sia completa, i test pianificati vengano svolti ecc...
+- SQA Plan: piano confermato dal management per definire le verifiche da applicare al progetto
+- **standard** e *procedure*: rispettivamente **cosa** dovrebbe essere fatto e *come* va fatto
+#### Verification, Validation e Testing
+Si vuole innanzitutto definire la differenza tra Verifica e Validazione(V&V)
+- Verifica: controlla se il prodotto viene costruito correttamente rispetto agli artefatti e alle specifiche di riferimento
+	- "stiamo costruendo il prodotto in modo giusto?"
+- Validazione: controlla se il software soddisfa le reali esigenze dell'utente finale
+	- "stiamo costruendo il prodotto giusto?"
+
+poi si può anche definire ispezione e testing
+- Ispezione: controlli statici che analizzano gli artefatti senza eseguire il codice
+- Testing: controllo dinamico dove viene eseguito effettivamente il software
+
+Il documento che pianifica le attività di testing è il **Test Plan**
+
+poi si possono definire anche validation testing e defect testing:
+- il validation testing(applicazione pratica): cerca di vedere se soddisfa i requisiti utente e non fallisce
+- il defect: invece cerca intenzionalmente di rompere il software per trovare bug
+##### 4 passi della fase di testing
+- Progettazione dei casi di test: definiscono scenari e output attesi
+- Preparazione dei casi di test: scelta degli input effettivi da fare
+- Esecuzione del programma
+- confronto dei risultati: predizione vs risultato ottenuto
+
+##### 3 livelli di testing
+1. **Component Testing**, testing di unità e moduli separatamente
+2. **Integration Testing**, testing su relazioni tra componenti prima in piccolo poi in grande
+3. **User Testing**, test finale con dati reali dei clienti per decidere se il software è pronto per il rilascio
+
+##### Politiche di Testing
+Impossibile provare tutti gli input possibili quindi si devono trovare delle soluzioni
+
+Si distingue tra
+- **Test Case**: include gli **input** + le **Test Predictions (gli output attesi corretti)** previsti dalla specifica
+- **Test Data**: sono **solo gli input** forniti al software
+
+###### Black Box e White Box
+e il tester può vedere il sistema software come:
+- **Black Box Testing**
+	- il Tester conosce solo specifica, fornisce input e legge output
+	- si usa equivalent partitioning per dividere gli input e gli output in classi di equivalenza
+	- principio simile usato nelle testing guidelines provando su array e liste ma trattandole come black box
+- **White Box Testing**
+	- il tester conosce il codice, non deve testarlo tutto ma coprire una determinata % di codice `Testing Coverage`
+
+###### Path Testing
+Usato nel **White Box Testing** vi è il Path Testing
+- usando i flowgraph si realizzano use Case che li attraversano
+- visto che è impossibile testare tutto si cercando percorsi indipendenti(che creano un nuovo arco)
+- si sfrutta la complessità ciclomatica per trovare percorsi linearmente indipendenti
+![[assets/p157-fig-178.png|469]]
+
+###### Integration Testing
+Riunisce singoli test e li combina per vedere se funzionano insieme
+organizzato in:
+- Top-Down
+	- parti dalle interfacce e scendi giù
+- Bottom-Up
+	- parti dai moduli di base e sali fino alle interfacce, per partire da sotto si usano test drivers, programmi che simulano il chiamante
+###### Stress Testing
+- Sovraccaricare il sistema fino al raggiungimento di prestazioni inaccettabili
+###### Object Oriented Testing
+- si fanno test di oggetti, metodi, classi
+	- l'ereditarietà crea complicanze poiché un tester deve anche verificare le singole sottoclassi che ereditano metodi e altro
+###### Cluster Testing
+- Testing su un gruppo di oggetti vede tre approcci
+	- Use-Case: testing basate dagli use case
+	- Thread Testing: testing al cluster rispetto a una sequenza specifica di eventi
+	- Object Interaction Testing: testing sui messaggi scamvbiati tra utenti
+## Processi Aziendali: BPM e BPMN
+
+### BP(Business Process), BPM e Workflow
+- BP: definisce un insieme di attività correlate e coordinate per produrre valore per il cliente
+- Workflow: parte aziendale che è automatizzata da software
+- BPM(Business Process Management): disciplina che applica metodologie di gestione e tecnologie per ottimizzare, modellare e analizzare i processi sia umani che non
+- **Ciclo di Vita BPM (6 Fasi a spirale)**:
+- Identificazione: si identificano i processi dell'azienda disponibili ->
+- ->Modellazione (As-Is): intervista ai lavoratori e come lavorano oggi   -> 
+- Analisi: si analizza il modello BPMN creato per scovare problemi -> 
+- Riprogettazione (To-Be): si sistema il modello creato  -> 
+- Implementazione: si trasforma il modello in qualcosa di utilizzato -> 
+- Monitoraggio: si raccolgono log per capire come procede ->
+![[Pasted image 20260829095359.png|365]]
+### Notazione BPMN (Business Process Model and Notation — Standard OMG)
+Notazione standard per rappresentare i processi aziendali(vedi sopra ciclo di vita viene usato BPMN) i suoi elementi di base sono:
+- **Start Event** `○`: punto di inizio
+- **End Event** `●`: punto di conclusione
+- **Task**`(Rettangoli arrotondati)`: attività singola atomica
+- **Sequence Flow**`──>`: indica ordine di esecuzione delle attività
+
+poi ci sono i Gateway che definiscono le parti decisionali del processo
+- **Exclusive Gateway**`(con la xor X)`: indica un unico percorso decisionale
+- **Parallel Gateway**`(AND con il +)`: attiva più percorsi in parallelo
+- **Inclusive Gateway**`(OR con ○)`: attiva uno o più percorsi contemporaneamente
+sono di tipo **Event based**, appena si verifica una condizione si eseguono
+
+![[Pasted image 20260829101432.png|408]]
+
+chi svolge le attività è definito con:
+- **Pool**: rappresenta una organizzazione o un partecipante
+- **Lane**: rappresentano specifici ruoli di una pool
+
+i **message flow** i messaggi scambiati tra i partecipanti
+
+- **Orchestrazione**: processo interno controllato da un **singolo coordinatore centrale** (il motore di workflow all'interno di una Pool).
+![[Pasted image 20260829101248.png]]
+- **Coreografia**: interazione decentralizzata tra **più partecipanti/organizzazioni** senza un regista unico, coordinati solo dallo scambio di messaggi.
+![[Pasted image 20260829101349.png]]
+qui il pool è patient e receptionist la lane non si vede
+
+
