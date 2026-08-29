@@ -115,6 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -143,7 +144,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "UNI/ANNO 3/CALCOLO NUMERICO/ORALE/CN UNICO.md",
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -165,11 +166,12 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
