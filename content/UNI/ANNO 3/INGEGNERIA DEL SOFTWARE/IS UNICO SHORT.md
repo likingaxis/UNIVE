@@ -299,16 +299,16 @@ Valutare quanto un'organizzazione sia in grado di sviluppare software  in modo s
 #### Modello CMM - Capability Maturity Model
 Modello che descrive la maturità del processo software di un'organizzazione
 il modello è organizzato in 5 livelli:
-- 1. Initial
+- 1. **Initial**
 	- processo ad hoc(improvvisato)
 	- presenza di heroes che la carryano
-- 2. Repeatable
+- 2. **Repeatable**
 	- pratiche di base di project management come pianificazione e monitoring
-- 3. Defined
+- 3. **Defined**
 	- processo documentato e standardizzato
-- 4. Managed
+- 4. **Managed**
 	- non segue solo procedure ma raccoglie dati per misure quantitative per capire se sta funzionando
-- 5. Optimizing
+- 5. **Optimizing**
 	- Utilizza tutto ciò che misura per migliorare il processo andando a fare Defect Prevention(prevenzione di difetti)
 
 Il CMM è un modello additivo se stai al 5 devi aver rispettato i precedenti livelli
@@ -378,7 +378,7 @@ Specifiche che vengono rappresentate con **modelli grafici**
 quando vengono definite possono dare **3 punti di vista differenti**
 - sul **modello dei dati**
 	- requisiti **relativi ai dati** e alla loro organizzazione
-- sul modello comportamentale
+- sul modello **comportamentale**
 	- come il **sistema interagisce** **con** gli **utenti** e come diverse **parti** del **sistema** **interagiscono** **tra** di **loro**
 - sul **modello dinamico**
 	- come il **sistema** **cambia** **stato** e **comportamento** nel **tempo**
@@ -386,13 +386,13 @@ quando vengono definite possono dare **3 punti di vista differenti**
 - Modella la struttura concettuale dei dati: **Entità** (rettangoli), **Attributi** (ovali), **Relazioni** (rombi) e cardinalità (`1:1`, `1:N`, `N:M`).
 ![[GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|140]]
 ###### Modello (DFD Data Flow Diagram)
-- Modella il cambiamento dei dati
+- **Modella** il **cambiamento** dei **dati**
 - si organizza il tutto a più livelli di raffinamento, dove all'inzio si ha un modello molto superficiale e man mano diventa sempre più approfondito
 
-- doppio quadrato= sorgente di dati
-- freccia= il flusso dei dati
-- quadrato arrotondato= processo che lavora i dati
-- rettangolo aperto= memoria che salva i dati(archivio)
+- doppio quadrato= **sorgente di dati**
+- freccia= il **flusso dei dati**
+- quadrato arrotondato= **processo** che **lavora i dati**
+- rettangolo aperto= **memoria** che **salva** i **dati**(archivio)
 immagina questo come primo raffinamento poi diventa sempre più complesso e pieno di passaggi e figure
 ![[Pasted image 20260319124621.png|291]]
 
@@ -1127,7 +1127,7 @@ poi si possono definire anche validation testing e defect testing:
 - **confronto dei risultati**: predizione vs risultato ottenuto
 
 ##### 3 livelli di testing
-1. **Component Testing**, testing di unità e *moduli *separatamente*
+1. **Component Testing**, testing di unità e *moduli separatamente*
 2. **Integration Testing**, testing su *relazioni* tra *componenti* prima in piccolo poi in grande
 3. **User Testing**, test *finale* con *dati* *reali* dei *clienti* per decidere se il software è *pronto* per il *rilascio*
 
