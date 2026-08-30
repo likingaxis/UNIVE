@@ -558,7 +558,7 @@ Diagramma che descrive la parte dinamica delle specifiche semi-formali con eleme
 
 ![[GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|400]]
 
-MODULO  4 FINO A QUI
+MODULO  5
 ## Software Project Management
 Consiste nella gestione del progetto software con una forte pianificazione.
 Si può ricondurre alle ***quattro P*** che sono tutte collegate tra loro:
@@ -599,8 +599,8 @@ Di tipo gerarchico dove ogni partecipante ha un suo ruolo e ognuno di loro comun
 ![[GPT PREMIUMS/17_agosto_appunti/assets/p068-fig-070.png|385]]
 
 Poi vi è anche una versione dove si divide il tutto in 2 team per evitare il Contro
-- team Leader per gli aspetti tecnici
-- team Manager per quelli gestionali
+- **team Leader** per gli aspetti **tecnici**
+- **team Manager** per quelli **gestionali**
 ### Stime nei progetti software
 Ci sono diverse grandezze che possiamo stimare per capire cosa ci aspetta nelle fasi successive dello sviluppo software:
 - *dimensione del software*
@@ -609,9 +609,9 @@ Ci sono diverse grandezze che possiamo stimare per capire cosa ci aspetta nelle 
 - *costo*
 
 si calcolano con 3 approcci principali:
-- antologia: ci si basa su progetti passati, se sono simili ha senso sennò no
-- scomposizione
-- modelli algoritmici empirici
+- **antologia**: ci si basa su progetti passati, se sono simili ha senso sennò no
+- **scomposizione**
+- **modelli algoritmici empirici**
 
 analizziamo meglio gli ultimi 2
 ##### Scomposizione
@@ -644,7 +644,7 @@ valutiamo le seguenti misure
 - **Dati**
 	- *ILF*: dati gestiti internamente
 	- *EIF*: dati esterni gestiti da altre app ma condivise con il sistema software
-- Interazioni con l'esterno
+- **Interazioni con l'esterno**
 	- *EI(External Input)*: input che entrano nel software
 	- *EO(External Output)*: dati che escono dal software
 	- *EQ(External Query)*: input che genera un output senza modificare archivi
@@ -682,14 +682,14 @@ Dopo aver definito queste 2 cose si stimano le KLOC previste
 - Kilo Lines of Code  `20 KLOC` $\approx$ `20 000 LOC`
 
 si calcola con 2 livelli di precisione diversi:
-- Nominale:
+- **Nominale**:
 	- calcolo senza troppe caratteristiche
 	- $Effort_{nominale} = a \times (KLOC)^b$
 	- risultato in Man-Months
 	- a e b dipendono dalle cose scelte prima (livelli di precisione e modello del prodotto)
-- Cost Drivers
+- **Cost Drivers**
 	- si corregge quello nominale tenendo conto di cambiamenti
-	- si da un punteggio a questi 15 fattori e poi si fa il loro prodotto
+	- si da un punteggio a questi **15 fattori** e poi si fa il loro prodotto
 	- $C = \prod_i C_i$ 
 	- e poi $Effort = Effort_{nominale} \times C$
 
@@ -707,7 +707,7 @@ Si rappresenta con 2 strumenti complementari
 rappresenta i task e le loro dipendenze con un grafo
 - **nodi**=task
 - **archi**=vincoli di precedenza
-si nota *come cammino* critico quel cammino di task che fa durare meno tempo lo sviluppo
+si nota *come cammino* *critico* quel cammino di task che fa durare meno tempo lo sviluppo
 
 ![[GPT PREMIUMS/17_agosto_appunti/assets/p078-fig-080.png|600]]
 #### Diagramma di Gantt
@@ -715,22 +715,22 @@ Utile per capire le effettive scalette temporali sul calendario
 
 ![[CORSETTI/Immagini/Pasted image 20260421100613.png|408]]
 
-MODULO  5 FINO A QUI
+
 ### Documento SPMP - Software Project Management Plan
 Si prendono stime, pianificazione temporale, organizzazione del team e rischi e si mettono in un documento che certifica il contratto operativo del progetto
 - ovvero il contratto che mette nero su bianco ogni cosa possibile per chi lavora sul progetto
-
+MODULO  6
 # MODULO 2
 ## Progettazione Software
-si vuole passare dal documento di specifica al documento di progetto
-- dove si fanno effettivamente le cose(dominio della soluzione)
+si vuole **passare** dal **documento** di **specifica** al **documento di progetto**
+- dove si fanno effettivamente le cose(**dominio della soluzione**)
 
 Alla base di questa fase della progettazione vi sono 6 principi fondamentali:
 - **Stepwise refinement**: man mano si creano iterazioni sempre migliori del documento di progetto
 - **Astrazione**: consente di concentrarsi su determinati aspetti e escluderne altri si divide in:
 	- procedurale, si da un focus ai servizi che offre
 	- dei dati, si lavora con dei dati ma senza sapere la loro rappresentazione interna
-- **Decomposizione modulare**: si suddivide un problema in sotto problemi più piccoli e isolati, genera lo structure chart(artefatto prodotto dove si vede una gerarchia dei moduli con nodi e archi)
+- **Decomposizione modulare**: si **suddivide** un **problema** in **sotto** **problemi** più piccoli e isolati, genera lo structure chart(artefatto prodotto dove si vede una gerarchia dei moduli con nodi e archi)
 	- *Dimostrazione dell'Effort*:
 	- Dati due problemi $p_1$ e $p_2$, sia $C$ la complessità ed $E$ lo sforzo (effort):
 	- Se $C(p_1) > C(p_2) \implies E(p_1) > E(p_2)$ *(più complesso = più sforzo)*
@@ -748,36 +748,36 @@ Alla base di questa fase della progettazione vi sono 6 principi fondamentali:
 - **information hiding**: ogni modulo deve rendere visibile solo ciò che gli altri moduli devono conoscere nascondendo altri dettagli implementativi
 - **riusabilità**: utilizzare un nuovo prodotto su elementi già sviluppati
 	- avviene su diversi livelli crescenti
-		- moduli software: riuso di singole funzioni o classi
-		- application framework: riuso di una struttura portante
-		- design pattern: riuso di schemi e relazioni tra classi
-		- architettura software: riuso dell'intera architettura
+		- **moduli software**: riuso di singole funzioni o classi
+		- **application framework**: riuso di una struttura portante
+		- **design pattern**: riuso di schemi e relazioni tra classi
+		- **architettura software**: riuso dell'intera architettura
 ![[GPT PREMIUMS/17_agosto_appunti/assets/p087-fig-089.png|331]]
 
 ### OOD - Object Oriented Design (preliminare)
-Vi è una logica che riporta quella di requirements engineering per gli OOA ma la porta per la progettazione software con OOD, un processo iterativo e incrementale che si divide in 2 sottofasi:
-- preliminare
-- dettagliato
+Vi è una **logica** che riporta quella di **requirements engineering** per gli OOA ma la porta per la **progettazione software** con **OOD**, un processo iterativo e incrementale che si divide in 2 sottofasi:
+- **preliminare**
+- **dettagliato**
 come prima cosa che viene analizzata nella fase di OOD per capire COME deve fare il sistema e non più COSA deve fare il sistema vi è la sua architettura
 #### Architetture di sistema
 si descrive come devono essere messe le componenti del sistema e come devono collaborare si dividono in
 ##### Centralizzate
 il sistema software gira su un solo nodo di calcolo(tipo un solo PC)
 - **Mainframe-based Architecture**
-	- un unico elaboratore che esegue il software e gestisce i dati
-	- gli utenti comunicano con questo calcolatore mediante terminale
+	- un *unico elaboratore* che esegue il *software* e gestisce i *dati*
+	- gli *utenti* comunicano con questo calcolatore mediante *terminale*
 - **File-sharing**
-	- File condivisi tra pc ma che fanno calcoli a sè
-	- i pc non comunicano tra di loro e non condividono risorse di calcolo
+	- *File condivisi tra pc* ma che fanno calcoli a sè
+	- i *pc non comunicano* tra di loro e non condividono risorse di calcolo
 ##### Distribuite
-si suddivide l'elaborazione tra più nodi porta diversi 
+si suddivide l'elaborazione tra *più* *nodi* porta diversi 
 - vantaggi come:
-	- scalabilità, load balancing, trasparenza, concorrenza
+	- *scalabilità*, *load balancing*, trasparenza, concorrenza
 - svantaggi come:
-	- latenza della rete, sicurezza, gestire differenza tra dispositivi diversi usati in rete
-prevedono l'uso di middleware, strato di software che fornisce servizi di comunicazione e connettività alle applicazioni distribuite si mette tra:
-- applicazioni
-- sistema operativo e infrastruttura di rete
+	- *latenza della rete*, *sicurezza*, gestire *differenza tra dispositivi* diversi usati in rete
+prevedono l'uso di **middleware**, **strato** di software che fornisce **servizi** di comunicazione e **connettività** alle applicazioni distribuite si **mette tra**:
+- **applicazioni**
+- **sistema operativo e infrastruttura di rete**
 ##### Client/Server
 Si divide l'architettura del sistema software in:
 - **Client**:
@@ -813,7 +813,7 @@ N-Tier per aggiungere altri server come uno di autenticazione
 	- **Server Skeleton**: riceve i byte dall'ORB lato server, esegue l'**Unmarshalling** (spacchetta i parametri) e invoca il metodo sull'oggetto reale
 - **IDL (Interface Definition Language)**: linguaggio neutro per definire le interfacce indipendentemente dal linguaggio di programmazione (poi compilato per generare Stub e Skeleton in Java, C++, ecc.)
 ##### Component-Based
-**Impacchetta** il software mediante **componenti preconfezionate** che hanno una separazione netta tra *interfaccia e *implementazione*
+**Impacchetta** il software mediante **componenti preconfezionate** che hanno una separazione netta tra *interfaccia e implementazione*
 infatti vi è il concetto di **black box** (sufficiente sapere l'interfaccia esterna)
 vengono utilizzati **Component Framework** per fornire le basi per costruire applicazioni che fanno parte di uno stesso dominio
 ![[GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-090.png|390]]
@@ -873,43 +873,29 @@ Una **transazione** è una richiesta che raggruppa due o più operazioni in una 
 - **Isolation**: transazioni concorrenti non interferiscono tra loro
 - **Durability**: dopo il *commit*, le modifiche sono permanenti
 
-###### I 4 Pattern Architetturali di Transazione:
-1. **Two-Phase Commit Protocol (2PC)**:
-	- Garantisce l'atomicità tra database diversi tramite un **Commit Coordinator** in 2 fasi:
-		- *Fase 1 (Prepare)*: il coordinatore chiede a tutti i nodi di prepararsi bloccando le risorse (*lock*) e inviare il proprio voto (Sì/No).
-		- *Fase 2 (Commit o Abort)*: se **tutti** votano Sì $\to$ ordina il *Commit* definitivo; se anche **uno solo** vota No o va in timeout $\to$ ordina il *Rollback/Abort* a tutti.
-2. **Compound Transaction Pattern**:
-	- Evita il rollback totale drastico quando non serve (es. prenotazione *Volo + Hotel + Auto*).
-	- Divide la transazione complessa in **sottotransazioni modulari**, consentendo **rollback parziali** (se manca l'auto, non cancella il volo).
-3. **Long-Living Transaction Pattern**:
-	- Usato per transazioni che durano ore o giorni a causa di decisioni umane (**Human in the loop**, es. approvazione mutuo).
-	- Evita di tenere i database bloccati a lungo: spezza il processo in transazioni brevi e applica un **Recheck** delle condizioni prima della conferma finale.
-4. **Negotiation Pattern (Agent-Based)**:
-	- Agenti software (*Client Agent* e *Service Agent*) negoziano condizioni o risorse alternative se la richiesta iniziale non è disponibile.
-
 ###### Coordinamento dei Servizi:
 Un'applicazione SOA può utilizzare più servizi contemporaneamente bisogna stabilire chi controlla l'ordine e le interazioni tra i servizi quindi vi è:
 - **Orchestrazione**: un coordinatore centrale (**orchestratore**) controlla e dirige l'ordine di esecuzione di tutti i servizi
 - **Coreografia**: nessun coordinatore centrale; i servizi collaborano e si scambiano messaggi direttamente in modo decentralizzato
 
-MODULO  6 FINO A QUI
+MODULO  7
 ### OOD - Object Oriented Design (Di dettaglio)
 l'OOD dettagliato definisce la struttura interna delle classi prima della codifica, si rappresentano le cose sempre con diagrammi UML ma con un focus sui dettagli implementativi e di codice
 Ogni use case che era definito nella parte delle OOA è definito ora come delle classi che collaborano tra loro, collaborazione che hanno 2 parti:
-- Comportamentale (dinamica): Spiega come gli elementi comunicano nel tempo mediante Communication Diagram o Sequence Diagram
-- Strutturale(statica): rappresenta la struttura vera e propria aggiungendo dettagli al Class Diagram
+- **Comportamentale** (dinamica): Spiega come gli elementi comunicano nel tempo mediante Communication Diagram o Sequence Diagram
+- **Strutturale**(statica): rappresenta la struttura vera e propria aggiungendo dettagli al Class Diagram
 #### Principi di buon Design
 ##### Legge di Demetra
-Afferma che un oggetto deve comunicare solo con i suoi vicini immediati e non con estranei, deve limitare le sue dipendenze agli oggetti con cui ha una relazione diretta per migliorare la manutenibilità e la flessibilità di codice
+*Afferma* che un **oggetto** deve **comunicare** **solo** con i suoi **vicini** **immediati** e **non** con **estranei**, deve **limitare** le sue **dipendenze** agli **oggetti** con cui ha una **relazione** **diretta** per migliorare la **manutenibilità** e la **flessibilità** di **codice**
 Per ridurre l'inter-layer coupling (accoppiamento tra livelli diversi delle componenti) e usare soprattutto intra-layer coupling (accoppiamento tra oggetti dello stesso livello)
 ###### Piccola parentesi sugli UML structured Class
-non sono direttamente collegati con i principi di buon design ma in UML abbiamo visto le class diagram standard, che descrivono le classi fuori
-poi ci sono le structured class che invece approfondiscono cosa vi è dentro
-da fuori però vengono ancora viste come delle black box e solo gli ingegneri vedono al suo interno, gli elementi principali sono:
-- **Part**: componente/oggetto interno appartenente alla classe
-- **Port**: punto di interazione con l'esterno (espone/richiede interfacce)
-- **Connector**: linea di comunicazione interna che collega le parti tra loro o alle porte
-- **Role**: ruolo ricoperto da un elemento nella collaborazione
+non sono direttamente collegati con i principi di buon design ma in UML abbiamo visto le **class diagram standard**, che descrivono le classi fuori
+poi ci sono le **structured class** che invece approfondiscono cosa vi è dentro
+da fuori però vengono ancora viste come delle **black box** e solo gli **ingegneri** vedono al suo interno, gli elementi principali sono:
+- **Part**: **componente**/oggetto **interno** appartenente alla **classe**
+- **Port**: punto di **interazione** con **l'esterno** (espone/richiede **interfacce**)
+- **Connector**: linea di **comunicazione interna** che *collega* le **parti** tra loro **o** alle **porte**
+- **Role**: *ruolo* ricoperto da un *elemento* nella *collaborazione*
 ![[assets/p107-fig-111.png|383]]
 
 ricordiamo quindi che class diagram e structure diagram sono diversi
@@ -919,8 +905,8 @@ Modella l'architettura fisica e il rilascio (*deployment*) del software a runtim
 - **Nodi (cubi 3D)**: dispositivi hardware fisici o ambienti di esecuzione (es. *Server Web, Database Server, Smartphone*).
 - **Artefatti (`<<artifact>>`)**: i file eseguibili/binari concreti che vengono installati sui nodi (es. `app.jar`, `database.sql`, `setup.exe`).
 ##### Design Pattern
-Servono per risolvere problemi ricorrenti nelle fasi di progettazione permettendo riutilizzo di strutture già collaudate.
-Si classificano su due dimensioni indipendenti
+Servono per **risolvere** **problemi** **ricorrenti** nelle **fasi** di **progettazione** permettendo **riutilizzo** di **strutture** già collaudate.
+Si classificano su **due** **dimensioni** **indipendenti**
 ***Purpose***
 - Descrive il tipo di problema progettuale che affronta il pattern e sono:
 	- Problemi **Creazionali**: Facilitare la creazione di oggetti
@@ -992,7 +978,7 @@ Soluzione:
 passiamo ora ai pattern comportamentali
 ###### Observer (comportamentale)
 Di tipo Comportamentale e Object Scope
-Consente di definire una dipendenza 1 a N dove se un oggetto cambia stato tutti gli oggetti dipendenti vengono aggiornati e notificati
+Consente di definire una dipendenza 1 a N tra subject e observer dove se un oggetto cambia stato tutti gli oggetti dipendenti vengono aggiornati e notificati
 Soluzione:
 - `Subject`: classe base che contiene l'elenco degli observer e una lista delle operazioni per gestirli
 - `Observer`: interfaccia comune per tutti gli observer e contiene il metodo di aggiornamento
@@ -1016,7 +1002,9 @@ Soluzione:
 - `Client`: utilizza una strategy
 ![[assets/p074-fig-039.png|416]]
 
-MODULO  7 FINO A QUI
+non è soltanto una libreria, ma uno **scheletro riutilizzabile dell’applicazione**, tipicamente basato su classi astratte e sulle loro relazioni; consente riuso sia di design sia di codice. I Design Pattern possono essere usati come “mattoni” per costruire framework.
+
+MODULO  8
 ## Metriche del Software e Misura della Complessità
 Servono misure quantitative e oggettive per valutare la complessità, l'affidabilità e la manutenibilità del progetto.
 Le misure utilizzate si dividono in 2 grandi categorie:
@@ -1091,7 +1079,7 @@ $$ev(F) = v(F) - m$$
 - dove $m$ è il numero di sottografi strutturati collassati
 - **Teorema**: $ev(F) = 1 \iff$ il programma è perfettamente **D-strutturato** (pulito, senza salti anomali)
 
-MODULO  8 FINO A QUI
+MODULO  9
 ## Qualità del software, SQA e Testing
 La qualità del software è la conformità del prodotto a quelli che sono i requisiti funzionali e prestazionali esplicitamente dichiarati, insieme anche agli standard di sviluppo stabiliti.
 Ci sono diversi modelli che esplorano la qualità del software in modi diversi
