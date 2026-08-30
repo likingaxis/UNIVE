@@ -1,5 +1,7 @@
 ## Piano 31 agosto — ripasso finale
 
+Scrivi al bracciale
+
 ### 09:00–13:00 — Giro completo 9 moduli
 
 - 09:00–09:25 → **M1**
