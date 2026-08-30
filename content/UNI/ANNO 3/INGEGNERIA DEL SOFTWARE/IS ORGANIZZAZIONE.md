@@ -1,175 +1,68 @@
-**29 agosto = ricostruzione completa con appunti davanti**  
-**30 agosto = richiamo attivo + consolidamento dei punti deboli**  
-**31 agosto = simulazione d’esame + rifinitura finale**
+## Piano 31 agosto — ripasso finale
 
-L’indice che mi hai dato è abbastanza ampio: sono **9 moduli**, dai fondamenti fino a qualità/testing/BPM, quindi cercare di rendere ogni giornata identica sarebbe meno efficace.
+### 09:00–13:00 — Giro completo 9 moduli
 
-E terrei **ogni giorno 1h30–2h obbligatorie per il progetto**, separate dallo studio teorico, così non ti “mangia” continuamente attenzione.
-
-## 29 agosto — Prima ripetizione completa guidata
-
-Obiettivo di oggi: **rivedere tutto almeno una volta seriamente**, con `IS UNICO SHORT` davanti, cercando però di parlare prima di guardare. Non importa ancora essere perfetto.
-
-|Orario|Attività|
-|---|---|
-|**12:00–13:30**|**Modulo 1** — Fondamenti, ciclo di vita, affidabilità|
-|**13:30–14:30**|Pranzo + pausa|
-|**14:30–16:00**|**Modulo 2** — Modelli, Risk Management, Agile/Scrum, CMM|
-|**16:00–16:15**|Pausa|
-|**16:15–17:45**|**Modulo 3** — Requisiti, specifiche, Petri Net|
-|**17:45–18:00**|Pausa|
-|**18:00–19:30**|**PROGETTO**|
-|**19:30–20:30**|Cena / stacco|
-|**20:30–22:00**|**Modulo 4** — OOA/OOD + UML|
-|**22:00–22:15**|Pausa|
-|**22:15–23:00**|Ripasso veloce Moduli 1–4: solo titoli + concetti principali|
-
-Oggi **non proverei a chiudere tutti e 9 i moduli**. Preferisco che 1–4 vengano ripetuti davvero, anziché arrivare al testing alle 2 di notte senza ricordare nulla.
-
-Il Modulo 4 è anche parecchio corposo: BCE, Class Diagram, Use Case, Sequence, Collaboration, State, Activity e Package.
-
-### Come ripetere oggi
-
-Per ogni sottopunto:
-
-**1. Leggi solo il titolo.**  
-Prova a parlarne.
-
-**2. Se ti blocchi**, dai una rapida occhiata.
-
-**3. Distogli gli occhi dagli appunti** e rispiega.
-
-**4. Metti un segno sui concetti problematici.**
-
-Userei tre categorie semplicissime:
-
-- 🟢 = lo so senza guardare;
+- 09:00–09:25 → **M1**
     
-- 🟡 = lo so ma devo farmi aiutare dagli appunti;
+- 09:25–09:55 → **M2**
     
-- 🔴 = non lo ricordavo / confondo le cose.
+- 09:55–10:20 → **M3**
+    
+- 10:20–10:45 → **M4**
+    
+- 10:45–11:15 → **M5**
+    
+- 11:15–11:45 → **M6**
+    
+- 11:45–12:15 → **M7**
+    
+- 12:15–12:35 → **M8**
+    
+- 12:35–13:00 → **M9**
     
 
-Domani lavoreremo soprattutto su 🟡 e 🔴.
+Metodo per ogni modulo:  
+**scaletta di sole parole-chiave → ripeti senza leggere → se ti blocchi controlla velocemente → richiudi e ripeti.**
 
----
+Con me: mi scrivi **“Modulo X, parto”** e io ti guido solo nella sequenza degli argomenti senza anticiparti le risposte. Alla fine: voto /30 + errori/punti gialli + 1-2 domande del professore.
 
-# 30 agosto — Seconda passata + completamento programma
+### 14:00–17:00 — Domande reali del professore
 
-Qui deve iniziare il vero **active recall**.
+Solo active recall, niente lettura preventiva.
 
-|Orario|Attività|
-|---|---|
-|**09:00–10:00**|Ripetizione a memoria **Moduli 1–2**|
-|**10:00–10:15**|Pausa|
-|**10:15–11:15**|Ripetizione a memoria **Moduli 3–4**|
-|**11:15–11:30**|Pausa|
-|**11:30–13:00**|**Modulo 5** — Project Management, stime, FP, COCOMO, PERT/Gantt|
-|**13:00–14:00**|Pranzo|
-|**14:00–15:30**|**Modulo 6** — Architetture, Client/Server, ORB, componenti, SOA|
-|**15:30–15:45**|Pausa|
-|**15:45–17:00**|**Modulo 7** — Detailed OOD + Design Pattern|
-|**17:00–18:30/19:00**|**PROGETTO**|
-|**19:00–20:00**|Cena|
-|**20:00–21:00**|**Modulo 8** — Metriche|
-|**21:00–22:15**|**Modulo 9** — Qualità, SQA, Testing, BPM|
-|**22:15–23:00**|Domande orali miste sui Moduli 1–9|
+Obiettivo: rendere automatiche soprattutto **definizioni, differenze, formule e domande già realmente fatte**.
 
-Questa è probabilmente la **giornata più pesante**.
+### 17:00–18:00 — Pausa vera
 
-La parte 5–9 comprende parecchie cose che conviene sapere per strutture, non a memoria testuale: formule di FP e COCOMO, coesione/coupling, architetture distribuite, gli 8 Design Pattern, McCabe, testing ecc.
+### 18:00–20:00 — Recupero errori
 
-Il vantaggio è che alcune sezioni sono molto più rapide da ripetere una volta capita la struttura.
+Dividi tutto in:
 
-Per esempio:
+- 🟢 **Verde** → lo so, non lo ripasso
+    
+- 🟡 **Giallo** → risposta incerta/incompleta
+    
+- 🔴 **Rosso** → non lo ricordo
+    
 
-> Design Pattern  
-> → classificazione  
-> → creazionali / strutturali / comportamentali  
-> → class vs object  
-> → gli 8 pattern.
+Ripassi **solo gialli e rossi**.
 
-Non devi recitare pagine.
+### 20:30–22:00 — Simulazione orale
 
----
+Domande casuali, senza appunti, risposte da 1–3 minuti + eventuale approfondimento.
 
-# 31 agosto — Giorno decisivo
+### 22:00–23:00 — Ultimo consolidamento
 
-Il 31 **non studierei quasi più in maniera passiva**.
+Solo:  
+**formule + elenchi + differenze + nomi secchi + domande che continui a sbagliare.**
 
-Deve essere essenzialmente una simulazione dell'esame.
+Poi dormire.
 
-|Orario|Attività|
-|---|---|
-|**09:00–10:30**|Simulazione orale **Moduli 1–3**|
-|**10:30–10:45**|Pausa|
-|**10:45–12:15**|Simulazione orale **Moduli 4–6**|
-|**12:15–13:00**|Correzione lacune|
-|**13:00–14:00**|Pranzo|
-|**14:00–15:15**|Simulazione orale **Moduli 7–9**|
-|**15:15–15:30**|Pausa|
-|**15:30–17:00**|**PROGETTO — ultima ripetizione seria**|
-|**17:00–18:00**|Punti 🔴 rimasti|
-|**18:00–19:00**|Pausa / cena anticipata|
-|**19:00–20:30**|**Interrogazione casuale completa con me**|
-|**20:30–21:00**|Ultime correzioni|
-|**21:00–22:00 max**|Ripasso leggerissimo: definizioni, formule, elenchi|
-|**dopo le 22**|**STOP**|
+### 1 settembre mattina
 
-La sera del 31 eviterei assolutamente di fare una maratona fino alle 2–3.
+Circa **60–90 min di ripasso leggero**:  
+domande del professore + punti gialli + formule.
 
-Meglio arrivare al giorno dopo con il cervello funzionante.
+**Niente argomenti nuovi.**
 
----
-
-# La cosa più importante: progressione delle 3 giornate
-
-Il metodo dovrebbe cambiare.
-
-### Oggi — 29
-
-Puoi avere gli appunti davanti.
-
-Direi anche tranquillamente:
-
-**60–70% memoria / 30–40% consultazione.**
-
-### Domani — 30
-
-Gli appunti devono essere **chiusi** all'inizio di ogni domanda.
-
-Provi → poi controlli.
-
-**85–90% memoria.**
-
-### 31
-
-Quasi zero appunti durante la risposta.
-
-Li apri **solo dopo che hai terminato**, per correggere.
-
-È la giornata in cui scopriremo se qualcosa è davvero rimasto.
-
----
-
-# Come lavorerei io con te
-
-Possiamo usare questa chat come **interrogatore + correttore per tutti e tre i giorni**.
-
-Oggi, come avevamo deciso:
-
-> tu ripeti **Modulo 1 con gli appunti davanti** → scrivi `fine` → io controllo cosa hai detto rispetto a SHORT, file completo e indice → ti dico omissioni/errori → ti faccio qualche domanda.
-
-Poi passiamo al Modulo 2.
-
-Domani invece inizio a diventare più cattivo 😄: ti faccio partire dagli argomenti **senza dirti necessariamente tutti i sottopunti**.
-
-Il 31 possiamo fare proprio:
-
-> **“Professore mode”**
-
-domande imprevedibili, follow-up sulla tua risposta, collegamenti tra argomenti e voto finale.
-
-C'è inoltre un vantaggio nel seguire l'indice come struttura: parte dai fondamenti e procede verso requisiti → OOA/OOD → project management → architetture → design → metriche → qualità/testing, quindi ripetendolo in quell'ordine ricostruiamo anche il **filo logico dell'intero corso**, non soltanto nove blocchi isolati.
-
-**Per oggi partirei adesso con Modulo 1 e cercherei di chiuderlo entro circa le 13:30.** Vai pure con la ripetizione come avevamo stabilito: non importa se ogni tanto guardi.
+Regola di domani: **non devi leggere tutto finché “ti sembra di saperlo”. Devi provare a dirlo, sbagliare, correggere e ridirlo.**
