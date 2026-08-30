@@ -1006,7 +1006,7 @@ non è soltanto una libreria, ma uno **scheletro riutilizzabile dell’applicazi
 
 MODULO  8
 ## Metriche del Software e Misura della Complessità
-Servono misure quantitative e oggettive per valutare la complessità, l'affidabilità e la manutenibilità del progetto.
+Servono **misure** *quantitative* e *oggettive* per valutare la *complessità*, l'*affidabilità* e la *manutenibilità* del **progetto**.
 Le misure utilizzate si dividono in 2 grandi categorie:
 - **intermodulari**: valutano le relazioni e le chiamate tra i moduli
 - **intramodulari**: valutano i moduli singolarmente
@@ -1018,17 +1018,17 @@ dove:
 - `N` sono i moduli come nodi
 - `R` sono le relazioni tra i nodi e sono gli archi
 Viene utilizzato per misurare 4 attributi diversi di tipo qualitativo:
-- coesione: quanto un modulo svolge un compito specifico
-- coupling: il grado di dipendenza tra i moduli
-- morfologia: la forma complessiva del grafo(architettura)
-- information flow: quanti dati entrano ed escono dai moduli
+- **coesione**: quanto un modulo svolge un compito specifico
+- **coupling**: il grado di dipendenza tra i moduli
+- **morfologia**: la forma complessiva del grafo(architettura)
+- **information flow**: quanti dati entrano ed escono dai moduli
 Si vogliono ora approfondire in particolare
 #### Morfologia
 l'architettura viene valutata attraverso
-- Size: numero di nodi e archi
-- Depth: distanza massima dalla radice ai livelli più profondi
-- Width: massimo numero di nodi in uno stesso livello
-- Edge-to-Node Ratio: rapporto tra archi e nodi
+- **Size**: numero di nodi e archi
+- **Depth**: distanza massima dalla radice ai livelli più profondi
+- **Width**: massimo numero di nodi in uno stesso livello
+- **Edge-to-Node Ratio**: rapporto tra archi e nodi
 
 Da questi attributi si usano 2 metriche:
 ##### Internal Reuse
@@ -1042,7 +1042,7 @@ misura quanto il grafo si discosta da un albero perfetto
 $$m(G)=\frac{2(e−n+1)}{(n−1)(n−2)}​$$
 
 se $m(G)=0$ è un albero perfetto puro
-se $r(G)=1$ grafo è completamente connesso(disordine)
+se $m(G)=1$ grafo è completamente connesso(disordine)
 
 #### Information Flow
 Serve per definire quanto flusso passa tra i moduli intermodulare(relazioni tra moduli)
@@ -1052,7 +1052,7 @@ $$IF(M_i) = [fan\text{-}in(M_i) \times fan\text{-}out(M_i)]^2$$
 ![[assets/p078-fig-040.jpeg|299]]
 
 #### FlowGraph
-valuta flusso di entrata e uscita interna nelle componenti dei moduli intramodulare
+rappresenta flusso di entrata e uscita interna nelle componenti dei moduli intramodulare
 
 $$FG = \{N,E\}$$
 
@@ -1081,29 +1081,16 @@ $$ev(F) = v(F) - m$$
 
 MODULO  9
 ## Qualità del software, SQA e Testing
-La qualità del software è la conformità del prodotto a quelli che sono i requisiti funzionali e prestazionali esplicitamente dichiarati, insieme anche agli standard di sviluppo stabiliti.
-Ci sono diversi modelli che esplorano la qualità del software in modi diversi
+La qualità del software è la **conformità** del **prodotto** a quelli che sono i **requisiti** **funzionali** e **prestazionali** esplicitamente **dichiarati**, insieme anche agli **standard** di **sviluppo** **stabiliti**.
+Ci sono **diversi** **modelli** che esplorano la qualità del software in modi diversi
 #### Quality Model di McCall
-Valuta la qualità del prodotto sotto 3 aspetti ognuna con diversi indici di qualità
-- Product Operation
+**Valuta** la qualità del prodotto sotto **3** **aspetti** ognuna con **diversi** **indici** di **qualità**
+- **Product Operation**
 	- si valuta il prodotto rispetto all'uso quotidiano
-	- Correttezza: rispetta specifiche e obiettivi dell'utente?
-	- Affidabilità: quanto è operativo nel tempo?
-	- Efficienza: quanto consuma in termini di risorse di calcolo?
-	- Integrità: protegge i dati da accessi non autorizzati?
-	- Usabilità: è comprensibile per l'utente?
-- Product Revision
+- **Product Revision**
 	- quanto il prodotto può essere controllato e modificato
-	- Manutenibilità: è facile trovare e correggere difetti?
-	- Testabilità: il software è facile da verificare se funziona?
-	- Flessibilità: quanto è facile modificarlo?
-- Product Transition
+- **Product Transition**
 	- capacità di adattarsi a nuovi ambienti
-	- Portabilità: facile cambiare ambiente operativo?
-	- Riusabilità: facile riutilizzare il prodotto o sue parti?
-	- Interoperabilità: facile dialogare con altri sistemi software?
-	- Evolubilità: effort richiesto per adeguarlo a nuovi requisiti
-
 ognuno di questi 12 fattori viene calcolato a loro volta basandosi su 10 attributi che attraverso il Checklist Method viene valutato come positivo o negativo
 
 ![[assets/p148-fig-168.png|298]]
@@ -1112,40 +1099,40 @@ questa checklist non viene fatta solo da una persona ma da un team di evaluation
 attraverso Walkthrough o inspection il team si confronta per arrivare a una valutazione condivisa
 ![[assets/p152-fig-177.png|346]]
 #### Software Quality Assurance — SQA
-Utilizzato per capire in modo sistematico se prodotto software e processo di sviluppo software siano conformi agli standard
-Queste verifiche vengono fatte da un team a se (comporta dei costi)
-- Team SQA: si assicura che la documentazione sia completa, i test pianificati vengano svolti ecc...
-- SQA Plan: piano confermato dal management per definire le verifiche da applicare al progetto
+**Utilizzato** per capire in modo **sistematico** se **prodotto** software e **processo** di sviluppo software siano **conformi** agli **standard**
+Queste **verifiche** vengono fatte da un **team** a se (comporta dei *costi*)
+- *Team SQA*: si assicura che la **documentazione** sia **completa**, i test pianificati vengano svolti ecc...
+- *SQA Plan*: **piano** confermato dal **management** per definire le **verifiche** da **applicare** al **progetto**
 - **standard** e *procedure*: rispettivamente **cosa** dovrebbe essere fatto e *come* va fatto
 #### Verification, Validation e Testing
-Si vuole innanzitutto definire la differenza tra Verifica e Validazione(V&V)
-- Verifica: controlla se il prodotto viene costruito correttamente rispetto agli artefatti e alle specifiche di riferimento
+Si vuole innanzitutto definire la differenza tra *Verifica e Validazione*(V&V)
+- **Verifica**: controlla se il prodotto viene costruito correttamente rispetto agli artefatti e alle specifiche di riferimento
 	- "stiamo costruendo il prodotto in modo giusto?"
-- Validazione: controlla se il software soddisfa le reali esigenze dell'utente finale
+- **Validazione**: controlla se il software soddisfa le reali esigenze dell'utente finale
 	- "stiamo costruendo il prodotto giusto?"
 
 poi si può anche definire ispezione e testing
-- Ispezione: controlli statici che analizzano gli artefatti senza eseguire il codice
-- Testing: controllo dinamico dove viene eseguito effettivamente il software
+- **Ispezione**: controlli statici che analizzano gli artefatti senza eseguire il codice
+- **Testing**: controllo dinamico dove viene eseguito effettivamente il software
 
 Il documento che pianifica le attività di testing è il **Test Plan**
 
 poi si possono definire anche validation testing e defect testing:
-- il validation testing(applicazione pratica): cerca di vedere se soddisfa i requisiti utente e non fallisce
-- il defect: invece cerca intenzionalmente di rompere il software per trovare bug
+- il *validation testing*(applicazione pratica): cerca di vedere se **soddisfa** i **requisiti** **utente** e *non fallisce*
+- il *defect*: invece cerca *intenzionalmente* di *rompere* il *software* per trovare *bug*
 ##### 4 passi della fase di testing
-- Progettazione dei casi di test: definiscono scenari e output attesi
-- Preparazione dei casi di test: scelta degli input effettivi da fare
-- Esecuzione del programma
-- confronto dei risultati: predizione vs risultato ottenuto
+- **Progettazione dei casi di test**: definiscono scenari e output attesi
+- **Preparazione dei casi di test**: scelta degli input effettivi da fare
+- **Esecuzione del programma**
+- **confronto dei risultati**: predizione vs risultato ottenuto
 
 ##### 3 livelli di testing
-1. **Component Testing**, testing di unità e moduli separatamente
-2. **Integration Testing**, testing su relazioni tra componenti prima in piccolo poi in grande
-3. **User Testing**, test finale con dati reali dei clienti per decidere se il software è pronto per il rilascio
+1. **Component Testing**, testing di unità e *moduli *separatamente*
+2. **Integration Testing**, testing su *relazioni* tra *componenti* prima in piccolo poi in grande
+3. **User Testing**, test *finale* con *dati* *reali* dei *clienti* per decidere se il software è *pronto* per il *rilascio*
 
 ##### Politiche di Testing
-Impossibile provare tutti gli input possibili quindi si devono trovare delle soluzioni
+*Impossibile* *provare* *tutti* gli *input* possibili quindi si devono trovare delle *soluzioni*
 
 Si distingue tra
 - **Test Case**: include gli **input** + le **Test Predictions (gli output attesi corretti)** previsti dalla specifica
@@ -1183,7 +1170,7 @@ organizzato in:
 - Testing su un gruppo di oggetti vede tre approcci
 	- Use-Case: testing basate dagli use case
 	- Thread Testing: testing al cluster rispetto a una sequenza specifica di eventi
-	- Object Interaction Testing: testing sui messaggi scamvbiati tra utenti
+	- Object Interaction Testing: testing sui messaggi scambiati tra utenti
 ## Processi Aziendali: BPM e BPMN
 
 ### BP(Business Process), BPM e Workflow
