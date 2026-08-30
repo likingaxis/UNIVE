@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "f44ddef9f61afe44",
+        "id": "d9b125667c064cfe",
         "type": "tabs",
         "children": [
           {
-            "id": "0ef64968d7683a34",
+            "id": "fd3b5f6f0688a138",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/LEZIONI SPARSE/LEZIONE 2.md",
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "LEZIONE 2"
+              "title": "IS UNICO SHORT"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 462.3000183105469
+    "width": 200
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -187,8 +187,9 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "0ef64968d7683a34",
+  "active": "fd3b5f6f0688a138",
   "lastOpenFiles": [
+    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/LEZIONI SPARSE/LEZIONE 2.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/LEZIONI SPARSE/LEZIONE 1.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/ORALE/INDICE.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/CALCOLO NUMERICO INDICE.md",
@@ -214,7 +215,6 @@
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/ORALE/GPT.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/ORALE/CN UNICO SAMUELE.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT/CALCOLO NUMERICO UNICO.md",
-    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT/CN PIANO.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829095359.png",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101432.png",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101349.png",
