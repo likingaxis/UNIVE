@@ -8,31 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "d9ba0cf036155918",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/COMPITI/CN SIMONE BUONG.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "CN SIMONE BUONG"
-            }
-          },
-          {
             "id": "0ef64968d7683a34",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
+                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "IS ORGANIZZAZIONE"
+              "title": "IS UNICO SHORT"
             }
           }
         ]
@@ -201,8 +187,12 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "385e3b437a6aac05",
+  "active": "0ef64968d7683a34",
   "lastOpenFiles": [
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore di sede AMA.md",
+    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/COMPITI/CN SIMONE BUONG.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/ORALE/INDICE.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/CN UNICO.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/TEOREMI LEMMI E COROLLARI.md",
@@ -225,10 +215,6 @@
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT/CN PIANO.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT/pagine 7-10 latex.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT/pagine 2-6 latex.md",
-    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT/pagine 11-12 latex.md",
-    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/COMPITI/CN SIMONE BUONG.md",
-    "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/COMPITI/TICKET TO RIDE.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829095359.png",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101432.png",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101349.png",
