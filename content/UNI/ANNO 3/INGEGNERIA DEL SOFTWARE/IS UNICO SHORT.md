@@ -1174,9 +1174,9 @@ organizzato in:
 ## Processi Aziendali: BPM e BPMN
 
 ### BP(Business Process), BPM e Workflow
-- BP: definisce un insieme di attività correlate e coordinate per produrre valore per il cliente
+- **BP**: definisce un insieme di attività correlate e coordinate per produrre valore per il cliente
 - Workflow: parte aziendale che è automatizzata da software
-- BPM(Business Process Management): disciplina che applica metodologie di gestione e tecnologie per ottimizzare, modellare e analizzare i processi sia umani che non
+- **BPM(Business Process Management)**: disciplina che applica metodologie di gestione e tecnologie per ottimizzare, modellare e analizzare i processi sia umani che non
 - **Ciclo di Vita BPM (6 Fasi a spirale)**:
 - Identificazione: si identificano i processi dell'azienda disponibili ->
 - ->Modellazione (As-Is): intervista ai lavoratori e come lavorano oggi   -> 
