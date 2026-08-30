@@ -3,5 +3,12 @@ node_modules
 .flowershow
 .flowershow-cache
 .trash
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
+**/.obsidian/workspace*.json
+
+# Chiavi e certificati
+*.key
+*.pem
+*.pub
+id_rsa*
+id_ed25519*
+
