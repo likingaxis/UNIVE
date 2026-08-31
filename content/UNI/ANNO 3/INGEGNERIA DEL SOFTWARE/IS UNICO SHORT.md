@@ -1158,7 +1158,8 @@ e il tester può vedere il sistema software come:
 	- principio simile usato nelle testing guidelines provando su array e liste ma trattandole come black box
 - **White Box Testing**
 	- il tester conosce il codice, non deve testarlo tutto ma coprire una determinata % di codice `Testing Coverage`
-
+###### Component Testing
+vai a fare un testing sulla singola componente
 ###### Path Testing
 Usato nel **White Box Testing** vi è il Path Testing
 - usando i flowgraph si realizzano use Case che li attraversano
