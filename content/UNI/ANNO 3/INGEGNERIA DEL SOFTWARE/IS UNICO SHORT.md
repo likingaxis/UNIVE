@@ -1,3 +1,4 @@
+***modulo 1***
 # MODULO 1
 ## Introduzione ISW
 - **Definizione di Ingegneria del software**
@@ -326,7 +327,7 @@ in totale *sono 18* e lavorano su aspetti come:
 - **modalità di verifica**
 ***MODULO 3***
 ## Requisiti
-Descrivono una condizione o capacità necessaria all'utente per risolvere un problema o raggiungere un obiettivo.
+Descrivono una **condizione** o **capacità** *necessaria* all'**utente** per risolvere un *problema* o raggiungere un *obiettivo*.
 I requisiti si osservano su:
 #### 2 livelli di astrazione
 - **Requisiti utente**:
@@ -426,12 +427,14 @@ dove
 
 **Linguaggio Z** basato su teoria degli insiemi e logica dei predicati
 
-MODULO  4
+***MODULO  4***
 
 ## Analisi Orientata agli Oggetti (OOA)
 L'OOA(Object Oriented Analysis) rappresenta una fase di specifica semi-formale dei requisiti seguendo il paradigma a oggetti.
 - bisogni informali diventano modelli strutturati e non ambigui
 definisce COSA deve fare il prodotto software
+
+requisiti come input e produce **modelli del sistema** che costituiscono la specifica software
 #### Meccanismi OO(Object Oriented)
 - **incapsulamento**: avere nella stessa classe attributi e metodi
 - **information hiding**: dettagli implementativi interni non per forza visibili dall'utilizzatore
@@ -548,6 +551,15 @@ Diagramma che descrive la parte dinamica delle specifiche semi-formali con eleme
 - **Transizione**: passaggio di stato di un oggetto rispetto ad un evento o azione che avviene
 
 ![[GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-065.png|257]]
+
+#### Object Diagram
+è una fotografia a runtime di istanze concrete e dei legami tra esse, collegata al Class Diagram.
+
+L'**Object Diagram** rappresenta:
+- istanze di classi
+- valori o stato di oggetti specifici
+- collegamenti tra quelle istanze
+![[GPT PREMIUMS/16_agosto_appunti/assets/p055-fig-055.png|393]]
 #### Package (Diagramma dei Package)
 - **Cos'è:** Meccanismo per raggruppare elementi correlati (classi, use case) graficamente rappresentato come una cartella con linguetta.
 - **Scopi:** 
@@ -558,9 +570,9 @@ Diagramma che descrive la parte dinamica delle specifiche semi-formali con eleme
 
 ![[GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|400]]
 
-MODULO  5
+***MODULO  5***
 ## Software Project Management
-Consiste nella gestione del progetto software con una forte pianificazione.
+Consiste nella gestione e pianificazione del progetto software.
 Si può ricondurre alle ***quattro P*** che sono tutte collegate tra loro:
 - **People**
 	- organizzare i team e le loro responsabilità
@@ -609,7 +621,7 @@ Ci sono diverse grandezze che possiamo stimare per capire cosa ci aspetta nelle 
 - *costo*
 
 si calcolano con 3 approcci principali:
-- **antologia**: ci si basa su progetti passati, se sono simili ha senso sennò no
+- **analogia**: ci si basa su progetti passati, se sono simili ha senso sennò no
 - **scomposizione**
 - **modelli algoritmici empirici**
 
@@ -719,7 +731,8 @@ Utile per capire le effettive scalette temporali sul calendario
 ### Documento SPMP - Software Project Management Plan
 Si prendono stime, pianificazione temporale, organizzazione del team e rischi e si mettono in un documento che certifica il contratto operativo del progetto
 - ovvero il contratto che mette nero su bianco ogni cosa possibile per chi lavora sul progetto
-MODULO  6
+
+***MODULO  6***
 # MODULO 2
 ## Progettazione Software
 si vuole **passare** dal **documento** di **specifica** al **documento di progetto**
@@ -845,7 +858,7 @@ Questa comunicazione vede pattern complementari di comunicazione
 
 ######  Web services
 è un determinato **servizio SOA** che utilizza protocolli di internet
-un servizio che segue il modello SOAP/WDSL ed è composto da 3 problemi distinti
+un servizio che segue il modello ***SOAP/WDSL*** ed è composto da 3 problemi distinti
 - **Come registrare e scoprire il servizio** con ***UDDI***(Universal Description, Discovery and Integration)
 	- puoi pubblicare un servizio, ricercare servizi ecc...
 
@@ -878,7 +891,7 @@ Un'applicazione SOA può utilizzare più servizi contemporaneamente bisogna stab
 - **Orchestrazione**: un coordinatore centrale (**orchestratore**) controlla e dirige l'ordine di esecuzione di tutti i servizi
 - **Coreografia**: nessun coordinatore centrale; i servizi collaborano e si scambiano messaggi direttamente in modo decentralizzato
 
-MODULO  7
+***MODULO  7***
 ### OOD - Object Oriented Design (Di dettaglio)
 l'OOD dettagliato definisce la struttura interna delle classi prima della codifica, si rappresentano le cose sempre con diagrammi UML ma con un focus sui dettagli implementativi e di codice
 Ogni use case che era definito nella parte delle OOA è definito ora come delle classi che collaborano tra loro, collaborazione che hanno 2 parti:
@@ -914,8 +927,8 @@ Si classificano su **due** **dimensioni** **indipendenti**
 	- Problemi **Comportamentali**: Gestiscono gli algoritmi e i comportamenti che possono avere gli oggetti
 ***Scope***
 - Specifica se il pattern si applica a classi o oggetti
-	- **Class Scope**: relazioni tra classi e sottoclassi riprendendo i concetti di ereditarietà
-	- **Object Scope**: relazioni tra oggetti
+	- **Class Scope**: relazioni statiche basate soprattutto su ereditarietà
+	- **Object Scope**: relazioni dinamiche tra oggetti, tipicamente composizione/delega
 
 Iniziamo descrivendo i Pattern di tipo creazionale:
 ###### Factory Method (creazionale)
@@ -980,10 +993,9 @@ passiamo ora ai pattern comportamentali
 Di tipo Comportamentale e Object Scope
 Consente di definire una dipendenza 1 a N tra subject e observer dove se un oggetto cambia stato tutti gli oggetti dipendenti vengono aggiornati e notificati
 Soluzione:
-- `Subject`: classe base che contiene l'elenco degli observer e una lista delle operazioni per gestirli
-- `Observer`: interfaccia comune per tutti gli observer e contiene il metodo di aggiornamento
-- `ConcreteSubject`: oggetto effettivo che invoca i metodi e fa le cose e chiama notify e aggiorna ciascun observer
-- `ConcreteObserver`: riceve le notifiche e implementa update
+- `Subject` mantiene l’elenco degli Observer;
+- quando cambia stato, esegue `notify`;
+- ciascun `Observer` riceve `update`.
 ![[assets/p072-fig-037.jpeg|360]]
 
 ###### Template Method (comportamentale)
@@ -1052,7 +1064,7 @@ $$IF(M_i) = [fan\text{-}in(M_i) \times fan\text{-}out(M_i)]^2$$
 ![[assets/p078-fig-040.jpeg|299]]
 
 #### FlowGraph
-rappresenta flusso di entrata e uscita interna nelle componenti dei moduli intramodulare
+rappresenta flusso di controllo interno nelle componenti dei moduli intramodulare
 
 $$FG = \{N,E\}$$
 
@@ -1166,6 +1178,9 @@ organizzato in:
 ###### Object Oriented Testing
 - si fanno test di oggetti, metodi, classi
 	- l'ereditarietà crea complicanze poiché un tester deve anche verificare le singole sottoclassi che ereditano metodi e altro
+###### Acceptance testing
+- software a contratto
+	- fai fare il testing proprio da clienti o utenti finali
 ###### Cluster Testing
 - Testing su un gruppo di oggetti vede tre approcci
 	- Use-Case: testing basate dagli use case
