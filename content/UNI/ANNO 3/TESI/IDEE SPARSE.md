@@ -27,6 +27,15 @@
 
 - **(Opzionale / Fase 2)**: Passare queste discrepanze a un Agente Riparatore per eseguire il _Self-Healing_ (auto-correzione del codice sorgente Ansible
 
+NEW:
+- Aggiungere sistema di screen per vedere le interfacce? possibilità di fare call di un tool che mostra la schermata attuale
+- Fare benchmark con diversi modelli, MCP
+	- lista modelli che possono fare pentesting Locali/non
+- prendere macchine fatte da loro per fare benchmarking
+- creare un sistema di benchmarking accurato per capire se il sistema sta funzionando davvero
+
+
+
 
 
 #### SOLUZIONE
