@@ -1,0 +1,8 @@
+- devo fare un esame di gender inclusion che non ho seguito, ho creato una trascrizione delle lezioni che sono riuscito a racimolare su teams (transcript lezioni a caso)
+- poi ho anche il pdf guida dell'esame
+- l'idea era fare un pdf unico che diciamo dava una idea sul gender inclusion a livelli di lezione super striminzito e denso che arriva dritto al punto per avere i concetti minimi ma utili
+- poi volevo fare un progetto sul gaming e le donne secondo te si può fare qualcosa di carino e conforme a ciò che vuole la prof?
+	- usare perplexity per raccogliere i dati su questi argomenti
+	- creare un file md che disegna la struttura delle slide e un discorso più lungo
+	- accorciarlo con un altro file md per fare solo le slide
+	- creare le slide in html e convertirle in pptx con una roba su github che dovrebbe esistere 

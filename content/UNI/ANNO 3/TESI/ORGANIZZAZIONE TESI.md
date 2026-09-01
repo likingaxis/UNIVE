@@ -1,13 +1,9 @@
-- VM con distro di linux adatta per fare quello che bisogna fare
-- stilare lista argomenti prerequisiti
-	- capire le definizioni base di questi argomenti
-- lavorare con setup_machine.yml
-- PLAN delle date 
-	- fase di studio
-	- fase di comprensione di quello che devo fare nel pratico
-	- fase di lavoro effettivo + scrittura tesi
-
-- cosa non dimenticare
-	- crediti D
-	- Loreti è ok con la cosa?
-
+- clona la repository
+- scarica il progetto sul fisso
+- leggi e studia il tutto
+- rileggi obiettivo 0 e cosa è stato fatto
+- leggi obiettivo 1
+- fare discorsi con antigravity per capire cosa va fatto
+- inviare memoria.md o memoria2.md a perplexity e fare ricerche su obiettivo 1 e cosa studiare per farlo al meglio
+- studia
+- fai obiettivo 1
