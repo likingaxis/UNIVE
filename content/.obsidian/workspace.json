@@ -11,10 +11,14 @@
             "id": "8669357c7a945bdd",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/ORGANIZZAZIONI ESAMI.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "ORGANIZZAZIONI ESAMI"
             }
           }
         ]
@@ -183,7 +187,7 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "385e3b437a6aac05",
+  "active": "8669357c7a945bdd",
   "lastOpenFiles": [
     "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/Progetto_Bernardi_DeSantis_Grande_Gugliotta_Luci.pdf",
     "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
