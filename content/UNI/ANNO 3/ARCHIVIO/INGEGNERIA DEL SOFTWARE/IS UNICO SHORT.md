@@ -23,11 +23,11 @@ Si vuole distinguere la differenza tra le due affidabilità che manifestano guas
 
 Guasto Hardware si può vedere dal grafico come ci sia mortalità infantile per difetti grossi, poi si stabilizza poi si guasta per usura
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-001.png|254]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-001.png|254]]
 
 Guasto Software invece si nota come ad ogni modifica aumenta la possibilità di avere guasti ma poi scende, non segue la curva ideale
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-002.png|255]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-002.png|255]]
 #### Le problematiche del Software
 Ci sono alcuni problemi legati alla produzione del software ma si dividono principalmente in:
 - ***Accidentali***
@@ -129,7 +129,7 @@ Non è proprio un modello infatti è senza un processo strutturato ha le seguent
 ***Pro***: rapidità iniziale
 *Contro*: 0 scalabilità, troppi costi di manutenzione
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|360]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|360]]
 #### Modello Waterfall
 Modello di tipo sequenziale e più disciplinato del Build & Fix vede le seguenti componenti:
 - **Requirements phase e verifica**: vengono definiti i requisiti
@@ -143,7 +143,7 @@ Modello di tipo sequenziale e più disciplinato del Build & Fix vede le seguenti
 ***Pro***: sequenziale e semplice
 ***Contro***: Se si fa un fix per una fase troppo indietro i costi aumentano di molto
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|368]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|368]]
 #### Modello con Rapid Prototyping
 Correggi:
 **Rapid Prototyping = concetto generale**  
@@ -162,7 +162,7 @@ Si dividono in 2 tipologie:
 ***Pro***: con i prototipi si capiscono meglio i requisiti
 *Contro*: il cliente può avere una falsa percezione visto che poi manca tutta la parte strutturale dietro
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|364]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|364]]
 
 
 ### Modelli basati su iterazione dei processi
@@ -172,7 +172,7 @@ Due modelli importanti:
 sviluppo composto da build, ogni build aggiunge una parte delle funzionalità fino ad arrivare al sistema completo
 - outline description: descrizione generale del prodotto
 - concurrent activities che in modo parallelo portano a delle differenti versioni come quelle a destra passando da build in build
-![[GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|412]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|412]]
 
 Il modello a Sviluppo Incrementale in realtà si divide in 2 tipologie:
 ##### Con Overall Architecture
@@ -181,19 +181,19 @@ Si ha una fase iniziale dove si fanno normalmente requirements specifiche archit
 ***Pro***: Si definiscono in fase preliminare la maggior parte dei dettagli riducendo problemi di integrazione
 *Contro*: Lentezza e Rigidità
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|332]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|332]]
 ##### Senza Overall Architecture
 Si parte con lo sviluppo delle Build senza una fase di progettazione architetturale precedente
 ***Pro***: Molto immediato
 *Contro*: Rischio di avere difficoltà nella fase di integrazione delle build e nel rispettare i requisiti richiesti dal cliente
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
 
 ###### Problema del modello incrementale dei costi
 - con più incrementi diminuisce il costo delle singole build
 - ma aumenta il costo di integrazione quando ci sono tante build
 la loro somma genera una regione di ***costo minimo***
-![[GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
 #### Modello a spirale
 Modello di tipo sempre iterativo ma che aggiunge una parte di *Risk Management* si rappresenta con una spirale
 - **più ti allontani** dal centro *più aumentano i costi*
@@ -206,10 +206,10 @@ Modello di tipo sempre iterativo ma che aggiunge una parte di *Risk Management* 
 
 prima di investire ulteriormente si vedono i rischi
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|378]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|378]]
 
 Poi c'è una versione di Boehm che aggiunge cose come prototipi, simulazioni, benchmark ecc...
-![[GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|469]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|469]]
 
 ##### Parentesi sul Risk Management
 Nei modelli a spirale come abbiamo visto si introduce quella componente sulla gestione dei rischi
@@ -237,7 +237,7 @@ Con i seguenti modelli si lavora sempre con classi e oggetti indipendentemente d
 - **non obbligo** di usare linguaggi di programmazione ad oggetti
 
 Si vede dal basso verso l'alto come una fontana, poi quando sali influenzi le parti sotto
-![[GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|313]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|313]]
 
 #### Modelli concorrenti
 Si usano **modelli tradizionali** ma si **dividono parti collegate tra loro** dello sviluppo usando **software di comunicazione** tra team così da **ridurre** il **tempo** necessario
@@ -288,7 +288,7 @@ il framework è la parte strutturale del procedimento con le varie componenti co
 - **Development Team**: gruppo che svolge il lavoro tecnico
 - **Product Owner**: gestisce product backlog, priorità e esigenze del prodotto
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|477]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|477]]
 
 #### User Story per metodologie Agile
 Per descrivere bene i bisogni di un utente e da cui derivare delle specifiche del progetto come il product backlog per Scrum si utilizzano le User Story
@@ -372,7 +372,7 @@ Formalizzano i requisiti per evitare ambiguità prima della progettazione effett
 ##### Specifiche Informali
 Linguaggio stile Java in combinazione con parole del linguaggio naturale
 - non scrivi codice vero e proprio ma togli qualche ambiguità mettendo if else ecc
-![[GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|390]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|390]]
 
 ##### Specifiche Semi-Formali
 Specifiche che vengono rappresentate con **modelli grafici**
@@ -385,7 +385,7 @@ quando vengono definite possono dare **3 punti di vista differenti**
 	- come il **sistema** **cambia** **stato** e **comportamento** nel **tempo**
 ###### Modello ERD (Entity Relationship Diagram)
 - Modella la struttura concettuale dei dati: **Entità** (rettangoli), **Attributi** (ovali), **Relazioni** (rombi) e cardinalità (`1:1`, `1:N`, `N:M`).
-![[GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|140]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|140]]
 ###### Modello (DFD Data Flow Diagram)
 - **Modella** il **cambiamento** dei **dati**
 - si organizza il tutto a più livelli di raffinamento, dove all'inzio si ha un modello molto superficiale e man mano diventa sempre più approfondito
@@ -416,7 +416,7 @@ dove
 	- per permettere il passaggio dei token da un posto all'altro vi è questa regola di Firing che si divide in 2 fasi
 	- Abilitazione (si consente il passaggio della transizione), una transizione è abilitata se, per ogni place di input, ci sono **almeno tanti token quanto richiesto dal peso dell’arco**.
 	- Scatto(trasferimento effettivo dei token) si tolgono i token dal posto di inizio e si generano al posto di arrivo 
-![[GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|413]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|413]]
 - **Proprietà delle Reti di Petri:**
 	- **Non Determinismo:** più transizioni portano a una scelta di tipo deterministico se si abilita il Firing
 	- **Liveness (Vitalità):** non ci sono situazioni di stallo
@@ -503,7 +503,7 @@ Questi due elementi si mettono in relazione mediante:
 - Generalizzazione: quando un attore (o caso d'uso) specializzato eredita le capacità di un altro più generale
 	- `[Amministratore] ---------▷ [Utente Registrato]`
 
-![[GPT PREMIUMS/16_agosto_appunti/assets/p057-fig-057.png|346]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p057-fig-057.png|346]]
 
 
 #### Activity Diagram
@@ -522,7 +522,7 @@ I suoi elementi sono:
 	- **barra nera piena** con 1 freccia in ingresso e più frecce in uscita $\to$ avvia attività in parallelo/concorrenza
 - **Join (Barra di sincronizzazione):** 
 	- **barra nera piena** con più frecce in ingresso e 1 sola in uscita $\to$ attende che **tutte** le attività parallele siano completate prima di proseguire
-![[GPT PREMIUMS/16_agosto_appunti/assets/p060-fig-060.png|374]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p060-fig-060.png|374]]
 
 #### Sequence Diagram
 Diagrammi sempre di tipo comportamentale
@@ -550,7 +550,7 @@ Diagramma che descrive la parte dinamica delle specifiche semi-formali con eleme
 - **Stato**: descrive lo stato di un oggetto
 - **Transizione**: passaggio di stato di un oggetto rispetto ad un evento o azione che avviene
 
-![[GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-065.png|257]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-065.png|257]]
 
 #### Object Diagram
 è una fotografia a runtime di istanze concrete e dei legami tra esse, collegata al Class Diagram.
@@ -559,7 +559,7 @@ L'**Object Diagram** rappresenta:
 - istanze di classi
 - valori o stato di oggetti specifici
 - collegamenti tra quelle istanze
-![[GPT PREMIUMS/16_agosto_appunti/assets/p055-fig-055.png|393]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p055-fig-055.png|393]]
 #### Package (Diagramma dei Package)
 - **Cos'è:** Meccanismo per raggruppare elementi correlati (classi, use case) graficamente rappresentato come una cartella con linguetta.
 - **Scopi:** 
@@ -568,7 +568,7 @@ L'**Object Diagram** rappresenta:
   3. *Controllo visibilità* (espone solo le classi pubbliche nascondendo quelle interne).
 - **Dipendenza ($-->$):** il Package A dipende dal Package B se le sue classi usano elementi di B (base per l'architettura a livelli/Layer).
 
-![[GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|400]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|400]]
 
 ***MODULO  5***
 ## Software Project Management
@@ -608,7 +608,7 @@ Ora si vedono due modelli estremi, di solito si adattano delle vie di mezzo
 Di tipo gerarchico dove ogni partecipante ha un suo ruolo e ognuno di loro comunica con uno chief programmer
 ***Pro***: canale di comunicazione ridotto
 ***Contro***: sovraccarico del capo
-![[GPT PREMIUMS/17_agosto_appunti/assets/p068-fig-070.png|385]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p068-fig-070.png|385]]
 
 Poi vi è anche una versione dove si divide il tutto in 2 team per evitare il Contro
 - **team Leader** per gli aspetti **tecnici**
@@ -639,7 +639,7 @@ Dove:
 - LOC/pm: Linee di codice prodotte in un Man-Month
 - $/LOC: costo medio per linea di codice
 
-![[GPT PREMIUMS/17_agosto_appunti/assets/p070-fig-072.png|380]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p070-fig-072.png|380]]
 
 Problema: troppo dipendente dal linguaggio usato
 ###### Function Point
@@ -661,14 +661,14 @@ valutiamo le seguenti misure
 	- *EO(External Output)*: dati che escono dal software
 	- *EQ(External Query)*: input che genera un output senza modificare archivi
 
-![[GPT PREMIUMS/17_agosto_appunti/assets/p071-fig-073.png|320]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p071-fig-073.png|320]]
 
 Si fa una somma dei valori ponderati producendo così UFC
 
 ***TCF***
 si aggiungono 14 gradi di influenza con un valore da 0 a 5(irrilevante-essenziale)
 e poi si calcola tutto così
-![[GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-076.png|202]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-076.png|202]]
 
 poi si calcola infine la formula scritta sopra ovvero la moltiplicazione tra UFC E TCF
 
@@ -677,7 +677,7 @@ Problema: modelli possono usare LOC ma noi abbiamo usato FP
 - si usa una tabella per fare il passaggio da una parte all'altra
 - utile per fare calcoli con modelli algoritmici empirici
 $$\text{LOC} = \text{FP} \times \text{Gearing Ratio}$$
-![[GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-077.png|235]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-077.png|235]]
 #### modelli algoritmici empirici
 Abbiamo visto solo un tipo:
 ###### COCOMO - COnstructive COst mOdel
@@ -721,11 +721,11 @@ rappresenta i task e le loro dipendenze con un grafo
 - **archi**=vincoli di precedenza
 si nota *come cammino* *critico* quel cammino di task che fa durare meno tempo lo sviluppo
 
-![[GPT PREMIUMS/17_agosto_appunti/assets/p078-fig-080.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p078-fig-080.png|600]]
 #### Diagramma di Gantt
 Utile per capire le effettive scalette temporali sul calendario
 
-![[CORSETTI/Immagini/Pasted image 20260421100613.png|408]]
+![[Pasted image 20260421100613.png|408]]
 
 
 ### Documento SPMP - Software Project Management Plan
@@ -757,7 +757,7 @@ Alla base di questa fase della progettazione vi sono 6 principi fondamentali:
 			- un coupling alto significa dover conoscere bene gli altri moduli, e le modifiche su uno rischiano di romperne altri
 	- una scomposizione è ben fatta se si ha ***massima*** ***coesione*** e ***minimo*** ***coupling***
 
-![[GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-084.png|377]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-084.png|377]]
 - **information hiding**: ogni modulo deve rendere visibile solo ciò che gli altri moduli devono conoscere nascondendo altri dettagli implementativi
 - **riusabilità**: utilizzare un nuovo prodotto su elementi già sviluppati
 	- avviene su diversi livelli crescenti
@@ -765,7 +765,7 @@ Alla base di questa fase della progettazione vi sono 6 principi fondamentali:
 		- **application framework**: riuso di una struttura portante
 		- **design pattern**: riuso di schemi e relazioni tra classi
 		- **architettura software**: riuso dell'intera architettura
-![[GPT PREMIUMS/17_agosto_appunti/assets/p087-fig-089.png|331]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p087-fig-089.png|331]]
 
 ### OOD - Object Oriented Design (preliminare)
 Vi è una **logica** che riporta quella di **requirements engineering** per gli OOA ma la porta per la **progettazione software** con **OOD**, un processo iterativo e incrementale che si divide in 2 sottofasi:
@@ -829,7 +829,7 @@ N-Tier per aggiungere altri server come uno di autenticazione
 **Impacchetta** il software mediante **componenti preconfezionate** che hanno una separazione netta tra *interfaccia e implementazione*
 infatti vi è il concetto di **black box** (sufficiente sapere l'interfaccia esterna)
 vengono utilizzati **Component Framework** per fornire le basi per costruire applicazioni che fanno parte di uno stesso dominio
-![[GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-090.png|390]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-090.png|390]]
 
 ##### SOA(Service Oriented Architecture) e Web Services
 Architettura di tipo distribuito che è composta da servizi autonomi
@@ -844,17 +844,17 @@ Per trovare i servizi un consumer si interfaccia con un Service Broker
 Questa comunicazione vede pattern complementari di comunicazione
 ***Service Registration Pattern*** (pattern di registrazione del servizio)
 - Il broker ha le varie informazioni sui servizi e comunicano come in foto
-![[GPT PREMIUMS/18_agosto_appunti/assets/p093-fig-092.png|202]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p093-fig-092.png|202]]
 ***Broker Forwarding e Broker Handle*** (pattern di invocazione del servizio)
 - pattern che descrivono come il consumer si interfaccia con il broker
 - nel primo il broker fa da intermediario tra service e consumer
-![[GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-093.png|346]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-093.png|346]]
 
 - nel secondo possiamo vedere come il broker dica solo la posizione del servizio e poi il consumer deve parlare con il servizio(meno trasparenza)
-![[GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-094.png|275]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-094.png|275]]
 ***Service Discovery Pattern*** (pattern di ricerca del servizio)
 - il consumer chiede al broker una tipologia di servizio non specifica e si mette in contatto con quel servizio
-![[GPT PREMIUMS/18_agosto_appunti/assets/p095-fig-095.png|330]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p095-fig-095.png|330]]
 
 ######  Web services
 è un determinato **servizio SOA** che utilizza protocolli di internet
@@ -862,10 +862,10 @@ un servizio che segue il modello ***SOAP/WDSL*** ed è composto da 3 problemi di
 - **Come registrare e scoprire il servizio** con ***UDDI***(Universal Description, Discovery and Integration)
 	- puoi pubblicare un servizio, ricercare servizi ecc...
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p096-fig-096.png|244]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p096-fig-096.png|244]]
 - **Come descrivere il servizio** con ***WSDL***(Web Services Description Language)
 	- permette di far vedere le operazioni possibili, quali input/output sono previsti, dove si trova ecc
-![[GPT PREMIUMS/18_agosto_appunti/assets/p097-fig-099.png|296]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p097-fig-099.png|296]]
 - **Come scambiare messaggi con questi servizi** con ***SOAP*** (Simple Object Access Protocol)
 	- protocollo che usa XML e protocollo HTTP
 
@@ -876,7 +876,7 @@ Un altro stile architetturale di Web Services sono quelli con il sistema REST
 4. **Named Resources (Risorse Nominate)**: Ogni risorsa è identificata univocamente da una URL/URI (es. `http://api.miosito.com/utenti/123`).
 5. **Interconnected resource representations**: Le risorse sono collegate tramite link, permettendo al client di navigare da uno stato all'altro dell'applicazione (Hypermedia).
 consente operazioni come GET, POST, PUT e DELETE
-![[GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-100.png|265]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-100.png|265]]
 ##### Pattern per transazioni distribuite
 Non sono un'architettura a sé, ma **pattern di sicurezza/coordinamento** applicati all'interno di architetture distribuite (SOA e Client/Server) per garantire la consistenza dei dati su più server/DB indipendenti.
 
@@ -909,10 +909,10 @@ da fuori però vengono ancora viste come delle **black box** e solo gli **ingegn
 - **Port**: punto di **interazione** con **l'esterno** (espone/richiede **interfacce**)
 - **Connector**: linea di **comunicazione interna** che *collega* le **parti** tra loro **o** alle **porte**
 - **Role**: *ruolo* ricoperto da un *elemento* nella *collaborazione*
-![[assets/p107-fig-111.png|383]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p107-fig-111.png|383]]
 
 ricordiamo quindi che class diagram e structure diagram sono diversi
-![[assets/p108-fig-112.png|452]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p108-fig-112.png|452]]
 ###### Deployment Diagram
 Modella l'architettura fisica e il rilascio (*deployment*) del software a runtime:
 - **Nodi (cubi 3D)**: dispositivi hardware fisici o ambienti di esecuzione (es. *Server Web, Database Server, Smartphone*).
@@ -939,7 +939,7 @@ Soluzione:
 
 1. **`Creator`** dichiara il metodo di creazione (`factoryMethod()`) con tipo di ritorno astratto `Product`, **senza sapere né decidere quale oggetto concreto verrà creato**.
 2. **`ConcreteCreator`** (la sottoclasse) fa l'override del metodo ed **è l'unica che sa e decide quale classe concreta istanziare (`new ConcreteProduct()`)**.
-![[assets/p069-fig-033.png|508]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p069-fig-033.png|508]]
 ###### Abstract Factory (creazionale)
 Di tipo Creazionale e Object Scope
 Permette di creare oggetti tra loro correlati come delle famiglie senza specificare le loro classi effettive ma che li rende perfettamente compatibili
@@ -949,7 +949,7 @@ Soluzione:
 - `AbstractProduct`: definisce una interfaccia comune per un tipo di prodotto
 - `ConcreteProduct`:le effettive classi prodotte da quella factory concreta
 - `Client`: usa Abstract factory e Abstract Product senza conoscere le concrete
-![[assets/p069-fig-033.png|388]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p069-fig-033.png|388]]
 
 passiamo ora ai pattern strutturali:
 
@@ -964,7 +964,7 @@ Soluzione:
 nelle foto si nota come può essere sia Class che Object
 - Class: Adapter eredita tra target e adaptee
 - Object: eredita da target e contiene una istanza di Adaptee
-![[assets/p070-fig-034.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p070-fig-034.png|650]]
 
 ###### Composite (strutturale)
 Di tipo Strutturale e Object Scope
@@ -976,7 +976,7 @@ Soluzione:
 - `Composite`: elemento contenitore che ha una lista di Component figli implementa l'operazione base in modo ricorsivo(quello della leaf)
 - `Client`: interagisce con Component
 
-![[assets/p071-fig-035.png|469]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p071-fig-035.png|469]]
 ###### Decorator (strutturale)
 Di tipo Strutturale e Object Scope
 Aggiunge nuove funzionalità a un oggetto a runtime
@@ -985,7 +985,7 @@ Soluzione:
 - `ConcreteComponent`: l'oggetto effettivo a cui vogliamo aggiungere funzionalità
 - `Decorator`: implementa l'interfaccia component e contiene un riferimento a un oggetto Component interno
 - `ConreteDecorator`: aggiunge le proprie funzionalità specifiche 
-![[assets/p071-fig-036.png|452]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p071-fig-036.png|452]]
 
 
 passiamo ora ai pattern comportamentali
@@ -996,7 +996,7 @@ Soluzione:
 - `Subject` mantiene l’elenco degli Observer;
 - quando cambia stato, esegue `notify`;
 - ciascun `Observer` riceve `update`.
-![[assets/p072-fig-037.jpeg|360]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p072-fig-037.jpeg|360]]
 
 ###### Template Method (comportamentale)
 Di tipo comportamentale e Class Scope
@@ -1004,7 +1004,7 @@ Consente di definire lo scheletro di un algoritmo delegando alle sottoclassi la 
 Soluzione:
 - `AbstractClass`:contiene il template con i passi fissi da fare
 - `ConcreteClass`: sottoclasse effettiva che implementa i singoli metodi
-![[assets/p073-fig-038.png|378]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p073-fig-038.png|378]]
 ###### Strategy (comportamentale)
 Di tipo comportamentale e Object Scope
 Consente di definire una famiglia di algoritmi che si possono intercambiare tra di loro mettendoli in una classe separata
@@ -1012,7 +1012,7 @@ Soluzione:
 - `Strategy`: interfaccia comune degli algoritmi
 - `ConcreteStrategy`: le classi effettive che implementano quel determinato algoritmo
 - `Client`: utilizza una strategy
-![[assets/p074-fig-039.png|416]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p074-fig-039.png|416]]
 
 non è soltanto una libreria, ma uno **scheletro riutilizzabile dell’applicazione**, tipicamente basato su classi astratte e sulle loro relazioni; consente riuso sia di design sia di codice. I Design Pattern possono essere usati come “mattoni” per costruire framework.
 
@@ -1061,7 +1061,7 @@ Serve per definire quanto flusso passa tra i moduli intermodulare(relazioni tra 
 - **fan-in** → quantità di flussi che arrivano al modulo
 - **fan-out** → quantità di flussi che partono dal modulo
 $$IF(M_i) = [fan\text{-}in(M_i) \times fan\text{-}out(M_i)]^2$$
-![[assets/p078-fig-040.jpeg|299]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p078-fig-040.jpeg|299]]
 
 #### FlowGraph
 rappresenta flusso di controllo interno nelle componenti dei moduli intramodulare
@@ -1070,7 +1070,7 @@ $$FG = \{N,E\}$$
 
 - i **nodi** rappresentano blocchi o istruzioni del programma;
 - gli **archi** rappresentano i possibili passaggi del controllo da un nodo all'altro.
-![[assets/p079-fig-041.png|364]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p079-fig-041.png|364]]
 
 ##### Complessità ciclomatica di McCabe
 usata con i flowgraph misura Il numero di **cammini di codice indipendenti** (quanti `if` e rami logici ci sono).
@@ -1105,11 +1105,11 @@ Ci sono **diversi** **modelli** che esplorano la qualità del software in modi d
 	- capacità di adattarsi a nuovi ambienti
 ognuno di questi 12 fattori viene calcolato a loro volta basandosi su 10 attributi che attraverso il Checklist Method viene valutato come positivo o negativo
 
-![[assets/p148-fig-168.png|298]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p148-fig-168.png|298]]
 
 questa checklist non viene fatta solo da una persona ma da un team di evaluation variegato
 attraverso Walkthrough o inspection il team si confronta per arrivare a una valutazione condivisa
-![[assets/p152-fig-177.png|346]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p152-fig-177.png|346]]
 #### Software Quality Assurance — SQA
 **Utilizzato** per capire in modo **sistematico** se **prodotto** software e **processo** di sviluppo software siano **conformi** agli **standard**
 Queste **verifiche** vengono fatte da un **team** a se (comporta dei *costi*)
@@ -1165,7 +1165,7 @@ Usato nel **White Box Testing** vi è il Path Testing
 - usando i flowgraph si realizzano use Case che li attraversano
 - visto che è impossibile testare tutto si cercando percorsi indipendenti(che creano un nuovo arco)
 - si sfrutta la complessità ciclomatica per trovare percorsi linearmente indipendenti
-![[assets/p157-fig-178.png|469]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p157-fig-178.png|469]]
 
 ###### Integration Testing
 Riunisce singoli test e li combina per vedere se funzionano insieme

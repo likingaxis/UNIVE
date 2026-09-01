@@ -993,7 +993,7 @@ Descriveremo due degli approcci che permettono di organizzare team (persone).
 Vantaggi: atteggiamento positivo nella ricerca di difetti e molto produttivo in caso di problemi difficili da risolvere (es. ambiti di ricerca)  Svantaggi: l'approccio non può essere imposto ma deve nascere spontaneamente, inoltre gli sviluppatori più anziani non desiderano essere valutati al pari dei più giovani.
 - Approccio con Capo Programmatore (gerarchico, verticale): basato sul concetto di specializzazione (ogni partecipante svolge i compiti per i quali è stato formato) e gerarchia (ogni sviluppatore comunica esclusivamente con il capo-programmatore che dirige le attività ed è responsabile dei risultati). 
 
-![[p068-fig-070.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p068-fig-070.png|500]]
 
 Vantaggi: (funziona in domini specifici già organizzati in termini gerarchici (militare, difesa)) Diminuisce il numero di canali di comunicazione e quindi diminuiscono anche i problemi in base alla legge di Brooks. Svantaggi: richiede personale molto esperto per ricoprire i vari incarichi; il capoprogrammatore è sia manager che tecnico con grande esperienza,  il programmatore di backup che può dover anche sostituire il capoprogrammatore è responsabile di attività di testing,  poi il segretario di programmazione che è responsabile della documentazione e dell'archivio di produzione.
 Questi due approcci appena visti sono agli estremi, ovviamente ne esistono molti altri "in between". Si è assistito in particolare ad una evoluzione degli approcci, dove il capoprogrammatore essendo sia manager che tecnico risulta essere il valutatore di se
@@ -1007,7 +1007,7 @@ Tuttavia nasce un problema: in questo approccio leader e manager non hanno canal
 <!-- Pagina PDF 69 -->
 orizzontale, con decision making decentralizzato per cui si introducono canali di comunicazione tra programmatori, tra team leader sfruttando quindi i vantaggi dell'approccio orizzontale.
 
-![[p069-fig-071.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p069-fig-071.png|700]]
 
 Le componenti fondamentali di una corretta pianificazione sono: 
 - Scoping (comprendere il problema e lavoro da svolgere), 
@@ -1022,7 +1022,7 @@ Il problema di entrambe le tecniche è che richiedono come variabile indipendent
 ---
 
 <!-- Pagina PDF 70 -->
-![[p070-fig-072.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p070-fig-072.png|700]]
 
 Si stima guardando componenti più piccole: UICF gestione interfaccia utente, 2DGA e 3 analisi geometria a 2 e 3 dimensioni, DBM (database management), CGDF strumento di computer graphics, PCF gestione periferiche, DAM per l'analisi strutturale del progetto. 
 Devo anzitutto fornire il numero stimato di LOC per ogni componente, difficile tipicamente fare queste stime (tipicamente si fa ciò quando si sta aggiornando un progetto es. aggiungendo funzionalità di modo che non si sottostimi troppo). A questo punto chi fa uso della tecnica deve fornire come input anche LOC/pm (parametro di effort, produttività, quantità di lavoro per lo sviluppo quindi righe di codice per mese/uomo, quante righe di codice produce una persona in un mese lavorativo) e $/LOC (parametro di costo, costo per riga di codice).  Forniti questi tre input tramite la tecnica di scomposizione posso derivare le colonne di Cost e Effort (MM) (semplicemente moltiplico $/LOC per estimated LOC per il primo e per il secondo divido estimated LOC per LOC/pm).  NB: effort e costi calcolati riguardano solo la fase di progettazione (dal post specifica al rilascio).
@@ -1037,7 +1037,7 @@ di specifica, il manuale è continuamente aggiornato e molto dettagliato.  Il co
 2. si moltiplica l'UFC con il Technical Complexity Factor TFC. 
 ## FP = UFCxTFC
 
-![[p071-fig-073.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p071-fig-073.png|500]]
 
 UFC è calcolato rilevando 5 valori (detti elementi di conteggio) dal documento di specifica: Il cerchio grande rappresenta il software sul quale viene fatta la misura di punti funzione, tale software ha come confine Boundary (oltre il quale vi sono gli utenti e gli altri sistemi con cui il software interagisce).  Dei 5 elementi di conteggio citati prima due fanno riferimento ai dati (informazioni che il sistema software deve gestire o scambiare con altri) mentre gli altri tre fanno riferimento alle interazioni con il mondo esterno in termini di utenti del software stesso. 
 Nella Categoria Dati si devono contare: 
@@ -1063,7 +1063,7 @@ Una volta ottenuti questi numeri sfrutto una tabella fornita dal manuale di cont
 ---
 
 <!-- Pagina PDF 73 -->
-![[p073-fig-075.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p073-fig-075.png|500]]
 
 Per ognuno di essi decido la corrispettiva complessità funzionale, e in base ad essa decido per quanto moltiplicarli. Il manuale di conteggio potrà fornirmi dettagli riguardo ILF in questo caso, ad esempio potrebbe dirmi se una tabella ha numero di colonne inferiore a 10 allora Low, altrimenti etc… Abbiamo quindi finalmente calcolato UFC (unadjusted perché finora abbiamo considerato questi elementi solo dal punto di vista della loro complessità funzionale)  Difficilmente ci si sbaglia di troppo perché il manuale di conteggio è molto dettagliato.
 Per ottenere gli FP definitivi devo però considerare anche la difficoltà tecnica oltre a quella funzionale. La difficoltà tecnica è calcolata a partire da 14 fattori, detti Fattori di Degree of Influence, che possono avere influenza più o meno forte nel caso specifico del software dove sto effettuando il calcolo degli FP. 
@@ -1074,12 +1074,12 @@ Ad ognuno dei fattori è associato un valore intero compreso tra 0 e 5, dove  0 
 <!-- Pagina PDF 74 -->
 facilità d'installazione, se è necessario installarlo su più siti,  facilità di modifica (manutenibilità). Una volta associati i valori interi per ognuno dei 14 fattori, posso calcolare TCF come segue: 
 
-![[p074-fig-076.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p074-fig-076.png|350]]
 
 +-35% adjusted perché se metto a tutti gli Fj 5 allora ottengo 0.65 + 0.7 = 1.35 mentre se metto 0 ottengo 0.65. Si parla di aggiustare perché UCF verrà "aggiustato" di questa percentuale in avanti o indietro per via della moltiplicazione, non sarà mai stravolto ma sistemato in funzione della difficoltà tecnica.
 Tuttavia resta un problema, le tecniche di stima di tempi costi ed effort maggiormente utilizzate non si basano su FP ma su LOC. La stessa funzione realizzata con un certo linguaggio di programmazione avrà uno specifico numero di LOC diverso dagli altri. Per tradurre quindi FP in LOC devo scegliere un determinato linguaggio. Sono state quindi sviluppate delle tabelline dette di backfiring. 
 
-![[p074-fig-077.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p074-fig-077.png|350]]
 
 Per ogni linguaggio è fornito il source statement per punti funzione (a quante LOC in uno specifico linguaggio di programmazione corrisponde il singolo punto funzione). Chiaramente analisi statistica quindi: lower bound, numero medio e upper bound. Calcolare LOC corrispondenti tramite la tabella e fornirle in input alla mia tecnica di stima di effort e tempi che sarà accurato visto che ho preso in considerazione FP e corrispondente LOC via backfiring. Con queste tabelle grazie al calcolo del numero di LOC possiamo associare valori quantitativi per rappresentare la capacità di espressione, da qui il Nominal Level della tabella che aumenta all'aumentare del livello del linguaggio.
 
@@ -1103,7 +1103,7 @@ Prendiamo per vedere il funzionamento il caso di modello Intermidiate e Organic.
 ---
 
 <!-- Pagina PDF 76 -->
-![[p076-fig-078.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p076-fig-078.png|500]]
 
 Nel caso di FP erano fattori che avevano influenza sulla complessità tecnica del prodotto e che "aggiustavano" di +-35% UnadjustedFPCost. In questo caso invece i cost driver hanno un rating: valore nominale 1.00 (infatti poi li metto in produttoria e se sono tutti 1 allora effort = effort nominale), il rating scende o sale a seconda dei casi, se scende ho risparmi in termini di costo se invece sale avrò costo aggiuntivo.  I 15 fattori sono divisi in 4 gruppi (legati a caratteristiche di Prodotto, Piattaforma d'esecuzione, Personale e Progetto).  Required Software Reliability (l'applicazione ha requisiti di affidabilità stringenti o no? Se non ne ha posso scegliere Very Low -> risparmio sul costo perché il prodotto non ha quella esigenza, se invece alti posso aumentare molto l'effort!), dimensione database, complessità di prodotto (per cui è definita anche Extra High con influenza Ci 1.65), vincoli di tempo d'esecuzione (es. per software real time), memorizzazione, volatilità virtual machine, tempo di risposta turnaround.
 Poi per il calcolo dell'effort contano anche le caratteristiche del personale -> competenze analisti software (in questo caso se le competenze sono alte allora si risparmia sui costi! 0.71 Very High), conoscenza del dominio applicativo, competenza programmatori, conoscenza del sistema operativo dove si definisce il software, conoscenza linguaggio programmazione e lo stesso vale per gli attributi di progetto: se uso di pratiche moderne di programmazione allora l'effort diminuisce e lo stesso per l'uso di strumenti software.  L'ultimo cost driver, "Required development schedule" è l'unico che fornisce un valore maggiore di 1 sia a sx che a dx -> conviene stare al valore nominale.  Questo attributo indica il fatto che il mio progetto abbia o meno tempo stringente di consegna, sia che abbia tempi molto stringenti che non l'effort aumenta. Il motivo intuitivamente sta nel fatto che se devo fare qualcosa entro poco tempo mi ci metto tanto quindi grande effort, se invece ho tanto tempo mi ci metterò comunque parecchio per cercare la soluzione migliore.
@@ -1113,7 +1113,7 @@ Poi per il calcolo dell'effort contano anche le caratteristiche del personale ->
 <!-- Pagina PDF 77 -->
 Applicando il prodotto per il fattore C non si modificherà mai l'effort di un ordine di grandezza, ma similmente a quanto visto per l'aggiustamento di UFC si "aggiusterà" l'effort nominale di un tot. Per capire quale rating conviene scegliere ci sono parametri standard da seguire, 
 
-![[p077-fig-079.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p077-fig-079.png|700]]
 
 es: Vediamo com. se dalla reliability dipende la vita delle persone allora very high.
 Riguardo la dimensione si calcola rapporto dimensione database e numero d'istruzioni, se minore di 10 low etc… 
@@ -1134,7 +1134,7 @@ Gli strumenti che si utilizzano per operare sulla pianificazione temporale sono 
 - Diagrammi PERT (Program Evaluation and Review Technique) grazie al quale definiamo la rete di task come un grafo dove nodo = task e arco = legame di precedenza. Dal diagramma posso determinare il cammino critico (sequenza di task che determina la durata minima del progetto, il cammino più lungo) e stimare il tempo di completamento per ciascun task (es.
 posso stimare che il task di durata 7 sopra perché venga completato in totale ci metterò 3+8+7=18) e i limiti temporali di inizio e fine di ciascun task. 
 
-![[p078-fig-080.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p078-fig-080.png|500]]
 
 ---
 
@@ -1142,12 +1142,12 @@ posso stimare che il task di durata 7 sopra perché venga completato in totale c
 (In questo caso il cammino critico è segnato dal cammino in rosso, accumulare un ritardo su uno di questi task significa portarsi dietro un ritardo per l'intero progetto.) Ciò che PERT non fornisce direttamente sono informazioni precise a livello temporale (non so quando un progetto inizia e finisce a livello calendariale), in questo senso si sfrutta la Carta di GANTT che è una pianificazione calendariale delle attività da svolgere.  Poiché in GANTT invece non appaiono le relazioni di precedenza tra task, viene integrata con PERT per fornire informazioni complete.
 Tutti questi strumenti (COCOMO, tabelle di scomposizione, GANTT, PERT così come tutta la parte di risk management) fanno parte di un processo più ampio che abbiamo detto essere il Software Project Management, che è guidato da un documento fondamentale: 
 
-![[p079-fig-081.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p079-fig-081.png|700]]
 
 ---
 
 <!-- Pagina PDF 80 -->
-![[p080-fig-082.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p080-fig-082.png|700]]
 
 SPMP (software project management plan).
 
@@ -1179,13 +1179,13 @@ Il risultato ottenuto dopo la decomposizione modulare è detto architettura dei 
 ---
 
 <!-- Pagina PDF 82 -->
-![[p082-fig-083.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p082-fig-083.png|350]]
 
 Una buona divisione di un prodotto software in moduli è quella che permetti di ottenere:
 - Massima coesione (cohesion) interna ai moduli
 - Minimo grado di accoppiamento (coupling) esterna ai moduli La coesione rappresenta le interazioni interne al modulo e deve essere massimizzata, il coupling fa invece riferimento all'interazione tra moduli e deve essere minimizzata. Il problema di queste metriche è che se cerchiamo di massimizzare la coesione operiamo negativamente sul coupling e viceversa, si vuole quindi trovare il numero di moduli che offra il miglior tradeoff, e in questo senso facciamo riferimento esclusivamente al costo.
 
-![[p082-fig-084.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p082-fig-084.png|500]]
 
 Coesione: Per eseguire una funzione sono necessarie varie azioni, che possono essere concentrate in un singolo modulo o sparse in tanti. In altre parole, la coesione misura il grado di interazione interna al modulo tra le azioni di una funzione. La coesione si misura utilizzando una scala di valori, per un totale di 7:
 1. Coincidentale: nessuna relazione tra azioni nel modulo. 
@@ -1203,11 +1203,11 @@ In base al tipo di approccio, possiamo avere come obiettivo o Informational (per
 <!-- Pagina PDF 83 -->
 **Es di coesione logica:**
 
-![[p083-fig-085.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p083-fig-085.png|500]]
 
 il modulo è diviso in tanti pezzi di codice e so che però se mi servisse ne chiamerò soltanto uno. Problemi di manutenibilità perché le porzioni di codice potrebbero essere interallacciate con altro fuori, per questo ancora solo livello 2 di coesione. Es coesione temporale: open old_master_file, open new_master_file, open transactionfile etc… azioni correlate a livello temporale. Ancora solo livello 3 di coesione perché i file aperti in questo modulo potrebbero essere aggiornati da altri moduli -> sempre problemi manutenibilità. Es Coesione procedurale: read part_number from database, use part_number to update… azioni avvengono in sequenza. Es Communicational aggiunge il fatto che si lavora su una singola variabile/struttura dati. In alcune scale di valori vista la loro somiglianza temporal, procedural e communicational sono combinate in un singolo livello. Es coesione informational: es. classe dove si ha una struttura dati e una serie di funzioni che lavorano su di essa, ognuna utilizzabile in modo separato.
 
-![[p083-fig-086.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p083-fig-086.png|500]]
 
 ## (FINE ESEMPIO)
 La misurazione della coesione ovviamente avviene a livello architetturale, ossia per ciascun modulo individualmente.
@@ -1215,7 +1215,7 @@ La misurazione della coesione ovviamente avviene a livello architetturale, ossia
 ---
 
 <!-- Pagina PDF 84 -->
-![[p084-fig-087.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p084-fig-087.png|700]]
 
 A partire dalla descrizione di ogni modulo dobbiamo capire la relativa coesione: vediamo moduli con coesione functional che svolgono una funzione ben precisa (es. memorizzare record temperature, crea record temperature etc..), si hanno poi moduli a coesione coincidentale che svolgono azioni scorrelate (es. inizializza le somme e apri i file, chiudi file e stampa le temperature medie. Si poteva fare di meglio, ad es. creando un modulo dedicato alla gestione dei file, uno a inizializzare le somme e l'altro a stampare le temperature medie), poi moduli a coesione logica che fa varie cose ma ogni volta che lo utilizzo se ne fa una sola in base a ciò che interessa al modulo chiamante.
 Dobbiamo ora occuparci di misurare il coupling. Il coupling misura il grado di accoppiamento tra moduli, anch'esso si misura usando una
@@ -1243,7 +1243,7 @@ Un esempio per il control coupling è se un modulo p chiama il modulo q chiedend
 ## (FINE ESEMPIO)
 Example Structure Chart (oggi chiamato architettura software)
 
-![[p085-fig-088.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p085-fig-088.png|500]]
 
 L'interazione tra moduli è evidenziata da degli archi numerati. I moduli si scambiano dei messaggi, e questi messaggi veicolano dei parametri che possono essere di input o di output.
 (ES: saltare) Es. p e q interagiscono scambiandosi il messaggio 1 che ha come parametro di input tipo di aircraft e output status flag.
@@ -1267,7 +1267,7 @@ Riusabilità:  Fa riferimento all'utilizzo di componenti sviluppati per un prodo
 <!-- Pagina PDF 87 -->
 - architettura software (comprendenti (a), (b), (c)).
 
-![[p087-fig-089.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p087-fig-089.png|500]]
 
 ---
 
@@ -1331,13 +1331,13 @@ Il component framework è l'elemento di cui si fa uso per realizzare applicazion
 <!-- Pagina PDF 91 -->
 framework e se ve ne sono abbastanza allora implemento le componenti mancanti e il framework potrà permettermi di costruire l'applicazione per soddisfare i miei requisiti specifici. I programmatori possono quindi aggiungere componenti mancanti, aggiornando il framework per usi futuri. Tuttavia, non ha avuto grande successo commerciale/industriale nella realizzazione di framework sufficienti.
 
-![[p091-fig-090.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p091-fig-090.png|500]]
 
 ## Componenti UML
 In UML 1 il concetto di componente era legato a un'entità fisica: un'implementazione di cui posso fare l'allocazione in una certa piattaforma di esecuzione (es. eseguibile, documento word etc..). Tuttavia ciò comportava un problema: non vi era rappresentazione di come si arrivasse a queste componenti a partire ad esempio dalle classi Con UML 2 si supera il problema introducendo una modifica sostanziale al concetto di componente: esso rappresenta un elemento che esiste già a livello di progetto.
 Il componente viene quindi rappresentato come una sorta di classe con lo stereotipo <<component>> che in modalità blackbox realizza una certa interfaccia, questa realizzazione blackbox è visualizzata con la freccia a triangolo vuoto (simbolo ereditarietà) ma tratteggiata.
 
-![[p091-fig-091.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p091-fig-091.png|500]]
 
 In UML 2 inoltre, per superare il gap semantico tra gli elementi a livello di progettazione e livello di esecuzione, il concetto di classe è stato rimpiazzato dal concetto di classe strutturata (per far capire come le classi che progetto sono tradotte in oggetto eseguibile).
 ## 6- Architetture Service Oriented
@@ -1363,7 +1363,7 @@ Service Registration Pattern:  Rappresenta semplicemente una richiesta che il se
 I diagrammi di interazione UML per descrivere le interazioni tra oggetti sono: sequence diagram e collaboration diagram (il secondo usato in fase di progettazione). Manca una componente fondamentale nel collaboration diagram che invece è presente nel sequence diagram: l'ordine temporale, quindi alla specifica di ogni messaggio scambiato è associato un sequence number (R1 e R2 in figura) per ricostruire anche l'ordine temporale e passare al sequence. Inoltre in UML 2 il collaboration diagram è stato rinominato comunication diagram.
 ## Service Registration Pattern
 
-![[p093-fig-092.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p093-fig-092.png|350]]
 
 Il servizio viene registrato presso il broker e una volta ricevuto l'ACK dal broker allora il servizio è stato aggiunto all' "archivio" del broker. Una volta registrato il servizio i potenziali consumatori possono interagire con il broker e capire dalla descrizione se il servizio è di loro interesse o meno.
 Broker Forwarding Pattern (pagine bianche del telefono):  Il broker si interpone tra provider e consumer anche dopo la fase iniziale per l'utilizzo del servizio.  Si assume che il consumer conosca il nome del service provider ma non sappia l'interfaccia di rete per usare il servizio, quindi lo chiede al provider. In particolare il client manda un messaggio identificando il servizio richiesto, il broker riceve la richiesta e recupera (in base alle informazioni presenti nel suo archivio dove sono registrati i servizi) l'interfaccia di rete presso cui il servizio è reso disponibile, inoltra quindi la
@@ -1373,11 +1373,11 @@ Broker Forwarding Pattern (pagine bianche del telefono):  Il broker si interpone
 <!-- Pagina PDF 94 -->
 richiesta al servizio, prende la risposta e la inoltra infine al consumer.
 
-![[p094-fig-093.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p094-fig-093.png|500]]
 
 Broker Handle Pattern (pagine bianche del telefono):  Il broker è inizialmente coinvolto per ottenere le informazioni della location del service provider, ma invece di inoltrare il tutto manda le informazioni al consumer affinché la successiva comunicazione sia diretta con il provider
 
-![[p094-fig-094.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p094-fig-094.png|500]]
 
 Il vantaggio nell'utilizzo del primo è che è garantita la location trasparency: se cambia interfaccia di rete lo viene a sapere il broker che aggiornando il registro di servizi nasconderà automaticamente il tutto al consumer, non funziona con il secondo metodo. Il vantaggio del secondo però è che si scambiano meno messaggi, maggiore efficienza. Nelle pagine bianche conosco il servizio ma non la posizione di esso, nelle pagine gialle conosco il servizio che mi serve ma non lo specifico servizio.
 Service Discovery Pattern (pagine gialle):  Il consumer richiede al broker una tipologia di servizio (queryServices), il broker restituisce una lista di servizi che soddisfano la richiesta (sempre tramite l'archivio interno dove i servizi sono registrati), il service requester sceglie il servizio da utilizzare. Da questo punto in poi si
@@ -1387,7 +1387,7 @@ Service Discovery Pattern (pagine gialle):  Il consumer richiede al broker una t
 <!-- Pagina PDF 95 -->
 può interagire nelle due modalità viste prima.
 
-![[p095-fig-095.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p095-fig-095.png|500]]
 
 Ma in base a cosa potrei scegliere uno specifico servizio da una lista generica? In base a vari criteri al di là della funzionalità, come QoS (quality of service).
 Anche se le SOA sono indipendenti dalle piattaforme, usano i Web Services. Un Web Service è un servizio che fa uso di protocolli standard internet e per lo scambio di dati (richieste, risposte etc..) usano protocolli XML (Extensible Markup Language).
@@ -1405,7 +1405,7 @@ UDDI (Universal Description Discovery and Integration): Per realizzare il concet
 Quindi in generale quando parliamo di tecnologia implementativa a supporto di architetture service oriented si fa riferimento a come realizzare il broker, come descrivere il servizio e come interagire con il servizio, nel caso web services UDDI, WSDL e SOAP.
 **Tutto il processo riassunto in questa slide:**
 
-![[p096-fig-096.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p096-fig-096.png|500]]
 
 (ES: saltare) L'uso del Web Services ha come idea di base di rendere disponibili i servizi tramite interfaccia di rete raggiungibile tramite una piattaforma web (non solo usando HTTP).
 
@@ -1424,7 +1424,7 @@ Qui un esempio di Web Service in cui interviene anche il broker su un altro nodo
 ## (FINE ESEMPIO)
 WSDL mette a disposizione solo gli elementi di base per utilizzare il servizio (quindi niente roba al di là dell'interfaccia tipo QoS), ossia l'insieme di operazioni che possono essere invocate (del tutto simile all'interfaccia pubblica di una classe che mi dice i metodi che posso invocare), la network location dove presso cui raggiungere il servizio ed inviare la relativa richiesta SOAP.
 
-![[p097-fig-099.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p097-fig-099.png|500]]
 
 Un documento WSDL come si vede è diviso in due parti separate (livello di astrazione): A sinistra WSDL mette a disposizione le operazioni in termini di messaggi input e output (esiste in realtà anche il messaggio di fault oltre a input e output se errore). Questa parte descritta in XML. A destra invece si mostra come le operazioni sono concretamente messe a disposizione sull'interfaccia di rete: es. la richiesta è inviata tramite HTTP e raggiunge uno specifico indirizzo di rete URI e lo strumento utilizzato per mettere a disposizione le informazioni a livello di interfaccia di rete cioè il portType. Un portType è null'altro che un insieme di operazioni messe a disposizione su uno o più URI (endpoint). Si utilizza maggiormente HTTP (sincrono) per condividere questi messaggi ma si potrebbero utilizzare anche altri protocolli come TCP o SMTP (asincrona).
 Nel tempo sono stati introdotti anche ulteriori contributi che non sono alternativi alla tecnologia Web Service ma che si affiancano ad essa, uno di questi è REST (Representational State Transfer). Questo più che essere una tecnologia implementativa (come WebService) è uno stile architetturale (come gestire l'architettura di un sistema software distribuito usando sempre protocolli standard internet, in particolare HTTP).
@@ -1437,9 +1437,9 @@ Caratteristiche: client/server quindi un server mette a disposizione una risorsa
 Per interagire con le risorse si utilizzano le RESTful API che usano le 4 operazioni CRUD HTTP in base al "contesto": se si deve prendere una Collection di risorse (es. /users nell'URL) o un singolo Item (es. /users/{id}).  POST può essere usato solo nelle collezioni per aggiungervi un item mentre  GET sia sulle collezioni che sui singoli item (nel primo caso per ottenere la lista di elementi e nel secondo il singolo elemento) PUT e DELETE utilizzabili solo negli item.
 Nell'approccio convenzionale si fa uso di un singolo URL per mettere a disposizione il servizio che offra più tipologie di accesso. L'approccio basato su REST invece fa uso di più URL. (conforme anche con Axiom 0 e non ha collo di bottiglia)
 
-![[p098-fig-100.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p098-fig-100.png|350]]
 
-![[p098-fig-101.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p098-fig-101.png|500]]
 
 ## Software Architectural Transaction Patterns
 Una Transazione rappresenta una richiesta effettuata da un client che contenga due o più operazioni, che però svolgono una singola funzione logica e devono essere completate interamente o per nulla.
@@ -1457,7 +1457,7 @@ Per garantire le proprietà di questa transazione si utilizza il protocollo (anc
 (ES: saltare) Vi sono due servizi nella transazione di trasferimento bancario ognuno su un'interfaccia di rete differente: firstBankService per prelevare i soldi dal saving account e secondBankService per permettere il deposito del denaro sul secondo conto. Per coordinare correttamente le attività svolte dai due servizi dobbiamo coinvolgere anche un altro oggetto che svolga il ruolo di coordinatore, il CommitCoordinator. Vediamo come funzionano le due fasi.
 **Prima fase:**
 
-![[p099-fig-102.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p099-fig-102.png|500]]
 
 ---
 
@@ -1465,7 +1465,7 @@ Per garantire le proprietà di questa transazione si utilizza il protocollo (anc
 La transazione è gestita in modo centralizzato per cui sarà il commitcoordinator a gestire l'ordine della transazione. Il commitcoordinator invia un primo messaggio 1a e 1b ai due servizi coinvolti in cui gli comunica di prepararsi al commit. A fronte di questa richiesta i due servizi effettuano 1a.1 e 1b.1 un lock per garantire l'Isolation e quindi la Consistency (non si vuole che altre transazioni operino mentre i due servizi effettuano l'operazione sui due conti). A questo punto il firstBankService farà l'operazione di debito e l'altro di accredito. Se le operazioni vanno a buon fine i servizi inviano al cooridnator un readyToCommit, in assenza di questo messaggio la transazione è abortita.
 **Se invece a buon fine si passa alla seconda fase:**
 
-![[p100-fig-103.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p100-fig-103.png|500]]
 
 Viene inviato commit dal coordinatore, confermata l'operazione di addebito e di accredito (2a.1, 2b.1), si libera il lock e viene completata la transazione.
 ## (FINE ESEMPIO)
@@ -1476,7 +1476,7 @@ La compound transaction è una transazione composita, ossia costituita da un ins
 ---
 
 <!-- Pagina PDF 101 -->
-![[p101-fig-104.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p101-fig-104.png|500]]
 
 Qui il caso in cui tutte e tre le sottotransazioni hanno esito positivo. Nel caso in cui una singola sottotransazione non abbia esito positivo, si salvano le prenotazioni che hanno avuto successo.
 ## (FINE ESEMPIO)
@@ -1489,7 +1489,7 @@ In queste transazioni si ha il human in the loop per cui si deve tener conto di 
 <!-- Pagina PDF 102 -->
 transazione quindi è necessario un recheck
 
-![[p102-fig-105.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p102-fig-105.png|500]]
 
 Nell'esempio in figura il servizio che funge da intermediario tra utente e compagnia aerea (TravelAgent) chiede a 3 compagnie aeree (1a, 1b, 1c) di mostrare i posti disponibili in un certo volo. Ottenuta la risposta l'utente decide di prenotare il posto in unifiedAirlines, (2. reserve), il servizio fa un recheck che ha esito negativo e quindi invia 3. reject all'utente che dovrà rivolgersi quindi ad un'altra compagnia aerea (in questo caso britannic) prenotando e in questo caso il recheck ha esito positivo e quindi la transazione ha successo.
 ## (FINE ESEMPIO)
@@ -1509,7 +1509,7 @@ La principale differenza tra richiesta e proposta è che la seconda è negoziabi
 <!-- Pagina PDF 103 -->
 (ES: saltare) riguardo la transazione per prenotazione posti vista prima si immagina un servizio che permetta, sapendo che devo andare a new york tot data, di trovare le offerte disponibili (senza che io utente vada a vedere il sito di ogni compagnia aerea).
 
-![[p103-fig-106.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p103-fig-106.png|700]]
 
 In questo esempio 1. Il clientagent invia una proposta (negoziabile!) per viaggio a londra il 14 ottobre e ritorno il 21 che costi meno di 700 euro. A fronte di questa richiesta il serviceagent si confronta con diversi servizi offerti da compagnie aeree inviando in modo concorrente le richieste (2a, 2b, 2c). Il messaggio che torna al clientagent è una offer con le soluzioni migliori trovate dal serviceagent (unifiedairlines a 750 euro o britannic a 775). Il client invia quindi un messaggio di richiesta (non negoziabile!) (4) per prenotare UA, ma nel frattempo biglietto già acquistato da qualcun altro quindi reject dalla compagnia al serviceagent e reject dal serviceagent al clientagent (7). Allora il clientagent richiede quello a 775 di BA, in questo caso la reserve da parte del serviceagent ha successo -> il serviceagent risponde con accettazione finale alla richiesta non negoziabile del clientagent.
 ## (FINE ESEMPIO)
@@ -1552,7 +1552,7 @@ Si centra il tutto sull'oggetto CourseOffering che diventa classe God in quanto 
 <!-- Pagina PDF 106 -->
 In una stratificazione corretta delle classi devono esserci oggetti boundary che si devono occupare solo di catturare le richieste dell'utente e inoltrarle agli oggetti di controllo, che conoscono la logica applicativa e interagiranno con gli oggetti entity (oggetti che mantengono le informazioni) al fine di soddisfare la richiesta. Ma in questi casi sto dando responsabilità di controllo a un oggetto entity -> non rispettano la stratificazione BCE.
 
-![[p106-fig-110.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p106-fig-110.png|500]]
 
 Si introduce quindi un oggetto di controllo che si occupi della logica di esecuzione. Corso fornisce gli esami propedeutici, student la carriera universitaria e courseoffering interpellato solo eventualmente per iscrivere lo studente, si garantisce che le classi entity si limitino ad avere le informazioni senza controllare.
 ## (FINE ESEMPIO)
@@ -1574,7 +1574,7 @@ Come detto la Legge di Demeter favorisce quindi manutenibilità ma anche compren
 Mentre in UML 1 la classe è intesa come semplice aggregato di dati e operazioni, in UML 2 si mantiene lo stesso simbolo (forma rettangolare) ma diventa "classe strutturata" in quanto contiene elementi detti roles o parti che formano la sua struttura e ne descrivono il comportamento.  Questo meccanismo è gerarchico in quanto un ruolo/parte di una classe strutturata può essere a sua volta classe strutturata, ciò permette di gestire la complessità in modo stratificato lavorando a diversi livelli di astrazione. Ogni ruolo rappresenta un elemento partecipante nella realizzazione della struttura interna della classe, e questi ruoli sono interconnessi attraverso il concetto di connettore.
 Esiste una differenza tra ruoli e parti: i ruoli seguono una semantica "per riferimento" mentre le parti "per valore".  In questo senso si utilizza la classe strutturata per definire i building blocks di un'applicazione, nascondendo i dettagli implementativi. In particolare vi è un incapsulamento molto stretto del comportamento, per cui ogni interazione tra elementi di classi diverse deve avvenire attraverso un meccanismo basato su messaggi.
 
-![[p107-fig-111.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p107-fig-111.png|500]]
 
 Si vede quindi concettualmente la classe strutturata come una scatola nera che mette a disposizione servizi (operazioni elencate nell'interfaccia pubblica della classe) nascondendo l'implementazione delle operazioni agli utilizzatori della classe. Per utilizzare i metodi messi a disposizione dalla classe si utilizzano delle Porte, attraverso le quali inviare messaggi e riceverne eventualmente indietro. Inoltre all'interno della classe strutturata possono esservi altre classi strutturate, altre classi semplici etc…
 Internamente poi deve essere definito come viene realizzata la classe strutturata sia in termini strutturali che comportamentali. Per la parte comportamentale si utilizzano spesso macchine a stati finiti (come la classe evolve durante il suo funzionamento transitando da uno stato iniziale a uno finale).
@@ -1586,7 +1586,7 @@ In questo senso quindi ogni classe può essere vista come un elemento di progett
 anche a livello di testing (si testa a livello di unità Unit-Testing fino alla verifica del funzionamento dell'applicazione quando queste unità sono integrate, integration testing).
 ## Class Diagram vs Composite Structure Diagram
 
-![[p108-fig-112.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p108-fig-112.png|700]]
 
 Con il class diagram e composition: si rappresenta come item sia costituito da due oggetti interni, uno che descrive l'elemento e l'altro che fornisce informazioni sul prezzo -> se cancello l'oggetto item cancello anche gli oggetti description e pricing in esso contenuti. Riguardo la classe strutturata invece metto nella classe item due parti: una che è istanza di description e una che è istanza di pricing.
 Quindi la classe strutturata rappresenta un meccanismo migliore per rappresentare informazioni tipiche di sistemi software di grandi dimensioni, dove gli elementi vengono rappresentati in modo gerarchico.
@@ -1604,20 +1604,20 @@ Per quel che riguarda il deployment diagram ogni nodo di esecuzione è rappresen
 <!-- Pagina PDF 109 -->
 Le connessioni sono rappresentate mediante archi che collegano i nodi.
 
-![[p109-fig-113.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p109-fig-113.png|350]]
 
 Come detto quindi un nodo rappresenta una risorsa computazionale che ha tipicamente
 **capacità di elaborazione e memoria:**
 Ne esistono due tipologie principali: Nodi Device se rappresentano proprio la risorsa fisica con capacità di processing o Execution environment se rappresenta particolari piattaforme di esecuzione allocate nel nodo.
 
-![[p109-fig-114.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p109-fig-114.png|350]]
 
 Riguardo i Connector invece rappresenta una connessione tra due nodi del diagram. Oltre alle connessioni si possono utilizzare anche le molteplicità per descrivere quanti nodi partecipano a una connessione nel deployment diagram.
 
 ---
 
 <!-- Pagina PDF 110 -->
-![[p110-fig-115.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p110-fig-115.png|500]]
 
 ## Process-to-Node Allocation
 si occupa di come assegnare i vari processi ai dispositivi hardware in esecuzione. Per farlo
@@ -1630,7 +1630,7 @@ si occupa di come assegnare i vari processi ai dispositivi hardware in esecuzion
 - In base all'availability dell'hardware e delle connessioni (se connessioni instabili ne devo tener conto per l'allocazione dei processi)
 - In base ai Rerouting Requirements (se un nodo fallisce o una connessione si interrompe, il sistema deve poter riallocare i processi)
 
-![[p110-fig-116.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p110-fig-116.png|500]]
 
 Si inseriscono quindi i processi nei vari nodi di esecuzione (es. il processo che permette la registrazione e l'accesso al catalogo corsi e al sistema di billing garantendo interoperabilità)
 
@@ -1639,19 +1639,19 @@ Si inseriscono quindi i processi nei vari nodi di esecuzione (es. il processo ch
 <!-- Pagina PDF 111 -->
 L'attività di Deployment rappresenta ciò che mi permette di assegnare/mappare gli artefatti sui nodi fisici durante l'esecuzione. L'artefatto software rappresenta quindi l'entità su cui può essere fatto il deployment verso il nodo fisico, e questi artefatti modellano le entità fisiche che in UML 1 erano rappresentate attraverso il costrutto componente (quindi componente rimpiazzata in UML 2 da artifact). Tra gli artefatti si hanno quindi file, eseguibili, tabelle database, pagine web etc…
 
-![[p111-fig-117.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p111-fig-117.png|500]]
 
 Qui sopra tre esempi di come gli artefatti possono essere disposti (deployment) sui nodi, tre modi.
 La Manifestazione è una relazione tra un elemento di un modello e il relativo artifact che implementa il modello. Sono tipicamente implementati come set di artefatti e anche in questo caso sono file sorgente, eseguibili, documentazione, … Questi legami di deployment possono anche essere arricchiti di informazioni per specificarne meglio il significato attraverso il Deployment Specification.
 
-![[p111-fig-118.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p111-fig-118.png|500]]
 
 (ES: saltare fino a pag) L'artefatto MainStudentForm.src è codice sorgente manifestazione della classe (elemento di modello) MainStudenForm, ciò viene ancora una volta descritto tramite associazione generica con relativo stereotipo. Una volta compilato il codice sorgente diventa eseguibile (.exe), che a sua volta è manifestazione di MainStudentForm. Infine il deployment avviene per quel che riguarda proprio questo eseguibile.
 
 ---
 
 <!-- Pagina PDF 112 -->
-![[p112-fig-119.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p112-fig-119.png|500]]
 
 L'Oggetto <<DeploymentSpec>> permette di specificare informazioni del tipo come eseguire l'artefatto, dove eseguirlo e la priorità. L'utilizzo della deployment specification e di questi parametri è utile per arricchire il modello di informazioni utili e per sistemi automatici che permettono automaticamente di effettuare il deployment su nodi di elaborazione.
 SOA Casestudy (ES: saltare fino a pag 120) Parliamo di un software da utilizzare per fare online shopping, partendo da un insieme di requisiti astratti, analisi dei requisiti e poi progettazione effettiva. Il cliente fornisce dettagli personali, memorizzati nel customer account. Se il cliente effettua un ordine e la carta di credito è valida, un ordine di consegna è inviato al fornitore che controlla che il prodotto sia presente nell'inventario, in caso positivo conferma l'ordine e dice al cliente la data consegna prevista. Quando l'ordine è in consegna il cliente è notificato e la carta di credito addebitata.
@@ -1710,7 +1710,7 @@ Viene rappresentato il communication diagram, definito "concurrent" in quanto i 
 Progettare una componente significa definirne interfaccia e implementazione. Questo quindi
 **lo facciamo per ognuno dei servizi che dobbiamo implementare:**
 
-![[p117-fig-126.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p117-fig-126.png|500]]
 
 ## UML permette di rappresentare l'interfaccia fornita da ciascun componente usando la
 notazione PALLINO, collegato alla classe attraverso una porta (coerentemente alla rappresentazione concettuale di servizio visto come black box alla quale accedo attraverso la porta) (IcatalogService interfaccia servizio catalogo, Pcatalogservice porta servizio catalogo).
@@ -1720,7 +1720,7 @@ notazione PALLINO, collegato alla classe attraverso una porta (coerentemente all
 <!-- Pagina PDF 118 -->
 A questo punto dobbiamo definire le interfacce del servizio. 
 
-![[p118-fig-127.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p118-fig-127.png|500]]
 
 L'interfaccia di Catalog Service è costituita da due operazioni: richiedicatalogo e richiediselezione (richiedere la selezione di un certo insieme di elementi). Ogni operazione è fornita con la lista di parametri formali, e per ognuno di essi si esplicita se sia di input o output. Dal punto di vista progettuale CatalogService permette di accedere alle classi CatalogInfo e ItemInfo, si rappresentano quindi anche gli attributi delle classi e la relativa associazione di aggregazione. Anche la classe enumeration CatalogType per indicare i tipi di catalogo messi a disposizione dal fornitore.
 Si fa la stessa operazione (non solo interfaccia, ma anche classe di origine e classi con cui interagirà attraverso le operazioni, ossia classi contenute!) anche per customeraccountservice, il deliveryorderservice e l'inventoryservice. Le altre due classi per la posta elettronica e per i pagamenti non li progettiamo noi, quindi ci limitiamo a descriverne l'interfaccia.
@@ -1728,7 +1728,7 @@ Si fa la stessa operazione (non solo interfaccia, ma anche classe di origine e c
 ---
 
 <!-- Pagina PDF 119 -->
-![[p119-fig-128.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p119-fig-128.png|700]]
 
 La nostra architettura è quindi costituita da una serie di componenti, ognuna con la propria interfaccia. Le componenti sono collegate dalle porte e si effettuano richieste definite secondo un prefisso R (required, ossia il componente richiede una certa funzionalità) o un prefisso P (provided). Chiaro come R per boundary e P per controllo come risposta in quanto per l'interfaccia si richiede il servizio al coordinator.  In basso notazione Lollipop, si utilizza per rendere ancora più esplicito il fornitore e il <richiedente. Se sopra la palla del lollipop richiedente, se stecco del lollipop fornitore (vedi tra Pinventoryservice e RinventoryService, c'è una roba che sembra un lollipop).
 Ci si aspetta quindi che tutte le componenti User Interaction non vi sia alcuna funzionalità offerta (ha solo bisogno della componente coordinator). Le "forchette" indicano che questi servizi necessitano solo funzionalità e non ne offrono. Sul lato coordinator invece entrambe le cose: sopra si forniscono funzionalità alle user interaction, sotto si richiedono funzionalità alle componenti di servizio. Lato service invece solo servizi messi a disposizione (pallino). A questo punto bisognerà andare nel dettaglio per ogni componente di modo da descrivere come essa deve essere realizzata limitatamente a solo quelli che dobbiamo realizzare. Questo è importante perché in ottica di riusabilità dell'applicazione, infatti una volta implementati i nostri servizi come il catalog service o il delivery order service possiamo metterli a disposizione su rete e diventare noi stessi fornitori di servizi.
@@ -2174,7 +2174,7 @@ La qualità del software (standard IEEE) rappresenta per definizione il grado pe
 - Organizzazione: ci si focalizza sui benefici aziendali -> costi e profitti (se il prodotto è facile da mettere sul mercato, quanto il prodotto permetta di incrementare i profitti/ridurre i costi etc…).
 Il concetto di qualità è un insieme di caratteristiche facilmente inquadrabili in modo soggettivo, ma si devono valutare in modo oggettivo per poter essere misurate e dare valutazione quantitativa. Si usa il Quality Model introdotto da McCall: il Quality Triangle.
 
-![[p146-fig-167.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p146-fig-167.png|350]]
 
 Sulle ascisse la percentuale di attività che vengono svolte sul prodotto a partire dal momento in cui questo è immesso sul mercato.  Sulle ordinate il tempo, che parte dal momento di delivery (rilascio, momento in cui il software passa dallo stadio di sviluppo a quello di uso/manutenzione).  Dal momento del rilascio il software sarà usato da diversi attori in modi diversi: vi saranno gli utenti che svolgeranno le così dette Operation Activities. Mentre gli utenti usano il software gli sviluppatori avvieranno delle attività di monitoraggio e manutenzione pressoché continue per molti motivi.  Man mano che il software viene utilizzato iniziano anche le Revision Activities (manutenzione correttiva) e Transition Activities (manutenzione perfettiva e adattiva).  Ad un certo punto, quando gli utenti terminano di usare il software (Operation Activities), il software entra nello stadio di dismissione. Come sappiamo questo stadio non è istantaneo e non rappresenta necessariamente la cancellazione del software, ma magari una sua rielaborazione (quindi ulteriori attività di
 
@@ -2215,7 +2215,7 @@ codice e documento requisiti etc..),
 - Auto-documentation: quanto il software è in grado di aiutare l'utente attraverso un help in linea.
 Quindi McCall definisce alcuni di questi attributi per ogni indice e misura tutti questi attributi secondo specifiche metriche. Vediamo un esempio per 4 indici.
 
-![[p148-fig-168.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p148-fig-168.png|500]]
 
 Per misurare gli attributi a loro volta sono necessari tipicamente dei sottoattributi per arrivare ad un'effettiva misura: es. per la modularità a9 per misurarla si utilizzano tipicamente i sottoattributi come abbiamo visto nelle lezioni precedenti di coesione e coupling, morfologia e information flow (poi esistono anche altri modi, ogni modello usa il proprio e può far quindi riferimento a diverse metriche). 
 Per questi calcoli, che quindi possono avvenire usando diverse metriche, si introduce il Checklist Method, che mette a disposizione a chi deve valutare la qualità del software delle checklist che tipicamente pongono delle domande alle quali semplicemente l'utilizzatore deve porre una risposta.  Sarà a carico del metodo checklist, una volta fornite le risposte, calcolare il valore complessivo dell'attributo. Una volta calcolati i valori dei vari attributi questi vengono raggruppati per ottenere il livello del corrispondente indice (tenendo ovviamente conto dell'impatto, se positivo o negativo).
@@ -2269,7 +2269,7 @@ Vediamo ora come si calcola invece l'attributo Modularità.
 Sappiamo che un modo per misurarla riguarda l'utilizzo dei concetti e le misurazioni di Cohesion e Coupling, ma anche di Morfologia e Information Flow.  In questo caso si fa riferimento solo alla coesione e al coupling.  Alle risposte non sono associati valori numerici, ma delle etichette A, B C, o D. Viene richiesto di fornire la percentuale di moduli in base al tipo (coesione coincidentale, logica o temporale, procedurale o comunicativa, informational o functional). Invece di separare i 7 li si raggruppa quindi in gruppi per un totale di 4 risposte. Lo stesso vale per il coupling, dove viene richiesto di definire la distribuzione percentuale di coppie di moduli in base al tipo di coupling (content, common, control, stamp o data). Successivamente si passa sugli attributi generali di modularità e si torna quindi alle classiche checklist. Anche in questo caso, essendo modularità un attributo con impatto positivo sull'indice, le risposte migliori sono quelle tali per cui il valore è più alto.
 Vediamo ora come calcolare il valore complessivo di modularità. 
 
-![[p152-fig-177.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p152-fig-177.png|500]]
 
 Le prime due domande sono calcolate a parte come si vede sopra: in particolare si pesa zero la coesione e il coupling peggiore (coincidentale e content) mentre si pesa a 3 quelle migliori. Dividendo tutto per 50 si normalizza ottenendo quindi ancora un valore tra 0 e 1.
 Torniamo a vedere come si effettua la valutazione di questi attributi.  La documentazione come anticipato deve essere analizzata in dettaglio dal Checklist Evaluation Team per rispondere a ciascuna domanda, (tramite tecniche come Walkthrough o Ispezioni).  Ogni membro del team deve rispondere alle domande in modo indipendente senza confrontarsi subito con gli altri.  Durante le riunioni di Walkthrough o i meeting di ispezione i membri del team finalmente si confrontano per verificare di aver dato le stesse risposte alle domande e il perché. Se sono diverse allora bisogna discuterne per arrivare a un'unica risposta comune, per poter finalmente calcolare il valore dell'attributo. 
@@ -2352,7 +2352,7 @@ Questo per quanto riguardava il testing dal punto di vista di componenti. Sappia
 Per il testing d'integrazione non ci interessa più entrare in dettaglio nei singoli moduli. Testing di tipo black box con test cases derivati direttamente dal Documento di Specifica. La difficoltà principale in questo tipo di testing è identificare gli errori, in quanto possono esservi interazioni complesse tra le componenti del sistema e quando si scopre un output anomalo può esser complesso capire il perché. Per tale ragione si suggerisce di adottare un approccio incrementale nell'Integration Testing. Per iniziare la fase di Integration Testing non è necessario che tutte le componenti siano disponibili, ma solo la parte d'interesse. Per questo è possibile procedere con il testing
 **incrementale:**
 
-![[p157-fig-178.png|350]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p157-fig-178.png|350]]
 
 ---
 

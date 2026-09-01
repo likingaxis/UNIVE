@@ -33,7 +33,7 @@ Nel modello BCE le responsabilità sono separate tra:
 
 Se una classe Entity inizia anche a decidere il flusso dell’applicazione, si mescolano responsabilità appartenenti a strati differenti. Il materiale mostra quindi come la logica di controllo vada isolata in apposite classi Control.
 
-![[assets/p106-fig-110.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p106-fig-110.png|600]]
 
 Il vantaggio non è soltanto concettuale. Se cambia la politica con cui viene gestita una determinata operazione, la modifica rimane concentrata nella classe di controllo invece di essere dispersa tra classi che hanno anche altre responsabilità.
 
@@ -61,7 +61,7 @@ In UML 1 una classe veniva rappresentata soprattutto come un insieme di dati e o
 
 Una **Structured Class** è una classe che contiene elementi interni, chiamati **roles** o **parts**, che partecipano alla realizzazione del suo comportamento.
 
-![[assets/p107-fig-111.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p107-fig-111.png|650]]
 
 L’idea è quella di considerare la classe come una **black box**:
 
@@ -90,7 +90,7 @@ A questo punto è importante distinguere due diagrammi che possono sembrare simi
 
 Il **Class Diagram** descrive principalmente le classi e le relazioni tra esse. Il **Composite Structure Diagram**, invece, entra **all’interno di una classe strutturata** e mostra le parti concrete che collaborano per realizzarne il comportamento.
 
-![[assets/p108-fig-112.png|750]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p108-fig-112.png|750]]
 
 La differenza non è quindi semplicemente grafica:
 
@@ -125,9 +125,9 @@ Un nodo rappresenta una risorsa computazionale utilizzata durante l’esecuzione
 - **Device** → risorsa fisica con capacità di elaborazione;
 - **Execution Environment** → ambiente o piattaforma di esecuzione ospitata su una risorsa computazionale.
 
-![[assets/p109-fig-113.png|400]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p109-fig-113.png|400]]
 
-![[assets/p109-fig-114.png|450]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p109-fig-114.png|450]]
 
 I nodi sono collegati attraverso **Connector**, che rappresentano i meccanismi di comunicazione tra le risorse. Le connessioni possono essere ulteriormente caratterizzate, per esempio attraverso molteplicità.
 
@@ -140,7 +140,7 @@ La distinzione è quindi semplice ma importante:
 
 Una volta definita la piattaforma, bisogna decidere **quali processi debbano essere eseguiti su quali nodi**. Questa attività prende il nome di **Process-to-Node Allocation**.
 
-![[assets/p110-fig-115.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p110-fig-115.png|600]]
 
 L’allocazione non viene scelta casualmente. Occorre considerare diversi vincoli e obiettivi:
 
@@ -153,7 +153,7 @@ L’allocazione non viene scelta casualmente. Occorre considerare diversi vincol
 - considerare l’availability di hardware e collegamenti;
 - prevedere eventuali esigenze di rerouting in caso di guasti.
 
-![[assets/p110-fig-116.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p110-fig-116.png|600]]
 
 Il Deployment Diagram ci ha quindi mostrato la piattaforma, mentre la Process-to-Node Allocation decide **come utilizzare concretamente quella piattaforma**.
 
@@ -173,7 +173,7 @@ Gli esempi riportati nel materiale comprendono:
 
 Il **Deployment** è l’attività con cui questi artifact vengono assegnati ai nodi della piattaforma.
 
-![[assets/p111-fig-117.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p111-fig-117.png|600]]
 
 È importante non confondere quindi tre livelli:
 
@@ -187,7 +187,7 @@ La relazione di **Manifestation** collega un elemento del modello all’artifact
 
 Per esempio, una classe progettata può essere realizzata attraverso uno o più file sorgente e, dopo la compilazione, attraverso un file eseguibile. Gli artifact sono quindi la concretizzazione fisica degli elementi definiti nel modello.
 
-![[assets/p111-fig-118.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p111-fig-118.png|500]]
 
 ## Deployment Specification
 
@@ -199,7 +199,7 @@ Può indicare informazioni relative, per esempio, a:
 - collocazione;
 - priorità o altri parametri necessari all’ambiente di esecuzione.
 
-![[assets/p112-fig-119.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p112-fig-119.png|500]]
 
 Questa informazione è utile soprattutto quando il deployment deve essere descritto in modo sufficientemente preciso da poter essere supportato anche da strumenti automatici.
 
@@ -216,7 +216,7 @@ Per ogni componente occorre quindi distinguere:
 
 UML rappresenta le interfacce fornite e richieste attraverso porte e apposite notazioni grafiche.
 
-![[assets/p117-fig-126.png|550]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p117-fig-126.png|550]]
 
 Una **provided interface** descrive una funzionalità che il componente mette a disposizione degli altri; una **required interface** descrive invece una funzionalità di cui il componente ha bisogno.
 
@@ -226,13 +226,13 @@ Questa distinzione permette di progettare componenti che possono essere collegat
 
 Definire un’interfaccia significa specificare le operazioni accessibili dall’esterno e, per ciascuna operazione, i relativi parametri di input e output.
 
-![[assets/p118-fig-127.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p118-fig-127.png|600]]
 
 Il componente può quindi essere trattato dall’esterno come una black box: chi lo usa deve conoscere **cosa offre**, non necessariamente **come lo implementa**.
 
 Quando più componenti vengono collegati, le required interface di uno devono trovare corrispondenza nelle provided interface messe a disposizione dagli altri componenti.
 
-![[assets/p119-fig-128.png|750]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p119-fig-128.png|750]]
 
 Questo porta direttamente alla riusabilità: se esiste già un componente che offre l’interfaccia necessaria, può essere integrato nel sistema; se non esiste, lo si implementa e potrà eventualmente essere riutilizzato in futuro.
 
@@ -259,7 +259,7 @@ L’uso di un pattern non garantisce automaticamente una buona progettazione e n
 
 Prima di studiare i singoli pattern bisogna capire **secondo quali criteri vengono organizzati**. La classificazione utilizzata nel materiale considera due dimensioni indipendenti: **Purpose** e **Scope**.
 
-![[assets/p067-fig-031.png|750]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/19_agosto_appunti/19_agosto_appunti/assets/p067-fig-031.png|750]]
 
 ## Classificazione per Purpose
 

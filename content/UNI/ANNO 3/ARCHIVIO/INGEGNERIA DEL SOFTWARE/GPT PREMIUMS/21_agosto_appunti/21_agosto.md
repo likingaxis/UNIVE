@@ -37,7 +37,7 @@ Il **Quality Triangle** distingue tre famiglie di attività:
 - **Revision** → modifica e manutenzione del prodotto;
 - **Transition** → adattamento o trasferimento del prodotto verso nuovi contesti e utilizzi.
 
-![[assets/p146-fig-167.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p146-fig-167.png|500]]
 
 Il punto del triangolo non è soltanto classificare le attività. Serve a mostrare che **la qualità continua a essere rilevante dopo il rilascio**: il software viene utilizzato, corretto, modificato, adattato e può infine essere sostituito o riutilizzato in nuovi contesti.
 
@@ -100,7 +100,7 @@ Il modello segue quindi questa logica:
 
 È qui che si ricollegano le metriche studiate in precedenza: per esempio la modularità può essere valutata usando informazioni su **cohesion, coupling, morfologia e information flow**.
 
-![[assets/p148-fig-168.png|550]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p148-fig-168.png|550]]
 
 # Checklist Method
 
@@ -125,7 +125,7 @@ La valutazione non viene affidata a una sola persona. Gli appunti prevedono un *
 
 Ogni membro esamina inizialmente il materiale in modo indipendente. Successivamente, attraverso **Walkthrough** o **Inspection**, il team confronta le risposte e cerca di arrivare a una valutazione condivisa.
 
-![[assets/p152-fig-177.png|550]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p152-fig-177.png|550]]
 
 Il Checklist Method è quindi uno strumento per valutare la qualità. Ma il progetto ha bisogno di qualcosa di più generale: un'attività che controlli in modo continuativo **come il software viene prodotto e se vengono rispettate le regole definite dall'organizzazione**.
 
@@ -340,7 +340,7 @@ Qui si ricollega la **complessità ciclomatica** studiata con le metriche:
 
 Quindi la complessità ciclomatica non serve soltanto a descrivere la complessità strutturale del codice: può anche indicare **quanti percorsi indipendenti devono essere considerati per costruire un insieme di test di base**.
 
-![[assets/p157-fig-178.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p157-fig-178.png|600]]
 
 Questo collegamento chiude il cerchio con le metriche del 20 agosto:
 

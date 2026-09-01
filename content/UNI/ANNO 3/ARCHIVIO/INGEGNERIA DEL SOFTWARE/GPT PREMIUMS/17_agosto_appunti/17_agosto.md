@@ -98,7 +98,7 @@ L'idea è ridurre la complessità delle comunicazioni:
 - gli sviluppatori comunicano principalmente con il capo programmatore;
 - il Chief Programmer coordina le attività ed è responsabile del risultato.
 
-![[assets/p068-fig-070.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p068-fig-070.png|600]]
 
 Il vantaggio principale è la riduzione dei canali di comunicazione. Il limite è che il ruolo centrale richiede una persona molto competente sia dal punto di vista tecnico sia da quello gestionale.
 
@@ -116,7 +116,7 @@ Si introducono quindi:
 - canali di comunicazione tra team;
 - forme di *decision making* più decentralizzate.
 
-![[assets/p069-fig-071.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p069-fig-071.png|700]]
 
 Il punto importante non è memorizzare un unico modello organizzativo “corretto”, ma capire che **la struttura del team influenza comunicazione, coordinamento e quindi tempi e costi del progetto**.
 
@@ -221,7 +221,7 @@ Una tecnica mostrata negli appunti utilizza per ciascun componente:
 - **LOC/pm** → produttività, cioè quante linee di codice vengono prodotte mediamente in un mese-persona;
 - **$/LOC** → costo medio per linea di codice.
 
-![[assets/p070-fig-072.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p070-fig-072.png|700]]
 
 A partire da questi valori si possono ricavare:
 
@@ -293,7 +293,7 @@ dove:
 
 Per calcolare UFC bisogna osservare il sistema attraverso il suo **boundary**, cioè il confine che separa il software dal mondo esterno.
 
-![[assets/p071-fig-073.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p071-fig-073.png|600]]
 
 Gli elementi vengono divisi in due gruppi.
 
@@ -330,7 +330,7 @@ Contare semplicemente gli elementi non basta: un ILF semplice non pesa necessari
 
 Per ciascun elemento si determina quindi una classe di complessità e si applica il peso previsto dalla tecnica.
 
-![[assets/p073-fig-075.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p073-fig-075.png|600]]
 
 La somma dei valori ponderati produce il conteggio non aggiustato **UFC**.
 
@@ -361,7 +361,7 @@ Tra gli esempi citati:
 
 Il fattore complessivo viene calcolato attraverso la formula riportata negli appunti:
 
-![[assets/p074-fig-076.png|450]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-076.png|450]]
 
 Il TCF non sostituisce il conteggio funzionale: lo **aggiusta** in base alla difficoltà tecnica.
 
@@ -377,7 +377,7 @@ Serve quindi un ponte tra le due misure.
 
 Il **Backfiring** utilizza tabelle empiriche che associano a ciascun linguaggio un numero indicativo di LOC per Function Point.
 
-![[assets/p074-fig-077.png|450]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-077.png|450]]
 
 Il passaggio diventa:
 
@@ -473,7 +473,7 @@ Per esempio possono cambiare:
 
 Per questo l'effort nominale viene corretto attraverso i **Cost Drivers**.
 
-![[assets/p076-fig-078.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p076-fig-078.png|600]]
 
 Gli appunti considerano 15 fattori suddivisi in gruppi relativi a:
 
@@ -501,7 +501,7 @@ e quindi:
 $$Effort = Effort_{nominale} \times C$$
 \]
 
-![[assets/p077-fig-079.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p077-fig-079.png|700]]
 
 Questa struttura è concettualmente simile a quanto visto nei Function Point:
 
@@ -589,7 +589,7 @@ Negli appunti:
 - i nodi rappresentano i task;
 - gli archi rappresentano i vincoli di precedenza.
 
-![[assets/p078-fig-080.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p078-fig-080.png|600]]
 
 Il diagramma permette di capire:
 
@@ -622,7 +622,7 @@ Permette di vedere:
 - quanto dura;
 - quali attività si sovrappongono.
 
-![[assets/p079-fig-081.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p079-fig-081.png|700]]
 
 PERT e Gantt descrivono quindi due aspetti complementari:
 
@@ -637,7 +637,7 @@ Team, stime, Risk Management, PERT e Gantt non sono attività isolate. Devono es
 
 Il documento guida è lo **SPMP — Software Project Management Plan**.
 
-![[assets/p080-fig-082.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p080-fig-082.png|700]]
 
 Lo SPMP formalizza il piano secondo cui il progetto verrà organizzato e controllato.
 
@@ -774,7 +774,7 @@ Il motivo è pratico:
 
 Il risultato della decomposizione costituisce l'**architettura dei moduli**.
 
-![[assets/p082-fig-083.png|450]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-083.png|450]]
 
 Ma come possiamo capire se abbiamo suddiviso bene il sistema?
 
@@ -795,7 +795,7 @@ Questi due concetti osservano il sistema da direzioni differenti:
 - **Cohesion** → guarda *dentro* il modulo;
 - **Coupling** → guarda *tra* moduli diversi.
 
-![[assets/p082-fig-084.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-084.png|600]]
 
 Non basta quindi creare tanti moduli. Bisogna creare moduli che abbiano responsabilità interne coerenti e che dipendano il meno possibile dagli altri.
 
@@ -831,7 +831,7 @@ Le operazioni appartengono alla stessa categoria generale, ma a ogni invocazione
 
 Il modulo contiene quindi diverse attività logicamente simili, controllate dal chiamante.
 
-![[assets/p083-fig-085.png|550]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p083-fig-085.png|550]]
 
 ## 3. Temporal Cohesion
 
@@ -863,7 +863,7 @@ Il modulo contiene più operazioni indipendenti, ciascuna con il proprio ingress
 - esiste uno stato/dato comune;
 - più operazioni lavorano su quello stato.
 
-![[assets/p083-fig-086.png|550]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p083-fig-086.png|550]]
 
 ## 7. Functional Cohesion
 
@@ -876,7 +876,7 @@ Gli appunti collegano:
 - **Functional Cohesion** alla programmazione strutturata;
 - **Informational Cohesion** al paradigma Object Oriented.
 
-![[assets/p084-fig-087.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p084-fig-087.png|700]]
 
 Una volta valutata la qualità interna di ciascun modulo, dobbiamo guardare l'altro lato della decomposizione: **quanto i moduli dipendono tra loro**.
 
@@ -936,7 +936,7 @@ I moduli comunicano passando esclusivamente i dati necessari attraverso un'inter
 
 Il modulo chiamante e quello chiamato non devono conoscere dettagli implementativi reciproci.
 
-![[assets/p085-fig-088.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p085-fig-088.png|600]]
 
 I fattori che aumentano il coupling comprendono:
 
@@ -1008,7 +1008,7 @@ Nella fase di progettazione il riuso può avvenire a diversi livelli:
 - **Design Pattern**;
 - **architetture software**.
 
-![[assets/p087-fig-089.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p087-fig-089.png|600]]
 
 Questa progressione è importante:
 

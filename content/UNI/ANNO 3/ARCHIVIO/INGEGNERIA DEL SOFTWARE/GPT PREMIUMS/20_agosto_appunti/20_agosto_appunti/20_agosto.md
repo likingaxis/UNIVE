@@ -32,7 +32,7 @@ L'**Abstract Factory** fornisce un'interfaccia per creare **famiglie di oggetti 
 
 Il problema tipico nasce quando un'applicazione deve funzionare con più famiglie compatibili di prodotti. Il client dovrebbe poter cambiare famiglia senza essere riscritto.
 
-![[assets/p069-fig-032.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p069-fig-032.png|650]]
 
 I ruoli principali sono:
 
@@ -50,7 +50,7 @@ Il limite è che l'interfaccia della factory definisce quali tipi di prodotto ap
 
 Il **Factory Method** affronta un problema simile, ma non crea una famiglia completa. Definisce invece un metodo per creare un prodotto e lascia alle **sottoclassi** la scelta della classe concreta da istanziare.
 
-![[assets/p069-fig-033.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p069-fig-033.png|650]]
 
 I ruoli principali sono:
 
@@ -80,7 +80,7 @@ L'**Adapter** permette di riutilizzare una classe esistente quando la sua interf
 
 Il problema è quindi di compatibilità, non di funzionalità: la classe esistente svolge già il lavoro necessario, ma il client non sa utilizzarla nel formato in cui si presenta.
 
-![[assets/p070-fig-034.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p070-fig-034.png|650]]
 
 I partecipanti sono:
 
@@ -95,7 +95,7 @@ L'Adapter introduce quindi un **ponte tra due interfacce incompatibili**, evitan
 
 Il **Composite** serve quando bisogna rappresentare una struttura gerarchica composta da elementi semplici e gruppi di elementi, ma il client dovrebbe poterli trattare **allo stesso modo**.
 
-![[assets/p071-fig-035.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p071-fig-035.png|650]]
 
 I ruoli fondamentali sono:
 
@@ -114,7 +114,7 @@ Questo permette di costruire strutture ad albero e di manipolarle in maniera uni
 
 Il **Decorator** permette di aggiungere dinamicamente nuove responsabilità a un oggetto **senza modificarne la classe di base** e senza creare una grande gerarchia di sottoclassi.
 
-![[assets/p071-fig-036.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p071-fig-036.png|600]]
 
 I ruoli principali sono:
 
@@ -145,7 +145,7 @@ I pattern comportamentali entrano in gioco quando la struttura degli oggetti è 
 
 L'**Observer** definisce una dipendenza **uno-a-molti** tra oggetti: quando cambia lo stato di un oggetto, gli altri oggetti interessati vengono notificati automaticamente.
 
-![[assets/p072-fig-037.jpeg|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p072-fig-037.jpeg|600]]
 
 I ruoli principali sono:
 
@@ -167,7 +167,7 @@ Il punto importante è che il Subject non deve conoscere i dettagli concreti deg
 
 Il **Template Method** definisce nella superclasse la **struttura generale di un algoritmo**, lasciando alle sottoclassi l'implementazione di alcuni passaggi.
 
-![[assets/p073-fig-038.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p073-fig-038.png|600]]
 
 Il pattern separa quindi:
 
@@ -185,7 +185,7 @@ Il vantaggio è evitare di duplicare la struttura generale dell'algoritmo in pi�
 
 Lo **Strategy** serve quando esistono più algoritmi alternativi per svolgere la stessa operazione e vogliamo poterli sostituire senza modificare il client.
 
-![[assets/p074-fig-039.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p074-fig-039.png|650]]
 
 I ruoli principali sono:
 
@@ -306,7 +306,7 @@ I due concetti fondamentali sono:
 - **fan-in** → quantità di flussi che arrivano al modulo;
 - **fan-out** → quantità di flussi che partono dal modulo.
 
-![[assets/p078-fig-040.jpeg|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p078-fig-040.jpeg|500]]
 
 In modo intuitivo:
 
@@ -341,7 +341,7 @@ in cui:
 - i **nodi** rappresentano blocchi o istruzioni del programma;
 - gli **archi** rappresentano i possibili passaggi del controllo da un nodo all'altro.
 
-![[assets/p079-fig-041.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p079-fig-041.png|600]]
 
 Il flowgraph permette di rappresentare strutture come:
 

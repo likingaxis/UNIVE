@@ -282,7 +282,7 @@ Il flusso è:
 4. si implementano soltanto quelli mancanti;
 5. i nuovi componenti possono arricchire il framework per utilizzi futuri.
 
-![[assets/p091-fig-090.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-090.png|500]]
 
 ## Componenti in UML
 
@@ -293,7 +293,7 @@ Negli appunti viene evidenziata anche un'evoluzione tra UML 1 e UML 2.
 
 Una componente viene rappresentata come un elemento con stereotipo `<<component>>` che realizza una determinata interfaccia.
 
-![[assets/p091-fig-091.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-091.png|500]]
 
 Il passaggio da componenti a SOA nasce da una nuova esigenza: **non solo riusare componenti all'interno di un sistema, ma rendere funzionalità autonome disponibili in rete, anche su piattaforme differenti e potenzialmente fornite da organizzazioni differenti**.
 
@@ -357,7 +357,7 @@ Il **Service Registration Pattern** è il passaggio iniziale.
 3. il broker registra il servizio;
 4. il provider riceve conferma dell'avvenuta registrazione.
 
-![[assets/p093-fig-092.png|400]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p093-fig-092.png|400]]
 
 La registrazione rende concretamente possibile la **Discoverability**.
 
@@ -377,7 +377,7 @@ Nel **Broker Forwarding** il broker rimane coinvolto in ogni richiesta:
 4. riceve la risposta;
 5. la inoltra al consumer.
 
-![[assets/p094-fig-093.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-093.png|500]]
 
 Vantaggio principale:
 
@@ -396,7 +396,7 @@ Nel **Broker Handle** il broker interviene soltanto nella fase iniziale:
 2. il broker restituisce un riferimento, o **service handle**;
 3. consumer e provider comunicano poi direttamente.
 
-![[assets/p094-fig-094.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-094.png|500]]
 
 Vantaggio:
 
@@ -421,7 +421,7 @@ Il **Service Discovery Pattern** viene paragonato alle *pagine gialle*.
 4. il consumer sceglie quale utilizzare;
 5. da quel momento può proseguire con una delle modalità di interazione viste prima.
 
-![[assets/p095-fig-095.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p095-fig-095.png|500]]
 
 La scelta tra più servizi equivalenti può basarsi anche su caratteristiche ulteriori, per esempio la **QoS — Quality of Service**.
 
@@ -474,7 +474,7 @@ La descrizione specifica, in particolare:
 
 WSDL svolge quindi un ruolo analogo all'interfaccia pubblica di una classe: descrive **come usare il servizio senza esporne l'implementazione interna**.
 
-![[assets/p097-fig-099.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p097-fig-099.png|500]]
 
 ## UDDI
 
@@ -497,7 +497,7 @@ Il flusso complessivo diventa:
 6. invia la richiesta SOAP al provider;
 7. riceve la risposta SOAP.
 
-![[assets/p096-fig-096.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p096-fig-096.png|500]]
 
 Finora abbiamo visto un approccio orientato a **servizi e messaggi**. REST propone una prospettiva differente: organizzare l'interazione di rete attorno alle **risorse**.
 
@@ -538,9 +538,9 @@ Negli appunti le RESTful API vengono collegate alle operazioni fondamentali:
 - `PUT` → aggiornare un elemento identificato;
 - `DELETE` → eliminare un elemento identificato.
 
-![[assets/p098-fig-100.png|400]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-100.png|400]]
 
-![[assets/p098-fig-101.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-101.png|500]]
 
 A questo punto sappiamo come i servizi possono essere trovati e invocati. Rimane però un problema quando **una singola funzione logica richiede più operazioni o addirittura più servizi**: cosa succede se alcune operazioni riescono e altre falliscono?
 
@@ -582,7 +582,7 @@ Il **Two-Phase Commit Protocol** introduce quindi un coordinatore centrale.
 4. se sono pronti, inviano `readyToCommit`;
 5. se anche un solo partecipante non è pronto, la transazione viene abortita.
 
-![[assets/p099-fig-102.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p099-fig-102.png|500]]
 
 ### Fase 2 — Commit
 
@@ -593,7 +593,7 @@ Se tutti i servizi sono pronti:
 3. vengono liberati i lock;
 4. la transazione termina.
 
-![[assets/p100-fig-103.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p100-fig-103.png|500]]
 
 Questo pattern è adatto quando vogliamo preservare una forte atomicità globale. Non tutte le operazioni complesse, però, devono essere trattate come un blocco unico.
 
@@ -608,7 +608,7 @@ Quindi:
 - transazione piatta → fallimento di una parte può richiedere rollback dell'intera transazione;
 - compound transaction → la struttura in sottotransazioni permette maggiore flessibilità e rollback parziali.
 
-![[assets/p101-fig-104.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p101-fig-104.png|500]]
 
 Il pattern è utile quando le parti della funzione complessiva sono sufficientemente indipendenti da poter essere gestite separatamente.
 
@@ -626,7 +626,7 @@ Il **Long-Living Transaction Pattern** divide quindi il processo in più sottotr
 
 Prima di completare l'operazione può essere necessario effettuare un **recheck** delle condizioni precedentemente osservate.
 
-![[assets/p102-fig-105.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p102-fig-105.png|500]]
 
 Finora le richieste erano determinate in modo abbastanza preciso. In altri casi il client può invece esprimere una richiesta **negoziabile** e accettare soluzioni alternative.
 
@@ -662,7 +662,7 @@ Il Service Agent può:
 - rifiutare una proposta o richiesta;
 - accettarla.
 
-![[assets/p103-fig-106.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p103-fig-106.png|650]]
 
 I Transaction Pattern hanno mostrato come coordinare operazioni che coinvolgono più servizi. Per costruire realmente un'applicazione SOA rimangono però due problemi di progettazione:
 

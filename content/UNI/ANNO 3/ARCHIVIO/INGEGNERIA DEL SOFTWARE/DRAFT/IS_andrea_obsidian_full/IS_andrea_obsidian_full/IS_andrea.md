@@ -1789,7 +1789,7 @@ La progettazione del software orientato agli oggetti è un processo complesso ch
 ## CLASSIFICAZIONE
 Classificazione in base allo scopo (purpose):
 
-![[p067-fig-031.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p067-fig-031.png|700]]
 
 - **Creazionali:** Gestiscono il processo di creazione di oggetti.
 - **Strutturali:** Definiscono la struttura del sistema in termini di composizione di classi e oggetti. Si basano su concetti di ereditarietà e polimorfismo.
@@ -1832,7 +1832,7 @@ Un framework è un insieme di strumenti e convenzioni che forniscono una struttu
 ## ABSTRACT FACTORY
 L'Abstract Factory è un pattern creazionale che fornisce un'interfaccia per la creazione di famiglie di oggetti correlati senza specificarne le classi concrete. Questo è particolarmente utile quando si desidera sviluppare un sistema indipendente dalle modalità di creazione dei prodotti con cui opera. Motivazione: Un esempio comune di utilizzo dell'Abstract Factory è nella realizzazione di strumenti per lo sviluppo di interfacce utente (UI) che devono supportare diversi tipi di "look & feel". Per garantire la portabilità di un'applicazione tra diverse modalità di interfaccia utente, è importante che gli oggetti non siano direttamente "cablati" nel codice, ma che l'applicazione utilizzi un'interfaccia comune fornita dalla factory. Classificazione: L'Abstract Factory rientra nella categoria creazionale basato su oggetti, poiché si concentra sulla creazione di oggetti, in particolare di famiglie di oggetti correlati. Applicabilità:
 
-![[p069-fig-032.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p069-fig-032.png|700]]
 
 - A sistemi che devono essere indipendenti dalle modalità di creazione dei prodotti con cui operano.
 - A sistemi che devono poter essere configurati per utilizzare famiglie di prodotti diverse.
@@ -1855,7 +1855,7 @@ L'Abstract Factory è un pattern creazionale che fornisce un'interfaccia per la 
 ## FACTORY METHOD
 Il Factory Method è un pattern creazionale che ha come scopo principale quello di definire un'interfaccia per creare un oggetto in una classe, lasciando alle sottoclassi il compito di modificare il tipo di oggetto che verrà istanziato. Questo consente di decidere dinamicamente, a tempo di esecuzione, quale specifico oggetto deve essere creato. Motivazione: Nel contesto dei framework, le classi astratte definiscono spesso le relazioni tra gli elementi del dominio, ma è compito delle sottoclassi fornire l'implementazione concreta degli oggetti. Il Factory Method è utile quando una classe non può sapere in anticipo quali classi di oggetti deve creare o quando si desidera che le sottoclassi scelgano gli oggetti da creare.
 
-![[p069-fig-033.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p069-fig-033.png|700]]
 
 <!-- Pagina PDF 70 -->
 
@@ -1881,7 +1881,7 @@ Applicabilità:
 ## ADAPTER
 L'Adapter è un pattern strutturale utilizzato quando si ha una classe con un'interfaccia incompatibile con quella richiesta da un client, e si desidera adattare l'interfaccia della classe esistente in modo che possa essere utilizzata dal client senza modificare il codice sorgente della classe stessa. In altre parole, fornisce un modo per far collaborare classi con interfacce diverse che altrimenti non potrebbero lavorare insieme. Motivazione: Immagina di avere un editor che consente di disegnare e comporre elementi grafici, dove l'astrazione chiave è rappresentata da un singolo oggetto grafico. Ora, se vuoi integrare un nuovo componente che, per qualche motivo, ha un'interfaccia incompatibile con l'editor, puoi utilizzare l'Adapter per creare un ponte tra l'interfaccia del nuovo componente (Adaptee) e quella richiesta dall'editor (Target). Applicabilità: Si usa quando si vuole riutilizzare una classe esistente, ma la sua interfaccia è incompatibile con quella desiderata. Partecipanti:
 
-![[p070-fig-034.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p070-fig-034.png|700]]
 
 - **Client:** È il componente che richiede un'interfaccia specifica.
 - **Target:** È l'interfaccia desiderata dal client. L'Adapter implementa questa interfaccia.
@@ -1897,7 +1897,7 @@ In sintesi, l'Adapter è un pattern utile quando si ha una classe esistente con 
 ## COMPOSITE
 Il Composite è un pattern strutturale utilizzato per creare strutture gerarchiche di oggetti, in modo che oggetti singoli (Leaf) e oggetti composti (Composite) possano essere trattati in modo uniforme. Questo è particolarmente utile in situazioni in cui si desidera manipolare una gerarchia di oggetti in modo uniforme, ad esempio nelle applicazioni grafiche in cui si devono gestire sia le forme geometriche di base che gli oggetti più complessi costruiti da queste forme. Motivazione: Nei contesti come gli editor grafici, è comune avere oggetti singoli come linee o cerchi, ma anche oggetti composti come gruppi di figure. Il Composite consente di trattare entrambi i tipi di oggetti in modo uniforme, semplificando il codice del client. Classificazione: Il Composite è un pattern strutturale basato su oggetti, poiché coinvolge la composizione di oggetti per formare strutture più complesse. Applicabilità: Si usa quando si vogliono rappresentare gerarchie di oggetti in modo che oggetti semplici e oggetti compositi siano trattati in modo uniforme. Partecipanti:
 
-![[p071-fig-035.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p071-fig-035.png|700]]
 
 - **Component e Composite:** 
 
@@ -1913,7 +1913,7 @@ Il Composite è un pattern strutturale utilizzato per creare strutture gerarchic
 ## DECORATOR
 Il pattern Decorator è un pattern strutturale il cui scopo principale è aggiungere dinamicamente funzionalità (responsabilità) ad un oggetto senza modificare la sua interfaccia. Questo è particolarmente utile quando si vuole estendere il comportamento di un oggetto in modo flessibile e dinamico, senza ricorrere all'eccessivo uso di sottoclassi. Motivazione: Uno scenario classico di applicazione per il pattern Decorator si trova nell'implementazione di interfacce utente, dove si possono aggiungere dinamicamente funzionalità come un testo scorrevole o un particolare
 
-![[p071-fig-036.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p071-fig-036.png|600]]
 
 <!-- Pagina PDF 72 -->
 
@@ -1941,7 +1941,7 @@ bordo a un oggetto senza modificare la sua struttura di base. L'alternativa stat
 ## OBSERVER
 Il pattern Observer è un pattern comportamentale che ha come scopo principale definire una dipendenza uno a molti tra oggetti, mantenendo basso il grado di accoppiamento. In altre parole, il pattern Observer consente a un oggetto, chiamato Subject, di notificare automaticamente gli oggetti interessati, chiamati Observer, quando il suo stato cambia, in modo che tutti gli oggetti dipendenti possano aggiornarsi automaticamente. Motivazione: Un tipico scenario in cui si applica il pattern Observer è nelle applicazioni con interfaccia grafica (GUI), realizzate secondo il paradigma Model-View-Control. Quando il Model cambia, gli oggetti che implementano la View devono aggiornarsi per riflettere correttamente lo stato attuale del Model. Classificazione: Il pattern Observer è un pattern comportamentale basato su oggetti, poiché coinvolge la definizione di come gli oggetti interagiscono tra loro durante il cambiamento di stato.
 
-![[p072-fig-037.jpeg|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p072-fig-037.jpeg|700]]
 
 <!-- Pagina PDF 73 -->
 
@@ -1966,7 +1966,7 @@ L'approccio corretto: Il pattern Observer prevede che gli osservatori si registr
 ## TEMPLATE METHOD
 Il pattern Template Method è un pattern comportamentale che ha come scopo principale definire la struttura di un algoritmo all'interno di un metodo di una classe base (AbstractClass), delegando alcuni passi specifici alle sottoclassi concrete (ConcreteClass). Questo pattern è particolarmente utile quando si desidera fornire un'implementazione generica di un algoritmo e permettere alle sottoclassi di personalizzare alcune parti dell'algoritmo senza modificarne la struttura di base. Motivazione: Considera un framework per costruire applicazioni in grado di gestire documenti diversi. Il Template Method definisce un algoritmo in base ad operazioni astratte che saranno definite nelle sottoclassi specifiche. In questo modo, è possibile fornire una struttura di base per l'algoritmo e lasciare alle sottoclassi la definizione di passi variabili. Classificazione: Il Template Method è un pattern comportamentale basato su classi, in quanto coinvolge la definizione di comportamenti comuni nella classe astratta e la delega di comportamenti specifici alle sottoclassi concrete. Applicabilità:
 
-![[p073-fig-038.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p073-fig-038.png|700]]
 
 - È utilizzato per implementare la parte invariante di un algoritmo, lasciando alle sottoclassi la definizione degli step variabili.
 - È utile quando ci sono comportamenti comuni che possono essere inseriti nel template. Partecipanti:
@@ -1991,7 +1991,7 @@ Il pattern Template Method è un pattern comportamentale che ha come scopo princ
 ## STRATEGY
 Il pattern Strategy è un pattern comportamentale che ha come scopo principale definire ed incapsulare una famiglia di algoritmi in modo da renderli intercambiabili indipendentemente dal client che li usa. Questo pattern permette di definire un'interfaccia comune per un insieme di algoritmi, incapsulare ciascun algoritmo in una classe separata, e permettere ai client di selezionare dinamicamente l'algoritmo da utilizzare. Motivazione: Considera una situazione in cui hai una famiglia di algoritmi, ad esempio algoritmi di ordinamento come QuickSort, BubbleSort e MergeSort. Invece di implementare tutti questi algoritmi all'interno di una singola classe, il pattern Strategy suggerisce di creare una classe separata per ciascun algoritmo, tutte implementando la stessa interfaccia (Strategy). In questo modo, puoi facilmente cambiare l'algoritmo utilizzato in un'applicazione senza dover modificare il client. Classificazione: Il pattern Strategy è un pattern comportamentale basato su oggetti, poiché coinvolge la definizione di comportamenti (algoritmi) all'interno di oggetti. Applicabilità:
 
-![[p074-fig-039.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p074-fig-039.png|700]]
 
 - Molte classi correlate differiscono solo per il comportamento. Il pattern fornisce un modo per avere un'interfaccia comune.
 - Sono necessarie più varianti di uno stesso algoritmo, a seconda dei tipi di dato in ingresso o delle condizioni operative. Partecipanti:
@@ -2094,7 +2094,7 @@ Utilità delle Misure del Flusso di Informazioni:
 - **Individuazione dei Punti di Stress nel Sistema:** Le misure del flusso di informazioni possono evidenziare i punti di stress nel sistema, dove la quantità di informazioni che attraversa determinati moduli è significativamente elevata.
 - **Comprensione dei Problemi di Progettazione Potenziali:** Forniscono una visione sui possibili problemi di progettazione, poiché la complessità derivante dai flussi di informazioni può indicare aree in cui la struttura del sistema potrebbe essere migliorata. In sintesi, le misure del flusso di informazioni forniscono un modo per valutare quanto le informazioni si muovono attraverso il sistema e possono essere utilizzate per identificare aree critiche, punti di stress e potenziali problemi di progettazione all'interno di un sistema software.
 
-![[p078-fig-040.jpeg|450]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p078-fig-040.jpeg|450]]
 
 Fan-in e Fan-out: I concetti di "Fan-in" e "Fan-out" sono misure utilizzate per quantificare i flussi di informazioni in un sistema software, concentrandosi su un modulo specifico.
 - Il "Fan-in" di un modulo M è il numero totale di flussi locali (diretti e indiretti) che terminano in M, più il numero di flussi globali (strutture dati) da cui M recupera informazioni.
@@ -2129,7 +2129,7 @@ Il grafo di flusso (Flowgraph) è un modo di modellare la struttura del flusso d
 - **Grado Uscente:** Indica il numero di archi che escono da un nodo. I nodi di procedura avranno un grado uscente di 1, mentre i nodi terminali avranno un grado uscente di 0.
 - **Grado Entrante:** Indica il numero di archi che entrano in un nodo. I nodi di inizio avranno un grado entrante di 0.
 
-![[p079-fig-041.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p079-fig-041.png|600]]
 
 Costrutti del Flowgraph:
 - **Sequence (Sequenza):** Rappresenta un elenco sequenziale di istruzioni senza strutture di controllo aggiuntive.
@@ -2142,7 +2142,7 @@ Costrutti del Flowgraph:
 
 <!-- Pagina PDF 80 -->
 
-![[p080-fig-042.jpeg|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p080-fig-042.jpeg|600]]
 
 In sintesi, il Flowgraph è uno strumento visuale che aiuta a rappresentare la struttura del flusso di controllo di un programma attraverso nodi e archi, consentendo una comprensione più chiara della logica e della sequenza delle istruzioni nel codice.
 
@@ -2170,7 +2170,7 @@ Nesting (Annidamento): Il concetto di annidamento è indicato dalla notazione F1
 
 Prime Decomposition: Il "Prime Decomposition Theorem" (Teorema di Decomposizione Prime) è formulato da Fenton e Whitty. Esso afferma che ogni flowgraph può essere univocamente decomposto in una gerarchia di prime. Questa gerarchia è nota come "decomposition tree" (albero di decomposizione). L'albero di decomposizione mostra come il flowgraph complessivo è formato dalla combinazione di diverse prime flowgraphs attraverso sequenziazione e annidamento. In altre parole, il teorema afferma che è possibile scomporre ogni flowgraph complesso in un insieme di flowgraph più semplici (prime flowgraphs) che possono essere sequenziati o annidati per ottenere la struttura complessiva del programma.
 
-![[p081-fig-045.jpeg|450]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/IS_andrea_obsidian_full/IS_andrea_obsidian_full/assets/p081-fig-045.jpeg|450]]
 
 ![[p081-fig-046.png|450]]
 

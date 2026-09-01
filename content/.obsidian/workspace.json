@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "0fb5ee1f69fe2bfb",
+        "id": "6ad7de38eab39165",
         "type": "tabs",
         "children": [
           {
-            "id": "a3ced30b16a7b388",
+            "id": "8669357c7a945bdd",
             "type": "leaf",
             "state": {
-              "type": "pdf",
-              "state": {
-                "file": "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/Progetto_Bernardi_DeSantis_Grande_Gugliotta_Luci.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Progetto_Bernardi_DeSantis_Grande_Gugliotta_Luci"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -185,28 +183,28 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "a3ced30b16a7b388",
+  "active": "385e3b437a6aac05",
   "lastOpenFiles": [
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/Progetto_Bernardi_DeSantis_Grande_Gugliotta_Luci.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/Ripasso_mirato_ISW_31_agosto.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/ISW.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/IS INDICE.md",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/Progetto_Bernardi_DeSantis_Grande_Gugliotta_Luci.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/IS UNICO SHORT.md",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/IS UNICO.md",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/IS ORGANIZZAZIONE.md",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/Ripasso_mirato_ISW_31_agosto.md",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/ISW.md",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/IS INDICE.md",
     "UNI/ANNO 3/ORGANIZZAZIONI ESAMI.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/I parte ISW - SistSW/07-Pianificazione.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/15-BPM.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/14-Testing.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/13-Qualità del Software.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/12-Metriche di struttura.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/I parte ISW - SistSW/07-Pianificazione.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/15-BPM.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/14-Testing.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/13-Qualità del Software.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/12-Metriche di struttura.pdf",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/LEZIONI SPARSE/LEZIONE 2.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/LEZIONI SPARSE/LEZIONE 1.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/ORALE/INDICE.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/CALCOLO NUMERICO INDICE.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/CN UNICO.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/CN CHECKLIST.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore di sede AMA.md",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/Documentazione Use Case — Amministratore di sede AMA.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/COMPITI/CN SIMONE BUONG.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/TEOREMI LEMMI E COROLLARI.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/ORGANIZZAZIONE CN.md",
@@ -218,15 +216,15 @@
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT/Modifiche per gli esercizi di chat.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/ORALE/PROMPT.md",
     "UNI/ANNO 3/ARCHIVIO/CALCOLO NUMERICO/DRAFT/PROMPT.md",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829095359.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101432.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101349.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/18-BP simulation.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/17-M&S Intro.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/16-BPMN.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101248.png",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/I parte ISW - SistSW/05a-OOA.pdf",
-    "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260826171330.png",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829095359.png",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101432.png",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101349.png",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/18-BP simulation.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/17-M&S Intro.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/II parte ISW/16-BPMN.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260829101248.png",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/official-slides/I parte ISW - SistSW/05a-OOA.pdf",
+    "UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/FOTOIS/Pasted image 20260826171330.png",
     "UNI/ANNO 3/tree.png",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/uc_utente_non_registrato.jpg",
     "UNI/ANNO 3/INGEGNERIA DEL SOFTWARE/PROGETTO/PROGETTO COMPLETO/versioneMD/figure/uc_operatore_sede.jpg",

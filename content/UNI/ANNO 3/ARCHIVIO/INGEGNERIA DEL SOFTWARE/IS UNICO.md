@@ -85,7 +85,7 @@ viene fatto durante l'intero sviluppo
 
 **Verifica e validazione descrivono cosa vogliamo controllare; il testing è uno degli strumenti con cui effettuiamo questi controlli.**
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p006-fig-005.png|315]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p006-fig-005.png|315]]
 
 Il diagramma evidenzia proprio questa differenza: la verifica mette in relazione le fasi vicine del processo, mentre la validazione collega il prodotto sviluppato agli obiettivi dell'utente
 
@@ -163,7 +163,7 @@ Si vuole distinguere la differenza tra le due, entrambi possono manifestare guas
 	- ma possiamo per sbaglio metterne un'altro
 Ora si analizzano due grafici uno del guasto hardware e uno software
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-001.png|371]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-001.png|371]]
 
 Nel grafico hardware si riconoscono tre zone concettuali:
 
@@ -171,7 +171,7 @@ Nel grafico hardware si riconoscono tre zone concettuali:
 - una fase relativamente stabile;
 - una fase finale in cui l'usura fa aumentare i guasti.
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-002.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p003-fig-002.png|520]]
 
 Nel software l'andamento è differente:
 - le correzioni dovrebbero far diminuire la frequenza di guasto ma in realtà
@@ -223,7 +223,7 @@ L'idea è:
 3. la si modifica in base ai problemi e alle richieste;
 4. si continua a correggerla finché il cliente non è soddisfatto.
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|480]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-003.png|480]]
 
 Il problema è che nel Build & Fix le modifiche non sono inserite in una struttura progettuale controllata comportando un prodotto difficile da comprendere e mantenere
 ### Modello Waterfall
@@ -231,7 +231,7 @@ Di tipo sequenziale e funziona a cascata dove ogni fase consegue la successiva
 molto più disciplinato di Build & Fix poiché obbliga la documentazione capire il problema progettare e verificare i vari output delle fasi
 
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p005-fig-004.png|520]]
 
 - requisiti;
 - specifica;
@@ -248,7 +248,7 @@ nasce per affrontare un problema della fase dei requisiti:
 cliente e sviluppatore utilizzano le stesse parole ma immaginano cose differenti
 utilizzare un prototipo permette all'utente di provare una rappresentazione preliminare del sistema e dare un feedback
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-006.png|520]]
 
 
 Cosa si intende per prototipo?
@@ -258,7 +258,7 @@ Il prototipo permette di svolgere due attività fondamentali:
 - **Requirements Validation**: verificare che ciò che abbiamo capito corrisponda davvero alle esigenze dell'utente.
 Per realizzare un singolo prototipo si seguono i seguenti step
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-007.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p007-fig-007.png|520]]
 
 La realizzazione di un prototipo completo invece vede il seguente ciclo
 - definizione di obiettivi o requisiti iniziali
@@ -272,7 +272,7 @@ La realizzazione di un prototipo completo invece vede il seguente ciclo
  - viene utilizzato come strumento per comprendere i requisiti e poi abbandonato
 - questo perchè il prototipo viene costruito privilegiando la rapidità non necessariamente rispettando standard qualitativi sull'architettura, l'efficienza la sicurezza ecc...
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-008.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-008.png|520]]
 
 Un'interfaccia che sembra pronta dopo pochi giorni può inoltre creare nel cliente una falsa percezione quando invece tutta la parte dietro deve ancora essere realizzata
 
@@ -298,7 +298,7 @@ il vantaggio di farlo a incrementi è che non bisogna aspettare la fine dell'int
 
 Il processo a sviluppo incrementale può partire da una outline description(descrizione generale del prodotto)
 e poi si prendono le parti da sviluppare progressivamente
-![[GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p008-fig-009.png|520]]
 #### Modello incrementale con Overall Architecture
 - versione più conservativa
 - si realizza una progettazione architetturale complessiva del prodotto
@@ -306,13 +306,13 @@ e poi si prendono le parti da sviluppare progressivamente
 dopo aver definito questa struttura si procede con varie build incrementali sulle singole componenti
 
 così già sappiamo dei dettagli importanti sulle componenti riducendo problemi di integrazione tra esse
-![[GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p009-fig-010.png|520]]
 #### Incrementale senza Overall Architecture
 - in questa variante invece si parte direttamente dai requisiti con maggiore priorità
 ogni build viene sviluppata quasi come un progetto indipendente
 il vantaggio è maggiore velocità iniziale ma poi si rischia una maggior complessità ad ogni build successiva soprattutto per integrazione delle componenti software
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-011.png|650]]
 
 ###### Problema del modello incrementale
 Suddividere il prodotto in molti incrementi ha effetti opposti sui costi
@@ -323,7 +323,7 @@ possiamo vedere nel grafico sotto due tendenze:
 - costo delle build/modifiche che diminuisce aumentando il numero di incrementi
 - costo di integrazione che aumenta quando ci sono build numerose
 la loro somma genera una regione di ***costo minimo***
-![[GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p010-fig-012.png|520]]
 ### Modello a spirale
 - modello iterativo che introduce come elemento centrale la gestione del rischio
 ad ogni giro della spirale si fa una iterazione del progetto
@@ -339,16 +339,16 @@ in una iterazione viene fatto:
 
 prima di investire ulteriormente si analizzano i rischi per progetti insostenibili non si prosegue nella progettazione
 
-![[GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p011-fig-013.png|520]]
 
 >[!info]- è possibile modificare il sistema Waterfall aggiungendo una parte di Risk analysis
 >
 >
->![[GPT PREMIUMS/14_agosto_appunti/assets/p012-fig-014.png|500]]
+>![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p012-fig-014.png|500]]
 
 
 #### Modello a spirale di Boehm
-![[GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p013-fig-015.png|650]]
 
 Nella rappresentazione classica di Boehm, il rischio rimane il principio che guida la scelta delle attività da svolgere in ogni iterazione
 possono essere utilizzati:
@@ -407,7 +407,7 @@ vedendo il grafico sotto si nota come alcune fasi sono sovrapposte parzialmente 
 	- più attività possono essere svolte nello stesso periodo
 - Iterazione
 	- una fase viene ripetuta per migliorarne il risultato con iterazioni intra-fase(attività interne alla stessa fase) e inter-fase(una fase successiva può portare a una revisione delle precedenti)
-![[GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|313]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p016-fig-021.png|313]]
 
 ### Ingegneria simultanea o concorrente
 L'ingegneria Concorrente cerca di ridurre tempi e costi facendo coesistere attività che in un modello strettamente sequenziale sarebbero svolte una dopo l'altra ma senza caos
@@ -453,7 +453,7 @@ dove viene prodotta una versione stabile e completa
 	- dove si fa testing interno come alpha testing
 	- beta testing
 	- correzione dei difetti
-![[GPT PREMIUMS/14_agosto_appunti/assets/p019-fig-023.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p019-fig-023.png|500]]
 #### Modello Netscape
 Organizzazione che adottava un modello simile ma per prodotti internet
 - meno tester
@@ -511,7 +511,7 @@ Ruoli presenti
 	- da una parte di esso si fa il planning di uno sprint per capire su quale parte del backlog fare uno sprint facendo così si ha uno sprint backlog
 
 - per Definition of Done si riferisce a tutti quei criteri per cui un lavoro possa essere considerato completo
-![[GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|520]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/14_agosto_appunti/assets/p022-fig-025.png|520]]
 ### User Story
 Per descrivere il bisogno dal punto di vista dell'utente si può utilizzare questo formato non prendendolo come una vera e propria specifica ma come una cosa compatta che può far discutere i bisogni dell'utente
 `As a <role>, I want <goal> so that <benefit>`
@@ -644,7 +644,7 @@ quando si parla di requisito si intende un singolo dettaglio o descrizione
 l'insieme di requisiti forma una specifica
 Per rendere una specifica più precisa si può usare un linguaggio simile a uno pseudocodice come PDL
 
-![[GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p030-fig-031.png|650]]
 
 Il vantaggio è ridurre l'ambiguità rispetto al linguaggio naturale.
 l'ideale è utilizzarlo non per cose troppo interne ma per interfacce o simili altrimenti si rischia di dire
@@ -753,7 +753,7 @@ Di base utilizza tre elementi grafici
 	- indicano quali place forniscono le condizioni necessarie a una transition
 	- quali place ricevono token dopo l'esecuzione della transition
 
-![[GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p033-fig-033.png|650]]
 
 
 - token
@@ -766,7 +766,7 @@ Di base utilizza tre elementi grafici
 
 **transition enabled → firing → modifica dei token → nuova marcatura → nuovo stato rappresentato**
 
-![[GPT PREMIUMS/15_agosto_appunti/assets/p034-fig-034.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p034-fig-034.png|650]]
 
 Negli esempi del corso si parte da una marcatura iniziale e si provano differenti transition abilitate. Se più transition sono abilitate contemporaneamente, possono esistere più possibili evoluzioni della rete
 - l'inhibitor arc esprime una condizione negativa
@@ -804,7 +804,7 @@ In questo modo uno schema può essere usato per descrivere sia:
 - lo **stato** del sistema;
 - le **operazioni** che modificano quello stato.
 
-![[GPT PREMIUMS/15_agosto_appunti/assets/p036-fig-036.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p036-fig-036.png|650]]
 
 Nell'esempio dei pulsanti dell'ascensore vengono definiti insiemi di pulsanti e vincoli tra questi insiemi. La parte dichiarativa dice **quali elementi esistono e di che tipo sono**; la parte dei predicati dice **quali relazioni devono essere vere**.
 
@@ -824,7 +824,7 @@ ERD struttura dei dati e relazioni tra entità
 DFD flusso dei dati attraverso i processi del sistema
 ##### ERD Entity Relationship Diagram
 rappresenta le entità rilevanti e le relazioni esistenti tra esse
-![[GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-038.png|300]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-038.png|300]]
 - entità -> oggetti o concetti di cui interessa memorizzare informazioni
 - attributi -> proprietà delle entità
 - relazioni -> collegamenti logici tra entità
@@ -839,7 +839,7 @@ Descrive come i dati entrano nel sistema vengono elaborati memorizzati e inviati
 
 non rappresenta l'ordine temporale delle operazioni
 può essere inizialmente molto generale ma poi si può raffinare con più processi
-![[GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|224]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/15_agosto_appunti/assets/p038-fig-039.png|224]]
 ### SSA Structured System Analysis 
 SSA è una tecnica di analisi che porta alla costruzione di una specifica semi-formale, usando modelli come DFD e altre rappresentazioni strutturate.
 
@@ -977,7 +977,7 @@ ci sono diversi approcci per farlo ma sono tutti combinabili o alternative
 Si parte dal testo dei requisiti e si individuano le frasi nominali in particolare i sostantivi
 Ogni sostantivo viene inizialmente trattato come classe candidata
 Successivamente le candidate vengono classificate in rilevanti non rilevanti o fuzzy(non si sa se sceglierle)
-![[GPT PREMIUMS/16_agosto_appunti/assets/p044-fig-043.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p044-fig-043.png|500]]
 
 L'esempio dell'università mostra proprio questo passaggio: termini come `Course` o `Degree` possono diventare classi rilevanti, mentre concetti generici come `number` non lo diventano automaticamente.
 
@@ -993,7 +993,7 @@ Le classi vengono cercate a partire dagli scenari descritti negli Use Case
 - il testo che descrive il caso d'uso viene poi analizzato per trovare altre classi
 
 
-![[GPT PREMIUMS/16_agosto_appunti/assets/p046-fig-046.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p046-fig-046.png|500]]
 
 Nell'esempio del telemarketing, gli attori `Telemarketer` e `Supporter` diventano quindi classi rilevanti per il modello dei dati
 
@@ -1031,7 +1031,7 @@ Nomi
 - **Operazioni:** Come accennato nella parte precedente, l'aggiunta delle operazioni (i metodi della classe) viene ritardata. 
 	- Si aspetta di avere a disposizione il _modello comportamentale_, perché è da lì (es. dai sequence diagram) che capiremo quali azioni la classe deve effettivamente compiere.
 
-![[GPT PREMIUMS/16_agosto_appunti/assets/p047-fig-048.png|550]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p047-fig-048.png|550]]
 
 L'esempio universitario mostra questo raffinamento: nuove informazioni fanno evolvere il Class Diagram e alcuni concetti inizialmente incerti vengono promossi a vere classi.
 in questo esempio qua sopra si può notare come vengono espresse alcune proprietà
@@ -1059,7 +1059,7 @@ Un indizio importante è la presenza di un attributo il cui tipo non è un tipo 
 	- descrive il ruolo che gli oggetti assumono nell'associazione
 
 L'immagine mostra un modello in cui associazioni, molteplicità e role name vengono progressivamente specificati.
-![[GPT PREMIUMS/16_agosto_appunti/assets/p051-fig-052.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p051-fig-052.png|650]]
 
 è importante in una relazione evitare associazioni ternarie dove una relazione coinvolge tre classi
 - bisogna trasformarla in una rete di associazioni binarie
@@ -1080,7 +1080,7 @@ UML distingue due forme principali di relazioni di questo tipo
 	- rappresentata con un rombo pieno dalla parte del contenitore
 	- se il tutto viene eliminato, anche la parte perde senso/esistenza nel modello
 	- tratta i casi di Owns e Exclusive Owns
-![[GPT PREMIUMS/16_agosto_appunti/assets/p053-fig-054.png|550]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p053-fig-054.png|550]]
 
 L'esempio universitario mette a confronto i due casi: la carriera accademica può essere modellata come parte fortemente legata allo studente, mentre altre relazioni richiedono un legame meno forte.
 ##### Generalizzazione ed Ereditarietà 
@@ -1103,7 +1103,7 @@ L'**Object Diagram** rappresenta:
 - istanze di classi
 - valori o stato di oggetti specifici
 - collegamenti tra quelle istanze
-![[GPT PREMIUMS/16_agosto_appunti/assets/p055-fig-055.png|393]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p055-fig-055.png|393]]
 
 L'immagine mostra oggetti specifici dello scenario universitario e rende concrete relazioni che nel Class Diagram erano espresse a livello di classe.
 ### Modello comportamentale
@@ -1145,10 +1145,10 @@ La differenza fondamentale è:
 - **include** → comportamento necessario
 - **extend** → comportamento eventuale
 
-![[GPT PREMIUMS/16_agosto_appunti/assets/p056-fig-056.png|401]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p056-fig-056.png|401]]
 
 Nell'esempio universitario si vedono sia `include` sia `extend`: il diagramma mostra quindi non solo quali servizi esistono, ma anche quali scenari sono obbligatoriamente collegati e quali si attivano soltanto in certi casi.
-![[GPT PREMIUMS/16_agosto_appunti/assets/p057-fig-057.png|401]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p057-fig-057.png|401]]
 
 L'esempio Contact Management mostra invece bene la generalizzazione tra attori con responsabilità differenti.
 La **generalizzazione** è nelle frecce con **triangolo vuoto** tra gli attori
@@ -1187,7 +1187,7 @@ Questa differenza è fondamentale:
 - **merge** → riunisce alternative;
 - **join** → sincronizza attività parallele.
 
-![[GPT PREMIUMS/16_agosto_appunti/assets/p060-fig-060.png|425]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p060-fig-060.png|425]]
 
 L'esempio del noleggio video mostra branch, cicli, fork e join all'interno dello stesso scenario.
 L'Activity Diagram ci dice **quali attività devono essere svolte**
@@ -1209,7 +1209,7 @@ Descrive lo scambio di messaggi tra gli oggetti seguendo un rigoroso **ordine te
 
 Il diagramma rende quindi visibile non solo chi comunica con chi, ma soprattutto **in quale ordine**.
 
-![[CORSETTI/Immagini/Pasted image 20260420190701.png|525]]
+![[Pasted image 20260420190701.png|525]]
 #### Collaboration Diagram
 Più usato in fase di OOD.
 Invece di avere la linea del tempo, mostra gli oggetti disposti nello spazio e collegati dalle relazioni strutturali che esistono tra loro.
@@ -1251,7 +1251,7 @@ Per descrivere come il loro stato cambia nel tempo per alcuni oggetti ad esempio
 - Una **transizione** rappresenta il passaggio da uno stato a un altro
 - descritta con evento condizione e azione
 
-![[GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-065.png|450]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p065-fig-065.png|450]]
 #### Gestire la complessità dei modelli OOA
 Quando si progetta un sistema software reale, il Class Diagram diventa rapidamente un groviglio incomprensibile
 Se tutte le classi potessero comunicare liberamente con tutte le altre, il modello diventerebbe rapidamente difficile da comprendere e mantenere
@@ -1262,7 +1262,7 @@ Si organizzano gli elementi in gruppi e si limitano le comunicazioni
 - si evitano collegamenti arbitrari tra ogni parte del sistema
 
 così diventa tutto più gestibile
-![[GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/16_agosto_appunti/assets/p066-fig-067.png|500]]
 
 Per raggruppare fisicamente e logicamente queste classi, UML usa i **Package** (raffigurati come delle cartelline).
 - I package possono essere annidati l'uno dentro l'altro
@@ -1299,14 +1299,14 @@ Partendo dai requisiti testuali (es. "Ogni corso di laurea ha corsi obbligatori 
 Analizzando regole più specifiche (es. vincoli sui posti disponibili e approvazioni), le classi prendono forma.
 - Vengono assegnati gli attributi con i rispettivi tipi di dato. Ad esempio, `Course` riceve `course_code` (marcato come `<<PK>>`, Primary Key) e `credit_points`. `CourseOffering` riceve `year`, `semester` ed `enrolment_quota`.
 
-![[CORSETTI/Immagini/Pasted image 20260420185048.png|466]]
+![[Pasted image 20260420185048.png|466]]
 ### A.3 - Aggiunta delle Aggregazioni
 
 Il sistema richiede di mantenere uno storico accademico (`AcademicRecord`) e di sapere quale docente è responsabile di un corso (`AcademicInCharge`).
 - Si crea una **composizione** (rombo pieno, legame vitale) tra `Student` e `AcademicRecord`: lo storico non ha senso di esistere senza lo studente.
 - Si crea un'**aggregazione** (rombo vuoto) tra `Course` e `CourseOffering`: il corso logico "contiene" le sue edizioni annuali.
 
-![[CORSETTI/Immagini/Pasted image 20260420185527.png|441]]
+![[Pasted image 20260420185527.png|441]]
 ### A.5 - Use Case Diagram (Casi d'Uso)
 
 Si mappano gli attori e le loro azioni.
@@ -1314,7 +1314,7 @@ Si mappano gli attori e le loro azioni.
 - L'attore `Student Office` può "Fornire le istruzioni di iscrizione" (che **estende** `<<extend>>` il caso d'uso precedente, essendo un'azione opzionale).
 - L'inserimento del piano di studi (`Enter Program of Study`) **include** sempre `<<include>>` la sua validazione (`Validate Program of Study`).
 
-![[CORSETTI/Immagini/Pasted image 20260420185827.png|471]]
+![[Pasted image 20260420185827.png|471]]
 ### A.6 e A.7 - Sequence Diagram e Identificazione Operazioni
 
 Per capire come inserire un piano di studi, si modella l'interazione.
@@ -1322,7 +1322,7 @@ Per capire come inserire un piano di studi, si modella l'interazione.
 - Si verificano i requisiti tramite chiamate sincrone come `areYouValid()` (inviata allo Studente) e `areYouOpen()` (inviata all'Offerta Formativa).
 - **Risultato (A.7):** Grazie a questi messaggi, nel Class Diagram compaiono finalmente i metodi! La classe `Course` riceve l'operazione `areYouOpen()`, e `CourseOffering` riceve `areYouOpen()` e `addStudent()`.
 
-![[CORSETTI/Immagini/Pasted image 20260420190733.png|452]]
+![[Pasted image 20260420190733.png|452]]
 
 
 ## Software Project Management
@@ -1360,7 +1360,7 @@ Team con Chief Programmer
 - approccio gerarchico che riduce la complessità delle comunicazioni
 - ogni partecipante ha un suo ruolo specializzato e gli sviluppatori comunicano con un capo sviluppatore
 	- riduzione dei canali di comunicazione ma richiede persone estremamente competenti
-![[GPT PREMIUMS/17_agosto_appunti/assets/p068-fig-070.png|385]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p068-fig-070.png|385]]
 date le limitazioni viene poi evoluto il modello con una divisione delle responsabilità tra due team
 - team Leader per gli aspetti tecnici
 - team Manager per gli aspetti gestionali
@@ -1370,7 +1370,7 @@ Si introducono quindi:
 - livelli superiori di coordinamento;
 - canali di comunicazione tra team;
 - forme di *decision making* più decentralizzate.
-![[GPT PREMIUMS/17_agosto_appunti/assets/p069-fig-071.png|700]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p069-fig-071.png|700]]
 Il punto importante non è memorizzare un unico modello organizzativo “corretto”, ma capire che **la struttura del team influenza comunicazione, coordinamento e quindi tempi e costi del progetto**.
 
 ### Che cosa deve stabilire una pianificazione
@@ -1416,7 +1416,7 @@ $$Effort = \frac{Estimated\ LOC}{LOC/pm}$$
 - **Cost**:
 $$Cost = Estimated\ LOC \times \$/LOC$$
 
-![[GPT PREMIUMS/17_agosto_appunti/assets/p070-fig-072.png|443]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p070-fig-072.png|443]]
 
 problema: 
 bisogna stimare le LOC prima che il codice esista e inoltre dipende dal linguaggio di programmazione usato
@@ -1448,11 +1448,11 @@ ricordando che file non è un singolo file nel file system ma Indica un **gruppo
 	- dati che escono dal software
 - EQ- External Inquiry
 	- un input che genera immediatamente un output senza modificare archivi interni
-![[GPT PREMIUMS/17_agosto_appunti/assets/p071-fig-073.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p071-fig-073.png|600]]
 
 non è sufficiente contarli per ciascuno bisogna determinare una classe di complessità e si applica il peso previsto dalla tecnica
 
-![[GPT PREMIUMS/17_agosto_appunti/assets/p073-fig-075.png|373]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p073-fig-075.png|373]]
 La somma dei valori ponderati produce il conteggio non aggiustato **UFC**.
 Finora abbiamo però misurato soltanto **la complessità funzionale**
 Non abbiamo ancora considerato quanto il prodotto sia tecnicamente difficile da realizzare
@@ -1462,7 +1462,7 @@ Gli appunti considerano **14 Degree of Influence**. Per ciascun fattore viene as
 - `5` → influenza essenziale.
 
 Il fattore complessivo viene calcolato attraverso la formula riportata negli appunti:
-![[GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-076.png|285]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-076.png|285]]
 Il TCF non sostituisce il conteggio funzionale: lo **aggiusta** in base alla difficoltà tecnica.
 
 ##### Un ponte tra Functional Point e LOC il Backfiring
@@ -1474,7 +1474,7 @@ Questa conversione non rende FP e LOC la stessa misura:
 - FP misura la dimensione dal punto di vista della funzionalità;
 - LOC misura la dimensione del codice;
 - il backfiring permette di passare empiricamente dall'una all'altra quando un modello richiede LOC.
-![[GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-077.png|280]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p074-fig-077.png|280]]
 
 
 Una volta ottenuta una stima dimensionale in LOC, possiamo usarla come input per un modello algoritmico. Negli appunti il modello principale è **COCOMO**
@@ -1558,7 +1558,7 @@ Il **cammino critico** è la sequenza di task che determina la durata minima pos
 Quindi PERT risponde bene alla domanda:
 
 > **quali dipendenze tra task condizionano la durata del progetto?**
-![[GPT PREMIUMS/17_agosto_appunti/assets/p078-fig-080.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p078-fig-080.png|600]]
 
 Non rende però altrettanto immediato capire **in quali date di calendario** si svolgono le singole attività.
 Per questo viene affiancato dal diagramma di Gantt.
@@ -1573,7 +1573,7 @@ Permette di vedere:
 - quanto dura;
 - quali attività si sovrappongono.
 
-![[CORSETTI/Immagini/Pasted image 20260421100613.png]]
+![[Pasted image 20260421100613.png]]
 
 ### Documento SPMP - Software Project Management Plan
 
@@ -1664,7 +1664,7 @@ La suddivisione in moduli di un sistema software (**decomposizione modulare**) p
 > Di conseguenza: $E(p1+p2) > E(p1) + E(p2)$. 
 > Questo dimostra che risolvere due problemi piccoli separatamente costa meno fatica che risolvere il problema intero in un colpo solo.
 > 
-![[GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-083.png|450]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-083.png|450]]
 
 Ma come possiamo capire se abbiamo suddiviso bene il sistema?
 Servono due criteri complementari:
@@ -1710,7 +1710,7 @@ Si presentano cinque livelli, dal peggiore al migliore
 1. **Content (di Contenuto - Livello 1, Pessimo):** Un modulo entra a gamba tesa nell'implementazione dell'altro. Modifica il contenuto di un altro modulo, legge le sue variabili locali tramite spostamenti in memoria (offset), o effettua salti (branch) verso label interne dell'altro modulo. È disastroso.
 2. **Common (Comune - Livello 2):** Due o più moduli accedono a variabili globali in memoria.
     - _Esempio:_ Due moduli `cca` e `ccb` modificano e leggono una `global variable`. Un ciclo del tipo `while(global_variable == 0)` dipende totalmente da chi altro nel sistema la tocca.
-      ![[CORSETTI/Immagini/Pasted image 20260422175604.png|452]]
+      ![[Pasted image 20260422175604.png|452]]
       
 3. **Control (di Controllo - Livello 3):** Un modulo passa un "flag di controllo" ad un altro modulo per pilotarne esplicitamente l'esecuzione interna.
     - _Esempio:_ Il Modulo P chiama Q per fargli fare una cosa. Q ritorna un flag (es. "task non completato") imponendo a P di compiere un'azione specifica di conseguenza (es. "stampa messaggio di errore"). P e Q sono intimamente legati dalla logica di controllo.~~~~~~~~
@@ -1725,7 +1725,7 @@ Una scomposizione è ben fatta se, e solo se, permette di ottenere:
 Questi due concetti osservano il sistema da direzioni differenti:
 - **Cohesion** → guarda *dentro* il modulo;
 - **Coupling** → guarda *tra* moduli diversi.
-![[GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-084.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p082-fig-084.png|600]]
 
 
 
@@ -1756,7 +1756,7 @@ Nella fase di progettazione il riuso può avvenire a diversi livelli:
 - **Design Pattern**;
 - **architetture software**.
 
-![[GPT PREMIUMS/17_agosto_appunti/assets/p087-fig-089.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/17_agosto_appunti/assets/p087-fig-089.png|600]]
 
 Con questi principi abbiamo definito **come deve essere strutturata una buona soluzione software a livello generale**.
 
@@ -1934,7 +1934,7 @@ Può includere:
 4. si implementano soltanto quelli mancanti;
 5. i nuovi componenti possono arricchire il framework per utilizzi futuri.
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-090.png|500]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-090.png|500]]
 
 
 Viene evidenziata anche un'evoluzione tra UML 1 e UML 2.
@@ -1944,7 +1944,7 @@ Viene evidenziata anche un'evoluzione tra UML 1 e UML 2.
 
 Una componente viene rappresentata come un elemento con stereotipo `<<component>>` che realizza una determinata interfaccia.
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-091.png|383]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p091-fig-091.png|383]]
 
 ##### SOA - Service-Oriented Architecture
 
@@ -1986,7 +1986,7 @@ Per gestire questa comunicazione intermediata, esistono diversi **Broker Pattern
 3. il broker registra il servizio;
 4. il provider riceve conferma dell'avvenuta registrazione.
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p093-fig-092.png|265]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p093-fig-092.png|265]]
 
 La registrazione rende concretamente possibile la **Discoverability**.
 
@@ -2004,7 +2004,7 @@ Nel **Broker Forwarding** il broker rimane coinvolto in ogni richiesta:
 4. riceve la risposta;
 5. la inoltra al consumer.
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-093.png|346]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-093.png|346]]
 
 
 - migliore **Location Transparency**, perché eventuali cambiamenti della posizione del provider vengono gestiti dal broker ma ogni interazione passa attraverso il broker aumentando gli scambi
@@ -2017,7 +2017,7 @@ Nel **Broker Handle** il broker interviene soltanto nella fase iniziale:
 2. il broker restituisce un riferimento, o **service handle**;
 3. consumer e provider comunicano poi direttamente.
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-094.png|275]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p094-fig-094.png|275]]
 
 - se cambia la posizione del servizio, la Location Transparency è meno forte rispetto al Forwarding.
 
@@ -2034,7 +2034,7 @@ Il **Service Discovery Pattern** viene paragonato alle *pagine gialle*.
 4. il consumer sceglie quale utilizzare;
 5. da quel momento può proseguire con una delle modalità di interazione viste prima.
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p095-fig-095.png|330]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p095-fig-095.png|330]]
 
 I provider e consumer possono essere realizzati con tecnologie diverse quindi serve uno standard di comunicazione per scambiare messaggi
 
@@ -2067,7 +2067,7 @@ La descrizione specifica, in particolare:
 
 WSDL svolge quindi un ruolo analogo all'interfaccia pubblica di una classe: descrive **come usare il servizio senza esporne l'implementazione interna**
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p097-fig-099.png|347]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p097-fig-099.png|347]]
 
 
 **UDDI — Universal Description, Discovery and Integration** realizza il concetto di registro dei Web Services.
@@ -2087,7 +2087,7 @@ Il flusso complessivo diventa:
 6. invia la richiesta SOAP al provider;
 7. riceve la risposta SOAP.
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p096-fig-096.png|320]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p096-fig-096.png|320]]
 
 con il modello ***REST***
 
@@ -2114,9 +2114,9 @@ Negli appunti le **RESTful API** vengono collegate alle operazioni fondamentali:
 - `POST` → aggiungere un nuovo elemento a una collezione;
 - `PUT` → aggiornare un elemento identificato;
 - `DELETE` → eliminare un elemento identificato.
-![[GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-100.png|265]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-100.png|265]]
 
-![[GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-101.png|277]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/18_agosto_appunti/assets/p098-fig-101.png|277]]
 
 quando **una singola funzione logica richiede più operazioni o addirittura più servizi**: cosa succede se alcune operazioni riescono e altre falliscono?
 ##### Software Architectural Transaction Patterns
@@ -2150,7 +2150,7 @@ Una **Compound Transaction** divide una transazione complessa in più sottotrans
 La differenza rispetto a una transazione completamente atomica è che può essere possibile conservare le sottotransazioni già concluse con successo e annullare soltanto quelle fallite.
 - _Esempio:_ Un'agenzia di viaggi prenota per te il volo, l'hotel e l'auto a noleggio. Se l'auto a noleggio non è disponibile, non vuoi che il sistema ti cancelli automaticamente in blocco (rollback) anche il volo verso le Maldive! Il pattern permette "rollback parziali" e modifiche modulari.
 
-![[CORSETTI/Immagini/Pasted image 20260424172132.png|322]]
+![[Pasted image 20260424172132.png|322]]
 ***Long-Living Transaction Pattern***
 
 Alcune transazioni non possono essere completate rapidamente perché includono un **human in the loop**, cioè una decisione umana durante l'esecuzione
@@ -2237,7 +2237,7 @@ Gli elementi fondamentali usati nella struttura interna sono:
 - **Connector** → collega le parti o i ruoli e indica i percorsi attraverso cui possono comunicare;
 - **Port** → rappresenta un punto di interazione tra la classe e ciò che si trova all’esterno.
 Le interazioni avvengono tramite messaggi, mantenendo quindi una netta separazione tra l’interfaccia visibile e l’implementazione interna.
-![[assets/p107-fig-111.png|383]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p107-fig-111.png|383]]
 
 #### Class Diagram e Composite Structure Diagram
 
@@ -2245,7 +2245,7 @@ A questo punto è importante distinguere due diagrammi che possono sembrare simi
 
 Il **Class Diagram** descrive principalmente le classi e le relazioni tra esse. Il **Composite Structure Diagram**, invece, entra **all’interno di una classe strutturata** e mostra le parti concrete che collaborano per realizzarne il comportamento.
 
-![[assets/p108-fig-112.png|750]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p108-fig-112.png|750]]
 
 - con il Class Diagram ragioniamo sulle relazioni tra tipi e classi
 - con il Composite Structure Diagram osserviamo la struttura interna di un particolare elemento di progettazione
@@ -2276,7 +2276,7 @@ Il **Deployment Diagram** rappresenta la configurazione della piattaforma di ese
 
 Una volta definita la piattaforma, bisogna decidere **quali processi debbano essere eseguiti su quali nodi**. Questa attività prende il nome di **Process-to-Node Allocation**.
 
-![[assets/p110-fig-115.png|424]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p110-fig-115.png|424]]
 
 **separare interfaccia e implementazione**.
 Per ogni componente occorre quindi distinguere:
@@ -2285,7 +2285,7 @@ Per ogni componente occorre quindi distinguere:
 
 UML rappresenta le interfacce fornite e richieste attraverso porte e apposite notazioni grafiche.
 
-![[assets/p117-fig-126.png|550]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/DRAFT/ISW_obsidian_full/ISW_obsidian_full/assets/p117-fig-126.png|550]]
 
 Una **provided interface** descrive una funzionalità che il componente mette a disposizione degli altri; una **required interface** descrive invece una funzionalità di cui il componente ha bisogno.
 
@@ -2353,7 +2353,7 @@ Entrambi separano la logica di creazione dal codice che usa gli oggetti, ma lo f
 L'**Abstract Factory** fornisce un'interfaccia per creare **famiglie di oggetti correlati** senza specificarne direttamente le classi concrete
 Il problema tipico nasce quando un'applicazione deve funzionare con più famiglie compatibili di prodotti. Il client dovrebbe poter cambiare famiglia senza essere riscritto.
 
-![[assets/p069-fig-032.png|536]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p069-fig-032.png|536]]
 
 I ruoli principali sono:
 
@@ -2368,7 +2368,7 @@ Il vantaggio principale è che il client rimane indipendente dalle classi concre
 
 Il **Factory Method** affronta un problema simile, ma non crea una famiglia completa. Definisce invece un metodo per creare un prodotto e lascia alle **sottoclassi** la scelta della classe concreta da istanziare.
 
-![[assets/p069-fig-033.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p069-fig-033.png|650]]
 
 I ruoli principali sono:
 - **Product** → interfaccia comune degli oggetti prodotti;
@@ -2383,7 +2383,7 @@ Una volta creati gli oggetti, bisogna decidere **come farli collaborare e compor
 L'**Adapter** permette di riutilizzare una classe esistente quando la sua interfaccia è incompatibile con quella richiesta dal client.
 Il problema è quindi di compatibilità, non di funzionalità: la classe esistente svolge già il lavoro necessario, ma il client non sa utilizzarla nel formato in cui si presenta.
 
-![[assets/p070-fig-034.png|650]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p070-fig-034.png|650]]
 
 I partecipanti sono:
 - **Client** → usa l'interfaccia attesa;
@@ -2394,7 +2394,7 @@ L'Adapter introduce quindi un **ponte tra due interfacce incompatibili**, evitan
 
 Il **Composite** serve quando bisogna rappresentare una struttura gerarchica composta da elementi semplici e gruppi di elementi, ma il client dovrebbe poterli trattare **allo stesso modo**.
 
-![[assets/p071-fig-035.png|469]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p071-fig-035.png|469]]
 
 I ruoli fondamentali sono:
 
@@ -2409,7 +2409,7 @@ L'idea centrale è quindi:
 Questo permette di costruire strutture ad albero e di manipolarle in maniera uniforme.
 
 Il **Decorator** permette di aggiungere dinamicamente nuove responsabilità a un oggetto **senza modificarne la classe di base** e senza creare una grande gerarchia di sottoclassi.
-![[assets/p071-fig-036.png|452]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p071-fig-036.png|452]]
 
 I ruoli principali sono:
 - **Component** → interfaccia comune;
@@ -2424,7 +2424,7 @@ I pattern comportamentali entrano in gioco quando la struttura degli oggetti è 
 
 L'**Observer** definisce una dipendenza **uno-a-molti** tra oggetti: quando cambia lo stato di un oggetto, gli altri oggetti interessati vengono notificati automaticamente.
 
-![[assets/p072-fig-037.jpeg|360]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p072-fig-037.jpeg|360]]
 
 I ruoli principali sono:
 - **Subject** → mantiene l'elenco degli observer e fornisce operazioni per registrarli o rimuoverli
@@ -2441,7 +2441,7 @@ La sequenza logica è:
 
 Il **Template Method** definisce nella superclasse la **struttura generale di un algoritmo**, lasciando alle sottoclassi l'implementazione di alcuni passaggi.
 
-![[assets/p073-fig-038.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p073-fig-038.png|600]]
 
 Il pattern separa quindi:
 - una parte **invariante** dell'algoritmo, definita una volta nella classe astratta;
@@ -2453,7 +2453,7 @@ I ruoli principali sono:
 Il vantaggio è evitare di duplicare la struttura generale dell'algoritmo in più classi.
 
 Lo **Strategy** serve quando esistono più algoritmi alternativi per svolgere la stessa operazione e vogliamo poterli sostituire senza modificare il client.
-![[assets/p074-fig-039.png|434]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p074-fig-039.png|434]]
 
 I ruoli principali sono:
 - **Strategy** → interfaccia comune degli algoritmi;
@@ -2526,7 +2526,7 @@ I due concetti fondamentali sono:
 - fan-out elevato → il modulo interagisce o influenza molti altri elementi;
 - entrambi elevati → il modulo occupa una posizione molto centrale e può diventare un punto critico dell'architettura.
 
-![[assets/p078-fig-040.jpeg|299]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p078-fig-040.jpeg|299]]
 
 $$IF(M_i) = [fan\text{-}in(M_i) \times fan\text{-}out(M_i)]^2$$
 Un valore alto segnala un modulo fortemente connesso all'ambiente circostante e quindi potenzialmente più complesso da comprendere, modificare e testare
@@ -2551,7 +2551,7 @@ $$FG = \{N,E\}$$
 - ricorsione;
 - concorrenza.
 
-![[assets/p079-fig-041.png|600]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/20_agosto_appunti/20_agosto_appunti/assets/p079-fig-041.png|600]]
 
 ##### Complessità ciclomatica
 
@@ -2607,7 +2607,7 @@ Il **Quality Triangle** distingue tre famiglie di attività:
 - **Revision** → modifica e manutenzione del prodotto
 - **Transition** → adattamento o trasferimento del prodotto verso nuovi contesti e utilizzi
 
-![[assets/p146-fig-167.png|330]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p146-fig-167.png|330]]
 
 Il punto del triangolo non è soltanto classificare le attività. Serve a mostrare che **la qualità continua a essere rilevante dopo il rilascio**
 
@@ -2652,7 +2652,7 @@ Un attributo può contribuire a più indici e può avere un impatto:
 - **positivo** → un valore maggiore migliora l'indice
 - **negativo** → un valore maggiore lo peggiora
 
-![[assets/p148-fig-168.png|486]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p148-fig-168.png|486]]
 
 Gli attributi non sono sempre misurabili direttamente con una formula. Per rendere più sistematica la valutazione viene introdotto il **Checklist Method**.
 
@@ -2667,7 +2667,7 @@ La valutazione non viene affidata a una sola persona ma vi è un **Checklist Eva
 
 Ogni membro esamina inizialmente il materiale in modo indipendente. Successivamente, attraverso **Walkthrough** o **Inspection**, il team confronta le risposte e cerca di arrivare a una valutazione condivisa.
 
-![[assets/p152-fig-177.png|396]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p152-fig-177.png|396]]
 
 l progetto ha bisogno di qualcosa di più generale: un'attività che controlli in modo continuativo **come il software viene prodotto e se vengono rispettate le regole definite dall'organizzazione**.
 
@@ -2796,7 +2796,7 @@ Qui si ricollega la **complessità ciclomatica** studiata con le metriche:
 
 Quindi la complessità ciclomatica non serve soltanto a descrivere la complessità strutturale del codice: può anche indicare **quanti percorsi indipendenti devono essere considerati per costruire un insieme di test di base**.
 
-![[assets/p157-fig-178.png|469]]
+![[UNI/ANNO 3/ARCHIVIO/INGEGNERIA DEL SOFTWARE/GPT PREMIUMS/21_agosto_appunti/assets/p157-fig-178.png|469]]
 
 
 #### Integration Testing
