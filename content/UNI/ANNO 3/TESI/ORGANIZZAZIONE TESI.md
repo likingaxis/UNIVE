@@ -1,6 +1,3 @@
-- clona la repository
-- scarica il progetto sul fisso
-- leggi e studia il tutto
 - rileggi obiettivo 0 e cosa è stato fatto
 - leggi obiettivo 1
 - fare discorsi con antigravity per capire cosa va fatto

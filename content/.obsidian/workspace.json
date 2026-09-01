@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "c669058a4fe5c611",
+        "id": "fd1f1fdf18d59aea",
         "type": "tabs",
         "children": [
           {
-            "id": "d0a363639915f489",
+            "id": "31aa7ef108013736",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/ANNO 3/TESI/ORGANIZZAZIONE TESI.md",
+                "file": "UNI/ANNO 3/TESI/IDEE SPARSE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ORGANIZZAZIONE TESI"
+              "title": "IDEE SPARSE"
             }
           }
         ]
@@ -187,19 +187,20 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "385e3b437a6aac05",
+  "active": "31aa7ef108013736",
   "lastOpenFiles": [
-    "UNI/ANNO 3/TESI/Untitled.md",
-    "UNI/ANNO 3/TESI/Materiale tutor/GUIDE.md",
-    "UNI/ANNO 3/TESI/SPIEGAZION/COSE UTILI DA SAPERE PER OBIETTIVO 1.md",
-    "UNI/ANNO 3/TESI/SPIEGAZION/architettura_completa.md",
     "UNI/ANNO 3/TESI/ARGOMENTI PREREQUISITI.md",
-    "UNI/ANNO 3/TESI/DRAFT.md",
     "UNI/ANNO 3/TESI/IDEE SPARSE.md",
     "UNI/ANNO 3/TESI/KNOWLEDGE.md",
     "UNI/ANNO 3/TESI/MODIFICHE EFFETTUATE.md",
     "UNI/ANNO 3/TESI/my_background_and_vision.md",
     "UNI/ANNO 3/TESI/ORGANIZZAZIONE TESI.md",
+    "UNI/ANNO 3/TESI/Untitled.base",
+    "UNI/ANNO 3/TESI/Untitled.md",
+    "UNI/ANNO 3/TESI/Materiale tutor/GUIDE.md",
+    "UNI/ANNO 3/TESI/SPIEGAZION/COSE UTILI DA SAPERE PER OBIETTIVO 1.md",
+    "UNI/ANNO 3/TESI/SPIEGAZION/architettura_completa.md",
+    "UNI/ANNO 3/TESI/DRAFT.md",
     "UNI/ANNO 3/TESI/TESI.md",
     "UNI/ANNO 3/TESI/PDF DI SPIEGAZIONE.md",
     "UNI/ANNO 3/TESI/EMAIL AL PASQUALE 2.md",
@@ -216,7 +217,6 @@
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/FASE_4_PROMPT_CHATGPT_SLIDE_E_GUIDA_PPTX.md",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/FASE_3_PROMPT_CHATGPT_DISCORSO.md",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/FASE_2_PROMPT_PERPLEXITY.md",
-    "UNI/ANNO 3/GENDER INCLUSION/donne-gaming-inclusione.marp (1).md",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/donne-gaming-inclusione.html",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/donne-gaming-inclusione.pptx",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/Presentazione_Gaming_Donne.html",
@@ -225,7 +225,6 @@
     "UNI/ANNO 3/GENDER INCLUSION/DRAFT/OUTPUT PERPLEXITY",
     "UNI/ANNO 3/GENDER INCLUSION/DRAFT",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE GENDER/Screenshot 2026-09-01 152637.png",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE GENDER/Screenshot 2026-09-01 152829.png",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE GENDER/Screenshot 2026-09-01 152759.png",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE GENDER/Screenshot 2026-09-01 152836.png",

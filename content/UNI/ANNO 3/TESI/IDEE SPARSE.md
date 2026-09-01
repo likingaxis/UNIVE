@@ -65,3 +65,6 @@ DIVIDO IN FASI COSA VA FATTO
 - Una volta che il prototipo tramite prompt Markdown funziona in modo impeccabile, scrivere il motore Python dentro `vulcatest/core/graph_engine.py`.
 - Creare i nodi in Python (`planner_node`, `executor_node`, `evaluator_node`).
 - Sostituire le chiamate umane `/comando` con il passaggio automatico dello Stato (JSON) tra i nodi del grafo. Essendo API separate, l'isolamento del contesto per l'Executor sarà garantito per design.
+
+
+Utilizzare Qwen per fare pentesting in locale (ha senso?)
