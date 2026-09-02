@@ -2,6 +2,8 @@
 Problema ancora aperto di obiettivo 0
 
 ma così con i prompt di questo agente non rischio che verification non viene messo su nuove vulnerabilità?
+Leggi antigravity
+
 #### Obiettivo 1:
 Lo dividerei in 
 - White box testing
@@ -25,19 +27,151 @@ Nel tuo progetto potresti arrivare a una filosofia del tipo:
 Questo punto è fondamentale perché giustifica un'architettura guidata dagli artefatti di design e differenzia nettamente il White-Box dal futuro ramo Black-Box.
 
 Interchangeability by design
+***PLANNER***
+- Riceve `STORYLINE.md`, `writeup.md` e gli altri artefatti utili della challenge.
+- Genera un `ATTACK_PLAN` strutturato, con:
+    - step;
+    - dipendenze;
+    - input richiesti;
+    - output attesi;
+    - checklist;
+    - artifact/evidence richiesti.
+- Può essere:
+    - deterministico;
+    - LLM-based;
+    - ibrido.
+- Viene mantenuto separato da VulcaMind per:
+    - non sovraccaricare il nodo di design;
+    - permettere di sostituirlo e benchmarkarlo.
+- Rimane da valutare se, in futuro, l'`ATTACK_PLAN` possa essere prodotto direttamente da VulcaMind.
+***ORCHESTRATOR***
+- Componente principalmente **deterministico**.
+- Gestisce l'esecuzione step-by-step dell'`ATTACK_PLAN`.
+- Per ogni step:
+    1. legge dipendenze e input richiesti;
+    2. costruisce un piccolo `ExecutorContext`;
+    3. invoca l'Executor;
+    4. riceve lo `StepResult`;
+    5. verifica schema, checklist e completezza;
+    6. aggiorna stato, metriche e artifact;
+    7. decide `next / retry / stop`.
+
+***TestState***
+Rappresenta una struttura dati delle **informazioni attendibili e utili alla run**, ad esempio:
+- step completati/falliti;
+- valori estratti;
+- credenziali;
+- servizi scoperti;
+- sessioni;
+- retry;
+- riferimenti alle evidence.
+
+viene fatto dall'orchestrator in modo deterministico(se gli stati prodotti da Executor sono effettivamente schematici)
+L'Executor non legge o modifica direttamente il `TestState`.
+Può invece richiedere informazioni tramite:
+```text
+request_context(key)
+```
+L'Orchestrator recupera e restituisce soltanto il dato richiesto, evitando di sovraccaricare il contesto dell'Executor.
+
+***Evidence Store***
+Contiene i dati più pesanti o completi:
+- stdout/stderr;
+- trace;
+- screenshot;
+- file;
+- response HTTP;
+- artifact;
+- log;
+- altre evidenze grezze.
+Il `TestState` mantiene principalmente riferimenti a questi elementi.
+
+***Retry Policy***
+L'Orchestrator applica una Retry Policy definita.
+
+I casi semplici possono essere gestiti deterministicamente.
+
+Se il fallimento è ambiguo o richiede interpretazione, viene chiamato il `Diagnostician`.
+
+***EXECUTOR***
+- Riceve uno step dell'Attack Plan e un piccolo `ExecutorContext`.
+- Interagisce realmente con la macchina target.
+- Segue la checklist associata allo step.
+- Produce un risultato strutturato.
+```text
+StepResult
+├── actions
+├── tool_calls
+├── stdout
+├── stderr
+├── raw_responses
+├── extracted_values
+├── artifacts
+├── checks_performed
+└── candidate_evidence
+```
+- Artifact, trace e metriche dovrebbero essere raccolti il più possibile automaticamente tramite codice/tooling, evitando di affidare all'LLM la loro compilazione manuale.
+- Può effettuare piccoli adattamenti operativi.
+- I retry significativi dello step vengono invece controllati dall'Orchestrator.
+- Può richiedere informazioni aggiuntive tramite `request_context()`.
+Se lo `StepResult` non soddisfa checklist o contratto richiesto, l'Orchestrator lo rimanda all'Executor per completare ciò che manca.
+
+***DIAGNOSTICIAN***
+- Viene chiamato solo quando un errore non è facilmente classificabile con regole deterministiche.
+- Evita di sovraccaricare l'Executor con reasoning diagnostico.
+- Analizza:
+    - errore dell'Executor;
+    - errore transitorio;
+    - problema dell'Attack Plan;
+    - comportamento inatteso del target;
+    - probabile problema nella macchina generata.
+- Produce una diagnosi strutturata e una raccomandazione.
+Esempio:
+```text
+servizio previsto dalla storyline non disponibile
+→ probabile problema della macchina
+→ retry non consigliato
+→ failure candidato
+```
+Non deve inventare un nuovo percorso alternativo per risolvere la challenge: nel White-Box l'obiettivo rimane verificare il percorso intenzionale.
+***FINAL EVALUATOR***
+- Riceve dall'Orchestrator il risultato complessivo della run.
+- Analizza:
+    - Attack Plan;
+    - TestState;
+    - errori;
+    - retry;
+    - artifact/evidence;
+    - diagnostica;
+    - metriche.
+- Produce il `REPORT.md` finale.
+La valutazione può essere **ibrida**:
+Parte deterministica
+Gestisce casi evidenti, ad esempio:
+```text
+Step 1 PASS
+Step 2 PASS
+Step 3 FAIL
+Step 4 NOT_REACHED
+
+→ challenge non conforme
+```
+Parte LLM
+Serve per:
+- interpretare le cause;
+- descrivere le discrepanze;
+- individuare il componente probabilmente responsabile;
+- produrre una diagnosi utile.
+
+Il report potrà essere utilizzato successivamente da
+- Self-Healing;
+- debugging;
+- validazione finale;
+- eventuale avvio del ramo Black-Box.
 
 
+L'obiettivo non è quindi fissare a priori la migliore architettura, ma costruire VulcaTest in modo da poter **confrontare sperimentalmente più configurazioni e determinare quali risultano più affidabili, efficienti e adatte al White-Box Conformance Testing**.
 
-L'architettura è la seguente
-- PLANNER
-	- riceve storyline.md writeup.md e tutto ciò che può essere utile
-	- restituisce un ATTACK_PLAN.md con un determinato formato+checklist
-	- utilizzato per non sovraccaricare il nodo vulcamind (capire sennò se fare ATTACK PLAN direttamente da li)
-- ORCHESTRATOR
-	- deterministico
-- EXECUTOR
-- DIAGNOSTICIAN
-- FINAL EVALUATOR
 
 
 parte benchmark forse richiederà più tempo della realizzazione effettiva
