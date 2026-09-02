@@ -20,14 +20,27 @@ Nel tuo progetto potresti arrivare a una filosofia del tipo:
 
 
 ##### White-box testing
-SCRIVI QUI ARCHITETTURA DOMANI MATTINA
-- FAI SCHEMI
+> **Verificare automaticamente che il percorso intenzionale progettato per la challenge sia realmente eseguibile sulla macchina generata e che gli step previsti producano i risultati attesi.**
 
+Questo punto è fondamentale perché giustifica un'architettura guidata dagli artefatti di design e differenzia nettamente il White-Box dal futuro ramo Black-Box.
+
+Interchangeability by design
+
+
+
+L'architettura è la seguente
+- PLANNER
+	- riceve storyline.md writeup.md e tutto ciò che può essere utile
+	- restituisce un ATTACK_PLAN.md con un determinato formato+checklist
+	- utilizzato per non sovraccaricare il nodo vulcamind (capire sennò se fare ATTACK PLAN direttamente da li)
+- ORCHESTRATOR
+	- deterministico
+- EXECUTOR
+- DIAGNOSTICIAN
+- FINAL EVALUATOR
 
 
 parte benchmark forse richiederà più tempo della realizzazione effettiva
-- tenere in considerazione che orchestrator può essere deterministico <=> attack plan dice cose come nello step 2 la password viene usata allo step 6
-
 ###### DOMANDE PROGETTUALI SUL WHITE BOX ARCHITECTURE
 
 Sì, capito: vuoi domande che **servano davvero a migliorare il design prima di implementarlo**, non domande da difesa orale.
