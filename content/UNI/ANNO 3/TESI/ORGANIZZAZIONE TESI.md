@@ -1,7 +1,5 @@
-2 settembre
-- esegui implementation plan
-- studia obiettivo 0
 3 settembre
+- studia obiettivo 0
 - inizia obiettivo 1
 - studia per obiettivo 1
 	- fai solo plan e execute
