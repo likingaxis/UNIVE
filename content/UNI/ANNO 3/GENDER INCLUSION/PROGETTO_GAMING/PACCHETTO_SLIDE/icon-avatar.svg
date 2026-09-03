@@ -1,0 +1,8 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Character head / avatar -->
+  <circle cx="24" cy="17" r="7.5" stroke="#A78BFA" stroke-width="3" fill="#0A1828"/>
+  <!-- Character shoulders / torso -->
+  <path d="M12 36 C12 28, 17 26, 24 26 C31 26, 36 28, 36 36" stroke="#A78BFA" stroke-width="3" stroke-linecap="round"/>
+  <!-- Narrative sparkle / crown accent -->
+  <path d="M24 5 L25.5 8 L28.5 9.5 L25.5 11 L24 14 L22.5 11 L19.5 9.5 L22.5 8 Z" fill="#A78BFA"/>
+</svg>

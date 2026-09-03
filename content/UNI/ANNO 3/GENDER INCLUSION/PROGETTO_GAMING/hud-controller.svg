@@ -1,0 +1,111 @@
+<svg width="320" height="280" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Soft shadow -->
+    <filter id="screen-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="controller-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.75"/>
+    </filter>
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 1. MONITOR / SCREEN -->
+  <!-- Bezel -->
+  <rect x="30" y="16" width="260" height="165" rx="18" fill="#0A1526" stroke="#37D6E8" stroke-width="3.5" filter="url(#screen-shadow)"/>
+  <!-- Inner Screen -->
+  <rect x="42" y="28" width="236" height="141" rx="10" fill="#0E243E"/>
+
+  <!-- Screen subtle scanlines -->
+  <line x1="42" y1="65" x2="278" y2="65" stroke="rgba(55,214,232,0.08)" stroke-width="1.5"/>
+  <line x1="42" y1="100" x2="278" y2="100" stroke="rgba(55,214,232,0.08)" stroke-width="1.5"/>
+  <line x1="42" y1="135" x2="278" y2="135" stroke="rgba(55,214,232,0.08)" stroke-width="1.5"/>
+
+  <!-- ON SCREEN: PAC-MAN -->
+  <g transform="translate(60, 56)">
+    <!-- Body -->
+    <path d="M 32 32 L 60 16 A 34 34 0 1 0 60 48 Z" fill="#FACC15" stroke="#EAB308" stroke-width="2.5"/>
+    <!-- Eye -->
+    <circle cx="34" cy="14" r="3.5" fill="#0E243E"/>
+  </g>
+
+  <!-- ON SCREEN: DOTS -->
+  <circle cx="144" cy="88" r="4.5" fill="#37D6E8" filter="url(#glow-cyan)"/>
+  <circle cx="162" cy="88" r="4.5" fill="#37D6E8" filter="url(#glow-cyan)"/>
+  <circle cx="180" cy="88" r="4.5" fill="#37D6E8" filter="url(#glow-cyan)"/>
+
+  <!-- ON SCREEN: MUSHROOM -->
+  <g transform="translate(200, 58)">
+    <!-- Mushroom Cap -->
+    <path d="M 5 34 C 5 12, 45 12, 45 34 Z" fill="#FF6B6B" stroke="#E11D48" stroke-width="2.5"/>
+    <!-- Spots -->
+    <circle cx="15" cy="24" r="4" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="35" cy="24" r="4" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="25" cy="16" r="3" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Stem -->
+    <path d="M 15 34 C 15 47, 35 47, 35 34 Z" fill="#F4F7FB" stroke="#CBD5E1" stroke-width="2.5"/>
+    <!-- Eyes -->
+    <rect x="20" y="32" width="2" height="6" rx="1" fill="#0F172A"/>
+    <rect x="28" y="32" width="2" height="6" rx="1" fill="#0F172A"/>
+  </g>
+
+  <!-- MONITOR STAND (behind controller) -->
+  <path d="M 136 181 L 126 210 L 194 210 L 184 181 Z" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+
+  <!-- 2. FOREGROUND: MODERN CONTROLLER WITH FULLY ROUNDED ERGONOMIC HANDLES -->
+  <g transform="translate(56, 140)" filter="url(#controller-shadow)">
+    <!-- Controller Body: smooth rounded handles like the reference -->
+    <!--
+      Left handle rounds smoothly at bottom: (32, 110) with radius ~18
+      Right handle rounds smoothly at bottom: (176, 110) with radius ~18
+    -->
+    <path d="
+      M 48 24 
+      C 68 12, 140 12, 160 24 
+      C 182 36, 198 72, 194 96 
+      C 190 114, 168 126, 150 110 
+      C 140 100, 134 82, 126 74 
+      C 116 68, 92 68, 82 74 
+      C 74 82, 68 100, 58 110 
+      C 40 126, 18 114, 14 96 
+      C 10 72, 26 36, 48 24 Z" 
+      fill="#F4F7FB" stroke="#0F2138" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- Central Top Bridge Accent -->
+    <path d="M 80 20 L 128 20 L 120 38 L 88 38 Z" fill="#E2E8F0"/>
+
+    <!-- D-PAD (Left) -->
+    <g transform="translate(42, 45)">
+      <path d="M 9 0 H 17 V 9 H 26 V 17 H 17 V 26 H 9 V 17 H 0 V 9 H 9 Z" fill="#0F2138" stroke="#1E293B" stroke-width="1.5"/>
+      <circle cx="13" cy="13" r="3" fill="#37D6E8"/>
+    </g>
+
+    <!-- ACTION BUTTONS (Right - ABXY) -->
+    <g transform="translate(138, 42)">
+      <circle cx="18" cy="7" r="5" fill="#37D6E8" stroke="#0F2138" stroke-width="2"/>
+      <circle cx="29" cy="17" r="5" fill="#FF6B6B" stroke="#0F2138" stroke-width="2"/>
+      <circle cx="7" cy="17" r="5" fill="#5EE6A8" stroke="#0F2138" stroke-width="2"/>
+      <circle cx="18" cy="27" r="5" fill="#A78BFA" stroke="#0F2138" stroke-width="2"/>
+    </g>
+
+    <!-- ANALOG STICKS (Ergonomic placement with colored centers) -->
+    <g transform="translate(74, 76)">
+      <circle cx="0" cy="0" r="12" fill="#0F2138" stroke="#37D6E8" stroke-width="2.5"/>
+      <circle cx="0" cy="0" r="5" fill="#37D6E8"/>
+    </g>
+    <g transform="translate(134, 76)">
+      <circle cx="0" cy="0" r="12" fill="#0F2138" stroke="#A78BFA" stroke-width="2.5"/>
+      <circle cx="0" cy="0" r="5" fill="#A78BFA"/>
+    </g>
+
+    <!-- Select / Start Buttons -->
+    <rect x="88" y="46" width="10" height="4" rx="2" fill="#64748B"/>
+    <rect x="110" y="46" width="10" height="4" rx="2" fill="#64748B"/>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow-donut" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Track Circle -->
+  <circle cx="120" cy="120" r="88" stroke="rgba(169,184,204,0.12)" stroke-width="16" fill="none" />
+
+  <!-- Men segment (52% = ~287 deg, starting from top 270 deg) -->
+  <!-- Circumference = 2 * PI * 88 = 552.92. 52% is 287.5 -->
+  <circle cx="120" cy="120" r="88" 
+    stroke="rgba(167,139,250,0.3)" 
+    stroke-width="16" 
+    stroke-dasharray="287.5 552.92" 
+    stroke-dashoffset="-265.4"
+    stroke-linecap="round" 
+    fill="none" />
+
+  <!-- Women segment (48% = 265.4 of 552.92), starting from top -->
+  <circle cx="120" cy="120" r="88" 
+    stroke="#37D6E8" 
+    stroke-width="16" 
+    stroke-dasharray="265.4 552.92" 
+    stroke-dashoffset="0" 
+    transform="rotate(-90 120 120)"
+    stroke-linecap="round" 
+    filter="url(#glow-donut)"
+    fill="none" />
+
+  <!-- Center Text -->
+  <text x="120" y="112" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="44" font-weight="900" fill="#F4F7FB">48%</text>
+  <text x="120" y="138" text-anchor="middle" font-family="'Aptos Mono', monospace" font-size="12" font-weight="700" fill="#37D6E8" letter-spacing="1.5">DONNE</text>
+  <text x="120" y="156" text-anchor="middle" font-family="'Aptos Mono', monospace" font-size="10.5" fill="#A9B8CC" opacity="0.8">52% UOMINI</text>
+</svg>

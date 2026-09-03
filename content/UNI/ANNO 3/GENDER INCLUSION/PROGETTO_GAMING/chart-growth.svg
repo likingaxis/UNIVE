@@ -1,0 +1,59 @@
+<svg width="440" height="240" viewBox="0 0 440 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Mint Area Gradient -->
+    <linearGradient id="mint-area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5EE6A8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#5EE6A8" stop-opacity="0.0"/>
+    </linearGradient>
+    <filter id="glow-mint" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Grid lines -->
+  <line x1="30" y1="50" x2="410" y2="50" stroke="rgba(169,184,204,0.12)" stroke-dasharray="3 3"/>
+  <line x1="30" y1="110" x2="410" y2="110" stroke="rgba(169,184,204,0.12)" stroke-dasharray="3 3"/>
+  <line x1="30" y1="170" x2="410" y2="170" stroke="rgba(169,184,204,0.2)"/>
+
+  <!-- Y-axis labels -->
+  <text x="24" y="54" text-anchor="end" font-family="'Aptos Mono', monospace" font-size="10" fill="#64748B">+15%</text>
+  <text x="24" y="114" text-anchor="end" font-family="'Aptos Mono', monospace" font-size="10" fill="#64748B">+8%</text>
+  <text x="24" y="174" text-anchor="end" font-family="'Aptos Mono', monospace" font-size="10" fill="#64748B">0%</text>
+
+  <!-- X-axis labels -->
+  <text x="50" y="196" text-anchor="middle" font-family="'Aptos Mono', monospace" font-size="11" fill="#A9B8CC">ANNO PREC.</text>
+  <text x="340" y="196" text-anchor="middle" font-family="'Aptos Mono', monospace" font-size="11" fill="#A9B8CC">OGGI (IIDEA)</text>
+
+  <!-- TRAJECTORY 1: WOMEN (+14%) -->
+  <!-- Area under curve -->
+  <path d="M 50 170 C 140 170, 230 65, 340 58 L 340 170 Z" fill="url(#mint-area)"/>
+  <!-- Stroke -->
+  <path d="M 50 170 C 140 170, 230 65, 340 58" stroke="#5EE6A8" stroke-width="3.5" stroke-linecap="round" filter="url(#glow-mint)"/>
+  <!-- End Point -->
+  <circle cx="340" cy="58" r="5.5" fill="#5EE6A8"/>
+  <circle cx="340" cy="58" r="9" stroke="#5EE6A8" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Label 1: Women -->
+  <rect x="354" y="44" width="76" height="26" rx="4" fill="rgba(94,230,168,0.15)" stroke="rgba(94,230,168,0.4)" stroke-width="1"/>
+  <text x="392" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="800" fill="#5EE6A8">+14,0%</text>
+  <text x="215" y="85" font-family="'Aptos Mono', monospace" font-size="11" font-weight="700" fill="#5EE6A8">DONNE ↗</text>
+
+  <!-- TRAJECTORY 2: MEN (+2.5%) -->
+  <path d="M 50 170 C 140 170, 230 155, 340 150" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="340" cy="150" r="4.5" fill="#A78BFA"/>
+
+  <!-- Label 2: Men -->
+  <rect x="354" y="138" width="76" height="24" rx="4" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.3)" stroke-width="1"/>
+  <text x="392" y="154" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#A78BFA">+2,5%</text>
+  <text x="215" y="158" font-family="'Aptos Mono', monospace" font-size="10.5" font-weight="600" fill="#A78BFA">UOMINI →</text>
+
+  <!-- Callout Pill: 5.6x faster -->
+  <g transform="translate(60, 16)">
+    <rect x="0" y="0" width="168" height="24" rx="12" fill="rgba(94,230,168,0.12)" stroke="rgba(94,230,168,0.35)" stroke-width="1"/>
+    <text x="84" y="16" text-anchor="middle" font-family="'Aptos Mono', monospace" font-size="10.5" font-weight="800" fill="#5EE6A8" letter-spacing="0.5">▲ CRESCITA 5,6× PIÙ VELOCE</text>
+  </g>
+</svg>
