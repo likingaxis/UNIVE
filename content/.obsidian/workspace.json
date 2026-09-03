@@ -4,39 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "e7bf93684f888817",
+        "id": "ff051ed9fb2f823d",
         "type": "tabs",
         "children": [
           {
-            "id": "2e20c6be36a50063",
+            "id": "aff79fd4acebb201",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/ANNO 3/GENDER INCLUSION/Copione orale completo.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Copione orale completo"
-            }
-          },
-          {
-            "id": "a172cb970c46ddf5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/ANNO 3/GENDER INCLUSION/TEORIA_ESSENZIALE.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "TEORIA_ESSENZIALE"
+              "title": "New tab"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -202,12 +183,17 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "a172cb970c46ddf5",
+  "active": "aff79fd4acebb201",
   "lastOpenFiles": [
     "UNI/ANNO 3/GENDER INCLUSION/Copione orale completo.md",
+    "UNI/ANNO 3/GENDER INCLUSION/TEORIA_CONCETTI_CHIAVE_ORALE.md",
     "UNI/ANNO 3/GENDER INCLUSION/TEORIA_ESSENZIALE.md",
-    "UNI/ANNO 3/GENDER INCLUSION/donne-gaming-inclusione.marp (1).md",
+    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/GUIDA_ORALE_CONCETTI_CHIAVE.md",
+    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/GUIDA_ORALE_CONCETTI_CHIAVE.md",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/donne-gaming-inclusione.pdf",
+    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/chart-parity.svg",
+    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/chart-growth.svg",
+    "UNI/ANNO 3/GENDER INCLUSION/donne-gaming-inclusione.marp (1).md",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide9.JPG",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide8.JPG",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide7.JPG",
@@ -216,10 +202,8 @@
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide4.JPG",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide3.JPG",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide2.JPG",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide1.JPG",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/donne-gaming-inclusione-editabile-raw.pptx",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/opzioni_grafica_slide6.png",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide3",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_render_new",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/~$donne-gaming-inclusione-editabile.pptx",
@@ -246,8 +230,6 @@
     "UNI/ANNO 3/TESI/DRAFT.md",
     "UNI/ANNO 3/TESI/ARGOMENTI PREREQUISITI.md",
     "UNI/ANNO 3/ORGANIZZAZIONI ESAMI.md",
-    "UNI/ANNO 3/TESI/my_background_and_vision.md",
-    "UNI/ANNO 3/TESI/PDF DI SPIEGAZIONE.md",
-    "UNI/ANNO 3/TESI/EMAIL AL PASQUALE 2.md"
+    "UNI/ANNO 3/TESI/my_background_and_vision.md"
   ]
 }
