@@ -11,10 +11,14 @@
             "id": "bb32f837f45f76d8",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/GENDER INCLUSION/TEORIA_CONCETTI_CHIAVE_ORALE.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "TEORIA_CONCETTI_CHIAVE_ORALE"
             }
           }
         ]
@@ -185,7 +189,12 @@
   },
   "active": "bb32f837f45f76d8",
   "lastOpenFiles": [
+    "UNI/ANNO 3/COSA FARE.md",
+    "UNI/ANNO 3/ORGANIZZAZIONI ESAMI.md",
+    "UNI/ANNO1 M/profilo.md",
     "UNI/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
+    "UNI/PROMPT CHAT GPT.md",
+    "UNI/SCHEDA LUCI WOW.md",
     "UNI/ANNO1 M/ORARIO.md",
     "index.md",
     "UNI/PROFILO/Profilo%20CV.md",
@@ -207,11 +216,6 @@
     "UNI/PROFILO/resocontoesamitriennale/REPORT_ALGORITMI_2.md",
     "UNI/PROFILO/resocontoesamitriennale/REPORT_MATEMATICA_DISCRETA.md",
     "UNI/PROFILO/resocontoesamitriennale/REPORT_INFORMATION_RETRIEVAL.md",
-    "UNI/PROFILO/resocontoesamitriennale/REPORT_RETI_DI_CALCOLATORI.md",
-    "UNI/PROFILO/resocontoesamitriennale/REPORT_ARCHITETTURA.md",
-    "UNI/PROFILO/resocontoesamitriennale/REPORT_ALGORITMI_1.md",
-    "UNI/PROFILO/resocontoesamitriennale/REPORT_CALCOLO_NUMERICO.md",
-    "UNI/PROFILO/resocontoesamitriennale/REPORT_PROBABILITA_E_STATISTICA.md",
     "UNI/TRIENNALE",
     "UNI/PROFILO/resocontoesamitriennale",
     "UNI/ANNO1 M",
