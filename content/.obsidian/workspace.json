@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "ff051ed9fb2f823d",
+        "id": "da5e0a3de033347f",
         "type": "tabs",
         "children": [
           {
-            "id": "aff79fd4acebb201",
+            "id": "bb32f837f45f76d8",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/B2R1.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "B2R1"
+              "title": "New tab"
             }
           }
         ]
@@ -80,7 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 499.10003662109375
+    "width": 487.10003662109375
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -187,28 +183,43 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "aff79fd4acebb201",
+  "active": "bb32f837f45f76d8",
   "lastOpenFiles": [
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/PROMPT EXECUTOR.md",
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/B2R1.md",
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/PROMPT PLANNER.md",
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/FASE 1.md",
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/fasi.md",
-    "UNI/ANNO 3/TESI/ORGANIZZAZIONE TESI.md",
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/Untitled.md",
+    "UNI/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
+    "UNI/ANNO1 M/ORARIO.md",
+    "index.md",
+    "UNI/PROFILO/Profilo%20CV.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_VULNERABILITA.md",
+    "UNI/PROFILO/resocontoesamitriennale/INDICE_GENERALE.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_GENDER_INCLUSION.md",
+    "UNI/PROFILO",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_PROGRAMMAZIONE_WEB.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_INTELLIGENZA_ARTIFICIALE.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_SISTEMI_OPERATIVI.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_LINGUAGGI_DI_PROGRAMMAZIONE.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_PROGRAMMAZIONE_1.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_FONDAMENTI_DI_INFORMATICA.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_INGEGNERIA_DEL_SOFTWARE.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_LOGICA_RETI_LOGICHE.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_RICERCA_OPERATIVA.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_BASI_DI_DATI.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_GEOMETRIA_ALGEBRA_LINEARE.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_ALGORITMI_2.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_MATEMATICA_DISCRETA.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_INFORMATION_RETRIEVAL.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_RETI_DI_CALCOLATORI.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_ARCHITETTURA.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_ALGORITMI_1.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_CALCOLO_NUMERICO.md",
+    "UNI/PROFILO/resocontoesamitriennale/REPORT_PROBABILITA_E_STATISTICA.md",
+    "UNI/TRIENNALE",
+    "UNI/PROFILO/resocontoesamitriennale",
+    "UNI/ANNO1 M",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX",
     "UNI/ANNO 3/TESI/OBIETTIVO 1",
-    "UNI/ANNO 3/TESI/TESI.md",
-    "UNI/ANNO 3/COSA FARE.md",
-    "UNI/ANNO 3/GENDER INCLUSION/Copione orale completo.md",
-    "UNI/ANNO 3/GENDER INCLUSION/TEORIA_CONCETTI_CHIAVE_ORALE.md",
-    "UNI/ANNO 3/GENDER INCLUSION/TEORIA_ESSENZIALE.md",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/GUIDA_ORALE_CONCETTI_CHIAVE.md",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/GUIDA_ORALE_CONCETTI_CHIAVE.md",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/donne-gaming-inclusione.pdf",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/chart-parity.svg",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/chart-growth.svg",
-    "UNI/ANNO 3/GENDER INCLUSION/donne-gaming-inclusione.marp (1).md",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide9.JPG",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide8.JPG",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide7.JPG",
@@ -219,21 +230,6 @@
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6/Slide2.JPG",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide6",
     "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/donne-gaming-inclusione-editabile-raw.pptx",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide3",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_render_new",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/~$donne-gaming-inclusione-editabile.pptx",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/~$donne-gaming-inclusione-fit.pptx",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/~$donne-gaming-inclusione-fit-fixed.pptx",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/COME_PRESENTARE.md",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/PACCHETTO_SLIDE/donne-gaming-inclusione.marp.md",
-    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/CORREZIONI SLIE.md",
-    "UNI/ANNO 3/GENDER INCLUSION/Struttura delle slide — “Donne, Gaming e Inclusione”.md",
-    "UNI/ANNO 3/GENDER INCLUSION/OUTPUT GPT FASE 3.md",
-    "UNI/ANNO 3/GENDER INCLUSION/OUTPUT PERPLEXITY.md",
-    "UNI/ANNO 3/TESI/MODIFICHE EFFETTUATE.md",
-    "UNI/ANNO 3/TESI/Call 2-09 tutor.md",
-    "UNI/ANNO 3/TESI/tips della call 0.md",
-    "UNI/ANNO 3/TESI/IDEE SPARSE.md",
-    "UNI/ANNO 3/TESI/Materiale tutor/GUIDE.md"
+    "UNI/ANNO 3/GENDER INCLUSION/PROGETTO_GAMING/pptx_check_slide3"
   ]
 }
