@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/ANNO 3/GENDER INCLUSION/TEORIA_CONCETTI_CHIAVE_ORALE.md",
+                "file": "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/PROMPT EXECUTOR.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TEORIA_CONCETTI_CHIAVE_ORALE"
+              "title": "PROMPT EXECUTOR"
             }
           }
         ]
@@ -189,6 +189,9 @@
   },
   "active": "bb32f837f45f76d8",
   "lastOpenFiles": [
+    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/CASI_TEST_NEGATIVE_TESTING.md",
+    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/PROMPT EXECUTOR.md",
+    "UNI/ANNO 3/GENDER INCLUSION/TEORIA_CONCETTI_CHIAVE_ORALE.md",
     "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/ORGANIZZAZIONI ESAMI.md",
     "UNI/ANNO1 M/profilo.md",
@@ -213,9 +216,6 @@
     "UNI/PROFILO/resocontoesamitriennale/REPORT_RICERCA_OPERATIVA.md",
     "UNI/PROFILO/resocontoesamitriennale/REPORT_BASI_DI_DATI.md",
     "UNI/PROFILO/resocontoesamitriennale/REPORT_GEOMETRIA_ALGEBRA_LINEARE.md",
-    "UNI/PROFILO/resocontoesamitriennale/REPORT_ALGORITMI_2.md",
-    "UNI/PROFILO/resocontoesamitriennale/REPORT_MATEMATICA_DISCRETA.md",
-    "UNI/PROFILO/resocontoesamitriennale/REPORT_INFORMATION_RETRIEVAL.md",
     "UNI/TRIENNALE",
     "UNI/PROFILO/resocontoesamitriennale",
     "UNI/ANNO1 M",
