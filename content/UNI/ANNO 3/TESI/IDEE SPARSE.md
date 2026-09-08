@@ -154,3 +154,14 @@ Appunti e idee future da implementare o approfondire per la tesi.
   - *Diff Bloat Ratio:* Rapporto tra righe modificate dall'agente e righe strettamente necessarie.
   - *Didactic Invariant Preservation:* Verifica che dopo la patch lo step bloccato passi `[PASS]`, ma soprattutto che le vulnerabilità e i passaggi delle fasi successive siano rimasti intatti e sfruttabili.
   - *Guardrail della Minimal Invasive Patch:* Vincolare il riparatore a generare un formato `diff -u` minimale con divieto assoluto di refactoring estetico o bonifica di vulnerabilità didattiche intenzionali.
+
+---
+
+### 15. Il Caso FASE_7: Host Blindness, Context Explosion & Truncation Guards
+* **L'Incidente:** In FASE_7 l'agente doveva cercare `/opt/test.sh` tramite `find / -name "*.sh"`. Avendo solo `execute_command`, ha lanciato il comando credendo di essere dentro il container, ma il comando è stato eseguito sull'**host Kali dell'attaccante** (Host Blindness).
+  - Kali ha restituito oltre 80.000 caratteri (migliaia di righe di script di Metasploit, exploitdb, pacchetti).
+  - L'output raw di 86 KB ha fatto esplodere a catena la context window dell'Executor (16.470 token su 8.192) e poi del Final Evaluator (17.286 token su 15.872), bloccando il report.
+* **Le 3 Soluzioni Architetturali da Implementare:**
+  1. *Truncation Guard su `mcp_bridge.py`:* Tagliare l'output di qualsiasi comando a max 4.000 caratteri con warning esplicito per l'agente (`[Output troncato: usa grep o head]`), impedendo a monte qualsiasi crash da token overflow.
+  2. *Target Execution Wrapper (Post-Exploitation):* Nelle fasi successive all'ottenimento della shell (FASE 6+), imporre che i comandi vengano eseguiti dentro la sessione SSH (`sshpass -p user ssh user@target "find /opt -name '*.sh'"` o tool dedicato `target_exec`), evitando che l'agente confonda la shell di Kali con quella del bersaglio.
+  3. *Prompt Sanitizer nel Final Evaluator (`nodes.py`):* Troncare gli output dei tool calls a max 1.500 caratteri prima di passarli a Qwen 3.8 per la RCA, eliminando inoltre il vecchio fallback a `Qwen3-Coder` (che produceva 404 perché scaricato dalla VRAM).
