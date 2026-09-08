@@ -40,3 +40,6 @@
 [STEP 6] Entrypoint CLI & Esecuzione End-to-End
 
 (main.py: uv run python main.py -> test su container Pizzeria)
+
+
+Supporto a più indirizzi IP
