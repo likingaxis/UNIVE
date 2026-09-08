@@ -1,79 +1,156 @@
-### Obiettivo 1 idee
+# 💡 Idee Future di Progetto & Roadmap (VulcaTest)
 
-- da quello che ho capito obiettivo 1 è diviso in 2 parti
-	- verifica della macchina e fix
-	- verifica di unintended ways
+Appunti e idee future da implementare o approfondire per la tesi.
 
-- scrivere un toolbox.md che prende `yaml+file` mio md con comandi consigliati da usare(forse utile per la parte 2)
-#### Agente di verifica macchina e fix
-- script in python che prende
-	- STORYLINE_STND.md oppure STORYLINE_B2R.md
-	- lo formatta nel miglior modo possibile per l'agente
-- l'agente prova attacca la macchina scrivendo un suo writeup.md
-	- si confronta writeup_attackwhite.md con writeup.md
-	- per progettare questo agente devo fare semplice brainstorming e reasoning con ai per generare un prompt giusto? un agente dentro si fa semplicemente a partire da un prompt e ho finito?
+---
 
-#### Agente di verifica unintended ways
-- Strutturare VulcaTEST in almeno 2 agenti
-	- 1 scrive linee guida su cosa eseguire(pianificazione) basandosi su STORYLINE.md
-		- scrivendo un file chiamato ATTACK_PLAN.md
-		- usare anche Storyline_B2R.md al planner
-	- 1 le esegue effettivamente(azione)
-		- nel frattempo scrive ATTACK.md
-- confrontare writeup vulcaTEST ATTACK.md e ATTACK_PLAN.md con writeup vulcaFORGE writeup.md
-	- per trovare discrepanze
-- utilizzare un file TOOLBOX.md che contiene dei comandi che può utilizzare(fase non unintended way)
-	- basandoti sugli yaml e sul mio file che avevo fatto per l'esame
+### 1. Golden Path Test (Verifica del Successo Completo a 10 Step)
+* **Cosa significa:** Finora abbiamo testato e dimostrato il ramo in cui la macchina fallisce (`FASE_2 [FAIL]`). Dobbiamo testare anche il ramo in cui la macchina è sana e conforme al 100%.
+* **Come fare:** Allineare `FASE_2` alla realtà (cioè cercare il link `orari.php` invece del modulo chat inesistente) e far girare tutta la catena: LFI $\rightarrow$ estrazione password $\rightarrow$ SSH login $\rightarrow$ Privilege Escalation con sudo nano $\rightarrow$ Flag di root `[PASS]`.
+* **Valore per la tesi:** Dimostra che il sistema sa sia bocciare una macchina rotta sia promuovere e certificare una macchina perfetta.
 
-- **(Opzionale / Fase 2)**: Passare queste discrepanze a un Agente Riparatore per eseguire il _Self-Healing_ (auto-correzione del codice sorgente Ansible
+---
 
-NEW:
-- Aggiungere sistema di screen per vedere le interfacce? possibilità di fare call di un tool che mostra la schermata attuale
-- Fare benchmark con diversi modelli, MCP
-	- lista modelli che possono fare pentesting Locali/non
-- prendere macchine fatte da loro per fare benchmarking
-- creare un sistema di benchmarking accurato per capire se il sistema sta funzionando davvero
+### 2. Sistema di Screenshot & Ispezione Visiva (Visual QA Multimodale)
+* **L'intuizione:** Spesso le web app didattiche usano JavaScript, bottoni o form grafici. Con un semplice `curl` o `grep` nell'HTML grezzo rischi di non vedere se un elemento è nascosto da una regola CSS (`display: none`), se la pagina si rompe visivamente o se il layout non è navigabile.
+* **Come implementarlo:**
+  - Aggiungere un tool all'Executor (es. Playwright, Chromium headless o `browser_agent_inspect` di HexStrike) che apre l'URL e scatta uno screenshot PNG salvandolo nell'Evidence Store.
+  - Passare l'immagine a un modello Vision (es. Qwen2.5-VL locale o Gemini Flash Vision) chiedendogli: *"Il pulsante di login o il modulo di supporto è visibile e cliccabile nella schermata?"*.
+* **Valore per la tesi:** Trasforma VulcaTest da semplice strumento CLI a framework avanzato di **Visual Conformance Testing**.
+
+---
+
+### 3. Closed-Loop Self-Healing con VulcaForge
+* **L'intuizione:** VulcaTest genera già `healing_ticket.json` con il componente colpevole (es. `webapps/pizzeria/index.php`) e la patch consigliata. Ora dobbiamo chiudere il cerchio collegandolo a VulcaForge.
+* **Come implementarlo:**
+  - Creare un agente riparatore (o script di patching) dentro VulcaForge che riceve il ticket JSON.
+  - L'agente applica la modifica al template o al playbook Ansible, ricompila il container e re-innesca in automatico `main.py` di VulcaTest.
+  - Se il secondo test passa `[PASS]`, il ciclo di autoriparazione è concluso con successo!
+* **Valore per la tesi:** È il punto più alto del progetto: dimostra una piattaforma completamente autonoma capace di auto-diagnosticarsi e auto-ripararsi.
+
+---
+
+### 4. Benchmark Comparativo tra Modelli (Locale vs Cloud)
+* **L'intuizione:** Per la tesi serve dimostrare *perché* abbiamo fatto certe scelte tecnologiche con dati sperimentali alla mano.
+* **Cosa confrontare:**
+  - Far girare lo stesso test su diversi modelli: **Qwen 3 Coder 30B**, **Qwen 3.8 27B**, **Gemini 3.8 Flash**, **Claude 3.5 Sonnet**, **Llama 3.3 70B**.
+  - **Metriche da misurare:**
+    - *Success Rate:* Quanti step completano correttamente?
+    - *Refusal Rate:* Quante volte il modello cloud si rifiuta di eseguire comandi di pentesting/exploit per via dei filtri etici?
+    - *Tempo e Velocità:* Token al secondo e durata totale del test.
+    - *Costi:* 0€ della soluzione locale su workstation vs costo in token delle API cloud.
+
+---
+
+### 5. Benchmark su un Dataset di più Macchine del Laboratorio
+* **L'intuizione:** Finora il banco di prova principale è stato *Pizzeria B2R*. Per dare validità scientifica generale al framework, dobbiamo testarlo su più ambienti.
+* **Come implementarlo:**
+  - Selezionare 3-5 macchine diverse create per gli esami universitari o per VulcAIn, che coprano vulnerabilità differenti (es. SQL Injection, Command Injection, path traversal, exploit su permessi SUID).
+  - Creare uno script runner batch che esegue VulcaTest su tutte le macchine e compila una tabella riassuntiva con le metriche complessive.
+
+---
+
+### 6. Modulo Black-Box (Ricerca di Unintended Ways & Bypass)
+* **L'intuizione:** Solo DOPO che la macchina è stata certificata conforme via White-Box, possiamo chiederci: *"Ci sono scorciatoie che permettono a uno studente furbetto di diventare root senza fare la strada voluta dal professore?"*.
+* **Come implementarlo:**
+  - Lanciare un agente Executor "cieco": conosce solo l'IP del target e i tool consentiti, senza avere l'Attack Plan.
+  - L'agente cerca misconfiguration comuni: file di backup `.bak`, password di default, porte lasciate aperte per errore, permessi `777`.
+  - Se trova un modo per diventare root diverso dalla storyline, genera una segnalazione di "Unintended Bypass".
+
+---
+
+### 7. Ingegnerizzazione dell'Orchestratore di Generazione in Python
+* **L'intuizione:** Tenere Ansible per la configurazione dei servizi dentro i container (è lo standard del settore e funziona benissimo), ma **unificare e ripulire tutta la logica di generazione delle macchine in moduli Python moderni**.
+* **Come strutturarlo:**
+  - Sostituire eventuali script bash sparsi con classi Python tipizzate (es. `VulcaForgeEngine`) per leggere i manifesti, gestire i template Jinja2 e invocare le build Docker.
+  - Questo rende immediato e naturale l'aggancio tra VulcaForge e VulcaTest per il Self-Healing.
+
+---
+
+### 8. Gestione Sessioni Interattive & Reverse Shell: VulcaHarness (Stateful Session Broker)
+* **Il Limite Teorico degli Agenti LLM (Stateless RPC vs Stateful Stream):**
+  - Tutti i framework correnti per agenti di cybersecurity (HexStrike, AutoGen, CrewAI, OpenAI tools) operano nel paradigma **Stateless Request/Response (RPC)**: l'agente invia una stringa di comando, il server lancia `subprocess.run()`, attende la morte del processo e restituisce l'output.
+  - La realtà dell'Offensive Security e del Penetration Testing richiede invece canali bidirezionali a stati (**Stateful Duplex Channels / PTY / TCP Sockets**):
+    1. *Prompt interattivi a metà esecuzione:* comandi come `ssh`, `su`, `sudo -i`, `passwd`, o database client (`mysql`) chiedono input su TTY e con i runner sincroni vanno in hang/timeout (come visto in FASE_6 di Pizzeria B2R).
+    2. *Connessioni asincrone in ingresso (Reverse Shells):* payload da `revshells.com` (bash `/dev/tcp`, python, netcat, php) richiedono che la macchina attaccante tenga aperta una porta in ascolto (`listen`), non bloccante, per poi interagire con la shell catturata lungo più turni dell'LLM.
+    3. *Persistenza dello stato operativo (Context & Working Directory):* senza sessioni a stati, ogni turno perde `cd`, variabili d'ambiente (`export`) e privilegi acquisiti.
+    4. *Sequenze GTFOBins / Escape interattivi:* l'interazione con editor come `sudo nano /etc/passwd` o `vi` richiede l'invio di byte di controllo (`Ctrl+X`, `\r`) dentro un terminale già allocato.
+
+* **L'Architettura di VulcaHarness (Micro-modulo di ~160 righe su Kali):**
+  - Un demone leggero in Python (`vulca_harness.py`) residente sulla macchina attaccante (Kali Linux) ed esposto come server indipendente **FastMCP** (es. su porta `8889`), mentre HexStrike continua a gestire i suoi 150 tool batch sulla porta `8888` senza alcun conflitto.
+  - Gestisce un registro di sessioni in memoria `sessions = {id: SessionObject}` e implementa un multiplexer I/O non-bloccante tramite `pty` e `asyncio`.
+  - **Le 4 Primitive Universali esposte all'Agente:**
+    1. `harness_spawn(command, pty=True) -> session_id`: lancia comandi locali allocando un vero pseudo-terminale (es. SSH, GDB, `su`, client DB).
+    2. `harness_listen(port, protocol="tcp") -> session_id`: apre un listener server TCP asincrono in background per catturare qualsiasi reverse shell senza bloccare il flusso dell'agente.
+    3. `harness_interact(session_id, input_data=None, timeout=2.0) -> output`: invia byte/comandi/password alla sessione attiva e legge l'output con idle-drain non-bloccante e pulizia codici ANSI.
+    4. `harness_close(session_id)` e `harness_list()`: ispezione e distruzione controllata dei socket e dei processi figli.
+
+* **Scalabilità e Aggiunta a Costo Zero di Nuovi Tool e Driver:**
+  - L'Harness rende l'agente **completamente agnostico rispetto al mezzo di comunicazione**. L'LLM interagisce sempre e solo con `interact(session_id, command)`:
+    - *Container & Cloud:* `docker exec -it` o `kubectl exec` vengono gestiti come semplici sessioni PTY.
+    - *Framework C2:* sessioni Metasploit (`meterpreter`) o agenti Sliver/Havoc possono essere incapsulati nello stesso broker.
+    - *Tooling Helper di alto livello:* permette di costruire sopra l'Harness tool composti come `session_upload_file` (trasferimento file in base64 dentro la sessione attiva) o `session_privesc_check`.
+
+* **Disaccoppiamento Pulito (Separation of Concerns):**
+  - **VulcaTest (Windows / LangGraph):** il *Cervello* (logica di pianificazione, FSM a stati finiti, validazione contratti Pydantic, self-healing).
+  - **HexStrike (Kali / Porta 8888):** la *Cassetta degli attrezzi batch* (Nmap, Gobuster, Nikto, Nuclei per scansioni pesanti una tantum).
+  - **VulcaHarness (Kali / Porta 8889):** il *Sistema nervoso interattivo* (canali I/O persistenti, reverse shell e PTY streaming).
+
+* **Valore Scientifico e Accademico per la Tesi:**
+  - Dimostra che il framework non si limita a usare wrapper di terze parti o workaround fragili (`expect` inline), ma affronta e risolve formalmente uno dei problemi aperti più discussi nella letteratura degli agenti autonomi di sicurezza: la transizione da *stateless tool-use* a *stateful reactive environments*.
 
 
+---
 
+### 9. Evidence Carving & OCR per Artefatti Complessi (PDF, PCAP, Immagini)
+* **Il problema:** Se una challenge nasconde una password in un PDF scansionato, in una cattura di rete `.pcap` o in un'immagine con steganografia, l'agente testuale che fa `curl` si ritrova byte binari illeggibili o è completamente cieco.
+* **Come risolverlo:**
+  - *Carving da terminale:* Insegnare all'agente a usare tool specifici su Kali (`pdftotext` per PDF testuali, `tshark` per PCAP, `strings` ed `exiftool` per metadati).
+  - *OCR & Multimodalità:* Se il PDF è un'immagine scansionata, estrarre il PNG e passarlo a `tesseract` o a un modello Vision (es. Qwen-VL o Gemini Flash) per leggere il testo scritto a mano o nella foto.
 
+---
 
-#### SOLUZIONE
-DIVIDO IN FASI COSA VA FATTO
-##### Fase 1: Creazione dell'Infrastruttura e del `TOOLBOX.md`
-- Creare la struttura di cartelle indipendente `VULCAIN/vulcatest/sessions/` per separare l'ambiente di QA da quello del Builder e del Designer.
-- Recuperare il file degli appunti/comandi dell'esame del tesista.
-- Scansionare le vulnerabilità del registry di VulcaForge per dedurre i tool necessari.
-- Redigere il file statico `TOOLBOX.md` (salvato in `vulcatest/core/`) che conterrà la lista rigida dei comandi bash autorizzati (es. sintassi esatta per nmap, curl, ssh, nc) limitando così lo "spazio d'azione" dell'agente.
+### 10. Writeup Generator Automatico per gli Studenti (Da Trace a Guida Didattica)
+* **L'intuizione:** Quando una macchina supera tutti gli step (`[CONFORME]`), abbiamo nell'Evidence Store l'audit trail perfetto: comandi esatti funzionanti, log di output reali, flag estratti e screenshot.
+* **Come implementarlo:**
+  - Un modulo downstream che rielabora questo trace e compila automaticamente la guida illustrata ufficiale della challenge (`WRITEUP_GENERATED.md`).
+  - Risparmia ore di lavoro manuale al docente e garantisce che la soluzione spiegata agli studenti corrisponda al 100% alla macchina reale.
 
-##### Fase 2: Creazione del workflow `.agents/workflows/vulcatest_planner.md`
-- Creare il prompt per l'Agente Planner (l'assistente del professore).
-- **Input:** Il workflow obbligherà l'agente a leggere la `STORYLINE_B2R.md` (il copione) e il `TOOLBOX.md` (i limiti tecnici).
-- **Output:** L'agente dovrà generare un file strutturato chiamato `ATTACK_PLAN.md` (da salvare nella rispettiva cartella in `vulcatest/sessions/<macchina>/`) contenente la sequenza esatta dei comandi da lanciare e i *success criteria*.
+---
 
-##### Fase 3: Creazione del workflow `.agents/workflows/vulcatest_executor.md`
-- Creare il prompt per l'Agente Executor (lo studente bendato / il pentester).
-- **Input:** Il workflow lo obbligherà a leggere ESCLUSIVAMENTE l'`ATTACK_PLAN.md`.
-- **Esecuzione:** L'agente userà il tool `run_command` per lanciare materialmente i comandi contro il container Docker in esecuzione.
-- **Output:** Durante l'esecuzione, compilerà il file `ATTACK.md` con gli output reali del terminale (es. "Porta 80 non raggiungibile: errore 404").
+### 11. Matrice di Iniezione Guasti (Negative Testing Sistematico a 5 Livelli)
+* **L'intuizione:** Per validare scientificamente la capacità diagnostica di VulcaTest, non basta testare un guasto casuale, ma serve una batteria di difetti controllati iniettati apposta nei sorgenti IaC.
+* **I 5 livelli di difetto da testare:**
+  1. *Rete:* Porta chiusa o bindata solo su `127.0.0.1` invece che su `0.0.0.0`.
+  2. *Web/App:* Socket FastCGI/PHP-FPM spento (`502 Bad Gateway`) o file mancanti in webroot.
+  3. *Autenticazione:* Password errata nei file di configurazione o permessi sbagliati su chiavi SSH (`chmod 777` che fa scattare lo `StrictModes`).
+  4. *Privilege Escalation:* Bit SUID mancante su un binario o sintassi errata nel file `/etc/sudoers`.
+  5. *Flag:* Permessi errati su `/root/flag.txt` o file vuoto.
+* **Valore per la tesi:** Permette di calcolare la *Confusion Matrix* della Root Cause Analysis (quante volte l'LLM identifica esattamente il file e la causa del guasto).
 
-##### Fase 4: Creazione del workflow `.agents/workflows/vulcatest_evaluator.md`
-- Creare il prompt per l'Agente Evaluator (il giudice / mergiatore).
-- **Input:** L'agente raccoglierà sul tavolo la `STORYLINE_B2R.md`, il `WRITEUP.md` generato da VulcaForge e l'`ATTACK.md` reale.
-- **Output:** Genererà il documento finale `REPORT.md` (il vero output dell'Obiettivo 1 della tesi) in cui rileverà eventuali discrepanze logiche tra la teoria e la pratica.
+---
 
-##### Fase 5: Testing Prototipale Interattivo (Pizzeria)
-- Avviare il container della macchina "Chepizzachiama?".
-- **Isolamento del Contesto (Prevenzione Bleeding):**
-  1. Eseguire `/vulcatest_planner` nella chat corrente.
-  2. Aprire obbligatoriamente una **NUOVA CHAT PULITA** per invocare `/vulcatest_executor`, garantendo che non possa leggere la Storyline in cronologia e barare.
-  3. Lanciare `/vulcatest_evaluator` per generare il report finale.
-- Correggere eventuali "allucinazioni" affinando i prompt dei 3 workflow appena creati.
+### 12. Adattamento Dinamico del Budget di Thinking per Modelli di Reasoning
+* **Il problema:** I modelli "ragionatori" (come Qwen 3.8) su prompt didattici lunghi rischiano di generare oltre 10.000 token di ragionamento interno, esaurendo il limite (`max_tokens`) prima di emettere il testo finale.
+* **Come risolverlo:**
+  - Un middleware dinamico nell'SDK che calcola la finestra utile e forza parametri controllati (`reasoning_effort: "medium"` o `enable_thinking: False` a seconda se il nodo richiede sintesi o codice), prevenendo a monte qualsiasi blocco da saturazione token.
 
-##### Fase 6: Porting su LangGraph (Python)
-- Una volta che il prototipo tramite prompt Markdown funziona in modo impeccabile, scrivere il motore Python dentro `vulcatest/core/graph_engine.py`.
-- Creare i nodi in Python (`planner_node`, `executor_node`, `evaluator_node`).
-- Sostituire le chiamate umane `/comando` con il passaggio automatico dello Stato (JSON) tra i nodi del grafo. Essendo API separate, l'isolamento del contesto per l'Executor sarà garantito per design.
+---
 
+### 13. Script di Benchmark & Generazione Tabelle LaTeX per la Tesi
+* **L'intuizione:** Dopo aver eseguito decine di test su varie macchine, avremo molti file `run_summary.json` con metriche preziose (tempi, tool calls, ratei di conformità).
+* **Come implementarlo:**
+  - Uno script Python dedicato (`generate_thesis_tables.py`) che aggrega tutti i JSON dell'Evidence Store, calcola medie e deviazioni standard e genera direttamente tabelle formattate in sintassi **LaTeX** (`\begin{tabular}...`).
+  - Pronto per essere copiato e incollato direttamente nel capitolo sperimentale della tesi.
 
-Utilizzare Qwen per fare pentesting in locale (ha senso?)
+---
+
+### 14. Benchmark su Goal Drift, Patch Bloat & Didactic Preservation nel Self-Healing
+* **Il problema:** Quando un LLM riceve il compito di riparare un file sorgente o un playbook Ansible sulla base del ticket di healing, rischia di entrare in un "loop perfezionistico" o di subire un drift:
+  - *Patch Bloat:* Riscrive 100 righe di CSS o layout quando bastava inserire un form minimale di 5 righe.
+  - *Scope Creep:* Aggiunge librerie o funzionalità extra non richieste dalla storyline didattica.
+  - *Il "Paradosso del Secure-by-Default":* I modelli di coding sono addestrati a sanificare le vulnerabilità. Se il riparatore vede una falla didattica (es. l'LFI `include($_GET['file'])`), rischia di "sanificarla" per perfezionismo, rendendo la sfida impossibile da risolvere per gli studenti!
+* **Come misurarlo e benchmarkarlo per la tesi:**
+  - *Diff Bloat Ratio:* Rapporto tra righe modificate dall'agente e righe strettamente necessarie.
+  - *Didactic Invariant Preservation:* Verifica che dopo la patch lo step bloccato passi `[PASS]`, ma soprattutto che le vulnerabilità e i passaggi delle fasi successive siano rimasti intatti e sfruttabili.
+  - *Guardrail della Minimal Invasive Patch:* Vincolare il riparatore a generare un formato `diff -u` minimale con divieto assoluto di refactoring estetico o bonifica di vulnerabilità didattiche intenzionali.

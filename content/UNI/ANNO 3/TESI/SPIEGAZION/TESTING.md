@@ -1,0 +1,4 @@
+- creare una lista di possibili problematiche e di possibili macchine da creare
+- creane tipo (inserisci numero suggerito da chat gpt)
+- ognuna rotta in un modo
+- prendi metriche cambia cose ecc e valuta come cambiano le cose(casi studio utili)
