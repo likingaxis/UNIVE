@@ -1,8 +1,6 @@
+### a Mappa Completa e Aggiornata (Tutti i 12 File del Framework)
 
-1. fatto
-2. fatto
-3. domani
-
+Ecco il quadro esatto con lo stato di avanzamento reale:
 
 ### 1. Testing di tutto il grafo (Negative vs Golden Path)
 * **Dove siamo ora:** Abbiamo convalidato empiricamente il ramo di **Negative Testing** (`FASE_1 [PASS]` $\rightarrow$ `FASE_2 [FAIL]` $\rightarrow$ `Evaluator [RCA + Ticket]`). Questo ramo dimostra che l'Auditor non bara ed è fondamentale.

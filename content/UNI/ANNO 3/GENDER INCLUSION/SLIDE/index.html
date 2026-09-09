@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donne, Gaming e Inclusione · Università di Roma Tor Vergata</title>
+  
+  <style>
+    :root {
+      --bg-base: #14161A;
+      --bg-surface: #1B1E24;
+      --bg-elevated: #242831;
+      --bg-sunken: #0E1013;
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.14);
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --accent-cyan: #38BDF8;
+      --accent-violet: #A855F7;
+      --accent-coral: #F43F5E;
+      --accent-neutral: #94A3B8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background-color: #0B0D0F;
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .font-display {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .font-serif-italic {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+    }
+
+    /* Fixed Canvas 1920x1080 */
+    #presentation-viewport {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 50%, #16181D 0%, #0B0D0F 100%);
+    }
+
+    #presentation-canvas {
+      position: absolute;
+      width: 1920px;
+      height: 1080px;
+      background-color: var(--bg-base);
+      transform-origin: center center;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      padding: 64px 80px 72px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #14161A;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform: scale(0.99) translateY(4px);
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+      z-index: 10;
+    }
+
+    /* Atmospheric subtle grid texture */
+    .bg-grid-pattern {
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+
+    /* Card styling */
+    .card-surface {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 12px;
+    }
+
+    .card-elevated {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+    }
+
+    .card-sunken {
+      background: var(--bg-sunken);
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+    }
+
+    /* Subtle glow helpers */
+    .glow-cyan {
+      box-shadow: 0 0 40px -10px rgba(56, 189, 248, 0.18);
+    }
+    .glow-coral {
+      box-shadow: 0 0 40px -10px rgba(244, 63, 94, 0.18);
+    }
+    .glow-violet {
+      box-shadow: 0 0 40px -10px rgba(168, 85, 247, 0.18);
+    }
+
+    /* Top bar & Bottom bar */
+    .slide-header {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-hairline);
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    .slide-footer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-hairline);
+      padding-top: 20px;
+      margin-top: 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Interactive controls */
+    #hud-controls {
+      position: fixed;
+      bottom: 24px;
+      right: 32px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(20, 22, 26, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+
+    .hud-btn {
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hud-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Speaker Notes Modal */
+    #notes-drawer {
+      position: fixed;
+      bottom: 80px;
+      right: 32px;
+      width: 480px;
+      max-height: 420px;
+      background: #1B1E24;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      z-index: 99;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      overflow-y: auto;
+    }
+
+    #notes-drawer.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Custom Waveform Animation */
+    @keyframes pulse-wave {
+      0%, 100% { transform: scaleY(0.7); }
+      50% { transform: scaleY(1.15); }
+    }
+    .wave-bar-active {
+      transform-origin: center;
+      animation: pulse-wave 1.4s ease-in-out infinite;
+    }
+  
+    /* Print to PDF Styles (16:9 Landscape 1920x1080) */
+    @media print {
+      @page {
+        size: 1920px 1080px;
+        margin: 0;
+      }
+      html, body {
+        width: 1920px !important;
+        height: auto !important;
+        background: #14161A !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      #presentation-viewport {
+        width: 1920px !important;
+        height: auto !important;
+        background: none !important;
+        overflow: visible !important;
+        display: block !important;
+      }
+      #presentation-canvas {
+        position: static !important;
+        transform: none !important;
+        width: 1920px !important;
+        height: auto !important;
+        box-shadow: none !important;
+        background-color: #14161A !important;
+      }
+      .slide {
+        position: relative !important;
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        width: 1920px !important;
+        height: 1080px !important;
+        min-height: 1080px !important;
+        max-height: 1080px !important;
+      }
+      #hud-controls, #notes-drawer {
+        display: none !important;
+      }
+    }
+
+  
+        :root {
+      --cyan: #38BDF8;
+      --violet: #A855F7;
+      --coral: #F43F5E;
+      --display-font: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
+      --serif-font: 'Playfair Display', Georgia, serif;
+    }
+
+    .font-display {
+      font-family: var(--display-font);
+    }
+
+    /* Shared Navigation Bar across slides */
+    .nav-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 48px;
+      background: #0E1013;
+      display: flex;
+      align-items: center;
+      padding: 0 64px;
+      gap: 24px;
+      z-index: 20;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .nav-bar .nav-section {
+      font-family: var(--display-font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #94A3B8;
+    }
+    .nav-bar .nav-speaker {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: #94A3B8;
+      opacity: .7;
+    }
+    .nav-bar .nav-progress {
+      margin-left: auto;
+      display: flex;
+      gap: 6px;
+    }
+    .nav-bar .nav-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #94A3B8;
+      opacity: .25;
+    }
+    .nav-bar .nav-dot.active { opacity: 1; background: var(--cyan); }
+
+    /* ── SLIDE 1 STYLES ── */
+    .slide-1 {
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 55%, rgba(168,85,247,.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 30% 40%, rgba(56,189,248,.04) 0%, transparent 60%),
+        linear-gradient(175deg, #17191D 0%, #14161A 40%, #0E1013 100%);
+      padding: 0 !important;
+    }
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg, rgba(248,250,252,.015) 0 1px, transparent 1px 120px),
+        repeating-linear-gradient(0deg, rgba(248,250,252,.015) 0 1px, transparent 1px 120px);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .slide-1 .accent-line {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet) 50%, var(--coral));
+      z-index: 10;
+    }
+    .slide-1 .editorial-tag {
+      position: absolute;
+      top: 44px; left: 64px;
+      font-family: var(--display-font);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      z-index: 10;
+    }
+    .slide-1 .editorial-tag::after {
+      content: '';
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--cyan);
+      margin-top: 8px;
+      opacity: .5;
+    }
+    .slide-1 .title-block {
+      position: absolute;
+      left: 64px;
+      top: 140px;
+      width: 780px;
+      z-index: 10;
+    }
+    .slide-1 .title-main {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 72px;
+      line-height: 1.02;
+      letter-spacing: -.02em;
+      color: #F8FAFC;
+    }
+    .slide-1 .title-main em {
+      font-style: normal;
+      color: var(--violet);
+    }
+    .slide-1 .title-main .coral-word {
+      color: var(--coral);
+    }
+    .slide-1 .subtitle {
+      margin-top: 20px;
+      font-family: var(--serif-font);
+      font-style: italic;
+      font-size: 19px;
+      line-height: 1.55;
+      color: #CBD5E1;
+      max-width: 560px;
+    }
+    .slide-1 .meta-block {
+      position: absolute;
+      left: 64px;
+      bottom: 80px;
+      z-index: 10;
+    }
+    .slide-1 .meta-course {
+      font-family: var(--display-font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #94A3B8;
+      margin-bottom: 14px;
+    }
+    .slide-1 .meta-names {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .slide-1 .meta-name {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #CBD5E1;
+    }
+    .slide-1 .meta-name .matricola {
+      font-weight: 400;
+      color: #94A3B8;
+      margin-left: 6px;
+    }
+        .slide-1 .characters-zone {
+      position: absolute;
+      right: 0;
+      bottom: 48px;
+      width: 1160px;
+      height: 850px;
+      z-index: 5;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    .slide-1 .char-group {
+      width: 100%;
+      max-width: 1160px;
+      height: auto;
+      object-fit: contain;
+      object-position: right bottom;
+      filter: drop-shadow(0 20px 50px rgba(0,0,0,.85)) contrast(1.04);
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.25) 12%, black 30%), linear-gradient(to bottom, transparent 0%, black 14%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.25) 12%, black 30%), linear-gradient(to bottom, transparent 0%, black 14%);
+      -webkit-mask-composite: destination-in;
+      mask-composite: intersect;
+    }
+    .slide-1 .characters-zone::before {
+      content: '';
+      position: absolute;
+      right: 0; bottom: 0;
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse at 60% 80%, rgba(168,85,247,.12) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .slide-1 .right-strip {
+      position: absolute;
+      right: 0; top: 0;
+      width: 4px; height: 100%;
+      background: var(--violet);
+      opacity: .3;
+      z-index: 10;
+    }
+
+    /* ── ANIMATED WAVEFORM (Slide 4) ── */
+    @keyframes wavePulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.95; }
+      50% { transform: scaleY(0.25); opacity: 0.4; }
+    }
+    .wave-bar {
+      transform-origin: center;
+      animation: wavePulse 1.2s ease-in-out infinite alternate;
+      display: inline-block;
+    }
+    .wave-bar:nth-child(1) { animation-delay: 0.1s; }
+    .wave-bar:nth-child(2) { animation-delay: 0.35s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.15s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+    .wave-bar:nth-child(5) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(6) { animation-delay: 0.4s; }
+    .wave-bar:nth-child(7) { animation-delay: 0.05s; }
+    .wave-bar:nth-child(8) { animation-delay: 0.25s; }
+
+  
+
+    /* ── SLIDE 5 EDITORIAL TIMELINE (EXACT REFERENCE) ── */
+    .slide-5 {
+      background: linear-gradient(178deg, #17191D 0%, #14161A 50%, #111318 100%);
+      padding: 0 !important;
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+    }
+    .slide-5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg, rgba(248,250,252,.01) 0 1px, transparent 1px 240px);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .slide-5 .section-marker {
+      position: absolute;
+      top: 36px; left: 64px;
+      z-index: 10;
+    }
+    .slide-5 .section-num {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--violet);
+      opacity: .15;
+    }
+    .slide-5 .section-label {
+      font-family: var(--display-font);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-top: -4px;
+    }
+    .slide-5 .slide-title {
+      position: absolute;
+      top: 44px; left: 180px;
+      z-index: 10;
+    }
+    .slide-5 .slide-title h2 {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 44px;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      color: #F8FAFC;
+    }
+    .slide-5 .slide-title h2 span {
+      color: var(--violet);
+    }
+    .slide-5 .takeaway {
+      position: absolute;
+      top: 108px; left: 180px;
+      font-family: var(--serif-font);
+      font-style: italic;
+      font-size: 16px;
+      color: #CBD5E1;
+      z-index: 10;
+      opacity: .8;
+    }
+    .slide-5 .timeline {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      bottom: 68px;
+      top: 160px;
+      z-index: 5;
+    }
+    .slide-5 .timeline-axis {
+      position: absolute;
+      bottom: 140px;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg,
+        var(--violet) 0%,
+        var(--violet) 25%,
+        var(--coral) 50%,
+        var(--cyan) 75%,
+        var(--cyan) 100%
+      );
+      opacity: .4;
+      z-index: 2;
+    }
+    .slide-5 .timeline-axis::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--violet);
+    }
+    .slide-5 .timeline-axis::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 10px solid var(--cyan);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+    .slide-5 .tl-node {
+      position: absolute;
+      bottom: 0;
+      width: 280px;
+      margin-left: -140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 5;
+    }
+    .slide-5 .tl-node .node-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid;
+      position: absolute;
+      bottom: 133px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 6;
+      background: #14161A;
+    }
+    .slide-5 .tl-node .node-year {
+      font-family: var(--display-font);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .08em;
+      position: absolute;
+      bottom: 104px;
+      left: 0; right: 0;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .slide-5 .tl-node .node-label {
+      position: absolute;
+      bottom: 68px;
+      left: 0; right: 0;
+      text-align: center;
+      font-family: var(--display-font);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+    .slide-5 .tl-node .node-desc {
+      position: absolute;
+      bottom: 38px;
+      left: 0; right: 0;
+      text-align: center;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: #94A3B8;
+      white-space: nowrap;
+    }
+    .slide-5 .tl-node .char-cutout {
+      position: absolute;
+      bottom: 160px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: none !important;
+      width: auto !important;
+      object-fit: contain;
+      pointer-events: none;
+    }
+    .slide-5 .node-peach { left: 160px; }
+    .slide-5 .node-peach .node-dot { border-color: var(--violet); }
+    .slide-5 .node-peach .node-year { color: var(--violet); }
+    .slide-5 .node-peach .node-label { color: #F8FAFC; }
+    .slide-5 .node-peach .char-cutout {
+      height: 380px !important;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.5)) saturate(.9) !important;
+    }
+    .slide-5 .node-lara { left: 540px; }
+    .slide-5 .node-lara .node-dot { border-color: var(--coral); }
+    .slide-5 .node-lara .node-year { color: var(--coral); }
+    .slide-5 .node-lara .node-label { color: #F8FAFC; }
+    .slide-5 .node-lara .char-cutout {
+      height: 420px !important;
+      filter: drop-shadow(0 12px 30px rgba(0,0,0,.6)) !important;
+      z-index: 7;
+    }
+    .slide-5 .node-aloy { left: 960px; }
+    .slide-5 .node-aloy .node-dot { border-color: var(--cyan); }
+    .slide-5 .node-aloy .node-year { color: var(--cyan); }
+    .slide-5 .node-aloy .node-label { color: #F8FAFC; }
+    .slide-5 .node-aloy .char-cutout {
+      height: 480px !important;
+      z-index: 8;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,.7)) contrast(1.05) !important;
+    }
+    .slide-5 .node-modular { left: 1440px; }
+    .slide-5 .node-modular .node-dot { border-color: var(--cyan); background: var(--cyan); }
+    .slide-5 .node-modular .node-year { color: var(--cyan); }
+    .slide-5 .node-modular .node-label { color: #F8FAFC; }
+    .slide-5 .editorial-inset-box {
+      position: absolute;
+      bottom: 160px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 440px !important;
+      height: 270px !important;
+      background: #17191D;
+      border: 1px solid rgba(56,189,248,.35);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0,0,0,.65);
+      display: flex;
+      flex-direction: column;
+    }
+    .slide-5 .editorial-inset-box .inset-header {
+      font-family: var(--display-font);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(56,189,248,.08);
+      padding: 6px 12px;
+      border-bottom: 1px solid rgba(56,189,248,.2);
+      text-align: left;
+    }
+    .slide-5 .editorial-inset-box .inset-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slide-5 .annotation {
+      position: absolute;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 12px;
+      color: #94A3B8;
+      line-height: 1.5;
+      max-width: 240px;
+      z-index: 10;
+      border-radius: 4px;
+    }
+    .slide-5 .annotation strong {
+      color: #CBD5E1;
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .slide-5 .ann-malegaze {
+      top: 160px;
+      left: 540px;
+      padding: 14px 18px;
+      border-left: 3px solid var(--accent-coral);
+      background: rgba(244,63,94,.08);
+      backdrop-filter: blur(8px);
+    }
+    .slide-5 .ann-complexity {
+      top: 160px;
+      left: 980px;
+      padding: 14px 18px;
+      border-left: 3px solid var(--accent-cyan);
+      background: rgba(56,189,248,.08);
+      backdrop-filter: blur(8px);
+    }
+    .slide-5 .ann-modular {
+      top: 160px;
+      left: 1420px;
+      padding: 14px 18px;
+      border-left: 3px solid var(--accent-cyan);
+      background: rgba(56,189,248,.08);
+      backdrop-filter: blur(8px);
+    }
+
+
+    /* Slide 4 Header styling matching Slide 5 */
+    .slide-4 .section-marker {
+      position: absolute;
+      top: 36px; left: 80px;
+      z-index: 10;
+    }
+    .slide-4 .section-num {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      color: #F43F5E;
+      opacity: .18;
+    }
+    .slide-4 .section-label {
+      font-family: var(--display-font);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #F43F5E;
+      margin-top: -4px;
+    }
+    .slide-4 .slide-title {
+      position: absolute;
+      top: 42px; left: 230px;
+      z-index: 10;
+    }
+    .slide-4 .slide-title h2 {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 44px;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      color: #F8FAFC;
+    }
+    .slide-4 .slide-title h2 span {
+      color: #F43F5E;
+    }
+    .slide-4 .takeaway {
+      position: absolute;
+      top: 102px; left: 230px;
+      font-family: var(--serif-font);
+      font-style: italic;
+      font-size: 18px;
+      color: #CBD5E1;
+      z-index: 10;
+      opacity: .85;
+    }
+    .slide-4 .speaker-badge {
+      position: absolute;
+      right: 80px;
+      top: 48px;
+      z-index: 20;
+    }
+
+
+    /* Robust Waveform Animation Styles (Independent of Tailwind) */
+    .waveform-container {
+      background: #0E1013;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      border-radius: 8px;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.7);
+    }
+    .waveform-bars {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 48%;
+      height: 64px;
+      justify-content: center;
+    }
+    @keyframes wavePulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.95; }
+      50% { transform: scaleY(0.25); opacity: 0.35; }
+    }
+    .wave-bar-solid {
+      width: 6px;
+      background: #F43F5E;
+      border-radius: 9999px;
+      display: inline-block;
+      transform-origin: center;
+      animation: wavePulse 1.2s ease-in-out infinite alternate;
+      box-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+    }
+    .wave-bar-solid:nth-child(1) { height: 22px; animation-delay: 0.1s; }
+    .wave-bar-solid:nth-child(2) { height: 42px; animation-delay: 0.35s; }
+    .wave-bar-solid:nth-child(3) { height: 54px; animation-delay: 0.15s; }
+    .wave-bar-solid:nth-child(4) { height: 30px; animation-delay: 0.45s; }
+    .wave-bar-solid:nth-child(5) { height: 48px; animation-delay: 0.2s; }
+    .wave-bar-solid:nth-child(6) { height: 58px; animation-delay: 0.4s; }
+    .wave-bar-solid:nth-child(7) { height: 36px; animation-delay: 0.05s; }
+    .wave-bar-solid:nth-child(8) { height: 50px; animation-delay: 0.25s; }
+    .wave-bar-solid:nth-child(9) { height: 26px; animation-delay: 0.38s; }
+    .wave-bar-solid:nth-child(10) { height: 16px; animation-delay: 0.12s; }
+
+    .waveform-flatline {
+      width: 48%;
+      display: flex;
+      align-items: center;
+      padding-left: 16px;
+    }
+    .flatline-track {
+      width: 100%;
+      height: 3px;
+      background: #F43F5E;
+      position: relative;
+      box-shadow: 0 0 10px #F43F5E;
+    }
+    .flatline-dot {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #F43F5E;
+      box-shadow: 0 0 8px #F43F5E;
+    }
+
+
+    /* =========================================================================
+       SLIDE 4: EDITORIAL ACADEMIC POLISH
+       ========================================================================= */
+    .slide-4 .section-marker {
+      position: absolute;
+      top: 36px; left: 80px;
+      z-index: 10;
+    }
+    .slide-4 .section-num {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      color: #F43F5E;
+      opacity: .18;
+    }
+    .slide-4 .section-label {
+      font-family: var(--display-font);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #F43F5E;
+      margin-top: -4px;
+    }
+    .slide-4 .slide-title {
+      position: absolute;
+      top: 42px; left: 230px;
+      z-index: 10;
+    }
+    .slide-4 .slide-title h2 {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 44px;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      color: #F8FAFC;
+    }
+    .slide-4 .slide-title h2 span {
+      color: #F43F5E;
+    }
+    .slide-4 .takeaway {
+      position: absolute;
+      top: 102px; left: 230px;
+      font-family: var(--serif-font);
+      font-style: italic;
+      font-size: 18px;
+      color: #CBD5E1;
+      z-index: 10;
+      opacity: .85;
+    }
+    .slide-4 .speaker-badge {
+      position: absolute;
+      right: 80px;
+      top: 48px;
+      z-index: 20;
+    }
+
+    /* Waveform visualizer container */
+    .s4-visualizer {
+      background: #0E1013;
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-radius: 8px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: inset 0 0 24px rgba(0,0,0,0.8);
+      margin-bottom: 16px;
+    }
+    .s4-vis-half {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .s4-vis-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+    .s4-bars-wrapper {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 8px;
+      background: rgba(244, 63, 94, 0.04);
+      border-radius: 4px;
+      border: 1px solid rgba(244, 63, 94, 0.12);
+    }
+    @keyframes s4Wave {
+      0%, 100% { transform: scaleY(1); opacity: 0.95; }
+      50% { transform: scaleY(0.2); opacity: 0.35; }
+    }
+    .s4-bar {
+      width: 5px;
+      background: #F43F5E;
+      border-radius: 4px;
+      display: inline-block;
+      transform-origin: center;
+      animation: s4Wave 1.2s ease-in-out infinite alternate;
+      box-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+    }
+    .s4-bar:nth-child(1) { height: 16px; animation-delay: 0.05s; }
+    .s4-bar:nth-child(2) { height: 32px; animation-delay: 0.3s; }
+    .s4-bar:nth-child(3) { height: 44px; animation-delay: 0.15s; }
+    .s4-bar:nth-child(4) { height: 26px; animation-delay: 0.45s; }
+    .s4-bar:nth-child(5) { height: 42px; animation-delay: 0.2s; }
+    .s4-bar:nth-child(6) { height: 46px; animation-delay: 0.4s; }
+    .s4-bar:nth-child(7) { height: 34px; animation-delay: 0.1s; }
+    .s4-bar:nth-child(8) { height: 40px; animation-delay: 0.35s; }
+    .s4-bar:nth-child(9) { height: 22px; animation-delay: 0.25s; }
+    .s4-bar:nth-child(10) { height: 14px; animation-delay: 0.5s; }
+
+    .s4-cut-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: #F43F5E;
+      opacity: 0.9;
+    }
+    .s4-cut-badge span {
+      font-size: 16px;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .s4-flatline-wrapper {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      background: rgba(244, 63, 94, 0.03);
+      border-radius: 4px;
+      border: 1px dashed rgba(244, 63, 94, 0.2);
+      position: relative;
+    }
+    .s4-flatline {
+      width: 100%;
+      height: 3px;
+      background: #F43F5E;
+      position: relative;
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.8);
+    }
+    .s4-flatline-dot {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #F43F5E;
+      box-shadow: 0 0 8px #F43F5E;
+    }
+    .s4-strategy-card {
+      background: #0E1013;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left: 3px solid #F43F5E;
+      border-radius: 6px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .s4-strategy-card:last-child {
+      margin-bottom: 0;
+    }
+
+
+    /* =========================================================================
+       SLIDE 2 & 3: EDITORIAL ACADEMIC POLISH (MATCHING SLIDE 4 & 5)
+       ========================================================================= */
+    .slide-2 .section-marker, .slide-3 .section-marker {
+      position: absolute;
+      top: 36px; left: 80px;
+      z-index: 10;
+    }
+    .slide-2 .section-num, .slide-3 .section-num {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      color: #38BDF8;
+      opacity: .18;
+    }
+    .slide-2 .section-label, .slide-3 .section-label {
+      font-family: var(--display-font);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #38BDF8;
+      margin-top: -4px;
+    }
+    .slide-2 .slide-title, .slide-3 .slide-title {
+      position: absolute;
+      top: 42px; left: 230px;
+      z-index: 10;
+    }
+    .slide-2 .slide-title h2, .slide-3 .slide-title h2 {
+      font-family: var(--display-font);
+      font-weight: 800;
+      font-size: 44px;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      color: #F8FAFC;
+    }
+    .slide-2 .slide-title h2 span, .slide-3 .slide-title h2 span {
+      color: #38BDF8;
+    }
+    .slide-2 .takeaway, .slide-3 .takeaway {
+      position: absolute;
+      top: 102px; left: 230px;
+      font-family: var(--serif-font);
+      font-style: italic;
+      font-size: 18px;
+      color: #CBD5E1;
+      z-index: 10;
+      opacity: .85;
+    }
+    .slide-2 .speaker-badge, .slide-3 .speaker-badge {
+      position: absolute;
+      right: 80px;
+      top: 48px;
+      z-index: 20;
+    }
+
+</style>
+<link rel="stylesheet" href="utilities.css"><link rel="stylesheet" href="final.css"></head>
+<body>
+
+<div id="presentation-viewport">
+  <div id="presentation-canvas" class="bg-grid-pattern">
+
+        <!-- ===================================================================
+         SLIDE 1: HERO COVER (WOW 1)
+         =================================================================== -->
+    <section class="slide slide-1" data-slide-index="1" id="slide-1">
+      <div class="accent-line"></div>
+      <div class="right-strip"></div>
+
+      <div class="editorial-tag">Gender &amp; Inclusion · Informatica · A.A. 2024–2025</div>
+
+      <div class="title-block">
+        <h1 class="title-main">
+          Donne, <em>Gaming</em><br>e <span class="coral-word">Inclusione</span>
+        </h1>
+        <p class="subtitle">
+          Radici storiche, dati di settore e prospettive<br>
+          tra codice e società
+        </p>
+      </div>
+
+      <div class="meta-block">
+        <div class="meta-course">Università di Roma Tor Vergata</div>
+        <div class="meta-names">
+          <div class="meta-name">Luca Gugliotta <span class="matricola">0342634</span></div>
+          <div class="meta-name">Valerio Bernardi <span class="matricola">0349538</span></div>
+          <div class="meta-name">Samuele De Santis <span class="matricola">0348324</span></div>
+        </div>
+      </div>
+
+      <div class="characters-zone">
+        <img class="char-group"
+             src="Assets/girl together.png"
+             alt="Donne nel Gaming — Personaggi femminili">
+      </div>
+
+      <div class="slide-footer fixed-footer">
+        <div>CONFERENZA ORALE ACCADEMICA (12 MIN) · FOCUS SU PIATTAFORME DIGITALI &amp; ARCHITETTURA DEL SOFTWARE</div>
+        <div class="font-mono text-[#38BDF8]">SLIDE 01 / 09</div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SLIDE 2: PERCHÉ PARLARNE DA INFORMATICI? (EPISTEMOLOGIA)
+         =================================================================== -->
+    <section class="slide slide-2" data-slide-index="2" id="slide-2">
+      <!-- Magazine Chapter Header (matching Slide 5 & Slide 4) -->
+      <div class="section-marker">
+        <div class="section-num">02</div>
+        <div class="section-label">Prospettiva</div>
+      </div>
+
+      <div class="speaker-badge">Luca Gugliotta</div>
+
+      <div class="slide-title">
+        <h2>Perché parlarne da <span>informatici</span>?</h2>
+      </div>
+
+      <div class="takeaway">
+        &laquo;Il codice modella lo spazio sociale: algoritmi e interfacce decidono chi può partecipare.&raquo;
+      </div>
+
+      <!-- Slide Body positioned cleanly under takeaway -->
+      <div style="position: absolute; left: 80px; right: 80px; top: 150px; bottom: 85px; display: flex; flex-direction: column; justify-content: space-between;">
+        
+        <!-- Hero Statement Banner -->
+        <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #38BDF8; padding: 20px 28px; border-radius: 8px;">
+          <p style="font-size: 24px; color: #CBD5E1; line-height: 1.4; margin: 0;">
+            Come informatici studiamo algoritmi, latenza e sistemi distribuiti. Ma nel software interattivo, le decisioni tecniche non sono mai astratte:
+            <span style="color: #F8FAFC; font-weight: 700;">regolano chi può abitare lo spazio digitale, chi viene protetto e chi viene escluso.</span>
+          </p>
+        </div>
+
+        <!-- 3 Deep Analytical Vector Cards -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 12px 0;">
+          
+          <!-- Card 1 -->
+          <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-top: 4px solid #38BDF8; border-radius: 8px; padding: 26px 24px; display: flex; flex-direction: column; justify-content: space-between; height: 350px;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #38BDF8; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 8px;">
+                01 · VETTORE SOCIALE
+              </div>
+              <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 28px; color: #F8FAFC; margin-bottom: 12px;">
+                Chi gioca
+              </h3>
+              <p style="font-size: 16px; color: #CBD5E1; line-height: 1.45; margin: 0;">
+                La playerbase reale è già ampiamente paritaria (~50% donne). L'archetipo monoculturale del "gamer ragazzo" è una distorsione percettiva, non un dato empirico.
+              </p>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px;">
+              ESA 2025 · DEMOGRAFIA REALE VS BIAS
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-top: 4px solid #A855F7; border-radius: 8px; padding: 26px 24px; display: flex; flex-direction: column; justify-content: space-between; height: 350px;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A855F7; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 8px;">
+                02 · VETTORE SIMBOLICO
+              </div>
+              <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 28px; color: #F8FAFC; margin-bottom: 12px;">
+                Cosa vediamo
+              </h3>
+              <p style="font-size: 16px; color: #CBD5E1; line-height: 1.45; margin: 0;">
+                Dall'oggettivazione passiva (male gaze) alla modularità sistemica. L'architettura degli avatar determina se l'utente è confinato in stereotipi o abilitato a costruire un'identità autonoma.
+              </p>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px;">
+              CHARACTER DESIGN &amp; AGENCY MODULARE
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-top: 4px solid #F43F5E; border-radius: 8px; padding: 26px 24px; display: flex; flex-direction: column; justify-content: space-between; height: 350px;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #F43F5E; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 8px;">
+                03 · VETTORE INDUSTRIALE
+              </div>
+              <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 28px; color: #F8FAFC; margin-bottom: 12px;">
+                Chi sviluppa
+              </h3>
+              <p style="font-size: 16px; color: #CBD5E1; line-height: 1.45; margin: 0;">
+                La parità tra chi gioca si interrompe bruscamente negli studi: nei ruoli ingegneristici e decisionali la presenza femminile crolla al 20%, con un divario retributivo strutturale.
+              </p>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px;">
+              GDC 2025 · PIPELINE E GLASS CEILING
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Manifesto Banner -->
+        <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #38BDF8; padding: 14px 28px; border-radius: 8px;">
+          <p style="font-family: 'Newsreader', serif; font-style: italic; font-size: 22px; color: #F8FAFC; line-height: 1.3; margin: 0;">
+            &laquo;Il modo in cui programmiamo uno spazio digitale influenza chi potrà viverlo e chi ne sarà escluso.&raquo;
+          </p>
+        </div>
+
+      </div>
+
+      <div class="slide-footer fixed-footer">
+        <div>LIVELLI ANALITICI: CONDOTTA UTENTE · RAPPRESENTAZIONE SIMBOLICA · PRODUZIONE INDUSTRIALE</div>
+        <div class="font-mono text-[#38BDF8]">SLIDE 02 / 09</div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SLIDE 3: IL PARADOSSO PERCETTIVO (DATI & DEMOGRAFIA)
+         =================================================================== -->
+    <!-- ===================================================================
+         SLIDE 3: IL PARADOSSO PERCETTIVO (DATI & DEMOGRAFIA)
+         =================================================================== -->
+    <section class="slide slide-3" data-slide-index="3" id="slide-3">
+      <!-- Magazine Chapter Header -->
+      <div class="section-marker">
+        <div class="section-num">03</div>
+        <div class="section-label">Demografia</div>
+      </div>
+
+      <div class="speaker-badge">Luca Gugliotta</div>
+
+      <div class="slide-title">
+        <h2>La realtà è quasi <span>paritaria</span>. La percezione no.</h2>
+      </div>
+
+      <div class="takeaway">
+        &laquo;La parità demografica nei consumi smentisce lo stereotipo del medium come enclave maschile.&raquo;
+      </div>
+
+      <!-- Slide Body: Airy, Minimal, Zero Heavy Boxes -->
+      <div style="position: absolute; left: 80px; right: 80px; top: 155px; bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start;">
+        
+        <!-- Left Column: Global ESA Data & Centered Parity Gauge -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding-right: 20px;">
+          <div>
+            <!-- Hero 48% -->
+            <div style="display: flex; align-items: baseline; gap: 20px; margin-bottom: 24px;">
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 130px; line-height: 0.9; color: #38BDF8; letter-spacing: -0.04em;">48%</span>
+              <div style="font-size: 24px; color: #F8FAFC; font-weight: 600; line-height: 1.3; max-width: 320px;">
+                delle persone che giocano nel mondo sono donne.
+              </div>
+            </div>
+
+            <!-- Mathematical Parity Gauge Bar -->
+            <div style="margin-top: 10px; margin-bottom: 30px;">
+              <!-- Labels Above Track -->
+              <div style="position: relative; width: 100%; height: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #94A3B8;">
+                <span style="position: absolute; left: 0; bottom: 4px;">0%</span>
+                <span style="position: absolute; left: 24%; transform: translateX(-50%); bottom: 4px; color: #38BDF8; font-weight: 700;">48% VIDEOGIOCATRICI</span>
+                <!-- Exactly Centered Threshold Label -->
+                <span style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 4px; color: #FFFFFF; font-weight: 700; white-space: nowrap;">PARITÀ (50%)</span>
+                <span style="position: absolute; right: 0; bottom: 4px;">100%</span>
+              </div>
+
+              <!-- Track Container -->
+              <div style="position: relative; width: 100%; height: 12px; background: #1B1E24; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.1); overflow: visible;">
+                <!-- 48% Filled Bar -->
+                <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 48%; background: #38BDF8; border-radius: 9999px 0 0 9999px; box-shadow: 0 0 10px rgba(56,189,248,0.5);"></div>
+                <!-- 50% Threshold Line Locked at Center -->
+                <div style="position: absolute; left: 50%; margin-left: -1px; width: 2px; top: -6px; bottom: -6px; background-color: #FFFFFF; border-radius: 1px; box-shadow: 0 0 8px #FFFFFF; z-index: 10;"></div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #64748B; margin-top: 8px;">
+                <span>Campione internazionale ESA 2025</span>
+                <span style="color: #94A3B8;">Δ -2% dalla parità perfetta</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Secondary Metrics (Minimal, with simple accent bar) -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 8px;">
+            <div style="border-left: 3px solid #38BDF8; padding-left: 14px;">
+              <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 42px; color: #F8FAFC; line-height: 1;">47,8%</div>
+              <div style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.35;">delle persone che giocano in Europa sono donne.</div>
+            </div>
+            <div style="border-left: 3px solid #38BDF8; padding-left: 14px;">
+              <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 42px; color: #F8FAFC; line-height: 1;">5,7M</div>
+              <div style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.35;">di videogiocatrici in Italia.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Italian Dynamic Growth & Minimal Quote -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding-left: 10px;">
+          <div>
+            <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 32px; color: #F8FAFC; line-height: 1.2; margin-bottom: 32px;">
+              La crescita della componente femminile è molto più rapida.
+            </h3>
+
+            <!-- Comparative Progress Bars (Minimal) -->
+            <div style="display: flex; flex-direction: column; gap: 28px;">
+              <!-- Donne -->
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                  <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 20px; color: #F8FAFC;">Donne</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 32px; color: #38BDF8; line-height: 1;">+14,0%</span>
+                </div>
+                <div style="width: 100%; height: 12px; background: #1B1E24; border-radius: 9999px; overflow: hidden;">
+                  <div style="height: 100%; width: 85%; background: #38BDF8; border-radius: 9999px; box-shadow: 0 0 10px rgba(56,189,248,0.4);"></div>
+                </div>
+              </div>
+
+              <!-- Uomini -->
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                  <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 20px; color: #94A3B8;">Uomini</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 32px; color: #94A3B8; line-height: 1;">+2,5%</span>
+                </div>
+                <div style="width: 100%; height: 12px; background: #1B1E24; border-radius: 9999px; overflow: hidden;">
+                  <div style="height: 100%; width: 15%; background: #64748B; border-radius: 9999px;"></div>
+                </div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #64748B; margin-top: 8px;">
+                  Mercato maschile maturo e prossimo alla saturazione demografica.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Minimal Quote Banner -->
+          <div style="border-left: 3px solid #38BDF8; padding: 14px 20px; background: rgba(56,189,248,0.03); border-radius: 0 6px 6px 0;">
+            <p style="font-family: 'Newsreader', serif; font-style: italic; font-size: 23px; color: #F8FAFC; line-height: 1.35; margin: 0;">
+              &laquo;Le donne ci sono già. Il problema è la loro invisibilità culturale.&raquo;
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="slide-footer fixed-footer">
+        <div>FONTI: ESA 2025 · VIDEO GAMES EUROPE 2025 · IIDEA 2024</div>
+        <div class="font-mono text-[#38BDF8]">SLIDE 03 / 09</div>
+      </div>
+    </section>
+
+<!-- ===================================================================
+         SLIDE 4: TOSSICITÀ ONLINE E VOCE
+         =================================================================== -->
+    <section class="slide slide-4" data-slide-index="4" id="slide-4">
+      <!-- Magazine Chapter Header -->
+      <div class="section-marker">
+        <div class="section-num">04</div>
+        <div class="section-label">Spazio Sociale</div>
+      </div>
+
+      <div class="speaker-badge">Valerio Bernardi</div>
+
+      <div class="slide-title">
+        <h2>Quando basta una voce per diventare un <span>bersaglio</span></h2>
+      </div>
+
+      <div class="takeaway">
+        &laquo;La voce rende riconoscibile il genere, innescando dinamiche di esclusione e molestia mirata.&raquo;
+      </div>
+
+      <!-- Slide Body: Airy, Minimal, Horizontal Process + Waveform Box + 3 Pills -->
+      <div style="position: absolute; left: 80px; right: 80px; top: 155px; bottom: 80px; display: flex; flex-direction: column; justify-content: space-between;">
+        
+        <!-- Top Process Chain (Minimal Badges) -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: center;">
+          <div style="background: #17191D; border: 1px solid rgba(56,189,248,0.3); border-radius: 6px; padding: 12px 16px; text-align: center;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; color: #38BDF8; letter-spacing: 0.1em;">VOCE</span>
+          </div>
+          <div style="background: #17191D; border: 1px solid rgba(168,85,247,0.3); border-radius: 6px; padding: 12px 16px; text-align: center;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; color: #A855F7; letter-spacing: 0.1em;">GENERE RICONOSCIUTO</span>
+          </div>
+          <div style="background: #17191D; border: 1px solid rgba(244,63,94,0.4); border-radius: 6px; padding: 12px 16px; text-align: center;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; color: #F43F5E; letter-spacing: 0.1em;">MOLESTIA</span>
+          </div>
+          <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 12px 16px; text-align: center;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; color: #CBD5E1; letter-spacing: 0.1em;">SILENZIO</span>
+          </div>
+        </div>
+
+        <!-- Middle Split: Left Empirical Stat vs Right Minimal Waveform & Pills -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; margin: 20px 0;">
+          
+          <!-- Left: Big 48% + Context -->
+          <div>
+            <div style="display: flex; align-items: baseline; gap: 20px; margin-bottom: 20px;">
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 130px; line-height: 0.9; color: #F43F5E; letter-spacing: -0.04em;">48%</span>
+              <div style="font-size: 24px; color: #F8FAFC; font-weight: 600; line-height: 1.3; max-width: 320px;">
+                delle giocatrici subisce molestie legate al genere.
+              </div>
+            </div>
+
+            <div style="border-left: 3px solid #64748B; padding-left: 14px; margin-bottom: 16px;">
+              <p style="font-size: 16px; color: #CBD5E1; line-height: 1.45; margin: 0;">
+                A fronte del <strong style="color: #F8FAFC;">76%</strong> dei gamer che dichiara di aver subito molestie online in generale.
+              </p>
+            </div>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #64748B; line-height: 1.4;">
+              Contesto: Da Gamergate alle analisi attuali (AboutGender 2025) l'ostilità tutela uno spazio presunto maschile.
+            </div>
+          </div>
+
+          <!-- Right: Compact Visualizer Box + 3 Horizontal Pills -->
+          <div style="background: #0E1013; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 28px 24px;">
+            
+            <!-- Waveform to Flatline Graphic -->
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 80px; padding: 0 16px; margin-bottom: 24px;">
+              <!-- Left: Animated Bars (Active Voice) -->
+              <div style="display: flex; align-items: center; gap: 6px; width: 45%; height: 60px; justify-content: center;">
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+                <span class="s4-bar"></span>
+              </div>
+
+              <!-- Right: Flatline (Silence / 0 dB) -->
+              <div style="width: 48%; display: flex; align-items: center; position: relative;">
+                <div style="width: 100%; height: 3px; background: #F43F5E; box-shadow: 0 0 8px #F43F5E; position: relative;">
+                  <div style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; background: #F43F5E; box-shadow: 0 0 6px #F43F5E;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 Pill Buttons Side-by-Side (Exactly like user's media 2) -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+              <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 14px 10px; text-align: center;">
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600; color: #F8FAFC;">
+                  Microfono spento
+                </div>
+              </div>
+
+              <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 14px 10px; text-align: center;">
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600; color: #F8FAFC;">
+                  Nickname neutro
+                </div>
+              </div>
+
+              <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 14px 10px; text-align: center;">
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600; color: #F8FAFC;">
+                  Party chiusi
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Bottom Minimal Quote Banner -->
+        <div style="border-left: 3px solid #F43F5E; padding: 14px 20px; background: rgba(244,63,94,0.03); border-radius: 0 6px 6px 0;">
+          <p style="font-family: 'Newsreader', serif; font-style: italic; font-size: 23px; color: #F8FAFC; line-height: 1.35; margin: 0;">
+            &laquo;Proteggersi diventando invisibili rafforza l'idea che le donne "non ci siano".&raquo;
+          </p>
+        </div>
+
+      </div>
+
+      <div class="slide-footer fixed-footer">
+        <div>FONTI: ADL (HATE &amp; HARASSMENT) · WELLS ET AL. · ABOUTGENDER</div>
+        <div class="font-mono text-[#F43F5E]">SLIDE 04 / 09</div>
+      </div>
+    </section>
+
+
+            <section class="slide slide-5" data-slide-index="5" id="slide-5">
+
+      <div class="section-marker">
+        <div class="section-num">05</div>
+        <div class="section-label">Rappresentazione</div>
+      </div>
+
+      <div style="position: absolute; right: 80px; top: 48px; z-index: 20;" class="speaker-badge">Valerio Bernardi</div>
+      <div class="slide-title">
+        <h2>Da contorno a <span>soggetto</span></h2>
+      </div>
+
+      <div class="takeaway">
+        &laquo;Da oggetto della narrazione a soggetto della narrazione&raquo;
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+        <div class="timeline-axis"></div>
+
+        <!-- Node 1: Princess Peach -->
+        <div class="tl-node node-peach">
+          <img class="char-cutout"
+               src="Assets/Princess_Peach_Stock_Art.png"
+               alt="Princess Peach">
+          <div class="node-dot"></div>
+          <div class="node-year">ANNI '80</div>
+          <div class="node-label">Princess Peach</div>
+          <div class="node-desc">Damsel in distress</div>
+        </div>
+
+        <!-- Node 2: Lara Croft 1996 -->
+        <div class="tl-node node-lara">
+          <img class="char-cutout"
+               src="Assets/LaraTomb4.webp"
+               alt="Lara Croft 1996">
+          <div class="node-dot"></div>
+          <div class="node-year">1996</div>
+          <div class="node-label">Lara Croft</div>
+          <div class="node-desc">Autonomia + male gaze</div>
+        </div>
+
+        <!-- Node 3: Aloy -->
+        <div class="tl-node node-aloy">
+          <img class="char-cutout"
+               src="Assets/horizon_zero_dawn_transparent_character_png_by_wallpaper_background_dk06e2o-pre.png"
+               alt="Aloy &mdash; Horizon Zero Dawn">
+          <div class="node-dot"></div>
+          <div class="node-year">2017&ndash;2020</div>
+          <div class="node-label">Aloy &middot; Senua &middot; Ellie</div>
+          <div class="node-desc">Complessit&agrave; e autenticit&agrave;</div>
+        </div>
+
+        <!-- Node 4: Modular Identity -->
+        <div class="tl-node node-modular">
+          <div class="editorial-inset-box">
+            <div class="inset-header">SISTEMA AVATAR &middot; BALDUR'S GATE 3</div>
+            <img class="inset-img"
+                 src="Assets/Baldurs-Gate-3-Character-Creation-Origin.jpg"
+                 alt="Baldur's Gate 3 &mdash; Character Creator">
+          </div>
+          <div class="node-dot"></div>
+          <div class="node-year">OGGI</div>
+          <div class="node-label">Identit&agrave; modulare</div>
+          <div class="node-desc">Corpo &middot; Voce &middot; Pronomi</div>
+        </div>
+      </div>
+
+      <!-- Annotations matching screenshot -->
+      <div class="annotation ann-malegaze">
+        <strong>Male gaze</strong><br>
+        Autonoma ma sessualizzata &mdash;<br>corpo disegnato per lo sguardo maschile
+      </div>
+
+      <div class="annotation ann-complexity">
+        <strong>Soggettivit&agrave; piena</strong><br>
+        Competenza, trauma, salute mentale,<br>fisicit&agrave; autentica
+      </div>
+
+      <div class="annotation ann-modular">
+        <strong>Disaccoppiamento</strong><br>
+        Corpo, voce e pronomi come scelte<br>indipendenti del giocatore
+      </div>
+
+      <div class="slide-footer fixed-footer" style="position: absolute; left: 80px; right: 80px; bottom: 60px; height: 42px;">
+        <div>PERSONAGGI FEMMINILI NEL VIDEOGIOCO &middot; ESEMPI, NON UN'EVOLUZIONE LINEARE</div>
+        <div class="font-mono text-[#A855F7]">SLIDE 05 / 09</div>
+      </div>
+    </section>
+
+
+    <section class="slide" data-slide-index="6" id="slide-6">
+      <div class="slide-header fixed-header">
+        <div class="header-left">
+          <div class="section-tag-group">
+            <span class="section-num-accent text-violet">06</span>
+            <span class="section-topic-label text-violet">INDUSTRIA</span>
+          </div>
+          <div class="header-divider"></div>
+          <h2 class="slide-title-text">Quasi metà gioca. Solo un quarto sviluppa</h2>
+        </div>
+        <div class="speaker-badge">Samuele De Santis</div>
+      </div>
+
+      <div class="flex-1 grid grid-cols-12 gap-10 items-center py-2 slide-body industry">
+        <div class="col-span-7 flex flex-col justify-between h-full py-2 pr-4">
+          <div class="space-y-3.5 mb-4 industry-steps">
+            <div class="w-full p-4 rounded-lg border-l-4 border-l-[#38BDF8] bg-[#17191D] flex items-center justify-between border border-white/10">
+              <div>
+                <div class="font-display font-bold text-2xl text-[#F8FAFC]" style=";font-size:34px;">Giocatrici</div>
+                <div class="text-sm text-[#94A3B8]" style=";font-size:24px;">Campione internazionale ESA, 2025</div>
+              </div>
+              <div class="font-display font-black text-5xl text-[#38BDF8]" style=";font-size:64px;">48%</div>
+            </div>
+
+            <div class="w-[88%] p-4 rounded-lg border-l-4 border-l-[#A855F7] bg-[#17191D] flex items-center justify-between border border-white/10">
+              <div>
+                <div class="font-display font-bold text-2xl text-[#F8FAFC]" style=";font-size:34px;">Forza lavoro negli studi</div>
+                <div class="text-sm text-[#94A3B8]" style=";font-size:24px;">23% in Italia · circa 25% nel campione GDC</div>
+              </div>
+              <div class="font-display font-black text-5xl text-[#A855F7]" style=";font-size:64px;">23–25%</div>
+            </div>
+
+            <div class="w-[75%] p-4 rounded-lg border-l-4 border-l-[#F43F5E] bg-[#17191D] flex items-center justify-between border border-white/10">
+              <div>
+                <div class="font-display font-bold text-2xl text-[#F8FAFC]" style=";font-size:34px;">Ruoli tecnici</div>
+                <div class="text-sm text-[#94A3B8]" style=";font-size:24px;">Stima del progetto · fonte specifica da precisare</div>
+              </div>
+              <div class="font-display font-black text-5xl text-[#F43F5E]" style=";font-size:64px;">≈20%</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-6 pt-4 border-t border-white/[0.08] segregations">
+            <div class="border-l-2 border-l-[#A855F7] pl-3">
+              <div class="font-display font-bold text-lg text-[#F8FAFC] mb-1" style=";font-size:28px;">Segregazione orizzontale</div>
+              <p class="text-sm text-[#CBD5E1] leading-relaxed" style=";font-size:24px;">
+                Concentrazione in alcuni ambiti professionali e minore presenza in altri.
+              </p>
+            </div>
+            <div class="border-l-2 border-l-[#F43F5E] pl-3">
+              <div class="font-display font-bold text-lg text-[#F8FAFC] mb-1" style=";font-size:28px;">Segregazione verticale</div>
+              <p class="text-sm text-[#CBD5E1] leading-relaxed" style=";font-size:24px;">
+                Meno presenza nei ruoli decisionali e di leadership.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-span-5 flex flex-col justify-between h-full py-2 industry-image">
+          <div class="relative w-full h-[400px] rounded-lg overflow-hidden border border-white/10">
+            <img src="Assets/b6d72b82421a434d6dd302f4e0ba4fd7.jpg" alt="Studio di sviluppo" class="w-full h-full object-cover">
+          </div>
+
+          <div class="pl-5 border-l-4 border-l-[#F43F5E] mt-4 py-2 bg-[#17191D] border border-white/[0.06] rounded-r-lg">
+            <p class="text-[20px] text-[#F8FAFC] font-serif italic leading-snug" style=";font-size:30px;">
+              Una minore varietà di esperienze nei team può lasciare alcuni bisogni fuori dal progetto.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer fixed-footer">
+        <div>ESA 2025 · IIDEA, DATI 2024 · GDC 2025 · ≈20% DA VERIFICARE</div>
+        <div class="font-mono text-[#F43F5E]">SLIDE 06 / 09</div>
+      </div>
+    </section>
+
+
+    <section class="slide" data-slide-index="7" id="slide-7">
+      <!-- Standardized Editorial Header -->
+      <div class="slide-header fixed-header">
+        <div class="header-left">
+          <div class="section-tag-group">
+            <span class="section-num-accent text-coral">07</span>
+            <span class="section-topic-label text-coral">DIVARIO</span>
+          </div>
+          <div class="header-divider"></div>
+          <h2 class="slide-title-text">Il divario cresce salendo di livello</h2>
+        </div>
+        <div class="speaker-badge">Samuele De Santis</div>
+      </div>
+
+      <div class="slide-body flex flex-col justify-between" style="padding-top: 10px; padding-bottom: 10px;">
+        <!-- The True Ascending Staircase -->
+        <div class="gap-stairs" style="position: relative; height: 480px; display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 40px; align-items: end;">
+          
+          <!-- Step 1: Retribuzione (Base Level) -->
+          <div class="gap-step gap-step-1" style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-top: 4px solid #F43F5E; border-radius: 8px; padding: 28px 24px; height: 320px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #F43F5E; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 12px;">01 / RETRIBUZIONE</div>
+              <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 78px; color: #F43F5E; line-height: 1; margin-bottom: 14px;">−24%</div>
+              <p style="font-size: 20px; color: #CBD5E1; line-height: 1.35; margin: 0;">
+                Retribuzione media delle donne rispetto agli uomini nel campione GDC USA.
+              </p>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+              GDC Salary Report 2025
+            </div>
+          </div>
+
+          <!-- Step 2: Carriera Senior (Elevated +60px) -->
+          <div class="gap-step gap-step-2" style="background: #1B1E24; border: 1px solid rgba(244,63,94,0.3); border-top: 4px solid #F43F5E; border-radius: 8px; padding: 28px 24px; height: 400px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #F43F5E; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 12px;">02 / CARRIERA SENIOR</div>
+              <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 68px; color: #F8FAFC; line-height: 1; margin-bottom: 8px;">
+                68% <span style="color: #64748B; font-weight: 400; font-size: 42px;">/</span> <span style="color: #F43F5E;">38%</span>
+              </div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #38BDF8; font-weight: 700; margin-bottom: 12px;">
+                Uomini / Donne e non binarie (6+ anni exp, $125k+)
+              </div>
+              <p style="font-size: 19px; color: #CBD5E1; line-height: 1.35; margin: 0;">
+                30 punti percentuali di distanza nell'accesso ai livelli retributivi più alti.
+              </p>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+              Campione game designer senior
+            </div>
+          </div>
+
+          <!-- Step 3: Competizione (Highest Step) -->
+          <div class="gap-step gap-step-3" style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-top: 4px solid #F43F5E; border-radius: 8px; padding: 28px 24px; height: 480px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #F43F5E; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 12px;">03 / COMPETIZIONE</div>
+              <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 78px; color: #F43F5E; line-height: 1; margin-bottom: 14px;">33%</div>
+              <p style="font-size: 20px; color: #CBD5E1; line-height: 1.35; margin: 0; margin-bottom: 16px;">
+                del pubblico esports è femminile.*
+              </p>
+              <div style="background: rgba(244,63,94,0.08); border-left: 2px solid #F43F5E; padding: 12px 14px; border-radius: 4px;">
+                <p style="font-size: 18px; color: #F8FAFC; font-weight: 600; line-height: 1.3; margin: 0;">
+                  La presenza nei tornei aperti resta estremamente limitata.
+                </p>
+              </div>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+              *Stima di progetto da completare
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Panel: Dedicated Circuits -->
+        <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="max-width: 320px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #F43F5E; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">RISPOSTE STRUTTURALI</div>
+            <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 22px; color: #F8FAFC;">Circuiti dedicati</div>
+          </div>
+          <div class="flex items-center gap-12">
+            <div class="flex items-center gap-4">
+              <img src="Assets/VCT_Game_Changers_Championship_lightmode.png" alt="VCT Game Changers" style="height: 56px; width: auto; filter: brightness(1.2) contrast(1.1);">
+              <div>
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 18px; color: #F8FAFC;">VCT Game Changers</div>
+                <div style="font-size: 15px; color: #94A3B8;">Valorant · visibilità per generi marginalizzati</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <img src="Assets/600px-ESL_Impact_lightmode.png" alt="ESL Impact" style="height: 56px; width: auto; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">
+              <div>
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 18px; color: #F8FAFC;">ESL Impact</div>
+                <div style="font-size: 15px; color: #94A3B8;">Counter-Strike · circuito femminile dal 2022</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer fixed-footer">
+        <div>GDC SALARY REPORT 2025, P. 10 · RIOT GAMES · ESL</div>
+        <div class="font-mono text-[#F43F5E]">SLIDE 07 / 09</div>
+      </div>
+    </section>
+
+
+        <section class="slide slide-8" data-slide-index="8" id="slide-8">
+      <!-- Standardized Editorial Header -->
+      <div class="slide-header fixed-header">
+        <div class="header-left">
+          <div class="section-tag-group">
+            <span class="section-num-accent text-cyan">08</span>
+            <span class="section-topic-label text-cyan">ARCHITETTURA</span>
+          </div>
+          <div class="header-divider"></div>
+          <h2 class="slide-title-text">Dalla diversità all’inclusione</h2>
+        </div>
+        <div class="speaker-badge">Samuele De Santis</div>
+      </div>
+
+      <div class="slide-body flex flex-col justify-between" style="padding-top: 10px; padding-bottom: 10px;">
+        <!-- Top Contrast: Dual Symmetrical Editorial Panels with Central Bridge Badge -->
+        <div class="grid grid-cols-12 gap-8 items-stretch">
+          <!-- Left: Diversità -->
+          <div class="col-span-5 p-7 rounded-xl bg-[#17191D] border border-white/10 border-t-4 border-t-[#94A3B8] flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #94A3B8;">01 · STATO ATTUALE</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #64748B;">Dato quantitativo</span>
+              </div>
+              <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 40px; color: #F8FAFC; margin-bottom: 10px;">Diversità</h3>
+              <div style="font-size: 24px; font-weight: 600; color: #CBD5E1; margin-bottom: 12px;">Essere presenti nello spazio.</div>
+              <p style="font-size: 19px; color: #94A3B8; line-height: 1.45;">
+                Il 48% di chi gioca è donna. Ma la sola presenza numerica non garantisce sicurezza, rispetto o possibilità di crescita.
+              </p>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #64748B; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px; margin-top: 14px;">
+              Presenza passiva nel sistema
+            </div>
+          </div>
+
+          <!-- Center: Editorial Bridge Badge -->
+          <div class="col-span-2 flex flex-col items-center justify-center text-center">
+            <div style="background: #1B1E24; border: 1px solid rgba(56,189,248,0.4); box-shadow: 0 0 25px rgba(56,189,248,0.15); border-radius: 9999px; padding: 12px 18px; display: flex; align-items: center; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #38BDF8; letter-spacing: 0.1em;">SALTO PROGETTUALE</span>
+              <span style="color: #38BDF8; font-weight: 700; font-size: 18px;">→</span>
+            </div>
+          </div>
+
+          <!-- Right: Inclusione -->
+          <div class="col-span-5 p-7 rounded-xl bg-[#1B1E24] border border-cyan-500/30 border-t-4 border-t-[#38BDF8] shadow-[0_0_30px_rgba(56,189,248,0.08)] flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #38BDF8;">02 · OBIETTIVO ETICO &amp; TECNICO</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #38BDF8;">Condizione qualitativa</span>
+              </div>
+              <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 40px; color: #38BDF8; margin-bottom: 10px;">Inclusione</h3>
+              <div style="font-size: 24px; font-weight: 600; color: #F8FAFC; margin-bottom: 12px;">Poter partecipare alle stesse condizioni.</div>
+              <p style="font-size: 19px; color: #CBD5E1; line-height: 1.45;">
+                Poter giocare, comunicare, lavorare e competere senza subire discriminazioni, molestie o barriere invisibili nel software.
+              </p>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #38BDF8; border-top: 1px solid rgba(56,189,248,0.15); padding-top: 12px; margin-top: 14px;">
+              Partecipazione attiva e protetta
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle: 3 Grounded Pillars -->
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #94A3B8; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px;">
+            PER CHI SVILUPPA QUESTO IMPLICA SCELTE CONCRETE:
+          </div>
+          <div class="grid grid-cols-3 gap-8">
+            <div class="p-6 rounded-lg bg-[#17191D] border border-white/10 border-l-4 border-l-[#38BDF8]">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38BDF8; font-weight: 700; margin-bottom: 6px;">01 · ARCHITETTURA DI GIOCO</div>
+              <h4 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; color: #F8FAFC; margin-bottom: 8px;">Design inclusivo</h4>
+              <p style="font-size: 17px; color: #CBD5E1; line-height: 1.4; margin: 0;">
+                Avatar modulari, personalizzazione disaccoppiata e accessibilità integrata fin dalla fase di pre-produzione.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-lg bg-[#17191D] border border-white/10 border-l-4 border-l-[#F43F5E]">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #F43F5E; font-weight: 700; margin-bottom: 6px;">02 · SPAZIO SOCIALE</div>
+              <h4 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; color: #F8FAFC; margin-bottom: 8px;">Community sicure</h4>
+              <p style="font-size: 17px; color: #CBD5E1; line-height: 1.4; margin: 0;">
+                Sistemi di moderazione proattivi, reporting a basso attrito e tutele attive sulla voice chat contro le molestie.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-lg bg-[#17191D] border border-white/10 border-l-4 border-l-[#A855F7]">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A855F7; font-weight: 700; margin-bottom: 6px;">03 · INDUSTRIA &amp; ESPORTS</div>
+              <h4 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; color: #F8FAFC; margin-bottom: 8px;">Opportunità eque</h4>
+              <p style="font-size: 17px; color: #CBD5E1; line-height: 1.4; margin: 0;">
+                Trasparenza retributiva, percorsi di leadership tecnica per sviluppatrici e supporto ai circuiti competitivi.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom: Manifesto -->
+        <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #38BDF8; padding: 20px 28px; border-radius: 8px;">
+          <p style="font-family: 'Newsreader', serif; font-style: italic; font-size: 32px; color: #F8FAFC; line-height: 1.3; margin: 0;">
+            «L'inclusione non è un accessorio: è un requisito di progettazione del software.»
+          </p>
+        </div>
+      </div>
+
+      <div class="slide-footer fixed-footer">
+        <div>PROGETTAZIONE SOFTWARE E SPAZI DIGITALI</div>
+        <div class="font-mono text-[#38BDF8]">SLIDE 08 / 09</div>
+      </div>
+    </section>
+
+
+    <section class="slide" data-slide-index="9" id="slide-9">
+      <!-- Standardized Editorial Header -->
+      <div class="slide-header fixed-header">
+        <div class="header-left">
+          <div class="section-tag-group">
+            <span class="section-num-accent text-cyan">09</span>
+            <span class="section-topic-label text-cyan">MANIFESTO</span>
+          </div>
+          <div class="header-divider"></div>
+          <h2 class="slide-title-text">Le donne nel gaming ci sono già</h2>
+        </div>
+        <div class="speaker-badge">Luca · Valerio · Samuele</div>
+      </div>
+
+      <div class="slide-body grid grid-cols-12 gap-12 items-stretch" style="padding-top: 10px; padding-bottom: 10px;">
+        <!-- Left & Center: Powerful Manifesto Core (col-span-8) -->
+        <div class="col-span-8 flex flex-col justify-between pr-8 border-r border-white/10">
+          <div>
+            <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 40px; color: #38BDF8; line-height: 1.25; margin-bottom: 24px;">
+              La presenza delle donne non si traduce ancora in pari riconoscimento e opportunità.
+            </div>
+
+            <p style="font-size: 26px; color: #CBD5E1; line-height: 1.5; margin-bottom: 20px;">
+              Nel videogioco scegliamo e agiamo attraverso un personaggio. Questa esperienza può mettere in discussione gli stereotipi consolidati. Come futuri informatici, contribuiamo in prima persona a definirne le possibilità e i limiti.
+            </p>
+          </div>
+
+          <!-- The Climax Question -->
+          <div style="background: #17191D; border: 1px solid rgba(168,85,247,0.3); border-left: 5px solid #A855F7; box-shadow: 0 10px 30px rgba(168,85,247,0.08); padding: 28px 32px; border-radius: 8px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A855F7; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 10px;">DOMANDA GUIDA</div>
+            <p style="font-family: 'Newsreader', serif; font-style: italic; font-size: 34px; color: #F8FAFC; line-height: 1.35; margin: 0;">
+              «Sappiamo progettare spazi in cui tutte le persone possano partecipare alle stesse condizioni?»
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Discreet Academic Colophon (col-span-4) -->
+        <div class="col-span-4 flex flex-col justify-between pl-4">
+          <div style="background: #17191D; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 22px 24px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: #94A3B8; font-weight: 700; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px;">
+              FONTI ACCADEMICHE &amp; REPORT
+            </div>
+
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #CBD5E1;">
+              <li class="flex items-center gap-2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #38BDF8;"></span>ESA · Power of Play (2025)</li>
+              <li class="flex items-center gap-2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #38BDF8;"></span>Video Games Europe (dati 2024)</li>
+              <li class="flex items-center gap-2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #38BDF8;"></span>IIDEA · Rapporto Annuale (2024)</li>
+              <li class="flex items-center gap-2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #F43F5E;"></span>ADL · Hate &amp; Harassment (2023)</li>
+              <li class="flex items-center gap-2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #F43F5E;"></span>Wells, Romhányi, Steinkuehler (2025)</li>
+              <li class="flex items-center gap-2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #A855F7;"></span>GDC State of the Industry (2025)</li>
+              <li class="flex items-center gap-2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #A855F7;"></span>Botto e Falzea · AboutGender (2025)</li>
+            </ul>
+          </div>
+
+          <!-- Academic Metadata -->
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #94A3B8; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); line-height: 1.6;">
+            Università di Roma Tor Vergata<br>
+            Corso di Gender &amp; Inclusion · Informatica<br>
+            Prof.ssa Barbara Martini · <span style="color: #38BDF8; font-weight: 700;">A.A. 2025–2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer fixed-footer">
+        <div>GENDER &amp; INCLUSION · INFORMATICA · TOR VERGATA</div>
+        <div class="font-mono text-[#38BDF8]">SLIDE 09 / 09</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div id="hud-controls">
+  <button class="hud-btn" id="btn-prev" title="Slide precedente (←)">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    <span>PREV</span>
+  </button>
+  
+  <div class="font-mono text-xs text-[#CBD5E1] px-2 flex items-center gap-1">
+    <span id="hud-current" class="text-[#38BDF8] font-bold">01</span>
+    <span class="text-[#94A3B8]">/</span>
+    <span id="hud-total" class="text-[#94A3B8]">09</span>
+  </div>
+
+  <button class="hud-btn" id="btn-next" title="Slide successiva (→ / Spazio)">
+    <span>NEXT</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </button>
+
+  <span class="w-px h-4 bg-white/20 mx-1"></span>
+
+  <button class="hud-btn" id="btn-notes" title="Note orali del relatore (Tasto N)">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+    <span>NOTE</span>
+  </button>
+
+  
+  <button class="hud-btn" id="btn-print" title="Salva o Stampa in PDF (Tasto P)">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+    <span>PDF</span>
+  </button>
+
+  <button class="hud-btn" id="btn-fs" title="Schermo intero (Tasto F)">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+  </button>
+</div>
+
+<div id="notes-drawer">
+  <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+    <div class="font-mono text-xs text-[#38BDF8] uppercase font-bold tracking-wider" id="notes-speaker-label">
+      NOTE ORALI DEL RELATORE
+    </div>
+    <button id="notes-close" class="text-[#94A3B8] hover:text-white font-mono text-sm">×</button>
+  </div>
+  <div class="text-sm text-[#CBD5E1] leading-relaxed" id="notes-content">
+    Caricamento note...
+  </div>
+</div>
+
+<script>
+  (function() {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const totalSlides = slides.length;
+    let currentSlideIndex = 1;
+
+    // Speaker notes mapped exactly from copione.md
+    const speakerNotes = {"1": {"speaker": "Luca Gugliotta · 0:00–0:55", "text": "Buongiorno. Parliamo di donne, gaming e inclusione, concentrandoci su stereotipi, tossicità online, rappresentazione dei personaggi e lavoro nell’industria videoludica. Siamo studenti di Informatica: il videogioco è un prodotto software, un medium culturale e uno spazio sociale."}, "2": {"speaker": "Luca Gugliotta · 0:55–1:50", "text": "Voice chat, moderazione, matchmaking e avatar sono scelte tecniche che influenzano la partecipazione. Guardiamo a tre aspetti: chi gioca, cosa vediamo e chi sviluppa. Il modo in cui programmiamo uno spazio digitale influenza chi può parteciparvi."}, "3": {"speaker": "Luca Gugliotta · 1:50–3:20", "text": "ESA, Power of Play 2025: il 48% delle persone intervistate è donna. Il campione comprende 24.216 giocatori di almeno 16 anni in 21 paesi, attivi almeno un’ora a settimana. In Italia IIDEA rileva 5,7 milioni di videogiocatrici nel 2024, con crescita annua del 14% contro il 2,5% degli uomini. Il 47,8% europeo è mantenuto su richiesta dal progetto iniziale ma non è stato confermato: la pagina VGE sui dati 2024 riporta il 45%. Non presentarlo come dato verificato finché non si recupera il riferimento preciso. Le popolazioni rilevate non coincidono."}, "4": {"speaker": "Valerio Bernardi · 3:20–5:05", "text": "La voce può rendere riconoscibile il genere e diventare il punto di partenza di molestie mirate. Nell’indagine ADL statunitense del 2023, il 48% delle giocatrici adulte intervistate segnala molestie legate al genere. Il 76% riguarda invece molestie di qualsiasi tipo tra gli adulti che giocano online. Evitare la voice chat limita la comunicazione con la squadra. Nickname neutri e gruppi chiusi illustrano altre forme di protezione. Wells, Romhányi e Steinkuehler (2025) studiano odio e molestie su un campione diverso, non sono la fonte delle due percentuali ADL. Botto e Falzea (2025) analizzano la persistenza delle culture di esclusione a dieci anni da Gamergate."}, "5": {"speaker": "Valerio Bernardi · 5:05–6:55", "text": "La timeline presenta esempi, non un progresso lineare valido per tutti i giochi. Peach richiama il ruolo della principessa da salvare. Lara Croft, introdotta nel 1996, unisce autonomia e sessualizzazione: il render usato è di Tomb Raider IV (1999), non del primo gioco. Aloy, Senua, Ellie e Abby esemplificano protagoniste con storie, competenze e corpi diversi. In Baldur’s Gate 3 alcune dimensioni del personaggio, come corpo, voce e identità, sono personalizzabili separatamente. Da oggetto a soggetto della narrazione."}, "6": {"speaker": "Samuele De Santis · 6:55–8:05", "text": "Il confronto mostra uno scarto tra pubblico e lavoro nell’industria, non il percorso di uno stesso gruppo di persone. ESA rileva il 48% di donne tra i giocatori del campione internazionale. IIDEA riporta il 23% di donne tra gli occupati italiani nel 2024. Il circa 25% GDC è una sintesi del progetto. Il ≈20% nei ruoli tecnici resta una stima del progetto senza una fonte specifica verificata: non attribuirlo genericamente all’Unione europea o al solo settore videoludico. La segregazione orizzontale riguarda la distribuzione tra professioni, quella verticale l’accesso alle posizioni decisionali."}, "7": {"speaker": "Samuele De Santis · 8:05–9:20", "text": "La progressione è concettuale: retribuzione, carriera senior, competizione. Le tre misure non sono direttamente confrontabili. Il GDC Salary Report 2025, pagina 10, riporta un divario medio del 24% nel campione USA. Tra 75 game designer occupati con almeno sei anni di esperienza, il 68% degli uomini e il 38% di donne e persone non binarie riceve almeno 125.000 dollari annui: la differenza è di 30 punti percentuali. La cifra del 33% di pubblico esports femminile è conservata dal progetto ma manca il riferimento preciso. VCT Game Changers ed ESL Impact sono esempi di circuiti dedicati, senza assumere che eliminino da soli il divario o garantiscano il passaggio ai roster misti."}, "8": {"speaker": "Samuele De Santis · 9:20–10:35", "text": "Diversità significa riconoscere la varietà delle persone presenti. Inclusione significa creare le condizioni per partecipare. Per chi sviluppa questo implica scelte concrete: avatar e accessibilità, strumenti per segnalare e gestire molestie, criteri trasparenti per accesso e crescita professionale. L’inclusione è un requisito di progettazione."}, "9": {"speaker": "Samuele De Santis · 10:35–11:15", "text": "Le donne nel gaming ci sono già. La presenza non si traduce ancora in pari riconoscimento e opportunità. Il videogioco ci fa scegliere e agire attraverso un personaggio e può mettere in discussione gli stereotipi. Come informatici contribuiamo a definire le possibilità e i limiti di questi ambienti. Sappiamo progettare spazi in cui tutte le persone possano partecipare alle stesse condizioni?"}};
+
+    // Canvas scaling to viewport (1920x1080 fixed aspect)
+    const canvas = document.getElementById('presentation-canvas');
+    function fitCanvas() {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const scaleX = windowWidth / 1920;
+      const scaleY = windowHeight / 1080;
+      const scale = Math.min(scaleX, scaleY); // 98% for clean border breathing
+      
+      canvas.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      canvas.style.left = '50%';
+      canvas.style.top = '50%';
+    }
+
+    window.addEventListener('resize', fitCanvas);
+    fitCanvas();
+
+    // Navigation logic
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+
+      slides.forEach(slide => {
+        const slideIdx = parseInt(slide.getAttribute('data-slide-index'), 10);
+        if (slideIdx === index) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      currentSlideIndex = index;
+      history.replaceState(null, "", `#${index}`);
+
+      // Update HUD
+      document.getElementById('hud-current').textContent = String(index).padStart(2, '0');
+      document.getElementById('hud-total').textContent = String(totalSlides).padStart(2, '0');
+
+      // Update Notes Drawer if open
+      updateNotesDrawer();
+    }
+
+    function updateNotesDrawer() {
+      const note = speakerNotes[currentSlideIndex];
+      if (note) {
+        document.getElementById('notes-speaker-label').textContent = note.speaker;
+        document.getElementById('notes-content').textContent = note.text;
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < totalSlides) {
+        showSlide(currentSlideIndex + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlideIndex > 1) {
+        showSlide(currentSlideIndex - 1);
+      }
+    }
+
+    // Keyboard controls
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        showSlide(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        showSlide(totalSlides);
+            } else if (e.key === 'p' || e.key === 'P') {
+        e.preventDefault();
+        window.print();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      } else if (e.key === 'n' || e.key === 'N') {
+        e.preventDefault();
+        toggleNotes();
+      }
+    });
+
+    // HUD button bindings
+    document.getElementById('btn-prev').addEventListener('click', prevSlide);
+    document.getElementById('btn-next').addEventListener('click', nextSlide);
+    document.getElementById('btn-notes').addEventListener('click', toggleNotes);
+    document.getElementById('notes-close').addEventListener('click', toggleNotes);
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log(err));
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+        document.getElementById('btn-print').addEventListener('click', () => window.print());
+    document.getElementById('btn-fs').addEventListener('click', toggleFullscreen);
+
+    function toggleNotes() {
+      const drawer = document.getElementById('notes-drawer');
+      drawer.classList.toggle('open');
+      updateNotesDrawer();
+    }
+
+    window.addEventListener("hashchange", () => { const n = parseInt(location.hash.slice(1), 10); if (Number.isFinite(n)) showSlide(n); });
+    let hudTimer; window.addEventListener("pointermove", () => { document.body.classList.add("controls-visible"); clearTimeout(hudTimer); hudTimer=setTimeout(() => document.body.classList.remove("controls-visible"),1800); });
+    // Initial Hash detection
+    const initialHash = window.location.hash.replace('#', '');
+    const parsedInitial = parseInt(initialHash, 10);
+    if (!isNaN(parsedInitial) && parsedInitial >= 1 && parsedInitial <= totalSlides) {
+      showSlide(parsedInitial);
+    } else {
+      showSlide(1);
+    }
+  })();
+</script>
+
+</body>
+</html>
