@@ -32,6 +32,7 @@ flowchart TD
         I23["Idea 23: Automated Session Hygiene & Pre-Flight State Health Checks"]
         I24["Idea 24: Dynamic Checkpoint Steering & Step-Adaptive Budgeting"]
         I25["Idea 25: Network Agnosticism, VPN Tunnels & Dynamic LHOST Discovery"]
+        I26["Idea 26: Composite Multi-Target Decomposition & Challenge Routing"]
         I16["Idea 16: Checklist Ponderata & Conformance Scoring Continuo"]
         I10["Idea 10: Writeup Generator Automatico per gli Studenti"]
         I6["Idea 6: Modulo Black-Box (Auditing Unintended Ways & Bypass)"]
@@ -51,7 +52,7 @@ flowchart TD
 | :--- | :--- | :--- | :--- |
 | **🚀 TIER 1** | **(TOP PRIORITY) Validazione Macchine VulcaMind & Self-Healing** | **⭐ Idea 5 (Priorità 1)**, **Idea 7**, **Idea 3**, **Idea 14** | Prova empirica di generalità su target d'esame reali (`Exam_1APP26`, `Exam_2APP26`, `Sim_01/02`) e chiusura del ciclo con VulcaForge. |
 | **📊 TIER 2** | **Dati Sperimentali & Tabelle Tesi** | **Idea 11**, **Idea 4**, **Idea 13** | Validazione scientifica: matrice confusionale negative testing, benchmark comparativo modelli esteso e tabelle LaTeX pronte. |
-| **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
+| **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 26**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
 
 ---
 
@@ -183,6 +184,27 @@ flowchart TD
   4. *VHost Agnostic Testing:* Forzatura sistematica dell'header `Host: <vhost>` nelle chiamate di rete o aliasing dinamico effimero, eliminando la necessità per lo studente o l'auditor di modificare manualmente il DNS di sistema.
   5. *Tassonomia di Errore Differenziata nell'Evaluator:* L'Evaluator distingue formalmente tra guasto didattico del target (`CHALLENGE_DEFECT`, es. porta chiusa o servizio web in errore 500) e anomalia dell'infrastruttura di rete (`NETWORK_TUNNEL_FAULT`, es. tunnel VPN caduto o route flap), prevenendo l'emissione di falsi negativi sulla qualità della macchina didattica.
 * **Valore per la Tesi:** Dimostra che VulcaTest non è un semplice script da banco per container locali, ma un framework di conformance testing di livello enterprise pronto per operare agnosticamente su Cyber Range accademici complessi e reti federate.
+
+---
+
+### 26. Composite Multi-Target Decomposition & Challenge Routing (Disaccoppiamento di Ambienti d'Esame Eterogenei)
+* **Il Problema e i Limiti delle Euristiche Ingenue:**
+  Nelle sessioni d'esame reali (es. `Exam_1APP26`, `Exam_2APP26`, `Sim_Exam_01/02`), i repository didattici non contengono una singola macchina monolitica, ma un *ecosistema composito multi-target*:
+  1. *Eterogeneità Strutturale:* La documentazione include contemporaneamente una macchina principale in stile Boot to Root (B2R) con una storyline narrativa profonda (porte 22, 80, 20000) e molteplici sfide indipendenti (*Standalone A*, *Standalone B*) ospitate su container Docker satellite e porte separate (`58090`, `58022`).
+  2. *Fragilità delle Soluzioni "Naive" (String Splitting / Regex):* Tentare di separare le sfide a valle nel codice del Planner tramite un banale split su stringhe o parole chiave (es. cercare `## Standalone` o `# Independent Challenge`) è una scorciatoia fragile e inaffidabile. È sufficiente una minima deviazione sintattica introdotta dal docente o dal compilatore Markdown (convenzioni bilingui, elenchi numerati invece di intestazioni, inversione dell'ordine dei capitoli) per far fallire il parser o tagliare erroneamente porzioni legittime della catena B2R.
+  3. *Cecità Infrastrutturale e Mancato Collaudo Satellite:* Se il framework si limita a ignorare o tagliare via le challenge secondarie per far spazio nel contesto, le sfide standalone rimangono completamente prive di verifica di conformità. Gli studenti potrebbero quindi ricevere un ambiente d'esame con una sfida standalone difettosa o non funzionante senza che l'auditor se ne accorga.
+* **La Soluzione Architetturale Robusta:**
+  1. *Pre-Planner Semantic Decomposer & Challenge Manifest:* Sviluppare un modulo di scomposizione semantica a monte (o estendere il generatore VulcaMind con un manifest strutturato `challenge_topology.yml`). Tale modulo identifica formalmente i confini logici e fisici di ogni singola unità didattica presente nella cartella:
+     - Unità 1: `b2r_primary` (container `exam_1app26`, porte 22/80/20000, target SSH/Web/CLI, flag `user.txt` e `root.txt`).
+     - Unità 2: `standalone_a` (container `exam_1app26_stnda`, porta 58090, target diagnostico web, flag `VDSI{...}`).
+     - Unità 3: `standalone_b` (container `exam_1app26_stndb`, porta 58022, target cronjob/privesc, flag `get_flag`).
+  2. *Multi-Plan Attack Generation (Piani d'Attacco Disaccoppiati):* Il Planner non genera un unico file monolitico, ma una matrice di piani indipendenti (`ATTACK_PLAN_b2r.md`, `ATTACK_PLAN_stnda.md`, `ATTACK_PLAN_stndb.md`). Ciascun piano viene compilato fornendo al modello LLM esclusivamente la porzione documentale pertinente, garantendo:
+     - Zero inquinamento cross-challenge del prompt.
+     - Riduzione fisiologica del prompt a <6.000 token, consentendo al modello di operare sempre al 100% in VRAM GPU senza degradare le prestazioni.
+  3. *Target Routing & Suite Execution nell'Orchestratore:* L'Orchestratore LangGraph acquisisce la capacità di instradare i test su target multipli:
+     - Esecuzione mirata: `uv run main.py --unit b2r` o `uv run main.py --unit standalone_a`.
+     - Esecuzione a suite completa (`--all-units`): collaudo sequenziale o parallelo di tutti i container della sessione d'esame, con reset Clean Slate dedicato per ogni singolo container e produzione di un report unificato d'esame.
+* **Valore per la Tesi:** Formalizza il passaggio da un verificatore "single-machine" a un sistema di test architetturale per ambienti d'esame compositi ed eterogenei, superando le euristiche sintattiche fragili a favore di una scomposizione semantica rigorosa.
 
 ---
 
