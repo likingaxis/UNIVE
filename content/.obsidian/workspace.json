@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "441c015ebecfb19b",
+        "id": "9820f95233e3588b",
         "type": "tabs",
         "children": [
           {
-            "id": "9628cb5020ef3012",
+            "id": "e09bddfaeefe5e81",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -187,17 +187,20 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "385e3b437a6aac05",
+  "active": "e09bddfaeefe5e81",
   "lastOpenFiles": [
     "UNI/ANNO 3/TESI/Call/call 0 tutor.md",
+    "UNI/ANNO 3/TESI/IDEE SPARSE.md",
+    "UNI/ANNO 3/TESI/OBIETTIVO 1/GUIDA PASSO PASSO.md",
+    "UNI/ANNO 3/TESI/ORGANIZZAZIONE TESI.md",
+    "UNI/ANNO 3/TESI/MODIFICHE EFFETTUATE.md",
+    "UNI/ANNO 3/TESI/TESI.md",
+    "UNI/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
     "UNI/ANNO 3/TESI/Call/Call 11-09 tutor.md",
     "UNI/ANNO 3/TESI/Call",
     "UNI/ANNO1 M/ORARIO.md",
     "UNI/ANNO 3/COSA FARE.md",
-    "UNI/ANNO 3/TESI/ORGANIZZAZIONE TESI.md",
-    "UNI/ANNO 3/TESI/MODIFICHE EFFETTUATE.md",
     "UNI/ANNO 3/TESI/Call/Call 2-09 tutor.md",
-    "UNI/ANNO 3/TESI/IDEE SPARSE.md",
     "UNI/ANNO 3/GENDER INCLUSION/TEORIA_CONCETTI_CHIAVE_ORALE.md",
     "UNI/ANNO 2/FONDAMENTI/DIMOSTRAZIONI/TUTTE LE RIDUZIONI.md",
     "UNI/ANNO 2/FONDAMENTI/DIMOSTRAZIONI/CHECKLIST FONDAMENTI.md",
@@ -208,15 +211,12 @@
     "UNI/ANNO 2/FONDAMENTI/FONDAMENTI LEZ.22.md",
     "UNI/ANNO 2/FONDAMENTI/FONDAMENTI LEZ.20.md",
     "UNI/ANNO 2/FONDAMENTI/FONDAMENTI LEZ.19.md",
-    "UNI/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
     "UNI/ANNO 3/ORGANIZZAZIONI ESAMI.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/donne-gaming-inclusione.pptx",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/copione.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/REVISIONE.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/README.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/FONTI.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/DESIGN_SINTESI.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/BRIEF_SINTESI.md",
     "UNI/ANNO 3/tree.png",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/donne-gaming-inclusione.pdf",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/utilities.css",

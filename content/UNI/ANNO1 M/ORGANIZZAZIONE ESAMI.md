@@ -49,6 +49,12 @@
 | ⭐              | **Advanced Cryptography**                      | 6   | **1° anno, 2° sem.** | Crittografia avanzata             | ⭐                                           |
 | **STRATEGICO** | **Computer Systems and Programming**           | 6   | **1° anno, 1° sem.** | C / Linux / sistemi / low-level   | ⭐⭐⭐ **se non hai già queste basi**          |
 
+SECURE COMPUTATION vs computer systems and programming
+- non mi ricordo
+DATA AND NETWORK SECURITY
+- practical network defense vs data and network security
+
+
 
 12 CFU — Elective course
 
@@ -58,6 +64,7 @@
 | ⭐⭐⭐      | **Programmable Networks**              | 6   | **1° anno, 2° sem.** | **I3S — Engineering in Computer Science and Artificial Intelligence** | SDN, network programmability, automazione delle reti, sviluppo di applicazioni di controllo e programmazione del data plane.               |
 | ⭐⭐⭐      | **AI-Native Communication Networks**   | 6   | **2° anno, 2° sem.** | **I3S — Telecommunication Engineering**                               | AI applicata alle reti: ML, deep learning, reinforcement learning, GNN, federated learning, edge-cloud e reti 6G.                          |
 | ⭐⭐       | **Data Management**                    | 6   | **1° anno, 2° sem.** | **I3S — Engineering in Computer Science and Artificial Intelligence** | Database e sistemi dati: gestione interna, query processing, transazioni, concorrenza, recovery e basi per sistemi backend/data-intensive. |
+
 
 Per come stai costruendo il percorso, questi quattro rappresentano quattro direzioni abbastanza diverse:
 

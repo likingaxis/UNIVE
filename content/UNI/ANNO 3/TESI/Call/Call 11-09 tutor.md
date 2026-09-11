@@ -18,6 +18,9 @@
 			cd ~/Desktop/TESI/vulcAIN/hexstrike
 			python3 hexstrike_server.py --host 0.0.0.0 --port 8888
 			```
+```docker
+	docker inspect -f '{{.Name}}: {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -q)
+```
 - **Configurazione del `.env` (`vulcatest/white-box/.env`)**
 	- Percorsi della challenge e dell'Attack Plan:
 		- `CHALLENGE_NAME="Nome Challenge"`: etichetta descrittiva/didattica della sfida (es. *"Web Exploitation Masterclass"* o *"Social Y (Exam 1APP26)"*), utilizzata nei banner di esecuzione e nell'intestazione dei report di conformità.
