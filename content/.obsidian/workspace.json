@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "9820f95233e3588b",
+        "id": "ee87f5580140ede7",
         "type": "tabs",
         "children": [
           {
-            "id": "e09bddfaeefe5e81",
+            "id": "abcd5d54a0ded214",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/ANNO 3/TESI/Call/Call 11-09 tutor.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Call 11-09 tutor"
+              "title": "New tab"
             }
           }
         ]
@@ -187,18 +183,23 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "e09bddfaeefe5e81",
+  "active": "abcd5d54a0ded214",
   "lastOpenFiles": [
-    "UNI/ANNO 3/TESI/Call/call 0 tutor.md",
+    "UNI/ANNO 3/TESI/SPIEGAZION/Untitled.md",
     "UNI/ANNO 3/TESI/IDEE SPARSE.md",
+    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/fasi.md",
+    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/FONTI.md",
+    "UNI/ANNO 3/tree.png",
+    "UNI/ANNO 3/ORGANIZZAZIONI ESAMI.md",
+    "UNI/ANNO1 M/ORARIO.md",
+    "UNI/ANNO 3/TESI/Call/Call 11-09 tutor.md",
+    "UNI/ANNO 3/TESI/Call/call 0 tutor.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/GUIDA PASSO PASSO.md",
     "UNI/ANNO 3/TESI/ORGANIZZAZIONE TESI.md",
     "UNI/ANNO 3/TESI/MODIFICHE EFFETTUATE.md",
     "UNI/ANNO 3/TESI/TESI.md",
     "UNI/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
-    "UNI/ANNO 3/TESI/Call/Call 11-09 tutor.md",
     "UNI/ANNO 3/TESI/Call",
-    "UNI/ANNO1 M/ORARIO.md",
     "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/TESI/Call/Call 2-09 tutor.md",
     "UNI/ANNO 3/GENDER INCLUSION/TEORIA_CONCETTI_CHIAVE_ORALE.md",
@@ -211,13 +212,8 @@
     "UNI/ANNO 2/FONDAMENTI/FONDAMENTI LEZ.22.md",
     "UNI/ANNO 2/FONDAMENTI/FONDAMENTI LEZ.20.md",
     "UNI/ANNO 2/FONDAMENTI/FONDAMENTI LEZ.19.md",
-    "UNI/ANNO 3/ORGANIZZAZIONI ESAMI.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/donne-gaming-inclusione.pptx",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/copione.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/REVISIONE.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/README.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/FONTI.md",
-    "UNI/ANNO 3/tree.png",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/donne-gaming-inclusione.pdf",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/utilities.css",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/final.css",

@@ -11,12 +11,13 @@ I task rimanenti per il completamento della tesi e i successivi sviluppi accadem
 
 ```mermaid
 flowchart TD
-    subgraph TIER1 ["🚀 TIER 1 — Priorità Massima: Validazione Multi-Macchina VulcaMind & Self-Healing"]
+    subgraph TIER1 ["🚀 TIER 1 — Priorità Massima: Target Stress-Test, Validazione Multi-Macchina & Self-Healing"]
+        I27["🚨 ⭐ Idea 27 (PRIORITÀ ASSOLUTA): Macchine Target con Vulnerabilità 'Stress-Test' per White-Box"]
         I5["⭐ Idea 5: Conformance Testing su Macchine VulcaMind (Exam 1, Exam 2, Sim)"]
         I7["Idea 7: Orchestratore Python VulcaForge (VulcaForgeEngine)"]
         I3["Idea 3: Closed-Loop Self-Healing con VulcaForge"]
         I14["Idea 14: Benchmark Goal Drift, Patch Bloat & Didactic Preservation"]
-        I5 --> I7 --> I3 --> I14
+        I27 --> I5 --> I7 --> I3 --> I14
     end
 
     subgraph TIER2 ["📊 TIER 2 — Dati Sperimentali & Tabelle per la Tesi"]
@@ -50,7 +51,7 @@ flowchart TD
 
 | Tier | Obiettivo Primario | Idee Incluse | Output Concreto per la Tesi |
 | :--- | :--- | :--- | :--- |
-| **🚀 TIER 1** | **(TOP PRIORITY) Validazione Macchine VulcaMind & Self-Healing** | **⭐ Idea 5 (Priorità 1)**, **Idea 7**, **Idea 3**, **Idea 14** | Prova empirica di generalità su target d'esame reali (`Exam_1APP26`, `Exam_2APP26`, `Sim_01/02`) e chiusura del ciclo con VulcaForge. |
+| **🚀 TIER 1** | **(TOP PRIORITY) Target Stress-Test, Validazione Macchine VulcaMind & Self-Healing** | **🚨 ⭐ Idea 27 (Priorità Assoluta)**, **⭐ Idea 5**, **Idea 7**, **Idea 3**, **Idea 14** | Progettazione macchine con vulnerabilità per stressare i limiti dell'architettura white-box, generalità su target d'esame reali (`Exam_1APP26`, `Exam_2APP26`, `Sim_01/02`) e chiusura del ciclo con VulcaForge. |
 | **📊 TIER 2** | **Dati Sperimentali & Tabelle Tesi** | **Idea 11**, **Idea 4**, **Idea 13** | Validazione scientifica: matrice confusionale negative testing, benchmark comparativo modelli esteso e tabelle LaTeX pronte. |
 | **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 26**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
 
@@ -58,7 +59,22 @@ flowchart TD
 
 ## 🚀 TIER 1: Priorità Massima — Validazione Multi-Macchina VulcaMind & Chiusura del Ciclo
 
-*Obiettivo: Validare immediatamente la generalizzabilità di VulcaTest sull'intero corpus di macchine didattiche prodotte da VulcaMind, ed estendere il framework al self-healing a ciclo chiuso con VulcaForge.*
+*Obiettivo: Progettare macchine didattiche mirate a stressare i confini dell'architettura white-box, validare la generalizzabilità di VulcaTest sull'intero corpus di macchine didattiche VulcaMind, ed estendere il framework al self-healing a ciclo chiuso con VulcaForge.*
+
+---
+
+### 🚨 ⭐ 27. (PRIORITÀ ASSOLUTA) Creazione di Macchine Target con Vulnerabilità "Stress-Test" per l'Architettura White-Box (Vulnerabilità Utili ad Alto Rischio di Fallimento)
+
+* **L'intuizione Fondamentale:**  
+  Per elevare al massimo livello il valore metodologico e scientifico della tesi di laurea, la validazione sperimentale di VulcaTest non deve limitarsi a macchine didattiche in cui l'agente esegue linearmente catene standard o dove emergono solo bug accidentali di configurazione (es. permessi, percorsi o user drift come in `06.Web_Exploitation`). È indispensabile **progettare e realizzare deliberatamente macchine target con vulnerabilità reali, didatticamente utili ed efficaci**, ma specificamente concepite per **stressare i limiti e le criticità note o potenziali dell'attuale architettura white-box**.
+* **Obiettivo Scientifico ed Operativo:**
+  - Sfidare i presupposti intrinseci del framework: interazione sincrona request-response vs listener asincroni, gestione del tempo reale, canali interattivi non-lineari, stateful multi-stage exploit, vincoli di budget turni ed espansione del contesto.
+  - Mappare empiricamente e formalizzare nella tesi quali classi di vulnerabilità e pattern offensivi sono pienamente risolvibili dall'agente white-box e quali invece provocano il blocco del framework o richiedono evoluzioni architetturali.
+* **Valore Accademico (Boundary Testing & Negative Findings):**
+  - Dimostra che la tesi affronta con onestà e rigore scientifico il problema dei confini operativi dell'IA (*"Boundary Exploration & Falsification"*), trasformando i limiti tecnici dell'architettura in risultati sperimentali di prim'ordine.
+* **Stato dell'Attività & Prossimi Passi:**
+  > [!IMPORTANT]
+  > **Nota Operativa:** L'elenco dettagliato, la tassonomia e la selezione puntuale delle vulnerabilità e dei servizi specifici da implementare in questo pool di macchine stress-test verranno discussi e definiti in una sessione di lavoro dedicata.
 
 ---
 
