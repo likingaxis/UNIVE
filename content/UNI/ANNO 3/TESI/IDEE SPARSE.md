@@ -23,9 +23,10 @@ flowchart TD
     subgraph TIER2 ["📊 TIER 2 — Dati Sperimentali & Tabelle per la Tesi"]
         I11["Idea 11: Matrice Negative Testing Controllata (14 Scenari a 5 Livelli)"]
         I4["Idea 4: Estensione Benchmark Comparativo Modelli (Cloud vs Local)"]
+        I28["Idea 28: Nodo Compattazione Prompt & Benchmark Efficienza (Quantizzazioni, Tok/s, Thinking)"]
         I13["Idea 13: Script Generazione Tabelle LaTeX (generate_thesis_tables.py)"]
         I11 --> I13
-        I4 --> I13
+        I4 --> I28 --> I13
     end
 
     subgraph TIER3 ["🌟 TIER 3 — Perfezionamenti Architetturali & Future Works"]
@@ -39,6 +40,11 @@ flowchart TD
         I6["Idea 6: Modulo Black-Box (Auditing Unintended Ways & Bypass)"]
         I2["Idea 2: Visual QA Multimodale (Playwright / Vision LLM)"]
         I9["Idea 9: Evidence Carving & OCR per Artefatti Complessi (PDF/PCAP)"]
+        I29["Idea 29: Gestione Adattiva Timeout, Cooldown & Heartbeat per Tool a Lunga Esecuzione"]
+        I30["Idea 30: Self-Healing a Contesto Asimmetrico (Heuristic Leads vs IaC)"]
+        I31["Idea 31: Casi di Studio Goal-Oriented Solver vs Strict Conformance (Autonomous Workarounds & Adaptive Execution)"]
+        I32["Idea 32: Report Condensato Flash Diagnostic (REPORT_BRIEF.md) per Efficienza Token"]
+        I33["Idea 33: Keyword Anchoring nel System Prompt per Localizzazione Deterministica dell'Errore"]
     end
 
     TIER1 --> TIER2
@@ -52,8 +58,8 @@ flowchart TD
 | Tier | Obiettivo Primario | Idee Incluse | Output Concreto per la Tesi |
 | :--- | :--- | :--- | :--- |
 | **🚀 TIER 1** | **(TOP PRIORITY) Target Stress-Test, Validazione Macchine VulcaMind & Self-Healing** | **🚨 ⭐ Idea 27 (Priorità Assoluta)**, **⭐ Idea 5**, **Idea 7**, **Idea 3**, **Idea 14** | Progettazione macchine con vulnerabilità per stressare i limiti dell'architettura white-box, generalità su target d'esame reali (`Exam_1APP26`, `Exam_2APP26`, `Sim_01/02`) e chiusura del ciclo con VulcaForge. |
-| **📊 TIER 2** | **Dati Sperimentali & Tabelle Tesi** | **Idea 11**, **Idea 4**, **Idea 13** | Validazione scientifica: matrice confusionale negative testing, benchmark comparativo modelli esteso e tabelle LaTeX pronte. |
-| **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 26**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
+| **📊 TIER 2** | **Dati Sperimentali & Tabelle Tesi** | **Idea 11**, **Idea 4**, **Idea 28**, **Idea 13** | Validazione scientifica: matrice confusionale negative testing, benchmark compattazione/quantizzazioni/throughput e tabelle LaTeX pronte. |
+| **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 26**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9**, **Idea 29**, **Idea 30**, **Idea 31**, **Idea 32**, **Idea 33** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
 
 ---
 
@@ -153,6 +159,35 @@ flowchart TD
 
 ---
 
+### 28. Nodo di Compattazione Dinamica del Contesto & Benchmark di Efficienza (Quantizzazioni, Throughput Tok/s & Budget di Thinking)
+* **L'Intuizione & Il Problema:**
+  Nei compiti di conformance testing a catena estesa, la cronologia multi-turno dell'Executor (tool call ripetute, output massivi di scansioni Nmap/Hydra e ispezione di file) unita ai documenti didattici del Planner può far lievitare rapidamente la context window oltre i 20k–30k token. Sebbene il backend locale (Unsloth Studio) gestisca dinamicamente lo *sweet spot* di memoria VRAM, un contesto non compresso presenta criticità evidenti:
+  1. Dilata progressivamente i tempi di prefill e latenza al primo token (*Time-To-First-Token* - TTFT).
+  2. Aumenta la pressione sulla memoria della KV Cache sulla GPU (16 GB), costringendo il motore di inferenza a scaricare layer su CPU/RAM via bus PCIe se la memoria satura.
+  3. Introduce rumore semantico nei turni avanzati accumulando output storici non più rilevanti per lo step corrente.
+* **La Soluzione Architetturale (Prompt Compactor Node in LangGraph):**
+  - **Nodo di Compattazione Statale (`prompt_compactor`):** Un nodo/middleware specializzato nel grafo di LangGraph che interviene a monte dell'invocazione LLM o al superamento di una soglia prefissata (es. ogni 5 turni o quando la cronologia supera i 15k token).
+  - **Strategie di Compattazione Chirurgica:**
+    - *Selective Output Summarization:* Sostituisce l'output verboso di tool voluminosi (es. decine di righe di scansione porte o dump di file) con un estratto semantico sintetico delle sole evidenze convalidate (`[EVIDENCE EXTRACTED: open_ports: 22,80]`).
+    - *Thinking Stripping:* Rimozione automatica dei blocchi di ragionamento effimero `<think>...</think>` dei turni passati prima di inviare la cronologia al turno successivo, risparmiando migliaia di token a costo zero.
+    - *Sliding Window Semantica & Blackboard Deduplication:* Preserva intatti solo l'ultimo turno operativo e il dizionario condiviso dei valori convalidati (`verified_values`), collassando la sequenza dei comandi intermedi falliti o esplorativi.
+* **Valore Strategico per la Discussione dell'Esame di Laurea (Benchmark Comparativo Multidimensionale):**
+  Questo modulo offre un capitolo sperimentale ad altissimo impatto per la commissione di laurea, consentendo di portare alla discussione dell'esame dati quantitativi e grafici di benchmark estremamente solidi:
+  1. **Benchmark di Compressione:** Confronto rigoroso tra esecuzione con cronologia raw vs prompt compattato (riduzione del Memory Footprint della KV Cache, token risparmiati per singola run e dimostrazione formale che il 100% di conformità viene mantenuto senza alcuna perdita di contesto).
+  2. **Benchmark delle Quantizzazioni (Trade-off Precisione vs VRAM):** Valutazione empirica a parità di modello tra diverse quantizzazioni GGUF (es. `UD-Q4_K_XL`, `UD-Q3_K_XL`, `Q4_K_M`, `Q5_K_M`): impatto sull'occupazione fisica della VRAM su GPU da 16 GB (RX 9070 XT), aderenza sintattica alla checklist e assenza di allucinazioni di comandi.
+  3. **Analisi del Throughput (Curva Token/s vs Profondità del Contesto):** Misurazione della velocità di generazione (tok/s) in funzione della crescita della context window (da 4k a 30k token), evidenziando empiricamente il punto esatto di saturazione dello *sweet spot* e il degrado prestazionale indotto dal bus PCIe in caso di offload su RAM DDR5.
+  4. **Studio della Dinamica di Reasoning (Variazione Thinking Budget: `low`, `medium`, `high`, `off`):** Analisi comparativa su modelli dotati di reasoning nativo (es. Qwen 3.8): rapporto quantitativo tra token spesi nel reasoning vs token dell'output didattico, latenza complessiva di generazione e robustezza logica del piano d'attacco risultante.
+  5. **Benchmark sull'Uso e Scalabilità della Context Window (Lost-in-the-Middle, Attenzione Esecutiva & Strategie di Retention):**
+     - *Attenzione Esecutiva & Needle-in-a-Haystack Operativo:* Valutare empiricamente la capacità dell'agente di ripescare e utilizzare evidenze critiche scoperte nei primissimi step (es. porte scoperte allo Step 1, credenziali o percorsi svelati nei metadati) man mano che la finestra di contesto scala da 4k a 8k, 16k, 25k e 30k token. Verificare se e quando si innesca il fenomeno del *Lost-in-the-Middle* (il modello dimentica o ri-esegue scansioni ridondanti perché l'informazione è "sepolta" a metà della cronologia).
+     - *Efficienza Informativa della Finestra:* Misurare il rapporto tra token utili (comandi mirati, payload convalidati, evidenze estratte) e token di rumore passivo (output prolissi di terminale, banner di errore, cronologia di comandi falliti).
+     - *Confronto tra Strategie di Context Management:* Benchmark a tre vie tra:
+       a) **Full Raw Context:** Nessun filtro, accumulo integrale della cronologia (massimo sovraccarico, rischio di offload su RAM).
+       b) **Naive Sliding Window / Truncation:** Mantenere solo gli ultimi $N$ turni (rischio di amnesia sui prerequisiti iniziali).
+       c) **Selective Prompt Compaction (Nostro Approccio):** Pulizia dei blocchi `<think>`, sintesi degli output voluminosi e conservazione della blackboard convalidata.
+     - *Metriche di Output:* Tasso di conformità (%), tempo totale di esecuzione, picco di allocazione VRAM della KV Cache, e frequenza di allucinazioni/deviazioni dalla catena d'attacco.
+
+---
+
 ### 13. Script di Aggregazione & Generazione Tabelle LaTeX (`generate_thesis_tables.py`)
 * **L'intuizione:** Uno script Python dedicato che legge tutti i file `run_summary.json` nell'Evidence Store, calcola medie, deviazioni standard, turni consumati e conformità, e stampa direttamente codice LaTeX (`\begin{tabular}...\end{tabular}`) pronto da incollare nei capitoli della tesi.
 
@@ -247,6 +282,108 @@ flowchart TD
 
 ### 9. Evidence Carving & OCR per Artefatti Complessi (PDF, PCAP, Immagini)
 * **La Soluzione:** Tool specialistici su Kali (`pdftotext`, `tshark`, `exiftool`) e OCR integrato (`tesseract`) per estrarre evidenze nascoste in documenti, catture di traffico o immagini steganografiche.
+
+---
+
+### 29. Gestione Adattiva del Timeout, Cooldown e Monitoraggio Heartbeat per Tool a Lunga Esecuzione (Tool-Aware Execution & Network Pacing)
+* **Il Problema e i Limiti del Timeout Statico:**
+  Nei framework di conformance testing e auditing autonomo, i comandi eseguiti tramite micro-gateway o protocolli MCP (es. `execute_command`, `interactive_terminal_exec`) adottano storicamente un **timeout fisso globale** (es. 30s o 60s):
+  1. *Falso Positivo da Premature Termination:* Tool intrinsecamente computazionali o iterativi su volumi elevati di dati (es. `hydra` su dizionari di password estesi, scansioni Nmap esaustive su 65.535 porte con `-p-`, directory fuzzing massivo con `ffuf`/`gobuster`, o password cracking con `john`/`hashcat`) superano agevolmente la soglia rigida di 60 secondi pur operando in modo nominale. Il processo viene abbattuto forzatamente dal framework, generando un falso fallimento di conformance per timeout.
+  2. *Freeze Sistemico su Comandi Appesi:* Di converso, impostare un timeout globale elevato (es. 300s o 600s) rende l'agente vulnerabile al blocco indefinito qualora un comando attenda input interattivo non fornito (es. prompt nascosti di password o conferme yes/no) o invii probe verso porte filtrate che scartano i pacchetti (`DROP`).
+  3. *Socket Saturation & Target Rate-Limiting (Mancanza di Cooldown):* L'assenza di un meccanismo di *pacing* o intervallo di cooldown tra esecuzioni consecutive di attacchi a raffica (es. tentativi ripetuti di connessione SSH o burst HTTP POST) può saturare il pool di connessioni del target, provocare socket exhaustion (`connection refused`), oppure attivare meccanismi difensivi come `fail2ban` o HTTP 429 (Too Many Requests), invalidando il test didattico.
+* **La Soluzione Architetturale (Adaptive Execution & Heartbeat Pacing Engine):**
+  1. *Tool-Aware Dynamic Timeout Profile:* Il bridge di esecuzione analizza il tool invocato e i suoi argomenti, assegnando una finestra temporale proporzionata al carico atteso:
+     - **Fast Probes (5s - 15s):** `curl`, `cat`, `ls`, `whoami`, `getcap`, `id`.
+     - **Medium Operations (30s - 60s):** `nmap` su top porte, compilazione codice, parsing file di grandi dimensioni.
+     - **Long-Running / Heavy Jobs (120s - 300s):** `hydra`, `nmap -p-`, `gobuster`, `sqlmap`, `john`, `hashcat`.
+  2. *Live Streaming Heartbeat & Activity-Based Timeout Extension:* Invece di attendere passivamente la chiusura del processo in modalità bloccante, il sub-sistema monitora lo stream `stdout`/`stderr` del comando:
+     - Se il processo produce output o log di avanzamento periodico (heartbeat), il timer di timeout viene resettato ed esteso dinamicamente di un delta temporale ($\Delta t = 15s$), consentendo a processi lenti ma regolari di giungere a naturale compimento.
+     - Il comando viene terminato esclusivamente se non viene emesso alcun byte per un intervallo continuo di *inattività* (*Silence Threshold*).
+  3. *Target Cooldown, Jitter & Backoff Strategy:* Capacità per il framework di modulare il ritmo dei comandi:
+     - Riconoscimento di risposte di saturazione o rate limiting (es. `connection reset by peer`, `temporarily unavailable`, HTTP 429).
+     - Iniezione automatica di un intervallo di *cooldown* (pacing) configurabile o calcolato tramite Exponential Backoff con Jitter casuale tra un'invocazione e la successiva.
+* **Valore per la Tesi:** Risolve una delle più critiche asimmetrie tra agenti software e processi sistemistici reali: l'incapacità di discernere tra un comando legittimamente lento e un comando bloccato/appeso, garantendo un collaudo robusto e non distruttivo anche su target protetti da rate-limiting o carichi computazionali pesanti.
+
+---
+
+### 30. Architettura di Self-Healing a Contesto Asimmetrico: Il Final Evaluator come Generatore di "Indizi Euristici" e l'Healing Node come Risolutore IaC (Heuristic Lead vs Deterministic Patching)
+* **Il Problema (L'Asimmetria Cognitiva tra Tester e Builder):**
+  Nel ciclo di Conformance Testing e Closed-Loop Self-Healing, esiste un disallineamento informativo strutturale tra chi testa la macchina e chi deve ripararla:
+  1. *Il Final Evaluator opera sul piano osservativo-sintomatico (In-Band / Black-Box):* Ha visibilità esclusivamente sull'esecuzione operativa (stdout/stderr dei tool, risposte HTTP, codici di errore, checklist). Non conosce l'architettura sorgente della macchina, i file di specifica YAML di VulcaForge, i task Ansible o i Dockerfile.
+  2. *Il Rischio di "Local Workaround" (Miopia del Tester):* Di fronte a un fallimento (es. HTTP 403 `Access denied.` su upload `.pHP` in DataVault B2R), il Final Evaluator formula conclusioni logiche ma miopi rispetto all'architettura complessiva: incolpa Nginx e propone di aggiungere regole di rewrite/location sul web server, ignorando che l'infrastruttura era basata su PHP-FPM con direttiva `security.limit_extensions` configurata a monte.
+  3. Se un nodo di healing automatico applicasse acriticamente le direttive del Final Evaluator in modalità 1:1, applicherebbe "toppe" fragili e scorrette a runtime anziché risolvere il difetto alla radice.
+* **La Soluzione Architetturale (Heuristic Lead Investigation & Multi-Tier Context):**
+  1. *Ridefinizione Semantica del Ticket:* Le raccomandazioni del Final Evaluator (`recommended_patch` in `healing_ticket.json`) non devono essere trattate come direttive imperative 1:1, ma come **"capi d'accusa" o indizi euristici (Heuristic Leads)**.
+  2. *Contesto Elevato nel Nodo di Healing:* Il Nodo di Healing opera con un contesto cognitivo superiore (*IaC Metacognition*):
+     - Riceve l'indizio: *"Il server web rifiuta file .pHP con 403"*.
+     - Ispeziona la ricetta sorgente della macchina (`machines/datavault.yaml`) e scopre i componenti dichiarati (es. `php-fpm-allow-extensions`).
+     - Incrocia l'intento didattico con i file Ansible generati, identificando l'esatta riga di codice difettosa nel generatore (es. `with_fileglob` eseguito sull'host invece che sul target).
+  3. *Closed-Loop Dual-Plane Patching:* Il nodo di healing formula due tipi di patch:
+     - *Patch a Caldo (Target Runtime):* comando di fix immediato sul container per validare l'ipotesi (`sed` + `restart service`).
+     - *Patch a Freddo (IaC Source):* correzione permanente del componente YAML o del playbook Ansible nel repository di VulcaForge, garantendo che le future generazioni siano immuni dal difetto.
+* **Valore per la Tesi:** Formalizza per la prima volta un principio cardine dell'ingegneria del software autonoma applicata alla cybersecurity: la separazione netta tra *diagnosi del sintomo* (demandata all'agente di testing) e *risoluzione della causa radice* (demandata all'agente costruttore con accesso al contesto globale dell'architettura).
+
+---
+
+### 31. Casi di Studio di Modelli "Goal-Oriented" (Opportunistic Problem Solving) vs Conformance Strict: L'Agente che si Auto-Adatta e Corregge l'Ambiente Pur di Raggiungere il Risultato
+* **L'Intuizione & Il Fenomeno Osservato sul Campo:**  
+  Nelle sperimentazioni reali condotte con l'Executor (in particolare con modelli ad alto ragionamento come *Qwen 2.5/3.8* e *Qwen-Coder*), è emerso un comportamento cognitivo ricorrente di straordinario interesse scientifico: **il modello è fortemente orientato all'obiettivo finale (*Goal-Directed Problem Solving*)**. Quando incontra ostacoli imprevisti, limitazioni ambientali, bug di configurazione o disallineamenti infrastrutturali, l'agente non va in stallo e non si arrende; al contrario, **sviluppa autonomamente strategie di aggiramento (workaround), auto-corregge le anomalie a runtime e riprogramma i propri passi intermedi pur di raggiungere il risultato sperato** (la shell, la flag o il comando riuscito).
+* **Casi di Studio Empirici Emersi dai Test:**
+  1. *Caso Studio 1 — Citadel B2R (FASE 10 / Permessi di `/tmp`):*  
+     - **L'Ostacolo:** Il piano didattico prescriveva di generare una coppia di chiavi SSH effimere direttamente in `/tmp/id_rsa`. Tuttavia, a causa di un difetto nel Dockerfile, la directory `/tmp` era impostata a `0755 root:root` (non scrivibile dall'utente non-privilegiato `developer`).
+     - **Il Self-Fix del Modello:** Di fronte al fallimento di scrittura in `/tmp`, l'agente non ha abortito la run. Ha ragionato sul contesto e ha generato le chiavi nella propria home (`~/id_rsa`), dopodiché ha sfruttato lo script `/opt/backup.sh` (eseguito periodicamente da root via cron) iniettandovi un comando di copia `cp /home/developer/id_rsa /tmp/id_rsa` e installazione della chiave pubblica in `/home/sysadmin/.ssh/authorized_keys`. Ha poi testato l'accesso direttamente con `ssh -i ~/id_rsa sysadmin@localhost whoami`, ottenendo con successo l'identità di `sysadmin`.
+  2. *Caso Studio 2 — DataVault B2R (FASE 3 / Blacklist Bypass & Case-Sensitivity):*  
+     - **L'Ostacolo:** Il caricamento di webshell con estensione `.php` veniva bloccato dal filtro applicativo.
+     - **Il Self-Fix del Modello:** L'agente ha estratto i metadati EXIF dal banner `/assets/vault_banner.jpg` con `exiftool`, ha isolato la nota dello sviluppatore sul blacklist filtering e ha dedotto autonomamente la discrepanza tra il controllo case-sensitive del codice PHP e l'esecuzione case-insensitive di FastCGI/Nginx, confezionando ed eseguendo con successo l'upload di `shell.pHP`.
+  3. *Caso Studio 3 — Pizzeria B2R (FASE 6 / TUI & Password Interattive):*  
+     - **L'Ostacolo:** Mancanza di PTY per gestire l'inserimento interattivo della password per `su - developer`.
+     - **Il Self-Fix del Modello:** Il modello ha tentato molteplici strategie alternative di evasione (piping con `echo`, spawn di pseudo-terminali Python inline `python3 -c 'import pty; pty.spawn("/bin/bash")'`) e ha invocato proattivamente `request_turn_extension` per ampliare il budget e completare l'escalation.
+* **Il Paradosso Accademico: "Good Hacker vs Strict Conformance Auditor":**  
+  Questo fenomeno apre una riflessione fondamentale per la tesi di laurea:
+  - *La Prospettiva del Penetration Tester (Offensive Mindset):* Questo comportamento è **virtuoso e desiderabile**. Dimostra resilienza operativa, pensiero laterale e intelligenza tattica; un vero attaccante o uno studente d'eccellenza non si ferma davanti a un banale permesso o errore di setup, ma trova un vettore alternativo.
+  - *La Prospettiva del Conformance Testing Didattico (QA Mindset):* Per un sistema di validazione di laboratori d'esame, l'eccessiva proattività del modello rischia di diventare un **fattore distorsivo (Masking Effect)**: se l'agente "cura" o aggira silenziosamente un difetto strutturale dell'ambiente, la macchina potrebbe essere promossa come conforme, ma gli studenti reali (che seguiranno rigidamente le istruzioni del testo d'esame o non avranno lo stesso intuito) rimarranno irrimediabilmente bloccati.
+* **Implicazioni Architetturali per VulcaTest (Dual-Stance Agent Architecture):**  
+  Formalizzazione di due modalità operative complementari nell'ecosistema:
+  1. *Strict Auditor Mode (Default per Conformance):* L'agente è vincolato a verificare la pedissequa aderenza dell'ambiente al Golden Path didattico progettato dal docente (`ATTACK_PLAN.md`). Se un vincolo intermedio fallisce, la run viene bloccata e viene emesso un ticket di non-conformità (`healing_ticket.json`).
+  2. *Opportunistic Solver Mode (Autonomous Student / Black-Box Mode):* L'agente è incoraggiato a esplorare percorsi alternativi, aggirare difetti e raggiungere comunque le flag. Tutte le deviazioni rispetto al piano d'attacco formale vengono registrate come **Telemetry Findings & Deviation Warnings**, segnalando al docente: *"La macchina è risolvibile, ma richiede workaround non previsti nella documentazione didattica ufficiale"*.
+* **Valore per la Tesi:** Arricchisce il lavoro con una trattazione epistemologica di altissimo profilo: come conciliare la naturale tendenza al problem-solving euristico degli LLM con il rigore deterministico richiesto dal collaudo del software e dalla didattica accademica.
+
+---
+
+### 32. Generazione di un Report Sintetico Condensato dal Final Evaluator (Flash Diagnostic Summary / `REPORT_BRIEF.md`) per l'Ottimizzazione dei Token e Riduzione della Latenza di Healing
+* **Il Problema (Token Bloat & Context Dilution nell'Invocazione del Healer):**  
+  Al termine della fase di testing, il `Final Evaluator` genera un report di conformità esaustivo e dettagliato (`REPORT.md`), comprensivo di matrice dei test, audit granulare di ciascuna fase superata, log delle evidenze e tabelle riassuntive per il docente. Quando si verifica un'anomalia e viene attivato il ciclo di riparazione automatica (Closed-Loop Healing tramite Antigravity CLI o modello generativo downstream):
+  1. *Eccesso di Contesto Irrilevante:* L'invio dell'intero `REPORT.md` (spesso superiore a 250 righe e migliaia di token) consuma una porzione considerevole della context window dell'agente riparatore.
+  2. *Diluizione dell'Attenzione ("Needle in a Haystack"):* Il modello di healing rischia di disperdere risorse cognitive rileggendo decine di passaggi perfettamente riusciti prima di raggiungere il singolo step bloccante.
+  3. *Latenza e Costi Inutili:* L'elaborazione di contesti ridondanti aumenta drasticamente i tempi di inferenza e il costo per token ad ogni iterazione di healing.
+* **La Soluzione Architetturale (Dual-Tier Reporting & Flash Diagnostic Payload):**  
+  Il Final Evaluator viene esteso per produrre contestualmente due viste del collaudo:
+  1. *Full Human Report (`REPORT.md`):* Il documento analitico completo ad uso dell'esaminatore/docente e per l'archiviazione formale dei risultati.
+  2. *Flash Diagnostic Summary (`REPORT_BRIEF.md` / `diagnostic_flash` in JSON):* Una versione estremamente compatta (<30-40 righe, poche centinaia di token) ad altissima densità informativa, pensata specificamente come payload "zero-noise" per l'agente di self-healing. Contiene unicamente:
+     - Target ID e container d'esame.
+     - Esito sintetico (`FAIL` con indicatore di severità).
+     - Step bloccante esatto (`blocking_step`, es. `FASE_11_PRIVILEGE_ESCALATION`).
+     - Ultimo sintomo osservato (codice d'uscita, errore HTTP, output di errore saliente o eccezione).
+     - Indizio euristico essenziale (`heuristic_lead`) formulato dal tester.
+* **Valore per la Tesi:** Formalizza un'architettura di reporting a risoluzione differenziata (*Human-Facing Verbose vs Agent-Facing Lean*). Abbina la trasparenza accademica con l'efficienza ingegneristica, riducendo del 70-80% l'overhead di token nel ciclo di auto-riparazione e tagliando il *Time-to-First-Patch*.
+
+---
+
+### 33. Keyword Anchoring e Mappatura Semantica nel System Prompt per l'Individuazione Deterministica dell'Errore nei Ticket Strutturati
+* **Il Problema (Ambiguità nell'Ispezione dei Ticket e Falsi Positivi Cognitivi):**  
+  Quando un agente generativo autonomo (come Antigravity CLI) viene istruito per analizzare un file di ticket (`healing_ticket.json`) o un report di test, tende ad adottare un'euristica di lettura testuale sequenziale e probabilistica. Senza una bussola semantica esplicita, l'agente può:
+  1. Confondere avvisi secondari, warning informativi o log di fallback con l'effettiva causa radice del guasto.
+  2. Concentrarsi su metadati non rilevanti per la riparazione (come metriche di timing, ID di sessione o fasi superate).
+  3. Allucinare l'origine dell'errore indicando componenti o playbook non coinvolti nella rottura.
+* **La Soluzione Architetturale (Keyword Anchoring & Deterministic Field Protocol):**  
+  Nel `SYSTEM_PROMPT` dell'agente riparatore (Antigravity CLI) viene integrata una direttiva di **Keyword Anchoring**, definendo esplicitamente i contrassegni lessicali univoci e la sequenza logica di decodifica del ticket:
+  1. *Mappatura delle Parole Chiave Primarie:*
+     - `"blocking_step"` / `FASE_X`: Indica inequivocabilmente il gradino della catena di attacco in cui si è verificata l'interruzione.
+     - `"root_cause"` / `"error_symptom"`: Isola il payload di errore esatto (es. `sh: 1: uptime: not found`, `403 Forbidden`, `Permission denied`).
+     - `"affected_component"` / `"target_recipe"`: Puntamento deterministico al componente IaC dichiarato in VulcaForge (es. `system-users`, `privesc-sudo-vi`, `citadel.yaml`).
+     - `"recommended_patch"` / `"heuristic_lead"`: L'indizio del tester, da validare rispetto al codice sorgente dell'infrastruttura.
+  2. *Protocollo Rigido di Navigazione:* L'agente viene istruito a eseguire un'analisi ad ancoraggio: non scansionare l'intero report, ma ricercare prioritariamente queste specifiche chiavi per circoscrivere l'anomalia prima di aprire qualsiasi file sorgente o tentare la rigenerazione della macchina.
+* **Valore per la Tesi:** Introduce il concetto di *Deterministic Semantic Anchoring* nei workflow di coding autonomo: trasforma un processo di troubleshooting potenzialmente ambiguo in una procedura d'intervento guidata e replicabile, azzerando le allucinazioni di diagnosi e massimizzando il tasso di successo al primo tentativo di fix (*First-Attempt Success Rate*).
 
 ---
 
