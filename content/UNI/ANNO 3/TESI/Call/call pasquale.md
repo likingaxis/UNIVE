@@ -46,6 +46,7 @@ funzionamento:
 	- `final evaluator node` nodo che ha una parte in cui raccoglie tutte le evidenze create dalle variabili e da state.py scambiato tra i nodi del grafo e genera un file json di tutti i teststep ecc...
 		- successivamente il tutto viene passato a un modello che genera un REPORT dettagliato di quanto accaduto
 - nodo di healing
+	- AGGIUNGILO DOMANI
 	- nodo ancora in fase di costruzione
 	- utilizzerà antigravity CLI e i vari report generati per correggere la generazione della macchina
 	- daremo un numero massimo di tentativi per correggere se poi continua a non funzionare bloccheremo il tutto per revisione umana
