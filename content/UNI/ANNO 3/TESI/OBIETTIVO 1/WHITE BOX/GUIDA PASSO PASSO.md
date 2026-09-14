@@ -629,3 +629,18 @@ Al termine di ogni run, ispeziona la cartella `evidence/<challenge_id>/latest/`:
 2. **`REPORT.md`:** Documento formale che certifica il verdetto (`[CONFORME]` o `[NON CONFORME]`), descrive le evidenze empiriche e isola la causa radice del guasto didattico.
 
 3. **`healing_ticket.json`:** Oggetto JSON contenente il file impattato (es. `webapps/pizzeria/index.php`), la root cause e la patch raccomandata per l'agente autoriparatore Ansible.
+
+---
+
+## 🩺 STEP 10: Closed-Loop Self-Healing con VulcaHealing
+
+Se il collaudo fallisce (`FAILED`) e in `.env` è configurato `HEALING=true`:
+1. Il grafo LangGraph instrada l'esecuzione al nodo indipendente `healer_node`.
+2. Il modulo **`vulcahealing`** (`healer.py` + `diff_tracker.py`) attiva **Antigravity CLI** con il principio **Heuristic Lead** (Idea 30), correggendo la ricetta IaC in `vulcaforge/machines/<challenge>.yaml` senza alterare le vulnerabilità didattiche.
+3. Viene calcolato deterministicamente il `patch.diff` con `difflib`.
+4. Viene eseguito il reset **Clean Slate** del container Docker target su Kali Linux.
+5. Lo stato del grafo viene azzerato e il test viene rieseguito da zero sul container risanato per convalidare la chiusura del cerchio.
+
+> 📖 **Approfondimento Tecnico Completo:**  
+> Per l'analisi dettagliata di librerie, funzioni, codice e domande d'esame, consulta la guida dedicata:  
+> 👉 **[[GUIDA SELF HEALING]]**

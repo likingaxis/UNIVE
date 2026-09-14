@@ -16,7 +16,7 @@ body{font-family:Inter,sans-serif}.font-display{font-family:"Plus Jakarta Sans",
 
 
 
-:root{--display-font:'Plus Jakarta Sans',sans-serif;--serif-font:'Newsreader',serif}
+:root{--display-font:'Plus Jakarta Sans',sans-serif;--body-font:'Inter',sans-serif;--serif-font:'Newsreader',serif;--mono-font:'JetBrains Mono',monospace;--p-scale:1;--p-density:1;}
 body{font-family:'Plus Jakarta Sans',sans-serif}.font-display{font-family:'Plus Jakarta Sans',sans-serif}.font-mono,.slide-footer{font-family:'JetBrains Mono',monospace}.font-serif,.font-serif-italic{font-family:'Newsreader',serif;font-style:italic}
 .slide{padding:64px 80px 60px;background:#14161a;overflow:hidden}.slide-header{margin:0;padding-bottom:24px;align-items:center;gap:32px;flex-shrink:0}.slide-header h2{font-size:54px!important;line-height:1.15;letter-spacing:-.025em}.slide-header>div:last-child{font-size:22px!important;white-space:nowrap}.slide-header>div:last-child>div{font-size:22px!important}.slide-footer{margin:0;padding-top:18px;min-height:42px;font-size:20px;gap:24px}.slide-body{min-height:0;margin:34px 0 30px;flex:1}.slide-body>div{min-width:0}.bg-grid-pattern{background-image:none}
 /* rounded & shadow preserved */
@@ -73,7 +73,10 @@ html, body {
 }
 h1, h2, h3, h4 { text-wrap: balance; }
 p { text-wrap: pretty; }
-.stat-badge, .font-mono, [class*="mono"] { font-variant-numeric: tabular-nums lining-nums; }
+.stat-badge, .font-mono, [class*="mono"], .node-year, .section-num, .section-num-accent {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
 
 .text-cyan { color: #38BDF8 !important; }
 /* text-violet retired */

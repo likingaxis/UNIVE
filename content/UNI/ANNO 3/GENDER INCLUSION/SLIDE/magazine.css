@@ -1,0 +1,2709 @@
+/* ==========================================================================
+   CHECKPOINT MAGAZINE — STILI EDITORIALI VIDEOGAME MAGAZINE (FORMATO 16:9)
+   Ispirato a Club Nintendo, Nintendo Magazine System, Game Informer, Edge
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. FONT DECLARATIONS (Locali Offline) & GOOGLE FONTS PROGRESSIVE
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Syne:wght@700;800;900&family=Bebas+Neue&family=Space+Grotesk:wght@600;700&display=swap');
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("Fonts/plus-jakarta-sans-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("Fonts/plus-jakarta-sans-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("Fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("Fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("Fonts/inter-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("Fonts/inter-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("Fonts/inter-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("Fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("Fonts/jetbrains-mono-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("Fonts/newsreader-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   2. VARIABILI & COLOR PALETTE
+   -------------------------------------------------------------------------- */
+:root {
+  --font-masthead: 'Bebas Neue', 'Chakra Petch', 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  --font-tech: 'Chakra Petch', 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Newsreader', Georgia, serif;
+
+  --color-page-paper: #F4EFE6;
+  --color-page-paper-alt: #EBE4D5;
+  --color-page-dark: #12151B;
+  --color-page-darker: #0B0D11;
+  --color-page-dark-card: #1B1F27;
+
+  --color-mag-yellow: #FFE500;
+  --color-mag-red: #FF2A4D;
+  --color-mag-cyan: #00F0FF;
+  --color-mag-blue: #0066FF;
+  --color-mag-orange: #FF6600;
+  --color-mag-purple: #A855F7;
+  --color-mag-ink: #0F172A;
+  --color-mag-muted: #64748B;
+
+  --radius-badge: 9999px;
+  --radius-box: 6px;
+  --shadow-magazine: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   3. RESET & BASE SHELL
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: #0A0C0E;
+  color: #F8FAFC;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  height: 100vh;
+  height: 100dvh;
+  background: radial-gradient(circle at 50% 10%, #1A1E26 0%, #0A0C0E 70%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* Subtly textured background pattern */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0),
+    radial-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 0);
+  background-size: 24px 24px, 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0D0F13;
+}
+::-webkit-scrollbar-thumb {
+  background: #2D333F;
+  border-radius: 5px;
+  border: 2px solid #0D0F13;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-mag-red);
+}
+
+::selection {
+  background: var(--color-mag-yellow);
+  color: #000;
+}
+
+/* --------------------------------------------------------------------------
+   4. MAGAZINE HUD & READER CONTROLS (HEADER & BOTTOM BAR)
+   -------------------------------------------------------------------------- */
+.mag-reader-header {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 1680px;
+  height: 46px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(14, 16, 20, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.mag-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mag-brand-badge {
+  background: var(--color-mag-red);
+  color: #FFF;
+  font-family: var(--font-tech);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0% 100%);
+  box-shadow: 2px 2px 0 #FFF;
+}
+
+.mag-title-sub {
+  font-family: var(--font-tech);
+  font-size: 0.9rem;
+  color: #CBD5E1;
+  letter-spacing: 0.05em;
+}
+
+.mag-title-sub em {
+  font-style: normal;
+  color: var(--color-mag-yellow);
+  font-weight: 700;
+}
+
+.mag-status-spread {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #E2E8F0;
+}
+
+.mag-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+
+.mag-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: var(--font-tech);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #1C2028;
+  color: #E2E8F0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.mag-btn:hover {
+  background: #282E3A;
+  color: #FFF;
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.mag-btn:active {
+  transform: translateY(1px);
+}
+
+.mag-btn-accent {
+  background: var(--color-mag-yellow);
+  color: #000;
+  border-color: var(--color-mag-yellow);
+  font-weight: 700;
+}
+
+.mag-btn-accent:hover {
+  background: #FFF;
+  color: #000;
+  border-color: #FFF;
+  box-shadow: 0 0 12px rgba(255, 229, 0, 0.4);
+}
+
+.mag-btn-icon {
+  padding: 8px 10px;
+}
+
+/* --------------------------------------------------------------------------
+   5. MAGAZINE WORKSPACE & SPREAD CONTAINER (16:9 NATIVO)
+   -------------------------------------------------------------------------- */
+.mag-workspace {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  padding: 8px 16px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Active Spread Switcher */
+.mag-spread-viewport {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2000px;
+}
+
+/* Base Spread: 16:9 Slide Ratio (Always strictly bounded) */
+.mag-spread {
+  display: none;
+  aspect-ratio: 16 / 9;
+  height: min(100%, calc(96vw * (9 / 16)));
+  width: min(calc(100% * (16 / 9)), 96vw, 1560px);
+  max-height: 100%;
+  max-width: min(1560px, 96vw);
+  border-radius: 8px;
+  background: var(--color-page-paper);
+  box-shadow: var(--shadow-magazine);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mag-spread.active {
+  display: grid;
+  animation: magSpreadTurn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes magSpreadTurn {
+  0% {
+    opacity: 0;
+    transform: scale(0.98) rotateY(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+/* Double-page Spread Grid */
+.mag-spread.double-page {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Single Page Spread (Cover - 16:9 Widescreen) */
+.mag-spread.single-page {
+  display: none;
+  grid-template-columns: 1fr;
+}
+
+.mag-spread.single-page.active {
+  display: block;
+}
+
+/* Realistic Center Spine Shadow / Staple Gutter for Double Spreads */
+.mag-spread.double-page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 44px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.12) 35%,
+    rgba(0, 0, 0, 0.28) 49%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.28) 51%,
+    rgba(0, 0, 0, 0.12) 65%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* --------------------------------------------------------------------------
+   6. INDIVIDUAL PAGE STRUCTURE & FOLIOS
+   -------------------------------------------------------------------------- */
+.mag-page {
+  padding: clamp(18px, 2.5vh, 26px) clamp(22px, 2.5vw, 36px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  color: var(--color-mag-ink);
+  background-color: var(--color-page-paper);
+}
+
+.mag-page.page-dark {
+  background-color: var(--color-page-dark);
+  color: #F8FAFC;
+}
+
+.mag-page.page-left {
+  padding-right: 38px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mag-page.page-right {
+  padding-left: 38px;
+}
+
+.mag-page.page-dark.page-left {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Folio: Running Heads & Page Numbers */
+.mag-folio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-tech);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #000;
+  color: #222;
+}
+
+.page-dark .mag-folio-header {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  color: #94A3B8;
+}
+
+.mag-folio-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-tech);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding-top: 12px;
+  margin-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  color: #444;
+}
+
+.page-dark .mag-folio-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: #64748B;
+}
+
+.mag-page-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 24px;
+  padding: 0 8px;
+  background: #000;
+  color: #FFF;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-radius: 3px;
+}
+
+.page-dark .mag-page-badge {
+  background: var(--color-mag-yellow);
+  color: #000;
+}
+
+/* --------------------------------------------------------------------------
+   7. SPREAD 0: COPERTINA WIDESCREEN 16:9 (CLUB NINTENDO / GAME INFORMER STYLE)
+   -------------------------------------------------------------------------- */
+.mag-cover {
+  position: relative;
+  background: radial-gradient(circle at 75% 50%, #1A2130 0%, #0E1118 65%, #080A0E 100%);
+  color: #FFF;
+  width: 100%;
+  height: 100%;
+  padding: clamp(8px, 1.4vh, 16px) clamp(16px, 2vw, 28px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 3px solid var(--color-mag-yellow);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Chequered Retro Border Top & Bottom */
+.cover-chequered-border {
+  height: 8px;
+  flex-shrink: 0;
+  background: repeating-conic-gradient(#000 0% 25%, #FFF 0% 50%) 50% / 10px 10px;
+  border: 1px solid #000;
+}
+
+/* Top Magazine Info Bar */
+.cover-top-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-tech);
+  font-size: clamp(0.68rem, 0.85vw, 0.78rem);
+  font-weight: 700;
+  color: var(--color-mag-yellow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: clamp(2px, 0.4vh, 4px) 0;
+}
+
+/* Chrome / 3D Embossed Masthead Bar */
+.cover-masthead-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(2px, 0.4vh, 4px) 0 clamp(4px, 0.7vh, 8px) 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+  z-index: 10;
+}
+
+.cover-masthead-pill {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 45%, #94A3B8 100%);
+  border: 3px solid #FF2A4D;
+  border-radius: 9999px;
+  padding: clamp(2px, 0.4vh, 4px) clamp(14px, 1.6vw, 22px);
+  box-shadow: 0 4px 16px rgba(255, 42, 77, 0.45), inset 0 2px 4px #FFF;
+}
+
+.cover-masthead-title {
+  font-family: var(--font-masthead);
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  color: #CC002B;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px #FFF, 3px 3px 0px #700016;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.cover-masthead-subtitle {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.7rem, 0.82vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #00F0FF;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  text-align: right;
+  max-width: 500px;
+  line-height: 1.3;
+}
+
+/* Widescreen 16:9 Cover Layout: 2 Columns */
+.cover-widescreen-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(14px, 2.2vw, 30px);
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+  padding: clamp(4px, 0.6vh, 8px) 0;
+  position: relative;
+  z-index: 5;
+}
+
+/* Left Column: Headlines, Dossier Teasers & Barcode */
+.cover-story-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 0;
+  z-index: 10;
+  padding-top: clamp(6px, 1.2vh, 14px);
+}
+
+.cover-header-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: clamp(6px, 1vh, 12px);
+}
+
+.cover-main-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--color-mag-yellow);
+  color: #000;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: clamp(0.66rem, 0.78vw, 0.74rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  transform: rotate(-1.5deg);
+  box-shadow: 2px 2px 0 #000;
+  margin-bottom: clamp(3px, 0.5vh, 6px);
+}
+
+.cover-main-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #FFF;
+  text-shadow: 2px 2px 0 #FF2A4D, 4px 4px 0 #000;
+  margin-bottom: 0;
+}
+
+.cover-main-subtext {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: #CBD5E1;
+  line-height: 1.45;
+  margin-bottom: 18px;
+  max-width: 580px;
+  border-left: 3px solid var(--color-mag-cyan);
+  padding-left: 12px;
+}
+
+/* Teaser cards in left col */
+.cover-teasers-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1vh, 10px);
+  margin-bottom: clamp(4px, 0.7vh, 8px);
+  width: calc(100% - clamp(14px, 1.6vw, 24px));
+}
+
+.cover-card-teaser {
+  background: rgba(18, 22, 30, 0.92);
+  border-radius: 6px;
+  padding: clamp(8px, 1.1vh, 12px) clamp(10px, 1.2vw, 14px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border-left: 4px solid var(--color-mag-yellow);
+  transition: transform 0.2s ease;
+}
+
+.cover-card-teaser:hover {
+  transform: translateX(4px);
+}
+
+.cover-card-teaser.accent-red { border-left-color: var(--color-mag-red); }
+.cover-card-teaser.accent-cyan { border-left-color: var(--color-mag-cyan); }
+.cover-card-teaser.accent-purple { border-left-color: var(--color-mag-purple); }
+
+.cover-card-teaser-tag {
+  font-family: var(--font-tech);
+  font-size: clamp(0.72rem, 0.82vw, 0.78rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 3px;
+}
+
+.accent-red .cover-card-teaser-tag { color: var(--color-mag-red); }
+.accent-cyan .cover-card-teaser-tag { color: var(--color-mag-cyan); }
+.accent-purple .cover-card-teaser-tag { color: var(--color-mag-purple); }
+
+.cover-card-teaser-headline {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: #FFF;
+}
+
+.cover-card-teaser-sub {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.78rem, 0.88vw, 0.85rem);
+  color: #94A3B8;
+  margin-top: 3px;
+  line-height: 1.28;
+}
+
+/* Left Bottom: Barcode + Metadata */
+.cover-left-bottom-bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.2vw, 14px);
+  padding-top: clamp(4px, 0.6vh, 8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.cover-fake-barcode {
+  background: #FFF;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.barcode-lines {
+  width: 80px;
+  height: 24px;
+  background: repeating-linear-gradient(
+    to right,
+    #000 0px,
+    #000 2px,
+    transparent 2px,
+    transparent 4px,
+    #000 4px,
+    #000 7px,
+    transparent 7px,
+    transparent 9px,
+    #000 9px,
+    #000 13px,
+    transparent 13px,
+    transparent 15px
+  );
+}
+
+.barcode-digits {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-align: center;
+  margin-top: 1px;
+  letter-spacing: 0.18em;
+  color: #111;
+}
+
+.cover-meta-text {
+  font-family: var(--font-tech);
+  font-size: clamp(0.65rem, 0.72vw, 0.72rem);
+  color: #94A3B8;
+  line-height: 1.25;
+}
+
+.cover-meta-text strong {
+  color: #FFF;
+}
+
+/* Right Column: Hero Visual & Stickers & CTA Button */
+.cover-visual-col {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cover-visual-aura {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.4) 0%, rgba(255, 42, 77, 0.2) 50%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.cover-hero-img-box {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  container-type: size;
+  z-index: 5;
+}
+
+.cover-hero-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  max-height: 100%;
+  width: min(100cqw, calc(100cqh * (16 / 9)));
+  height: calc(min(100cqw, calc(100cqh * (16 / 9))) * (9 / 16));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-hero-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.9));
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.cover-hero-img:hover {
+  transform: scale(1.02);
+}
+
+/* Floating Stickers on Hero */
+.cover-hero-sticker {
+  position: absolute;
+  background: rgba(14, 16, 20, 0.94);
+  border: 2px solid var(--color-mag-yellow);
+  border-radius: 6px;
+  padding: clamp(4px, 0.6vh, 7px) clamp(8px, 0.9vw, 11px);
+  max-width: clamp(170px, 16vw, 215px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+  z-index: 15;
+}
+
+.cover-hero-sticker-top {
+  top: clamp(-18px, -2vh, -10px);
+  right: clamp(-28px, -2.2vw, -16px);
+  transform: rotate(2.5deg);
+  border-color: var(--color-mag-cyan);
+}
+
+.cover-hero-sticker-bottom {
+  bottom: clamp(-10px, -1.2vh, 0px);
+  left: clamp(-34px, -2.5vw, -18px);
+  max-width: clamp(180px, 17vw, 230px);
+  transform: rotate(-3deg);
+  border-color: var(--color-mag-purple);
+}
+
+.cover-sticker-title {
+  font-family: var(--font-tech);
+  font-size: clamp(0.62rem, 0.7vw, 0.68rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-mag-yellow);
+}
+
+.cover-hero-sticker-top .cover-sticker-title { color: var(--color-mag-cyan); }
+.cover-hero-sticker-bottom .cover-sticker-title { color: var(--color-mag-purple); }
+
+.cover-sticker-desc {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.7rem, 0.78vw, 0.76rem);
+  font-weight: 700;
+  color: #FFF;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.cover-cta-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+  flex-shrink: 0;
+  padding-top: clamp(4px, 0.6vh, 8px);
+  margin-top: 0;
+}
+
+.cover-btn-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(6px, 1vh, 9px) clamp(18px, 2vw, 26px);
+  background: var(--color-mag-yellow);
+  color: #000;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: clamp(0.8rem, 0.95vw, 0.92rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 2px solid #FFF;
+  border-radius: 6px;
+  box-shadow: 0 4px 0 #000, 0 6px 16px rgba(255, 229, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cover-btn-open:hover {
+  background: #FFF;
+  color: #000;
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 8px 0 #000, 0 14px 30px rgba(255, 255, 255, 0.6);
+}
+
+.cover-btn-open:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 2px 0 #000;
+}
+
+/* --------------------------------------------------------------------------
+   8. SPREAD 1: SOMMARIO & EDITORIALE (REFERENCE b265de11...)
+   -------------------------------------------------------------------------- */
+/* Left Page: Table of Contents */
+.toc-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  justify-content: space-between;
+}
+
+.toc-title-area {
+  flex-shrink: 0;
+  margin-bottom: clamp(6px, 1vh, 12px);
+}
+
+.toc-super-title {
+  font-family: var(--font-tech);
+  font-size: clamp(0.68rem, 0.8vw, 0.8rem);
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.toc-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
+  font-weight: 900;
+  line-height: 0.95;
+  color: #0F172A;
+  margin-top: 2px;
+  margin-bottom: clamp(4px, 0.6vh, 8px);
+}
+
+.toc-yellow-rule {
+  width: 100%;
+  height: 3px;
+  background: var(--color-mag-yellow);
+  border-radius: 2px;
+}
+
+/* Step-stair layout with vertical artwork strips */
+.toc-staircase {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(5px, 0.7vw, 9px);
+  flex: 1;
+  min-height: 0;
+  padding: clamp(4px, 0.6vh, 8px) 0;
+}
+
+.toc-step-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.toc-step-column:hover {
+  transform: translateY(-6px);
+}
+
+.toc-col-info {
+  text-align: center;
+  margin-bottom: clamp(3px, 0.5vh, 6px);
+  flex-shrink: 0;
+}
+
+.toc-col-topic {
+  font-family: var(--font-tech);
+  font-size: clamp(0.6rem, 0.72vw, 0.7rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #0F172A;
+  line-height: 1.15;
+}
+
+.toc-col-badge {
+  font-family: var(--font-mono);
+  font-size: clamp(0.52rem, 0.6vw, 0.58rem);
+  color: #64748B;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+/* The vertical artwork image strip */
+.toc-slice-card {
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border: 2px solid #0F172A;
+  background: #222;
+}
+
+.toc-step-1 .toc-slice-card { height: clamp(130px, 19vh, 170px); }
+.toc-step-2 .toc-slice-card { height: clamp(170px, 25vh, 225px); }
+.toc-step-3 .toc-slice-card { height: clamp(210px, 31vh, 280px); }
+.toc-step-4 .toc-slice-card { height: clamp(250px, 37vh, 335px); }
+.toc-step-5 .toc-slice-card { height: clamp(290px, 43vh, 390px); }
+.toc-step-6 .toc-slice-card { height: clamp(330px, 48vh, 445px); }
+
+.toc-slice-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.toc-step-column:hover .toc-slice-img {
+  transform: scale(1.08);
+}
+
+.toc-slice-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.1) 60%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 6px;
+}
+
+.toc-slice-num {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+  font-weight: 900;
+  color: #FFF;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Right Page: Versione Schematica da Slide (Executive Summary) */
+.editorial-schematic-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  justify-content: space-between;
+}
+
+.editorial-schematic-header {
+  flex-shrink: 0;
+  margin-bottom: clamp(4px, 0.7vh, 8px);
+}
+
+.editorial-schematic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #0F172A;
+  color: #FFF;
+  font-family: var(--font-tech);
+  font-size: clamp(0.64rem, 0.72vw, 0.7rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: clamp(2px, 0.4vh, 4px);
+}
+
+.editorial-schematic-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #0F172A;
+  margin-bottom: clamp(2px, 0.4vh, 4px);
+}
+
+.editorial-schematic-sub {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.72rem, 0.84vw, 0.82rem);
+  color: #475569;
+  line-height: 1.28;
+}
+
+.editorial-schematic-sub strong {
+  color: #0F172A;
+}
+
+/* 3 Schematic Pillars Grid */
+.editorial-pillars-grid {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.7vh, 7px);
+  margin: clamp(4px, 0.7vh, 8px) 0;
+  flex: 1;
+  min-height: 0;
+  justify-content: space-evenly;
+}
+
+.editorial-pillar-card {
+  background: #FFF;
+  border-radius: 6px;
+  padding: clamp(5px, 0.8vh, 7px) clamp(8px, 1vw, 12px);
+  border-left: 4px solid var(--color-mag-yellow);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(8px, 1vw, 12px);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.editorial-pillar-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.editorial-pillar-card.accent-cyan { border-left-color: var(--color-mag-cyan); }
+.editorial-pillar-card.accent-red { border-left-color: var(--color-mag-red); }
+.editorial-pillar-card.accent-purple { border-left-color: var(--color-mag-purple); }
+
+.editorial-pillar-icon {
+  font-size: clamp(1.1rem, 1.3vw, 1.25rem);
+  line-height: 1;
+  padding-top: 1px;
+}
+
+.editorial-pillar-body {
+  flex: 1;
+}
+
+.editorial-pillar-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.editorial-pillar-num {
+  font-family: var(--font-tech);
+  font-size: clamp(0.62rem, 0.7vw, 0.68rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.editorial-pillar-card.accent-cyan .editorial-pillar-num { color: #0284C7; }
+.editorial-pillar-card.accent-red .editorial-pillar-num { color: #DC2626; }
+.editorial-pillar-card.accent-purple .editorial-pillar-num { color: #9333EA; }
+
+.editorial-pillar-tag {
+  font-family: var(--font-tech);
+  font-size: clamp(0.64rem, 0.72vw, 0.75rem);
+  background: #0F172A;
+  color: #FFF;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.editorial-pillar-card.accent-cyan .editorial-pillar-tag {
+  border: 1.5px solid var(--color-mag-cyan);
+  color: var(--color-mag-cyan);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+.editorial-pillar-card.accent-red .editorial-pillar-tag {
+  border: 1.5px solid var(--color-mag-red);
+  color: var(--color-mag-red);
+  box-shadow: 0 0 8px rgba(255, 42, 77, 0.3);
+}
+
+.editorial-pillar-card.accent-purple .editorial-pillar-tag {
+  border: 1.5px solid #A855F7;
+  color: #C084FC;
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+}
+
+.editorial-pillar-title {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.8rem, 0.9vw, 0.88rem);
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 1px;
+}
+
+.editorial-pillar-desc {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.68rem, 0.76vw, 0.76rem);
+  color: #475569;
+  line-height: 1.28;
+}
+
+.editorial-pillar-desc strong {
+  color: #0F172A;
+}
+
+/* Central Project Thesis Callout */
+.editorial-thesis-box {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  border-radius: 6px;
+  padding: clamp(6px, 0.9vh, 8px) clamp(10px, 1.2vw, 14px);
+  color: #FFF;
+  border-left: 4px solid var(--color-mag-yellow);
+  margin-bottom: clamp(3px, 0.6vh, 6px);
+  flex-shrink: 0;
+}
+
+.editorial-thesis-tag {
+  font-family: var(--font-tech);
+  font-size: clamp(0.62rem, 0.7vw, 0.66rem);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-mag-yellow);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 2px;
+}
+
+.editorial-thesis-text {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.72rem, 0.8vw, 0.78rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #F8FAFC;
+}
+
+.editorial-thesis-text strong {
+  color: var(--color-mag-yellow);
+}
+
+/* Authors Footer Meta */
+.editorial-schematic-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: clamp(4px, 0.6vh, 6px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: var(--font-tech);
+  font-size: clamp(0.65rem, 0.72vw, 0.7rem);
+  color: #64748B;
+  flex-shrink: 0;
+}
+
+.editorial-schematic-footer strong {
+  color: #0F172A;
+}
+
+/* --------------------------------------------------------------------------
+   9. SPREAD 2: FIRST LOOK / DEMOGRAFICA (FFVII & ANGRY BIRDS STYLE)
+   -------------------------------------------------------------------------- */
+/* Left Page: Hero Game Data & First Look */
+.first-look-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #000;
+  color: #FFF;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  padding: 3px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.first-look-capsule span {
+  color: var(--color-mag-yellow);
+}
+
+.first-look-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+
+.first-look-subhead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+/* Retro Cartridge / Spec Box: GAME DATA */
+.game-data-box {
+  background: #0F172A;
+  color: #FFF;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25);
+  border: 2px solid var(--color-mag-yellow);
+  position: relative;
+}
+
+.game-data-badge {
+  position: absolute;
+  top: -11px;
+  left: 16px;
+  background: var(--color-mag-yellow);
+  color: #000;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.game-data-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 14px;
+  margin-top: 4px;
+}
+
+.game-data-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-data-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.game-data-value {
+  font-family: var(--font-tech);
+  font-size: clamp(0.96rem, 1.1vw, 1.14rem);
+  font-weight: 800;
+  color: #F8FAFC;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+.game-data-value.val-cyan {
+  color: #00F0FF;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.45);
+}
+
+.game-data-value.val-yellow {
+  color: #FFE600;
+  text-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
+}
+
+.game-data-value.val-green {
+  color: #34D399;
+  text-shadow: 0 0 10px rgba(52, 211, 153, 0.45);
+}
+
+.first-look-body-text {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #334155;
+  column-count: 2;
+  column-gap: 24px;
+}
+
+/* Presentation Symbol Capsules (Refined: Evident Symbols & Presentation Anchors) */
+.first-look-points {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5px, 0.85vh, 8px);
+  margin-top: clamp(6px, 1vh, 12px);
+  flex: 1;
+  justify-content: space-evenly;
+}
+
+.first-look-point-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 15px);
+  background: #FFF;
+  border: 1.5px solid #E2E8F0;
+  border-left: 5px solid #0284C7;
+  border-radius: 8px;
+  padding: clamp(5px, 0.8vh, 8px) clamp(10px, 1.2vw, 14px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.first-look-point-item:hover {
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.first-look-point-item:nth-child(1) { border-left-color: #0284C7; }
+.first-look-point-item:nth-child(2) { border-left-color: #10B981; }
+.first-look-point-item:nth-child(3) { border-left-color: #EF4444; }
+
+/* Evident, Prominent Symbol Badge */
+.first-look-symbol-badge {
+  width: clamp(38px, 2.5vw, 44px);
+  height: clamp(38px, 2.5vw, 44px);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.25rem, 1.5vw, 1.45rem);
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+}
+
+.badge-cyan {
+  background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+  border: 1.5px solid #38BDF8;
+}
+
+.badge-green {
+  background: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%);
+  border: 1.5px solid #4ADE80;
+}
+
+.badge-red {
+  background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+  border: 1.5px solid #F87171;
+}
+
+.first-look-point-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.first-look-point-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.first-look-point-title {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.78rem, 0.88vw, 0.86rem);
+  font-weight: 800;
+  color: #0F172A;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.first-look-point-tag {
+  font-family: var(--font-tech);
+  font-size: clamp(0.6rem, 0.68vw, 0.66rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.tag-cyan { background: #E0F2FE; color: #0284C7; }
+.tag-green { background: #DCFCE7; color: #16A34A; }
+.tag-red { background: #FEE2E2; color: #DC2626; }
+
+.first-look-point-desc {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.7rem, 0.76vw, 0.76rem);
+  color: #475569;
+  line-height: 1.28;
+}
+
+.first-look-point-desc strong {
+  color: #0F172A;
+}
+
+/* Right Page: High Impact Statistics & Angry Birds Style Callouts */
+.stat-spread-banner {
+  background: var(--color-mag-red);
+  color: #FFF;
+  padding: 7px 14px;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 0% 100%);
+  margin-bottom: 16px;
+}
+
+.stat-heroes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.stat-hero-card {
+  background: #FFF;
+  border: 3px solid #0F172A;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 3px 3px 0 #0F172A;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-hero-card.accent-red {
+  border-color: var(--color-mag-red);
+  box-shadow: 3px 3px 0 var(--color-mag-red);
+}
+
+.stat-hero-card.accent-blue {
+  border-color: var(--color-mag-blue);
+  box-shadow: 3px 3px 0 var(--color-mag-blue);
+}
+
+.stat-huge-number {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: #0F172A;
+}
+
+.accent-red .stat-huge-number { color: var(--color-mag-red); }
+.accent-blue .stat-huge-number { color: var(--color-mag-blue); }
+
+.stat-card-title {
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 1rem;
+  color: #0F172A;
+  margin-top: 6px;
+}
+
+.stat-card-desc {
+  font-size: 0.82rem;
+  color: #475569;
+  margin-top: 4px;
+  line-height: 1.35;
+}
+
+.stat-card-source {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #94A3B8;
+  margin-top: 6px;
+  display: block;
+}
+
+/* Perception Bar Comparison */
+.perception-bar-box {
+  background: #E2E8F0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.bar-row {
+  margin-bottom: 8px;
+}
+
+.bar-row:last-child {
+  margin-bottom: 0;
+}
+
+.bar-label-group {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-tech);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 4px;
+}
+
+.bar-track {
+  height: 12px;
+  background: #CBD5E1;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.bar-fill-reality {
+  width: 48%;
+  background: linear-gradient(90deg, #3B82F6, #00F0FF);
+}
+
+.bar-fill-perception {
+  width: 80%;
+  background: linear-gradient(90deg, #EF4444, #F59E0B);
+}
+
+.polaroid-badge-note {
+  background: var(--color-mag-yellow);
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: var(--font-tech);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.35;
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* --------------------------------------------------------------------------
+   10. SPREAD 3: SPECIAL FEATURE: VOICE CHAT & TOXICITY (SUPER MARIO RPG & CRASH)
+   -------------------------------------------------------------------------- */
+.feature-header-capsule {
+  display: inline-block;
+  background: var(--color-mag-red);
+  color: #FFF;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(255, 42, 77, 0.4);
+  margin-bottom: 10px;
+}
+
+/* 3D Yellow/Red Retro Title (Super Mario RPG style) */
+.feature-title-3d {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--color-mag-yellow);
+  text-transform: uppercase;
+  text-shadow: 
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     4px  4px 0 #FF2A4D,
+     6px  6px 0 #000;
+  margin-bottom: 6px;
+}
+
+.feature-kicker {
+  font-family: var(--font-tech);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Character Cutout Wrap Layout */
+.character-wrap-layout {
+  position: relative;
+  margin-top: 10px;
+}
+
+.character-wrap-img {
+  float: right;
+  width: 220px;
+  max-width: 42%;
+  margin-left: 16px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.35));
+}
+
+.call-to-arms-pill {
+  background: var(--color-mag-red);
+  color: #FFF;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.feature-columns {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+/* Voice Slide Presentation Points (Fase 3 / Anti-wall of text) */
+.voice-slide-points {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(7px, 1.1vh, 12px);
+  margin-top: clamp(6px, 1vh, 10px);
+}
+
+.voice-point-card {
+  background: #FFF;
+  border-radius: 6px;
+  border: 1.5px solid #CBD5E1;
+  border-left: 4px solid var(--color-mag-red);
+  padding: clamp(7px, 1.1vh, 10px) clamp(10px, 1.2vw, 14px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.voice-point-card:nth-child(2) {
+  border-left-color: #8B5CF6;
+}
+
+.voice-point-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.voice-point-icon {
+  font-size: clamp(1rem, 1.15vw, 1.2rem);
+  line-height: 1;
+}
+
+.voice-point-title {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.78rem, 0.88vw, 0.86rem);
+  font-weight: 800;
+  color: #0F172A;
+}
+
+.voice-point-text {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.72rem, 0.8vw, 0.78rem);
+  line-height: 1.35;
+  color: #334155;
+}
+
+.voice-point-text strong {
+  color: #0F172A;
+  font-weight: 700;
+}
+
+/* Callout Stat Card for 48% (Fase 1 / Evidenziazione Metrica) */
+.voice-stat-callout {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 15px);
+  border-left: 5px solid #FF2A4D !important;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
+  padding: clamp(6px, 0.9vh, 9px) clamp(10px, 1.2vw, 14px);
+}
+
+.voice-stat-badge-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0F172A;
+  border: 2px solid #FF2A4D;
+  border-radius: 8px;
+  padding: clamp(4px, 0.6vh, 6px) clamp(8px, 1vw, 12px);
+  min-width: clamp(62px, 4.6vw, 78px);
+  box-shadow: 0 4px 12px rgba(255, 42, 77, 0.25);
+  flex-shrink: 0;
+}
+
+.voice-stat-huge {
+  font-family: var(--font-masthead);
+  font-size: clamp(1.5rem, 2.1vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #FF2A4D;
+  text-shadow: 0 0 12px rgba(255, 42, 77, 0.5);
+}
+
+.voice-stat-sub {
+  font-family: var(--font-tech);
+  font-size: clamp(0.55rem, 0.62vw, 0.62rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #FFE600;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.voice-stat-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Right Page: Crash Bandicoot Cajas de Objetos (Boxes of Objects) */
+.cajas-section-header {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #0F172A;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.cajas-subhead {
+  font-family: var(--font-tech);
+  font-size: 0.82rem;
+  color: #64748B;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  letter-spacing: 0.05em;
+}
+
+.cajas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.caja-box {
+  background: #FFF;
+  border: 2px solid #0F172A;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 3px 3px 0 #0F172A;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.caja-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 3px 7px 0 #0F172A;
+}
+
+.caja-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #0F172A;
+  color: #FFF;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.caja-title {
+  font-family: var(--font-tech);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #0F172A;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.caja-desc {
+  font-size: 0.8rem;
+  color: #475569;
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+.caja-stat-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-mag-red);
+  margin-top: 4px;
+}
+
+/* System Design Warning Banner */
+.system-warning-banner {
+  background: #1E293B;
+  color: #FFF;
+  border-left: 5px solid var(--color-mag-yellow);
+  padding: 12px 16px;
+  border-radius: 4px;
+}
+
+.system-warning-title {
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--color-mag-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.system-warning-text {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #E2E8F0;
+}
+
+/* --------------------------------------------------------------------------
+   11. SPREAD 4: THE TIMELINE: DA CONTORNO A SOGGETTO (ZELDA STYLE)
+   -------------------------------------------------------------------------- */
+.mag-spread.timeline-spread {
+  background: #0F131A;
+  color: #FFF;
+}
+
+.mag-spread.timeline-spread .mag-page {
+  background: transparent;
+  color: #FFF;
+}
+
+.timeline-super-banner {
+  background: var(--color-mag-red);
+  color: #FFF;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+
+.timeline-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #FFF;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.timeline-subhead {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #94A3B8;
+  max-width: 650px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+/* Branching Timeline Track across the two pages */
+/* --------------------------------------------------------------------------
+   11. SPREAD 4: THE TIMELINE: DA CONTORNO A SOGGETTO (ZELDA & RETRO STYLE)
+   -------------------------------------------------------------------------- */
+.mag-spread.timeline-spread {
+  background: #0B0E14;
+  color: #FFF;
+}
+
+.mag-spread.timeline-spread .mag-page {
+  background: transparent;
+  color: #FFF;
+}
+
+.timeline-super-banner {
+  background: linear-gradient(90deg, #FF2A4D 0%, #A855F7 50%, #00F0FF 100%);
+  color: #FFF;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: clamp(0.72rem, 0.8vw, 0.82rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  display: inline-block;
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 0% 100%);
+  margin-bottom: 4px;
+}
+
+.timeline-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  font-weight: 900;
+  color: #FFF;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 2px 0 4px 0;
+  line-height: 1;
+}
+
+.timeline-subhead {
+  font-size: clamp(0.74rem, 0.82vw, 0.82rem);
+  line-height: 1.35;
+  color: #94A3B8;
+  max-width: 900px;
+  margin-bottom: clamp(6px, 1vh, 10px);
+}
+
+/* Authentic Magazine Timeline System */
+.mag-timeline-system {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.7vh, 8px);
+  margin-top: 2px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Continuous Horizontal Timeline Rail with Milestone Pins */
+.mag-timeline-rail-wrap {
+  position: relative;
+  width: 100%;
+  padding: 4px 0 6px 0;
+}
+
+.mag-timeline-rail-bar {
+  position: absolute;
+  top: 14px;
+  left: 6%;
+  right: 6%;
+  height: 4px;
+  background: linear-gradient(90deg, #F59E0B 0%, #00F0FF 35%, #A855F7 70%, #10B981 100%);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+  border-radius: 999px;
+  z-index: 1;
+}
+
+.mag-timeline-milestones-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(10px, 1.2vw, 16px);
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-milestone-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.milestone-pin-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FFF;
+  border: 3px solid #00F0FF;
+  box-shadow: 0 0 10px #00F0FF;
+  margin-bottom: 3px;
+  transition: transform 0.2s ease;
+}
+
+.node-1 .milestone-pin-dot { border-color: #F59E0B; box-shadow: 0 0 10px #F59E0B; }
+.node-2 .milestone-pin-dot { border-color: #00F0FF; box-shadow: 0 0 10px #00F0FF; }
+.node-3 .milestone-pin-dot { border-color: #A855F7; box-shadow: 0 0 10px #A855F7; }
+.node-4 .milestone-pin-dot { border-color: #10B981; box-shadow: 0 0 10px #10B981; }
+
+.milestone-year-badge {
+  font-family: var(--font-tech);
+  font-size: clamp(0.72rem, 0.8vw, 0.82rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #0F172A;
+  border: 1.5px solid #CBD5E1;
+  color: #FFF;
+}
+
+.node-1 .milestone-year-badge { border-color: #F59E0B; color: #F59E0B; }
+.node-2 .milestone-year-badge { border-color: #00F0FF; color: #00F0FF; }
+.node-3 .milestone-year-badge { border-color: #A855F7; color: #C084FC; }
+.node-4 .milestone-year-badge { border-color: #10B981; color: #34D399; }
+
+/* 4 Timeline Era Cards */
+.mag-timeline-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(10px, 1.2vw, 16px);
+  flex: 1;
+  min-height: 0;
+}
+
+.timeline-era-card {
+  background: #131722;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: clamp(6px, 0.9vh, 10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-era-card:hover {
+  transform: translateY(-4px);
+}
+
+.era-peach { border-top: 4px solid #F59E0B; }
+.era-peach:hover { border-color: #F59E0B; box-shadow: 0 12px 28px rgba(245, 158, 11, 0.2); }
+
+.era-lara { border-top: 4px solid #00F0FF; }
+.era-lara:hover { border-color: #00F0FF; box-shadow: 0 12px 28px rgba(0, 240, 255, 0.2); }
+
+.era-aloy { border-top: 4px solid #A855F7; }
+.era-aloy:hover { border-color: #A855F7; box-shadow: 0 12px 28px rgba(168, 85, 247, 0.2); }
+
+.era-bg3 { border-top: 4px solid #10B981; }
+.era-bg3:hover { border-color: #10B981; box-shadow: 0 12px 28px rgba(16, 185, 129, 0.2); }
+
+.era-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.era-tag {
+  font-family: var(--font-tech);
+  font-size: clamp(0.55rem, 0.62vw, 0.62rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #94A3B8;
+  text-transform: uppercase;
+}
+
+.era-role-pill {
+  font-family: var(--font-mono);
+  font-size: clamp(0.52rem, 0.58vw, 0.58rem);
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  display: inline-block;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.role-trophy { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.4); }
+.role-action { background: rgba(0, 240, 255, 0.15); color: #38BDF8; border: 1px solid rgba(0, 240, 255, 0.4); }
+.role-subject { background: rgba(168, 85, 247, 0.15); color: #C084FC; border: 1px solid rgba(168, 85, 247, 0.4); }
+.role-modular { background: rgba(16, 185, 129, 0.15); color: #4ADE80; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+.era-card-visual {
+  height: clamp(130px, 17vh, 180px);
+  background: radial-gradient(circle at 50% 60%, rgba(30, 41, 59, 0.6) 0%, #080A0F 85%);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0 8px 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.era-peach .era-card-visual {
+  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.16) 0%, #080A0F 80%);
+}
+
+.era-lara .era-card-visual {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.16) 0%, #080A0F 80%);
+}
+
+.era-aloy .era-card-visual {
+  background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.16) 0%, #080A0F 80%);
+}
+
+.era-bg3 .era-card-visual {
+  background: #080A0F;
+}
+
+.era-char-img {
+  max-height: 94%;
+  max-width: 94%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));
+  transition: transform 0.25s ease;
+}
+
+.timeline-era-card:hover .era-char-img {
+  transform: scale(1.08);
+}
+
+.bg3-img {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.era-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.era-char-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 1.15vw, 1.22rem);
+  font-weight: 800;
+  color: #FFF;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.era-game-sub {
+  font-family: var(--font-tech);
+  font-size: clamp(0.68rem, 0.76vw, 0.78rem);
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.era-speaking-prompt {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.78rem, 0.86vw, 0.9rem);
+  color: #CBD5E1;
+  line-height: 1.38;
+  margin: 0;
+}
+
+.era-speaking-prompt strong {
+  color: #FFF;
+}
+
+/* --------------------------------------------------------------------------
+   12. SPREAD 5: BEHIND THE SCREEN & ESPORTS (GAME INFORMER STYLE)
+   -------------------------------------------------------------------------- */
+.level99-pill {
+  display: inline-block;
+  background: var(--color-mag-purple);
+  color: #FFF;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  padding: 3px 12px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.industry-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+
+.industry-funnel-container {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.funnel-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #FFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  padding: 9px 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.funnel-num {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 900;
+  min-width: 75px;
+  color: var(--color-mag-red);
+}
+
+.funnel-info h4 {
+  font-family: var(--font-tech);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0F172A;
+  text-transform: uppercase;
+}
+
+.funnel-info p {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.3;
+}
+
+/* Esports Pro Circuit Showcase */
+.esports-header-tag {
+  font-family: var(--font-tech);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-mag-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.esports-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.esports-card {
+  background: #FFF;
+  border: 2px solid #0F172A;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 3px 3px 0 #0F172A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.esports-logo-box {
+  height: 55px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.esports-logo-img {
+  max-height: 100%;
+  max-width: 120px;
+  object-fit: contain;
+}
+
+.esports-card h4 {
+  font-family: var(--font-tech);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #0F172A;
+  text-transform: uppercase;
+}
+
+.esports-card p {
+  font-size: 0.78rem;
+  color: #475569;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   13. SPREAD 6: IL MANIFESTO & QUARTA DI COPERTINA (POSTER STYLE)
+   -------------------------------------------------------------------------- */
+/* Left Page: The Software Engineering Manifesto */
+.manifesto-poster {
+  background: #000;
+  color: #FFF;
+  border-radius: 8px;
+  padding: 24px 22px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 4px solid var(--color-mag-yellow);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.manifesto-header-stamp {
+  font-family: var(--font-tech);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--color-mag-yellow);
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--color-mag-yellow);
+  padding-bottom: 6px;
+}
+
+.manifesto-giant-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.1vw, 2.15rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #FFF;
+  margin: 8px 0;
+  text-shadow: 2px 2px 0 var(--color-mag-red);
+  letter-spacing: -0.01em;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.manifesto-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.pillar-num {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--color-mag-cyan);
+  line-height: 1;
+}
+
+.pillar-text h4 {
+  font-family: var(--font-tech);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #FFF;
+  text-transform: uppercase;
+}
+
+.pillar-text p {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  line-height: 1.35;
+  margin-top: 2px;
+}
+
+/* Right Page: Back Cover & Credits Colophon */
+.back-cover-page {
+  background: #11141B;
+  color: #FFF;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.colophon-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.colophon-title {
+  font-family: var(--font-tech);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-mag-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.colophon-team {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.team-member {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: #E2E8F0;
+}
+
+.team-member strong {
+  color: #FFF;
+  font-weight: 700;
+}
+
+.colophon-sources-list {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #94A3B8;
+  line-height: 1.45;
+  margin-top: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   14. BOTTOM THUMBNAIL STRIP & SPREAD NAVIGATION
+   -------------------------------------------------------------------------- */
+.mag-bottom-bar {
+  flex: 0 0 auto;
+  position: relative;
+  width: 100%;
+  height: 56px;
+  background: rgba(11, 13, 16, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 90;
+  box-sizing: border-box;
+}
+
+.mag-nav-arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #1C2028;
+  color: #FFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mag-nav-arrow-btn:hover {
+  background: var(--color-mag-yellow);
+  color: #000;
+  border-color: var(--color-mag-yellow);
+  transform: scale(1.08);
+}
+
+.mag-nav-arrow-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mini Spreads Strip */
+.mag-thumbs-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 8px;
+  scrollbar-width: none;
+}
+
+.mag-thumbs-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.mag-thumb-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.mag-thumb-item:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.mag-thumb-item.active {
+  opacity: 1;
+}
+
+.mag-thumb-box {
+  width: 58px;
+  height: 36px;
+  border-radius: 4px;
+  background: #1E232E;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-tech);
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #CBD5E1;
+  transition: all 0.2s ease;
+}
+
+.mag-thumb-item.active .mag-thumb-box {
+  border-color: var(--color-mag-yellow);
+  background: #2D3546;
+  color: var(--color-mag-yellow);
+  box-shadow: 0 0 10px rgba(255, 229, 0, 0.4);
+}
+
+.mag-thumb-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #94A3B8;
+  margin-top: 3px;
+}
+
+.mag-thumb-item.active .mag-thumb-label {
+  color: #FFF;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   15. RESPONSIVE ADAPTATIONS (MOBILE & TABLETS)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .mag-spread {
+    aspect-ratio: auto;
+    min-height: auto;
+  }
+  .mag-spread.double-page {
+    grid-template-columns: 1fr;
+  }
+  .mag-spread.double-page::after {
+    display: none;
+  }
+  .cover-widescreen-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .mag-page.page-left {
+    border-right: none;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.15);
+    padding-right: 28px;
+  }
+  .mag-page.page-right {
+    padding-left: 28px;
+  }
+  .toc-staircase {
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  .toc-slice-card {
+    height: 160px !important;
+  }
+  .timeline-nodes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat-heroes-grid {
+    grid-template-columns: 1fr;
+  }
+  .editorial-columns, .first-look-body-text {
+    column-count: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .mag-page {
+    padding: 22px 18px;
+  }
+  .mag-reader-header {
+    padding: 8px 12px;
+  }
+  .mag-title-sub {
+    display: none;
+  }
+  .timeline-nodes-grid {
+    grid-template-columns: 1fr;
+  }
+  .cajas-grid, .esports-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .cover-masthead-title {
+    font-size: 3.2rem;
+  }
+  .cover-main-headline {
+    font-size: 2rem;
+  }
+  .mag-bottom-bar {
+    padding: 8px 12px;
+  }
+  .mag-thumbs-strip {
+    gap: 8px;
+  }
+  .mag-thumb-box {
+    width: 44px;
+    height: 30px;
+    font-size: 0.65rem;
+  }
+}
