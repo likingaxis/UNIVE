@@ -45,6 +45,7 @@ flowchart TD
         I31["Idea 31: Casi di Studio Goal-Oriented Solver vs Strict Conformance (Autonomous Workarounds & Adaptive Execution)"]
         I32["Idea 32: Report Condensato Flash Diagnostic (REPORT_BRIEF.md) per Efficienza Token"]
         I33["Idea 33: Keyword Anchoring nel System Prompt per Localizzazione Deterministica dell'Errore"]
+        I34["Idea 34: Budgeting Adattivo del Self-Healing (Progress-Aware, Per-Phase & Sliding Ceiling)"]
     end
 
     TIER1 --> TIER2
@@ -59,7 +60,7 @@ flowchart TD
 | :--- | :--- | :--- | :--- |
 | **🚀 TIER 1** | **(TOP PRIORITY) Target Stress-Test, Validazione Macchine VulcaMind & Self-Healing** | **🚨 ⭐ Idea 27 (Priorità Assoluta)**, **⭐ Idea 5**, **Idea 7**, **Idea 3**, **Idea 14** | Progettazione macchine con vulnerabilità per stressare i limiti dell'architettura white-box, generalità su target d'esame reali (`Exam_1APP26`, `Exam_2APP26`, `Sim_01/02`) e chiusura del ciclo con VulcaForge. |
 | **📊 TIER 2** | **Dati Sperimentali & Tabelle Tesi** | **Idea 11**, **Idea 4**, **Idea 28**, **Idea 13** | Validazione scientifica: matrice confusionale negative testing, benchmark compattazione/quantizzazioni/throughput e tabelle LaTeX pronte. |
-| **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 26**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9**, **Idea 29**, **Idea 30**, **Idea 31**, **Idea 32**, **Idea 33** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
+| **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 26**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9**, **Idea 29**, **Idea 30**, **Idea 31**, **Idea 32**, **Idea 33**, **Idea 34** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
 
 ---
 
@@ -384,6 +385,26 @@ flowchart TD
      - `"recommended_patch"` / `"heuristic_lead"`: L'indizio del tester, da validare rispetto al codice sorgente dell'infrastruttura.
   2. *Protocollo Rigido di Navigazione:* L'agente viene istruito a eseguire un'analisi ad ancoraggio: non scansionare l'intero report, ma ricercare prioritariamente queste specifiche chiavi per circoscrivere l'anomalia prima di aprire qualsiasi file sorgente o tentare la rigenerazione della macchina.
 * **Valore per la Tesi:** Introduce il concetto di *Deterministic Semantic Anchoring* nei workflow di coding autonomo: trasforma un processo di troubleshooting potenzialmente ambiguo in una procedura d'intervento guidata e replicabile, azzerando le allucinazioni di diagnosi e massimizzando il tasso di successo al primo tentativo di fix (*First-Attempt Success Rate*).
+
+---
+
+### 34. Budgeting Adattivo e Progress-Aware del Self-Healing (Superamento del Limite Statico Global Attempts: Phase-Progress Credit, Budget per Step & Sliding Healing Ceiling)
+* **Il Problema (Il Paradosso del Budget Globale Statico e Starvation su Catene Multi-Fase):**  
+  Nell'attuale architettura a ciclo chiuso, il controllo delle iterazioni di self-healing in LangGraph (`orchestrator/graph.py`) è governato da una soglia scalare globale e statica: `MAX_HEALING_ATTEMPTS` (tipicamente impostata a 1 o 2). Sebbene questo vincolo nasca per evitare loop infiniti su bug strutturalmente insanabili, la sua cecità rispetto all'avanzamento effettivo della catena didattica crea una grave anomalia metodologica (*Chained Bug Starvation*):
+  1. *Il Caso Concreto di Starvation:* In una challenge Boot to Root articolata su molteplici fasi sequenziali (es. FASE 1 Recon, FASE 2 Foothold Web, FASE 3 Privilege Escalation), l'infrastruttura IaC può contenere difetti indipendenti su gradini diversi (ad es. un disallineamento nei permessi del web server al primo step e un bug nel cronjob o nei sudoers al secondo step). Se il test fallisce a FASE 1, l'agente riparatore interviene con successo (Consumo: Tentativo 1 di 2) e la macchina viene rigenerata; al nuovo collaudo, FASE 1 viene superata brillantemente ma la run si arresta a FASE 2 per il secondo difetto, innescando il secondo ciclo di healing (Consumo: Tentativo 2 di 2).
+  2. *L'Interruzione Prematura Nonostante il Progresso Reale:* A questo punto il budget globale è interamente esaurito ($2/2$), nonostante il sistema abbia compiuto un progresso sostanziale sbloccando con successo la prima fase. Se a FASE 3 si presenta un terzo difetto indipendente, il framework arresta forzatamente il collaudo e dichiara la macchina non conforme, vanificando due interventi di successo già convalidati ed escludendo la macchina prima che possa raggiungere la piena conformità.
+  3. *Equiparazione Errata tra "Stallo su Singolo Step" e "Avanzamento Multi-Step":* L'approccio statico tratta identicamente due scenari radicalmente diversi: due fallimenti consecutivi sullo *stesso identico step* (segno evidente di stallo, fallimento della diagnosi o incapacità del modello di riparare quel bug) vs due fallimenti su *step distinti e progressivi* (segno inequivocabile di avanzamento costante verso l'obiettivo didattico finale).
+* **La Soluzione Architetturale (Progress-Aware Adaptive Healing Budgeting):**  
+  Superamento del contatore scalare cieco a favore di una gestione delle risorse a retroazione dinamica guidata dal progresso:
+  1. *Per-Step Scoped Budgeting (Budget di Tentativo Locale):* Il vincolo di iterazione non viene applicato ciecamente all'intera run, ma contestualizzato al singolo step (`MAX_ATTEMPTS_PER_STEP = 2`). Ogni fase ha a disposizione un proprio budget di risoluzione: se FASE 1 viene sanata al primo o secondo tentativo, la successiva FASE 2 beneficia a sua volta del proprio margine operativo. Il fallimento terminale (*Stagnation Failure*) viene decretato esclusivamente se lo *stesso* step fallisce ripetutamente per $N$ cicli consecutivi.
+  2. *Progress Credit Replenishment (Ricarica del Budget su Avanzamento):* Introduzione di un credito di progresso (*Progress-Earned Healing Credits*): ogni volta che una sessione di re-test post-healing supera lo step che nel ciclo precedente risultava bloccante ($\text{current\_step\_index} > \text{last\_blocking\_step\_index}$), il budget dei tentativi disponibili viene ricaricato di $+1$ (oppure il tentativo precedente viene considerato "ammortizzato" dal successo dell'avanzamento).
+  3. *Global Safety Ceiling & Token Safeguard:* Per prevenire comunque run infinite o consumi sproporzionati di token su challenge con decine di difetti a cascata, viene mantenuto un tetto massimo assoluto di salvaguardia (*Sliding Ceiling*, es. `MAX_TOTAL_HEALING_STEPS = 5` o un limite massimo aggregato sul tempo/token di inferenza per l'intera pipeline).
+  4. *Telemetria nello Stato di LangGraph (`VulcaTestState`):* Estensione del dizionario di stato con metriche di progressione:
+     - `healing_history: dict[str, int]` (mappatura del numero di interventi subiti da ciascun `step_id`).
+     - `last_blocking_step: Optional[str]` (identificativo dell'ultimo step fallito).
+     - La funzione di routing decisionale `route_final_evaluator` può così verificare programmaticamente:
+       $$\text{Se } \text{attempts}(\text{current\_step}) < \text{MAX\_PER\_STEP} \land \text{total\_healings} < \text{GLOBAL\_CEILING} \implies \text{Route to Healer}$$
+* **Valore per la Tesi:** Formalizza un principio avanzato di efficienza computazionale e cibernetica degli agenti autonomi: il passaggio da un tetto rigido e punitivo a una **gestione delle risorse guidata dal progresso didattico empirico**, dimostrando come un'architettura a retroazione debba saper distinguere tra "tentativo a vuoto" e "passo in avanti convalidato".
 
 ---
 
