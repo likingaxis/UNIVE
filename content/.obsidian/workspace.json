@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "99f9922c90b07a77",
+        "id": "c1402ed250f169df",
         "type": "tabs",
         "children": [
           {
-            "id": "3a80246d7274d2f1",
+            "id": "1eb8eb02ed396f1e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/ANNO 3/COSA FARE.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "COSA FARE"
+              "title": "New tab"
             }
           }
         ]
@@ -187,11 +183,11 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "3a80246d7274d2f1",
+  "active": "1eb8eb02ed396f1e",
   "lastOpenFiles": [
+    "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/TESI/Call/call pasquale.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/GUIDA SELF HEALING.md",
-    "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/TESTING SU MACCHINE.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/GUIDA PASSO PASSO.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/FONTI.md",
