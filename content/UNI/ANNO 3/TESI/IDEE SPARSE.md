@@ -46,6 +46,7 @@ flowchart TD
         I32["Idea 32: Report Condensato Flash Diagnostic (REPORT_BRIEF.md) per Efficienza Token"]
         I33["Idea 33: Keyword Anchoring nel System Prompt per Localizzazione Deterministica dell'Errore"]
         I34["Idea 34: Budgeting Adattivo del Self-Healing (Progress-Aware, Per-Phase & Sliding Ceiling)"]
+        I35["Idea 35: Pre-Flight Infrastructure Health Check & Dynamic Target IP Introspection"]
     end
 
     TIER1 --> TIER2
@@ -60,7 +61,7 @@ flowchart TD
 | :--- | :--- | :--- | :--- |
 | **🚀 TIER 1** | **(TOP PRIORITY) Target Stress-Test, Validazione Macchine VulcaMind & Self-Healing** | **🚨 ⭐ Idea 27 (Priorità Assoluta)**, **⭐ Idea 5**, **Idea 7**, **Idea 3**, **Idea 14** | Progettazione macchine con vulnerabilità per stressare i limiti dell'architettura white-box, generalità su target d'esame reali (`Exam_1APP26`, `Exam_2APP26`, `Sim_01/02`) e chiusura del ciclo con VulcaForge. |
 | **📊 TIER 2** | **Dati Sperimentali & Tabelle Tesi** | **Idea 11**, **Idea 4**, **Idea 28**, **Idea 13** | Validazione scientifica: matrice confusionale negative testing, benchmark compattazione/quantizzazioni/throughput e tabelle LaTeX pronte. |
-| **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 26**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9**, **Idea 29**, **Idea 30**, **Idea 31**, **Idea 32**, **Idea 33**, **Idea 34** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
+| **🌟 TIER 3** | **Perfezionamenti & Future Works** | **Idea 21**, **Idea 23**, **Idea 24**, **Idea 25**, **Idea 26**, **Idea 16**, **Idea 10**, **Idea 6**, **Idea 2**, **Idea 9**, **Idea 29**, **Idea 30**, **Idea 31**, **Idea 32**, **Idea 33**, **Idea 34**, **Idea 35** | Contributi teorici e capitolo di sviluppi futuri ad alto impatto accademico. |
 
 ---
 
@@ -405,6 +406,35 @@ flowchart TD
      - La funzione di routing decisionale `route_final_evaluator` può così verificare programmaticamente:
        $$\text{Se } \text{attempts}(\text{current\_step}) < \text{MAX\_PER\_STEP} \land \text{total\_healings} < \text{GLOBAL\_CEILING} \implies \text{Route to Healer}$$
 * **Valore per la Tesi:** Formalizza un principio avanzato di efficienza computazionale e cibernetica degli agenti autonomi: il passaggio da un tetto rigido e punitivo a una **gestione delle risorse guidata dal progresso didattico empirico**, dimostrando come un'architettura a retroazione debba saper distinguere tra "tentativo a vuoto" e "passo in avanti convalidato".
+
+---
+
+### 35. Pre-Flight Infrastructure Health Check & Dynamic Target IP Introspection (Auto-Discovery, Gateway Probe & Container Readiness Guard)
+* **Il Problema (Fragilità Ambientale, IP Drift di Docker e Spreco di Risorse LLM su Errori Prematuri):**  
+  Nell'architettura distribuita di VulcaTest (host orchestratore su Windows/macOS/Linux, agent execution environment su Kali Linux, target challenge containerizzati su Docker bridge o reti custom), l'avvio della pipeline di conformance testing soffre di una potenziale vulnerabilità infrastrutturale prima ancora che il modello LLM inizi a ragionare:
+  1. *Dynamic Docker IP Drift:* Sulle reti bridge di Docker (`docker0` o subnet custom `172.17.0.0/16`), gli indirizzi IP dei container vengono assegnati dinamicamente in ordine di instanziazione dal demone host. Se altri container vengono avviati o fermati, o se la macchina target viene ricreata a seguito di un ciclo di rebuild o riavvio del demone Docker, il container target può ricevere un IP diverso da quello staticamente configurato nel file `.env` o nello state iniziale (ad esempio `172.17.0.4` invece di `172.17.0.2`).
+  2. *Token Burning su Host Fantasma e Falsi Negativi Metodologici:* In presenza di IP drift, l'agente riceve dal Planner un piano orientato verso un IP non raggiungibile o associato a un container estraneo. L'Executor tenta ripetutamente comandi di recon (`curl`, `nmap`, `nc`), incappando in timeout di rete o connection refused. Il budget di turni viene rapidamente bruciato, esaurendo token e tempo di calcolo, per poi decretare un falso fallimento della macchina didattica (`FAIL`) per un banale disallineamento dell'infrastruttura di test.
+  3. *Micro-servizi e Gateway Ausiliari Offline:* L'operatività degli step dipende strettamente dai gateway su Kali (HexStrike Gateway su porta `8888`, Terminal Gateway / Session Broker su porta `8889`). Se uno di questi servizi è andato in crash o non è stato avviato prima del test, la sessione fallisce violentemente a runtime al primo tool call.
+  4. *Container Premature Exit & Assenza di Warmup:* Se il container subisce un errore critico in fase di avvio (`entrypoint.sh` o script di setup) entra immediatamente in stato `Exited (1)`, oppure necessita di una breve finestra di warmup (3-5 secondi) per consentire ai demoni interni (Nginx, PHP-FPM, Apache, SSH, database) di completare il binding delle socket prima di poter gestire traffico in ingresso.
+* **La Soluzione Architetturale (Deterministic Pre-Flight Gatekeeper & Dynamic Introspection):**  
+  Introduzione di un modulo di pre-volo rigoroso e non invasivo (`preflight_check.py` o nodo `PreFlightGuard` integrato all'avvio del grafo LangGraph) che funge da guardrail deterministico a costo zero di token:
+  1. *Dynamic Docker Target IP Auto-Discovery:*  
+     Prima di istanziare il Planner o compilare il prompt di sistema, il framework esegue un'introspezione a basso livello sul demone Docker di Kali tramite SSH/MCP:
+     ```bash
+     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name>
+     ```
+     L'IP effettivo restituito dal kernel sovrascrive dinamicamente qualsiasi valore preconfigurato in `.env` e viene propagato nello stato di LangGraph (`state["target_ip"] = detected_ip`). Qualora il container esponga porte mappate sull'host (`host_port`), l'introspezione rileva l'eventuale binding alternativo.
+  2. *Container Status & Lifecycle Guard:*  
+     Verifica esplicita che lo stato del container sia rigorosamente `running` (`{{.State.Running}} == true`) e che non sia in crash loop (`{{.State.Restarting}} == false`). Se il container è spento o terminato con codice d'errore, il test abortisce all'istante segnalando i log del container (`docker logs --tail 50 <container_name>`).
+  3. *Auxiliary Gateways Handshake (HexStrike & Terminal Broker Probe):*  
+     Esecuzione preventiva di una sonda TCP/HTTP veloce verso gli endpoint infrastrutturali di Kali (`http://<KALI_IP>:8888/health` per HexStrike, socket check su porta `8889` per `terminal_gateway.py`). Se un servizio ausiliario è offline, il sistema fornisce un messaggio di remediation immediato all'operatore prima di avviare il grafo.
+  4. *Network Reachability & Target Service Warmup Probe:*  
+     Verifica attiva della raggiungibilità di rete dall'ambiente di esecuzione:
+     - Ping ICMP verso il `target_ip` rilevato.
+     - TCP Socket Probe non invasivo sulle porte didattiche primarie (es. porta 80 o 22) con timeout elastico di warmup (es. fino a 10s con step di 1s) per attendere il completo avvio dei servizi interni.
+  5. *Fail-Fast & Zero Token Cost Policy:*  
+     Se una qualsiasi delle condizioni di pre-flight fallisce, l'esecuzione viene interrotta immediatamente con la tassonomia d'errore `INFRASTRUCTURE_UNAVAILABLE`. Non viene invocata alcuna chiamata LLM, garantendo zero spreco di crediti/token e preservando l'integrità scientifica dei benchmark di conformità.
+* **Valore per la Tesi:** Formalizza il paradigma del **Pre-Flight Gatekeeping nei Sistemi Agentici**: dimostra come in architetture di testing autonomo sia imperativo disaccoppiare la validazione della stabilità dell'ambiente computazionale dal ragionamento cognitivo del modello, eliminando alla radice i falsi negativi sistemici dovuti all'IP drift e garantendo la piena riproducibilità scientifica dei collaudi.
 
 ---
 

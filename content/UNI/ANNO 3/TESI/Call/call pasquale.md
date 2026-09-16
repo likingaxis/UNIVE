@@ -21,7 +21,7 @@ ho strutturato vulcatest in 3 parti differenti:
 mostrare a schermo come è stata ideata l'architettura vulcatest con white-box mediante uno schema langgraph
 
 funzionamento:
-- se abilitato `--generate-plan` oppure se non presente ATTACK_PLAN.md nella cartella di riferimento si abilita il nodo ****planner*** del grafo
+- se abilitato `--generate-plan` oppure se non presente ATTACK_PLAN.md nella cartella di riferimento si abilita il nodo ***planner*** del grafo
 	- realizza `ATTACK_PLAN.md` a partire da file di riferimento generati da vulcamind come `DESCRIPTION.md` `STORYLINE.md` `WRITEUP.md`
 	- dopo aver generato il piano di attacco invoca `plan_parser.py`
 		- effettua il parsing del file markdown e istanzia degli oggetti TestStep
@@ -40,16 +40,22 @@ funzionamento:
 		-  `executor.py` esegue gli step mediante i tool che invoca dal bridge, ha un budget definito di turni e all'ultimo turno è obbligato a scegliere se dare la fase per FAILED oppure se richiedere altri turni se non viene superato il budget massimo 
 		- mediante il tool `submit_step_result` produce StepResult  un oggetto pydantic che ha uno stato di successo o fallimento contenente produced_values che verranno poi messi come verified_values dopo essere passati per nodes.py che verifica se lo step è avvenuto con SUCCESS
 		- inoltre produce un file evidence_log con tutti i vari turni e la durata effettiva
-		- elenco di alcuni tool possibili da parte di executor:
+		- elenco di alcuni tool possibili da parte di executor descritti e definiti su mcp bridge
+			- ci tengo a precisare che i seguenti tool avvengono con una ricerca su matching basati su 3 principi 1. ricerca parole di lunghezza >=3 2. ricerca per iniziale es: nmap trova nmap_scan 3. spezza le parole del tool in underscore, e ne fa una ricerca per ognuno
+			- se tutto ciò fallisce consente di fare execute_command oppure interactive_terminal_exec (per operazioni sincrone e con sessione)
+		- come funziona la interactive shell, spiega l'architettura HTTP realizzata
 			- scrivi qui l'elenco
 		- l'orchestratore controlla se i passi sono stati eseguiti con successo se la risposta è FAILED oppure c'è un PASSED a un determinato elemento della checklist allora si passa al final evaluator
 	- `final evaluator node` nodo che ha una parte in cui raccoglie tutte le evidenze create dalle variabili e da state.py scambiato tra i nodi del grafo e genera un file json di tutti i teststep ecc...
 		- successivamente il tutto viene passato a un modello che genera un REPORT dettagliato di quanto accaduto
 - nodo di healing
-	- AGGIUNGILO DOMANI
-	- nodo ancora in fase di costruzione
-	- utilizzerà antigravity CLI e i vari report generati per correggere la generazione della macchina
-	- daremo un numero massimo di tentativi per correggere se poi continua a non funzionare bloccheremo il tutto per revisione umana
+	- nodo di healing che fa una chiamata al software ANTIGRAVITY CLI
+	- basandosi sul report e i file ansible della macchina va a correggere quelli che sono gli step definiti come failed dall'executor
+	- genera un healing report e chiama un file diff_tracker.py che tiene traccia delle modifiche dei file effettuati generando un file chiamato patch.diff
+	- inoltre viene fatto uno snapshot della cartella della macchina prima delle modifiche per facilitare un riutilizzo
+	- il nodo di healing in automatico fa anche il remove e build della nuova macchina per rieseguire l'esecuzione per un controllo futuro
+	- viene gestita una possibile differenza di indirizzo ip andando a modificare il target ip così da non consentire ulteriori problematiche
+	- ad ogni chiamata di antigravity CLI il system prompt viene arricchito dai report healing differenti delegati ad una lettura da parte dell'agente
 - inoltre ci tengo a precisare che è possibile gestire 3 modelli differenti con 3 settings differenti per l'architettura grazie a `model_manager.py`
 
 
