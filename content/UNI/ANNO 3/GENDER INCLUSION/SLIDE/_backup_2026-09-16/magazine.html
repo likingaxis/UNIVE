@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GENDER &amp; INCLUSION · Donne, Gaming &amp; Inclusione</title>
+  <link rel="stylesheet" href="magazine.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. MAGAZINE HUD CONTROLS (HEADER)
+       ========================================================================= -->
+  <header class="mag-reader-header">
+    <div class="mag-brand-group">
+      <div class="mag-brand-badge">GENDER &amp; INCLUSION</div>
+      <div class="mag-title-sub">PROGETTO ANALITICO <em>// DONNE &amp; GAMING</em></div>
+    </div>
+
+    <div class="mag-status-spread">
+      <div class="mag-status-dot"></div>
+      <span id="mag-spread-label">COPERTINA · SPECIAL ISSUE</span>
+    </div>
+
+    <div class="mag-controls-group">
+      <button class="mag-btn" id="btn-sound-toggle" title="Attiva/disattiva suono sfoglio pagina">
+        <span id="sound-icon">🔊</span> SUONO
+      </button>
+      <button class="mag-btn" id="btn-view-toggle" title="Alterna tra Doppia Pagina e Pagina Singola">
+        <span id="view-icon">📖</span> VISTA: <span id="view-mode-text">SPREAD</span>
+      </button>
+      <button class="mag-btn mag-btn-icon" id="btn-fullscreen" title="Schermo intero (F)">
+        ⛶
+      </button>
+      <a href="index.html" class="mag-btn" title="Vai alle slide accademiche classiche">
+        SLIDE CLASSICHE →
+      </a>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. MAGAZINE SPREADS WORKSPACE
+       ========================================================================= -->
+  <main class="mag-workspace">
+    <div class="mag-spread-viewport">
+
+      <!-- ---------------------------------------------------------------------
+           SPREAD 0: LA COPERTINA (CLUB NINTENDO / GAME INFORMER STYLE)
+           --------------------------------------------------------------------- -->
+      <!-- ---------------------------------------------------------------------
+           SPREAD 0: LA COPERTINA WIDESCREEN 16:9 (CLUB NINTENDO / GAME INFORMER STYLE)
+           --------------------------------------------------------------------- -->
+      <section class="mag-spread single-page active" id="spread-0" data-label="COPERTINA · EDIZIONE SPECIALE">
+        <div class="mag-cover">
+          <div class="cover-chequered-border"></div>
+
+          <div class="cover-top-bar">
+            <span>VOLUME 01</span>
+            <span>UNIVERSITÀ DI ROMA TOR VERGATA · DIPARTIMENTO DI INFORMATICA</span>
+            <span>EDIZIONE SPECIALE</span>
+          </div>
+
+          <!-- Embossed Beveled Masthead Bar -->
+          <div class="cover-masthead-container">
+            <div class="cover-masthead-pill">
+              <h1 class="cover-masthead-title">GENDER &amp; INCLUSION</h1>
+            </div>
+            <div class="cover-masthead-subtitle">
+              UTILIZZO DEI DATI PER CONTESTUALIZZARE IL MONDO DELLE DONNE NEL GAMING
+            </div>
+          </div>
+
+          <!-- Widescreen 16:9 Body Grid -->
+          <div class="cover-widescreen-grid">
+            
+            <!-- Left Column: Headlines, Dossier Teasers & Barcode -->
+            <div class="cover-story-col">
+              <div class="cover-header-group">
+                <div class="cover-main-badge">TEMA DEL GIORNO:</div>
+                <h2 class="cover-main-headline">DONNE, GAMING &amp; INCLUSIONE</h2>
+              </div>
+
+              <!-- Three Feature Teaser Cards -->
+              <div class="cover-teasers-stack">
+                <div class="cover-card-teaser accent-cyan">
+                  <span class="cover-card-teaser-tag">01 · PLAYERBASE FEMMINILE</span>
+                  <div class="cover-card-teaser-headline">Playerbase femminile: è davvero così poco numerosa?</div>
+                  <div class="cover-card-teaser-sub">Dati globali ESA (48%) e crescita italiana IIDEA: la realtà dei numeri contro gli stereotipi.</div>
+                </div>
+
+                <div class="cover-card-teaser accent-red">
+                  <span class="cover-card-teaser-tag">02 · TOSSICITÀ & VOICE CHAT</span>
+                  <div class="cover-card-teaser-headline">Tossicità nel gaming per il gender femminile</div>
+                  <div class="cover-card-teaser-sub">Le barriere del microfono, le molestie mirate e le strategie di difesa nelle lobby competitive.</div>
+                </div>
+
+                <div class="cover-card-teaser accent-purple">
+                  <span class="cover-card-teaser-tag">03 · INDUSTRY GAP & CARRIERE</span>
+                  <div class="cover-card-teaser-headline">Industry gap nel settore gaming per le donne</div>
+                  <div class="cover-card-teaser-sub">Dalla passione per il gioco alla forza lavoro negli studi: ruoli tecnici, senior gap e disparità.</div>
+                </div>
+              </div>
+
+              <!-- Barcode & Credits -->
+              <div class="cover-left-bottom-bar">
+                <div class="cover-fake-barcode">
+                  <div class="barcode-lines"></div>
+                  <div class="barcode-digits">9 788899 012026</div>
+                </div>
+                <div class="cover-meta-text">
+                  <div>PREZZO: <strong>0 €</strong></div>
+                  <div>AUTORI: <strong>LUCA, VALERIO, SAMUELE</strong></div>
+                  <div>MATRICOLE: <strong>0342634 · 0349538 · 0348324</strong></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Hero Visual & Floating Badges & CTA -->
+            <div class="cover-visual-col">
+              <div class="cover-visual-aura"></div>
+              
+              <div class="cover-hero-img-box">
+                <div class="cover-hero-frame">
+                  <img src="Assets/girl together.png" alt="Eroine dei videogiochi: Aloy, Samus, Ellie, Kai'Sa" class="cover-hero-img">
+
+                  <!-- Floating Stickers (Anchored to Hero Frame) -->
+                  <div class="cover-hero-sticker cover-hero-sticker-top">
+                    <div class="cover-sticker-title">🎮 TIMELINE 1985–2024</div>
+                    <div class="cover-sticker-desc">Da damigella da salvare a protagonista del videogioco</div>
+                  </div>
+
+                  <div class="cover-hero-sticker cover-hero-sticker-bottom">
+                    <div class="cover-sticker-title">🏆 ESPORTS</div>
+                    <div class="cover-sticker-desc">Donne nel settore Esports: la crescita dei tornei femminili</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Button to Open Spread 1 -->
+              <div class="cover-cta-row">
+                <button class="cover-btn-open" onclick="goToSpread(1)">
+                  SLIDE 2 <span>➔</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="cover-chequered-border cover-chequered-bottom"></div>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------------------------
+           SPREAD 1: SOMMARIO & EDITORIALE (REFERENCE b265de11...)
+           --------------------------------------------------------------------- -->
+      <section class="mag-spread double-page" id="spread-1" data-label="SOMMARIO & EDITORIALE (PP. 02-03)">
+        
+        <!-- Left Page: Table of Contents (Step-stair layout) -->
+        <article class="mag-page page-left">
+          <header class="mag-folio-header">
+            <span>02 | GENDER &amp; INCLUSION</span>
+            <span>SOMMARIO // INDICE DEI CONTENUTI</span>
+          </header>
+
+          <div class="toc-container">
+            <div class="toc-title-area">
+              <div class="toc-super-title">INDICE DEGLI ARTICOLI</div>
+              <h2 class="toc-main-title">Table of Contents</h2>
+              <div class="toc-yellow-rule"></div>
+            </div>
+
+            <!-- Staggered Artwork Staircase -->
+            <div class="toc-staircase">
+              
+              <!-- Col 1 -->
+              <div class="toc-step-column toc-step-1" onclick="goToSpread(1)">
+                <div class="toc-col-info">
+                  <div class="toc-col-topic">PERCHÉ INFORMATICI</div>
+                  <div class="toc-col-badge">EDITORIALE</div>
+                </div>
+                <div class="toc-slice-card">
+                  <img src="Assets/toc_slide_03.png" alt="Intro Slide 03" class="toc-slice-img">
+                  <div class="toc-slice-overlay">
+                    <span class="toc-slice-num">03</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 2 -->
+              <div class="toc-step-column toc-step-2" onclick="goToSpread(2)">
+                <div class="toc-col-info">
+                  <div class="toc-col-topic">PARADOSSO 48%</div>
+                  <div class="toc-col-badge">FIRST LOOK</div>
+                </div>
+                <div class="toc-slice-card">
+                  <img src="Assets/toc_slide_04.png" alt="First Look Slide 04" class="toc-slice-img">
+                  <div class="toc-slice-overlay">
+                    <span class="toc-slice-num">04</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 3 -->
+              <div class="toc-step-column toc-step-3" onclick="goToSpread(3)">
+                <div class="toc-col-info">
+                  <div class="toc-col-topic">VOICE CHAT & DEFENSE</div>
+                  <div class="toc-col-badge">SPECIAL FEATURE</div>
+                </div>
+                <div class="toc-slice-card">
+                  <img src="Assets/toc_slide_06.png" alt="Voice Chat Slide 06" class="toc-slice-img">
+                  <div class="toc-slice-overlay">
+                    <span class="toc-slice-num">06</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 4 -->
+              <div class="toc-step-column toc-step-4" onclick="goToSpread(4)">
+                <div class="toc-col-info">
+                  <div class="toc-col-topic">TIMELINE SOGGETTI</div>
+                  <div class="toc-col-badge">CRONOLOGIA</div>
+                </div>
+                <div class="toc-slice-card">
+                  <img src="Assets/toc_slide_08.png" alt="Timeline Slide 08" class="toc-slice-img">
+                  <div class="toc-slice-overlay">
+                    <span class="toc-slice-num">08</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 5 -->
+              <div class="toc-step-column toc-step-5" onclick="goToSpread(5)">
+                <div class="toc-col-info">
+                  <div class="toc-col-topic">INDUSTRIA & ESPORTS</div>
+                  <div class="toc-col-badge">ESPORTS</div>
+                </div>
+                <div class="toc-slice-card">
+                  <img src="Assets/toc_slide_10.png" alt="Industry & Esports Slide 10" class="toc-slice-img">
+                  <div class="toc-slice-overlay">
+                    <span class="toc-slice-num">10</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 6 -->
+              <div class="toc-step-column toc-step-6" onclick="goToSpread(6)">
+                <div class="toc-col-info">
+                  <div class="toc-col-topic">IL MANIFESTO</div>
+                  <div class="toc-col-badge">CLOSING</div>
+                </div>
+                <div class="toc-slice-card">
+                  <img src="Assets/toc_slide_12.png" alt="Manifesto Slide 12" class="toc-slice-img">
+                  <div class="toc-slice-overlay">
+                    <span class="toc-slice-num">12</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span>GENDER &amp; INCLUSION // SLIDE 02</span>
+            <span class="mag-page-badge">02</span>
+          </footer>
+        </article>
+
+        <!-- Right Page: Schematizzazione Slide Editoriale -->
+        <article class="mag-page page-right">
+          <header class="mag-folio-header">
+            <span>INTRODUZIONE // IL PROGETTO</span>
+            <span>03 | GENDER &amp; INCLUSION</span>
+          </header>
+
+          <div class="editorial-schematic-container">
+            <div class="editorial-schematic-header">
+              <span class="editorial-schematic-badge">🎯 PROSPETTIVA INFORMATICA</span>
+              <h2 class="editorial-schematic-title">Perché parlarne da informatici?</h2>
+              <div class="editorial-schematic-sub">
+                Il videogioco è una community viva di milioni di persone: chi sviluppa e gestisce le piattaforme decide chi può sentirsi a casa.
+              </div>
+            </div>
+
+            <!-- 3 Schematic Dimension Pillars -->
+            <div class="editorial-pillars-grid">
+              
+              <!-- Pillar 1 -->
+              <div class="editorial-pillar-card accent-cyan">
+                <div class="editorial-pillar-icon">📊</div>
+                <div class="editorial-pillar-body">
+                  <div class="editorial-pillar-head-row">
+                    <span class="editorial-pillar-num">01 · CHI GIOCA</span>
+                    <span class="editorial-pillar-tag">48% MONDO · 42% ITALIA</span>
+                  </div>
+                  <div class="editorial-pillar-title">Numeri reali contro gli stereotipi</div>
+                  <div class="editorial-pillar-desc">
+                    Presenza massiccia e consolidata: <strong style="color: #0284C7;">quasi 1 videogiocatore su 2 è donna</strong>. Superiamo il mito del "mondo da maschi".
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pillar 2 -->
+              <div class="editorial-pillar-card accent-red">
+                <div class="editorial-pillar-icon">🎙️</div>
+                <div class="editorial-pillar-body">
+                  <div class="editorial-pillar-head-row">
+                    <span class="editorial-pillar-num">02 · COME SI GIOCA</span>
+                    <span class="editorial-pillar-tag">48% SILENZIO FORZATO</span>
+                  </div>
+                  <div class="editorial-pillar-title">Voice chat, rispetto e barriere</div>
+                  <div class="editorial-pillar-desc">
+                    <strong style="color: #DC2626;">La voce come bersaglio immediato:</strong> quasi metà delle giocatrici spegne il microfono per evitare insulti e molestie.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pillar 3 -->
+              <div class="editorial-pillar-card accent-purple">
+                <div class="editorial-pillar-icon">💻</div>
+                <div class="editorial-pillar-body">
+                  <div class="editorial-pillar-head-row">
+                    <span class="editorial-pillar-num">03 · CHI CREA &amp; GAREGGIA</span>
+                    <span class="editorial-pillar-tag">SOLO 22% TECH · +14% ESPORTS</span>
+                  </div>
+                  <div class="editorial-pillar-title">Donne nel settore gaming, esports e lavoro</div>
+                  <div class="editorial-pillar-desc">
+                    <strong style="color: #7E22CE;">Il gap industriale:</strong> solo il 22% negli studi di programmazione, a fronte di una vertiginosa crescita dei tornei pro femminili.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Central Project Thesis Callout -->
+            <div class="editorial-thesis-box">
+              <div class="editorial-thesis-tag">
+                <span>⚡</span> IL MESSAGGIO CHIAVE
+              </div>
+              <div class="editorial-thesis-text">
+                «I videogiochi appartengono a chiunque li giochi: creare community accoglienti e pari opportunità non è un'opzione secondaria, ma una scelta fondamentale che riguarda tutti noi.»
+              </div>
+            </div>
+
+            <!-- Authors Footer Meta -->
+            <div class="editorial-schematic-footer">
+              <div>AUTORI: <strong>LUCA GUGLIOTTA · VALERIO BERNARDI · SAMUELE DE SANTIS</strong></div>
+              <div><strong>UNIVERSITÀ DI ROMA TOR VERGATA</strong> · A.A. 2025/2026</div>
+            </div>
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span class="mag-page-badge">03</span>
+            <span>GENDER &amp; INCLUSION // SLIDE 03</span>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- ---------------------------------------------------------------------
+           SPREAD 2: FIRST LOOK / DEMOGRAFICA (FFVII & ANGRY BIRDS STYLE)
+           --------------------------------------------------------------------- -->
+      <section class="mag-spread double-page" id="spread-2" data-label="FIRST LOOK · IL PARADOSSO DEL 48% (PP. 04-05)">
+        
+        <!-- Left Page: The 48% Paradox & Cartridge HUD Box -->
+        <article class="mag-page page-left">
+          <header class="mag-folio-header">
+            <span>04 | FIRST LOOK</span>
+            <span>ANALISI DEMOGRAFICA // GENDER &amp; INCLUSION</span>
+          </header>
+
+          <div class="first-look-capsule">
+            <span>▶</span> IL PARADOSSO DEMOGRAFICO
+          </div>
+
+          <h2 class="first-look-headline">La realtà è quasi paritaria. La percezione no.</h2>
+          
+          <div class="first-look-subhead">
+            «Quasi la metà di chi impugna un pad è donna, ma l'immaginario collettivo continua a trattarla come un'eccezione esotica.»
+          </div>
+
+          <!-- GAME DATA (Dati alla mano / Focus Numerico) -->
+          <div class="game-data-box">
+            <div class="game-data-badge">📊 DATI ALLA MANO // I NUMERI DEL SETTORE</div>
+            <div class="game-data-grid">
+              <div class="game-data-item">
+                <span class="game-data-label">FONTE GLOBALE</span>
+                <span class="game-data-value val-cyan">ESA Power of Play 2025</span>
+              </div>
+              <div class="game-data-item">
+                <span class="game-data-label">CAMPIONE ESAMINATO</span>
+                <span class="game-data-value val-yellow">24.216 Giocatori (21 Paesi)</span>
+              </div>
+              <div class="game-data-item">
+                <span class="game-data-label">POPOLAZIONE ITALIANA</span>
+                <span class="game-data-value val-cyan">5,7 Milioni (IIDEA 2024)</span>
+              </div>
+              <div class="game-data-item">
+                <span class="game-data-label">TREND DI CRESCITA</span>
+                <span class="game-data-value val-green">+14% Donne vs +2,5% Uomini</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Presentation Symbol Capsules (Evident Symbols & Presentation Anchors) -->
+          <div class="first-look-points">
+            
+            <div class="first-look-point-item">
+              <div class="first-look-symbol-badge badge-cyan">🎮</div>
+              <div class="first-look-point-content">
+                <div class="first-look-point-header">
+                  <span class="first-look-point-title">Accesso &amp; Costanza</span>
+                  <span class="first-look-point-tag tag-cyan">Console · PC · Mobile</span>
+                </div>
+                <div class="first-look-point-desc">
+                  <strong>Platea quotidiana e continuativa:</strong> il gaming femminile è un'abitudine costante, non un'esperienza occasionale.
+                </div>
+              </div>
+            </div>
+
+            <div class="first-look-point-item">
+              <div class="first-look-symbol-badge badge-green">📈</div>
+              <div class="first-look-point-content">
+                <div class="first-look-point-header">
+                  <span class="first-look-point-title">Crescita a Doppio Passo</span>
+                  <span class="first-look-point-tag tag-green">+14% vs +2,5%</span>
+                </div>
+                <div class="first-look-point-desc">
+                  <strong>Accelerazione record in Italia (+14%):</strong> le videogiocatrici crescono a un ritmo 6 volte superiore rispetto agli uomini.
+                </div>
+              </div>
+            </div>
+
+            <div class="first-look-point-item">
+              <div class="first-look-symbol-badge badge-red">🛑</div>
+              <div class="first-look-point-content">
+                <div class="first-look-point-header">
+                  <span class="first-look-point-title">Il Paradosso Culturale</span>
+                  <span class="first-look-point-tag tag-red">48% Reale vs "Default"</span>
+                </div>
+                <div class="first-look-point-desc">
+                  <strong>Parità nei numeri ma non nella percezione:</strong> la presenza è al 48%, eppure marketing e community considerano ancora l'uomo la norma.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span>GENDER &amp; INCLUSION // SLIDE 04</span>
+            <span class="mag-page-badge">04</span>
+          </footer>
+        </article>
+
+        <!-- Right Page: Angry Birds Style Infographic High-Impact Stats -->
+        <article class="mag-page page-right">
+          <header class="mag-folio-header">
+            <span>INFOGRAFICA POWER DATA</span>
+            <span>05 | GENDER &amp; INCLUSION</span>
+          </header>
+
+          <div class="stat-spread-banner">
+            NUMERI CHE DEMOLISCONO I PREGIUDIZI // ESA & IIDEA REPORT
+          </div>
+
+          <div class="stat-heroes-grid">
+            
+            <div class="stat-hero-card accent-red">
+              <div class="stat-huge-number">48%</div>
+              <div class="stat-card-title">PLATEA FEMMINILE MONDIALE</div>
+              <p class="stat-card-desc">Quasi 1 persona su 2 che gioca quotidianamente su console, PC o mobile è donna.</p>
+              <span class="stat-card-source">Fonte: ESA Power of Play (24k intervistati)</span>
+            </div>
+
+            <div class="stat-hero-card accent-blue">
+              <div class="stat-huge-number">5.7M</div>
+              <div class="stat-card-title">GIOCATRICI ATTIVE IN ITALIA</div>
+              <p class="stat-card-desc">Una community massiccia in costante accelerazione (+14% annuo registrato).</p>
+              <span class="stat-card-source">Fonte: IIDEA Gaming Report 2024</span>
+            </div>
+
+          </div>
+
+          <!-- Perception vs Reality comparison bar -->
+          <div class="perception-bar-box">
+            <div class="bar-row">
+              <div class="bar-label-group">
+                <span>REALTÀ STATISTICA REALE (DONNE NEL GAMING)</span>
+                <strong>48% PARITARIO</strong>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-fill-reality"></div>
+              </div>
+            </div>
+
+            <div class="bar-row" style="margin-top: 14px;">
+              <div class="bar-label-group">
+                <span>PERCEZIONE STEREOTIPATA / DEFAULT DI MERCATO</span>
+                <strong>~80% "GIOCO PER MASCHI"</strong>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-fill-perception"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Polaroid Sticker Note -->
+          <div class="polaroid-badge-note">
+            ⚡ <strong>NOTA:</strong> Il pubblico femminile è già presente e gioca regolarmente. Il problema non è la voglia di giocare, ma l'ambiente che si trova nelle lobby e il modo in cui le community accolgono le giocatrici.
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span class="mag-page-badge">05</span>
+            <span>GENDER &amp; INCLUSION // SLIDE 05</span>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- ---------------------------------------------------------------------
+           SPREAD 3: SPECIAL FEATURE: VOICE CHAT & TOXICITY (NMS & CRASH)
+           --------------------------------------------------------------------- -->
+      <section class="mag-spread double-page" id="spread-3" data-label="SPECIAL FEATURE · VOICE CHAT & SISTEMI DIFENSIVI (PP. 06-07)">
+        
+        <!-- Left Page: NMS 3D Title, Lara Cutout & Story -->
+        <article class="mag-page page-left">
+          <header class="mag-folio-header">
+            <span>06 | SPECIAL FEATURE</span>
+            <span>VOCE &amp; COMMUNITY // GENDER &amp; INCLUSION</span>
+          </header>
+
+          <span class="feature-header-capsule">SPECIAL FEATURE</span>
+          
+          <h2 class="feature-title-3d">GAME OVER AL SILENZIO!</h2>
+          
+          <div class="feature-kicker">Quando basta una voce per diventare un bersaglio</div>
+
+          <div class="character-wrap-layout">
+            <img src="Assets/50014-lara-croft.png" alt="Lara Croft" class="character-wrap-img">
+
+            <div class="feature-columns">
+              <span class="call-to-arms-pill">A CALL TO ARMS!</span>
+              
+              <!-- Voice Slide Presentation Points (Fase 3) -->
+              <div class="voice-slide-points">
+                <div class="voice-point-card">
+                  <div class="voice-point-header">
+                    <span class="voice-point-icon">🎙️</span>
+                    <strong class="voice-point-title">La Voce come Bersaglio</strong>
+                  </div>
+                  <div class="voice-point-text">
+                    Nei giochi competitivi comunicare è fondamentale, ma per una donna aprire il microfono significa spesso rivelare la propria identità ed esporsi a insulti, battute sessiste o sabotaggi immediati.
+                  </div>
+                </div>
+
+                <div class="voice-point-card" style="border-left: 4px solid var(--color-mag-red); background: #FFF;">
+                  <div class="voice-point-header" style="display: flex; align-items: baseline; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span class="voice-point-icon">🛑</span>
+                      <strong class="voice-point-title">Molestie Mirate al Genere</strong>
+                    </div>
+                    <span style="font-family: var(--font-tech); font-size: 1.45rem; font-weight: 900; color: #FF2A4D; text-shadow: 0 0 10px rgba(255,42,77,0.35); letter-spacing: 0.04em;">
+                      48% <span style="font-size: 0.68rem; color: #64748B; font-weight: 700; text-shadow: none;">(ADL)</span>
+                    </span>
+                  </div>
+                  <div class="voice-point-text" style="margin-top: 4px;">
+                    Quasi <strong style="color: #FF2A4D; font-weight: 800;">1 videogiocatrice su 2</strong> subisce attacchi diretti per il solo fatto di essere donna: non semplice "tossicità", ma una barriera mirata che spinge al silenzio.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span>GENDER &amp; INCLUSION // SLIDE 06</span>
+            <span class="mag-page-badge">06</span>
+          </footer>
+        </article>
+
+        <!-- Right Page: Crash Bandicoot "Cajas de Objetos" (Defensive Equipment) -->
+        <article class="mag-page page-right">
+          <header class="mag-folio-header">
+            <span>EQUIPAGGIAMENTO DIFENSIVO // CAJAS DE OBJETOS</span>
+            <span>07 | GENDER &amp; INCLUSION</span>
+          </header>
+
+          <h3 class="cajas-section-header">L'Inventario di Sopravvivenza</h3>
+          <div class="cajas-subhead">Le strategie di autodifesa adottate quotidianamente dalle giocatrici</div>
+
+          <div class="cajas-grid">
+            
+            <div class="caja-box">
+              <div class="caja-icon-badge">🔇</div>
+              <div class="caja-title">MUTE MIC COATTO</div>
+              <p class="caja-desc">Spegnere il microfono e rinunciare alla comunicazione vocale per non farsi identificare.</p>
+              <span class="caja-stat-tag">48% GIOCATRICI (ADL 2023)</span>
+            </div>
+
+            <div class="caja-box">
+              <div class="caja-icon-badge">🎭</div>
+              <div class="caja-title">NICKNAME NEUTRO</div>
+              <p class="caja-desc">Camuffare il proprio username con pseudonimi neutri o maschili per evitare il fuoco incrociato.</p>
+              <span class="caja-stat-tag">STRATEGIA ADOTTATA</span>
+            </div>
+
+            <div class="caja-box">
+              <div class="caja-icon-badge">🏰</div>
+              <div class="caja-title">FORTEZZA DISCORD</div>
+              <p class="caja-desc">Abbandonare il matchmaking pubblico casuale per rifugiarsi in canali chiusi e community fidate.</p>
+              <span class="caja-stat-tag">FRAMMENTAZIONE RETE</span>
+            </div>
+
+            <div class="caja-box">
+              <div class="caja-icon-badge">⚠️</div>
+              <div class="caja-title">IL BAN EX-POST</div>
+              <p class="caja-desc">Sospendere il tossico dopo che l'abuso è avvenuto non ripara il danno psicologico subito.</p>
+              <span class="caja-stat-tag">FALLIMENTO DI DESIGN</span>
+            </div>
+
+          </div>
+
+          <div class="system-warning-banner">
+            <div class="system-warning-title">💡 IL RUOLO DI CHI SVILUPPA</div>
+            <div class="system-warning-text">
+              «Chiedere alle giocatrici di mutarsi o nascondersi non è una soluzione, ma la prova che il sistema non funziona. Chi sviluppa un videogioco ha la responsabilità di progettare community sane, strumenti di protezione efficaci e ambienti sicuri fin dal primo giorno.»
+            </div>
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span class="mag-page-badge">07</span>
+            <span>GENDER &amp; INCLUSION // SLIDE 07</span>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- ---------------------------------------------------------------------
+           SPREAD 4: TIMELINE: DA CONTORNO A SOGGETTO (ZELDA STYLE)
+           --------------------------------------------------------------------- -->
+      <section class="mag-spread double-page timeline-spread" id="spread-4" data-label="CRONOLOGIA · DA CONTORNO A SOGGETTO (PP. 08-09)">
+        
+        <!-- Left + Right unified page spread -->
+        <article class="mag-page page-left" style="grid-column: 1 / -1; padding-bottom: 30px;">
+          <header class="mag-folio-header">
+            <span>08-09 | GENDER &amp; INCLUSION</span>
+            <span>SPECIALE EVOLUZIONE DEI PERSONAGGI // 1985 - 2024</span>
+          </header>
+
+          <div class="timeline-super-banner">SPECIALE RETROSPETTIVA 1985–2024 // EVOLUZIONE DEI PERSONAGGI</div>
+          <h2 class="timeline-main-title">Da Contorno a Soggetto</h2>
+          <div class="timeline-subhead">
+            Dalla damigella nel castello all'architettura a codice: l'evoluzione del ruolo e del design femminile in 40 anni di videogiochi.
+          </div>
+
+          <!-- Authentic Retro Gaming Magazine Timeline System (Fase 2) -->
+          <div class="mag-timeline-system">
+            
+            <!-- Continuous Chronological Glowing Axis Rail -->
+            <div class="mag-timeline-rail-wrap">
+              <div class="mag-timeline-rail-bar"></div>
+              <div class="mag-timeline-milestones-row">
+                <div class="timeline-milestone-marker node-1">
+                  <div class="milestone-pin-dot"></div>
+                  <span class="milestone-year-badge">1985</span>
+                </div>
+                <div class="timeline-milestone-marker node-2">
+                  <div class="milestone-pin-dot"></div>
+                  <span class="milestone-year-badge">1996</span>
+                </div>
+                <div class="timeline-milestone-marker node-3">
+                  <div class="milestone-pin-dot"></div>
+                  <span class="milestone-year-badge">2017+</span>
+                </div>
+                <div class="timeline-milestone-marker node-4">
+                  <div class="milestone-pin-dot"></div>
+                  <span class="milestone-year-badge">2023+</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 Distinctive Era Cards -->
+            <div class="mag-timeline-cards-grid">
+              
+              <!-- Era 1: Peach -->
+              <div class="timeline-era-card era-peach">
+                <div class="era-card-header">
+                  <span class="era-tag">NES 8-BIT ERA</span>
+                  <span class="era-role-pill role-trophy">TROFEO NARRATIVO</span>
+                </div>
+                <div class="era-card-visual">
+                  <img src="Assets/Princess_Peach_Stock_Art.png" alt="Princess Peach" class="era-char-img">
+                </div>
+                <div class="era-card-info">
+                  <h3 class="era-char-title">Princess Peach</h3>
+                  <div class="era-game-sub">Super Mario Bros. (1985)</div>
+                  <p class="era-speaking-prompt">
+                    <strong>La damigella nel castello:</strong> mero oggetto passivo della trama che funge da ricompensa finale per l'eroe maschile.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Era 2: Lara Croft -->
+              <div class="timeline-era-card era-lara">
+                <div class="era-card-header">
+                  <span class="era-tag">3D ADVENTURE (PS1)</span>
+                  <span class="era-role-pill role-action">AUTONOMA MA SESSUALIZZATA</span>
+                </div>
+                <div class="era-card-visual">
+                  <img src="Assets/LaraTomb4.webp" alt="Lara Croft Tomb Raider IV" class="era-char-img">
+                </div>
+                <div class="era-card-info">
+                  <h3 class="era-char-title">Lara Croft</h3>
+                  <div class="era-game-sub">Tomb Raider (1996)</div>
+                  <p class="era-speaking-prompt">
+                    <strong>Prima grande eroina autonoma:</strong> abile ed esploratrice, affiancata però da un marketing che ne iper-sessualizza le forme.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Era 3: Aloy & Senua -->
+              <div class="timeline-era-card era-aloy">
+                <div class="era-card-header">
+                  <span class="era-tag">MODERN DRAMA</span>
+                  <span class="era-role-pill role-subject">SOGGETTO NARRATIVO</span>
+                </div>
+                <div class="era-card-visual">
+                  <img src="Assets/horizon_zero_dawn_transparent_character_png_by_wallpaper_background_dk06e2o-pre.png" alt="Aloy Horizon Zero Dawn" class="era-char-img">
+                </div>
+                <div class="era-card-info">
+                  <h3 class="era-char-title">Aloy &amp; Senua</h3>
+                  <div class="era-game-sub">Horizon / Hellblade (2017+)</div>
+                  <p class="era-speaking-prompt">
+                    <strong>Corpi funzionali e conflitti reali:</strong> protagoniste complesse con cicatrici, vulnerabilità e autonomia decisionale totale.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Era 4: Baldur's Gate 3 -->
+              <div class="timeline-era-card era-bg3">
+                <div class="era-card-header">
+                  <span class="era-tag">IDENTITY CODE</span>
+                  <span class="era-role-pill role-modular">ARCHITETTURA MODULARE</span>
+                </div>
+                <div class="era-card-visual bg3-creator-box">
+                  <img src="Assets/Baldurs-Gate-3-Character-Creation-Origin.jpg" alt="Baldur's Gate 3 Character Creation" class="era-char-img bg3-img">
+                </div>
+                <div class="era-card-info">
+                  <h3 class="era-char-title">Identità a Codice</h3>
+                  <div class="era-game-sub">Baldur's Gate 3 (2023+)</div>
+                  <p class="era-speaking-prompt">
+                    <strong>Disaccoppiamento totale:</strong> corpo, voce, genitali e pronomi sono parametri indipendenti nel software.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <footer class="mag-folio-footer" style="margin-top: 14px;">
+            <span>GENDER &amp; INCLUSION // SLIDE 08-09</span>
+            <span>PP. 08-09</span>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- ---------------------------------------------------------------------
+           SPREAD 5: BEHIND THE SCREEN & ESPORTS (GAME INFORMER STYLE)
+           --------------------------------------------------------------------- -->
+      <section class="mag-spread double-page" id="spread-5" data-label="DIETRO LO SCHERMO · IL GAP CRESCE SALENDO DI LIVELLO (PP. 10-11)">
+        
+        <!-- Left Page: The Industry Gap Funnel -->
+        <article class="mag-page page-left">
+          <header class="mag-folio-header">
+            <span>10 | BEHIND THE SCREEN</span>
+            <span>ANALISI DELL'INDUSTRIA VIDEOLUDICA</span>
+          </header>
+
+          <span class="level99-pill">LEVEL 99 // THE INDUSTRY GAP</span>
+          
+          <h2 class="industry-headline">Il gap cresce salendo di livello</h2>
+          
+          <p style="font-size: 0.95rem; line-height: 1.5; color: #475569; margin-bottom: 12px;">
+            Dalla sedia della giocatrice alla poltrona del director: la presenza femminile si assottiglia drasticamente ad ogni passaggio gerarchico.
+          </p>
+
+          <div class="industry-funnel-container">
+            
+            <div class="funnel-row" style="border-left: 4px solid #10B981;">
+              <div class="funnel-num" style="color: #059669;">48%</div>
+              <div class="funnel-info">
+                <h4>PUBBLICO VIDEOGIOCATRICI (MONDO)</h4>
+                <p>Base di partenza paritaria: quasi metà dell'intera platea globale videogioca regolarmente (ESA 2025).</p>
+              </div>
+            </div>
+
+            <div class="funnel-row" style="border-left: 4px solid #0284C7;">
+              <div class="funnel-num" style="color: #0284C7;">23%</div>
+              <div class="funnel-info">
+                <h4>FORZA LAVORO SETTORE (ITALIA)</h4>
+                <p>Primo dimezzamento: solo 1 persona su 4 occupata negli studi di sviluppo italiani è donna (IIDEA 2024).</p>
+              </div>
+            </div>
+
+            <div class="funnel-row" style="border-left: 4px solid #D97706;">
+              <div class="funnel-num" style="color: #D97706;">20%</div>
+              <div class="funnel-info">
+                <h4>RUOLI TECNICI &amp; CORE PROGRAMMING</h4>
+                <p>Segregazione orizzontale marcata: appena 1 su 5 nei team di game engine, grafica e gameplay code.</p>
+              </div>
+            </div>
+
+            <div class="funnel-row" style="border-left: 4px solid #DC2626;">
+              <div class="funnel-num" style="color: #DC2626;">-24%</div>
+              <div class="funnel-info">
+                <h4>GENDER PAY GAP MEDIO (GDC 2025)</h4>
+                <p>Divario retributivo lordo annuo tra sviluppatori e sviluppatrici a parità di mansione.</p>
+              </div>
+            </div>
+
+            <div class="funnel-row" style="border-left: 4px solid #991B1B;">
+              <div class="funnel-num" style="color: #991B1B;">30 pt</div>
+              <div class="funnel-info">
+                <h4>GAP RETRIBUTIVO SENIOR (>125K$)</h4>
+                <p>Soffitto di cristallo: 68% degli uomini senior supera i 125k$ annui contro solo il 38% delle professioniste.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span>GENDER &amp; INCLUSION // SLIDE 10</span>
+            <span class="mag-page-badge">10</span>
+          </footer>
+        </article>
+
+        <!-- Right Page: Esports Arena & Pro Circuit Focus -->
+        <article class="mag-page page-right">
+          <header class="mag-folio-header">
+            <span>ESPORTS ARENA // CIRCUITI DEDICATI</span>
+            <span>11 | GENDER &amp; INCLUSION</span>
+          </header>
+
+          <div class="esports-header-tag">COMPETIZIONE AD ALTI LIVELLI</div>
+          <h3 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 900; color: #0F172A; margin-bottom: 10px; line-height: 1.15;">
+            Circuiti Protetti e Nuove Opportunità
+          </h3>
+
+          <p style="font-size: 0.92rem; line-height: 1.55; color: #334155; margin-bottom: 16px;">
+            Nel panorama competitivo esportivo, dove la presenza del pubblico femminile si attesta al 33%, le barriere all'ingresso nei roster misti di Serie A sono rimaste a lungo insormontabili a causa di dinamiche di spogliatoio tossiche e pregiudizi sistemici. Per colmare questo vuoto sono nati circuiti pro dedicati:
+          </p>
+
+          <div class="esports-showcase-grid">
+            
+            <div class="esports-card">
+              <div class="esports-logo-box">
+                <img src="Assets/VCT_Game_Changers_Championship_lightmode.png" alt="VCT Game Changers Logo" class="esports-logo-img">
+              </div>
+              <h4>VCT GAME CHANGERS</h4>
+              <p>Il circuito ufficiale Riot Games per Valorant: ha creato campionesse globali, salary stipendiati e palcoscenici mondiali gremiti.</p>
+            </div>
+
+            <div class="esports-card">
+              <div class="esports-logo-box">
+                <img src="Assets/600px-ESL_Impact_lightmode.png" alt="ESL Impact Logo" class="esports-logo-img">
+              </div>
+              <h4>ESL IMPACT</h4>
+              <p>L'ecosistema Counter-Strike femminile: garantisce montepremi stabili e competizioni LAN di altissimo livello agonistico.</p>
+            </div>
+
+          </div>
+
+          <div class="polaroid-badge-note" style="background: #0F172A; color: #FFF; border-color: var(--color-mag-yellow);">
+            🏆 <strong>LA SFIDA APERTA:</strong> I circuiti dedicati sono acceleratori eccezionali per formare esperienza e visibilità, ma il traguardo finale resta l'integrazione piena e paritaria nei massimi campionati mondiali misti.
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span class="mag-page-badge">11</span>
+            <span>GENDER &amp; INCLUSION // SLIDE 11</span>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- ---------------------------------------------------------------------
+           SPREAD 6: IL MANIFESTO & QUARTA DI COPERTINA (POSTER STYLE)
+           --------------------------------------------------------------------- -->
+      <section class="mag-spread double-page" id="spread-6" data-label="IL MANIFESTO & QUARTA DI COPERTINA (PP. 12-13)">
+        
+        <!-- Left Page: The Manifesto Poster -->
+        <article class="mag-page page-left" style="padding: 24px;">
+          <div class="manifesto-poster">
+            <div class="manifesto-header-stamp">
+              IL MANIFESTO DELL'INFORMATICA INCLUSIVA
+            </div>
+
+            <h2 class="manifesto-giant-title">
+              L'INCLUSIONE È<br>UN REQUISITO DI PROGETTAZIONE
+            </h2>
+
+            <p style="font-size: 1.1rem; color: #E2E8F0; line-height: 1.4; font-family: var(--font-serif); font-style: italic;">
+              «Non è un accessorio decorativo post-lancio, né un gesto di cortesia aziendale. È una specifica funzionale che riguarda l'architettura dei sistemi, i canali di comunicazione e le meccaniche di gioco.»
+            </p>
+
+            <div class="manifesto-pillars">
+              <div class="pillar-item">
+                <span class="pillar-num">01</span>
+                <div class="pillar-text">
+                  <h4>IDENTITÀ MODULARE NEL CODICE</h4>
+                  <p>Disaccoppiare corpo, voce e pronomi per dare a chiunque la libertà di esistere nel mondo di gioco.</p>
+                </div>
+              </div>
+
+              <div class="pillar-item">
+                <span class="pillar-num">02</span>
+                <div class="pillar-text">
+                  <h4>SPAZI SICURI PROGETTATI ALLA BASE</h4>
+                  <p>Privacy vocale e moderazione proattiva native nel software: la sicurezza non si rincorre dopo l'abuso.</p>
+                </div>
+              </div>
+
+              <div class="pillar-item">
+                <span class="pillar-num">03</span>
+                <div class="pillar-text">
+                  <h4>TEAM PARITARI, GIOCHI MIGLIORI</h4>
+                  <p>Ambienti di sviluppo inclusivi creano storie più ricche, personaggi credibili e prodotti di successo per tutti.</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-mag-yellow); border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+              STATUS: CODICE APPROVATO // NO SHORTCUTS
+            </div>
+          </div>
+        </article>
+
+        <!-- Right Page: Back Cover & Colophon -->
+        <article class="mag-page page-right back-cover-page">
+          <header class="mag-folio-header">
+            <span>COLOPHON // GENDER &amp; INCLUSION</span>
+            <span>13 | QUARTA DI COPERTINA</span>
+          </header>
+
+          <div class="colophon-box">
+            <h3 class="colophon-title">CREDITI EDITORIALI & ACCADEMICI</h3>
+            
+            <div class="colophon-team">
+              <div class="team-member">
+                Curatela & Software Architecture: <strong>Luca Gugliotta</strong>
+              </div>
+              <div class="team-member">
+                Ricerca Vocale & Gameplay Defense: <strong>Valerio Bernardi</strong>
+              </div>
+              <div class="team-member">
+                Analisi Industriale & Esports Economics: <strong>Samuele De Santis</strong>
+              </div>
+            </div>
+
+            <div class="colophon-sources-list">
+              <strong>FONTI CONSULTATE & RIFERIMENTI:</strong><br>
+              • Entertainment Software Association (ESA) – Power of Play 2025<br>
+              • IIDEA – Il mercato dei videogiochi in Italia 2024<br>
+              • Anti-Defamation League (ADL) – Hate & Harassment in Games 2023<br>
+              • Game Developers Conference (GDC) – State of the Game Industry 2025<br>
+              • Larian Studios – Baldur's Gate 3 Character Creation Pipeline
+            </div>
+          </div>
+
+          <div style="text-align: center; margin: 24px 0;">
+            <div style="font-family: var(--font-tech); font-size: 1.2rem; font-weight: 900; color: var(--color-mag-yellow); margin-bottom: 8px;">
+              HAI COMPLETATO IL NUMERO!
+            </div>
+            <p style="font-size: 0.9rem; color: #94A3B8; margin-bottom: 16px;">
+              Puoi ricominciare la lettura o saltare rapidamente ai dossier tematici con la barra sottostante.
+            </p>
+            <button class="mag-btn mag-btn-accent" onclick="goToSpread(0)">
+              TORNA ALLA COPERTINA ⟲
+            </button>
+          </div>
+
+          <div style="border-top: 2px solid rgba(255,255,255,0.15); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #64748B;">
+              PRINTED AT UNIVERSITÀ TOR VERGATA<br>
+              TUTTI I DIRITTI RISERVATI AI VIDEOGIOCATORI
+            </div>
+            <div class="cover-fake-barcode" style="transform: scale(0.85);">
+              <div class="barcode-lines" style="width: 100px;"></div>
+              <div class="barcode-digits">2026-CS-DEPT</div>
+            </div>
+          </div>
+
+          <footer class="mag-folio-footer">
+            <span class="mag-page-badge">13</span>
+            <span>FINE NUMERO</span>
+          </footer>
+        </article>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. BOTTOM NAVIGATION THUMBNAIL STRIP & ARROWS
+       ========================================================================= -->
+  <nav class="mag-bottom-bar">
+    <button class="mag-nav-arrow-btn" id="btn-prev-spread" title="Spread precedente (Freccia Sinistra)" onclick="prevSpread()">
+      ❮
+    </button>
+
+    <div class="mag-thumbs-strip" id="mag-thumbs-strip">
+      
+      <div class="mag-thumb-item active" onclick="goToSpread(0)">
+        <div class="mag-thumb-box">COVER</div>
+        <span class="mag-thumb-label">P. 01</span>
+      </div>
+
+      <div class="mag-thumb-item" onclick="goToSpread(1)">
+        <div class="mag-thumb-box">TOC</div>
+        <span class="mag-thumb-label">PP. 02-03</span>
+      </div>
+
+      <div class="mag-thumb-item" onclick="goToSpread(2)">
+        <div class="mag-thumb-box">48%</div>
+        <span class="mag-thumb-label">PP. 04-05</span>
+      </div>
+
+      <div class="mag-thumb-item" onclick="goToSpread(3)">
+        <div class="mag-thumb-box">VOICE</div>
+        <span class="mag-thumb-label">PP. 06-07</span>
+      </div>
+
+      <div class="mag-thumb-item" onclick="goToSpread(4)">
+        <div class="mag-thumb-box">TIME</div>
+        <span class="mag-thumb-label">PP. 08-09</span>
+      </div>
+
+      <div class="mag-thumb-item" onclick="goToSpread(5)">
+        <div class="mag-thumb-box">BOSS</div>
+        <span class="mag-thumb-label">PP. 10-11</span>
+      </div>
+
+      <div class="mag-thumb-item" onclick="goToSpread(6)">
+        <div class="mag-thumb-box">POSTER</div>
+        <span class="mag-thumb-label">PP. 12-13</span>
+      </div>
+
+    </div>
+
+    <button class="mag-nav-arrow-btn" id="btn-next-spread" title="Spread successivo (Freccia Destra o Spazio)" onclick="nextSpread()">
+      ❯
+    </button>
+  </nav>
+
+  <!-- =========================================================================
+       4. INTERACTIVE JAVASCRIPT: NAVIGATION & PROCEDURAL PAGE TURN SOUND
+       ========================================================================= -->
+  <script>
+    let currentSpreadIndex = 0;
+    const totalSpreads = 7; // Spreads 0 to 6
+    let soundEnabled = true;
+    let singlePageView = false;
+
+    // Web Audio API Procedural Page Rustle Generator (No external audio file needed!)
+    let audioCtx = null;
+
+    function playPageTurnSound() {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const bufferSize = audioCtx.sampleRate * 0.15; // 150ms rustle
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        
+        // Pink noise approximation for realistic paper friction
+        let b0 = 0, b1 = 0, b2 = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          data[i] = (b0 + b1 + b2 + white * 0.5362) * 0.1;
+        }
+
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+
+        // Lowpass filter for paper warmth
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1400, audioCtx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(350, audioCtx.currentTime + 0.15);
+
+        // Volume envelope
+        const gainNode = audioCtx.createGain();
+        gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.28, audioCtx.currentTime + 0.04);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+
+        noise.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        noise.start();
+      } catch (e) {
+        console.warn('Audio Context not allowed yet', e);
+      }
+    }
+
+    function updateSpreadUI() {
+      // Toggle active class on spreads
+      for (let i = 0; i < totalSpreads; i++) {
+        const spreadEl = document.getElementById(`spread-${i}`);
+        if (spreadEl) {
+          spreadEl.classList.toggle('active', i === currentSpreadIndex);
+        }
+      }
+
+      // Update thumb strip
+      const thumbItems = document.querySelectorAll('.mag-thumb-item');
+      thumbItems.forEach((thumb, idx) => {
+        thumb.classList.toggle('active', idx === currentSpreadIndex);
+      });
+
+      // Update top status indicator
+      const activeSpread = document.getElementById(`spread-${currentSpreadIndex}`);
+      if (activeSpread) {
+        const label = activeSpread.getAttribute('data-label') || `SPREAD ${currentSpreadIndex + 1}`;
+        document.getElementById('mag-spread-label').textContent = label;
+      }
+
+      // Update button disabled state
+      document.getElementById('btn-prev-spread').disabled = (currentSpreadIndex === 0);
+      document.getElementById('btn-next-spread').disabled = (currentSpreadIndex === totalSpreads - 1);
+
+      // Scroll into view if thumb is hidden
+      if (thumbItems[currentSpreadIndex]) {
+        thumbItems[currentSpreadIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    function goToSpread(index) {
+      if (index >= 0 && index < totalSpreads && index !== currentSpreadIndex) {
+        currentSpreadIndex = index;
+        window.location.hash = `spread-${index}`;
+        playPageTurnSound();
+        updateSpreadUI();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function nextSpread() {
+      if (currentSpreadIndex < totalSpreads - 1) {
+        goToSpread(currentSpreadIndex + 1);
+      }
+    }
+
+    function prevSpread() {
+      if (currentSpreadIndex > 0) {
+        goToSpread(currentSpreadIndex - 1);
+      }
+    }
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      // If typing in input, ignore
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'd' || e.key === 'D') {
+        e.preventDefault();
+        nextSpread();
+      } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+        e.preventDefault();
+        prevSpread();
+      } else if (e.key === 'm' || e.key === 'M') {
+        toggleSound();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (!isNaN(e.key) && parseInt(e.key) >= 0 && parseInt(e.key) < totalSpreads) {
+        goToSpread(parseInt(e.key));
+      }
+    });
+
+    // Sound Toggle
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const soundIcon = document.getElementById('sound-icon');
+      soundIcon.textContent = soundEnabled ? '🔊' : '🔇';
+    }
+
+    document.getElementById('btn-sound-toggle').addEventListener('click', toggleSound);
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
+
+    // View Mode Toggle (Spread vs Single Page Stacked)
+    document.getElementById('btn-view-toggle').addEventListener('click', () => {
+      singlePageView = !singlePageView;
+      const modeText = document.getElementById('view-mode-text');
+      const doubleSpreads = document.querySelectorAll('.mag-spread.double-page');
+      
+      if (singlePageView) {
+        modeText.textContent = 'SINGOLA';
+        doubleSpreads.forEach(spread => {
+          spread.style.gridTemplateColumns = '1fr';
+        });
+      } else {
+        modeText.textContent = 'SPREAD';
+        doubleSpreads.forEach(spread => {
+          spread.style.gridTemplateColumns = '1fr 1fr';
+        });
+      }
+    });
+
+    // Touch Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 60) {
+        nextSpread(); // Swipe left -> next
+      } else if (touchEndX - touchStartX > 60) {
+        prevSpread(); // Swipe right -> prev
+      }
+    }, { passive: true });
+
+    // Initialize UI from hash if present
+    const hashMatch = window.location.hash.match(/spread-(\d+)/);
+    if (hashMatch) {
+      const targetIdx = parseInt(hashMatch[1]);
+      if (targetIdx >= 0 && targetIdx < totalSpreads) {
+        currentSpreadIndex = targetIdx;
+      }
+    }
+    updateSpreadUI();
+  </script>
+
+</body>
+</html>

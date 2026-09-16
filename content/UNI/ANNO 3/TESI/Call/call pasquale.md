@@ -57,6 +57,8 @@ funzionamento:
 	- viene gestita una possibile differenza di indirizzo ip andando a modificare il target ip così da non consentire ulteriori problematiche
 	- ad ogni chiamata di antigravity CLI il system prompt viene arricchito dai report healing differenti delegati ad una lettura da parte dell'agente
 - inoltre ci tengo a precisare che è possibile gestire 3 modelli differenti con 3 settings differenti per l'architettura grazie a `model_manager.py`
+- come ho gestito i casi in cui l'output ha un certo cooldown? es: hydra impiega anche ore prima di funzionare
+	- ho messo una funzione watching, legge l'output che arriva e se non arrivano più dati entro un tot di secondi (per ora 300s) restituisce DEAD oppure se ha finito restituisce DONE
 
 
 #### Come si esegue

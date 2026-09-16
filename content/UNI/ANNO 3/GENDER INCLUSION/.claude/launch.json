@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "slides",
+      "runtimeExecutable": "py",
+      "runtimeArgs": [".claude/nocache_server.py", "SLIDE"],
+      "port": 8765
+    }
+  ]
+}

@@ -86,6 +86,64 @@
 
 ---
 
+## 📌 Casi di studio (episodi reali da raccontare in tesi)
+
+### CS-1 — L'oracolo lasco: una checklist disgiuntiva che nascondeva un difetto (Pizzeria_B2R, 16/09/2026)
+
+> **Perché vale come caso di studio.** Illustra un principio forte: *il collaudo è affidabile quanto il suo oracolo (la checklist)*. E mostra un ciclo di **miglioramento del prompt guidato da un fallimento osservato** — utile da raccontare proprio quando si spiega il `SYSTEM_PROMPT` del Planner (Cap. 2). Materiale ideale anche per il Cap. 4 come evidenza empirica.
+
+**Cosa è successo.** La FASE_2 di Pizzeria passava con `SUCCESS` *pur mancando la chat di assistenza*, che nel design (STORYLINE/WRITEUP/CTFD) è il **meccanismo obbligatorio** con cui si scopre l'endpoint nascosto `/orari.php`. La macchina deployata non aveva la chat ed esponeva `/orari.php` con un **link diretto** in home.
+
+**Perché passava — non è colpa dell'Executor.** L'Executor è stato *onesto*: ha persino cercato la chat e non l'ha trovata (log sotto), ma la checklist generata dal Planner conteneva una voce **disgiuntiva** che gli concedeva una via alternativa:
+
+```
+- [ ] È stata individuata la funzionalità di consultazione orari tramite la chat o l'interfaccia.
+```
+
+Quell'`o l'interfaccia` rende la voce soddisfacibile *aggirando* il percorso didattico previsto. Estratto del log (esecuzione poi stoppata a mano):
+
+```
+[Turno 2] curl -s http://172.17.0.2/ | grep -i -E "chat|assistenza|messag"
+          → ⚠️ Command completed with errors   # nessun match: la chat NON c'è
+[Turno 5] submit_step_result(status=SUCCESS ...)
+   item "…tramite la chat o l'interfaccia" → passed=True
+   evidence: '<li>🍕 <a href="orari.php">Consulta gli orari delle sedi</a></li>'
+   # soddisfatto via LINK DIRETTO, non via chat → difetto invisibile, verde falso
+```
+
+**Diagnosi.** La leva è a monte (Planner), non l'Executor: il Planner *genera* l'`ATTACK_PLAN.md` dai documenti di design, e aveva **ammorbidito** una storyline rigida ("pannello nascosto svelato *tramite la chat*") in un generico "chat o interfaccia". Un OR *inventato* = una forma di allucinazione (una via che il design non autorizza).
+
+**Intervento — miglioramento del `SYSTEM_PROMPT` del Planner.** Aggiunte due regole ai "Criteri di Qualità", *generiche* (non overfittate su Pizzeria): il metro resta sempre *"cosa dice il design"*, non *"quale parola è vietata"* — l'OR resta lecito per macchine che offrono davvero più vie valide.
+
+- **Regola 5 — Fedeltà dei Connettori Logici (grounding delle congiunzioni):** la struttura logica della checklist deve rispecchiare quella del design, come già comandi/tool/porte. Alternative ammesse *solo* se i documenti prevedono esplicitamente più vie valide; mai introdurre alternative assenti.
+- **Regola 6 — Fedeltà al Meccanismo di Scoperta:** risorsa descritta come *nascosta e rivelata tramite un'interazione specifica* (chat, parametro nascosto, trigger) ⇒ voce distinta che verifica la scoperta *tramite quel meccanismo*, senza scorciatoie dirette.
+
+**Il punto concettuale (il "sugo").** Una macchina che **passa** il collaudo pur mancando una funzionalità prevista è il bug vero (oracolo rotto, falso verde) — molto più insidioso di un fallimento. Con la checklist severa il primo giro *deve* dare rosso su Pizzeria: ed è **corretto**, perché quel rosso onesto è esattamente il trigger che innesca il self-healing (checklist severa → Executor fallisce "manca la chat" → healer aggiunge la chat → stessa checklist ora passa). Collega Cap. 2 (oracolo/Planner) → Cap. 3 (healing) → Cap. 4 (evidenza).
+
+**Domanda aperta di scrittura.** *Ha senso includere i prompt usati nella tesi?* Ipotesi: sì, ma con misura — nel corpo del testo le regole 5/6 come *estratto motivato* (esempio di design dell'oracolo e di prompt engineering iterativo), il `SYSTEM_PROMPT` integrale del Planner in **appendice**. Il "prima/dopo" della checklist di FASE_2 è una figura efficace.
+
+### CS-2 — Il falso-positivo da *terminal echo*: quando la sentinella matcha sé stessa (16/09/2026)
+
+> **Perché vale come caso di studio.** È un bug di *infrastruttura del loop* (non del modello), sottile e istruttivo, con un colpo di scena metodologico: era il **vero root cause** dietro un sintomo che avevamo prima diagnosticato male. Materiale per il Cap. 2/3 (architettura client-server Executor↔Terminal Gateway) e come esempio onesto di *debugging di un sistema agentico*.
+
+**Il sintomo.** Nel primo ciclo di healing di Pizzeria l'healer lavorava bene (patch reale, `out/` rigenerati), ma la ricompilazione Docker risultava **durata ≈0 secondi** (di solito 3-4 minuti), il container restava quello **vecchio**, eppure i file `out/` su Kali erano **aggiornati**.
+
+**Il meccanismo.** Il rebuild gira sul Terminal Gateway (PTY su Kali) e il completamento è rilevato via *sentinella*:
+
+```bash
+docker build -t pizzeria . && echo __BUILD_SUCCESS__ || echo __BUILD_FAILED__
+```
+
+con attesa fino a comparsa di `__BUILD_SUCCESS__` / `__BUILD_FAILED__`. Ma una shell su PTY fa l'**echo del comando** appena lo riceve: la prima riga letta è il comando stesso, che contiene *testualmente* entrambi i marker. La sentinella matcha **sé stessa** al primo giro (~0.3s) → uscita immediata con "successo" → il deploy (`docker run`) parte mentre il `docker build` vero è appena iniziato in background → **container dalla vecchia immagine**; `out/` aggiornati perché il generatore gira su Windows *prima* del build.
+
+**Il colpo di scena metodologico.** Avevamo attribuito il "fix che non arriva al container" a un **timeout di build troppo corto** (180s) e introdotto un *idle-watchdog* adattivo. Giusto in sé, ma **non era quello** il root cause: anche il watchdog "completava" subito sull'echo. La vera causa era il falso match della sentinella. Lezione da raccontare: in un sistema agentico che pilota una shell reale, i confini *out-of-band* (echo del PTY, buffering, sessioni parallele) sono fonti di bug sottili quanto il modello — e vanno isolati con lo stesso rigore.
+
+**Il fix (minimo).** Spezzare il token nel comando con concatenazione di stringhe quotate — `echo "__BUILD""_""SUCCESS__"` stampa `__BUILD_SUCCESS__`, ma il testo del comando (quindi l'echo) contiene `__BUILD""_""SUCCESS__`, che non matcha il marker contiguo. Il marker pulito compare **solo** all'esecuzione reale dell'`echo`, cioè a build concluso. Due righe, logica invariata.
+
+**Aggancio agli altri contributi.** Questo episodio dà valore al *gate* di CS-anteriore (deploy solo su `__BUILD_SUCCESS__`) e all'iniezione dell'errore di build nel prompt dell'healer: pezzi di robustezza del **loop di rebuild** che, insieme, rendono il self-healing affidabile end-to-end. Bel filo per il Cap. 3: *"il self-healing non falliva per incapacità del modello, ma per fragilità d'infrastruttura nel loop"*.
+
+---
+
 ## 🧭 Note trasversali (promemoria da tenere a mente scrivendo)
 
 - **Software finito ≠ tesi finita.** Cap. 2–3 descrivono un sistema *già esistente* (presente, con sicurezza); Cap. 4 descrive lavoro *ancora da produrre* post-call (passato).

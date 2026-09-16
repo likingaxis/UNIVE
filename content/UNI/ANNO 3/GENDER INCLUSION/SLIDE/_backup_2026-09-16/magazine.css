@@ -411,7 +411,7 @@ body::before {
    6. INDIVIDUAL PAGE STRUCTURE & FOLIOS
    -------------------------------------------------------------------------- */
 .mag-page {
-  padding: 26px 36px;
+  padding: clamp(18px, 2.5vh, 26px) clamp(22px, 2.5vw, 36px);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -509,7 +509,7 @@ body::before {
   color: #FFF;
   width: 100%;
   height: 100%;
-  padding: 15.1px 28px;
+  padding: clamp(8px, 1.4vh, 16px) clamp(16px, 2vw, 28px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -534,12 +534,12 @@ body::before {
   align-items: center;
   justify-content: space-between;
   font-family: var(--font-tech);
-  font-size: 12.5px;
+  font-size: clamp(0.68rem, 0.85vw, 0.78rem);
   font-weight: 700;
   color: var(--color-mag-yellow);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 4px 0;
+  padding: clamp(2px, 0.4vh, 4px) 0;
 }
 
 /* Chrome / 3D Embossed Masthead Bar */
@@ -548,7 +548,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 0 7.6px 0;
+  padding: clamp(2px, 0.4vh, 4px) 0 clamp(4px, 0.7vh, 8px) 0;
   border-bottom: 2px solid rgba(255, 255, 255, 0.12);
   z-index: 10;
 }
@@ -559,13 +559,13 @@ body::before {
   background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 45%, #94A3B8 100%);
   border: 3px solid #FF2A4D;
   border-radius: 9999px;
-  padding: 4px 22px;
+  padding: clamp(2px, 0.4vh, 4px) clamp(14px, 1.6vw, 22px);
   box-shadow: 0 4px 16px rgba(255, 42, 77, 0.45), inset 0 2px 4px #FFF;
 }
 
 .cover-masthead-title {
   font-family: var(--font-masthead);
-  font-size: 38.4px;
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
   line-height: 0.95;
   letter-spacing: 0.04em;
   color: #CC002B;
@@ -577,7 +577,7 @@ body::before {
 
 .cover-masthead-subtitle {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  font-size: 13.1px;
+  font-size: clamp(0.7rem, 0.82vw, 0.82rem);
   font-weight: 700;
   letter-spacing: 0.03em;
   color: #00F0FF;
@@ -592,11 +592,11 @@ body::before {
 .cover-widescreen-grid {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
-  gap: 30px;
+  gap: clamp(14px, 2.2vw, 30px);
   align-items: stretch;
   flex: 1;
   min-height: 0;
-  padding: 6.5px 0;
+  padding: clamp(4px, 0.6vh, 8px) 0;
   position: relative;
   z-index: 5;
 }
@@ -609,14 +609,14 @@ body::before {
   height: 100%;
   min-height: 0;
   z-index: 10;
-  padding-top: 13px;
+  padding-top: clamp(6px, 1.2vh, 14px);
 }
 
 .cover-header-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 10.8px;
+  margin-bottom: clamp(6px, 1vh, 12px);
 }
 
 .cover-main-badge {
@@ -626,18 +626,18 @@ body::before {
   color: #000;
   font-family: var(--font-tech);
   font-weight: 800;
-  font-size: 11.8px;
+  font-size: clamp(0.66rem, 0.78vw, 0.74rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 3px 10px;
   transform: rotate(-1.5deg);
   box-shadow: 2px 2px 0 #000;
-  margin-bottom: 5.4px;
+  margin-bottom: clamp(3px, 0.5vh, 6px);
 }
 
 .cover-main-headline {
   font-family: var(--font-heading);
-  font-size: 38.4px;
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
   font-weight: 900;
   line-height: 1.02;
   letter-spacing: -0.02em;
@@ -662,15 +662,15 @@ body::before {
 .cover-teasers-stack {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 7.6px;
-  width: calc(100% - 24px);
+  gap: clamp(6px, 1vh, 10px);
+  margin-bottom: clamp(4px, 0.7vh, 8px);
+  width: calc(100% - clamp(14px, 1.6vw, 24px));
 }
 
 .cover-card-teaser {
   background: rgba(18, 22, 30, 0.92);
   border-radius: 6px;
-  padding: 11.9px 14px;
+  padding: clamp(8px, 1.1vh, 12px) clamp(10px, 1.2vw, 14px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   border-left: 4px solid var(--color-mag-yellow);
   transition: transform 0.2s ease;
@@ -686,7 +686,7 @@ body::before {
 
 .cover-card-teaser-tag {
   font-family: var(--font-tech);
-  font-size: 12.5px;
+  font-size: clamp(0.72rem, 0.82vw, 0.78rem);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -700,7 +700,7 @@ body::before {
 
 .cover-card-teaser-headline {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  font-size: 16.3px;
+  font-size: clamp(0.92rem, 1.05vw, 1.02rem);
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.25;
@@ -709,7 +709,7 @@ body::before {
 
 .cover-card-teaser-sub {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 13.6px;
+  font-size: clamp(0.78rem, 0.88vw, 0.85rem);
   color: #94A3B8;
   margin-top: 3px;
   line-height: 1.28;
@@ -719,8 +719,8 @@ body::before {
 .cover-left-bottom-bar {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding-top: 6.5px;
+  gap: clamp(8px, 1.2vw, 14px);
+  padding-top: clamp(4px, 0.6vh, 8px);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
 }
@@ -764,7 +764,7 @@ body::before {
 
 .cover-meta-text {
   font-family: var(--font-tech);
-  font-size: 11.5px;
+  font-size: clamp(0.65rem, 0.72vw, 0.72rem);
   color: #94A3B8;
   line-height: 1.25;
 }
@@ -842,30 +842,30 @@ body::before {
   background: rgba(14, 16, 20, 0.94);
   border: 2px solid var(--color-mag-yellow);
   border-radius: 6px;
-  padding: 6.5px 11px;
-  max-width: 215px;
+  padding: clamp(4px, 0.6vh, 7px) clamp(8px, 0.9vw, 11px);
+  max-width: clamp(170px, 16vw, 215px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
   z-index: 15;
 }
 
 .cover-hero-sticker-top {
-  top: -18px;
-  right: -28px;
+  top: clamp(-18px, -2vh, -10px);
+  right: clamp(-28px, -2.2vw, -16px);
   transform: rotate(2.5deg);
   border-color: var(--color-mag-cyan);
 }
 
 .cover-hero-sticker-bottom {
-  bottom: -10px;
-  left: -34px;
-  max-width: 230px;
+  bottom: clamp(-10px, -1.2vh, 0px);
+  left: clamp(-34px, -2.5vw, -18px);
+  max-width: clamp(180px, 17vw, 230px);
   transform: rotate(-3deg);
   border-color: var(--color-mag-purple);
 }
 
 .cover-sticker-title {
   font-family: var(--font-tech);
-  font-size: 10.9px;
+  font-size: clamp(0.62rem, 0.7vw, 0.68rem);
   font-weight: 800;
   text-transform: uppercase;
   color: var(--color-mag-yellow);
@@ -876,7 +876,7 @@ body::before {
 
 .cover-sticker-desc {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  font-size: 12.2px;
+  font-size: clamp(0.7rem, 0.78vw, 0.76rem);
   font-weight: 700;
   color: #FFF;
   line-height: 1.2;
@@ -889,7 +889,7 @@ body::before {
   justify-content: center;
   z-index: 20;
   flex-shrink: 0;
-  padding-top: 6.5px;
+  padding-top: clamp(4px, 0.6vh, 8px);
   margin-top: 0;
 }
 
@@ -897,12 +897,12 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 26px;
+  padding: clamp(6px, 1vh, 9px) clamp(18px, 2vw, 26px);
   background: var(--color-mag-yellow);
   color: #000;
   font-family: var(--font-tech);
   font-weight: 800;
-  font-size: 14.7px;
+  font-size: clamp(0.8rem, 0.95vw, 0.92rem);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   border: 2px solid #FFF;
@@ -938,12 +938,12 @@ body::before {
 
 .toc-title-area {
   flex-shrink: 0;
-  margin-bottom: 10.8px;
+  margin-bottom: clamp(6px, 1vh, 12px);
 }
 
 .toc-super-title {
   font-family: var(--font-tech);
-  font-size: 12.8px;
+  font-size: clamp(0.68rem, 0.8vw, 0.8rem);
   font-weight: 700;
   color: #475569;
   text-transform: uppercase;
@@ -952,12 +952,12 @@ body::before {
 
 .toc-main-title {
   font-family: var(--font-heading);
-  font-size: 35.2px;
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
   font-weight: 900;
   line-height: 0.95;
   color: #0F172A;
   margin-top: 2px;
-  margin-bottom: 6.5px;
+  margin-bottom: clamp(4px, 0.6vh, 8px);
 }
 
 .toc-yellow-rule {
@@ -971,10 +971,10 @@ body::before {
 .toc-staircase {
   display: flex;
   align-items: flex-end;
-  gap: 9px;
+  gap: clamp(5px, 0.7vw, 9px);
   flex: 1;
   min-height: 0;
-  padding: 6.5px 0;
+  padding: clamp(4px, 0.6vh, 8px) 0;
 }
 
 .toc-step-column {
@@ -992,13 +992,13 @@ body::before {
 
 .toc-col-info {
   text-align: center;
-  margin-bottom: 5.4px;
+  margin-bottom: clamp(3px, 0.5vh, 6px);
   flex-shrink: 0;
 }
 
 .toc-col-topic {
   font-family: var(--font-tech);
-  font-size: 11.2px;
+  font-size: clamp(0.6rem, 0.72vw, 0.7rem);
   font-weight: 800;
   text-transform: uppercase;
   color: #0F172A;
@@ -1007,7 +1007,7 @@ body::before {
 
 .toc-col-badge {
   font-family: var(--font-mono);
-  font-size: 9.3px;
+  font-size: clamp(0.52rem, 0.6vw, 0.58rem);
   color: #64748B;
   text-transform: uppercase;
   margin-top: 1px;
@@ -1024,12 +1024,12 @@ body::before {
   background: #222;
 }
 
-.toc-step-1 .toc-slice-card { height: 170px; }
-.toc-step-2 .toc-slice-card { height: 225px; }
-.toc-step-3 .toc-slice-card { height: 280px; }
-.toc-step-4 .toc-slice-card { height: 335px; }
-.toc-step-5 .toc-slice-card { height: 390px; }
-.toc-step-6 .toc-slice-card { height: 445px; }
+.toc-step-1 .toc-slice-card { height: clamp(130px, 19vh, 170px); }
+.toc-step-2 .toc-slice-card { height: clamp(170px, 25vh, 225px); }
+.toc-step-3 .toc-slice-card { height: clamp(210px, 31vh, 280px); }
+.toc-step-4 .toc-slice-card { height: clamp(250px, 37vh, 335px); }
+.toc-step-5 .toc-slice-card { height: clamp(290px, 43vh, 390px); }
+.toc-step-6 .toc-slice-card { height: clamp(330px, 48vh, 445px); }
 
 .toc-slice-img {
   width: 100%;
@@ -1055,7 +1055,7 @@ body::before {
 
 .toc-slice-num {
   font-family: var(--font-heading);
-  font-size: 25.6px;
+  font-size: clamp(1.2rem, 1.5vw, 1.6rem);
   font-weight: 900;
   color: #FFF;
   line-height: 1;
@@ -1073,7 +1073,7 @@ body::before {
 
 .editorial-schematic-header {
   flex-shrink: 0;
-  margin-bottom: 7.6px;
+  margin-bottom: clamp(4px, 0.7vh, 8px);
 }
 
 .editorial-schematic-badge {
@@ -1083,28 +1083,28 @@ body::before {
   background: #0F172A;
   color: #FFF;
   font-family: var(--font-tech);
-  font-size: 11.2px;
+  font-size: clamp(0.64rem, 0.72vw, 0.7rem);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 2px 8px;
   border-radius: 3px;
-  margin-bottom: 4px;
+  margin-bottom: clamp(2px, 0.4vh, 4px);
 }
 
 .editorial-schematic-title {
   font-family: var(--font-heading);
-  font-size: 32px;
+  font-size: clamp(1.4rem, 2vw, 2rem);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: #0F172A;
-  margin-bottom: 4px;
+  margin-bottom: clamp(2px, 0.4vh, 4px);
 }
 
 .editorial-schematic-sub {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  font-size: 13.1px;
+  font-size: clamp(0.72rem, 0.84vw, 0.82rem);
   color: #475569;
   line-height: 1.28;
 }
@@ -1117,8 +1117,8 @@ body::before {
 .editorial-pillars-grid {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  margin: 7.6px 0;
+  gap: clamp(4px, 0.7vh, 7px);
+  margin: clamp(4px, 0.7vh, 8px) 0;
   flex: 1;
   min-height: 0;
   justify-content: space-evenly;
@@ -1127,12 +1127,12 @@ body::before {
 .editorial-pillar-card {
   background: #FFF;
   border-radius: 6px;
-  padding: 7px 12px;
+  padding: clamp(5px, 0.8vh, 7px) clamp(8px, 1vw, 12px);
   border-left: 4px solid var(--color-mag-yellow);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: clamp(8px, 1vw, 12px);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -1146,7 +1146,7 @@ body::before {
 .editorial-pillar-card.accent-purple { border-left-color: var(--color-mag-purple); }
 
 .editorial-pillar-icon {
-  font-size: 20px;
+  font-size: clamp(1.1rem, 1.3vw, 1.25rem);
   line-height: 1;
   padding-top: 1px;
 }
@@ -1164,7 +1164,7 @@ body::before {
 
 .editorial-pillar-num {
   font-family: var(--font-tech);
-  font-size: 10.9px;
+  font-size: clamp(0.62rem, 0.7vw, 0.68rem);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1176,7 +1176,7 @@ body::before {
 
 .editorial-pillar-tag {
   font-family: var(--font-tech);
-  font-size: 12px;
+  font-size: clamp(0.64rem, 0.72vw, 0.75rem);
   background: #0F172A;
   color: #FFF;
   padding: 2px 7px;
@@ -1208,7 +1208,7 @@ body::before {
 
 .editorial-pillar-title {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  font-size: 14.1px;
+  font-size: clamp(0.8rem, 0.9vw, 0.88rem);
   font-weight: 800;
   color: #0F172A;
   margin-bottom: 1px;
@@ -1216,7 +1216,7 @@ body::before {
 
 .editorial-pillar-desc {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 12.2px;
+  font-size: clamp(0.68rem, 0.76vw, 0.76rem);
   color: #475569;
   line-height: 1.28;
 }
@@ -1229,16 +1229,16 @@ body::before {
 .editorial-thesis-box {
   background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
   border-radius: 6px;
-  padding: 8px 14px;
+  padding: clamp(6px, 0.9vh, 8px) clamp(10px, 1.2vw, 14px);
   color: #FFF;
   border-left: 4px solid var(--color-mag-yellow);
-  margin-bottom: 6px;
+  margin-bottom: clamp(3px, 0.6vh, 6px);
   flex-shrink: 0;
 }
 
 .editorial-thesis-tag {
   font-family: var(--font-tech);
-  font-size: 10.6px;
+  font-size: clamp(0.62rem, 0.7vw, 0.66rem);
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1251,7 +1251,7 @@ body::before {
 
 .editorial-thesis-text {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  font-size: 12.5px;
+  font-size: clamp(0.72rem, 0.8vw, 0.78rem);
   font-weight: 600;
   line-height: 1.3;
   color: #F8FAFC;
@@ -1266,10 +1266,10 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 6px;
+  padding-top: clamp(4px, 0.6vh, 6px);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   font-family: var(--font-tech);
-  font-size: 11.2px;
+  font-size: clamp(0.65rem, 0.72vw, 0.7rem);
   color: #64748B;
   flex-shrink: 0;
 }
@@ -1303,7 +1303,7 @@ body::before {
 
 .first-look-headline {
   font-family: var(--font-heading);
-  font-size: 48px;
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -1369,7 +1369,7 @@ body::before {
 
 .game-data-value {
   font-family: var(--font-tech);
-  font-size: 18.2px;
+  font-size: clamp(0.96rem, 1.1vw, 1.14rem);
   font-weight: 800;
   color: #F8FAFC;
   margin-top: 2px;
@@ -1403,8 +1403,8 @@ body::before {
 .first-look-points {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 10.8px;
+  gap: clamp(5px, 0.85vh, 8px);
+  margin-top: clamp(6px, 1vh, 12px);
   flex: 1;
   justify-content: space-evenly;
 }
@@ -1412,12 +1412,12 @@ body::before {
 .first-look-point-item {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: clamp(10px, 1.2vw, 15px);
   background: #FFF;
   border: 1.5px solid #E2E8F0;
   border-left: 5px solid #0284C7;
   border-radius: 8px;
-  padding: 8px 14px;
+  padding: clamp(5px, 0.8vh, 8px) clamp(10px, 1.2vw, 14px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -1433,13 +1433,13 @@ body::before {
 
 /* Evident, Prominent Symbol Badge */
 .first-look-symbol-badge {
-  width: 44px;
-  height: 44px;
+  width: clamp(38px, 2.5vw, 44px);
+  height: clamp(38px, 2.5vw, 44px);
   border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 23.2px;
+  font-size: clamp(1.25rem, 1.5vw, 1.45rem);
   flex-shrink: 0;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
 }
@@ -1475,7 +1475,7 @@ body::before {
 
 .first-look-point-title {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  font-size: 13.8px;
+  font-size: clamp(0.78rem, 0.88vw, 0.86rem);
   font-weight: 800;
   color: #0F172A;
   text-transform: uppercase;
@@ -1484,7 +1484,7 @@ body::before {
 
 .first-look-point-tag {
   font-family: var(--font-tech);
-  font-size: 10.6px;
+  font-size: clamp(0.6rem, 0.68vw, 0.66rem);
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -1498,7 +1498,7 @@ body::before {
 
 .first-look-point-desc {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 12.2px;
+  font-size: clamp(0.7rem, 0.76vw, 0.76rem);
   color: #475569;
   line-height: 1.28;
 }
@@ -1550,7 +1550,7 @@ body::before {
 
 .stat-huge-number {
   font-family: var(--font-heading);
-  font-size: 67.2px;
+  font-size: clamp(3rem, 5vw, 4.2rem);
   font-weight: 900;
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -1666,7 +1666,7 @@ body::before {
 /* 3D Yellow/Red Retro Title (Super Mario RPG style) */
 .feature-title-3d {
   font-family: var(--font-heading);
-  font-size: 60.8px;
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -0.02em;
@@ -1730,8 +1730,8 @@ body::before {
 .voice-slide-points {
   display: flex;
   flex-direction: column;
-  gap: 11.9px;
-  margin-top: 10px;
+  gap: clamp(7px, 1.1vh, 12px);
+  margin-top: clamp(6px, 1vh, 10px);
 }
 
 .voice-point-card {
@@ -1739,7 +1739,7 @@ body::before {
   border-radius: 6px;
   border: 1.5px solid #CBD5E1;
   border-left: 4px solid var(--color-mag-red);
-  padding: 10px 14px;
+  padding: clamp(7px, 1.1vh, 10px) clamp(10px, 1.2vw, 14px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
@@ -1755,20 +1755,20 @@ body::before {
 }
 
 .voice-point-icon {
-  font-size: 19.2px;
+  font-size: clamp(1rem, 1.15vw, 1.2rem);
   line-height: 1;
 }
 
 .voice-point-title {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  font-size: 13.8px;
+  font-size: clamp(0.78rem, 0.88vw, 0.86rem);
   font-weight: 800;
   color: #0F172A;
 }
 
 .voice-point-text {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 12.5px;
+  font-size: clamp(0.72rem, 0.8vw, 0.78rem);
   line-height: 1.35;
   color: #334155;
 }
@@ -1782,10 +1782,10 @@ body::before {
 .voice-stat-callout {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: clamp(10px, 1.2vw, 15px);
   border-left: 5px solid #FF2A4D !important;
   background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
-  padding: 9px 14px;
+  padding: clamp(6px, 0.9vh, 9px) clamp(10px, 1.2vw, 14px);
 }
 
 .voice-stat-badge-col {
@@ -1796,15 +1796,15 @@ body::before {
   background: #0F172A;
   border: 2px solid #FF2A4D;
   border-radius: 8px;
-  padding: 6px 12px;
-  min-width: 78px;
+  padding: clamp(4px, 0.6vh, 6px) clamp(8px, 1vw, 12px);
+  min-width: clamp(62px, 4.6vw, 78px);
   box-shadow: 0 4px 12px rgba(255, 42, 77, 0.25);
   flex-shrink: 0;
 }
 
 .voice-stat-huge {
   font-family: var(--font-masthead);
-  font-size: 35.2px;
+  font-size: clamp(1.5rem, 2.1vw, 2.2rem);
   font-weight: 900;
   line-height: 1;
   color: #FF2A4D;
@@ -1813,7 +1813,7 @@ body::before {
 
 .voice-stat-sub {
   font-family: var(--font-tech);
-  font-size: 9.9px;
+  font-size: clamp(0.55rem, 0.62vw, 0.62rem);
   font-weight: 800;
   letter-spacing: 0.08em;
   color: #FFE600;
@@ -1959,7 +1959,7 @@ body::before {
 
 .timeline-main-title {
   font-family: var(--font-heading);
-  font-size: 51.2px;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 900;
   line-height: 1;
   color: #FFF;
@@ -1995,7 +1995,7 @@ body::before {
   color: #FFF;
   font-family: var(--font-tech);
   font-weight: 800;
-  font-size: 13.1px;
+  font-size: clamp(0.72rem, 0.8vw, 0.82rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   padding: 3px 12px;
@@ -2006,7 +2006,7 @@ body::before {
 
 .timeline-main-title {
   font-family: var(--font-heading);
-  font-size: 41.6px;
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
   font-weight: 900;
   color: #FFF;
   text-transform: uppercase;
@@ -2016,18 +2016,18 @@ body::before {
 }
 
 .timeline-subhead {
-  font-size: 13.1px;
+  font-size: clamp(0.74rem, 0.82vw, 0.82rem);
   line-height: 1.35;
   color: #94A3B8;
   max-width: 900px;
-  margin-bottom: 10px;
+  margin-bottom: clamp(6px, 1vh, 10px);
 }
 
 /* Authentic Magazine Timeline System */
 .mag-timeline-system {
   display: flex;
   flex-direction: column;
-  gap: 7.6px;
+  gap: clamp(4px, 0.7vh, 8px);
   margin-top: 2px;
   flex: 1;
   min-height: 0;
@@ -2055,7 +2055,7 @@ body::before {
 .mag-timeline-milestones-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: clamp(10px, 1.2vw, 16px);
   position: relative;
   z-index: 2;
 }
@@ -2084,7 +2084,7 @@ body::before {
 
 .milestone-year-badge {
   font-family: var(--font-tech);
-  font-size: 13.1px;
+  font-size: clamp(0.72rem, 0.8vw, 0.82rem);
   font-weight: 900;
   letter-spacing: 0.08em;
   padding: 1px 8px;
@@ -2103,7 +2103,7 @@ body::before {
 .mag-timeline-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: clamp(10px, 1.2vw, 16px);
   flex: 1;
   min-height: 0;
 }
@@ -2112,7 +2112,7 @@ body::before {
   background: #131722;
   border: 2px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  padding: 9.7px;
+  padding: clamp(6px, 0.9vh, 10px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2147,7 +2147,7 @@ body::before {
 
 .era-tag {
   font-family: var(--font-tech);
-  font-size: 9.9px;
+  font-size: clamp(0.55rem, 0.62vw, 0.62rem);
   font-weight: 800;
   letter-spacing: 0.08em;
   color: #94A3B8;
@@ -2156,7 +2156,7 @@ body::before {
 
 .era-role-pill {
   font-family: var(--font-mono);
-  font-size: 9.3px;
+  font-size: clamp(0.52rem, 0.58vw, 0.58rem);
   font-weight: 700;
   padding: 1px 5px;
   border-radius: 3px;
@@ -2172,7 +2172,7 @@ body::before {
 .role-modular { background: rgba(16, 185, 129, 0.15); color: #4ADE80; border: 1px solid rgba(16, 185, 129, 0.4); }
 
 .era-card-visual {
-  height: 180px;
+  height: clamp(130px, 17vh, 180px);
   background: radial-gradient(circle at 50% 60%, rgba(30, 41, 59, 0.6) 0%, #080A0F 85%);
   border-radius: 6px;
   overflow: hidden;
@@ -2229,7 +2229,7 @@ body::before {
 
 .era-char-title {
   font-family: var(--font-heading);
-  font-size: 19.5px;
+  font-size: clamp(1.05rem, 1.15vw, 1.22rem);
   font-weight: 800;
   color: #FFF;
   line-height: 1.15;
@@ -2239,7 +2239,7 @@ body::before {
 
 .era-game-sub {
   font-family: var(--font-tech);
-  font-size: 12.5px;
+  font-size: clamp(0.68rem, 0.76vw, 0.78rem);
   color: #94A3B8;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -2248,7 +2248,7 @@ body::before {
 
 .era-speaking-prompt {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 14.4px;
+  font-size: clamp(0.78rem, 0.86vw, 0.9rem);
   color: #CBD5E1;
   line-height: 1.38;
   margin: 0;
@@ -2276,7 +2276,7 @@ body::before {
 
 .industry-headline {
   font-family: var(--font-heading);
-  font-size: 48px;
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -2414,7 +2414,7 @@ body::before {
 
 .manifesto-giant-title {
   font-family: var(--font-heading);
-  font-size: 34.4px;
+  font-size: clamp(1.4rem, 2.1vw, 2.15rem);
   font-weight: 900;
   line-height: 1.05;
   text-transform: uppercase;
@@ -2632,9 +2632,68 @@ body::before {
 /* --------------------------------------------------------------------------
    15. RESPONSIVE ADAPTATIONS (MOBILE & TABLETS)
    -------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .mag-spread {
+    aspect-ratio: auto;
+    min-height: auto;
+  }
+  .mag-spread.double-page {
+    grid-template-columns: 1fr;
+  }
+  .mag-spread.double-page::after {
+    display: none;
+  }
+  .cover-widescreen-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .mag-page.page-left {
+    border-right: none;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.15);
+    padding-right: 28px;
+  }
+  .mag-page.page-right {
+    padding-left: 28px;
+  }
+  .toc-staircase {
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  .toc-slice-card {
+    height: 160px !important;
+  }
+  .timeline-nodes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat-heroes-grid {
+    grid-template-columns: 1fr;
+  }
+  .editorial-columns, .first-look-body-text {
+    column-count: 1;
+  }
+}
+
 @media (max-width: 768px) {
+  .mag-page {
+    padding: 22px 18px;
+  }
+  .mag-reader-header {
+    padding: 8px 12px;
+  }
   .mag-title-sub {
     display: none;
+  }
+  .timeline-nodes-grid {
+    grid-template-columns: 1fr;
+  }
+  .cajas-grid, .esports-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .cover-masthead-title {
+    font-size: 3.2rem;
+  }
+  .cover-main-headline {
+    font-size: 2rem;
   }
   .mag-bottom-bar {
     padding: 8px 12px;
@@ -2647,577 +2706,4 @@ body::before {
     height: 30px;
     font-size: 0.65rem;
   }
-}
-
-/* ==========================================================================
-   FASCIA 3.a — LEGGIBILITÀ IN PROIEZIONE
-   Override raggruppati per spread: aumentano dimensioni minime, contrasto
-   e gerarchia dei dati chiave senza cambiare la struttura delle pagine.
-   ========================================================================== */
-
-/* --- 3.a · Gruppo 1: copertina, pp. 02-03, pp. 04-05 --------------------- */
-
-/* Copertina */
-#spread-0 .cover-masthead-subtitle { font-size: 0.95rem; }
-#spread-0 .cover-card-teaser-tag { font-size: 0.85rem; }
-#spread-0 .cover-card-teaser-headline { font-size: 1.35rem; margin-bottom: 4px; }
-#spread-0 .cover-card-teaser-sub { font-size: 1rem; line-height: 1.45; color: #CBD5E1; }
-#spread-0 .cover-sticker-title { font-size: 0.8rem; }
-#spread-0 .cover-sticker-desc { font-size: 0.98rem; line-height: 1.3; }
-
-/* Sommario */
-#spread-1 .toc-col-topic { font-size: 0.85rem; line-height: 1.2; }
-#spread-1 .toc-col-badge { font-size: 0.72rem; color: #475569; }
-
-/* Editoriale */
-#spread-1 .editorial-schematic-sub { font-size: 1.1rem; line-height: 1.45; color: #334155; }
-#spread-1 .editorial-pillar-num { font-size: 0.82rem; }
-#spread-1 .editorial-pillar-tag { font-size: 0.82rem; }
-#spread-1 .editorial-pillar-title { font-size: 1.3rem; margin: 4px 0; }
-#spread-1 .editorial-pillar-desc { font-size: 1.02rem; line-height: 1.45; color: #334155; }
-#spread-1 .editorial-thesis-tag { font-size: 0.82rem; }
-#spread-1 .editorial-thesis-text { font-size: 1.25rem; line-height: 1.4; font-weight: 700; }
-
-/* First look — pagina 04 */
-#spread-2 .game-data-label { font-size: 0.78rem; color: #CBD5E1; }
-#spread-2 .first-look-point-title { font-size: 1.05rem; }
-#spread-2 .first-look-point-tag { font-size: 0.8rem; }
-#spread-2 .first-look-point-desc { font-size: 1rem; line-height: 1.4; color: #334155; }
-
-/* First look — pagina 05: i numeri sono il messaggio */
-#spread-2 .stat-huge-number {
-  font-size: 4.7rem;
-  line-height: 0.95;
-}
-#spread-2 .accent-red .stat-huge-number { text-shadow: 0 0 22px rgba(255, 42, 77, 0.45); }
-#spread-2 .accent-blue .stat-huge-number { text-shadow: 0 0 22px rgba(0, 102, 255, 0.4); }
-#spread-2 .stat-card-title { font-size: 1.1rem; }
-#spread-2 .stat-card-desc { font-size: 1.02rem; line-height: 1.4; color: #334155; }
-#spread-2 .stat-card-source { font-size: 0.78rem; color: #64748B; }
-#spread-2 .bar-label-group { font-size: 0.92rem; align-items: baseline; }
-#spread-2 .bar-label-group strong { font-size: 1.25rem; color: #0066FF; }
-#spread-2 .bar-track { height: 14px; }
-#spread-2 .polaroid-badge-note { font-size: 1.15rem; line-height: 1.4; }
-
-
-/* --- 3.a · Gruppo 2: pp. 06-07, pp. 08-09, p. 10 ------------------------ */
-
-/* Pagina 06 */
-#spread-3 .feature-kicker { font-size: 1.2rem; }
-#spread-3 .call-to-arms-pill { font-size: 0.85rem; }
-#spread-3 .character-wrap-img { width: 235px; }
-#spread-3 .voice-point-title { font-size: 1.15rem; }
-#spread-3 .voice-point-text { font-size: 1.05rem; line-height: 1.45; }
-#spread-3 .voice-point-header > span:last-child {
-  font-size: 2.6rem !important;
-  line-height: 1;
-  text-shadow: 0 0 18px rgba(255, 42, 77, 0.45) !important;
-}
-#spread-3 .voice-point-header > span:last-child > span { font-size: 0.8rem !important; }
-
-/* Pagina 07: la frase chiave diventa leggibile, le strategie più grandi */
-#spread-3 .cajas-subhead {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #0F172A;
-  text-transform: none;
-  letter-spacing: 0;
-}
-#spread-3 .caja-title { font-size: 1.12rem; }
-#spread-3 .caja-desc { font-size: 1.02rem; line-height: 1.4; color: #334155; }
-#spread-3 .caja-stat-tag { font-size: 0.85rem; }
-#spread-3 .system-warning-title { font-size: 1rem; }
-#spread-3 .system-warning-text { font-size: 1.08rem; line-height: 1.45; }
-
-/* Pagine 08-09 */
-#spread-4 .timeline-subhead { font-size: 1.15rem; color: #CBD5E1; }
-#spread-4 .milestone-year-badge { font-size: 1rem; }
-#spread-4 .era-tag { font-size: 0.75rem; }
-#spread-4 .era-role-pill { font-size: 0.72rem; }
-#spread-4 .era-char-title { font-size: 1.5rem; }
-#spread-4 .era-game-sub { font-size: 0.9rem; color: #CBD5E1; }
-#spread-4 .era-speaking-prompt { font-size: 1.08rem; line-height: 1.45; }
-/* passaggio al terzo relatore: da piè di pagina invisibile a frase leggibile */
-#spread-4 .mag-folio-footer > span:first-child {
-  font-size: 1.05rem;
-  color: var(--color-mag-yellow);
-  letter-spacing: 0.06em;
-}
-
-/* Pagina 10: i numeri guidano il discorso */
-#spread-5 .page-left > p {
-  font-size: 1.2rem !important;
-  color: #334155 !important;
-}
-#spread-5 .funnel-row { padding: 10px 14px; gap: 16px; }
-#spread-5 .funnel-num { flex: 0 0 150px; font-size: 2.1rem; line-height: 1; text-align: center; }
-#spread-5 .funnel-info h4 { font-size: 1.02rem; }
-#spread-5 .funnel-info p { font-size: 0.98rem; line-height: 1.35; color: #334155; }
-
-/* --- 3.a · Gruppo 3: p. 11, p. 12, p. 13 -------------------------------- */
-
-/* Pagina 11 */
-#spread-5 .esports-header-tag { font-size: 0.9rem; }
-#spread-5 .page-right > h3 { font-size: 2.3rem !important; }
-#spread-5 .page-right > p {
-  font-size: 1.2rem !important;
-  line-height: 1.5 !important;
-}
-#spread-5 .esports-logo-box { height: 70px; }
-#spread-5 .esports-card { padding: 16px; }
-#spread-5 .esports-card h4 { font-size: 1.1rem; }
-#spread-5 .esports-card p { font-size: 1rem; line-height: 1.4; color: #334155; }
-#spread-5 .page-right .polaroid-badge-note { font-size: 1.15rem; line-height: 1.45; }
-
-/* Pagina 12 */
-#spread-6 .manifesto-header-stamp { font-size: 0.95rem; }
-#spread-6 .manifesto-poster > p {
-  font-size: 1.45rem !important;
-  line-height: 1.4 !important;
-  color: #FFFFFF !important;
-}
-#spread-6 .manifesto-pillars { gap: 18px; }
-#spread-6 .pillar-num { font-size: 2rem; flex: 0 0 72px; }
-#spread-6 .pillar-text h4 { font-size: 1.15rem; }
-#spread-6 .pillar-text p { font-size: 1.05rem; line-height: 1.4; color: #CBD5E1; }
-#spread-6 .manifesto-poster > div:last-child {
-  font-size: 1rem !important;
-  line-height: 1.4;
-}
-
-/* Pagina 13: la chiusura è la cosa più grande della pagina */
-#spread-6 .back-cover-page .mag-folio-header { color: #94A3B8; border-color: rgba(255, 255, 255, 0.2); }
-.conclusion-hero {
-  display: grid;
-  grid-template-columns: 1fr 240px;
-  align-items: center;
-  gap: 12px;
-  margin: 4px 0 18px;
-}
-.conclusion-title {
-  font-family: var(--font-heading);
-  font-size: 2.35rem;
-  font-weight: 900;
-  line-height: 1.05;
-  color: var(--color-mag-yellow);
-  text-shadow: 0 0 28px rgba(255, 229, 0, 0.35);
-  margin-bottom: 14px;
-}
-.conclusion-question {
-  font-size: 1.3rem;
-  line-height: 1.45;
-  color: #E2E8F0;
-  margin-bottom: 18px;
-}
-.conclusion-img {
-  width: 100%;
-  max-height: 380px;
-  object-fit: contain;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
-}
-#spread-6 .colophon-title { font-size: 1rem; }
-#spread-6 .team-member { font-size: 1.02rem; }
-#spread-6 .colophon-sources-list { font-size: 0.85rem; line-height: 1.55; color: #CBD5E1; }
-
-/* ==========================================================================
-   FASCIA 3.b — IMMAGINI E COMPOSIZIONE (riempire i vuoti, dare aria ai contenuti)
-   ========================================================================== */
-
-/* p.03 — i tre pilastri riempiono la colonna invece di galleggiare */
-#spread-1 .editorial-pillars-grid { justify-content: flex-start; gap: 20px; margin: 26px 0; }
-#spread-1 .editorial-pillar-card { flex: 1; align-items: center; padding: 16px 22px; gap: 18px; }
-#spread-1 .editorial-pillar-icon { font-size: 2.1rem; }
-#spread-1 .editorial-pillar-title { font-size: 1.5rem; }
-#spread-1 .editorial-pillar-desc { font-size: 1.1rem; }
-
-/* p.05 — blocchi compatti in alto, le barre prendono lo spazio libero */
-#spread-2 .page-right { justify-content: flex-start; }
-#spread-2 .stat-heroes-grid { margin-top: 22px; }
-#spread-2 .perception-bar-box {
-  flex: 1; display: flex; flex-direction: column; justify-content: space-evenly;
-  margin: 22px 0; padding: 18px 22px;
-}
-#spread-2 .perception-bar-box .bar-row { margin: 0 !important; }
-#spread-2 .bar-label-group { font-size: 1.02rem; margin-bottom: 8px; }
-#spread-2 .bar-label-group strong { font-size: 1.6rem; text-shadow: 0 0 16px rgba(0, 102, 255, 0.35); }
-#spread-2 .bar-track { height: 18px; }
-#spread-2 .page-right .polaroid-badge-note { margin-bottom: 22px; }
-
-/* pp.08-09 — le immagini occupano l'altezza della card, niente vuoti sopra e sotto */
-#spread-4 .era-card-visual { flex: 1; height: auto; min-height: 0; margin: 10px 0 14px; }
-#spread-4 .era-char-img { height: 94%; width: auto; }
-#spread-4 .era-bg3 .bg3-img { height: 100%; width: 100%; }
-#spread-4 .era-card-info { min-height: 152px; } /* titoli allineati sulla stessa riga */
-
-/* p.11 — titolo vicino al tag, loghi grandi, card che riempiono la pagina */
-#spread-5 .page-right { justify-content: flex-start; }
-#spread-5 .esports-header-tag { margin-top: 10px; margin-bottom: 8px; }
-#spread-5 .page-right > p { margin-bottom: 0 !important; }
-#spread-5 .esports-showcase-grid { flex: 1; margin: 26px 0; gap: 20px; }
-#spread-5 .esports-card { justify-content: center; padding: 22px; }
-#spread-5 .esports-logo-box { height: 150px; margin-bottom: 18px; }
-#spread-5 .esports-logo-img { max-width: 220px; }
-#spread-5 .esports-card h4 { font-size: 1.35rem; }
-#spread-5 .esports-card p { font-size: 1.1rem; }
-#spread-5 .page-right .polaroid-badge-note { margin-bottom: 22px; }
-
-/* ==========================================================================
-   REPORT ANTI-SLOP — Gruppo A: interfaccia e icone
-   ========================================================================== */
-.px-icon { width: 1.15em; height: 1.15em; fill: currentColor; vertical-align: -0.2em; flex-shrink: 0; }
-.mag-reader-header { justify-content: space-between; }
-.mag-controls-group .mag-btn { display: inline-flex; align-items: center; gap: 8px; }
-.mag-nav-arrow-btn .px-icon { width: 22px; height: 22px; vertical-align: middle; }
-.mag-thumbs-strip { gap: 10px; }
-.mag-thumb-box { width: auto; min-width: 96px; padding: 0 12px; letter-spacing: 0.06em; }
-
-/* ==========================================================================
-   REPORT ANTI-SLOP — Gruppo B: copertina, pp. 02-03, pp. 04-05
-   ========================================================================== */
-
-/* Copertina — testata più grande, contenuti raccolti sotto il titolo */
-#spread-0 .cover-top-bar { font-size: 15px; }
-#spread-0 .cover-masthead-container { padding: 10px 0 16px; }
-#spread-0 .cover-masthead-pill { padding: 8px 34px; border-width: 4px; }
-#spread-0 .cover-masthead-title { font-size: 64px; }
-#spread-0 .cover-masthead-subtitle { font-size: 1.35rem; max-width: 720px; }
-#spread-0 .cover-story-col { justify-content: flex-start; padding-top: 22px; }
-#spread-0 .cover-main-headline { font-size: 58px; }
-#spread-0 .cover-teasers-stack { margin-top: 34px; gap: 16px; }
-#spread-0 .cover-left-bottom-bar { margin-top: auto; }
-#spread-0 .cover-visual-col { justify-content: center; gap: 34px; }
-#spread-0 .cover-hero-img-box { flex: 0 1 auto; height: 470px; }
-#spread-0 .cover-btn-open { font-size: 1.1rem; padding: 12px 34px; }
-#spread-0 .cover-btn-open .px-icon { width: 1.3em; height: 1.3em; }
-#spread-0 .cover-card-teaser { padding: 18px 22px; }
-#spread-0 .cover-card-teaser-headline { font-size: 1.6rem; }
-#spread-0 .cover-card-teaser-sub { font-size: 1.12rem; }
-
-/* p.03 — numero grande al posto dell'emoji, niente targhette */
-#spread-1 .editorial-pillar-icon {
-  font-family: var(--font-heading); font-size: 3rem; font-weight: 900; line-height: 1;
-  flex: 0 0 116px; text-align: left; padding: 0;
-}
-#spread-1 .accent-cyan .editorial-pillar-icon { color: #0284C7; }
-#spread-1 .accent-red .editorial-pillar-icon { color: #DC2626; }
-#spread-1 .accent-purple .editorial-pillar-icon { color: #9333EA; }
-#spread-1 .editorial-pillar-card { box-shadow: none; border: 2px solid #0F172A; border-left-width: 8px; border-radius: 4px; }
-#spread-1 .accent-cyan.editorial-pillar-card { border-left-color: #0284C7; }
-#spread-1 .accent-red.editorial-pillar-card { border-left-color: #DC2626; }
-#spread-1 .accent-purple.editorial-pillar-card { border-left-color: #9333EA; }
-#spread-1 .editorial-pillar-num { font-size: 0.95rem; }
-#spread-1 .editorial-pillar-title { font-size: 1.65rem; }
-
-/* p.04 — icone pixel al posto delle emoji */
-#spread-2 .first-look-symbol-badge .px-icon { width: 26px; height: 26px; }
-#spread-2 .badge-cyan { color: #0284C7; }
-#spread-2 .badge-green { color: #16A34A; }
-#spread-2 .badge-red { color: #DC2626; }
-
-/* p.05 — barre segmentate stile "barra della vita", tacca della parità al 50% */
-#spread-2 .perception-bar-box { background: #0F172A; border-radius: 6px; padding: 22px 26px 40px; }
-#spread-2 .bar-label-group { color: #E2E8F0; font-size: 1.05rem; }
-#spread-2 .bar-label-group strong { color: #00F0FF; font-size: 1.9rem; text-shadow: 0 0 16px rgba(0, 240, 255, 0.45); }
-#spread-2 .bar-track {
-  height: 30px; border-radius: 3px; overflow: visible;
-  background: repeating-linear-gradient(90deg, #1E293B 0 20px, #0F172A 20px 24px);
-  border: 2px solid #334155;
-}
-#spread-2 .bar-fill {
-  border-radius: 0;
-  background: repeating-linear-gradient(90deg, transparent 0 20px, #0F172A 20px 24px),
-              linear-gradient(90deg, #0066FF, #00F0FF);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
-}
-#spread-2 .bar-track::after {
-  content: ""; position: absolute; left: 50%; top: -8px; bottom: -8px; width: 3px;
-  background: var(--color-mag-yellow); box-shadow: 0 0 8px rgba(255, 229, 0, 0.7);
-}
-#spread-2 .bar-row:last-child .bar-track::before {
-  content: "50% · PARITÀ"; position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(-50%);
-  font-family: var(--font-tech); font-size: 0.85rem; font-weight: 800; letter-spacing: 0.08em;
-  color: var(--color-mag-yellow); white-space: nowrap;
-}
-#spread-2 .polaroid-badge-note .px-icon,
-#spread-1 .editorial-thesis-tag .px-icon { color: inherit; }
-
-/* ==========================================================================
-   REPORT ANTI-SLOP — Gruppo C: pp. 06-07, pp. 08-09
-   ========================================================================== */
-
-/* p.06 — etichette dei due dati più grandi */
-#spread-3 .voice-point-title { font-size: 1.4rem; white-space: nowrap; }
-#spread-3 .voice-point-header > span:last-child { font-size: 2.4rem !important; }
-#spread-3 .call-to-arms-pill { font-size: 0.95rem; }
-#spread-3 .voice-point-icon { color: var(--color-mag-red); }
-#spread-3 .voice-point-icon .px-icon { width: 28px; height: 28px; vertical-align: middle; }
-
-/* p.07 — meno testo: titolo + conseguenza, la spiegazione la dà chi presenta */
-#spread-3 .cajas-section-header { font-size: 2.4rem; }
-#spread-3 .cajas-subhead { font-size: 1.5rem; line-height: 1.35; }
-#spread-3 .cajas-subhead strong { color: #DC2626; }
-#spread-3 .cajas-grid { gap: 18px; margin: 26px 0; }
-#spread-3 .caja-box { display: flex; align-items: center; gap: 18px; padding: 22px 20px; }
-#spread-3 .caja-icon-badge { width: 60px; height: 60px; margin: 0; flex-shrink: 0; }
-#spread-3 .caja-icon-badge .px-icon { width: 36px; height: 36px; }
-#spread-3 .caja-title { font-size: 1.35rem; }
-#spread-3 .caja-stat-tag { display: block; font-family: var(--font-tech); font-size: 1.15rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 6px; }
-#spread-3 .caja-source { display: block; font-family: var(--font-mono); font-size: 0.78rem; color: #64748B; margin-top: 4px; }
-#spread-3 .system-warning-title { font-size: 1.15rem; display: flex; align-items: center; gap: 8px; color: var(--color-mag-yellow); }
-#spread-3 .system-warning-text { font-size: 1.25rem; line-height: 1.5; }
-
-/* pp.08-09 — pallini centrati sulla linea, testi più grandi e contrastati */
-#spread-4 .mag-timeline-rail-bar { top: 9px; }
-#spread-4 .milestone-pin-dot { margin-bottom: 6px; }
-#spread-4 .era-card-header { margin-bottom: 2px; }
-#spread-4 .era-role-pill { font-size: 0.95rem; padding: 3px 10px; }
-#spread-4 .era-char-title { font-size: 1.5rem; white-space: nowrap; }
-#spread-4 .era-game-sub { font-size: 1rem; color: #CBD5E1; }
-#spread-4 .era-speaking-prompt { font-size: 1.28rem; line-height: 1.4; color: #E2E8F0; }
-#spread-4 .era-card-info { min-height: 150px; gap: 4px; }
-#spread-4 .timeline-era-card { padding: 14px; }
-
-/* ==========================================================================
-   REPORT ANTI-SLOP — Gruppo D: pp. 10-11, pp. 12-13
-   ========================================================================== */
-
-/* p.10 — tre confronti a barre, ogni numero accanto al suo termine di paragone */
-#spread-5 .page-left { justify-content: flex-start; }
-#spread-5 .page-left > p { margin-bottom: 0 !important; }
-.gap-blocks { display: flex; flex-direction: column; gap: 14px; margin: 22px 0 16px; flex: 1; justify-content: center; }
-.gap-block { background: #0F172A; border-radius: 6px; padding: 18px 22px 20px; }
-.gap-block-head {
-  display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;
-  font-family: var(--font-tech); font-size: 1.15rem; font-weight: 800; color: #FFF; text-transform: uppercase; letter-spacing: 0.04em;
-}
-.gap-step { color: var(--color-mag-yellow); }
-.gap-src { margin-left: auto; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400; color: #94A3B8; text-transform: none; letter-spacing: 0; }
-.gap-bar-row { display: grid; grid-template-columns: 196px 1fr 112px; align-items: center; gap: 14px; }
-.gap-bar-row + .gap-bar-row { margin-top: 12px; }
-.gap-bar-label { font-family: var(--font-tech); font-size: 1rem; font-weight: 700; color: #CBD5E1; }
-.gap-track {
-  height: 30px; border: 2px solid #334155; border-radius: 3px;
-  background: repeating-linear-gradient(90deg, #1E293B 0 18px, #0F172A 18px 22px);
-}
-.gap-fill { height: 100%; }
-.gap-bar-value { font-family: var(--font-heading); font-size: 1.5rem; white-space: nowrap; font-weight: 900; text-align: right; line-height: 1; }
-.is-women .gap-fill {
-  background: repeating-linear-gradient(90deg, transparent 0 18px, #0F172A 18px 22px), linear-gradient(90deg, #9333EA, #FF2A4D);
-  box-shadow: 0 0 12px rgba(255, 42, 77, 0.35);
-}
-.is-women .gap-bar-value { color: #FF4D6A; text-shadow: 0 0 14px rgba(255, 42, 77, 0.45); }
-.is-men .gap-fill { background: repeating-linear-gradient(90deg, transparent 0 18px, #0F172A 18px 22px), #64748B; }
-.is-men .gap-bar-value { color: #CBD5E1; }
-.ceiling-note {
-  font-size: 1.3rem; line-height: 1.4; color: #0F172A; margin-bottom: 18px;
-  border-left: 6px solid var(--color-mag-yellow); padding: 4px 0 4px 16px;
-}
-
-/* p.11 — 1/3 in evidenza */
-
-/* p.12 — poster più denso */
-#spread-6 .manifesto-poster { justify-content: flex-start; padding: 30px 30px 24px; }
-#spread-6 .manifesto-giant-title { font-size: 2.9rem; margin: 28px 0 18px; }
-#spread-6 .manifesto-poster > p { font-size: 1.45rem !important; margin: 0 0 44px; }
-#spread-6 .manifesto-pillars { gap: 38px; margin: 0; }
-#spread-6 .pillar-num { font-size: 2.4rem; flex: 0 0 84px; }
-#spread-6 .pillar-text h4 { font-size: 1.35rem; }
-#spread-6 .pillar-text p { font-size: 1.2rem; }
-#spread-6 .manifesto-poster > div:last-child { margin-top: auto; font-size: 1.05rem !important; }
-
-/* p.13 — solo fonti, più grandi */
-#spread-6 .back-cover-page { justify-content: flex-start; }
-#spread-6 .conclusion-hero { margin: 30px 0 34px; grid-template-columns: minmax(0, 1fr) 260px; }
-#spread-6 .conclusion-title { font-size: 2.05rem; }
-#spread-6 .conclusion-img { max-height: 400px; }
-#spread-6 .colophon-box { padding: 20px 24px; }
-#spread-6 .colophon-title { font-size: 1.15rem; margin-bottom: 4px; }
-#spread-6 .colophon-sources-list { font-size: 1.02rem; line-height: 1.6; color: #E2E8F0; margin-top: 6px; }
-#spread-6 .back-cover-page .mag-folio-footer { margin-top: auto; }
-
-/* ==========================================================================
-   REPORT 2 — evidenziazioni dei dati, icone p.03, timeline più compatta
-   ========================================================================== */
-
-/* Dato "catchy": stesso stile di 1/3 ovunque (dimensione relativa al testo intorno) */
-.hl-num {
-  font-family: var(--font-heading); font-weight: 900; font-style: normal;
-  font-size: 1.55em; line-height: 0.9; letter-spacing: -0.01em; white-space: nowrap;
-  vertical-align: -0.08em;
-}
-.hl-blue { color: #0066FF; text-shadow: 0 0 16px rgba(0, 102, 255, 0.35); }
-.hl-red { color: #FF2A4D; text-shadow: 0 0 16px rgba(255, 42, 77, 0.35); }
-.hl-purple { color: #9333EA; text-shadow: 0 0 16px rgba(147, 51, 234, 0.35); }
-.hl-green { color: #16A34A; text-shadow: 0 0 16px rgba(22, 163, 74, 0.35); }
-.hl-yellow { color: var(--color-mag-yellow); text-shadow: 0 0 16px rgba(255, 229, 0, 0.45); }
-.hl-purple-dark { color: #C084FC; text-shadow: 0 0 16px rgba(192, 132, 252, 0.45); }
-
-/* p.03 — icone pixel al posto dei numeri */
-#spread-1 .editorial-pillar-icon { display: flex; align-items: center; justify-content: center; }
-#spread-1 .editorial-pillar-icon .px-icon { width: 64px; height: 64px; vertical-align: 0; }
-
-/* pp.08-09 — card un po' più piccole */
-#spread-4 .mag-timeline-cards-grid { flex: 0 1 auto; height: 570px; }
-
-/* ==========================================================================
-   REPORT 3 — icone p.12, etichette p.10, domanda aperta p.11
-   ========================================================================== */
-#spread-6 .pillar-num { display: flex; align-items: center; justify-content: center; }
-#spread-6 .pillar-num .px-icon {
-  width: 52px; height: 52px; vertical-align: 0; color: var(--color-mag-cyan);
-  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.45));
-}
-#spread-6 .pillar-item { align-items: center; }
-#spread-5 .polaroid-badge-note .note-kicker,
-#spread-5 .polaroid-badge-note .px-icon { color: var(--color-mag-yellow); }
-
-/* ==========================================================================
-   FASCIA 4 — rifiniture: relatori, filo del discorso, icone, spazi
-   ========================================================================== */
-
-/* Piè di pagina: numero di slide del copione + chi parla */
-.mag-folio-footer strong { color: var(--color-mag-red); font-weight: 800; }
-.mag-folio-footer .handoff { color: #0F172A; font-size: 0.95rem; letter-spacing: 0.04em; }
-.mag-folio-footer .handoff strong { color: #FFF; background: var(--color-mag-red); padding: 2px 8px; border-radius: 3px; }
-#spread-4 .mag-folio-footer .handoff { color: var(--color-mag-yellow); }
-.back-cover-page .mag-folio-footer strong { color: var(--color-mag-yellow); }
-#spread-6 .manifesto-header-stamp { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-#spread-6 .manifesto-header-stamp .px-icon { color: var(--color-mag-yellow); }
-#spread-6 .stamp-who { font-size: 0.8rem; letter-spacing: 0.1em; color: #CBD5E1; }
-#spread-6 .stamp-who strong { color: var(--color-mag-yellow); }
-
-/* Barra in basso con icone */
-.mag-thumb-box { gap: 8px; }
-.mag-thumb-box .px-icon { width: 16px; height: 16px; vertical-align: -3px; }
-
-/* Icone nelle pillole */
-.feature-header-capsule .px-icon, .level99-pill .px-icon, .esports-header-tag .px-icon,
-.timeline-super-banner .px-icon, .stat-spread-banner .px-icon { width: 1.25em; height: 1.25em; vertical-align: -0.25em; margin-right: 4px; }
-
-/* Copertina: domanda di apertura */
-#spread-0 .cover-question { font-size: 1.35rem; color: #CBD5E1; margin-top: 16px; line-height: 1.35; }
-#spread-0 .cover-question strong { color: var(--color-mag-yellow); }
-#spread-0 .cover-teasers-stack { margin-top: 26px; }
-
-/* Sommario: filo del discorso nello spazio sopra la scalinata */
-#spread-1 .page-left { position: relative; }
-.toc-thread { position: absolute; top: 205px; left: 36px; width: 510px; display: flex; flex-direction: column; gap: 10px; }
-.toc-thread-title { font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #0F172A; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-.toc-thread-step { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 12px; position: relative; }
-.toc-thread-step + .toc-thread-step::before { content: ""; position: absolute; left: 16px; top: -12px; height: 12px; width: 2px; background: #94A3B8; }
-.toc-thread-num { width: 34px; height: 34px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 900; color: #FFF; font-size: 1.05rem; }
-.toc-thread-text { font-size: 1.12rem; font-weight: 700; color: #0F172A; line-height: 1.2; }
-.toc-thread-who { font-family: var(--font-mono); font-size: 0.75rem; color: #64748B; letter-spacing: 0.06em; }
-.t-cyan .toc-thread-num { background: #0284C7; }
-.t-red .toc-thread-num { background: #DC2626; }
-.t-purple .toc-thread-num { background: #9333EA; }
-.t-orange .toc-thread-num { background: #D97706; }
-.t-green .toc-thread-num { background: #16A34A; }
-#spread-1 .toc-col-badge { font-size: 0.8rem; font-weight: 700; color: #DC2626; letter-spacing: 0.08em; }
-
-/* p.06 — card più piene, niente vuoto sotto */
-#spread-3 .voice-slide-points { gap: 20px; display: flex; flex-direction: column; }
-#spread-3 .voice-point-card { padding: 22px 22px 24px !important; }
-#spread-3 .voice-point-text { font-size: 1.2rem; }
-
-/* p.07 — riquadri vicini alla frase chiave */
-#spread-3 .page-right { justify-content: flex-start; }
-#spread-3 .cajas-grid { margin: 30px 0 26px; }
-#spread-3 .caja-box { padding: 30px 22px; }
-#spread-3 .page-right .mag-folio-footer { margin-top: auto; }
-
-/* pp.08-09 — via l'intestazione illeggibile */
-#spread-4 .mag-folio-header { display: none; }
-#spread-4 .era-game-sub { font-size: 0.92rem; letter-spacing: 0.02em; }
-
-/* p.12 — leve più distribuite */
-#spread-6 .manifesto-pillars { gap: 50px; }
-
-/* p.13 — chiusura con "Grazie" */
-.conclusion-thanks { font-family: var(--font-heading); font-size: 2.6rem; font-weight: 900; color: #FFF; text-shadow: 2px 2px 0 var(--color-mag-red); margin: 4px 0 14px; }
-.conclusion-back { font-size: 0.75rem; opacity: 0.8; }
-
-/* Fascia 4 — ritocchi dopo il controllo */
-#spread-3 .cajas-grid { flex: 1; margin: 30px 0; }
-#spread-4 .mag-timeline-cards-grid { height: 640px; }
-#spread-4 .mag-folio-footer > span:last-child { color: #CBD5E1; }
-#spread-6 .back-cover-page .mag-folio-footer { color: #CBD5E1; }
-#spread-5 .ceiling-note { font-size: 1.2rem; margin-bottom: 12px; }
-body.clean-capture .mag-reader-header, body.clean-capture .mag-bottom-bar { display: none !important; }
-body.clean-capture .mag-workspace { padding: 0; }
-
-/* Report 4 */
-.toc-thread-step { grid-template-columns: 34px 1fr; }
-#spread-1 .toc-col-badge { color: #64748B; }
-#spread-0 .cover-left-bottom-bar { gap: 18px; padding-top: 12px; }
-#spread-0 .barcode-lines { width: 120px; height: 36px; }
-#spread-0 .barcode-digits { font-size: 0.78rem; }
-#spread-0 .cover-meta-text { font-size: 15px; line-height: 1.35; }
-#spread-2 .note-red { color: #DC2626; }
-#spread-3 .voice-point-title { color: #DC2626; }
-#spread-3 .caja-source { font-family: var(--font-tech); font-size: 0.9rem; color: #475569; margin-top: 6px; }
-
-/* Report 5 */
-#spread-0 .cover-teasers-stack .hl-num { font-size: 1.12em; vertical-align: -0.03em; }
-#spread-2 .game-data-box { padding: 20px 22px 16px; }
-#spread-2 .game-data-grid { gap: 14px 20px; }
-#spread-2 .game-data-label { font-size: 0.9rem; color: #E2E8F0; letter-spacing: 0.06em; }
-#spread-2 .game-data-value { font-size: 1.3rem; }
-#spread-2 .game-data-badge { font-size: 0.8rem; }
-#spread-2 .first-look-points { justify-content: stretch; gap: 18px; margin-top: 26px; margin-bottom: 22px; }
-#spread-2 .first-look-point-item { flex: 1; gap: 20px; padding: 12px 22px; }
-#spread-2 .flp-num { font-size: 2.3rem; width: 150px; flex-shrink: 0; text-align: center; vertical-align: 0; line-height: 1; }
-#spread-2 .first-look-symbol-badge { width: 54px; height: 54px; }
-#spread-2 .first-look-point-content { gap: 4px; }
-#spread-2 .first-look-point-title { font-size: 1.15rem; }
-#spread-2 .first-look-point-desc { font-size: 1.15rem; line-height: 1.35; }
-
-/* Fascia 4 — secondo giro */
-#spread-3 .voice-slide-points { gap: 34px; margin-top: 18px; }
-#spread-3 .call-to-arms-pill { margin-top: 10px; }
-#spread-3 .cajas-grid { grid-auto-rows: 1fr; }
-#spread-5 .gap-src { font-size: 0.8rem; color: #94A3B8; }
-
-/* Sfogliata delle pagine (layer temporanei creati in goToSpread) */
-.mag-spread-viewport { display: grid; place-items: center; perspective: none; }
-.mag-spread-viewport > .mag-spread { grid-area: 1 / 1; }
-.mag-spread.no-anim { animation: none; }
-.mag-spread.turn-layer { display: grid !important; animation: none; pointer-events: none; box-shadow: none; }
-.mag-spread.single-page.turn-layer { display: block !important; }
-.turn-static-left { clip-path: inset(0 50% 0 0); z-index: 2; }
-.turn-static-right { clip-path: inset(0 0 0 50%); z-index: 2; }
-.turn-front-right, .turn-back-left, .turn-front-left, .turn-back-right {
-  z-index: 3; backface-visibility: hidden; transform-origin: 50% 50%;
-  animation-duration: 780ms !important; animation-timing-function: cubic-bezier(0.55, 0.05, 0.3, 1) !important;
-  animation-fill-mode: forwards !important;
-}
-.turn-front-right { clip-path: inset(0 0 0 50%); animation-name: turnFrontRight !important; }
-.turn-back-left { clip-path: inset(0 50% 0 0); animation-name: turnBackLeft !important; }
-.turn-front-left { clip-path: inset(0 50% 0 0); animation-name: turnFrontLeft !important; }
-.turn-back-right { clip-path: inset(0 0 0 50%); animation-name: turnBackRight !important; }
-@keyframes turnFrontRight { from { transform: perspective(3400px) rotateY(0deg); } to { transform: perspective(3400px) rotateY(-180deg); } }
-@keyframes turnBackLeft { from { transform: perspective(3400px) rotateY(180deg); } to { transform: perspective(3400px) rotateY(0deg); } }
-@keyframes turnFrontLeft { from { transform: perspective(3400px) rotateY(0deg); } to { transform: perspective(3400px) rotateY(180deg); } }
-@keyframes turnBackRight { from { transform: perspective(3400px) rotateY(-180deg); } to { transform: perspective(3400px) rotateY(0deg); } }
-.turn-shade { position: absolute; inset: 0; z-index: 50; pointer-events: none; opacity: 0; animation: 780ms cubic-bezier(0.55, 0.05, 0.3, 1) forwards; }
-.turn-front-right .turn-shade { background: linear-gradient(to left, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.45) 100%); animation-name: shadeIn; }
-.turn-front-left .turn-shade { background: linear-gradient(to right, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.45) 100%); animation-name: shadeIn; }
-.turn-back-left .turn-shade { background: linear-gradient(to right, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 50%); animation-name: shadeOut; }
-.turn-back-right .turn-shade { background: linear-gradient(to left, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 50%); animation-name: shadeOut; }
-@keyframes shadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes shadeOut { from { opacity: 1; } to { opacity: 0; } }
-
-/* ==========================================================================
-   TELA FISSA 16:9 — ogni spread è progettato a 1680x945 e scalato in blocco
-   (--mag-scale è calcolato in magazine.html in base allo spazio disponibile).
-   Stessa impaginazione su proiettore, portatile e monitor.
-   ========================================================================== */
-.mag-spread {
-  width: 1680px;
-  height: 945px;
-  max-width: none;
-  max-height: none;
-  aspect-ratio: auto;
-  flex-shrink: 0;
-  zoom: var(--mag-scale, 1);
 }
