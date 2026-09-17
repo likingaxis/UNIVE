@@ -142,6 +142,27 @@ con attesa fino a comparsa di `__BUILD_SUCCESS__` / `__BUILD_FAILED__`. Ma una s
 
 **Aggancio agli altri contributi.** Questo episodio dà valore al *gate* di CS-anteriore (deploy solo su `__BUILD_SUCCESS__`) e all'iniezione dell'errore di build nel prompt dell'healer: pezzi di robustezza del **loop di rebuild** che, insieme, rendono il self-healing affidabile end-to-end. Bel filo per il Cap. 3: *"il self-healing non falliva per incapacità del modello, ma per fragilità d'infrastruttura nel loop"*.
 
+### CS-3 — La chiusura del loop: prima certificazione self-healing end-to-end (Pizzeria_B2R, 16/09/2026) ⭐ *milestone A1*
+
+> **Perché vale come caso di studio.** È il **payoff** dei tre episodi precedenti: la dimostrazione empirica che il closed-loop *funziona davvero* — difetto → diagnosi → riparazione autonoma → conformità certificata fino a root. È il risultato-cardine del Cap. 3 (self-healing) e del Cap. 4 (evidenza sperimentale).
+
+**Il risultato (da `run_summary.json`).** `status: COMPLETED`, **7/7 step, 0 falliti (100%)**, durata ~26 min (1560s, incluso il ciclo di healing). Kill chain completa e verificata con evidenza forense: LFI `/orari.php` → lettura `config.php` via `php://filter` (base64) → creds SSH `user:user` → pivot a `franchino` → **privesc a root** via `sudo /bin/nano /etc/passwd` (NOPASSWD) con iniezione utente UID 0. Flag reali catturate: user `VDSI{f00th0ld_4cqu1r3d_ch3_p1zz4}`, root `VDSI{r00t_pwn3d_p1zz4_m4rgh3r1t4}`.
+
+**Il loop che si chiude — la sequenza completa:**
+1. **Difetto** — la macchina generata non aveva la chat e linkava `/orari.php` direttamente in navbar (defect di generazione IaC).
+2. **Diagnosi** (`healing_ticket.json`) — l'Evaluator produce un ticket con RCA **corretta**: `defect_type: IAC_GENERATION_DEFECT`, `blocking_step: FASE_2`, root cause = *"il pipeline non ha prodotto il componente chat… il link a orari.php è esposto direttamente… rendendo impossibile la scoperta del pannello nascosto"*.
+3. **Riparazione autonoma** (`healing_1/HEALING_REPORT.md`, patch su **11 file** sorgente+compilati) — l'healer ha **creato** `chat.js` + `chat.php` (bot con intent-matching regex che risponde agli orari rivelando `/orari.php`), aggiunto il widget e gli stili, e — punto chiave — **rimosso il link diretto** dalla navbar e dai "Servizi Rapidi", sostituendolo con la chat. Ha chiuso il *bypass*, non solo aggiunto la feature.
+4. **Conformità** — al retest FASE_2 passa **tramite la chat** (`POST /chat.php` → `{"endpoint":"/orari.php"}`, `chat.js` fa `fetch`), e la catena arriva a root.
+
+**Cosa dimostra (i punti da vendere in tesi):**
+- Il self-healing **non "fa passare il test"**: ripara la *causa a monte* nei sorgenti IaC (Heuristic Lead), con **Minima Riparazione** e **Fedeltà all'Intento** (ha ripristinato il percorso didattico previsto senza abbassare la difficoltà né fare leak).
+- I **5 fix del loop** hanno lavorato in coro: (1) Planner severo rende visibile il difetto, (2) sentinella echo-safe + (3) gate + (4) idle-watchdog garantiscono che *la riparazione arrivi davvero al container*, (5) la rete di sicurezza dell'errore-build resta pronta.
+- Rende concreta la tesi centrale: **il self-healing non falliva per incapacità del modello, ma per fragilità d'infrastruttura nel loop di rebuild** — rimosse quelle, il loop chiude fino a root.
+
+**Figure/estratti utili:** il diff `index.php` (prima: link diretto `<a href="orari.php">Consulta gli orari</a>` → dopo: widget chat + `<script src="assets/chat.js">`); l'intent-matching di `chat.php`; la checklist FASE_2 severa soddisfatta via `/chat.php`; la timeline del ciclo (difetto → ticket → 11 file patchati → retest 7/7).
+
+**Trittico completo:** CS-1 (oracolo lasco che nasconde il difetto) → CS-2 (echo bug che impediva alla fix di arrivare al container) → **CS-3 (il loop che finalmente chiude end-to-end)**. Tre problemi distinti, tutti d'infrastruttura/oracolo, nessuno di "intelligenza" del modello.
+
 ---
 
 ## 🧭 Note trasversali (promemoria da tenere a mente scrivendo)
