@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ad8907a0a2b69f74",
+        "id": "c21e9759ccb9b390",
         "type": "tabs",
         "children": [
           {
-            "id": "819c311d45de7c56",
+            "id": "2a93d8f56fe5ef3d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/ANNO 3/GENDER INCLUSION/Copione finale.md",
+                "file": "UNI/ANNO 3/TESI/PAPER LETTI E IDEE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Copione finale"
+              "title": "PAPER LETTI E IDEE"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 579.9000244140625
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -187,11 +187,16 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "819c311d45de7c56",
+  "active": "385e3b437a6aac05",
   "lastOpenFiles": [
+    "UNI/ANNO 3/TESI/PAPER LETTI E IDEE.md",
+    "UNI/ANNO 3/TESI/TESI.md",
+    "UNI/ANNO 3/TESI/Documentazione.md",
+    "UNI/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
+    "UNI/ANNO1 M/ORGANIZZAZIONI ESAMI 2.md",
     "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/TESI/Call/call pasquale.md",
-    "UNI/ANNO1 M/ORGANIZZAZIONI ESAMI.md",
+    "UNI/ANNO 3/ARCHIVIO/GENDER INCLUSION/Copione finale.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/CASI_TEST_NEGATIVE_TESTING.md",
     "UNI/ANNO 3/TESI/IDEE SPARSE.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/DIFETTI PRINCIPALI.md",
@@ -203,7 +208,6 @@
     "UNI/ANNO 3/TESI/SPIEGAZION/architettura_completa.md",
     "UNI/ANNO 3/TESI/idee_e_struttura_tesi.md",
     "UNI/ANNO 3/TESI/ORGANIZZAZIONE TESI.md",
-    "UNI/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
     "UNI/ANNO1 M/ORARIO.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/sedPNbZ8a",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/sedNEeACv",
@@ -221,19 +225,15 @@
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/magazine.html.tmp.49820.f774c4b1bd9f",
     "UNI/ANNO 3/GENDER INCLUSION/Copione orale REVISIONATO.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/sedYJWJdN",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/_backup_2026-09-16/magazine.css",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/_backup_2026-09-16/magazine.html",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/_backup_2026-09-16",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/FONTI.md",
+    "UNI/ANNO 3/ARCHIVIO/GENDER INCLUSION/SLIDE/_backup_2026-09-16/magazine.css",
+    "UNI/ANNO 3/ARCHIVIO/GENDER INCLUSION/SLIDE/_backup_2026-09-16/magazine.html",
+    "UNI/ANNO 3/ARCHIVIO/GENDER INCLUSION/SLIDE/_backup_2026-09-16",
+    "UNI/ANNO 3/ARCHIVIO/GENDER INCLUSION/SLIDE/FONTI.md",
     "UNI/ANNO 3/GENDER INCLUSION/Copione orale REVISIONATO.md.tmp.49820.d92649692a6f",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/REVISIONE.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/README.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/PRODUCT.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/BRIEF.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/DESIGN_SINTESI.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Design.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/copione.md",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/BRIEF_SINTESI.md",
+    "UNI/ANNO 3/ARCHIVIO/GENDER INCLUSION/SLIDE/BRIEF.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/Unconfirmed 531263.crdownload"
   ]
 }

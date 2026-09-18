@@ -14,7 +14,7 @@
 > ridurrei la dimensione del font di queste evidenze
 
 ### 📸 Riferimento Visivo Annotato:
-![Bug #1](./images/bug_1.png)
+![Bug #1](bug_1.png)
 
 <details>
 <summary>🔎 Clicca per espandere il Frammento HTML / DOM</summary>
@@ -67,7 +67,7 @@
 > migliorare la leggibilità di questa parte qui
 
 ### 📸 Riferimento Visivo Annotato:
-![Bug #2](./images/bug_2.png)
+![Bug #2](bug_2.png)
 
 <details>
 <summary>🔎 Clicca per espandere il Frammento HTML / DOM</summary>
