@@ -288,4 +288,138 @@ La catena parte da una **SQLi** che bypassa il login (`' OR 1=1--`) e porta alla
 
 ## 7. Piano scientifico da proporre
 
-*(da scrivere insieme)*
+Le quattro macchine della sezione precedente dimostrano *qualitativamente* che l'architettura funziona sul campo. Per una tesi di laurea e una validazione accademica, però, il solo "funziona" non basta: serve un piano sperimentale capace di rendere le prestazioni **misurabili, confrontabili e riproducibili**.
+
+Definisco quindi un framework di valutazione articolato su **quattro benchmark quantitativi (B1-B4)**, descrivo la metodologia controllata con cui generare le macchine di prova (la perturbazione del ground truth), collego ogni scelta alla letteratura recente sugli agenti autonomi, e infine separo con trasparenza gli esperimenti prioritari da quelli opzionali.
+
+---
+
+### I quattro benchmark
+
+Ciascun benchmark risponde a una domanda specifica sul comportamento del sistema: il tester *vede* il problema? Lo *capisce*? Lo *ripara*? E quanto *costa* farlo?
+
+```
+B1: Riconoscimento (il tester VEDE)      -> Confusione binaria (TP/FP/FN/TN) + Progress
+B2: Diagnosi (il tester CAPISCE)         -> Accuratezza della Root Cause Analysis (RCA)
+B3: Riparazione (il tester RIPARA)       -> Successo Closed-Loop + Invasività della Patch
+B4: Efficienza (ASSE TRASVERSALE)        -> Tempi di fase, Consumo Token e Numero di Tool
+```
+
+---
+
+#### B1 — Capacità di Riconoscimento (il tester *vede*)
+
+- **Domanda guida**: *Il sistema è in grado di accorgersi in autonomia se una macchina presenta un difetto, distinguendola da una sana?*
+- **Contesto pratico**: Nei test di sicurezza adottiamo la convenzione diagnostica standard: consideriamo **«Positivo»** il riscontro di un'anomalia o difetto nella macchina.
+  - **Vero Positivo (TP)**: la macchina è difettosa e l'agente la blocca dichiarando `FAILED`. (Successo dell'auditor: il difetto è stato intercettato).
+  - **Falso Positivo (FP)**: la macchina era sana e conforme, ma l'agente fallisce per errore o allucinazione. (Falso allarme).
+  - **Falso Negativo (FN)**: la macchina conteneva un difetto, ma l'agente lo aggira o non se ne accorge, dichiarando `COMPLETED`. (Difetto sfuggito: la macchina rotta viene promossa per errore).
+  - **Vero Negativo (TN)**: la macchina era perfettamente sana e il test si conclude con `COMPLETED`.
+
+Da questa matrice di confusione ricaviamo gli indicatori statistici di affidabilità:
+$$\text{Precision} = \frac{TP}{TP + FP} \qquad \text{Recall} = \frac{TP}{TP + FN} \qquad F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+- **La misura a grana fine: il *Progress***:
+  Un verdetto binario (Passato/Fallito) è troppo rigido e nasconde informazioni vitali: fallire al primo step perché una porta è chiusa non è la stessa cosa che fallire al penultimo dopo aver completato con successo 6 fasi complesse su 7. Per questo affianchiamo la metrica di avanzamento:
+  $$\text{Progress} = \frac{\sum \text{voci di checklist con } passed = true}{\text{totale complessivo voci di checklist del piano}}$$
+- **Dove vive il dato**: L'esito binario si legge da `metrics.status` (`COMPLETED` o `FAILED`), mentre il progress si calcola aggregando i singoli punti verificati in `steps_detail[].checklist_evaluation` dentro `run_summary.json`.
+
+---
+
+#### B2 — Accuratezza Diagnostica (il tester *capisce*)
+
+- **Domanda guida**: *Quando il collaudo si blocca, il sistema comprende la reale causa tecnica del problema o genera spiegazioni superficiali?*
+- **Contesto pratico**: C'è una differenza sostanziale tra il *sintomo* osservato dall'agente all'esterno (es. "il server risponde 403 Forbidden" oppure "il login SSH viene rifiutato") e la *causa radice* interna all'infrastruttura (es. permessi errati su `/root/.ssh/authorized_keys` o una direttiva mancante in Nginx). Misuriamo se la Root Cause Analysis (RCA) prodotta dal Final Evaluator centra il vero componente impattato.
+- **Formula**:
+  $$\text{RCA Accuracy} = \frac{\text{numero di diagnosi corrette}}{\text{numero totale di fallimenti analizzati}}$$
+  Una diagnosi è classificata come **corretta** se il ticket formale (`healing_ticket.json`) identifica esattamente sia la tipologia del guasto (`defect_type`), sia il componente sorgente o file di configurazione (`affected_component`) che è stato alterato nel test.
+- **Dove vive il dato**: La diagnosi dell'auditor è archiviata in `healing_ticket.json`, e viene confrontata a posteriori con il registro della mutazione nota applicata alla macchina.
+
+---
+
+#### B3 — Efficacia di Riparazione (il tester *ripara*)
+
+- **Domanda guida**: *L'agente di riparazione (VulcaHealing) riesce a ripristinare la piena risolvibilità della macchina con un intervento chirurgico e rispettoso del design originale?*
+- **Contesto pratico**: La riparazione non deve limitarsi a "far passare il test ad ogni costo": non deve abbassare la difficoltà della sfida, non deve eliminare le vulnerabilità didattiche volute e non deve riscrivere interi file se bastava correggere una riga. Valutiamo quindi due aspetti complementari: il tasso di successo e la pulizia della patch.
+- **Formule**:
+  1. **Successo Closed-Loop**: percentuale di cicli in cui, dopo la riparazione, il secondo run di collaudo va a buon fine fino a root:
+     $$\text{Closed-Loop Success Rate} = \frac{\text{interventi di healing con retest COMPLETED}}{\text{totale interventi di healing avviati}}$$
+  2. **Invasività della Patch (Minimalità)**: quantifica quanto l'intervento è stato conciso rispetto alla correzione minima ideale (calcolata tramite il diff deterministico di `diff_tracker`):
+     $$\text{Ampiezza Patch} = \#\text{file modificati} + \#\text{righe alterate}$$
+- **Dove vive il dato**: L'esito del retest è registrato nel nuovo `metrics.status`, mentre il dettaglio riga per riga della modifica si trova nei file generati `healing/healing_N/patch.diff` e nel contatore `modified_count` di `HEALING_REPORT.md`.
+
+---
+
+#### B4 — Costo Computazionale ed Efficienza (Asse Trasversale)
+
+- **Domanda guida**: *Quante risorse (in termini di tempo reale, token consumati e comandi eseguiti) richiede validare o riparare un laboratorio?*
+- **Contesto pratico**: Questo benchmark non usa una formula chiusa, ma misura i costi vivi del framework, permettendo di confrontare macchine di difficoltà diversa o modelli LLM differenti a parità di scenario. Abbiamo strutturato la misurazione su tre dimensioni indipendenti per evitare che si inquinino a vicenda:
+  1. **Tempi Netti per Fase (`phase_timings`)**:
+     - *Tempo di Setup*: misurazione isolata del reset Clean Slate dei container Docker (`setup_seconds`), così la lentezza del disco locale non altera il giudizio sull'agente.
+     - *Tempo Puro di Collaudo*: somma netta del tempo trascorso all'interno di `executor_node` (ragionamento + esecuzione tool su Kali) e `orchestrator_node` (routing deterministico).
+     - *Tempo di Valutazione e Riparazione*: isolamento del tempo impiegato per la RCA (`final_evaluator_node`) e per l'eventuale ciclo di Antigravity CLI e rebuild (`healer_node`).
+  2. **Consumo Granulare di Token (`tokens`)**:
+     - Conteggio separato di token di input (prompt) e output (risposte/thinking) per ciascun attore: `planner`, `executor_total` (con spaccato per singolo step `executor_per_step`), `final_evaluator`, `healer` e `grand_total`.
+  3. **Complessità Operativa**:
+     - Numero di turni ReAct impiegati (`steps_detail[].turns_used`) rispetto al budget concesso, e totale dei comandi inviati a terminale (`total_tool_calls`).
+- **Dove vive il dato**: Tutte le metriche sono serializzate in modo nativo nei campi dedicati `metrics.phase_timings` e `metrics.tokens` di `run_summary.json`.
+
+---
+
+### La metodologia: come generare le macchine di prova (Ground Truth per Perturbazione)
+
+Per poter calcolare oggettivamente la matrice di confusione (B1) e l'accuratezza diagnostica (B2), è indispensabile conoscere la **verità assoluta** su ogni macchina prima ancora di avviare il test: dobbiamo sapere con certezza se è sana o difettosa, dove risiede l'errore e quale comportamento ci si deve attendere.
+
+Invece di affidarci a difetti casuali o imprecisi, adottiamo una tecnica consolidata nell'ingegneria del software: la **perturbazione controllata (Mutation Testing)**:
+
+1. **Stato Base (Golden State)**: Partiamo da una macchina didattica certificata come pienamente funzionante, in cui il percorso di attacco previsto (*intended way*) viene completato al 100% con successo.
+2. **Iniezione della Singola Mutazione**: Applichiamo una singola alterazione mirata e deterministica nei sorgenti dell'infrastruttura (IaC di VulcaForge):
+   - *Esempio sui permessi*: cambiare la proprietà di una chiave SSH privata da `operator` a `root` in `machines/authgate.yaml` (la chiave diventa illeggibile per l'utente, bloccando il foothold).
+   - *Esempio applicativo*: alterare una regex di routing o un parametro HTTP nella webapp.
+   - *Esempio di configurazione*: rimuovere una direttiva da `sudoers` o disabilitare un'estensione in PHP-FPM.
+
+In questo modo abbiamo un **Ground Truth perfetto**: sappiamo a priori quale fase deve fallire e quale componente è colpevole.
+
+- **Numerosità del campione sperimentale**:
+  - *Scala formale*: Per garantire una significatività statistica rigorosa, il numero di campioni $n$ può essere dimensionato con la formula $n \ge \frac{\ln(1-C)}{\ln(1-p)}$ (dove $C$ è il livello di confidenza e $p$ la probabilità di guasto; es. per un $C=99\%$ e $p=20\%$ servono circa 21 macchine mutate).
+  - *Dimostrazione pilota per la tesi*: Ai fini della validazione del framework, è sufficiente un trittico dimostrativo basato su tre scenari controllati:
+    1. Una macchina sana di controllo (deve dare esito `COMPLETED`).
+    2. Una macchina con rottura bloccante macroscopica (es. porta o servizio disabilitato: deve dare `FAILED` immediato).
+    3. Una macchina con un'anomalia sottile di permessi o logica didattica (es. permessi errati o incoerenza di oracolo: deve dare `FAILED` nello step esatto e innescare la corretta diagnosi RCA).
+
+---
+
+### I fondamenti teorici: da dove nascono queste scelte
+
+Il piano sperimentale proposto non è frutto di intuizioni estemporanee, ma adatta alla cybersecurity i principi metodologici emersi nella letteratura più autorevole sulla valutazione di sistemi agentici basati su LLM:
+
+1. **Valutazione a grana fine invece che binaria (Subtask Decomposition)**:
+   - *Letteratura*: **AgentBoard** (*benchmarking multimodal agents*) e **Cybench** (*evaluating LLMs on cybersecurity challenges*).
+   - *Applicazione in VulcaTest*: Valutare un agente solo con un flag booleano "ha preso la flag di root sì/no" cancella l'intero comportamento intermedio. La nostra metrica di *Progress* scompone il collaudo nei singoli requisiti atomici della checklist didattica.
+2. **Integrità dell'Oracolo e Divieto di Autocertificazione (Test Oracle Problem)**:
+   - *Letteratura*: **SWE-Bench Pro** e la letteratura sul *Reward Hacking* / *Specification Gaming*.
+   - *Applicazione in VulcaTest*: Se l'agente che esegue i comandi potesse anche giudicare a parole se ha fatto bene, tenderebbe ad "auto-promuoversi" per compiacere l'obiettivo. In VulcaTest l'oracolo è separato: l'Executor interagisce sul campo, ma il verdetto è vincolato da contratti Pydantic rigidi e verifiche empiriche testuali nell'output.
+3. **Valutazione Congiunta: Modello + Architettura (Scaffold-Aware Evaluation)**:
+   - *Letteratura*: **SWE-agent** (*Agent-Computer Interfaces*) e **Cybench**.
+   - *Applicazione in VulcaTest*: Le performance di un agente dipendono per metà dal modello LLM e per metà dai tool e dal controllo del flusso (lo *scaffold*). Mantenendo invariata la nostra architettura LangGraph, possiamo isolare l'impatto del solo modello di linguaggio scambiando la configurazione in `.env`.
+
+---
+
+### Programma di lavoro: impegni certi vs estensioni opzionali
+
+Per garantire serietà scientifica e rispetto delle tempistiche di tesi, distinguo chiaramente ciò che costituisce il nucleo obbligatorio dello studio da ciò che rappresenta un'estensione facoltativa.
+
+#### Sperimentazioni Certe (Nucleo della Tesi)
+1. **Confronto tra Modelli (Cloud vs Locale)**:
+   - Esecuzione delle run di benchmark confrontando un modello cloud avanzato (es. Qwen 2.5 / DeepSeek via API) con un modello open-weights locale eseguito interamente su scheda grafica.
+   - *Obiettivo*: Quantificare il trade-off tra costo/latenza e accuratezza, dimostrando che il conformance testing può operare anche in ambienti isolati offline senza connessione internet.
+2. **Studio di Efficacia dell'Architettura (Ablazione dei Ruoli)**:
+   - Confronto tra la nostra pipeline modulare a ruoli separati (Planner $\to$ Orchestrator $\to$ Executor $\to$ Evaluator) e un approccio monolitico generico (un singolo agente a cui viene chiesto di fare tutto insieme).
+   - *Obiettivo*: Provare scientificamente che la separazione dei ruoli previene il *goal drift* e produce riscontri più affidabili.
+3. **Metriche Reali di Risoluzione**:
+   - Raccolta completa della tabella dei benchmark (B1, B2, B3, B4) sul trittico di test pilota per documentare numericamente tempi di fase, percentuali di progresso e consumo di token.
+
+#### Estensioni Opzionali (Solo se il tempo residuo lo consentirà)
+1. **Dataset di Perturbazione su Larga Scala**: Generazione automatizzata di decine di varianti mutate tramite script per popolare matrici di confusione statisticamente estese.
+2. **Modalità Black-Box Pura**: Esecuzione del collaudo senza fornire writeup né storyline, ricavando gli obiettivi unicamente dalle descrizioni/flag della piattaforma CTFd per confrontare i tempi dell'agente con i tempi medi degli studenti umani registrati negli esami universitari.
+3. **Benchmarking Autonomo della Coerenza del Planner**: Misurazione formale della capacità del Planner di rilevare oracoli contraddittori o trappole didattiche nei documenti sorgente prima ancora di passare il piano all'esecutore.

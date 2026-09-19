@@ -1,7 +1,21 @@
 - fregatene dei voti, stai costruendo la persona che sarai in magistrale, lì puoi grindare di brutto sei bravo in quelle cose e inoltre farai esperienze come erasmus ecc... (Se ti impegni davvero)
 
+
+- [x] [  ] Prima di fare brainstorming crea un bug in citadel o datavalut e vedi se executor e healing risolvono la cosa
+- [x] [  ] Chiedi come fanno ora a essere raccolte effettivamente le metriche, quali raccogliamo già?
+- [x] [  ] Brainstorming sui paper mentre eseguo fix delle macchine
+- [x] [  ] Ripristino delle macchine
+- [x] [  ] Definire i benchmark
+- [x] [  ] Definire le metriche
+- [ ] [  ] Creare 3-4 esempi di macchine e salvarne le metriche
+- [ ] aggiustarle(sono tutte sbagliate)
+- [ ] [  ] Scrivere bene la presentazione da fare al pasquale con impronta architetturale e progettuale della cosa, es: perché ho usato yaml al posto di JSON(può essere interessante)
+- [ ] [  ] Fare le slide e prepararsi alla presentazione(aurora ti ascolta)
+- [ ] [  ] Mentre creo e testo le macchine inizio a scrivere la tesi (i primi capitoli che funzionano senza dati effettivi,chiedi per sicurezza se ha senso)
+- [ ] [  ] Prima di realizzare i benchmark devo accertarmi che la linea produttiva funzioni su 3-4 casi
+
 - [ ] Completare call pasquale.md
-- [ ] Leggere i paper+video su yt
+- [x] Leggere i paper+video su yt
 - [ ] Brainstorming su quali benchmark usare
 - [ ] definire le metriche per ottenere quei benchmark(prendere i più fattibili)
 - [ ] testare e vedere se le metriche vengono effettivamente restituite

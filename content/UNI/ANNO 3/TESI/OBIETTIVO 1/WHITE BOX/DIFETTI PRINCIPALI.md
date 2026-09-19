@@ -52,6 +52,7 @@ Questa sezione raggruppa le anomalie che si verificano durante la traduzione dai
 #### A2.3 — Mancata Abilitazione dei Siti o Mancato Reload dei Demoni
 * **Descrizione del Problema:** Il file di configurazione Nginx viene scritto in `/etc/nginx/sites-available/custom.conf`, ma non viene creato il symlink simbolico in `/etc/nginx/sites-enabled/`, oppure non viene inviato il segnale `nginx -s reload`.
 * **Sintomo:** Nginx continua a servire la vecchia configurazione o la sola configurazione di fallback `default`.
+* **Strategia di Rilevamento/Fix:** Negative testing NT-WEB-05; verifica che il web server applichi la configurazione aggiornata e non la sola landing page di default.
 
 ---
 
@@ -61,6 +62,7 @@ Questa sezione raggruppa le anomalie che si verificano durante la traduzione dai
 * **Descrizione del Problema:** In sfide multi-vhost (es. `portal.vdsi` per la parte pubblica e `admin.vdsi` o `api.vdsi` per la console gestionale), le vulnerabilità (es. LFI, Upload, SQLi) o i blocchi `location` vengono associati al `server_name` sbagliato.
 * **Causa Tecnica Radice:** Mancanza di modularità nella suddivisione dei file `.conf` o nesting errato dei blocchi `server { ... }` generati tramite concatenazione automatica in Ansible.
 * **Sintomo:** L'attacco funziona se effettuato con header `Host: default`, ma fallisce quando lo studente o l'auditor interroga l'hostname specifico documentato nello writeup.
+* **Strategia di Rilevamento/Fix:** Negative testing NT-WEB-06 (VHost Mismatch); collaudo deterministico delle rotte su ciascun `server_name` dichiarato.
 
 #### A3.2 — Host-Header Mismatch e Mancata Sincronizzazione `/etc/hosts`
 * **Descrizione del Problema:** Nginx è configurato rigidamente su `server_name challenge.lab;` con direttiva di rifiuto o drop per richieste sull'IP grezzo.
@@ -74,6 +76,7 @@ Questa sezione raggruppa le anomalie che si verificano durante la traduzione dai
 * **Descrizione del Problema:** La catena di exploit richiede di fare lateral movement o accesso SSH su un utente intermedio (es. `developer`, `sysadmin`, `operator`), ma l'utente non esiste nel sistema.
 * **Causa Tecnica Radice:** Il modulo Ansible `ansible.builtin.user` viene saltato, oppure mancano i parametri obbligatori (`create_home: true`, `shell: /bin/bash`). Su container leggeri, l'utente viene talvolta creato senza cartella `/home/<user>`, impedendo l'accesso SSH o il salvataggio della user flag.
 * **Sintomo:** Tentativi di switch (`su - user`) o connessione SSH falliscono con `User not found` o `No such file or directory` sulla home.
+* **Strategia di Rilevamento/Fix:** Negative testing NT-AUTH-03; verifica dell'esistenza utente, della presenza della home directory e della validità della shell interattiva.
 
 #### A4.2 — Password Mismatch & Hashing Incompatibile
 * **Descrizione del Problema:** La password dichiarata nell'`ATTACK_PLAN.md` non corrisponde a quella effettivamente impostata nel container.
@@ -89,6 +92,7 @@ Questa sezione raggruppa le anomalie che si verificano durante la traduzione dai
 * **Descrizione del Problema:** L'utente `www-data` deve poter salvare file nella cartella `/var/www/html/uploads/`, ma la cartella appartiene a `root:root` con permessi `0755`.
 * **Causa Tecnica Radice:** Mancata esecuzione di `chown -R www-data:www-data /var/www/html/uploads/`.
 * **Sintomo:** Le richieste di upload falliscono con errore applicativo o generano un errore PHP `Warning: move_uploaded_file(...): failed to open stream: Permission denied`.
+* **Strategia di Rilevamento/Fix:** Negative testing NT-WEB-07 (Ownership Cartelle Web) e NT-PRIV-05 (Ownership Script Post-Exploitation).
 
 #### A5.2 — "Permessi Laschi" e Scorciatoie Didattiche (Unintended Solutions)
 * **Descrizione del Problema:** I file di sistema, le cartelle o le flag vengono generati con permessi eccessivamente aperti (`chmod 777` o `644`).
@@ -96,6 +100,7 @@ Questa sezione raggruppa le anomalie che si verificano durante la traduzione dai
 * **Impatto Didattico Catastrofico:**
   - Se `/root/root.txt` è leggibile con `chmod 644`, l'utente di basso livello `www-data` può eseguire `cat /root/root.txt` direttamente via web shell, **cortocircuitando l'intera storyline** (rendendo inutili 6+ fasi di lateral movement e privilege escalation).
   - Se script eseguiti da root (es. `/opt/backup.sh`) hanno permessi `777`, qualsiasi utente può riscriverli immediatamente senza sfruttare le vulnerabilità logiche previste.
+* **Strategia di Rilevamento/Fix:** Negative testing NT-PRIV-04 (Flag root con permessi laschi) e NT-PRIV-06 (Script di root con permessi 777); verifica automatica dell'albero dei permessi contro scorciatoie didattiche non intenzionali.
 
 #### A5.3 — Permessi Errati su File SSH (`StrictModes` Failure)
 * **Descrizione del Problema:** Una chiave privata SSH (`id_rsa`) o pubblica (`authorized_keys`) viene piazzata nel sistema, ma l'autenticazione viene rifiutata.
