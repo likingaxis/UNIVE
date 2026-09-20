@@ -1,16 +1,12 @@
-struttura del seguente testo:
-- reintroduzione e spiegazione rapida del progetto
-- cosa succede se applico vulcatest a un classico sistema con harness tipo antigravity? mostra il problema devi trovare la chat
-- soluzione:
-- architettura e decisioni progettuali prese in vulcatest (alto livello)(mermaid)
-- Executor a basso livello con un focus sulle decisioni progettuali prese
-- architettura bridge utilizzata su vulcatest per utilizzo dei tool(mermaid)
-- vulcahealing 
-- utilizzo di modelli locali
-- test eseguiti (descrivi le 8 macchine realizzate e portati i report se vuole analizzarli) (caso studio principale pizzeria_B2R)
-- piano scientifico, benchmark+metriche
+#### Slide 1
+- nome studente: Luca Gugliotta
+- nome relatore: Francesco Pasquale
+- Corso di Laurea: Tor Vergata Informatica (L-31)
+- Progetto: VulcaTest & VulcaHealing
+- Titolo: Conformance testing agentico e self-healing per macchine vulnerabili generate da AI: progettazione e validazione di un framework evidence-based per laboratori didattici di cybersecurity
 
-#### 1. Reintroduzione e spiegazione rapida del progetto
+#### Slide 2: Reintroduzione e spiegazione rapida del progetto
+
 VulcAIn è un ecosistema che combina agenti AI e IaC(Infrastructure as Code) per generare macchine vulnerabili per sfide CTF e B2R
 è composta principalmente da un workflow composto da 3 moduli:
 - VulcaMind: a partire da una descrizione iniziale definisce la storyline la struttura della challenge il percorso di attacco della macchina e la relativa soluzione
@@ -20,7 +16,9 @@ VulcAIn è un ecosistema che combina agenti AI e IaC(Infrastructure as Code) per
 Il mio compito è stato quello di introdurre Vulcatest e VulcaHaling due moduli aggiuntivi che rispettivamente devono:
 - verificare la validità della macchina mediante del pentesting agentico Quality Assurance
 - riparare la macchina in caso emerga qualche problema
-#### 2. Cosa succede se delego il modulo vulcatest ad un harness AI come antigravity?
+
+#### Slide 3: Cosa succede se delego il modulo vulcatest ad un harness AI come antigravity?
+
 ##### Sono presenti 3 problematiche principali
 ###### 1. Guardrail stringenti soprattutto su modelli di frontiera
 > This request was blocked by Gemini's filters. They can occasionally trigger by mistake on safe coding, security, or biology-related queries. Please try rephrasing your prompt. You can [send feedback](https://ai.google.dev/gemini-api/docs/troubleshooting#file-bug) or read more about [our policies here](https://policies.google.com/terms/generative-ai/use-policy).
@@ -36,7 +34,7 @@ inoltre un harness generico lavora senza il rigore di un oracolo evidence-based:
 
 un esempio concreto è pizzeria: la storyline prevedeva che l'endpoint nascosto si scoprisse tramite una chat di assistenza, ma la chat non era stata generata e il link era esposto in chiaro. un harness libero completa comunque la challenge e la dà per valida; il mio executor invece rileva l'incoerenza e blocca la fase, perché la checklist richiede esplicitamente quel canale come intended way
 
-#### 3. Architettura VulcaTest in modalità White-Box
+#### Slide 4: Progettazione Architetturale di VulcaTest in modalità White-Box
 Come soluzione per la verifica delle intended ways per determinare la conformance della macchina ho realizzato una architettura di tipologia role-based che ha il compito di risolvere la problematica esposta in precedenza
 
 Vorrei innanzi tutto definire dei principi cardine che mi sono prefissato a priori nella fase di progettazione dell'architettura
@@ -56,9 +54,12 @@ a livello micro abbiamo ReAct:
 - un esecutore che fa reasoning-> Act -> observe 
 - tutto questo con una suddivisione in turni
 
+#### Slide 5: Architettura effettiva
+IMPORTANTE DA METTERE NELLE SLIDE LA FOTO DELL'ARCHITETTURA
 ![[Pasted image 20260920161552.png|451]]
 
-##### Planner
+#### Slide 6: Planner
+
 Il modulo del pianificatore è suddiviso in 2 parti che riprendono il principio numero 1
 Una parte con uso di LLM che genera un `ATTACK_PLAN.md` a partire da:
 - system prompt ben definito che obbliga l'LLM a generare un piano rigoroso e con un certo formato
@@ -78,7 +79,7 @@ Una seconda parte con  `plan_parser.py`
 	- `allowed_tools`
 
 ci tengo a precisare che `ATTACK_PLAN.md` dentro ha degli snippet in YAML, in questo caso è stato preferito al JSON poiché più permissivo
-##### Orchestrator
+#### Slide 7: Orchestratore
 Non è un singolo modulo ma possiamo racchiudervi un insieme di componenti atte a controllare il workflow in modo deterministico
 L'elemento principale di questa orchestrazione è `graph.py`
 - definisce l'attivazione condizionale dei nodi mediante l'utilizzo di archi, ho utilizzato LangGraph per realizzarlo, è importante non confonderlo con il grafo dell'architettura questo ha uno scopo prettamente di orchestrazione
@@ -111,7 +112,9 @@ L'elemento principale di questa orchestrazione è `graph.py`
 		- altrimenti chiama il nodo di healing
 	- `HEALER->ORCHESTRATOR`
 		- dopo che ha la correzione è stata effettuata passa all'orchestratore per eseguire di nuovo il test
-##### Executor
+
+#### Slide 8: Executor
+
 nodo di esecuzione che è stato progettato seguendo il principio ReAct spiegato precedentemente
 viene istanziato e richiamato ogni volta dal nodo di executor del grafo
 in executor ho portato diverse idee progettuali e non è un semplice LLM che ha la possibilità di chiamare dei tool di un server come HexStrike
@@ -128,7 +131,9 @@ in executor ho portato diverse idee progettuali e non è un semplice LLM che ha 
 	- turni utilizzati in quel momento
 	- il consumo dei token
 - un server bridge che fa da intermediario tra la macchina Kali e il nostro LLM che spiegherò ora come punto a sé per definire al meglio la sua architettura e struttura
-###### Bridge(non è un nodo fa parte di executor)
+
+#### Slide 9: Bridge
+![[Pasted image 20260920230436.png]]
 i tool che può utilizzare l'executor si dividono in 2 livelli distinti e per tale ragione è stato deciso di definire un bridge che nasconde la seguente suddivisione all'utilizzatore
 l'executor chiama un tool e il bridge decide dove mandarlo
 tool di livello 1
@@ -144,13 +149,17 @@ inoltre all'executor non viene per forza inviata tutta la lista dei tool possibi
 vengono sempre assegnati però dei tool di default tra quelli descritti in precedenza
 
 una cosa che il Bridge consente di effettuare come parte integrante dell'harness del nostro LLM è quella di consentire l'utilizzo di editor a schermo mediante l'invio di comandi da tastiera da parte dell'LLM convertiti in testo leggibile dal nostro server che usa `pexpect`
-##### Final Evaluator
+
+#### Slide 10: Final Evaluator
+
 nodo che trae le conclusioni e genera le evidenze sulla base di ciò che è stato fatto
 anche qui abbiamo una parte deterministica che calcola le metriche  e scrive un `run_summary.json` a partire dagli oggetti realizzati durante l'esecuzione del codice come `state` `StepResult` e `ToolCallRecord`
 poi avviene invece un secondo stadio con delle chiamate a LLM locali che generano
 - un `REPORT.md` sulla base del piano di attacco e dalle evidenze realizzate
 - un `healing_ticket.json` se la macchina presenta delle problematiche vengono evidenziate qui
-##### VulcaHealing
+
+#### Slide 11: VulcaHealing
+
 il nodo di healing presenta delle differenze dal nodo executor e per questo motivo è bene descriverlo seperatamente
 innanzitutto a differenza di tutto il resto la responsabilità di healing è stata affidata ad un software chiamato antigravity di google che consente l'utilizzo di agentic AI sfruttando modelli che mette a disposizione, questo consente un healing molto più avanzato e con dei tool potenzialmente infiniti forniti dal seguente software all'LLM utilizzato(in questo caso gemini 3.8 flash)
 
@@ -173,7 +182,8 @@ viene inoltre eseguito un diff deterministico da uno script python `diff_tracker
 
 dopo aver terminato viene effettuato un build del docker e viene rimesso in esecuzione per effettuare un nuovo test
 
-#### 4. Utilizzo di modelli locali
+#### Slide 12: Utilizzo di modelli locali
+
 In questo progetto ho utilizzato un modello locale
 `Qwen 3.8 27B Q3_K_XL` con thinking a low che lavora ai nodi di planning esecuzione e final evaluator
 come sviluppi futuri potrei realizzare anche il nodo di healing in locale così da rendere tutto completamente indipendente e a costo zero ma per il momento ancora non è così
@@ -188,8 +198,7 @@ Total tokens14.3M
 
 raggiungendo un costo stimato se si fosse pagato il tutto  di $6,58
 
-
-### 5. Raccolta delle macchine realizzate e testate con successo
+#### Slide 13: Raccolta delle macchine realizzate e testate con successo
 ho realizzato complessivamente 8 macchine e tutte e 8 hanno riportato delle buone risposte da parte della mia architettura(dopo qualche bug fixing)
 Se volessimo raggruppare le vulnerabilità testate avremmo:
 
@@ -227,7 +236,8 @@ Se volessimo raggruppare le vulnerabilità testate avremmo:
 - **cron job + file world-writable**: script di backup a `0777` eseguito da cron di root (Citadel), sfruttato anche in modalità **time-aware** (attesa dell'esecuzione periodica del cron)
 - **Python module hijacking via cron**: directory di import scrivibile e modulo (`random`) importato da uno script eseguito dal cron di root (ConsoleGate)
 
-### 6. Analisi scientifica
+#### Slide 14: Analisi scientifica
+
 Si vuole definire un piano sperimentale capace di rendere le prestazioni del workflow misurabili, confrontabili e riproducibili
 si vogliono quindi definire 4 benchmark quantitativi basati dopo una attenta lettura dei paper:
 - **PentestGPT**
@@ -355,7 +365,9 @@ Mappa di quali oggetti alimentano ogni benchmark:
 - confrontare l'approccio con questa architettura rispetto a una architettura monolitica agentica(magari confrontando anche i costi)
 - Modalità Black-Box pura e sottoporla a CTF come quelle di TryHackMe o esami svolti dagli studenti di VDSI confrontando tempi e soluzioni
 	- dovrebbe essere fattibile basta modificare dei parametri ma l'executor(il cuore) rimarrebbe quasi invariato
-### 7. Struttura della tesi
+
+#### Slide 15: Struttura della tesi
+
 Ho ideato la mia tesi con i seguenti capitoli:
 - capitolo 1: Introduzione e contesto
 	- definiscio il dominio didattico delle CTF cos'è un workflow agentico, un agente LLM e il problema da risolvere
@@ -370,7 +382,7 @@ Ho ideato la mia tesi con i seguenti capitoli:
 - capitolo 5: Conclusioni e sviluppi futuri
 	- 3-4 pagine
 
-### 8. Scrittura+ Cosa manca da fare
+#### Slide 16: Scrittura+ Cosa manca da fare
 Cosa farò ora?
 - mentre eseguo i benchmark scrivo i primi 3 capitoli
 - se ho terminato tutto e mi rimane tempo provo ad aggiungere confronti con più modelli e black-box

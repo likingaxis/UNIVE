@@ -234,4 +234,4 @@ $$\boxed{,m \ \text{base che coprono } V ;\times; A \ \text{(operatori applicabi
 - [x] webmaster 172.17.0.5
 - [x] consolegate e 172.17.0.2
 - [x] cryptovault 172.17.0.4
-- [ ] privaudit 172.17.0.3
+- [x] privaudit 172.17.0.3
