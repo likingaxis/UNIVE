@@ -13,12 +13,60 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "UNI/ANNO 3/TESI/Call/Call pasquale 2.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Call pasquale 2"
+            }
+          },
+          {
+            "id": "b2937e9c4df34e35",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Macchine di test e perturbazione"
+            }
+          },
+          {
+            "id": "e4ba242e874b8c8e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "UNI/ANNO 3/COSA FARE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
               "title": "COSA FARE"
+            }
+          }
+        ]
+      },
+      {
+        "id": "6d1e4eac30d6bdd5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "740d16085716b196",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UNI/ANNO 3/TESI/Call/call pasquale.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "call pasquale"
             }
           }
         ]
@@ -80,7 +128,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 579.9000244140625
+    "width": 321.5
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -189,22 +237,32 @@
   },
   "active": "e3004e8efe4317d7",
   "lastOpenFiles": [
+    "UNI/ANNO 3/TESI/Call/call pasquale.md",
+    "UNI/ANNO 3/TESI/Call/Call pasquale 2.md",
+    "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
+    "UNI/ANNO 3/TESI/Call/spiegazione benchmark da fare.md",
+    "UNI/ANNO 3/TESI/Call/call 0 tutor.md",
+    "UNI/ANNO 3/TESI/Call/Call 2-09 tutor.md",
     "UNI/ANNO 3/TESI/BENCHMARK/PAPER LETTI E IDEE.md",
+    "UNI/ANNO 3/TESI/Pasted image 20260920124129.png",
+    "UNI/ANNO 3/TESI/Pasted image 20260920161410.png",
+    "UNI/ANNO 3/TESI/Pasted image 20260920161552.png",
+    "UNI/ANNO 3/TESI/TESI.md",
+    "Pasted image 20260920161345.png",
+    "UNI/ANNO1 M/ORARIO.md",
+    "Pasted image 20260920130419.png",
+    "Pasted image 20260920130401.png",
+    "Pasted image 20260920130347.png",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/TESTING SU MACCHINE.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/DIFETTI PRINCIPALI.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/CASI_TEST_NEGATIVE_TESTING.md",
     "UNI/ANNO 3/TESI/BENCHMARK/3 macchine di test.md",
-    "UNI/ANNO1 M/ORARIO.md",
     "UNI/ANNO 3/TESI/BENCHMARK/PIANO BENCHMARK (terra terra).md",
     "UNI/ANNO 3/TESI/SESSIONE 0 - Fondamenta e stato metriche.md",
-    "UNI/ANNO 3/TESI/Call/spiegazione benchmark da fare.md",
     "UNI/ANNO 3/TESI/BENCHMARK",
-    "UNI/ANNO 3/TESI/Call/call pasquale.md",
     "UNI/ANNO 3/TESI/IMPLEMENTAZIONE benchmark (specs per agente).md",
     "UNI/ANNO 3/TESI/idee_e_struttura_tesi.md",
-    "UNI/ANNO 3/TESI/TESI.md",
-    "UNI/ANNO 3/COSA FARE.md",
     "UNI/ANNO1 M/profilo.md",
     "UNI/ANNO1 M/ORGANIZZAZIONI ESAMI 2.md",
     "UNI/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
@@ -213,21 +271,11 @@
     "UNI/ANNO 3/ARCHIVIO/GENDER INCLUSION/Copione finale.md",
     "UNI/ANNO 3/TESI/IDEE SPARSE.md",
     "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/COME STUDIARE IL CODICE.md",
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/FONTI.md",
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/GUIDA PASSO PASSO.md",
-    "UNI/ANNO 3/TESI/OBIETTIVO 1/WHITE BOX/GUIDA SELF HEALING.md",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/sedPNbZ8a",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/sedNEeACv",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/toc_spread_12.png",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/toc_spread_10.png",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/toc_spread_08.png",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/toc_spread_06.png",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/toc_spread_04.png",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/toc_spread_03.png",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/icons/bookmark.svg",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/icons/sparkles.svg",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/icons/book-open.svg",
-    "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/icons/message-text.svg",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/Assets/icons",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/magazine.html.tmp.49820.f774c4b1bd9f",
     "UNI/ANNO 3/GENDER INCLUSION/SLIDE/sedYJWJdN",

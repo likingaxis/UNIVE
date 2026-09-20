@@ -7,8 +7,8 @@
 - [x] [  ] Ripristino delle macchine
 - [x] [  ] Definire i benchmark
 - [x] [  ] Definire le metriche
-- [ ] [  ] Creare 3-4 esempi di macchine e salvarne le metriche
-- [ ] aggiustarle(sono tutte sbagliate)
+- [x] [  ] Creare 3-4 esempi di macchine e salvarne le metriche
+- [x] aggiustarle(sono tutte sbagliate)
 - [ ] [  ] Scrivere bene la presentazione da fare al pasquale con impronta architetturale e progettuale della cosa, es: perché ho usato yaml al posto di JSON(può essere interessante)
 - [ ] [  ] Fare le slide e prepararsi alla presentazione(aurora ti ascolta)
 - [ ] [  ] Mentre creo e testo le macchine inizio a scrivere la tesi (i primi capitoli che funzionano senza dati effettivi,chiedi per sicurezza se ha senso)

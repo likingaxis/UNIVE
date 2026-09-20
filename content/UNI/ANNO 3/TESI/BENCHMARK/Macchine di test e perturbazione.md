@@ -226,3 +226,12 @@ $$\Delta_{\text{gate}} = T - m \approx 100 - 12 = 88 \ \text{run di validazione 
 **In una riga**
 
 $$\boxed{,m \ \text{base che coprono } V ;\times; A \ \text{(operatori applicabili)} ;=; T \ \text{casi con ground truth automatico}, \quad \text{giro } n \ge \tfrac{\ln(1-C)}{\ln(1-p)},}$$
+
+
+
+
+
+- [x] webmaster 172.17.0.5
+- [x] consolegate e 172.17.0.2
+- [x] cryptovault 172.17.0.4
+- [ ] privaudit 172.17.0.3
