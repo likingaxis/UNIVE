@@ -8,7 +8,7 @@
 #### Slide 2: Mappa degli argomenti
 
 Cosa vedremo oggi, in ordine:
-1. **Il progetto in breve** — l'ecosistema VulcAIn e i miei due moduli (VulcaTest & VulcaHealing)
+1. **Il progetto e il mio contributo** — l'ecosistema VulcAIn e i miei due moduli (VulcaTest & VulcaHealing)
 2. **Il problema** — perché non basta delegare a un harness AI generico (guardrail, troppe libertà, imprecisioni)
 3. **L'architettura di VulcaTest** — i principi di design e i componenti:
 	- Planner → Orchestratore (nodi + archi) → Executor → Bridge → Final Evaluator
@@ -26,11 +26,25 @@ Cosa vedremo oggi, in ordine:
 - **VulcaForge**: traduce questa struttura in qualcosa di eseguibile in IaC, mediante Ansible, Dockerfile e script di verifica
 - **VulcaShip**: effettua il deployment sull'effettiva struttura di virtualizzazione
 
+
+![[Pasted image 20260921131227.png]]
+
+*E una volta generata la macchina, come si verificava che funzionasse davvero?*
+
+#### Slide 4: Il mio compito
+
+Prima del mio progetto, Michele e Danilo dovevano testare **a mano** le macchine generate e rilevare i problemi in modo manuale: un lavoro che richiedeva davvero **tanto, tanto tempo**.
+
 Il mio compito è stato introdurre **VulcaTest** e **VulcaHealing**, due moduli aggiuntivi che rispettivamente devono:
 - **verificare** la validità della macchina mediante pentesting agentico (Quality Assurance)
 - **riparare** la macchina nel caso emerga qualche problema
 
-#### Slide 4: Cosa succede se delego il modulo vulcatest ad un harness AI come antigravity?
+*(MOSTRA UNA FOTO DI DANILO E MICHELE IN VACANZA)*
+![[Pasted image 20260921132554.png]]
+
+*La domanda spontanea è: perché non delegare questa verifica a un harness AI già pronto, tipo Antigravity? Vediamo cosa succede.*
+
+#### Slide 5: Cosa succede se delego il modulo vulcatest ad un harness AI come antigravity?
 
 ##### Sono presenti 3 problematiche principali
 ###### 1. Guardrail stringenti soprattutto su modelli di frontiera
@@ -48,7 +62,9 @@ un harness generico lavora **senza il rigore di un oracolo evidence-based**: si 
 
 **Esempio concreto — Pizzeria**: la storyline prevedeva che l'endpoint nascosto si scoprisse tramite una chat di assistenza, ma la chat non era stata generata e il link era esposto in chiaro. Un harness libero completa comunque la challenge e la dà per valida; il mio executor invece **rileva l'incoerenza e blocca la fase**, perché la checklist richiede esplicitamente quel canale come *intended way*.
 
-#### Slide 5: Progettazione Architetturale di VulcaTest in modalità White-Box
+*Da questi tre problemi nasce la mia scelta progettuale: un'architettura fatta apposta.*
+
+#### Slide 6: Progettazione Architetturale di VulcaTest in modalità White-Box
 Come soluzione per la verifica delle *intended ways* e la determinazione della **conformance** della macchina ho realizzato un'architettura di tipo **role-based**, pensata per risolvere le problematiche esposte in precedenza.
 
 Innanzitutto definisco i **principi cardine** che mi sono prefissato a priori in fase di progettazione:
@@ -64,11 +80,11 @@ definire un'architettura che dia la possibilità di **cambiare le componenti fac
 - a livello **macro**, il principio **Plan+Execute**: il planner scrive l'intero piano, che poi viene eseguito da un esecutore
 - a livello **micro**, **ReAct**: un esecutore che fa *reasoning → act → observe*, il tutto suddiviso in turni
 
-#### Slide 6: Architettura effettiva
+#### Slide 7: Architettura effettiva
 IMPORTANTE DA METTERE NELLE SLIDE LA FOTO DELL'ARCHITETTURA
 ![[Pasted image 20260920161552.png|451]]
 
-#### Slide 7: Planner
+#### Slide 8: Planner
 
 Il modulo del pianificatore è suddiviso in **2 parti**, che riprendono il principio n.1 (deterministico/agentico).
 
@@ -88,7 +104,7 @@ Il modulo del pianificatore è suddiviso in **2 parti**, che riprendono il princ
 	- `allowed_tools`
 
 Ci tengo a precisare che dentro `ATTACK_PLAN.md` ci sono **snippet in YAML**: preferito al JSON perché più permissivo.
-#### Slide 8: Orchestratore
+#### Slide 9: Orchestratore
 Non è un singolo modulo: possiamo racchiudervi un **insieme di componenti** che controllano il workflow in modo **deterministico**.
 
 L'elemento principale di questa orchestrazione è `graph.py`:
@@ -102,7 +118,7 @@ L'elemento principale di questa orchestrazione è `graph.py`:
 	- i **verified values**: un dizionario di elementi utili per gli step successivi (es. password o username da salvare)
 	- le sessioni attive della shell e il `target_ip`
 
-#### Slide 9: Orchestratore - i nodi
+#### Slide 10: Orchestratore - i nodi
 I nodi utilizzati sono i seguenti:
 - **`orchestrator`** — un altro elemento dell'insieme degli orchestratori: legge lo step corrente, seleziona il `TestStep` dalla lista e lo imposta come `current_step`
 	- imposta lo status a `COMPLETED` se non vi sono più step da seguire
@@ -112,7 +128,7 @@ I nodi utilizzati sono i seguenti:
 - **`final_evaluator`** — lo spiegherò con maggiore precisione dopo; in sostanza genera un `REPORT.md` e altre evidenze per definire bene cosa è successo negli step eseguiti
 - **`healer`** — attiva la riparazione autonoma della macchina, delegando a un controller Python che pilota la CLI di Antigravity
 
-#### Slide 10: Orchestratore - gli archi
+#### Slide 11: Orchestratore - gli archi
 Gli archi sono i seguenti:
 - **`START → ORCHESTRATOR`**
 - **`ORCHESTRATOR → EXECUTOR / FINAL_EVALUATOR`**
@@ -127,7 +143,7 @@ Gli archi sono i seguenti:
 - **`HEALER → ORCHESTRATOR`**
 	- una volta effettuata la correzione, passa all'orchestratore per eseguire di nuovo il test
 
-#### Slide 11: Executor
+#### Slide 12: Executor
 
 Nodo di esecuzione progettato seguendo il principio **ReAct** spiegato in precedenza; viene istanziato e richiamato ogni volta dal nodo `executor` del grafo.
 In executor ho portato diverse idee progettuali: **non è un semplice LLM** che chiama i tool di un server come HexStrike.
@@ -145,7 +161,7 @@ In executor ho portato diverse idee progettuali: **non è un semplice LLM** che 
 	- il consumo dei token
 - un **server bridge** che fa da intermediario tra la macchina Kali e il nostro LLM, che spiegherò ora come punto a sé per definirne meglio architettura e struttura
 
-#### Slide 12: Bridge
+#### Slide 13: Bridge
 ![[Pasted image 20260920230436.png]]
 I tool che l'executor può utilizzare si dividono in **2 livelli distinti**: per questo ho definito un **bridge** che nasconde tale suddivisione all'utilizzatore. L'executor chiama un tool e **il bridge decide dove mandarlo**.
 
@@ -164,7 +180,7 @@ Il Bridge, per scelta progettuale, oltre a fornire i tool ne **gestisce anche gl
 
 Un'altra cosa che il Bridge consente, come parte integrante dell'harness del nostro LLM, è l'**uso di editor a schermo**: i comandi da tastiera inviati dall'LLM vengono convertiti in testo leggibile dal server che usa `pexpect`.
 
-#### Slide 13: Final Evaluator
+#### Slide 14: Final Evaluator
 
 Nodo che **trae le conclusioni** e genera le evidenze sulla base di ciò che è stato fatto.
 
@@ -174,14 +190,14 @@ Nodo che **trae le conclusioni** e genera le evidenze sulla base di ciò che è 
 - un `REPORT.md`, sulla base del piano di attacco e delle evidenze raccolte
 - un `healing_ticket.json`, in cui vengono evidenziate le eventuali problematiche della macchina
 
-#### Slide 14: VulcaHealing
+#### Slide 15: VulcaHealing
 
 Il nodo di healing presenta delle differenze rispetto al nodo executor, per questo è bene descriverlo **separatamente**.
 
 - a differenza di tutto il resto, la responsabilità dell'healing è affidata a un software chiamato **Antigravity** (di Google), che consente l'uso di *agentic AI* sfruttando i modelli che mette a disposizione. Questo permette un healing molto più avanzato, con tool potenzialmente infiniti forniti dal software all'LLM utilizzato (in questo caso **gemini 3.8 flash**)
 - un'altra distinzione importante: il nodo di **testing** lavorava a stretto contatto con la macchina generata, mentre qui abbiamo un agente che ha **piena visione dei file Ansible** creati e di tutto ciò che permette una correzione **dalle fondamenta**
 
-#### Slide 15: VulcaHealing - implementazione
+#### Slide 16: VulcaHealing - implementazione
 
 All'healer viene passato un **system prompt dettagliato**, preceduto dal prefisso `/goal`: quest'ultimo è una **skill di Antigravity** che permette all'agente di perseguire un obiettivo.
 Il system prompt obbliga l'agente a **scrivere esclusivamente sui file della macchina** in analisi, senza toccare altre cartelle, e impone ulteriori vincoli:
@@ -199,7 +215,7 @@ agy --mode accept-edits --dangerously-skip-permissions --model <HEALING_MODEL> -
 - viene inoltre eseguito un **diff deterministico** dallo script Python `diff_tracker.py`, che definisce cosa è stato modificato prima e dopo l'healing
 - al termine viene effettuato un **build del Docker**, che viene rimesso in esecuzione per un nuovo test
 
-#### Slide 16: Utilizzo di modelli locali
+#### Slide 17: Utilizzo di modelli locali
 
 In questo progetto ho utilizzato un **modello locale**: `Qwen 3.8 27B Q3_K_XL`, con *thinking* a `low`, che lavora ai nodi di **planning, esecuzione e final evaluator**.
 Come sviluppo futuro potrei realizzare anche il nodo di **healing in locale**, così da rendere tutto completamente indipendente e a costo zero — ma per il momento non è ancora così.
@@ -216,7 +232,7 @@ Guardando lo storico del server API che gestisce i modelli sulla mia macchina, p
 
 per un **costo stimato**, se si fosse pagato tutto, di **$6,58**.
 
-#### Slide 17: Raccolta delle macchine realizzate e testate con successo
+#### Slide 18: Raccolta delle macchine realizzate e testate con successo
 Ho realizzato complessivamente **8 macchine** e tutte e 8 hanno riportato buone risposte da parte della mia architettura (dopo qualche bug fixing).
 Raggruppando le **vulnerabilità testate** avremmo:
 
@@ -234,7 +250,7 @@ Raggruppando le **vulnerabilità testate** avremmo:
 - **file upload non validato** con bypass della blacklist sfruttando l'estensione case-insensitive `.pHP` e directory `uploads/` a `0777` (DataVault, WebMaster)
 - **information disclosure** su web: file esposti in chiaro, credenziali in file di configurazione/script
 
-#### Slide 18: Vulnerabilità testate (2)
+#### Slide 19: Vulnerabilità testate (2)
 
 **Credenziali, autenticazione e movimento laterale**
 - credential leak in file di sistema: `/opt/test.sh` (Pizzeria), `.bash_history` (PrivAudit)
@@ -256,7 +272,7 @@ Raggruppando le **vulnerabilità testate** avremmo:
 - **cron job + file world-writable**: script di backup a `0777` eseguito da cron di root (Citadel), sfruttato anche in modalità **time-aware** (attesa dell'esecuzione periodica del cron)
 - **Python module hijacking via cron**: directory di import scrivibile e modulo (`random`) importato da uno script eseguito dal cron di root (ConsoleGate)
 
-#### Slide 19: Analisi scientifica
+#### Slide 20: Analisi scientifica
 
 Si vuole definire un **piano sperimentale** capace di rendere le prestazioni del workflow **misurabili, confrontabili e riproducibili**.
 Si vogliono quindi definire **4 benchmark quantitativi**, individuati dopo un'attenta lettura dei paper:
@@ -276,7 +292,7 @@ Si vogliono quindi definire **4 benchmark quantitativi**, individuati dopo un'at
     - _Titolo_: _AgentBoard: An Analytical Evaluation Board of Multi-turn LLM Agents_
     - _Link_: [https://arxiv.org/pdf/2401.13178](https://arxiv.org/pdf/2401.13178)
 
-#### Slide 20: Definizione della TestBench
+#### Slide 21: Definizione della TestBench
 I benchmark che definirò saranno tutti basati su **macchine generate a priori**, che rappresenteranno un **Dataset**. Il procedimento di generazione segue un paradigma ben definito dal paper (_The Test Oracle Problem in Synthetic_), dimensionato da una formula:
 - il numero di campioni $n$ si dimensiona con $n \ge \frac{\ln(1-C)}{\ln(1-p)}$, dove $C$ è il livello di confidenza e $p$ la probabilità di guasto (es. per $C=99\%$ e $p=20\%$ servono circa **21 macchine**)
 
@@ -289,7 +305,13 @@ Questo consente quindi di definire:
 $$M\times N=n$$
 per ottenere $n$ campioni sono sufficienti $M$ macchine e $N$ perturbazioni.
 
-#### Slide 21: B1 - Capacità di riconoscimento
+Ho diviso le perturbazioni in 4 classi
+- P1: Blocco per (under-provisioning) -> risorsa mancante-> l'healer ripara in modo additivo
+- P2: Alterazione (mis-provisioning) -> difetto silenzioso come una flag errata -> fix correttivo
+- P3: Scorciatoie (over-provisioning) -> presenza di scorciatoie per l'esecutore come permessi che non dovrebbero esserci -> l'healing toglie con un fix sottrattivo
+- P4: Specification Defect-> la macchina è perfetta ma vi sono problemi di specifica -> l'healer non deve fare nulla sulla macchina
+
+#### Slide 22: B1 - Capacità di riconoscimento
 **Nasce da una domanda:** il sistema è in grado di accorgersi in autonomia se una macchina presenta un difetto, distinguendola da una sana?
 
 Si costruisce una **confusion matrix**:
@@ -311,11 +333,11 @@ Cattura i **successi parziali** lungo il percorso di collaudo, senza appiattire 
 $$\text{Progress} = \frac{\sum \text{checkpoint della checklist superati con successo}}{\text{totale checkpoint previsti nel piano}}$$
 
 questo permette considerazioni su **misure non binarie**, invece del semplice `PASSED/FAILED`.
-#### Slide 22: B2 - Accuratezza Diagnostica
+#### Slide 23: B2 - Accuratezza Diagnostica
 **Nasce da una domanda:** il Final Evaluator comprende la reale causa interna dell'errore?
 
 $$\text{RCA Accuracy} = \frac{\text{diagnosi corrette}}{\text{totale fallimenti analizzati}}$$
-#### Slide 23: B3 - Efficacia di Riparazione
+#### Slide 24: B3 - Efficacia di Riparazione
 **Nasce da una domanda:** il nodo di healing è in grado di ripristinare la macchina effettuando interventi minimi?
 
 Andiamo a calcolare:
@@ -324,7 +346,7 @@ $$\text{Closed-Loop Success Rate} = \frac{\text{riparazioni con retest COMPLETED
 quantifica la % di riparazioni che, al secondo run, consentono all'agente di completare tutti gli step.
 $$\text{Ampiezza Patch} = \#\text{file modificati} + \#\text{righe alterate}$$
 quantifica l'ampiezza dell'intervento rispetto alla correzione minima necessaria, calcolata tramite **diff deterministico** (`patch.diff`).
-#### Slide 24: B4 - Costi ed Efficienza
+#### Slide 25: B4 - Costi ed Efficienza
 **Nasce dalle domande:** quanto ci costa? quanto tempo impiega? quanti token consumiamo?
 Misuriamo i tempi con:
 $$T_{\text{collaudo}} = T_{\text{executor}} + T_{\text{orchestrator}}$$
@@ -335,7 +357,7 @@ $$\text{Token}_{\text{totali}} = \text{Token}_{\text{planner}} + \text{Token}_{\
 
 $\text{Costo} = (\text{Token}_{\text{in}} \cdot P_{\text{in}}) + (\text{Token}_{\text{out}} \cdot P_{\text{out}})$
 
-#### Slide 25: Benchmark da aggiungere in futuro
+#### Slide 26: Benchmark da aggiungere in futuro
 - **confrontare modelli differenti**
 	- risponde a una domanda nata dai paper (_Cybench_ e _SWE-Agent_)
 	- quanto stiamo confrontando i **modelli** e quanto lo **scaffold** (l'infrastruttura che li gestisce)
@@ -343,7 +365,7 @@ $\text{Costo} = (\text{Token}_{\text{in}} \cdot P_{\text{in}}) + (\text{Token}_{
 - **modalità Black-Box pura**, sottoponendola a CTF come quelle di TryHackMe o a esami svolti dagli studenti di VDSI, confrontando tempi e soluzioni
 	- dovrebbe essere fattibile modificando alcuni parametri, ma l'executor (il cuore) rimarrebbe quasi invariato
 
-#### Slide 26: Struttura della tesi
+#### Slide 27: Struttura della tesi
 
 Ho ideato la mia tesi con i seguenti capitoli:
 - **capitolo 1 — Introduzione e contesto**
@@ -360,7 +382,7 @@ Ho ideato la mia tesi con i seguenti capitoli:
 - **capitolo 5 — Conclusioni e sviluppi futuri**
 	- 3-4 pagine
 
-#### Slide 27: Scrittura + cosa manca da fare
+#### Slide 28: Scrittura + cosa manca da fare
 Cosa farò ora?
 - mentre eseguo i benchmark, scrivo i primi 3 capitoli
 - se termino tutto e mi rimane tempo, provo ad aggiungere confronti con più modelli e la modalità black-box
