@@ -11,12 +11,14 @@
             "id": "e3004e8efe4317d7",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "UNI/ANNO 3/TESI/Pasted image 20260920230436.png"
+                "file": "UNI/ANNO1 M/ORARIO.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20260920230436"
+              "icon": "lucide-file",
+              "title": "ORARIO"
             }
           }
         ]
@@ -187,6 +189,7 @@
   },
   "active": "e3004e8efe4317d7",
   "lastOpenFiles": [
+    "UNI/ANNO 3/TESI/Pasted image 20260920230436.png",
     "UNI/ANNO 3/TESI/Pasted image 20260921131227.png",
     "UNI/ANNO 3/TESI/Call/Slide.md",
     "Pasted image 20260921132554.png",
@@ -194,7 +197,6 @@
     "Pasted image 20260921131110.png",
     "UNI/ANNO 3/TESI/Call/Call pasquale 2.md",
     "UNI/ANNO 3/TESI/Call/call pasquale.md",
-    "UNI/ANNO 3/TESI/Pasted image 20260920230436.png",
     "UNI/ANNO 3/TESI/BENCHMARK/PAPER LETTI E IDEE.md",
     "UNI/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
     "UNI/ANNO 3/TESI/idee_e_struttura_tesi.md",
