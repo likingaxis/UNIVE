@@ -1,36 +1,13 @@
 - fregatene dei voti, stai costruendo la persona che sarai in magistrale, lì puoi grindare di brutto sei bravo in quelle cose e inoltre farai esperienze come erasmus ecc... (Se ti impegni davvero)
 
-
-- [x] [  ] Prima di fare brainstorming crea un bug in citadel o datavalut e vedi se executor e healing risolvono la cosa
-- [x] [  ] Chiedi come fanno ora a essere raccolte effettivamente le metriche, quali raccogliamo già?
-- [x] [  ] Brainstorming sui paper mentre eseguo fix delle macchine
-- [x] [  ] Ripristino delle macchine
-- [x] [  ] Definire i benchmark
-- [x] [  ] Definire le metriche
-- [x] [  ] Creare 3-4 esempi di macchine e salvarne le metriche
-- [x] aggiustarle(sono tutte sbagliate)
-- [ ] [  ] Scrivere bene la presentazione da fare al pasquale con impronta architetturale e progettuale della cosa, es: perché ho usato yaml al posto di JSON(può essere interessante)
-- [ ] [  ] Fare le slide e prepararsi alla presentazione(aurora ti ascolta)
-- [ ] [  ] Mentre creo e testo le macchine inizio a scrivere la tesi (i primi capitoli che funzionano senza dati effettivi,chiedi per sicurezza se ha senso)
-- [ ] [  ] Prima di realizzare i benchmark devo accertarmi che la linea produttiva funzioni su 3-4 casi
-
-- [ ] Completare call pasquale.md
-- [x] Leggere i paper+video su yt
-- [ ] Brainstorming su quali benchmark usare
-- [ ] definire le metriche per ottenere quei benchmark(prendere i più fattibili)
-- [ ] testare e vedere se le metriche vengono effettivamente restituite
-- [ ] costruire una lista di macchine(Dataset) da generare
-- [ ] alcune con dei difetti, altre perfette dove intended way è al 100%
-	- [ ] per quelle con dei difetti, analizzare e creare una lista di difetti che avvengono solitamente
-- [ ] creare le macchine dalla lista(sarà noioso, decidere a priori un numero)
-- [ ] eseguire e raccogliere i dati (è possibile automatizzare la cosa? tipo creare uno script in python che tutta la notte fa partire macchina 1 poi macchina 2 poi macchina N e così via?)
-PRIMA DI FARLO IN GRANDE (QUELLO SOPRA) MAGARI PROVARE CON 3 MACCHINE 1 ROTTA 1 BUONA 1 CON QUALCOSA DI ROTTO MA PIÙ SNEAKY e calcolare le metriche solo su quelle 3(per farlo vedere al pasquale)
-- [ ] dopo aver raccolto i dati schematizzarli e contestualizzarli per raccogliere le metriche
-- [ ] slide pasquale
-farlo su N macchine(definire un numero per capire la precisione)
-HackTheBox?
-- [ ] scrivere la tesi
-
+- [ ] Piantine
+- [ ] Esami a scelta approfondisci( senti anche i messaggi)
+- [ ] Leggere paper su progettazione di architetture agentiche utile per dare contesto e valore a quello che ho fatto io
+- [ ] La tesi deve dare valore a cosa ho fatto
+- [ ] Perché non installare antigravity su docker?
+- [ ] Leggere paper su agentic ai
+- [ ] Dopo aver fatto ciò definire i capitoli della tesi dopo un attento brainstorming
+- [ ] Pulisci il portatile per domani
 
 
 Ecco la scaletta in step, divisa netta pre-call / post-call, con l'ordine giusto e le dipendenze.
