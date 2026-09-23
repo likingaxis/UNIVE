@@ -1,11 +1,17 @@
-[](ESERCIZI%20ARM.md)# ARRIVARE 15 MINUTI PRIMA
-- sistemi di numerazioni ed algebra di boole
-- sistemi digitali e codifica
-- architettura ARM
-- programmazione in ARM
-- Böhm-Jacopini dice che posso non scrivere porcherie e che posso scrivere cose strutturate, in modo strutturato
-- tipo di architettura:ARM7
-[[UNI/ANNO 1/ARCHITETTURA/LISTA ARGOMENTI]]
+# Architettura dei Sistemi di Elaborazione ⚙️
+
+> [!important] Note d'Esame: Arrivare 15 minuti prima!
+> - Sistemi di numerazioni ed algebra di Boole
+> - Sistemi digitali e codifica
+> - Architettura ARM (ARM7)
+> - Programmazione in ARM
+> - Böhm-Jacopini: programmazione strutturata
+
+### [[LISTA ARGOMENTI]]
+
+---
+
+## Lezioni
 
 >[!example]- # [[1.INTRODUZIONE]]
 > argomenti
@@ -16,7 +22,6 @@
 >- storia della famiglia intel
 >- unità metriche
 
-
 >[!example]- # [[2.Organizzazione sistemi di calcolo]]
 > argomenti
 > - processori
@@ -26,7 +31,6 @@
 >argomenti
 >- gerarchie delle memorie
 >- hard disk e supporti di memoria
-
 
 >[!example]- # [[4.Input-Output]]
 >argomenti:
@@ -39,21 +43,17 @@
 >- Algebra di Boole
 >- Porte logiche 
 
-
 >[!example]- # [[6.Livello Logico Digitale]]
 >- flip flop, latch e varie porte logiche
-
 
 >[!example]- # [[7.Livello logico digitale(2)]]
 >- varie cpu partendo dal pentium fino all'i7
 >- vari microcontrollori
 
-
 >[!example]- # [[8.Architettura ARM]]
 >- introduzione all'argomento
 >- spiegazione di registri, indirizzamenti e shift 
 >- varie istruzioni in ARM
-
 
 >[!example]- # [[9.PROGRAMMARE IN ARM]]
 >- guida sulla programmazione
@@ -75,9 +75,11 @@
 >[!example]- # [[14.sistemi operativi]]
 >paging memorie e scheduling
 
+---
 
+## Esercizi ed Esoneri
 
->[!tip]- # lista di esercizi
-> # [[HAMMING CODE]]
-> # [[ESERCIZI ARM]]
-
+>[!tip]- Lista Esercizi e Prove
+> - [[ESERCIZI ARM]]
+> - [[HAMMING CODE]]
+> - [[ESONERO PART2]]

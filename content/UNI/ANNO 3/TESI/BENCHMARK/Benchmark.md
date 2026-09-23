@@ -1,20 +1,6 @@
 ---
 title: "Benchmark — Macchine e Scenari"
 ---
-
-
-- [x] GitPoison 172.17.0.7
-- [x] TunnelGate 172.17.0.8
-- [x] NetVault 172.17.0.9
-
-
-
-
-
-
-
-
-
 # Benchmark delle Macchine Vulnerabili (Boot2Root)
 
 Panoramica schematica di tutte le macchine create nel generatore **VulcaForge** e di quelle pianificate per coprire l'intero programma pratico d'esame.
@@ -157,3 +143,94 @@ Queste 3 macchine sono progettate per colmare i concetti rimanenti del syllabus 
   2. Identificazione dell'algoritmo hash con `hashid` (`$6$` SHA-512 o `$y$` yescrypt).
   3. Esecuzione di `unshadow passwd.txt shadow.txt > unshadowed.txt` e cracking con John (`john --wordlist=rockyou.txt`).
 - **Privilege Escalation:** L'utente amministratore fa parte del gruppo speciale `shadow` (o ha una regola `sudo socat`), permettendo la lettura/modifica diretta delle credenziali di root.
+
+
+
+
+
+
+### PERTURBAZIONI LISTA
+i tutor hanno espresso questo:
+
+SI DIVIDONO IN 4 TIPOLOGIE:
+1. ...
+2. ...
+3. ...
+4. ...
+AGGIUNGERNE ALTRE?
+
+
+#### Benchmark che farò e motivazioni varie
+
+Obiettivo di questa parte è rendere le prestazioni del mio workflow **misurabili, confrontabili e riproducibili**. Prima ancora di elencare le metriche voglio però chiarire *che tipo* di valutazione sto facendo, perché è una scelta metodologica che condiziona tutto il resto — e che ho preso in modo consapevole dopo aver letto i lavori di riferimento.
+
+##### Il paradigma: una test suite con oracolo noto, non un'inferenza statistica
+
+Il problema di fondo quando si valuta un sistema come il mio è il *test oracle problem*: se costruissi da zero una macchina "rotta", non conoscerei con certezza quale sia il difetto e quale la reazione corretta, e finirei per giudicare l'output del mio sistema con un altro giudizio soggettivo (tipicamente un altro LLM), reintroducendo proprio l'imprecisione che voglio eliminare. Il lavoro *The Test Oracle Problem in Synthetic LLM-as-Judge Corpora* mette in guardia esattamente da questo: quando l'oracolo è sintetico e non verificato, la verità di riferimento si distorce o sparisce.
+
+La soluzione che adotto è la **perturbazione controllata**: parto da una macchina **sana e conforme** (una *golden machine*, che VulcaTest supera al 100%) e vi inietto **una singola mutazione deterministica e isolata**. Così il ground truth è noto *per costruzione* — so con esattezza quale difetto ho introdotto, dove, e quale tripla (verdetto, diagnosi, azione) mi aspetto in risposta — senza alcuna etichettatura manuale e senza alcun giudice soggettivo.
+
+Ci tengo a precisare una conseguenza importante di questa scelta: quello che sto facendo appartiene al paradigma del **software testing**, non della statistica inferenziale. Ogni caso di test non è un'estrazione casuale da una popolazione, ma una **sonda progettata di proposito** per verificare un comportamento noto in un contesto noto. I casi quindi **non sono indipendenti** — li scelgo io e condividono le stesse macchine base — e sarebbe scorretto leggerli come un campione i.i.d. da cui stimare un parametro con un intervallo di confidenza. Le metriche che riporterò sono **descrittive sulla suite** ("su questi casi progettati il sistema si è comportato così"), non stime di popolazione.
+
+##### Da dove vengono le perturbazioni — e cosa NON è una perturbazione
+
+Le perturbazioni non sono guasti inventati: **replicano errori di generazione realmente accaduti**, segnalati dai tutor (catalogo E1–E6) o documentati come incidenti durante i miei test. Questo dà validità ecologica al dataset — quando reinietto "web app non copiata" o "permessi troppo laschi" sto riproducendo un errore che *è successo davvero* prima che la macchina fosse corretta al suo stato golden.
+
+Va però fatta una distinzione netta, perché negli output iniziali dei test convivono due nature diverse. Mentre collaudavo le macchine ho corretto problemi di **due tipi**, e solo uno alimenta il benchmark:
+
+- **Difetti lato macchina** (generazione / IaC): componente non copiato, configurazione nginx errata, utente mancante, ownership o permessi sbagliati, SUID preimpostato. Sono stati risolti correggendo *la macchina*, ed esistono nell'IaC come singola manopola. **Solo questi** sono ammissibili come perturbazioni: li reinietto sopra il golden e ne conosco la tripla per costruzione.
+- **Immaturità del framework** (harness / prompt / codice): blocchi dovuti al guardrail del provider (errori 403 sull'LLM), output non serializzato correttamente, budget di turni insufficiente, gestione di reverse-shell o sessioni interattive. Questi li ho risolti correggendo *VulcaTest stesso* (prompt engineering e codice), non la macchina. Non sono perturbazioni: appartengono alla narrazione dell'evoluzione del sistema (capitolo su architettura e scelte di design), e semmai motivano scelte come l'adozione di modelli locali per aggirare i guardrail.
+
+Il criterio operativo che ne deriva è semplice: **una cella del benchmark è ammissibile solo se il difetto è correggibile — ed era stato corretto — sul lato macchina**. Un fallimento risolto sul lato framework non è mai una perturbazione. Questa separazione va verificata sul sorgente IaC attuale (la mutazione deve esistere come toggle nel golden), non ricostruita a memoria dagli output grezzi, dove le due nature si mescolano.
+
+##### Come dimensiono il dataset: copertura, non un numero magico
+
+Se non sto stimando una probabilità di guasto su una popolazione, allora la domanda "quante macchine servono?" non si risolve con una formula di confidenza, ma con un **argomento di copertura**. Formalizzo il criterio come un problema classico di *set cover*.
+
+Sia $V$ l'insieme delle classi di vulnerabilità e di difetto che voglio esercitare (LFI, file upload, SUID, PATH hijacking, capabilities, cron hijacking, sudo GTFObins, crypto XOR, interazione su socket grezzo, e così via), e sia $\text{cover}(b) \subseteq V$ ciò che una singola macchina base $b$ copre. Definisco il numero di macchine base come:
+
+$$m = \min |B| \quad \text{tale che} \quad \bigcup_{b \in B} \text{cover}(b) = V$$
+
+In parole: $m$ è il **minimo numero di macchine il cui insieme, preso tutto insieme, tocca ogni classe di $V$**. È il principio del set cover — scelgo poche macchine complementari ed evito quelle ridondanti che ripetono classi già coperte. La frase che porto in tesi è dunque:
+
+> Le macchine base non sono state scelte in numero arbitrario: costituiscono l'insieme (minimo) che, collettivamente, esercita tutte le classi di vulnerabilità e di difetto del mio tassonario. La copertura è quindi completa e senza ridondanza.
+
+Sono onesto su due punti: il set cover è un problema NP-hard, quindi **argomento** la copertura, non ne calcolo l'ottimo; e la formula di numerosità campionaria $n \ge \frac{\ln(1-C)}{\ln(1-p)}$, che pure compare in letteratura, la uso **solo come motivazione dell'ordine di grandezza** della suite (serve una ventina abbondante di casi-difetto, non tre e non mille), dichiarando esplicitamente che i casi non sono i.i.d. e che quindi non ne ricavo un livello di confidenza. È la copertura a dare validità, non la formula.
+
+Il vantaggio pratico di questo approccio è il **riuso**. Un operatore di perturbazione (per esempio "rendi la root flag leggibile a tutti", classe P3) è una *ricetta* svincolata dalla singola macchina, e si applica a molte basi. Definendo la matrice di applicabilità $A$ — dove $A_{ij}=1$ se l'operatore $o_j$ ha senso sulla base $b_i$ — il numero di casi di test è
+
+$$T = \sum_{i,j} A_{ij} \; \ll \; m \cdot M$$
+
+dove la disuguaglianza vale perché $A$ è **sparsa**: non ogni operatore si applica a ogni macchina (un difetto web non ha senso su una macchina senza web). Con una decina di macchine base e operatori riusabili arrivo dell'ordine del centinaio di casi **senza scrivere un centinaio di macchine**, e con il ground truth automatico per ognuno.
+
+##### Lo spazio delle run: casi × K × profilo
+
+Il dataset appena descritto definisce i **casi**. Lo spazio effettivo delle esecuzioni ha però più assi, e voglio tenerli distinti perché ognuno risponde a una domanda diversa.
+
+- **Casi** = le coppie $(\text{base}, \text{operatore})$ con $A_{ij}=1$, ciascuna con la sua tripla attesa. A questi affianco le **run sane** (una per macchina base): non sono un contorno ma parte integrante della misura, perché fungono da *gate* del baseline (se la sana non chiude `COMPLETED` pulito, la macchina esce dal dataset perché un fallimento successivo non sarebbe più attribuibile alla mutazione), da **veri negativi** (dimostrano che il sistema non inventa difetti dove non ce ne sono) e da **costo di riferimento**.
+- **K — ripetizioni per caso.** Qui sta un punto delicato che voglio dichiarare apertamente: le K ripetizioni **non** servono a darmi potenza statistica (sarebbero pseudo-repliche correlate, non nuovi campioni indipendenti). Servono a **caratterizzare il non-determinismo** del sistema — lo stesso caso, su K run, può chiudere $k$ volte `FAILED` e $K-k$ volte `COMPLETED` a causa del sampling del modello. È una misura descrittiva di *flakiness*, resa necessaria dal fatto che l'Executor è un LLM: ho osservato empiricamente casi in cui l'esito oscillava per via del quoting di un payload o della gestione del terminale. Riportare la dispersione sulle K è più onesto che nascondere la varianza dietro un valore secco.
+- **Profilo — configurazione dei modelli.** È l'unica vera variabile indipendente che manipolo di proposito: cambiando il profilo (per esempio modello **locale** vs **cloud**, per attore) rispondo alla domanda "quanto conta il modello e quanto lo scaffold?" — domanda che nasce direttamente da *Cybench* e dai lavori sugli agenti software. L'architettura è già predisposta per questo, perché i modelli sono configurabili per ruolo (planner, executor, evaluator, healer).
+
+Tutto ciò che **non** è un asse d'interesse va invece **congelato** e registrato, altrimenti un risultato non sarebbe più attribuibile: il piano d'attacco (uso un piano *congelato* per macchina, così la qualità del Planner non inquina la misura di Executor/Evaluator/Healer), il budget di turni dell'Executor, la lunghezza di context window e la soglia di troncamento degli output dei tool. Queste sono variabili di controllo: le tengo costanti nella matrice principale, e le muovo — una alla volta — solo in un eventuale esperimento di *ablation* dedicato.
+
+Il budget complessivo di run che ne deriva, per un singolo profilo, è
+
+$$R = \underbrace{m}_{\text{run sane (gate + veri negativi)}} + \underbrace{n \cdot K}_{\text{casi perturbati} \times \text{ripetizioni}}$$
+
+dove $n \le T$ è il sottoinsieme di casi che scelgo effettivamente di girare (per copertura delle classi, non per confidenza). Il gate del baseline è anche ciò che mi fa **risparmiare**: valido ogni macchina base *una volta*, invece di validare da zero ognuno dei $T$ casi come se fosse una macchina nuova.
+
+##### Come leggo i risultati: metriche descrittive e per classe
+
+Coerentemente col paradigma, lo scoring è **deterministico** (nessun LLM-as-judge, per non ricadere nella distorsione dell'oracolo sintetico) e i risultati sono presentati **per classe di perturbazione**, non aggregati in un unico numero di popolazione. La confusion matrix di B1 resta uno strumento utile, ma la leggo come *conteggio descrittivo attribuibile* (quanti difetti di classe P1 riconosciuti, quanti P2, ecc.), non come stima di una "precision globale" che reintrodurrebbe di nascosto l'ottica statistica che ho scartato. Le K ripetizioni entrano come dispersione, non come campioni.
+
+I quattro benchmark che calcolo restano quelli del piano scientifico, e li ancoro così ai lavori di riferimento:
+
+- **B1 — Riconoscimento.** Il sistema distingue una macchina difettosa da una sana? Confronto verdetto prodotto vs atteso su sane e perturbate (confusion matrix, e da lì accuracy/precision/recall/$F_1$ come sintesi descrittive per classe). Integro una misura di **avanzamento** non binaria — la frazione di checkpoint della checklist superati — ispirata all'idea di *progress rate* su subtask di *AgentBoard* e *Cybench*, per non appiattire tutto su un Pass/Fail.
+- **B2 — Accuratezza diagnostica.** Il Final Evaluator comprende la *causa reale*? Confronto la diagnosi prodotta (dove si è bloccato + tipo di difetto + componente) con la tripla nota. È qui che la classe P4 (oracolo/specifica) è cruciale, perché richiede di attribuire il difetto alla *specifica* e non alla macchina.
+- **B3 — Efficacia di riparazione.** L'Healer ripara con interventi minimi, o declina quando deve? Misuro il *closed-loop success rate* e l'**ampiezza della patch** (file e righe, da diff deterministico), e verifico anche la *direzione* corretta della riparazione: additiva (ripristina ciò che manca, P1), sottrattiva/hardening (rimuove l'eccesso, P3), oppure rifiuto (P4). Questo è il punto in cui il mio sistema si distingue da un harness generico, in linea con la critica alla mancanza di rigore dell'oracolo.
+- **B4 — Costi ed efficienza.** Quanto costa in tempo e token? Tempi per fase e consumo per attore, con la run sana come baseline e la differenza sana/perturbata come costo di gestione del difetto. È l'asse su cui il confronto locale/cloud del profilo diventa concreto.
+
+Il dominio (pentesting agentico su CTF/B2R) e l'impianto di valutazione si appoggiano infine ai precedenti del settore — *PentestGPT* per l'agente di penetration testing e *Cybench* per il benchmark di cybersecurity su LLM — mentre l'attenzione all'affidabilità della valutazione e alla verifica del ground truth richiama *SWE-Bench Pro Verified*.
+
+*Riferimenti considerati:* The Test Oracle Problem in Synthetic LLM-as-Judge Corpora; Cybench; AgentBoard; PentestGPT; SWE-Bench Pro Verified.
+

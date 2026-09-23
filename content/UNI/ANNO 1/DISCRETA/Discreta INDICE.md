@@ -1,13 +1,15 @@
-# Indice
+# Matematica Discreta 🔢
 
-## piano personale:
-### [[ORGANIZZAZIONE DISCRETA]]
+### [[ORGANIZZAZIONE DISCRETA|Piano Personale & Organizzazione Studio]]
 
-### [[GRAFI e RETI]]
-### [[INSIEMISTICA]]
-### [[OPA]]
-### [[ciao/content/UNI/ANNO 1/DISCRETA/PROBABILITÀ]]
-### [[RELAZIONI]]
-### [[RSA]]
-### [[ARGOMENTI CON LIMITI E INTEGRALI]]
+---
 
+## Argomenti Principali
+
+- ### [[INSIEMISTICA]]
+- ### [[RELAZIONI]]
+- ### [[RSA]]
+- ### [[GRAFI e RETI]]
+- ### [[OPA]]
+- ### [[PROBABILITÀ|Probabilità]]
+- ### [[ARGOMENTI CON LIMITI E INTEGRALI]]
