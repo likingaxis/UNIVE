@@ -9,7 +9,6 @@
 - [ ] Perché non installare antigravity su docker?
 
 - [ ] Dopo aver fatto ciò definire i capitoli della tesi dopo un attento brainstorming
-- [ ] Pulisci il portatile per domani
 
 
 Ecco la scaletta in step, divisa netta pre-call / post-call, con l'ordine giusto e le dipendenze.
