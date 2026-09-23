@@ -5,7 +5,7 @@ title: "Benchmark — Macchine e Scenari"
 
 - [x] GitPoison 172.17.0.7
 - [x] TunnelGate 172.17.0.8
-- [ ] NetVault 172.17.0.9
+- [x] NetVault 172.17.0.9
 
 
 
