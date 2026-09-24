@@ -3,5 +3,6 @@
 - [x] Leggere paper su progettazione di architetture agentiche utile per dare contesto e valore a quello che ho fatto io
 - [ ] Leggere paper su prompt engineering
 - [x] Leggere paper su agentic ai
+- [ ] finire appunti distributed systems
 
 - [ ] Dopo aver fatto ciò definire i capitoli della tesi dopo un attento brainstorming
