@@ -10,7 +10,7 @@ Mi chiamo Luca Gugliotta e studio presso [l'università di Tor Vergata informati
 ## INTELLIGENZA ARTIFICIALE 🤖
 [[IA INDICE]]
 ## BIG DATA 📊
-[[BIG DATA INDICE]]
+[[UNI/Triennale/ANNO 3/ARCHIVIO/ALGORITMI PER I BIG DATA/BIG DATA INDICE]]
 ## PROGRAMMAZIONE WEB 🌐
 [[PROGRAMMAZIONE WEB INDICE]]
 ## VULNERABILITÀ 🛡️
