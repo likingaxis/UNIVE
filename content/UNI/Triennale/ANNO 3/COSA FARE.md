@@ -4,6 +4,5 @@
 - [ ] Leggere paper su prompt engineering
 - [ ] Leggere paper su agentic ai
 - [ ] La tesi deve dare valore a cosa ho fatto
-- [ ] Perché non installare antigravity su docker?
 
 - [ ] Dopo aver fatto ciò definire i capitoli della tesi dopo un attento brainstorming
