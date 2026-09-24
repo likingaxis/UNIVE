@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Triennale/ANNO 3/COSA FARE.md",
+                "file": "UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY/CR LESSON 1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "COSA FARE"
+              "title": "CR LESSON 1"
             }
           }
         ]
@@ -189,8 +189,15 @@
   },
   "active": "54c916002598d869",
   "lastOpenFiles": [
+    "UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY/CR INDICE.md",
+    "UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY/CR LESSON 1.md",
+    "UNI/Magistrale/ANNO1 M/ORARIO.md",
+    "UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE/PROMPT ENGINEERING.md",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE/su agentic LLM generale.md",
     "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE/su architetture agentiche LLM.md",
     "UNI/Triennale/ANNO 3/TESI/FONTI.md",
+    "UNI/Triennale/ANNO 3/COSA FARE.md",
     "UNI/Triennale/ANNO 3/TESI/idee_e_struttura_tesi.md",
     "UNI/Triennale/ANNO 3/TESI/TESI.md",
     "UNI/Triennale/ANNO 3/TESI/SESSIONE 0 - Fondamenta e stato metriche.md",
@@ -209,22 +216,17 @@
     "UNI/Triennale/ANNO 3/TESI/CESTINO/Documentazione.md",
     "UNI/Triennale/ANNO 3/HACKATON/tree.png",
     "UNI/Triennale/ANNO 3/TESI/CESTINO",
-    "UNI/Triennale/ANNO 3/COSA FARE.md",
     "UNI/Triennale/ANNO 3/TESI/Materiale tutor/GUIDE.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE/su agentic LLM generale.md",
     "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE/PAPER LETTI E IDEE su benchmark.md",
     "UNI/Triennale/ANNO 3/TESI/INFO UTILI.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE/PROMPT ENGINEERING.md",
     "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 1.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/perturbazioni.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/PIANO BENCHMARK (terra terra).md",
-    "UNI/Triennale/ANNO 3/TESI/Call/spiegazione benchmark da fare.md",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260924103257.png",
-    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS INDICE.md",
     "UNI/Magistrale",
     "UNI/Untitled",
     "UNI/Triennale",
@@ -232,7 +234,6 @@
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS",
     "UNI/ANNO 3/TESI/Pasted image 20260921131208.png",
     "Pasted image 20260921131110.png",
-    "UNI/ANNO 3/TESI/Pasted image 20260920161410.png",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK"
+    "UNI/ANNO 3/TESI/Pasted image 20260920161410.png"
   ]
 }
