@@ -439,3 +439,8 @@ Quindi la stessa idea della CAI diventa:
 Il critic valuta il comportamento dell'agente rispetto a queste regole.
 
 # The Prompt Report: A Systematic Survey of Prompt Engineering Techniques
+cosa si intende per ablation in ai
+eliminare il modulo di vision di un modello è ablation?
+
+==Sì==, **eliminare il modulo di vision da un modello multimodale è a tutti gli effetti un ablation study**.
+
