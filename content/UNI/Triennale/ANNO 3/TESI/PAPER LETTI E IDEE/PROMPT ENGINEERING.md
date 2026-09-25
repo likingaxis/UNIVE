@@ -286,3 +286,156 @@ In altre parole:
 CoT usefulness≈problem complexity×model capability\boxed{ CoT\ usefulness \approx problem\ complexity \times model\ capability }
 
 # Constitutional AI: Harmlessness from AI Feedback
+# 2. Che cosa significa “Constitutional AI”
+
+La “constitution” è semplicemente una piccola lista di principi scritti dagli esseri umani.
+
+Esempi concettuali:
+
+```
+Do not assist with illegal activity.
+
+Avoid harmful, racist, sexist or dangerous content.
+
+Prefer responses that are helpful, honest and harmless.
+
+Avoid being excessively preachy or accusatory.
+```
+
+La supervisione umana viene quindi compressa in qualcosa come:
+
+\[ Human\ values \rightarrow small\ set\ of\ written\ principles \]
+
+invece di:
+
+\[ Human\ values \rightarrow 100\,000+\ preference\ labels \]
+
+Gli autori descrivono infatti la CAI come una forma estrema di **scaled supervision**: gli esseri umani definiscono i principi, mentre gli AI aiutano a scalare l'applicazione di quei principi.
+# 3. L'architettura generale(DICIAMO CHE È QUELLO CHE HO APPLICATO? AVEVO UN PROMPT MOLTO FATTO DA REGOLE E POI HO CORRETTO PIANO PIANO)
+
+Il diagramma più importante è **Figura 1, pagina 2**.
+
+Il metodo è diviso in **due fasi**:
+
+```
+1. Supervised Constitutional AI
+2. Reinforcement Learning from AI Feedback
+```
+
+Più precisamente:
+
+\[ \boxed{ Critique \rightarrow Revision \rightarrow Supervised\ Learning \rightarrow AI\ Preferences \rightarrow Preference\ Model \rightarrow RL } \]
+
+La prima fase serve a portare il modello verso una distribuzione di risposte più sicure.
+
+La seconda fase raffina il comportamento tramite reinforcement learning.
+
+# 8. Una critica importante: il critic può sbagliare
+
+Gli autori osservano anche che le critiche generate dal modello non sono sempre corrette.
+
+A volte sono:
+
+- eccessive;
+- inaccurate;
+- troppo severe;
+- basate su problemi che non esistono realmente.
+
+Eppure, sorprendentemente, le **revisioni finali migliorano comunque spesso la risposta**. 2212.08073v1
+
+Questa distinzione è molto interessante:
+
+\[ \text{Critique quality} \neq \text{Revision quality} \]
+
+Un critic può quindi non essere perfettamente interpretabile o accurato, ma può comunque essere utile come segnale intermedio.
+
+---
+
+# 9. Fase 2: Reinforcement Learning from AI Feedback
+
+Questa è la parte più innovativa.
+
+Nel RLHF classico:
+
+\[ Human \rightarrow A > B \]
+
+Nella CAI:
+
+\[ AI \rightarrow A > B \]
+
+Ovvero il modello stesso giudica quale risposta sia migliore.
+
+Gli autori chiamano questo:
+
+\[ \boxed{RLAIF} \]
+
+**Reinforcement Learning from AI Feedback**.
+
+2212.08073v1
+
+Per il tuo progetto, secondo me il modo più interessante di leggere questo paper è attraverso tre ruoli.
+
+### Actor
+
+Produce una risposta:
+
+\[ Actor(prompt) \rightarrow response \]
+
+### Critic
+
+Analizza il risultato secondo una serie di principi:
+
+\[ Critic(response,constitution) \rightarrow critique \]
+
+### Reviser
+
+Produce una versione migliore:
+
+\[ Reviser(response,critique) \rightarrow response' \]
+
+### Judge
+
+Confronta due candidate:
+
+\[ Judge(A,B,constitution) \rightarrow preference \]
+
+Questa struttura è estremamente vicina a molte architetture agentiche moderne.
+
+---
+
+# 25. Collegamento diretto con il tuo workflow
+
+Per un agente di cybersecurity potresti avere qualcosa del tipo:
+
+```
+Planner
+   ↓
+Action
+   ↓
+Observation
+   ↓
+Critic
+   ↓
+Revision / New Plan
+```
+
+La constitution potrebbe contenere non necessariamente principi morali, ma anche **vincoli operativi**.
+
+Per esempio:
+
+```
+1. Do not repeat commands that already failed without new evidence.
+2. Prefer low-cost reconnaissance before expensive scans.
+3. Every hypothesis must be supported by observations.
+4. Do not treat absence of output as evidence of success.
+5. Verify vulnerabilities before declaring them exploitable.
+6. Avoid destructive actions.
+```
+
+Quindi la stessa idea della CAI diventa:
+
+\[ \boxed{ Constitution = explicit behavioral policy } \]
+
+Il critic valuta il comportamento dell'agente rispetto a queste regole.
+
+# The Prompt Report: A Systematic Survey of Prompt Engineering Techniques

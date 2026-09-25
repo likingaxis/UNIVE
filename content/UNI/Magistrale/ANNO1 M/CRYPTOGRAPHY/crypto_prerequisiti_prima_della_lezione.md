@@ -10,23 +10,23 @@ Serve solo a rinfrescare i concetti matematici e informatici che è utile avere 
 
 ## Appartenenza
 
-Se `x` appartiene a un insieme `A`:
+Se $x$ appartiene a un insieme $A$:
 
-\[
+$$
 x \in A
-\]
+$$
 
 Se non appartiene:
 
-\[
+$$
 x \notin A
-\]
+$$
 
 Esempio:
 
-\[
-3 \in \{1,2,3,4\}
-\]
+$$
+3 \in \{1, 2, 3, 4\}
+$$
 
 ---
 
@@ -36,15 +36,15 @@ La cardinalità di un insieme è il numero dei suoi elementi.
 
 Se:
 
-\[
-A = \{a,b,c\}
-\]
+$$
+A = \{a, b, c\}
+$$
 
 allora:
 
-\[
+$$
 |A| = 3
-\]
+$$
 
 Questa notazione compare continuamente in crittografia.
 
@@ -52,23 +52,23 @@ Questa notazione compare continuamente in crittografia.
 
 ## Prodotto cartesiano
 
-Se abbiamo due insiemi `A` e `B`:
+Se abbiamo due insiemi $A$ e $B$:
 
-\[
+$$
 A \times B
-\]
+$$
 
 è l'insieme di tutte le coppie:
 
-\[
-(a,b)
-\]
+$$
+(a, b)
+$$
 
 con:
 
-\[
-a \in A,\qquad b \in B
-\]
+$$
+a \in A, \qquad b \in B
+$$
 
 ---
 
@@ -76,23 +76,23 @@ a \in A,\qquad b \in B
 
 Una funzione:
 
-\[
-f:A \rightarrow B
-\]
+$$
+f: A \rightarrow B
+$$
 
-associa a ogni elemento di `A` un elemento di `B`.
+associa a ogni elemento di $A$ un elemento di $B$.
 
 Terminologia:
 
-- `A` = dominio
-- `B` = codominio
-- `f(x)` = valore prodotto dalla funzione sull'input `x`
+- $A$ = dominio
+- $B$ = codominio
+- $f(x)$ = valore prodotto dalla funzione sull'input $x$
 
 Esempio:
 
-\[
-f(x)=x^2
-\]
+$$
+f(x) = x^2
+$$
 
 ---
 
@@ -100,9 +100,9 @@ f(x)=x^2
 
 Se una funzione è invertibile, possiamo avere:
 
-\[
-f^{-1}(f(x))=x
-\]
+$$
+f^{-1}(f(x)) = x
+$$
 
 Non serve approfondire molto: basta ricordare l'idea di una trasformazione che può essere "annullata" da un'altra trasformazione.
 
@@ -112,15 +112,15 @@ Non serve approfondire molto: basta ricordare l'idea di una trasformazione che p
 
 Un bit può essere:
 
-\[
+$$
 0
-\]
+$$
 
 oppure:
 
-\[
+$$
 1
-\]
+$$
 
 Una sequenza di bit può essere, per esempio:
 
@@ -134,27 +134,25 @@ Una sequenza di bit può essere, per esempio:
 
 La notazione:
 
-\[
+$$
 \{0,1\}^n
-\]
+$$
 
 significa:
 
-> insieme di tutte le stringhe di bit di lunghezza `n`.
+> insieme di tutte le stringhe di bit di lunghezza $n$.
 
 Esempio:
 
-\[
-\{0,1\}^2
-=
-\{00,01,10,11\}
-\]
+$$
+\{0,1\}^2 = \{00, 01, 10, 11\}
+$$
 
 Quindi:
 
-\[
+$$
 |\{0,1\}^n| = 2^n
-\]
+$$
 
 Questa relazione è molto importante.
 
@@ -166,14 +164,14 @@ Lo XOR è un'operazione tra bit.
 
 Si indica con:
 
-\[
+$$
 \oplus
-\]
+$$
 
 Tabella:
 
-| a | b | a XOR b |
-|---|---|---------|
+| $a$ | $b$ | $a \text{ XOR } b$ |
+| :---: | :---: | :---: |
 | 0 | 0 | 0 |
 | 0 | 1 | 1 |
 | 1 | 0 | 1 |
@@ -181,29 +179,27 @@ Tabella:
 
 Proprietà da ricordare:
 
-\[
+$$
 a \oplus 0 = a
-\]
+$$
 
-\[
+$$
 a \oplus a = 0
-\]
+$$
 
-\[
+$$
 a \oplus b = b \oplus a
-\]
+$$
 
-\[
-(a \oplus b)\oplus c
-=
-a\oplus(b\oplus c)
-\]
+$$
+(a \oplus b) \oplus c = a \oplus (b \oplus c)
+$$
 
 e soprattutto:
 
-\[
-(a\oplus b)\oplus b=a
-\]
+$$
+(a \oplus b) \oplus b = a
+$$
 
 ---
 
@@ -211,35 +207,35 @@ e soprattutto:
 
 È utile essere veloci con:
 
-\[
-2^1=2
-\]
+$$
+2^1 = 2
+$$
 
-\[
-2^2=4
-\]
+$$
+2^2 = 4
+$$
 
-\[
-2^3=8
-\]
+$$
+2^3 = 8
+$$
 
-\[
-2^4=16
-\]
+$$
+2^4 = 16
+$$
 
-\[
-2^8=256
-\]
+$$
+2^8 = 256
+$$
 
-\[
-2^{10}=1024
-\]
+$$
+2^{10} = 1024
+$$
 
-Se una stringa ha `n` bit, esistono:
+Se una stringa ha $n$ bit, esistono:
 
-\[
+$$
 2^n
-\]
+$$
 
 possibili stringhe diverse.
 
@@ -247,9 +243,9 @@ Esempio:
 
 una stringa di 8 bit può assumere:
 
-\[
-2^8=256
-\]
+$$
+2^8 = 256
+$$
 
 valori diversi.
 
@@ -261,21 +257,21 @@ Non serve fare esercizi complicati.
 
 Ricorda soltanto che:
 
-\[
-\log_2(2^n)=n
-\]
+$$
+\log_2(2^n) = n
+$$
 
 Esempio:
 
-\[
-\log_2(256)=8
-\]
+$$
+\log_2(256) = 8
+$$
 
 perché:
 
-\[
-256=2^8
-\]
+$$
+256 = 2^8
+$$
 
 In informatica e crittografia la base 2 compare continuamente.
 
@@ -289,51 +285,51 @@ Questa è probabilmente la parte matematica più importante da avere fresca.
 
 ## Evento
 
-Se `A` è un evento:
+Se $A$ è un evento:
 
-\[
-Pr[A]
-\]
+$$
+\Pr[A]
+$$
 
-indica la probabilità che `A` accada.
+indica la probabilità che $A$ accada.
 
 La probabilità è sempre compresa tra:
 
-\[
-0 \leq Pr[A] \leq 1
-\]
+$$
+0 \leq \Pr[A] \leq 1
+$$
 
 ---
 
 ## Evento complementare
 
-Se `A` è un evento:
+Se $A$ è un evento:
 
-\[
-Pr[\neg A]=1-Pr[A]
-\]
+$$
+\Pr[\neg A] = 1 - \Pr[A]
+$$
 
 ---
 
 # 8. Variabili casuali
 
-Una variabile casuale `X` può assumere diversi valori secondo una certa distribuzione.
+Una variabile casuale $X$ può assumere diversi valori secondo una certa distribuzione.
 
 La scrittura:
 
-\[
-Pr[X=x]
-\]
+$$
+\Pr[X = x]
+$$
 
 significa:
 
-> probabilità che la variabile casuale `X` assuma il valore `x`.
+> probabilità che la variabile casuale $X$ assuma il valore $x$.
 
 Esempio: dado equilibrato.
 
-\[
-Pr[X=3]=\frac16
-\]
+$$
+\Pr[X = 3] = \frac{1}{6}
+$$
 
 ---
 
@@ -343,33 +339,33 @@ Una distribuzione è uniforme quando tutti i valori possibili hanno la stessa pr
 
 Se:
 
-\[
-S=\{a,b,c,d\}
-\]
+$$
+S = \{a, b, c, d\}
+$$
 
 e scegliamo un elemento uniformemente:
 
-\[
-Pr[X=a]=Pr[X=b]=Pr[X=c]=Pr[X=d]=\frac14
-\]
+$$
+\Pr[X = a] = \Pr[X = b] = \Pr[X = c] = \Pr[X = d] = \frac{1}{4}
+$$
 
 In generale, se:
 
-\[
+$$
 X
-\]
+$$
 
-è uniforme su un insieme finito `S`, allora:
+è uniforme su un insieme finito $S$, allora:
 
-\[
-Pr[X=x]=\frac{1}{|S|}
-\]
+$$
+\Pr[X = x] = \frac{1}{|S|}
+$$
 
 per ogni:
 
-\[
-x\in S
-\]
+$$
+x \in S
+$$
 
 ---
 
@@ -377,19 +373,19 @@ x\in S
 
 La scrittura:
 
-\[
-Pr[A\cap B]
-\]
+$$
+\Pr[A \cap B]
+$$
 
 significa:
 
-> probabilità che avvengano sia `A` sia `B`.
+> probabilità che avvengano sia $A$ sia $B$.
 
 Può anche comparire come:
 
-\[
-Pr[X=x \land Y=y]
-\]
+$$
+\Pr[X = x \land Y = y]
+$$
 
 ---
 
@@ -397,22 +393,20 @@ Pr[X=x \land Y=y]
 
 Formula:
 
-\[
-Pr[A\mid B]
-=
-\frac{Pr[A\cap B]}{Pr[B]}
-\]
+$$
+\Pr[A \mid B] = \frac{\Pr[A \cap B]}{\Pr[B]}
+$$
 
 Da leggere:
 
-> probabilità di `A` sapendo che `B` è avvenuto.
+> probabilità di $A$ sapendo che $B$ è avvenuto.
 
 Esempio intuitivo:
 
-- `A`: una carta è un re
-- `B`: sappiamo che la carta è una figura
+- $A$: una carta è un re
+- $B$: sappiamo che la carta è una figura
 
-La probabilità di `A` cambia dopo aver conosciuto `B`.
+La probabilità di $A$ cambia dopo aver conosciuto $B$.
 
 Questa idea sarà molto importante nel corso.
 
@@ -420,23 +414,19 @@ Questa idea sarà molto importante nel corso.
 
 # 12. Indipendenza
 
-Due eventi `A` e `B` sono indipendenti quando sapere che uno è accaduto non dà informazione sull'altro.
+Due eventi $A$ e $B$ sono indipendenti quando sapere che uno è accaduto non dà informazione sull'altro.
 
 Una definizione equivalente è:
 
-\[
-Pr[A\cap B]
-=
-Pr[A]Pr[B]
-\]
+$$
+\Pr[A \cap B] = \Pr[A] \Pr[B]
+$$
 
 oppure:
 
-\[
-Pr[A\mid B]
-=
-Pr[A]
-\]
+$$
+\Pr[A \mid B] = \Pr[A]
+$$
 
 quando la probabilità condizionata è definita.
 
@@ -446,19 +436,15 @@ quando la probabilità condizionata è definita.
 
 Per eventi incompatibili:
 
-\[
-Pr[A\cup B]
-=
-Pr[A]+Pr[B]
-\]
+$$
+\Pr[A \cup B] = \Pr[A] + \Pr[B]
+$$
 
 Se non sono necessariamente incompatibili:
 
-\[
-Pr[A\cup B]
-=
-Pr[A]+Pr[B]-Pr[A\cap B]
-\]
+$$
+\Pr[A \cup B] = \Pr[A] + \Pr[B] - \Pr[A \cap B]
+$$
 
 ---
 
@@ -466,23 +452,19 @@ Pr[A]+Pr[B]-Pr[A\cap B]
 
 È utile riconoscere:
 
-\[
-\sum_{x\in S} f(x)
-\]
+$$
+\sum_{x \in S} f(x)
+$$
 
 che significa:
 
-> somma `f(x)` per tutti gli elementi `x` dell'insieme `S`.
+> somma $f(x)$ per tutti gli elementi $x$ dell'insieme $S$.
 
 Esempio:
 
-\[
-\sum_{i=1}^{3} i
-=
-1+2+3
-=
-6
-\]
+$$
+\sum_{i=1}^{3} i = 1 + 2 + 3 = 6
+$$
 
 ---
 
@@ -490,69 +472,69 @@ Esempio:
 
 ## Per ogni
 
-\[
+$$
 \forall x
-\]
+$$
 
 significa:
 
-> per ogni `x`
+> per ogni $x$
 
 Esempio:
 
-\[
-\forall x\in A
-\]
+$$
+\forall x \in A
+$$
 
-= per ogni elemento `x` appartenente ad `A`.
+= per ogni elemento $x$ appartenente ad $A$.
 
 ---
 
 ## Esiste
 
-\[
+$$
 \exists x
-\]
+$$
 
 significa:
 
-> esiste almeno un `x`
+> esiste almeno un $x$
 
 ---
 
 # 16. Implicazione
 
-\[
+$$
 A \Rightarrow B
-\]
+$$
 
 significa:
 
-> se `A` è vero, allora `B` è vero.
+> se $A$ è vero, allora $B$ è vero.
 
 ---
 
 # 17. Se e solo se
 
-\[
+$$
 A \iff B
-\]
+$$
 
 significa:
 
-> `A` è vero se e solo se `B` è vero.
+> $A$ è vero se e solo se $B$ è vero.
 
 Quindi valgono entrambe le implicazioni:
 
-\[
-A\Rightarrow B
-\]
+$$
+A \Rightarrow B
+$$
 
 e:
 
-\[
-B\Rightarrow A
-\]
+$$
+B \Rightarrow A
+$$
 
 ---
 
@@ -560,23 +542,23 @@ B\Rightarrow A
 
 È utile ricordare cosa significa:
 
-\[
+$$
 a \bmod n
-\]
+$$
 
-cioè il resto della divisione di `a` per `n`.
+cioè il resto della divisione di $a$ per $n$.
 
 Esempio:
 
-\[
-17\bmod 5=2
-\]
+$$
+17 \bmod 5 = 2
+$$
 
 perché:
 
-\[
-17=3\cdot5+2
-\]
+$$
+17 = 3 \cdot 5 + 2
+$$
 
 Non serve approfondire ancora aritmetica modulare avanzata.
 
@@ -592,13 +574,13 @@ Un algoritmo è una procedura che:
 
 In forma astratta:
 
-\[
-y=A(x)
-\]
+$$
+y = A(x)
+$$
 
 significa:
 
-> l'algoritmo `A`, dato l'input `x`, produce `y`.
+> l'algoritmo $A$, dato l'input $x$, produce $y$.
 
 ---
 
@@ -631,23 +613,23 @@ Non serve ripassare tutta la teoria della complessità.
 
 Esempi:
 
-\[
+$$
 O(n)
-\]
+$$
 
-\[
+$$
 O(n^2)
-\]
+$$
 
-\[
+$$
 O(n^3)
-\]
+$$
 
 contro quantità esponenziali come:
 
-\[
+$$
 O(2^n)
-\]
+$$
 
 Idea intuitiva:
 
@@ -697,7 +679,7 @@ Non serve conoscere ancora i diversi modelli di sicurezza.
 Il corso sarà probabilmente pieno di questi termini.
 
 | English | Italiano |
-|---|---|
+| :--- | :--- |
 | message | messaggio |
 | sender | mittente |
 | receiver | destinatario |
@@ -747,18 +729,18 @@ Arriveranno eventualmente dopo.
 
 Prima di entrare in aula dovresti riuscire a dire senza pensarci troppo:
 
-- [ ] So cosa significa \(x\in A\)
-- [ ] So cosa significa \(|A|\)
-- [ ] So leggere \(f:A\rightarrow B\)
-- [ ] So cosa significa \(\{0,1\}^n\)
-- [ ] So che ci sono \(2^n\) stringhe di `n` bit
+- [ ] So cosa significa $x \in A$
+- [ ] So cosa significa $|A|$
+- [ ] So leggere $f: A \rightarrow B$
+- [ ] So cosa significa $\{0,1\}^n$
+- [ ] So che ci sono $2^n$ stringhe di $n$ bit
 - [ ] So fare XOR tra due bit/stringhe
-- [ ] So leggere \(Pr[X=x]\)
+- [ ] So leggere $\Pr[X=x]$
 - [ ] So cos'è una distribuzione uniforme
 - [ ] So cos'è una probabilità condizionata
 - [ ] So cosa significa indipendenza
-- [ ] So leggere \(\forall\), \(\exists\), \(\Rightarrow\), \(\iff\)
-- [ ] Ricordo cosa significa `mod`
+- [ ] So leggere $\forall$, $\exists$, $\Rightarrow$, $\iff$
+- [ ] Ricordo cosa significa $\bmod$
 - [ ] So distinguere algoritmo deterministico e randomizzato
 - [ ] Ho un'idea intuitiva di cosa significhi "algoritmo efficiente"
 
@@ -768,13 +750,13 @@ Prima di entrare in aula dovresti riuscire a dire senza pensarci troppo:
 
 Se hai pochissimo tempo, concentrati solo su questi punti:
 
-1. \(\{0,1\}^n\) e \(2^n\)
+1. $\{0,1\}^n$ e $2^n$
 2. XOR
 3. probabilità condizionata
 4. indipendenza
 5. distribuzione uniforme
 6. insiemi, funzioni e cardinalità
-7. notazione \(\forall,\exists,\Rightarrow,\iff\)
+7. notazione $\forall, \exists, \Rightarrow, \iff$
 8. differenza tra algoritmo deterministico e randomizzato
 
 Questi sono i prerequisiti più utili da avere freschi prima di iniziare.
