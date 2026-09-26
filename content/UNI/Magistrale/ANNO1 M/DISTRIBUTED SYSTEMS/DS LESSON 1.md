@@ -49,38 +49,66 @@ Distributed systems are a **fight against uncertainty** caused by:
 - **Failures:** processes or communication may fail
 - **Local view:** each process only knows its own local information, not the complete global state
 
-#### DS SLIDE FILE 1
-***fino a slide 25***
-##### Methodology
-- models
-	- a set of object
-- abstractions
-	- what type of technology they use
-- specifications
-	- borg
-- algorithms
-	- algoritmos del deppeffozza
+#### DS SLIDE FILE 2
+***up to slide 25***
+##### Methodology/ Main concepts
+we have four main concepts:
+- **model**
+	- a set of object in the system like
+		- processes, communication links, timing assumptions, failures
+- **abstractions**
+	- describes the high-level object or service we want to provide without implementation details
+- **specifications**
+	- describes which properties the abstraction must satisfy
+- **algorithms**
+	- the concrete distributed procedure used to implement the abstraction
 
-## Models, Abstraction and basic concepts
-#### Models
+## Models, Abstractions and Basic Concepts
+#### Model
+A model tells us what kind of distributed system we assume. But what do we mean by a system?
 ##### System
-- n processes in $\pi:{p0,...,p_n-1}$ with distinct identities(like an IP but we can see it like a number)
+- n processes in $\pi:\{p0,...,p_n-1\}$ with distinct identities(like an IP but we can see it like a number)
 the system doesn't change during time
 $$G:(\pi,E)$$ usually this graph is complete, every process(node) is connected with another using a link(edge)
-- not in the algorithm exercises
-
-(picture with the graph and the message)
+- We assume a **static system**: the set of processes and the network topology do not change during the execution.
+![[Pasted image 20260926085113.png|311]]
 ###### Process(node)
-A process has an upper layer with  input and output 
-- the I and O are fore maybe another process or a human
-- instead the process has also a rev MSG Y and a send MSG X
-- connected with a link, a link has a inBuffer and an OutBuffer
-in a formal way
-> $$P_j ...$$
+A process is modeled as a possibility infinite-state I/O automaton
+It interacts with two levels:
+- Upper layer:
+	- receives input X and produces output Y
+	- this layer interact with another component or an external user(human)
+- Link layer:
+	- receives messages: "Rcv MSG y"
+	- sens messages: "Send MSG X"
+Each process is connected to communication links and has:
+- InBuffer: contains received messages
+- OutBuffer: contains messages that have been sent but not yet delivered
 
-- internal states Q
-- initial states Q_in subset Q
-- a message M is formed by a triple `<sender,receiver,payload>`
+![[Pasted image 20260926085524.png|363]]
+
+
+>[!info] in a formal way
+>$$P_j(q\in Q  \ \cup \ Q_{in}, InBuf_j)=(q'\in Q, Send_{msg} \subset M)$$
+>-  $P_j$ is a state transition function of process $p_j$ it takes the Input Buffer and have a current internal state
+>- process $p_j$ execute a local step and produce a message to send
+> 
+> after this transition
+> $$OutBuf_j=OutBuf_j \cup Send_msg$$
+> $$InBuf_j=\varnothing$$
+> 
+> - `InBuf_j` contains the messages already delivered to process `p_j`.
+> - When `p_j` executes its next local step, it consumes the current contents of `InBuf_j`.
+> - After the step, `InBuf_j` becomes empty.
+
+- a set of internal states `Q`
+- a set of initial states `Q_in ⊆ Q`
+- a set of possible messages `M`
+
+A message has the triple:
+
+`<sender, receiver, payload>`
+
 
 the initial state is distinct for every process because at least they have different identities
 ##### Asynchronous system
