@@ -97,81 +97,126 @@ Each process is connected to communication links and has:
 > $$OutBuf_j=OutBuf_j \cup Send_msg$$
 > $$InBuf_j=\varnothing$$
 > 
-> - `InBuf_j` contains the messages already delivered to process `p_j`.
-> - When `p_j` executes its next local step, it consumes the current contents of `InBuf_j`.
-> - After the step, `InBuf_j` becomes empty.
+> - $InBuf_j$ contains the messages already delivered to process $p_j$
+> - When $p_j$ executes its next local step, it consumes the current contents of $InBuf_j$
+> - After the step, $InBuf_j$ becomes empty.
 
-- a set of internal states `Q`
-- a set of initial states `Q_in ⊆ Q`
-- a set of possible messages `M`
+- a set of internal states $Q$
+- a set of initial states $Q_{in} ⊆ Q$
+- a set of possible messages $M$
 
 A message has the triple:
+$$<sender, receiver, payload>$$
 
-`<sender, receiver, payload>`
-
-
-the initial state is distinct for every process because at least they have different identities
+Each process can have a different initial state, because processes have distinct identities
 ##### Asynchronous system
-- no concept of time
-- any action can take an unpredictable time(!=slow) but slow is better than unpredictable
-- action like a local action or send a message
+- no known bound on how long actions or message deliveries take
+- any action can take an unpredictable time(!=slow)
+	- we can say that slow is better than unpredictable
+- Examples of actions:
+	- execution of a local step
+	- delivery of a message
 
-###### Execution
-is a story of our system
-- on a computer is like a snapshot of the memory
-- in a distributed system is also the sending of a message and the receives
-- adversary is an entity that decides what is gonna happen in the execution
-	- a scheduler that schedules events
-- the input for an algorithm is also the time and not also the messages only
+##### Execution
+An execution describes the evolution of the whole distributed system over time
+It can be seen as the "story" of the system
+which events happen and how the global state changes after each event
+is not a single event is the whole sequence of things that happen formally
+is an infinite sequence that alternates configurations and events
+$$(C_0,e_0,C_1,e_1,C_2,e_2,\dots)$$
 
-- execution of a local step - Exec(i): process i executes one step of its state machine
+###### Events
+An event is one atomic step that can change the system state
+We have an adversary(or scheduler) that decides which enabled event happens next
+the execution model has two main types of events:
+- $Exec(i)$:
+	- process $p_i$ executes one local step of its state machine
+- $Del(i,j,m)$:
+	- message $m$ is delivered from process $p_i$ to process $p_j$ 
+![[ezgif.com-speed.gif]]
 
-(picture from the slides)
 Asynchrony is also in the local execution
 
-Del stands for Delivery not delete
-so we have 2 types of events and the time is discrete
-- exec and delivery
-
-Configuration_N stands for the state of my entire system after the event N
-a configuration like the 0 is an array of n processes
-
->$$C_0=<(q_0,{},{}), ...$$
-
-+ picture from the slides
+##### Configuration
+a Configuration $C_t$ represents the global state of the system at step $t$
+It contains the state of every process
+a configuration an array of n processes
+$$
+C_t[j] = (q_j, InBuf_j, OutBuf_j)
+$$
+it can be seen like a set of triple
+>example $$
+C_0 = \langle
+(q_0,\{\},\{\}),
+(q_1,\{m\},\{\}),
+(q_2,\{\},\{\})
+\rangle
+$$
+>![[Pasted image 20260926100143.png|525]]
 
 - our scheduler cant create messages it follows the actual configuration
 
-the local execution is always enabled, not depended by the configuration_N
 
-because the time is discrete we mark only the event that happens, if nothing happens is chill
+we know that an execution is a set of configurations
+every configuration has an event $(e_0,e_1,e_2,\dots)$ they are individual
+one single possible history of the distributed system is an execution
+$$\varepsilon = (C_0,e_0,C_1,e_1,C_2,\ldots)$$
 
-to analyse the states we use the space time diagram
-image from the slides
-everything happens in depending of the delay
+
+
+##### Enabled Events
+An event can happen only if it is **enabled** in the current configuration
+for example
+- A local step `Exec(i)` is enabled for the process.
+- A delivery `Del(i,j,m)` is enabled only if message `m`
+  is currently in `OutBuf_i`.
+
+Therefore, the scheduler cannot invent messages:
+it can only choose among events that are possible in the current configuration.
+
+##### Space-Time Diagram
+Executions can also be represented using a **space-time diagram**:
+- one horizontal line for each process
+- time progresses along the horizontal axis
+- local events happen on the process line
+- arrows represent messages exchanged between processes
+The exact position of events depends on delays and on the order chosen by the scheduler
 - arrow=message m
+![[Pasted image 20260926101131.png|578]]
 
 ###### Limit the power of the scheduler
-fair execution
-an execution is fair if every process p_i ...
-- first property this means that ...01:20:00
-- second property the message will be delivered but we dont know when, this happens but dont know when
+A **fair execution** is an execution in which:
+1. every process $p_i$ executes infinitely many local steps
+2. every sent message is eventually delivered (the message will be delivered, but we don't know when)
 
-Example of an Algorithm
-(picture)
-p_0 cannot answer if there is a process with 1
-he can answer only if p_0 receive a message from p_1 that receives also a message from p_2
+This means that the scheduler cannot indefinitely stop a process
+and cannot delay a sent message forever
 
-if the scheduler is not fair it can isolate every messages from p_2
-we need fairness to give less powers to the adversary!
+>[!info]- Example of an Algorithm
+> ![[Pasted image 20260926101817.png|300]]
+> $p_0$ has value 0
+> $p_1$ has value 0
+> $p_2$ has value 1
+> only $p_2$ knows that there exists a process with value `1`
+> to let $p_0$ "answer is there some process with value 1?"
+> the information must travel from $p_2$ to $p_1$ and after that to $p_0$
+> 
+> The scheduler does not "want" to block the algorithm.
+> It models every possible ordering and delay of events.
+> if the scheduler is not fair it can isolate every messages from p_2
+> we need fairness to give less powers to the adversary!
+
 ##### Local View or Local Execution
-is a set of events that impact on this process
-p2 knows about p3 until C2
+The **local view** of a process is the subsequence of events in the global execution that affect that process
+So a process does not see the entire execution of the system
 
-picture slide (can a p answer if there is a 1 in the system?)
-the local view of every process is not a part of the system is infact local
-epsilon=execution
+This means that two different global executions may look identical to a process.
 
-the process doesnt know nothing about the time and also the Configuration they only have the local view about what happens
-(from the picture) indistinguishability theorem
-we say that p_1 and p_2 cannot distinguish E from E'
+If process $p_i$ has the same local view in executions $E$ and $E'$,
+then $p_i$ cannot distinguish $E$ from $E'$
+![[Pasted image 20260926102907.png|498]]
+the process doesn't know nothing about the time and also the Configuration they only have the local view about what happens
+
+so we have the
+###### Indistinguishability Theorem
+![[Pasted image 20260926103001.png|532]]
