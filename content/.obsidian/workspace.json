@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS INDICE.md",
+                "file": "UNI/Triennale/ANNO 3/HACKATON/Report di Sviluppo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DS INDICE"
+              "title": "Report di Sviluppo"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 468.70001220703125
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -189,8 +189,9 @@
   },
   "active": "f0489b1556693a25",
   "lastOpenFiles": [
-    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 1.md",
+    "UNI/Triennale/ANNO 3/HACKATON/HACKATON ORACLE.md",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS INDICE.md",
+    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 1.md",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260926103001.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260926102907.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260926101817.png",
