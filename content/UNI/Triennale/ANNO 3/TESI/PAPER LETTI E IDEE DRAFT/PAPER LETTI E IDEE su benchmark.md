@@ -2,41 +2,41 @@ SCRIVERE ROBA SUI PROMPT ENGINEERING NON FARE OVERFITTING ECC(LEGGI PAPER SUL PR
 
 ### IDEE DELLA TESI DOVUTA AI VIDEO E PAPER LETTI
 ##### PENTEST GPT
-- costi, prezzi, velocità, parlare dell'hardware usato e fare riferimento ai bassi costi e che il tutto può girare anche offline
-- confrontare un agente AI con harness tipico e vedere i risultati ottenuti rispetto alla mia architettura(credo che questo sia il diretto competitor)
-- parlare dell'harness dietro all'LLM che ho messo(fino ad ora non ho mai parlato con un'ottica agentica e architetturale ma più al livello di codice)
-- parlare di quello che avrebbe dovuto affrontare un vero tester e che questo avrebbe preso molto tempo per un lavoro prettamente meccanico, lasciare la progettazione delle vulnerabilità all'umano ma la fase tediosa no
-- evidenziare bene i tool che può svolgere il nostro esecutore (cercare di testarne molti idea per il dataset)
-- parlare della context window, di come l'orchestratore riduce i problemi legati a questo
-- prendere in considerazione il fatto che black-box possa essere fatto facilmente, modificando il planner e renderlo la mente della challenge, mentre invece l'esecutore solo lo schiavo che svolge le cose e gli occhi (ha senso?) dividere i compiti mente-lavoro (anche se non lo implemento portare una progettazione avrebbe senso?) il final evaluator che fine fa?
-- passare a un lavoro totalmente locale? promuovere l'ia locale per abbattere i costi (forse sto andando troppo fuori focus e sembrerebbe una tesi sulle ia locali e basta)
-Le slide inoltre erano fatte davvero molto bene (prendere ispirazione)
+<mark style="background:#b1ffff">- costi, prezzi, velocità, parlare dell'hardware usato e fare riferimento ai bassi costi e che il tutto può girare anche offline</mark>
+<mark style="background:#b1ffff">- confrontare un agente AI con harness tipico e vedere i risultati ottenuti rispetto alla mia architettura(credo che questo sia il diretto competitor)</mark>
+<mark style="background:#b1ffff">- parlare dell'harness dietro all'LLM che ho messo(fino ad ora non ho mai parlato con un'ottica agentica e architetturale ma più al livello di codice)</mark>
+<mark style="background:#b1ffff">- parlare di quello che avrebbe dovuto affrontare un vero tester e che questo avrebbe preso molto tempo per un lavoro prettamente meccanico, lasciare la progettazione delle vulnerabilità all'umano ma la fase tediosa no</mark>
+<mark style="background:#b1ffff">- evidenziare bene i tool che può svolgere il nostro esecutore (cercare di testarne molti idea per il dataset)</mark>
+<mark style="background:#b1ffff">- parlare della context window, di come l'orchestratore riduce i problemi legati a questo</mark>
+<mark style="background:#b1ffff">- prendere in considerazione il fatto che black-box possa essere fatto facilmente, modificando il planner e renderlo la mente della challenge, mentre invece l'esecutore solo lo schiavo che svolge le cose e gli occhi (ha senso?) dividere i compiti mente-lavoro (anche se non lo implemento portare una progettazione avrebbe senso?) il final evaluator che fine fa?</mark>
+<mark style="background:#b1ffff">- passare a un lavoro totalmente locale? promuovere l'ia locale per abbattere i costi (forse sto andando troppo fuori focus e sembrerebbe una tesi sulle ia locali e basta)</mark>
+<mark style="background:#b1ffff">Le slide inoltre erano fatte davvero molto bene (prendere ispirazione)</mark>
 - https://www.youtube.com/watch?v=eGqjYo_vdTg
 
 ##### Cybench
-- spiegare cosa è una CTF
-- far vedere l'agente e come interagisce con la macchina
-- far vedere healer che accede ai file della macchina yaml
-- far vedere il prompt dopo averlo AI slop ripulito? nella tesi, penso abbia senso e descriverne come è stato progettato e le tecniche di design su come fare prompt engineering
-- healing mode oppure only testing mode (parlare di 2 modalità se hai fatto la black-box metti in mezzo anche quella)
-- definire le metriche utilizzate proprio in una slide/ parte dedicata della tesi
-- slide 21 è molto simile a quello che faccio
-- interessante testare il modello sulla base di quante informazioni gli diamo
-- fare benchmark sui modelli, quale risponde meglio all'architettura? testarne 3-5 penso vada più che bene
-- definire una difficoltà di task(ha senso?) valutare in base alla difficoltà di esecuzione
-- il planner riesce sempre ad interpretare la descrizione? non concentrarsi solo sui test dell'executor, riesce ad identificare eventuali or? and? (focus soprattutto nel prompt engineering che abbiamo fatto)
-un discorso etico? ha senso? bho! magari non sulla tesi ma sulle slide
-Metriche interessanti: velocità, success rate nel rilevare il problema, costo tutto questo modificando
-- modello
-- context window
-- system prompt?
-- compattare più fasi in una (se non rende difficoltà di codice) così da vedere quanto effettivamente perde contesto il modello (es: creiamo solo fase 1 e fase 2 e vediamo quanto diventa meno grounded ecc)
-- threshold
-- non so cosa altro
+<mark style="background:#b1ffff">- spiegare cosa è una CTF</mark>
+<mark style="background:#b1ffff">- far vedere l'agente e come interagisce con la macchina</mark>
+<mark style="background:#b1ffff">- far vedere healer che accede ai file della macchina yaml</mark>
+<mark style="background:#b1ffff">- far vedere il prompt dopo averlo AI slop ripulito? nella tesi, penso abbia senso e descriverne come è stato progettato e le tecniche di design su come fare prompt engineering</mark>
+<mark style="background:#b1ffff">- healing mode oppure only testing mode (parlare di 2 modalità se hai fatto la black-box metti in mezzo anche quella)</mark>
+<mark style="background:#b1ffff">- definire le metriche utilizzate proprio in una slide/ parte dedicata della tesi</mark>
+<mark style="background:#b1ffff">- slide 21 è molto simile a quello che faccio</mark>
+<mark style="background:#b1ffff">- interessante testare il modello sulla base di quante informazioni gli diamo</mark>
+<mark style="background:#b1ffff">- fare benchmark sui modelli, quale risponde meglio all'architettura? testarne 3-5 penso vada più che bene</mark>
+<mark style="background:#b1ffff">- definire una difficoltà di task(ha senso?) valutare in base alla difficoltà di esecuzione</mark>
+<mark style="background:#b1ffff">- il planner riesce sempre ad interpretare la descrizione? non concentrarsi solo sui test dell'executor, riesce ad identificare eventuali or? and? (focus soprattutto nel prompt engineering che abbiamo fatto)</mark>
+<mark style="background:#b1ffff">un discorso etico? ha senso? bho! magari non sulla tesi ma sulle slide</mark>
+<mark style="background:#b1ffff">Metriche interessanti: velocità, success rate nel rilevare il problema, costo tutto questo modificando</mark>
+<mark style="background:#b1ffff">- modello</mark>
+<mark style="background:#b1ffff">- context window</mark>
+<mark style="background:#b1ffff">- system prompt?</mark>
+<mark style="background:#b1ffff">- compattare più fasi in una (se non rende difficoltà di codice) così da vedere quanto effettivamente perde contesto il modello (es: creiamo solo fase 1 e fase 2 e vediamo quanto diventa meno grounded ecc)</mark>
+<mark style="background:#b1ffff">- threshold</mark>
+<mark style="background:#b1ffff">- non so cosa altro</mark>
 
 
-scrivere formalismi del genere nella tesi esempio:
-Formalmente il paper lo esprime come:
+<mark style="background:#b1ffff">scrivere formalismi del genere nella tesi esempio:</mark>
+<mark style="background:#b1ffff">Formalmente il paper lo esprime come:</mark>
 
 rt,at=Act(mt)r_t,a_t=Act(m_t) st,ot=Execute(st−1,at)s_t,o_t=Execute(s_{t-1},a_t) mt+1=Update(mt,rt,ot)m_{t+1}=Update(m_t,r_t,o_t)
 
@@ -121,10 +121,10 @@ Quindi:
 > **una metrica binaria nasconde moltissima informazione sulla capability dell'agente.**
 
 
-penso sia interessante modificare attack plan per deviare e capire l'indipendenza dell'executor (ha senso?) magari gli togliamo una volta cosa deve fare esplicitamente e scriviamo (individua la problematica, potrebbe funzionare?)
+<mark style="background:#b1ffff">penso sia interessante modificare attack plan per deviare e capire l'indipendenza dell'executor (ha senso?) magari gli togliamo una volta cosa deve fare esplicitamente e scriviamo (individua la problematica, potrebbe funzionare?)</mark>
 
 
-QUANDO FACCIO BENCHMARK TRA MODELLI TROVO SIA UTILE CITARE QUESTO:
+<mark style="background:#b1ffff">QUANDO FACCIO BENCHMARK TRA MODELLI TROVO SIA UTILE CITARE QUESTO:</mark>
 Il paper in pratica separa due cose:
 
 ```
@@ -158,13 +158,13 @@ Questo emerge chiaramente perché cambiando solo:
 le performance cambiano sensibilmente.
 
 
-Prendere i produced tokens per fare benchmark per capire il reasoning ecc
+<mark style="background:#b1ffff">Prendere i produced tokens per fare benchmark per capire il reasoning ecc</mark>
 
 
-QUELLO CHE ERA SUCCESSO A ME CON GEMINI CON MCP E BASTA!:
-Questo è molto interessante.
+<mark style="background:#b1ffff">QUELLO CHE ERA SUCCESSO A ME CON GEMINI CON MCP E BASTA!:</mark>
+<mark style="background:#b1ffff">Questo è molto interessante.</mark>
 
-In una prima versione il server vulnerabile e l'agente vivevano nello stesso ambiente Docker.
+<mark style="background:#b1ffff">In una prima versione il server vulnerabile e l'agente vivevano nello stesso ambiente Docker.</mark>
 
 L'agente scopre che può semplicemente fare qualcosa tipo:
 
@@ -190,8 +190,8 @@ La loro conclusione è molto chiara:
 
 
 
-Aggiungere una pesatura alle metriche? ha senso?
-Dato che risolvere un task da 2 minuti e uno da 10 ore non dovrebbe forse valere esattamente lo stesso, provano una metrica pesata:
+<mark style="background:#b1ffff">Aggiungere una pesatura alle metriche? ha senso?</mark>
+<mark style="background:#b1ffff">Dato che risolvere un task da 2 minuti e uno da 10 ore non dovrebbe forse valere esattamente</mark> lo stesso, provano una metrica pesata:
 
 weight=log2​(FST)
 
@@ -203,9 +203,9 @@ Registrano anche:
 - numero di interazioni.
 
 
-ha senso aprire una parentesi su questo nella tesi (motivo: gemini 3.8 flash a volte non va gpt 5.6 sol manco a dirlo, claude opus 5 passa a opus 4.8)
+<mark style="background:#b1ffff">ha senso aprire una parentesi su questo nella tesi (motivo: gemini 3.8 flash a volte non va gpt 5.6 sol manco a dirlo, claude opus 5 passa a opus 4.8)</mark>
 
-Analizzano anche eventuali rifiuti del modello.
+<mark style="background:#b1ffff">Analizzano anche eventuali rifiuti del modello.</mark>
 
 Sono relativamente rari.
 
@@ -290,15 +290,15 @@ https://arxiv.org/pdf/2408.08926
 
 ##### The Test Oracle Problem in Synthetic LLM-as-Judge Corpora: Disappearance, Distortion and a Validation Protocol
 
-- perchè non avere macchine perfette e un allucinatore che le devia? per creare dei test? ha senso?
-	- penso di si almeno per creare una categoria specifica di rottura
-	- classificare i tipi di rottura in fase di benchmarking mi vengono in mente(ma sono a caso forse sono da cambiare tutte):
-		- funzionalità omesse
-		- rotture effettive
-		- disomogeneità dal writeup
-	- scrivere nella tesi, citando il seguente paper è importante avere dei buoni test di partenza onde evitare il rischio di relizzazione di test fallati dal principio
+<mark style="background:#b1ffff">- perchè non avere macchine perfette e un allucinatore che le devia? per creare dei test? ha senso?</mark>
+<mark style="background:#b1ffff">	- penso di si almeno per creare una categoria specifica di rottura</mark>
+<mark style="background:#b1ffff">	- classificare i tipi di rottura in fase di benchmarking mi vengono in mente(ma sono a caso forse sono da cambiare tutte):</mark>
+<mark style="background:#b1ffff">		- funzionalità omesse</mark>
+<mark style="background:#b1ffff">		- rotture effettive</mark>
+<mark style="background:#b1ffff">		- disomogeneità dal writeup</mark>
+<mark style="background:#b1ffff">	- scrivere nella tesi, citando il seguente paper è importante avere dei buoni test di partenza onde evitare il rischio di relizzazione di test fallati dal principio</mark>
 
-applicare Mechanical perturbation al posto di LLM-generated
+<mark style="background:#b1ffff">applicare Mechanical perturbation al posto di LLM-generated</mark>
 
 ma producendo esempi
 - artificiali;
@@ -353,7 +353,7 @@ Non errori rarissimi.
 https://arxiv.org/pdf/2607.13707
 
 ##### SWE-Bench Pro Verified: A Reliable Benchmark for Software Engineering Agents
-- forse utile per i benchmark sulla fase di healing più che executor, di base per lui però possiamo sfruttare la seguente formula interessante:
+<mark style="background:#b1ffff">- forse utile per i benchmark sulla fase di healing più che executor, di base per lui però possiamo sfruttare la seguente formula interessante:</mark>
 L’idea base di SWE-Bench è molto semplice.
 
 Hai:
@@ -380,7 +380,7 @@ Accuracy=task risoltitask totaliAccuracy = \frac{\text{task risolti}} {\text{t
 
 Nel paper il benchmark contiene **731 task**.
 
-La seconda metà è molto interessante invece per executor:
+<mark style="background:#b1ffff">La seconda metà è molto interessante invece per executor:</mark>
 Oppure può passare senza aver implementato tutto ciò che gli hai chiesto.
 
 Gli autori trovano 4 classi di problema.
@@ -393,7 +393,7 @@ Gli autori trovano 4 classi di problema.
 | Other                  | 2      |
 in particolare i penultimi 2
 
-introdurre un human expert che compie la final decision (per motivi di tempo forse la parte più tediosa)
+<mark style="background:#b1ffff">introdurre un human expert che compie la final decision (per motivi di tempo forse la parte più tediosa)</mark>
  15. Come correggono i task
 
 Qui usano una pipeline interessante:
@@ -429,9 +429,9 @@ test della solution
 
 e può far sì che entrambi condividano la stessa assunzione sbagliata.
 
-soluzione secondo me:separare solution da chi crea test
+<mark style="background:#b1ffff">soluzione secondo me:separare solution da chi crea test</mark>
 
-QUESTO NON PUÒ ACCADERE PERCHÈ ABBIAMO FORZATO UNA STRUTTURA DATI SOTTO GIUSTO? -> MATERIALE UTILE PER TESI PER DIRE (IL NOSTRO AGENTE NON PUÒ FARLO GODO)
+<mark style="background:#b1ffff">QUESTO NON PUÒ ACCADERE PERCHÈ ABBIAMO FORZATO UNA STRUTTURA DATI SOTTO GIUSTO? -> MATERIALE UTILE PER TESI PER DIRE (IL NOSTRO AGENTE NON PUÒ FARLO GODO)</mark>
 
 Nel task qutebrowser l'agente scopre sperimentalmente che:
 
@@ -613,9 +613,9 @@ ma il verifier esterno dice:
 FAIL
 ```
 
-Gli esempi di pagina 23 e 25 del paper mostrano esattamente questo fenomeno: self-test apparentemente valido ma oracle esterno contrario.
+<mark style="background:#b1ffff">Gli esempi di pagina 23 e 25 del paper mostrano esattamente questo fenomeno: self-test apparentemente valido ma oracle esterno contrario.</mark>
 
-Per un framework agentico sarebbe una metrica molto sensata.
+<mark style="background:#b1ffff">Per un framework agentico sarebbe una metrica molto sensata.</mark>
 
 
 #### AgentBoard: An Analytical Evaluation Board of Multi-turn LLM Agents
@@ -648,7 +648,7 @@ Se lo stato corrente soddisfa solo una delle due condizioni:
 Progress=0.5Progress = 0.5
 B. Subgoal matching
 
-Quando il task è più ambiguo, lo scompongono in subgoal.
+<mark style="background:#b1ffff">Quando il task è più ambiguo, lo scompongono in subgoal.</mark>
 
 Per esempio:
 
@@ -785,7 +785,7 @@ teleport kitchen
 
 quella è un'azione invalida.
 
-La grounding accuracy misura quindi la capacità di tradurre:
+<mark style="background:#b1ffff">La grounding accuracy misura quindi la capacità di tradurre:</mark>
 
 ```
 intenzione
@@ -830,11 +830,11 @@ ma non completa l'ultima parte
 ```
 
 
-##### POSSO EFFETTIVAMENTE FARLO CON IL BUDGET MANAGEMENT(APRIRE UN DISCORSO DELLA TESI PROPRIO SU QUESTO)
+<mark style="background:#b1ffff">POSSO EFFETTIVAMENTE FARLO CON IL BUDGET MANAGEMENT(APRIRE UN DISCORSO DELLA TESI PROPRIO SU QUESTO)</mark>
 
-il modello può effettivamente mandare più comandi insieme quindi come si comporta con solo 3 turni?(esempio)
+<mark style="background:#b1ffff">il modello può effettivamente mandare più comandi insieme quindi come si comporta con solo 3 turni?(esempio)</mark>
 
-Questa è un'altra parte molto importante.
+<mark style="background:#b1ffff">Questa è un'altra parte molto importante.</mark>
 
 Guardano:
 
@@ -935,7 +935,7 @@ Quindi è più corretto leggerlo come:
 Non è una misura causale pura della capability.
 
 
-### Parlare di ambiente totalmente osservabile (cit a IA)
+### <mark style="background:#b1ffff">Parlare di ambiente totalmente osservabile (cit a IA)</mark>
 n PDDL hai uno stato simbolico del tipo:
 
 ```
@@ -964,8 +964,8 @@ state progression
 ```
 
 
-##### Quale uso io?
-Confrontano tre strategie.
+<mark style="background:#b1ffff">##### Quale uso io?</mark>
+<mark style="background:#b1ffff">Confrontano tre strategie.</mark>
 
 ### Sliding Window
 

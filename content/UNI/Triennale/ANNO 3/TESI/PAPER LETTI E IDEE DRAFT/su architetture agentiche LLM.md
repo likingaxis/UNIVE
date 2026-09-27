@@ -17,7 +17,7 @@ Qui il modello può interagire con un ambiente, ma se non ragiona esplicitamente
 
 ReAct cerca quindi di prendere il meglio di entrambi.
 
-IO ALLORA NON FACCIO PROPRIO REACT FACCIO UN MIX DI QUESTI DUE? 
+<mark style="background:#b1ffff">IO ALLORA NON FACCIO PROPRIO REACT FACCIO UN MIX DI QUESTI DUE? </mark>
 # 2. L’idea di ReAct
 
 La formulazione del paper è sorprendentemente semplice.
@@ -217,7 +217,7 @@ ReAct
 ```
 
 I due metodi sono quindi complementari.
-# 14. Esempio molto interessante del fallimento Act-only(UTILE PER QUANDO USAVO SOLO 30B CODER? CHE NON HA COT?)
+# 14. <mark style="background:#b1ffff">Esempio molto interessante del fallimento Act-only(UTILE PER QUANDO USAVO SOLO 30B CODER? CHE NON HA COT?)</mark>
 
 Nell’appendice fanno vedere un task:
 
@@ -472,7 +472,7 @@ Certo. Questo paper è **“Reflexion: Language Agents with Verbal Reinforcement
 
 Rispetto al paper ReAct che hai appena visto, questo è praticamente il passo successivo.
 
-carina come idea architetturale ma non fitta con la mia architettura se ci si pensa
+<mark style="background:#b1ffff">carina come idea architetturale ma non fitta con la mia architettura se ci si pensa</mark>
 # MetaGPT: Meta Programming for a Multi-Agent Collaborative Framework
 più agenti che “chiacchierano” liberamente non bastano; per collaborare bene servono workflow strutturati, ruoli chiari e output standardizzati.
 # 1. Il problema che vuole risolvere
@@ -545,7 +545,7 @@ Gli autori sottolineano che le SOP aiutano a:
 
 MetaGPT codifica queste procedure direttamente nei prompt e nel workflow degli agenti.
 
-NEL MIO CASO CI SONO EFFETTIVAMENTE ARTEFATTI MA TRA I DUE AGENTI GLI LLM PENSO NON CONTINO COME PLANNER ECC NON SONO AGENTI GIUSTO?
+<mark style="background:#b1ffff">NEL MIO CASO CI SONO EFFETTIVAMENTE ARTEFATTI MA TRA I DUE AGENTI GLI LLM PENSO NON CONTINO COME PLANNER ECC NON SONO AGENTI GIUSTO?</mark>
 
 # 1. Il problema che vuole risolvere
 
@@ -737,7 +737,7 @@ Sequence Flow Diagram
 ```
 
 non un generico paragrafo.
-# 19. Ma attenzione: non significa “più agenti = sempre meglio”(GIUSTIFICA LA MIA ARCHITETTURA CON 2 AGENTI E BASTA NEL COMPLESSO)
+# 19. Ma attenzione: non significa “più agenti = sempre meglio”<mark style="background:#b1ffff">(GIUSTIFICA LA MIA ARCHITETTURA CON 2 AGENTI E BASTA NEL COMPLESSO)</mark>
 
 Il punto del paper non è:
 
@@ -838,4 +838,4 @@ final evidence
 
 anziché passare l’intero transcript a tutti.
 
-# per le architetture viene anche citato coala che invece ho usato per un'idea generale sugli LLM ma posso anche citare per la parte architetturale
+# <mark style="background:#b1ffff">per le architetture viene anche citato coala che invece ho usato per un'idea generale sugli LLM ma posso anche citare per la parte architetturale</mark>

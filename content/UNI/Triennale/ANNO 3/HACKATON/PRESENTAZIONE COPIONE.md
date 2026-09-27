@@ -21,6 +21,7 @@ Puoi eventualmente aggiungere:
 Nel vostro progetto questo è particolarmente evidente per la telemetria: MCP permette di evitare di passare circa 127 KB di JSON al modello e di richiedere solamente i giri o i componenti necessari. Struffolihackaton_Documentazione
 
 Sul dato **131.072 token**: nei file del progetto che mi hai dato non è documentato, quindi prima di metterlo nella presentazione lo verificherei. Non ne hai realmente bisogno per sostenere il ragionamento.
+![[Pasted image 20260927094639.png|138]]
 
 ---
 
@@ -33,7 +34,7 @@ Sul dato **131.072 token**: nei file del progetto che mi hai dato non è documen
 > Riceve una richiesta, la interpreta, decide quali strumenti utilizzare, raccoglie le informazioni necessarie e infine le combina per produrre una risposta.
 > 
 > Quindi il suo compito principale diventa quello di **ragionare e interpretare**, mentre l'accesso ai dati viene delegato a strumenti specializzati.
-
+![[Pasted image 20260927095023.png|201]]
 Questa è secondo me la frase chiave:
 
 > **Non chiediamo al modello di sapere tutto. Gli diamo gli strumenti per sapere dove trovare ciò che gli serve.**

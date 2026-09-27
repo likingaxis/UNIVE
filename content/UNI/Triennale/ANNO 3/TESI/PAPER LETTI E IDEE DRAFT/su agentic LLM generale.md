@@ -1,6 +1,6 @@
 dal paper 
 # A Survey on Large Language Model Based Autonomous Agents
-copio e incollo dei concetti interessanti:
+<mark style="background:#b1ffff">copio e incollo dei concetti interessanti:</mark>
 # 3. Memory
 
 La memoria consente all'agente di utilizzare ciò che è successo in precedenza per prendere decisioni future.
@@ -1001,7 +1001,7 @@ Per esempio:
 Ma il framework CoALA continuerebbe comunque a essere utile come modello concettuale per capire **quali funzioni cognitive vengono svolte**, anche se fossero tutte implementate dentro un singolo modello
 
 # Large Language Model based Multi-Agents: A Survey of Progress and Challenges
-Questo mi sembra un paper per definire bene delle cose che già ho riporto principalmte quello posso più che altro giustificare quanto ho fatto prendendo da queste letterature cose che ho già implementato
+<mark style="background:#b1ffff">Questo mi sembra un paper per definire bene delle cose che già ho riporto principalmte quello posso più che altro giustificare quanto ho fatto prendendo da queste letterature cose che ho già implementato</mark>
 
 # 2. La tassonomia principale del paper
 
@@ -1301,6 +1301,6 @@ Diagnostician → Planner:
 prefer enumeration before exploitation"
 ```
 
-molti parlano di improvement e self evolution o cose simili, l'idea ha senso e posso anche implementarla ma ciò potrebbe modificare troppo i test e le verifiche che devo fare quindi lo terrei come implementazione futura post tesi
+<mark style="background:#b1ffff">molti parlano di improvement e self evolution o cose simili, l'idea ha senso e posso anche implementarla ma ciò potrebbe modificare troppo i test e le verifiche che devo fare quindi lo terrei come implementazione futura post tesi</mark>
 
-BISOGNA VALUTARE ANCHE redundant actions questo ha senso immagino per ottenere uno step magari fa mille altri step prima senza un vero motivo 
+<mark style="background:#b1ffff">BISOGNA VALUTARE ANCHE redundant actions questo ha senso immagino per ottenere uno step magari fa mille altri step prima senza un vero motivo </mark>
