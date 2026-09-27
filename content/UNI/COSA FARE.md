@@ -9,13 +9,18 @@
 - [ ] provare a ripeterlo 2 volte
 #### Tesi
 - [x] Leggere paper su progettazione di architetture agentiche utile per dare contesto e valore a quello che ho fatto io
-- [ ] Leggere paper su prompt engineering
+- [x] Leggere paper su prompt engineering
 - [x] Leggere paper su agentic ai
-- [ ] Dopo aver fatto ciò definire i capitoli della tesi dopo un attento brainstorming
+- [x] Dopo aver fatto ciò definire i capitoli della tesi dopo un attento brainstorming
 - [ ] eseguire benchmark
-- [ ] finisci la parte dei paper
-- [ ] brainstorming sui capitoli da scrivere
-- [ ] suddividi il lavoro in giorni
+- [x] finisci la parte dei paper
+- [x] brainstorming sui capitoli da scrivere
+- [ ] capitolo 3a
+- [ ] capitolo 3b
+- [ ] capitolo 4
+- [ ] capitolo 2+capitolo 5
+- [ ] capitolo 6+capitolo 1
+
 
 #### Magistrale
 - [ ] finire appunti crittografia
