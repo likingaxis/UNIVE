@@ -15,6 +15,8 @@
 - [ ] eseguire benchmark
 - [x] finisci la parte dei paper
 - [x] brainstorming sui capitoli da scrivere
+- [ ] migliorare il nodo di healing
+- [ ] interfaccia a main.py
 - [ ] capitolo 3a
 - [ ] capitolo 3b
 - [ ] capitolo 4
