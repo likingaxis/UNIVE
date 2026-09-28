@@ -6,7 +6,7 @@
 - [x] prepararsi un discorso da fare
 - [x] definire slide
 - [x] rifinire slide
-- [ ] provare a ripeterlo 2 volte
+- [x] provare a ripeterlo 2 volte
 #### Tesi
 - [x] Leggere paper su progettazione di architetture agentiche utile per dare contesto e valore a quello che ho fatto io
 - [x] Leggere paper su prompt engineering
@@ -26,5 +26,6 @@
 
 #### Magistrale
 - [ ] finire appunti crittografia
-- [x] finire appunti network
+- [ ] finire appunti network
+- [ ] appunti distributed
 - [ ] Esami a scelta approfondisci( senti anche i messaggi)

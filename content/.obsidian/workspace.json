@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "35f520cd1ac789e0",
+        "id": "4774fea48669dcf5",
         "type": "tabs",
         "children": [
           {
-            "id": "41ce2d92812305cb",
+            "id": "751046781ee1f07f",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -187,8 +187,13 @@
       "vault-retrieval:Vault Retrieval": false
     }
   },
-  "active": "41ce2d92812305cb",
+  "active": "751046781ee1f07f",
   "lastOpenFiles": [
+    "UNI/Triennale/ANNO 3/TESI/HEALING NODO.md",
+    "UNI/Triennale/ANNO 3/TESI/Call/spiegazione benchmark da fare.md",
+    "UNI/COSA FARE.md",
+    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 2.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 2.md",
     "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
     "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.55504.48b06486341c",
     "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
@@ -196,7 +201,6 @@
     "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.55504.54ae7373d832",
     "UNI/Triennale/ANNO 3/TESI/Call/Call pasquale 2.md",
     "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.55504.653b85e7aa5c",
-    "UNI/Triennale/ANNO 3/TESI/Call/spiegazione benchmark da fare.md",
     "UNI/Triennale/ANNO 3/TESI/idee_e_struttura_tesi.md",
     "UNI/Triennale/ANNO 3/TESI/FONTI.md",
     "UNI/Triennale/ANNO 3/TESI/OBIETTIVO 0/MODIFICHE EFFETTUATE.md",
@@ -209,7 +213,6 @@
     "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN",
     "UNI/Triennale/ANNO 3/HACKATON/tecnologie_progetto_struffoli.md",
     "UNI/Triennale/ANNO 3/HACKATON/PRESENTAZIONE COPIONE.md",
-    "UNI/COSA FARE.md",
     "UNI/Triennale/ANNO 3/HACKATON/SLIDE SCRIPT.md",
     "UNI/Triennale/ANNO 3/HACKATON/HACKATON ORACLE.md",
     "UNI/Triennale/ANNO 3/HACKATON/Report di Sviluppo.md",
@@ -229,8 +232,6 @@
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 1.md",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260926103001.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260926102907.png",
-    "UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY/CR LESSON 1.md",
-    "UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY/CR INDICE.md",
     "UNI/Magistrale/ANNO1 M/NETWORK",
     "UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY",
     "UNI/Triennale/ANNO 3/TESI/Call/Fotocall"
