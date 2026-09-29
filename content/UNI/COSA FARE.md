@@ -1,6 +1,4 @@
-
-
-
+- [ ] sicur nazionale
 #### Hackaton
 - [x] documentazione da leggere
 - [x] prepararsi un discorso da fare
