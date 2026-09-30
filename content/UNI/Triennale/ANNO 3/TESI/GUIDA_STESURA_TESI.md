@@ -4,7 +4,7 @@
 > 1. **Regola d'oro**: la tesi la scrive **Luca**, non tu. Tu sei un *sounding board* (struttura, brainstorming, domande, mappa scelte↔letteratura, stime). **Mai** generare prosa della tesi.
 > 2. **Ordine di lettura per capire il progetto**: questo file → `Call/call pasquale.md` (architettura completa) → il **codice** in `...\Desktop\TESI\vulcAIN\vulcatest` per ogni claim tecnico.
 > 3. **Le fonti sono un percorso di ragionamento, non lo stato attuale**: prima di scrivere un fatto tecnico, verificalo sul codice (vedi §0 caveat).
-> 4. Lavoro attuale: **brainstorming capitolo per capitolo** dei sotto-capitoli (vedi §5–6).
+> 4. **STATO (2026-09-30):** brainstorming CONCLUSO → 6 capitoli + sotto-capitoli fissati (§5), pattern↔codice↔fonte mappati (§7), strategia **draft-first** + piano sprint (§8). **Prossima azione: recall pack del G1 (Cap.3a)**, poi Luca scrive. In attesa da Luca: ore/giorno sprint + ok placeholder risultati Cap.5.
 
 > **Cos'è questo file.** È la *single source of truth* per la stesura della tesi di Luca. Serve a far ripartire da zero qualsiasi chat/assistente senza dover rispiegare tutto: qui stanno path, fonti (con i loro caveat), filo conduttore, feedback del relatore, regole di stile, scaletta dei capitoli e — cosa più importante — il nucleo di "cosa ho fatto" con parole di Luca.
 >
@@ -114,7 +114,14 @@
    7. **Il Bridge e i tool a due livelli** *(sotto-capitolo separato)* — HexStrike L1 stateless + Terminal Gateway L2 pexpect/PTY; troncamento output; lista tool ritagliata; editor a schermo/tasti speciali; idle-watchdog.
    8. **Final Evaluator** (Stadio 1 deterministico→`run_summary.json`; Stadio 2 LLM→`REPORT.md`/`healing_ticket`).
    9. **(a) Prompt engineering come metodo e PROCESSO** — non solo il concetto, ma il **processo iterativo reale** test→correzione→test seguito da Luca (contributo: "prompt = hyperparameter search", mechanism engineering, non fine-tuning). Esempi curati di iterazione: CS-1 (regole 5/6 del Planner), la regola di *state-awareness* nata dall'incidente nano, il *graceful nudge*. Origine = il "cheating agent". *(Breve: prompt specifici coi nodi; testi integrali in Appendice; letteratura: Prompt Report, Constitutional AI, prompt sensitivity.)*
-   10. **(b) Il modello locale e l'infrastruttura di inferenza** *(sotto-capitolo vero, ~3-4 pag — model & inference engineering, lavoro non ancora documentato)*: selezione modello + perché serve la **CoT** (Qwen Coder senza CoT falliva/loop → lega a letteratura CoT + fallimento act-only ReAct); risparmio memoria/VRAM; trade-off **context window ↔ token/s**; **ablazione** della parte vision; **MTP + n-gram** vs `auto` (speculative decoding, velocità); server **Unsloth AI** + hot-swap `model_manager` (lega al Principio #4); il "perché locale" = guardrail + costo. ⚠️ verificare i parametri esatti sulla config reale in fase di scrittura.
+   10. **(b) Il modello locale e l'infrastruttura di inferenza** *(sotto-capitolo vero ~3-4 pag — model & inference engineering, lavoro non documentato; raccontarlo come PERCORSO, non elenco di parametri)*. Arco interno:
+      - **a. Perché locale** — guardrail (frontiera rifiuta il pentesting) + costo.
+      - **b. La ricerca del modello giusto** — quali provati e perché scartati: Qwen Coder senza CoT → loop (act-only); modelli grossi → troppo lenti (decisione già presa: si resta su Qwen3.8-27B, vedi memoria planner-variance); approdo finale.
+      - **c. Perché serve reasoning/CoT** — CoT utile solo su modelli capaci + fallimento act-only ReAct.
+      - **d. Ottimizzazione inferenza** — trade-off **context window ↔ tok/s**, **reasoning level** (low), **temperatura**, **MTP + n-gram** (speculative decoding), **ablazione vision**.
+      - **e. Infrastruttura** — server **Unsloth** + hot-swap `model_manager` + triade Executor/Evaluator/Planner via `.env` (Principio #4).
+      - **f. Costo reale** — "molto basso" NON zero (fix prof), ~$6-equiv.
+      - ⚠️ **Anti-duplicazione col Cap.5**: qui il *perché* (qualitativo); i *numeri* del confronto local vs cloud stanno nel Cap.5. Parametri esatti (temperatura, reasoning, MTP+ngram, Unsloth) dal `.env`/`config.py` nel recall pack.
    11. **Il Diagnostician rimosso** *(sotto-capitolo breve)* — decisione di design (Goal Drift → RCA post-mortem nel Final Evaluator). Richiamabile in 1 riga all'apertura del Cap.4.
 
 **Regola prompt (trasversale):** metodo spiegato UNA volta (3.9a) → rationale del singolo prompt col suo nodo (Planner/Executor/Healer) → testi integrali in **Appendice: prompt integrali**.
@@ -207,3 +214,39 @@
 - Speculative decoding `[USATO]` — MTP + n-gram.
 
 **Verità dal codice (correzioni):** `TestStep` NON ha `requires` (esiste solo nel formato YAML del piano, non nel contratto Pydantic). Grafo, gate AND, two-stage retrieval, graceful nudge, budget checkpoint = confermati in codice.
+
+**File letti sul codice (per il recall pack, path da `...\Desktop\TESI\vulcAIN\vulcatest\`):** `white-box/executor/executor.py` (SYSTEM_PROMPT Auditor Mode righe ~21-83, budget/nudge/checkpoint ~273-487, tool submit/extension/verified ~85-190), `white-box/planner/planner.py` (SYSTEM_PROMPT righe ~37-120), `vulcahealing/healer.py` (`_build_healing_prompt` righe ~259-331, `run_healing` ~334+), `white-box/executor/models.py` (contratti Pydantic), `white-box/orchestrator/graph.py` (routing), `white-box/orchestrator/state.py` (`VulcaTestState`). Ancora da leggere per i recall pack: `orchestrator/nodes.py` (32k, i 4 nodi), `executor/mcp_bridge.py` (bridge L1/L2, troncamento, list_tools, SPECIAL_KEYS_MAP), `orchestrator/plan_parser.py`, `orchestrator/model_manager.py` (hot-swap), `.env`/`config.py` (parametri modello: temperatura, reasoning, MTP+ngram, Unsloth), `wait_utils.py` (idle-watchdog), `diff_tracker.py`. Diario `memoria.md` (1276 righe) poco scavato: fonte per i dettagli storici.
+
+---
+
+## 8. Stima tempi/pagine + piano sprint bozza (2026-09-30)
+
+**Pagine per capitolo (corpo):**
+| Cap | Pagine | Ore 1ª stesura (~2h/pag) |
+|---|---|---|
+| 1. Introduzione | 3-4 | ~7 |
+| 2. Contesto | 8-11 | ~20 |
+| 3. Architettura | 14-18 | ~30 |
+| 4. VulcaHealing | 7-9 | ~15 |
+| 5. Valutazione | 9-12 | ~23 |
+| 6. Conclusioni | 3-4 | ~7 |
+| Appendice | 5-8 | ~3 |
+
+Corpo ≈ **44-58 pag**. Prima stesura ≈ **105h**. Con overhead (figure, verifica su codice, revisioni, formattazione, +40%): **totale ~145-160h**. Di cui ~15-25h **bloccate** sui numeri del Cap.5 (benchmark in corso).
+
+**Supporto AI (recall pack + revisione + figure, NON scrittura di prosa): riduzione ~30-40% → ~95-110h totali.** Taglia molto su recupero/revisione/figure, quasi nulla su pensiero+scrittura in voce di Luca (che deve restare sua per la discussione).
+
+**STRATEGIA DECISA (Luca, 2026-09-30): draft-first.** Scrivere una **prima bozza completa il prima possibile** (~5 giorni) → mandarla al relatore per feedback sull'intera forma → poi rifinire con calma. Bozza = asticella bassa (contenuto giù, no polish/figure lucide/verifica esaustiva), ritmo ~1h/pag, ~40-50h totali. **Risultati Cap.5 = placeholder** ("tabella da popolare", benchmark in corso).
+
+**Ordine di scrittura CONFERMATO da Luca: 3 → 4 → 2 → 5(metodologia) → 6 → 1.** (Non l'ordine di lettura: intro/conclusioni riassumono → per ultime; contesto tarato dopo i tecnici; Cap.5 numeri bloccati. Il file `TESI.md` resta ordinato 1→6; si scrive fuori ordine, si consegna in ordine.)
+
+**Piano sprint 5 giorni (~9-10h/giorno; leve: 7 giorni a ~6-7h/g, oppure bozza più scarna ~30-35 pag):**
+- **G1** — Cap.3a: molla · principi (incl. sciogliere "determinismo" = LLM-vs-Code di CoALA) · visione · Planner · Orchestratore
+- **G2** — Cap.3b: Executor · Bridge · Final Evaluator · prompt-eng · modello · Diagnostician
+- **G3** — Cap.4 VulcaHealing (9 sotto-cap.)
+- **G4** — Cap.2 Contesto + Cap.5 metodologia (senza numeri)
+- **G5** — Cap.6 + Cap.1 + placeholder risultati Cap.5 + rilettura e invio al relatore
+
+**IN ATTESA da Luca per finalizzare il calendario:** (1) ore/giorno reali nello sprint; (2) conferma placeholder risultati Cap.5.
+
+**PROSSIMA AZIONE quando si riparte:** preparare il **recall pack del G1 (Cap.3a)** — estrarre da codice + `memoria.md` i dettagli di: apertura-molla (3 problemi harness generico + Pizzeria), 5 principi cardine, visione d'insieme del grafo, Planner, Orchestratore; con evidenza (file/riga) e pattern da citare (§7). Poi Luca scrive.
