@@ -165,3 +165,37 @@ Suppose that process q executing our algorithm receives message m that
 ...
 ...
 ...
+
+
+##### FIFO problem
+we want to fix this problem between a certain source p to a receiver q
+- works only with 2 process
+but for every message we should wait m1 before m2
+
+we want to build on top of PP2P link a FIFO link
+we attach a counter t to attach to the message
+so we send `<m,t=0>`  and then `<m,t=1` ecc...
+so the process q should enqueue `e=<m,t=1>` 
+- i need another counter that define the expected first message
+
+Codice prendilo dalle slide
+
+
+
+Example: m1,m2,m3 first two are for p2 and the latest is for p3
+`[0,0,0]` location 0 for ourself second for p2 third for p3
+- questa var a 3 quale è nel codice?
+every process has a local virable
+- process are allowed to send himself messages
+
+handler at line 11 is triggered so is enable (we have an if)
+###### FIFO PROOF BY CONTRADDICTION
+- assume that `<m,t1>` comes before `<m,t2>` with t1>t2
+
+
+the teacher in the exams gives two version of an algorithm like the actual exercise
+what happens if we remove line 12
+- we have potentially infinite memory usage
+
+what happens if we change `k=nex[s]` to `k>=next[s]`
+- what properties it will impact?
