@@ -149,8 +149,9 @@ it should be decomposed in two properties:
 ![[Pasted image 20260930124523.png|535]]
 
 #### Algorithms: communication link
-we want to take the FL1 FL2 FL3 and remove infinite concept
-so we take something more hard to make the fair lossy link stronger and better
+we add a new module to make fair lossy link more stronger and powerful adding properties the something is an algorithm
+![[Pasted image 20260930140734.png|237]]
+
 ###### Stubborn algorithm
 Ci sono delle regole non scritte che ha detto a voce (cerca di capirle: alfredo dovrebbe)
 
