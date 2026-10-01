@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "124996098763daa7",
+            "id": "045499a41f052d18",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 2.md",
+                "file": "UNI/Triennale/ANNO 3/BOZZA SCRITTA/INDICE e titolo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DS LESSON 2"
+              "title": "INDICE e titolo"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 222.30001831054688
+    "width": 427.1000061035156
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -171,57 +171,56 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "quartz-git-manager:Git Sync Manager": false,
-      "vault-retrieval:Vault Retrieval": false
+      "quartz-git-manager:Git Sync Manager": false
     }
   },
   "active": "385e3b437a6aac05",
   "lastOpenFiles": [
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/TITOLO.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/INDICE e titolo.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - Stesura.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 4 - Stesura.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3.md",
+    "UNI/Triennale/ANNO 3/TESI/TESI.md",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/INTELLIGENZA ARTIFICIALE/PRIMO ESONERO/IA UNICO PRIMO ESONERO.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/FOTO/excalidraw/~$ontespizio.docx",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/FOTO/excalidraw/Frontespizio.docx",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 788473.crdownload",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md",
+    "UNI/Triennale/ANNO 3/TESI/SKILL_STESURA_TESI.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - modello stile tesi.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md.tmp.2672.4478e741f64e",
+    "UNI/Triennale/ANNO 3/TESI/Call/Call pasquale 2.md",
+    "UNI/Triennale/ANNO 3/TESI/FONTI.md",
+    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md.tmp.2672.b3fabec8fe88",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md.tmp.2672.9a132d0c32de",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md.tmp.2672.e09b84fd626e",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Schede nodi (richiamo).md",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md.tmp.2672.eadc225cfbbb",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md.tmp.2672.a002c277953c",
+    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.2672.f93e380717d0",
+    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/FOTO/Pasted image 20261001134308.png",
+    "Pasted image 20261001134247.png",
+    "UNI/Triennale/ANNO 3/TESI/HEALING NODO.md",
+    "UNI/COSA FARE.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/PIANO BENCHMARK (terra terra).md",
+    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 2.md",
+    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 3.md",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930140734.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930124523.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930124123.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930124100.png",
     "Pasted image 20260930124042.png",
-    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 2.md",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930122816.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS LESSON 1.md",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930121002.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930115947.png",
-    "Pasted image 20260930115940.png",
-    "Pasted image 20260930115930.png",
-    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930115239.png",
-    "UNI/COSA FARE.md",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.7888.6981d0abf110",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS INDICE.md",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
-    "UNI/Triennale/ANNO 3/TESI/TESI.md",
     "UNI/Triennale/ANNO 3/HACKATON/Struffolihackaton_Short.md",
     "UNI/Triennale/ANNO 3/HACKATON/Struffolihackaton_Documentazione.md",
     "UNI/Triennale/ANNO 3/HACKATON/Copione_Luca_corretto.md",
-    "UNI/Triennale/ANNO 3/HACKATON/Copione LUCA.md",
-    "UNI/Triennale/ANNO 3/TESI/HEALING NODO.md",
-    "UNI/Triennale/ANNO 3/TESI/Call/spiegazione benchmark da fare.md",
-    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 2.md",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.55504.48b06486341c",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.55504.deffc0d5158b",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.55504.54ae7373d832",
-    "UNI/Triennale/ANNO 3/TESI/Call/Call pasquale 2.md",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.tmp.55504.653b85e7aa5c",
-    "UNI/Triennale/ANNO 3/TESI/idee_e_struttura_tesi.md",
-    "UNI/Triennale/ANNO 3/TESI/FONTI.md",
-    "UNI/Triennale/ANNO 3/TESI/OBIETTIVO 0/MODIFICHE EFFETTUATE.md",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/PIANO BENCHMARK (terra terra).md",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/su architetture agentiche LLM.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/su agentic LLM generale.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/PROMPT ENGINEERING.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/PAPER LETTI E IDEE su benchmark.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN",
-    "UNI/Triennale/ANNO 3/HACKATON/tecnologie_progetto_struffoli.md",
-    "UNI/Triennale/ANNO 3/HACKATON/Unconfirmed 11792.crdownload",
-    "UNI/Magistrale/ANNO1 M/NETWORK/NET PIC",
-    "UNI/Magistrale/ANNO1 M/NETWORK",
-    "UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY"
+    "UNI/Triennale/ANNO 3/HACKATON/Copione LUCA.md"
   ]
 }

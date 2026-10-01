@@ -21,6 +21,7 @@
 - [ ] capitolo 2+capitolo 5
 - [ ] capitolo 6+capitolo 1
 - [ ] unsloth usa auto, giustificare il modello usato e le modalità
+- [ ] sistema di screenshot per writeup
 
 
 #### Magistrale

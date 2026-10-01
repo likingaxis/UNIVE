@@ -4,7 +4,7 @@
 > 1. **Regola d'oro**: la tesi la scrive **Luca**, non tu. Tu sei un *sounding board* (struttura, brainstorming, domande, mappa scelte↔letteratura, stime). **Mai** generare prosa della tesi.
 > 2. **Ordine di lettura per capire il progetto**: questo file → `Call/call pasquale.md` (architettura completa) → il **codice** in `...\Desktop\TESI\vulcAIN\vulcatest` per ogni claim tecnico.
 > 3. **Le fonti sono un percorso di ragionamento, non lo stato attuale**: prima di scrivere un fatto tecnico, verificalo sul codice (vedi §0 caveat).
-> 4. **STATO (2026-09-30):** brainstorming CONCLUSO → 6 capitoli + sotto-capitoli fissati (§5), pattern↔codice↔fonte mappati (§7), strategia **draft-first** + piano sprint (§8). **Prossima azione: recall pack del G1 (Cap.3a)**, poi Luca scrive. In attesa da Luca: ore/giorno sprint + ok placeholder risultati Cap.5.
+> 4. **STATO (2026-10-01):** struttura **CONSOLIDATA** — catena macro (ogni cap. = 1 domanda-motrice) + **regola della quota** + Cap.3 a **due movimenti** + inventario implementazioni (secchi A-E), tutto in §5. Decisioni chiuse: *healing = capitolo* (contributo), *modello = sotto-capitolo dell'Architettura* (substrato), *VulcAIn generale nel Contesto*, *determinismo risolto* → "deterministic where possible, agentic where necessary". Luca sta scrivendo la bozza dei sotto-capitoli in `TESI.md`. **Prossima azione:** Luca scrive; l'assistente applica la **regola della quota** alle bozze e prepara recall pack su richiesta.
 
 > **Cos'è questo file.** È la *single source of truth* per la stesura della tesi di Luca. Serve a far ripartire da zero qualsiasi chat/assistente senza dover rispiegare tutto: qui stanno path, fonti (con i loro caveat), filo conduttore, feedback del relatore, regole di stile, scaletta dei capitoli e — cosa più importante — il nucleo di "cosa ho fatto" con parole di Luca.
 >
@@ -88,7 +88,20 @@
 
 ## 5. Scaletta emergente dei capitoli
 
-*(Uscita dal brainstorming + feedback prof. Cap.1 e Cap.2 FISSATI il 2026-09-27; Cap.3-5 sotto-capitoli ancora da brainstormare.)*
+*(CONSOLIDATA 2026-10-01 dopo brainstorming completo + feedback prof. Sostituisce la vecchia scaletta.)*
+
+**Catena macro — ogni capitolo risponde a UNA domanda; la chiusura di un cap. apre il successivo (nessun buco, nessuna sovrapposizione):**
+
+| Cap | Domanda-motrice | Lascia aperto → |
+|---|---|---|
+| 1 Intro | di cosa parla e com'è fatta la tesi | apre tutto |
+| 2 Contesto | perché serve validare+riparare in automatico macchine didattiche AI | "come lo costruisci?" → 3 · (tiene aperto di proposito: "perché non un harness pronto?" → apre 3) |
+| 3 Architettura | come ho costruito un harness che verifica la conformità *senza fidarsi dell'agente* | produce il REPORT → "e se dice difetto?" → 4 |
+| 4 VulcaHealing | come riparo in automatico e chiudo il loop | loop chiuso → "funziona, e quanto?" → 5 |
+| 5 Valutazione | quanto funziona (misurabile/confrontabile/riproducibile) | → 6 |
+| 6 Conclusioni | cosa ho dimostrato, limiti, dove si va | — |
+
+**Regola della quota (alto-livello vs codice — vale in TUTTA la tesi):** 3 quote — ① *decisione di design* (cosa/perché/quale principio: SEMPRE nel corpo) · ② *meccanismo* (il come concettuale, schema, niente codice: solo se l'insight non si capisce senza) · ③ *implementazione* (snippet/dettaglio fine: di norma → GitHub/Appendice). **Test per ogni cosa:** "se lo tolgo, il lettore perde una DECISIONE o solo una RIGA DI CODICE?" → decisione = resta; codice = fuori. (Allineata al relatore: "snippet solo se utili".)
 
 **1. Introduzione** *(corta, vincolata dal prof: serve solo a dire di cosa parla la tesi)*
    1. Aggancio al problema in 2 frasi (macchine didattiche generate da AI, oggi validate/riparate a mano).
@@ -101,34 +114,47 @@
    3. Agenti LLM e architetture agentiche — agente = LLM + azione + ambiente; ReAct, Plan+Execute a livello concettuale.
    4. Il concetto di **harness** — l'infrastruttura attorno all'LLM (il gancio: "è ciò che ho costruito io").
    5. L'ecosistema **VulcAIn** ereditato (Mind/Forge/Ship) + il bisogno grezzo (difetti testati a mano = costoso → motiva l'ESISTENZA di VulcaTest). Soft handoff: nominare VulcaTest come protagonista in arrivo.
+   6. **Lavori correlati / stato dell'arte** *(aggiunto 2026-10-01)* — posizionamento vs lavoro esistente (distinto dal background concettuale sopra): **PentestGPT** e agentic pentesting framework (fanno exploitation autonoma; NON conformance né oracolo evidence-based, tendono al goal-reaching) · **Automated Program Repair / self-healing** (per posizionare VulcaHealing) · **la novità da dichiarare**: nessuno combina *conformance testing* + *oracolo evidence-based* su *macchine didattiche generate da AI* + *closed-loop self-healing*. NON duplicare: gli harness generici restano in 3.1 (motivazione), i paper di benchmark in Cap.5 (metodologia). 📚 PentestGPT. ⚠️ **Verificare col relatore** se serve un capitolo "Stato dell'arte" dedicato (alcuni corsi lo richiedono) → in tal caso promuovilo a capitolo breve tra Contesto e Architettura.
    > **Decisione (B):** "il problema" (harness generico non basta) NON chiude il Contesto → **apre il Cap.3** come molla. Due motivazioni distinte: *perché esiste VulcaTest* (tutor testano a mano) = Contesto; *perché serve un'architettura dedicata e non un harness pronto* (i 3 problemi) = apertura Cap.3.
    > **Decisione (C):** prompting e uso/scelta dei modelli NON nel Contesto → il *perché* nel Cap.3, il *confronto empirico* nel Cap.4.
 
-**3. Architettura VulcaTest** *(merge architettura+implementazione del TESTER; criterio IBRIDO: principi come griglia + cammino per flusso. FISSATO 2026-09-27)*
-   1. **Apertura-molla**: ① cosa dovrebbe fare VulcaTest → ② "naturale usare un harness pronto… ma no": i 3 problemi (guardrail / troppa libertà / imprecisioni-no oracolo) + esempio Pizzeria → ③ ecco l'architettura che risolve.
-   2. **I 5 principi cardine** (griglia di lettura del capitolo).
-   3. **Visione d'insieme** — il grafo LangGraph e il flusso (START→orchestrator⇄executor→final_evaluator[→healer]).
-   4. **Planner** (LLM + `plan_parser` deterministico; `ATTACK_PLAN.md`; YAML vs JSON; `TestStep`; le sue regole di prompt = CS-1 oracolo lasco, regole 5/6).
-   5. **Orchestratore** (`graph.py`, `state.py`, avanzamento deterministico, no-retry, gate AND sulla checklist).
-   6. **Executor — il cuore** (Auditor Mode = il suo prompt + origine "cheating agent"; budget dinamico; ReAct; `StepResult`; two-stage retrieval dei `verified_values`; graceful nudge/checkpoint).
-   7. **Il Bridge e i tool a due livelli** *(sotto-capitolo separato)* — HexStrike L1 stateless + Terminal Gateway L2 pexpect/PTY; troncamento output; lista tool ritagliata; editor a schermo/tasti speciali; idle-watchdog.
-   8. **Final Evaluator** (Stadio 1 deterministico→`run_summary.json`; Stadio 2 LLM→`REPORT.md`/`healing_ticket`).
-   9. **(a) Prompt engineering come metodo e PROCESSO** — non solo il concetto, ma il **processo iterativo reale** test→correzione→test seguito da Luca (contributo: "prompt = hyperparameter search", mechanism engineering, non fine-tuning). Esempi curati di iterazione: CS-1 (regole 5/6 del Planner), la regola di *state-awareness* nata dall'incidente nano, il *graceful nudge*. Origine = il "cheating agent". *(Breve: prompt specifici coi nodi; testi integrali in Appendice; letteratura: Prompt Report, Constitutional AI, prompt sensitivity.)*
-   10. **(b) Il modello locale e l'infrastruttura di inferenza** *(sotto-capitolo vero ~3-4 pag — model & inference engineering, lavoro non documentato; raccontarlo come PERCORSO, non elenco di parametri)*. Arco interno:
-      - **a. Perché locale** — guardrail (frontiera rifiuta il pentesting) + costo.
-      - **b. La ricerca del modello giusto** — quali provati e perché scartati: Qwen Coder senza CoT → loop (act-only); modelli grossi → troppo lenti (decisione già presa: si resta su Qwen3.8-27B, vedi memoria planner-variance); approdo finale.
-      - **c. Perché serve reasoning/CoT** — CoT utile solo su modelli capaci + fallimento act-only ReAct.
-      - **d. Ottimizzazione inferenza** — trade-off **context window ↔ tok/s**, **reasoning level** (low), **temperatura**, **MTP + n-gram** (speculative decoding), **ablazione vision**.
-      - **e. Infrastruttura** — server **Unsloth** + hot-swap `model_manager` + triade Executor/Evaluator/Planner via `.env` (Principio #4).
-      - **f. Costo reale** — "molto basso" NON zero (fix prof), ~$6-equiv.
-      - ⚠️ **Anti-duplicazione col Cap.5**: qui il *perché* (qualitativo); i *numeri* del confronto local vs cloud stanno nel Cap.5. Parametri esatti (temperatura, reasoning, MTP+ngram, Unsloth) dal `.env`/`config.py` nel recall pack.
-   11. **Il Diagnostician rimosso** *(sotto-capitolo breve)* — decisione di design (Goal Drift → RCA post-mortem nel Final Evaluator). Richiamabile in 1 riga all'apertura del Cap.4.
+**3. Architettura VulcaTest** *(il TESTER — UN capitolo, DUE movimenti. Merge architettura+implementazione (criterio IBRIDO: principi = griglia + cammino per flusso). È GIUSTO sia il cap. più grande ~15-18pp: è il contributo. NON spaccarlo arch/impl = ciò che il prof ha fatto togliere; la divisione legittima è tester(3)/healer(4).)*
 
-**Regola prompt (trasversale):** metodo spiegato UNA volta (3.9a) → rationale del singolo prompt col suo nodo (Planner/Executor/Healer) → testi integrali in **Appendice: prompt integrali**.
+*Movimento A — il sistema (cosa È l'harness; percorre i nodi nell'ordine del controllo; finisce producendo il REPORT)*
+   1. **Apertura-molla** — dal prototipo (era solo un system prompt) all'architettura vera; ① cosa deve fare VulcaTest → ② i 3 problemi dell'harness pronto (guardrail / troppa libertà / nessun oracolo evidence-based) — **Antigravity qui = CONTRO-esempio** — + esempio Pizzeria → ③ ecco la risposta.
+   2. **I 5 principi cardine** (griglia di lettura; parole di Luca): *deterministic where possible, agentic where necessary* · *evidence-based execution* · *separation of concerns* · *interchangeability by design* · *plan+execute & react*. ⭐ qui si **scioglie "determinismo"** (il 1° principio È la risposta al dubbio del prof).
+   3. **Visione d'insieme** — il grafo LangGraph e il flusso (START→orchestrator⇄executor→final_evaluator[→healer]).
+   4. **Planner** (LLM + `plan_parser` deterministico; `ATTACK_PLAN.md`; snippet YAML; `TestStep`; regole di prompt = CS-1 oracolo lasco, regole 5/6; de-fence multi-blocco).
+   5. **Orchestratore** (*prima* dell'Executor, come nelle slide che convincevano; `graph.py`, `state.py`/`VulcaTestState`; avanzamento deterministico, no-retry, gate AND sulla checklist).
+   6. **Executor — il cuore** (esecutore con poco margine ma che *interpreta*; Auditor Mode = il suo prompt + origine "cheating agent"; ReAct; `StepResult` + campo `evidence` OBBLIGATORIO = no self-certification *strutturale*).
+   7. **Il Bridge — i due sensi dell'Executor** — *azione* (tool-call: L1 HexStrike stateless + L2 `interactive_terminal_exec`, nato da necessità) + *percezione* (output ripulito ANSI/VT100, `session_last_line`, avvisi iniettati). Terminal Gateway = demone REST disaccoppiato (FastAPI+pexpect) su Kali (porta 8889). Tool auto-descriventi a runtime. Nano/special-keys (`\r` vs `^J`) solo alla quota-decisione.
+   8. **Final Evaluator** (Stadio 1 deterministico→`run_summary.json`; Stadio 2 LLM→`REPORT.md`/`healing_ticket`). → chiude il Movimento A.
+   9. **Il Diagnostician rimosso** *(breve)* — decisione di design (Goal Drift → RCA post-mortem nel Final Evaluator). Richiamabile in 1 riga in apertura Cap.4.
+
+*Movimento B — l'ingegneria dell'harness (come l'ho fatto funzionare; taglia tutti i nodi → viene DOPO che il lettore li conosce)*
+   10. **Robustezza e gestione del contesto** ⭐ *(secco C — un'unica molla: l'agente stocastico in una finestra finita)* — troncamento output (`MAX_TOOL_OUTPUT_CHARS`) · tool-slicing (~150→pochi, `list_tools`+matching) · two-stage retrieval dei `verified_values` (`show_`→`get_`, context minimization) · budget turni dinamico + **graceful nudge** (a -2 turni avvisa: tirare le fila / chiedere proroga / emettere verdetto) + checkpoint · **watchdog timeout DONE/IDLE/CAP/DEAD** (aspetta il *silenzio*, non un tempo fisso; marker `stop_pattern`; è la risposta a "come gestisco build/tool lenti").
+   11. **Prompt engineering come metodo e PROCESSO** — il processo iterativo reale test→correzione→test ("prompt = hyperparameter search", mechanism engineering, non fine-tuning). Esempi curati: CS-1 (regole 5/6), *state-awareness* da incidente nano, *graceful nudge*. Origine = il "cheating agent". *(Metodo UNA volta → rationale del singolo prompt col suo nodo → testi integrali in Appendice; letteratura: Prompt Report, Constitutional AI, prompt sensitivity.)*
+   12. **Il modello locale e l'infrastruttura di inferenza** *(~3-4pp — model & inference engineering, substrato; PERCORSO non elenco di parametri)*:
+      - **a. Perché locale** — guardrail (frontiera rifiuta il pentesting) + costo.
+      - **b. Ricerca del modello** — Qwen Coder senza CoT → loop (act-only); modelli grossi → troppo lenti (si resta su Qwen3.8-27B, vedi memoria planner-variance); approdo finale.
+      - **c. Reasoning/CoT** — serve CoT (utile solo su modelli capaci); fallimento act-only ReAct.
+      - **d. Ottimizzazione inferenza** — context window ↔ tok/s · reasoning level (low) · temperatura · MTP+n-gram (speculative decoding) · ablazione vision · **sizing dinamico della finestra** (`token_utils`, kv-cache/VRAM) *(ri-prende il §10: 10 = riduci l'input, 12d = dimensiona il contenitore)*.
+      - **e. Infrastruttura** — server Unsloth + hot-swap `model_manager` + triade Executor/Evaluator/Planner via `.env` (Principio #4).
+      - **f. Costo reale** — "molto basso" NON zero (fix prof), ~$6-equiv.
+      - ⚠️ **Anti-duplicazione Cap.5**: qui il *perché* (qualitativo); i *numeri* local-vs-cloud stanno nel Cap.5. Parametri esatti dal `.env`/`config.py`.
+   → **chiude il capitolo:** il report con un difetto → apre il Cap.4.
+
+**Inventario implementazioni (i "secchi" → dove vanno), verificato sul codice 2026-10-01:**
+- **A. Contratti**: `VulcaTestState`→§3.5 · `TestStep`/`StepResult`→ai punti di handoff · `ChecklistItemResult.evidence`→§3.6/principi · `ToolCallRecord`→§3.6 (ponte verso B4 del Cap.5).
+- **B. Bridge** → §3.7.
+- **C. Robustezza/contesto** → §3.10 (RAGGRUPPATO, non sparso: trasforma 5 "trucchi" in un argomento di design unico).
+- **D. Planner** (YAML + `plan_parser`, de-fence multi-blocco) → §3.4.
+- **E. Build Docker + IP dinamico** → NON qui: Cap.4 (nodo healer).
+- *Isolamento cross-run* (`reset_all_sessions`/`clear_cache`) → citato in §3.7, agganciato al Cap.5 (igiene benchmark).
 
 **4. VulcaHealing** *(capitolo a sé — Strada B decisa 2026-09-27; 9 sotto-capitoli abbozzati)*
    1. Perché un sottosistema separato (agente stateless, serve piena agency sui sorgenti IaC).
-   2. **Perché delegare a un agente esterno, e perché è intercambiabile** — Antigravity come *caso*, non vincolo: estendibile a Claude Code / Codex / harness locali (DeepSeek) cambiando le righe del subprocess. Lega al Principio #4 (modularità) e al filo mechanism-engineering (il valore è il meccanismo, l'agente è pluggable).
+   2. **Perché delegare a un agente esterno, e perché è intercambiabile** *(Antigravity qui = STRUMENTO scelto — ruolo OPPOSTO al contro-esempio del §3.1: per testare no, per riparare sì; dirlo esplicitamente o il lettore si confonde)* — Antigravity come *caso*, non vincolo: estendibile a Claude Code / Codex / harness locali (DeepSeek) cambiando le righe del subprocess. Lega al Principio #4 (modularità) e al filo mechanism-engineering (il valore è il meccanismo, l'agente è pluggable).
    3. Il contesto asimmetrico (**Heuristic Lead**) — il report è un indizio, la causa è a monte nei sorgenti (es. DataVault: ticket "Nginx" → causa reale bug scoping Ansible/PHP-FPM).
    4. La **costituzione**: le 5 regole di riparazione (minima riparazione, no leak, no abbassare difficoltà, preservare vuln volute, interpretazione restrittiva) → mappa su **Constitutional AI**; base delle metriche **B3**.
    5. Il **perimetro di scrittura** (scrive solo i sorgenti; `out/` in sola lettura) — per non riparare l'artefatto sbagliato.
@@ -157,6 +183,78 @@
 **Appendici** — *Prompt integrali* (Planner, Executor/Auditor Mode, Healer); eventuale *config modello/inferenza*. Link al repo GitHub.
 
 **Parcheggiati:** termine "determinismo" (§3.4). *(Risolto 2026-09-27: healing = capitolo a sé, Strada B → struttura a 6 capitoli.)*
+
+---
+
+## 5-BIS. MAPPA RAPIDA DEI CAPITOLI (da qui si scrive)
+
+> Versione scansionabile della struttura (§5) — **tienila aperta mentre scrivi**.
+> Legenda: ⭐ citazione forte · 📚 citazione puntuale · (—) niente, è tuo.
+> **Regola della quota (sempre):** decisione → corpo · meccanismo → se l'insight lo richiede · codice → GitHub/Appendice.
+
+**1 · Introduzione** — *per ultima · 3-4 pp*
+1. Aggancio al problema (macchine didattiche AI, oggi validate/riparate a mano)
+2. Il contributo in sintesi (VulcaTest + VulcaHealing)
+3. Roadmap della tesi
+→ quasi zero citazioni (al max 📚 mechanism engineering)
+
+**2 · Contesto** — *la "scala di concetti" · 8-11 pp*
+1. Dominio: CTF / B2R, il pentest come esame — 📚 Cybench
+2. Intended way e white-box testing: vulnerabilità volute vs veri difetti — (—)
+3. Agenti LLM e architetture agentiche — 📚 Prompt Report, CoALA
+4. Il concetto di **harness** — ⭐ Autonomous Agents Survey *(il gancio: "è ciò che ho costruito")*
+5. L'ecosistema VulcAIn (Mind/Forge/Ship) + il bisogno grezzo — (—)
+6. **Lavori correlati / stato dell'arte** — PentestGPT + agentic pentest · APR/self-healing · il gap (nessuno combina conformance + oracolo evidence-based su macchine AI + closed-loop) — 📚 PentestGPT
+→ lascia aperto di proposito: *"perché non un harness pronto?"* (apre il Cap.3)
+
+**3 · Architettura VulcaTest** — *il tester · UN capitolo, DUE movimenti · 15-18 pp*
+*Movimento A — il sistema (finisce producendo il REPORT):*
+1. Apertura-molla: prototipo→architettura; 3 problemi harness generico (**Antigravity = contro-esempio**) + Pizzeria
+2. I 5 principi — ⭐ CoALA (LLM vs Code = scioglie "determinismo") · SWE-Bench Pro · Prompt Report/ReAct
+3. Visione d'insieme (il grafo) — 📚 Plan-and-Solve, Multi-Agent Survey
+4. Planner (LLM + parser deterministico, YAML, `TestStep`) — 📚 planning senza feedback
+5. Orchestratore (*prima* dell'Executor; `VulcaTestState`; no-retry; gate AND) — 📚 CoALA working memory
+6. Executor — il cuore (Auditor Mode, ReAct, `StepResult`+`evidence`) — ⭐ ReAct · Constitutional AI · MetaGPT
+7. Il Bridge — i due sensi (azione L1/L2 + percezione) — 📚 CoALA grounding
+8. Final Evaluator (2 stadi → report/ticket) — ⭐ SWE-Bench Pro (oracle integrity)
+9. Il Diagnostician rimosso (goal drift) — 📚 Cybench
+*Movimento B — l'ingegneria dell'harness:*
+10. Robustezza e gestione del contesto (troncamento · tool-slicing · two-stage retrieval · budget+nudge · watchdog) — 📚 AgentBoard
+11. Prompt engineering come processo — ⭐ Prompt Report · Constitutional AI
+12. Modello e inferenza (perché locale → ricerca modello → CoT → ottimizzazioni → infra → costo) — 📚 CoT (Wei)
+→ chiude: il report con un difetto (apre il Cap.4)
+
+**4 · VulcaHealing** — *il healer · 7-9 pp*
+1. Perché un sottosistema separato — (—)
+2. Perché delegare e perché è intercambiabile (**Antigravity = strumento scelto**) — 📚 mechanism engineering
+3. Heuristic Lead — (—)
+4. Costituzione a 5 regole — ⭐ Constitutional AI
+5. Perimetro di scrittura — (—)
+6. Diff deterministico / no self-certification — ⭐ SWE-Bench Pro
+7. Chiusura del loop (gate echo-safe + IP dinamico post-rebuild) — (—)
+8. Cicli stateless ma informati — 📚 CoALA episodic
+9. Limiti — (—)
+
+**5 · Valutazione sperimentale** — *numeri in arrivo · 9-12 pp · il cap. più "accademico"*
+1. Metodologia (dal "funziona" al "quanto") — 📚 Survey, AgentBoard
+2. Dataset golden source — 📚 Test Oracle
+3. Perturbazione P1-P4 + baseline gate — ⭐ Test Oracle (mutation)
+4. I 4 benchmark (B1 riconoscimento · B2 RCA · B3 healing · B4 costi) — ⭐ Cybench, AgentBoard, SWE-Bench Pro
+5. La questione statistica (*n* non indipendente) — ⭐ Test Oracle + feedback prof
+6. Pizzeria ammiraglia (CS-3) — (—)
+7. Confronto modelli (local vs cloud) — ⭐ Model+Scaffold (Cybench/AgentBoard)
+8. Ablazione dei ruoli — 📚 MetaGPT, Cybench
+9. Risultati e discussione — 📚 AgentBoard
+
+**6 · Conclusioni e sviluppi futuri** — *per ultima · 3-4 pp*
+1. Sintesi del contributo
+2. Limiti onesti (`MAX_HEALING_ATTEMPTS=1`, *n*, dataset piccolo)
+3. Sviluppi futuri (black-box · dataset statistico · healing locale)
+4. Considerazioni finali — 📚 CoALA (la decomposizione resta valida)
+
+**Appendici** — prompt integrali (Planner/Executor/Healer) · eventuale config modello · link repo GitHub
+
+**Ordine di scrittura consigliato:** 3 → 4 → 2 → 5(metodologia) → 6 → 1 *(i numeri del Cap.5 dipendono dai benchmark; intro/conclusioni riassumono → per ultime)*.
 
 ---
 
@@ -249,4 +347,57 @@ Corpo ≈ **44-58 pag**. Prima stesura ≈ **105h**. Con overhead (figure, verif
 
 **IN ATTESA da Luca per finalizzare il calendario:** (1) ore/giorno reali nello sprint; (2) conferma placeholder risultati Cap.5.
 
-**PROSSIMA AZIONE quando si riparte:** preparare il **recall pack del G1 (Cap.3a)** — estrarre da codice + `memoria.md` i dettagli di: apertura-molla (3 problemi harness generico + Pizzeria), 5 principi cardine, visione d'insieme del grafo, Planner, Orchestratore; con evidenza (file/riga) e pattern da citare (§7). Poi Luca scrive.
+**PROSSIMA AZIONE quando si riparte:** Luca STA SCRIVENDO il Cap.3 in `...\ANNO 3\BOZZA SCRITTA\Capitolo 3.md` (a 3.3 al 2026-10-01). L'assistente fornisce **recall pack per nodo** (§9.4/9.5) e applica la **regola della quota** alle bozze. NON scrive prosa. Dettagli operativi completi in §9.
+
+---
+
+## 9. DETTAGLI DI STESURA (recall pack + regole operative, consolidati 2026-10-01)
+
+### 9.1 Come scrivere UN nodo — template a 5 mosse
+Ogni sotto-capitolo di nodo segue lo stesso stampo (è anche la cura all'"mi blocco, non so come si scrive"):
+1. **Cosa fa** — 1 frase (il ruolo).
+2. **La decisione di design + perché** — il cuore (quota 1, SEMPRE). *È la mossa che il relatore vuole: non "cosa fa" ma "perché l'ho progettato così".*
+3. **Il come** — meccanismo a parole/schema, solo se l'insight non si capisce senza (quota 2).
+4. **Quota codice** — snippet solo se È la decisione; altrimenti → GitHub/Appendice.
+5. **Aggancio al nodo dopo** — 1 frase (la molla che apre il prossimo). *È così che si collegano i nodi senza salti.*
+
+**Budget pagine per nodo (Cap.3):** apertura 1,5-2 · principi 1,5-2 · visione 1-1,5 · Planner 1-1,5 · Orchestratore 0,5-1 · **Executor 2-2,5** · Bridge 1,5-2 · Final Eval 1 · Diagnostician 0,5 · Robustezza 1,5-2 · Prompt eng 1-1,5 · **Modello 3-4**.
+
+**Regola codice (mostra / non mostra):**
+- **MOSTRA** (3-8 righe) solo se il codice è la decisione e si capisce a colpo d'occhio: schema `ChecklistItemResult` (`item`/`passed`/`evidence`), un `TestStep` in YAML, le 5 regole della costituzione healer.
+- **NON MOSTRARE** (→ GitHub): `SPECIAL_KEYS_MAP`, polling del watchdog, regex del parser, loop di budget. Descrivi la *decisione* a parole.
+
+### 9.2 Strutture dati — in contesto, non in un capitolo a parte
+NON fare una sezione "strutture dati" prima dei nodi (diventa catalogo arido). Introduci ogni contratto al **nodo proprietario**: `TestStep`→Planner · `StepResult`/`ChecklistItemResult`→Executor · `ToolCallRecord`→Executor/Bridge (telemetria, ponte a B4) · `VulcaTestState`→Orchestratore. Mostra i campi solo dove *sono* la decisione (`TestStep`, `ChecklistItemResult`).
+**Mossa opzionale forte:** una frase in 3.3 che nomina la decisione senza i campi — *"i nodi non si scambiano messaggi liberi ma contratti tipizzati (structured artifact handoff)"*. 📚 MetaGPT.
+
+### 9.3 Citazioni — la regola dei 3 lavori
+Una citazione guadagna il posto solo se fa UNO di: **① giustifica** una scelta · **② dà un nome/formalismo** · **③ fa da contrasto**. Altrimenti fuori (e dove non serve, scrivilo). Le citazioni **si concentrano** (Cap.3: §3.2/3.6/3.8/3.11; Cap.5 quasi tutto), non si spalmano. Mappa inline per capitolo in §5-BIS.
+**Framing onesto (NON "derivati dai paper"):** i principi sono TUOI, la letteratura li *fonda a posteriori*. Verbi: pattern davvero usati → "riprende/adotta"; inquadrati dopo → "trova fondamento in/è inquadrabile come".
+**Per-principio (3.2):** ① deterministic-where-possible → CoALA (LLM vs Code, scioglie "determinismo") · ② no-self-certification → SWE-Bench Pro (+ Constitutional AI) · ③ separation of concerns → CoALA modularità (+ MetaGPT) · ④ intercambiabilità → *nessuna, è tuo* · ⑤ plan+execute & react → ReAct + Prompt Report (Plan-and-Solve); contrasto Survey (planning senza feedback).
+
+### 9.4 Gap analysis per nodo — cosa AGGIUNGERE a Call pasquale 2 (verificato su codice)
+*(ciò che manca/è sotto-raccontato rispetto alla spiegazione già scritta in `Call/Call pasquale 2.md`)*
+- **Planner:** gerarchia fonti STORYLINE>WRITEUP>DESCRIPTION · regole 5/6 del prompt ("Fedeltà Connettori Logici" + "Meccanismo di Scoperta" = fix CS-1, nasce da Pizzeria → collega a 3.1) · de-fence multi-blocco del parser (reverse shell listener/trigger/pty).
+- **Orchestratore:** no-retry esplicito (retry ASSENTE, op-level non cablato — limite onesto) · gate AND come *meccanismo dell'oracolo*.
+- **Executor ⭐ (buco più grosso):** **Auditor Mode** (§9.5) — del tutto assente in Call pasquale · origine "cheating agent" · **graceful nudge** (a −2 turni) · `evidence` OBBLIGATORIA per item (no-self-cert = struttura dati, [executor.py:112]) · regola state-awareness da incidente nano.
+- **Bridge/Robustezza:** Terminal Gateway = demone REST FastAPI su Kali:8889 · il **secondo senso (percezione)**: pulizia ANSI/VT100, `session_last_line`, rilevamento password, tool auto-descriventi a runtime (`list_tools` inietta avvisi) · **watchdog DONE/IDLE/CAP/DEAD** (`wait_utils`: aspetta il silenzio, non un tempo fisso; marker `stop_pattern`) — assente · nano `\r` vs `^J`.
+- **Final Evaluator:** il **Diagnostician rimosso** (l'RCA vive qui perché il nodo è stato tolto per goal drift) · campi `healing_ticket` (`defect_type`: IAC_GENERATION/CONFIG/SPECIFICATION, `blocking_step`, `affected_component`, `root_cause`).
+- **Healing (Cap.4):** Heuristic Lead (report=sintomo) · 5ª regola (interpretazione restrittiva) · perimetro `out/` read-only · gate build echo-safe (marker `__BUILD_SUCCESS__`, no-deploy se assente) + IP dinamico post-rebuild · cicli stateless-ma-informati (no `--resume`, rilegge HEALING_REPORT/BUILD_ERROR) · delega agent-agnostic · limite `MAX_HEALING_ATTEMPTS=1`.
+
+### 9.5 Recall pack Auditor Mode (il prompt dell'Executor — [executor.py:21-83])
+Origine = **cheating agent** (il modello dichiarava successi senza provarli). È il no-self-certification reso prompt. Le 8 regole → raggruppale in **4 temi** (il prompt integrale va in Appendice, NON nel corpo):
+- **A — l'auditor certifica, non aggiusta** (reg.1): solo in-band; vietato out-of-band (docker host); servizio rotto = difetto. 📚 Cybench (isolation).
+- **B — giudizio vincolato: AND + evidenza ⭐** (reg.2+3): gate AND (un `false`→FAILED); "ESEGUI non dedurre"; simmetria dell'onere di prova (assenza di segnale ≠ fallimento). 📚 SWE-Bench Pro, Constitutional AI.
+- **C — modello mentale del terminale** (reg.4+5+6): sessioni PTY vs one-shot; host awareness; TTY hygiene (nano, anti-flooding). *Queste regole nascono da fallimenti concreti → prova del "prompt eng come processo" (3.11).*
+- **D — economia e chiusura** (reg.7+8): 1 tool = 1 turno; verified values; `request_turn_extension`; verdetto via `submit_step_result` (`checklist_evaluation` 1:1 con `evidence`).
+Tool interni: `submit_step_result`, `request_turn_extension`, `show_verified_values`, `get_verified_value`.
+
+### 9.6 Classificazione CoALA di VulcaTest (per 3.3/3.4)
+**Verdetto:** singolo agente cognitivo di moduli · working memory (`VulcaTestState`) + procedural memory esplicita (il codice) · azioni interne (reasoning + retrieval two-stage) + grounding digitale esterno (`interactive_terminal_exec`) · decision-making **ReAct-like** · **privo** di memoria episodica/semantica e di apprendimento persistente. ⭐ La forza è dichiarare i limiti (CoALA descrive un sistema così come "ReAct-like, senza long-term memory né learning" — citalo).
+**Due livelli di agente (non confonderli):** il *tester* (Planner+Executor+Final Evaluator, accoppiati) = **un** agente di moduli → Cap.3. Con l'**healer**, VulcaTest **delega** ad **Antigravity**, agente separato/autonomo/sostituibile (coupling debole) → **due agenti**, tema del Cap.4. In 3.4 resta nello scope tester.
+
+### 9.7 Diagrammi — uno per capitolo
+- **Cap.3 (3.3) = solo il tester.** TOGLI dal diagramma: nodo HEALER, arco FAILED→HEALER, HEALER→PATCH.DIFF, l'anello FIX→ORCHESTRATOR. TIENI `FINAL EVALUATOR → REPORT/RUNSUMMARY/HEALINGTICKET`: il `HEALINGTICKET.json` è il **gancio** (freccia tratteggiata "→ VulcaHealing Cap.4").
+- **Cap.4 = il loop chiuso completo** (Healer→Antigravity→PATCH.DIFF→rebuild→FIX→re-test).
+- **Note accuratezza:** i due "START" confondono (sono 2 modalità: genera-piano vs esegui-con-piano) → etichetta o semplifica · **MCP Bridge non è un nodo** del grafo (vive nell'Executor) e il **Planner è a monte** del grafo — dillo nel testo.

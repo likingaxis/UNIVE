@@ -1,7 +1,8 @@
 {
-  "cssTheme": "Blue Topaz",
+  "cssTheme": "Primary",
   "enabledCssSnippets": [
-    "Style"
+    "Style",
+    "bullet"
   ],
   "theme": "obsidian"
 }
