@@ -4,7 +4,7 @@
 > 1. **Regola d'oro**: la tesi la scrive **Luca**, non tu. Tu sei un *sounding board* (struttura, brainstorming, domande, mappa scelte↔letteratura, stime). **Mai** generare prosa della tesi.
 > 2. **Ordine di lettura per capire il progetto**: questo file → `Call/call pasquale.md` (architettura completa) → il **codice** in `...\Desktop\TESI\vulcAIN\vulcatest` per ogni claim tecnico.
 > 3. **Le fonti sono un percorso di ragionamento, non lo stato attuale**: prima di scrivere un fatto tecnico, verificalo sul codice (vedi §0 caveat).
-> 4. **STATO (2026-10-01):** struttura **CONSOLIDATA** — catena macro (ogni cap. = 1 domanda-motrice) + **regola della quota** + Cap.3 a **due movimenti** + inventario implementazioni (secchi A-E), tutto in §5. Decisioni chiuse: *healing = capitolo* (contributo), *modello = sotto-capitolo dell'Architettura* (substrato), *VulcAIn generale nel Contesto*, *determinismo risolto* → "deterministic where possible, agentic where necessary". Luca sta scrivendo la bozza dei sotto-capitoli in `TESI.md`. **Prossima azione:** Luca scrive; l'assistente applica la **regola della quota** alle bozze e prepara recall pack su richiesta.
+> 4. **STATO (2026-10-02):** Capitolo 3 (Architettura VulcaTest) e Capitolo 4 (VulcaHealing) **COMPLETATI E CONSOLIDATI** in `BOZZA SCRITTA/Capitolo 3 - Stesura.md` e `BOZZA SCRITTA/Capitolo 4 - Stesura.md`. L'indice e i sottoparagrafi di 3° livello sono sincronizzati al 100% in `BOZZA SCRITTA/INDICE e titolo.md` e `TESI.md`. Specifiche hardware congelate: **16 GB VRAM**, **64 GB RAM**. Runtime locale: Qwen 3.8 27B GGUF (`reasoning_effort=medium`, KV-cache fp16, speculative decoding MTP+N-gram, hot-swapping via `model_manager.py`). **Prossima azione:** stesura del **Capitolo 2 (Contesto e lavori correlati)** e formalizzazione metodologica del **Capitolo 5 (Valutazione sperimentale / TestBench)** prima dell'inserimento dei risultati empirici.
 
 > **Cos'è questo file.** È la *single source of truth* per la stesura della tesi di Luca. Serve a far ripartire da zero qualsiasi chat/assistente senza dover rispiegare tutto: qui stanno path, fonti (con i loro caveat), filo conduttore, feedback del relatore, regole di stile, scaletta dei capitoli e — cosa più importante — il nucleo di "cosa ho fatto" con parole di Luca.
 >
@@ -14,7 +14,11 @@
 
 ## 0. Path e file
 
-- **File target della tesi** (dove si scrive): `C:\Users\Luca\Desktop\UNI2\quartz\content\UNI\Triennale\ANNO 3\TESI\TESI.md` (vault Obsidian/quartz).
+- **Bozze di stesura consolidate** (dove si scrive e si rifinisce capitolo per capitolo):
+  - `C:\Users\Luca\Desktop\UNI2\quartz\content\UNI\Triennale\ANNO 3\TESI\BOZZA SCRITTA\Capitolo 3 - Stesura.md` (consolidato)
+  - `C:\Users\Luca\Desktop\UNI2\quartz\content\UNI\Triennale\ANNO 3\TESI\BOZZA SCRITTA\Capitolo 4 - Stesura.md` (consolidato)
+  - `C:\Users\Luca\Desktop\UNI2\quartz\content\UNI\Triennale\ANNO 3\TESI\BOZZA SCRITTA\INDICE e titolo.md` (indice ufficiale con 3° livello)
+- **File master della tesi**: `C:\Users\Luca\Desktop\UNI2\quartz\content\UNI\Triennale\ANNO 3\TESI\TESI.md` (mappa concettuale e sintesi).
 - **Codice sorgente reale** (fonte di verità tecnica): `C:\Users\Luca\Desktop\TESI\vulcAIN\vulcatest` (e `vulcaforge`, `vulcamind`). Ogni sottoprogetto ha `.git` proprio; vulcatest committato solo fino a "versione 1", il resto è working tree non committato.
 - **Diario di sviluppo**: `C:\Users\Luca\Desktop\TESI\memoria.md` (storico dettagliato, ma può essere disallineato dal codice — verificare).
 - **Fonti-canovaccio** (nella cartella TESI):
@@ -38,7 +42,7 @@
 - **Il mio compito → VulcaTest.** Un sistema automatico che **impersona uno studente** e verifica se, seguendo il piano previsto (l'*intended way*), la macchina si risolve davvero con successo. Se il percorso previsto non funziona, la macchina ha un difetto.
   - *Esempio Pizzeria* (macchina che ho **generato** io): mancava una **chat** che invece era prevista come parte dell'intended way (il canale con cui lo studente scopre l'endpoint nascosto). Senza, lo studente non ritrova il percorso voluto dai professori → difetto.
 - **L'architettura.** VulcaTest invoca più volte un LLM ed è organizzato in **Planner** + **Executor**, coordinati da un **Orchestratore** e un **Final Evaluator**. Sopra/attorno all'LLM c'è un'**infrastruttura = harness** — ed è proprio questa la parte che ho costruito io. *(Il concetto di "harness" va spiegato in introduzione: è di fatto ciò che ho fatto.)*
-- **Realizzazione.** In **Python**. LLM = **Qwen 3.8 27B in locale** sulla mia macchina *(specificare le specifiche hardware in tesi)*.
+- **Realizzazione.** In **Python**. LLM = **Qwen 3.8 27B in locale** sulla mia macchina (postazione con **16 GB di VRAM** e **64 GB di RAM**).
 - **Il report e l'healing.** Il test produce un **report** che rappresenta le eventuali rotture della macchina. Le rotture vanno a un **nodo di Healing** che prova a risolverle in automatico. L'healing è demandato ad **Antigravity da command line**, ma arricchito da funzionalità mie che misurano l'output, rafforzano la struttura dell'healing e forniscono le informazioni direttamente al nodo (così non deve cercarsele).
 - **Il loop.** Dopo l'healing il test viene **richiamato** → si chiude il loop test → healing → re-test.
 
@@ -152,16 +156,13 @@
 - **E. Build Docker + IP dinamico** → NON qui: Cap.4 (nodo healer).
 - *Isolamento cross-run* (`reset_all_sessions`/`clear_cache`) → citato in §3.7, agganciato al Cap.5 (igiene benchmark).
 
-**4. VulcaHealing** *(capitolo a sé — Strada B decisa 2026-09-27; 9 sotto-capitoli abbozzati)*
-   1. Perché un sottosistema separato (agente stateless, serve piena agency sui sorgenti IaC).
-   2. **Perché delegare a un agente esterno, e perché è intercambiabile** *(Antigravity qui = STRUMENTO scelto — ruolo OPPOSTO al contro-esempio del §3.1: per testare no, per riparare sì; dirlo esplicitamente o il lettore si confonde)* — Antigravity come *caso*, non vincolo: estendibile a Claude Code / Codex / harness locali (DeepSeek) cambiando le righe del subprocess. Lega al Principio #4 (modularità) e al filo mechanism-engineering (il valore è il meccanismo, l'agente è pluggable).
-   3. Il contesto asimmetrico (**Heuristic Lead**) — il report è un indizio, la causa è a monte nei sorgenti (es. DataVault: ticket "Nginx" → causa reale bug scoping Ansible/PHP-FPM).
-   4. La **costituzione**: le 5 regole di riparazione (minima riparazione, no leak, no abbassare difficoltà, preservare vuln volute, interpretazione restrittiva) → mappa su **Constitutional AI**; base delle metriche **B3**.
-   5. Il **perimetro di scrittura** (scrive solo i sorgenti; `out/` in sola lettura) — per non riparare l'artefatto sbagliato.
-   6. Il **flusso operativo** (snapshot in-memory vs draft fisico → invocazione `agy` stream-json + timeout a due livelli → fail-safe recompile → **diff deterministico = no self-certification**).
-   7. La **chiusura del loop** (rebuild con **gate echo-safe** = CS-2, IP dinamico dopo rebuild, reset+retest).
-   8. **Cicli stateless ma informati** (no `--resume`, stato sul filesystem, legge gli HEALING_REPORT precedenti, BUILD_ERROR in cima al prompt del ciclo dopo).
-   9. **Limiti attuali** (`MAX_HEALING_ATTEMPTS=1` di default, incoerenza slug).
+**4. VulcaHealing: closed-loop self-healing** *(consolidato a 6 sezioni, 7-9 pp; chiuso nello stesso StateGraph)*
+   1. **Integrazione di VulcaHealing nel workflow closed-loop** — estensione naturale dello StateGraph (`Final Evaluator -> healer_node -> rebuild -> Orchestrator`); asimmetria operativa in-band (Kali, attacco, nessun accesso IaC per prevenire scorciatoie) vs out-of-band (sorgenti IaC, persistenza); prevenzione di Goal Drift e conflitto di interessi.
+   2. **Dal ticket diagnostico alla localizzazione del difetto nell'Infrastructure as Code** — la RCA è già chiusa dal Final Evaluator (§3.8); qui il ticket si trasforma in localizzazione mirata nei file IaC; principio dell'**Heuristic Lead** (il ticket è un indizio euristico, non una prescrizione rigida); risalita della catena di dipendenze (caso studio DataVault: HTTP 404 Nginx originato a monte da socket errato in Ansible).
+   3. **L'Healer: delega operativa a harness agentici generici** — ruolo complementare degli harness generici (inadatti al testing vincolato di §3.1, ideali per il code editing multi-file); controller `healer.py` che invoca Antigravity CLI (`agy --mode accept-edits --output-format stream-json /goal`) in modalità headless; modularità e sostituibilità del motore di editing (Principio 4).
+   4. **Prompt dell'Healer, vincoli operativi e perimetro di modifica** — vincoli deontologici (Constitutional AI): riparazione minima, No-Leak, **preservazione categorica delle vulnerabilità didattiche** (non sanificare le falle volute!), divieto modifiche fittizie, economia esplorazione; perimetro rigido: modificabile solo `machines/<slug>.yaml` (e webapp), `out/` in sola lettura (artefatto derivato effimero); cicli stateless con iniezione di `BUILD_ERROR.md` al ciclo successivo.
+   5. **Tracciamento e validazione delle modifiche** — rifiuto dell'autocertificazione dell'agente riparatore; modulo deterministico `diff_tracker.py`: snapshot iniziale pre-fix, calcolo del diff unificato `patch.diff` ed emissione di `HEALING_REPORT.md` via `difflib`; misurazione delta per Benchmark B3.
+   6. **Chiusura del ciclo: ricostruzione dell’ambiente e regression testing** — rigenerazione bundle con `generator/main.py`; compilazione Docker su Kali con **Gate Echo-Safe** (Caso Studio CS-2, marker concatenato quotato `echo '"__BUILD""_""SUCCESS__"'`); ricreazione container (*Clean Slate*) e IP dinamico (`docker inspect`); **regression testing integrale** da Fase 1 (`current_step_index = 0`) per escludere regressioni; limite di terminazione `MAX_HEALING_ATTEMPTS=1`.
 
 **5. Valutazione sperimentale** *(scheletro FISSATO 2026-09-27; numeri APERTI — benchmark in esecuzione. Regola: ogni benchmark agganciato al paper che lo fonda — approccio ibrido.)*
    1. **Dal "funziona" al "quanto funziona"** — obiettivo e metodologia (misurabile / confrontabile / riproducibile).
@@ -207,33 +208,26 @@
 6. **Lavori correlati / stato dell'arte** — PentestGPT + agentic pentest · APR/self-healing · il gap (nessuno combina conformance + oracolo evidence-based su macchine AI + closed-loop) — 📚 PentestGPT
 → lascia aperto di proposito: *"perché non un harness pronto?"* (apre il Cap.3)
 
-**3 · Architettura VulcaTest** — *il tester · UN capitolo, DUE movimenti · 15-18 pp*
-*Movimento A — il sistema (finisce producendo il REPORT):*
-1. Apertura-molla: prototipo→architettura; 3 problemi harness generico (**Antigravity = contro-esempio**) + Pizzeria
-2. I 5 principi — ⭐ CoALA (LLM vs Code = scioglie "determinismo") · SWE-Bench Pro · Prompt Report/ReAct
-3. Visione d'insieme (il grafo) — 📚 Plan-and-Solve, Multi-Agent Survey
-4. Planner (LLM + parser deterministico, YAML, `TestStep`) — 📚 planning senza feedback
-5. Orchestratore (*prima* dell'Executor; `VulcaTestState`; no-retry; gate AND) — 📚 CoALA working memory
-6. Executor — il cuore (Auditor Mode, ReAct, `StepResult`+`evidence`) — ⭐ ReAct · Constitutional AI · MetaGPT
-7. Il Bridge — i due sensi (azione L1/L2 + percezione) — 📚 CoALA grounding
-8. Final Evaluator (2 stadi → report/ticket) — ⭐ SWE-Bench Pro (oracle integrity)
-9. Il Diagnostician rimosso (goal drift) — 📚 Cybench
-*Movimento B — l'ingegneria dell'harness:*
-10. Robustezza e gestione del contesto (troncamento · tool-slicing · two-stage retrieval · budget+nudge · watchdog) — 📚 AgentBoard
-11. Prompt engineering come processo — ⭐ Prompt Report · Constitutional AI
-12. Modello e inferenza (perché locale → ricerca modello → CoT → ottimizzazioni → infra → costo) — 📚 CoT (Wei)
-→ chiude: il report con un difetto (apre il Cap.4)
+**3 · Architettura e implementazione di VulcaTest** — *il tester · 15-18 pp (CONSOLIDATO)*
+3.1 Requisiti e limiti delle soluzioni generiche (guardrail, sostenibilità, controllo/oracolo, contro-esempio Antigravity, caso Pizzeria) — 📚 SWE-bench Pro, Cybench
+3.2 Principi di progettazione del sistema (1. Deterministico vs probabilistico · 2. Evidenze e no auto-certificazione · 3. Separazione responsabilità · 4. Intercambiabilità · 5. Controllo gerarchico Plan-and-Solve + ReAct) — ⭐ CoALA, MetaGPT, Plan-and-Solve (Wang), ReAct (Yao)
+3.3 Architettura generale e flusso di coordinamento (inquadramento CoALA, memoria di lavoro `VulcaTestState` in LangGraph, punti d'ingresso, contratti tipizzati Pydantic) — 📚 CoALA, MetaGPT
+3.4 Il Planner: generazione e formalizzazione dell’Attack Plan (architettura ibrida 2 stadi, gerarchia fonti, regole oracolo CS-1, contesto dinamico) — 📚 planning senza feedback
+3.5 L’Orchestrator: controllo del workflow e gestione dello stato (stato condiviso tipizzato, topologia StateGraph condizionale, gate AND) — 📚 LangGraph, CoALA
+3.6 L’Executor: esecuzione degli step e modalità di auditing (Auditor Mode, budget dinamico + graceful nudge, tool interni, contratto `StepResult`) — ⭐ ReAct, Constitutional AI, MetaGPT
+3.7 Il Bridge di esecuzione: gestione degli strumenti e delle interazioni con il target (canale azione L1 HexStrike / L2 Terminal Gateway, canale percezione e watchdog del silenzio, gestione contesto e tool-slicing, supporto TUI/PTY) — 📚 CoALA grounding, AgentBoard
+3.8 Il Final Evaluator: valutazione deterministica e Root Cause Analysis (Stadio 1 metriche deterministiche `run_summary.json`, Stadio 2 RCA e `healing_ticket.json`, Diagnostician rimosso) — ⭐ SWE-bench Pro (verifier gap), Cybench
+3.9 Prompt engineering e definizione dei ruoli agentici (sviluppo iterativo, specializzazione prompt, regole e formati vincolati) — ⭐ Prompt Report, Constitutional AI
+3.10 Modello locale e configurazione dell’inferenza (motivazioni locale, 16 GB VRAM, 64 GB RAM, Qwen 3.8 27B GGUF, CoT `reasoning_effort=medium`, quantizzazione 3-bit, KV fp16, speculative MTP+N-gram, hot-swap `model_manager`, benchmark per LLM) — 📚 Chain-of-Thought (Wei)
+→ chiude: il report diagnostico e il ticket aprono il Cap. 4.
 
-**4 · VulcaHealing** — *il healer · 7-9 pp*
-1. Perché un sottosistema separato — (—)
-2. Perché delegare e perché è intercambiabile (**Antigravity = strumento scelto**) — 📚 mechanism engineering
-3. Heuristic Lead — (—)
-4. Costituzione a 5 regole — ⭐ Constitutional AI
-5. Perimetro di scrittura — (—)
-6. Diff deterministico / no self-certification — ⭐ SWE-Bench Pro
-7. Chiusura del loop (gate echo-safe + IP dinamico post-rebuild) — (—)
-8. Cicli stateless ma informati — 📚 CoALA episodic
-9. Limiti — (—)
+**4 · VulcaHealing: closed-loop self-healing** — *l'healer · 7-9 pp (CONSOLIDATO)*
+4.1 Integrazione di VulcaHealing nel workflow closed-loop (estensione StateGraph, separazione in-band/out-of-band, prevenzione goal drift) — 📚 CoALA modularità
+4.2 Dal ticket diagnostico alla localizzazione del difetto nell'Infrastructure as Code (Heuristic Lead, risalita catena IaC, caso DataVault) — (—)
+4.3 L'Healer: delega operativa a harness agentici generici (harness generico per code editing, controller `healer.py`, Antigravity CLI headless `/goal`, modularità) — 📚 mechanism engineering
+4.4 Prompt dell'Healer, vincoli operativi e perimetro di modifica (5 regole deontologiche, preservazione vulnerabilità didattiche, protezione `out/`, feedback `BUILD_ERROR.md`) — ⭐ Constitutional AI
+4.5 Tracciamento e validazione delle modifiche (rifiuto auto-certificazione, `diff_tracker.py`, snapshot, patch.diff, HEALING_REPORT.md) — ⭐ SWE-bench Pro
+4.6 Chiusura del ciclo: ricostruzione dell’ambiente e regression testing (rebuild bundle, gate Echo-Safe CS-2, Clean Slate, IP dinamico, regression testing da Fase 1, `MAX_HEALING_ATTEMPTS=1`) — (—)
 
 **5 · Valutazione sperimentale** — *numeri in arrivo · 9-12 pp · il cap. più "accademico"*
 1. Metodologia (dal "funziona" al "quanto") — 📚 Survey, AgentBoard
@@ -281,7 +275,7 @@
 
 **Architettura (Cap.3 principi+flusso)**
 - Plan-and-Execute `[USATO]` — piano scritto una volta, no replanning (grafo `executor→orchestrator→executor`). → Prompt Report (Plan-and-Solve), Survey Autonomous Agents (planning senza feedback).
-- Blackboard / working memory `[INQUADRABILE]` — `VulcaTestState` TypedDict condiviso. → CoALA (working memory) + Blackboard pattern SE.
+- LangGraph State / working memory `[USATO]` — `VulcaTestState` TypedDict condiviso tra nodi dello StateGraph. → CoALA (working memory), LangGraph.
 - Agente cognitivo modulare / role-based `[USATO]` — moduli specializzati. → CoALA (singolo agente di moduli), Multi-Agents Survey (layered / cooperative / pre-defined profiling).
 - **LLM vs Code** `[USATO]` — deterministico (parsing/orchestrazione/metriche) vs LLM (planning/exec/RCA). → CoALA "LLM vs Code". ⭐ munizioni per il dubbio "determinismo".
 - Conditional routing / macchina a stati `[INQUADRABILE]` — `route_*` in `graph.py`.

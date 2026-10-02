@@ -106,37 +106,15 @@ L’insieme di questi cinque principi costituisce la base progettuale dell’arc
 
 Prima di analizzare nel dettaglio i singoli moduli, è utile descrivere la struttura complessiva di VulcaTest, chiarendo come vengono organizzati i ruoli, come viene gestito lo stato e in che modo i diversi componenti comunicano tra loro.
 
-### Inquadramento nel framework CoALA
+### Inquadramento architetturale e gestione dello stato
 
-Facendo riferimento alla tassonomia proposta da CoALA (_Cognitive Architectures for Language Agents_), VulcaTest può essere descritto come un **singolo agente cognitivo modulare composto da ruoli specializzati**, piuttosto che come un sistema multi-agente composto da entità autonome che cooperano liberamente.
+Facendo riferimento alla tassonomia proposta da CoALA (_Cognitive Architectures for Language Agents_), VulcaTest può essere descritto come un **singolo agente cognitivo modulare composto da ruoli specializzati**, piuttosto che come un sistema multi-agente formato da entità autonome che cooperano liberamente. Pianificazione, orchestrazione, esecuzione e valutazione sono separate in moduli distinti, ma rimangono coordinate all’interno di un unico flusso di controllo.
 
-Le diverse funzioni necessarie al collaudo — pianificazione, orchestrazione, esecuzione e valutazione — sono separate in moduli distinti, ma rimangono vincolate a un unico flusso di controllo.
+La **Working Memory** del sistema è rappresentata dalla struttura dati tipizzata `VulcaTestState`, che modella lo stato condiviso del workflow gestito tramite LangGraph. Ogni nodo riceve lo stato corrente, legge i campi necessari alla propria funzione e restituisce esclusivamente gli aggiornamenti da applicare. All’interno dello stato vengono mantenuti la sequenza dei `TestStep`, l’indice dello step corrente, lo stato globale del collaudo, le evidenze raccolte, i valori verificati, le sessioni terminali PTY ancora attive e le informazioni di telemetria.
 
-È inoltre necessario distinguere VulcaTest da VulcaHealing. Il sottosistema di collaudo descritto in questo capitolo comprende Planner, Orchestrator, Executor e Final Evaluator. VulcaHealing, approfondito nel Capitolo 4, costituisce invece un componente separato, invocato soltanto quando il collaudo rileva una non conformità.
+La componente procedurale dell’architettura rimane invece esplicitamente definita dal sistema attraverso le regole di routing, i meccanismi di parsing e validazione, le transizioni di stato, gli strumenti disponibili e i vincoli imposti dai system prompt. Non viene inoltre mantenuta memoria persistente tra run differenti: il sistema non utilizza database vettoriali né meccanismi di memoria episodica o semantica destinati a trasferire informazioni tra esecuzioni successive. Ogni run parte quindi da uno stato indipendente, riducendo l’accumulo di contesto e favorendo la riproducibilità del collaudo.
 
-### Gestione della memoria
-
-La memoria del sistema è stata volutamente limitata alle sole informazioni necessarie all’esecuzione corrente.
-
-La **Working Memory** è rappresentata dalla struttura dati tipizzata `VulcaTestState`, che modella lo stato condiviso (*state*) previsto da framework di orchestrazione a grafo come LangGraph. Ogni nodo del grafo riceve lo stato corrente, legge i campi necessari alla propria funzione e restituisce esclusivamente gli aggiornamenti da applicare.
-
-All’interno di questa struttura vengono mantenuti:
-
-- La sequenza dei `TestStep` da eseguire.
-- L’indice dello step corrente.
-- Lo stato globale del collaudo (`RUNNING`, `COMPLETED`, `FAILED`).
-- Le evidenze raccolte durante l’esecuzione.
-- I valori verificati, come credenziali, token e flag.
-- Le sessioni terminali PTY ancora attive sul target.
-- Le informazioni di telemetria utilizzate per la valutazione sperimentale.
-
-La **Procedural Memory** non viene invece appresa dal modello, ma rimane esplicitamente definita nel software. Le regole di routing, i meccanismi di parsing, le transizioni di stato e i vincoli dei system prompt rappresentano la conoscenza procedurale con cui il sistema opera.
-
-La memoria episodica e quella semantica non vengono utilizzate. Il sistema non conserva informazioni tra run differenti e non impiega database vettoriali o basi di conoscenza persistenti. Questa scelta risponde a due esigenze principali:
-
-- **Riduzione del contesto:** evitare l’accumulo di informazioni non necessarie limita il numero di token elaborati dai modelli locali.
-- **Riproducibilità:** ogni run parte da uno stato indipendente, evitando che informazioni acquisite in esecuzioni precedenti influenzino i test successivi.
-
+L’architettura qui descritta costituisce il nucleo di conformance testing di VulcaTest. Nell’implementazione completa, lo stesso grafo di orchestrazione può estendersi alla fase di healing in presenza di una non conformità; tale fase viene approfondita separatamente nel Capitolo 4.
 ### Punti di ingresso e ciclo di vita dell’esecuzione
 
 VulcaTest prevede due modalità principali di avvio.
@@ -146,7 +124,7 @@ VulcaTest prevede due modalità principali di avvio.
 
 In entrambi i casi, dopo la disponibilità dell’Attack Plan, l’esecuzione converge sullo stesso grafo di orchestrazione.
 
-![[Pasted image 20261001134308.png|504]]
+![[Pasted image 20261002152624.png|380]]
 ### Comunicazione tra nodi e contratti tipizzati
 
 I componenti di VulcaTest non comunicano attraverso messaggi liberi in linguaggio naturale. Lo scambio di informazioni avviene invece tramite strutture dati tipizzate, in modo da ridurre ambiguità e rendere ogni passaggio verificabile.
@@ -169,7 +147,7 @@ A differenza di un piano scritto per un analista umano, l’Attack Plan costitui
 
 ### Architettura ibrida a due stadi
 
-In accordo con il principio _deterministico quando possibile, probabilistico quando necessario_, il Planner non affida l’intero processo a una singola generazione del modello, ma utilizza una pipeline composta da due stadi.
+Il Planner utilizza una pipeline ibrida composta da due stadi, separando la generazione affidata al modello dalla successiva validazione deterministica.
 
 1. **Stadio generativo (LLM).**  
     Il modello elabora la documentazione della challenge e produce un documento strutturato che combina sezioni descrittive in Markdown e blocchi formali in YAML.
@@ -263,7 +241,7 @@ Nel contesto di VulcaTest, il termine Orchestrator non identifica un singolo com
 
 La parte centrale di questa orchestrazione è implementata mediante **LangGraph**, utilizzato per modellare il workflow come un grafo a stati. I diversi nodi rappresentano le principali fasi operative del sistema, mentre gli archi e le condizioni di routing definiscono in modo esplicito le transizioni possibili tra esse.
 
-In coerenza con il principio _deterministico quando possibile, probabilistico quando necessario_, queste decisioni di coordinamento non vengono affidate a un modello linguistico, ma rimangono interamente governate dal codice. L’Orchestrator non decide quindi come risolvere uno step, ma stabilisce quale componente deve essere eseguito, con quale stato e in quali condizioni il flusso può avanzare.
+Le decisioni di coordinamento rimangono interamente governate dal codice e non richiedono l’intervento di un modello linguistico. L’Orchestrator non decide quindi come risolvere uno step, ma stabilisce quale componente debba essere eseguito, con quale stato e in quali condizioni il flusso possa avanzare.
 
 All’interno del grafo è presente anche un nodo denominato `orchestrator`, che rappresenta il punto principale di controllo tra uno step e il successivo. Questo nodo non coincide però con l’intero concetto di Orchestrator, che comprende più in generale tutta la logica di coordinamento del workflow.
 
@@ -281,7 +259,7 @@ Lo schema completo dello stato e la definizione degli attributi sono riportati i
 
 ### Topologia del grafo e instradamento condizionale
 
-Il workflow è implementato mediante **LangGraph** attraverso uno `StateGraph` che coordina i nodi `orchestrator`, `executor`, `final_evaluator` e `healer`.
+Il workflow è implementato mediante **LangGraph** attraverso uno `StateGraph` che coordina i nodi `orchestrator`, `executor`, `final_evaluator` e `healer`. I primi tre costituiscono il nucleo del processo di conformance testing, mentre il nodo `healer` estende il grafo con la fase di correzione prevista dal workflow closed-loop. Tale nodo viene raggiunto esclusivamente in presenza di una non conformità e quando la modalità di self-healing è abilitata; la sua logica interna verrà approfondita nel Capitolo 4.
 
 Il flusso segue una sequenza di transizioni definite.
 
@@ -289,7 +267,7 @@ Il flusso segue una sequenza di transizioni definite.
     Il grafo parte dal nodo `START`, inizializza lo stato del collaudo e imposta `current_step_index = 0`.
     
 2. **Selezione dello step.**  
-    Il nodo `orchestrator` verifica se esistono ancora step da eseguire. Se il piano non è terminato, seleziona il `TestStep` corrente, imposta lo stato a `RUNNING` e inoltra il controllo all’Executor. Se invece tutti gli step sono stati completati, imposta lo stato globale a `COMPLETED` e passa direttamente al Final Evaluator.
+    Il nodo `orchestrator` verifica se esistono ancora step da eseguire. Se il piano non è terminato, seleziona il `TestStep` corrente, imposta lo stato a `RUNNING` e inoltra il controllo all’Executor. Se invece tutti gli step sono stati completati, imposta lo stato globale a `COMPLETED` e trasferisce il controllo al Final Evaluator.
     
 3. **Valutazione del risultato e Fail-Fast.**  
     Al termine dello step, l’Executor restituisce uno `StepResult`. Se lo stato è `SUCCESS`, l’Orchestrator aggiorna `verified_values`, incrementa l’indice e avvia lo step successivo.
@@ -297,16 +275,16 @@ Il flusso segue una sequenza di transizioni definite.
     Se invece lo step è `FAILED`, il collaudo viene interrotto immediatamente secondo un principio di **Fail-Fast**. Poiché le fasi successive dipendono spesso dai privilegi o dai dati ottenuti in quelle precedenti, proseguire dopo un fallimento produrrebbe risultati poco significativi e aumenterebbe inutilmente il costo dell’esecuzione.
     
 4. **Valutazione finale.**  
-    Sia in caso di completamento sia in caso di fallimento, il flusso converge sul `final_evaluator`, che aggrega i risultati della run e produce gli artefatti conclusivi.
+    Sia in caso di completamento sia in caso di fallimento, il flusso converge sul `final_evaluator`, che aggrega i risultati della run e produce gli artefatti conclusivi. Una run completata termina in questa fase; in presenza di una non conformità, il workflow può invece proseguire verso la fase di healing.
     
 5. **Avvio dell’healing.**  
-    Se il collaudo è fallito e l’autoriparazione è abilitata, il sistema verifica che il numero massimo di tentativi non sia stato superato. In caso contrario, il controllo viene trasferito al nodo `healer`.
+    Se il collaudo è fallito, il self-healing è abilitato e il numero massimo di tentativi non è stato raggiunto, il controllo viene trasferito al nodo `healer`. In caso contrario, la run termina con l’esito prodotto dal Final Evaluator.
     
 6. **Nuova esecuzione dopo la correzione.**  
-    Dopo l’intervento di VulcaHealing e la ricostruzione dell’ambiente, il workflow ritorna all’Orchestrator e il collaudo viene eseguito nuovamente dall’inizio.
+    Al termine della fase di healing e della ricostruzione dell’ambiente, il controllo ritorna all’Orchestrator e il processo di conformance testing viene eseguito nuovamente dall’inizio. In questo modo il medesimo grafo realizza il ciclo **verifica–diagnosi–correzione–rivalidazione**, pur mantenendo separate le responsabilità dei diversi sottosistemi.
     
 
-Questa organizzazione separa in modo netto il controllo del workflow dall’esecuzione operativa. L’Orchestrator non decide come completare uno step e non interpreta gli output del target: gestisce esclusivamente lo stato del sistema e applica le regole di transizione definite dall’architettura.
+Questa organizzazione separa il controllo del workflow dall’esecuzione operativa. L’Orchestrator non decide come completare uno step e non interpreta direttamente gli output del target, ma mantiene lo stato del sistema e applica le regole di transizione definite dall’architettura.
 
 La sezione successiva descrive l’Executor, il componente incaricato di eseguire concretamente i singoli step dell’Attack Plan e raccogliere le evidenze necessarie alla loro verifica.
 
@@ -381,7 +359,7 @@ Ad esempio, può sapere che nello stato sono presenti valori identificati come `
 
 Questa scelta riduce la quantità di informazioni inserite nel contesto del modello e impedisce che credenziali, token, hash e altri dati accumulati durante il test vengano ripetuti a ogni nuovo step.
 
-### Il contratto `StepResult` e il rifiuto dell’auto-certificazione
+### Il contratto `StepResult` e la verifica dello step
 
 La conclusione di uno step avviene attraverso il tool `submit_step_result`. I dati restituiti dal modello vengono trasformati in un oggetto tipizzato `StepResult`, che rappresenta il contratto formale tra Executor e Orchestrator.
 
@@ -396,15 +374,9 @@ La conclusione di uno step avviene attraverso il tool `submit_step_result`. I da
 
 Ogni voce della checklist viene rappresentata tramite un `ChecklistItemResult`, che associa al requisito un esito booleano e la relativa evidenza.
 
-Il punto fondamentale è che il valore finale di `status` non viene accettato direttamente dalla risposta dell’LLM. Prima di creare lo `StepResult`, il codice ricalcola il risultato sulla base della checklist.
+Il valore finale di `status` non viene accettato direttamente dalla risposta dell’LLM, ma viene ricalcolato dal codice sulla base della checklist. Se anche un solo requisito non risulta soddisfatto, lo stato dello step viene forzato a `FAILED`. L’Executor rimane quindi responsabile della raccolta e dell’interpretazione delle evidenze, mentre il verdetto viene determinato dalle condizioni definite nell’Attack Plan.
 
-Se anche un solo requisito non è stato soddisfatto, lo stato dello step viene forzato a `FAILED`, indipendentemente dal giudizio espresso dal modello.
-
-La conformità dello step non dipende quindi dall’auto-valutazione dell’Executor, ma dall’applicazione deterministica delle condizioni definite nell’Attack Plan. Il modello raccoglie e interpreta le evidenze, mentre il codice mantiene il controllo sul verdetto finale.
-
-Per eseguire queste operazioni, l’Executor necessita infine di uno strato capace di mediare l’interazione tra il modello, gli strumenti di sicurezza e le sessioni terminali persistenti. Questo ruolo è svolto dal **Bridge**, descritto nella sezione successiva.
-
-## 3.7 Il Bridge di esecuzione: mediazione operativa e gestione delle interazioni con il target
+## 3.7 Il Bridge di esecuzione: gestione degli strumenti e delle interazioni con il target
 
 L’Executor non interagisce direttamente con la macchina attaccante o con il target. Tra la logica decisionale del modello e l’ambiente operativo è presente un componente dedicato, denominato **Bridge** (`executor/mcp_bridge.py`).
 
@@ -444,9 +416,7 @@ Questo livello consente di:
 La distinzione tra i due livelli permette quindi di utilizzare tool stateless per le operazioni semplici e sessioni PTY persistenti quando è necessario mantenere continuità nell’interazione.
 
 La figura seguente riassume questa struttura, mostrando il rapporto tra Executor, Bridge, HexStrike e Terminal Gateway.
-
-![[Pasted image 20261002090531.png]]
-
+![[Pasted image 20261002152954.png]]
 ### Canale della percezione: normalizzazione dell’output e informazioni di stato
 
 Il Bridge non si limita a inoltrare i risultati dei comandi. Gli output vengono pre-elaborati prima di essere restituiti all’Executor, in modo da ridurre il rumore e fornire al modello informazioni utili sullo stato dell’interazione.
@@ -466,9 +436,9 @@ Gli output prodotti dagli strumenti di sicurezza possono raggiungere dimensioni 
 Il Bridge applica due meccanismi principali per ridurre il consumo di token.
 
 **1. Troncamento degli output.**  
-Se un risultato supera la soglia configurata (`MAX_TOOL_OUTPUT_CHARS = 8000`), il testo viene ridotto preservandone la parte iniziale e quella finale. La sezione centrale viene sostituita da un marcatore che segnala l’avvenuto troncamento.
+Se un risultato supera la soglia configurata (`MAX_TOOL_OUTPUT_CHARS = 8000`), il testo viene troncato conservandone la parte iniziale, seguita da un marcatore che segnala l’avvenuto troncamento e riporta la lunghezza originale.
 
-Questa scelta permette di mantenere sia il contesto iniziale del comando sia eventuali messaggi conclusivi o errori, evitando di inserire nel contesto migliaia di caratteri non necessari.
+Questa scelta permette di mantenere il contesto iniziale del comando, in genere il più informativo, evitando di inserire nel contesto migliaia di caratteri non necessari.
 
 **2. Tool-slicing tramite `allowed_tools`.**  
 Il catalogo completo degli strumenti disponibili può essere molto ampio. Inviare all’LLM la descrizione di tutti i tool a ogni iterazione comporterebbe un costo significativo in termini di token e aumenterebbe il numero di opzioni non pertinenti.
@@ -481,11 +451,11 @@ A queste misure si aggiunge un **watchdog con timeout adattivo**. Nell’interaz
 
 Le sessioni PTY possono essere utilizzate anche con applicazioni terminali interattive, come `nano`, `vi`, `vim`, `less` o `more`. Questi programmi non si comportano come normali comandi lineari, perché interpretano direttamente eventi di tastiera e sequenze di controllo.
 
-Per consentire all’Executor di interagire con queste applicazioni, il Terminal Gateway implementa una mappatura dei principali tasti speciali. Identificatori simbolici come `enter`, `esc`, `tab`, `backspace`, i tasti direzionali e combinazioni come `ctrl+x` vengono convertiti nelle corrispondenti sequenze inviate alla sessione PTY.
+Per consentire all’Executor di interagire con queste applicazioni, il Bridge implementa una mappatura dei principali tasti speciali. Identificatori simbolici come `enter`, `esc`, `tab`, `backspace`, i tasti direzionali e combinazioni come `ctrl+x` vengono convertiti nelle corrispondenti sequenze inviate alla sessione PTY.
 
 È inoltre possibile trasmettere sequenze ordinate di input attraverso il parametro `commands`, permettendo di eseguire più interazioni terminali all’interno dello stesso turno.
 
-Un caso specifico riguarda il tasto Invio. In alcune applicazioni terminali, l’invio del carattere `\n` non equivale alla pressione fisica di Enter. In `nano`, ad esempio, può essere interpretato come una combinazione di controllo differente. Per evitare questo comportamento, il Gateway traduce l’azione `enter` nel carattere `\r`, corrispondente al Carriage Return atteso dal terminale interattivo.
+Un caso specifico riguarda il tasto Invio. In alcune applicazioni terminali, l’invio del carattere `\n` non equivale alla pressione fisica di Enter. In `nano`, ad esempio, può essere interpretato come una combinazione di controllo differente. Per evitare questo comportamento, il Bridge traduce l’azione `enter` nel carattere `\r`, corrispondente al Carriage Return atteso dal terminale interattivo.
 
 Questa gestione permette all’Executor di mantenere la stessa interfaccia anche quando il percorso di attacco richiede applicazioni interattive, evitando di interrompere la sessione o modificare involontariamente il contenuto visualizzato.
 
@@ -495,7 +465,7 @@ Una volta terminata l’esecuzione degli step, oppure in caso di interruzione do
 
 ## 3.8 Il Final Evaluator: valutazione deterministica e Root Cause Analysis
 
-Il **Final Evaluator** è il nodo conclusivo del workflow di collaudo. Viene eseguito al termine dell’Attack Plan oppure immediatamente dopo il primo fallimento, in accordo con il principio di Fail-Fast.
+Il **Final Evaluator** rappresenta il nodo conclusivo della **fase di conformance testing**. Viene eseguito al termine dell’Attack Plan oppure immediatamente dopo il primo fallimento, in accordo con il principio di Fail-Fast.
 
 Il suo compito è duplice: consolidare le metriche della run e analizzare le eventuali cause di fallimento. Per mantenere separati i dati quantitativi dall’interpretazione dell’LLM, il componente è organizzato in due stadi.
 
@@ -525,11 +495,11 @@ Nel primo caso, il problema può essere ricondotto a una configurazione o a un a
 
 Questa distinzione evita che il sistema di healing modifichi un ambiente corretto per soddisfare un test formulato in modo errato.
 
-Con la produzione di `run_summary.json`, `REPORT.md` e dell’eventuale `healing_ticket.json` si conclude il workflow di VulcaTest. Il ticket diagnostico costituisce quindi il punto di collegamento con VulcaHealing, descritto nel Capitolo 4.
+Con la produzione di `run_summary.json`, `REPORT.md` e dell’eventuale `healing_ticket.json` si conclude la fase di **verifica e diagnosi** del workflow. In presenza di una non conformità e qualora il self-healing sia abilitato, il `healing_ticket.json` costituisce l’artefatto strutturato attraverso cui le evidenze raccolte e la diagnosi prodotta dal Final Evaluator vengono trasferite alla successiva fase di correzione. La logica di VulcaHealing viene approfondita nel Capitolo 4.
 
 ## 3.9 Prompt engineering e definizione dei ruoli agentici
 
-Una parte rilevante dello sviluppo di VulcaTest ha riguardato la definizione dei system prompt associati ai componenti basati su modelli linguistici. Planner, Executor, Final Evaluator e Healer svolgono infatti compiti differenti e richiedono quindi istruzioni, vincoli e formati di output specifici.
+Una parte rilevante dello sviluppo del **workflow agentico** ha riguardato la definizione dei system prompt associati ai componenti basati su modelli linguistici. Planner, Executor, Final Evaluator e Healer svolgono responsabilità differenti e richiedono quindi istruzioni, vincoli e formati di output specifici.
 
 È importante distinguere questo approccio dal fine-tuning. I modelli utilizzati non vengono modificati nei pesi e non vengono sottoposti a nuove fasi di addestramento. Il loro comportamento viene invece guidato attraverso system prompt dedicati, regole esplicite, strumenti disponibili e strutture di output definite dall’architettura.
 
@@ -558,7 +528,7 @@ L’**Executor** utilizza invece l’Auditor Mode, che stabilisce il perimetro o
 
 Il **Final Evaluator** riceve istruzioni più orientate alla sintesi e alla diagnosi, con l’obiettivo di correlare le evidenze raccolte e produrre la Root Cause Analysis senza modificare il verdetto deterministico già calcolato dal sistema.
 
-Il **Healer**, descritto nel Capitolo 4, utilizza infine un prompt specifico per la modifica controllata dei sorgenti Infrastructure as Code.
+Il **Healer**, attivato nella fase di self-healing del workflow closed-loop, utilizza infine un prompt dedicato alla modifica controllata dei sorgenti _Infrastructure as Code_. I vincoli specifici che ne delimitano il perimetro di intervento e la logica di correzione vengono approfonditi nel Capitolo 4.
 
 ### Regole esplicite e formati vincolati
 
@@ -572,13 +542,13 @@ Ogni prompt definisce:
 - Le condizioni di successo o fallimento.
 - Il formato degli output attesi.
 
-Questa impostazione richiama il principio della _Constitutional AI_, pur senza implementarne l’intera metodologia: l’obiettivo è utilizzare un insieme stabile di regole per vincolare il comportamento del modello durante l’esecuzione.
+La progettazione dei prompt riprende a livello concettuale l’impostazione della Constitutional AI, utilizzando un insieme esplicito e stabile di regole per delimitare il comportamento del modello. Nel caso di VulcaTest, tali principi vengono tradotti nei vincoli operativi e nei formati definiti per ciascun ruolo.
 
 I prompt completi sono riportati in Appendice. In questa sezione vengono invece evidenziati soltanto i principi che ne hanno guidato la progettazione e il processo con cui sono stati progressivamente raffinati.
 
 ---
 
-## 3.10 Modello locale e ottimizzazione dei parametri di inferenza
+## 3.10 Modello locale e configurazione dell’inferenza
 
 Come definito nel principio di modularità (3.2), l’architettura di VulcaTest è indipendente dallo specifico modello linguistico utilizzato. Planner, Executor e Final Evaluator comunicano con il backend di inferenza attraverso interfacce standard, consentendo in linea di principio di sostituire il modello senza modificare la logica del workflow.
 
@@ -628,20 +598,10 @@ In particolare, il sistema permette di osservare aspetti come la capacità di se
 La valutazione del modello diventa quindi separabile dalla valutazione dell’architettura: mantenendo invariato VulcaTest è possibile sostituire il backend di inferenza e misurare come cambia il comportamento dell’Executor. Questa possibilità verrà ripresa nel Capitolo 5 durante la valutazione sperimentale.
 
 ---
-
 ## Conclusioni del capitolo: dal collaudo alla riparazione autonoma
 
-In questo capitolo è stata esaminata in dettaglio l'architettura di **VulcaTest**, il sistema ideato per trasformare il collaudo di sicurezza delle macchine didattiche da un processo manuale o stocastico in un'attività rigorosa, metodica ed evidence-based. 
+In questo capitolo è stata descritta l’architettura di **VulcaTest**, progettata per rendere il collaudo delle macchine didattiche vulnerabili un processo strutturato, riproducibile e basato su evidenze verificabili. La separazione tra componenti agentiche e controlli deterministici consente di mantenere la flessibilità del modello nelle fasi che richiedono interpretazione, senza affidargli direttamente il controllo del workflow o il verdetto finale.
 
-Attraverso la formalizzazione di cinque principi architetturali fondamentali — tra cui spiccano la netta separazione tra codice deterministico e modelli probabilistici, il rifiuto categorico dell'autocertificazione dell'agente e la rigida demarcazione dei ruoli operativi — è stato possibile superare tutti i limiti che rendevano inapplicabili i comuni harness generici:
-- Il **Planner** traduce la documentazione di progetto in una sequenza tipizzata di `TestStep`, vincolando i criteri di successo a oracoli composti in congiunzione logica `AND`;
-- L'**Orchestratore** controlla deterministicamente la progressione del test lungo un grafo a stati esplicito, impedendo all'agente di deviare dagli obiettivi assegnati;
-- L'**Executor**, operando in regime di *Auditor Mode*, interagisce con l'ambiente esclusivamente tramite comandi in-band e raccoglie evidenze testuali verificabili per ciascun checkpoint, subordinando il verdetto a un ricalcolo deterministico condotto dal codice Python;
-- Il **Bridge** fornisce un canale robusto di azione e percezione, garantendo l'igiene dei contesti mediante tool-slicing, troncamento dinamico degli output e gestione di sessioni PTY interattive;
-- Il **Final Evaluator** consolida la telemetria di esecuzione in metriche strutturate e conduce un'analisi retrospettiva delle cause radice qualora il collaudo registri un fallimento.
+La fase di conformance testing si conclude con il **Final Evaluator**, che consolida i risultati della run e, in caso di non conformità, produce il file `healing_ticket.json`. Tale artefatto rappresenta il punto di passaggio verso la fase successiva del workflow.
 
-Al termine di una sessione di collaudo che ha rilevato la non conformità della macchina bersaglio, VulcaTest non si limita a emettere un verdetto negativo generico, ma produce un artefatto strutturato formale: il file `healing_ticket.json`. Tale documento isola con precisione lo step bloccante, il componente di sistema coinvolto e la natura del difetto riscontrato.
-
-A questo punto si apre un interrogativo fondamentale, che segna il passaggio al capitolo successivo: **è possibile sfruttare l'evidenza puntuale prodotta dal collaudatore per riparare automaticamente i difetti della macchina, chiudendo il ciclo tra verifica e correzione?**
-
-Tentare di demandare la correzione al medesimo agente di collaudo o intervenire direttamente all'interno dell'ambiente virtualizzato attivo costituirebbe una grave violazione architetturale, riparando l'effetto visibile anziché la causa d'origine. Nel Capitolo 4 verrà introdotto **VulcaHealing**, il sottosistema autonomo progettato per ricevere il ticket diagnostico e intervenire chirurgicamente sui sorgenti *Infrastructure-as-Code* a monte, implementando un ciclo completo di auto-riparazione a loop chiuso.
+Il Capitolo 4 approfondisce **VulcaHealing**, ossia la fase di correzione e rivalidazione attraverso cui il sistema utilizza la diagnosi prodotta da VulcaTest per intervenire sulla causa del difetto e chiudere il ciclo di self-healing.

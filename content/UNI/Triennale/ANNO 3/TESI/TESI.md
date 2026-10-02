@@ -73,7 +73,7 @@
   - Regole costituzionali dell'oracolo (**Caso Studio CS-1**: oracolo lasco, connettori logici e grounding del meccanismo di scoperta).
   - Dimensionamento dinamico del contesto (`plan_context_length`).
 - **3.5 L’Orchestrator: controllo del workflow e gestione dello stato**:
-  - La blackboard condivisa tipizzata (`VulcaTestState`).
+  - Lo stato condiviso tipizzato in LangGraph (`VulcaTestState`).
   - Topologia dello StateGraph di LangGraph e routing condizionale.
   - Politica di avanzamento: gate logico `AND` sulla checklist e assenza deliberata di retry a livello di grafo.
 - **3.6 L’Executor: esecuzione degli step e modalità di auditing**:
@@ -82,7 +82,7 @@
   - Gestione dinamica del budget: Graceful Nudge a -2 turni e Checkpoint di proroga.
   - Tool interni e Two-stage retrieval dei valori convalidati (`show_verified_values` $\rightarrow$ `get_verified_value`).
   - Il contratto `StepResult` e la validazione deterministica del verdetto nel codice (`_build_step_result`).
-- **3.7 Il Bridge di esecuzione: mediazione operativa e gestione delle interazioni con il target**:
+- **3.7 Il Bridge di esecuzione: gestione degli strumenti e delle interazioni con il target**:
   - Canale dell'azione: Livello 1 (HexStrike REST stateless) vs Livello 2 (Terminal Gateway FastAPI + pexpect su porta 8889 per sessioni PTY interattive e persistenti).
   - Canale della percezione: bonifica output ANSI/VT100, `session_last_line`, watchdog adattivo del silenzio (DONE/IDLE/CAP/DEAD).
   - Governo del contesto: troncamento deterministico a 8.000 caratteri e tool-slicing dinamico.
@@ -94,13 +94,12 @@
 - **3.9 Prompt engineering e definizione dei ruoli agentici**:
   - Il ciclo iterativo reale: test $\rightarrow$ fallimento empirico $\rightarrow$ regola costituzionale.
   - Dai fallimenti pratici alle regole deontologiche e di TTY hygiene.
-- **3.10 Modello locale e ottimizzazione dei parametri di inferenza**:
-  - Motivazioni: privacy, assenza di guardrail offensivi, sostenibilità economica.
-  - Esplorazione e selezione: fallimento dell'approccio act-only (perché Qwen Coder falliva senza CoT $\rightarrow$ scelta finale `Qwen 3.8 27B`).
-  - Calibrazione del Chain-of-Thought (`reasoning_effort=low`).
-  - Ottimizzazioni locali: quantizzazione GGUF e speculative decoding (MTP + n-gram).
-  - Architettura di serving con Unsloth e hot-swapping dinamico (`model_manager.py`).
-  - Analisi del costo reale di calcolo ("costo molto basso", non zero per l'energia, confrontato con i costi cloud equivalenti).
+- **3.10 Modello locale e configurazione dell’inferenza**:
+  - Motivazioni: superamento dei guardrail commerciali e sostenibilità economica (zero costi variabili per token).
+  - Vincoli hardware reali (16 GB VRAM, 64 GB RAM) e selezione del modello: Qwen 3.8 27B in formato quantizzato GGUF.
+  - Ruolo essenziale del Chain-of-Thought (limiti dei modelli *act-only*) e calibrazione dello sforzo cognitivo (`reasoning_effort=medium`).
+  - Ottimizzazioni del runtime: quantizzazione a 3 bit, KV-cache a 16 bit (fp16), speculative decoding (MTP + N-gram) e gestione dinamica dei contesti tramite `model_manager.py`.
+  - VulcaTest come ambiente di valutazione e benchmark per modelli linguistici nella cybersecurity.
 
 ---
 
@@ -109,33 +108,37 @@
 > **Domanda-motrice:** *Come si ripara in modo autonomo e deterministico il codice IaC a fronte di una non conformità senza alterare le vulnerabilità didattiche e chiudendo il loop con il re-test?*  
 > **Lascia aperto:** Il loop agentico è chiuso $\rightarrow$ *"In che misura e con quale efficacia il sistema rileva, diagnostica e corregge i difetti?"* $\rightarrow$ Apre il Cap. 5.
 
-- **4.1 Dal rilevamento alla correzione: motivazioni e separazione del sottosistema**:
-  - Asimmetria operativa: collaudatore *in-band* (esterno, shell d'attacco) vs riparatore *out-of-band* (sui sorgenti IaC).
-  - Separazione delle responsabilità e prevenzione del conflitto di interessi (chi ripara non deve poter manomettere l'oracolo di prova).
-- **4.2 Dalle evidenze alla causa: distinzione tra sintomo e difetto nell’Infrastructure as Code**:
-  - Disaccoppiamento tra sintomo esterno e radice dichiarativa (Caso Studio DataVault: HTTP 404 Nginx dovuto a socket errato in Ansible).
-- **4.3 Delega operativa a harness generici: integrazione con Antigravity CLI**:
-  - Competenze richieste: reasoning su codice multi-file.
-  - *Antigravity come strumento operativo* headless (`agy --mode accept-edits --output-format stream-json /goal`) governato dal controller `healer.py` (ruolo opposto al Cap. 3).
-  - Rispetto del Principio 4: modularità e sostituibilità del motore di healing con altri agenti (Claude Code, modelli locali).
-- **4.4 Prompt costituzionale, vincoli operativi e perimetro di modifica**:
-  - Le 5 regole deontologiche di riparazione (Constitutional AI):
-    1. Riparazione minima.
+- **4.1 Integrazione di VulcaHealing nel workflow closed-loop**:
+  - Estensione naturale del medesimo StateGraph di LangGraph: `Final Evaluator -> healer_node -> rebuild -> Orchestrator`.
+  - Separazione funzionale e asimmetria operativa: collaudatore *in-band* (esterno, shell d'attacco, nessun accesso IaC per prevenire scorciatoie) vs riparatore *out-of-band* (sorgenti IaC, persistenza).
+  - Prevenzione del Goal Drift e conflitto di interessi: chi ripara non ha accesso né potere di modifica sull'oracolo di prova.
+- **4.2 Dal ticket diagnostico alla localizzazione del difetto nell’Infrastructure as Code**:
+  - Traduzione dalla diagnosi al codice: la Root Cause Analysis è già chiusa dal Final Evaluator (§3.8); qui il ticket si trasforma in localizzazione mirata nei file IaC.
+  - Il principio dell'**Heuristic Lead**: il sintomo registrato è un indizio euristico per risalire la catena delle dipendenze, non una prescrizione rigida.
+  - Caso Studio DataVault: falso sintomo HTTP 404 su Nginx causato a monte da permessi errati sul socket PHP-FPM in un task Ansible.
+- **4.3 L’Healer: delega operativa a harness agentici generici**:
+  - Ruolo complementare degli harness generici: inadatti al testing vincolato (§3.1), ma pienamente appropriati per il code editing multi-file.
+  - Integrazione con Antigravity CLI (`agy --mode accept-edits --output-format stream-json /goal`) governata dal controller `healer.py`.
+  - Principio di modularità: disaccoppiamento del motore di editing (sostituibile con Claude Code, OpenHands o modelli locali).
+- **4.4 Prompt dell’Healer, vincoli operativi e perimetro di modifica**:
+  - Vincoli deontologici ispirati alla Constitutional AI:
+    1. Riparazione minima e mirata.
     2. Divieto di leakage didattico (*No-Leak*).
-    3. Preservazione delle vulnerabilità didattiche (non sanificare le falle volute!).
-    4. Divieto di modifiche spurie.
-    5. Economia di esplorazione.
-  - Delimitazione rigorosa dei diritti di scrittura: sorgenti modificabili (`machines/<slug>.yaml`, webapp) vs sola lettura (`out/<slug>/`, report, documentazione) per impedire modifiche su artefatti effimeri.
-- **4.5 Tracciamento delle modifiche: diff deterministico e validazione delle correzioni**:
-  - Il modulo deterministico `diff_tracker.py`: snapshot iniziale, calcolo del diff unificato `patch.diff` ed emissione di `HEALING_REPORT.md` via `difflib`.
+    3. Preservazione categorica delle vulnerabilità didattiche (non sanificare le debolezze intenzionali!).
+    4. Divieto di modifiche fittizie o cosmetiche.
+    5. Economia di esplorazione del repository.
+  - Delimitazione rigida del perimetro sul filesystem: sorgenti modificabili (`machines/<slug>.yaml`, webapp) vs sola lettura (`out/<slug>/`, report, documentazione) per impedire modifiche su artefatti effimeri sovrascritti al build.
+  - Esecuzione stateless ed esternalizzazione della memoria: iniezione di `BUILD_ERROR.md` in cima al prompt nei cicli successivi in caso di errori di compilazione.
+- **4.5 Tracciamento e validazione delle modifiche**:
+  - Rifiuto dell'auto-certificazione: verifica oggettiva delle modifiche sul filesystem.
+  - Modulo deterministico `diff_tracker.py`: snapshot iniziale pre-fix, calcolo del diff unificato `patch.diff` ed emissione di `HEALING_REPORT.md` via `difflib`.
+  - Misurazione della dimensione della patch come metrica per il Benchmark B3.
 - **4.6 Chiusura del ciclo: ricostruzione dell’ambiente e regression testing**:
-  - Sequenza operativa del nodo Healer nello StateGraph.
-  - Sincronizzazione bundle con VulcaForge (`generator/main.py`).
-  - **Caso Studio CS-2**: Il falso positivo da Terminal Echo nel Rebuild Docker e soluzione con marker concatenato (`echo '"__BUILD""_""SUCCESS__"'`).
-  - Ricreazione del container Docker (*Clean Slate*) e risoluzione dinamica dell'IP via `docker inspect`.
-  - Regression testing completo: ripartenza da FASE 1 per convalidare l'intera catena d'attacco.
-  - Cicli stateless ma informati: assenza di `--resume`, con memoria contestuale esternalizzata su filesystem (`BUILD_ERROR.md` iniettato nel prompt successivo).
-  - Limiti attuali: vincolo a tentativo singolo (`MAX_HEALING_ATTEMPTS=1`).
+  - Sequenza operativa: sincronizzazione bundle con VulcaForge (`generator/main.py`) e ricompilazione Docker su Kali.
+  - **Caso Studio CS-2**: Il falso positivo da Terminal Echo nel Rebuild Docker e soluzione con marker concatenato quotato (`echo '"__BUILD""_""SUCCESS__"'`).
+  - Ricreazione del container Docker (*Clean Slate*), intervallo di stabilizzazione (5s) e risoluzione dinamica dell'IP via `docker inspect`.
+  - **Regression testing integrale**: ripartenza obbligatoria da FASE 1 (`current_step_index = 0`) per verificare che la patch non abbia introdotto effetti collaterali sulle fasi precedenti.
+  - Condizioni di arresto e limiti attuali: vincolo a tentativo singolo (`MAX_HEALING_ATTEMPTS=1`), dipendenza da modello cloud per l'healing vs modello locale di VulcaTest.
 
 ---
 
@@ -172,7 +175,7 @@
 - **5.5 Analisi sperimentale e discussione dei risultati** *(da popolare a conclusione dei benchmark)*:
   - **5.5.1 La questione statistica: pseudo-repliche e argomentazione per copertura**: difesa scientifica sul campionamento correlato; dimensionamento statistico formale come *future work*.
   - **5.5.2 Caso studio ammiraglia Pizzeria_B2R: validazione closed-loop end-to-end**: dimostrazione completa del ciclo difetto $\rightarrow$ blocco $\rightarrow$ ticket $\rightarrow$ healing $\rightarrow$ re-test 7/7 superato (CS-3). Vignette su *Citadel* (cron) e *DataVault* (socket asincroni).
-  - **5.5.3 Confronto empirico tra modelli (Locale vs Cloud)**: impatto del substrato (*Model vs Scaffold*): Qwen 3.8 27B vs API commerciali.
+  - **5.5.3 Valutazione comparativa dei modelli**: impatto del reasoning e confronto con modelli orientati al codice (Qwen Coder vs Qwen 3.8 27B come Executor).
   - **5.5.4 Studio di ablazione dei ruoli: l'impatto della modularità contro il Goal Drift**: confronto tra StateGraph a ruoli e agente monolitico privo di vincoli.
   - **5.5.5 Discussione generale delle risultanze empiriche**.
 
@@ -188,7 +191,7 @@
   - Vincolo del singolo tentativo di autoriparazione (`MAX_HEALING_ATTEMPTS=1`).
   - Dipendenza dalla completezza delle specifiche di design generate a monte da VulcaMind.
   - Dimensione del dataset limitata al programma didattico triennale.
-- **6.3 Sviluppi futuri: black-box testing, healing locale e supporto real-time agli esami**:
+- **6.3 Sviluppi futuri: benchmark esteso con modelli cloud, black-box testing, healing locale e supporto real-time agli esami**:
   - *Modalità Black-Box Testing*: affiancare alla conformance un agente di auditing autonomo privo di writeup per scoprire scorciatoie non intenzionali (*unintended paths*).
   - *Healing completamente locale*: addestramento o fine-tuning di modelli open-weight specializzati per eliminare la dipendenza da API esterne.
   - *Oracolo per esami in tempo reale*: impiego dell'harness per la valutazione continua e l'assegnazione automatica del punteggio durante le prove pratiche degli studenti.
