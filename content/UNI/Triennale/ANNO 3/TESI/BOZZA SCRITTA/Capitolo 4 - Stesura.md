@@ -23,7 +23,7 @@ VulcaHealing non costituisce un'architettura separata o un software indipendente
 
 $$\text{Planner} \longrightarrow \text{Orchestrator} \rightleftarrows \text{Executor} \longrightarrow \text{Final Evaluator} \xrightarrow[\text{non conforme}]{\text{healing abilitato}} \text{Healer} \longrightarrow \text{Rebuild} \longrightarrow \text{Orchestrator}$$
 
-Quando il collaudo si conclude con esito negativo e l'autoriparazione è abilitata (`HEALING=true` in configurazione), l'arco condizionale del grafo indirizza il flusso al nodo `healer_node` — l'instradamento dipende unicamente dall'esito del collaudo e dal numero di tentativi già consumati (§4.6), non dalla presenza di un particolare artefatto. In parallelo, il Final Evaluator deposita nello stato condiviso il file diagnostico `healing_ticket.json`: non è questo a determinare se il flusso vada verso l'Healer, ma è il materiale di corredo alla diagnosi, che alimenta a valle le metriche di accuratezza della RCA discusse nel Capitolo 5.
+Quando il collaudo si conclude con esito negativo e l'autoriparazione è abilitata (`HEALING=true` in configurazione), l'arco condizionale del grafo indirizza il flusso al nodo `healer_node` — l'instradamento dipende unicamente dall'esito del collaudo e dal numero di tentativi già consumati (§4.6), non dalla presenza di un particolare artefatto. In parallelo, il Final Evaluator deposita tra le evidenze di collaudo il file diagnostico `healing_ticket.json`: non è questo a determinare se il flusso vada verso l'Healer, ma è il materiale di corredo alla diagnosi, che alimenta a valle le metriche di accuratezza della RCA discusse nel Capitolo 5.
 
 ---
 
@@ -38,7 +38,7 @@ Trattare il ticket diagnostico come una prescrizione rigida ("correggi il compon
 
 ```
        ┌────────────────────────┐
-       │   TICKET / SINTOMO     │  Es. Errore HTTP 404 registrato su Nginx
+       │   TICKET / SINTOMO     │  Es. HTTP 403 «Access denied.» sulla webshell `.pHP`
        └───────────┬────────────┘
                    │  Indizio di partenza (non prescrizione vincolante)
                    ▼
@@ -49,18 +49,18 @@ Trattare il ticket diagnostico come una prescrizione rigida ("correggi il compon
                    │  Isolamento della reale causa radice
                    ▼
        ┌────────────────────────┐
-       │ Modifica mirata        │  Correzione permessi socket in machines/datavault.yaml
+       │ Modifica mirata        │  Ripristino della direttiva limit_extensions nel task Ansible sorgente
        │ alla radice causale    │
        └────────────────────────┘
 ```
 
 ### Dalla diagnosi alla ricetta dichiarativa: il caso DataVault
 Un esempio emblematico è emerso durante il collaudo della macchina didattica *DataVault*:
-- Il ticket di collaudo registrava un codice HTTP `404 Not Found` sul web server Nginx, segnalando quest'ultimo come componente bloccante;
-- Un intervento ingenuo avrebbe modificato la configurazione del web server (`nginx.conf`) per tentare di forzare la risoluzione dell'endpoint;
-- In realtà Nginx era configurato correttamente: la radice del guasto risiedeva a monte, in un task Ansible che impostava in modo errato i permessi di lettura/scrittura sul socket Unix di PHP-FPM, impedendo la comunicazione con il backend applicativo.
+- Il ticket di collaudo registrava un codice HTTP `403 Forbidden` con corpo `Access denied.` alla richiesta della webshell, portando il Final Evaluator a indicare il web server Nginx come componente bloccante (la sua `recommended_patch` suggeriva di intervenire sulla direttiva `location` di Nginx);
+- Un intervento ingenuo avrebbe modificato la configurazione del web server (`nginx.conf`) per tentare di forzare l'accesso alla risorsa;
+- In realtà Nginx inoltrava correttamente la richiesta al backend FastCGI: la radice del guasto risiedeva a monte, in un task Ansible che avrebbe dovuto abilitare in PHP-FPM l'esecuzione dell'estensione `.pHP` (direttiva `security.limit_extensions`) ma che veniva silenziosamente saltato — il costrutto `with_fileglob` era risolto sul nodo di controllo anziché sul target — lasciando il container con la configurazione di fabbrica che rifiutava di eseguire la webshell caricata.
 
-L'Healer riceve quindi il sintomo registrato nel ticket come coordinata iniziale, ma concentra la propria analisi sul confronto tra l'intento didattico descritto nella documentazione e le direttive presenti nei playbook di VulcaForge.
+L'Healer riceve quindi il sintomo registrato nel report di collaudo (`REPORT.md`, la sintesi distillata della RCA del Final Evaluator) come coordinata iniziale, ma concentra la propria analisi sul confronto tra l'intento didattico descritto nella documentazione e le direttive presenti nei playbook di VulcaForge.
 
 ---
 
@@ -93,7 +93,7 @@ Un modello avanzato istruito genericamente a "correggere gli errori dell'infrast
 Per scongiurare questo rischio, il prompt di missione dell'Healer (`_build_healing_prompt`) è strutturato attorno a tre cardini: regole deontologiche esplicite, perimetro rigido dei permessi di scrittura e retroazione sugli errori di compilazione.
 
 ### Vincoli di riparazione e preservazione delle vulnerabilità didattiche
-Riprendendo concettualmente l'impostazione della *Constitutional AI* (l'impiego di una serie di principi non negoziabili per governare le decisioni del modello), il prompt impone cinque regole vincolanti:
+Riprendendo concettualmente l'impostazione della *Constitutional AI* (l'impiego di una serie di principi non negoziabili per governare le decisioni del modello), il prompt codifica un insieme di regole vincolanti, sintetizzabili in cinque cardini:
 1. **Riparazione minima e mirata:** modificare esclusivamente il codice strettamente indispensabile per sbloccare lo step non conforme, senza alterare altre direttive.
 2. **Divieto di leakage didattico (*No-Leak*):** non inserire messaggi di aiuto, suggerimenti o credenziali in chiaro che possano facilitare indebitamente la prova per lo studente.
 3. **Preservazione categorica delle vulnerabilità didattiche:** le debolezze di sicurezza previste dal progetto (es. injection SQL, permessi SUID, configurazioni sudo deboli) costituiscono requisiti funzionali della sfida e non devono essere rimosse.
@@ -103,7 +103,7 @@ Riprendendo concettualmente l'impostazione della *Constitutional AI* (l'impiego 
 ### Delimitazione del perimetro di scrittura e protezione del bundle
 Oltre alle regole di comportamento, il framework impone una netta separazione dei privilegi di scrittura:
 - **File modificabili:** la ricetta dichiarativa della macchina (`machines/<slug>.yaml`) ed eventuali sorgenti applicativi dedicati (`registry/web/webapps/<slug>/`).
-- **File in sola lettura:** le specifiche didattiche (`STORYLINE_B2R.md`, `WRITEUP.md`), il ticket diagnostico (`healing_ticket.json`) e la directory del bundle compilato (`out/<slug>/`).
+- **File in sola lettura:** il report di collaudo da cui parte la diagnosi (`REPORT.md`), le specifiche didattiche (`STORYLINE_B2R.md`, `WRITEUP.md`), il ticket diagnostico (`healing_ticket.json`) e la directory del bundle compilato (`out/<slug>/`).
 - **Directory interdette:** il codice di VulcaTest e VulcaHealing, le configurazioni delle altre sfide e l'ambiente host di virtualizzazione.
 
 Una convenzione dichiarata nel prompt non è, da sola, una garanzia: l'harness agentico necessita di un accesso in lettura più ampio del solo perimetro consentito (deve poter consultare, ad esempio, la documentazione didattica della challenge), e nulla a livello di sistema operativo gli impedisce fisicamente di scrivere altrove. Per questo il controller non si limita a dichiarare il perimetro, ma lo **verifica a posteriori in modo deterministico**: subito dopo la conclusione della sessione dell'agente — e PRIMA che la ricompilazione automatica del bundle (`out/<slug>/`) abbia luogo, per non confondere un'eventuale scrittura diretta e indebita in quella cartella con la rigenerazione legittima che la segue — confronta l'insieme dei file realmente modificati (lo stesso diff calcolato da `diff_tracker`, §4.5) con il perimetro dichiarato. Ogni file al di fuori di quell'elenco viene automaticamente ripristinato al proprio stato precedente, usando lo snapshot già raccolto per il calcolo del diff. La separazione dei privilegi smette così di dipendere dal buon comportamento del modello e diventa una proprietà strutturale del sistema, verificabile a prescindere dall'esito della sessione agentica.
@@ -126,7 +126,7 @@ La validazione delle correzioni non si basa sull'output testuale generato da Ant
 
 ### Snapshot, calcolo del diff deterministico e artefatti generati
 Il modulo gestisce il ciclo di controllo attraverso tre passaggi sequenziali:
-1. **Snapshot iniziale:** prima di avviare l'agente, la funzione `take_folder_snapshot` scansiona l'albero di directory della sfida registrando l'hash e il contenuto di ciascun file. Contemporaneamente, `backup_machine_draft` genera una copia fisica di sicurezza dello stato pre-riparazione (`draft_pre_fix`).
+1. **Snapshot iniziale:** prima di avviare l'agente, la funzione `take_folder_snapshot` scansiona l'albero di directory della sfida registrando il contenuto testuale di ciascun file. Contemporaneamente, `backup_machine_draft` genera una copia fisica di sicurezza dello stato pre-riparazione (`draft_pre_fix`).
 2. **Intervento dell'agente:** l'Healer applica le modifiche sui file autorizzati entro il perimetro consentito.
 3. **Calcolo deterministico del differenziale:** al termine dell'esecuzione, la funzione `compute_folder_diff` confronta lo stato del filesystem con lo snapshot iniziale mediante la libreria Python `difflib`, generando due artefatti formali:
    - `patch.diff`: il file di differenze unificato standard, che traccia esattamente ogni riga aggiunta, rimossa o modificata;
@@ -208,7 +208,7 @@ Per impedire cicli infiniti e contenere i consumi di calcolo, il loop di autorip
 - **Classificazione strutturata dell'esito:** ogni ciclo di healing termina con un verdetto esplicito — `PATCHED` (una modifica reale è stata applicata nel perimetro consentito), `DECLINED` (l'agente ha correttamente concluso che la causa è a monte, §4.4, senza applicare alcuna patch), `OUT_OF_SCOPE` (l'unica scrittura rilevata era fuori perimetro ed è stata automaticamente ripristinata), oppure `ERROR` (l'harness agentico è terminato con un errore o un timeout). Il solo codice di uscita del processo non basta a distinguerli — l'harness termina con successo tanto quando applica una correzione quanto quando declina onestamente — per cui il verdetto viene derivato dal confronto fra il diff e il perimetro dichiarato (§4.4), non dal codice di uscita.
 - **Convergence guard (predisposto, non ancora esercitato):** quando il numero di tentativi consentiti è superiore a uno, un controllo aggiuntivo confronta l'esito del ciclo appena concluso e lo step di conformità che lo aveva innescato con quelli del tentativo precedente: se un ciclo `DECLINED`/`OUT_OF_SCOPE` lascia il retest bloccato sullo stesso identico step, il loop si interrompe anziché ripetere lo stesso esito. Con `MAX_HEALING_ATTEMPTS=1` questo controllo non può mai attivarsi — non esiste un "tentativo precedente" con cui confrontarsi — ma resta pronto per quando il budget di tentativi verrà aumentato.
 - **Distinzione tra guasto dello strumento e difetto della macchina:** un'eccezione imprevista nelle fasi di rebuild/redeploy (ad esempio una caduta della connessione verso il Terminal Gateway) viene etichettata esplicitamente come guasto dell'infrastruttura di collaudo, distinta dal gate di build Echo-Safe descritto sopra e mai registrata, nei dati aggregati, come un difetto di conformità della macchina bersaglio.
-- **Dipendenza da modelli esterni:** mentre VulcaTest opera interamente su pesi locali aperti (§3.10), VulcaHealing si affida a Gemini 3.8 Flash tramite Antigravity CLI per gestire compiti complessi di refactoring del codice. La transizione della fase di healing verso modelli locali specializzati nella programmazione rappresenta uno dei principali sviluppi futuri del lavoro (§6.3).
+- **Dipendenza da modelli esterni:** mentre VulcaTest opera interamente su pesi locali aperti (§3.10), VulcaHealing si affida al modello Gemini 3.8 Flash tramite Antigravity CLI — nella configurazione sperimentale del Capitolo 5, la variante `gemini-3.8-flash-high` — per gestire compiti complessi di refactoring del codice. La transizione della fase di healing verso modelli locali specializzati nella programmazione rappresenta uno dei principali sviluppi futuri del lavoro (§6.3).
 
 ---
 
