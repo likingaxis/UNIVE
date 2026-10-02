@@ -90,12 +90,165 @@
 
 ---
 
-## 5. Indice e struttura dei capitoli
+## 5. Scaletta emergente dei capitoli
 
-> [!NOTE]
-> L'indice ufficiale e la mappa dettagliata dei capitoli sono stati scorporati e centralizzati per mantenere una singola fonte di verità (*Single Source of Truth*) sempre allineata:
-> - **Indice ufficiale e titolazione completa**: [`BOZZA SCRITTA/INDICE e titolo.md`](file:///C:/Users/Luca/Desktop/UNI2/quartz/content/UNI/Triennale/ANNO%203/TESI/BOZZA%20SCRITTA/INDICE%20e%20titolo.md)
-> - **Mappa concettuale, progressione e domande-motrici**: [`TESI.md`](file:///C:/Users/Luca/Desktop/UNI2/quartz/content/UNI/Triennale/ANNO%203/TESI/TESI.md)
+*(CONSOLIDATA 2026-10-01 dopo brainstorming completo + feedback prof. Sostituisce la vecchia scaletta.)*
+
+**Catena macro — ogni capitolo risponde a UNA domanda; la chiusura di un cap. apre il successivo (nessun buco, nessuna sovrapposizione):**
+
+| Cap | Domanda-motrice | Lascia aperto → |
+|---|---|---|
+| 1 Intro | di cosa parla e com'è fatta la tesi | apre tutto |
+| 2 Contesto | perché serve validare+riparare in automatico macchine didattiche AI | "come lo costruisci?" → 3 · (tiene aperto di proposito: "perché non un harness pronto?" → apre 3) |
+| 3 Architettura | come ho costruito un harness che verifica la conformità *senza fidarsi dell'agente* | produce il REPORT → "e se dice difetto?" → 4 |
+| 4 VulcaHealing | come riparo in automatico e chiudo il loop | loop chiuso → "funziona, e quanto?" → 5 |
+| 5 Valutazione | quanto funziona (misurabile/confrontabile/riproducibile) | → 6 |
+| 6 Conclusioni | cosa ho dimostrato, limiti, dove si va | — |
+
+**Regola della quota (alto-livello vs codice — vale in TUTTA la tesi):** 3 quote — ① *decisione di design* (cosa/perché/quale principio: SEMPRE nel corpo) · ② *meccanismo* (il come concettuale, schema, niente codice: solo se l'insight non si capisce senza) · ③ *implementazione* (snippet/dettaglio fine: di norma → GitHub/Appendice). **Test per ogni cosa:** "se lo tolgo, il lettore perde una DECISIONE o solo una RIGA DI CODICE?" → decisione = resta; codice = fuori. (Allineata al relatore: "snippet solo se utili".)
+
+**1. Introduzione** *(corta, vincolata dal prof: serve solo a dire di cosa parla la tesi)*
+   1. Aggancio al problema in 2 frasi (macchine didattiche generate da AI, oggi validate/riparate a mano).
+   2. Cosa fa questa tesi — contributo in sintesi (VulcaTest + VulcaHealing, il "cosa ho fatto").
+   3. Struttura della tesi (roadmap capitolo per capitolo).
+
+**2. Contesto** *(la "scala di concetti"; concetti PRIMA di VulcaIn perché VulcaIn è esso stesso agentico)*
+   1. Il dominio didattico — CTF/B2R, il pentest come esame (ricevo un IP, trovo le vulnerabilità).
+   2. Intended way e conformance — la macchina si risolve solo seguendo il percorso previsto; **vulnerabilità volute vs veri difetti**.
+   3. Agenti LLM e architetture agentiche — agente = LLM + azione + ambiente; ReAct, Plan+Execute a livello concettuale.
+   4. Il concetto di **harness** — l'infrastruttura attorno all'LLM (il gancio: "è ciò che ho costruito io").
+   5. L'ecosistema **VulcAIn** ereditato (Mind/Forge/Ship) + il bisogno grezzo (difetti testati a mano = costoso → motiva l'ESISTENZA di VulcaTest). Soft handoff: nominare VulcaTest come protagonista in arrivo.
+   6. **Lavori correlati / stato dell'arte** *(aggiunto 2026-10-01)* — posizionamento vs lavoro esistente (distinto dal background concettuale sopra): **PentestGPT** e agentic pentesting framework (fanno exploitation autonoma; NON conformance né oracolo evidence-based, tendono al goal-reaching) · **Automated Program Repair / self-healing** (per posizionare VulcaHealing) · **la novità da dichiarare**: nessuno combina *conformance testing* + *oracolo evidence-based* su *macchine didattiche generate da AI* + *closed-loop self-healing*. NON duplicare: gli harness generici restano in 3.1 (motivazione), i paper di benchmark in Cap.5 (metodologia). 📚 PentestGPT. ⚠️ **Verificare col relatore** se serve un capitolo "Stato dell'arte" dedicato (alcuni corsi lo richiedono) → in tal caso promuovilo a capitolo breve tra Contesto e Architettura.
+   > **Decisione (B):** "il problema" (harness generico non basta) NON chiude il Contesto → **apre il Cap.3** come molla. Due motivazioni distinte: *perché esiste VulcaTest* (tutor testano a mano) = Contesto; *perché serve un'architettura dedicata e non un harness pronto* (i 3 problemi) = apertura Cap.3.
+   > **Decisione (C):** prompting e uso/scelta dei modelli NON nel Contesto → il *perché* nel Cap.3, il *confronto empirico* nel Cap.4.
+
+**3. Architettura VulcaTest** *(il TESTER — UN capitolo, DUE movimenti. Merge architettura+implementazione (criterio IBRIDO: principi = griglia + cammino per flusso). È GIUSTO sia il cap. più grande ~15-18pp: è il contributo. NON spaccarlo arch/impl = ciò che il prof ha fatto togliere; la divisione legittima è tester(3)/healer(4).)*
+
+*Movimento A — il sistema (cosa È l'harness; percorre i nodi nell'ordine del controllo; finisce producendo il REPORT)*
+   1. **Apertura-molla** — dal prototipo (era solo un system prompt) all'architettura vera; ① cosa deve fare VulcaTest → ② i 3 problemi dell'harness pronto (guardrail / troppa libertà / nessun oracolo evidence-based) — **Antigravity qui = CONTRO-esempio** — + esempio Pizzeria → ③ ecco la risposta.
+   2. **I 5 principi cardine** (griglia di lettura; parole di Luca): *deterministic where possible, agentic where necessary* · *evidence-based execution* · *separation of concerns* · *interchangeability by design* · *plan+execute & react*. ⭐ qui si **scioglie "determinismo"** (il 1° principio È la risposta al dubbio del prof).
+   3. **Visione d'insieme** — il grafo LangGraph e il flusso (START→orchestrator⇄executor→final_evaluator[→healer]).
+   4. **Planner** (LLM + `plan_parser` deterministico; `ATTACK_PLAN.md`; snippet YAML; `TestStep`; regole di prompt = CS-1 oracolo lasco, regole 5/6; de-fence multi-blocco).
+   5. **Orchestratore** (*prima* dell'Executor, come nelle slide che convincevano; `graph.py`, `state.py`/`VulcaTestState`; avanzamento deterministico, no-retry, gate AND sulla checklist).
+   6. **Executor — il cuore** (esecutore con poco margine ma che *interpreta*; Auditor Mode = il suo prompt + origine "cheating agent"; ReAct; `StepResult` + campo `evidence` OBBLIGATORIO = no self-certification *strutturale*).
+   7. **Il Bridge — i due sensi dell'Executor** — *azione* (tool-call: L1 HexStrike stateless + L2 `interactive_terminal_exec`, nato da necessità) + *percezione* (output ripulito ANSI/VT100, `session_last_line`, avvisi iniettati). Terminal Gateway = demone REST disaccoppiato (FastAPI+pexpect) su Kali (porta 8889). Tool auto-descriventi a runtime. Nano/special-keys (`\r` vs `^J`) solo alla quota-decisione.
+   8. **Final Evaluator** (Stadio 1 deterministico→`run_summary.json`; Stadio 2 LLM→`REPORT.md`/`healing_ticket`). → chiude il Movimento A.
+   9. **Il Diagnostician rimosso** *(breve)* — decisione di design (Goal Drift → RCA post-mortem nel Final Evaluator). Richiamabile in 1 riga in apertura Cap.4.
+
+*Movimento B — l'ingegneria dell'harness (come l'ho fatto funzionare; taglia tutti i nodi → viene DOPO che il lettore li conosce)*
+   10. **Robustezza e gestione del contesto** ⭐ *(secco C — un'unica molla: l'agente stocastico in una finestra finita)* — troncamento output (`MAX_TOOL_OUTPUT_CHARS`) · tool-slicing (~150→pochi, `list_tools`+matching) · two-stage retrieval dei `verified_values` (`show_`→`get_`, context minimization) · budget turni dinamico + **graceful nudge** (a -2 turni avvisa: tirare le fila / chiedere proroga / emettere verdetto) + checkpoint · **watchdog timeout DONE/IDLE/CAP/DEAD** (aspetta il *silenzio*, non un tempo fisso; marker `stop_pattern`; è la risposta a "come gestisco build/tool lenti").
+   11. **Prompt engineering come metodo e PROCESSO** — il processo iterativo reale test→correzione→test ("prompt = hyperparameter search", mechanism engineering, non fine-tuning). Esempi curati: CS-1 (regole 5/6), *state-awareness* da incidente nano, *graceful nudge*. Origine = il "cheating agent". *(Metodo UNA volta → rationale del singolo prompt col suo nodo → testi integrali in Appendice; letteratura: Prompt Report, Constitutional AI, prompt sensitivity.)*
+   12. **Il modello locale e l'infrastruttura di inferenza** *(~3-4pp — model & inference engineering, substrato; PERCORSO non elenco di parametri)*:
+      - **a. Perché locale** — guardrail (frontiera rifiuta il pentesting) + costo.
+      - **b. Ricerca del modello** — Qwen Coder senza CoT → loop (act-only); modelli grossi → troppo lenti (si resta su Qwen3.8-27B, vedi memoria planner-variance); approdo finale.
+      - **c. Reasoning/CoT** — serve CoT (utile solo su modelli capaci); fallimento act-only ReAct.
+      - **d. Ottimizzazione inferenza** — context window ↔ tok/s · reasoning level (low) · temperatura · MTP+n-gram (speculative decoding) · ablazione vision · **sizing dinamico della finestra** (`token_utils`, kv-cache/VRAM) *(ri-prende il §10: 10 = riduci l'input, 12d = dimensiona il contenitore)*.
+      - **e. Infrastruttura** — server Unsloth + hot-swap `model_manager` + triade Executor/Evaluator/Planner via `.env` (Principio #4).
+      - **f. Costo reale** — "molto basso" NON zero (fix prof), ~$6-equiv.
+      - ⚠️ **Anti-duplicazione Cap.5**: qui il *perché* (qualitativo); i *numeri* local-vs-cloud stanno nel Cap.5. Parametri esatti dal `.env`/`config.py`.
+   → **chiude il capitolo:** il report con un difetto → apre il Cap.4.
+
+**Inventario implementazioni (i "secchi" → dove vanno), verificato sul codice 2026-10-01:**
+- **A. Contratti**: `VulcaTestState`→§3.5 · `TestStep`/`StepResult`→ai punti di handoff · `ChecklistItemResult.evidence`→§3.6/principi · `ToolCallRecord`→§3.6 (ponte verso B4 del Cap.5).
+- **B. Bridge** → §3.7.
+- **C. Robustezza/contesto** → §3.10 (RAGGRUPPATO, non sparso: trasforma 5 "trucchi" in un argomento di design unico).
+- **D. Planner** (YAML + `plan_parser`, de-fence multi-blocco) → §3.4.
+- **E. Build Docker + IP dinamico** → NON qui: Cap.4 (nodo healer).
+- *Isolamento cross-run* (`reset_all_sessions`/`clear_cache`) → citato in §3.7, agganciato al Cap.5 (igiene benchmark).
+
+**4. VulcaHealing: closed-loop self-healing** *(consolidato a 6 sezioni, 7-9 pp; chiuso nello stesso StateGraph)*
+   1. **Integrazione di VulcaHealing nel workflow closed-loop** — estensione naturale dello StateGraph (`Final Evaluator -> healer_node -> rebuild -> Orchestrator`); asimmetria operativa in-band (Kali, attacco, nessun accesso IaC per prevenire scorciatoie) vs out-of-band (sorgenti IaC, persistenza); prevenzione di Goal Drift e conflitto di interessi.
+   2. **Dal ticket diagnostico alla localizzazione del difetto nell'Infrastructure as Code** — la RCA è già chiusa dal Final Evaluator (§3.8); qui il ticket si trasforma in localizzazione mirata nei file IaC; principio dell'**Heuristic Lead** (il ticket è un indizio euristico, non una prescrizione rigida); risalita della catena di dipendenze (caso studio DataVault: HTTP 404 Nginx originato a monte da socket errato in Ansible).
+   3. **L'Healer: delega operativa a harness agentici generici** — ruolo complementare degli harness generici (inadatti al testing vincolato di §3.1, ideali per il code editing multi-file); controller `healer.py` che invoca Antigravity CLI (`agy --mode accept-edits --output-format stream-json /goal`) in modalità headless; modularità e sostituibilità del motore di editing (Principio 4).
+   4. **Prompt dell'Healer, vincoli operativi e perimetro di modifica** — vincoli deontologici (Constitutional AI): riparazione minima, No-Leak, **preservazione categorica delle vulnerabilità didattiche** (non sanificare le falle volute!), divieto modifiche fittizie, economia esplorazione; perimetro rigido: modificabile solo `machines/<slug>.yaml` (e webapp), `out/` in sola lettura (artefatto derivato effimero); cicli stateless con iniezione di `BUILD_ERROR.md` al ciclo successivo.
+   5. **Tracciamento e validazione delle modifiche** — rifiuto dell'autocertificazione dell'agente riparatore; modulo deterministico `diff_tracker.py`: snapshot iniziale pre-fix, calcolo del diff unificato `patch.diff` ed emissione di `HEALING_REPORT.md` via `difflib`; misurazione delta per Benchmark B3.
+   6. **Chiusura del ciclo: ricostruzione dell’ambiente e regression testing** — rigenerazione bundle con `generator/main.py`; compilazione Docker su Kali con **Gate Echo-Safe** (Caso Studio CS-2, marker concatenato quotato `echo '"__BUILD""_""SUCCESS__"'`); ricreazione container (*Clean Slate*) e IP dinamico (`docker inspect`); **regression testing integrale** da Fase 1 (`current_step_index = 0`) per escludere regressioni; limite di terminazione `MAX_HEALING_ATTEMPTS=1`.
+
+**5. Valutazione sperimentale** *(scheletro FISSATO 2026-09-27; numeri APERTI — benchmark in esecuzione. Regola: ogni benchmark agganciato al paper che lo fonda — approccio ibrido.)*
+   1. **Dal "funziona" al "quanto funziona"** — obiettivo e metodologia (misurabile / confrontabile / riproducibile).
+   2. **Il dataset di macchine (golden source / ground truth)** — framing: ideate ~11-12 macchine *(numero da confermare)*, certificate sane, usate come golden source per i benchmark via perturbazione. **NO catalogo macchina-per-macchina** (noioso) → un **panorama unico dei tool/tecniche raccolti** (raggruppamento per vulnerabilità) + 1 riga di storia solo per le più significative.
+   3. **Metodologia di benchmark: perturbazione controllata** — golden state → mutazione singola + **baseline gate** obbligatorio; tassonomia **P1-P4**. *(cit. Test Oracle Problem — mutation testing)*
+   4. **I 4 benchmark** — B1 riconoscimento (confusion matrix + progress; cit. AgentBoard/Cybench), B2 RCA, B3 healing (closed-loop + ampiezza patch), B4 costi/token/tempi. *(oracolo→SWE-Bench Pro; scaffold-aware→SWE-agent)*
+   5. **La questione statistica** — perché $M\times N \neq n$ (campioni correlati/clusterizzati), difesa "copertura + ground-truth stratificata", sizing come *future work*. *(feedback prof)*
+   6. **Caso studio-ammiraglia: Pizzeria_B2R** — closed-loop end-to-end (CS-3). Citadel/DataVault = vignette brevi di capacità Executor.
+   7. **Confronto empirico modelli** (local vs cloud) — *nucleo*; solo misure, niente ri-descrizione modelli (sta nel Cap.3).
+   8. **Ablazione dei ruoli** (modulare vs monolitico) — *nucleo*; dimostra che la separazione previene il goal drift.
+   9. **Risultati e discussione.**
+
+**6. Conclusioni e sviluppi futuri** *(scheletro FISSATO 2026-09-27)*
+   1. **Sintesi del contributo** — ricapitola il mechanism engineering: harness evidence-based + closed-loop self-healing.
+   2. **Limiti** onesti (`MAX_HEALING_ATTEMPTS=1`, *n* statistico, dataset piccolo…).
+   3. **Sviluppi futuri** — modalità black-box; dataset grande statistico; healing in locale (costo ~0); coerenza del Planner; usi oltre il testing.
+   4. **Considerazioni finali.**
+
+**Appendici** — *Prompt integrali* (Planner, Executor/Auditor Mode, Healer); eventuale *config modello/inferenza*. Link al repo GitHub.
+
+**Parcheggiati:** termine "determinismo" (§3.4). *(Risolto 2026-09-27: healing = capitolo a sé, Strada B → struttura a 6 capitoli.)*
+
+---
+
+## 5-BIS. MAPPA RAPIDA DEI CAPITOLI (da qui si scrive)
+
+> Versione scansionabile della struttura (§5) — **tienila aperta mentre scrivi**.
+> Legenda: ⭐ citazione forte · 📚 citazione puntuale · (—) niente, è tuo.
+> **Regola della quota (sempre):** decisione → corpo · meccanismo → se l'insight lo richiede · codice → GitHub/Appendice.
+
+**1 · Introduzione** — *per ultima · 3-4 pp*
+1. Aggancio al problema (macchine didattiche AI, oggi validate/riparate a mano)
+2. Il contributo in sintesi (VulcaTest + VulcaHealing)
+3. Roadmap della tesi
+→ quasi zero citazioni (al max 📚 mechanism engineering)
+
+**2 · Contesto** — *la "scala di concetti" · 8-11 pp*
+1. Dominio: CTF / B2R, il pentest come esame — 📚 Cybench
+2. Intended way e white-box testing: vulnerabilità volute vs veri difetti — (—)
+3. Agenti LLM e architetture agentiche — 📚 Prompt Report, CoALA
+4. Il concetto di **harness** — ⭐ Autonomous Agents Survey *(il gancio: "è ciò che ho costruito")*
+5. L'ecosistema VulcAIn (Mind/Forge/Ship) + il bisogno grezzo — (—)
+6. **Lavori correlati / stato dell'arte** — PentestGPT + agentic pentest · APR/self-healing · il gap (nessuno combina conformance + oracolo evidence-based su macchine AI + closed-loop) — 📚 PentestGPT
+→ lascia aperto di proposito: *"perché non un harness pronto?"* (apre il Cap.3)
+
+**3 · Architettura e implementazione di VulcaTest** — *il tester · 15-18 pp (CONSOLIDATO)*
+3.1 Requisiti e limiti delle soluzioni generiche (guardrail, sostenibilità, controllo/oracolo, contro-esempio Antigravity, caso Pizzeria) — 📚 SWE-bench Pro, Cybench
+3.2 Principi di progettazione del sistema (1. Deterministico vs probabilistico · 2. Evidenze e no auto-certificazione · 3. Separazione responsabilità · 4. Intercambiabilità · 5. Controllo gerarchico Plan-and-Solve + ReAct) — ⭐ CoALA, MetaGPT, Plan-and-Solve (Wang), ReAct (Yao)
+3.3 Architettura generale e flusso di coordinamento (inquadramento CoALA, memoria di lavoro `VulcaTestState` in LangGraph, punti d'ingresso, contratti tipizzati Pydantic) — 📚 CoALA, MetaGPT
+3.4 Il Planner: generazione e formalizzazione dell’Attack Plan (architettura ibrida 2 stadi, gerarchia fonti, regole oracolo CS-1, contesto dinamico) — 📚 planning senza feedback
+3.5 L’Orchestrator: controllo del workflow e gestione dello stato (stato condiviso tipizzato, topologia StateGraph condizionale, gate AND) — 📚 LangGraph, CoALA
+3.6 L’Executor: esecuzione degli step e modalità di auditing (Auditor Mode, budget dinamico + graceful nudge, tool interni, contratto `StepResult`) — ⭐ ReAct, Constitutional AI, MetaGPT
+3.7 Il Bridge di esecuzione: gestione degli strumenti e delle interazioni con il target (canale azione L1 HexStrike / L2 Terminal Gateway, canale percezione e watchdog del silenzio, gestione contesto e tool-slicing, supporto TUI/PTY) — 📚 CoALA grounding, AgentBoard
+3.8 Il Final Evaluator: valutazione deterministica e Root Cause Analysis (Stadio 1 metriche deterministiche `run_summary.json`, Stadio 2 RCA e `healing_ticket.json`, Diagnostician rimosso) — ⭐ SWE-bench Pro (verifier gap), Cybench
+3.9 Prompt engineering e definizione dei ruoli agentici (sviluppo iterativo, specializzazione prompt, regole e formati vincolati) — ⭐ Prompt Report, Constitutional AI
+3.10 Modello locale e configurazione dell’inferenza (motivazioni locale, 16 GB VRAM, 64 GB RAM, Qwen 3.8 27B GGUF, CoT `reasoning_effort=medium`, quantizzazione 3-bit, KV fp16, speculative MTP+N-gram, hot-swap `model_manager`, benchmark per LLM) — 📚 Chain-of-Thought (Wei)
+→ chiude: il report diagnostico e il ticket aprono il Cap. 4.
+
+**4 · VulcaHealing: closed-loop self-healing** — *l'healer · 7-9 pp (CONSOLIDATO)*
+4.1 Integrazione di VulcaHealing nel workflow closed-loop (estensione StateGraph, separazione in-band/out-of-band, prevenzione goal drift) — 📚 CoALA modularità
+4.2 Dal ticket diagnostico alla localizzazione del difetto nell'Infrastructure as Code (Heuristic Lead, risalita catena IaC, caso DataVault) — (—)
+4.3 L'Healer: delega operativa a harness agentici generici (harness generico per code editing, controller `healer.py`, Antigravity CLI headless `/goal`, modularità) — 📚 mechanism engineering
+4.4 Prompt dell'Healer, vincoli operativi e perimetro di modifica (5 regole deontologiche, preservazione vulnerabilità didattiche, protezione `out/`, feedback `BUILD_ERROR.md`) — ⭐ Constitutional AI
+4.5 Tracciamento e validazione delle modifiche (rifiuto auto-certificazione, `diff_tracker.py`, snapshot, patch.diff, HEALING_REPORT.md) — ⭐ SWE-bench Pro
+4.6 Chiusura del ciclo: ricostruzione dell’ambiente e regression testing (rebuild bundle, gate Echo-Safe CS-2, Clean Slate, IP dinamico, regression testing da Fase 1, `MAX_HEALING_ATTEMPTS=1`) — (—)
+
+**5 · Valutazione sperimentale** — *numeri in arrivo · 9-12 pp · il cap. più "accademico"*
+1. Metodologia (dal "funziona" al "quanto") — 📚 Survey, AgentBoard
+2. Dataset golden source — 📚 Test Oracle
+3. Perturbazione P1-P4 + baseline gate — ⭐ Test Oracle (mutation)
+4. I 4 benchmark (B1 riconoscimento · B2 RCA · B3 healing · B4 costi) — ⭐ Cybench, AgentBoard, SWE-Bench Pro
+5. La questione statistica (*n* non indipendente) — ⭐ Test Oracle + feedback prof
+6. Pizzeria ammiraglia (CS-3) — (—)
+7. Confronto modelli (local vs cloud) — ⭐ Model+Scaffold (Cybench/AgentBoard)
+8. Ablazione dei ruoli — 📚 MetaGPT, Cybench
+9. Risultati e discussione — 📚 AgentBoard
+
+**6 · Conclusioni e sviluppi futuri** — *per ultima · 3-4 pp*
+1. Sintesi del contributo
+2. Limiti onesti (`MAX_HEALING_ATTEMPTS=1`, *n*, dataset piccolo)
+3. Sviluppi futuri (black-box · dataset statistico · healing locale)
+4. Considerazioni finali — 📚 CoALA (la decomposizione resta valida)
+
+**Appendici** — prompt integrali (Planner/Executor/Healer) · eventuale config modello · link repo GitHub
+
+**Ordine di scrittura consigliato:** 3 → 4 → 2 → 5(metodologia) → 6 → 1 *(i numeri del Cap.5 dipendono dai benchmark; intro/conclusioni riassumono → per ultime)*.
 
 ---
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Stesura.md",
+                "file": "UNI/Triennale/ANNO 3/TESI/TESI.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Capitolo 3 - Stesura"
+              "title": "TESI"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 321.20001220703125
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -174,10 +174,22 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "99f0e276d1117669",
+  "active": "385e3b437a6aac05",
   "lastOpenFiles": [
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3.md",
+    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.bak",
+    "UNI/Triennale/ANNO 3/TESI/TESI.md.bak",
+    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
+    "UNI/Triennale/ANNO 3/TESI/TESI.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Stesura.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Stesura.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Stesura.md.bak",
+    "UNI/Triennale/ANNO 3/TESI/Style/Call pasquale 2.md",
+    "UNI/Triennale/ANNO 3/TESI/Style/Spiegazione progetto di tesi Luca Gugliotta.pdf",
+    "UNI/Triennale/ANNO 3/TESI/Style/CONTESTO_REVISIONE_TESI.md",
+    "UNI/Triennale/ANNO 3/TESI/Style",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Preparazione Hackathon Linux CNIT.docx",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 135762.crdownload",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/perturbazioni.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
@@ -186,25 +198,16 @@
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FONTI.md",
     "UNI/Triennale/ANNO 3/TESI/Call/Call pasquale 2.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261002152954.png",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
-    "UNI/Triennale/ANNO 3/TESI/TESI.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 17964.crdownload",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/ARCHITETTURA CON HEALING (1).excalidraw",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 100720.crdownload",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261002152624.png",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/ARCHITETTURA CON HEALING.excalidraw",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 877735.crdownload",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Stesura.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md",
     "UNI/Triennale/ANNO 3/TESI/SKILL_STESURA_TESI.md",
     "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - Stesura.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Bridge.excalidraw",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Frontespizio.docx",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/architettura senza healing.excalidraw",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261002090531.png",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261001134308.png",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO",
     "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/VULNERABILITÀ/ESAME/FILE UTILE PER LE ESERCITAZIONI.md",
     "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3.md",
@@ -214,11 +217,8 @@
     "UNI/Triennale/ANNO 3/BOZZA SCRITTA/FOTO/Pasted image 20261002090531.png",
     "UNI/Triennale/ANNO 3/BOZZA SCRITTA/TITOLO.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/INTELLIGENZA ARTIFICIALE/PRIMO ESONERO/IA UNICO PRIMO ESONERO.md",
-    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - modello stile tesi.md",
-    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Schede nodi (richiamo).md",
     "UNI/Triennale/ANNO 3/BOZZA SCRITTA/FOTO/Pasted image 20261001134308.png",
     "Pasted image 20261001134247.png",
-    "UNI/Triennale/ANNO 3/TESI/HEALING NODO.md",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930140734.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930124523.png",
     "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930124123.png"

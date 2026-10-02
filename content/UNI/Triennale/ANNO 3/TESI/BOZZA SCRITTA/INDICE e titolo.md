@@ -18,8 +18,8 @@ TITOLO: Framework AI-driven per il self-healing di scenari Cyber Range
 ## 3. Architettura e implementazione di VulcaTest
 
 3.1 Requisiti e limiti delle soluzioni generiche
-   3.1.1 Il livello del modello: guardrail e sostenibilità
-   3.1.2 Il livello del controllo operativo e dell’oracolo
+   3.1.1 Il livello del modello: guardrail e costi di esecuzione
+   3.1.2 Il livello del controllo operativo
 3.2 Principi di progettazione del sistema
    3.2.1 Deterministico quando possibile, probabilistico quando necessario
    3.2.2 Esecuzione basata su evidenze e rifiuto dell’auto-certificazione
@@ -28,12 +28,12 @@ TITOLO: Framework AI-driven per il self-healing di scenari Cyber Range
    3.2.5 Controllo gerarchico: pianificazione a livello macro e ReAct a livello micro
 3.3 Architettura generale e flusso di coordinamento
    3.3.1 Inquadramento architetturale e gestione dello stato
-   3.3.2 Punti di ingresso e ciclo di vita dell’esecuzione
-   3.3.3 Comunicazione tra nodi e contratti tipizzati
+   3.3.2 Punti di ingresso e avvio del workflow
+   3.3.3 Comunicazione tra i componenti e strutture dati tipizzate
 3.4 Il Planner: generazione e formalizzazione dell’Attack Plan  
    3.4.1 Architettura ibrida a due stadi
    3.4.2 Gerarchia delle fonti e risoluzione delle ambiguità
-   3.4.3 Regole per la costruzione dell’oracolo
+   3.4.3 Regole per la definizione dei criteri di verifica
    3.4.4 Dimensionamento dinamico del contesto
 3.5 L’Orchestrator: controllo del workflow e gestione dello stato  
    3.5.1 Working Memory: `VulcaTestState`
@@ -49,22 +49,19 @@ TITOLO: Framework AI-driven per il self-healing di scenari Cyber Range
    3.7.3 Gestione del contesto: troncamento degli output e tool-slicing
    3.7.4 Supporto alle applicazioni terminali interattive
 3.8 Il Final Evaluator: valutazione deterministica e Root Cause Analysis  
-   3.8.1 Stadio 1: metriche deterministiche
-   3.8.2 Stadio 2: analisi qualitativa e Root Cause Analysis
+   3.8.1 Stadio 1: raccolta delle metriche
+   3.8.2 Stadio 2: diagnosi del fallimento e Root Cause Analysis
 3.9 Prompt engineering e definizione dei ruoli agentici
-   3.9.1 Sviluppo iterativo dei prompt
-   3.9.2 Specializzazione dei prompt per ruolo
-   3.9.3 Regole esplicite e formati vincolati
-3.10 Modello locale e configurazione dell’inferenza
-   3.10.1 Scelta dell’inferenza locale
-   3.10.2 Selezione del modello e reasoning
-   3.10.3 Configurazione del runtime
-   3.10.4 VulcaTest come ambiente di valutazione dei modelli
+   3.9.1 Sviluppo e specializzazione dei prompt
+   3.9.2 Regole esplicite e formati vincolati
+3.10 Modello locale e ottimizzazione dei parametri di inferenza
+   3.10.1 Scelta del modello locale
+   3.10.2 Configurazione e ottimizzazione dell’inferenza
 
 ## 4. VulcaHealing: closed-loop self-healing
 
 4.1 Integrazione di VulcaHealing nel workflow closed-loop
-   4.1.1 Separazione funzionale tra collaudo e autoriparazione
+   4.1.1 Separazione funzionale tra validazione e autoriparazione
    4.1.2 Estensione dello StateGraph e attivazione condizionale
 4.2 Dal ticket diagnostico alla localizzazione del difetto nell’Infrastructure as Code
    4.2.1 Il principio dell’Heuristic Lead: sintomo vs causa radice

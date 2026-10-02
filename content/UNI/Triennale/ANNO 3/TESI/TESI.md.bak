@@ -47,50 +47,59 @@
 ---
 
 ### 3. Architettura e implementazione di VulcaTest *(15–18 pagine — il Tester)*
-> *(Allineato alla stesura consolidata in `BOZZA SCRITTA/Capitolo 3 - Stesura.md` e `BOZZA SCRITTA/INDICE e titolo.md`)*  
-> **Domanda-motrice:** *Come si progetta e si realizza un harness di validazione che verifichi la conformità dell'intended way senza fidarsi delle autodichiarazioni del modello?*  
+> *(Allineato alla stesura consolidata in `BOZZA SCRITTA/Capitolo 3 - Stesura.md`)*  
+> **Domanda-motrice:** *Come si progetta e si realizza un harness di collaudo che verifichi la conformità dell'intended way senza fidarsi delle autodichiarazioni del modello?*  
 > **Lascia aperto:** Il tester emette il report diagnostico e, in caso di non conformità, genera l'`healing_ticket.json` $\rightarrow$ *"Chi interviene per riparare i sorgenti IaC e chiudere il cerchio?"* $\rightarrow$ Apre il Cap. 4.
 
 - **3.1 Requisiti e limiti delle soluzioni generiche**:
-  - **3.1.1 Il livello del modello: guardrail e costi di esecuzione**: guardrail commerciali sulle tecniche offensive e insostenibilità economica delle chiamate API cloud su task iterativi.
-  - **3.1.2 Il livello del controllo operativo**: assenza di un oracolo evidence-based e rischio di allucinazione, eccesso di libertà operativa e distorsione da goal-reaching (tentativi out-of-band su Docker/host), carenza di telemetria; contro-esempio empirico di Antigravity e caso studio di *Pizzeria_B2R* con bypass HTML della chat non generata.
+  - Il livello del modello: guardrail commerciali sulle tecniche cyber e insostenibilità economica delle API cloud.
+  - Il livello del controllo operativo e dell'oracolo: eccesso di libertà e distorsione da goal-reaching (tentativi out-of-band su Docker/host), assenza di oracolo evidence-based e rischio di allucinazione, carenza di telemetria.
+  - *Antigravity come contro-esempio*.
+  - Caso empirico di *Pizzeria_B2R*: l'endpoint scoperto per bypass HTML a causa della chat non generata.
 - **3.2 Principi di progettazione del sistema**:
-  - **3.2.1 Deterministico quando possibile, probabilistico quando necessario**: dualismo CoALA (codice deterministico per flusso, parsing e metriche vs modello probabilistico per reasoning, exploit e RCA $\rightarrow$ formalizzazione del controllo ibrido).
-  - **3.2.2 Esecuzione basata su evidenze e rifiuto dell’auto-certificazione**: principio SWE-bench Pro (verifier gap e verifica oggettiva dei comandi eseguiti).
-  - **3.2.3 Separazione delle responsabilità e specializzazione dei ruoli**: architettura role-based per prevenire il Goal Drift tra pianificazione, esecuzione e valutazione.
-  - **3.2.4 Intercambiabilità e modularità architetturale**: modelli, tool e context window pluggabili e configurabili via runtime.
-  - **3.2.5 Controllo gerarchico: pianificazione a livello macro e ReAct a livello micro**: scomposizione del problema in macro-fasi sequenziali e micro-cicli d'azione reattivi.
+  1. *Deterministico quando possibile, probabilistico quando necessario* (CoALA: codice deterministico per flusso/parsing/metriche vs LLM probabilistico per reasoning/exploit/RCA $\rightarrow$ scioglie il dubbio del professore).
+  2. *Esecuzione basata su evidenze e rifiuto dell'auto-certificazione* (SWE-bench Pro: verifier gap).
+  3. *Separazione delle responsabilità* (Architettura Role-Based per prevenire il Goal Drift).
+  4. *Intercambiabilità e modularità architetturale* (modelli, tool e context window pluggabili).
+  5. *Controllo gerarchico: Plan-and-Execute a livello macro e ReAct a livello micro*.
 - **3.3 Architettura generale e flusso di coordinamento**:
-  - **3.3.1 Inquadramento architetturale e gestione dello stato**: inquadramento CoALA (singolo agente cognitivo modulare governato da ruoli specializzati); Working Memory (`VulcaTestState`) e Procedural Memory nel codice; motivazione scientifica dell'assenza di memoria episodica/semantica per isolamento e riproducibilità (Clean Slate).
-  - **3.3.2 Punti di ingresso e avvio del workflow**: Execution Mode (piano esistente) vs Planning & Execution Mode (generazione dinamica dell'attacco).
-  - **3.3.3 Comunicazione tra i componenti e strutture dati tipizzate**: contratti dati Pydantic e paradigma dello *Structured Artifact Handoff* (MetaGPT).
+  - Inquadramento CoALA: singolo agente cognitivo modulare governato da ruoli specializzati.
+  - Gestione della memoria: Working Memory (`VulcaTestState`) e Procedural Memory (codice); esclusione motivata di memoria episodica e semantica (Clean Slate e isolamento scientifico).
+  - Punti d'ingresso: Execution Mode vs Planning & Execution Mode.
+  - Contratti tipizzati di interfaccia Pydantic (*Structured Artifact Handoff* di MetaGPT).
 - **3.4 Il Planner: generazione e formalizzazione dell’Attack Plan**:
-  - **3.4.1 Architettura ibrida a due stadi**: LLM generativo per la sintesi della strategia e parser deterministico (`plan_parser.py`) con convalida Pydantic su `ATTACK_PLAN.md`.
-  - **3.4.2 Gerarchia delle fonti e risoluzione delle ambiguità**: priorità vincolante (Storyline > Writeup > Description), de-fence multi-blocco e grounding anti-allucinazione.
-  - **3.4.3 Regole per la definizione dei criteri di verifica**: definizione formale dell'oracolo, insufficienza del solo exit code bash, connettori logici AND/OR, ancoraggio del meccanismo di scoperta; Caso Studio CS-1 (oracolo lasco).
-  - **3.4.4 Dimensionamento dinamico del contesto**: formula euristica `plan_context_length` su `token_utils.py` per allocare la finestra ottimale.
+  - Architettura ibrida a due stadi: LLM generativo + parser deterministico (`plan_parser.py`).
+  - Gerarchia delle fonti (Storyline > Writeup > Description) e de-fence multi-blocco.
+  - Regole costituzionali dell'oracolo (**Caso Studio CS-1**: oracolo lasco, connettori logici e grounding del meccanismo di scoperta).
+  - Dimensionamento dinamico del contesto (`plan_context_length`).
 - **3.5 L’Orchestrator: controllo del workflow e gestione dello stato**:
-  - **3.5.1 Working Memory: `VulcaTestState`**: stato condiviso tipizzato in LangGraph e aggregazione cumulativa delle evidenze.
-  - **3.5.2 Topologia del grafo e instradamento condizionale**: StateGraph di LangGraph, funzioni di routing condizionale (`route_orchestrator`), gate logico `AND` sui checkpoint della checklist e assenza deliberata di retry a livello di grafo.
+  - Lo stato condiviso tipizzato in LangGraph (`VulcaTestState`).
+  - Topologia dello StateGraph di LangGraph e routing condizionale.
+  - Politica di avanzamento: gate logico `AND` sulla checklist e assenza deliberata di retry a livello di grafo.
 - **3.6 L’Executor: esecuzione degli step e modalità di auditing**:
-  - **3.6.1 Auditor Mode**: il tester in-band vincolato al perimetro dello step; prompt costituzionale per neutralizzare il *cheating agent* e le scorciatoie fuori perimetro.
-  - **3.6.2 Gestione dinamica del budget operativo**: Graceful Nudge a -2 turni e Checkpoint di proroga con `request_turn_extension`.
-  - **3.6.3 Tool interni e recupero dei valori verificati**: meccanismo di Two-stage retrieval (`show_verified_values` $\rightarrow$ `get_verified_value`) per la minimizzazione del contesto.
-  - **3.6.4 Il contratto `StepResult` e la verifica dello step**: validazione deterministica del verdetto nel codice (`_build_step_result`), riesame indipendente della checklist e sovrascrittura anti-allucinazione.
+  - Il collaudatore in-band: ciclo ReAct vincolato al perimetro dello step.
+  - L'Auditor Mode: prompt costituzionale per neutralizzare il *cheating agent*.
+  - Gestione dinamica del budget: Graceful Nudge a -2 turni e Checkpoint di proroga.
+  - Tool interni e Two-stage retrieval dei valori convalidati (`show_verified_values` $\rightarrow$ `get_verified_value`).
+  - Il contratto `StepResult` e la validazione deterministica del verdetto nel codice (`_build_step_result`).
 - **3.7 Il Bridge di esecuzione: gestione degli strumenti e delle interazioni con il target**:
-  - **3.7.1 Canale dell’azione: architettura a due livelli**: Livello 1 (HexStrike REST stateless su porta 8888) vs Livello 2 (Terminal Gateway FastAPI + pexpect su porta 8889 per sessioni PTY interattive e persistenti).
-  - **3.7.2 Canale della percezione: normalizzazione dell’output e informazioni di stato**: bonifica sequenze ANSI/VT100, `session_last_line`, watchdog adattivo del silenzio con stati DONE/IDLE/CAP/DEAD su pexpect.
-  - **3.7.3 Gestione del contesto: troncamento degli output e tool-slicing**: prevenzione della saturazione da comandi verbosi (es. `find /`), budget `MAX_TOOL_OUTPUT_CHARS = 8000` con conservazione di testa e coda, tool-slicing dinamico per la riduzione dello spazio delle azioni.
-  - **3.7.4 Supporto alle applicazioni terminali interattive**: gestione di editor a schermo pieno (nano, vi) e mappatura dei tasti speciali `SPECIAL_KEYS_MAP` (conversione carriage return `\r` vs newline `^J`).
+  - Canale dell'azione: Livello 1 (HexStrike REST stateless) vs Livello 2 (Terminal Gateway FastAPI + pexpect su porta 8889 per sessioni PTY interattive e persistenti).
+  - Canale della percezione: bonifica output ANSI/VT100, `session_last_line`, watchdog adattivo del silenzio (DONE/IDLE/CAP/DEAD).
+  - Governo del contesto: troncamento deterministico a 8.000 caratteri e tool-slicing dinamico.
+  - Supporto ad editor interattivi (nano, vi, escape carriage return `\r` vs newline `^J`).
 - **3.8 Il Final Evaluator: valutazione deterministica e Root Cause Analysis**:
-  - **3.8.1 Stadio 1: raccolta delle metriche**: calcolo deterministico delle metriche di esecuzione, aggregazione evidenze e generazione di `run_summary.json`.
-  - **3.8.2 Stadio 2: diagnosi del fallimento e Root Cause Analysis**: triage LLM post-mortem, generazione del report qualitativo `REPORT.md` e dell'`healing_ticket.json`; decisione architetturale sulla rimozione del Diagnostician in-loop a favore della valutazione post-mortem per prevenire il Goal Drift.
+  - Stadio 1 deterministico: metriche quantitative e generazione di `run_summary.json`.
+  - Stadio 2 LLM: RCA post-mortem, generazione di `REPORT.md` e triage dell'oracolo (`healing_ticket.json`).
+  - La decisione di design sulla rimozione del Diagnostician in-loop (prevenzione del Goal Drift).
 - **3.9 Prompt engineering e definizione dei ruoli agentici**:
-  - **3.9.1 Sviluppo e specializzazione dei prompt**: processo iterativo guidato da evidenze empiriche reali (esecuzione del test $\rightarrow$ fallimento operativo $\rightarrow$ introduzione di vincoli costituzionali).
-  - **3.9.2 Regole esplicite e formati vincolati**: regole deontologiche dell'Auditor Mode, formati di risposta vincolati, isolamento dei token di reasoning e TTY hygiene.
-- **3.10 Modello locale e ottimizzazione dei parametri di inferenza**:
-  - **3.10.1 Scelta del modello locale**: indipendenza da API commerciali, superamento dei guardrail etici e sostenibilità economica; vincoli hardware reali (16 GB VRAM, 64 GB RAM); selezione di Qwen 3.8 27B quantizzato GGUF IQ3_S; ruolo essenziale del Chain-of-Thought e calibrazione dello sforzo cognitivo con `reasoning_effort=medium`.
-  - **3.10.2 Configurazione e ottimizzazione dell’inferenza**: quantizzazione a 3 bit, KV-cache a 16 bit fp16, speculative decoding con MTP + N-gram, gestione dinamica dei contesti e hot-swap tramite `model_manager.py`.
+  - Il ciclo iterativo reale: test $\rightarrow$ fallimento empirico $\rightarrow$ regola costituzionale.
+  - Dai fallimenti pratici alle regole deontologiche e di TTY hygiene.
+- **3.10 Modello locale e configurazione dell’inferenza**:
+  - Motivazioni: superamento dei guardrail commerciali e sostenibilità economica (zero costi variabili per token).
+  - Vincoli hardware reali (16 GB VRAM, 64 GB RAM) e selezione del modello: Qwen 3.8 27B in formato quantizzato GGUF.
+  - Ruolo essenziale del Chain-of-Thought (limiti dei modelli *act-only*) e calibrazione dello sforzo cognitivo (`reasoning_effort=medium`).
+  - Ottimizzazioni del runtime: quantizzazione a 3 bit, KV-cache a 16 bit (fp16), speculative decoding (MTP + N-gram) e gestione dinamica dei contesti tramite `model_manager.py`.
+  - VulcaTest come ambiente di valutazione e benchmark per modelli linguistici nella cybersecurity.
 
 ---
 
@@ -100,8 +109,9 @@
 > **Lascia aperto:** Il loop agentico è chiuso $\rightarrow$ *"In che misura e con quale efficacia il sistema rileva, diagnostica e corregge i difetti?"* $\rightarrow$ Apre il Cap. 5.
 
 - **4.1 Integrazione di VulcaHealing nel workflow closed-loop**:
-  - **4.1.1 Separazione funzionale tra validazione e autoriparazione**: asimmetria operativa tra tester *in-band* (esterno, shell d'attacco, nessun accesso IaC per prevenire scorciatoie) e riparatore *out-of-band* (sorgenti IaC, persistenza); prevenzione del Goal Drift e del conflitto di interessi (chi ripara non ha potere di modifica sull'oracolo di prova).
-  - **4.1.2 Estensione dello StateGraph e attivazione condizionale**: estensione naturale del medesimo StateGraph di LangGraph con transizione condizionale `Final Evaluator -> healer_node -> rebuild -> Orchestrator`.
+  - Estensione naturale del medesimo StateGraph di LangGraph: `Final Evaluator -> healer_node -> rebuild -> Orchestrator`.
+  - Separazione funzionale e asimmetria operativa: collaudatore *in-band* (esterno, shell d'attacco, nessun accesso IaC per prevenire scorciatoie) vs riparatore *out-of-band* (sorgenti IaC, persistenza).
+  - Prevenzione del Goal Drift e conflitto di interessi: chi ripara non ha accesso né potere di modifica sull'oracolo di prova.
 - **4.2 Dal ticket diagnostico alla localizzazione del difetto nell’Infrastructure as Code**:
   - Traduzione dalla diagnosi al codice: la Root Cause Analysis è già chiusa dal Final Evaluator (§3.8); qui il ticket si trasforma in localizzazione mirata nei file IaC.
   - Il principio dell'**Heuristic Lead**: il sintomo registrato è un indizio euristico per risalire la catena delle dipendenze, non una prescrizione rigida.
