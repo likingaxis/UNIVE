@@ -1,4 +1,4 @@
-# Capitolo 4 — VulcaHealing: il Ciclo Chiuso di Auto-Riparazione
+# Capitolo 4 — VulcaHealing: closed-loop self-healing
 
 L'identificazione automatica di una non conformità non esaurisce il ciclo di controllo qualità. Se un harness di collaudo si limita a emettere un verdetto negativo e un rapporto di errore, l'onere della diagnosi e dell'intervento correttivo ricade interamente sull'operatore umano, ricreando il medesimo collo di bottiglia che l'automazione intendeva ridurre.
 
@@ -6,7 +6,7 @@ Per completare la pipeline di VulcAIn, ho progettato **VulcaHealing**, un sottos
 
 ---
 
-## 4.1 Dal Collaudo alla Riparazione: Separazione dei Ruoli
+## 4.1 Dal rilevamento alla correzione: motivazioni e separazione del sottosistema
 
 Una delle prime decisioni architetturali del progetto ha riguardato la netta separazione tra il modulo collaudatore (**VulcaTest**) e il modulo riparatore (**VulcaHealing**). In prima battuta si potrebbe ipotizzare di demandare la correzione allo stesso modello linguistico che conduce il test, consentendogli di intervenire direttamente sulla macchina attiva non appena riscontra un comando fallito. Nella pratica, questa impostazione presenta limiti sia concettuali che operativi.
 
@@ -18,7 +18,7 @@ La seconda motivazione discende dal principio di separazione delle responsabilit
 
 ---
 
-## 4.2 Distinguere le Evidenze: il Principio dell'Heuristic Lead
+## 4.2 Dalle evidenze alla causa: distinzione tra sintomo e difetto nell’Infrastructure as Code
 
 Anche una volta posizionato l'agente sui file sorgente dell'infrastruttura, sorge un problema metodologico critico: come deve essere interpretato il rapporto di collaudo?
 
@@ -53,7 +53,7 @@ L'healer riceve il sintomo come coordinata di partenza, ma ha l'onere di risalir
 
 ---
 
-## 4.3 Integrazione di Harness Generici (Antigravity CLI)
+## 4.3 Delega operativa a harness generici: integrazione con Antigravity CLI
 
 Per operare sui sorgenti IaC, le competenze richieste al modello linguistico differiscono da quelle dell'Executor:
 - Nel collaudo operativo è prioritaria una bassa latenza per gestire turni di shell ravvicinati su una grammatica di azioni circoscritta;
@@ -71,7 +71,7 @@ Qualora si rendesse opportuno sostituire Antigravity con un altro strumento di c
 
 ---
 
-## 4.4 Ingegneria del Prompt per Modelli di Frontiera e Vincoli Costituzionali
+## 4.4 Prompt costituzionale, vincoli operativi e perimetro di modifica
 
 Un modello linguistico avanzato istruito genericamente a "correggere gli errori del sistema" tende a comportarsi secondo i canoni della manutenzione software convenzionale: il suo istinto naturale è sanificare le falle e irrobustire le configurazioni. Nel dominio delle macchine didattiche, questo approccio risulterebbe controproducente: **eliminare le vulnerabilità volute vanifica l'intero scopo pedagogico della challenge**.
 
@@ -100,7 +100,7 @@ Tuttavia, l'agente deve poter apprendere dagli esiti delle azioni passate. Tale 
 
 ---
 
-## 4.5 Tracciamento Deterministico delle Modifiche
+## 4.5 Tracciamento delle modifiche: diff deterministico e validazione delle correzioni
 
 In continuità con il principio *Evidence-Based Execution* e con il rifiuto del *verifier gap* [SWE-bench Pro] adottato nell'Executor (§3.6), VulcaHealing non si affida all'autocertificazione dell'agente riparatore. Non è sufficiente che il modello dichiari nel proprio riepilogo testuale di aver sistemato la configurazione: occorre una verifica oggettiva delle modifiche apportate sul filesystem.
 
@@ -115,7 +115,7 @@ Questo tracciamento oggettivo garantisce che l'intervento sia realmente avvenuto
 
 ---
 
-## 4.6 Chiusura del Loop Agentico e Riesecuzione del Collaudo
+## 4.6 Chiusura del ciclo: ricostruzione dell’ambiente e regression testing
 
 Una volta calcolato il diff deterministico, il nodo `healer_node` all'interno dello StateGraph di LangGraph (`white-box/orchestrator/nodes.py`) prende in carico la sequenza operativa necessaria a chiudere il ciclo di retroazione (*closed-loop*):
 

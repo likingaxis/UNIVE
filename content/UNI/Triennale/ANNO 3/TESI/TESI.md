@@ -46,55 +46,55 @@
 
 ---
 
-### 3. Architettura VulcaTest *(15–18 pagine — il Tester)*
+### 3. Architettura e implementazione di VulcaTest *(15–18 pagine — il Tester)*
 > *(Allineato alla stesura consolidata in `BOZZA SCRITTA/Capitolo 3 - Stesura.md`)*  
 > **Domanda-motrice:** *Come si progetta e si realizza un harness di collaudo che verifichi la conformità dell'intended way senza fidarsi delle autodichiarazioni del modello?*  
 > **Lascia aperto:** Il tester emette il report diagnostico e, in caso di non conformità, genera l'`healing_ticket.json` $\rightarrow$ *"Chi interviene per riparare i sorgenti IaC e chiudere il cerchio?"* $\rightarrow$ Apre il Cap. 4.
 
-- **3.1 Dal prototipo all'architettura: perché un harness generico non basta**:
+- **3.1 Requisiti e limiti delle soluzioni generiche**:
   - Il livello del modello: guardrail commerciali sulle tecniche cyber e insostenibilità economica delle API cloud.
   - Il livello del controllo operativo e dell'oracolo: eccesso di libertà e distorsione da goal-reaching (tentativi out-of-band su Docker/host), assenza di oracolo evidence-based e rischio di allucinazione, carenza di telemetria.
   - *Antigravity come contro-esempio*.
   - Caso empirico di *Pizzeria_B2R*: l'endpoint scoperto per bypass HTML a causa della chat non generata.
-- **3.2 Principi di design architetturale**:
+- **3.2 Principi di progettazione del sistema**:
   1. *Deterministico quando possibile, probabilistico quando necessario* (CoALA: codice deterministico per flusso/parsing/metriche vs LLM probabilistico per reasoning/exploit/RCA $\rightarrow$ scioglie il dubbio del professore).
   2. *Esecuzione basata su evidenze e rifiuto dell'auto-certificazione* (SWE-bench Pro: verifier gap).
   3. *Separazione delle responsabilità* (Architettura Role-Based per prevenire il Goal Drift).
   4. *Intercambiabilità e modularità architetturale* (modelli, tool e context window pluggabili).
   5. *Controllo gerarchico: Plan-and-Execute a livello macro e ReAct a livello micro*.
-- **3.3 Visione d'insieme e architettura di coordinamento**:
+- **3.3 Architettura generale e flusso di coordinamento**:
   - Inquadramento CoALA: singolo agente cognitivo modulare governato da ruoli specializzati.
   - Gestione della memoria: Working Memory (`VulcaTestState`) e Procedural Memory (codice); esclusione motivata di memoria episodica e semantica (Clean Slate e isolamento scientifico).
   - Punti d'ingresso: Execution Mode vs Planning & Execution Mode.
   - Contratti tipizzati di interfaccia Pydantic (*Structured Artifact Handoff* di MetaGPT).
-- **3.4 Il Planner: formalizzazione e parsing dell'Attack Plan**:
+- **3.4 Il Planner: generazione e formalizzazione dell’Attack Plan**:
   - Architettura ibrida a due stadi: LLM generativo + parser deterministico (`plan_parser.py`).
   - Gerarchia delle fonti (Storyline > Writeup > Description) e de-fence multi-blocco.
   - Regole costituzionali dell'oracolo (**Caso Studio CS-1**: oracolo lasco, connettori logici e grounding del meccanismo di scoperta).
   - Dimensionamento dinamico del contesto (`plan_context_length`).
-- **3.5 L'Orchestratore: grafo di controllo e gestione dello stato**:
+- **3.5 L’Orchestrator: controllo del workflow e gestione dello stato**:
   - La blackboard condivisa tipizzata (`VulcaTestState`).
   - Topologia dello StateGraph di LangGraph e routing condizionale.
   - Politica di avanzamento: gate logico `AND` sulla checklist e assenza deliberata di retry a livello di grafo.
-- **3.6 L'Executor: collaudatore in-band e Auditor Mode**:
+- **3.6 L’Executor: esecuzione degli step e modalità di auditing**:
   - Il collaudatore in-band: ciclo ReAct vincolato al perimetro dello step.
   - L'Auditor Mode: prompt costituzionale per neutralizzare il *cheating agent*.
   - Gestione dinamica del budget: Graceful Nudge a -2 turni e Checkpoint di proroga.
   - Tool interni e Two-stage retrieval dei valori convalidati (`show_verified_values` $\rightarrow$ `get_verified_value`).
   - Il contratto `StepResult` e la validazione deterministica del verdetto nel codice (`_build_step_result`).
-- **3.7 Il Bridge: mediazione operativa, livelli di esecuzione e interazione interattiva**:
+- **3.7 Il Bridge di esecuzione: mediazione operativa e gestione delle interazioni con il target**:
   - Canale dell'azione: Livello 1 (HexStrike REST stateless) vs Livello 2 (Terminal Gateway FastAPI + pexpect su porta 8889 per sessioni PTY interattive e persistenti).
   - Canale della percezione: bonifica output ANSI/VT100, `session_last_line`, watchdog adattivo del silenzio (DONE/IDLE/CAP/DEAD).
   - Governo del contesto: troncamento deterministico a 8.000 caratteri e tool-slicing dinamico.
   - Supporto ad editor interattivi (nano, vi, escape carriage return `\r` vs newline `^J`).
-- **3.8 Il Final Evaluator: metrologia deterministica e Root Cause Analysis**:
+- **3.8 Il Final Evaluator: valutazione deterministica e Root Cause Analysis**:
   - Stadio 1 deterministico: metriche quantitative e generazione di `run_summary.json`.
   - Stadio 2 LLM: RCA post-mortem, generazione di `REPORT.md` e triage dell'oracolo (`healing_ticket.json`).
   - La decisione di design sulla rimozione del Diagnostician in-loop (prevenzione del Goal Drift).
-- **3.9 Prompt engineering come metodo e processo sperimentale**:
+- **3.9 Prompt engineering e definizione dei ruoli agentici**:
   - Il ciclo iterativo reale: test $\rightarrow$ fallimento empirico $\rightarrow$ regola costituzionale.
   - Dai fallimenti pratici alle regole deontologiche e di TTY hygiene.
-- **3.10 Modello locale adottato, infrastruttura di serving e sweet-spot dei parametri**:
+- **3.10 Modello locale e ottimizzazione dei parametri di inferenza**:
   - Motivazioni: privacy, assenza di guardrail offensivi, sostenibilità economica.
   - Esplorazione e selezione: fallimento dell'approccio act-only (perché Qwen Coder falliva senza CoT $\rightarrow$ scelta finale `Qwen 3.8 27B`).
   - Calibrazione del Chain-of-Thought (`reasoning_effort=low`).
@@ -104,21 +104,21 @@
 
 ---
 
-### 4. VulcaHealing: il Ciclo Chiuso di Auto-Riparazione *(7–9 pagine — l'Healer)*
+### 4. VulcaHealing: closed-loop self-healing *(7–9 pagine — l'Healer)*
 > *(Allineato alla stesura consolidata in `BOZZA SCRITTA/Capitolo 4 - Stesura.md` con accorpamenti recepiti)*  
 > **Domanda-motrice:** *Come si ripara in modo autonomo e deterministico il codice IaC a fronte di una non conformità senza alterare le vulnerabilità didattiche e chiudendo il loop con il re-test?*  
 > **Lascia aperto:** Il loop agentico è chiuso $\rightarrow$ *"In che misura e con quale efficacia il sistema rileva, diagnostica e corregge i difetti?"* $\rightarrow$ Apre il Cap. 5.
 
-- **4.1 Dal collaudo alla riparazione: motivazioni di un sottosistema separato**:
+- **4.1 Dal rilevamento alla correzione: motivazioni e separazione del sottosistema**:
   - Asimmetria operativa: collaudatore *in-band* (esterno, shell d'attacco) vs riparatore *out-of-band* (sui sorgenti IaC).
   - Separazione delle responsabilità e prevenzione del conflitto di interessi (chi ripara non deve poter manomettere l'oracolo di prova).
-- **4.2 Distinguere le evidenze: il principio dell'Heuristic Lead (sintomo vs causa radice IaC)**:
+- **4.2 Dalle evidenze alla causa: distinzione tra sintomo e difetto nell’Infrastructure as Code**:
   - Disaccoppiamento tra sintomo esterno e radice dichiarativa (Caso Studio DataVault: HTTP 404 Nginx dovuto a socket errato in Ansible).
-- **4.3 Delega operativa ad harness generici: il ruolo di Antigravity CLI**:
+- **4.3 Delega operativa a harness generici: integrazione con Antigravity CLI**:
   - Competenze richieste: reasoning su codice multi-file.
   - *Antigravity come strumento operativo* headless (`agy --mode accept-edits --output-format stream-json /goal`) governato dal controller `healer.py` (ruolo opposto al Cap. 3).
   - Rispetto del Principio 4: modularità e sostituibilità del motore di healing con altri agenti (Claude Code, modelli locali).
-- **4.4 Gestione del prompt costituzionale per modelli di frontiera e perimetro di scrittura**:
+- **4.4 Prompt costituzionale, vincoli operativi e perimetro di modifica**:
   - Le 5 regole deontologiche di riparazione (Constitutional AI):
     1. Riparazione minima.
     2. Divieto di leakage didattico (*No-Leak*).
@@ -126,9 +126,9 @@
     4. Divieto di modifiche spurie.
     5. Economia di esplorazione.
   - Delimitazione rigorosa dei diritti di scrittura: sorgenti modificabili (`machines/<slug>.yaml`, webapp) vs sola lettura (`out/<slug>/`, report, documentazione) per impedire modifiche su artefatti effimeri.
-- **4.5 Tenere traccia delle modifiche: diff deterministico e rifiuto dell'autocertificazione**:
+- **4.5 Tracciamento delle modifiche: diff deterministico e validazione delle correzioni**:
   - Il modulo deterministico `diff_tracker.py`: snapshot iniziale, calcolo del diff unificato `patch.diff` ed emissione di `HEALING_REPORT.md` via `difflib`.
-- **4.6 Chiusura del loop agentico: ricompilazione Docker, gate echo-safe e re-test di regressione**:
+- **4.6 Chiusura del ciclo: ricostruzione dell’ambiente e regression testing**:
   - Sequenza operativa del nodo Healer nello StateGraph.
   - Sincronizzazione bundle con VulcaForge (`generator/main.py`).
   - **Caso Studio CS-2**: Il falso positivo da Terminal Echo nel Rebuild Docker e soluzione con marker concatenato (`echo '"__BUILD""_""SUCCESS__"'`).
