@@ -4,41 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "87eda5cd18547659",
+        "id": "dee2f94a3861ea35",
         "type": "tabs",
         "children": [
           {
-            "id": "99f0e276d1117669",
+            "id": "784beaae1d034f83",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
+                "file": "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/su agentic LLM generale.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Capitolo 3 - Revisione"
-            }
-          }
-        ]
-      },
-      {
-        "id": "ad65723bfe74f8e6",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "cacf1cff9e8469e3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Capitolo 3 - Revisione"
+              "title": "su agentic LLM generale"
             }
           }
         ]
@@ -100,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 321.20001220703125
+    "width": 561.2000122070312
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -194,53 +174,53 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "99f0e276d1117669",
+  "active": "784beaae1d034f83",
   "lastOpenFiles": [
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Stesura.md.tmp.28532.1da5668809fd",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Stesura.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Stesura.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Stesura.md.tmp.61336.dc69c117747f",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/su architetture agentiche LLM.md",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/su agentic LLM generale.md",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/PROMPT ENGINEERING.md",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE DRAFT/PAPER LETTI E IDEE su benchmark.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
+    "UNI/Triennale/ANNO 3/TESI/Style/~$ontespizio (1).docx",
+    "UNI/Triennale/ANNO 3/TESI/Style/Frontespizio (1).docx",
+    "UNI/Triennale/ANNO 3/TESI/Style/Unconfirmed 842245.crdownload",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Stesura.md",
+    "UNI/Triennale/ANNO 3/TESI/Style/Call pasquale 2.md",
+    "UNI/Triennale/ANNO 3/TESI/TESI.md",
+    "UNI/Triennale/ANNO 3/TESI/Style/~$ontespizio.docx",
+    "UNI/Triennale/ANNO 3/TESI/Style/Frontespizio.docx",
+    "UNI/Triennale/ANNO 3/TESI/Style/Unconfirmed 582797.crdownload",
+    "UNI/Triennale/ANNO 3/TESI/Style/REGOLE_STILE.md",
+    "UNI/Triennale/ANNO 3/TESI/Style/CONTESTO_REVISIONE_TESI.md",
+    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
+    "UNI/COSA FARE.md",
+    "UNI/Triennale/ANNO 3/TESI/SKILL_STESURA_TESI.md",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
+    "UNI/Triennale/ANNO 3/TESI/Style/noteFrontespizio.pdf",
+    "UNI/Triennale/ANNO 3/TESI/Style/Spiegazione progetto di tesi Luca Gugliotta.pdf",
+    "UNI/Triennale/ANNO 3/TESI/Style/_tmp/front-01.png",
+    "UNI/Triennale/ANNO 3/TESI/Style/_tmp",
+    "UNI/Triennale/ANNO 3/TESI/Style/_tmp_front4-02.png",
+    "UNI/Triennale/ANNO 3/TESI/Style/_tmp_front4-01.png",
+    "UNI/Triennale/ANNO 3/TESI/Style/_tmp_front3-01.png",
+    "UNI/Triennale/ANNO 3/TESI/Style/_tmp_front2-01.png",
+    "UNI/Triennale/ANNO 3/TESI/Style/Unconfirmed 17399.crdownload",
+    "UNI/Triennale/ANNO 3/TESI/Style/_tmp_model-2.png",
+    "UNI/Triennale/ANNO 3/TESI/Style/_tmp_front-01.png",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FONTI.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FONTI_aggiornato.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Stesura.md",
     "UNI/Triennale/ANNO 3/TESI/HEALING NODO.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/VULNERABILITÀ/ESAME/FILE UTILE PER LE ESERCITAZIONI.md",
     "UNI/Triennale/ANNO 3/TESI/idee_e_struttura_tesi.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
-    "UNI/Triennale/ANNO 3/TESI/SKILL_STESURA_TESI.md",
-    "UNI/Triennale/ANNO 3/TESI/TESI.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3.md",
-    "UNI/COSA FARE.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md.bak",
-    "UNI/Triennale/ANNO 3/TESI/TESI.md.bak",
-    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Stesura.md.bak",
-    "UNI/Triennale/ANNO 3/TESI/Style/Call pasquale 2.md",
-    "UNI/Triennale/ANNO 3/TESI/Style/Spiegazione progetto di tesi Luca Gugliotta.pdf",
-    "UNI/Triennale/ANNO 3/TESI/Style/CONTESTO_REVISIONE_TESI.md",
-    "UNI/Triennale/ANNO 3/TESI/Style",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Preparazione Hackathon Linux CNIT.docx",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 135762.crdownload",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/perturbazioni.md",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/PIANO BENCHMARK (terra terra).md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FONTI.md",
-    "UNI/Triennale/ANNO 3/TESI/Call/Call pasquale 2.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261002152954.png",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 17964.crdownload",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/ARCHITETTURA CON HEALING (1).excalidraw",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261002152624.png",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md",
-    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - Stesura.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261002090531.png",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261001134308.png",
-    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3 - rifinitura (riferimento).md",
-    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/Capitolo 3.md",
-    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/FOTO/Pasted image 20261002090531.png",
-    "UNI/Triennale/ANNO 3/BOZZA SCRITTA/FOTO/Pasted image 20261001134308.png",
-    "Pasted image 20261001134247.png",
-    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930140734.png",
-    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930124523.png",
-    "UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS PIC/Pasted image 20260930124123.png"
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261002090531.png"
   ]
 }

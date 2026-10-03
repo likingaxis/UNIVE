@@ -1,221 +1,219 @@
-# Capitolo 4 — VulcaHealing: closed-loop self-healing
+VulcaTest permette di rilevare una non conformità e di raccogliere le evidenze necessarie a descriverne la causa. Il solo rilevamento, tuttavia, lascia ancora all’operatore il compito di intervenire sui sorgenti della macchina e verificare nuovamente il risultato.
 
-L'identificazione automatica di una non conformità non esaurisce il ciclo di controllo qualità. Se l'harness di collaudo si limitasse a emettere un verdetto negativo e un rapporto di errore, l'onere della diagnosi e dell'intervento correttivo ricadrebbe interamente sull'operatore umano, ricreando il medesimo collo di bottiglia che l'automazione intende eliminare.
+Per chiudere questo ciclo è stato sviluppato **VulcaHealing**, il componente incaricato di tentare la correzione automatica delle macchine non conformi. A partire dalla diagnosi prodotta dal Final Evaluator, VulcaHealing individua il difetto nei sorgenti Infrastructure as Code, applica una modifica, ricostruisce l’ambiente e avvia un nuovo test con VulcaTest.
 
-Per completare la pipeline di VulcAIn ho sviluppato **VulcaHealing**, il sottosistema incaricato di tentare la riparazione automatica delle macchine didattiche difettose. Operando a valle del collaudo, VulcaHealing riceve il ticket diagnostico generato dal Final Evaluator (§3.8), localizza la causa del difetto nei file sorgente dell'infrastruttura (*Infrastructure-as-Code*), applica una correzione mirata, coordina la ricompilazione dell'ambiente bersaglio e avvia infine una sessione di ri-collaudo (*regression testing*) per verificare l'effettiva risoluzione della non conformità.
-
-In questo capitolo viene analizzata la struttura di VulcaHealing, evidenziando come la fase di correzione si integri nel medesimo grafo di orchestrazione di VulcaTest senza duplicarne le responsabilità.
-
----
+Il capitolo descrive l’integrazione di questa fase nel workflow, il modo in cui la diagnosi viene usata per individuare il punto da correggere e l’architettura adottata per eseguire le modifiche.
 
 ## 4.1 Integrazione di VulcaHealing nel workflow closed-loop
 
-Una delle scelte architetturali fondamentali del progetto riguarda l'integrazione di VulcaHealing come prosecuzione naturale del collaudo, mantenendo al contempo una netta separazione funzionale tra i due compiti. 
+VulcaHealing estende il workflow di verifica introducendo una fase di correzione successiva al rilevamento di una non conformità. Testing e healing rimangono però due attività separate, con accessi all’ambiente e responsabilità differenti.
 
-### Separazione funzionale tra collaudo e autoriparazione
-In prima battuta si potrebbe ipotizzare di demandare la riparazione allo stesso agente che conduce il test, permettendogli di intervenire sulla macchina attiva non appena riscontra un comando fallito. Questa impostazione presenta tuttavia limiti concettuali e operativi insormontabili:
+### 4.1.1 Separazione funzionale tra collaudo e autoriparazione
 
-- **Asimmetria dei punti di vista (in-band vs out-of-band):** L'Executor di VulcaTest opera *in-band*, simulando un attaccante esterno (dalla macchina Kali Linux) che interagisce unicamente con le interfacce esposte dal target (porte di rete, socket, terminale). Non possiede né deve possedere accesso ai file di configurazione con cui l'ambiente è stato generato, poiché tale informazione comprometterebbe il realismo del collaudo. Al contrario, l'Healer richiede una prospettiva *out-of-band*: per correggere un difetto in modo persistente non serve alterare lo stato effimero di un container in esecuzione, ma occorre modificare i playbook Ansible, i Dockerfile e le ricette dichiarative da cui l'immagine viene compilata.
-- **Prevenzione del Goal Drift e conflitto di interessi:** Affidare allo stesso agente sia il collaudo sia la correzione incentiva il modello ad abbassare i requisiti della checklist o a considerare risolti passaggi non verificati pur di dichiarare completato il compito (§3.2, Principio 3). Separando rigorosamente i ruoli, l'agente riparatore non ha alcun potere di alterare i criteri di giudizio dell'oracolo, così come il collaudatore non dispone di permessi di scrittura sui sorgenti dell'infrastruttura.
+Affidare la correzione allo stesso agente che esegue il test mescolerebbe due compiti che richiedono punti di vista differenti.
 
-### Estensione dello StateGraph e attivazione condizionale
-VulcaHealing non costituisce un'architettura separata o un software indipendente, ma si inserisce come nodo funzionale all'interno del medesimo grafo di orchestrazione LangGraph descritto nel Capitolo 3:
+L’Executor di VulcaTest lavora **in-band**: parte dalla macchina Kali e interagisce soltanto con i servizi esposti dal target. Non accede ai file utilizzati per generare la macchina, perché queste informazioni non sarebbero disponibili a un utente che affronta la challenge.
 
-$$\text{Planner} \longrightarrow \text{Orchestrator} \rightleftarrows \text{Executor} \longrightarrow \text{Final Evaluator} \xrightarrow[\text{non conforme}]{\text{healing abilitato}} \text{Healer} \longrightarrow \text{Rebuild} \longrightarrow \text{Orchestrator}$$
+L’Healer lavora invece **out-of-band** sui sorgenti dell’infrastruttura. Una correzione deve infatti essere applicata ai file da cui la macchina viene generata, come ricette, playbook Ansible, Dockerfile o sorgenti applicativi. Modificare soltanto il container già in esecuzione produrrebbe un cambiamento temporaneo, destinato a scomparire alla successiva ricostruzione.
 
-Quando il collaudo si conclude con esito negativo e l'autoriparazione è abilitata (`HEALING=true` in configurazione), l'arco condizionale del grafo indirizza il flusso al nodo `healer_node` — l'instradamento dipende unicamente dall'esito del collaudo e dal numero di tentativi già consumati (§4.6), non dalla presenza di un particolare artefatto. In parallelo, il Final Evaluator deposita tra le evidenze di collaudo il file diagnostico `healing_ticket.json`: non è questo a determinare se il flusso vada verso l'Healer, ma è il materiale di corredo alla diagnosi, che alimenta a valle le metriche di accuratezza della RCA discusse nel Capitolo 5.
+La separazione mantiene inoltre indipendenti verifica e correzione. L’Healer può modificare i sorgenti, ma non i criteri con cui VulcaTest stabilisce la conformità; l’Executor può verificare la macchina, ma non correggerla durante il test.
 
----
+### 4.1.2 Estensione dello StateGraph e attivazione condizionale
+
+VulcaHealing è integrato nello stesso `StateGraph` utilizzato da VulcaTest. Il Planner opera a monte del grafo e produce l’Attack Plan iniziale; il workflow runtime è invece composto dai quattro nodi `orchestrator`, `executor`, `final_evaluator` e `healer`.
+
+Il ciclo può essere rappresentato in forma semplificata come:
+
+$$
+\text{Orchestrator}
+\rightleftarrows
+\text{Executor}
+\longrightarrow
+\text{Final Evaluator}
+\xrightarrow[\text{non conforme}]{\text{healing abilitato}}
+\text{Healer}
+\longrightarrow
+\text{Orchestrator}
+$$
+
+Il passaggio al nodo `healer` dipende dall’esito del test, dall’abilitazione del self-healing e dal numero di tentativi di correzione ancora disponibili. Il ticket diagnostico prodotto dal Final Evaluator accompagna invece la non conformità e fornisce le informazioni utilizzate nella fase di analisi.
+
+Dopo l’intervento dell’Healer, il flusso torna all’Orchestrator e il test riparte utilizzando lo stesso Attack Plan già strutturato. Le condizioni di terminazione e il numero massimo di tentativi sono descritti nella Sezione 4.6.
 
 ## 4.2 Dal ticket diagnostico alla localizzazione del difetto nell’Infrastructure as Code
 
-La responsabilità della diagnosi qualitativa appartiene interamente al Final Evaluator (§3.8), che attraverso la Root Cause Analysis isola il passo fallito, le evidenze raccolte e il componente di sistema coinvolto. VulcaHealing non ripete tale diagnosi, ma prende in carico il problema a valle: **trasformare la diagnosi in una localizzazione precisa del difetto all'interno dei file sorgente IaC**.
+La Root Cause Analysis eseguita dal Final Evaluator identifica lo step fallito, il componente coinvolto e la possibile causa della non conformità. VulcaHealing usa questa diagnosi come punto di partenza per individuare il file o la direttiva da modificare nei sorgenti dell’infrastruttura.
 
-### Il principio dell’Heuristic Lead: sintomo vs causa radice
-Nelle architetture basate su Infrastructure as Code, i difetti di configurazione tendono a propagarsi a cascata lungo la catena delle dipendenze: il punto in cui il malfunzionamento emerge all'esterno quasi mai coincide con la direttiva sorgente che lo ha originato.
+### 4.2.1 Il ticket come punto di partenza per la ricerca della causa
 
-Trattare il ticket diagnostico come una prescrizione rigida ("correggi il componente X") indurrebbe l'agente in errore. Da questa evidenza discende il principio dell'**Heuristic Lead**: il ticket costituisce un *indizio euristico* di partenza per restringere l'area di indagine, lasciando all'agente l'onere di risalire la catena causale fino al file dichiarativo corretto.
+Il punto in cui un errore si manifesta durante il test può non coincidere con il punto dei sorgenti in cui il difetto è stato introdotto. Una risposta HTTP errata, un servizio non disponibile o un permesso mancante possono dipendere da configurazioni generate in una fase precedente della pipeline.
 
-```
-       ┌────────────────────────┐
-       │   TICKET / SINTOMO     │  Es. HTTP 403 «Access denied.» sulla webshell `.pHP`
-       └───────────┬────────────┘
-                   │  Indizio di partenza (non prescrizione vincolante)
-                   ▼
-       ┌────────────────────────┐
-       │ Risalita della catena  │  Analisi dipendenze: Nginx -> PHP-FPM -> task Ansible
-       │ di provisioning IaC    │
-       └───────────┬────────────┘
-                   │  Isolamento della reale causa radice
-                   ▼
-       ┌────────────────────────┐
-       │ Modifica mirata        │  Ripristino della direttiva limit_extensions nel task Ansible sorgente
-       │ alla radice causale    │
-       └────────────────────────┘
-```
+Per questo il ticket non viene interpretato come una prescrizione diretta della modifica da applicare. Il componente e la causa indicati dalla diagnosi restringono l’area da analizzare, mentre l’Healer deve ricostruire la catena che collega il sintomo osservato ai file Infrastructure as Code responsabili della configurazione.
 
-### Dalla diagnosi alla ricetta dichiarativa: il caso DataVault
-Un esempio emblematico è emerso durante il collaudo della macchina didattica *DataVault*:
-- Il ticket di collaudo registrava un codice HTTP `403 Forbidden` con corpo `Access denied.` alla richiesta della webshell, portando il Final Evaluator a indicare il web server Nginx come componente bloccante (la sua `recommended_patch` suggeriva di intervenire sulla direttiva `location` di Nginx);
-- Un intervento ingenuo avrebbe modificato la configurazione del web server (`nginx.conf`) per tentare di forzare l'accesso alla risorsa;
-- In realtà Nginx inoltrava correttamente la richiesta al backend FastCGI: la radice del guasto risiedeva a monte, in un task Ansible che avrebbe dovuto abilitare in PHP-FPM l'esecuzione dell'estensione `.pHP` (direttiva `security.limit_extensions`) ma che veniva silenziosamente saltato — il costrutto `with_fileglob` era risolto sul nodo di controllo anziché sul target — lasciando il container con la configurazione di fabbrica che rifiutava di eseguire la webshell caricata.
+[Mantenere qui lo schema sintomo → analisi delle dipendenze → localizzazione nei sorgenti → modifica.]
 
-L'Healer riceve quindi il sintomo registrato nel report di collaudo (`REPORT.md`, la sintesi distillata della RCA del Final Evaluator) come coordinata iniziale, ma concentra la propria analisi sul confronto tra l'intento didattico descritto nella documentazione e le direttive presenti nei playbook di VulcaForge.
+### 4.2.2 Dalla diagnosi alla ricetta dichiarativa: il caso DataVault
 
----
+Un esempio è emerso durante il test della macchina _DataVault_. La richiesta a una webshell con estensione `.pHP` restituiva `403 Forbidden` con corpo `Access denied.`, indicando un problema nella catena di elaborazione della richiesta web.
 
-## 4.3 L’Healer: delega operativa a harness agentici generici
+La richiesta veniva però inoltrata correttamente da Nginx al backend FastCGI. Il rifiuto avveniva in PHP-FPM, che manteneva la configurazione predefinita e non consentiva l’esecuzione dell’estensione `.pHP`.
 
-Per intervenire sui sorgenti Infrastructure as Code, le facoltà cognitive richieste al modello differiscono radicalmente da quelle dell'Executor di VulcaTest:
-- Nel collaudo operativo è fondamentale un'interazione a turni serrati, orientata a una sequenza fissa di comandi shell e vincolata a un oracolo deterministico;
-- Nella riparazione dei sorgenti è richiesta una capacità avanzata di comprensione semantica del codice, navigazione dell'albero di directory e modifica multi-file su formati eterogenei (YAML di Ansible, Dockerfile, Python, configurazioni Linux).
+La configurazione prevista avrebbe dovuto essere applicata durante il provisioning. Il task Ansible incaricato di modificare `security.limit_extensions` veniva invece saltato perché il costrutto `with_fileglob` veniva risolto sul nodo di controllo anziché sul target.
 
-Per questa ragione, la fase esecutiva di modifica è stata delegata a un agente esterno invocato tramite la CLI di **Google Antigravity** (`agy`).
+La correzione non consisteva quindi nel modificare il punto in cui il `403` diventava visibile, ma il task di provisioning che avrebbe dovuto produrre la configurazione corretta. Il caso mostra perché la diagnosi del test deve essere usata come riferimento per la ricerca, senza assumere che il componente in cui compare il sintomo coincida con il sorgente da modificare.
 
-### Il ruolo complementare degli harness generici nel code editing
-Questa scelta evidenzia la complementarietà tra i due approcci discussi nella tesi:
-- Nel **conformance testing** (§3.1), un harness generico si è rivelato inadatto a causa della tendenza a cercare scorciatoie e dell'assenza di un oracolo basato su evidenze oggettive;
-- Nella **riparazione dei sorgenti**, al contrario, la flessibilità di un harness generico per il coding rappresenta un punto di forza, purché l'azione del modello sia vincolata a un perimetro di modifica rigidamente controllato dal controller esterno.
+## 4.3 L’Healer: delega operativa a un harness agentico
 
-### Architettura di integrazione con Antigravity CLI
-In pieno accordo con il principio di modularità (§3.2, Principio 4), l'integrazione con Antigravity non introduce vincoli proprietari nel framework. L'interfaccia risiede nel controller Python `healer.py`, che avvia la CLI di Antigravity come sottoprocesso in modalità headless (`--mode accept-edits`). 
+La fase di healing richiede capacità diverse da quelle utilizzate durante il conformance testing. L’Executor interagisce con un target già costruito attraverso un ciclo ReAct, entro i vincoli definiti dal `TestStep`, dalla checklist e dai tool disponibili. L’Healer deve invece navigare i sorgenti del progetto, mettere in relazione file differenti e applicare modifiche a configurazioni Ansible, Dockerfile, codice applicativo e file di sistema.
 
-Il controller imposta la root di lavoro sul repository della sfida, richiede lo streaming degli eventi in formato JSON (`--output-format stream-json`) per tracciare token e strumenti utilizzati, e attiva la modalità orientata all'obiettivo mediante il comando `/goal`. 
+Per questa ragione la modifica dei sorgenti viene delegata a un agente di coding esterno, invocato attraverso la CLI di **Google Antigravity** (`agy`) [@googleantigravity2026].
 
-Se in futuro si decidesse di sostituire Antigravity con un altro strumento agentico di coding (come Claude Code, OpenHands o un modello locale specializzato), l'intera infrastruttura circostante — calcolo dei diff, gate di compilazione e ciclo di re-test — rimarrà invariata, richiedendo unicamente l'adeguamento del comando di invocazione.
+### 4.3.1 Uso di un harness generico nella fase di correzione
 
----
+Lo stesso grado di libertà che rende poco adatto un harness general-purpose al conformance testing risulta utile nella modifica dei sorgenti.
 
-## 4.4 Prompt dell’Healer, vincoli operativi e perimetro di modifica
+Durante il test è necessario controllare il percorso seguito dall’agente, i tool disponibili e le condizioni che determinano il successo di ogni step. Nella fase di healing, invece, il modello deve poter esplorare file differenti, ricostruire dipendenze e scegliere autonomamente dove intervenire.
 
-Un modello avanzato istruito genericamente a "correggere gli errori dell'infrastruttura" tende spontaneamente ad applicare le buone pratiche dell'amministrazione di sistema: chiudere porte non necessarie, correggere permessi deboli e sanificare configurazioni vulnerabili. Nel contesto di un Cyber Range didattico, questo comportamento distruggerebbe l'utilità del laboratorio: **eliminare le vulnerabilità volute vanifica l'intero scopo formativo della macchina**.
+Questa libertà rimane comunque confinata dal controller di VulcaHealing, che definisce il perimetro dei file interessati, registra le modifiche e sottopone il risultato ai controlli descritti nelle sezioni successive.
 
-Per scongiurare questo rischio, il prompt di missione dell'Healer (`_build_healing_prompt`) è strutturato attorno a tre cardini: regole deontologiche esplicite, perimetro rigido dei permessi di scrittura e retroazione sugli errori di compilazione.
+### 4.3.2 Integrazione con Antigravity CLI
 
-### Vincoli di riparazione e preservazione delle vulnerabilità didattiche
-Riprendendo concettualmente l'impostazione della *Constitutional AI* (l'impiego di una serie di principi non negoziabili per governare le decisioni del modello), il prompt codifica un insieme di regole vincolanti, sintetizzabili in cinque cardini:
-1. **Riparazione minima e mirata:** modificare esclusivamente il codice strettamente indispensabile per sbloccare lo step non conforme, senza alterare altre direttive.
-2. **Divieto di leakage didattico (*No-Leak*):** non inserire messaggi di aiuto, suggerimenti o credenziali in chiaro che possano facilitare indebitamente la prova per lo studente.
-3. **Preservazione categorica delle vulnerabilità didattiche:** le debolezze di sicurezza previste dal progetto (es. injection SQL, permessi SUID, configurazioni sudo deboli) costituiscono requisiti funzionali della sfida e non devono essere rimosse.
-4. **Divieto di modifiche fittizie:** se l'analisi dimostra che i sorgenti sono già conformi e il problema risiede a monte nella specifica di collaudo, l'agente deve astenersi da modifiche arbitrarie e terminare la sessione.
-5. **Economia di esplorazione:** limitare l'ispezione ai soli file pertinenti alla macchina in esame, evitando scansioni indiscriminate dell'intero repository.
+L’integrazione con Antigravity è concentrata nel controller Python `healer.py`, che avvia la CLI `agy` come sottoprocesso in modalità non interattiva.
 
-### Delimitazione del perimetro di scrittura e protezione del bundle
-Oltre alle regole di comportamento, il framework impone una netta separazione dei privilegi di scrittura:
-- **File modificabili:** la ricetta dichiarativa della macchina (`machines/<slug>.yaml`) ed eventuali sorgenti applicativi dedicati (`registry/web/webapps/<slug>/`).
-- **File in sola lettura:** il report di collaudo da cui parte la diagnosi (`REPORT.md`), le specifiche didattiche (`STORYLINE_B2R.md`, `WRITEUP.md`), il ticket diagnostico (`healing_ticket.json`) e la directory del bundle compilato (`out/<slug>/`).
-- **Directory interdette:** il codice di VulcaTest e VulcaHealing, le configurazioni delle altre sfide e l'ambiente host di virtualizzazione.
+L’esecuzione viene avviata tramite `-p`, mentre `--mode accept-edits` permette all’agente di applicare direttamente le modifiche ai file senza richiedere conferme manuali. Il flag `--dangerously-skip-permissions` evita ulteriori richieste interattive legate ai permessi durante la sessione.
 
-Una convenzione dichiarata nel prompt non è, da sola, una garanzia: l'harness agentico necessita di un accesso in lettura più ampio del solo perimetro consentito (deve poter consultare, ad esempio, la documentazione didattica della challenge), e nulla a livello di sistema operativo gli impedisce fisicamente di scrivere altrove. Per questo il controller non si limita a dichiarare il perimetro, ma lo **verifica a posteriori in modo deterministico**: subito dopo la conclusione della sessione dell'agente — e PRIMA che la ricompilazione automatica del bundle (`out/<slug>/`) abbia luogo, per non confondere un'eventuale scrittura diretta e indebita in quella cartella con la rigenerazione legittima che la segue — confronta l'insieme dei file realmente modificati (lo stesso diff calcolato da `diff_tracker`, §4.5) con il perimetro dichiarato. Ogni file al di fuori di quell'elenco viene automaticamente ripristinato al proprio stato precedente, usando lo snapshot già raccolto per il calcolo del diff. La separazione dei privilegi smette così di dipendere dal buon comportamento del modello e diventa una proprietà strutturale del sistema, verificabile a prescindere dall'esito della sessione agentica.
+La directory di lavoro viene impostata sui sorgenti di VulcaForge, mentre `--add-dir` rende visibile all’agente l’intera radice del workspace. L’accesso in lettura è quindi più ampio del perimetro entro cui l’agente è autorizzato a scrivere; quest’ultimo viene controllato separatamente dal controller, come descritto nella Sezione 4.4.2.
 
-La protezione della cartella `out/<slug>/` risponde a un preciso principio dell'Infrastructure as Code: in essa risiedono gli artefatti derivati (il Dockerfile assemblato e il playbook `setup_machine.yml`) generati automaticamente da VulcaForge. Consentire all'agente di modificare direttamente i file in `out/` risolverebbe il problema solo temporaneamente, poiché la prima ricompilazione automatica sovrascriverebbe le modifiche. Confinando la scrittura alla sola ricetta dichiarativa `machines/<slug>.yaml`, si assicura che ogni correzione rimanga persistente alla fonte.
+L’opzione `--output-format stream-json` permette di ricevere gli eventi della sessione in formato strutturato e di registrare informazioni come token consumati e tool utilizzati. L’obiettivo della correzione viene invece fornito nel prompt tramite il prefisso `/goal`.
 
-### Feedback deterministico su errori di compilazione pregressi
-L'Healer opera in modalità **stateless**: ogni invocazione costituisce una sessione pulita priva di memoria pregressa, impedendo che errori accumulati in tentativi precedenti influenzino le decisioni attuali.
+La dipendenza da Antigravity rimane confinata a questo livello di integrazione. Le fasi successive — controllo del perimetro, tracciamento delle modifiche, ricostruzione dell’ambiente e nuovo test — non dipendono dall’harness utilizzato per modificare i sorgenti.
 
-Tuttavia, l'agente deve poter apprendere dai fallimenti operativi. Il passaggio di informazioni avviene tramite il filesystem: a ogni ciclo viene associata una cartella progressiva (`healing_1/`, `healing_2/`). Se la modifica introdotta provoca un errore di compilazione Docker o Ansible, il controller cattura l'output del compilatore nel file `BUILD_ERROR.md`. Al tentativo successivo, tale log viene inserito con priorità in cima al prompt, costringendo il modello a risolvere l'errore di sintassi o di direttiva appena introdotto prima di proseguire.
 
----
+## 4.4 Prompt dell’Healer e perimetro di modifica
+
+Come per i componenti descritti nella Sezione 3.9, anche il comportamento dell’Healer viene delimitato attraverso un prompt dedicato. In questo caso è necessario tenere conto di una caratteristica particolare delle macchine didattiche: alcune configurazioni che un agente di coding potrebbe interpretare come problemi di sicurezza costituiscono in realtà vulnerabilità previste dalla challenge e devono essere preservate.
+
+Il prompt deve quindi guidare la correzione della non conformità senza trasformarsi in una generica attività di hardening dell’infrastruttura.
+
+### 4.4.1 Vincoli di riparazione e preservazione delle vulnerabilità didattiche
+
+Nella definizione del prompt è stata ripresa l’idea, proposta nel lavoro sulla _Constitutional AI_, di esplicitare un insieme di principi che delimitano il comportamento del modello [citazione]. Nel caso di VulcaHealing questi principi riguardano direttamente il modo in cui può essere modificata la macchina:
+
+1. **Modifica minima.** La correzione deve interessare soltanto ciò che è necessario per risolvere la non conformità individuata.
+    
+2. **Assenza di leakage didattico.** La modifica non deve introdurre suggerimenti, credenziali in chiaro o altre informazioni che rendano più semplice la risoluzione della challenge.
+    
+3. **Preservazione delle vulnerabilità previste.** Vulnerabilità come SQL injection, binari SUID o configurazioni `sudo` deboli possono appartenere al percorso didattico e non devono essere corrette se fanno parte della specifica della macchina.
+    
+4. **Nessuna modifica arbitraria.** Se l’analisi non individua un difetto nei sorgenti, l’agente deve poter terminare senza applicare una patch.
+    
+5. **Esplorazione limitata alla macchina interessata.** L’analisi deve concentrarsi sui file pertinenti alla challenge corrente, evitando modifiche o ricerche non necessarie nel resto del repository.
+    
+
+Questi vincoli definiscono ciò che l’agente dovrebbe fare. Il rispetto del perimetro di scrittura viene però controllato anche dal codice, senza dipendere soltanto dal prompt.
+
+### 4.4.2 Perimetro di scrittura e protezione degli artefatti generati
+
+L’Healer dispone di un accesso in lettura ampio al workspace, necessario per ricostruire le dipendenze tra documentazione, ricette e sorgenti. Le modifiche sono invece consentite soltanto sui file associati alla macchina corrente.
+
+Il perimetro viene suddiviso in tre categorie:
+
+- **modificabili:** la ricetta della macchina (`machines/<slug>.yaml`) e gli eventuali sorgenti applicativi dedicati, ad esempio `registry/web/webapps/<slug>/`;
+- **in sola lettura:** la documentazione della challenge, il report prodotto dal collaudo e gli artefatti generati in `out/<slug>/`;
+- **esclusi dalla modifica:** VulcaTest, VulcaHealing, le altre challenge e l’ambiente host.
+
+Questa distinzione non viene affidata soltanto alle istruzioni del prompt. Al termine della sessione, e prima della rigenerazione del bundle, il controller confronta i file modificati con il perimetro consentito. Le modifiche rilevate al di fuori di esso vengono ripristinate utilizzando lo snapshot raccolto prima dell’esecuzione dell’agente.
+
+Quando vengono rilevate scritture fuori perimetro, il controller genera inoltre `PERIMETER_VIOLATIONS.md`, che registra i file interessati prima del ripristino. Il tentativo di modifica rimane quindi tracciato anche se i cambiamenti vengono neutralizzati.
+
+La directory `out/<slug>/` viene mantenuta in sola lettura perché contiene artefatti derivati dalla ricetta sorgente, come il Dockerfile e il playbook `setup_machine.yml` generati da VulcaForge. Una modifica applicata direttamente a questi file andrebbe persa alla generazione successiva. La correzione deve quindi essere effettuata sui sorgenti da cui il bundle viene prodotto.
+
+### 4.4.3 Feedback sugli errori di compilazione
+
+Ogni invocazione dell’agente di healing parte da una nuova sessione e non mantiene la cronologia del tentativo precedente. Le informazioni necessarie tra un tentativo e il successivo vengono conservate dal controller attraverso gli artefatti prodotti sul filesystem.
+
+Se una modifica provoca il fallimento del build, ad esempio per un errore Docker o nell’esecuzione del playbook Ansible, l’output viene salvato in `BUILD_ERROR.md`. Quando viene effettuato un nuovo tentativo, il contenuto del file viene inserito nel prompt insieme alla diagnosi, in modo che l’agente possa tenere conto dell’errore introdotto dalla modifica precedente.
+
+Nella configurazione utilizzata per gli esperimenti del Capitolo 5 il numero massimo di tentativi è pari a uno; questo meccanismo diventa operativo quando viene configurato un budget di healing superiore.
 
 ## 4.5 Tracciamento e validazione delle modifiche
 
-In continuità con il principio dell'esecuzione basata su evidenze (§3.2, Principio 2), VulcaHealing rifiuta qualunque forma di auto-certificazione da parte del modello. Il fatto che l'agente dichiari di aver risolto il problema non costituisce una prova: le modifiche devono essere riscontrate oggettivamente sul filesystem.
+Come nel collaudo, anche nella fase di healing l’output dichiarato dal modello non viene utilizzato come prova del risultato. Il controller verifica direttamente le modifiche presenti sul filesystem e conserva il relativo diff.
 
-### Rifiuto dell’auto-certificazione nella fase di riparazione
-La validazione delle correzioni non si basa sull'output testuale generato da Antigravity, ma su un controllo deterministico affidato al modulo Python `diff_tracker.py`. 
+### 4.5.1 Snapshot e calcolo del diff
 
-### Snapshot, calcolo del diff deterministico e artefatti generati
-Il modulo gestisce il ciclo di controllo attraverso tre passaggi sequenziali:
-1. **Snapshot iniziale:** prima di avviare l'agente, la funzione `take_folder_snapshot` scansiona l'albero di directory della sfida registrando il contenuto testuale di ciascun file. Contemporaneamente, `backup_machine_draft` genera una copia fisica di sicurezza dello stato pre-riparazione (`draft_pre_fix`).
-2. **Intervento dell'agente:** l'Healer applica le modifiche sui file autorizzati entro il perimetro consentito.
-3. **Calcolo deterministico del differenziale:** al termine dell'esecuzione, la funzione `compute_folder_diff` confronta lo stato del filesystem con lo snapshot iniziale mediante la libreria Python `difflib`, generando due artefatti formali:
-   - `patch.diff`: il file di differenze unificato standard, che traccia esattamente ogni riga aggiunta, rimossa o modificata;
-   - `HEALING_REPORT.md`: un riepilogo leggibile dei file coinvolti e dell'entità delle variazioni.
+Il controllo è implementato nel modulo `diff_tracker.py` e si articola in tre passaggi.
 
-Oggi un diff vuoto non interrompe il ciclo: la ricompilazione del bundle e il redeploy del container (§4.6) vengono comunque eseguiti anche quando l'Healer non ha applicato alcuna patch, per poi ripresentare al retest esattamente lo stesso esito di partenza. Condizionare il salto di queste fasi all'esito `DECLINED`/`OUT_OF_SCOPE` — reso ora esplicito proprio da questo diff (§4.6) — è un'ottimizzazione identificata ma non ancora implementata, rimandata per non introdurre variazioni non controllate nei dati di benchmark già raccolti con il comportamento attuale. La misura delle righe modificate resta comunque il dato oggettivo impiegato per quantificare l'ampiezza dell'intervento nei benchmark del Capitolo 5.
+Prima dell’avvio dell’agente, `take_folder_snapshot` registra lo stato dei file sorgente presenti nel repository VulcaForge. Viene inoltre creata una copia fisica dello stato iniziale della macchina (`draft_pre_fix`), utilizzabile come riferimento e per eventuali ripristini.
 
----
+Antigravity viene quindi eseguito all’interno del workspace previsto e può applicare le modifiche consentite dal prompt e dal perimetro definito nella Sezione 4.4.
 
-## 4.6 Chiusura del ciclo: ricostruzione dell’ambiente e regression testing
+Al termine della sessione, `compute_folder_diff` confronta il filesystem con lo snapshot iniziale. Dal confronto vengono prodotti due artefatti:
 
-Una volta convalidato il diff, il controllo ritorna al nodo `healer_node` all'interno dello StateGraph di LangGraph, che avvia la sequenza di operazioni necessarie a chiudere il ciclo di retroazione (*closed-loop*):
+- `patch.diff`, che contiene le differenze riga per riga;
+    
+- `HEALING_REPORT.md`, che riassume i file interessati dalla modifica.
+    
 
-```
-       ┌────────────────────────┐
-       │ Modifica sorgente YAML │
-       └───────────┬────────────┘
-                   │
-                   ▼
-       ┌────────────────────────┐
-       │ Sincronizzazione bundle│  (generator/main.py generate)
-       │ con VulcaForge         │
-       └───────────┬────────────┘
-                   │
-                   ▼
-       ┌────────────────────────┐
-       │ docker build su Kali   │
-       │ con Gate Echo-Safe     │  (echo '"__BUILD""_""SUCCESS__"')
-       └───────────┬────────────┘
-                   │
-          Compilazione riuscita?
-          /                    \
-     SÌ  /                      \  NO
-        ▼                        ▼
- ┌──────────────────────┐   ┌─────────────────────────────┐
- │ Clean Slate: ricrea  │   │ Annulla deploy, salva       │
- │ container Docker     │   │ BUILD_ERROR.md e inietta    │
- └──────────┬───────────┘   │ nel ciclo successivo        │
-            │               └─────────────────────────────┘
-            ▼
- ┌──────────────────────┐
- │ Risolvi nuovo IP via │
- │ docker inspect       │
- └──────────┬───────────┘
-            │
-            ▼
- ┌──────────────────────┐
- │ Reset stato grafo:   │
- │ Re-Test da FASE 1    │
- └──────────────────────┘
-```
+Lo stesso confronto viene utilizzato per individuare eventuali scritture al di fuori del perimetro consentito e ripristinarle prima delle fasi successive.
 
-### Pipeline di rebuild e il gate di compilazione Echo-Safe
-La ricompilazione e la ridistribuzione della macchina seguono un percorso rigoroso:
-1. **Sincronizzazione del bundle:** il framework invoca lo script `generator/main.py` di VulcaForge per tradurre la ricetta dichiarativa aggiornata nel nuovo playbook Ansible e nel relativo Dockerfile in `out/<slug>/`.
-2. **Compilazione su Kali e Gate Echo-Safe:** la compilazione della nuova immagine viene lanciata sul nodo Kali Linux attraverso il Terminal Gateway PTY. Durante lo sviluppo è emersa un'anomalia empirica legata all'eco locale dei terminali pseudo-TTY:
+### 4.5.2 Classificazione dell’intervento
 
-> [!NOTE]
-> **Il falso positivo da Terminal Echo nel Rebuild Docker**  
-> Nelle versioni preliminari, il comando di compilazione veniva inviato nella forma:  
-> `docker build -t <image> . && echo __BUILD_SUCCESS__ || echo __BUILD_FAILED__`  
-> Poiché i terminali PTY replicano immediatamente in ingresso i caratteri digitati (*local echo*), il watchdog intercettava la stringa `__BUILD_SUCCESS__` restituita dall'eco prima ancora che il comando fosse eseguito, considerando erroneamente conclusa la compilazione.  
-> Il problema è stato risolto spezzando il marcatore tramite concatenazione di stringhe quotate:  
-> `echo '"__BUILD""_""SUCCESS__"'`  
-> In questo modo l'eco del terminale riceve frammenti separati che non attivano la regex del watchdog, mentre il marcatore contiguo compare nell'output solo dopo l'effettiva conclusione del processo di build.
+L’esito della sessione di healing viene ricavato dal comportamento osservato sul filesystem e dall’esito dell’agente, distinguendo quattro casi:
 
-Se il build non si conclude con successo, interviene un gate deterministico: il deploy viene abortito e l'errore registrato per il ciclo successivo, evitando di testare un ambiente disallineato rispetto ai sorgenti.
+- `PATCHED`: è presente almeno una modifica valida all’interno del perimetro consentito;
+    
+- `DECLINED`: la sessione termina senza errori ma non produce modifiche ai sorgenti autorizzati;
+    
+- `OUT_OF_SCOPE`: le modifiche rilevate interessano esclusivamente file esterni al perimetro e vengono ripristinate;
+    
+- `ERROR`: l’esecuzione dell’harness termina con un errore o supera il timeout previsto.
+    
 
-### Ripristino dello stato e regression testing integrale
-A fronte di una compilazione riuscita, il sistema ricrea l'ambiente partendo da uno stato pulito (*Clean Slate*):
-- Il vecchio container viene terminato e rimosso, avviando una nuova istanza a partire dall'immagine aggiornata;
-- Viene applicata una pausa di stabilizzazione di 5 secondi per consentire l'avvio ordinato dei servizi di rete (Nginx, PHP-FPM, OpenSSH);
-- Tramite `docker inspect`, il controller estrae dinamicamente il nuovo indirizzo IPv4 assegnato al container e aggiorna il campo `target_ip` nello stato del grafo;
-- **Regression testing integrale:** il flusso non ripete unicamente lo step che era fallito, ma azzera l'indice dei passi (`current_step_index = 0`) e riavvia il collaudo dalla prima fase (`FASE 1`). Questo passaggio è indispensabile per accertare che la correzione introdotta non abbia prodotto effetti collaterali indesiderati, alterando la raggiungibilità degli step precedenti.
+Questa distinzione è necessaria perché il codice di uscita dell’agente non permette da solo di capire se sia stata effettivamente applicata una correzione.
 
-### Condizioni di terminazione del ciclo e limiti attuali
-Per impedire cicli infiniti e contenere i consumi di calcolo, il loop di autoriparazione è regolato da precise condizioni di arresto:
-- **Limite sui tentativi (`MAX_HEALING_ATTEMPTS=1`):** nella configurazione predefinita adottata per la validazione sperimentale, il numero massimo di iterazioni correttive per ciascuna macchina è impostato a 1. Se la patch non consente di superare l'intero collaudo di conformità al primo tentativo, il ciclo si arresta con esito negativo, consentendo di misurare con precisione il tasso di successo del primo intervento correttivo.
-- **Classificazione strutturata dell'esito:** ogni ciclo di healing termina con un verdetto esplicito — `PATCHED` (una modifica reale è stata applicata nel perimetro consentito), `DECLINED` (l'agente ha correttamente concluso che la causa è a monte, §4.4, senza applicare alcuna patch), `OUT_OF_SCOPE` (l'unica scrittura rilevata era fuori perimetro ed è stata automaticamente ripristinata), oppure `ERROR` (l'harness agentico è terminato con un errore o un timeout). Il solo codice di uscita del processo non basta a distinguerli — l'harness termina con successo tanto quando applica una correzione quanto quando declina onestamente — per cui il verdetto viene derivato dal confronto fra il diff e il perimetro dichiarato (§4.4), non dal codice di uscita.
-- **Convergence guard (predisposto, non ancora esercitato):** quando il numero di tentativi consentiti è superiore a uno, un controllo aggiuntivo confronta l'esito del ciclo appena concluso e lo step di conformità che lo aveva innescato con quelli del tentativo precedente: se un ciclo `DECLINED`/`OUT_OF_SCOPE` lascia il retest bloccato sullo stesso identico step, il loop si interrompe anziché ripetere lo stesso esito. Con `MAX_HEALING_ATTEMPTS=1` questo controllo non può mai attivarsi — non esiste un "tentativo precedente" con cui confrontarsi — ma resta pronto per quando il budget di tentativi verrà aumentato.
-- **Distinzione tra guasto dello strumento e difetto della macchina:** un'eccezione imprevista nelle fasi di rebuild/redeploy (ad esempio una caduta della connessione verso il Terminal Gateway) viene etichettata esplicitamente come guasto dell'infrastruttura di collaudo, distinta dal gate di build Echo-Safe descritto sopra e mai registrata, nei dati aggregati, come un difetto di conformità della macchina bersaglio.
-- **Dipendenza da modelli esterni:** mentre VulcaTest opera interamente su pesi locali aperti (§3.10), VulcaHealing si affida al modello Gemini 3.8 Flash tramite Antigravity CLI — nella configurazione sperimentale del Capitolo 5, la variante `gemini-3.8-flash-high` — per gestire compiti complessi di refactoring del codice. La transizione della fase di healing verso modelli locali specializzati nella programmazione rappresenta uno dei principali sviluppi futuri del lavoro (§6.3).
+Nell’implementazione attuale, anche un diff vuoto non interrompe immediatamente il ciclo: bundle e ambiente vengono comunque ricostruiti e VulcaTest viene eseguito nuovamente. Evitare rebuild e re-test nei casi `DECLINED` o `OUT_OF_SCOPE` rappresenta una possibile ottimizzazione, non applicata alla configurazione utilizzata per raccogliere i dati sperimentali del Capitolo 5.
 
----
+## 4.6 Chiusura del ciclo: rebuild dell’ambiente e regression testing
 
-## Conclusioni del capitolo: verso la valutazione sperimentale
+Una patch sui sorgenti non è sufficiente a considerare risolta la non conformità. La modifica deve essere trasformata nuovamente in un ambiente eseguibile e la macchina deve superare un nuovo collaudo.
 
-L'introduzione di VulcaHealing completa l'architettura complessiva di VulcAIn, realizzando un ciclo chiuso tra verifica di conformità e autoriparazione guidata dell'Infrastructure as Code.
+La fase successiva all’Healer segue quindi questa sequenza:
 
-L'asimmetria operativa tra testing in-band e riparazione out-of-band, l'interpretazione del ticket secondo il principio dell'Heuristic Lead, i vincoli espliciti di preservazione delle vulnerabilità didattiche, il tracciamento oggettivo del diff e il collaudo di regressione integrale permettono di sanare i difetti di generazione senza richiedere l'intervento dell'operatore umano.
+**modifica dei sorgenti → generazione del bundle → build dell’immagine → ricreazione della macchina → aggiornamento del target → nuovo test**
 
-Definita la struttura teorica e implementativa dei moduli, il **Capitolo 5** presenta la campagna sperimentale condotta su un dataset eterogeneo di macchine didattiche, analizzando quantitativamente la capacità di rilevamento delle non conformità, l'accuratezza diagnostica del Final Evaluator e l'efficacia correttiva di VulcaHealing.
+[Figura: ciclo Healer → VulcaForge → build → redeploy → VulcaTest. In caso di errore di build, il flusso torna al tentativo successivo con `BUILD_ERROR.md`.]
+
+### 4.6.1 Generazione del bundle e gate di compilazione
+
+Dopo la modifica dei sorgenti, VulcaHealing richiama `generator/main.py` di VulcaForge per rigenerare il bundle della macchina. La ricetta aggiornata viene quindi tradotta nel nuovo playbook Ansible e nel Dockerfile presenti in `out/<slug>/`.
+
+L’immagine Docker viene successivamente compilata sulla macchina Kali attraverso il Terminal Gateway. Il controller attende un marcatore prodotto soltanto al termine del comando di build, così da distinguere una compilazione conclusa correttamente da una sessione ancora in esecuzione.
+
+Durante lo sviluppo è emerso un problema dovuto al local echo del PTY. Nelle prime versioni, il comando inviato al terminale conteneva direttamente la stringa usata come marcatore di successo. Poiché il PTY restituisce anche i caratteri digitati, il watchdog poteva intercettare il marcatore nell’eco del comando prima che il build fosse realmente terminato.
+
+Per evitare questo falso positivo, il marcatore viene costruito nel comando in forma separata e compare come stringa completa soltanto nell’output prodotto dopo l’esecuzione. Il watchdog può così utilizzarlo come conferma della conclusione effettiva del build.
+
+Se la compilazione fallisce, il deploy viene interrotto e l’output dell’errore viene salvato in `BUILD_ERROR.md`. Non viene quindi avviato un test su un ambiente che non corrisponde ai sorgenti appena modificati.
+
+### 4.6.2 Ripristino dell’ambiente e regression testing integrale
+
+Quando il build termina correttamente, l’ambiente viene ricreato a partire dalla nuova immagine. Il controller utilizza `reset.sh`, quando disponibile; negli altri casi rimuove il container precedente e ne avvia uno nuovo.
+
+Dopo l’avvio viene applicata una pausa di stabilizzazione di 5 secondi. Il nuovo indirizzo IPv4 assegnato al container viene quindi recuperato con `docker inspect` e salvato nel campo `target_ip` dello stato condiviso.
+
+Il nuovo collaudo non riparte dallo step che aveva provocato il fallimento. `current_step_index` viene riportato a `0` e VulcaTest esegue nuovamente l’intero Attack Plan.
+
+La ripetizione completa è necessaria perché una modifica che risolve lo step fallito potrebbe aver alterato un passaggio precedente. Il successo della correzione viene quindi stabilito sul comportamento dell’intera macchina, utilizzando gli stessi criteri di conformità del test iniziale.
+
+### 4.6.3 Condizioni di terminazione e limiti attuali
+
+Il numero di interventi dell’Healer è limitato da `MAX_HEALING_ATTEMPTS`. Nella configurazione utilizzata per la valutazione sperimentale il valore è impostato a `1`: ogni macchina riceve quindi un solo tentativo di correzione automatica.
+
+L’implementazione prevede anche un controllo di convergenza per configurazioni con più tentativi. Se un ciclo `DECLINED` o `OUT_OF_SCOPE` viene seguito da un nuovo test che si blocca sullo stesso step, il sistema può interrompere ulteriori iterazioni invece di ripetere lo stesso comportamento. Con `MAX_HEALING_ATTEMPTS=1` questo controllo non interviene nei test descritti nel Capitolo 5.
+
+Gli errori dell’infrastruttura di collaudo vengono inoltre mantenuti distinti dalle non conformità della macchina. Un problema nel Terminal Gateway, nel rebuild o in un altro componente del framework non viene registrato come fallimento della challenge.
+
+Un ultimo limite riguarda il modello utilizzato per la correzione. VulcaTest viene eseguito con il modello locale descritto nella Sezione 3.10, mentre l’Healer utilizza Antigravity e il modello Gemini 3.8 Flash nella configurazione sperimentale adottata. L’impiego futuro di modelli locali specializzati nel code editing permetterebbe di rimuovere questa dipendenza esterna.
+
+Con questa fase il ciclo avviato da VulcaTest viene completato: una non conformità rilevata può essere diagnosticata, corretta sui sorgenti e sottoposta nuovamente allo stesso processo di verifica. Il Capitolo 5 valuta separatamente le prestazioni del collaudo, della Root Cause Analysis e della fase di healing.

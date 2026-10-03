@@ -1,4 +1,4 @@
-TITOLO: Framework AI-driven per il self-healing di scenari Cyber Range 
+TITOLO: VulcaTest: Framework agentico per verifica di conformità e self-healing di scenari Cyber Range
 
 ## 1. Introduzione
 
@@ -18,68 +18,59 @@ TITOLO: Framework AI-driven per il self-healing di scenari Cyber Range
 ## 3. Architettura e implementazione di VulcaTest
 
 3.1 Requisiti e limiti delle soluzioni generiche
-   3.1.1 Il livello del modello: guardrail e costi di esecuzione
-   3.1.2 Il livello del controllo operativo
+   3.1.1 Limiti del modello: guardrail e costi di esecuzione
+   3.1.2 Limiti sul controllo
 3.2 Principi di progettazione del sistema
-   3.2.1 Deterministico quando possibile, probabilistico quando necessario
-   3.2.2 Esecuzione basata su evidenze e rifiuto dell’auto-certificazione
-   3.2.3 Separazione delle responsabilità e specializzazione dei ruoli
-   3.2.4 Intercambiabilità e modularità architetturale
-   3.2.5 Controllo gerarchico: pianificazione a livello macro e ReAct a livello micro
 3.3 Architettura generale e flusso di coordinamento
    3.3.1 Inquadramento architetturale e gestione dello stato
    3.3.2 Punti di ingresso e avvio del workflow
    3.3.3 Comunicazione tra i componenti e strutture dati tipizzate
 3.4 Il Planner: generazione e formalizzazione dell’Attack Plan  
-   3.4.1 Architettura ibrida a due stadi
-   3.4.2 Gerarchia delle fonti e risoluzione delle ambiguità
+   3.4.1 Generazione del piano e parsing deterministico
+   3.4.2 Gerarchia delle fonti e gestione delle ambiguità
    3.4.3 Regole per la definizione dei criteri di verifica
-   3.4.4 Dimensionamento dinamico del contesto
 3.5 L’Orchestrator: controllo del workflow e gestione dello stato  
-   3.5.1 Working Memory: `VulcaTestState`
-   3.5.2 Topologia del grafo e instradamento condizionale
-3.6 L’Executor: esecuzione degli step e modalità di auditing
-   3.6.1 Auditor Mode
-   3.6.2 Gestione dinamica del budget operativo
-   3.6.3 Tool interni e recupero dei valori verificati
+   3.5.1 Stato condiviso: `VulcaTestState`
+   3.5.2 Grafo di esecuzione e condizioni di transizione
+3.6 L’Executor: esecuzione e verifica degli step
+   3.6.1 Il system prompt dell’Executor
+   3.6.2 Gestione dinamica del budget
+   3.6.3 Recupero dei valori verificati
    3.6.4 Il contratto `StepResult` e la verifica dello step
-3.7 Il Bridge di esecuzione: gestione degli strumenti e delle interazioni con il target 
-   3.7.1 Canale dell’azione: architettura a due livelli
-   3.7.2 Canale della percezione: normalizzazione dell’output e informazioni di stato
+3.7 Il Bridge di esecuzione: gestione dei tool e delle interazioni con il target
+   3.7.1 Esecuzione dei tool: HexStrike e Terminal Gateway
+   3.7.2 Normalizzazione degli output e stato delle sessioni
    3.7.3 Gestione del contesto: troncamento degli output e tool-slicing
    3.7.4 Supporto alle applicazioni terminali interattive
-3.8 Il Final Evaluator: valutazione deterministica e Root Cause Analysis  
+3.8 Il Final Evaluator: valutazione finale e Root Cause Analysis
    3.8.1 Stadio 1: raccolta delle metriche
    3.8.2 Stadio 2: diagnosi del fallimento e Root Cause Analysis
 3.9 Prompt engineering e definizione dei ruoli agentici
-   3.9.1 Sviluppo e specializzazione dei prompt
-   3.9.2 Regole esplicite e formati vincolati
-3.10 Modello locale e ottimizzazione dei parametri di inferenza
+3.10 Modello locale e configurazione dei parametri
    3.10.1 Scelta del modello locale
-   3.10.2 Configurazione e ottimizzazione dell’inferenza
+   3.10.2 Configurazione del runtime e gestione del contesto
 
-## 4. VulcaHealing: closed-loop self-healing
+## 4. Il self-healing closed-loop in VulcaTest
 
-4.1 Integrazione di VulcaHealing nel workflow closed-loop
-   4.1.1 Separazione funzionale tra validazione e autoriparazione
-   4.1.2 Estensione dello StateGraph e attivazione condizionale
-4.2 Dal ticket diagnostico alla localizzazione del difetto nell’Infrastructure as Code
-   4.2.1 Il principio dell’Heuristic Lead: sintomo vs causa radice
-   4.2.2 Dalla diagnosi alla ricetta dichiarativa: il caso DataVault
-4.3 L’Healer: delega operativa a harness agentici generici
-   4.3.1 Il ruolo complementare degli harness generici nel code editing
-   4.3.2 Architettura di integrazione con Antigravity CLI
-4.4 Prompt dell’Healer, vincoli operativi e perimetro di modifica
+4.1 Il nodo di healing nel workflow closed-loop
+   4.1.1 Separazione tra verifica e correzione
+   4.1.2 Posizione del nodo nel grafo
+4.2 Il ticket di healing
+4.3 L’agente di healing: delega a un harness agentico
+   4.3.1 Uso di un harness generico nella fase di correzione
+   4.3.2 Integrazione con Antigravity CLI
+4.4 Prompt dell’agente di healing e perimetro di modifica
    4.4.1 Vincoli di riparazione e preservazione delle vulnerabilità didattiche
-   4.4.2 Delimitazione del perimetro di scrittura e protezione del bundle
-   4.4.3 Feedback deterministico su errori di compilazione pregressi
+   4.4.2 Perimetro di lettura e scrittura
+   4.4.3 Feedback tra tentativi successivi
 4.5 Tracciamento e validazione delle modifiche
-   4.5.1 Rifiuto dell’auto-certificazione nella fase di riparazione
-   4.5.2 Snapshot, calcolo del diff deterministico e artefatti generati
-4.6 Chiusura del ciclo: ricostruzione dell’ambiente e regression testing
-   4.6.1 Pipeline di rebuild e il gate di compilazione Echo-Safe
-   4.6.2 Ripristino dello stato e regression testing integrale
-   4.6.3 Condizioni di terminazione del ciclo e limiti attuali
+   4.5.1 Snapshot e registrazione delle modifiche
+   4.5.2 Verifica del perimetro di scrittura
+   4.5.3 Classificazione dell’intervento
+4.6 Chiusura del ciclo: rebuild dell’ambiente e regression testing
+   4.6.1 Generazione del bundle e build dell’immagine
+   4.6.2 Ricreazione dell’ambiente e regression testing
+   4.6.3 Numero massimo di tentativi
 
 ## 5. Valutazione sperimentale
 

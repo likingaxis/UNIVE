@@ -99,7 +99,11 @@ Serve per capire:
 
 L'indice deve quindi essere usato come vincolo di struttura.
 
-### 5. Capitolo attuale da revisionare
+### 5. Regole di stile e capitolo di riferimento
+
+`REGOLE_STILE.md` raccoglie le decisioni concrete prese durante la revisione del Capitolo 3, che è il riferimento di stile per i capitoli successivi (`BOZZA SCRITTA/Capitolo 3 - Revisione.md`). Le regole di quel file hanno la precedenza sulle indicazioni generali di questo documento quando sono più specifiche.
+
+### 6. Capitolo attuale da revisionare
 
 È il testo principale su cui lavorare.
 
@@ -359,7 +363,7 @@ Deve descrivere **questo progetto**, con il mio ragionamento, ma in una forma ac
 
 Dopo aver allegato questo file e le fonti necessarie, si può usare un messaggio simile:
 
-> Usa `CONTESTO_REVISIONE_TESI.md` come istruzione di lavoro.  
+> Usa `CONTESTO_REVISIONE_TESI.md` e `REGOLE_STILE.md` come istruzioni di lavoro e il Capitolo 3 rivisto come riferimento di stile.  
 > Ti allego anche il PDF che definisce lo stile di scrittura, l'indice completo della tesi, i miei appunti sul progetto e il capitolo che voglio revisionare.  
 > Lavoriamo sottocapitolo per sottocapitolo. Non riscrivere tutto in una volta: prima analizziamo la sezione, individuiamo cosa suona artificiale, astratto o ridondante e poi la sistemiamo mantenendo il contenuto tecnico reale.
 
