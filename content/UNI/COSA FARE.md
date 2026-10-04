@@ -1,11 +1,8 @@
 #### Tesi
-
-- [ ] migliorare testbench
 - [ ] fare i benchmark
 - [ ] migliorare il nodo di healing
 - [ ] capitolo 3 revisione
-- [ ] indice revisione
-- [ ] capitolo 4
+- [ ] capitolo 4 revisione
 - [ ] capitolo 2+capitolo 5
 - [ ] capitolo 6+capitolo 1
 

@@ -1,6 +1,6 @@
 # Fonti – Tesi VulcaTest
 
-> **Verificato il:** 3 ottobre 2026  
+> **Verificato il:** 3 ottobre 2026 (aggiornato il 4 ottobre 2026 con le fonti del Capitolo 2)  
 > Questo file è pensato come elenco master delle fonti. Nella bibliografia finale conviene citare solo le fonti effettivamente richiamate nel testo. Per i paper, quando disponibile, è preferita la versione pubblicata rispetto al solo preprint arXiv. Per software e documentazione tecnica è consigliabile indicare anche versione/commit e data di accesso.
 
 ## 1. Cybersecurity e agenti per penetration testing
@@ -16,6 +16,14 @@
 - **[SE USATO NEL RELATED WORK] HexStrike AI MCP Agents**  
   Repository software ufficiale; non è un paper scientifico.  
   https://github.com/0x4m4/hexstrike-ai
+
+- **[CORE/CAP. 2] The Cyber Range: A Guide** (chiave `nist2023cyberrange`)  
+  Cyber Range Project Team, NICE Community Coordinating Council, National Institute of Standards and Technology (NIST), settembre 2023.  
+  https://nist.gov/system/files/documents/2023/09/29/The%20Cyber%20Range_A%20Guide.pdf
+
+- **[CORE/CAP. 2] Cyber ranges and security testbeds: Scenarios, functions, tools and architecture** (chiave `yamin2020cyberranges`)  
+  M. M. Yamin, B. Katt, V. Gkioulos, Computers & Security, vol. 88, 101636, 2020.  
+  DOI: https://doi.org/10.1016/j.cose.2019.101636
 
 ## 2. Architetture agentiche, reasoning e prompting
 
@@ -159,6 +167,22 @@ Per il `.bib` finale conviene ricontrollare i metadata della versione del paper 
 - **[SE EFFETTIVAMENTE USATO] Unsloth**  
   Repository ufficiale e citation software fornita dal progetto.  
   https://github.com/unslothai/unsloth
+
+- **[CORE/CAP. 2] Docker** (chiave `docker`)  
+  Piattaforma di containerizzazione usata per le applicazioni delle macchine generate da VulcaForge e per l'esecuzione del target.  
+  Documentazione: https://docs.docker.com/
+
+- **[CORE/CAP. 2] Ansible** (chiave `ansible`)  
+  Strumento di Infrastructure as Code con cui VulcaForge genera il playbook di provisioning della macchina.  
+  Documentazione: https://docs.ansible.com/
+
+- **[CORE/CAP. 2] Model Context Protocol – Specification** (chiave `mcp2025`)  
+  Protocollo aperto per collegare applicazioni basate su LLM a strumenti e fonti di dati esterne (versione 2025-06-18).  
+  https://modelcontextprotocol.io/specification/2025-06-18
+
+- **[CAP. 2] Claude Code – documentazione** (chiave `claudecode`)  
+  Harness agentico general-purpose citato come esempio insieme a Google Antigravity.  
+  https://code.claude.com/docs
 
 ## 7. Fonti secondarie / materiale di supporto
 
