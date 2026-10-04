@@ -12,3 +12,10 @@ node_modules
 id_rsa*
 id_ed25519*
 
+# File binari ed eseguibili pesanti negli appunti
+content/**/*.exe
+content/**/*.zip
+content/**/*.tar.gz
+content/**/*.iso
+
+
