@@ -13,7 +13,7 @@ davanti a te con animazione di scomparsa e apparizione appare la modifica su que
 	- modifica con lasso
 	- preservare il contesto della conversazione e auto apprendimento sullo stile
 	- modifica in batch dopo n feedback
-	- 
+	- premi una bolla che si gonfia e dentro appare la nota vocale, poi rilasci il tasto e passa alla bolla successiva per creare un workflow del discorso
 
 non fare tutto da zero prima fai ricerche per capire la cosa
 

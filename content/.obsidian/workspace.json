@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/COSA FARE.md",
+                "file": "UNI/Triennale/ANNO 3/HACKATON VULN/02_CHEATSHEET_OPERATIVO_GARA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "COSA FARE"
+              "title": "02_CHEATSHEET_OPERATIVO_GARA"
             }
           }
         ]
@@ -176,16 +176,22 @@
   },
   "active": "64334d30165e6a00",
   "lastOpenFiles": [
+    "UNI/Triennale/ANNO 3/HACKATON VULN/01_COSA_STUDIARE_E_ROADMAP.md",
+    "UNI/Triennale/ANNO 3/HACKATON VULN/Script utili per l'hackathon.md",
+    "UNI/Triennale/ANNO 3/HACKATON VULN/FILE UTILE PER LE ESERCITAZIONI.md",
+    "UNI/Triennale/ANNO 3/HACKATON VULN/02_CHEATSHEET_OPERATIVO_GARA.md",
+    "UNI/Triennale/ANNO 3/HACKATON VULN/00_GUIDA_E_CONTESTO_HACKATHON.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
+    "UNI/Triennale/ANNO 3/HACKATON VULN",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
+    "UNI/PROGETTI/Text Revisioning/IDEA.md",
+    "UNI/COSA FARE.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 idea.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
-    "UNI/PROGETTI/Text Revisioning/IDEA.md",
     "UNI/PROGETTI/Text Revisioning/AI_Native_Writing_Product_Overview_Short.md",
     "UNI/PROGETTI/Text Revisioning/Unconfirmed 708902.crdownload",
-    "UNI/COSA FARE.md",
     "UNI/Magistrale/ANNO1 M/ORGANIZZAZIONE ESAMI.md",
     "UNI/PROGETTI/Text Revisioning/AI_Native_Writing_Product_Spec.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/VULNERABILITÀ/ESAME/FILE UTILE PER LE ESERCITAZIONI.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/siyuan-3.8.6-win.exe",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 777637.crdownload",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
@@ -204,23 +210,17 @@
     "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260920230436.png",
     "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260920161552.png",
     "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260920124129.png",
-    "UNI/Triennale/ANNO 3/HACKATON/Copione_Luca_corretto.md",
-    "UNI/Triennale/ANNO 3/HACKATON/embedding.jpg",
-    "UNI/Triennale/ANNO 3/HACKATON/embedding.png",
-    "UNI/Triennale/ANNO 3/HACKATON/HACKATON ORACLE.md",
-    "UNI/Triennale/ANNO 3/HACKATON/mcp.png",
-    "UNI/Triennale/ANNO 3/HACKATON/tecnologie_progetto_struffoli.md",
-    "UNI/Triennale/ANNO 3/HACKATON/Struffolihackaton_Short.md",
-    "UNI/Triennale/ANNO 3/HACKATON/Struffolihackaton_Documentazione.md",
-    "UNI/Triennale/ANNO 3/HACKATON/Report di Sviluppo.md",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Copione_Luca_corretto.md",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/embedding.jpg",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/embedding.png",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/HACKATON ORACLE.md",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/mcp.png",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/tecnologie_progetto_struffoli.md",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Struffolihackaton_Short.md",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Struffolihackaton_Documentazione.md",
+    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Report di Sviluppo.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/INTELLIGENZA ARTIFICIALE/PRIMO ESONERO/IA UNICO PRIMO ESONERO.md",
     "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FONTI.md",
-    "UNI/Triennale/ANNO 3/TESI/idee_e_struttura_tesi.md",
-    "UNI/Triennale/ANNO 3/TESI/Style/CONTESTO_REVISIONE_TESI.md",
-    "UNI/Triennale/ANNO 3/TESI/Style/REGOLE_STILE.md",
-    "UNI/Triennale/ANNO 3/TESI/Style/2023_Tesi___Sapienza_Università_di_Roma__Modello_ITA_ (9).pdf",
-    "UNI/Triennale/ANNO 3/TESI/Style/~$ontespizio (1).docx"
+    "UNI/Triennale/ANNO 3/TESI/Style/2023_Tesi___Sapienza_Università_di_Roma__Modello_ITA_ (9).pdf"
   ]
 }
