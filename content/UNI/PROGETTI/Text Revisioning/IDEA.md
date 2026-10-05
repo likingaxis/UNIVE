@@ -9,6 +9,11 @@ davanti a te con animazione di scomparsa e apparizione appare la modifica su que
 	- creare e facilitare un flusso di scrittura es:
 	- utente crea nuovo documento con titolo -> chiesto il contesto a parole-> chiesti i documenti di contesto su quella cosa -> chiesto lo stile di scrittura creando uno style guide (portale con diversi esempi di scrittura una sorta di search hub) -> creare uno schema / bozza sulla cosa da trattare
 	- gestione delle immagini
+	- text to speech
+	- modifica con lasso
+	- preservare il contesto della conversazione e auto apprendimento sullo stile
+	- modifica in batch dopo n feedback
+	- 
 
 non fare tutto da zero prima fai ricerche per capire la cosa
 
