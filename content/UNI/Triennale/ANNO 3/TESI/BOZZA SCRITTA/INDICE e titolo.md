@@ -1,4 +1,4 @@
-TITOLO: VulcaTest: Framework agentico per verifica di conformità e self-healing di scenari Cyber Range
+TITOLO: VulcaTest: Un Framework agentico per la verifica di conformità e il self-healing di scenari Cyber Range
 
 ## 1. Introduzione
 

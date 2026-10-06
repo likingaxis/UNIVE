@@ -169,4 +169,4 @@ Ogni tipo di rottura è coperto su almeno 2 macchine diverse: un difetto mancato
 
 
 ##### Limitazioni
-1. nonostante la verifica
+1. nonostante la verificà
