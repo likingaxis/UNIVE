@@ -169,4 +169,10 @@ Ogni tipo di rottura è coperto su almeno 2 macchine diverse: un difetto mancato
 
 
 ##### Limitazioni
-1. nonostante la verifica
+1. nonostante la verifica manuale della correttezza degli artifacts mancano delle metriche rigorose per stabilire effettivamente se un problema nel planner o relativo agli artifacts stesso (in relazione all'esperimento 0). Scrivere che questo è comunque non un problema del nostro lavoro ma dovuto a tool preesistenti su vulcamind con human in the loop non in oggetto dello studio
+2. nella valutazione dell'healer (E2) stiamo assumendo che l'executor funzioni in tutte e 2 le run di testing prima e dopo l'healing (TP) nella seconda run non abbiamo la certezza ma assumiamo di si
+
+Disclaimer 1:
+- se il planner genera un piano non comprensibile dall'executor è il planner che deve generare cose comprensibile non l'executor che deve interpretare propriamente cose ambigue. L'executor si valida se è in grado o meno di trovare problemi dato un piano prefissato e certificato
+
+Un golden plan è un plan che ha avuto successo 3 volte
