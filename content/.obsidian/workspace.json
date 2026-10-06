@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
+                "file": "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "INDICE e titolo"
+              "title": "Benchmark"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 310
+    "width": 588.4000244140625
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -176,6 +176,8 @@
   },
   "active": "b09ac8397094122a",
   "lastOpenFiles": [
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
+    "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
@@ -219,8 +221,6 @@
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/HACKATON ORACLE.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/mcp.png",
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/tecnologie_progetto_struffoli.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Struffolihackaton_Short.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Struffolihackaton_Documentazione.md",
     "UNI/Triennale/ANNO 3/TESI/Style/2023_Tesi___Sapienza_Università_di_Roma__Modello_ITA_ (9).pdf"
   ]
 }
