@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "0975ee2ffc044bad",
+        "id": "f934cbf810b6e26d",
         "type": "tabs",
         "children": [
           {
-            "id": "64334d30165e6a00",
+            "id": "b09ac8397094122a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Triennale/ANNO 3/HACKATON VULN/02_CHEATSHEET_OPERATIVO_GARA.md",
+                "file": "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02_CHEATSHEET_OPERATIVO_GARA"
+              "title": "Benchmark"
             }
           }
         ]
@@ -174,16 +174,20 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "64334d30165e6a00",
+  "active": "b09ac8397094122a",
   "lastOpenFiles": [
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/PIANO BENCHMARK (terra terra).md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/perturbazioni.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Macchine di test e perturbazione.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
+    "UNI/Triennale/ANNO 3/HACKATON VULN/02_CHEATSHEET_OPERATIVO_GARA.md",
     "UNI/Triennale/ANNO 3/HACKATON VULN/01_COSA_STUDIARE_E_ROADMAP.md",
     "UNI/Triennale/ANNO 3/HACKATON VULN/Script utili per l'hackathon.md",
     "UNI/Triennale/ANNO 3/HACKATON VULN/FILE UTILE PER LE ESERCITAZIONI.md",
-    "UNI/Triennale/ANNO 3/HACKATON VULN/02_CHEATSHEET_OPERATIVO_GARA.md",
     "UNI/Triennale/ANNO 3/HACKATON VULN/00_GUIDA_E_CONTESTO_HACKATHON.md",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark.md",
     "UNI/Triennale/ANNO 3/HACKATON VULN",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
     "UNI/PROGETTI/Text Revisioning/IDEA.md",
     "UNI/COSA FARE.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 idea.md",
@@ -194,7 +198,6 @@
     "UNI/PROGETTI/Text Revisioning/AI_Native_Writing_Product_Spec.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/siyuan-3.8.6-win.exe",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 777637.crdownload",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
     "Pasted image 20261004204706.png",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261004204727.png",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/vulcAIn pipeline (1).excalidraw",
@@ -218,9 +221,6 @@
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/tecnologie_progetto_struffoli.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Struffolihackaton_Short.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Struffolihackaton_Documentazione.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/Report di Sviluppo.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/INTELLIGENZA ARTIFICIALE/PRIMO ESONERO/IA UNICO PRIMO ESONERO.md",
-    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
     "UNI/Triennale/ANNO 3/TESI/Style/2023_Tesi___Sapienza_Università_di_Roma__Modello_ITA_ (9).pdf"
   ]
 }

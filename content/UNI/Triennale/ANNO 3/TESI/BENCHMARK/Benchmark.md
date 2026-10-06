@@ -159,3 +159,14 @@ Ogni tipo di rottura è coperto su almeno 2 macchine diverse: un difetto mancato
 | P2 | CryptoVault, Pizzeria, PrivAudit, ConsoleGate, TunnelGate, DataVault, WebMaster |
 | P3 | PrivAudit, Citadel, CryptoVault, ConsoleGate, NetVault, TunnelGate + generico (`root.txt`) |
 | P4 | AuthGate, ConsoleGate, Pizzeria + iniettabile su ogni macchina con SSH |
+
+- assicurare il contesto prima della generazione del ground truth
+	- prima isolato da dopo
+- esperimento -> rappresenta interpretazione delle metriche con rispettiva domanda di ricerca
+- isolare il nodo dell'architettura
+- cambiare il numero di test
+- salvare corrispondenza perturbazione run ->report
+
+
+##### Limitazioni
+1. nonostante la verifica
