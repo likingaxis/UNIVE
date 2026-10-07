@@ -3,13 +3,13 @@
 VulcaTest permette di rilevare una non conformità e di raccogliere le evidenze che ne descrivono la causa. Il solo rilevamento, però, lascia ancora all’operatore il compito di intervenire sui file sorgente della macchina e di verificare nuovamente il risultato.
 
 Per chiudere questo ciclo VulcaTest include un nodo di healing, che parte dalla diagnosi del Final Evaluator, corregge i file Infrastructure as Code della macchina, la ricostruisce e avvia un nuovo test.
-
+``aggiungere un semplice schema su excalidraw con un ciclo con testing -> healing che torna indietro?``
 ## 4.1 Il nodo di healing nel workflow closed-loop
 
 Il nodo di healing aggiunge al workflow una fase di correzione, successiva al rilevamento di una non conformità. Test e correzione restano due attività separate: affidarle allo stesso agente mescolerebbe compiti che richiedono accessi all’ambiente e punti di vista diversi.
 
 - L’Executor lavora **in-band**: parte dalla macchina Kali e interagisce soltanto con i servizi esposti dal target. Non accede ai file usati per generare la macchina, perché queste informazioni non sarebbero disponibili a un utente che affronta la challenge.
-- Il nodo di healing lavora invece **out-of-band** sui file sorgente dell’infrastruttura, cioè sui file da cui la macchina viene generata: ricette, playbook Ansible, Dockerfile e sorgenti applicativi.
+- Il nodo di healing lavora invece **out-of-band** sui file sorgente dell’infrastruttura, cioè sui file da cui la macchina viene generata:`i :prima? bisogna ancora decidere se nelle liste usare i : le , o i .` ricette, playbook Ansible, Dockerfile e sorgenti applicativi.
 
 La separazione mantiene anche indipendenti verifica e correzione. Il nodo di healing può modificare la macchina, ma non i criteri con cui VulcaTest stabilisce la conformità. L’Executor può verificare la macchina, ma non correggerla durante il test.
 
@@ -26,7 +26,7 @@ Il ticket va letto tenendo conto di come è stato prodotto. Il Final Evaluator c
 ## 4.3 L’agente di healing: delega a un harness agentico
 
 La fase di healing richiede capacità diverse da quelle del conformance testing. L’Executor interagisce con un target già costruito, entro i vincoli definiti dal `TestStep`, dalla checklist e dai tool disponibili. L’agente di healing deve invece navigare i sorgenti del progetto, mettere in relazione file differenti e applicare modifiche di natura molto varia. Può trattarsi di correggere un task Ansible o un Dockerfile, ma anche di generare file mancanti, come una pagina PHP o uno script richiesto dalla challenge.
-
+``se mettessi fase di attacco anzichè collaudo?``
 Nel collaudo un harness general-purpose è stato scartato perché lascia all’agente troppa libertà (Sezione 3.1). Nella correzione questa libertà diventa utile. Non si può stabilire in anticipo quali file andranno modificati o quali strumenti serviranno, e un harness generico mette a disposizione dell’agente gli strumenti per esplorare il repository e intervenire dove serve.
 
 Per questo la modifica dei sorgenti è affidata a Google Antigravity [@googleantigravity2026], con il modello Gemini 3.8 Flash e reasoning impostato su High. Anche questo nodo potrebbe usare un modello locale, ma i modelli eseguibili sull’hardware disponibile (Sezione 3.10.1) hanno capacità limitate nella scrittura e correzione di codice, mentre i modelli di frontiera sono ottimizzati proprio per questo tipo di compito.
@@ -66,7 +66,7 @@ Il tracciamento delle modifiche è implementato in un modulo Python. Prima dell�
 Al termine della sessione il filesystem viene confrontato con lo snapshot iniziale. Dal confronto vengono prodotti `patch.diff`, che contiene le differenze riga per riga, e `HEALING_REPORT.md`, che elenca i file modificati. Il diff permette anche di misurare l’ampiezza della patch, una delle metriche usate nel Capitolo 5.
 
 Lo stesso confronto mostra se l’agente ha scritto fuori dal perimetro definito nella Sezione 4.4. In questo caso le modifiche esterne vengono annullate ripristinando lo stato dello snapshot, prima che la macchina venga ricostruita. I file coinvolti vengono elencati in `PERIMETER_VIOLATIONS.md`, così il tentativo resta documentato anche se i suoi effetti sono stati annullati.
-
+``**il prompt è solo una raccomandazione a parole, non un blocco fisico.**1. Per fargli fare il suo lavoro, hai dovuto dare all'agente i permessi di scrittura su tutta la cartella del progetto.1. Nel prompt gli dici: _"mi raccomando, modifica solo la macchina X"_.1. Ma l'agente è un LLM: ogni tanto delira, si distrae o si inventa cose (nei test reali su _GitPoison_ è andato davvero a toccare i file di _Citadel_).1. Non potendoti fidare ciecamente delle parole, hai messo il codice Python a fare da "buttafuori": prima fa una foto ai file, e se l'AI ha allucinato e ha toccato roba che non doveva toccare, Python rimette tutto a posto all'istante dallo snapshot prima di fare danni.``
 Il codice di uscita dell’agente da solo non basta a capire se sia stata applicata una correzione. Per questo l’esito della sessione viene classificato in base alle modifiche rilevate sul filesystem e all’esito dell’agente:
 
 - `PATCHED`: almeno una modifica valida all’interno del perimetro.

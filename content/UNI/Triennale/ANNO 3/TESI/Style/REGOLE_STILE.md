@@ -9,7 +9,7 @@ In caso di dubbio, vale il principio: *scrivere come nel Capitolo 3 rivisto*.
 ## 1. Lessico e ritmo
 
 - Ridurre le parole che tendono a ripetersi: **"utilizza/utilizzato"**, **"previsto"**, **"necessari"**, **"durante"**, **"quindi"**, **"inoltre"**. Alternative semplici: *usa, si appoggia a, impiega*, oppure ristrutturare la frase.
-- Frasi brevi e lineari. Se una frase ha più di una subordinata, valutare se dividerla in due.
+- Frasi lineari, senza catene di subordinate. Le frasi legate da causa, conseguenza o spiegazione si uniscono, perché spezzarle rende il testo a singhiozzo. Il punto fermo separa idee distinte. Se una frase supera le due subordinate, si divide. (Aggiornata il 7/10/2026: la vecchia regola "frasi brevi" aveva prodotto troppi punti.)
 - **"Componente" sempre al femminile** (*le componenti distinte, componenti concrete, ciascuna componente*), con articoli, aggettivi e participi accordati.
 - **"Il modello" solo quando si parla davvero del modello** (scelta, quantizzazione, runtime). Altrove nominare la componente (*il Planner*, *il Final Evaluator*), usare *l'LLM* per la parte generativa o *l'agente* per l'LLM che agisce dentro l'Executor. Per evitare che il nuovo termine si ripeta a sua volta: soggetto sottinteso, forma impersonale o passiva, frasi unite.
 - Numeri decimali in prosa con la virgola (*3,5 bit*, *0,9 GB*); nelle formule LaTeX `1{,}15`.
