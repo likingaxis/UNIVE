@@ -4,31 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "815323735575f549",
+        "id": "cf48d5174d0ff310",
         "type": "tabs",
         "children": [
           {
-            "id": "4a922cf8be5ec461",
+            "id": "359e896344fecea8",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "UNI/Magistrale/ANNO1 M/NETWORK/Network Infrastructures Theory 24-25 2.5.pdf"
+                "file": "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "Network Infrastructures Theory 24-25 2.5"
-            }
-          },
-          {
-            "id": "e606e3e309706ce9",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "RIPASSO PRIMO TEST"
+              "icon": "lucide-file",
+              "title": "CHECKLIST_RUN_OPERATIVA"
             }
           }
         ]
@@ -184,19 +174,19 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "4a922cf8be5ec461",
+  "active": "359e896344fecea8",
   "lastOpenFiles": [
-    "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Two_Hour_Guided_Reading.pdf",
-    "UNI/Magistrale/ANNO1 M/NETWORK/Network Infrastructures Theory 24-25 2.5.pdf",
-    "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.pdf",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 2.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.pdf",
+    "UNI/Magistrale/ANNO1 M/NETWORK/Network Infrastructures Theory 24-25 2.5.pdf",
+    "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Two_Hour_Guided_Reading.pdf",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 1.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Four_Lectures_Study_Guide.pdf",
-    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 2.md",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/main (1).pdf",
     "UNI/COSA FARE.md",

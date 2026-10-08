@@ -65,8 +65,8 @@ uv run python benchmark/run_matrix.py --set core15 --profile local --machines gi
 ```
 
 ### 8. TunnelGate_B2R
-- [ ] P2-07 (Run 1) — hash in `shadow.txt` disallineato
-- [ ] P3-07 (Run 1) — utente `trainee` aggiunto al gruppo `shadow`
+- [x] P2-07 (Run 1) — hash in `shadow.txt` disallineato
+- [x] P3-07 (Run 1) — utente `trainee` aggiunto al gruppo `shadow`
 ```bash
 uv run python benchmark/run_matrix.py --set core15 --profile local --machines tunnelgate -k 1
 ```
