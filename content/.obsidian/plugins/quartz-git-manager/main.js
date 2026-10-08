@@ -11,7 +11,8 @@ const DEFAULT_SETTINGS = {
   enableExitGuard: true,
   autoCommitPrefix: 'Backup appunti: ',
   customGitPath: '',
-  warnOnLargeFiles: true
+  warnOnLargeFiles: true,
+  createBackupOnFreshStart: true
 };
 
 // ==========================================================
@@ -20,6 +21,7 @@ const DEFAULT_SETTINGS = {
 class GitService {
   constructor(plugin) {
     this.plugin = plugin;
+    this._cachedRepoRoot = null;
   }
 
   get vaultPath() {
@@ -30,18 +32,34 @@ class GitService {
     return this.plugin.settings.customGitPath.trim() || 'git';
   }
 
+  async getRepoRoot() {
+    if (this._cachedRepoRoot) return this._cachedRepoRoot;
+    const res = await this.execGit(['rev-parse', '--show-toplevel'], { cwd: this.vaultPath });
+    if (res.success && res.stdout) {
+      this._cachedRepoRoot = path.normalize(res.stdout.trim());
+      return this._cachedRepoRoot;
+    }
+    return this.vaultPath;
+  }
+
   execGit(args, options = {}) {
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       const gitCmd = this.gitPath;
-      const cwd = this.vaultPath;
+      const cwd = options.cwd || (this._cachedRepoRoot || this.vaultPath);
 
       execFile(
         gitCmd,
         args,
         {
           cwd,
-          timeout: options.timeout || 30000,
-          env: { ...process.env, LANG: 'en_US.UTF-8', LC_ALL: 'en_US.UTF-8' }
+          timeout: options.timeout || 45000,
+          env: {
+            ...process.env,
+            LANG: 'en_US.UTF-8',
+            LC_ALL: 'en_US.UTF-8',
+            GIT_TERMINAL_PROMPT: '0',
+            GIT_OPTIONAL_LOCKS: '0'
+          }
         },
         (error, stdout, stderr) => {
           const out = (stdout || '').trim();
@@ -77,10 +95,24 @@ class GitService {
     return this.plugin.settings.defaultBranch;
   }
 
+  async isMergeInProgress() {
+    const res = await this.execGit(['rev-parse', '-q', '--verify', 'MERGE_HEAD']);
+    return res.success && Boolean(res.stdout);
+  }
+
+  async isRebaseInProgress() {
+    const repoRoot = await this.getRepoRoot();
+    const rebaseMerge = path.join(repoRoot, '.git', 'rebase-merge');
+    const rebaseApply = path.join(repoRoot, '.git', 'rebase-apply');
+    return fs.existsSync(rebaseMerge) || fs.existsSync(rebaseApply);
+  }
+
   async getStatus() {
+    await this.getRepoRoot();
     const branch = await this.getCurrentBranch();
     const res = await this.execGit(['status', '--porcelain', '-b']);
-    
+    const mergePending = await this.isMergeInProgress();
+
     if (!res.success) {
       return {
         success: false,
@@ -89,7 +121,8 @@ class GitService {
         ahead: 0,
         behind: 0,
         files: [],
-        hasConflicts: false,
+        hasConflicts: mergePending,
+        isMergePending: mergePending,
         largeFiles: [],
         rawError: res.stderr || res.error
       };
@@ -98,9 +131,10 @@ class GitService {
     const lines = res.stdout.split('\n').map(l => l.trimEnd()).filter(Boolean);
     let ahead = 0;
     let behind = 0;
-    let hasConflicts = false;
+    let hasConflicts = mergePending;
     const files = [];
     const largeFiles = [];
+    const repoRoot = await this.getRepoRoot();
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -136,12 +170,14 @@ class GitService {
         // Controllo dimensione file
         if (this.plugin.settings.warnOnLargeFiles && status !== 'D') {
           try {
-            const fullPath = path.join(this.vaultPath, filePath);
+            const fullPath = path.resolve(repoRoot, filePath);
             if (fs.existsSync(fullPath)) {
               const stat = fs.statSync(fullPath);
-              const sizeMb = (stat.size / (1024 * 1024)).toFixed(1);
-              if (stat.size > 25 * 1024 * 1024) {
-                largeFiles.push({ path: filePath, sizeMb });
+              if (stat && stat.isFile && stat.isFile()) {
+                const sizeMb = (stat.size / (1024 * 1024)).toFixed(1);
+                if (stat.size > 25 * 1024 * 1024) {
+                  largeFiles.push({ path: filePath, sizeMb });
+                }
               }
             }
           } catch (e) {
@@ -161,12 +197,13 @@ class GitService {
       behind,
       files,
       hasConflicts,
+      isMergePending: mergePending,
       largeFiles,
       rawError: null
     };
   }
 
-  async getRecentCommits(limit = 6) {
+  async getRecentCommits(limit = 8) {
     const res = await this.execGit(['log', '--oneline', '--decorate', `-${limit}`]);
     if (!res.success) return [];
     return res.stdout.split('\n').filter(Boolean);
@@ -179,12 +216,9 @@ class GitService {
   }
 
   async getDetailedBranches() {
-    // Aggiornamento branch remoti in background (timeout breve per non bloccare se offline)
-    await this.execGit(['fetch', '--prune', 'origin'], { timeout: 8000 });
-
+    await this.execGit(['fetch', '--prune', 'origin'], { timeout: 10000 });
     const currentBranch = await this.getCurrentBranch();
 
-    // Branch locali con eventuale upstream
     const localRes = await this.execGit(['branch', '--format=%(refname:short)|%(upstream:short)']);
     const allBranches = new Map();
 
@@ -203,7 +237,6 @@ class GitService {
       });
     }
 
-    // Branch remoti
     const remoteRes = await this.execGit(['branch', '-r', '--format=%(refname:short)']);
     if (remoteRes.success && remoteRes.stdout) {
       remoteRes.stdout.split('\n').filter(Boolean).forEach(line => {
@@ -230,7 +263,6 @@ class GitService {
       isCurrent: (b.name === currentBranch)
     }));
 
-    // Ordina: branch corrente in cima, poi alfabetico
     list.sort((a, b) => {
       if (a.isCurrent) return -1;
       if (b.isCurrent) return 1;
@@ -244,11 +276,19 @@ class GitService {
   }
 
   async fetch() {
-    return await this.execGit(['fetch', 'origin']);
+    return await this.execGit(['fetch', '--prune', 'origin']);
   }
 
   async pull(branch) {
     return await this.execGit(['pull', 'origin', branch]);
+  }
+
+  async abortMerge() {
+    return await this.execGit(['merge', '--abort']);
+  }
+
+  async abortRebase() {
+    return await this.execGit(['rebase', '--abort']);
   }
 
   async switchBranch(targetBranch) {
@@ -274,7 +314,6 @@ class GitService {
 
     const commitRes = await this.execGit(['commit', '-m', message]);
     if (!commitRes.success) {
-      // Se non c'erano modifiche da committare ma ci sono commit pendenti
       const stdoutLower = (commitRes.stdout || '').toLowerCase();
       const stderrLower = (commitRes.stderr || '').toLowerCase();
       if (
@@ -282,7 +321,7 @@ class GitService {
         stdoutLower.includes('no changes added to commit') || stderrLower.includes('no changes added to commit') ||
         stdoutLower.includes('nothing added to commit') || stderrLower.includes('nothing added to commit')
       ) {
-        // ok, procediamo al push
+        // ok, nessun nuovo file, procediamo al push di eventuali commit pendenti
       } else {
         return { success: false, step: 'git commit', error: commitRes.stderr || commitRes.error };
       }
@@ -296,15 +335,117 @@ class GitService {
     return { success: true };
   }
 
+  async stashAndPull(branch) {
+    const stashRes = await this.execGit(['stash', 'save', '-u', 'Auto-stash prima di pull']);
+    const pulledRes = await this.pull(branch);
+    let popRes = null;
+    if (stashRes.success && !stashRes.stdout.includes('No local changes to save')) {
+      popRes = await this.execGit(['stash', 'pop']);
+    }
+    return {
+      success: pulledRes.success,
+      stashSuccess: stashRes.success,
+      popSuccess: popRes ? popRes.success : true,
+      pullError: pulledRes.stderr || pulledRes.error,
+      popError: popRes ? (popRes.stderr || popRes.error) : null
+    };
+  }
+
+  // ==========================================================
+  // FRESH START RESET (RIPRISTINO COMPLETO DA CLOUD / FRESH CLONE)
+  // ==========================================================
+  async freshStartReset(branch, createBackup = true, onProgress = null) {
+    const update = (msg) => { if (onProgress) onProgress(msg); };
+
+    update('🌐 1/5: Connessione a GitHub e scaricamento aggiornamenti...');
+    const fetchRes = await this.execGit(['fetch', '--prune', 'origin'], { timeout: 60000 });
+    if (!fetchRes.success) {
+      return {
+        success: false,
+        step: 'fetch origin',
+        error: fetchRes.stderr || fetchRes.error
+      };
+    }
+
+    // Backup di sicurezza delle modifiche locali
+    if (createBackup) {
+      update('💾 2/5: Creazione backup locale di sicurezza prima della sovrascrittura...');
+      try {
+        const statusRes = await this.getStatus();
+        if (statusRes.files && statusRes.files.length > 0) {
+          const repoRoot = await this.getRepoRoot();
+          const now = new Date();
+          const stamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+          const backupDir = path.join(this.vaultPath, '.obsidian', 'backups', `fresh_start_${stamp}`);
+
+          for (const f of statusRes.files) {
+            if (f.status === 'D') continue;
+            const src = path.resolve(repoRoot, f.path);
+            if (fs.existsSync(src)) {
+              try {
+                const stat = fs.statSync(src);
+                if (stat.isFile()) {
+                  const dest = path.join(backupDir, f.path);
+                  fs.mkdirSync(path.dirname(dest), { recursive: true });
+                  fs.copyFileSync(src, dest);
+                }
+              } catch (e) {
+                // Copia singolo file non critica
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('[Git Sync] Backup locale prima del fresh start fallito (procedo ugualmente):', err);
+      }
+    } else {
+      update('⏩ 2/5: Backup locale saltato.');
+    }
+
+    update('🧹 3/5: Annullamento di conflitti, merge o rebase in sospeso...');
+    await this.abortMerge();
+    await this.abortRebase();
+
+    update('🗑️ 4/5: Rimozione file e cartelle orfane non tracciate...');
+    await this.execGit(['clean', '-fd']);
+
+    update(`🔄 5/5: Allineamento forzato al commit più recente di origin/${branch}...`);
+    const resetRes = await this.execGit(['reset', '--hard', `origin/${branch}`]);
+    if (!resetRes.success) {
+      return {
+        success: false,
+        step: `git reset --hard origin/${branch}`,
+        error: resetRes.stderr || resetRes.error
+      };
+    }
+
+    // Ulteriore passata di pulizia post-reset
+    await this.execGit(['clean', '-fd']);
+
+    return { success: true };
+  }
+
   formatError(errText) {
     if (!errText) return 'Errore sconosciuto durante l\'operazione Git.';
     if (errText.includes('Could not resolve host') || errText.includes('Failed to connect') || errText.includes('Network is unreachable')) {
-      return '🌐 <b>Dispositivo Offline</b>: Connessione a GitHub non disponibile. Le modifiche rimangono salvate in locale sul tuo PC.';
+      return '🌐 <b>Dispositivo Offline</b>: Impossibile raggiungere GitHub. Verifica la connessione Internet.';
+    }
+    if (errText.includes('unable to unlink old') || errText.includes('Invalid argument') || errText.includes('Permission denied')) {
+      return '🔒 <b>File Bloccato da Windows</b>: Uno o più file sono aperti o bloccati dal sistema operativo. Prova a chiudere le schede in Obsidian o a eseguire un <b>Fresh Start</b>.';
+    }
+    if (errText.includes('Pulling is not possible because you have unmerged files') || errText.includes('unmerged files') || errText.includes('MERGE_HEAD exists')) {
+      return '🛑 <b>Merge con Conflitti in Sospeso</b>: C\'è un tentativo di unione non terminato. Clicca su "Annulla Merge" o esegui un "Fresh Start" per ripristinare il repository.';
+    }
+    if (errText.includes('diverged') || errText.includes('have diverged')) {
+      return '🔀 <b>Cronologia Divergente</b>: La cronologia locale e quella di GitHub sono separate (ad es. per riscrittura commit). Esegui un <b>Fresh Start</b> per riallinearti al cloud.';
+    }
+    if (errText.includes('Updates were rejected because the remote contains work') || errText.includes('non-fast-forward')) {
+      return '⚠️ <b>Aggiornamenti Rifiutati</b>: Su GitHub sono presenti nuovi commit non ancora scaricati. Esegui un <b>Pull</b> o un <b>Fresh Start</b> prima di inviare.';
     }
     if (errText.includes('Automatic merge failed') || errText.includes('conflict')) {
-      return '🛑 <b>Conflitto di Merge</b>: Sono presenti modifiche contrastanti tra locale e remoto. Risolvi i file in conflitto prima di procedere.';
+      return '🛑 <b>Conflitto di Merge</b>: Sono presenti modifiche contrastanti tra locale e remoto. Puoi risolvere i file oppure annullare il merge.';
     }
-    if (errText.includes('Permission denied') || errText.includes('Authentication failed')) {
+    if (errText.includes('Permission denied (publickey)') || errText.includes('Authentication failed')) {
       return '🔑 <b>Errore di Autenticazione</b>: Credenziali Git o chiave SSH non valide o scadute.';
     }
     return errText;
@@ -351,6 +492,26 @@ class QuartzGitManagerPlugin extends Plugin {
       id: 'commit-push',
       name: 'Esegui Commit & Push delle note',
       callback: () => new CommitPushModal(this.app, this).open()
+    });
+
+    this.addCommand({
+      id: 'fresh-start-cloud',
+      name: 'Fresh Start: Ripristina e allinea forzatamente con GitHub',
+      callback: () => new FreshStartModal(this.app, this).open()
+    });
+
+    this.addCommand({
+      id: 'abort-merge',
+      name: 'Annulla Conflitti / Merge in sospeso',
+      callback: async () => {
+        const res = await this.git.abortMerge();
+        if (res.success) {
+          new Notice('✅ Merge annullato con successo. Repository ripristinato.');
+        } else {
+          new Notice(`⚠️ Nessun merge attivo da annullare oppure errore:\n${res.stderr || res.error}`);
+        }
+        this.refreshStatusBar();
+      }
     });
 
     this.addCommand({
@@ -401,7 +562,7 @@ class QuartzGitManagerPlugin extends Plugin {
   setupExitGuard() {
     this.beforeUnloadHandler = (event) => {
       if (this.isClosing || !this.settings.enableExitGuard) {
-        return; // Permetti chiusura
+        return;
       }
 
       event.preventDefault();
@@ -412,11 +573,9 @@ class QuartzGitManagerPlugin extends Plugin {
 
       this.git.getStatus().then((status) => {
         if (status.isClean && (!status.ahead || status.ahead === 0)) {
-          // Tutto pulito e sincronizzato
           this.isClosing = true;
           window.close();
         } else {
-          // Modifiche locali o commit in sospeso
           new ExitGuardModal(this.app, this, status).open();
         }
       }).catch(() => {
@@ -465,7 +624,7 @@ class QuartzGitManagerPlugin extends Plugin {
       this.statusBarEl.createEl('span', {
         text: ` ↓${status.behind}`,
         cls: 'qgm-badge-prod',
-        attr: { title: `${status.behind} commit da scaricare dal server (esegui pull)` }
+        attr: { title: `${status.behind} commit da scaricare da GitHub (esegui pull)` }
       });
     }
 
@@ -477,7 +636,7 @@ class QuartzGitManagerPlugin extends Plugin {
       });
     }
 
-    if (status.hasConflicts) {
+    if (status.hasConflicts || status.isMergePending) {
       this.statusBarEl.createEl('span', {
         text: ' 🛑 CONFLITTO',
         cls: 'qgm-badge-prod'
@@ -497,13 +656,13 @@ class QuartzGitManagerPlugin extends Plugin {
       return;
     }
 
-    if (!status.isClean) {
-      new Notice(`⚠️ [Git Sync] Rilevate ${status.files.length} modifiche locali. Pull all'avvio sospeso per proteggere il tuo lavoro locale.`, 8000);
+    if (status.hasConflicts || status.isMergePending) {
+      new Notice(`🛑 [Git Sync] ATTENZIONE: Merge o conflitti in sospeso! Apri Git Sync Manager per risolverli o fare Fresh Start.`, 10000);
       return;
     }
 
-    if (status.hasConflicts) {
-      new Notice(`🛑 [Git Sync] ATTENZIONE: Sono presenti file in conflitto non risolti!`, 10000);
+    if (!status.isClean) {
+      new Notice(`⚠️ [Git Sync] Rilevate ${status.files.length} modifiche locali. Pull automatico saltato per salvaguardare il tuo lavoro locale.`, 7000);
       return;
     }
 
@@ -512,27 +671,38 @@ class QuartzGitManagerPlugin extends Plugin {
 
     if (pullRes.success) {
       if (pullRes.stdout.includes('Already up to date')) {
-        new Notice(`✅ [Git Sync] Vault aggiornato (${status.branch}).`, 3000);
+        new Notice(`✅ [Git Sync] Vault aggiornato (${status.branch}).`, 2500);
       } else {
-        new Notice(`📥 [Git Sync] Nuove note scaricate con successo da origin/${status.branch}!`, 6000);
+        new Notice(`📥 [Git Sync] Nuove note scaricate con successo da origin/${status.branch}!`, 5000);
       }
       this.refreshStatusBar();
     } else {
       const formatted = this.git.formatError(pullRes.stderr || pullRes.error);
-      new Notice(`⚠️ [Git Sync] Sincronizzazione all'avvio non riuscita:\n${pullRes.stderr || pullRes.error}`, 9000);
+      new Notice(`⚠️ [Git Sync] Sincronizzazione all'avvio non riuscita:\n${pullRes.stderr || pullRes.error}`, 8000);
     }
   }
 
   async executePull() {
-    const branch = await this.git.getCurrentBranch();
+    const status = await this.git.getStatus();
+    const branch = status.branch || await this.git.getCurrentBranch();
+
+    if (status.hasConflicts || status.isMergePending) {
+      new PullConflictDialogModal(this.app, this, status).open();
+      return;
+    }
+
     new Notice(`🔄 [Git Sync] Pull da origin/${branch} in corso...`);
     const pullRes = await this.git.pull(branch);
 
     if (pullRes.success) {
-      new Notice(`✅ [Git Sync] Pull completato su ${branch}!`);
+      if (pullRes.stdout.includes('Already up to date')) {
+        new Notice(`✅ [Git Sync] Già aggiornato con origin/${branch}!`);
+      } else {
+        new Notice(`📥 [Git Sync] Modifiche scaricate con successo da origin/${branch}!`);
+      }
       this.refreshStatusBar();
     } else {
-      new Notice(`❌ [Git Sync] Errore durante il pull:\n${pullRes.stderr || pullRes.error}`, 10000);
+      new PullConflictDialogModal(this.app, this, status, pullRes).open();
     }
   }
 }
@@ -555,16 +725,35 @@ class MainManagerModal extends Modal {
 
     const status = await this.plugin.git.getStatus();
 
-    // Avviso Conflitti
-    if (status.hasConflicts) {
+    // Avviso Conflitti o Merge pendente
+    if (status.hasConflicts || status.isMergePending) {
       const conflictBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-danger' });
-      conflictBox.innerHTML = '🛑 <b>CONFLITTO DI MERGE RILEVATO</b>: Ci sono note con conflitti non risolti. Apri i file contrassegnati e rimuovi i marcatori di conflitto prima di sincronizzare.';
+      conflictBox.innerHTML = `🛑 <b>CONFLITTO O MERGE BLOCCATO</b>: È presente un merge interrotto o ci sono file in conflitto.<br>Puoi annullare il merge oppure forzare il ripristino pulito da GitHub.`;
+      
+      const conflictBtnRow = conflictBox.createEl('div', { attr: { style: 'margin-top: 8px; display: flex; gap: 8px;' } });
+      const abortBtn = conflictBtnRow.createEl('button', { text: '↩️ Annulla Merge (Abort)' });
+      abortBtn.addEventListener('click', async () => {
+        const res = await this.plugin.git.abortMerge();
+        if (res.success) {
+          new Notice('✅ Merge annullato. Repository sbloccato.');
+          this.close();
+          new MainManagerModal(this.app, this.plugin).open();
+        } else {
+          new Notice(`❌ Errore annullamento: ${res.stderr || res.error}`);
+        }
+      });
+
+      const freshBtn = conflictBtnRow.createEl('button', { text: '🔄 Risolvi con Fresh Start', cls: 'qgm-btn-warning' });
+      freshBtn.addEventListener('click', () => {
+        this.close();
+        new FreshStartModal(this.app, this.plugin).open();
+      });
     }
 
     // Avviso Remote Ahead (Behind)
     if (status.behind > 0) {
       const behindBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
-      behindBox.innerHTML = `⚠️ <b>Repository Remoto più Recente</b>: Ci sono <b>${status.behind} commit</b> sul server da scaricare.<br>💡 <i>Consiglio: Esegui prima un <b>Pull</b> per evitare divergenze.</i>`;
+      behindBox.innerHTML = `⚠️ <b>GitHub è più Recente</b>: Ci sono <b>${status.behind} commit</b> sul server da scaricare.<br>💡 <i>Consiglio: Esegui un <b>Pull</b> prima di salvare nuove note per evitare conflitti.</i>`;
     }
 
     // Avviso File Grandi
@@ -592,7 +781,7 @@ class MainManagerModal extends Modal {
     });
 
     const row4 = infoCard.createEl('div', { cls: 'qgm-info-row' });
-    row4.createEl('span', { text: 'Sincronizzazione Server:', cls: 'qgm-info-label' });
+    row4.createEl('span', { text: 'Sincronizzazione GitHub:', cls: 'qgm-info-label' });
     if (status.ahead === 0 && status.behind === 0) {
       row4.createEl('span', { text: '✅ Perfettamente allineato con origin', cls: 'qgm-info-value' });
     } else {
@@ -602,7 +791,7 @@ class MainManagerModal extends Modal {
       });
     }
 
-    // Bottoni Azioni
+    // Bottoni Azioni Principali
     const actionsContainer = contentEl.createEl('div', { cls: 'qgm-actions-list' });
 
     new Setting(actionsContainer)
@@ -619,7 +808,7 @@ class MainManagerModal extends Modal {
 
     new Setting(actionsContainer)
       .setName('📤 Salva & Invia (Commit + Push)')
-      .setDesc('Crea un commit e carica le modifiche sul server')
+      .setDesc('Crea un commit con le note modificate e caricale su GitHub')
       .addButton(btn => btn
         .setButtonText('Commit & Push')
         .setClass('qgm-btn-success')
@@ -650,6 +839,189 @@ class MainManagerModal extends Modal {
           new StatusLogModal(this.app, this.plugin).open();
         })
       );
+
+    // SEZIONE RIPRISTINO DI EMERGENZA (FRESH START)
+    new Setting(actionsContainer)
+      .setName('🆘 Fresh Start / Ripristino da GitHub')
+      .setDesc('Risolve blocchi, divergenze o conflitti allineando forzatamente il vault allo stato esatto di GitHub (equivalente a un clone fresco).')
+      .addButton(btn => btn
+        .setButtonText('🔄 Fresh Start')
+        .setClass('qgm-btn-warning')
+        .onClick(() => {
+          this.close();
+          new FreshStartModal(this.app, this.plugin).open();
+        })
+      );
+  }
+
+  onClose() {
+    this.contentEl.empty();
+  }
+}
+
+// ==========================================================
+// MODAL: FRESH START (RIPRISTINO TOTALE DA CLOUD)
+// ==========================================================
+class FreshStartModal extends Modal {
+  constructor(app, plugin) {
+    super(app);
+    this.plugin = plugin;
+  }
+
+  async onOpen() {
+    const { contentEl } = this;
+    contentEl.empty();
+    contentEl.addClass('qgm-modal');
+
+    contentEl.createEl('h2', { text: '🔄 Fresh Start: Ripristino da GitHub' });
+
+    const status = await this.plugin.git.getStatus();
+    const branch = status.branch || this.plugin.settings.defaultBranch;
+
+    const descBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-info' });
+    descBox.innerHTML = `Questa operazione garantisce che il vault locale sia <b>identico al 100% alla versione presente su GitHub</b> (branch <code>origin/${branch}</code>), risolvendo istantaneamente qualsiasi problema di conflitti, file orfani o divergenza storica.<br><br>
+<b>Cosa farà esattamente:</b>
+<ul style="margin: 6px 0 0 18px; padding: 0;">
+  <li>Scarica l'ultimo stato aggiornato da GitHub (<code>git fetch --prune</code>).</li>
+  <li>Crea una copia di backup automatica delle modifiche locali non sincronizzate in <code>.obsidian/backups/</code>.</li>
+  <li>Annulla qualsiasi merge o rebase interrotto (<code>git merge --abort</code>).</li>
+  <li>Rimuove i file non tracciati e orfani (<code>git clean -fd</code>).</li>
+  <li>Resetta forzatamente il branch locale a quello remoto (<code>git reset --hard origin/${branch}</code>).</li>
+</ul>`;
+
+    // Opzione Backup
+    const backupOptionContainer = contentEl.createEl('div', { cls: 'qgm-checkbox-row' });
+    const backupCheckbox = backupOptionContainer.createEl('input', {
+      type: 'checkbox',
+      attr: { id: 'qgm-backup-checkbox' }
+    });
+    backupCheckbox.checked = this.plugin.settings.createBackupOnFreshStart;
+
+    const backupLabel = backupOptionContainer.createEl('label', {
+      text: ' Crea copia di sicurezza locale prima di sovrascrivere (consigliato)',
+      attr: { for: 'qgm-backup-checkbox' }
+    });
+
+    const statusMsgContainer = contentEl.createEl('div', {
+      cls: 'qgm-info-card',
+      attr: { style: 'margin-top: 14px; display: none;' }
+    });
+
+    const btnGroup = contentEl.createEl('div', { cls: 'qgm-button-group' });
+    const cancelBtn = btnGroup.createEl('button', { text: 'Annulla' });
+    cancelBtn.addEventListener('click', () => this.close());
+
+    const confirmBtn = btnGroup.createEl('button', {
+      text: `🚀 Esegui Fresh Start (${branch})`,
+      cls: 'qgm-btn-warning'
+    });
+
+    confirmBtn.addEventListener('click', async () => {
+      confirmBtn.disabled = true;
+      cancelBtn.disabled = true;
+      statusMsgContainer.style.display = 'block';
+
+      const updateProgress = (text) => {
+        statusMsgContainer.innerHTML = `<span class="qgm-loading-spinner"></span> ${text}`;
+      };
+
+      const res = await this.plugin.git.freshStartReset(branch, backupCheckbox.checked, updateProgress);
+
+      if (res.success) {
+        statusMsgContainer.innerHTML = '✅ <b>Ripristino completato con successo!</b> Il vault è ora perfettamente identico a GitHub.';
+        new Notice('🎉 Fresh Start completato! Vault allineato al cloud al 100%.', 6000);
+        this.plugin.refreshStatusBar();
+        setTimeout(() => this.close(), 1600);
+      } else {
+        confirmBtn.disabled = false;
+        cancelBtn.disabled = false;
+        const formattedErr = this.plugin.git.formatError(res.error);
+        statusMsgContainer.innerHTML = `❌ <b>Errore durante ${res.step}:</b><br>${formattedErr}<br><pre style="white-space: pre-wrap; font-size: 11px; margin-top: 6px;">${res.error}</pre>`;
+      }
+    });
+  }
+
+  onClose() {
+    this.contentEl.empty();
+  }
+}
+
+// ==========================================================
+// MODAL: DIALOGO CONFLITTO O MODIFICHE PENDENTI SU PULL
+// ==========================================================
+class PullConflictDialogModal extends Modal {
+  constructor(app, plugin, status, pullError = null) {
+    super(app);
+    this.plugin = plugin;
+    this.status = status;
+    this.pullError = pullError;
+  }
+
+  onOpen() {
+    const { contentEl } = this;
+    contentEl.empty();
+    contentEl.addClass('qgm-modal');
+
+    contentEl.createEl('h2', { text: '⚠️ Sincronizzazione Pull Bloccata' });
+
+    const alertBox = contentEl.createEl('div', { cls: 'qgm-alert qgm-alert-warning' });
+    if (this.pullError) {
+      const formatted = this.plugin.git.formatError(this.pullError.stderr || this.pullError.error);
+      alertBox.innerHTML = `<b>Il pull non è riuscito:</b><br>${formatted}<br><pre style="white-space: pre-wrap; font-size: 11px; margin-top: 6px;">${this.pullError.stderr || this.pullError.error}</pre>`;
+    } else {
+      alertBox.innerHTML = `Sono presenti conflitti o modifiche locali pendenti che impediscono un pull automatico pulito.`;
+    }
+
+    contentEl.createEl('p', { text: 'Come desideri procedere?' });
+
+    const actionsContainer = contentEl.createEl('div', { cls: 'qgm-actions-list' });
+
+    // Opzione 1: Stash & Pull
+    new Setting(actionsContainer)
+      .setName('📦 Salva temporaneamente (Stash) ed esegui Pull')
+      .setDesc('Mette temporaneamente da parte le modifiche locali, scarica da GitHub e riapplica il tuo lavoro.')
+      .addButton(btn => btn
+        .setButtonText('Stash & Pull')
+        .onClick(async () => {
+          this.close();
+          new Notice('🔄 Esecuzione Stash & Pull in corso...');
+          const res = await this.plugin.git.stashAndPull(this.status.branch);
+          if (res.success && res.popSuccess) {
+            new Notice('✅ Sincronizzazione con Stash completata!');
+          } else {
+            new Notice(`⚠️ Pull eseguito ma si sono verificati avvisi durante il ripristino delle modifiche.`);
+          }
+          this.plugin.refreshStatusBar();
+        })
+      );
+
+    // Opzione 2: Fresh Start
+    new Setting(actionsContainer)
+      .setName('🔄 Fresh Start (Sovrascrivi con la versione di GitHub)')
+      .setDesc('Allinea forzatamente il vault allo stato di GitHub. Crea un backup di sicurezza locale automatico.')
+      .addButton(btn => btn
+        .setButtonText('Fresh Start')
+        .setClass('qgm-btn-warning')
+        .onClick(() => {
+          this.close();
+          new FreshStartModal(this.app, this.plugin).open();
+        })
+      );
+
+    // Opzione 3: Commit & Push prima del Pull
+    new Setting(actionsContainer)
+      .setName('💾 Crea prima un Commit del lavoro locale')
+      .setDesc('Registra le modifiche locali in un commit prima di effettuare il pull.')
+      .addButton(btn => btn
+        .setButtonText('Commit Modifiche')
+        .onClick(() => {
+          this.close();
+          new CommitPushModal(this.app, this.plugin, this.status).open();
+        })
+      );
+
+    const btnGroup = contentEl.createEl('div', { cls: 'qgm-button-group' });
+    btnGroup.createEl('button', { text: 'Chiudi' }).addEventListener('click', () => this.close());
   }
 
   onClose() {
@@ -1108,6 +1480,17 @@ class QuartzGitSettingTab extends PluginSettingTab {
         .setValue(this.plugin.settings.enableExitGuard)
         .onChange(async (value) => {
           this.plugin.settings.enableExitGuard = value;
+          await this.plugin.saveSettings();
+        })
+      );
+
+    new Setting(containerEl)
+      .setName('Backup Automatico su Fresh Start')
+      .setDesc('Crea una cartella di backup locale di sicurezza in .obsidian/backups/ prima di sovrascrivere il vault dal cloud.')
+      .addToggle(toggle => toggle
+        .setValue(this.plugin.settings.createBackupOnFreshStart)
+        .onChange(async (value) => {
+          this.plugin.settings.createBackupOnFreshStart = value;
           await this.plugin.saveSettings();
         })
       );

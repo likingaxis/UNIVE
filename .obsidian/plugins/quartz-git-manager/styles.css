@@ -293,3 +293,7 @@
 @keyframes qgm-spin {
   to { transform: rotate(360deg); }
 }
+
+.qgm-btn-fresh { background-color: var(--color-purple, #805ad5) !important; color: white !important; }
+.qgm-checkbox-row { display: flex; align-items: center; gap: 8px; margin: 12px 0; font-size: 13px; cursor: pointer; }
+
