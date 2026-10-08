@@ -13,30 +13,22 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Two_Hour_Guided_Reading.pdf"
+                "file": "UNI/Magistrale/ANNO1 M/NETWORK/Network Infrastructures Theory 24-25 2.5.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "Network_Infrastructures_Two_Hour_Guided_Reading"
+              "title": "Network Infrastructures Theory 24-25 2.5"
             }
-          }
-        ]
-      },
-      {
-        "id": "1ce752320a8d383c",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "df6c61c06c730a7d",
+            "id": "e606e3e309706ce9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 1.md",
-                "mode": "source",
-                "source": false
+                "file": "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.pdf"
               },
-              "icon": "lucide-file",
-              "title": "NET LESSON 1"
+              "icon": "lucide-file-text",
+              "title": "RIPASSO PRIMO TEST"
             }
           }
         ]
@@ -194,15 +186,17 @@
   },
   "active": "4a922cf8be5ec461",
   "lastOpenFiles": [
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Two_Hour_Guided_Reading.pdf",
-    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 1.md",
-    "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.md",
-    "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Four_Lectures_Study_Guide.pdf",
+    "UNI/Magistrale/ANNO1 M/NETWORK/Network Infrastructures Theory 24-25 2.5.pdf",
     "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.pdf",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 1.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Four_Lectures_Study_Guide.pdf",
     "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 2.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/main (1).pdf",
     "UNI/COSA FARE.md",
@@ -212,12 +206,10 @@
     "UNI/Triennale/ANNO 3/TESI/CESTINO/Benchmark.md",
     "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark UNICO.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/perchè ho usato le stesse macchine per fare i test e l'improving.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak3",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak2",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FONTI.md.bak",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak",
     "UNI/Triennale/ANNO 3/TESI/Call/spiegazione benchmark da fare.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261008111500.png",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/executor_sequence.png",
