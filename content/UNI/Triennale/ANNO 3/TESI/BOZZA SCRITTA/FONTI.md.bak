@@ -90,18 +90,6 @@
   arXiv:2609.08149, 2026.  
   https://arxiv.org/abs/2609.08149
 
-- **[CORE/CAP. 5 – METRICHE] τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains** (chiave `yao2024taubench`)  
-  S. Yao, N. Shinn, P. Razavi, K. Narasimhan. arXiv:2406.12045, 2024. Introduce la metrica pass^k per l'affidabilità degli agenti su ripetizioni.  
-  https://arxiv.org/abs/2406.12045
-
-- **[CORE/CAP. 5 – COSTI E VALIDITÀ] AI Agents That Matter** (chiave `kapoor2025agents`)  
-  S. Kapoor, B. Stroebl, Z. S. Siegel, N. Nadgir, A. Narayanan. Transactions on Machine Learning Research (TMLR), 2025. Valutazione degli agenti attenta ai costi e all'uso di casi tenuti da parte (holdout).  
-  https://arxiv.org/abs/2407.01502
-
-- **[CORE/CAP. 5 – PERTURBAZIONI] Is Mutation an Appropriate Tool for Testing Experiments?** (chiave `andrews2005mutation`)  
-  J. H. Andrews, L. C. Briand, Y. Labiche. 27th International Conference on Software Engineering (ICSE 2005), pp. 402–411. Valuta l'uso di difetti iniettati artificialmente (mutanti) come sostituti dei difetti reali negli esperimenti di testing.  
-  DOI: https://doi.org/10.1109/ICSE.2005.1553583
-
 ## 4. Modello locale e quantizzazione
 
 - **[CORE] Qwen3.8-27B – model card ufficiale** (chiave `qwenteam2026qwen38`)  

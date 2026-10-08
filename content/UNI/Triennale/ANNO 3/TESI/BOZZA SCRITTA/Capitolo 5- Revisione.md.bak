@@ -1,0 +1,35 @@
+Per Realizzare i benchmark sul framework vulcatest vi è stata una certa difficoltà dovuta alla diversità delle casistiche in gioco, mi sono affidato a diversi benchmark per definire il modo migliore possibile per fare una analisi accurata sulla mia seguente architettura, io ora scriverò le idee ma poi è bene distinguere dove saranno riportati i riferimenti ai paper letti da me
+per quanto riguarda l'idea alla base è fondamentale fare delle precisazioni il mio caso di studio si riferisce al voler misurare correttamente l'operato di vulcatest cercando di ridurre il meno possibile le varianze del resto della catena vulcain, per quanto sia impossibile ridurle del tutto vista la stretta dipendenza dei seguenti nodi si presuppone comunque una riduzione del resto della catena
+l'idea alla base della catena dei benchmark prevede l'inclusione di 
+Artefatti generati da vulcamind->planner->executor->final evaluator-> healing
+
+l'idea alla base del sistema di benchmark realizzato è stato quello di fare una generazione di macchine nuove che includessero una buona gamma di vulnerabilità, dopo aver fatto ciò (non so se ha senso elencarle tutte e 8 è da capire forse no? forse mostrare una tabella con le macchine?)
+ogni macchina è stata testata e controllata sia manualmente che dopo varie esecuzioni di vulcatest fino al perfezionamento di quest'ultime con l'obiettivo di avere delle macchine golden state (è importante usare le terminologie giuste come dataset ground truth ecc quindi aiutami in quanto relatore su questo)
+una volta sistemate le macchine nella loro intended path e definite effettivamente come golden, si vuole applicare un'idea utile per diversi scopi, quello di aggiungere delle perturbazioni controllate ai file yaml di generazione di quest'ultime con l'idea di poter controllare adeguatamente e in modo sensato ogni fase dell'esecuzione sotto un determinato errore aggiunto da noi artificialmente
+per quanto riguarda le perturbazioni quest'ultime si sono divise in 3 tipologie principali 
+
+P1: tipologia di tipo bloccante e detrattivo, l'healer dovrà aggiungere qualcosa e invece l'executor dovrà segnalare una mancanza ad esempio rimozione di risorse php, ruoli, utenti ecc... 
+
+P2: alterazioni silenziose che non creano rumore ma misurano l'accuratezza delle evidenze lette dall'executor qui l'healer deve modificare, flag manomesse e inesatte, cambi di anche solo 1 carattere di valori, hash cambiati 
+
+P3: aggiunta di scorciatoie, qui l'healer deve rimuovere ad esempio flag con permessi troppo aperti che non dovrebbero essere così, aggiunte di utenti in gruppi non corretti e troppo permissivi, aggiunta di zone AXFR per il DNS 
+
+##### Come ho realizzato le macchine golden state
+bisogna integrare quello che ho scritto sopra ma in modo più completo che dici?
+
+inoltre ci tengo a precisare che i casi di realizzazione delle macchine golden state sono tutti isolati dalle successive fasi di testing, il contesto di ogni nodo è isolato del tutto sia per ogni esecuzione che per ogni correzione effettuata precedentemente
+
+per fare dei benchmark adeguati e dare diverse considerazioni si sono definite delle metriche tracciate durante tutto il workflow
+
+si sono prefissati diversi esperimenti prenderli da benchmark unico
+##### Limitazioni
+1. nonostante la verifica manuale della correttezza degli artifacts mancano delle metriche rigorose per stabilire effettivamente se un problema nel planner o relativo agli artifacts stesso (in relazione all'esperimento 0). Scrivere che questo è comunque non un problema del nostro lavoro ma dovuto a tool preesistenti su vulcamind con human in the loop non in oggetto dello studio
+2. nella valutazione dell'healer (E2) stiamo assumendo che l'executor funzioni in tutte e 2 le run di testing prima e dopo l'healing (TP) nella seconda run non abbiamo la certezza ma assumiamo di si
+
+Disclaimer 1:
+- se il planner genera un piano non comprensibile dall'executor è il planner che deve generare cose comprensibile non l'executor che deve interpretare propriamente cose ambigue. L'executor si valida se è in grado o meno di trovare problemi dato un piano prefissato e certificato
+
+Un golden plan è un plan che ha avuto successo 3 volte
+
+poi bisogna mettere i vari dati raccolti comprensivi anche di alcune cose non scritte qui come i token consumati e i tempi, quelli sono esperimenti in più?
+devo prendere diversi test e farne dei casi studio su cosa è accaduto in quella determinata run? prendo i più interessanti?

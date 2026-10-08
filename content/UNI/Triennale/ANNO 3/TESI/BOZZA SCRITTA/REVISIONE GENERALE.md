@@ -17,35 +17,42 @@ Lista di lavoro unica: osservazioni dell'assistente approvate + note scritte a m
 - [x] §2.1–2.5 e introduzione riscritti con le note di Luca (7/10). Resta aperta solo la fonte VulcAIn dai tutor.
 
 ### Cap. 3
-- [ ] §3.2 principio 3 — rimando alla Sezione 2.4 (MetaGPT) per l'impostazione role-based.
-- [ ] §3.3 — togliere "Prima di descrivere l'architettura nel dettaglio, è utile inquadrare…"; fondere il paragrafo CoALA con la riga su `VulcaTestState`.
-- [ ] §3.3 — distinguere componenti sviluppate e strumenti integrati (frase e/o figura).
-- [ ] §3.4 / §3.8 — uniformare la presentazione dei due stadi.
-- [ ] §3.8 — "Infrastructure as Code" → IaC (acronimo già definito nel Cap. 2).
-- [ ] §3.8 — `SPECIFICATION_DEFECT`: togliere "la macchina è conforme". Comportamento reale: il nodo di healing parte comunque, l'agente chiude con `DECLINED` senza patch, il controller salta rebuild e re-test e la run termina (coerente con §4.5).
-- [ ] §3.10.2 — togliere i valori di default, che passano al §5.4.
-- [ ] §3.10 apertura — non ripetere il motivo del modello locale, ora dichiarato nel §3.1 ("Il modello locale usato da Planner, Executor e Final Evaluator è stato configurato…").
+- [x] §3.2 principio 3 — rimando alla Sezione 2.4 (MetaGPT) per l'impostazione role-based.
+- [x] §3.3 — togliere "Prima di descrivere l'architettura nel dettaglio, è utile inquadrare…"; fondere il paragrafo CoALA con la riga su `VulcaTestState`.
+- [x] §3.3 — distinguere componenti sviluppate e strumenti integrati (frase e/o figura).
+- [x] §3.8 — stadi come lista `- **Stadio 1:** …` (§3.4 già fatto).
+- [x] §3.8 — "Infrastructure as Code" → IaC (acronimo già definito nel Cap. 2).
+- [x] §3.8 — `SPECIFICATION_DEFECT`: togliere "la macchina è conforme". Comportamento reale: il nodo di healing parte comunque, l'agente chiude con `DECLINED` senza patch, il controller salta rebuild e re-test e la run termina (coerente con §4.5).
+- [x] §3.10.2 — tolti i valori di default (8/10).
+- [x] §3.10 apertura — non ripetere il motivo del modello locale, ora dichiarato nel §3.1 ("Il modello locale usato da Planner, Executor e Final Evaluator è stato configurato…").
+- [x] §3.9–3.10 ritocchi mirati (8/10).
+- [x] §3.7 ritocchi di forma e §3.8 riscritto (8/10).
+- [x] §3.4–3.6 riscritti (8/10). Aggiunta nota [^pydantic] nel §3.3 e fonte `pydantic` in FONTI.md e references.bib.
 - [x] Introduzione e §3.1–3.3 riscritti (7/10). Ricordare: il testo nuovo usa l'apostrofo ' (uniformare nella passata finale).
 
-### Cap. 4
-- [ ] Introduzione — "Infrastructure as Code" → IaC; anticipare il ruolo del ciclo di controllo rispetto all'agente.
-- [ ] §4.1 — il nodo di healing lavora sulla ricetta IaC e sugli eventuali sorgenti applicativi dedicati, non su playbook e Dockerfile (generati da VulcaForge in `out/<nome>` e rigenerati a ogni ricostruzione, coerente con §4.4).
+- [ ] Figura 3.1 — distinguere con colore o bordo diverso le componenti sviluppate nella tesi (Planner, parser, Orchestrator, Executor, Bridge, Terminal Gateway, Final Evaluator, nodo di healing) dagli strumenti esterni (LangGraph, HexStrike, runtime del modello locale, Antigravity), con legenda. Aggiornare la didascalia.
+- [ ] (Facoltativa, se resta tempo) Nuova figura nel §3.6 — ciclo di uno step: agente, Executor, Bridge e target, fino a `submit_step_result` e al ricalcolo dello `status` (da disegnare su Excalidraw).
 
-- [ ] §4.2 — aggiungere in chiusura: la classificazione del Final Evaluator (solo evidenze in-band) è un'ipotesi; il ticket arriva al nodo di healing anche con `SPECIFICATION_DEFECT` e l'agente la conferma sui sorgenti (out-of-band); se non trova difetti chiude senza modifiche (→ §4.5).
+### Cap. 4
+- [x] Cap. 4 completato (8/10): intro con Figura 4.1 segnaposto, §4.1–4.3, §4.4 etichette e perimetro come istruzione del prompt, §4.5 motivazione del controllo sul perimetro.
+- [x] Introduzione — "Infrastructure as Code" → IaC; anticipare il ruolo del ciclo di controllo rispetto all'agente.
+- [x] §4.1 — il nodo di healing lavora sulla ricetta IaC e sugli eventuali sorgenti applicativi dedicati, non su playbook e Dockerfile (generati da VulcaForge in `out/<nome>` e rigenerati a ogni ricostruzione, coerente con §4.4).
+
+- [x] §4.2 — (ridotto a rimando, il concetto è ora nel §3.8) aggiungere in chiusura: la classificazione del Final Evaluator (solo evidenze in-band) è un'ipotesi; il ticket arriva al nodo di healing anche con `SPECIFICATION_DEFECT` e l'agente la conferma sui sorgenti (out-of-band); se non trova difetti chiude senza modifiche (→ §4.5).
 
 ### Cap. 1 (da ricordare in stesura)
 - [ ] §1.2 — dichiarare il contributo come mechanism engineering (oltre al prompt engineering): non si addestra un nuovo modello, si progetta l'harness che ne controlla l'esecuzione.
 
 ### Cap. 5 (da ricordare in stesura)
-- [ ] §5.4 — valori di default della finestra di contesto e hardware.
+- [ ] §5.4 — valori di default tolti dal §3.10.2: k = 3, α = 1,15, R_out = 8192 (Planner) / 4096 (Final Evaluator), S = 2048, W_base = 15.872, W_max = 40.960 token. Riportare anche l'hardware (GPU 16 GB VRAM, 64 GB RAM), che resta citato anche nel §3.10.1.
 
 ### Cap. 6 (da ricordare in stesura)
 - [ ] Sviluppi futuri: ricerca degli unintended path con VulcaTest black-box (richiamata nel §2.2).
 
 ### Passata finale di forma (tutti i capitoli)
-- [ ] Apostrofi uniformi (Cap. 2 usa `'`, Cap. 3–4 `’`).
-- [ ] Controllo terminologia (REGOLE_STILE §6), rimandi tra sezioni, citazioni alla prima occorrenza.
-- [ ] Porting nel `.tex` e confronto frase per frase.
+- [x] Apostrofi uniformi: tutti `'` (8/10).
+- [x] Controllo terminologia, rimandi, citazioni (8/10): aggiunte le citazioni di LangGraph, HexStrike, llama.cpp, Unsloth e Antigravity alla prima occorrenza nel §3.3.
+- [x] Porting nel `.tex` di Cap. 2, 3 e 4 e confronto frase per frase (8/10). Figure con `[H]`, Figura 4.1 in `images/healing_loop.png`, `parskip` con spazio ridotto a 6pt.
 
 ## Domande aperte
 

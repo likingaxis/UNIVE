@@ -38,28 +38,28 @@ uv run python benchmark/run_matrix.py --set core15 --profile local --machines ci
 uv run python benchmark/run_matrix.py --set core15 --profile local --machines cryptovault --cells P3-03 -k 1 --force
 ### 4. CryptoVault_B2R
 - [x] P2-03 (Run 1) — 1 carattere alterato in `.key` (`2026! -> 2026?`)
-- [ ] P3-03 (Run 1) — permessi/ownership deboli su `.key` o `backup.enc`
+- [x] P3-03 (Run 1) — permessi/ownership deboli su `.key` o `backup.enc`
 ```bash
 uv run python benchmark/run_matrix.py --set core15 --profile local --machines cryptovault -k 1
 ```
 
 ### 5. ConsoleGate_B2R
-- [ ] P1-13 (Run 1) — permessi cartella cron ristretti (`0775 -> 0755`)
-- [ ] P2-06 (Run 1) — token autenticazione demone TCP disallineato
+- [x] P1-13 (Run 1) — permessi cartella cron ristretti (`0775 -> 0755`)
+- [x] P2-06 (Run 1) — token autenticazione demone TCP disallineato
 ```bash
 uv run python benchmark/run_matrix.py --set core15 --profile local --machines consolegate -k 1
 ```
 
 ### 6. NetVault_B2R
-- [ ] P1-16 (Run 1) — zona DNS AXFR rimossa
-- [ ] P3-06 (Run 1) — zona AXFR secondaria aperta non prevista
+- [x] P1-16 (Run 1) — zona DNS AXFR rimossa
+- [x] P3-06 (Run 1) — zona AXFR secondaria aperta non prevista
 ```bash
 uv run python benchmark/run_matrix.py --set core15 --profile local --machines netvault -k 1
 ```
 
 ### 7. GitPoison_B2R
-- [ ] P1-14 (Run 1) — esposizione directory `.git` rimossa
-- [ ] P3-08 (Run 1) — `root.txt` con permessi laschi `0644` (check negativo)
+- [x] P1-14 (Run 1) — esposizione directory `.git` rimossa
+- [x] P3-08 (Run 1) — `root.txt` con permessi laschi `0644` (check negativo)
 ```bash
 uv run python benchmark/run_matrix.py --set core15 --profile local --machines gitpoison -k 1
 ```

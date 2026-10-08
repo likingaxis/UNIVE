@@ -1,0 +1,136 @@
+# Capitolo 5 — Valutazione sperimentale
+
+## 5.1 Obiettivi della valutazione e Test Oracle Problem
+
+La valutazione sperimentale misura l'affidabilità di VulcaTest nei tre compiti descritti nei capitoli precedenti: generare un Attack Plan eseguibile, riconoscere e diagnosticare una non conformità e ripararla. Per farlo bisogna stabilire con cosa confrontare l'esito di una run, e nel software testing questo è il problema dell'oracolo (_Test Oracle Problem_): per giudicare se un sistema si comporta correttamente serve un riferimento che descriva il comportamento atteso, e costruirlo può essere difficile quanto il test stesso [@barr2015oracle]. Nel caso di VulcaTest il problema si presenta in una forma particolare, perché il sistema da valutare è a sua volta un verificatore: per sapere se il suo verdetto su una macchina è corretto bisogna conoscere in anticipo se la macchina è conforme.
+
+Una valutazione end-to-end, in cui ogni run parte dalla documentazione della challenge e arriva fino all'eventuale correzione, non permette di rispondere a questa domanda. Il workflow attraversa più componenti in sequenza, e un fallimento può dipendere da un piano ambiguo, da un errore dell'Executor, da una diagnosi sbagliata o da una patch inefficace, senza che dal solo esito sia possibile stabilire quale componente lo abbia prodotto. Inoltre, se la macchina contiene un difetto non noto, non c'è modo di sapere se il verdetto finale sia corretto.
+
+Per questo la valutazione segue due principi. Il primo è costruire un riferimento noto prima di qualsiasi misura: macchine verificate manualmente come conformi e piani validati su di esse (Sezione 5.2), a cui vengono poi aggiunti difetti iniettati intenzionalmente nei sorgenti (Sezione 5.3). Lo stato di ogni macchina è così noto per costruzione, e ogni verdetto può essere confrontato con quello atteso. Il secondo è valutare le componenti separatamente, fissando gli input di ciascuna: il Planner viene valutato su macchine conformi, la rilevazione con un piano già validato e l'healing soltanto sulle non conformità rilevate correttamente. Ogni esperimento risponde così a una domanda distinta, e un fallimento può essere attribuito alla componente che lo ha prodotto.
+
+La struttura dell'Attack Plan rende questa analisi più precisa. Cybench scompone ogni challenge in subtask intermedi, così da misurare fin dove arriva l'agente anche quando non ottiene la flag [@zhang2025cybench]. In VulcaTest la stessa funzione è svolta dagli step e dalle loro checklist: l'esito di ogni step indica in quale punto del percorso il test si è fermato e quale condizione non è stata soddisfatta, e permette quindi di verificare non solo se un difetto è stato rilevato, ma anche se è stato rilevato nel punto in cui era stato introdotto.
+
+La valutazione riguarda VulcaTest e non l'intera pipeline VulcAIn. La documentazione delle challenge prodotta da VulcaMind viene rivista manualmente prima degli esperimenti e non è oggetto di misura (Sezione 5.8).
+
+## 5.2 Costruzione della ground truth
+
+Il riferimento con cui confrontare gli esiti delle run viene costruito prima degli esperimenti, in una fase indicata come E0 che non produce misure, ma stabilisce per ogni macchina uno stato noto e un piano di test validato.
+
+Le macchine usate nella valutazione sono state generate con VulcAIn: la documentazione della challenge da VulcaMind e la ricetta IaC da VulcaForge. Per ciascuna, la fase E0 segue quattro passaggi:
+
+- **Revisione della documentazione:** `DESCRIPTION.md`, `STORYLINE.md` e `WRITEUP.md` vengono controllati e, dove necessario, corretti a mano, in modo che descrivano l'intended path senza ambiguità.
+- **Qualificazione della macchina:** la ricetta IaC viene corretta finché la macchina non risulta risolvibile lungo l'intended path, e la verifica viene svolta manualmente seguendo il writeup.
+- **Generazione del piano:** l'Attack Plan viene generato dal Planner e corretto a mano solo dove impedisce l'avanzamento del test, ad esempio per un comando scritto in modo errato. Non vengono aggiunti né rimossi controlli dalla checklist.
+- **Validazione del piano:** il piano viene eseguito sulla macchina qualificata e considerato valido dopo tre run consecutive concluse con esito `COMPLETED`.
+
+La macchina ottenuta al termine della qualificazione prende il nome di **Golden Machine**: la versione della challenge considerata conforme, a cui viene riportato l'ambiente prima di ogni run. Il piano validato prende il nome di **Golden Plan**, e deve soddisfare due requisiti. Il primo è essere corretto rispetto alla macchina, cioè verificare l'intended path documentato, e viene garantito dalla verifica manuale. Il secondo è essere eseguibile dall'Executor senza ambiguità, e viene verificato dalle tre run. Le tre run non certificano quindi la correttezza del piano, ma la sua stabilità. Il Golden Plan non è l'unico piano valido per la macchina, ma un riferimento fisso che negli esperimenti successivi permette di escludere la variabilità introdotta dal Planner.
+
+Ogni run parte da uno stato noto. Prima di ogni esecuzione la macchina viene ricostruita a partire dalla ricetta della Golden Machine, eventualmente perturbata (Sezione 5.3), e nessuna componente conserva il contesto delle run precedenti: Planner, Executor e Final Evaluator ricevono solo gli input della run corrente, e ogni sessione dell'agente di healing parte senza memoria dei tentativi precedenti, salvo le informazioni passate attraverso il filesystem (Sezione 4.4).
+
+Le macchine sono le stesse usate durante lo sviluppo di VulcaTest, nella loro versione non perturbata. Le modifiche introdotte in quella fase hanno riguardato sia la gestione dell'interazione con il target sia i prompt, e queste ultime sono state formulate in modo generico (Sezione 3.9). Prima della campagna sperimentale codice, prompt e Golden Plan sono stati congelati. Le perturbazioni, invece, non sono state usate durante lo sviluppo. Ne segue che i risultati sulle macchine perturbate misurano la capacità di rilevare difetti mai incontrati, mentre quelli sulle macchine non perturbate vanno letti come una stima ottimistica (Sezione 5.8).
+
+## 5.3 Dataset: macchine di riferimento e perturbazioni controllate
+
+La valutazione usa un insieme di macchine Boot-to-Root generate con VulcAIn, ciascuna qualificata come Golden Machine secondo il procedimento della Sezione 5.2. Le macchine coprono tecniche diverse, in modo che la verifica non sia misurata su un unico tipo di vulnerabilità: ricognizione ed enumerazione web, sfruttamento di servizi di rete, cracking offline di credenziali, movimento laterale e privilege escalation attraverso binari SUID, cronjob, permessi di gruppo o configurazioni errate. La Tabella 5.1 riporta, per ogni macchina, le tecniche principali dell'intended path e il numero di step del relativo Golden Plan.
+
+[TABELLA 5.1 — placeholder: macchine di riferimento, tecniche dell'intended path, numero di step]
+
+Sulle Golden Machine vengono poi iniettati difetti controllati, modificando la ricetta IaC da cui la macchina viene generata. L'iniezione controllata di difetti è una tecnica consolidata nel software testing, in cui guasti noti vengono introdotti di proposito per misurare la capacità di un sistema di rilevarli [@andrews2005mutation]. Qui l'obiettivo è analogo: ogni perturbazione rende la macchina non conforme in un punto noto, così che il verdetto di VulcaTest possa essere confrontato con uno stato atteso. Poiché la perturbazione agisce sul sorgente e non sulla macchina già costruita, lo stesso difetto è riproducibile a ogni ricostruzione dell'ambiente.
+
+Le perturbazioni sono raggruppate in tre classi, definite in base al tipo di difetto introdotto nel sorgente e all'azione che la correzione richiede:
+
+- **P1 — Omissione (_under-provisioning_):** manca un elemento necessario a completare un passaggio del percorso, ad esempio un task di provisioning non eseguito, un file non creato o un record di configurazione assente. Il difetto si manifesta con un errore esplicito e bloccante, come una risorsa non raggiungibile o un comando che non trova ciò che si aspetta, e la correzione richiede di reintrodurre l'elemento mancante.
+- **P2 — Alterazione di valore (_mis-provisioning_):** l'elemento è presente e raggiungibile, ma contiene un valore errato, come una credenziale, una chiave o un token disallineati rispetto al resto della macchina. Il difetto non produce un errore immediato: il passaggio che usa il valore si conclude senza segnalazioni, e la non conformità emerge più avanti, nel passaggio che dipende da quel dato. La correzione richiede di riallineare il valore, senza aggiungere o togliere elementi.
+- **P3 — Eccesso di permessi (_over-provisioning_):** la macchina resta risolvibile, ma una configurazione troppo permissiva consente di scavalcare un passaggio formativo, ad esempio permessi troppo aperti su un file che dovrebbe essere protetto o un utente inserito in un gruppo privilegiato. Questo tipo di difetto è rilevabile solo se la checklist del Golden Plan contiene un controllo negativo, cioè una condizione che deve fallire, come l'impossibilità di leggere un file con privilegi insufficienti. La correzione richiede di restringere il permesso o rimuovere la scorciatoia.
+
+Le perturbazioni P3 sono state progettate sul sorgente IaC, indipendentemente dai controlli presenti negli Attack Plan. Una perturbazione P3 che agisce su un invariante non verificato dal Golden Plan non è quindi rilevabile per costruzione, e un eventuale mancato rilevamento di questo tipo viene distinto, nell'analisi dei risultati, da un errore di rilevazione dell'Executor (Sezione 5.8).
+
+La classe di una perturbazione, che descrive il tipo di difetto e l'azione di correzione, è indipendente dal tipo di difetto diagnosticato dal Final Evaluator (`defect_type`), che indica invece dove nasce il difetto nella pipeline di generazione (Sezione 3.8). Una stessa classe può corrispondere a difetti diagnosticati in modo diverso: un'omissione P1, ad esempio, può derivare sia da un task mai generato nella ricetta (`IAC_GENERATION_DEFECT`) sia da un valore di configurazione errato (`CONFIG_DEFECT`). La Tabella 5.2 elenca le perturbazioni usate nella valutazione, con la macchina, la classe, il tipo di difetto atteso e lo step del Golden Plan in cui il fallimento è atteso.
+
+[TABELLA 5.2 — placeholder: elenco delle perturbazioni (ID, macchina, descrizione sintetica, classe P1–P3, defect_type atteso, step atteso)]
+
+## 5.4 Disegno sperimentale e configurazione
+
+La valutazione è divisa in tre esperimenti, ciascuno dei quali isola una parte del workflow fissandone gli input con gli elementi della ground truth (Sezione 5.2).
+
+- **E1 — Planner:** misura con quale frequenza il Planner genera, a partire dalla documentazione della challenge, un Attack Plan eseguibile sulla Golden Machine. Il piano viene generato a ogni run ed eseguito su una macchina non perturbata, e la run è considerata riuscita se termina con esito `COMPLETED`. Il piano non deve coincidere con il Golden Plan, ma essere operativamente valido.
+- **E2 — Rilevazione e diagnosi:** misura, a parità di piano, con quale accuratezza VulcaTest distingue una macchina conforme da una che contiene un difetto noto e lo diagnostica correttamente. Ogni run usa il Golden Plan e viene eseguita su una Golden Machine, come controllo, oppure su una macchina perturbata. L'esperimento valuta insieme l'Executor, che deve rilevare il difetto, e il Final Evaluator, che deve classificarlo nel ticket.
+- **E3 — Healing:** misura con quale frequenza il nodo di healing ripristina la conformità di una macchina dopo una non conformità rilevata correttamente. L'esperimento parte soltanto dalle run di E2 classificate come veri positivi. La correzione viene verificata ricostruendo la macchina e rieseguendo lo stesso Golden Plan.
+
+In E1 vale un'assunzione sul rapporto tra Planner ed Executor. Il Planner deve produrre istruzioni che l'Executor possa eseguire, e non è compito dell'Executor interpretare in modo euristico un piano ambiguo o incompleto. Se una run di E1 fallisce perché il piano non è eseguibile, il fallimento è attribuito al Planner. L'Executor viene invece valutato in E2, su piani già certificati.
+
+In E3 non vengono considerati i falsi positivi, perché su una macchina conforme non c'è nulla da correggere, né i falsi negativi, perché senza ticket il nodo di healing non viene attivato. Restano esclusi anche i difetti di specifica (`SPECIFICATION_DEFECT`): in questi casi il comportamento atteso è che l'agente di healing non modifichi la macchina (Sezione 4.5), e includerli confonderebbe la misura della capacità di correzione.
+
+Ogni configurazione viene ripetuta tre volte, e le ripetizioni non rappresentano casi indipendenti, ma misurano la stabilità del sistema sullo stesso scenario. La Tabella 5.3 riporta il numero di run previste per ciascun esperimento.
+
+[TABELLA 5.3 — placeholder: esperimenti, condizioni, numero di run]
+
+Tutti gli esperimenti sono stati eseguiti con la stessa configurazione, congelata prima della campagna. L'ambiente dispone di una GPU con 16 GB di VRAM e 64 GB di RAM, e il modello locale è quello descritto nella Sezione 3.10.1. La finestra di contesto di Planner e Final Evaluator è dimensionata con i parametri della Sezione 3.10.2, impostati a $k = 3$, $\alpha = 1{,}15$, $S = 2048$, $W_{\text{base}} = 15.872$ e $W_{\text{max}} = 40.960$ token, con una riserva per l'output $R_{\text{out}}$ di 8192 token per il Planner e 4096 per il Final Evaluator. Il budget di turni dell'Executor è quello di default (Sezione 3.6). Il nodo di healing dispone di un solo tentativo di correzione per run: se la macchina ricostruita non supera il nuovo test, la run termina con l'esito di quest'ultimo.
+
+## 5.5 Metriche di valutazione
+
+Ogni esperimento usa metriche proprie, calcolate a partire dai dati registrati in `run_summary.json` (Sezione 3.8) e dagli artefatti della fase di healing (Sezione 4.5).
+
+Per il Planner (E1) la metrica principale è il tasso di successo, cioè la frazione di run concluse con esito `COMPLETED`:
+
+$$SR_{\text{Planner}} = \frac{\text{run completate}}{\text{run totali}}$$
+
+In E2 gli esiti delle run vengono classificati con una matrice di confusione, in cui la classe positiva corrisponde alla presenza di un difetto. Una run su macchina perturbata è un vero positivo (TP) solo se termina con un ticket e lo step fallito coincide con quello atteso per la perturbazione (Tabella 5.2). Una run su macchina perturbata che termina senza ticket è un falso negativo (FN). Su una Golden Machine, una run con ticket è un falso positivo (FP) e una run completata è un vero negativo (TN). Le run su macchina perturbata che producono un ticket in uno step diverso da quello atteso vengono riportate a parte: il sistema ha segnalato un problema, ma non il difetto introdotto. Dalla matrice si ricavano:
+
+$$\text{Recall} = \frac{TP}{TP + FN} \qquad \text{Specificity} = \frac{TN}{TN + FP}$$
+
+$$\text{Precision} = \frac{TP}{TP + FP} \qquad F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+Per i veri positivi viene valutata anche l'accuratezza diagnostica, cioè la frazione di ticket in cui il `defect_type` indicato dal Final Evaluator coincide con quello atteso.
+
+Le metriche precedenti sono calcolate sulle singole run e non indicano se gli errori sono distribuiti tra i casi o concentrati su alcuni. Per questo, raggruppando le tre ripetizioni di ogni configurazione, si calcolano due misure aggiuntive: pass@3, la frazione di configurazioni in cui il verdetto atteso viene ottenuto in almeno una ripetizione, e pass^3, la frazione in cui viene ottenuto in tutte e tre [@yao2024taubench]. Per uno strumento di verifica la seconda è la più significativa, perché misura se il verdetto su una stessa macchina è ripetibile.
+
+Per il nodo di healing (E3) la metrica principale è il tasso di successo della correzione:
+
+$$HSR = \frac{\text{TP la cui macchina ricostruita supera il nuovo test}}{\text{TP sottoposti al nodo di healing}}$$
+
+Accanto all'HSR vengono riportati l'esito della sessione dell'agente (`PATCHED`, `DECLINED`, `OUT_OF_SCOPE`, `ERROR`), l'ampiezza della patch, misurata dal numero di righe modificate in `patch.diff`, e le eventuali violazioni del perimetro registrate in `PERIMETER_VIOLATIONS.md`.
+
+[PLACEHOLDER — aggiungere le altre metriche raccolte (da completare)]
+
+In tutti gli esperimenti vengono infine registrati la durata di ogni run e i token consumati da ciascuna componente, compreso l'agente di healing. Queste misure non descrivono la correttezza del sistema, ma il costo necessario a ottenerla, un aspetto che la valutazione degli agenti tende a trascurare [@kapoor2025agents].
+
+---
+
+## Note di bozza di Luca (da togliere a fine capitolo)
+
+Per Realizzare i benchmark sul framework vulcatest vi è stata una certa difficoltà dovuta alla diversità delle casistiche in gioco, mi sono affidato a diversi benchmark per definire il modo migliore possibile per fare una analisi accurata sulla mia seguente architettura, io ora scriverò le idee ma poi è bene distinguere dove saranno riportati i riferimenti ai paper letti da me
+per quanto riguarda l'idea alla base è fondamentale fare delle precisazioni il mio caso di studio si riferisce al voler misurare correttamente l'operato di vulcatest cercando di ridurre il meno possibile le varianze del resto della catena vulcain, per quanto sia impossibile ridurle del tutto vista la stretta dipendenza dei seguenti nodi si presuppone comunque una riduzione del resto della catena
+l'idea alla base della catena dei benchmark prevede l'inclusione di 
+Artefatti generati da vulcamind->planner->executor->final evaluator-> healing
+
+l'idea alla base del sistema di benchmark realizzato è stato quello di fare una generazione di macchine nuove che includessero una buona gamma di vulnerabilità, dopo aver fatto ciò (non so se ha senso elencarle tutte e 8 è da capire forse no? forse mostrare una tabella con le macchine?)
+ogni macchina è stata testata e controllata sia manualmente che dopo varie esecuzioni di vulcatest fino al perfezionamento di quest'ultime con l'obiettivo di avere delle macchine golden state (è importante usare le terminologie giuste come dataset ground truth ecc quindi aiutami in quanto relatore su questo)
+una volta sistemate le macchine nella loro intended path e definite effettivamente come golden, si vuole applicare un'idea utile per diversi scopi, quello di aggiungere delle perturbazioni controllate ai file yaml di generazione di quest'ultime con l'idea di poter controllare adeguatamente e in modo sensato ogni fase dell'esecuzione sotto un determinato errore aggiunto da noi artificialmente
+per quanto riguarda le perturbazioni quest'ultime si sono divise in 3 tipologie principali 
+
+P1: tipologia di tipo bloccante e detrattivo, l'healer dovrà aggiungere qualcosa e invece l'executor dovrà segnalare una mancanza ad esempio rimozione di risorse php, ruoli, utenti ecc... 
+
+P2: alterazioni silenziose che non creano rumore ma misurano l'accuratezza delle evidenze lette dall'executor qui l'healer deve modificare, flag manomesse e inesatte, cambi di anche solo 1 carattere di valori, hash cambiati 
+
+P3: aggiunta di scorciatoie, qui l'healer deve rimuovere ad esempio flag con permessi troppo aperti che non dovrebbero essere così, aggiunte di utenti in gruppi non corretti e troppo permissivi, aggiunta di zone AXFR per il DNS 
+
+##### Come ho realizzato le macchine golden state
+bisogna integrare quello che ho scritto sopra ma in modo più completo che dici?
+
+inoltre ci tengo a precisare che i casi di realizzazione delle macchine golden state sono tutti isolati dalle successive fasi di testing, il contesto di ogni nodo è isolato del tutto sia per ogni esecuzione che per ogni correzione effettuata precedentemente
+
+per fare dei benchmark adeguati e dare diverse considerazioni si sono definite delle metriche tracciate durante tutto il workflow
+
+si sono prefissati diversi esperimenti prenderli da benchmark unico
+##### Limitazioni
+1. nonostante la verifica manuale della correttezza degli artifacts mancano delle metriche rigorose per stabilire effettivamente se un problema nel planner o relativo agli artifacts stesso (in relazione all'esperimento 0). Scrivere che questo è comunque non un problema del nostro lavoro ma dovuto a tool preesistenti su vulcamind con human in the loop non in oggetto dello studio
+2. nella valutazione dell'healer (E2) stiamo assumendo che l'executor funzioni in tutte e 2 le run di testing prima e dopo l'healing (TP) nella seconda run non abbiamo la certezza ma assumiamo di si
+
+Disclaimer 1:
+- se il planner genera un piano non comprensibile dall'executor è il planner che deve generare cose comprensibile non l'executor che deve interpretare propriamente cose ambigue. L'executor si valida se è in grado o meno di trovare problemi dato un piano prefissato e certificato
+
+Un golden plan è un plan che ha avuto successo 3 volte
+
+poi bisogna mettere i vari dati raccolti comprensivi anche di alcune cose non scritte qui come i token consumati e i tempi, quelli sono esperimenti in più?
+devo prendere diversi test e farne dei casi studio su cosa è accaduto in quella determinata run? prendo i più interessanti?

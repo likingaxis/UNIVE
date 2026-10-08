@@ -4,96 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "a42552429a26a30c",
+        "id": "815323735575f549",
         "type": "tabs",
         "children": [
           {
-            "id": "f8283a98e6f59354",
+            "id": "4a922cf8be5ec461",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/main (1).pdf"
+                "file": "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Two_Hour_Guided_Reading.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "main (1)"
-            }
-          },
-          {
-            "id": "51f66a28dc4a0a14",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "CHECKLIST_RUN_OPERATIVA"
-            }
-          },
-          {
-            "id": "cad83350834976a9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/COSA FARE.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "COSA FARE"
+              "title": "Network_Infrastructures_Two_Hour_Guided_Reading"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       },
       {
-        "id": "9edee955eeefd7ab",
+        "id": "1ce752320a8d383c",
         "type": "tabs",
         "children": [
           {
-            "id": "9b4ca46309650e5a",
+            "id": "df6c61c06c730a7d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
+                "file": "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Capitolo 2 - Revisione"
-            }
-          },
-          {
-            "id": "5c08a711617a3c0f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Capitolo 3 - Revisione"
-            }
-          },
-          {
-            "id": "ca4bfabf1d4269b2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Capitolo 4 - Revisione"
+              "title": "NET LESSON 1"
             }
           }
         ]
@@ -249,23 +192,40 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "cad83350834976a9",
+  "active": "4a922cf8be5ec461",
   "lastOpenFiles": [
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Two_Hour_Guided_Reading.pdf",
+    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 1.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Four_Lectures_Study_Guide.pdf",
+    "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.pdf",
+    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 2.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
-    "UNI/COSA FARE.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/main (1).pdf",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/REVISIONE GENERALE.md",
-    "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.md",
-    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 2.md",
+    "UNI/COSA FARE.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak5",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak4",
+    "UNI/Triennale/ANNO 3/TESI/Call/Call pasquale 2.md",
+    "UNI/Triennale/ANNO 3/TESI/CESTINO/Benchmark.md",
+    "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark UNICO.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/perchè ho usato le stesse macchine per fare i test e l'improving.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak3",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak2",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FONTI.md.bak",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak",
+    "UNI/Triennale/ANNO 3/TESI/Call/spiegazione benchmark da fare.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261008111500.png",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/executor_sequence.png",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/executor_sequence.svg",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261008103606.png",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/REVISIONE GENERALE.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/BENCHMARK SHORT.md",
     "UNI/Triennale/ANNO 3/TESI/GUIDA_STESURA_TESI.md",
-    "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 1.md",
-    "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.pdf",
-    "UNI/Triennale/ANNO 3/TESI/CESTINO/Benchmark.md",
     "UNI/Triennale/ANNO 3/TESI/CESTINO/Macchine di test e perturbazione.md",
     "UNI/Triennale/ANNO 3/TESI/CESTINO/piano_benchmark_vulcatest.md",
     "UNI/Triennale/ANNO 3/TESI/CESTINO/PIANO BENCHMARK (terra terra).md",
@@ -273,28 +233,11 @@
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON VULN/02_CHEATSHEET_OPERATIVO_GARA.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON VULN/01_COSA_STUDIARE_E_ROADMAP.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON VULN/Script utili per l'hackathon.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON VULN/FILE UTILE PER LE ESERCITAZIONI.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON VULN/00_GUIDA_E_CONTESTO_HACKATHON.md",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON VULN",
-    "UNI/PROGETTI/Text Revisioning/IDEA.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 idea.md",
-    "UNI/PROGETTI/Text Revisioning/Unconfirmed 708902.crdownload",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/siyuan-3.8.6-win.exe",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 777637.crdownload",
     "Pasted image 20261004204706.png",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261004204727.png",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/vulcAIn pipeline (1).excalidraw",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 906452.crdownload",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/vulcAIn pipeline.excalidraw",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/excalidraw/Unconfirmed 216041.crdownload",
     "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260921132554.png",
     "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260921131227.png",
     "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260920230436.png",
-    "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260920161552.png",
-    "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260920124129.png",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/embedding.jpg",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/embedding.png",
-    "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON/mcp.png"
+    "UNI/Triennale/ANNO 3/TESI/Call/Fotocall/Pasted image 20260920161552.png"
   ]
 }

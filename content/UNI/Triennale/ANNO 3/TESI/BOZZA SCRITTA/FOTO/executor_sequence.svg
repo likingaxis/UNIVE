@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1020" width="1200" height="1020">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0f172a" />
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="arr-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+    </marker>
+    <marker id="arr-sky" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+    </marker>
+    <style>
+      .h-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 16px; font-weight: 700; fill: #0f172a; text-anchor: middle; }
+      .h-sub { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11px; fill: #64748b; text-anchor: middle; }
+      .lbl { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 12.5px; fill: #0f172a; font-weight: 500; }
+      .lbl-blue { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 12.5px; fill: #1d4ed8; font-weight: 500; }
+      .lbl-gray { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11px; fill: #64748b; }
+      .lbl-bold { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .lifeline { stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 7,7; }
+      .react-frame { rx: 10; ry: 10; stroke: #94a3b8; stroke-width: 1.4; fill: #fafcff; }
+      .react-badge { rx: 5; ry: 5; stroke: #94a3b8; stroke-width: 1; fill: #e2e8f0; }
+      .box-head { rx: 8; ry: 8; stroke: #0f172a; stroke-width: 1.8; fill: #f8fafc; }
+      .nsc-box { rx: 8; ry: 8; stroke: #dc2626; stroke-width: 2; fill: #fef2f2; }
+      .act-gray { rx: 3; ry: 3; stroke: #475569; stroke-width: 1.2; fill: #e2e8f0; }
+      .act-blue { rx: 3; ry: 3; stroke: #2563eb; stroke-width: 1.2; fill: #dbeafe; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="1020" fill="#ffffff" />
+
+  <!-- Lifelines -->
+  <line x1="180" y1="95" x2="180" y2="925" class="lifeline" />
+  <line x1="460" y1="95" x2="460" y2="925" class="lifeline" />
+  <line x1="740" y1="95" x2="740" y2="925" class="lifeline" />
+  <line x1="1020" y1="95" x2="1020" y2="925" class="lifeline" />
+
+  <!-- Header Boxes -->
+  <g>
+    <rect x="85" y="30" width="190" height="56" class="box-head" />
+    <text x="180" y="52" class="h-title">EXECUTOR</text>
+    <text x="180" y="70" class="h-sub">Componente Python (Controller)</text>
+
+    <rect x="365" y="30" width="190" height="56" class="box-head" />
+    <text x="460" y="52" class="h-title">AGENTE</text>
+    <text x="460" y="70" class="h-sub">Modello LLM (Qwen3.8-27B)</text>
+
+    <rect x="645" y="30" width="190" height="56" class="box-head" />
+    <text x="740" y="52" class="h-title">MCP BRIDGE</text>
+    <text x="740" y="70" class="h-sub">HexStrike / Terminal Gateway</text>
+
+    <rect x="925" y="30" width="190" height="56" class="box-head" />
+    <text x="1020" y="52" class="h-title">TARGET</text>
+    <text x="1020" y="70" class="h-sub">Macchina Challenge (Docker / Kali)</text>
+  </g>
+
+  <!-- Phase 1: Setup -->
+  <g>
+    <text x="45" y="108" class="lbl-bold" fill="#0369a1">TestStep (da Orchestrator)</text>
+    <line x1="40" y1="118" x2="168" y2="118" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arr-sky)" />
+
+    <rect x="170" y="118" width="20" height="47" class="act-gray" />
+    <text x="196" y="136" class="lbl-gray" fill="#334155">1. Prepara contesto dello step (tool-slicing,</text>
+    <text x="196" y="154" class="lbl-gray" fill="#334155">   verified_values, budget turni 8-20)</text>
+
+    <text x="215" y="180" class="lbl">Invocazione LLM (system prompt vincolante, contesto step)</text>
+    <line x1="190" y1="190" x2="450" y2="190" stroke="#0f172a" stroke-width="1.6" marker-end="url(#arr)" />
+  </g>
+
+  <!-- Phase 2: ReAct Loop Frame -->
+  <g>
+    <rect x="80" y="215" width="1040" height="485" class="react-frame" />
+    <rect x="80" y="215" width="270" height="24" class="react-badge" />
+    <text x="90" y="231" font-family="'Segoe UI', sans-serif" font-size="11.5px" font-weight="700" fill="#334155">CICLO REACT A TURNI (1 .. N turni)</text>
+
+    <!-- Agent Reasoning -->
+    <rect x="450" y="245" width="20" height="30" class="act-blue" />
+    <text x="478" y="265" class="lbl-bold" fill="#1e40af">2. Reasoning (CoT) &amp; decisione azione</text>
+
+    <!-- 3. Tool call -->
+    <text x="220" y="306" class="lbl-blue">3. Chiamata a tool (es. execute_command, interactive_terminal_exec)</text>
+    <line x1="450" y1="315" x2="190" y2="315" stroke="#2563eb" stroke-width="1.6" marker-end="url(#arr-blue)" />
+
+    <!-- 4. Forward to Bridge -->
+    <text x="280" y="366" class="lbl-blue">4. Inoltro richiesta al backend (L1 HexStrike / L2 Terminal Gateway)</text>
+    <line x1="190" y1="375" x2="730" y2="375" stroke="#2563eb" stroke-width="1.6" marker-end="url(#arr-blue)" />
+
+    <!-- 5. Bridge to Target -->
+    <text x="765" y="426" class="lbl-blue">5. Invio comando / input shell PTY / richiesta HTTP</text>
+    <line x1="750" y1="435" x2="1010" y2="435" stroke="#2563eb" stroke-width="1.6" marker-end="url(#arr-blue)" />
+
+    <!-- 6. Raw Response -->
+    <text x="775" y="486" class="lbl-gray">6. Risposta grezza (stdout shell, output, prompt)</text>
+    <line x1="1010" y1="495" x2="750" y2="495" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arr-gray)" />
+
+    <!-- 7. Bridge normalization -->
+    <rect x="730" y="515" width="20" height="43" class="act-gray" />
+    <text x="756" y="533" class="lbl-gray">7. Pulizia ANSI, normalizzazione newline,</text>
+    <text x="756" y="551" class="lbl-gray">   troncamento max 8.000 caratteri</text>
+
+    <!-- 8. Bridge to Executor -->
+    <text x="320" y="586" class="lbl-gray">8. Risultato normalizzato e stato sessioni terminale</text>
+    <line x1="730" y1="595" x2="190" y2="595" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arr-gray)" />
+
+    <!-- 9. Executor to Agent -->
+    <text x="250" y="646" class="lbl-blue">9. Restituzione osservazione all'agente (tool result)</text>
+    <line x1="190" y1="655" x2="450" y2="655" stroke="#2563eb" stroke-width="1.6" marker-end="url(#arr-blue)" />
+  </g>
+
+  <!-- Phase 3: Step closure -->
+  <g>
+    <!-- 10. submit_step_result -->
+    <text x="204" y="728" class="lbl-bold">10. submit_step_result (dichiarazione status, evidenze, checklist)</text>
+    <line x1="450" y1="738" x2="190" y2="738" stroke="#0f172a" stroke-width="2.0" marker-end="url(#arr)" />
+
+    <!-- No self-certification box -->
+    <rect x="60" y="765" width="240" height="80" class="nsc-box" />
+    <text x="180" y="787" font-family="'Segoe UI', sans-serif" font-size="12px" font-weight="700" fill="#b91c1c" text-anchor="middle">NO-SELF-CERTIFICATION</text>
+    <text x="74" y="809" class="lbl-gray" fill="#991b1b">Ricalcolo deterministico Python:</text>
+    <text x="74" y="827" font-family="'Segoe UI', sans-serif" font-size="12px" font-weight="700" fill="#991b1b">se checklist non verificata -&gt; FAILED</text>
+
+    <!-- Return StepResult -->
+    <text x="45" y="872" class="lbl-bold" fill="#047857">StepResult tipizzato (ritorno all'Orchestrator)</text>
+    <line x1="170" y1="882" x2="40" y2="882" stroke="#059669" stroke-width="2.0" marker-end="url(#arr-green)" />
+  </g>
+
+  <!-- Footer -->
+  <g>
+    <rect x="50" y="925" width="1100" height="55" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2" />
+    <text x="65" y="947" class="lbl-bold" fill="#1e293b">Flusso operativo dell'Executor (§3.6):</text>
+    <text x="335" y="947" class="lbl-gray" fill="#475569">Coordinamento deterministico in Python, ciclo ReAct a turni (Qwen3.8-27B),</text>
+    <text x="65" y="967" class="lbl-gray" fill="#475569">disaccoppiamento dell'ambiente tramite Bridge (HexStrike / Gateway) e garanzia dell'oracolo tramite ricalcolo della checklist.</text>
+  </g>
+
+</svg>

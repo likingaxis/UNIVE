@@ -57,7 +57,7 @@ In caso di dubbio, vale il principio: *scrivere come nel Capitolo 3 rivisto*.
 ## 6. Terminologia fissata
 
 - **VulcaTest** indica l'intera architettura closed-loop, compreso il **nodo di healing** (non si usa più "VulcaHealing").
-- **Fase** e **step** indicano la stessa unità dell'Attack Plan, che nel codice corrisponde a un `TestStep`; le singole azioni dell'Executor dentro uno step sono i **turni**.
+- **Step** indica l'unità dell'Attack Plan, che nel codice corrisponde a un `TestStep`; **fase** si usa solo per le fasi del workflow (fase di test, fase di healing). Le singole azioni dell'agente dentro uno step sono i **turni**. (Aggiornata l'8/10/2026.)
 - **Attack Plan** e piano di attacco sono sinonimi; nella stessa sezione usare un solo termine.
 - **Target**: la macchina da verificare, raggiunta tramite il suo indirizzo IP. **Macchina Kali**: la postazione di attacco da cui partono le interazioni.
 - **Orchestrator** (concetto: tutta la logica di coordinamento) va distinto dal **nodo `orchestrator`** (nodo di smistamento nel grafo).
@@ -73,3 +73,16 @@ In caso di dubbio, vale il principio: *scrivere come nel Capitolo 3 rivisto*.
 5. A capitolo chiuso si riporta tutto nel `.tex` (citazioni → `\citep{}`, note → `\footnote{}`, rimandi → `\ref{}`, immagini → blocchi `figure` esistenti) e si fa un **confronto frase per frase** tra `.md` e `.tex`.
 6. Nel progetto LaTeX i capitoli sono `chapters/4_Title_Chapter_3.tex` e `chapters/5_Title_Chapter_4.tex` (gli unici inclusi da `main.tex`): non creare copie come `Capitolo_3.tex`. Le `\label` stanno sulle sezioni; quando si eliminano sottosezioni, aggiornare i `\ref` che le richiamano.
 7. Dopo aver aggiunto citazioni o modificato il frontespizio (TikZ), compilare più volte o con **latexmk**, altrimenti compaiono `[?]` o elementi fuori posto.
+
+## 8. Regole aggiunte nella revisione generale (7–8/10/2026)
+
+- **Liste:** voci con etichetta nella forma `**Etichetta:** testo`, con minuscola dopo i due punti; voci senza etichetta come frasi complete, con maiuscola e punto finale. Mai `;`, nemmeno nelle liste o nelle note.
+- **Stadi** di Planner e Final Evaluator come lista: `- **Stadio 1:** …`.
+- **Executor e agente:** "Executor" è la componente Python (nodo `executor`), "agente" è l'LLM che invoca.
+- **"Fase di test"**, non "collaudo" né "fase di attacco".
+- **Introduzioni di capitolo:** non ripetere quanto detto nel capitolo precedente e non elencare gli argomenti come una lista della spesa. Meglio una o due frasi che dicano il filo del capitolo.
+- **Figure:** subito dopo il paragrafo che le introduce, richiamate nel testo ("Figura 3.2"); nel `.tex` con `[H]`. Le etichette nelle figure sono in italiano (FINE, SÌ, NO).
+- **Apostrofo dritto** `'` in tutti i `.md`.
+- **Valore del lavoro:** le componenti sviluppate nella tesi vanno distinte dagli strumenti esterni integrati, senza toni autocelebrativi e senza aggiungere aneddoti di sviluppo.
+- **Impaginazione:** `parskip` con spazio ridotto (`skip=6pt plus 2pt`), niente rientro della prima riga.
+- **Porting nel `.tex`:** interventi mirati sui file esistenti, mantenendo le `\label`; poi confronto frase per frase in entrambe le direzioni e controllo di `\ref`, citazioni e ambienti.
