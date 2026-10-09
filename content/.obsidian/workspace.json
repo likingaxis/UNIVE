@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
+                "file": "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Capitolo 2 - Revisione"
+              "title": "CHECKLIST_RUN_OPERATIVA"
             }
           }
         ]
@@ -43,7 +43,7 @@
                 "sortOrder": "alphabetical",
                 "autoReveal": false,
                 "showSearch": true,
-                "searchQuery": "res"
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -174,11 +174,11 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "385e3b437a6aac05",
+  "active": "e35d5b3b010e3947",
   "lastOpenFiles": [
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark UNICO.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
     "UNI/COSA FARE.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/LABORATORY/LAB 1.md",
