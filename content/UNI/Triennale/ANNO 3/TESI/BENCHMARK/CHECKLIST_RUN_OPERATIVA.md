@@ -73,37 +73,76 @@ uv run python benchmark/run_matrix.py --set core15 --profile local --machines tu
 
 ---
 
-## Fase 2: Completamento a $K=3$ con `--resume` (Run 2 e 3)
-> Una volta che tutte le 15 celle hanno chiuso la Run 1 con successo, si lanciano le repliche 2 e 3 con `--resume`.
-> Il runner salterà automaticamente tutte le Run 1 già presenti nel ledger.
+## Fase 2: Completamento a $K=3$ e $K=4$ con `--resume` (Run 2, 3 e 4)
+> Tutte le 15 celle hanno chiuso con successo le repliche 1, 2, 3 e 4 (60 run totali archiviate nel ledger).
 ```bash
-uv run python benchmark/run_matrix.py --set core15 --profile local -k 3 --resume
+uv run python benchmark/run_matrix.py --set core15 --profile local -k 4 --resume
 ```
-- [x] Pizzeria (P1-01, P2-04) — Run 2 e Run 3
-- [x] AuthGate (P1-03) — Run 2 e Run 3
-- [x] Citadel (P1-10, P3-02) — Run 2 e Run 3
-- [x] CryptoVault (P2-03, P3-03) — Run 2 e Run 3
-- [x] ConsoleGate (P1-13, P2-06) — Run 2 e Run 3
-- [x] NetVault (P1-16, P3-06) — Run 2 e Run 3
-- [x] GitPoison (P1-14, P3-08) — Run 2 e Run 3
-- [x] TunnelGate (P2-07, P3-07) — Run 2 e Run 3
+- [x] Pizzeria (P1-01, P2-04) — Run 2, 3 e 4
+- [x] AuthGate (P1-03) — Run 2, 3 e 4
+- [x] Citadel (P1-10, P3-02) — Run 2, 3 e 4
+- [x] CryptoVault (P2-03, P3-03) — Run 2, 3 e 4
+- [x] ConsoleGate (P1-13, P2-06) — Run 2, 3 e 4
+- [x] NetVault (P1-16, P3-06) — Run 2, 3 e 4
+- [x] GitPoison (P1-14, P3-08) — Run 2, 3 e 4
+- [x] TunnelGate (P2-07, P3-07) — Run 2, 3 e 4
 
 ---
 
 ## Fase 3: E2 Clean Runs di Controllo (Negative Controls, 3x per Macchina Golden)
-> Servono a quantificare i True Negative e False Positive per la Confusion Matrix.
-> **Comando**: `uv run python benchmark/run_matrix.py --gate --profile local --machines <slug> -k 3`
+> Servono a quantificare i True Negative (TN) e verificare l'assenza di False Positive (FP) per la Confusion Matrix di $B_1$.
+> Eseguite con **piano congelato** e **healing disattivato** (`HEALING=false` automatico).
+> Ogni invocazione compila la macchina una volta sola e ripete 3 volte con reset del container (~2s).
 
-- [ ] Pizzeria Golden (3x)
-- [ ] AuthGate Golden (3x)
-- [ ] Citadel Golden (3x)
-- [ ] CryptoVault Golden (3x)
-- [ ] ConsoleGate Golden (3x)
-- [ ] NetVault Golden (3x)
-- [ ] GitPoison Golden (3x)
-- [ ] TunnelGate Golden (3x)
+### 1. Pizzeria_B2R Golden (3x)
+```bash
+uv run python benchmark/run_matrix.py --gate --profile local --machines pizzeria -k 3
+```
+- [ ] Pizzeria Golden (Run 1, 2, 3)
 
-*(Oppure in un colpo solo per tutte le 8 macchine):*
+### 2. AuthGate_B2R Golden (3x)
+```bash
+uv run python benchmark/run_matrix.py --gate --profile local --machines authgate -k 3
+```
+- [ ] AuthGate Golden (Run 1, 2, 3)
+
+### 3. Citadel_B2R Golden (3x)
+```bash
+uv run python benchmark/run_matrix.py --gate --profile local --machines citadel -k 3
+```
+- [ ] Citadel Golden (Run 1, 2, 3)
+
+### 4. CryptoVault_B2R Golden (3x)
+```bash
+uv run python benchmark/run_matrix.py --gate --profile local --machines cryptovault -k 3
+```
+- [ ] CryptoVault Golden (Run 1, 2, 3)
+
+### 5. ConsoleGate_B2R Golden (3x)
+```bash
+uv run python benchmark/run_matrix.py --gate --profile local --machines consolegate -k 3
+```
+- [ ] ConsoleGate Golden (Run 1, 2, 3)
+
+### 6. NetVault_B2R Golden (3x)
+```bash
+uv run python benchmark/run_matrix.py --gate --profile local --machines netvault -k 3
+```
+- [ ] NetVault Golden (Run 1, 2, 3)
+
+### 7. GitPoison_B2R Golden (3x)
+```bash
+uv run python benchmark/run_matrix.py --gate --profile local --machines gitpoison -k 3
+```
+- [ ] GitPoison Golden (Run 1, 2, 3)
+
+### 8. TunnelGate_B2R Golden (3x)
+```bash
+uv run python benchmark/run_matrix.py --gate --profile local --machines tunnelgate -k 3
+```
+- [ ] TunnelGate Golden (Run 1, 2, 3)
+
+*(Alternativa batch unico per tutte le 8 macchine):*
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines pizzeria,authgate,citadel,cryptovault,consolegate,netvault,gitpoison,tunnelgate -k 3
 ```
