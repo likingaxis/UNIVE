@@ -17,8 +17,8 @@ Realizzare macchine di questo tipo richiede tempo e competenze, perché oltre al
 
 ## 2.3 L'ecosistema VulcAIn: VulcaMind, VulcaForge e VulcaShip
 
-VulcAIn è un ecosistema modulare, ideato e sviluppato da Danilo Dell’Orco e Michele Salvatori, che combina agenti basati su AI e Infrastructure as Code (IaC) per automatizzare parte della realizzazione delle macchine didattiche vulnerabili, riducendo il lavoro di configurazione e lasciando all'autore maggiore spazio per la progettazione delle challenge. 
-La pipeline si articola in tre moduli (Figura 1):
+VulcAIn è un ecosistema modulare, ideato e sviluppato da Danilo Dell’Orco e Michele Salvatori, che combina agenti basati su AI e Infrastructure as Code (IaC)[^iac] per automatizzare parte della realizzazione delle macchine didattiche vulnerabili, riducendo il lavoro di configurazione e lasciando all'autore maggiore spazio per la progettazione delle challenge. 
+La pipeline si articola in tre moduli (Figura 2.1):
 - **VulcaMind:** a partire da una descrizione iniziale, definisce struttura, storyline, percorso di attacco e soluzione della challenge. La storyline e il writeup che produce descrivono l'intended path: la prima l'ordine dei passaggi, il secondo i dettagli tecnici per eseguirli.
 - **VulcaForge:** traduce la progettazione in infrastruttura. Un agente compone i moduli di un registro di vulnerabilità, servizi e configurazioni in una ricetta IaC, rappresentata da un file YAML dichiarativo che definisce la composizione della macchina. A partire da questa ricetta e dai sorgenti necessari, il generatore produce il playbook Ansible [@ansible] e i file di supporto, come i Dockerfile [@docker] delle applicazioni web.
 - **VulcaShip:** gestisce il deploy della macchina sull'infrastruttura di virtualizzazione del Cyber Range.
@@ -45,13 +45,13 @@ Il Plan-and-Execute [@wang2024survey] segue un'impostazione differente: il siste
 
 La separazione delle responsabilità è un principio adottato anche nelle architetture multi-agente. MetaGPT [@hong2024metagpt], ad esempio, organizza la collaborazione tra agenti attraverso ruoli specializzati e lo scambio di artefatti strutturati. Pur seguendo un'organizzazione differente, VulcaTest presenta un'impostazione analoga nella distinzione dei compiti e nell'utilizzo di rappresentazioni strutturate per il passaggio delle informazioni tra componenti.
 
-### 2.5 Harness agentici
+## 2.5 Harness agentici
 
 Il comportamento di un agente non dipende soltanto dal modello, ma anche dal software che lo circonda, chiamato _harness_. L'harness costruisce il prompt, espone i tool e ne gestisce le chiamate, controlla il ciclo di esecuzione e definisce le modalità con cui l'agente può interagire con l'ambiente. L'importanza di queste scelte emerge anche da Cybench [@zhang2025cybench], che confronta diverse configurazioni agentiche e mostra come le prestazioni possano variare in funzione dell'infrastruttura di esecuzione utilizzata.
 
 Wang et al. [@wang2024survey] distinguono due modalità per migliorare il comportamento di un agente senza modificare i pesi del modello: il _prompt engineering_, che interviene sulle istruzioni, e il _mechanism engineering_, che riguarda i meccanismi costruiti attorno al modello. Il lavoro di questa tesi interviene su entrambi gli aspetti, ma il contributo principale riguarda il secondo.
 
-Tra gli harness general-purpose rientrano strumenti come Google Antigravity [@antigravity] e Claude Code [@claudecode], progettati per attività aperte di sviluppo software, nelle quali l'agente può esplorare un progetto, modificare file ed eseguire comandi. Questi ambienti possono essere estesi attraverso interfacce come il Model Context Protocol (MCP) [@mcp], che permette di collegare strumenti e servizi esterni. Un esempio in ambito cybersecurity è HexStrike AI [@hexstrike], che espone strumenti di sicurezza offensiva utilizzabili da agenti basati su LLM.
+Tra gli harness general-purpose rientrano strumenti come Google Antigravity [@googleantigravity2026] e Claude Code [@claudecode], progettati per attività aperte di sviluppo software, nelle quali l'agente può esplorare un progetto, modificare file ed eseguire comandi. Questi ambienti possono essere estesi attraverso interfacce come il Model Context Protocol (MCP)[^mcp] [@mcp2025], che permette di collegare strumenti e servizi esterni. Un esempio in ambito cybersecurity è HexStrike AI [@hexstrikeai], che espone strumenti di sicurezza offensiva utilizzabili da agenti basati su LLM.
 
 Accanto agli strumenti general-purpose, sono state sviluppate soluzioni specifiche per il penetration testing e per la valutazione degli agenti in ambito cybersecurity. PentestGPT [@deng2024pentestgpt] affronta il problema della perdita di contesto nelle sessioni prolungate, suddividendo il lavoro tra moduli dedicati al ragionamento, alla generazione dei comandi e all'interpretazione degli output. Cybench, già citato, si concentra invece sulla valutazione delle capacità degli agenti LLM attraverso challenge CTF, suddivise in subtask intermedi per misurare l'avanzamento anche quando la sfida non viene completata.
 
