@@ -79,13 +79,13 @@ uv run python benchmark/run_matrix.py --set core15 --profile local --machines tu
 ```bash
 uv run python benchmark/run_matrix.py --set core15 --profile local -k 3 --resume
 ```
-- [ ] Pizzeria (P1-01, P2-04) — Run 2 e Run 3
-- [ ] AuthGate (P1-03) — Run 2 e Run 3
-- [ ] Citadel (P1-10, P3-02) — Run 2 e Run 3
-- [ ] CryptoVault (P2-03, P3-03) — Run 2 e Run 3
-- [ ] ConsoleGate (P1-13, P2-06) — Run 2 e Run 3
-- [ ] NetVault (P1-16, P3-06) — Run 2 e Run 3
-- [ ] GitPoison (P1-14, P3-08) — Run 2 e Run 3
+- [x] Pizzeria (P1-01, P2-04) — Run 2 e Run 3
+- [x] AuthGate (P1-03) — Run 2 e Run 3
+- [x] Citadel (P1-10, P3-02) — Run 2 e Run 3
+- [x] CryptoVault (P2-03, P3-03) — Run 2 e Run 3
+- [x] ConsoleGate (P1-13, P2-06) — Run 2 e Run 3
+- [x] NetVault (P1-16, P3-06) — Run 2 e Run 3
+- [x] GitPoison (P1-14, P3-08) — Run 2 e Run 3
 - [ ] TunnelGate (P2-07, P3-07) — Run 2 e Run 3
 
 ---
