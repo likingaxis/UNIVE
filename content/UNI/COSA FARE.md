@@ -6,6 +6,7 @@
 
 #### Tesi
 - [ ] fare i benchmark
+- [ ] fare i benchmark 4 macchine nuove
 - [x] capitolo 2 revisione
 - [x] capitolo 3 revisione
 - [x] capitolo 4 revisione
