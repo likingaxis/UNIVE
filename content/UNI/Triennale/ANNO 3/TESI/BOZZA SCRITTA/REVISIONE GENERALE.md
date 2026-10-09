@@ -74,3 +74,7 @@ Lette il 7/10. Esito proposto dall'assistente (✔ d'accordo, ~ d'accordo con mo
 
 ### Cap. 4
 - ✔ schema Excalidraw del ciclo (test → diagnosi → healing → rebuild → re-test) · ✔ punteggiatura liste · ✘ "fase di attacco" → meglio "fase di test" (coerente con il resto della tesi) · ✔ §4.5 spiegare che il perimetro nel prompt è solo un'istruzione (l'agente ha permessi di scrittura sul workspace) + caso GitPoison/Citadel in 1–2 frasi; adeguare il §4.4 ("il prompt consente di scrivere soltanto…")
+
+## IDEE
+- aggiungere uno screen dei fix come la chat mancante o comunque mostrare il processo run-> mostra la riga in cui evidenzia il problema -> fix mostrando la chat (questo magari sulle slide)
+- definire bene le metriche e i benchmark possibili
