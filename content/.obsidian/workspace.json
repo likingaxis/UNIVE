@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "UNI/Magistrale/ANNO1 M/NETWORK/LABORATORY/LAB 1.md",
+                "file": "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "LAB 1"
+              "title": "Capitolo 2 - Revisione"
             }
           }
         ]
@@ -42,8 +42,8 @@
               "state": {
                 "sortOrder": "alphabetical",
                 "autoReveal": false,
-                "showSearch": false,
-                "searchQuery": ""
+                "showSearch": true,
+                "searchQuery": "res"
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 261.20001220703125
+    "width": 386.8000183105469
   },
   "right": {
     "id": "0d2714675d21ba90",
@@ -174,30 +174,31 @@
       "quartz-git-manager:Git Sync Manager": false
     }
   },
-  "active": "e35d5b3b010e3947",
+  "active": "385e3b437a6aac05",
   "lastOpenFiles": [
-    "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Two_Hour_Guided_Reading.pdf",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
+    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark UNICO.md",
+    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
+    "UNI/COSA FARE.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/LABORATORY/LAB 1.md",
+    "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Two_Hour_Guided_Reading.pdf",
     "UNI/Magistrale/ANNO1 M/NETWORK/LABORATORY",
     "UNI/Magistrale/ANNO1 M/NETWORK/Network_Infrastructures_Four_Lectures_Study_Guide.pdf",
     "UNI/Magistrale/ANNO1 M/NETWORK/Network Infrastructures Theory 24-25 2.5.pdf",
     "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.pdf",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/CHECKLIST_RUN_OPERATIVA.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 3 - Revisione.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 2.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 4 - Revisione.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/RIPASSO PRIMO TEST.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md",
     "UNI/Magistrale/ANNO1 M/NETWORK/NET LESSON 1.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 2 - Revisione.md",
     "UNI/Triennale/ANNO 3/TESI/main (1).pdf",
-    "UNI/COSA FARE.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak5",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak4",
     "UNI/Triennale/ANNO 3/TESI/Call/Call pasquale 2.md",
     "UNI/Triennale/ANNO 3/TESI/CESTINO/Benchmark.md",
     "UNI/Triennale/ANNO 3/TESI/PAPER LETTI E IDEE CLEAN.md",
-    "UNI/Triennale/ANNO 3/TESI/BENCHMARK/Benchmark UNICO.md",
     "UNI/Triennale/ANNO 3/TESI/BENCHMARK/perchè ho usato le stesse macchine per fare i test e l'improving.md",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak3",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/Capitolo 5- Revisione.md.bak2",
@@ -213,7 +214,6 @@
     "UNI/Triennale/ANNO 3/TESI/CESTINO/piano_benchmark_vulcatest.md",
     "UNI/Triennale/ANNO 3/TESI/CESTINO/PIANO BENCHMARK (terra terra).md",
     "UNI/Triennale/ANNO 3/TESI/CESTINO/perturbazioni.md",
-    "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/INDICE e titolo.md",
     "UNI/Triennale/ANNO 3/ARCHIVIO/HACKATON VULN/02_CHEATSHEET_OPERATIVO_GARA.md",
     "Pasted image 20261004204706.png",
     "UNI/Triennale/ANNO 3/TESI/BOZZA SCRITTA/FOTO/Pasted image 20261004204727.png",
