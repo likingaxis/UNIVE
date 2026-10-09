@@ -98,25 +98,25 @@ uv run python benchmark/run_matrix.py --set core15 --profile local -k 4 --resume
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines pizzeria -k 3
 ```
-- [ ] Pizzeria Golden (Run 1, 2, 3)
+- [x] Pizzeria Golden (Run 1, 2, 3)
 
 ### 2. AuthGate_B2R Golden (3x)
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines authgate -k 3
 ```
-- [ ] AuthGate Golden (Run 1, 2, 3)
+- [x] AuthGate Golden (Run 1, 2, 3)
 
 ### 3. Citadel_B2R Golden (3x)
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines citadel -k 3
 ```
-- [ ] Citadel Golden (Run 1, 2, 3)
+- [x] Citadel Golden (Run 1, 2, 3)
 
 ### 4. CryptoVault_B2R Golden (3x)
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines cryptovault -k 3
 ```
-- [ ] CryptoVault Golden (Run 1, 2, 3)
+- [x] CryptoVault Golden (Run 1, 2, 3)
 
 ### 5. ConsoleGate_B2R Golden (3x)
 ```bash
