@@ -86,7 +86,7 @@ uv run python benchmark/run_matrix.py --set core15 --profile local -k 3 --resume
 - [x] ConsoleGate (P1-13, P2-06) — Run 2 e Run 3
 - [x] NetVault (P1-16, P3-06) — Run 2 e Run 3
 - [x] GitPoison (P1-14, P3-08) — Run 2 e Run 3
-- [ ] TunnelGate (P2-07, P3-07) — Run 2 e Run 3
+- [x] TunnelGate (P2-07, P3-07) — Run 2 e Run 3
 
 ---
 
