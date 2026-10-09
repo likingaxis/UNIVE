@@ -41,17 +41,15 @@ TITOLO: VulcaTest: Un Framework agentico per la verifica di conformità e il sel
 ## 5. Valutazione sperimentale
 
 5.1 Obiettivi della valutazione e Test Oracle Problem
-5.2 Metriche di valutazione
+5.2 Costruzione della ground truth
 5.3 Dataset: macchine di riferimento e perturbazioni controllate
-5.4 Configurazione sperimentale
-5.5 Risultati
-   5.5.1 Riconoscimento, diagnosi e riparazione
-   5.5.2 Confronto tra modelli (se non svolto: sviluppi futuri)
-   5.5.3 Studio di ablazione dei ruoli (se non svolto: sviluppi futuri)
-5.6 Casi di studio
-   5.6.1 Pizzeria_B2R: validazione closed-loop end-to-end
-   5.6.2 (altri casi da aggiungere)
-5.7 Discussione e limiti della valutazione
+5.4 Disegno sperimentale e configurazione
+5.5 Metriche di valutazione
+5.6 Risultati
+   5.6.1 Riconoscimento, diagnosi e riparazione
+5.7 Casi di studio
+   5.7.1 Pizzeria_B2R: validazione closed-loop end-to-end
+5.8 Discussione e limiti della valutazione
 
 ## 6. Conclusioni e sviluppi futuri
 

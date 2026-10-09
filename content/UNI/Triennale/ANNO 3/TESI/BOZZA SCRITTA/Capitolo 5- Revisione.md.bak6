@@ -16,7 +16,7 @@ La valutazione riguarda VulcaTest e non l'intera pipeline VulcAIn. La documentaz
 
 ## 5.2 Costruzione della ground truth
 
-Il riferimento con cui confrontare gli esiti delle run viene costruito prima degli esperimenti, in una fase indicata come E0 che non produce misure, ma stabilisce per ogni macchina uno stato noto e un piano di test validato. Le macchine usate nella valutazione sono state generate con VulcAIn: la documentazione della challenge da VulcaMind e la ricetta IaC da VulcaForge. Per ciascuna, la fase E0 si articola in quattro attività:
+Il riferimento con cui confrontare gli esiti delle run viene costruito prima degli esperimenti, in una fase indicata come E0 che non produce misure, ma stabilisce per ogni macchina uno stato noto e un piano di test validato. Le macchine usate nella valutazione sono state generate con VulcAIn: la documentazione della challenge da VulcaMind e la ricetta IaC da VulcaForge. Per ciascuna, la fase E0 segue quattro passaggi:
 
 - **Revisione della documentazione:** `DESCRIPTION.md`, `STORYLINE.md` e `WRITEUP.md` vengono controllati e, dove necessario, corretti a mano, in modo che descrivano l'intended path senza ambiguità.
 - **Qualificazione della macchina:** la ricetta IaC viene corretta finché la macchina non risulta risolvibile lungo l'intended path, e la verifica viene svolta manualmente seguendo il writeup.
@@ -27,11 +27,11 @@ La macchina ottenuta al termine della qualificazione prende il nome di **Golden 
 
 Ogni run parte da uno stato noto. Prima di ogni esecuzione la macchina viene ricostruita a partire dalla ricetta della Golden Machine, eventualmente perturbata (Sezione 5.3), e nessuna componente conserva il contesto delle run precedenti: Planner, Executor e Final Evaluator ricevono solo gli input della run corrente, e ogni sessione dell'agente di healing parte senza memoria dei tentativi precedenti, salvo le informazioni passate attraverso il filesystem (Sezione 4.4).
 
-Le macchine sono le stesse usate durante lo sviluppo di VulcaTest, nella loro versione non perturbata, mentre le perturbazioni non sono state usate in quella fase. Le modifiche introdotte durante lo sviluppo hanno riguardato sia la gestione dell'interazione con il target sia i prompt, formulati comunque in modo generico (Sezione 3.9), e prima della campagna sperimentale codice, prompt e Golden Plan sono stati congelati. Ne segue che i risultati sulle macchine perturbate misurano la capacità di rilevare difetti mai incontrati, mentre quelli sulle macchine non perturbate vanno letti come una stima ottimistica (Sezione 5.8).
+Le macchine sono le stesse usate durante lo sviluppo di VulcaTest, nella loro versione non perturbata. Le modifiche introdotte in quella fase hanno riguardato sia la gestione dell'interazione con il target sia i prompt, e queste ultime sono state formulate in modo generico (Sezione 3.9). Prima della campagna sperimentale codice, prompt e Golden Plan sono stati congelati. Le perturbazioni, invece, non sono state usate durante lo sviluppo. Ne segue che i risultati sulle macchine perturbate misurano la capacità di rilevare difetti mai incontrati, mentre quelli sulle macchine non perturbate vanno letti come una stima ottimistica (Sezione 5.8).
 
 ## 5.3 Dataset: macchine di riferimento e perturbazioni controllate
 
-Le Golden Machine del benchmark coprono tecniche diverse, in modo che la verifica non sia misurata su un unico tipo di vulnerabilità: ricognizione ed enumerazione web, sfruttamento di servizi di rete, cracking offline di credenziali, movimento laterale e privilege escalation attraverso binari SUID, cronjob, permessi di gruppo o configurazioni errate. La Tabella 5.1 riporta, per ogni macchina, le tecniche principali dell'intended path e il numero di step del relativo Golden Plan.
+La valutazione usa un insieme di macchine Boot-to-Root generate con VulcAIn, ciascuna qualificata come Golden Machine secondo il procedimento della Sezione 5.2. Le macchine coprono tecniche diverse, in modo che la verifica non sia misurata su un unico tipo di vulnerabilità: ricognizione ed enumerazione web, sfruttamento di servizi di rete, cracking offline di credenziali, movimento laterale e privilege escalation attraverso binari SUID, cronjob, permessi di gruppo o configurazioni errate. La Tabella 5.1 riporta, per ogni macchina, le tecniche principali dell'intended path e il numero di step del relativo Golden Plan.
 
 | Macchina    | Tecniche principali dell'intended path                         | Step del Golden Plan |
 | ----------- | -------------------------------------------------------------- | :------------------: |
@@ -46,9 +46,7 @@ Le Golden Machine del benchmark coprono tecniche diverse, in modo che la verific
 
 _Tabella 5.1 — Macchine del benchmark e lunghezza dei Golden Plan._
 
-Altre tre macchine, DataVault, WebMaster e PrivAudit, sono state qualificate con lo stesso procedimento ma partecipano soltanto a E1. Per contenere il tempo di calcolo, E2 ed E3 sono svolti sulle macchine della Tabella 5.1, scelte in modo da coprire categorie di vulnerabilità diverse.
-
-Sulle Golden Machine vengono poi iniettati difetti controllati, modificando la ricetta IaC da cui la macchina viene generata. L'iniezione controllata di difetti è una tecnica consolidata nel software testing, in cui errori noti vengono introdotti di proposito per misurare la capacità di un sistema di rilevarli [@andrews2005mutation]. Nel caso di VulcaTest ogni perturbazione rende la macchina non conforme in un punto noto, così che il verdetto del sistema possa essere confrontato con uno stato atteso. Poiché la perturbazione agisce sul sorgente e non sulla macchina già costruita, lo stesso difetto è riproducibile a ogni ricostruzione dell'ambiente.
+Sulle Golden Machine vengono poi iniettati difetti controllati, modificando la ricetta IaC da cui la macchina viene generata. L'iniezione controllata di difetti è una tecnica consolidata nel software testing, in cui difetti noti vengono introdotti di proposito per misurare la capacità di un sistema di rilevarli [@andrews2005mutation]. Nel caso di VulcaTest ogni perturbazione rende la macchina non conforme in un punto noto, così che il verdetto di VulcaTest possa essere confrontato con uno stato atteso. Poiché la perturbazione agisce sul sorgente e non sulla macchina già costruita, lo stesso difetto è riproducibile a ogni ricostruzione dell'ambiente.
 
 Le perturbazioni sono raggruppate in tre classi, definite in base al tipo di difetto introdotto nel sorgente e all'azione che la correzione richiede:
 
@@ -103,7 +101,7 @@ Ogni configurazione, cioè ogni macchina in un dato esperimento, nella versione 
 
 _Tabella 5.3 — Esperimenti e numero di run previste._
 
-Tutti gli esperimenti usano gli stessi parametri, su un ambiente con una GPU da 16 GB di VRAM e 64 GB di RAM e con il modello locale descritto nella Sezione 3.10.1. La finestra di contesto di Planner e Final Evaluator è dimensionata con i parametri della Sezione 3.10.2, impostati a $k = 3$, $\alpha = 1{,}15$, $S = 2048$, $W_{\text{base}} = 15.872$ e $W_{\text{max}} = 40.960$ token, con una riserva per l'output $R_{\text{out}}$ di 8192 token per il Planner e 4096 per il Final Evaluator. Il budget di turni dell'Executor resta quello di default, con 8 turni iniziali estendibili fino a 20 (Sezione 3.6). Il nodo di healing dispone di un solo tentativo di correzione per run: se la macchina ricostruita non supera il nuovo test, la run termina con l'esito di quest'ultimo.
+Tutti gli esperimenti usano gli stessi parametri. L'ambiente dispone di una GPU con 16 GB di VRAM e 64 GB di RAM, e il modello locale è quello descritto nella Sezione 3.10.1. La finestra di contesto di Planner e Final Evaluator è dimensionata con i parametri della Sezione 3.10.2, impostati a $k = 3$, $\alpha = 1{,}15$, $S = 2048$, $W_{\text{base}} = 15.872$ e $W_{\text{max}} = 40.960$ token, con una riserva per l'output $R_{\text{out}}$ di 8192 token per il Planner e 4096 per il Final Evaluator. Il budget di turni dell'Executor è quello di default (Sezione 3.6). Il nodo di healing dispone di un solo tentativo di correzione per run: se la macchina ricostruita non supera il nuovo test, la run termina con l'esito di quest'ultimo.
 
 ## 5.5 Metriche di valutazione
 
