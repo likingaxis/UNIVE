@@ -134,13 +134,13 @@ uv run python benchmark/run_matrix.py --gate --profile local --machines netvault
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines gitpoison -k 3
 ```
-- [ ] GitPoison Golden (Run 1, 2, 3)
+- [x] GitPoison Golden (Run 1, 2, 3)
 
 ### 8. TunnelGate_B2R Golden (3x)
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines tunnelgate -k 3
 ```
-- [ ] TunnelGate Golden (Run 1, 2, 3)
+- [x] TunnelGate Golden (Run 1, 2, 3)
 
 *(Alternativa batch unico per tutte le 8 macchine):*
 ```bash
