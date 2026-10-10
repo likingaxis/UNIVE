@@ -36,7 +36,7 @@ TITOLO: VulcaTest: Un Framework agentico per la verifica di conformità e il sel
 4.3 L’agente di healing: delega a un harness agentico
 4.4 Prompt dell’agente di healing e perimetro di modifica
 4.5 Tracciamento e validazione delle modifiche
-4.6 Chiusura del ciclo: rebuild dell’ambiente e regression testing
+4.6 Chiusura del ciclo: ricostruzione dell'ambiente e riverifica della conformità
 
 ## 5. Valutazione sperimentale
 

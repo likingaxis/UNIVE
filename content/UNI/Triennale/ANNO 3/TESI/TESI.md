@@ -123,7 +123,7 @@
   - Rifiuto dell'auto-certificazione: verifica oggettiva delle modifiche sul filesystem.
   - Modulo deterministico `diff_tracker.py`: snapshot iniziale pre-fix, calcolo del diff unificato `patch.diff` ed emissione di `HEALING_REPORT.md` via `difflib`.
   - Misurazione della dimensione della patch come metrica per il Benchmark B3.
-- **4.6 Chiusura del ciclo: ricostruzione dell’ambiente e regression testing**:
+- **4.6 Chiusura del ciclo: ricostruzione dell'ambiente e riverifica della conformità**:
   - Sequenza operativa: sincronizzazione bundle con VulcaForge (`generator/main.py`) e ricompilazione Docker su Kali.
   - **Caso Studio CS-2**: Il falso positivo da Terminal Echo nel Rebuild Docker e soluzione con marker concatenato quotato (`echo '"__BUILD""_""SUCCESS__"'`).
   - Ricreazione del container Docker (*Clean Slate*), intervallo di stabilizzazione (5s) e risoluzione dinamica dell'IP via `docker inspect`.
