@@ -85,7 +85,7 @@
 - **3.8 Il Final Evaluator: valutazione deterministica e Root Cause Analysis**:
   - **3.8.1 Stadio 1: raccolta delle metriche**: calcolo deterministico delle metriche di esecuzione, aggregazione evidenze e generazione di `run_summary.json`.
   - **3.8.2 Stadio 2: diagnosi del fallimento e Root Cause Analysis**: triage LLM post-mortem, generazione del report qualitativo `REPORT.md` e dell'`healing_ticket.json`; decisione architetturale sulla rimozione del Diagnostician in-loop a favore della valutazione post-mortem per prevenire il Goal Drift.
-- **3.9 Prompt engineering e definizione dei ruoli agentici**:
+- **3.9 Prompt engineering e sviluppo iterativo delle istruzioni**:
   - **3.9.1 Sviluppo e specializzazione dei prompt**: processo iterativo guidato da evidenze empiriche reali (esecuzione del test $\rightarrow$ fallimento operativo $\rightarrow$ introduzione di vincoli costituzionali).
   - **3.9.2 Regole esplicite e formati vincolati**: regole deontologiche dell'Auditor Mode, formati di risposta vincolati, isolamento dei token di reasoning e TTY hygiene.
 - **3.10 Modello locale e ottimizzazione dei parametri di inferenza**:

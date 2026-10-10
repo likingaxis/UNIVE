@@ -24,7 +24,7 @@ TITOLO: VulcaTest: Un Framework agentico per la verifica di conformità e il sel
 3.6 L’Executor: esecuzione e verifica degli step
 3.7 Il Bridge di esecuzione: gestione dei tool e delle interazioni con il target
 3.8 Il Final Evaluator: valutazione finale e Root Cause Analysis
-3.9 Prompt engineering e definizione dei ruoli agentici
+3.9 Prompt engineering e sviluppo iterativo delle istruzioni
 3.10 Modello locale e configurazione dei parametri
    3.10.1 Modello e runtime
    3.10.2 Dimensionamento della finestra di contesto
