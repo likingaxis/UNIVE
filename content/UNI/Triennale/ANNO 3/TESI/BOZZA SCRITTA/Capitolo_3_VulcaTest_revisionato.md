@@ -145,7 +145,7 @@ Il Final Evaluator interviene al termine dell'Attack Plan oppure quando un falli
 
 Se uno step termina con esito `FAILED`, la seconda fase genera anche `healing_ticket.json`, che riporta lo step in cui il test si è interrotto e una diagnosi preliminare del problema, comprendente la componente coinvolta, la possibile causa e il tipo di difetto. I tipi previsti sono tre: difetti nella generazione dell'IaC (`IAC_GENERATION_DEFECT`), errori di configurazione (`CONFIG_DEFECT`) ed errori nella specifica del test, cioè criteri di verifica dell'Attack Plan formulati in modo errato (`SPECIFICATION_DEFECT`).
 
-La classificazione resta un'ipotesi, perché il Final Evaluator dispone soltanto delle evidenze raccolte dall'Executor dall'esterno della macchina. Il ticket viene quindi passato al nodo di healing indipendentemente dal tipo di difetto diagnosticato, affinché l'agente possa esaminare i sorgenti e verificare la possibile causa del problema (Capitolo 4). Se il difetto riguarda effettivamente la specifica del test, la macchina non viene modificata e la correzione dell'Attack Plan resta affidata a un operatore.
+La classificazione resta un'ipotesi, poiché il Final Evaluator dispone soltanto delle evidenze raccolte dall'Executor dall'esterno della macchina. Se il self-healing è abilitato e restano tentativi disponibili, il ticket viene passato al nodo di healing indipendentemente dal tipo di difetto diagnosticato, affinché l'agente possa esaminare i sorgenti e verificare la possibile causa del problema (Capitolo 4). Se il difetto riguarda effettivamente la specifica del test, la macchina non viene modificata e la correzione dell'Attack Plan resta affidata a un operatore.
 
 ## 3.9 Prompt engineering e sviluppo iterativo delle istruzioni
 
