@@ -128,7 +128,7 @@ uv run python benchmark/run_matrix.py --gate --profile local --machines consoleg
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines netvault -k 3
 ```
-- [ ] NetVault Golden (Run 1, 2, 3)
+- [x] NetVault Golden (Run 1, 2, 3)
 
 ### 7. GitPoison_B2R Golden (3x)
 ```bash
