@@ -104,16 +104,12 @@
 
 ## 4. Modello locale e quantizzazione
 
-- **[CORE] Qwen3.8-27B – model card ufficiale** (chiave `qwenteam2026qwen38`)  
-  Modello base utilizzato dalla variante quantizzata.  
+- **[CORE] Qwen3.8-27B – Scheda ufficiale del Qwen Team** (chiave `qwenteam2026qwen38`)  
+  Modello originale/base open-weights utilizzato dalla variante quantizzata (da non confondere con Qwen3.8-Max).  
   https://huggingface.co/Qwen/Qwen3.8-27B
 
-- **[CORE] Qwen3.8 – fonte/citation indicata dalla model card ufficiale** (chiave `qwenteam2026qwen38`)  
-  Qwen Team, *Qwen3.8-Max: A New Bar for Coding and Cowork*, 2026.  
-  https://qwen.ai/blog?id=qwen3.8
-
 - **[CORE] ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF** (chiave `istadaslab2026qwen38`)  
-  Checkpoint GGUF quantizzato effettivamente utilizzato. La model card richiede di citare sia GSQ sia RCO.  
+  Checkpoint GGUF quantizzato effettivamente utilizzato (quantizzazione IQ3_S). La model card richiede di citare sia GSQ sia RCO.  
   https://huggingface.co/ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF
 
 - **[CORE] GSQ: Highly-Accurate Low-Precision Scalar Quantization for LLMs via Gumbel-Softmax Sampling** (chiave `dadgarnia2026gsq`)  

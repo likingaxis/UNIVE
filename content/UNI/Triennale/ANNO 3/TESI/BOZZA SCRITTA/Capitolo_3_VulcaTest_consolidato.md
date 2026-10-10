@@ -167,7 +167,7 @@ Per Planner, Executor e Final Evaluator è stato scelto un modello eseguito in l
 
 ### 3.10.1 Modello e runtime
 
-Il modello scelto è Qwen3.8-27B nella variante quantizzata IQ3_S, distribuita in formato GGUF³ nel repository `ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF` [22]. Il checkpoint è ottenuto con il metodo di quantizzazione GSQ [23] e con l'ottimizzazione RCO [24]. La quantizzazione riduce l'occupazione in memoria e permette di eseguire un modello da 27 miliardi di parametri sull'hardware disponibile.
+Il modello scelto è Qwen3.8-27B [21] nella variante quantizzata IQ3_S, distribuita in formato GGUF³ nel repository `ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF` [22]. Il checkpoint è ottenuto con il metodo di quantizzazione GSQ [23] e con l'ottimizzazione RCO [24]. La quantizzazione riduce l'occupazione in memoria e permette di eseguire un modello da 27 miliardi di parametri sull'hardware disponibile.
 
 Planner ed Executor utilizzano un livello di reasoning *medium*, scelto per bilanciare la capacità di elaborazione delle informazioni e il numero di token generati. Il Final Evaluator, che interpreta risultati già raccolti, utilizza invece un livello *low*.
 
@@ -214,7 +214,7 @@ Se la finestra stimata supera $W_{\max}$, il sistema segnala la condizione con u
 ## Note editoriali per il reinserimento in LaTeX (non fanno parte della tesi)
 
 - Ripristinare le Figure 2 e 3 dal documento originale; i segnaposto Markdown non sostituiscono i diagrammi.
-- I richiami bibliografici rimasti nel testo fanno riferimento alla numerazione del PDF originale. La citazione [21] è stata tolta dall’identificazione del modello perché rimandava a una pagina dedicata a un modello diverso; per identificare il checkpoint specifico rimane [22]. Dopo la conversione in LaTeX, controllare la numerazione e l’eventuale presenza di una voce [21] non più citata. Le note a piè di pagina sono state rese come note testuali contrassegnate da ¹–⁵ e vanno riportate nel formato LaTeX della tesi.
+- I richiami bibliografici rimasti nel testo fanno riferimento alla numerazione del PDF originale. La distinzione corretta per il modello è: [21] modello originale (Qwen3.8-27B – scheda ufficiale del Qwen Team su Hugging Face), [22] checkpoint effettivamente utilizzato (ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF, quantizzazione IQ3_S). Le note a piè di pagina sono state rese come note testuali contrassegnate da ¹–⁵ e vanno riportate nel formato LaTeX della tesi.
 - Nel Capitolo 5, sostituire il parametro `k = 3` relativo al rapporto caratteri/token con `$c_{\mathrm{tok}} = 3$`; non cambiare eventuali altri usi di `k` relativi alle ripetizioni sperimentali.
 - La specificazione del ticket è stata resa coerente con il comportamento riferito: ogni step `FAILED` genera un ticket, senza che ciò dimostri automaticamente una non conformità reale.
 - La descrizione del parser è stata corretta secondo il comportamento riferito: valida la struttura degli step presenti, non la completezza globale del piano.
