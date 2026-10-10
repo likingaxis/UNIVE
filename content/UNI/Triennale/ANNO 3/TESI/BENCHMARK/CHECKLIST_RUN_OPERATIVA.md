@@ -122,7 +122,7 @@ uv run python benchmark/run_matrix.py --gate --profile local --machines cryptova
 ```bash
 uv run python benchmark/run_matrix.py --gate --profile local --machines consolegate -k 3
 ```
-- [ ] ConsoleGate Golden (Run 1, 2, 3)
+- [x] ConsoleGate Golden (Run 1, 2, 3)
 
 ### 6. NetVault_B2R Golden (3x)
 ```bash
