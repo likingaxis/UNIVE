@@ -152,9 +152,20 @@ uv run python benchmark/run_matrix.py --gate --profile local --machines pizzeria
 ## Fase 4: E1 — Valutazione del Planner (Live Plan Generation su Macchine Sane)
 > Valuta se il Planner genera un Attack Plan operativo e compatibile con l'Executor su macchina Golden.
 > 11 macchine $\times$ 3 run con `--gate-regen-plan`.
+
+- **Blocco 1 (Macchine Web / Snelle, ~1h 30m):**
 ```bash
-uv run python benchmark/run_matrix.py --gate --gate-regen-plan --profile local -k 3
+uv run python benchmark/run_matrix.py --gate --gate-regen-plan --profile local --machines pizzeria,authgate,datavault,webmaster -k 3
 ```
+- **Blocco 2 (Macchine Intermedie / Protocolli, ~1h 45m):**
+```bash
+uv run python benchmark/run_matrix.py --gate --gate-regen-plan --profile local --machines consolegate,netvault,cryptovault,privaudit,gitpoison -k 3
+```
+- **Blocco 3 (Macchine Pesanti, ~2h):**
+```bash
+uv run python benchmark/run_matrix.py --gate --gate-regen-plan --profile local --machines citadel,tunnelgate -k 3
+```
+
 - [ ] Pizzeria (3x)
 - [ ] AuthGate (3x)
 - [ ] Citadel (3x)
