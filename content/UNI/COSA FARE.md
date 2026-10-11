@@ -1,15 +1,12 @@
 
 #### Tesi
-- [ ] fare i benchmark
 - [ ] fare i benchmark 4 macchine nuove
-- [x] capitolo 2 revisione
-- [x] capitolo 3 revisione
-- [x] capitolo 4 revisione
-- [x] capitolo 2 revisione NEW
-- [x] capitolo 3 revisione NEW
-- [ ] capitolo 4 revisione NEW
-- [ ] capitolo 5 revisione
-- [ ] capitolo 6+capitolo 1
+- [ ] finisci capitolo 5 -> brainstorming attivo sulle considerazioni da dire sui benchmark -> estrarre esempi end to end come pizzeria
+- [ ] revisione 2 3 4 e 5
+- [ ] scrivi 1 e 6
+- [ ] slide partendo dai paper come quello del prof, fare un brainstorming sulla narrativa da dare dare come contesto la tesi effettiva creare lo script del file md e poi creare le slide 
+
+
 
 #### Magistrale
 - [ ] finire appunti crittografia x4
