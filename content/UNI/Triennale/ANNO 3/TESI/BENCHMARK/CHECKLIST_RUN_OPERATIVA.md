@@ -166,17 +166,17 @@ uv run python benchmark/run_matrix.py --gate --gate-regen-plan --profile local -
 uv run python benchmark/run_matrix.py --gate --gate-regen-plan --profile local --machines citadel,tunnelgate -k 3
 ```
 
-- [ ] Pizzeria (3x)
-- [ ] AuthGate (3x)
+- [x] Pizzeria (3x)
+- [x] AuthGate (3x)
 - [ ] Citadel (3x)
-- [ ] CryptoVault (3x)
-- [ ] ConsoleGate (3x)
-- [ ] NetVault (3x)
-- [ ] GitPoison (3x)
+- [x] CryptoVault (3x)
+- [x] ConsoleGate (3x)
+- [x] NetVault (3x)
+- [x] GitPoison (3x)
 - [ ] TunnelGate (3x)
-- [ ] DataVault (3x)
-- [ ] WebMaster (3x)
-- [ ] PrivAudit (3x)
+- [x] DataVault (3x)
+- [x] WebMaster (3x)
+- [x] PrivAudit (3x)
 
 ---
 
