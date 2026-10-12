@@ -273,3 +273,64 @@ In E1 non è stato possibile recuperare un conteggio attendibile dei token del P
 I consumi dell'agente Antigravity sono stati ricostruiti dalle richieste registrate nella CLI, eliminando le duplicazioni presenti nella telemetria originale. I token di ragionamento dell'agente sono già inclusi negli output riportati, mentre quelli relativi alla cache sono mantenuti separati. I consumi di Qwen e Antigravity non vengono aggregati, poiché provengono da sistemi di contabilizzazione differenti.
 
 Queste misure caratterizzano il tempo e le risorse richieste dai percorsi operativi osservati, ma non quantificano direttamente il risparmio rispetto alla verifica e alla manutenzione manuale delle macchine, che non sono state oggetto di un confronto sperimentale.
+### 5.5.5 Valutazione supplementare su scenari aggiuntivi
+
+A differenza del benchmark principale, questa valutazione non mira a misurare sistematicamente la ripetibilità dei risultati, ma a osservare il comportamento di VulcaTest su quattro macchine non utilizzate durante lo sviluppo del framework: PingProbe, DocuPortal, LogViewer e JobDesk. L'obiettivo è verificare come il sistema si comporti su percorsi didattici differenti, mantenendo invariati il framework e la configurazione sperimentale.
+
+Per ciascuna macchina sono state inizialmente eseguite tre run del Golden Plan, allo scopo di verificarne la corretta esecuzione. Successivamente sono state introdotte tre perturbazioni, una per ciascuna tipologia P1, P2 e P3, con una singola esecuzione per perturbazione. La valutazione comprende quindi 24 run complessive, i cui risultati sono riportati nella Tabella 5.X.
+
+|Macchina|Golden Plan|P1|P2|P3|
+|---|---|---|---|---|
+|PingProbe|3/3 COMPLETED|Rilevata e corretta|Rilevata e corretta|Rilevata e corretta|
+|DocuPortal|3/3 COMPLETED|Rilevata e corretta|Rilevata e corretta|Non rilevata|
+|LogViewer|3/3 COMPLETED|Rilevata e corretta|Rilevata e corretta|Non rilevata|
+|JobDesk|3/3 COMPLETED|Rilevata e corretta|Rilevata e corretta|Non rilevata|
+
+_Tabella 5.X – Risultati della valutazione supplementare. «Rilevata e corretta» indica una perturbazione che ha prodotto un fallimento iniziale, seguito da un intervento di self-healing e da un re-test completato con successo._
+
+Tutte le dodici esecuzioni iniziali dei Golden Plan si sono concluse con stato `COMPLETED`, senza generare ticket diagnostici. Il risultato conferma che VulcaTest è riuscito a eseguire i percorsi previsti sulle quattro macchine aggiuntive, che comprendono tecniche differenti di accesso iniziale ed escalation dei privilegi.
+
+Anche le otto perturbazioni P1 e P2 hanno prodotto risultati uniformi: in ogni caso l'Executor ha rilevato una difformità rispetto al piano, il Final Evaluator ha generato un ticket e il nodo di healing è intervenuto sui sorgenti della macchina. Dopo la rigenerazione e il redeploy, tutti gli otto re-test hanno completato le fasi previste. Lo stesso comportamento è stato osservato per la perturbazione P3 di PingProbe, che introduceva privilegi sudo più ampi rispetto a quelli attesi.
+
+Le altre tre perturbazioni P3 hanno invece evidenziato un limite della verifica. In DocuPortal e JobDesk, le modifiche ai permessi della root flag non hanno impedito il completamento dei rispettivi piani, mentre in LogViewer l'aggiunta di un gruppo privilegiato è rimasta senza segnalazione, pur comparendo nelle evidenze raccolte. In tutti e tre i casi, l'esecuzione è terminata con stato `COMPLETED`, senza generare ticket né attivare il self-healing. Questi risultati mostrano che il completamento del percorso didattico non garantisce, da solo, l'assenza di configurazioni aggiuntive o potenziali scorciatoie non previste: il rilevamento dipende anche dai controlli definiti nell'Attack Plan.
+
+Nel complesso, la valutazione fornisce evidenze favorevoli sulla capacità di VulcaTest di operare su scenari aggiuntivi, eseguendo i percorsi previsti e intervenendo sulle difformità che ne compromettono la conformità. Al tempo stesso, i risultati delle P3 evidenziano i limiti di una verifica basata prevalentemente sul comportamento atteso. Considerati il numero contenuto di macchine e la singola esecuzione per perturbazione, queste osservazioni hanno carattere esplorativo e non costituiscono una misura generale delle prestazioni del framework.
+
+
+## 5.6 Casi di studio
+
+Per approfondire il comportamento di VulcaTest oltre i risultati aggregati, sono state selezionate tre esecuzioni che illustrano situazioni differenti: un ciclo di ripristino completato, una correzione riuscita senza completamento della riverifica e una perturbazione non rilevata perché esterna ai controlli previsti dall'Attack Plan.
+
+### 5.6.1 Pizzeria: rilevamento e ripristino di un difetto
+
+Il percorso d'attacco della macchina Pizzeria inizia con l'esplorazione di un'applicazione web, dalla quale il partecipante deve individuare le risorse necessarie per proseguire nelle fasi successive. La perturbazione P1-01 rimuove dalla ricetta IaC il componente responsabile della distribuzione dell'applicazione sul server. Durante la verifica, l'Executor raggiunge la seconda fase del Golden Plan, ma le risorse web previste non risultano disponibili e restituiscono risposte HTTP 404. Il Final Evaluator segnala il fallimento e individua, tra le possibili cause, un problema nel deployment dell'applicazione.
+
+L'Healer esamina quindi i sorgenti della macchina e ripristina il componente `web-app-deploy` nella ricetta IaC. VulcaTest rigenera il bundle, ricostruisce la macchina e avvia una nuova verifica con lo stesso Golden Plan. Questa volta le risorse web risultano accessibili e l'esecuzione prosegue fino allo stato `COMPLETED`. Il caso mostra come il framework possa partire da un'anomalia osservata durante il percorso d'attacco, intervenire sulla configurazione della macchina e verificare il ripristino attraverso una nuova esecuzione completa.
+
+### 5.6.2 GitPoison: correzione riuscita e riverifica incompleta
+
+Nella macchina GitPoison, il percorso previsto richiede inizialmente di recuperare un repository Git esposto attraverso il servizio web, per consultarne la cronologia e ottenere informazioni utili alle fasi successive. La perturbazione P1-14 rimuove il componente che rende accessibile il repository, impedendo quindi di proseguire nell'attacco. Durante la verifica iniziale, l'Executor tenta di accedere alla risorsa Git prevista dal piano, ma riceve una risposta HTTP 404. L'Healer interviene sui sorgenti ripristinando il componente `web-git-leak`, dopodiché la macchina viene ricostruita.
+
+Nel re-test, il repository torna accessibile e l'Executor riesce a recuperarne i contenuti, completando le prime cinque fasi del Golden Plan. L'esecuzione si interrompe però alla sesta fase, quando il modello linguistico supera la finestra di contesto disponibile. Il risultato finale rimane quindi `FAILED`, nonostante il difetto introdotto sia stato corretto. Questo caso evidenzia come il successo della riparazione e quello dell'intero ciclo operativo siano due aspetti distinti: una modifica corretta ai sorgenti non garantisce, da sola, che la successiva verifica venga completata.
+
+### 5.6.3 NetVault: limiti della copertura dell'Attack Plan
+
+La macchina NetVault prevede, tra i primi passaggi del percorso d'attacco, un trasferimento della zona DNS, attraverso il quale il partecipante può ottenere i record del dominio e individuare informazioni utili a proseguire. La perturbazione P3-06 aggiunge un record DNS TXT denominato `vault-internal`, non previsto dalla configurazione di riferimento, senza rimuovere i record necessari al percorso didattico. Durante la verifica, l'Executor esegue correttamente il trasferimento della zona e riceve anche il record aggiuntivo introdotto dalla perturbazione.
+
+Il Golden Plan richiede tuttavia di verificare che il trasferimento riesca e che siano presenti i record attesi, senza prevedere un controllo sull'eventuale presenza di informazioni aggiuntive. Di conseguenza, la fase viene considerata superata e l'intera esecuzione termina con stato `COMPLETED`, senza generare un ticket né avviare il self-healing. Il caso, appartenente alla valutazione esplorativa P3, evidenzia come una difformità possa essere visibile nei risultati della verifica senza essere segnalata, quando l'Attack Plan non contiene un controllo specifico per riconoscerla.
+
+### 5.7 Discussione e limiti della valutazione
+
+I risultati sperimentali mostrano che VulcaTest può ridurre significativamente il lavoro manuale necessario per verificare la conformità degli scenari Cyber Range e intervenire sui difetti riscontrati. Il contributo principale non consiste nell'automazione di singoli comandi di penetration testing, ma nell'integrazione di pianificazione, esecuzione, valutazione e ripristino all'interno di un workflow controllato, nel quale gli esiti delle verifiche possono guidare gli interventi successivi.
+
+Un primo aspetto riguarda il rapporto tra Planner ed Executor. La separazione dei due componenti permette di definire preventivamente il percorso da verificare e di eseguirlo mantenendo distinti gli obiettivi del test dalle decisioni operative. Tuttavia, l'efficacia della verifica dipende dalla qualità dell'Attack Plan: un piano incompleto o contenente controlli non sufficientemente specifici può compromettere l'esito della valutazione anche quando l'Executor opera correttamente. La validazione dei Golden Plan costituisce quindi un passaggio fondamentale per distinguere i difetti della macchina da quelli della specifica di test.
+
+Un limite strettamente collegato riguarda la copertura dei controlli. VulcaTest verifica principalmente che il percorso didattico previsto sia effettivamente percorribile, ma questo non garantisce l'assenza di vulnerabilità aggiuntive o scorciatoie non contemplate dal piano. Tale distinzione emerge anche nella valutazione supplementare sulle quattro macchine aggiuntive: mentre tutte le perturbazioni P1 e P2 sono state rilevate e corrette, tre delle quattro perturbazioni P3 non hanno prodotto alcuna segnalazione. In questi casi, il completamento dell'Attack Plan non è stato sufficiente a individuare le modifiche introdotte. L'estensione della copertura richiede pertanto controlli mirati anche ai comportamenti non previsti, senza confondere la verifica di conformità del percorso atteso con un'analisi esaustiva della sicurezza della macchina.
+
+Per quanto riguarda il self-healing, gli esperimenti evidenziano la possibilità di passare dal rilevamento di una non conformità alla modifica dei sorgenti e alla successiva riverifica dello scenario. La distinzione tra controlli _in-band_, eseguiti dall'esterno della macchina, e interventi _out-of-band_, effettuati sui sorgenti durante il ripristino, consente di mantenere separati il punto di vista del test e quello della correzione. Il completamento del re-test fornisce una verifica operativa dell'intervento, ma non garantisce che la soluzione adottata sia l'unica possibile o che preservi ogni proprietà dello scenario non esplicitamente controllata dall'Attack Plan.
+
+La tracciabilità costituisce un ulteriore elemento rilevante. La conservazione delle evidenze, dei ticket diagnostici, delle modifiche applicate e degli esiti dei re-test permette di ricostruire il comportamento del framework e di esaminare criticamente le decisioni degli agenti. Questo aspetto rimane particolarmente importante perché le diagnosi prodotte dai modelli linguistici sono ipotesi formulate sulla base delle informazioni disponibili, non accertamenti indipendenti della causa del difetto.
+
+Infine, i risultati devono essere interpretati considerando i limiti del disegno sperimentale. Le perturbazioni controllate permettono di confrontare il comportamento osservato con una ground truth nota, ma non rappresentano l'intera varietà dei difetti riscontrabili in ambienti reali. Inoltre, gli scenari appartengono allo stesso ecosistema tecnologico e la valutazione supplementare, pur introducendo macchine non utilizzate durante lo sviluppo, comprende una sola esecuzione per perturbazione. Non è quindi possibile estendere automaticamente i risultati a Cyber Range differenti o ricavarne conclusioni sulla stabilità delle prestazioni in condizioni non esaminate.
+
+Nel complesso, la valutazione sostiene l'utilità dell'approccio proposto per automatizzare la verifica e il ripristino dei percorsi didattici previsti. Al tempo stesso, evidenzia come l'affidabilità del processo dipenda non soltanto dalle capacità degli agenti, ma anche dalla qualità della specifica di test, dalla copertura dei controlli e dalla possibilità di verificare gli effetti delle correzioni applicate.
