@@ -124,7 +124,7 @@ Non tutti i tool richiedono lo stesso tipo di interazione. Scansioni ed enumeraz
 - **Sessioni persistenti:** il Bridge utilizza il Terminal Gateway, che mantiene sessioni PTY[^pty] tramite il modulo Python Pexpect [20]. Le chiamate successive al tool `interactive_terminal_exec` proseguono sulla stessa shell, e ogni sessione è identificata da un `session_name`, così da poter mantenere più terminali aperti contemporaneamente.
 
 ![[Pasted image 20261002152954.png]]
-**Figura 3 — Architettura del Bridge di esecuzione:** disaccoppiamento tra tool stateless (HexStrike) e sessioni PTY persistenti (Terminal Gateway).
+**Figura 3 — Bridge di esecuzione:** le richieste dell'Executor sono inoltrate a HexStrike per i tool stateless o al Terminal Gateway per le sessioni PTY persistenti.
 
 <!-- Inserire qui la figura originale 3 dal documento LaTeX/PDF. -->
 

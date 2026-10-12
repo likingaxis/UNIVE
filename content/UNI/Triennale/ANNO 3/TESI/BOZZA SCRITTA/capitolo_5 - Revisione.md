@@ -189,8 +189,6 @@ Delle 24 esecuzioni, 20 si sono concluse con stato `COMPLETED` e quattro con sta
 | TunnelGate | 2/3 | 66,67% |
 | **Totale** | **20/24** | **83,33%** |
 
-**[Figura X — Risultati E1 per macchina: grafico a barre orizzontali impilate che distingue le esecuzioni `COMPLETED` e `FAILED` nelle tre ripetizioni.]**
-
 L'analisi delle run fallite ha evidenziato cause differenti. In AuthGate il Planner ha introdotto una condizione non necessaria sull'output di Hydra, mentre in Citadel una delle esecuzioni è fallita per un problema dell'Executor nella gestione della sessione interattiva. In TunnelGate il piano richiedeva invece una condizione documentata nel writeup, ma incompatibile con lo stato effettivo della Golden Machine. Soltanto uno dei quattro arresti è stato attribuito direttamente a un errore semantico del Planner.
 
 La revisione dei piani ha rilevato contenuti sostanzialmente coerenti con il percorso previsto in 22 casi su 24. Il tasso di completamento dell'83,33% rappresenta quindi il risultato operativo dei piani generati, non una misura isolata della correttezza del Planner, poiché l'esito dipende anche dall'Executor e dalle condizioni di esecuzione.
@@ -279,14 +277,14 @@ A differenza del benchmark principale, questa valutazione non mira a misurare si
 
 Per ciascuna macchina sono state inizialmente eseguite tre run del Golden Plan, allo scopo di verificarne la corretta esecuzione. Successivamente sono state introdotte tre perturbazioni, una per ciascuna tipologia P1, P2 e P3, con una singola esecuzione per perturbazione. La valutazione comprende quindi 24 run complessive, i cui risultati sono riportati nella Tabella 5.X.
 
-|Macchina|Golden Plan|P1|P2|P3|
+|Macchina|Golden|P1|P2|P3|
 |---|---|---|---|---|
-|PingProbe|3/3 COMPLETED|Rilevata e corretta|Rilevata e corretta|Rilevata e corretta|
-|DocuPortal|3/3 COMPLETED|Rilevata e corretta|Rilevata e corretta|Non rilevata|
-|LogViewer|3/3 COMPLETED|Rilevata e corretta|Rilevata e corretta|Non rilevata|
-|JobDesk|3/3 COMPLETED|Rilevata e corretta|Rilevata e corretta|Non rilevata|
+|PingProbe|3/3|Rilevata e corretta|Rilevata e corretta|Rilevata e corretta|
+|DocuPortal|3/3|Rilevata e corretta|Rilevata e corretta|Non rilevata|
+|LogViewer|3/3|Rilevata e corretta|Rilevata e corretta|Non rilevata|
+|JobDesk|3/3|Rilevata e corretta|Rilevata e corretta|Non rilevata|
 
-_Tabella 5.X – Risultati della valutazione supplementare. «Rilevata e corretta» indica una perturbazione che ha prodotto un fallimento iniziale, seguito da un intervento di self-healing e da un re-test completato con successo._
+_Tabella 5.X – Risultati della valutazione supplementare. «Rilevata e corretta» indica una perturbazione che ha prodotto un fallimento iniziale, seguito da un intervento di self-healing e da un re-test completato con successo. La colonna Golden riporta le run del Golden Plan concluse con stato `COMPLETED`._
 
 Tutte le dodici esecuzioni iniziali dei Golden Plan si sono concluse con stato `COMPLETED`, senza generare ticket diagnostici. Il risultato conferma che VulcaTest è riuscito a eseguire i percorsi previsti sulle quattro macchine aggiuntive, che comprendono tecniche differenti di accesso iniziale ed escalation dei privilegi.
 
