@@ -100,4 +100,67 @@ una volta terminata la correzione è fondamentale effettuare un retesting per ch
 PROBLEMA: MANCA LA FIGURA CHE MOSTRA PIZZERIA AGGIUSTATA, ERA QUI CHE DOVEVO METTERLA NO? QUANDO PARLAVO DI HEALING
 
 
+Dopo aver definito VulcaTest sorge spontaneo chiedersi, come possiamo dimostrare che il sistema funzioni effettivamente e come possiamo evidenziare i risultati ottenuti?
 ## BLOCCO 3
+Per questo genere di framework non esistono benchmark o dataset già esistenti
+per definire se vulcatest sta valutando correttamente una macchina è fondamentale identificare un problema
+The oracle problem ne parla: per stabilire se un test è corretto non possiamo semplicemente vedere se la run è terminata con completed o failed, un esito positivo o negativo può dipendere da diversi fattori differenti
+(mostrare qualcosa come run completata run fallita evidenziando il dubbio della cosa)
+per misurare l'affidabilità del framework occorre quindi disporre di un riferimento indipendente che permetta di conoscere in anticipo il comportamento atteso
+
+per fare ciò con rigore sono state realizzate macchine vulnerabili generate direttamente mediante VulcAIN (mostra tante macchine)
+
+quest'ultime sono state successivamente risolte e fixate (mostra un processo dove le tante macchine normali passano per un nodo di fixing -> ed escono d'oro)
+quindi dietro c'è stato un effettivo lavoro di analisi dei problemi e correzione di quest'ultimi portando a delle macchine che nel concreto non presentano problemi sotto il punto di vista dell'intended path, è possibile eseguire il tutto senza problemi
+
+nota: per ora non parlerei dei golden plan lo metterei dopo come problema di isolamento dei nodi
+
+a seguito di queste macchine sono state realizzate appositamente delle perturbazioni controllate da applicare su quest'ultime, ognuna ha le sue ma è possibile racchiuderle in 3 categorie principali
+P1 P2 P3 schematizzate bene come avevi fatto anche tu qui
+grazie a queste perturbazioni ed averle applicate ad una macchina golden è possibile fare dei controlli mirati su quella singola fase riducendo di molto problemi di classificazione del problema
+
+a seguito di ciò, dopo aver preparato correttamente il dataset (non so se si può dire dataset)
+sono nati 3 esperimenti differenti (metti le figure un pò come nella tesi)
+sono un pò stanco nel descriverli tutti ma metterei un focus anche su cosa vogliamo isolare
+E1 -> isola il planner
+E2 -> isola l'executor, infatti qui aggiungerei
+per rispondere a una difficoltà di isolamento di un singolo nodo, sono stati fissati dei piani di attacco detti golden plan, che hanno il compito di deresponsabilizzare il planner in questo genere di test che non lo riguarda
+E3 -> isola il nodo di healing
+una cosa che metterei sono le formule molto semplici, comunque sarò con qualcuno in grado di comprenderle
+
+successivamente faccio mostrare i numeri 8 golden machine 15 perturbazioni, 108 run totali di cui 36 sessioni di healing
+precisando che delle 108 24 sono per E1 84 per E2 e 36 per E3
+(è importante mostrare questi dati con delle figure rilevanti e ben poste)
+per i risultati mi limito a riportare quanto hai scritto tu, mettiamo dei grafici che mostrano la cosa con precision recall f1 measure run completate ecc...
+non mostrerei TUTTO, dimmi tu cosa conviene mostrare (calcolando che siamo comunque ad una tesi triennale di informatica che sta in matematica senza esagerare però)
+
+(aggiungi qui nello script una breve motivazione per ogni metrica visto che non me le ricordo bene)
+
+poi passiamo ai tempi e token, per i numeri dei token mettiamo un TODO, per ora scriviamo xx per i token per i tempi dovresti avere tutto
+aggiungerei qualcosa come: una cosa importante per questa tesi che mi ha permesso di combattere le limitazioni dei modelli commerciali è stato l'utilizzo di un modello locale Qwen 3.8 27B quantizzato ecc... che mediante del tuning fatto da me e impostando MTP+NGRAM mi ha permesso di raggiungere dati non indifferenti per l'hardware a disposizioe con una media di 45 token al secondo e una context window fino a 40k
+
+passiamo poi alle P3, in aggiunta ai test eseguiti sulla P2 ho effettuato dei test trasversali al focus principale della tesi, aggiunendo questa terza perturbazione che richiede una capacità che al momento l'agente non offre in maniera autonoma, ovvero quella della rilevazione degli unintended path e delle scorciatoie. trovo importante comunque precisare che questa autonomia è limitata da una necessità di dover precisare esattamente cosa deve svolgere il nostro executor, gli unici successi avuti sotto queste perturbazioni sono proprio quelli che richiedevano di fare dei controlli su eventuali scorciatoie
+(mostra il grafico di P3 con il 20%)
+questa non è una limitazione effettiva del mio sistema, evidenzia solo come l'executor sia ottimo per eseguire ciò che gli viene detto ma giustamente troppo stretto e limitato per eseguire esplorazioni esterne
+
+
+
+
+## Blocco 4
+
+Ricapitolando abbiamo visto vulcatest e il modo in cui può dare un contributo in vulcain
+(mostra di nuovo il loop completo ma ad alto livello oppure a basso livello come una sorta di riasunto di tutto ciò che abbiamo visto, forse avrebbe senso mostrare l'architettura anche se densa di informazioni solo come ultima volta che viene vista)
+
+gli esperimenti hanno dimostrato che il framework è in grado nelle condizioni considerate di eseguire verifiche segnalare non conformità e produrre correzioni che possono essere confermate attraverso un nuovo test
+al tempo stesso abbiamo osservato che l'affidabilità è estremamente dipendente dalla qualità dell'attack plan generato, questo può essere utile ma al tempo stesso va evidenziato
+
+riprendendo il discorso fatto da P3 come sviluppi futuri ed estensioni abbiamo il testing esplorativo e la pipeline end to end
+- aggiungi qui a cosa ti riferisci
+
+Cosa racconterei oralmente: il primo sviluppo consiste nell'affiancare alla verifica di conformità una componente esplorativa, capace di cercare comportamenti indesiderati non esplicitamente previsti dal piano.
+Il secondo riguarda l'integrazione delle componenti VulcAIn in un unico workflow, dalla generazione alla verifica, con un'interfaccia grafica che permetta di gestire e monitorare il processo.
+La modularità che hai cercato di ottenere nella progettazione permette di pensare a queste estensioni senza riprogettare necessariamente l'intero framework.
+
+il contributo della tesi non consiste nel realizzare un agente capace di ottenere i permessi root bensì quello di introdurre un processo controllato per verificare e correggere il percorso didattico previsto
+
+ringraziamenti e ci sono domande
