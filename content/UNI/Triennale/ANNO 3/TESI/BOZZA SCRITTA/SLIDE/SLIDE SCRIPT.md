@@ -2,8 +2,8 @@
 Buongiorno a tutti sono Luca Gugliotta e vi presento il mio progetto di tesi: VulcaTest un framework agentico per il conformance testing e self-healing di scenari cyberrange
 
 Partendo proprio da quest'ultimo elemento (indico cyber range nel titolo cercando di metterlo che appare in basso centrato a sx nelle slide)
-Per Cyebrrange ci si riferisce ad ambienti informatici di simulazione progettati per riprodurre scenari realistici di cybersecurity, rappresentando una risorsa fondamentale per l'apprendimento. 
-Un esempio concreto di Scenario Cyberrange sono le macchine Boot-To-Root (icona (io direi svg ma poi sceglie claude come farla o come prenderla da internet) di un computer che rappresenta una macchina B2R)
+***Per Cyebrrange ci si riferisce ad ambienti informatici di simulazione progettati per riprodurre scenari realistici di cybersecurity, rappresentando una risorsa fondamentale per l'apprendimento.***
+Un **esempio concreto** di Scenario Cyberrange sono le macchine Boot-To-Root (icona (io direi svg ma poi sceglie claude come farla o come prenderla da internet) di un computer che rappresenta una macchina B2R)
 questo genere di macchine sono come dei computer progettate da qualcuno con lo scopo di fornire esercizi di vario genere con l'obiettivo di fornire degli spunti di apprendimento professionale in diversi ambiti della sicurezza informatica.
 Quindi in sostanza queste macchine vengono progettate da qualcuno e poi devono essere svolte come degli esercizi da qualcun'altro (trova un modo per dire qualcuno)(nelle slide immagino una figura con uno studente al computer)(dimmi se esagero troppo con le figure)
 l'obiettivo per chi deve esercitarsi è quello di rilevare vulnerabilità nella macchina e altre cose per il raggiungimento dell'utente con i privilegi massimi(root) (figura con il computer e fuori escono non per forza con una animazione delle card con scritto vulnerabilità, ecc...)
@@ -29,7 +29,7 @@ Da questa necessità nasce l'idea di realizzare
 VulcaTest progettato per automatizzare due attività
 (mostra due attività con scritto verifica e correzione)
 
-il primo problema incontrato durante la progettazione di vulcatest risiede nel dover automatizzare un qualcosa che prevede l'interpretazione e l'esecuzione di comandi su una macchina vulnerabile 
+***il primo problema incontrato durante la progettazione di vulcatest risiede nel dover automatizzare un qualcosa che prevede l'interpretazione e l'esecuzione di comandi su una macchina vulnerabile***
 
 # Blocco 2 - uso di LLM Agentici Harness architettura e implementazione di vulcatest
 Questo compito è possibile delegarlo ad un LLM in grado di interpretare le osservazioni e scegliere dinamicamente le azioni successive da dover eseguire sulla macchina.
@@ -39,7 +39,7 @@ non può eseguire comandi o in generale interagire con l'ambiente
 A tale scopo nascono gli harness , software che avvolgono (wrap) l'LLM permettendo a quest'ultimo di avere delle percezioni e di eseguire azioni mediante chiamate a tool
 (mostra una figura con un LLM con attorno un harness come se l'LLM fosse avvolto che interagisce con la macchina con una doppia freccia <->)
 
-attualmente nel mercato esistono diversi harness agentici che permettono questo genere di operazioni (mostra nelle slide antigravity claude code codex hermes grok bot)
+***attualmente nel mercato esistono diversi harness agentici che permettono questo genere di operazioni*** (mostra nelle slide antigravity claude code codex hermes grok bot)
 si impartiscono delle azioni che bisogna svolgere e l'agente in automatico le esegue direttamente sulla macchina che si sta utilizzando ad esempio svolgendo operazioni come la scrittura di codice in un ambiente dedicato
 questo può apparentemente rappresentare la soluzione che voleva risolvere VulcaTest fatta e finita, ma non dobbiamo dimenticarci assolutamente cosa volevamo effettivamente risolvere con vulcatest, l'obiettivo non è semplicemente quello di eseguire comandi su una macchina che portino alla soluzione (root) l'obiettivo è quello di verificare un percorso ben definito, qui stiamo svolgendo quindi due operazioni che possono sembrare simili ma in realtà sono differenti
 - gli harness general purpose privilegiano la flessibilità nelle fasi intermedie che incorrono tra l'inizio e la fine di una operazione per ottenere quel determinato risultato, questo non è per forza negativo è semplicemente diverso da ciò di cui abbiamo bisogno
