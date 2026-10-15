@@ -212,3 +212,21 @@ Queste fonti possono essere conservate come materiale di lavoro, ma non dovrebbe
    - runtime **llama.cpp**;
    - backend GPU **ROCm**.
 6. Google Antigravity va trattato come **componente operativo del nodo di healing** se viene effettivamente invocato nel workflow di self-healing, non come semplice IDE usato durante lo sviluppo.
+
+## Generazione automatica di Cyber Range e lavori correlati (aggiunte il 15 ottobre 2026)
+
+Fonti riprese dalla sezione "Background and Related Work" del paper ITASEC 2027 su VulcAIn (Dell'Orco, Salvatori et al.), usate nel §2.3 e nel §2.6. Chiavi e voci BibTeX copiate da `paper/bib/references.bib`.
+
+- **SecGen: Security Scenario Generator** (chiave `schreuders2017secgen`), USENIX ASE 2017.
+- **CyRIS: A Cyber Range Instantiation System for Facilitating Security Training** (chiave `pham2016cyris`), SoICT 2016. DOI: 10.1145/3011077.3011087
+- **Building next generation Cyber Ranges with CRACK** (chiave `russo2020crack`), Computers & Security 95, 2020. DOI: 10.1016/j.cose.2020.101837
+- **Nautilus: A Tool For Automated Deployment And Sharing Of Cyber Range Scenarios** (chiave `bernardinetti2021nautilus`), ARES 2021. DOI: 10.1145/3465481.3469182
+- **Automated Generation of Cybersecurity Exercise Scenarios** (chiave `skandylas2026automated`), arXiv:2604.01079, 2026.
+- **Evaluating ASCERT: generative AI for cyber-range scenario generation** (chiave `palumickas2025ascert`), Int. J. of Information Security 25, 2026. DOI: 10.1007/s10207-025-01179-w
+- **LLM-Assisted Generation of Intentionally Vulnerable Containerized Environments for Cyber Ranges** (chiave `perrone5206937llm`), SSRN 5206937, 2025.
+- **From Concept to Deployment: An AI Assistant for Generating and Configuring Cyber Range Scenarios** (chiave `rizos2025concept`), IEEE CSR Workshops 2025. DOI: 10.1109/CSR64739.2025.11130019
+- **ARCeR: An Agentic RAG for the Automated Definition of Cyber Ranges** (chiave `lupinacci2025arcer`), ARES 2025 Workshops, LNCS. DOI: 10.1007/978-3-032-00630-1_2
+- **RangeFactory: Scalable Construction of Multi-Hop Cyber Ranges** (chiave `jiang2026rangefactory`), arXiv:2608.09526, 2026.
+- **Dynamic Cyber Ranges** (chiave `mayoralvilches2026dynamic`), arXiv:2604.24184, 2026.
+- **Exploring LLM-based Automated Repairing of Ansible Script in Edge-Cloud Infrastructures** (chiave `kwon2023ansiblerepair`), Journal of Web Engineering 22(6), 2023. DOI: 10.13052/jwe1540-9589.2263
+- **Towards the self-healing of Infrastructure as Code projects using constrained LLM technologies** (chiave `diazdearcaya2024selfhealing`), APR '24. DOI: 10.1145/3643788.3648014
