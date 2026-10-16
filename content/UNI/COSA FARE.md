@@ -2,7 +2,7 @@
 #### Tesi
 - [ ] Revisione Tesi
 - [ ] Revisione Slide
-- [ ] Appunti Distributed
+- [x] Appunti Distributed
 - [ ] Appunti Network
 - [ ] Plan organizzativo per recuperare tutto, tabella operativa
 

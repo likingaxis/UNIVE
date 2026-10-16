@@ -4,6 +4,9 @@
   "theme": "letterpress",
   "showEditLink": false,
   "author": "Luca Gugliotta",
+  "contentExclude": [
+    "/UNI/Magistrale/ANNO1 M/Percorso STUD2"
+  ],
   "nav": [
     {
       "title": "Home",

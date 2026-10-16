@@ -5,6 +5,9 @@ node_modules
 .trash
 **/.obsidian/workspace*.json
 
+# Memoria personale del percorso di studio STUD2 (locale)
+/content/UNI/Magistrale/ANNO1 M/Percorso STUD2/
+
 # Chiavi e certificati
 *.key
 *.pem
