@@ -1,11 +1,10 @@
 
 #### Tesi
-- [ ] migliora le figure
-- [ ] slide partendo dai paper come quello del prof, fare un brainstorming sulla narrativa da dare dare come contesto la tesi effettiva creare lo script del file md e poi creare le slide 
-- [ ] fix Anti AI partendo dai suggerimenti di chat
-- [ ] revisione capitoli
-
-
+- [ ] Revisione Tesi
+- [ ] Revisione Slide
+- [ ] Appunti Distributed
+- [ ] Appunti Network
+- [ ] Plan organizzativo per recuperare tutto, tabella operativa
 
 #### Magistrale
 - [ ] finire appunti crittografia x4
