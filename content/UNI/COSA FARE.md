@@ -1,4 +1,9 @@
 
+#### Domani
+- Distributed 2
+- Revisione tesi
+- Prova discorso tesi
+- critto 1
 #### Tesi
 - [ ] Revisione Tesi
 - [ ] Revisione Slide
