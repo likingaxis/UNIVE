@@ -22,3 +22,21 @@ content/**/*.tar.gz
 content/**/*.iso
 
 
+
+# Configurazioni e strumenti personali: conservati sul computer, non pubblicati
+/.agent/
+/.agents/
+/.codex/
+/.gemini/
+/.opencode/
+/.impeccable/
+/.obsidian/
+/content/.obsidian/
+/pastel-topaz/
+/content/.trash/
+
+# Cache e file temporanei del sistema
+Thumbs.db
+desktop.ini
+__pycache__/
+*.pyc
