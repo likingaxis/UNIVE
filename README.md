@@ -29,9 +29,8 @@ Apri la cartella `content` come vault in Obsidian. Plugin, temi e impostazioni p
 - `pen-highlighter/`: sorgenti del plugin Obsidian personalizzato.
 - `resocontoesamitriennale/`: resoconti degli esami.
 - `tools/`: utilità Python e materiali di supporto.
-- `archive/publishing/flowershow/`: configurazione del precedente sistema di pubblicazione, conservata come riferimento.
 
-La pubblicazione web è sospesa durante il riordino. La configurazione archiviata di Flowershow non fa parte del flusso di lavoro corrente. Il branch di lavoro è `v4`; i vecchi branch vengono conservati nel backup locale prima della rimozione.
+La pubblicazione web è sospesa durante il riordino. La vecchia configurazione Flowershow è stata rimossa dalla repository. Il branch di lavoro è `v4`; i vecchi branch sono stati conservati nel backup locale prima della rimozione.
 
 Le cartelle Magistrale e Tesi sono materiale attivo e sono escluse dagli interventi di pulizia. Per i dettagli dell'intervento del 17 ottobre 2026, vedi il [resoconto della pulizia](./docs/pulizia-2026-10-17.md).
 
