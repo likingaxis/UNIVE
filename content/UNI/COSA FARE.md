@@ -1,16 +1,10 @@
 
 #### Domani
-- Distributed 2
-- Revisione tesi
-- Prova discorso tesi
-- critto 1
-#### Tesi
-- [ ] Revisione Tesi
-- [ ] Revisione Slide
-- [x] Appunti Distributed
-- [ ] Appunti Network
-- [x] Plan organizzativo per recuperare tutto, tabella operativa
-
+- [ ] lezione network
+- [ ] Revisione tesi letta da inizio a fine
+- [ ] Prova discorso tesi dall'inizio fino alla fine
+- [ ] critto 1
+- [ ] distributed 3
 #### Magistrale
 - [ ] crittografia 1
 - [ ] crittografia 2
@@ -22,8 +16,8 @@
 - [ ] network 3
 - [ ] network 4
 - [ ] network 5
-- [ ] distributed 1
-- [ ] distributed 2
+- [x] distributed 1
+- [x] distributed 2
 - [ ] distributed 3
 - [ ] distributed 4
 - [ ] distributed 5
