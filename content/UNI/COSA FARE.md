@@ -1,7 +1,14 @@
 
 #### Domani
 - [ ] lezione network
-- [ ] Revisione tesi letta da inizio a fine
+- [x] revisione sommario
+- [x] revisione cap 1
+- [ ] revisione cap 2
+- [ ] revisione cap 3
+- [ ] revisione cap 4
+- [ ] revisione cap 5
+- [ ] revisione cap 6
+- [ ] ringraziamenti
 - [ ] Prova discorso tesi dall'inizio fino alla fine
 - [ ] critto 1
 - [ ] distributed 3
