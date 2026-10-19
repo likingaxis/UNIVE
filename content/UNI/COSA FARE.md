@@ -3,8 +3,8 @@
 - [ ] lezione network
 - [x] revisione sommario
 - [x] revisione cap 1
-- [ ] revisione cap 2
-- [ ] revisione cap 3
+- [x] revisione cap 2
+- [x] revisione cap 3
 - [ ] revisione cap 4
 - [ ] revisione cap 5
 - [ ] revisione cap 6
