@@ -5,7 +5,7 @@
 - [x] revisione cap 1
 - [x] revisione cap 2
 - [x] revisione cap 3
-- [ ] revisione cap 4
+- [x] revisione cap 4
 - [ ] revisione cap 5
 - [ ] revisione cap 6
 - [ ] ringraziamenti
