@@ -6,8 +6,8 @@
 - [x] revisione cap 2
 - [x] revisione cap 3
 - [x] revisione cap 4
-- [ ] revisione cap 5
-- [ ] revisione cap 6
+- [x] revisione cap 5
+- [x] revisione cap 6
 - [ ] ringraziamenti
 - [ ] Prova discorso tesi dall'inizio fino alla fine
 - [ ] critto 1
