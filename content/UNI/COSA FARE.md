@@ -18,6 +18,7 @@
 - [ ] crittografia 3
 - [ ] crittografia 4
 - [ ] crittografia 5
+- [ ] crittografia 6
 - [ ] network 1
 - [ ] network 2
 - [ ] network 3
@@ -30,4 +31,6 @@
 - [ ] distributed 5
 - [ ] distributed 6
 - [ ] distributed 7
+- [ ] distributed 8
+- [ ] distributed 9
 - [ ] Esami a scelta approfondisci( senti anche i messaggi)
