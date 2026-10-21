@@ -1,15 +1,9 @@
 
 #### Domani
 - [ ] lezione network
-- [x] revisione sommario
-- [x] revisione cap 1
-- [x] revisione cap 2
-- [x] revisione cap 3
-- [x] revisione cap 4
-- [x] revisione cap 5
-- [x] revisione cap 6
+- [ ] revisione tesi
+- [ ] sistema slide
 - [ ] ringraziamenti
-- [ ] Prova discorso tesi dall'inizio fino alla fine
 - [ ] critto 1
 - [ ] distributed 3
 #### Magistrale
