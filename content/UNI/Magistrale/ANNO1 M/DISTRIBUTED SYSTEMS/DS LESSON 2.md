@@ -130,9 +130,11 @@ A **weak** abstraction provides minimal guarantees.
 ##### Two categories of properties
 
 - **Safety:**
+  - Define what must **never happen** (something bad).
   - if the property is violated at time $t$, the violation cannot be repaired later.
   - Formally: if a safety property is violated in execution $E$, there is a **finite prefix** $E'$ of $E$ such that every extension of $E'$ also violates the property.
 - **Liveness:**
+  - Define what must **eventually happen** (something good).
   - specifies that something good will happen; a violation cannot be established from a finite execution.
   - Formally: given a finite execution $E$ that does not satisfy a liveness property, there is an extension of $E$ that satisfies it.
   - Intuitive example: “At the end of time, we all resurrect.” No finite observation can rule it out.
