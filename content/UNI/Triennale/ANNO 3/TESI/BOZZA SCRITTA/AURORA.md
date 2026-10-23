@@ -1,0 +1,3 @@
+Ringrazio Aurora, siamo cresciuti insieme in questo percorso, per non essere mai stata indifferente ed essersi sempre preoccupata per me.
+ogni giornata passata a studiare e che poi finiva con un incontro con te per me era come vivere il natale, è bello vedere in una coppia qualcuno che crede nell'altro, che lo sprona e lo fa sentire speciale. Sei costantemente alla ricerca di una novità ma hai al tempo stesso le capacità di mettere delle radici in ciò che conta.
+Non vedo l'ora di passare altre avventure della vita con te e con il tuo entusiasmo.
