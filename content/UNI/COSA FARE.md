@@ -1,11 +1,9 @@
 
 #### Domani
-- [x] lezione network
-- [x] revisione tesi
-- [x] sistema slide
-- [x] ringraziamenti
 - [ ] critto 1
+- [ ] critto 2
 - [ ] distributed 3
+- [ ] distributed 4
 #### Magistrale
 - [ ] crittografia 1
 - [ ] crittografia 2
