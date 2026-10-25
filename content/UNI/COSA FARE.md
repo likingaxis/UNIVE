@@ -19,7 +19,7 @@
 - [x] distributed 1
 - [x] distributed 2
 - [x] distributed 3
-- [ ] distributed 4
+- [x] distributed 4
 - [ ] distributed 5
 - [ ] distributed 6
 - [ ] distributed 7
