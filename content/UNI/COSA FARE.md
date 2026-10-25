@@ -2,7 +2,7 @@
 #### Domani
 - [ ] critto 1
 - [ ] critto 2
-- [ ] distributed 3
+- [x] distributed 3
 - [ ] distributed 4
 #### Magistrale
 - [ ] crittografia 1
@@ -18,7 +18,7 @@
 - [ ] network 5
 - [x] distributed 1
 - [x] distributed 2
-- [ ] distributed 3
+- [x] distributed 3
 - [ ] distributed 4
 - [ ] distributed 5
 - [ ] distributed 6
