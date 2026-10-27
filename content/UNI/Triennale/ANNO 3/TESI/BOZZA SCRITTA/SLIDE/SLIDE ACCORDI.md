@@ -3,7 +3,7 @@
 - tra gli scenari da riprodurre un esempio è quello di sistemi informatici che presentano delle vulnerabilità
 - una particolare tipologia di esercizi è relativo alle macchine boot to root
 - l'obiettivo del partecipante è individuare e sfruttare queste vulnerabilità per ottenere i privilegi di root ovvero il massimo livello di privilegi amministrativi nei sistemi linux
-- un progettista definisce quello che è un inteded path
+- un progettista definisce quello che è un intemded path
 - la realizzazione di una macchina B2R
 - richiede molto tempo quindi il CNIT NAM LAB ha realizzato VulcAIn un workflow agentico che automatizza le prime 3 fasi viste prima
 - un caso d'uso di VulcAIn è nella realizzazione di una macchina di una pizzeria che espone un sito web con una chat di assistenza
