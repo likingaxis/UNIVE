@@ -1,9 +1,9 @@
 
 #### Domani
-- [ ] critto 1
-- [ ] critto 2
-- [x] distributed 3
-- [ ] distributed 4
+- [ ] prova ripetere tesi 5 min
+- [ ] ripeti tesi 20 min
+- [ ] sistema slide 5 min
+
 #### Magistrale
 - [ ] crittografia 1
 - [ ] crittografia 2
