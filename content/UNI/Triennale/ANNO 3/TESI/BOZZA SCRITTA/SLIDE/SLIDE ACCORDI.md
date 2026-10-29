@@ -6,11 +6,11 @@
 - un progettista definisce quello che è un intemded path
 - la realizzazione di una macchina B2R
 - richiede molto tempo quindi il CNIT NAM LAB ha realizzato VulcAIn un workflow agentico che automatizza le prime 3 fasi viste prima
-- un caso d'uso di VulcAIn è nella realizzazione di una macchina di una pizzeria che espone un sito web con una chat di assistenza
+- Per vedere un esempio concreto di utilizzo di VulcAIn, ho chiesto al sistema di generare una macchina di una pizzeria che espone un sito web con una chat di assistenza
 - la generazione è avvenuta con successo e il server espone correttamente il sito web, il problema è nell'assenza della chat di assistenza, questo taglia l'inteded path che doveva seguire lo studente
 - quindi VulcAIn a seguito della generazione vede quella che è una verifica manuale che identifica un difetto e che poi successivamente comporta una correzione manuale, tutto questo in un loop che impiega moltissimo tempo e che viene fatto finchè la macchina non è soddisfatta almeno per quanto riguarda l'inteded path
 - il mio obiettivo di tesi risiede proprio nell'automatizzare queste 2 fasi progettando e implementando Vulcatest
-- Per realizzarlo si ha la necessità di avere qualcosa che interpreta i comandi di output e gli errori della macchina e qualcosa che interagisce effettivamente con la macchina
+- Per automatizzare questa verifica, ho individuato due necessità di avere qualcosa che interpreta i comandi di output e gli errori della macchina e qualcosa che interagisce effettivamente con la macchina
 - una soluzione che viene in mente è l'utilizzo di LLM, questi generano però solo testo quindi si utilizza anche un Harness che nel mio caso è del codice in python
 - ne esistono diversi in mercato come antigravity claude code e codex ma hanno obiettivi diversi rispetto a quelli della fase di testing che devo realizzare, sono tutti molto flessibili e improntati nel bug fixing, senza dare eccessive limitazioni a un LLM
 - nel nostro caso noi abbiamo bisogno di fare conformance testing step by step sull'intended path, quindi realizzare un harness specializzato che limiti le possibilità e le azioni che può fare il nostro agente
