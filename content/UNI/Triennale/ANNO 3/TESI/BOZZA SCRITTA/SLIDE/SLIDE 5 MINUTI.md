@@ -2,12 +2,11 @@
 - i cyber range sono ambienti informatici di simulazione che riproducono...
 - un esempio di esercizi su scenari cyberrange sono le macchine boot-to-root
 - il progettista definisce un inteded path percorso didattico
-- esiste un progetto per automatizzare la generazione di queste macchine con un workflow agentico del CNIT NAM LAB, viene scritto un prompt e viene generata una macchina con vulcain
-- un caso d'uso che voglio mostrare è quello relativo ad una macchina di una pizzeria con un sito web che deve avere all'interno una chat di assistenza con diverse vulnerabilità
-- la macchina dopo essere stata generata mostra correttamente l'interfaccia web ma mancante della chat di assistenza, questo taglia il percorso didattico non permettendo allo studente di proseguire
-- per questo motivo dopo un processo di automatizzazione come quello di vulcain è necessario effettuare un ciclo di verifiche e correzioni
+- esiste un progetto del CNIT NAM LAB per automatizzare la generazione di queste macchine con un workflow agentico chiamato VulcAIn , viene scritto un prompt e viene generata una macchina
+- un caso d'uso che voglio mostrare è quello relativo ad una macchina di una pizzeria con un sito web che deve avere all'interno una chat di assistenza con diverse vulnerabilità, vulcain lo ha generato correttamente ma privo della chat di assistenza
+- quindi vulcain ha bisogno di una verifica manuale e una correzione manuale
 - il mio lavoro di tesi punta proprio ad automatizzare queste 2 fasi
-- Vulcatest utilizza un LLM per interpretare gli output e scegliere le azioni da eseguire, da solo però è in grado di processare testo, viene quindi introdotto un harness che gli permette di eseguire comandi sulla macchina, nel mio caso scritto in python, la fase di testing è eseguita interamente in locale con Qwen 3.8 27B
+- Vulcatest utilizza un LLM per interpretare gli output e scegliere le azioni da eseguire con un harness che gli permette di eseguire comandi sulla macchina, nel mio caso scritto in python, la fase di testing è eseguita interamente in locale con Qwen 3.8 27B
 - dando uno sguardo all'architettura implementata...
 - riprendendo la macchina della pizzeria dopo averla sottoposta a vulcatest è possibile vedere una identificazione e una correzione ripristinando l'inteded path
 - per quanto riguarda il lavoro svolto sulla valutazione di vulcatest possiamo prendere 3 domande ognuna con un esperimento
