@@ -40,3 +40,6 @@ Thumbs.db
 desktop.ini
 __pycache__/
 *.pyc
+
+# Ingresso personale alla Magistrale, fuori dalla repository pubblica
+/content/INIZIA QUI.md

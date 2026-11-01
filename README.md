@@ -2,6 +2,8 @@
 
 Appunti, esercizi, materiali dei corsi e progetti universitari di Luca Gugliotta, Università degli Studi di Roma Tor Vergata. La raccolta comprende Triennale e Magistrale ed è organizzata come vault Obsidian.
 
+La **Triennale è conclusa** ed è conservata come archivio. Il lavoro corrente riguarda la **Magistrale**. Nel vault locale apri `INIZIA QUI`: contiene i collegamenti al percorso di studio, agli orari e ai corsi, senza pubblicare la pagina personale.
+
 ## Consultazione
 
 | Raccolta | Percorso |
@@ -30,9 +32,9 @@ Apri la cartella `content` come vault in Obsidian. Plugin, temi e impostazioni p
 - `resocontoesamitriennale/`: resoconti degli esami.
 - `tools/`: utilità Python e materiali di supporto.
 
-La pubblicazione web è sospesa durante il riordino. La vecchia configurazione Flowershow è stata rimossa dalla repository. Il branch di lavoro è `v4`; i vecchi branch sono stati conservati nel backup locale prima della rimozione.
+Il [sito pubblico della Triennale](https://likingaxis.github.io/UNIVE-web/) rimane consultabile come archivio e usa uno snapshot fisso. Il motore del sito è nella repository separata [UNIVE-web](https://github.com/likingaxis/UNIVE-web). Il branch di lavoro del vault rimane `v4`.
 
-Le cartelle Magistrale e Tesi sono materiale attivo e sono escluse dagli interventi di pulizia. Per i dettagli dell'intervento del 17 ottobre 2026, vedi il [resoconto della pulizia](./docs/pulizia-2026-10-17.md).
+Il tag `archivio/triennale-2026-11-01` conserva la versione del vault alla chiusura della Triennale. Magistrale e Tesi restano escluse dal sito e non sono state modificate dalla pulizia. Vedi la [chiusura della Triennale](./docs/archivio-triennale-2026-11-01.md) e il [primo riordino](./docs/pulizia-2026-10-17.md).
 
 ## Autore e note
 
