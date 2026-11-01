@@ -2,7 +2,7 @@
 
 Appunti, esercizi, materiali dei corsi e progetti universitari di Luca Gugliotta, Università degli Studi di Roma Tor Vergata. La raccolta comprende Triennale e Magistrale ed è organizzata come vault Obsidian.
 
-La **Triennale è conclusa** ed è conservata come archivio. Il lavoro corrente riguarda la **Magistrale**. Nel vault locale apri `INIZIA QUI`: contiene i collegamenti al percorso di studio, agli orari e ai corsi, senza pubblicare la pagina personale.
+La **Triennale è conclusa** ed è conservata come archivio. Il lavoro corrente riguarda la **Magistrale**. Nel vault apri [index](./content/index.md) per le materie della Magistrale e l’organizzazione dello studio. La Triennale ha un [indice separato](./content/UNI/Triennale/TRIENNALE%20INDICE.md). La pagina locale `INIZIA QUI` rimane una raccolta di collegamenti rapidi.
 
 ## Consultazione
 

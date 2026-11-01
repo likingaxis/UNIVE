@@ -1,27 +1,29 @@
+---
+publish: false
+---
+
 # Chi sono? 👨🏻‍💻
 Mi chiamo Luca Gugliotta e studio presso [l'università di Tor Vergata informatica](https://web.uniroma2.it/)
 
 ![[tumblr_527e9e177b4cc0c2e94d2d9f98ae57ed_4ffd3b4f_500.webp]]
 
-# Gli esami: 📚
+# Magistrale 📚
 
-## INGEGNERIA DEL SOFTWARE 🧩
-[[IS INDICE]]
-## INTELLIGENZA ARTIFICIALE 🤖
-[[IA INDICE]]
-## BIG DATA 📊
-[[UNI/Triennale/ANNO 3/ALGORITMI PER I BIG DATA/BIG DATA INDICE]]
-## PROGRAMMAZIONE WEB 🌐
-[[PROGRAMMAZIONE WEB INDICE]]
-## VULNERABILITÀ 🛡️
-[[VULNERABILITÀ INDICE]]
-## INFORMATION RETRIEVAL 🔍
-[[INFORMATION RETRIEVAL INDICE]]
-## CALCOLO NUMERICO 🧮
-[[CALCOLO NUMERICO INDICE]]
+## CRYPTOGRAPHY 🔐
+[[UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY/CR INDICE|Indice di Cryptography]]
 
-# COLLEZIONE ANNI PRECEDENTI 🗂️
-### [[ANNO 1 INDICE|CORSI ANNO 1]] 
-### [[ANNO 2 INDICE|CORSI ANNO 2]] 
+## DISTRIBUTED SYSTEMS 🌐
+[[UNI/Magistrale/ANNO1 M/DISTRIBUTED SYSTEMS/DS INDICE|Indice di Distributed Systems]]
 
-![[Screenshot 2026-03-09 123930.png]]
+## NETWORK INFRASTRUCTURES 🖧
+[[UNI/Magistrale/ANNO1 M/NETWORK/NET INDICE|Indice di Network Infrastructures]]
+
+# Organizzazione 🗓️
+
+- [[UNI/Magistrale/ANNO1 M/ORARIO|Orario della Magistrale]]
+- [[UNI/Magistrale/ANNO1 M/ORGANIZZAZIONE ESAMI|Organizzazione degli esami]]
+- [[UNI/Magistrale/ANNO1 M/Percorso STUD2/INIZIA QUI|Percorso di studio STUD2]]
+
+# Archivio Triennale 🗂️
+
+[[UNI/Triennale/TRIENNALE INDICE|Apri l’indice della Triennale]]
