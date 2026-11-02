@@ -26,3 +26,5 @@
 - [ ] distributed 8
 - [ ] distributed 9
 - [ ] Esami a scelta approfondisci( senti anche i messaggi)
+
+- auto excalidraw injection
