@@ -1,10 +1,3 @@
-
-#### Domani
-- [ ] prova ripetere tesi 5 min
-- [ ] ripeti tesi 20 min
-- [ ] sistema slide 5 min
-
-#### Magistrale
 - [ ] crittografia 1
 - [ ] crittografia 2
 - [ ] crittografia 3
@@ -16,6 +9,9 @@
 - [ ] network 3
 - [ ] network 4
 - [ ] network 5
+- [ ] newtwork 6
+- [ ] network 7
+- [ ] network 8
 - [x] distributed 1
 - [x] distributed 2
 - [x] distributed 3
@@ -25,6 +21,7 @@
 - [ ] distributed 7
 - [ ] distributed 8
 - [ ] distributed 9
+- [ ] distributed 10
+- [ ] distributed 11
+- [ ] distributed 12
 - [ ] Esami a scelta approfondisci( senti anche i messaggi)
-
-- auto excalidraw injection

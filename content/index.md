@@ -20,7 +20,7 @@ Mi chiamo Luca Gugliotta e studio presso [l'università di Tor Vergata informati
 
 # Organizzazione 🗓️
 
-- [[UNI/Magistrale/ANNO1 M/ORARIO.png|Orario della Magistrale]]
+- ![[UNI/Magistrale/ANNO1 M/ORARIO.png|Orario della Magistrale]]
 - [[UNI/Magistrale/ANNO1 M/ORGANIZZAZIONE ESAMI|Organizzazione degli esami]]
 - [[UNI/Magistrale/ANNO1 M/Percorso STUD2/INIZIA QUI|Percorso di studio STUD2]]
 
