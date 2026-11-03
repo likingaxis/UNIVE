@@ -1,3 +1,8 @@
+###### OGGI
+- [ ] distributed 6+7+8
+- [ ] network recupero rapido dei concetti
+
+##### IN GENERALE
 - [ ] crittografia 1
 - [ ] crittografia 2
 - [ ] crittografia 3
@@ -16,7 +21,7 @@
 - [x] distributed 2
 - [x] distributed 3
 - [x] distributed 4
-- [ ] distributed 5
+- [x] distributed 5
 - [ ] distributed 6
 - [ ] distributed 7
 - [ ] distributed 8
