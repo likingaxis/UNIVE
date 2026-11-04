@@ -1,6 +1,6 @@
 ###### OGGI
 - [ ] distributed 6+7+8
-- [ ] network recupero rapido dei concetti
+- [ ] distributed 12
 
 ##### IN GENERALE
 - [ ] crittografia 1

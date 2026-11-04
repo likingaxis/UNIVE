@@ -1,1348 +1,569 @@
-#### Logical time in distributed systems
+#### Logical Time and the Happened-Before Relation
 
-> [!info] Slides and scope
-> Reference: [[DS-2425Time2.pdf|Time in Distributed Systems II]], physical PDF pages **3–49** (66 pages in the full deck).
-> These explanatory notes also retain the examples and reasoning from [[DS LESSON 5 transcripted|the Lesson 5 transcript]].
-> Prerequisites: processes, local events, message passing, and physical clock skew/uncertainty from [[DS LESSON 4|Lesson 4]].
-> Lamport's Mutual Exclusion, starting at page 50, is outside this note's scope.
+##### Why Logical Time?
+- Physical clocks in a distributed system cannot be synchronized with zero error: whenever two events are separated by less than $2D$ (where $D$ is the synchronization accuracy bound), their physical timestamps cannot determine which event occurred first.
+- For most distributed algorithms, however, knowing the exact wall-clock UTC instant of an event is unnecessary; what matters is whether one event could **causally affect** another.
+- **Logical Time** replaces physical timestamps with mathematical counters or structures that capture **cause-and-effect relationships** directly from process execution and message passing.
 
-##### Why physical time is insufficient
+---
 
-###### Connection to Lesson 4
+##### Events and the Happened-Before Relation ($\to$)
 
-In Lesson 4 we studied external and internal physical clock synchronization (including Cristian's algorithm, Berkeley's algorithm, and NTP). The central limitation was **accuracy**: physical clocks can be wrong by a small amount because of drift, synchronization errors, and unpredictable message delays.
+###### Process Execution and Local Ordering ($\to_i$)
+- A distributed system consists of $N$ sequential processes $P_1, P_2, \dots, P_N$.
+- Each process executes a sequence of **events** of three kinds:
+  1. **Local (internal) computation event**
+  2. **Message send event**: $\operatorname{send}(m)$
+  3. **Message receive event**: $\operatorname{receive}(m)$
+- Within a single sequential process $P_i$, events occur one after another in a well-defined total order denoted $\to_i$: if $e$ occurs before $e'$ on process $P_i$, we write $e \to_i e'$.
 
-Suppose a process $P_0$ sends message `m` and another process $P_1$ receives it. Physically, the receive **must** happen after the send. Yet imperfectly synchronized physical clocks might assign:
+![[DS-L5-local-order.svg|520]]
 
-- `send(m)` at the sender: `10:00:05`;
-- `receive(m)` at the receiver: `10:00:04`.
+###### Formal Definition of Happened-Before ($\to$)
 
-If we sort events only by these clock readings, we appear to get the impossible conclusion that the receive occurred first.
+> **Happened-Before Relation ($\to$)**: Lamport's **happened-before** (or **causal precedence**) relation $\to$ is the smallest relation on the set of system events satisfying the following three rules:
+> 1. **Local Ordering**: If $e$ and $e'$ occur on the same process $P_i$ and $e \to_i e'$, then $e \to e'$.
+> 2. **Send–Receive Ordering**: If $e = \operatorname{send}(m)$ is the sending of a message $m$ and $e' = \operatorname{receive}(m)$ is the reception of that same message $m$, then $e \to e'$.
+> 3. **Transitivity**: If there exists an event $e''$ such that $e \to e''$ and $e'' \to e'$, then $e \to e'$.
 
-> **Goal:** Generate timestamps that respect causal relationships between events, even without knowing their exact physical time.
+![[DS-L5-causal-path.svg|580]]
 
-We do not need a clock that measures seconds. We need an ordering mechanism that works even in an **asynchronous** system, without a shared physical clock.
+- **Causal Path Interpretation**: $e \to e'$ holds if and only if there is a directed **causal path** of local process steps and message arrows leading forward in time from $e$ to $e'$.
+- **Asymmetry of Unacknowledged Sends**: Sending a message establishes $e_{\text{send}} \to e_{\text{recv}}$, meaning the receiver learns about the sender's prior state, **not** vice versa. For the sender to know that its message was received, the receiver must send a causal reply (such as an `ACK`) back to the sender.
 
-###### Recall: Alice, Mike, and Bob
+![[DS-L5-scalar-ack.svg|480]]
 
-The lecture briefly returns to the conversation from the end of Lesson 4. Bob may receive Mike's response before Alice's earlier message, and therefore lack the context that makes the response meaningful.
+---
 
-The deeper problem is **not merely FIFO order on one communication link**: causal dependencies can travel through multiple processes and different links. We therefore need a way to identify when an event may depend on an earlier event elsewhere in the system.
+##### Concurrency ($\parallel$) and Partial Order
 
-##### Happened-Before: three rules and causal paths
-
-Leslie Lamport formalized a relation called **Happened-Before**, written:
-
-$$
-\boxed{e\rightarrow e'}
-$$
-
-Read this as: *event $e$ happened before event $e'$ in the causal order of the execution*.
-
-It means that a causal path exists from the first event to the second. Information **could** have propagated along that path. It does not necessarily mean that the application actually used that information.
-
-###### Rule 1 — Local order
-
-If two events occur on the **same sequential process**, and $e$ comes first, then:
-
-$$
-\boxed{e\rightarrow e'}
-$$
-
-For example:
-
-![[DS-L5-local-order.svg|400]]
-
-*Existing illustration of local order; the same rule applies on every process.*
-
-With a later local event $e_2$ on that process, we know $e_0\rightarrow e_1$, $e_1\rightarrow e_2$, and $e_0\rightarrow e_2$.
-
-The professor's everyday analogy is waking up and then brushing your teeth: you know their order because you experienced both actions in one sequence.
-
-**Important:** Local order is not a claim that the first operation *semantically causes* the second. We simply know their execution order.
-
-###### Rule 2 — Send/receive order
-
-If event $e$ is `send(m)` and event $e'$ is the corresponding `receive(m)`, then:
-
-$$
-\boxed{\operatorname{send}(m)\rightarrow\operatorname{receive}(m)}
-$$
-
-A message cannot be received before it has been sent. The professor compares this to receiving a letter: someone must have sent it beforehand.
-
-```text
-P0:    e1 = send(m) ------------------>
-                \
-                 \  message m
-                  \
-P1:    ---------------- e2 = receive(m) ------>
-```
-
-The two events may belong to different processes, but the message establishes a causal relationship.
-
-###### Rule 3 — Transitivity
-
-If:
-
-$$
-e\rightarrow e''
-\qquad\text{and}\qquad
-e''\rightarrow e',
-$$
-
-then:
-
-$$
-\boxed{e\rightarrow e'}.
-$$
-
-This rule **does not require** the three events to belong to the same process.
-
-**The professor's path example**
-
-![[DS-L5-causal-path.svg|480]]
-
-1. $e_0 \rightarrow e_1$ by **local order** on $P_0$.
-2. $e_1 \rightarrow e_2$ by **send/receive order**.
-3. $e_2 \rightarrow e_3$ by **local order** on $P_1$.
-4. By transitivity, $e_0 \rightarrow e_2$ and finally $e_0 \rightarrow e_3$.
-
-Formally:
-
-$$
-\boxed{e_0\rightarrow e_1\rightarrow e_2\rightarrow e_3}
-\quad\Longrightarrow\quad
-\boxed{e_0\rightarrow e_3}.
-$$
-
-$e_0$ and $e_3$ are on different processes and may never communicate directly. Nevertheless, the intermediate causal path orders them.
-
-###### Transitive closure
-
-The Happened-Before relation is generated by applying the local-order and send/receive rules, and repeatedly applying transitivity **until no additional relationships can be inferred**. This is the *transitive closure*.
-
-A useful way to reason about an execution is to imagine a directed graph:
-
-- each node is an event;
-- an edge follows local order or a message send/receive relation;
-- if a directed path exists from $e$ to $e'$, then $e \rightarrow  e'$.
-
-You must follow **forward-directed** edges. You cannot move backward in local time or reverse a message arrow.
-
-##### Concurrency, local knowledge, and partial order
-
-###### A distinction: global execution versus local knowledge
-
-In the preceding example we can see the entire execution and conclude $e_0 \rightarrow e_3$. But does $P_0$ necessarily know that $P_1$ has already received the message at $e_2$?
-
-**No.** $P_0$ knows that it sent the message; it is not automatically informed when the receiver processes it. In contrast, at $e_2$, $P_1$ receives information coming from $P_0$ and can potentially learn about $P_0$'s earlier events.
-
-This difference matters:
-
-- The **global Happened-Before relation** is a property of the execution.
-- The **local knowledge** of a process includes its own events and whatever information has reached it via messages.
-
-If $P_1$ sends an acknowledgement at $e_3$, which $P_0$ receives at $e_4$, we can establish $e_2 \rightarrow e_3 \rightarrow e_4$. At $e_4$, the sender can learn that the original message was received, assuming the acknowledgement identifies it.
-
-###### Definition of concurrent events
-
-Two events are **concurrent** if neither happened before the other:
-
-$$
-\boxed{
-e\parallel e'
-\iff
-\neg(e\rightarrow e')\ \land\ \neg(e'\rightarrow e).}
-$$
-
-The professor repeatedly asks students to inspect different pairs of events and find a causal path **in either direction**.
-
-Consider:
+> **Concurrent Events ($\parallel$)**: Two distinct events $e$ and $e'$ are **concurrent**, written $e \parallel e'$, if neither happened before the other:
+> $$e \parallel e' \iff \neg(e \to e') \land \neg(e' \to e)$$
 
 ![[DS-L5-concurrency.svg|480]]
 
-Are $e_3$ and $e_4$ ordered?
+- **Meaning of Concurrency**: $e \parallel e'$ does **not** mean $e$ and $e'$ occurred at the exact same physical instant; it means **no causal information could have flowed** from $e$ to $e'$ or from $e'$ to $e$.
+- **Strict Partial Order (POSET)**:
+  - The relation $\to$ is **irreflexive** ($\neg(e \to e)$), **asymmetric** ($e \to e' \implies \neg(e' \to e)$), and **transitive**, so it forms a **strict partial order** on the set of events (not a total order, because concurrent events are incomparable).
+  - **Concurrency is NOT transitive**: for example, if $e_1$ and $e_2$ are on the same process ($e_1 \to e_2$) and $e_3$ is an isolated event on another process with no messages exchanged, then $e_1 \parallel e_3$ and $e_3 \parallel e_2$, yet $e_1 \not\parallel e_2$ because $e_1 \to e_2$.
 
-- **Does $e_3 \rightarrow e_4$?** No: no message travels from $P_1$ back to $P_0$ before $e_4$.
-- **Does $e_4 \rightarrow e_3$?** No: the message to $P_1$ was sent at $e_1$, *before* $e_4$ existed; a message cannot convey information from the sender's future.
+###### Example: Evaluating Causal Precedence and Concurrency
+- Consider a 3-process execution with messages $S_1: e_1 \to e_3$ (from $P_1$ to $P_2$) and $S_2: e_4 \to e_6$ (from $P_2$ to $P_3$), where:
+  - $P_1$ executes $e_1$ then $e_2$ ($e_1 \to_1 e_2$)
+  - $P_2$ executes $e_3$ then $e_4$ ($e_3 \to_2 e_4$)
+  - $P_3$ executes $e_5$ then $e_6$ ($e_5 \to_3 e_6$)
+- **Causal chains**:
+  - $e_1 \to e_3$ (via $S_1$), $e_3 \to e_4$ (local on $P_2$), and $e_4 \to e_6$ (via $S_2$), so by transitivity **$e_1 \to e_6$**.
+  - $e_5 \to e_6$ (local on $P_3$).
+- **Concurrent pairs**:
+  - **$e_2 \parallel e_3$**: $e_2$ occurs on $P_1$ *after* $S_1$ was already sent at $e_1$, so no causal path leads from $e_2$ to $e_3$ or from $e_3$ to $e_2$.
+  - **$e_4 \parallel e_5$**: $e_5$ occurs on $P_3$ *before* $S_2$ arrives at $e_6$, so neither can influence the other.
 
-Therefore:
+---
 
-$$
-\boxed{e_3\parallel e_4.}
-$$
+#### Scalar Clocks (Lamport Logical Clocks)
 
-**Professor's intuition:** A process cannot know another process's future. Information only travels along existing forward-directed causal paths.
+##### The Clock Condition and Update Algorithm
+- A **Scalar (or Lamport) Logical Clock** assigns a single integer timestamp $L(e) \in \mathbb{N}$ to each event $e$ so as to preserve causal precedence:
 
-###### Concurrent does not mean simultaneous
+> **Clock Condition**: For any two events $e$ and $e'$:
+> $$e \to e' \implies L(e) < L(e')$$
 
-This is essential. Events may be concurrent even if one physically occurred earlier than the other. Concurrency means that neither event causally precedes the other **under the Happened-Before relation**; it does **not** require identical wall-clock times.
-
-In an asynchronous system, physical timestamps can be uncertain and are not the definition of causal order.
-
-###### Partial versus total order
-
-For any two **distinct** events $e$, $e'$, exactly one situation holds:
-
-1. $e \rightarrow  e'$;
-2. $e' \rightarrow  e$;
-3. $e \parallel  e'$.
-
-Because the third possibility exists, Happened-Before is a **strict partial order**, not a total order. (It is transitive and irreflexive; its reflexive closure is a non-strict partial order.)
-
-A **total order** compares every pair of distinct events. We could write all the events of a distributed execution into one list consistent with causality, but there may be several different valid lists.
-
-For the diagram above, both orders below respect its causal paths:
-
-```text
-e0, e1, e2, e3, e4
-e0, e1, e4, e2, e3
-```
-
-Each list is a **linear extension / topological ordering** of the underlying partial order. The list places concurrent events in some order, **but that placement does not create a Happened-Before relationship**.
-
-> **Classroom-style question:** If we introduce a new message from $e_3$ on $P_1$ to the event $e_4$ on $P_0$, are those events still concurrent?
->
-> **Answer:** No. The message supplies a send/receive edge, so $e_3 \rightarrow e_4$.
-
-##### Lamport logical (scalar) clocks
-
-The professor uses the expressions **Lamport Clock**, **Scalar Clock**, and **Logical Clock** for this same mechanism.
-
-A process maintains a *software counter*. It is not a physical clock, and its values have no units such as seconds.
-
-Let:
-
-- $L_i$ = local scalar clock of process $P_i$;
-- $L(e)$ = scalar timestamp assigned to event $e$;
-- $t$ = scalar timestamp attached to a received message.
-
-###### What property do we want?
-
-The **Clock Condition** is:
-
-$$
-\boxed{e\rightarrow e'\implies L(e)<L(e').}
-$$
-
-If one event causally precedes another, its timestamp must be **strictly smaller**.
-
-We do *not* require clocks on different processes to start from the same physical time or remain numerically equal.
-
-###### Algorithm
-
-**Initialization:** Every process starts with:
-
-$$
-\boxed{L_i=0.}
-$$
-
-**Local event at $P_i$:**
-
-$$
-L_i\leftarrow L_i+1;
-\qquad L(e)=L_i.
-$$
-
-**Send event at $P_i$:** Sending counts as an event, so increment once and attach the updated clock:
+###### Algorithm Rules
+- Each process $P_i$ maintains a local integer counter $L_i$, initialized to $0$:
+  1. **Initialization**:
+     $$L_i \gets 0$$
+  2. **Local Event or Send Event at $P_i$**: Before timestamping a local event or sending a message $m$, $P_i$ increments its counter by $1$:
+     $$L_i \gets L_i + 1$$
+     If the event is $\operatorname{send}(m)$, $P_i$ attaches the updated timestamp $t_m = L_i$ to message $m$.
+  3. **Receive Event at $P_i$**: Upon receiving message $(m, t_m)$, $P_i$ sets its clock to be strictly greater than both its previous local value and the incoming message timestamp:
+     $$L_i \gets \max(L_i, t_m) + 1$$
 
 ```text
-L_i := L_i + 1
-send(m, timestamp = L_i)
+Process Pi:
+    Init:
+        Li := 0
+
+    On local event e:
+        Li := Li + 1
+        L(e) := Li
+
+    On send(m):
+        Li := Li + 1
+        L(send(m)) := Li
+        send (m, Li)
+
+    On receive(m, tm):
+        Li := max(Li, tm) + 1
+        L(receive(m)) := Li
 ```
 
-**Receive event at $P_i$:** Before timestamping the receive event, use the message timestamp and the current local clock:
+##### Proof that $e \to e' \implies L(e) < L(e')$
+- If $e \to e'$, there exists a causal path $e = e_1 \to e_2 \to \dots \to e_k = e'$ where each step $e_r \to e_{r+1}$ is either:
+  - **Same process ($e_r \to_i e_{r+1}$)**: every subsequent event on $P_i$ increments $L_i$ by at least $1$, so $L(e_r) < L(e_{r+1})$.
+  - **Message send–receive ($e_r = \operatorname{send}(m), \; e_{r+1} = \operatorname{receive}(m)$)**: the message carries $t_m = L(e_r)$, and the receiver sets $L(e_{r+1}) = \max(L_j, L(e_r)) + 1 \ge L(e_r) + 1 > L(e_r)$.
+- By induction along the path, $L(e_1) < L(e_2) < \dots < L(e_k)$, hence $L(e) < L(e')$. $\blacksquare$
 
-$$
-\boxed{L_i\leftarrow\max(L_i,t)+1.}
-$$
+##### Worked Example and Fundamental Limitation of Scalar Clocks
 
-The `+1` represents the receive event itself. Do **not** add another increment for merely attaching a timestamp or updating internal metadata: the send or receive is one event.
+![[DS-L5-slide-20-scalar-trace.png|650]]
 
-###### Why not just increment on receive?
+- **Why the Converse Fails ($L(e) < L(e') \not\implies e \to e'$)**:
+  - Consider two processes $P_0$ and $P_1$ that do not exchange any messages initially:
+    - $P_0$ executes local event $e_0$ $\implies L(e_0) = 1$, then $e_2$ $\implies L(e_2) = 2$.
+    - Independently, $P_1$ executes local event $e_1$ $\implies L(e_1) = 1$.
+  - Here $L(e_1) = 1 < 2 = L(e_2)$, yet **$e_1 \parallel e_2$** (no causal path exists between $e_1$ and $e_2$)!
 
-Suppose the sender's clock was `9` before sending, so its send event gets timestamp `10`. The receiver currently has $L=2$.
+![[DS-L5-scalar-concurrent-events.svg|500]]
 
-If the receiver did only `L := L+1`, the receive event would get `3`:
+- **Conclusion**: Scalar clocks only satisfy a **one-way implication**:
+  - If $e \to e'$, then $L(e) < L(e')$ (so if $L(e) \ge L(e')$, we know for sure that $e \not\to e'$).
+  - However, observing $L(e) < L(e')$ **cannot distinguish** whether $e \to e'$ or $e \parallel e'$.
 
-$$
-L(\operatorname{send}(m))=10,
-\qquad
-L(\operatorname{receive}(m))=3.
-$$
+---
 
-This contradicts the send/receive relation and the Clock Condition, because `10 < 3` is false.
+#### Complete Causal Histories
 
-Instead:
+##### Intuition and Update Rules
+- To obtain an **if-and-only-if** characterization of causality ($e \to e' \iff C(e) < C(e')$), each event's timestamp must record the **exact set of all events that causally preceded it** (plus the event itself).
+- For an $N$-process system $(P_0, P_1, \dots, P_{N-1})$, the **Complete Causal History** of event $e$ is a tuple of $N$ ordered lists (one list per process):
 
-$$
-L_{\mathrm{recv}}=\max(2,10)+1=11,
-$$
+$$H(e) = [\operatorname{History}_{P_0}(e), \; \operatorname{History}_{P_1}(e), \; \dots, \; \operatorname{History}_{P_{N-1}}(e)]$$
 
-so `10 < 11` as required.
+- **Update Rules at Process $P_i$**:
+  1. **Initialization**: Every process starts with $N$ empty lists $H_i = [\,[\,], [\,], \dots, [\,]\,]$.
+  2. **Local Event or Send Event $e$ at $P_i$**: Append $e$ to $P_i$'s own list $\operatorname{History}_{P_i}$; if sending a message, attach the updated history $H_i$ to the message.
+  3. **Receive Event $e$ at $P_i$ (receiving message history $H_m$)**:
+     - For each process $k \in \{0, \dots, N-1\}$, merge the two histories by taking their union (which is simply the **longer list** between $H_i[k]$ and $H_m[k]$).
+     - Append the new receive event $e$ to $P_i$'s own list $H_i[i]$.
 
-We use the **maximum of both values** because the receive event must be later than:
+![[DS-L5-causal-history-update.svg|700]]
 
-1. the receiver's preceding local event;
-2. the message's send event.
+##### Comparing Causal Histories and Bidirectional Proof
+- Given two causal histories $H(e)$ and $H(e')$:
 
-Even if the receiver is already ahead (say $L_i=7$, incoming `t=4`), the formula works: `max(7,4)+1=8`.
+$$H(e) < H(e') \iff \Big(\forall k: H(e)[k] \text{ is a prefix of } H(e')[k]\Big) \land \Big(\exists j: H(e)[j] \text{ is a proper prefix of } H(e')[j]\Big)$$
 
-###### Short worked execution
+- **Example from the trace above**:
+  - Compare $e_2$ ($H(e_2) = [[e_0, e_2], [\,]]$) and $e_4$ ($H(e_4) = [[e_0, e_2], [e_1, e_3, e_4]]$):
+    - Component $0$: $[e_0, e_2]$ is a prefix of $[e_0, e_2]$.
+    - Component $1$: $[\,]$ is a proper prefix of $[e_1, e_3, e_4]$.
+    - Therefore $H(e_2) < H(e_4) \implies e_2 \to e_4$.
+  - Compare $e_1$ ($H(e_1) = [[\,], [e_1]]$) and $e_2$ ($H(e_2) = [[e_0, e_2], [\,]]$):
+    - Neither is component-wise a prefix of the other $\implies e_1 \parallel e_2$.
 
-![[DS-L5-scalar-ack.svg|500]]
+###### Proof that $e \to e' \iff H(e) < H(e')$
+1. **Forward Direction ($e \to e' \implies H(e) < H(e')$)**:
+   - Along any causal path from $e$ to $e'$, local steps append events and message receptions take component-wise unions before appending the receive event. Thus no previously known event is ever lost, and at $e'$ (which is distinct from $e$) at least $e'$ itself has been newly added, so $H(e)$ is a strict prefix of $H(e')$.
+2. **Reverse Direction ($H(e) < H(e') \implies e \to e'$)**:
+   - By construction, event $e$ on $P_i$ is recorded inside $H(e)[i]$. If $H(e) < H(e')$, then $H(e)[i]$ is a prefix of $H(e')[i]$, which means $e \in H(e')[i]$.
+   - Because information about $e$ can only reach the process executing $e'$ through local steps and messages, there must exist a directed causal path from $e$ to $e'$, hence $e \to e'$. $\blacksquare$
 
-*Existing explanatory execution; the table below follows the operations and timestamps.*
+---
 
-| Event | Operation | Computation | Timestamp |
-|---|---|---|---:|
-| $P_0$: first local event | increment | `0+1` | 1 |
-| $P_0$: send `m` | increment, attach | `1+1` | 2 |
-| $P_1$: local event | increment | `0+1` | 1 |
-| $P_1$: receive `m` | max + increment | `max(1,2)+1` | 3 |
-| $P_1$: send ACK | increment | `3+1` | 4 |
-| $P_0$: receive ACK | max + increment | `max(2,4)+1` | 5 |
+#### From Causal Histories to Vector Clocks
 
-Note that $P_0$ learns of the reception only when the ACK arrives (if it carries the right application meaning). Lamport's update rule itself merely preserves event ordering.
+##### The Prefix Property: Compressing Lists into Lengths
+- Full causal histories grow unboundedly in size as the number of events increases, making them too expensive to attach to every network packet.
+- **Key Observation (Prefix Property)**:
+  - Because each process $P_x$ is sequential, only $P_x$ generates events for component $x$, and it always appends them in the single fixed sequence $e_x^1, e_x^2, e_x^3, \dots$
+  - Consequently, it is **impossible** for two histories in the system to contain diverging lists for the same process $P_x$ (such as $[e_0, e_1, e_2]$ vs. $[e_0, e_1, e_3]$).
+  - Any valid history entry $\operatorname{History}_x$ is uniquely determined by how many events of $P_x$ it contains!
 
-##### The proof and the limitation of scalar clocks
+![[DS-L5-prefix-property.svg|450]]
 
-###### Proof: the Clock Condition (the professor's path argument)
+> **Prefix Property**: For any fixed process $P_x$, one history list $\operatorname{History}_x$ is a proper prefix of another list $\operatorname{History}_x'$ if and only if its length is strictly smaller:
+> $$\operatorname{History}_x \subset \operatorname{History}_x' \iff \operatorname{len}(\operatorname{History}_x) < \operatorname{len}(\operatorname{History}_x')$$
 
-**What we want to prove**
+- Replacing each list $\operatorname{History}_{P_k}(e)$ in $H(e)$ with its integer length $|\operatorname{History}_{P_k}(e)|$ compresses the unbounded history into a fixed-size array of $N$ integers — a **Vector Clock**:
 
-$$
-\forall e,e':\quad e\rightarrow e'\implies L(e)<L(e').
-$$
+$$V(e) = \Big[\,|\operatorname{History}_{P_0}(e)|, \; |\operatorname{History}_{P_1}(e)|, \; \dots, \; |\operatorname{History}_{P_{N-1}}(e)|\,\Big]$$
 
-**Step 1 — Use the definition of Happened-Before.** If $e \rightarrow  e'$, a directed causal path exists between them, consisting of local-order and/or message edges.
+![[DS-L5-slide-37-history-to-vector.png|650]]
 
-**Step 2 — Consider a local-order edge.** Between consecutive events on the same process, the counter increases by **at least one**; a receive may make it jump further. For an edge from event `a` to later event `b`:
+---
 
-$$
-L(b)>L(a).
-$$
+##### Vector Clock Algorithm and Comparison Rules
 
-**Step 3 — Consider a message edge.** If event `a` sends a message carrying `t=L(a)`, its receiving event `b` receives timestamp:
+###### Vector Clock Structure
+- In a system of $N$ processes, each process $P_i$ maintains an array of $N$ integers $V_i[1 \dots N]$ (or $0 \dots N-1$):
+  - **$V_i[i]$**: the number of events that have occurred on process $P_i$ itself so far.
+  - **$V_i[j]$ ($j \ne i$)**: the number of events on process $P_j$ that have causally preceded $P_i$'s current state.
 
-$$
-L(b)=\max(L_{\mathrm{local}},t)+1\ge t+1>t=L(a).
-$$
-
-Thus the timestamp also increases strictly across every message edge.
-
-**Step 4 — Follow the entire causal path.** Since the timestamp increases strictly along **every edge**, it increases from the start event $e$ to the final event $e'$.
-
-**Conclusion**
-
-$$
-\boxed{e\rightarrow e'\implies L(e)<L(e').}\qquad\blacksquare
-$$
-
-This is the proof the professor highlights: *walking forward along a causal path always increases the timestamp by at least one*.
-
-###### The professor's slide 20: scalar-clock trace
-
-![[DS-L5-slide-20-scalar-trace.png|680]]
-
-*Original scalar-clock execution; [[DS-2425Time2.pdf#page=20|physical PDF page 20]].*
-
-The slide contains three process lines, $P_1$, $P_2$, and $P_3$, with sends and receives that make the scalar clocks jump as messages arrive. It provides these event timestamps (the superscript denotes the process and the subscript the local event number):
-
-| Process | Event 1 | Event 2 | Event 3 | Event 4 | Event 5 |
-|---|---:|---:|---:|---:|---:|
-| $P_1$ | 1 | 2 | 6 | 7 | 8 |
-| $P_2$ | 2 | 3 | 7 | 9 | — |
-| $P_3$ | 1 | 4 | 5 | 6 | 8 |
-
-The original arrows above show the send/receive dependencies. Apply the local increment and `max + 1` rule; the key cases are:
-
-- A **causal pair**: a send event on $P_1$ and its later receive on $P_2$ have timestamps `1` and `2`.
-- Two **concurrent** first events on $P_1$ and $P_3$ both have timestamp `1`.
-- A first receive on $P_2$ (timestamp `2`) and the first event on $P_3$ (timestamp `1`) are **concurrent despite their different timestamps**.
-
-These illustrate why the algorithm is correct but does not tell the full causal story.
-
-![[DS-L5-scalar-concurrent-events.svg|480]]
-
-*Existing simplified scalar-clock example: different values can still belong to concurrent events.*
-
-###### The limitation: one implication, not two
-
-Lamport clocks guarantee:
-
-$$
-\boxed{e\rightarrow e'\implies L(e)<L(e').}
-$$
-
-But the converse is **false in general**:
-
-$$
-\boxed{L(e)<L(e')\ \not\!\implies\ e\rightarrow e'.}
-$$
-
-For example, a process may have timestamp `7` while a causally independent process has timestamp `3`. The inequality `3 < 7` does not establish a path between the two events.
-
-Why? One integer cannot encode all the causal dependencies in a distributed execution: concurrent events may have equal timestamps or different timestamps.
-
-**What can we infer from scalar timestamps alone?**
-
-| Observation | Valid inference |
-|---|---|
-| $e \rightarrow  e'$ is already known | Necessarily $L(e) < L(e')$ |
-| $L(e) < L(e')$ | $e \rightarrow  e'$ **or** $e \parallel  e'$; cannot choose from timestamps alone |
-| $L(e) > L(e')$ | $e' \rightarrow  e$ **or** $e \parallel  e'$ |
-| $L(e) = L(e')$ for distinct events | They must be **concurrent** (neither causal direction can hold) |
-
-The professor's next goal is therefore a timestamp $T(e)$ satisfying **both** implications:
-
-$$
-\boxed{e\rightarrow e'\iff T(e)<T(e').}
-$$
-
-To motivate it, he does **not** start with the final Vector Clock formula. First, he constructs a data structure that stores histories of events.
-
-#### Causal histories
-
-##### Complete causal histories
-
-###### Idea: carry all the causal information
-
-Rather than a single scalar, let each event's timestamp contain **all the process histories that can reach it**.
-
-With two processes $P_0$ and $P_1$, the timestamp has two entries:
-
-$$
-H(e)=[\mathrm{History}_{P_0}(e),\mathrm{History}_{P_1}(e)].
-$$
-
-Each entry is an ordered list of events generated by that process and known through causal communication. Initially all lists are empty.
-
-**Only process $P_i$ appends events to its own history**. Other processes may receive and adopt longer versions of that history, but they do not invent events for $P_i$.
-
-###### Professor's two-process example (slides 22–27)
+###### Update Rules
+1. **Initialization**:
+   $$V_i \gets [0, 0, \dots, 0]$$
+2. **Local Event or Send Event at $P_i$**: Increment $P_i$'s own component by $1$:
+   $$V_i[i] \gets V_i[i] + 1$$
+   If sending message $m$, attach a copy of the updated vector $V_m = V_i$ to $m$.
+3. **Receive Event at $P_i$ (upon receiving $(m, V_m)$)**:
+   - First, merge causal knowledge via the **component-wise maximum** (corresponding to taking the longer history in each entry):
+     $$\forall k \in \{1, \dots, N\}: \quad V_i[k] \gets \max(V_i[k], \; V_m[k])$$
+   - Second, increment the **receiver's own** component to count the receive event itself:
+     $$V_i[i] \gets V_i[i] + 1$$
 
 ```text
-P0:      e0 ---------- e2 = send(m) ---------------------->
-                         \
-                          \  m carries H(e2)
-                           \
-P1:      ----- e1 -------- e3 = receive(m) ---- e4 ----->
+Process Pi:
+    Init:
+        Vi := [0, 0, ..., 0]
+
+    On local event e:
+        Vi[i] := Vi[i] + 1
+        V(e) := copy(Vi)
+
+    On send(m):
+        Vi[i] := Vi[i] + 1
+        V(send(m)) := copy(Vi)
+        send (m, copy(Vi))
+
+    On receive(m, Vm):
+        for k := 1 to N do
+            Vi[k] := max(Vi[k], Vm[k])
+        Vi[i] := Vi[i] + 1
+        V(receive(m)) := copy(Vi)
 ```
 
-The **global event labels** $e_0$, $e_1$, $e_2$, etc. are names in the diagram; they are **not** local clock values. For $P_0$, $e_0$ is its first event and $e_2$ is its second event. $P_0$ does **not** need to know anything about $P_1$'s event $e_1$ to name or generate its own second event.
-
-**Initially**
-
-$$
-H_{P_0}=[[],[]],\qquad H_{P_1}=[[],[]].
-$$
-
-**Event $e_0$ on $P_0$**: append to $P_0$'s history:
-
-$$
-\boxed{H(e_0)=[[e_0],[]].}
-$$
-
-**Event $e_1$ on $P_1$**: independently append to $P_1$'s history:
-
-$$
-\boxed{H(e_1)=[[],[e_1]].}
-$$
-
-**Event $e_2$ on $P_0$**: it is a send event, so append it to $P_0$'s own list and attach the whole history to the message:
-
-$$
-\boxed{H(e_2)=[[e_0,e_2],[]].}
-$$
-
-**Event $e_3$ on $P_1$**: before receiving, $P_1$ has `[[],[e1]]`; the message carries `[[e0,e2],[]]`.
-
-Merge *corresponding process histories*, taking the **longer** list in each position:
-
-- $P_0$ history: `[]` versus `[e0,e2]` → take `[e0,e2]`.
-- $P_1$ history: `[e1]` versus `[]` → keep `[e1]`.
-
-Finally append the new receive event $e_3$ to $P_1$'s own history:
-
-$$
-\boxed{H(e_3)=[[e_0,e_2],[e_1,e_3]].}
-$$
-
-**Event $e_4$ on $P_1$**: append the new local event:
-
-$$
-\boxed{H(e_4)=[[e_0,e_2],[e_1,e_3,e_4]].}
-$$
-
-**Professor's recurring question:** Does $P_0$ know about $e_1$ or $e_3$ after sending at $e_2$? **No.** The information has travelled only from $P_0$ toward $P_1$. Sending does not reveal the receiver's events to the sender.
-
-##### Comparing histories and capturing causality
-
-These timestamps are lists, not numbers. How do we say one is smaller than another?
-
-###### History comparison
-
-For histories $H$ and $H'$, define:
-
-$$
-\begin{aligned}
-H<H'\iff{}&\forall k:\ H[k]\text{ is a prefix of }H'[k],\\
-&\exists j:\ H[j]\text{ is a proper prefix of }H'[j].
-\end{aligned}
-$$
-
-A *proper prefix* means a shorter list that contains precisely the beginning of the longer list. The empty list is a prefix of every list.
-
-The first requirement is **component-wise non-strict containment**; the second demands a **strict difference somewhere**.
-
-###### Ordered example: $e_2$ and $e_4$
-
-$$
-H(e_2)=[[e_0,e_2],[]],
-$$
-
-$$
-H(e_4)=[[e_0,e_2],[e_1,e_3,e_4]].
-$$
-
-Compare component by component:
-
-- $P_0$: `[e0,e2]` equals `[e0,e2]`.
-- $P_1$: `[]` is a proper prefix of `[e1,e3,e4]`.
-
-Thus:
-
-$$
-\boxed{H(e_2)<H(e_4)}
-\quad\Longrightarrow\quad
-\boxed{e_2\rightarrow e_4}.
-$$
-
-###### Concurrent example: $e_1$ and $e_2$
-
-$$
-H(e_1)=[[],[e_1]],
-\qquad
-H(e_2)=[[e_0,e_2],[]].
-$$
-
-If we try $H(e_1) < H(e_2)$, the $P_1$ component fails because `[e1]` is not a prefix of `[]`.
-
-If we try $H(e_2) < H(e_1)$, the $P_0$ component fails because `[e0,e2]` is not a prefix of `[]`.
-
-Neither history is smaller:
-
-$$
-\boxed{e_1\parallel e_2.}
-$$
-
-###### Why does this construction capture causality in **both** directions?
-
-The professor gives two intuitive proofs.
-
-**Direction A: If $e \rightarrow  e'$, then $H(e) < H(e')$.**
-
-1. The Happened-Before relation guarantees a forward-directed causal path.
-2. On a local event, the corresponding history grows by appending the event.
-3. On a message receive, the receiver merges the incoming histories, never discarding previously known causal events; then it appends the receive event.
-4. As information moves forward on a causal path, the history cannot shrink; at the final distinct event, its history has strictly grown.
-5. Thus $H(e) < H(e')$.
-
-**Direction B: If $H(e) < H(e')$, then $e \rightarrow  e'$.**
-
-1. By construction, $H(e)$ contains event $e$ in the history entry of its process.
-2. If $H(e) < H(e')$, every event in $H(e)$ is also represented in $H(e')$; in particular, $H(e')$ contains **$e$**.
-3. A process can learn about a remote event only if information has travelled to it through local execution and messages.
-4. Therefore there must be a causal path from $e$ to $e'$.
-5. Thus $e \rightarrow  e'$.
-
-Consequently, the full-history representation has the desired property:
-
-$$
-\boxed{e\rightarrow e'\iff H(e)<H(e').}
-$$
-
-**Why not use this in production?** The size of a history grows indefinitely with the number of events. The professor imagines a large deployed system generating thousands of events: repeatedly transmitting full history lists would be expensive in memory and bandwidth. We need a smaller representation.
-
-##### The Prefix Property: why history can be compressed
-
-This is the professor's central **engineering observation**.
-
-###### His classroom question
-
-Suppose there are two events in a distributed execution whose histories contain the following entry for the **same** process $P_x$:
-
-```text
-History of Px at event a: [e0, e1, e2]
-History of Px at event b: [e0, e1, e3]
-```
-
-Can this happen when both are supposed to record the **first three events of $P_x$**?
-
-**No.** Only $P_x$ appends to its own history, and its events occur in one local sequence. It cannot have two different third events in that sequence. Other processes may have **older** or **newer** copies of $P_x$'s history, but not conflicting copies that branch.
-
-Likewise:
-
-```text
-[e0, e1, e2]
-[e0, e1, e3, e4]
-```
-
-is impossible as two valid prefixes of the same process history, because the third element disagrees.
-
-Valid versions would instead look like:
-
-```text
-[e0]
-[e0, e1]
-[e0, e1, e2]
-[e0, e1, e2, e3]
-```
-
-###### Prefix Property
-
-For any fixed process $P_x$, any two valid histories of $P_x$ are **prefix-comparable**: the shorter one is a prefix of the longer one.
-
-![[DS-L5-prefix-property.svg|440]]
-
-Therefore, to compare two histories **of that same process**, we do not need to inspect their event identifiers. Their lengths are enough:
-
-$$
-\mathrm{History}_x\text{ is a proper prefix of }\mathrm{History}_x'
-\iff
-|\mathrm{History}_x|<|\mathrm{History}_x'|.
-$$
-
-###### From histories to counts
-
-Replace each process-specific list with its length:
-
-$$
-H(e)=[\mathrm{History}_{P_0}(e),\ldots,\mathrm{History}_{P_{N-1}}(e)]
-$$
-
-becomes:
-
-$$
-\boxed{V(e)=[|\mathrm{History}_{P_0}(e)|,\ldots,|\mathrm{History}_{P_{N-1}}(e)|].}
-$$
-
-This **is a Vector Clock**. We have compressed complete event histories to one integer **per process** without losing the information needed to compare causal order.
-
-###### Professor's same example, compressed
-
-![[DS-L5-slide-37-history-to-vector.png|680]]
-
-*Original two-process history example expressed as vectors; [[DS-2425Time2.pdf#page=37|physical PDF page 37]].*
-
-| Event | Complete causal history | Vector Clock |
-|---|---|---|
-| $e_0$ | `[[e0],[]]` | $[1,0]$ |
-| $e_1$ | `[[],[e1]]` | $[0,1]$ |
-| $e_2$ | `[[e0,e2],[]]` | $[2,0]$ |
-| $e_3$ | `[[e0,e2],[e1,e3]]` | $[2,2]$ |
-| $e_4$ | `[[e0,e2],[e1,e3,e4]]` | $[2,3]$ |
-
-**Event labels versus event counts:** The number `2` in $e_2$ is **part of its global diagram label**, whereas the `2` in $[2,0]$ counts **two actual events on $P_0$**. These are different things.
-
-##### Vector Clock definition and update algorithm
-
-###### Definition
-
-For a fixed set of $N$ sequential processes, each process $P_i$ maintains a vector:
-
-$$
-V_i=[v_0,v_1,\ldots,v_{N-1}].
-$$
-
-The vector has **one component per process**. The lecture assumes that processes know the number of processes and their identifiers so that component positions are consistent everywhere.
-
-At an event $e$ on $P_i$:
-
-- $V(e)[i]$ counts the number of events generated locally by $P_i$ up to and including $e$;
-- for $j \ne  i$, $V(e)[j]$ records how many events of $P_j$ have become known through causal communication.
-
-It does **not** count events system-wide by summing the vector. Each component has its own meaning.
-
-###### Initialization
-
-$$
-\boxed{V_i=[0,0,\ldots,0].}
-$$
-
-###### Local event
-
-Increment the component corresponding to the process itself:
-
-$$
-\boxed{V_i[i]\leftarrow V_i[i]+1.}
-$$
-
-###### Send event
-
-The send is an event: increment the sender's own entry, **then** attach the resulting vector to the message.
-
-```text
-upon a local event or send(m) at Pi:
-    Vi[i] := Vi[i] + 1
-    if sending m:
-        attach copy(Vi) to m
-        send m
-```
-
-###### Receive event
-
-If $P_i$ receives message `m` carrying vector $V_m$:
-
-1. Merge causal knowledge by taking the **component-wise maximum**:
-
-   $$
-   \boxed{V_i[k]\leftarrow\max(V_i[k],V_m[k])\quad\text{for all }k.}
-   $$
-
-2. Record the receive as a new event by incrementing the **receiver's own** component:
-
-   $$
-   \boxed{V_i[i]\leftarrow V_i[i]+1.}
-   $$
-
-In pseudocode:
-
-```text
-upon receive(m, Vm) at Pi:
-    for each process index k:
-        Vi[k] := max(Vi[k], Vm[k])
-    Vi[i] := Vi[i] + 1
-    timestamp(receive(m)) := copy(Vi)
-```
-
-This is a direct translation of the full-history algorithm:
-
-- appending an event to a list → **incrementing its length**;
-- choosing the longer of two histories → **taking the maximum of their lengths**.
-
-###### Worked receive (three processes)
-
-Suppose process $P_1$ has:
-
-$$
-V_1=[2,3,0]
-$$
-
-and receives:
-
-$$
-V_m=[4,1,2].
-$$
-
-Take the component-wise maximum:
-
-$$
-[\max(2,4),\max(3,1),\max(0,2)]=[4,3,2].
-$$
-
-Now increment the second component, because $P_1$ is the receiver (with indexes $P_0$, $P_1$, $P_2$):
-
-$$
-\boxed{V_1=[4,4,2].}
-$$
-
-**Typical mistakes:** incrementing the wrong entry; incrementing once for merging and once again for receiving; failing to increment before sending; or treating a receive and a later send as just one event. The last error comes up explicitly in the professor's final classroom exercise.
-
-##### Comparing Vector Clocks and detecting concurrency
-
-###### Equal, non-strict, and strict comparison
-
-For two vectors $V$ and $V'$ of the same length:
-
-$$
-V=V'\iff\forall k,\ V[k]=V'[k].
-$$
-
-$$
-\boxed{V\leq V'\iff\forall k,\ V[k]\leq V'[k].}
-$$
-
-The strict comparison used in the lecture is:
-
-$$
-\begin{aligned}
-V<V'\iff{}&\left(\forall k:\ V[k]\leq V'[k]\right)\\
-&\land\left(\exists j:\ V[j]<V'[j]\right).
-\end{aligned}
-$$
-
-**Do not require every component to be strictly smaller!** We require all to be $\leq$, with **at least one** $<$.
-
-This is a **component-wise partial order**, not the ordinary lexicographic comparison of arrays and not the comparison of sums.
-
-###### Professor's example 1 — Causally ordered (slide 42)
-
-$$
-V(e)=[1,2,0],\qquad V(e')=[1,2,2].
-$$
-
-Compare:
-
-```text
-index:        1     2     3
-V(e):         1     2     0
-              =     =     <
-V(e'):        1     2     2
-```
-
-> [!example]- Existing illustration of the component-wise comparison
-> ![[Pasted image 20261026140027.png|680]]
-
-Every component is $\leq$, and one is $<$. Therefore:
-
-$$
-\boxed{V(e)<V(e')\Longrightarrow e\rightarrow e'.}
-$$
-
-###### Professor's example 2 — Concurrent (slide 42)
-
-$$
-V(e)=[1,2,0],\qquad V(e')=[1,0,2].
-$$
-
-```text
-index:        1     2     3
-V(e):         1     2     0
-              =     >     <
-V(e'):        1     0     2
-```
-
-One vector is larger in component 2, but smaller in component 3. Neither is component-wise smaller than the other.
-
-Thus:
-
-$$
-\boxed{e\parallel e'.}
-$$
-
-###### The main theorem for Vector Clocks
-
-Because Vector Clocks are compressed versions of complete causal histories, the professor obtains:
-
-$$
-\boxed{e\rightarrow e'\iff V(e)<V(e').}
-$$
-
-Hence for distinct events:
-
-$$
-\boxed{e\parallel e'\iff
-\neg(V(e)\leq V(e'))\land
-\neg(V(e')\leq V(e)).}
-$$
-
-The equality case cannot occur for **two distinct valid event timestamps** under this update algorithm: each event increments its own component, so a later causal-history timestamp cannot be identical to that of an earlier distinct event, and distinct incomparable histories are not equal either.
-
-###### Scalar clocks versus Vector Clocks
-
-| Question | Scalar / Lamport Clock | Vector Clock |
-|---|---|---|
-| Does causal precedence force an increasing timestamp? | Yes | Yes |
-| Does a smaller timestamp prove causal precedence? | No | Yes (component-wise $<$) |
-| Can we detect concurrency from timestamps alone? | Not in general | Yes |
-| What is attached to a message? | One integer | $N$ integers |
-| Why does it work? | `max + 1` preserves forward causal paths | It compresses and merges causal histories |
-
-The Vector Clock costs more space ($N$ counters per timestamp) but provides a stronger causal test.
-
-#### Worked examples and exercises
-
-##### Worked three-process example — slide 43
+###### Component-Wise Vector Comparisons
+- Given two $N$-element vectors $V$ and $V'$:
+  - **Equality ($=$)**:
+    $$V = V' \iff \forall k: V[k] = V'[k]$$
+  - **Less than or equal ($\le$)**:
+    $$V \le V' \iff \forall k: V[k] \le V'[k]$$
+  - **Strictly less than ($<$)**: Every component of $V$ is $\le$ the corresponding component of $V'$, and **at least one** component is strictly smaller:
+    $$V < V' \iff (V \le V') \land (V \ne V') \iff \Big(\forall k: V[k] \le V'[k]\Big) \land \Big(\exists j: V[j] < V'[j]\Big)$$
+  - **Concurrency ($\parallel$)**: Neither vector is $\le$ the other (one vector is strictly larger in some index $a$, while the other is strictly larger in some index $b$):
+    $$V \parallel V' \iff \neg(V \le V') \land \neg(V' \le V)$$
+
+![[Pasted image 20261026140027.png|650]]
+
+> **Strong Clock Condition (Vector Clocks)**: For any two distinct events $e$ and $e'$:
+> $$\boxed{e \to e' \iff V(e) < V(e')} \qquad \text{and} \qquad \boxed{e \parallel e' \iff V(e) \parallel V(e')}$$
+
+###### Summary Comparison: Scalar Clocks vs. Vector Clocks
+
+| Property | Scalar (Lamport) Clock $L(e)$ | Vector Clock $V(e)$ |
+| :--- | :--- | :--- |
+| **Timestamp Size** | $1$ integer ($O(1)$) | $N$ integers ($O(N)$, where $N$ = number of processes) |
+| **Forward Implication** | $e \to e' \implies L(e) < L(e')$ ($\checkmark$) | $e \to e' \implies V(e) < V(e')$ ($\checkmark$) |
+| **Reverse Implication** | $L(e) < L(e') \not\implies e \to e'$ ($\times$) | $V(e) < V(e') \implies e \to e'$ ($\checkmark$) |
+| **Detects Concurrency ($e \parallel e'$)?** | **No** | **Yes** ($V(e) \not\le V(e') \land V(e') \not\le V(e)$) |
+
+---
+
+#### Worked Examples and Exercises
+
+##### Worked 3-Process Example
 
 ![[DS-L5-slide-43-vector-example.png|680]]
 
-*Original worked vector-clock example; [[DS-2425Time2.pdf#page=43|physical PDF page 43]].*
+- Let $e_i^j$ denote the $j$-th local event on process $P_i$ ($i \in \{1, 2, 3\}$), starting from $[0, 0, 0]$:
 
-The professor's slide has three processes $P_1$, $P_2$, $P_3$, each with locally ordered events. For clarity, write $e^i_j$ for the **$j$-th event on process $P_i$**. The slide writes the process index as a subscript and the event number as a superscript; the notes use the opposite convention. This differs from the globally named $e_0, e_1, e_2, ...$ used in the earlier two-process history example.
+| Process | Event | Operation | Computation | Vector Timestamp $V(e)$ |
+| :---: | :---: | :--- | :--- | :---: |
+| **$P_1$** | $e_1^1$ | Local event | Increment $V_1[1]$ | $[1, 0, 0]$ |
+| **$P_1$** | $e_1^2$ | Send to $P_2$ ($e_2^1$) | Increment $V_1[1]$ | $[2, 0, 0]$ |
+| **$P_1$** | $e_1^3$ | Send to $P_3$ ($e_3^3$) | Increment $V_1[1]$ | $[3, 0, 0]$ |
+| **$P_1$** | $e_1^4$ | Receive from $P_2$ ($e_2^3$) | $\max([3,0,0], [2,3,2]) + [1,0,0]$ | $[4, 3, 2]$ |
+| **$P_2$** | $e_2^1$ | Receive from $P_1$ ($e_1^2$) | $\max([0,0,0], [2,0,0]) + [0,1,0]$ | $[2, 1, 0]$ |
+| **$P_2$** | $e_2^2$ | Receive from $P_3$ ($e_3^2$) | $\max([2,1,0], [0,0,2]) + [0,1,0]$ | $[2, 2, 2]$ |
+| **$P_2$** | $e_2^3$ | Send to $P_1$ ($e_1^4$) | Increment $V_2[2]$ | $[2, 3, 2]$ |
+| **$P_3$** | $e_3^1$ | Local event | Increment $V_3[3]$ | $[0, 0, 1]$ |
+| **$P_3$** | $e_3^2$ | Send to $P_2$ ($e_2^2$) | Increment $V_3[3]$ | $[0, 0, 2]$ |
+| **$P_3$** | $e_3^3$ | Receive from $P_1$ ($e_1^3$) | $\max([0,0,2], [3,0,0]) + [0,0,1]$ | $[3, 0, 3]$ |
 
-###### Message relationships in the slide
+- **Causal Checks**:
+  - **$e_3^1$ vs. $e_1^4$**: $V(e_3^1) = [0, 0, 1] < [4, 3, 2] = V(e_1^4) \implies \mathbf{e_3^1 \to e_1^4}$ (via path $e_3^1 \to e_3^2 \to e_2^2 \to e_2^3 \to e_1^4$).
+  - **$e_1^4$ vs. $e_3^3$**: $V(e_1^4) = [4, 3, 2]$ and $V(e_3^3) = [3, 0, 3]$. In index $1$, $4 > 3$; in index $3$, $2 < 3$. Neither is $\le$ the other $\implies \mathbf{e_1^4 \parallel e_3^3}$.
 
-- $P_1$'s second event sends a message received at $P_2$'s first event.
-- $P_3$'s second event sends a message received at $P_2$'s second event.
-- $P_2$'s third event sends a message received at $P_1$'s fourth event.
-- $P_1$'s third event sends a message received at $P_3$'s third event.
+---
 
-Using the source/target notation:
-
-```text
-e^1_2 --> e^2_1
-e^3_2 --> e^2_2
-e^2_3 --> e^1_4
-e^1_3 --> e^3_3
-```
-
-All processes start from $[0,0,0]$.
-
-###### Calculate the timestamps
-
-| Process | Local event | Kind | Vector Clock |
-|---|---|---|---|
-| $P_1$ | $e^1_1$ | local | $[1,0,0]$ |
-| $P_1$ | $e^1_2$ | send to $P_2$ | $[2,0,0]$ |
-| $P_1$ | $e^1_3$ | send to $P_3$ | $[3,0,0]$ |
-| $P_1$ | $e^1_4$ | receive from $P_2$ | $[4,3,2]$ |
-| $P_2$ | $e^2_1$ | receive from $P_1$ | $[2,1,0]$ |
-| $P_2$ | $e^2_2$ | receive from $P_3$ | $[2,2,2]$ |
-| $P_2$ | $e^2_3$ | send to $P_1$ | $[2,3,2]$ |
-| $P_3$ | $e^3_1$ | local | $[0,0,1]$ |
-| $P_3$ | $e^3_2$ | send to $P_2$ | $[0,0,2]$ |
-| $P_3$ | $e^3_3$ | receive from $P_1$ | $[3,0,3]$ |
-
-**Check one receive at $P_2$:** At $e^2_2$, $P_2$ has $[2,1,0]$ and receives $[0,0,2]$ from $P_3$:
-
-$$
-\max([2,1,0],[0,0,2])=[2,1,2]
-\quad\Longrightarrow\quad
-[2,2,2].
-$$
-
-**Check the final receive at $P_1$:** Its local clock is $[3,0,0]$ and the incoming message carries $[2,3,2]$:
-
-$$
-\max([3,0,0],[2,3,2])=[3,3,2]
-\quad\Longrightarrow\quad
-\boxed{[4,3,2]}.
-$$
-
-###### The professor's comparisons
-
-First, compare $e^3_1$ and $e^1_4$:
-
-$$
-[0,0,1]<[4,3,2]
-\quad\Longrightarrow\quad
-\boxed{e^3_1\rightarrow e^1_4}.
-$$
-
-There is also an explicit path: $e^3_1$ → $e^3_2$ → $e^2_2$ → $e^2_3$ → $e^1_4$.
-
-Second, compare $e^1_4$ and $e^3_3$:
-
-$$
-V(e^1_4)=[4,3,2],
-\qquad
-V(e^3_3)=[3,0,3].
-$$
-
-The first vector is greater in the first two components but smaller in the third. Neither vector is less than the other:
-
-$$
-\boxed{e^1_4\parallel e^3_3.}
-$$
-
-This is an important classroom lesson: **a process can know more about some sources and less about others; neither history necessarily contains the other**.
-
-##### Professor's four-process exercise — slide 44
+##### Exercise 1 — 4-Process Vector Clock Execution
 
 ![[DS-L5-slide-44-vector-exercise.png|680]]
 
-*Original exercise diagram; solutions below use local labels a/b/c/d; [[DS-2425Time2.pdf#page=44|physical PDF page 44]].*
+###### Annotated Solution Diagram
 
-The slide asks us to **compute Vector Clocks for the whole execution** and then identify false statements among:
+![[DS-L5-exercise-44-solution.svg|750]]
 
-$$
-\begin{aligned}
-&\text{(1) } e_1\rightarrow e_2,\\
-&\text{(2) } e_1\rightarrow e_3,\\
-&\text{(3) } e_2\rightarrow e_3.
-\end{aligned}
-$$
+###### Step-by-Step Event Table
+- Label the events from left to right on each process:
+  - $P_1$: $a_1, a_2, a_3, a_4$ (where **$a_4 = e_3$**)
+  - $P_2$: $b_1, b_2, b_3, b_4, b_5, b_6, b_7$
+  - $P_3$: $c_1, c_2, c_3, c_4$ (where **$c_1 = e_1$**)
+  - $P_4$: $d_1, d_2, d_3$ (where **$d_3 = e_2$**)
 
-Here $e_1$, $e_2$, and $e_3$ are **labels for three selected events** in a four-process diagram; they are *not* the first, second, and third events of a single process.
+| Process | Event | Operation | Vector Calculation | Vector Clock |
+| :---: | :---: | :--- | :--- | :---: |
+| **$P_1$** | $a_1$ | Send to $P_2$ ($b_1$) | $[0,0,0,0] + [1,0,0,0]$ | $[1, 0, 0, 0]$ |
+| **$P_1$** | $a_2$ | Receive from $P_3$ ($c_1$) | $\max([1,0,0,0], [0,0,1,0]) + [1,0,0,0]$ | $[2, 0, 1, 0]$ |
+| **$P_1$** | $a_3$ | Send to $P_2$ ($b_3$) | $[2,0,1,0] + [1,0,0,0]$ | $[3, 0, 1, 0]$ |
+| **$P_1$** | $a_4 = \mathbf{e_3}$ | Receive from $P_2$ ($b_7$) | $\max([3,0,1,0], [3,7,4,3]) + [1,0,0,0]$ | $\mathbf{[4, 7, 4, 3]}$ |
+| **$P_2$** | $b_1$ | Receive from $P_1$ ($a_1$) | $\max([0,0,0,0], [1,0,0,0]) + [0,1,0,0]$ | $[1, 1, 0, 0]$ |
+| **$P_2$** | $b_2$ | Send to $P_4$ ($d_2$) | $[1,1,0,0] + [0,1,0,0]$ | $[1, 2, 0, 0]$ |
+| **$P_2$** | $b_3$ | Receive from $P_1$ ($a_3$) | $\max([1,2,0,0], [3,0,1,0]) + [0,1,0,0]$ | $[3, 3, 1, 0]$ |
+| **$P_2$** | $b_4$ | Send to $P_3$ ($c_3$) | $[3,3,1,0] + [0,1,0,0]$ | $[3, 4, 1, 0]$ |
+| **$P_2$** | $b_5$ | Receive from $P_3$ ($c_4$) | $\max([3,4,1,0], [3,4,4,1]) + [0,1,0,0]$ | $[3, 5, 4, 1]$ |
+| **$P_2$** | $b_6$ | Receive from $P_4$ ($d_3$) | $\max([3,5,4,1], [1,2,0,3]) + [0,1,0,0]$ | $[3, 6, 4, 3]$ |
+| **$P_2$** | $b_7$ | Send to $P_1$ ($a_4$) | $[3,6,4,3] + [0,1,0,0]$ | $[3, 7, 4, 3]$ |
+| **$P_3$** | $c_1 = \mathbf{e_1}$ | Send to $P_1$ ($a_2$) | $[0,0,0,0] + [0,0,1,0]$ | $\mathbf{[0, 0, 1, 0]}$ |
+| **$P_3$** | $c_2$ | Receive from $P_4$ ($d_1$) | $\max([0,0,1,0], [0,0,0,1]) + [0,0,1,0]$ | $[0, 0, 2, 1]$ |
+| **$P_3$** | $c_3$ | Receive from $P_2$ ($b_4$) | $\max([0,0,2,1], [3,4,1,0]) + [0,0,1,0]$ | $[3, 4, 3, 1]$ |
+| **$P_3$** | $c_4$ | Send to $P_2$ ($b_5$) | $[3,4,3,1] + [0,0,1,0]$ | $[3, 4, 4, 1]$ |
+| **$P_4$** | $d_1$ | Send to $P_3$ ($c_2$) | $[0,0,0,0] + [0,0,0,1]$ | $[0, 0, 0, 1]$ |
+| **$P_4$** | $d_2$ | Receive from $P_2$ ($b_2$) | $\max([0,0,0,1], [1,2,0,0]) + [0,0,0,1]$ | $[1, 2, 0, 2]$ |
+| **$P_4$** | $d_3 = \mathbf{e_2}$ | Send to $P_2$ ($b_6$) | $[1,2,0,2] + [0,0,0,1]$ | $\mathbf{[1, 2, 0, 3]}$ |
 
-###### Reading the diagram without ambiguity
+###### Evaluating the Causal Statements
+1. **Is $e_1 \to e_2$?**
+   - Compare $V(e_1) = [0, 0, 1, 0]$ and $V(e_2) = [1, 2, 0, 3]$.
+   - Component $3$ has $1 > 0$, while components $1, 2, 4$ have $0 < 1, 2, 3$. Neither vector is $\le$ the other ($e_1 \parallel e_2$).
+   - **Statement $e_1 \to e_2$ is FALSE.**
+2. **Is $e_1 \to e_3$?**
+   - Compare $V(e_1) = [0, 0, 1, 0]$ and $V(e_3) = [4, 7, 4, 3]$.
+   - $[0, 0, 1, 0] < [4, 7, 4, 3]$ holds component-wise.
+   - **Statement $e_1 \to e_3$ is TRUE.**
+3. **Is $e_2 \to e_3$?**
+   - Compare $V(e_2) = [1, 2, 0, 3]$ and $V(e_3) = [4, 7, 4, 3]$.
+   - $[1, 2, 0, 3] < [4, 7, 4, 3]$ holds component-wise.
+   - **Statement $e_2 \to e_3$ is TRUE.**
 
-Use these labels for the **locally ordered event positions**:
+---
 
-- $P_1$: $a_1$, $a_2$, $a_3$, $a_4$ (where **$a_4 = e_3$**).
-- $P_2$: $b_1$, $b_2$, $b_3$, $b_4$, $b_5$, $b_6$, $b_7$.
-- $P_3$: $c_1$, $c_2$, $c_3$, $c_4$ (where **$c_1 = e_1$**).
-- $P_4$: $d_1$, $d_2$, $d_3$ (where **$d_3 = e_2$**).
-
-Every process's own events proceed **left to right**. The message arrows from slide 44 are:
-
-| Send event | Receive event |
-|---|---|
-| $a_1$ on $P_1$ | $b_1$ on $P_2$ |
-| $c_1$ on $P_3$ | $a_2$ on $P_1$ |
-| $a_3$ on $P_1$ | $b_3$ on $P_2$ |
-| $b_2$ on $P_2$ | $d_2$ on $P_4$ |
-| $b_4$ on $P_2$ | $c_3$ on $P_3$ |
-| $d_1$ on $P_4$ | $c_2$ on $P_3$ |
-| $c_4$ on $P_3$ | $b_5$ on $P_2$ |
-| $d_3$ on $P_4$ | $b_6$ on $P_2$ |
-| $b_7$ on $P_2$ | $a_4$ on $P_1$ |
-
-These nine arrows reproduce the causal dependencies of the professor's diagram while the `a/b/c/d` labels avoid confusing local event numbers with the three highlighted questions.
-
-###### All Vector Clocks, with event types
-
-**Process $P_1$** (first component increases):
-
-| Event | Event type | Timestamp |
-|---|---|---|
-| $a_1$ | send to $P_2$ | $[1,0,0,0]$ |
-| $a_2$ | receive from $P_3$ ($c_1$) | $[2,0,1,0]$ |
-| $a_3$ | send to $P_2$ | $[3,0,1,0]$ |
-| $a_4 = e_3$ | receive from $P_2$ ($b_7$) | $[4,7,4,3]$ |
-
-**Process $P_2$** (second component increases):
-
-| Event | Event type | Timestamp |
-|---|---|---|
-| $b_1$ | receive from $P_1$ ($a_1$) | $[1,1,0,0]$ |
-| $b_2$ | send to $P_4$ | $[1,2,0,0]$ |
-| $b_3$ | receive from $P_1$ ($a_3$) | $[3,3,1,0]$ |
-| $b_4$ | send to $P_3$ | $[3,4,1,0]$ |
-| $b_5$ | receive from $P_3$ ($c_4$) | $[3,5,4,1]$ |
-| $b_6$ | receive from $P_4$ ($d_3$) | $[3,6,4,3]$ |
-| $b_7$ | send to $P_1$ | $[3,7,4,3]$ |
-
-**Process $P_3$** (third component increases):
-
-| Event | Event type | Timestamp |
-|---|---|---|
-| $c_1 = e_1$ | send to $P_1$ | $[0,0,1,0]$ |
-| $c_2$ | receive from $P_4$ ($d_1$) | $[0,0,2,1]$ |
-| $c_3$ | receive from $P_2$ ($b_4$) | $[3,4,3,1]$ |
-| $c_4$ | send to $P_2$ | $[3,4,4,1]$ |
-
-**Process $P_4$** (fourth component increases):
-
-| Event | Event type | Timestamp |
-|---|---|---|
-| $d_1$ | send to $P_3$ | $[0,0,0,1]$ |
-| $d_2$ | receive from $P_2$ ($b_2$) | $[1,2,0,2]$ |
-| $d_3 = e_2$ | send to $P_2$ | $[1,2,0,3]$ |
-
-###### Calculations highlighted in the lecture
-
-**Why is $P_4$'s first event $[0,0,0,1]$?** Because $P_4$ is generating its first event and has not learned anything about $P_1$, $P_2$, or $P_3$. The fourth entry alone increases.
-
-**Why does $d_2$ get $[1,2,0,2]$?** Before receiving it has $[0,0,0,1]$. The message from $b_2$ carries $[1,2,0,0]$:
-
-$$
-\max([0,0,0,1],[1,2,0,0])=[1,2,0,1]
-\quad\Longrightarrow\quad
-\boxed{[1,2,0,2]}.
-$$
-
-Then $d_3 = e_2$ is a send, so only the fourth component increases again:
-
-$$
-\boxed{V(e_2)=[1,2,0,3].}
-$$
-
-**Why does $a_4 = e_3$ have $[4,7,4,3]$?** $P_1$ previously has $[3,0,1,0]$. It receives from $b_7$, which sends $[3,7,4,3]$:
-
-$$
-\max([3,0,1,0],[3,7,4,3])=[3,7,4,3]
-\quad\Longrightarrow\quad
-\boxed{V(e_3)=[4,7,4,3]}.
-$$
-
-###### Answer the three questions
-
-The highlighted timestamps are:
-
-$$
-\begin{aligned}
-V(e_1)&=[0,0,1,0],\\
-V(e_2)&=[1,2,0,3],\\
-V(e_3)&=[4,7,4,3].
-\end{aligned}
-$$
-
-**(1) Does $e_1 \rightarrow e_2$?**
-
-Compare $[0,0,1,0]$ with $[1,2,0,3]$. The third component goes `1 > 0`, so the first is **not** less than the second. The reverse comparison also fails. Therefore they are incomparable:
-
-$$
-\boxed{e_1\parallel e_2\quad\Rightarrow\quad\text{statement (1) is FALSE}.}
-$$
-
-**(2) Does $e_1 \rightarrow e_3$?**
-
-$$
-[0,0,1,0]<[4,7,4,3]
-\quad\Longrightarrow\quad
-\boxed{\text{TRUE}.}
-$$
-
-**(3) Does $e_2 \rightarrow e_3$?**
-
-$$
-[1,2,0,3]<[4,7,4,3]
-\quad\Longrightarrow\quad
-\boxed{\text{TRUE}.}
-$$
-
-**Exam approach:** Do not jump straight to the three comparisons. First apply the update algorithm correctly to the diagram; then the comparison becomes mechanical.
-
-##### Further diagram exercise — slide 45
+##### Exercise 2 — Second 4-Process Vector Clock Execution
 
 ![[DS-L5-slide-45-vector-exercise.png|680]]
 
-*Original second exercise diagram; [[DS-2425Time2.pdf#page=45|physical PDF page 45]].*
+###### Annotated Solution Diagram
 
-Slide 45 presents another four-process execution and asks students to assign clocks and evaluate several causal claims. The transcript is unclear about some intermediate values; use the original diagram above as the reference for the arrows.
+![[DS-L5-exercise-45-solution.svg|750]]
 
-The slide labels:
+###### Step-by-Step Event Table
+- Label the events from left to right on each process:
+  - $P_1$: $a_1, a_2, a_3, a_4$ (where **$a_2 = e_1$** and **$a_4 = e_3$**)
+  - $P_2$: $b_1, b_2, b_3, b_4, b_5, b_6$ (where **$b_1 = e_2$** and **$b_6 = e_4$**)
+  - $P_3$: $c_1, c_2, c_3, c_4$
+  - $P_4$: $d_1, d_2, d_3, d_4$ (where **$d_4 = e_5$**)
 
-- $e_1$: the second event on $P_1$;
-- $e_2$: the first event on $P_2$;
-- $e_3$: the final receive on $P_1$;
-- $e_4$: the final receive on $P_2$;
-- $e_5$: the final receive on $P_4$.
+| Process | Event | Operation | Vector Calculation | Vector Clock |
+| :---: | :---: | :--- | :--- | :---: |
+| **$P_1$** | $a_1$ | Send to $P_2$ ($b_1$) | $[0,0,0,0] + [1,0,0,0]$ | $[1, 0, 0, 0]$ |
+| **$P_1$** | $a_2 = \mathbf{e_1}$ | Send to $P_4$ ($d_2$) | $[1,0,0,0] + [1,0,0,0]$ | $\mathbf{[2, 0, 0, 0]}$ |
+| **$P_1$** | $a_3$ | Send to $P_2$ ($b_6$) | $[2,0,0,0] + [1,0,0,0]$ | $[3, 0, 0, 0]$ |
+| **$P_1$** | $a_4 = \mathbf{e_3}$ | Receive from $P_3$ ($c_4$) | $\max([3,0,0,0], [2,4,4,3]) + [1,0,0,0]$ | $\mathbf{[4, 4, 4, 3]}$ |
+| **$P_2$** | $b_1 = \mathbf{e_2}$ | Receive from $P_1$ ($a_1$) | $\max([0,0,0,0], [1,0,0,0]) + [0,1,0,0]$ | $\mathbf{[1, 1, 0, 0]}$ |
+| **$P_2$** | $b_2$ | Receive from $P_4$ ($d_1$) | $\max([1,1,0,0], [0,0,0,1]) + [0,1,0,0]$ | $[1, 2, 0, 1]$ |
+| **$P_2$** | $b_3$ | Receive from $P_3$ ($c_1$) | $\max([1,2,0,1], [0,0,1,0]) + [0,1,0,0]$ | $[1, 3, 1, 1]$ |
+| **$P_2$** | $b_4$ | Send to $P_3$ ($c_2$) | $[1,3,1,1] + [0,1,0,0]$ | $[1, 4, 1, 1]$ |
+| **$P_2$** | $b_5$ | Send to $P_4$ ($d_4$) | $[1,4,1,1] + [0,1,0,0]$ | $[1, 5, 1, 1]$ |
+| **$P_2$** | $b_6 = \mathbf{e_4}$ | Receive from $P_1$ ($a_3$) | $\max([1,5,1,1], [3,0,0,0]) + [0,1,0,0]$ | $\mathbf{[3, 6, 1, 1]}$ |
+| **$P_3$** | $c_1$ | Send to $P_2$ ($b_3$) | $[0,0,0,0] + [0,0,1,0]$ | $[0, 0, 1, 0]$ |
+| **$P_3$** | $c_2$ | Receive from $P_2$ ($b_4$) | $\max([0,0,1,0], [1,4,1,1]) + [0,0,1,0]$ | $[1, 4, 2, 1]$ |
+| **$P_3$** | $c_3$ | Receive from $P_4$ ($d_3$) | $\max([1,4,2,1], [2,0,0,3]) + [0,0,1,0]$ | $[2, 4, 3, 3]$ |
+| **$P_3$** | $c_4$ | Send to $P_1$ ($a_4$) | $[2,4,3,3] + [0,0,1,0]$ | $[2, 4, 4, 3]$ |
+| **$P_4$** | $d_1$ | Send to $P_2$ ($b_2$) | $[0,0,0,0] + [0,0,0,1]$ | $[0, 0, 0, 1]$ |
+| **$P_4$** | $d_2$ | Receive from $P_1$ ($a_2$) | $\max([0,0,0,1], [2,0,0,0]) + [0,0,0,1]$ | $[2, 0, 0, 2]$ |
+| **$P_4$** | $d_3$ | Send to $P_3$ ($c_3$) | $[2,0,0,2] + [0,0,0,1]$ | $[2, 0, 0, 3]$ |
+| **$P_4$** | $d_4 = \mathbf{e_5}$ | Receive from $P_2$ ($b_5$) | $\max([2,0,0,3], [1,5,1,1]) + [0,0,0,1]$ | $\mathbf{[2, 5, 1, 4]}$ |
 
-Its printed follow-up question includes relationships such as $e_1 \rightarrow e_2$, $e_1 \rightarrow e_3$, and $e_2 \rightarrow e_3$. Reading the directed arrows yields:
+###### Evaluating the Causal Statements
+- **$e_1 \to e_2$**: $V(e_1) = [2,0,0,0]$ vs. $V(e_2) = [1,1,0,0]$ $\implies$ **FALSE** ($e_1 \parallel e_2$).
+- **$e_1 \to e_3$**: $V(e_1) = [2,0,0,0] < [4,4,4,3] = V(e_3)$ $\implies$ **TRUE**.
+- **$e_2 \to e_3$**: $V(e_2) = [1,1,0,0] < [4,4,4,3] = V(e_3)$ $\implies$ **TRUE**.
+- **$e_1 \to e_4$**: $V(e_1) = [2,0,0,0] < [3,6,1,1] = V(e_4)$ $\implies$ **TRUE**.
+- **$e_1 \to e_5$**: $V(e_1) = [2,0,0,0] < [2,5,1,4] = V(e_5)$ $\implies$ **TRUE**.
+- **$e_3, e_4, e_5$ pairwise**: $[4,4,4,3]$, $[3,6,1,1]$, and $[2,5,1,4]$ are all pairwise incomparable $\implies$ **$e_3 \parallel e_4 \parallel e_5$**.
 
-- **$e_1 \rightarrow e_2$: false.** $e_2$ is an earlier receive on $P_2$ of a message sent by the *first* event on $P_1$; it is not causally downstream of $e_1$, and neither is $e_1$ downstream of $e_2$.
-- **$e_1 \rightarrow e_3$: true.** They lie on the same process $P_1$, with $e_1$ earlier than $e_3$.
-- **$e_2 \rightarrow e_3$: true.** There is a forward path through later events and messages from $P_2$ to $P_3$, and from $P_3$ to the final receive on $P_1$.
+---
 
-The exam sheet embedded in the PDF also contains questions on failure detectors and mutual exclusion; those topics are outside this lesson's scope.
+##### Exercise 3 — Reconstructing an Execution from Network Observations
 
-The principal study exercise on this page is the same as slide 44: **assign one event per dot, respect each message arrow, and check component-wise comparisons only after clocks are computed**.
+###### Problem Statement
+- Consider an asynchronous distributed system with $4$ processes $(P_1, P_2, P_3, P_4)$ communicating over point-to-point links using Vector Clocks.
+- While debugging $P_1$'s **network card (NIC)**, we intercept two packets:
+  1. At `00:00`: an **outgoing** message sent by $P_1$ carrying timestamp **$[1, 0, 0, 0]$**.
+  2. At `00:05`: an **incoming** message addressed to $P_1$ carrying timestamp **$[1, 2, 3, 1]$**.
+- **Questions**:
+  - **Q3.1**: Draw a global execution compatible with these observations. Is the execution unique?
+  - **Q3.2**: Can there be a compatible execution in which at least one process **never sends any message**?
 
-##### Final classroom exercise: reconstructing an execution
+###### Crucial Observation: In-Flight Packet Timestamp vs. Post-Receive Timestamp
+- Because the incoming packet is intercepted at $P_1$'s network interface **before** $P_1$ processes the receive event, $[1, 2, 3, 1]$ is the **sender's vector clock** at the moment the packet was sent.
+- Once $P_1$ actually processes the receive event ($e_8$), $P_1$'s own vector clock will become:
 
-This is the professor's final, extended class exercise (slides **47–49**). It is especially useful because it **reverses** the previous task: instead of calculating clocks from a known execution, we infer possible executions from observed clocks.
+$$\max([1,0,0,0], \; [1,2,3,1]) + [1,0,0,0] = [2, 2, 3, 1]$$
 
-###### The exact problem setup
-
-There are four processes with IDs 1–4 and vector positions:
-
-$$
-(P_1,P_2,P_3,P_4).
-$$
-
-Messages use point-to-point links. The exercise is framed on slide 47 as an **asynchronous** message-passing system (the spoken transcript's opening word is inconsistent here; the slide is clearer). Vector Clocks are **incremented before sending**.
-
-We debug $P_1$ and observe messages at its **network interface**, not after handling them in application code:
-
-1. At `00:00`, an **outgoing** message from $P_1$ carries **$[1,0,0,0]$**.
-2. At `00:05`, an **incoming** message addressed to $P_1$ carries **$[1,2,3,1]$**.
-
-The professor asks:
-
-- **Q3.1:** Draw a global execution compatible with both observations. Is that execution unique?
-- **Q3.2:** Could an execution be compatible with the observations if at least one process **never sends messages**? Explain.
-
-**Crucial subtlety:** The incoming timestamp $[1,2,3,1]$ is observed **before $P_1$ processes the receive event**. Therefore it is the **sender's timestamp attached to the message**, not the new timestamp of $P_1$ after receiving it.
-
-###### Step A — Interpret the four components
-
-An incoming message with:
-
-$$
-\boxed{[1,2,3,1]}
-$$
-
-carries causal knowledge of:
-
-- one event on $P_1$;
-- two events on $P_2$;
-- three events on $P_3$;
-- one event on $P_4$.
-
-A convenient way to begin — just as the professor does with students — is to put down sufficient event dots on the process lines and then determine how they can be connected through valid sends and receives.
-
-Be careful: a **send** and a later **receive** are distinct events, each incrementing the relevant process's component once. A dot cannot simultaneously be a receive and a subsequent forward-send if the model counts both as events.
-
-###### Step B — Construct one valid execution
-
-Here is one compatible reconstruction from the existing notes. The table labels eight events $a$ to $h$; the SVG uses $e_1$ to $e_8$ for the same events.
-
-The diagram's horizontal placement is schematic: $d$ may occur independently at any time before $f$. The constraints are local order and message arrows; $h$ is the processing event **after** the incoming network observation.
+###### Step-by-Step Construction of a Compatible Execution (Q3.1)
+- Reading the components of the incoming packet $[1, 2, 3, 1]$ tells us how many events occurred at each process in the causal past of the send event:
+  - $1$ event on $P_1$ (the outgoing send `[1,0,0,0]` observed at `00:00`)
+  - $2$ events on $P_2$ (e.g., $1$ receive from $P_1$ + $1$ send to $P_3$)
+  - $3$ events on $P_3$ (e.g., $1$ receive from $P_2$ + $1$ receive from $P_4$ + $1$ send to $P_1$)
+  - $1$ event on $P_4$ (e.g., $1$ send to $P_3$)
+- *(Remember: each receive and each send is a separate event that increments the local component by $1$; a process cannot receive and forward a message while incrementing its component only once!)*
 
 ![[DS-L5-execution-reconstruction.svg|680]]
 
-*Existing explanatory reconstruction; the calculations below verify compatibility with the observations on [[DS-2425Time2.pdf#page=47|physical PDF pages 47–49]].*
+| Event | Process | Operation | Vector Clock After Event |
+| :---: | :---: | :--- | :---: |
+| **$e_1$** | $P_1$ | Send to $P_2$ *(observed outgoing at `00:00`)* | **$[1, 0, 0, 0]$** |
+| **$e_2$** | $P_2$ | Receive from $P_1$ ($e_1$) | $[1, 1, 0, 0]$ |
+| **$e_3$** | $P_2$ | Send to $P_3$ ($e_5$) | $[1, 2, 0, 0]$ |
+| **$e_4$** | $P_4$ | Send to $P_3$ ($e_6$) | $[0, 0, 0, 1]$ |
+| **$e_5$** | $P_3$ | Receive from $P_2$ ($e_3$) | $[1, 2, 1, 0]$ |
+| **$e_6$** | $P_3$ | Receive from $P_4$ ($e_4$) | $[1, 2, 2, 1]$ |
+| **$e_7$** | $P_3$ | Send to $P_1$ *(observed incoming at `00:05`)* | **$[1, 2, 3, 1]$** |
+| **$e_8$** | $P_1$ | Receive from $P_3$ ($e_7$) *(after NIC observation)* | $[2, 2, 3, 1]$ |
 
-Work through the events:
+###### Is the Execution Unique? (Q3.1)
+- **No, the execution is NOT unique.**
+- For example, on $P_3$, if the message from $P_4$ ($[0,0,0,1]$) arrives **before** the message from $P_2$ ($[1,2,0,0]$):
+  1. $P_3$'s first receive (from $P_4$) yields $[0, 0, 1, 1]$.
+  2. $P_3$'s second receive (from $P_2$) yields $\max([0,0,1,1], [1,2,0,0]) + [0,0,1,0] = [1, 2, 2, 1]$.
+  3. $P_3$'s send to $P_1$ yields $[1, 2, 3, 1]$.
+- Both executions produce the exact same observations at $P_1$. (Similarly, $P_2$ could execute a local event $[0,1,0,0]$ before sending $[0,2,0,0]$ to $P_3$, while $P_1$'s message goes directly to $P_3$, etc.)
 
-| Event | Process | Operation | Vector Clock **after event** |
-|---|---|---|---|
-| `a` | $P_1$ | send to $P_2$ | $[1,0,0,0]$ |
-| `b` | $P_2$ | receive from $P_1$ | $[1,1,0,0]$ |
-| `c` | $P_2$ | send to $P_3$ | $[1,2,0,0]$ |
-| `d` | $P_4$ | send to $P_3$ | $[0,0,0,1]$ |
-| $e$ | $P_3$ | receive from $P_2$ | $[1,2,1,0]$ |
-| `f` | $P_3$ | receive from $P_4$ | $[1,2,2,1]$ |
-| `g` | $P_3$ | send to $P_1$ | $[1,2,3,1]$ |
-| `h` | $P_1$ | process the incoming receive | $[2,2,3,1]$ |
+###### Can One Process Never Send Messages? (Q3.2)
+- **No, not in this execution.**
+- **General Invariant for a Silent Process**: If a process $P_k$ never sends any message, it can still increment its own local counter $V_k[k]$ via local events, but no other process can ever learn about $P_k$'s events:
 
-**Verify the critical computation at $P_3$:**
+$$P_k \text{ never sends a message} \implies \forall i \ne k: \; V_i[k] = 0$$
 
-On receiving $P_2$'s message $[1,2,0,0]$:
+- In our observation, $P_1$ sent the outgoing message at `00:00`, and the incoming packet $[1, 2, 3, 1]$ sent to $P_1$ by another process has **strictly positive entries in all four components** ($V_m[2] = 2 > 0$, $V_m[3] = 3 > 0$, $V_m[4] = 1 > 0$).
+- Therefore, information from every process $P_1, P_2, P_3, P_4$ must have been transmitted across the network, which requires **every process to have sent at least one message**.
 
-$$
-[0,0,0,0]\sqcup[1,2,0,0]=[1,2,0,0]
-\ \Longrightarrow\ [1,2,1,0].
-$$
+---
 
-Here $\sqcup$ denotes the component-wise maximum.
+#### 9. Application of Scalar Clocks: Lamport's Distributed Mutual Exclusion
 
-On receiving $P_4$'s message $[0,0,0,1]$:
+On slide 46 we saw that different logical time mechanisms solve different distributed problems:
+- **Vector Timestamps** $\longrightarrow$ **Causal Broadcast** (where exact causal concurrency detection $V(e) < V(e') \iff e \to e'$ is needed).
+- **Scalar Timestamps** $\longrightarrow$ **Lamport's Distributed Mutual Exclusion** (where we need a **total order** on Critical Section requests that extends the happened-before relation).
 
-$$
-[1,2,1,0]\sqcup[0,0,0,1]=[1,2,1,1]
-\ \Longrightarrow\ [1,2,2,1].
-$$
+---
 
-On sending to $P_1$, increment the **third** component:
+##### 9.1 The Mutual Exclusion (ME) Abstraction
 
-$$
-\boxed{[1,2,3,1]}
-$$
+Processes in a distributed system often need exclusive access to a shared resource or **Critical Section (CS)** without relying on a central coordinator.
 
-That is **exactly** the timestamp observed on the incoming packet at $P_1$.
+![[DS-L5-slide-51-mutex-abstraction.png|760]]
 
-If and when $P_1$ handles the packet, it starts from $[1,0,0,0]$, merges $[1,2,3,1]$, then increments its first component:
+> **Mutual Exclusion Abstraction:**
+> - **Events:**
+>   - $\langle \text{Request} \rangle$ *(from upper layer)*: requests access to the Critical Section (CS).
+>   - $\langle \text{Grant} \rangle$ *(to upper layer)*: grants exclusive access to enter the CS.
+>   - $\langle \text{Release} \rangle$ *(from upper layer)*: notifies that the process has exited the CS.
+> - **Properties:**
+>   - **ME1 — Mutual Exclusion (Safety):** At any time $t$, at most one process is inside the CS.
+>   - **ME2 — Liveness (No Deadlock / No Starvation):** If a process $p$ requests access to the CS, then $p$ eventually enters the CS.
+>   - **ME3 — Fairness (Causal FIFO Entry):** If the request of process $p$ happens-before ($\to$) the request of process $q$, then $q$ cannot enter the CS before $p$.
 
-$$
-[1,0,0,0]\sqcup[1,2,3,1]=[1,2,3,1]
-\ \Longrightarrow\ \boxed{[2,2,3,1]}.
-$$
+---
 
-Again, the observation on the network card **remains $[1,2,3,1]$**, not $[2,2,3,1]$.
+##### 9.2 System Assumptions and Total Ordering of Requests
 
-###### Q3.1 — Is the execution unique?
+Lamport's Mutual Exclusion algorithm relies on three key assumptions:
+1. **No Process Crashes ($f = 0$):** Every participating process is correct and eventually replies to requests and releases the CS after entering it.
+2. **FIFO Perfect Point-to-Point Links:** Messages between any pair of processes $(p_i, p_j)$ are delivered reliably, at most once, and in the exact order they were sent.
+3. **Scalar Clocks with Lexicographical Tie-Breaking (Total Order):**
+   - Scalar clocks alone satisfy $e \to e' \implies L(e) < L(e')$, which is only a **partial order** because two concurrent requests $r_i \parallel r_j$ can have equal scalar clock values $L_i = L_j$.
+   - To obtain a strict **total order** across all requests in the system, each request from process $p_i$ is stamped with the pair $\text{ts}(r_i) = \langle i, L_i \rangle$ (process ID $i$ and scalar clock $L_i$), ordered lexicographically by clock value first and process ID second:
+     $$\text{ts}(x) < \text{ts}(y) \iff \big(L(x) < L(y)\big) \;\lor\; \big(L(x) = L(y) \land \text{id}(x) < \text{id}(y)\big)$$
+   - Since process IDs are unique ($i \neq j$), no two requests from different processes can ever have the same timestamp $\text{ts}$, and whenever $\text{req}_i \to \text{req}_j$, we strictly have $L(\text{req}_i) < L(\text{req}_j) \implies \text{ts}(\text{req}_i) < \text{ts}(\text{req}_j)$.
 
-**No.** We can reverse the order in which $P_3$ receives the messages from $P_2$ and $P_4$, while preserving all essential constraints.
+![[DS-L5-lamport-mutex-conditions.svg|780]]
 
-An alternative order at $P_3$ is:
+---
 
-1. Receive from $P_4$: $[0,0,1,1]$.
-2. Receive from $P_2$: merge $[1,2,0,0]$, increment third component → $[1,2,2,1]$.
-3. Send to $P_1$: increment again → $[1,2,3,1]$.
+##### 9.3 Algorithm 1: Lamport's Mutual Exclusion Protocol
 
-This yields **the same observed incoming timestamp** with a different execution.
+Each process $p_i$ maintains:
+- `scalar_clock`: local Lamport scalar clock (initialized to $0$, incremented on every send and receive event).
+- `Requests`: local set of active Critical Section requests $\langle \text{REQ}, \text{ts} = \langle j, L_j \rangle \rangle$ (including $p_i$'s own request when active).
+- `Acks`: set of `ACK` messages received by $p_i$.
+- `my_req`: $p_i$'s current active request (or $\bot$ if $p_i$ is not requesting the CS).
 
-| Step on $P_3$ | Execution A | Execution B |
-|---|---|---|
-| First receive | From $P_2$: $[1,2,1,0]$ | From $P_4$: $[0,0,1,1]$ |
-| Second receive | From $P_4$: $[1,2,2,1]$ | From $P_2$: $[1,2,2,1]$ |
-| Subsequent send | $[1,2,3,1]$ | $[1,2,3,1]$ |
+![[DS-L5-slide-53-lamport-mutex-code.png|780]]
 
-Why this works: the component-wise maximum merges information independently of arrival order, although **each receive event still increments the local component**. We carefully counted the same number of receives and sends in both constructions.
+###### Summary of Protocol Rules for Process $p_i$
+1. **Requesting the CS (`upon event Request`):**
+   - $p_i$ increments `scalar_clock`, creates `my_req = (REQ, ts = <i, scalar_clock>)`, and sends `my_req` over the `FIFOPerfectLink` to **all** processes $p_j \in \Pi$ (including itself, which places `my_req` in `Requests`).
+2. **Receiving a Message (`upon event Deliver Message(m)`):**
+   - First updates `scalar_clock := max(clock(m), scalar_clock) + 1`.
+   - **If $m$ is a `REQ`:** adds $m$ to `Requests`, increments `scalar_clock`, and sends back `(ACK, ts = <i, scalar_clock>)` to `sender(m)`.
+   - **If $m$ is an `ACK`:** adds $m$ to `Acks`.
+   - **If $m$ is a `RLS` (Release):** removes the matching request from `sender(m)` out of `Requests`.
+3. **Entering the CS (`trigger event Granted`):**
+   Process $p_i$ is granted access to the CS **if and only if both conditions hold simultaneously**:
+   - **Condition 1 (Smallest Timestamp in Queue):** No request in $p_i$'s `Requests` set has a timestamp smaller than `ts(my_req)`:
+     $$\neg \exists \text{req} \in \text{Requests} : \text{ts}(\text{req}) < \text{ts}(\text{my\_req})$$
+   - **Condition 2 (Newer `ACK` from Every Process):** For every process $p \in \Pi$, $p_i$ has received an `ACK` from $p$ whose timestamp is strictly greater than `ts(my_req)`:
+     $$\forall p \in \Pi : \exists m \in \text{Acks} \mid \text{sender}(m) = p \land \text{ts}(m) > \text{ts}(\text{my\_req})$$
+4. **Releasing the CS (`upon event Release`):**
+   - $p_i$ removes its own request from `Requests` (sets `my_req := \bot`), increments `scalar_clock`, and broadcasts `(RLS, ts = <i, scalar_clock>)` over the `FIFOPerfectLink` to all $p_j \in \Pi$.
 
-The professor explores other possibilities with students and emphasizes that there is **not a unique reconstruction**. The observation constrains known event counts but does not reveal every message or the full causal graph.
+---
 
-###### Q3.2 — Could one process never send messages?
+##### 9.4 Step-by-Step Execution Example
 
-For **this exercise**, **no**.
+Consider three processes $p_1, p_2, p_3$:
+1. Initially all clocks are $0$. Process $p_1$ sends an application message to $p_3$, advancing $p_3$'s clock to $2$.
+2. At clock $3$, **$p_3$ requests the CS** with timestamp $(t=3, \text{id}=3)$, inserts it into its local queue, and sends `REQ(3, 3)` to $p_1$ and $p_2$.
+3. $p_1$ and $p_2$ receive `REQ(3, 3)` at clock $4$, store $(t=3, \text{id}=3)$ in their `Requests` queues, and send back `ACK`s at clock $5$.
+4. At clock $6$, **$p_1$ also requests the CS** with timestamp $(t=6, \text{id}=1)$, inserts $(t=6, \text{id}=1)$ into its local queue alongside $(t=3, \text{id}=3)$, and sends `REQ(6, 1)` to $p_2$ and $p_3$.
 
-The observed incoming vector is:
+![[DS-L5-slide-59-mutex-example-wait.png|740]]
 
-$$
-[1,2,3,1].
-$$
+5. At clock $10$, $p_1$ has already received both `ACK`s (with timestamp $8 > 6$), so **Condition 2 holds** for $p_1$. However, $p_1$'s queue contains both $(t=3, \text{id}=3)$ and $(t=6, \text{id}=1)$: since $(3, 3) < (6, 1)$, **Condition 1 is false**, so $p_1$ **must wait**!
+6. Meanwhile, at clock $9$, $p_3$ receives the second `ACK` from $p_2$. In $p_3$'s queue, $(t=3, \text{id}=3) < (t=6, \text{id}=1)$ is the smallest timestamp, and $p_3$ has newer `ACK`s from everyone, so **$p_3$ enters the CS**.
 
-Every component is strictly positive. Its sender must have obtained knowledge of at least one event from *each* other process. Such knowledge can cross process boundaries only by **messages**. Therefore each of $P_2$, $P_3$, and $P_4$ must have sent at least one message somewhere along the information flow; we already directly observed $P_1$ sending.
+![[DS-L5-slide-61-mutex-example-release.png|740]]
 
-**Careful general statement:** If $P_k$ generates local events but **never sends messages**, then no **other** process can learn about those events under the standard message-passing model. Thus for every $i\ne k$, the component for $P_k$ remains zero in $P_i$'s vectors:
+7. When $p_3$ exits the CS at clock $10$, it removes $(t=3, \text{id}=3)$ and sends `Release` to $p_1$ and $p_2$. Upon delivering `Release` at clock $11$, $p_1$ deletes $(t=3, \text{id}=3)$ from its queue; now $(t=6, \text{id}=1)$ is the smallest timestamp in $p_1$'s queue, so **$p_1$ enters the CS**.
 
-$$
-\begin{aligned}
-P_k\text{ never sends}\quad\Longrightarrow\\
-V_i[k]=0\quad\text{for all }i\ne k.
-\end{aligned}
-$$
+---
 
-The vector of the silent process **itself** may have a positive local component: it can perform local events even if it never sends. The conclusion that *every process must send* depends on our observed message containing **positive knowledge of all four processes**.
+##### 9.5 Correctness Proofs and Performance
 
-###### The professor's warning about counting events
+###### Proof of ME1 — Safety (Mutual Exclusion)
+> **Theorem:** At no time can two distinct processes $p_i$ and $p_j$ ($i < j$) be in the Critical Section simultaneously.
 
-One proposed classroom solution attempted to let a process **receive and then forward** information without counting both operations separately. This is invalid under the update convention in the exercise.
+**Proof (by contradiction):**
+1. Suppose for contradiction that both $p_i$ and $p_j$ are inside the CS at the same time.
+2. Then both $p_i$ and $p_j$ satisfied **Condition 1** and **Condition 2** while their respective requests $\text{req}_i$ and $\text{req}_j$ were still active (neither had sent `RLS` yet):
+   - $p_i$ received an `ACK` from $p_j$ with $\text{ts}(\text{ack}_{j \to i}) > \text{ts}(\text{req}_i)$, and when $p_j$ sent that `ACK`, $p_j$ had already inserted $\text{req}_i$ into $\text{Requests}_j$.
+   - $p_j$ received an `ACK` from $p_i$ with $\text{ts}(\text{ack}_{i \to j}) > \text{ts}(\text{req}_j)$, and when $p_i$ sent that `ACK`, $p_i$ had already inserted $\text{req}_j$ into $\text{Requests}_i$.
+3. Since timestamps are **totally ordered**, either $\text{ts}(\text{req}_i) < \text{ts}(\text{req}_j)$ or $\text{ts}(\text{req}_j) < \text{ts}(\text{req}_i)$. Without loss of generality, assume $\boxed{\text{ts}(\text{req}_i) < \text{ts}(\text{req}_j)}$.
+4. Consider when $p_i$ generated $\text{req}_i$ relative to when $p_i$ sent $\text{ack}_{i \to j}$ (which has timestamp $\text{ts}(\text{ack}_{i \to j}) > \text{ts}(\text{req}_j) > \text{ts}(\text{req}_i)$):
+   - Because $p_i$'s scalar clock is strictly increasing and $\text{ts}(\text{req}_i) < \text{ts}(\text{ack}_{i \to j})$, $p_i$ **must have sent $\text{req}_i$ to $p_j$ before sending $\text{ack}_{i \to j}$ to $p_j$**.
+5. By **FIFO link ordering** on the channel $p_i \to p_j$, $\text{req}_i$ must have been delivered to $p_j$ **before** $\text{ack}_{i \to j}$ was delivered to $p_j$.
+6. Since $p_i$ has not released the CS yet, $\text{req}_i$ is still present in $\text{Requests}_j$ when $p_j$ receives $\text{ack}_{i \to j}$ and enters the CS.
+7. But $\text{ts}(\text{req}_i) < \text{ts}(\text{req}_j)$, which contradicts **Condition 1** for $p_j$ ($\text{req}_j$ was supposed to have the smallest timestamp in $\text{Requests}_j$)! $\blacksquare$
 
-Example: if $P_4$ receives a message as one event and then sends a message as another, its local component increases **twice**. Starting from zero, it cannot do both actions and still have local component equal to `1`.
+---
 
-This is why we must distinguish the message timestamp observed **in flight** from the timestamp assigned **after processing its receive**.
+###### Proof of ME3 — Fairness (Causal Entry Order)
+> **Theorem:** If $\text{req}_j \to \text{req}_i$, then $p_i$ cannot enter the CS before $p_j$.
 
-#### Revision sheet
+**Proof:**
+1. By the Scalar Clock property, $\text{req}_j \to \text{req}_i \implies L(\text{req}_j) < L(\text{req}_i) \implies \boxed{\text{ts}(\text{req}_j) < \text{ts}(\text{req}_i)}$.
+2. To enter the CS, $p_i$ must first receive an `ACK` from $p_j$ with $\text{ts}(\text{ack}_{j \to i}) > \text{ts}(\text{req}_i) > \text{ts}(\text{req}_j)$.
+3. Since $\text{ts}(\text{req}_j) < \text{ts}(\text{ack}_{j \to i})$, process $p_j$ sent $\text{req}_j$ to $p_i$ **before** sending $\text{ack}_{j \to i}$ to $p_i$.
+4. By **FIFO link ordering** on $p_j \to p_i$, $p_i$ delivers $\text{req}_j$ **before** delivering $\text{ack}_{j \to i}$.
+5. Thus, by the time $p_i$ satisfies Condition 2, $\text{req}_j$ is already in $\text{Requests}_i$ with $\text{ts}(\text{req}_j) < \text{ts}(\text{req}_i)$, blocking $p_i$ from satisfying Condition 1 until $p_j$ enters and sends `RLS`. $\blacksquare$
 
-> [!summary]- Main results and update rules
-> - **Happened-Before:** local order, send/receive order, and transitivity generate a strict partial order. For distinct events, $e\parallel e'$ iff neither causal direction holds.
-> - **Scalar clocks:** increment on local/send; on receive use $L_i\leftarrow\max(L_i,t)+1$.
->   Causality implies $L(e)<L(e')$, but the converse fails. The proof follows strict growth along causal paths.
-> - **Full histories:** $e\rightarrow e'\iff H(e)<H(e')$.
-> - **Prefix Property:** valid histories of the same process are prefixes of one local sequence; their lengths suffice for comparison.
-> - **Vector clocks:** increment the local component on local/send; on receive take the component-wise maximum, then increment the receiver's component.
->   $e\rightarrow e'\iff V(e)<V(e')$; incomparable vectors identify concurrent events.
+> [!warning] What Happens If Links Are NOT FIFO? (Slide 66 Homework)
+> If links are only Perfect Links without FIFO ordering, **both Mutual Exclusion (Safety) and Fairness are violated**:
+> - Suppose $p_j$ sends $\text{req}_j$ at $\text{ts} = (1, j)$ to $p_i$, and shortly after receives $\text{req}_i$ with $\text{ts} = (2, i)$ and replies with $\text{ack}_{j \to i}$ at $\text{ts} = (4, j)$.
+> - Without FIFO on link $p_j \to p_i$, the fast $\text{ack}_{j \to i}$ can overtake the slow $\text{req}_j$ in transit!
+> - Then $p_i$ receives $\text{ack}_{j \to i}$ (satisfying Condition 2) while $\text{req}_j$ is still in flight (so $p_i$'s queue only contains $\text{req}_i$, satisfying Condition 1). Process $p_i$ enters the CS at the same time as $p_j$, violating **Safety (ME1)** and **Fairness (ME3)**.
 
-###### Frequent mistakes and how to avoid them
+---
 
-- **“Concurrent means simultaneous.”** Concurrent means **not ordered by Happened-Before**; physical times need not match.
-- **“$P_0$ knows a message was received because it sent it.”** The sender does **not automatically know**; an ACK or other message is needed.
-- **“Two events have different scalar timestamps, so they are causal.”** False. Scalar timestamps preserve existing causality; inequality does **not establish** causality.
-- **“If vectors differ, compare their sums.”** Wrong. Use **component-wise** comparisons.
-- **“Every Vector Clock component must be strictly smaller.”** Wrong. All must be $\leq$, with **at least one** strict $<$.
-- **“Vector Clock $[2,0]$ means the last event is labeled $e_2$.”** Wrong. It means **two known events** of the first process, none of the second.
-- **“Receiving a message merely increases the local component.”** Merge **all components by maximum first**, then increment the receiver's own component.
-- **“Send and receive in a forwarding chain count as one event.”** Wrong. The receive and subsequent send are **two** events.
-- **“A receive packet observed on the network has already had its vector incremented by the destination.”** Wrong. The incoming packet carries the **sender's** timestamp; the destination increments on processing.
-- **“A Vector Clock uniquely reconstructs the execution.”** Wrong. Multiple executions can generate the same observed timestamp(s).
+###### Performance and Message Complexity
+For a system of $N$ processes, each Critical Section execution in Lamport's algorithm requires:
+- $N - 1$ `REQ` messages to remote peers,
+- $N - 1$ `ACK` messages from remote peers,
+- $N - 1$ `RLS` messages upon exiting the CS,
+for a total message complexity of:
+$$\boxed{3(N - 1) \text{ messages per CS execution}}$$
+In the best case (when no other process is inside or competing for the CS), the **synchronization delay** from issuing `<Request>` to `<Grant>` is **2 message transmission delays** (1 `REQ` + 1 `ACK` round-trip).
 
-###### How to solve an exam execution diagram
-
-1. **Read the process labels and Vector Clock positions**. Establish whether indexing is 0-based or 1-based.
-2. **Identify all events** on each process, from left to right. Every dot counts as one event.
-3. **Classify each event** as local, send, or receive. Draw the sender for every receive.
-4. **Initialize all clocks at zero**.
-5. **Walk in causal order**: you can compute a receive only after you know the timestamp of its send.
-6. On **local/send**, increment only the process's own entry; attach the timestamp on send.
-7. On **receive**, take the component-wise maximum, then increment the receiver's own entry.
-8. **Check the meaning** of the vector: an entry counts how many events of that process are known.
-9. Only **after all required timestamps are correct**, compare target vectors component by component to answer causal questions.
-10. When reconstructing from network observations, distinguish the **in-transit packet timestamp** from the **processed receive event timestamp**.
-
-###### Self-check based on the lesson
-
-**Q1.** How can events on two different processes have a Happened-Before relationship even when they are not directly connected by one message?
-
-> [!answer]- Answer
-> By a chain of local-order and send/receive edges, combined through transitivity.
-
-**Q2.** What does $e \parallel  e'$ tell us about their physical timestamps?
-
-> [!answer]- Answer
-> Nothing precise about their physical order; it says neither event happens-before the other.
-
-**Q3.** Why do scalar clocks use `max(local, message)+1` on receive?
-
-> [!answer]- Answer
-> The receive must have a timestamp strictly greater than **both** the receiver's previous local timestamp and the sender's attached timestamp.
-
-**Q4.** Can we infer $e \rightarrow  e'$ from $L(e)=2$ and $L(e')=8$?
-
-> [!answer]- Answer
-> No. They could be concurrent.
-
-**Q5.** Why is it safe to replace a process's causal-history list with its length?
-
-> [!answer]- Answer
-> All valid histories for that process are prefixes of the same local event sequence, so a larger length always means a more complete history for that component.
-
-**Q6.** How can we tell from $V(e)=[1,2,0]$ and $V(e')=[1,0,2]$ that the events are concurrent?
-
-> [!answer]- Answer
-> The first vector is larger in one component and smaller in another; neither is $\leq$ the other.
-
-**Q7.** In the last exercise, why does an incoming packet $[1,2,3,1]$ not imply that $P_1$'s receive event has that same Vector Clock?
-
-> [!answer]- Answer
-> The packet's clock was assigned by its **sender**. After $P_1$ processes the message, it merges and increments its own component, obtaining $[2,2,3,1]$ in the given reconstruction.
-
-###### Teaching progression
-
-Physical-clock uncertainty → **Happened-Before** → concurrency and partial order → **scalar clocks** (one implication) → full causal histories → **Prefix Property** → **vector clocks** (both implications) → execution diagrams and reconstruction.

@@ -1,0 +1,7 @@
+- provocations
+- reflection argumantation
+- strategic reading
+- https://www.youtube.com/watch?v=nfTDljFG2g0&t=428s
+- https://www.youtube.com/watch?v=3lPnN8omdPA&t=676s
+- https://www.youtube.com/watch?v=sbmP6i-MChk&t=273s
+- https://www.youtube.com/watch?v=VKmUC5ukfqU

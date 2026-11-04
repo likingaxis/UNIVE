@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 270" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr-req" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-rep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <rect width="820" height="270" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="410" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Algorithm 2.7 (Increasing Timeout): False Suspicion, Timeout Adaptation &amp; Restore</text>
+
+  <!-- Timelines -->
+  <text x="45" y="95" font-size="14" font-weight="700" fill="#0f172a">p₀</text>
+  <line x1="75" y1="90" x2="780" y2="90" stroke="#334155" stroke-width="2"/>
+
+  <text x="45" y="205" font-size="14" font-weight="700" fill="#0f172a">p₁</text>
+  <line x1="75" y1="200" x2="780" y2="200" stroke="#334155" stroke-width="2"/>
+
+  <!-- Timeout 1 at t=5s (x=140) -->
+  <line x1="140" y1="75" x2="140" y2="105" stroke="#2563eb" stroke-width="2"/>
+  <text x="140" y="65" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">t = 5s (Timeout 1)</text>
+  <text x="140" y="50" text-anchor="middle" font-size="10" fill="#475569">delay = 5s, send REQ</text>
+
+  <!-- Slow request + slow reply -->
+  <line x1="140" y1="90" x2="260" y2="196" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arr-req)"/>
+  <text x="180" y="155" font-size="10.5" font-weight="600" fill="#1d4ed8">REQ</text>
+
+  <!-- Timeout 2 at t=10s (x=330) BEFORE reply arrives -->
+  <line x1="330" y1="72" x2="330" y2="108" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="330" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#dc2626">t = 10s (Timeout 2)</text>
+  <text x="330" y="67" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">p₁ ∉ alive → Suspect(p₁)!</text>
+  <text x="330" y="122" text-anchor="middle" font-size="10" fill="#b91c1c">suspected = {p₁}</text>
+
+  <!-- Late reply arrives at x=430 -->
+  <line x1="260" y1="200" x2="426" y2="95" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-rep)"/>
+  <circle cx="430" cy="90" r="4.5" fill="#16a34a"/>
+  <text x="430" y="122" text-anchor="middle" font-size="10.5" font-weight="700" fill="#15803d">Late REPLY arrives</text>
+  <text x="430" y="136" text-anchor="middle" font-size="10" fill="#15803d">alive := alive ∪ {p₁}</text>
+
+  <!-- Timeout 3 at t=15s (x=555) -->
+  <line x1="555" y1="72" x2="555" y2="108" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="555" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">t = 15s (Timeout 3)</text>
+  <text x="555" y="67" text-anchor="middle" font-size="10.5" font-weight="700" fill="#15803d">alive ∩ suspected = {p₁} ≠ ∅</text>
+  <rect x="485" y="148" width="160" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="565" y="165" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">1. delay := delay + Δ (10s)</text>
+  <text x="565" y="180" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">2. trigger Restore(p₁)</text>
+
+  <!-- Next timeout at t=25s (x=755) -->
+  <line x1="755" y1="75" x2="755" y2="105" stroke="#2563eb" stroke-width="2"/>
+  <text x="740" y="65" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">t = 25s (Timeout 4)</text>
+  <path d="M 555 102 H 755" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <text x="655" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">Wider window: delay = 10s</text>
+
+  <text x="410" y="248" text-anchor="middle" font-size="12" fill="#334155">Each false suspicion of a correct process increases delay by Δ until delay exceeds the stabilized RTT.</text>
+</svg>

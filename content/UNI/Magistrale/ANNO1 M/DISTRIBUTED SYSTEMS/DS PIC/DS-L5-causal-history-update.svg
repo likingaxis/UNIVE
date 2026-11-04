@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 250" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0f172a"/>
+    </marker>
+    <marker id="arr-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <rect width="780" height="250" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="390" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Complete Causal Histories: Propagation &amp; Merge Rule</text>
+
+  <!-- Process lines -->
+  <text x="45" y="95" font-size="14" font-weight="700" fill="#1d4ed8">P₀</text>
+  <line x1="75" y1="90" x2="725" y2="90" stroke="#0f172a" stroke-width="2" marker-end="url(#arr-h)"/>
+
+  <text x="45" y="185" font-size="14" font-weight="700" fill="#15803d">P₁</text>
+  <line x1="75" y1="180" x2="725" y2="180" stroke="#0f172a" stroke-width="2" marker-end="url(#arr-h)"/>
+
+  <!-- Message arrow e2 -> e3 -->
+  <line x1="330" y1="90" x2="455" y2="175" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arr-m)"/>
+  <text x="415" y="128" font-size="11" font-weight="600" fill="#1d4ed8">msg([[e₀,e₂], []])</text>
+
+  <!-- Events on P0 -->
+  <circle cx="150" cy="90" r="5" fill="#1d4ed8"/>
+  <text x="150" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">e₀</text>
+  <rect x="95" y="42" width="110" height="22" rx="4" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.2"/>
+  <text x="150" y="57" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#1e3a8a">[[e₀], []]</text>
+
+  <circle cx="330" cy="90" r="5" fill="#1d4ed8"/>
+  <text x="330" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">e₂</text>
+  <rect x="265" y="42" width="130" height="22" rx="4" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.2"/>
+  <text x="330" y="57" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#1e3a8a">[[e₀,e₂], []]</text>
+
+  <!-- Events on P1 -->
+  <circle cx="220" cy="180" r="5" fill="#15803d"/>
+  <text x="220" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">e₁</text>
+  <rect x="165" y="194" width="110" height="22" rx="4" fill="#dcfce7" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="220" y="209" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#14532d">[[], [e₁]]</text>
+
+  <circle cx="460" cy="180" r="5" fill="#15803d"/>
+  <text x="460" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">e₃</text>
+  <rect x="385" y="194" width="150" height="22" rx="4" fill="#dcfce7" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="460" y="209" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#14532d">[[e₀,e₂], [e₁,e₃]]</text>
+
+  <circle cx="635" cy="180" r="5" fill="#15803d"/>
+  <text x="635" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">e₄</text>
+  <rect x="550" y="194" width="170" height="22" rx="4" fill="#dcfce7" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="635" y="209" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#14532d">[[e₀,e₂], [e₁,e₃,e₄]]</text>
+
+  <text x="390" y="238" text-anchor="middle" font-size="11.5" fill="#475569">Replacing each list with its length yields Vector Clocks: [1,0], [0,1], [2,0], [2,2], [2,3].</text>
+</svg>

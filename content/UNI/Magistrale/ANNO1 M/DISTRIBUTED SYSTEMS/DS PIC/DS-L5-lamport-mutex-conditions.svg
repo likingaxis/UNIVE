@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 360" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 12; }
+      .card { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.5; rx: 8; }
+      .card-blue { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.8; rx: 8; }
+      .card-green { fill: #f0fdf4; stroke: #16a34a; stroke-width: 1.8; rx: 8; }
+      .card-amber { fill: #fffbeb; stroke: #d97706; stroke-width: 1.8; rx: 8; }
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: 700; fill: #1e293b; }
+      .text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; fill: #334155; }
+      .mono { font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; font-weight: 600; fill: #0f172a; }
+      .badge { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 700; fill: #ffffff; }
+    </style>
+  </defs>
+
+  <rect x="6" y="6" width="848" height="348" class="bg" />
+  <text x="430" y="32" text-anchor="middle" class="title">Lamport's Distributed Mutual Exclusion: Total Order &amp; Joint Entry Conditions</text>
+
+  <!-- Box 1: Total Order on Requests -->
+  <rect x="24" y="48" width="812" height="72" class="card-amber" />
+  <rect x="38" y="60" width="175" height="22" rx="4" fill="#d97706" />
+  <text x="125" y="75" text-anchor="middle" class="badge">TOTAL ORDER ON REQUESTS</text>
+  <text x="228" y="75" class="text">Scalar clocks alone only define a partial order, so concurrent requests can have equal clock values.</text>
+  <text x="38" y="102" class="mono">ts(req_i) = (L_i, i)  &lt;  ts(req_j) = (L_j, j)   iff   (L_i &lt; L_j)  OR  (L_i == L_j  AND  i &lt; j)</text>
+
+  <!-- Box 2: Condition 1 -->
+  <rect x="24" y="136" width="394" height="128" class="card-blue" />
+  <rect x="38" y="148" width="150" height="22" rx="4" fill="#2563eb" />
+  <text x="113" y="163" text-anchor="middle" class="badge">ENTRY CONDITION 1</text>
+  <text x="200" y="163" class="subtitle">Smallest Request in Local Queue</text>
+  <text x="38" y="190" class="mono">¬∃ req ∈ Requests : ts(req) &lt; ts(my_req)</text>
+  <text x="38" y="216" class="text">• Among all requests currently stored in p_i's local</text>
+  <text x="48" y="234" class="text">set Requests, p_i's own request my_req has the</text>
+  <text x="48" y="252" class="text">minimum lexicographical timestamp (L_i, i).</text>
+
+  <!-- Plus Sign -->
+  <circle cx="430" cy="200" r="14" fill="#0f172a" />
+  <text x="430" y="205" text-anchor="middle" class="badge" font-size="15">∧</text>
+
+  <!-- Box 3: Condition 2 -->
+  <rect x="442" y="136" width="394" height="128" class="card-green" />
+  <rect x="456" y="148" width="150" height="22" rx="4" fill="#16a34a" />
+  <text x="531" y="163" text-anchor="middle" class="badge">ENTRY CONDITION 2</text>
+  <text x="618" y="163" class="subtitle">Newer ACK from Every Peer</text>
+  <text x="456" y="190" class="mono">∀p ∈ Π : ∃m ∈ Acks | sender(m)=p ∧ ts(m) &gt; ts(my_req)</text>
+  <text x="456" y="216" class="text">• p_i has received an ACK from every process p with</text>
+  <text x="466" y="234" class="text">timestamp strictly larger than ts(my_req).</text>
+  <text x="456" y="252" class="text">• Guarantees p_i knows about all earlier requests!</text>
+
+  <!-- Box 4: Why FIFO Links Matter -->
+  <rect x="24" y="278" width="812" height="62" class="card" />
+  <text x="38" y="300" class="subtitle">Why FIFO Perfect Links Are Essential (Safety &amp; Fairness):</text>
+  <text x="38" y="322" class="text">If p_j sent a request with ts(req_j) &lt; ts(my_req), then p_j sent req_j BEFORE sending its ACK (whose ts &gt; ts(my_req) &gt; ts(req_j)).</text>
+  <text x="38" y="336" class="text">By FIFO ordering on link p_j → p_i, req_j MUST arrive at p_i before p_j's ACK—so p_i cannot satisfy Condition 2 without seeing req_j in Condition 1!</text>
+</svg>

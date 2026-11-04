@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 300" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="780" height="300" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="390" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Partial Synchrony: Alternating Synchronous &amp; Asynchronous Periods</text>
+
+  <!-- Shaded regions -->
+  <!-- Sync 1 -->
+  <rect x="80" y="55" width="180" height="190" fill="#dcfce7" opacity="0.55"/>
+  <text x="170" y="76" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">sync</text>
+  <!-- Async 1 -->
+  <rect x="260" y="55" width="140" height="190" fill="#fee2e2" opacity="0.6"/>
+  <text x="330" y="76" text-anchor="middle" font-size="13" font-weight="700" fill="#b91c1c">async</text>
+  <!-- Sync 2 -->
+  <rect x="400" y="55" width="160" height="190" fill="#dcfce7" opacity="0.55"/>
+  <text x="480" y="76" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">sync</text>
+  <!-- Async 2 -->
+  <rect x="560" y="55" width="110" height="190" fill="#fee2e2" opacity="0.6"/>
+  <text x="615" y="76" text-anchor="middle" font-size="13" font-weight="700" fill="#b91c1c">async</text>
+  <!-- Sync 3 -->
+  <rect x="670" y="55" width="60" height="190" fill="#dcfce7" opacity="0.55"/>
+  <text x="700" y="76" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">sync</text>
+
+  <!-- Vertical dividers -->
+  <line x1="260" y1="55" x2="260" y2="245" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="400" y1="55" x2="400" y2="245" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="560" y1="55" x2="560" y2="245" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="670" y1="55" x2="670" y2="245" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+  <!-- Axes -->
+  <line x1="80" y1="245" x2="740" y2="245" stroke="#0f172a" stroke-width="2"/>
+  <line x1="80" y1="245" x2="80" y2="50" stroke="#0f172a" stroke-width="2"/>
+  <text x="735" y="268" text-anchor="end" font-size="13" font-weight="600" fill="#0f172a">Time (ping sequence)</text>
+  <text x="26" y="150" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" transform="rotate(-90 26 150)">Round-Trip Delay</text>
+
+  <!-- Assumed bound Delta -->
+  <line x1="80" y1="155" x2="730" y2="155" stroke="#dc2626" stroke-width="2" stroke-dasharray="7,5"/>
+  <text x="725" y="147" text-anchor="end" font-size="12" font-weight="700" fill="#dc2626">Assumed delay bound Δ</text>
+
+  <!-- Delay curve -->
+  <path d="M 90 210 L 115 205 L 140 212 L 165 198 L 190 208 L 215 204 L 240 210 L 260 155 L 285 95 L 310 130 L 335 88 L 365 115 L 385 102 L 400 155 L 425 205 L 455 198 L 485 212 L 515 202 L 545 208 L 560 155 L 585 105 L 615 92 L 645 120 L 670 155 L 695 204 L 720 208" fill="none" stroke="#1d4ed8" stroke-width="2.5"/>
+
+  <text x="390" y="286" text-anchor="middle" font-size="12" fill="#475569">Real networks are typically synchronous most of the time, interrupted by temporary congestion spikes.</text>
+</svg>

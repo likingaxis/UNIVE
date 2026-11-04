@@ -1,524 +1,162 @@
-#### Time in distributed systems
+#### Models of Time in Distributed Systems
 
-> [!info] Slides and scope
-> Reference: [[../Percorso STUD2/Materiali/Distributed_Physical_Time_A.pdf|Time in Distributed Systems I]], physical PDF pages **1–27**.
-> The examples and explanations already in these notes are retained alongside the slide material.
+##### Asynchronous vs. Synchronous Systems
 
-##### The Three Models of Time
+> **Asynchronous System**: A distributed system with **no timing assumptions**:
+> - **Message transmission delay** is finite but **arbitrary** (unbounded).
+> - **Process execution speed** (processing delay) is finite but **arbitrary** (unbounded).
+> - Processes do not have synchronized physical clocks with bounded drift.
 
-*Slides, physical PDF pages 4–7.*
+> **Synchronous System**: A distributed system where **known upper bounds** hold at all times:
+> - **Bounded message transmission delay**: every message sent over a non-faulty link is received within a known time $\Delta_{\text{msg}}$.
+> - **Bounded processing delay**: every local computation step takes at most a known time $\Delta_{\text{proc}}$.
+> - **Bounded clock drift rate**: every local physical clock drifts from real time by at most a known rate $\rho$.
 
-In distributed systems, time assumptions determine how processes communicate and how algorithms can behave.
+###### The Fundamental Trade-Off
 
-We distinguish three models: **asynchronous**, **synchronous**, and **eventually synchronous**.
+| Model | Realism of Assumptions | Algorithm Design & Solvability |
+| :--- | :--- | :--- |
+| **Asynchronous** | **Very general**: holds even under heavy congestion or unpredictable scheduling, so any purely asynchronous algorithm works everywhere. | **Very restrictive**: a slow process is indistinguishable from a crashed one (timeouts cannot detect crashes accurately), making many fundamental problems (such as consensus with crashes) impossible to solve deterministically. |
+| **Synchronous** | **Very fragile**: requires worst-case delay bounds that either fail during network spikes or must be chosen so large that performance degrades severely. | **Very powerful**: timeouts are completely reliable; if a reply does not arrive within the worst-case bound, the remote process has definitely crashed. |
 
-###### Asynchronous systems
+##### Partial Synchrony and Eventually Synchronous Systems
 
-In an asynchronous system:
+###### Real-World Network Behavior (`ping`)
+- Observing a sequence of `ping` round-trip times on a real network reveals that message delays stay **low and predictable most of the time**, interrupted only occasionally by **congestion spikes** or routing transients.
+- Rather than discarding timing bounds altogether (purely asynchronous) or assuming they never fail (purely synchronous), a system can alternate between **synchronous periods** (delays below a bound $\Delta$) and **asynchronous periods** (delays exceeding $\Delta$).
 
-- There is **no known upper bound on message delays**.
-- Processes can execute local computational steps at unpredictable times.
-- We cannot assume a globally synchronized clock.
+![[DS-L3-partial-synchrony.svg|680]]
 
-For example, a message may take 10 milliseconds, 5 seconds, or several hours to arrive.
-- An algorithm cannot rely on a maximum delivery time.
+> **Partially Synchronous System**: A system that alternates between synchronous intervals (during which all timing bounds hold) and asynchronous intervals (during which timing bounds may be violated), staying synchronous most of the time.
 
-The advantage of the asynchronous model is that it is very general: algorithms designed for it can work under many different timing conditions.
+###### Eventually Synchronous System
+- For formal algorithm analysis, partial synchrony is abstracted into the **eventually synchronous model**, which captures the requirement that the network eventually remains stable long enough for the algorithm to terminate.
 
-> [!info]- Additional context already in these notes
-> However, this generality makes certain problems impossible to solve under specific failure assumptions. For example, deterministic consensus cannot be guaranteed in a fully asynchronous system with even one possible crash failure (the FLP impossibility result).
+> **Eventually Synchronous System**: A distributed system in which timing assumptions may be violated for an arbitrary initial period, but there exists an **unknown time $T$** (often called the *Global Stabilization Time*) after which all synchronous bounds on message delay, processing speed, and clock drift hold forever.
 
-###### Synchronous systems
+![[DS-L3-eventual-synchrony.svg|620]]
 
-In a synchronous system:
+- Because $T$ is **unknown to the processes**, an algorithm cannot simply wait until time $T$ before starting; it must execute correctly across both the initial unstable phase and the subsequent synchronous phase.
 
-- Message delays have a **known upper bound**.
-- Local computation times are bounded.
-- Processes can be scheduled according to known timing constraints.
-
-If the maximum message delay is $\delta$, a message sent at time $t$ must be delivered no later than:
-
-$$
-t_{\text{delivery}}\leq t+\delta
-$$
-
-For example, if $\delta=100\text{ ms}$, every message covered by this guarantee must arrive within 100 milliseconds.
-
-Synchronous systems provide stronger timing guarantees, making more distributed problems solvable.
-- However, these guarantees are difficult to maintain in unrestricted real-world networks.
-
-**Important:** The system provides the timing guarantee; the algorithm decides whether to use it.
-
-An asynchronous algorithm can run in a synchronous system without knowing $\delta$.
-- It simply does not need that additional guarantee.
-
-###### Eventually synchronous systems
-
-An eventually synchronous system combines aspects of the previous two models.
-
-> **Definition:** There exists a time $T$, unknown to us, after which the system becomes synchronous and remains synchronous forever.
-
-The time $T$ is called the **stabilization time**.
-
-Before $T$, the system may experience unpredictable delays.
-- After $T$, message delays and execution times satisfy stable bounds.
-
-In many eventually synchronous algorithms, neither the exact stabilization time nor the eventual delay bound needs to be known in advance.
-
-![[DS-L3-eventual-synchrony.svg|480]]
-
-*Existing explanatory diagram; reference: slide 13.*
-
-##### Why Do We Need Eventual Synchrony?
-
-*Slides, physical PDF pages 8–10.*
-
-Real networks often behave synchronously in practice, even though they cannot guarantee strict timing bounds at all times.
-
-The professor illustrates this using a `ping` experiment:
-
-- Most round-trip times are approximately 40–45 milliseconds.
-- Occasionally, a round-trip time is much larger, such as 739 milliseconds.
-
-These occasional spikes invalidate a strict 50 ms round-trip bound. The reported values are round-trip times (RTT); a one-way message-delay bound $\delta$ is a different quantity.
-
-We therefore need a model that allows unpredictable behavior initially but still provides conditions under which algorithms can eventually make progress.
-
-Notice that **usually observing small delays does not prove eventual synchrony**.
-- Eventual synchrony requires a permanent stabilization after some unknown time.
-
-##### Safety and Liveness in Eventually Synchronous Systems
-
-*Slides, physical PDF pages 11–13.*
-
-Recall the distinction from Lesson 2:
-
-- **Safety:**
-  - Something bad must never happen.
-- **Liveness:**
-  - Something good must eventually happen.
-
-A safety violation can be demonstrated using a finite execution prefix.
-- Once it happens, extending the execution cannot undo the violation.
-
-A liveness violation, on the other hand, generally requires an infinite execution in which the expected progress never occurs.
-
-###### Mutual exclusion example
-
-Consider two processes, $p_1$ and $p_2$, that want to access a shared critical section.
-
-The algorithm must guarantee:
-
-**Safety — Mutual Exclusion**
-
-At most one process can be inside the critical section at any given time.
-
-**Liveness — No-Starvation**
-
-A correct process requesting access must eventually be allowed to enter, under the algorithm's assumptions.
-
-Suppose the network experiences high latency.
-
-If the algorithm allows both processes to enter the critical section simultaneously, it violates safety.
-
-Even if the network stabilizes afterward, the violation cannot be undone.
-
-Instead, the algorithm can make both processes wait until sufficient coordination is possible.
-
-This does not necessarily violate liveness because **waiting is acceptable as long as progress eventually occurs**.
-
-###### Why safety must always hold
-
-In an eventually synchronous system, the network may behave asynchronously before stabilization time $T$.
-
-Therefore, an algorithm correct under this model cannot rely on eventual timing guarantees to preserve safety.
-
-Safety must hold:
-
-- Before $T$, when delays may be unpredictable.
-- After $T$, when delays become bounded.
-
-For example, mutual exclusion must never be violated, even during periods of high latency.
-
-###### Why liveness can depend on synchrony
-
-Liveness is different because progress can be delayed without immediately violating the property.
-
-Before $T$, processes may be unable to coordinate and may temporarily stop making progress.
-
-After $T$, the system remains synchronous forever.
-- This provides the algorithm with a sufficiently long period of stable communication to eventually make progress.
-
-For example, a process may wait for 30 minutes before entering the critical section.
-- If it eventually enters, no-starvation has not been violated.
-
-![[DS-L3-eventual-progress.svg|460]]
-
-*Existing illustration of the 30-minute waiting example in these notes.*
-
-However, if a correct requesting process waits forever without entering, no-starvation is violated.
-
-**Key idea:** Safety must hold throughout the entire execution, while liveness may rely on the eventual stabilization of the system.
+###### Safety and Liveness in Eventually Synchronous Systems
+- Designing an algorithm for an eventually synchronous system requires separating **Safety** ("nothing bad ever happens") from **Liveness** ("something good eventually happens"):
+  - **Safety must hold at all times**, even during the asynchronous phase before $T$, when timeouts may fire prematurely and messages may be arbitrarily delayed.
+  - **Liveness is guaranteed once the system becomes synchronous** (after $T$), when timing bounds hold and the algorithm can make progress without false suspicions.
 
 ![[DS-L3-safety-liveness.svg|520]]
 
-*Existing explanatory diagram; reference: slides 11–13.*
+![[DS-L3-eventual-progress.svg|640]]
 
-The definition of eventual synchrony is useful because the permanent synchronous period allows us to prove eventual progress without knowing how much time the algorithm will need.
+###### Example: Distributed Mutual Exclusion
+- Suppose processes compete for exclusive access to a shared **Critical Section (CS)**:
+  - **Safety (Mutual Exclusion)**: *At most one process is in the critical section at any time.* This property must **never** be violated, even when the network is behaving asynchronously.
+  - **Liveness (No Starvation / Progress)**: *Every process that requests entry eventually enters the critical section.* During asynchronous periods, message delays may temporarily prevent progress, but as soon as the system stabilizes after $T$, waiting processes are guaranteed to enter the critical section.
 
-##### Relationship Between Time Models
+##### Relationships Between Executions and Solvable Problems
 
-*Slides, physical PDF pages 14–15.*
+###### Inclusion of Allowed Executions
+- Every execution permitted by a synchronous system satisfies the timing bounds from the very beginning ($T = 0$), so it is also a valid eventually synchronous execution.
+- Every eventually synchronous execution has finite delays, so it is also a valid asynchronous execution.
+- Therefore, in terms of **possible executions** (behaviors the environment can produce):
 
-The professor distinguishes two different relationships.
+$$\text{Sync} \subseteq \text{E-Sync} \subseteq \text{Async}$$
 
-###### Relationship between possible executions
+![[DS-L3-time-models.svg|480]]
 
-An execution is a possible sequence of events performed by the distributed system.
+###### Inclusion of Solvable Problems
+- Stronger system assumptions restrict the adversary (fewer bad executions can happen), making **more problems solvable**:
+  - Any algorithm that solves a problem in an **asynchronous** system works over *all* executions, so it automatically solves that problem in **eventually synchronous** and **synchronous** systems.
+  - Conversely, a problem solvable only under synchronous assumptions may be unsolvable when timing bounds are removed.
+- Therefore, the inclusion **reverses** for the sets of **solvable problems**:
 
-The three models allow different sets of executions:
+$$\text{Solvable}_{\text{Async}} \subseteq \text{Solvable}_{\text{E-Sync}} \subseteq \text{Solvable}_{\text{Sync}}$$
 
-$$
-\text{Sync}\subseteq\text{E-Sync}\subseteq\text{Async}
-$$
+![[DS-L3-slide-15-solvable-problems.png|550]]
 
-This means:
+---
 
-1. Every synchronous execution is also eventually synchronous, because the system can be considered stable starting at $T=0$.
-2. Every eventually synchronous execution is compatible with the asynchronous model, because that model imposes no timing bounds.
-3. The reverse implications do not hold in general.
+#### Why Time is Important in Distributed Systems
 
-An asynchronous system permits more possible executions because messages and processes can experience arbitrary delays.
+##### Ordering Events and Messages
+- In a single machine, all processes share one central clock and one memory space, making the order of operations unambiguous.
+- In a distributed system, there is **no global shared clock**, and variable network delays can cause messages or events to be observed in different orders at different nodes.
 
-![[DS-L3-time-models.svg|430]]
+![[DS-L3-message-ordering.svg|680]]
 
-*Existing explanatory diagram; reference: slide 14.*
+- Similarly, when two events $e_1$ and $e_2$ occur on different machines ($P_1$ and $P_2$), determining whether $e_1$ happened before $e_2$ requires either **synchronized physical clocks** or **logical causality tracking**.
 
-###### Relationship between solvable problems
+![[DS-L3-slide-19-event-ordering.png|550]]
 
-The relationship between solvable problems is reversed:
+##### Practical Applications of Time in Distributed Systems
+1. **TDMA (Time-Division Multiple Access)**:
+   - Multiple nodes share a single communication medium (radio frequency or shared bus) by dividing time into recurring frames of fixed **time slots**.
+   - Each process transmits only during its assigned slot; if clocks disagree on slot boundaries, transmissions overlap and collide.
 
-$$
-\begin{aligned}
-\text{Solvable}_{\text{Async}}
-&\subseteq \text{Solvable}_{\text{E-Sync}} \\
-&\subseteq \text{Solvable}_{\text{Sync}}.
-\end{aligned}
-$$
+![[DS-L3-tdma.svg|680]]
 
-![[DS-L3-slide-15-solvable-problems.png|520]]
+2. **Security Protocols and Certificates**:
+   - **SSL/TLS (X.509 certificates)** and **Kerberos authentication tickets** contain validity intervals (`notBefore`, `notAfter` or expiration timestamps) to prevent replay attacks and enforce revocation.
+3. **Distributed Logs, Debugging, and Financial Systems**:
+   - Reconstructing the sequence of crashes across microservices, enforcing causality in distributed databases, and ordering stock-market orders all depend on accurate event timestamps.
 
-*Source: Time in Distributed Systems I, physical PDF page 15; cropped from the slide.*
+---
 
-The intuition is:
+#### Physical Computer Clocks
 
-**The fewer possible executions an algorithm must handle, the more timing assumptions it can exploit, and the more problems it may be able to solve.**
+##### Timestamping Events
+- Each process $p_i$ has access to a local clock $C_i$.
+- Whenever $p_i$ wishes to measure time or **timestamp** a local event $e$ occurring at real (physical) time $t$, it reads the current value of its local software clock:
 
-Therefore:
+$$C(e) := C_i(t)$$
 
-- An asynchronous algorithm also works in an eventually synchronous or synchronous system, assuming the same other system conditions.
-- An eventually synchronous algorithm also works in a synchronous system.
-- A synchronous algorithm is not guaranteed to work in an asynchronous system.
+##### Hardware Clocks vs. Software Clocks
 
-For example, a synchronous algorithm might use a timeout to detect a possible process failure.
-- In an asynchronous system, a message could simply be delayed beyond that timeout, causing an incorrect decision.
+![[DS-L3-hw-sw-clock.svg|700]]
 
-**Important:** A synchronous system does not automatically introduce timeouts or generate errors.
-- It provides timing guarantees that algorithms may use.
+###### 1. Hardware Clock $H_i(t)$
+- Built from a **quartz crystal oscillator** kept under tension, which vibrates at a nearly constant resonant frequency when stimulated electrically.
+- Each oscillation decrements a counter register; when the counter reaches zero, it triggers a **hardware timer interrupt** and reloads, incrementing an internal tick counter.
+- $H_i(t)$ represents the total number of hardware ticks elapsed since a fixed reference origin.
 
-##### Why Is Time Important in Distributed Systems?
+###### 2. Software Clock $C_i(t)$
+- The operating system scales and shifts the raw hardware tick count $H_i(t)$ into human- or application-meaningful units (such as seconds, milliseconds, or nanoseconds since the Unix Epoch):
 
-*Slides, physical PDF pages 17–21.*
+$$C_i(t) = \alpha H_i(t) + \beta$$
 
-Many distributed applications need to measure time or determine the order of events.
+- **$\alpha$ (clock speed / rate factor)**: scales the tick duration and allows the OS to **slew** the clock (speed it up or slow it down smoothly).
+- **$\beta$ (clock offset)**: shifts the origin to match a chosen reference epoch or to adjust the reading.
 
-Examples discussed by the professor include:
+---
 
-- Ordering events in distributed applications.
-- Stock market operations and buy/sell orders.
-- Authentication protocols that use timestamps to help prevent replay attacks.
-- Network monitoring and measurements.
-- Sensor networks using Time Division Multiple Access (TDMA) to assign access to a shared communication medium.
+#### Clock Skew and Clock Drift
 
-A common approach is **timestamping**: associating a timestamp with each event.
+##### Definitions: Skew vs. Drift
 
-By comparing timestamps, processes may attempt to reconstruct a global history of the distributed system.
+> **Clock Skew**: The instantaneous difference between the readings of two clocks $C_i$ and $C_j$ at the **same real-time instant $t$**:
+> $$\text{Skew}(t) = |C_i(t) - C_j(t)|$$
 
-However, this approach requires sufficiently accurate clocks.
-- If clocks are not properly synchronized, timestamps may produce an incorrect ordering.
+> **Clock Drift**: The phenomenon whereby a physical clock counts time at a rate different from real physical time $t$, causing the error (and the skew between different clocks) to change continuously over time.
 
-![[DS-L3-slide-19-event-ordering.png|640]]
+##### Drift Rate $\frac{dH(t)}{dt}$
+- Plotting the hardware clock reading $H(t)$ against real physical time $t$ reveals three behaviors according to the derivative (slope) $\frac{dH(t)}{dt}$:
+  - **Perfect Clock**: $\frac{dH(t)}{dt} = 1$ (slope $45^\circ$; ticks at the exact rate of real time).
+  - **Fast Clock**: $\frac{dH(t)}{dt} > 1$ (accumulates more than $1$ unit of clock time per unit of real time).
+  - **Slow Clock**: $\frac{dH(t)}{dt} < 1$ (accumulates less than $1$ unit of clock time per unit of real time).
 
-*Source: Time in Distributed Systems I, physical PDF page 19; two space-time diagrams illustrating different global event orders.*
+![[DS-L3-clock-rates.svg|520]]
 
-This motivates the study of physical clocks and clock synchronization.
+##### Why Drift Rate is Not Constant
+- Even two crystals cut from the same quartz bar do not oscillate at the exact same frequency due to microscopic **manufacturing tolerances** and **crystal aging**.
+- Furthermore, a single clock's drift rate **changes dynamically with ambient temperature**, so one cannot simply measure a clock's error once and compensate for it permanently with a fixed constant.
 
-##### Hardware and Software Clocks
+![[DS-L3-slide-26-temperature-drift.png|550]]
 
-*Slides, physical PDF pages 22–23.*
+##### Correct Hardware Clock Specification
+- Manufacturers specify a **maximum drift rate $\rho$** (for typical quartz crystal oscillators, $\rho \approx 10^{-6}$, meaning the clock loses or gains at most $1\text{ }\mu\text{s}$ per second, or about $86.4\text{ ms}$ per day).
 
-###### Hardware clocks
+> **Correct Hardware Clock**: A hardware clock $H(t)$ is **correct** (non-faulty) if its instantaneous rate of change with respect to real time $t$ always remains within $[1 - \rho, 1 + \rho]$:
+> $$1 - \rho \le \frac{dH(t)}{dt} \le 1 + \rho$$
 
-Computers typically measure time using a hardware oscillator, often based on quartz.
+- Integrating this bound over any real-time interval $[t_0, t]$ (with $t \ge t_0$) yields the elapsed hardware time bound:
 
-A quartz oscillator generates electrical oscillations at an approximately regular frequency.
-
-By counting these oscillations, the computer can measure elapsed time.
-
-For example, suppose an oscillator generates 1,000 ticks per second:
-
-- 1,000 ticks correspond to approximately 1 second.
-- 2,000 ticks correspond to approximately 2 seconds.
-- 5,000 ticks correspond to approximately 5 seconds.
-
-The hardware clock of process $i$ is denoted by:
-
-$$
-H_i(t)
-$$
-
-In the mathematical representation used in the lecture notes:
-
-$$
-H_i(t)=\int_0^t h_i(\tau)\,d\tau
-$$
-
-Here, $h_i(\tau)$ represents the instantaneous rate at which the hardware clock advances, in the chosen clock units.
-
-The main idea is that **the hardware clock measures elapsed time by accumulating oscillator ticks**.
-
-However, the frequency is not perfectly stable, so hardware clocks can run faster or slower than real time.
-
-###### Software clocks
-
-The time displayed by an operating system is obtained by interpreting and adjusting the underlying hardware clock.
-
-The professor models the software clock as:
-
-$$
-\boxed{C_i(t)=\alpha H_i(t)+\beta}
-$$
-
-Where:
-
-- $H_i(t)$:
-  - Hardware clock of process $i$.
-- $C_i(t)$:
-  - Software clock of process $i$.
-- $\alpha$:
-  - Scaling factor that adjusts the clock's speed.
-- $\beta$:
-  - Offset used to adjust the displayed time.
-
-**Parameter $\alpha$ — Speed correction**
-
-Suppose the hardware clock is twice as fast as real time.
-
-For every 1 second of real time, it advances by 2 seconds.
-
-To compensate, we can choose:
-
-$$
-\alpha=\frac12
-$$
-
-If the hardware clock is instead twice as slow, we can choose:
-
-$$
-\alpha=2
-$$
-
-**Parameter $\beta$ — Offset correction**
-
-Suppose two computers display different times:
-
-- Computer $p_1$: 10:00
-- Computer $p_2$: 11:00
-
-They have an offset of one hour.
-
-Adjusting $\beta$ allows the software clock to change its displayed value without changing the underlying hardware clock's rate.
-
-Clock synchronization algorithms use adjustments to clock offsets and rates to keep software clocks aligned.
-
-##### Clock Skew and Drift Rate
-
-*Slides, physical PDF pages 24–26.*
-
-The professor introduces two important concepts: **skew** and **drift rate**.
-
-###### Clock skew
-
-Clock skew is the difference between the readings of two software clocks at the same real time $t$.
-
-$$
-\boxed{\operatorname{Skew}_{i,j}(t)=|C_i(t)-C_j(t)|}
-$$
-
-For example:
-
-- Computer $p_1$ displays 10:00.
-- Computer $p_2$ displays 10:05.
-
-Their clock skew is 5 minutes.
-
-If skew were the only problem, synchronization would be relatively simple: we could compare the clocks, correct their offsets, and keep them synchronized.
-
-Unfortunately, clocks can advance at different speeds.
-
-###### Clock drift rate
-
-Clock drift describes the deviation of a clock's advancement rate from the rate of real time.
-
-The professor uses the derivative:
-
-$$
-\frac{dH(t)}{dt}
-$$
-
-This tells us how quickly hardware time advances compared with real time.
-
-We distinguish three situations.
-
-**Perfect clock**
-
-$$
-\frac{dH(t)}{dt}=1
-$$
-
-The clock advances at exactly the same rate as real time.
-
-For every 1 hour of real time, it measures exactly 1 hour.
-
-**Fast clock**
-
-$$
-\frac{dH(t)}{dt}>1
-$$
-
-The clock advances faster than real time.
-
-For example, if its rate is 2, it measures 2 hours for every 1 hour of real time.
-
-**Slow clock**
-
-$$
-\frac{dH(t)}{dt}<1
-$$
-
-The clock advances slower than real time.
-
-For example, if its rate is 0.5, it measures only 30 minutes for every 1 hour of real time.
-
-![[DS-L3-clock-rates.svg|480]]
-
-*Existing explanatory diagram; reference: slide 25.*
-
-###### Why drift is a problem
-
-Suppose two clocks are synchronized perfectly at 10:00.
-
-If one clock advances slightly faster than the other, after several hours they will display different times.
-
-Therefore, even if the initial skew is zero, **clock drift can cause the skew to increase over time**.
-
-One might think that adjusting $\alpha$ once would solve the problem permanently.
-
-However, physical clocks do not necessarily maintain a constant rate.
-
-Their oscillation frequency can change due to environmental conditions, such as temperature.
-
-For example, changes in the temperature of a quartz crystal may alter its oscillation frequency.
-
-![[DS-L3-slide-26-temperature-drift.png|540]]
-
-*Source: Time in Distributed Systems I, physical PDF page 26; quartz frequency error varies with temperature.*
-
-A clock can therefore become faster or slower over time, making periodic correction necessary.
-
-##### Correct Hardware Clocks
-
-*Slides, physical PDF page 27.*
-
-Since physical clocks are not perfect, the professor introduces the concept of a **correct clock**.
-
-A hardware clock is correct if its advancement rate remains within a specified bound around the ideal rate.
-
-Let $\rho>0$ represent the maximum permitted rate deviation.
-
-A clock is correct if:
-
-$$
-\boxed{
-1-\rho\leq\frac{dH(t)}{dt}\leq1+\rho
-}
-$$
-
-This means the clock may run slightly faster or slower than real time, but it must always remain within the allowed interval.
-
-For an illustrative example, suppose:
-
-$$
-\rho=0.01
-$$
-
-Then:
-
-$$
-0.99\leq\frac{dH(t)}{dt}\leq1.01
-$$
-
-A clock with rate $1.005$:
-
-- Is **correct**, because its rate lies within the allowed interval.
-- Is **not perfect**, because its rate is different from 1.
-- Runs approximately 0.5% faster than real time.
-
-A correct clock can still accumulate time errors.
-- Correctness only guarantees that these errors grow within controlled bounds.
-
-For a real-time interval $[t_0,t_1]$, with $t_1>t_0$, slide 27 gives:
-
-$$
-\begin{aligned}
-(1-\rho)(t_1-t_0)
-&\leq H(t_1)-H(t_0) \\
-&\leq (1+\rho)(t_1-t_0).
-\end{aligned}
-$$
-
-The measured interval can differ from real elapsed time, but the rate bound limits the error.
-
-##### Key Concepts to Remember
-
-- **Asynchronous system:**
-  - No known upper bound on message delays or execution times
-- **Synchronous system:**
-  - Known timing bounds
-- **Eventually synchronous system:**
-  - Becomes permanently synchronous after an unknown time $T$
-- **Safety:**
-  - Something bad must never happen
-- **Liveness:**
-  - Something good must eventually happen
-- **Hardware clock $H_i(t)$:**
-  - Measures time using hardware oscillator ticks
-- **Software clock $C_i(t)$:**
-  - Adjustable clock obtained from hardware time
-- **Clock skew:**
-  - Difference between two clock readings at the same time
-- **Clock drift:**
-  - Deviation of a clock's advancement rate from real time
-- **Perfect clock:**
-  - Advances at exactly the rate of real time
-- **Correct clock:**
-  - Advances within the bounds $1-\rho$ and $1+\rho$
-
-The central ideas of this lecture are:
-
-**1.** Stronger timing assumptions make more problems solvable, but are harder to guarantee in real networks.
-
-**2.** Eventual synchrony allows algorithms to preserve safety at all times while relying on permanent stabilization to guarantee eventual progress.
-
-**3.** Physical clocks are imperfect.
-- Even after synchronization, drift can cause their readings to diverge again.
+$$(1 - \rho)(t - t_0) \le H(t) - H(t_0) \le (1 + \rho)(t - t_0)$$

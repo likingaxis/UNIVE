@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <rect width="820" height="300" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="410" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">Round-Based P Timing Lemma: Why Every BEAT Arrives in the Same Round r</text>
+
+  <!-- Sender pi timeline -->
+  <text x="45" y="88" font-size="14" font-weight="700" fill="#1d4ed8">pᵢ (Sender)</text>
+  <line x1="145" y1="83" x2="775" y2="83" stroke="#334155" stroke-width="2"/>
+
+  <!-- Sender enters round r at t -->
+  <line x1="250" y1="65" x2="250" y2="101" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="250" y="57" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">t (pᵢ enters round r &amp; sends BEAT)</text>
+
+  <!-- Receiver pj timeline -->
+  <text x="45" y="215" font-size="14" font-weight="700" fill="#0f172a">pⱼ (Receiver)</text>
+  <line x1="145" y1="210" x2="775" y2="210" stroke="#334155" stroke-width="2"/>
+
+  <!-- Skew window [t - delta, t + delta] for pj entering round r -->
+  <rect x="180" y="196" width="140" height="28" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <line x1="180" y1="190" x2="180" y2="230" stroke="#d97706" stroke-width="2"/>
+  <text x="180" y="246" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b45309">t − δ</text>
+  <text x="180" y="261" text-anchor="middle" font-size="10" fill="#b45309">(earliest r start)</text>
+
+  <line x1="320" y1="190" x2="320" y2="230" stroke="#d97706" stroke-width="2"/>
+  <text x="320" y="246" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b45309">t + δ</text>
+  <text x="320" y="261" text-anchor="middle" font-size="10" fill="#b45309">(latest r start)</text>
+
+  <!-- BEAT arrival window (t + d_min, t + d_max] -->
+  <rect x="375" y="194" width="195" height="32" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="472" y="214" text-anchor="middle" font-size="11.5" font-weight="700" fill="#15803d">BEAT Arrival Window</text>
+
+  <!-- Fastest BEAT arrow: t + d_min -->
+  <line x1="250" y1="83" x2="375" y2="192" stroke="#16a34a" stroke-width="2" marker-end="url(#arr-green)"/>
+  <text x="375" y="246" text-anchor="middle" font-size="11.5" font-weight="700" fill="#15803d">t + d_min</text>
+  <text x="375" y="261" text-anchor="middle" font-size="10" fill="#15803d">(&gt; t + δ: No early arrival)</text>
+
+  <!-- Slowest BEAT arrow: t + d_max -->
+  <line x1="250" y1="83" x2="570" y2="192" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)"/>
+  <text x="570" y="246" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d4ed8">t + d_max</text>
+  <text x="570" y="261" text-anchor="middle" font-size="10" fill="#1d4ed8">(&lt; t − δ + T: No late arrival)</text>
+
+  <!-- Earliest end of round r on pj: t - delta + T -->
+  <line x1="700" y1="185" x2="700" y2="230" stroke="#7e22ce" stroke-width="2.5"/>
+  <text x="700" y="246" text-anchor="middle" font-size="11.5" font-weight="700" fill="#7e22ce">t − δ + T</text>
+  <text x="700" y="261" text-anchor="middle" font-size="10" fill="#7e22ce">(earliest r+1 start on pⱼ)</text>
+
+  <text x="410" y="286" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Because t + δ &lt; t + d_min ≤ t + d_max &lt; t − δ + T, the BEAT is guaranteed to arrive while pⱼ is in round r.</text>
+</svg>

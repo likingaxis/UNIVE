@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 210" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="780" height="210" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="390" y="32" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">TDMA (Time-Division Multiple Access): Synchronized Time Slots</text>
+
+  <!-- Frame 1 -->
+  <text x="225" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">TDMA Frame k</text>
+  <rect x="65" y="74" width="80" height="50" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="105" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Slot 1 (P₁)</text>
+
+  <rect x="145" y="74" width="80" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="185" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">Slot 2 (P₂)</text>
+
+  <rect x="225" y="74" width="80" height="50" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="265" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Slot 3 (P₃)</text>
+
+  <rect x="305" y="74" width="80" height="50" rx="6" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+  <text x="345" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#7e22ce">Slot 4 (P₄)</text>
+
+  <!-- Frame 2 -->
+  <text x="555" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">TDMA Frame k + 1</text>
+  <rect x="395" y="74" width="80" height="50" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="435" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Slot 1 (P₁)</text>
+
+  <rect x="475" y="74" width="80" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="515" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">Slot 2 (P₂)</text>
+
+  <rect x="555" y="74" width="80" height="50" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="595" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Slot 3 (P₃)</text>
+
+  <rect x="635" y="74" width="80" height="50" rx="6" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+  <text x="675" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#7e22ce">Slot 4 (P₄)</text>
+
+  <!-- Time arrow -->
+  <line x1="55" y1="150" x2="725" y2="150" stroke="#0f172a" stroke-width="2"/>
+  <polygon points="725,145 735,150 725,155" fill="#0f172a"/>
+  <text x="390" y="175" text-anchor="middle" font-size="12" fill="#334155">Shared medium access without collisions requires all nodes to agree on when each time slot starts and ends.</text>
+</svg>

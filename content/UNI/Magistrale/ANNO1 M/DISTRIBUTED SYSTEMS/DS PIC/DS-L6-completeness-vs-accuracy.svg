@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 245" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <rect width="800" height="245" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="400" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">The Two Dimensions of Failure Detection: Completeness vs. Accuracy</text>
+
+  <!-- Left Panel: Completeness -->
+  <rect x="25" y="48" width="365" height="175" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="207" y="72" text-anchor="middle" font-size="14" font-weight="700" fill="#15803d">Completeness (No Missed Crashes)</text>
+
+  <rect x="147" y="86" width="120" height="32" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
+  <text x="207" y="107" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">p₃ crashes</text>
+
+  <path d="M 207 118 V 136 M 85 136 H 330 M 85 136 V 150 M 207 136 V 150 M 330 136 V 150" fill="none" stroke="#475569" stroke-width="1.6"/>
+
+  <rect x="40" y="150" width="90" height="42" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="85" y="168" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f172a">Correct p₀</text>
+  <text x="85" y="184" text-anchor="middle" font-size="10.5" font-weight="600" fill="#15803d">Detects p₃ ✓</text>
+
+  <rect x="162" y="150" width="90" height="42" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="207" y="168" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f172a">Correct p₁</text>
+  <text x="207" y="184" text-anchor="middle" font-size="10.5" font-weight="600" fill="#15803d">Detects p₃ ✓</text>
+
+  <rect x="285" y="150" width="90" height="42" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="330" y="168" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f172a">Correct p₂</text>
+  <text x="330" y="184" text-anchor="middle" font-size="10.5" font-weight="600" fill="#15803d">Detects p₃ ✓</text>
+
+  <text x="207" y="211" text-anchor="middle" font-size="11" fill="#334155">Every crashed process is eventually detected by all correct processes.</text>
+
+  <!-- Right Panel: Accuracy -->
+  <rect x="410" y="48" width="365" height="175" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="592" y="72" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">Accuracy (No False Alarms)</text>
+
+  <rect x="435" y="96" width="130" height="50" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="500" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Alive Process p₁</text>
+  <text x="500" y="135" text-anchor="middle" font-size="10.5" fill="#475569">(slow / delayed link)</text>
+
+  <rect x="620" y="96" width="130" height="50" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="685" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">Observer p₀</text>
+  <text x="685" y="135" text-anchor="middle" font-size="10.5" font-weight="700" fill="#dc2626">Must NOT trigger Crash(p₁)</text>
+
+  <line x1="565" y1="121" x2="620" y2="121" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="592" y="175" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a8a">Strong Accuracy (P): Zero false detections ever.</text>
+  <text x="592" y="195" text-anchor="middle" font-size="11.5" font-weight="600" fill="#7e22ce">Eventual Strong Accuracy (◊P): No false suspicions eventually.</text>
+</svg>
