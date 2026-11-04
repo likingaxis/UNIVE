@@ -1,7 +1,5 @@
 ###### OGGI
-- [ ] distributed 6+7+8
-- [ ] distributed 12
-
+- continua con astra+ prompt swers
 ##### IN GENERALE
 - [ ] crittografia 1
 - [ ] crittografia 2
