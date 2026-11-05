@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="740" viewBox="0 0 1080 740" role="img" aria-labelledby="title desc">
+<title id="title">Hidden terminals and RTS CTS reservation</title>
+<desc id="desc">A and C can each communicate with B but cannot hear one another. A sends RTS to B, B sends CTS that both A and C can hear, A sends data and B sends ACK. C defers for the reserved interval. Time runs downward and the sequence is not to scale.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#2463a0"/></marker><marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#287361"/></marker></defs>
+<rect width="1080" height="740" rx="18" fill="#f8fafc"/>
+<g font-family="Arial, sans-serif" fill="#17324b">
+<text x="40" y="48" font-size="29" font-weight="700">Hidden terminals: the receiver has a different view</text>
+<g fill="#dceafa" stroke="#2463a0" stroke-width="2"><circle cx="210" cy="137" r="35"/><circle cx="540" cy="137" r="35"/><circle cx="870" cy="137" r="35"/></g>
+<g text-anchor="middle" font-size="27" font-weight="700"><text x="210" y="147">A</text><text x="540" y="147">B</text><text x="870" y="147">C</text></g>
+<path d="M253 137H497" stroke="#2463a0" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/><path d="M583 137H827" stroke="#2463a0" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="375" y="119" text-anchor="middle" font-size="18">can hear each other</text><text x="705" y="119" text-anchor="middle" font-size="18">can hear each other</text>
+<text x="540" y="204" text-anchor="middle" font-size="21" fill="#a14d22">A and C cannot hear each other, but both can interfere at B.</text>
+<rect x="40" y="231" width="1000" height="466" rx="12" fill="#ffffff" stroke="#d3dee7"/>
+<g text-anchor="middle" font-size="22" font-weight="700"><text x="210" y="271">A: sender</text><text x="540" y="271">B: receiver / AP</text><text x="870" y="271">C: hidden sender</text></g>
+<path d="M210 289V644 M540 289V644 M870 289V644" stroke="#98aab8" stroke-width="2" stroke-dasharray="6 6"/>
+<path d="M210 312L540 347" stroke="#2463a0" stroke-width="3" marker-end="url(#arrow)"/><text x="337" y="316" font-size="21">RTS</text>
+<path d="M540 381L210 416" stroke="#287361" stroke-width="3" marker-end="url(#green)"/><path d="M540 381L870 416" stroke="#287361" stroke-width="3" marker-end="url(#green)"/>
+<text x="340" y="384" font-size="21" fill="#287361">CTS</text><text x="705" y="384" font-size="21" fill="#287361">CTS</text>
+<rect x="780" y="432" width="180" height="165" rx="8" fill="#fff1df" stroke="#b35419"/>
+<g text-anchor="middle" font-size="20" fill="#8a451c"><text x="870" y="469">C hears B.</text><text x="870" y="501" font-weight="700">Defer:</text><text x="870" y="531">B is reserved</text><text x="870" y="559">for A's exchange.</text></g>
+<path d="M210 454L540 499" stroke="#2463a0" stroke-width="6" marker-end="url(#arrow)"/><text x="327" y="457" font-size="22" font-weight="700">DATA</text>
+<path d="M540 550L210 585" stroke="#287361" stroke-width="3" marker-end="url(#green)"/><text x="338" y="551" font-size="21">ACK</text>
+<text x="566" y="367" font-size="17">SIFS</text><text x="230" y="437" font-size="17">SIFS</text><text x="565" y="531" font-size="17">SIFS</text>
+<path d="M103 304V624" stroke="#627b90" stroke-width="2" marker-end="url(#arrow)"/><text x="74" y="651" font-size="18">time</text>
+<text x="540" y="674" text-anchor="middle" font-size="19">RTS can still collide. This is a successful exchange, not drawn to scale.</text>
+</g></svg>

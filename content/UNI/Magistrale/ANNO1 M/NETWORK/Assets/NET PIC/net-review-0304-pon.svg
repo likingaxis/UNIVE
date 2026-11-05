@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="630" viewBox="0 0 1080 630" role="img" aria-labelledby="title desc">
+<title id="title">Passive optical network: shared feeder and scheduled upstream</title>
+<desc id="desc">An active OLT connects through a passive splitter to three active ONUs. Downstream and upstream share the fibre using different wavelengths. The OLT schedules upstream bursts A, B and C with guard intervals between them.</desc>
+<defs><marker id="blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#2463a0"/></marker><marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#b35419"/></marker></defs>
+<rect width="1080" height="630" rx="18" fill="#f8fafc"/>
+<g font-family="Arial, sans-serif" fill="#17324b">
+<text x="40" y="48" font-size="29" font-weight="700">PON: share the fibre, coordinate the senders</text>
+<text x="40" y="79" font-size="19">The distribution section is passive; the endpoint equipment is powered.</text>
+<path d="M230 238H465 M535 238L800 144 M535 238H800 M535 238L800 332" fill="none" stroke="#8ca2b3" stroke-width="7"/>
+<rect x="50" y="193" width="180" height="90" rx="10" fill="#dceafa" stroke="#2463a0" stroke-width="2"/>
+<text x="140" y="230" text-anchor="middle" font-size="26" font-weight="700">OLT</text><text x="140" y="260" text-anchor="middle" font-size="19">Provider side</text>
+<path d="M465 205L535 238L465 271Z" fill="#e4e9ef" stroke="#627b90" stroke-width="2"/>
+<text x="490" y="300" text-anchor="middle" font-size="20">Passive splitter</text>
+<g fill="#e2f2ed" stroke="#287361" stroke-width="2"><rect x="800" y="109" width="220" height="70" rx="10"/><rect x="800" y="203" width="220" height="70" rx="10"/><rect x="800" y="297" width="220" height="70" rx="10"/></g>
+<g text-anchor="middle" font-size="23" font-weight="700"><text x="910" y="153">ONU A</text><text x="910" y="247">ONU B</text><text x="910" y="341">ONU C</text></g>
+<path d="M255 205H427" stroke="#2463a0" stroke-width="3" marker-end="url(#blue)"/><text x="250" y="158" font-size="19" fill="#2463a0">Downstream: OLT to ONUs</text><text x="250" y="184" font-size="18">one wavelength / one sender</text>
+<path d="M427 272H255" stroke="#b35419" stroke-width="3" marker-end="url(#orange)"/><text x="250" y="332" font-size="19" fill="#b35419">Upstream: ONUs to OLT</text><text x="250" y="359" font-size="18">another wavelength / shared channel</text>
+<rect x="40" y="404" width="1000" height="186" rx="12" fill="#ffffff" stroke="#d3dee7"/>
+<text x="64" y="440" font-size="23" font-weight="700">Upstream at the OLT: scheduled arrivals</text>
+<g stroke="#287361" stroke-width="1.5" fill="#e2f2ed"><rect x="100" y="462" width="220" height="52" rx="5"/><rect x="344" y="462" width="290" height="52" rx="5"/><rect x="658" y="462" width="260" height="52" rx="5"/></g>
+<g text-anchor="middle" font-size="21"><text x="210" y="495">A's burst</text><text x="489" y="495">B's burst</text><text x="788" y="495">C's burst</text></g>
+<path d="M90 535H980" stroke="#627b90" stroke-width="2" marker-end="url(#blue)"/><text x="960" y="564" font-size="18">time</text>
+<path d="M332 450V514 M646 450V514" fill="none" stroke="#b35419" stroke-width="1.5" stroke-dasharray="3 3"/><text x="480" y="574" text-anchor="middle" font-size="19">Small gaps between bursts are guard intervals.</text>
+</g></svg>

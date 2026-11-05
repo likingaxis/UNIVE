@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="600" viewBox="0 0 1080 600" role="img" aria-labelledby="title desc">
+<title id="title">Indirect and direct routing for mobility</title>
+<desc id="desc">Indirect routing sends user data from the correspondent through the home gateway to the mobile's visited network. Direct routing first looks up the current visited location through the home mechanism, then sends data towards the mobile directly. A new visited location requires an updated binding.</desc>
+<defs><marker id="blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#2463a0"/></marker><marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#b35419"/></marker></defs>
+<rect width="1080" height="600" rx="18" fill="#f8fafc"/>
+<g font-family="Arial, sans-serif" fill="#17324b">
+<text x="40" y="48" font-size="29" font-weight="700">Mobility routing: stable contact, changing location</text>
+<text x="40" y="80" font-size="19">Conceptual models: compare the data path and who needs location information.</text>
+<g fill="#ffffff" stroke="#d3dee7"><rect x="30" y="105" width="495" height="410" rx="12"/><rect x="555" y="105" width="495" height="410" rx="12"/></g>
+<g text-anchor="middle" font-size="25" font-weight="700"><text x="278" y="145">Indirect routing</text><text x="803" y="145">Direct routing</text></g>
+<g fill="#fff1df" stroke="#b35419" stroke-width="2"><rect x="185" y="180" width="185" height="65" rx="8"/><rect x="710" y="180" width="185" height="65" rx="8"/></g>
+<g text-anchor="middle" font-size="20"><text x="278" y="207">Home gateway</text><text x="278" y="232">forwards data</text><text x="803" y="207">Home mechanism</text><text x="803" y="232">location lookup</text></g>
+<g fill="#dceafa" stroke="#2463a0" stroke-width="2"><rect x="55" y="350" width="175" height="70" rx="8"/><rect x="320" y="350" width="175" height="70" rx="8"/><rect x="580" y="350" width="175" height="70" rx="8"/><rect x="845" y="350" width="175" height="70" rx="8"/></g>
+<g text-anchor="middle" font-size="19"><text x="143" y="392">Correspondent</text><text x="407" y="379">Mobile in</text><text x="407" y="405">visited network</text><text x="667" y="392">Correspondent</text><text x="932" y="379">Mobile in</text><text x="932" y="405">visited network</text></g>
+<path d="M151 350L233 248 M320 245L398 345" fill="none" stroke="#2463a0" stroke-width="4" marker-end="url(#blue)"/>
+<text x="92" y="280" font-size="18">data to home</text><text x="365" y="270" font-size="18">tunnel / forward</text>
+<path d="M680 347L760 248" fill="none" stroke="#b35419" stroke-width="2.5" stroke-dasharray="7 5" marker-start="url(#orange)" marker-end="url(#orange)"/>
+<text x="588" y="281" font-size="18" fill="#984815">lookup + reply</text>
+<path d="M757 385H839" fill="none" stroke="#2463a0" stroke-width="4" marker-end="url(#blue)"/><text x="798" y="335" text-anchor="middle" font-size="18">data</text>
+<g text-anchor="middle" font-size="19"><text x="278" y="461">Correspondent uses the stable home address.</text><text x="278" y="489">Possible detour through the home network.</text><text x="803" y="461">Correspondent learns the visited locator.</text><text x="803" y="489">Shorter path; location updates are needed.</text></g>
+<text x="540" y="556" text-anchor="middle" font-size="20">Data delivery towards the mobile is shown. Return-path policies can differ.</text>
+</g></svg>
