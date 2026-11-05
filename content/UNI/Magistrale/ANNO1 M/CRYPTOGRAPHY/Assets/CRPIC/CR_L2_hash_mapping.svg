@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="244" viewBox="0 0 620 244" role="img" aria-labelledby="title desc">
+<title id="title">Illustrative hash mapping</title><desc id="desc">An input message HELLO passes through a public hash function h and produces the output value 1010. This illustrates a mapping, not a specific hash algorithm or a secure MAC.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#53667b"/></marker></defs>
+<rect width="620" height="244" rx="16" fill="#f6f8fb"/>
+<g font-family="Segoe UI, sans-serif" fill="#243244" text-anchor="middle">
+<text x="310" y="31" font-size="17" font-weight="600">From a message to an output value</text>
+<rect x="24" y="70" width="168" height="96" rx="12" fill="#ddeafa" stroke="#7b9ec7"/>
+<text x="108" y="99" font-size="13">Input message</text><text x="108" y="132" font-size="20" font-weight="600">m = “HELLO”</text>
+<rect x="244" y="70" width="132" height="96" rx="12" fill="#e2f0e6" stroke="#7aa387"/>
+<text x="310" y="101" font-size="13">Hash function</text><text x="310" y="137" font-size="30" font-style="italic">h</text>
+<rect x="428" y="70" width="168" height="96" rx="12" fill="#f6e8d5" stroke="#c39c68"/>
+<text x="512" y="99" font-size="13">Output value</text><text x="512" y="132" font-size="20" font-weight="600">τ = 1010</text>
+<text x="310" y="205" font-size="12">Illustrative mapping; not a specific hash algorithm or a secure MAC.</text>
+</g><path d="M194 118 H239" stroke="#53667b" stroke-width="2" marker-end="url(#arrow)"/><path d="M378 118 H423" stroke="#53667b" stroke-width="2" marker-end="url(#arrow)"/></svg>

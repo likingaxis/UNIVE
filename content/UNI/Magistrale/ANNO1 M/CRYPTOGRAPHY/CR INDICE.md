@@ -22,6 +22,8 @@ Preparato il 5 novembre 2026 su richiesta dello studente. Per la chat di studio 
 - [Appunti di Davide — lezione 2](<Assets/APPUNTI_DAVIDE/lez. 2.md>): copia invariata dalla [fonte](https://github.com/DavideLights/appunti/blob/main/1o%20anno%20M/cockgraphy/lez.%202.md), con aggiunte `#gemini`. Contengono anche suggerimenti/soluzioni agli esercizi: il tutor deve lasciar tentare prima lo studente. Immagini incorporate non incluse; anno accademico non verificato. L'esempio finale di hashing affine va oltre le slide della lezione 2.
 - [Dispensa di Simone Bianco — supporto facoltativo](Assets/MATERIALE_STUDENTI/Cryptography.pdf): p. 8 stampata (p. 11 del PDF), dimostrazione del limite di Shannon; §2.2, pp. 8–10 stampate (pp. 11–13 del PDF), MAC e indipendenza a coppie. La dispensa tratta anche MAC t-time: per questa lezione concentrarsi sul caso one-time. La costruzione affine a p. 11 stampata è un eventuale approfondimento successivo. Fonte secondaria da confrontare con le slide, senza assumerne l'accuratezza integrale.
 
+[Appunti della lezione 2](<CR LESSON 2.md>): studio riferito come concluso il 5 novembre 2026; revisione editoriale completata. La nota segnala di ripassare hashing e indipendenza a coppie prima della lezione 3.
+
 Ordine della lezione:
 
 1. Pagine 1–2: limite di Shannon e dimostrazione per assurdo.
