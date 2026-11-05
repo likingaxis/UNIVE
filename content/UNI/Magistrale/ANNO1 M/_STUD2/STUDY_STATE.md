@@ -4,7 +4,7 @@
 
 - **Program / year:** MSc Cybersecurity, Sapienza, 2026/27. Active courses: Distributed Systems, Cryptography and Network Infrastructures. Statistics is excluded from this active plan by user instruction.
 - **Objective:** recover essential backlog while sustaining useful attendance, independent practice and winter-exam preparation; follow [STUDY_PLAN.md](STUDY_PLAN.md) and [AGENTS.md](../AGENTS.md).
-- **Last actual state update:** 2026-11-04 (Europe/Rome), first pilot calendar agreed for 5–11 November and experimental budget updated to 14 hours from the student's reported constraints; attendance decisions unchanged. Memories are dated 2026-11-04; this is the latest recorded evidence, not proof that no unrecorded progress has occurred. Confirm relevant changes at the next study session.
+- **Last actual state update:** 2026-11-05 (Europe/Rome), lecture-1 study/draft completion confirmed, with a very rough 10:00–12:00 session window; lesson 2 now starting as an additional activity. Independent check and net active minutes pending; possible effects on today's other blocks remain to reconcile. First pilot calendar agreed on 2026-11-04 for 5–11 November, with experimental 14-hour budget; attendance decisions unchanged. Detailed evidence dates are maintained in each course memory.
 - **Semester-end target:** 2026-12-22, provisional internal planning target; official calendar not verified. No learning achievement is inferred from implementing this state.
 
 ## B. Current course status
@@ -12,7 +12,7 @@
 | Course / detailed memory | Latest recorded situation | Active priority | Next meaningful action |
 | --- | --- | --- | --- |
 | [Distributed Systems](<MEMORIES/DISTRIBUTED_SYSTEMS.md>) | Attending; complete early notes do not establish independent understanding; algorithmic work is difficult, user-reported. | Recover lectures 8–9 while protecting independent exercise practice. | Select a small prerequisite check and one recovery block or FIFO exercise attempt; record outcome and help used. |
-| [Cryptography](<MEMORIES/CRYPTOGRAPHY.md>) | Temporarily not attending; systematic foundation recovery pending; local draft exists. | Build foundations before resuming useful attendance. | Use lecture-1 draft and current-year material for one SKE/perfect-secrecy block plus an independent check. |
+| [Cryptography](<MEMORIES/CRYPTOGRAPHY.md>) | Temporarily not attending; lesson-1 study/draft confirmed complete and editorial cleanup done; lesson 2 now starting. Independent check/report pending. | Build foundations before resuming useful attendance. | Continue lesson 2 in conceptual blocks; retain the pending lesson-1 check and reconcile today's other blocks at the next stopping point. |
 | [Network Infrastructures](<MEMORIES/NETWORK.md>) | Attending; theory generally understood and several labs completed, user-reported; latest outstanding lab unidentified. | Maintain current work and recover the relevant lab. | Identify the outstanding assignment and any actual deadline, then scope a practical attempt. |
 
 ### Recurring timetable and attendance
@@ -27,11 +27,12 @@ No active-course time overlaps appear in that timetable. Separate lab slots and 
 
 ### Pilot agenda — 5–11 November 2026
 
-User-agreed rolling seven-day pilot, **Europe/Rome**; not a permanent Monday–Sunday template. All study blocks are intentions; none is completed. Actual active minutes are **unknown until reported**, not zero. Estimates below are rough targets within the reserved windows; breaks are excluded from actual active time. Adapt later work to observed progress rather than forcing the estimate.
+User-agreed rolling seven-day pilot, **Europe/Rome**; not a permanent Monday–Sunday template. Statuses below reflect only confirmed reports; a planned window or its elapsed time does not establish completion. Actual active minutes are **unknown until reported**, not zero. Estimates below are rough targets within the reserved windows; breaks are excluded from actual active time. Adapt later work to observed progress rather than forcing the estimate.
 
 | Day/date | Time | Course / activity and specific objective | Expected outcome | Est. active time | Status | Actual active time |
 | --- | --- | --- | --- | --- | --- | --- |
-| Thu 5 Nov | 09:30–11:30 | Crypto theory: begin lecture 1, SKE/perfect secrecy; CR-L1 draft and CR-S2 current-year slides. ChatGPT guided study, then own explanation/check. | Initial explanation and assessed gaps. | 120 min | Planned | Not reported |
+| Thu 5 Nov | 09:30–11:30 planned; approximately 10:00–12:00 reported | Crypto theory: begin lecture 1, SKE/perfect secrecy; CR-L1 draft and CR-S2 current-year slides. ChatGPT guided study, then own explanation/check. | Initial explanation and assessed gaps. | 120 min | Partial — study/draft confirmed complete; independent check/report pending | Approx. 120 min session, very uncertain; net active time unknown |
+| Thu 5 Nov | Start/end not supplied | Crypto theory: lesson 2, additional activity chosen by the student; proceed in conceptual blocks from the prepared material. | First lesson-2 block and any gaps/attempts to report. | Not yet estimated | In progress — user-reported start | Not reported |
 | Thu 5 Nov | 12:00–13:00 | Network lab preparation: identify latest outstanding assignment using NI-L2 and relevant professor instructions; check deadline. | Named task, material needs and deadline status. | 60 min | Planned | Not reported |
 | Thu 5 Nov | 14:00–15:30 | DS recovery: begin lecture 8 using DS-S1 official material; check prerequisites as needed. | First recovery block and prerequisite gaps recorded. | 90 min | Planned | Not reported |
 | Fri 6 Nov | 14:00–15:00 | Network practical: work on Thursday's identified lab or necessary prerequisites. | Concrete attempt, observed behavior and remaining obstacles. | 60 min | Tentative — energy/travel | Not reported |
@@ -54,15 +55,17 @@ Source IDs refer to the linked course memories in §B. Inspect those memories an
 
 Crypto Tuesday 08:00–10:00 remains scheduled but not attended. Preserve the rest of Saturday and Sunday afternoon/evening. No new attendance is recorded merely by listing a class.
 
+**Current-day deviation (5 Nov):** student reports finishing Crypto lesson 1 around 12:00 after a very approximate 10:00 start and now proceeding with lesson 2. Its exact timing and scope are unknown. The 12:00–13:00 Network block may be affected; its execution is unreported. The 14:00–15:30 DS block remains planned, subject to an actual overlap report. No automatic transfer of these tasks or reduction of future Crypto blocks is inferred.
+
 **Pilot focus:** start Crypto foundations, begin DS lecture-8 recovery with independent exercise reasoning, and identify/work on the outstanding Network lab. If Friday is impractical or the buffer is unnecessary, reduce actual workload or explicitly replan; there is no automatic catch-up debt.
 
 ## D. Study capacity
 
-**Experimental assumption: approximately 14 hours for this seven-day pilot**, excluding university lectures/labs, commuting and breaks: **Crypto 6 h + DS 5 h + Network 2 h + flexible buffer 1 h = 14 h**. This includes Friday's tentative hour and Sunday's optional buffer; it is planned capacity, not promised active time. The earlier 11–12 hours is only a lower-intensity fallback. This is neither a quota nor verified availability. No measured active-study durations are recorded yet. Calibrate from actual or user-reported effort and outcomes; elapsed chat time is not a reliable study timer.
+**Experimental assumption: approximately 14 hours for this seven-day pilot**, excluding university lectures/labs, commuting and breaks: **Crypto 6 h + DS 5 h + Network 2 h + flexible buffer 1 h = 14 h**. This includes Friday's tentative hour and Sunday's optional buffer; it is planned capacity, not promised active time. The earlier 11–12 hours is only a lower-intensity fallback. This is neither a quota nor verified availability. One very rough Crypto session window is now reported; no reliable measurement of net active-study minutes is recorded yet. Calibrate from actual or user-reported effort and outcomes; elapsed chat time is not a reliable study timer.
 
 **User-reported constraints (2026-11-04):** generally start computer work 09:00–09:30 and study until about 17:00; Tuesday/Thursday are main study days. Avoid extra Monday/Wednesday study and independent study before an attended late lecture. Commute about 1 h each way; remain on campus between classes with 30 min lunch plus 20–30 min rest. Prefer weekend mornings and preserve late afternoons/evenings; Friday afternoon is conditional on energy/travel. Statistics is excluded. These preferences authorize this pilot, not filling every available gap. If Crypto attendance resumes, reassess capacity and scheduling.
 
-**Calibration:** after meaningful sessions, retain estimated versus student-reported active time, completed work/results and material difficulties in the course activity record. Ask briefly if active time is missing; otherwise keep it unknown. Estimate separately by course and activity type; no observations yet support averages. Use rough, uncertain estimates initially and adjust future blocks from actual experience, not unrelated tasks.
+**Calibration:** after meaningful sessions, retain estimated versus student-reported active time, completed work/results and material difficulties in the course activity record. Ask briefly if active time is missing; otherwise keep it unknown. Estimate separately by course and activity type; one low-confidence Crypto theory/proof/drafting session is insufficient for averages or extrapolation to later lessons. Use rough, uncertain estimates initially and adjust future blocks from actual experience, not unrelated tasks.
 
 ## E. Upcoming deadlines and events
 

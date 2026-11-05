@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="242" viewBox="0 0 340 242" role="img" aria-labelledby="title desc">
+<title id="title">XOR truth table</title><desc id="desc">XOR is zero for equal inputs and one for different inputs: 0 XOR 0 = 0, 0 XOR 1 = 1, 1 XOR 0 = 1, 1 XOR 1 = 0.</desc>
+<rect width="340" height="242" rx="14" fill="#f6f8fb"/>
+<g font-family="Segoe UI, sans-serif" text-anchor="middle" fill="#243244">
+<text x="170" y="29" font-size="18" font-weight="600">XOR</text>
+<rect x="16" y="44" width="308" height="34" rx="7" fill="#ddeafa"/>
+<g font-size="14" font-weight="600"><text x="67" y="66">a</text><text x="170" y="66">b</text><text x="273" y="66">a ⊕ b</text></g>
+<rect x="16" y="116" width="308" height="36" rx="5" fill="#e2f0e6"/><rect x="16" y="154" width="308" height="36" rx="5" fill="#e2f0e6"/>
+<g font-size="16"><text x="67" y="103">0</text><text x="170" y="103">0</text><text x="273" y="103">0</text><text x="67" y="141">0</text><text x="170" y="141">1</text><text x="273" y="141" font-weight="600">1</text><text x="67" y="179">1</text><text x="170" y="179">0</text><text x="273" y="179" font-weight="600">1</text><text x="67" y="217">1</text><text x="170" y="217">1</text><text x="273" y="217">0</text></g></g></svg>
