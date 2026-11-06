@@ -4,7 +4,7 @@
 
 
 
-Last update: **2026-11-06**, Europe/Rome: lesson-8 study completed and understood by student report, 60 active minutes; requested note cleanup and diagrams completed. Independent verification remains pending; lesson 9 was last reported in progress. Initialized with explicit authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md). Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities. Evidence labels: **Verified locally**, **Verified official**, **User-reported**, **Provisional**, **Unknown**, as defined in the plan.
+Last update: **2026-11-06**, Europe/Rome: lesson-8 study completed and understood by student report, 60 active minutes; requested note cleanup and diagrams completed. Lesson 9 is partially studied and paused, with a reported intention to resume later. Independent verification remains pending. Initialized with explicit authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md). Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities. Evidence labels: **Verified locally**, **Verified official**, **User-reported**, **Provisional**, **Unknown**, as defined in the plan.
 
 
 
@@ -163,7 +163,7 @@ Official publication inventory, dates and current endpoint are unknown. Local ma
 
 
 
-**Current study, user-reported 2026-11-06:** lesson 8 has now been studied successfully in one hour, and the student supplied an updated note for cleanup. Record lesson-8 study completion and understanding as **self-reported**. Lesson 9 was last reported in progress; no completion or duration for lesson 9 is established. Codex has not read the tutor conversation or received a brief tutor report.
+**Current study, user-reported 2026-11-06:** lesson 8 has now been studied successfully in one hour, and the student supplied an updated note for cleanup. Record lesson-8 study completion and understanding as **self-reported**. The student has stopped lesson 9 and intends to continue later. The reported time “6:25” is interpreted provisionally as **18:25, Europe/Rome**, given the afternoon context. Lesson 9 is **partial / paused**; original estimate, start time, active minutes, exact covered topics, difficulties and independent outcomes remain unknown. Study was in another chat; assistance intensity is unknown. Resumption is not scheduled. Codex has not read the tutor conversation or received a brief tutor report.
 
 ### Lesson 8 — theory activity record, 6 November 2026
 
@@ -262,7 +262,7 @@ When substantial study/exam planning needs alignment, check identified official 
 
 
 
-**Current student-selected theory task (2026-11-06):** lesson 8 / module 2 is studied and understood by student report (60 active minutes), and its requested editorial cleanup is complete. Lesson 9 was last reported in progress in another chat; completion/time and detailed source mapping remain unassessed. Next useful lesson-8 action is a short unaided recall of the flagged terminology and routing/physical-layer distinctions, then a brief ChatGPT report if available. Preserve the established workflow: study and personal notes with ChatGPT, followed by requested Codex cleanup, evidence updates and necessary planning adjustments. The global agenda now separates completed lesson-8 theory, lesson-9 study in progress and the still-unreported practical block. The outstanding lab remains unidentified.
+**Current student-selected theory task (2026-11-06):** lesson 8 / module 2 is studied and understood by student report (60 active minutes), and its requested editorial cleanup is complete. Lesson 9 is partially studied and paused; the student will resume later, with no new time commitment supplied. At resumption, recover the last covered topic rather than infer completion from elapsed time. Next useful lesson-8 action is a short unaided recall of the flagged terminology and routing/physical-layer distinctions, then a brief ChatGPT report if available. Preserve the established workflow: study and personal notes with ChatGPT, followed by requested Codex cleanup, evidence updates and necessary planning adjustments. The global agenda separates completed lesson-8 theory, paused lesson-9 study and the still-unreported practical block. The outstanding lab remains unidentified.
 
 
 
