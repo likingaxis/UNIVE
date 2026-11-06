@@ -1,6 +1,6 @@
 # Distributed Systems — Course Memory
 
-Last update: **2026-11-04** (Europe/Rome). Initialized under explicit Phase 1, Step 3 authorization. This is a state/evidence index, not lecture notes. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md) for global rules. Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities; unrelated course memories are not needed for a DS-only task.
+Last update: **2026-11-06** (Europe/Rome): official lecture-log snapshot rechecked for the cross-course planning review; no new DS study outcome reported. Initialized under explicit Phase 1, Step 3 authorization. This is a state/evidence index, not lecture notes. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md) for global rules. Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities; unrelated course memories are not needed for a DS-only task.
 
 Evidence labels retain the plan's meanings: **Verified locally**, **Verified official**, **User-reported**, **Provisional**, **Unknown**. File presence verifies neither completeness nor learning. Dates below describe the scope actually checked.
 
@@ -10,7 +10,7 @@ Distributed Systems (DS), Sapienza MSc Cybersecurity, 2026/27; instructor **Gius
 
 | Existing source ID | Reference and authority | Verification / limits |
 | --- | --- | --- |
-| DS-S1 | [Official lecture log](https://sites.google.com/view/distributedsystems-202627/lectures) | Last successful web text checks: 2026-11-04, before this initialization. Returned listing through lecture 11; user reports published material through at least 12. Linked files not individually verified. |
+| DS-S1 | [Official lecture log](https://sites.google.com/view/distributedsystems-202627/lectures) | Last successful web text check: 2026-11-06. Retrieved snapshot again lists through lecture 11; preserve the user report of publication through at least 12 and do not treat this as a guaranteed live endpoint. Lesson 8 explicitly covers perfect/eventual leader election, failure models and applications. No newly observed lecture entry, linked-file verification or download in this check. |
 | DS-S2 | [Official course home](https://sites.google.com/view/distributedsystems-202627/home-page) | Last successful web text check: 2026-11-04, before initialization. Course identity and algorithm-design/correctness objectives; not a verified exam specification. |
 | DS-L1 | [Local index](<../../DISTRIBUTED SYSTEMS/DS INDICE.md>) and lecture notes linked below | Inventory/index inspected 2026-11-04. Index links only lesson 1 and DS-S1; it is not a complete inventory. No full content audit. |
 | DS-L2 | `../../DISTRIBUTED SYSTEMS/Assets/SLIDES/` — local slide copies | Inventory checked 2026-11-04; four PDFs, contents/current-year alignment not verified. |
@@ -110,6 +110,7 @@ No topic is marked mastered. Future evidence entries should be brief: topic/task
 ## 10. Next actions and future reviews
 
 - At the next DS session, choose a concrete recovery block or diagnostic exercise, inspect its sources and record actual effort/outcome. No learning session has been completed by creating this memory.
+- **6 Nov planning review:** DS is the next main independent-study priority after the current Network lesson-9 session. The existing Saturday 7 Nov, 09:30–11:30 slot should cover one manageable lesson-8 block (failure-detector prerequisites, perfect/eventual leader election) and one independent trace or reasoning attempt; completing an entire lecture is not required. Thursday's DS execution remains unreported. An optional 30–45-minute start on Friday is only a conditional suggestion if the student still has time/energy, not an additional booked block or completed activity.
 - Perform the just-in-time exam check in §2 when study/exam alignment requires it; request only a useful missing DS example or instruction. Missing exam papers need not block foundational study.
 - After a studied block, provisionally review within 1–2 days, around one week and after 2–3 weeks, adjusted to performance and availability. **No review dates are booked and no reminders are configured.** Retry assisted exercises later on fresh or unaided tasks.
 - Update this memory only for meaningful confirmed changes; keep explanations elsewhere. Update global state only for cross-course impacts. Do not rewrite the global plan or touch every memory after a short session. Prefer updating existing topic/exercise records over appending repetitive session summaries. Keep meaningful assessment evidence and decision history, references, provenance and unresolved gaps; do not discard useful historical evidence merely to shorten the file.
@@ -118,4 +119,5 @@ No topic is marked mastered. Future evidence entries should be brief: topic/task
 
 - **2026-11-04 — prior source checks, retained from approved plan:** DS-S1/DS-S2 successfully read; repeated DS-S1 snapshots ended at 11 despite the report of publication through at least 12. Preserve both, without promoting the user report to independent web verification.
 - **2026-11-04 — initialization:** read root instructions and plan; inspected DS inventory/index, homework files, selected note/transcript content and slide filenames. Confirmed three empty homework files and the FIFO reconstruction in the fourth. PDFs/images were not content-verified; no new official web check performed in this initialization.
+- **2026-11-06 — scoped official check and planning review:** accessed DS-S1 web text; the returned snapshot still ends at lecture 11 and retains the earlier homework guidance. Reconfirmed lesson-8 topics for the next recovery block, without downloading sources, asserting later material absent or changing learning status. The global agenda's existing Saturday slot is refined around one conceptual block and an independent attempt; no extra Friday commitment is booked.
 - **Initial learning evidence:** user-reported baseline only; no new independent assessment or exercise completion. Memory creation is organizational progress only. Outstanding uncertainties remain in §§2, 4 and 8.
