@@ -1,183 +1,134 @@
-#### 1. What Is a Distributed System?
+# Lesson 1 — Distributed Systems and the Execution Model
 
-##### Definition of a Distributed System
-> A **distributed system** is a set of spatially separated entities, each with computational power, that communicate and coordinate with one another to achieve a common goal.
+## What Is a Distributed System?
 
-- **Entities:** computers, physical machines, or software processes ($\text{process} = \text{machine}$).
-- **Distributed:** the entities are spatially separated and execute independently.
-- **Common Goal:** the entities communicate and coordinate, possibly sharing resources, to achieve a shared objective.
+A **distributed system** consists of spatially separated entities that have computational power and communicate to achieve a common goal. An entity may be a physical machine or a software process; in the course model, we reason in terms of processes. They execute independently and coordinate by exchanging messages.
 
-In this course we focus on **static networks of processes**:
-- Nothing changes at the infrastructure level during the execution (the set of processes and the network topology are fixed).
+We focus on **static networks**: the set of processes and the network topology remain fixed during an execution. A process may still fail; a fixed topology does not mean that every participant keeps working.
 
----
+### Fault-Tolerant Agreement and the Consensus Problem
 
-##### Fault-Tolerant Agreement and the Consensus Problem
-
-- **Fault-Tolerant Agreement:**
-  - Several computers perform the same task.
-  - Some computers may fail.
-  - The goal is to make the surviving computers still reach an agreement despite failures.
-- **Consensus Problem:** formalizes the idea of agreement among multiple processes:
-  - Each process starts with its own initial value/opinion (e.g., **Commit** or **Abort**).
-  - The processes communicate with each other by exchanging messages.
-  - All non-faulty processes must eventually agree on the **same final decision**, even in the presence of failures.
+Suppose several computers cooperate on a task, but some may fail. **Fault-tolerant agreement** asks how the surviving computers can still agree. In the **consensus problem**, each process starts with an initial value, such as `Commit` or `Abort`, and processes exchange messages so that all non-faulty participants eventually reach the same decision despite failures.
 
 ![[Pasted image 20260924103257.png|533]]
 
----
+Failures can be handled by **detecting** them, **masking** their effects, **tolerating** them while continuing to operate, or **recovering** afterward. This course mainly studies tolerance: an algorithm must work under its stated failure bound. For example, a model may require fewer than one third of processes to be faulty; that is an assumption of the particular model, not a universal threshold.
 
-##### Failures and How Systems Handle Them
+### Asynchrony and the Main Difficulty of Distributed Systems
 
-We assume that **all computer systems fail** (sooner or later); therefore, building robust systems is essential. A system can handle failures in four different ways:
-- **Detection:** notice that something went wrong.
-- **Masking:** hide the effects of the failure from the user or upper layer.
-- **Tolerance** *(main focus of this course)*: continue operating correctly despite failures, as long as the number of faulty processes stays below a certain threshold (for instance, if the threshold is $1/3$, the system works properly as long as more than $2/3$ of the processes are non-faulty).
-- **Recovery:** restore a system's state after a failure has occurred.
+In an **asynchronous system**, processes cannot rely on a shared physical clock or known upper bounds on communication delays and local execution times. A process does not know when another process will take its next step or when a message will arrive. Unpredictable does not mean slow: a predictably slow system is easier to reason about than one whose delays cannot be bounded.
 
----
+A waiting process therefore cannot tell whether a peer has crashed, is running slowly, or has a delayed message. This uncertainty combines with the process's **local view**: it sees its own state and received messages, rather than the complete state of the system.
 
-##### Asynchrony and the Main Difficulty of Distributed Systems
+## Methodology and System Model
 
-An **asynchronous system** has **no global clock**. This means that:
-- Processes cannot rely on a shared notion of physical time.
-- Communication delays and local execution speeds are **unpredictable**.
-- A process cannot know when another process will execute a step or when a sent message will arrive.
-- **Unpredictable does not mean slow** (in fact, a predictably slow system is easier to reason about than an unpredictable one).
-- Because of this uncertainty, a waiting process **cannot distinguish a crashed process from a very slow process** (or a process whose messages are delayed).
+To reason precisely, we distinguish the **model**, which states assumptions about processes, links, timing and failures; the **abstraction**, which identifies the service we want; its **specification**, which gives the properties that service must satisfy; and the **algorithm**, which implements it under the model. An algorithm is correct only relative to those assumptions and properties.
 
-> **Core Challenge of Distributed Systems:**
-> Distributed algorithms are a **fight against uncertainty** caused by three factors:
-> 1. **Asynchrony:** execution speeds and message delays are unpredictable.
-> 2. **Failures:** processes or communication links may fail.
-> 3. **Local View:** each process only observes its own local state and received messages, never the complete global state of the system.
+### Network Graph and Processes
 
----
+The system contains a fixed set of $n$ processes with distinct identities:
 
-#### 2. Methodology and System Model
+$$
+\Pi = \{p_0,p_1,\dots,p_{n-1}\}.
+$$
 
-##### Four Foundational Concepts
-
-To design and reason about distributed systems rigorously, we separate four concepts:
-- **Model:** the formal set of objects and assumptions in the system (processes, communication links, timing assumptions, failure assumptions).
-- **Abstraction:** the high-level component or service we want to provide, defined without implementation details.
-- **Specification:** the formal properties (safety and liveness) that the abstraction must satisfy.
-- **Algorithm:** the concrete distributed procedure executed by the processes to implement the abstraction under the assumed model.
-
----
-
-##### Formal System Model
-
-###### Network Graph and Processes
-- A system consists of $n$ processes in a fixed set $\Pi = \{p_0, p_1, \dots, p_{n-1}\}$ with **distinct identities** (like an IP address, represented abstractly as an integer ID).
-- The network topology is modeled as a static graph:
-  $$G = (\Pi, E)$$
-  Usually this graph is complete: every process (node) is connected to every other process by a communication link (edge).
+We represent the network by a static graph $G=(\Pi,E)$, with processes as nodes and communication links as edges. The graph is usually complete: each process can communicate directly with every other process. Identities are represented abstractly by integers, much as addresses identify machines in a real network.
 
 ![[Pasted image 20260926085113.png|311]]
 
-###### Process as an I/O Automaton (State Machine)
-Each process $p_j$ is modeled as a (possibly infinite-state) **I/O automaton** that interacts with two boundaries:
-- **Upper layer:** receives an input $X$ from (and produces an output $Y$ to) a higher-level software component or external user.
-- **Link layer:** sends messages (`Send MSG x`) and receives delivered messages (`Rcv MSG y`).
+### Process as an I/O Automaton (State Machine)
 
-Each process maintains two message buffers:
-- **$\text{InBuf}_j$:** contains messages that have been delivered to $p_j$ by the network since its last local step.
-- **$\text{OutBuf}_j$:** contains messages that $p_j$ has sent into the network but that have not yet been delivered to their destinations.
+Each process $p_j$ is modeled as a deterministic **I/O automaton**, possibly with infinitely many states. It receives inputs and produces outputs at an upper boundary, connected to an application or user, and sends and receives messages at a lower boundary, connected to communication links.
+
+Its local state includes two buffers:
+
+- $\mathrm{InBuf}_j$: messages delivered by the network since the process's last local step.
+- $\mathrm{OutBuf}_j$: messages sent by the process but not yet delivered to their destinations.
 
 ![[Pasted image 20260926085524.png|363]]
 
-> [!info] Formal State Transition of a Process
-> Each process $p_j$ has a set of internal states $Q$, a subset of initial states $Q_{\text{in}} \subseteq Q$ (which may differ across processes since processes have distinct identities), and a set of possible messages $M$, where each message is a triple:
-> $$\langle \text{sender}, \text{receiver}, \text{payload} \rangle$$
-> The deterministic state transition function $P_j$ of process $p_j$ maps its current internal state and input buffer to a new internal state and a set of outgoing messages:
-> $$P_j(q \in Q, \, \text{InBuf}_j) = (q' \in Q, \, \text{Send\_msg} \subseteq M)$$
-> When process $p_j$ executes one atomic local step:
-> 1. It consumes all messages currently in $\text{InBuf}_j$ and updates its internal state from $q$ to $q'$.
-> 2. It appends the newly generated messages to its output buffer and clears its input buffer:
->    $$\text{OutBuf}_j \gets \text{OutBuf}_j \cup \text{Send\_msg}, \qquad \text{InBuf}_j \gets \varnothing$$
+Let $Q$ be its internal state space, $Q_{\mathrm{in}}\subseteq Q$ its initial states, and $M$ the set of messages. Initial states may differ between processes, which have distinct identities. Each message records $\langle\text{sender},\text{receiver},\text{payload}\rangle$. The transition function maps the current state and input buffer to a new state and outgoing messages:
 
----
+$$
+P_j(q,\mathrm{InBuf}_j)=(q',\mathrm{Send\_msg}),
+\qquad q,q'\in Q,\quad \mathrm{Send\_msg}\subseteq M.
+$$
 
-#### 3. Configurations, Events, and Executions
+During one **atomic local step**, $p_j$ consumes its input buffer, changes state from $q$ to $q'$, and appends the generated messages to its output buffer:
 
-##### Configuration (Global State)
-A **configuration** $C_t$ is a snapshot of the complete global state of the distributed system at step $t$. It is an $n$-tuple containing the local state, input buffer, and output buffer of every process $p_j \in \Pi$:
-$$C_t[j] = (q_j, \, \text{InBuf}_j, \, \text{OutBuf}_j)$$
+$$
+\mathrm{OutBuf}_j\gets\mathrm{OutBuf}_j\cup\mathrm{Send\_msg},
+\qquad
+\mathrm{InBuf}_j\gets\varnothing.
+$$
 
-> **Example:**
-> $$C_0 = \big\langle (q_0, \{\}, \{\}), \; (q_1, \{m\}, \{\}), \; (q_2, \{\}, \{\}) \big\rangle$$
-> ![[Pasted image 20260926100143.png|525]]
+## Configurations, Events, and Executions
 
----
+### Configuration (Global State)
 
-##### Events and the Scheduler (Adversary)
-An **event** is a single atomic transition that changes the system configuration. We model asynchrony through an abstract **scheduler** (or **adversary**) that chooses which **enabled event** happens next.
+A **configuration** $C_t$ describes the entire system at step $t$. It is an $n$-tuple whose entry for $p_j$ contains the internal state and both buffers:
 
-There are two fundamental types of events in the basic execution model:
-- **$\text{Exec}(i)$:** process $p_i$ executes one atomic local step of its state machine $P_i$ (consuming $\text{InBuf}_i$ and placing any sent messages into $\text{OutBuf}_i$).
-- **$\text{Del}(i, j, m)$:** message $m$ from sender $p_i$ is delivered across the link to receiver $p_j$ (moving $m$ from $\text{OutBuf}_i$ into $\text{InBuf}_j$).
+$$
+C_t[j]=(q_j,\mathrm{InBuf}_j,\mathrm{OutBuf}_j).
+$$
+
+For example, the configuration below has a message waiting in $p_1$'s input buffer:
+
+$$
+C_0=\big\langle(q_0,\{\},\{\}),\;(q_1,\{m\},\{\}),\;(q_2,\{\},\{\})\big\rangle.
+$$
+
+![[Pasted image 20260926100143.png|525]]
+
+### Events and the Scheduler (Adversary)
+
+An **event** is an atomic transition between configurations. The **scheduler**, also called the **adversary**, chooses which enabled event occurs next. In the basic model there are two event types:
+
+- $\mathrm{Exec}(i)$: $p_i$ takes a local step, consuming its input and generating outgoing messages.
+- $\mathrm{Del}(i,j,m)$: the network moves message $m$ from $\mathrm{OutBuf}_i$ to $\mathrm{InBuf}_j$.
 
 ![[ezgif.com-speed.gif]]
 
-###### Enabled Events
-The scheduler cannot invent messages or force arbitrary state jumps; it can only schedule an event if that event is **enabled** in the current configuration $C_t$:
-- $\text{Exec}(i)$ is enabled for any non-crashed process $p_i$.
-- $\text{Del}(i, j, m)$ is enabled **if and only if** message $m$ (with destination $p_j$) is currently in $\text{OutBuf}_i$.
+The scheduler controls the order of these events, but cannot invent messages or arbitrary state changes. $\mathrm{Exec}(i)$ is enabled while $p_i$ has not crashed; $\mathrm{Del}(i,j,m)$ is enabled only when the message, addressed to $p_j$, is in $\mathrm{OutBuf}_i$.
 
----
+### Execution and Space-Time Diagrams
 
-##### Execution and Space-Time Diagrams
+An **execution** is one possible evolution of the system, written as an alternating sequence of configurations and enabled events:
 
-> **Execution:**
-> An **execution** $\varepsilon$ describes one complete possible evolution ("story") of the distributed system over time. Formally, it is an alternating sequence of configurations and events:
-> $$\varepsilon = (C_0, e_0, C_1, e_1, C_2, e_2, \dots)$$
-> where $C_0$ is an initial configuration and each $C_{k+1}$ is the configuration obtained by applying enabled event $e_k$ to $C_k$.
+$$
+\varepsilon=(C_0,e_0,C_1,e_1,C_2,e_2,\dots).
+$$
 
-Executions are visually represented using **space-time diagrams**:
-- Each process is drawn as a horizontal timeline progressing from left to right.
-- Points on a line represent local events ($\text{Exec}$).
-- Directed arrows between lines represent messages ($m$) from their send step to their delivery event ($\text{Del}$).
+Here $C_0$ is initial, and applying $e_k$ to $C_k$ produces $C_{k+1}$. A **space-time diagram** draws each process as a horizontal timeline running from left to right, with points for local steps and arrows from message sends to deliveries.
 
 ![[Pasted image 20260926101131.png|578]]
 
----
+### Fairness: Limiting the Power of the Scheduler
 
-##### Fairness: Limiting the Power of the Scheduler
+Without restrictions, the scheduler could prevent progress by never scheduling a process or by delaying a message forever. In the reliable-message execution model used here, an execution is **fair** when every correct process takes infinitely many local steps and every message sent between correct processes is eventually delivered. Fairness provides eventual progress opportunities, without telling us how long a process or message will wait.
 
-If the scheduler had unrestricted power, it could trivially prevent any distributed algorithm from making progress simply by never scheduling a process or delaying a message forever. To rule out such degenerate schedules, we require **fair executions**:
+![[Pasted image 20260926101817.png|300]]
 
-> **Fair Execution:**
-> An execution is **fair** if:
-> 1. Every correct process $p_i$ executes infinitely many local steps ($\text{Exec}(i)$ occurs infinitely often).
-> 2. Every message sent between correct processes is eventually delivered ($\text{Del}(i, j, m)$ eventually occurs for every sent message $m$, though we do not know when).
+For example, let $p_0$ and $p_1$ start with value `0`, and $p_2$ with `1`, in the topology $p_0-p_1-p_2$. To learn that some process holds `1`, $p_0$ needs information to travel from $p_2$ through $p_1$. Without fairness, the scheduler could isolate $p_2$ forever by withholding its messages or steps. Fairness excludes that behavior.
 
-> [!info]- Example: Why Fairness Is Necessary
-> ![[Pasted image 20260926101817.png|300]]
-> Suppose $p_0$ has initial value `0`, $p_1$ has `0`, and $p_2$ has `1`. Only $p_2$ initially knows that some process holds the value `1`.
-> - For $p_0$ to learn whether any process holds `1` in the topology $p_0 - p_1 - p_2$, information must travel from $p_2$ to $p_1$ and then from $p_1$ to $p_0$.
-> - Without fairness, the scheduler could indefinitely delay every message from $p_2$, isolating $p_2$ forever. Fairness forces the scheduler to eventually deliver every sent message and step every live process.
+## Local View and the Indistinguishability Theorem
 
----
-
-#### 4. Local View and the Indistinguishability Theorem
-
-##### Local View of a Process
-A process $p_i$ does **not** observe the global configuration $C_t$ or the global execution $\varepsilon$. It only observes its own **local view** (or **local execution**) $\varepsilon|p_i$:
-- The initial state of $p_i$ in $C_0$.
-- The sequence of events in $\varepsilon$ that directly involve $p_i$ (namely $\text{Exec}(i)$ and deliveries $\text{Del}(*, i, m)$ to $p_i$).
+A process cannot observe the global configuration or execution. Its **local view**, denoted $\varepsilon|p_i$, consists of its initial state and the events involving it: its own $\mathrm{Exec}(i)$ steps and incoming $\mathrm{Del}(*,i,m)$ events.
 
 ![[Pasted image 20260926102907.png|498]]
 
-Because $p_i$'s state transitions depend **only** on its current local state and its $\text{InBuf}_i$, two completely different global executions $\varepsilon$ and $\varepsilon'$ (for example, one where a remote process $p_k$ has crashed and one where $p_k$'s messages are simply delayed) can produce the **exact same local view** at $p_i$ up to step $t$.
+Two different global executions can give $p_i$ the same local view. For example, a remote process might have crashed in one execution while its messages are merely delayed in another. Until a distinguishing message arrives, $p_i$ has the same information in both.
 
----
-
-##### The Indistinguishability Theorem
+### The Indistinguishability Theorem
 
 ![[Pasted image 20260926103001.png|532]]
 
-> **Indistinguishability Theorem:**
-> If a process $p_i$ has the same local view in two executions $\varepsilon$ and $\varepsilon'$ ($\varepsilon|p_i = \varepsilon'|p_i$), then $p_i$ cannot distinguish $\varepsilon$ from $\varepsilon'$ and **must take the exact same sequence of actions** (reaching the same local states and sending the same messages) in both executions.
+If a deterministic process $p_i$ has the same local view in two executions, it takes the same actions, reaches the same local states and sends the same messages in both:
 
-- **Why this theorem is foundational for impossibility proofs:** Whenever an adversary can construct two executions $\varepsilon$ and $\varepsilon'$ that require different global outcomes (e.g., in $\varepsilon$ peer $p_k$ is alive, whereas in $\varepsilon'$ peer $p_k$ has crashed) but yield the **exact same local view** at $p_i$, no deterministic algorithm at $p_i$ can behave differently in $\varepsilon$ and $\varepsilon'$.
+$$
+\varepsilon|p_i=\varepsilon'|p_i
+\quad\Longrightarrow\quad
+\text{the behavior of }p_i\text{ is identical in both executions}.
+$$
+
+This follows from its transition function: equal initial states and equal inputs produce equal next states. It is the basis of **indistinguishability arguments** in impossibility proofs. If two executions require different behavior from $p_i$ but give it identical information, a deterministic algorithm cannot choose differently between them.

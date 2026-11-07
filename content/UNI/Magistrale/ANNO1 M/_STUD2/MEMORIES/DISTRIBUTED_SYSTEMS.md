@@ -1,6 +1,6 @@
 # Distributed Systems — Course Memory
 
-Last update: **2026-11-06** (Europe/Rome): official lecture-log snapshot rechecked for the cross-course planning review; no new DS study outcome reported. Initialized under explicit Phase 1, Step 3 authorization. This is a state/evidence index, not lecture notes. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md) for global rules. Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities; unrelated course memories are not needed for a DS-only task.
+Last update: **2026-11-07** (Europe/Rome): requested editorial restructuring and review of lessons 1–6; the student's preferred note style is recorded in §3. Source checks were local and scoped to the revisions; no new DS study outcome or official web verification is reported. Initialized under explicit Phase 1, Step 3 authorization. This is a state/evidence index, not lecture notes. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md) for global rules. Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities; unrelated course memories are not needed for a DS-only task.
 
 Evidence labels retain the plan's meanings: **Verified locally**, **Verified official**, **User-reported**, **Provisional**, **Unknown**. File presence verifies neither completeness nor learning. Dates below describe the scope actually checked.
 
@@ -12,9 +12,9 @@ Distributed Systems (DS), Sapienza MSc Cybersecurity, 2026/27; instructor **Gius
 | --- | --- | --- |
 | DS-S1 | [Official lecture log](https://sites.google.com/view/distributedsystems-202627/lectures) | Last successful web text check: 2026-11-06. Retrieved snapshot again lists through lecture 11; preserve the user report of publication through at least 12 and do not treat this as a guaranteed live endpoint. Lesson 8 explicitly covers perfect/eventual leader election, failure models and applications. No newly observed lecture entry, linked-file verification or download in this check. |
 | DS-S2 | [Official course home](https://sites.google.com/view/distributedsystems-202627/home-page) | Last successful web text check: 2026-11-04, before initialization. Course identity and algorithm-design/correctness objectives; not a verified exam specification. |
-| DS-L1 | [Local index](<../../DISTRIBUTED SYSTEMS/DS INDICE.md>) and lecture notes linked below | Inventory/index inspected 2026-11-04. Index links only lesson 1 and DS-S1; it is not a complete inventory. No full content audit. |
-| DS-L2 | `../../DISTRIBUTED SYSTEMS/Assets/SLIDES/` — local slide copies | Inventory checked 2026-11-04; four PDFs, contents/current-year alignment not verified. |
-| DS-L3 | `../../DISTRIBUTED SYSTEMS/Assets/TRANSCRIPTED DS/` — local transcripts | Files for lessons 4, 5 and 7; selected text/headings inspected 2026-11-04. Secondary material; transcription authorship and fidelity unverified. |
+| DS-L1 | [Local index](<../../DISTRIBUTED SYSTEMS/DS INDICE.md>) and lecture notes linked below | Inventory/index inspected 2026-11-04. Lessons 1–6 fully read for the requested editorial revision and targeted correctness checks on 2026-11-07; remaining notes not re-reviewed. Index links only lesson 1 and DS-S1; it is not a complete inventory. No exhaustive technical audit. |
+| DS-L2 | `../../DISTRIBUTED SYSTEMS/Assets/SLIDES/` — local slide copies | Four-PDF inventory checked 2026-11-04. Relevant logical-time/mutual-exclusion and failure-detector pages consulted for the 2026-11-07 revision; existing embedded slide images checked for FIFO and round-based pseudocode. Full contents/current-year alignment not verified. |
+| DS-L3 | `../../DISTRIBUTED SYSTEMS/Assets/TRANSCRIPTED DS/` — local transcripts | Files for lessons 4, 5 and 7; selected text/headings inspected 2026-11-04. Relevant lesson-4 FIFO and lesson-5 logical-clock passages consulted on 2026-11-07. Secondary material; transcription authorship and fidelity unverified. |
 | DS-L4 | `../../DISTRIBUTED SYSTEMS/HOMEWORKS/` — local exercises/reconstructions | Four files inspected 2026-11-04; see §7. Not proof of completed work or official provenance for every item. |
 
 ## 2. Exam requirements and open questions
@@ -41,6 +41,7 @@ This process is scoped to DS in this file; other courses will keep their own exa
 - For attended lectures, retain rough notes and selectively revisit doubts. For recovery, use official material plus checked transcripts in conceptual blocks; the student writes substantive explanations whenever practical, and ChatGPT reviews them.
 - Attempt a trace, invariant, proof or counterexample before hints. Use progressive hints, then retry independently; full solutions only when explicitly requested. Record assistance separately from correctness.
 - ChatGPT is the primary interactive tutor; Codex maintains materials, evidence and planning context. Use short recall/verification sessions rather than polishing all existing notes.
+- **Note-writing preference, student-confirmed 2026-11-07:** use Network lessons 8–9 as the prose reference: connected explanations, restrained headings, precise definitions, useful examples and diagrams. Avoid long AI-generated expansions, repetitive summaries/comparison recaps and formulaic proof scaffolding. Shorten repetition while preserving substantive reasoning, model assumptions and correctness arguments; detailed worked calculations may use collapsible Obsidian callouts. Readability matters more than an arbitrary character target.
 - Theory and exercise proficiency are separate. Calibrate workload using actual session effort; global weekly hours are a hypothesis, not a rigid course quota. Detailed methodology remains in the global plan.
 
 ## 4. Lecture and material inventory
@@ -68,6 +69,7 @@ DS-L3 references: [lesson 4 transcript](<../../DISTRIBUTED SYSTEMS/Assets/TRANSC
 
 - **User-reported:** lecture 1 primarily student-authored, AI-reviewed; lectures 2–7 predominantly ChatGPT-generated. All seven are complete as documents, not independently audited for correctness or learning.
 - **User-reported / locally observed drafts:** recently attended lectures have rough notes, including files 10, 12 and 13. Exact authorship mix is **unknown**; preserve content and clarify only when needed.
+- **Requested editorial revision, 2026-11-07:** lessons 1–6 restructured with AI assistance, using three editing subagents and a second review of each pair by another agent, plus the main agent's review. Repeated recaps and proof scaffolding removed; core explanations, examples and all 101 existing embeds preserved. Lesson 4's FIFO definition and separate guarded delivery handler were aligned with the existing slide images and transcript; its supporting SVG was corrected. Lesson 5's mutex proof was clarified. Lesson 6's round-based pseudocode was aligned with its embedded slide, and its timing derivation explicitly uses the slide's idealized clock model. Original authorship remains as reported above. This is editorial/source evidence, not student study, independent proficiency or an exhaustive technical certification.
 - No separate notes 8, 9 or 11 found. Do not create duplicates before topic reconciliation, or rewrite complete notes wholesale.
 
 ## 6. Understanding and verification
