@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" font-family="Segoe UI, Arial, sans-serif">
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker></defs>
+  <rect x="1" y="1" width="958" height="298" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="480" y="36" text-anchor="middle" font-size="23" font-weight="700" fill="#0f172a">P₂'s local request queue</text>
+  <rect x="25" y="61" width="400" height="209" rx="12" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="225" y="92" text-anchor="middle" font-size="19" font-weight="600" fill="#334155">Before crash notification</text>
+  <rect x="48" y="112" width="354" height="54" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+  <text x="225" y="145" text-anchor="middle" font-size="18" fill="#991b1b">First: P₁ — crashed, no RLS</text>
+  <rect x="48" y="178" width="354" height="48" rx="8" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="225" y="208" text-anchor="middle" font-size="18" fill="#1e40af">Next: P₂ — waiting</text>
+  <text x="225" y="252" text-anchor="middle" font-size="16" fill="#991b1b">P₁'s stale request blocks P₂.</text>
+  <path d="M440 166H520" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="480" y="148" text-anchor="middle" font-size="15" font-weight="600" fill="#334155">Crash(P₁)</text>
+  <rect x="535" y="61" width="400" height="209" rx="12" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="735" y="92" text-anchor="middle" font-size="19" font-weight="600" fill="#334155">After removing P₁'s request</text>
+  <rect x="558" y="112" width="354" height="54" rx="8" fill="#ecfdf5" stroke="#059669"/>
+  <text x="735" y="145" text-anchor="middle" font-size="18" fill="#065f46">First: P₂ — next candidate</text>
+  <text x="735" y="202" text-anchor="middle" font-size="17" fill="#475569">P₂ still needs its other</text>
+  <text x="735" y="228" text-anchor="middle" font-size="17" fill="#475569">entry conditions to hold.</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-weight="400" fill="#25344d" style="color:#25344d" viewBox="-12 -12 354 212" width="354" height="212" color="#25344d">
+  <rect x="-11.5" y="-11.5" width="353" height="211" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  <circle cx="52" cy="82" r="20" fill="#b91c1c" fill-opacity=".12" stroke="#b91c1c" stroke-width="1.7" />
+  <text x="52" y="87" fill="#25344d" font-size="14" font-weight="600" text-anchor="middle">p₀</text>
+  <circle cx="278" cy="27" r="20" fill="#64748b" fill-opacity=".12" stroke="#64748b" stroke-width="1.7" />
+  <text x="278" y="32" fill="#25344d" font-size="14" font-weight="600" text-anchor="middle">p₁</text>
+  <circle cx="278" cy="82" r="20" fill="#64748b" fill-opacity=".12" stroke="#64748b" stroke-width="1.7" />
+  <text x="278" y="87" fill="#25344d" font-size="14" font-weight="600" text-anchor="middle">p₂</text>
+  <circle cx="278" cy="137" r="20" fill="#64748b" fill-opacity=".12" stroke="#64748b" stroke-width="1.7" />
+  <text x="278" y="142" fill="#25344d" font-size="14" font-weight="600" text-anchor="middle">p₃</text>
+  <path d="M74 82 L251 27" stroke="#0f766e" stroke-width="1.8" stroke-dasharray="none" />
+  <text x="171" y="44" text-anchor="middle" fill="#0f766e" font-size="10.5">Delivered ✓</text>
+  <path d="M74 82 L251 82" stroke="#0f766e" stroke-width="1.8" stroke-dasharray="none" />
+  <text x="171" y="73" text-anchor="middle" fill="#0f766e" font-size="10.5">Delivered ✓</text>
+  <path d="M74 82 L251 137" stroke="#b91c1c" stroke-width="1.8" stroke-dasharray="5 5" />
+  <text x="171" y="145" text-anchor="middle" fill="#b91c1c" font-size="10.5">Not delivered ✕</text>
+  <path d="M44 74 L60 90 M60 74 L44 90" stroke="#b91c1c" stroke-width="2.5" stroke-linecap="round" transform="translate(0 32)" />
+</svg>

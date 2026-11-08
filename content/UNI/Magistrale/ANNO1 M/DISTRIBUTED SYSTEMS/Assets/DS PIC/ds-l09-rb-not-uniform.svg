@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-weight="400" fill="#25344d" style="color:#25344d" viewBox="-12 -12 354 187" width="354" height="187" color="#25344d">
+  <rect x="-11.5" y="-11.5" width="353" height="186" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  <circle cx="39" cy="59" r="24" fill="#b91c1c" fill-opacity=".11" stroke="#b91c1c" stroke-width="1.6" />
+  <text x="39" y="64" text-anchor="middle" fill="#25344d" font-size="14" font-weight="600">P₀</text>
+  <text x="39" y="101" text-anchor="middle" font-size="10.5" fill="#b91c1c">Sender crashes</text>
+  <path d="M66 59 H137" stroke="#64748b" stroke-width="2" stroke-dasharray="none" />
+  <path d="M129 53 L138 59 L129 65" stroke="#64748b" stroke-width="2" fill="none" />
+  <circle cx="165" cy="59" r="24" fill="#b91c1c" fill-opacity=".11" stroke="#b91c1c" stroke-width="1.6" />
+  <text x="165" y="64" text-anchor="middle" fill="#25344d" font-size="14" font-weight="600">P₁</text>
+  <text x="165" y="101" text-anchor="middle" font-size="10.5" fill="#b91c1c">Delivers, crashes</text>
+  <path d="M192 59 H263" stroke="#b91c1c" stroke-width="2" stroke-dasharray="5 4" />
+  <path d="M224 52 L232 66 M232 52 L224 66" stroke="#b91c1c" stroke-width="2" />
+  <circle cx="291" cy="59" r="24" fill="#0f766e" fill-opacity=".11" stroke="#0f766e" stroke-width="1.6" />
+  <text x="291" y="64" text-anchor="middle" fill="#25344d" font-size="14" font-weight="600">P₂</text>
+  <text x="291" y="101" text-anchor="middle" font-size="10.5" fill="#0f766e">Never delivers</text>
+  <text x="165" y="133" text-anchor="middle" fill="#25344d" font-size="11">Only a faulty process delivers m</text>
+</svg>

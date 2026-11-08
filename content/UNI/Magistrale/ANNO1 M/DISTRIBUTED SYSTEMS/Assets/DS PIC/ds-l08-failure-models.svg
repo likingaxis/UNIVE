@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="Segoe UI, Arial, sans-serif">
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker></defs>
+  <rect x="1" y="1" width="898" height="478" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="450" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Failure models: from stronger to weaker guarantees</text>
+  <rect x="90" y="65" width="720" height="88" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="450" y="98" text-anchor="middle" font-size="23" font-weight="700" fill="#065f46">Fail-Stop</text>
+  <text x="450" y="130" text-anchor="middle" font-size="19" fill="#0f172a">Perfect links + perfect failure detector (P)</text>
+  <path d="M450 162V190" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="90" y="203" width="720" height="88" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="450" y="236" text-anchor="middle" font-size="23" font-weight="700" fill="#1e40af">Fail-Noisy</text>
+  <text x="450" y="268" text-anchor="middle" font-size="19" fill="#0f172a">Perfect links + eventually perfect failure detector (◇P)</text>
+  <path d="M450 300V328" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="90" y="341" width="720" height="80" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="450" y="372" text-anchor="middle" font-size="23" font-weight="700" fill="#334155">Fail-Silent</text>
+  <text x="450" y="402" text-anchor="middle" font-size="19" fill="#0f172a">Perfect links; no failure-detector oracle</text>
+  <text x="450" y="455" text-anchor="middle" font-size="17" fill="#475569">Each stronger model can provide the guarantees of the models below it.</text>
+</svg>

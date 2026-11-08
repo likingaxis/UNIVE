@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-weight="400" fill="#25344d" style="color:#25344d" viewBox="-12 -12 364 194" width="364" height="194" color="#25344d">
+  <rect x="-11.5" y="-11.5" width="363" height="193" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  <circle cx="55" cy="38" r="21" stroke="#b91c1c" stroke-width="1.7" fill="#b91c1c" fill-opacity=".12" />
+  <text x="55" y="42" font-size="13" font-weight="600" text-anchor="middle" fill="#25344d">P₃</text>
+  <text x="55" y="73" text-anchor="middle" fill="#b91c1c" font-size="10.5">Faulty</text>
+  <circle cx="284" cy="38" r="21" stroke="#b91c1c" stroke-width="1.7" fill="#b91c1c" fill-opacity=".12" />
+  <text x="284" y="42" font-size="13" font-weight="600" text-anchor="middle" fill="#25344d">P₅</text>
+  <text x="284" y="73" text-anchor="middle" fill="#b91c1c" font-size="10.5">Faulty</text>
+  <circle cx="55" cy="126" r="21" stroke="#0f766e" stroke-width="1.7" fill="#0f766e" fill-opacity=".12" />
+  <text x="55" y="130" font-size="13" font-weight="600" text-anchor="middle" fill="#25344d">P₁</text>
+  <text x="55" y="161" text-anchor="middle" fill="#0f766e" font-size="10.5">Correct</text>
+  <circle cx="284" cy="126" r="21" stroke="#0f766e" stroke-width="1.7" fill="#0f766e" fill-opacity=".12" />
+  <text x="284" y="130" font-size="13" font-weight="600" text-anchor="middle" fill="#25344d">P₂</text>
+  <text x="284" y="161" text-anchor="middle" fill="#0f766e" font-size="10.5">Correct</text>
+  <path d="M78 38 H258" stroke="#64748b" stroke-width="2" />
+  <path d="M249 32 L259 38 L249 44" stroke="#64748b" fill="none" stroke-width="2" />
+  <text x="169" y="27" text-anchor="middle" fill="#25344d" font-size="11">m delivered</text>
+  <path d="M55 76 V98 M284 76 V98" stroke="#b91c1c" stroke-dasharray="4 4" stroke-width="1.5" opacity=".5" />
+  <text x="170" y="126" text-anchor="middle" fill="#25344d" font-size="11">No delivery of m</text>
+</svg>
