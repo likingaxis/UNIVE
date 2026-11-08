@@ -1,4 +1,4 @@
-# Lesson 5 — Logical Clocks and Distributed Mutual Exclusion
+# Lesson 5 — Logical Clocks
 
 ## Logical Time and the Happened-Before Relation
 
@@ -327,88 +327,10 @@ $$
 
 Here $P_1$ is observed sending, and the incoming packet has positive entries for every other process. Its sender counts its own send event; positive entries for the remaining processes require information to have left them. Thus every process must have sent at least one message in any compatible execution.
 
-## Application of Scalar Clocks: Lamport's Distributed Mutual Exclusion
-
-Vector clocks let us identify causal relationships and concurrency, which is useful for causal broadcast. Mutual exclusion needs a different service: a total order on requests to enter a **critical section (CS)**, so processes can coordinate exclusive access without a central coordinator. Scalar timestamps, supplemented with process IDs, are enough for this.
-
-### The Mutual Exclusion (ME) Abstraction
-
-![[DS-L5-slide-51-mutex-abstraction.png|760]]
-
-The application issues `Request`, receives `Grant` when entry is allowed, and issues `Release` on leaving. The abstraction requires:
-
-- **ME1 — Mutual exclusion:** at most one process is in the CS at any time.
-- **ME2 — Liveness:** every requesting process eventually enters.
-- **ME3 — Fairness:** if $p$'s request happens before $q$'s, then $q$ cannot enter before $p$.
-
-### System Assumptions and Total Ordering of Requests
-
-Lamport's algorithm assumes **no crashes** ($f=0$), FIFO perfect point-to-point links, and processes that eventually release the CS. A process waiting for an acknowledgment or release cannot otherwise be guaranteed to progress.
-
-Concurrent requests can have equal scalar timestamps. To break ties, the slide code stores a timestamp as $\langle i,L_i\rangle$, but compares **clock value first, process ID second**:
-
-$$
-\operatorname{ts}(x)<\operatorname{ts}(y)
-\iff L(x)<L(y)\ \lor\ \big(L(x)=L(y)\land\operatorname{id}(x)<\operatorname{id}(y)\big).
-$$
-
-Unique IDs make requests totally ordered, and the clock condition ensures that this order respects happened-before.
-
-![[DS-L5-lamport-mutex-conditions.svg|780]]
-
-### Lamport's Mutual Exclusion Protocol
-
-Each process maintains a scalar clock, a set `Requests` of active requests, a set `Acks` of received acknowledgments, and its current request `my_req` (or $\bot$ when idle).
-
-![[DS-L5-slide-53-lamport-mutex-code.png|780]]
-
-When $p_i$ requests entry, it increments its clock and sends its timestamped `REQ` to all processes, including itself. On receiving any message, it first updates the scalar clock using the receive rule. It then handles the message as follows:
-
-- **`REQ`:** add it to `Requests`, increment the clock for the send, and return a timestamped `ACK`.
-- **`ACK`:** add it to `Acks`.
-- **`RLS`:** remove the sender's active request from `Requests`.
-
-A process with an active request can enter only when **both** conditions hold:
-
-1. Its request has the smallest timestamp in its local `Requests` set.
-2. It has an `ACK` from **every process**, timestamped later than its request.
-
-The first condition chooses a winner among known requests. The second, together with FIFO delivery, prevents an earlier request from remaining hidden in transit while that winner enters. Old acknowledgments do not suffice: the timestamp test must hold for the current request.
-
-On release, the process removes its own request, clears `my_req`, increments its clock and broadcasts `RLS`. Peers can then remove that request and reconsider their waiting requests.
-
-### Step-by-Step Execution Example
-
-In the following example, pairs are written as **(clock, ID)** for comparison. Initially all clocks are zero. An application message from $p_1$ advances $p_3$'s clock to 2. At clock 3, $p_3$ requests entry with timestamp $(3,3)$. Processes $p_1,p_2$ receive it at clock 4, record it, and acknowledge at clock 5.
-
-At clock 6, $p_1$ also requests entry, with timestamp $(6,1)$.
-
-![[DS-L5-slide-59-mutex-example-wait.png|740]]
-
-Even after $p_1$ receives the required acknowledgments with timestamps later than its request, it must wait: its queue still contains $(3,3)<(6,1)$. Meanwhile, $p_3$ receives its remaining acknowledgment at clock 9. Its request is the smallest, so it enters.
-
-![[DS-L5-slide-61-mutex-example-release.png|740]]
-
-When $p_3$ releases at clock 10, it broadcasts `RLS`. At clock 11, $p_1$ receives it and removes $(3,3)$. Its own request is now smallest and its acknowledgments are already available, so it enters.
-
-### Correctness Proofs and Performance
-
-**Mutual exclusion.** Suppose two active requests $r_i,r_j$ overlap in the CS, with $\operatorname{ts}(r_i)<\operatorname{ts}(r_j)$. To enter, $p_j$ must have received an acknowledgment from $p_i$ timestamped later than $r_j$, hence later than $r_i$. Since $p_i$'s clock increases, it sent $r_i$ before sending that acknowledgment. FIFO delivery ensures that $p_j$ receives $r_i$ before the acknowledgment that permits entry. Because $r_i$ has not been released, it remains in $p_j$'s queue and is smaller than $r_j$, contradicting the entry condition.
-
-**Fairness.** If $r_j\to r_i$, the clock condition gives $\operatorname{ts}(r_j)<\operatorname{ts}(r_i)$. Before entering for $r_i$, $p_i$ needs a later acknowledgment from $p_j$. Process $p_j$ sent $r_j$ before that acknowledgment, so FIFO delivers $r_j$ to $p_i$ first. Unless $p_j$ has already released it, the earlier request blocks $p_i$. Thus $p_i$ cannot enter ahead of $p_j$.
-
-> [!warning] What Happens If Links Are NOT FIFO? (Slide 66 Homework)
-> The FIFO step in these proofs is essential. Without it, an acknowledgment can overtake the sender's earlier request. For example, $p_j$ sends request $(1,j)$, then acknowledges $p_i$'s request $(2,i)$ at $(4,j)$. If $p_i$ sees the acknowledgment while $(1,j)$ is still in transit, it can satisfy both entry conditions prematurely. A full counterexample must also show $p_j$'s entry conditions and the overlapping CS intervals; the overtaking step alone does not establish simultaneous entry.
-
-Each CS execution exchanges $N-1$ requests, $N-1$ acknowledgments and $N-1$ releases with remote processes:
-
-$$
-3(N-1)\text{ messages per CS execution}.
-$$
-
-With no competing request, entry needs one request–acknowledgment round trip, or two message transmission delays in the simplified timing model.
+The application of scalar clocks to mutual exclusion begins in [[DS LESSON 6]].
 
 ## Sources
 
-- [Local time and logical-clock slides](<Assets/SLIDES/DS-2425Time2.pdf>): happened-before, histories and vector clocks; exercises on slides 43–45; mutual exclusion on slides 51–66. The filename is from an older academic year; current-year alignment remains unverified.
-- [Lesson 5 transcript](<Assets/TRANSCRIPTED DS/DS LESSON 5 transcripted.md>), a secondary transcription of the explanations and examples.
+- [Time II slides](<Assets/SLIDES/DS-2425Time2.pdf>), PDF pages 3–49: happened-before, scalar clocks, causal histories, vector clocks and exercises. The mutex section starts at PDF page 50 and is covered in Lesson 6.
+- [Lesson 5 transcript](<Assets/TRANSCRIPTED DS/DS LESSON 5 transcripted.md>): logical clocks and the vector-clock exercises, ending with the execution-reconstruction question.
+- [Professor’s lecture log](https://sites.google.com/view/distributedsystems-202627/lectures), lecture 5, 7 October 2026.
