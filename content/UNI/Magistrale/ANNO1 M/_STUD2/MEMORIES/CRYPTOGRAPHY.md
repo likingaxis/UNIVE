@@ -2,7 +2,7 @@
 
 
 
-Last update: **2026-11-08**, Europe/Rome: cross-course review confirms lesson 3 as the next study priority; CR-S2 now independently lists lecture PDFs 1–11 for 2026/27 (11 newly observed, topic/date not inspected). The student's latest learning report remains the 6 Nov lesson-2 review of about 30 active minutes, now understood by self-report. Independent verification and exercise performance remain separate. Initialized with explicit authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md). Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities.
+Last update: **2026-11-10**, Europe/Rome: requested editorial cleanup now covers lesson-4 draft and its inline figure/integration requests. The supplied opening proof was integrated at the end of lesson 3, with its lesson-4 provenance retained. Lesson-3 active time remains unknown; no lesson-4 duration, study-completion report or independent assessment was supplied. Drafts and editing do not establish learning or exercise performance. CR-S2's last successful remote inventory remains 8 Nov, listing PDFs 1–11. Initialized with explicit authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md). Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities.
 
 
 ## 1. Course identity and current status
@@ -95,6 +95,10 @@ Lecture-1 and lecture-2 study drafts are now present in the course directory; th
 
 
 
+**Local lesson-3 material observed, 2026-11-10:** [current-year slide PDF](<../../CRYPTOGRAPHY/Assets/SLIDES/crypto_lecture03_2627 (1).pdf>) (19 pages) and [transcript](<../../CRYPTOGRAPHY/Assets/TRANSCRIPTION/CR LESSON 3 Transcripted.md>) already exist locally. They were not downloaded or created during this review; acquisition date and download verification are unknown. The PDF's text was extracted for orientation; pages 12, 15, 16 and 19 were visually inspected to check the public/reusable-seed statement, LHL entropy condition and auxiliary-lemma constants. Relevant transcript excerpts were consulted; it contains repetition and transcription errors, and is not a verified verbatim record. The local PDF includes the LHL proof, although the earlier user-provided inventory associates LHL with lesson 4; preserve this scope overlap rather than renumbering notes. This local observation supersedes the earlier statement that lesson 3 was linked-only; lessons 4–11 remain inventory only. Links added to the course index; no remote source recheck or full accuracy audit performed.
+
+**Local lesson-4 material observed, 2026-11-10:** [slide PDF](../../CRYPTOGRAPHY/Assets/SLIDES/crypto_lecture04_2627.pdf) (10 pages), [transcript](<../../CRYPTOGRAPHY/Assets/TRANSCRIPTION/CR LESSON 4 Transcripted.md>) and [friend's lesson-4 note](<../../CRYPTOGRAPHY/Assets/APPUNTI_DAVIDE/lez. 4.md>) already present; no download performed, acquisition dates/integrity verification unknown. All slide text extracted for orientation; PDF pp. 1–2 and 5–10 visually inspected, relevant transcript passages consulted, friend-note excerpts used as secondary context. Slides/transcript establish that the auxiliary-lemma proof opens lecture 4, followed by computational security, OWFs, negligible functions and computational worlds. The student explicitly requested its integration into lesson 3 inside the draft; both notes preserve the true boundary. Lesson 4 is now locally available, superseding the earlier linked-only inventory; no later-lecture material acquired or remote source recheck performed.
+
 ## 5. Notes status and authorship
 
 
@@ -115,11 +119,15 @@ The earlier report of no written notes is reconciled with the existing [lecture-
 
 
 
+**Lesson-3 editorial cleanup, 2026-11-10:** [existing study draft](<../../CRYPTOGRAPHY/CR LESSON 3.md>) corrected for English, paragraph flow, heading hierarchy and Obsidian-native math. The professor's reasoning, examples and intermediate proof steps are retained; the two explanatory callouts explicitly marked for shortening were compacted. Two existing inline SVGs externalized into `Assets/CRPIC` (`CR_L3_deterministic_preimages.svg`, `CR_L3_seeded_family.svg`), rendered and visually checked; attachment links and display-math boundaries checked. A marked review callout distinguishes a single-source strong-extractor guarantee from a joint guarantee for repeated seed use. The LHL's “−2” constant agrees with the inspected slides; the auxiliary lemma's proof remains deferred, not invented. Authorship before review/AI contribution is not explicitly established; Codex editorial assistance is recorded. No complete source audit or independent learning assessment claimed.
+
+**Lesson-4 editorial cleanup, 2026-11-10:** [existing draft](<../../CRYPTOGRAPHY/CR LESSON 4.md>) revised under the workspace Study Notes skill for English, connected prose, restrained headings and Obsidian math. Source-supported corrections distinguish efficient verification in NP from solving, and an attack-to-factoring reduction from a proof of insecurity. OWF notation now explicitly includes parameterized domains/functions, uniform inputs, any valid preimage, the adversary's parameter input and negligible success for every PPT adversary. The qualification about known public-key constructions is retained without claiming stronger assumptions are proved necessary. The existing collision-probability proof is integrated at the end of [lesson 3](<../../CRYPTOGRAPHY/CR LESSON 3.md>), preserving Cauchy–Schwarz and squared-deviation steps and citing lecture-4 provenance; lesson 4 links to it. Three requested SVG redrawings (limitations table, OWF direction and inversion game) and one converted reduction diagram saved in `Assets/CRPIC` as `CR_L4_*.svg`, with white backgrounds; all four rendered/visually checked. Original screenshot retained as a file, removed from the reading path as requested. Independent read-only review checked the textual/proof changes; this evaluates the notes, not the student's unaided performance. Prior authorship/AI assistance remain unconfirmed; Codex editorial/illustration assistance recorded. No study time, whole-lesson completion or exercise outcome inferred.
+
 ## 6. Understanding and independent verification
 
 
 
-- Self-reported study: lectures 1 and 2 confirmed finished on 2026-11-05; lesson 2 ran 15:17–17:22. The hashing/pairwise-independence difficulty flagged on 5 Nov was revisited on 6 Nov for about 30 active minutes; the student now reports understanding it. Readiness to advance is self-reported; lesson 3 has not yet been reported started. The student's uncertainty concerns the recalled timing, not this completion report. No per-topic independent assessment supplied.
+- Self-reported study: lectures 1 and 2 confirmed finished on 2026-11-05; lesson 2 ran 15:17–17:22. The hashing/pairwise-independence difficulty flagged on 5 Nov was revisited on 6 Nov for about 30 active minutes; the student now reports understanding it. On 10 Nov, the student supplied a lesson-3 draft for correction and said the study duration is unknown. This establishes lesson-3 written work, while explicit whole-lesson completion, per-topic understanding and a tutor report remain unconfirmed. No per-topic independent assessment supplied.
 
 - Independently verified understanding, proof reconstruction and exercise proficiency: **not verified**; no evidence recorded here.
 
@@ -173,7 +181,7 @@ Foundation recovery is needed, user-reported; precise weaknesses in probability,
 
 
 
-1. **Next Crypto topic: lesson 3**, selected by the student on 2026-11-06 after the reported lesson-2 second-part review. Start with a brief recall of keyed hash families and joint uniformity, then proceed in conceptual blocks; acquire only the source material needed for that lesson when preparing the handoff. At the 8 Nov cross-course review, DS 8–9 and Network 8–9 have completion reports; Crypto lesson 3 is the next main recovery block. Known current-year material extends through 11, with no learning report for 3–11. Keep the pending lesson-1 check and independent MAC exercises as practice needs, without treating them as a requirement to repeat all of lesson 2.
+1. **Lesson 3: draft reviewed on 10 Nov.** Use the corrected note and already-local sources; whole-lesson study completion and any tutor assessment remain unconfirmed. Next useful check: reconstruct the affine-family argument or the LHL collision-probability split without copying, and review the marked seed-reuse limitation. Do not infer that lesson 4 is ready or that the planned Tuesday blocks were executed merely from editorial completion. Known current-year material extends through 11, with no study report for 4–11. Keep the pending lesson-1 check and independent MAC exercises as practice needs, without requiring a repeat of all of lesson 2.
 2. Have the student reconstruct a definition and a short argument, then attempt a related exercise. Record real effort, assistance and gaps; adjust workload to observed pace rather than enforce weekly quotas.
 
 3. Locate a transcript only if needed for a specific gap; its previously observed file is absent from the latest inventory. Reassess readiness to resume attendance from actual ability to follow prerequisites and identify manageable gaps, not complete backlog recovery.
@@ -206,7 +214,15 @@ Update only this memory after meaningful confirmed changes. Link to work instead
 | --- | --- | --- | --- | --- | --- |
 | Lesson-2 second-part review: hashing/pairwise independence | Not separately estimated; the future 60-min recall block is a different planned activity | About 30 min, student estimate; start/end not supplied | Student reports studying the second part correctly and now understanding it, with explicit request to move on. User confirmation only; no unaided attempt or tutor report supplied. | Amount of assistance unknown. Previously reported difficulty now resolved by self-report, retaining its dated history. Exercise performance status unchanged. | Lesson 3 next, with a brief recall and independent practice; no lesson-3 study completion inferred. |
 
+### Lesson-3 draft review — 10 November 2026
+
+| Activity | Original estimate | Actual active minutes | Work/result and evidence | Assistance / difficulties | Next action |
+| --- | --- | --- | --- | --- | --- |
+| Lesson-3 theory/proofs and existing draft; requested editorial cleanup | Tuesday agenda reserves 120 min for beginning/continuing the lesson; this is not a whole-lesson estimate or evidence of execution | Unknown — student explicitly does not know; do not infer or request the same time again | Existing draft covers affine hashing, one-time MAC security and reuse attack, min-entropy, deterministic-extraction impossibility, seeded extraction and the LHL proof. Editorial cleanup complete; whole-lesson study completion and independent performance unconfirmed. | Codex editorial help; earlier authorship/tutor assistance unknown. No tutor report or exercise result supplied. Seed reuse marked for review; this is a document-scope issue, not a diagnosed misconception. | Brief unaided reconstruction/tutor feedback and marked review point; retain the unknown duration without using it to calibrate pace. |
+
 ## 11. Last update and source-verification history
+
+- **2026-11-10, requested lesson-3 cleanup:** local note, existing PDF and transcript inspected within the scope recorded in §§4–5. Local availability and document-review status updated; no download, fresh remote verification, independent assessment or timing estimate. Global agenda and attendance unchanged because the request does not establish slot execution or a scheduling change.
 
 - **2026-11-08, cross-course planning/source review:** CR-S1 retrieval failed again; the GitHub directory also failed through the web tool, but CR-S2 was successfully accessed through the GitHub connector. It lists `crypto_lecture01_2627.pdf` through `crypto_lecture11_2627.pdf`. Lecture 11 is newly observed relative to the 5 Nov inventory, not established as newly published. No new PDF downloaded or content reviewed; topic/date and study effort remain unknown. Known outstanding lecture sequence expands from 3–10 to 3–11, with one additional unestimated theory/exercise unit. Prioritize lesson 3 in the existing Crypto blocks; no hours or attendance decisions changed.
 

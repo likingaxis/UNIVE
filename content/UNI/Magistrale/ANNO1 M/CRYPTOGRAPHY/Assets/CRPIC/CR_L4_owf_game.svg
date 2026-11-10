@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 530" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#1f2937">
+  <title id="title">The one-way function inversion game</title>
+  <desc id="desc">The challenger samples an input uniformly and sends its function value to a PPT adversary. The adversary returns a candidate preimage and wins if it is in the input domain and maps to the same output.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#475569"/></marker>
+  </defs>
+  <rect width="900" height="530" fill="#ffffff"/>
+  <path d="M220 95V483M680 95V483" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="7 6"/>
+  <rect x="48" y="26" width="344" height="65" rx="12" fill="#dbeafe"/>
+  <rect x="508" y="26" width="344" height="65" rx="12" fill="#ede9fe"/>
+  <text x="220" y="66" text-anchor="middle" font-size="26" font-weight="650" fill="#1d4ed8">Challenger C</text>
+  <text x="680" y="66" text-anchor="middle" font-size="26" font-weight="650" fill="#6d28d9">PPT adversary A</text>
+  <rect x="48" y="119" width="344" height="87" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="220" y="152" text-anchor="middle" font-size="20">Sample x uniformly from X<tspan baseline-shift="sub" font-size="15">λ</tspan></text>
+  <text x="220" y="185" text-anchor="middle" font-size="23" font-weight="600">Compute y = f<tspan baseline-shift="sub" font-size="16">λ</tspan>(x)</text>
+  <path d="M220 240H677" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="361" y="218" width="178" height="33" rx="7" fill="#ffffff"/>
+  <text x="450" y="241" text-anchor="middle" font-size="21">Send (1<tspan baseline-shift="super" font-size="14">λ</tspan>, y)</text>
+  <rect x="508" y="274" width="344" height="85" rx="10" fill="#f5f3ff" stroke="#ddd6fe"/>
+  <text x="680" y="307" text-anchor="middle" font-size="21">Compute a candidate preimage</text>
+  <text x="680" y="339" text-anchor="middle" font-size="23" font-weight="600">x′ ← A(1<tspan baseline-shift="super" font-size="15">λ</tspan>, y)</text>
+  <path d="M680 397H223" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="365" y="375" width="170" height="33" rx="7" fill="#ffffff"/>
+  <text x="450" y="398" text-anchor="middle" font-size="21">Return x′</text>
+  <rect x="48" y="432" width="344" height="75" rx="10" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="220" y="462" text-anchor="middle" font-size="20" font-weight="600" fill="#047857">A wins if x′ ∈ X<tspan baseline-shift="sub" font-size="14">λ</tspan></text>
+  <text x="220" y="490" text-anchor="middle" font-size="21" fill="#047857">and f<tspan baseline-shift="sub" font-size="14">λ</tspan>(x′) = y.</text>
+  <text x="680" y="470" text-anchor="middle" font-size="19" fill="#64748b">The original x is not required.</text>
+</svg>

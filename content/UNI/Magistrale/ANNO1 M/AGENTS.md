@@ -9,6 +9,12 @@ Management paths below are relative to the workspace root `ANNO1 M`. Plans/state
 - Check whether these files exist. Report missing context briefly; do not invent its contents or create missing components without authorization. Use available evidence to continue useful work. Do not rely exclusively on model memory for continuity.
 - The global plan/state and three course memories are implemented. Earlier phase restrictions describe their implementation history; follow the current task's explicit scope. Do not create further components, skills or automation without authorization.
 
+## Note-writing skill
+
+- Before creating, correcting, restructuring or reviewing study notes or their diagrams, read [Study Notes — SKILL.md](study-notes/SKILL.md). It applies across subjects, including theory, proofs, exercises and labs. Before drafting or editing prose, also read its [writing-quality guide](study-notes/references/writing-quality.md) and perform the skill's deliberate prose revision; use its SVG/figure reference when visual work is needed.
+- The skill lives in `study-notes/` beside this file. If it is absent from the session's skill catalog, open the linked file directly; do not rely on prior chat context. It supplements the rules here and does not expand the user's authorized editing scope.
+- Planning-only and source-inventory tasks do not require loading the note-writing skill unless they also involve editing notes.
+
 ## Course routing and guided initialization
 
 | Course and reasonable aliases | Memory path | Initial learning emphasis |

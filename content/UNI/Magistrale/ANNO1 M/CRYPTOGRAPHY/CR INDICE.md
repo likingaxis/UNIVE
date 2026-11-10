@@ -41,3 +41,20 @@ Ordine della lezione:
 > Alterna intuizione, definizioni precise e domande. Lasciami tentare dimostrazioni ed esercizi prima di dare indizi progressivi; non mostrare in anticipo le soluzioni presenti negli appunti secondari. Distingui gli spazi dalle variabili aleatorie, le cardinalità dalle lunghezze e le probabilità dalle operazioni deterministiche. Se una formula manoscritta è ambigua, segnalalo e chiariscila senza inventare cosa abbia detto il professore.
 >
 > Scriverò io le prime spiegazioni degli appunti. Gli appunti di Davide e la dispensa sono supporti da confrontare con le slide; segnala eventuali discrepanze. Alla fine prepara un breve report per Codex: parti effettivamente studiate, esiti delle verifiche, aiuti usati, esercizi tentati, difficoltà e prossima azione. Il tempo attivo va indicato soltanto se lo fornisco io.
+
+## Materiale per lo studio — lezione 3
+
+Materiali già presenti localmente, osservati il 10 novembre 2026; data di acquisizione non registrata. Nessun nuovo download durante la revisione.
+
+- [Slide della lezione 3, 2026/27](<Assets/SLIDES/crypto_lecture03_2627 (1).pdf>): 19 pagine, da hashing affine e MAC one-time a estrattori e dimostrazione del Leftover Hash Lemma. La presenza della dimostrazione si sovrappone alla precedente mappatura degli argomenti della lezione 4; la numerazione dei file è conservata.
+- [Trascrizione della lezione 3](<Assets/TRANSCRIPTION/CR LESSON 3 Transcripted.md>): supporto alle spiegazioni, con ripetizioni ed errori di trascrizione; non considerarla un verbale verificato.
+- [Appunti della lezione 3](<CR LESSON 3.md>): revisione editoriale richiesta e completata il 10 novembre; esempi e passaggi delle prove conservati, due riquadri compattati e diagrammi salvati come allegati. Resta un richiamo da verificare sul riuso del seed. Tempo attivo sconosciuto; la revisione non attesta comprensione autonoma o completamento degli esercizi.
+
+## Materiale per lo studio — lezione 4
+
+Materiali già presenti localmente, osservati il 10 novembre 2026; data di acquisizione e verifica del download non registrate. Nessun nuovo download durante la revisione.
+
+- [Slide della lezione 4, 2026/27](Assets/SLIDES/crypto_lecture04_2627.pdf): 10 pagine. La lezione apre con la prova del lemma ausiliario sulla probabilità di collisione (pp. 1–3), poi introduce sicurezza computazionale, riduzioni, OWF e funzioni trascurabili.
+- [Trascrizione della lezione 4](<Assets/TRANSCRIPTION/CR LESSON 4 Transcripted.md>): supporto alle spiegazioni e al punto di separazione fra le lezioni; contiene errori di trascrizione.
+- [Appunti di Davide — lezione 4](<Assets/APPUNTI_DAVIDE/lez. 4.md>): materiale secondario già presente, con aggiunte `#gemini`; acquisizione e anno accademico non verificati durante questa revisione.
+- [Appunti della lezione 4](<CR LESSON 4.md>): revisione editoriale e figure richieste completate il 10 novembre. Come indicato nella bozza, la prova iniziale è integrata alla fine della lezione 3, mantenendo la provenienza dalla lezione 4. Revisione e disponibilità dei materiali non attestano completamento dello studio o prestazioni autonome.

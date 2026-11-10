@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 350" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#1f2937">
+  <title id="title">A one-way function: easy to evaluate, hard to invert on average</title>
+  <desc id="desc">Computing y from x is efficient. Given an output from a uniform random input, a PPT adversary must have negligible probability of finding any valid preimage x prime.</desc>
+  <defs>
+    <marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#059669"/></marker>
+    <marker id="red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#dc2626"/></marker>
+  </defs>
+  <rect width="900" height="350" fill="#ffffff"/>
+  <rect x="22" y="22" width="856" height="135" rx="14" fill="#ecfdf5"/>
+  <rect x="22" y="173" width="856" height="155" rx="14" fill="#fef2f2"/>
+  <path d="M190 107H710" stroke="#059669" stroke-width="3.5" marker-end="url(#green)"/>
+  <path d="M710 266H190" stroke="#dc2626" stroke-width="3.5" stroke-dasharray="10 6" marker-end="url(#red)"/>
+  <g fill="#ffffff" stroke="#a7f3d0" stroke-width="2"><rect x="42" y="48" width="140" height="83" rx="10"/><rect x="718" y="48" width="140" height="83" rx="10"/></g>
+  <g fill="#ffffff" stroke="#fecaca" stroke-width="2"><rect x="42" y="207" width="140" height="83" rx="10"/><rect x="718" y="207" width="140" height="83" rx="10"/></g>
+  <g text-anchor="middle" font-size="37" font-family="Georgia, serif" font-style="italic"><text x="112" y="89">x</text><text x="788" y="89">y</text><text x="112" y="248">x′</text><text x="788" y="248">y</text></g>
+  <g text-anchor="middle" font-size="17" fill="#64748b"><text x="112" y="116">Input</text><text x="788" y="116">f(x)</text><text x="112" y="275">Any preimage</text><text x="788" y="275">Given output</text></g>
+  <text x="450" y="62" text-anchor="middle" font-size="24" font-weight="650" fill="#047857">Evaluate f: efficient</text>
+  <text x="450" y="89" text-anchor="middle" font-size="19">Compute y = f(x) in polynomial time.</text>
+  <text x="450" y="211" text-anchor="middle" font-size="24" font-weight="650" fill="#b91c1c">Invert f: hard on average</text>
+  <text x="450" y="240" text-anchor="middle" font-size="19">Given y, find x′ such that f(x′) = y.</text>
+  <text x="450" y="308" text-anchor="middle" font-size="17" fill="#991b1b">For uniform random inputs, every PPT inverter has negligible success.</text>
+</svg>
