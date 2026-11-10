@@ -22,8 +22,8 @@
 | Course / detailed memory | Latest recorded situation | Active priority | Next meaningful action |
 | --- | --- | --- | --- |
 | [Distributed Systems](<MEMORIES/DISTRIBUTED_SYSTEMS.md>) | Attending; lessons 8–9 completed by report; independent exercise evidence pending. | Brief lesson-8/9 recall and independent broadcast practice, then remaining broadcast coverage. | Classify a fresh crash execution and trace Lazy RB without hints; continue All-Ack correctness afterward. Earlier reserved-slot execution remains unreported. |
-| [Cryptography](<MEMORIES/CRYPTOGRAPHY.md>) | Temporarily not attending; lectures 1–2 studied/revised; second part of lesson 2 reviewed on 6 Nov and now understood by self-report. Independent exercises/checks remain pending. | Move to lesson 3 while retaining brief recall and independent practice. | Lesson 3 is next; use the recall block to check retention rather than repeat the resolved-by-report remedial work. |
-| [Network Infrastructures](<MEMORIES/NETWORK.md>) | Attending; lesson 8 studied/understood by report on 6 Nov (60 active min); lesson 9 study completed by report on 7 Nov (time undefined). Latest outstanding lab still unidentified. | Retain brief recall and preserve the practical recovery need. | Brief lesson-8/9 recall; requested note review when supplied; identify the outstanding lab for practical work. |
+| [Cryptography](<MEMORIES/CRYPTOGRAPHY.md>) | Temporarily not attending; lectures 1–2 studied/revised by report. Current-year PDF inventory now extends through 11; no study report for 3–11. Independent exercises/checks remain pending. | Next main recovery priority: lesson 3, with brief recall and independent practice. | Use the existing Tuesday theory block for lesson 3 after a short hashing recall; do not repeat all of lesson 2. |
+| [Network Infrastructures](<MEMORIES/NETWORK.md>) | Attending; lesson 8 studied/understood by report on 6 Nov (60 active min); lesson 9 study completed by report on 7 Nov (time undefined). Latest lab needs recovery by 8 Nov clarification; assignment number/topic still unidentified. | Retain brief recall and preserve the practical recovery need. | Brief lesson-8/9 recall; requested note review when supplied; identify the outstanding lab for practical work. |
 
 
 
@@ -109,7 +109,7 @@ Crypto Tuesday 08:00–10:00 remains scheduled but not attended. Preserve the re
 
 **8 Nov update:** DS lessons 8–9 are reported finished. Their completion records are separate from earlier reserved blocks and do not establish independent exercise attempts. Retain brief recall and broadcast practice before the remaining broadcast coverage; no future study windows are moved or added by these reports.
 
-**Pilot focus:** start Crypto foundations, begin DS lecture-8 recovery with independent exercise reasoning, and identify/work on the outstanding Network lab. If Friday is impractical or the buffer is unnecessary, reduce actual workload or explicitly replan; there is no automatic catch-up debt.
+**Pilot focus, reviewed Sun 8 Nov at 22:34 (student-reported local time):** Crypto 1–2 and DS/Network 8–9 are now studied by report. The next main recovery block is Crypto lesson 3; retain the existing DS independent-exercise block and identify the outstanding Network lab/test requirements. No additional study is booked tonight or on Monday. Tuesday's three existing blocks remain unchanged. The experimental 14 hours remains a hypothesis; reported DS theory sessions of roughly 120 and 60 minutes do not establish homework pace or the time needed for Crypto 3–11. Unreported past blocks remain unconfirmed, with no automatic catch-up debt.
 
 
 
@@ -136,6 +136,7 @@ Crypto Tuesday 08:00–10:00 remains scheduled but not attended. Preserve the re
 | Classification | Recorded event / date | Status |
 | --- | --- | --- |
 | Official deadlines | Exams, homework, labs and intermediate assessments | None confirmed in the current memories; this does not mean none exist. |
+| User-reported assessment | Upcoming Network test, reported 5 Nov | Student confirms on 8 Nov that the exam date is unknown to them; test scope and whether it is the same assessment remain unconfirmed. Historical examples are available, but do not establish current requirements. |
 | User-reported deadlines | Specific due dates | None supplied. Recurring lecture times are linked from §B. |
 | Internal study milestone | Pilot 5–11 Nov 2026; review at its end or sooner if needed | User-agreed pilot, not an official deadline; review is not an automation. |
 | Date requiring verification | Semester-end target, 22 Dec 2026 | Internal target only; official calendar and winter exam dates remain unknown. |

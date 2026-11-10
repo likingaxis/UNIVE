@@ -16,7 +16,7 @@ Last update: **2026-11-07**, Europe/Rome: lesson-9 study completed by student re
 
 
 
-Network Infrastructures (Network), MSc Cybersecurity, Sapienza, 2026/27. **User-reported:** attendance continues, general theoretical understanding is reasonably good, and rough notes are written during lectures. Several laboratories have been completed; at least one recent lab requires recovery, but its identity is unknown. Francesca Cuomo is named in the locally inspected PON deck (2026-11-05); current official instructor/course website not independently established here.
+Network Infrastructures (Network), MSc Cybersecurity, Sapienza, 2026/27. **User-reported:** attendance continues, general theoretical understanding is reasonably good, and rough notes are written during lectures. Several laboratories have been completed. **User clarification, 2026-11-08:** the lab requiring recovery is the latest one; its assignment number, topic and material mapping remain unknown. Do not identify it with local Lab 3 solely because that is the highest filename. Francesca Cuomo is named in the locally inspected PON deck (2026-11-05); current official instructor/course website not independently established here.
 
 
 
@@ -207,7 +207,7 @@ Preserve the aggregate user report of several completed labs and at least one re
 
 
 
-**2026/27 exam format: not yet verified.** Components, grading, duration, permitted resources, practical requirements, dates and deadlines are unknown. On 2026-11-05 the user reported an upcoming test and supplied historical examples (NI-L7); no current date or complete scope was supplied. These supersede the initial absence of identified samples, not the unknown status of current requirements. The older theory PDF has not been assessed for examination information.
+**2026/27 exam format: not yet verified.** Components, grading, duration, permitted resources, practical requirements, dates and deadlines are unknown. On 2026-11-05 the user reported an upcoming test and supplied historical examples (NI-L7); no current date or complete scope was supplied. On 2026-11-08, the student explicitly says they do not know the exam date; scope remains unspecified, and the relationship between this exam reference and the previously reported test is not clarified. Do not infer a scheduled date or urgency. These supersede the initial absence of identified samples, not the unknown status of current requirements. The older theory PDF has not been assessed for examination information.
 
 
 
@@ -237,7 +237,7 @@ When substantial study/exam planning needs alignment, check identified official 
 
 
 
-- **User-reported recovery:** at least one recent lab; identity and remaining work unknown.
+- **User-reported recovery, clarified 2026-11-08:** the latest lab; assignment number/topic, exact remaining work and deadline unknown. Identify its actual material at the next practical preparation, without assuming local Lab 3 is the task.
 
 
 - **Local unresolved questions to revisit, not verified misconceptions:** Lab 2 asks about IP/MAC roles, gateways, routing selection and a slide-35 exercise; Lab 3 asks about key passphrases and contains unfinished forwarding sections. Confirm which doubts remain live before diagnosing gaps.
