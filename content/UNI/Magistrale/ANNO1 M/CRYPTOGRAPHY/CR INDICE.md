@@ -58,3 +58,11 @@ Materiali già presenti localmente, osservati il 10 novembre 2026; data di acqui
 - [Trascrizione della lezione 4](<Assets/TRANSCRIPTION/CR LESSON 4 Transcripted.md>): supporto alle spiegazioni e al punto di separazione fra le lezioni; contiene errori di trascrizione.
 - [Appunti di Davide — lezione 4](<Assets/APPUNTI_DAVIDE/lez. 4.md>): materiale secondario già presente, con aggiunte `#gemini`; acquisizione e anno accademico non verificati durante questa revisione.
 - [Appunti della lezione 4](<CR LESSON 4.md>): revisione editoriale e figure richieste completate il 10 novembre. Come indicato nella bozza, la prova iniziale è integrata alla fine della lezione 3, mantenendo la provenienza dalla lezione 4. Revisione e disponibilità dei materiali non attestano completamento dello studio o prestazioni autonome.
+
+## Materiale per lo studio — lezione 5
+
+Materiali già presenti localmente, osservati l'11 novembre 2026; acquisizione e integrità del download non registrate. Nessun nuovo download durante la revisione.
+
+- [Slide della lezione 5, 2026/27](Assets/SLIDES/crypto_lecture05_2627.pdf): 14 pagine; PRG e indistinguibilità, attacco non limitato, stretch polinomiale e prova per ibridi, introduzione ai predicati hard-core e alle permutazioni one-way.
+- [Trascrizione della lezione 5](<Assets/TRANSCRIPTION/CR LESSON 5 Transcripted.md>): supporto secondario, con errori di trascrizione.
+- [Appunti della lezione 5](<CR LESSON 5.md>): studio riferito come concluso l'11 novembre in circa due ore, stima approssimativa. Correzione editoriale e figure richieste completate; resta da studiare meglio l'ultima parte prima della lezione 6. Comprensione autonoma ed esercizi non verificati.

@@ -2,7 +2,7 @@
 
 
 
-Last update: **2026-11-10**, Europe/Rome: requested editorial cleanup now covers lesson-4 draft and its inline figure/integration requests. The supplied opening proof was integrated at the end of lesson 3, with its lesson-4 provenance retained. Lesson-3 active time remains unknown; no lesson-4 duration, study-completion report or independent assessment was supplied. Drafts and editing do not establish learning or exercise performance. CR-S2's last successful remote inventory remains 8 Nov, listing PDFs 1–11. Initialized with explicit authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md). Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities.
+Last update: **2026-11-11**, Europe/Rome: student reports finishing lesson 5 in **about 2 hours**, a rough estimate, and explicitly needs to study its final part more carefully before lesson 6. Requested editorial cleanup and inline figure requests completed; this does not independently verify understanding or exercise performance. Lesson-3 duration remains unknown; no explicit whole-lesson completion or duration report for lesson 4 is inferred. CR-S2's last successful remote inventory remains 8 Nov, listing PDFs 1–11. Initialized with explicit authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md); global agenda is in [STUDY_STATE.md](../STUDY_STATE.md).
 
 
 ## 1. Course identity and current status
@@ -99,6 +99,8 @@ Lecture-1 and lecture-2 study drafts are now present in the course directory; th
 
 **Local lesson-4 material observed, 2026-11-10:** [slide PDF](../../CRYPTOGRAPHY/Assets/SLIDES/crypto_lecture04_2627.pdf) (10 pages), [transcript](<../../CRYPTOGRAPHY/Assets/TRANSCRIPTION/CR LESSON 4 Transcripted.md>) and [friend's lesson-4 note](<../../CRYPTOGRAPHY/Assets/APPUNTI_DAVIDE/lez. 4.md>) already present; no download performed, acquisition dates/integrity verification unknown. All slide text extracted for orientation; PDF pp. 1–2 and 5–10 visually inspected, relevant transcript passages consulted, friend-note excerpts used as secondary context. Slides/transcript establish that the auxiliary-lemma proof opens lecture 4, followed by computational security, OWFs, negligible functions and computational worlds. The student explicitly requested its integration into lesson 3 inside the draft; both notes preserve the true boundary. Lesson 4 is now locally available, superseding the earlier linked-only inventory; no later-lecture material acquired or remote source recheck performed.
 
+**Local lesson-5 material observed, 2026-11-11:** [slide PDF](../../CRYPTOGRAPHY/Assets/SLIDES/crypto_lecture05_2627.pdf) (14 pages) and [transcript](<../../CRYPTOGRAPHY/Assets/TRANSCRIPTION/CR LESSON 5 Transcripted.md>) already present; no download performed and acquisition/integrity verification unknown. Slide text extracted but handwritten extraction is poor; all pages visually inspected for scope, with the transcript's reduction/hard-core passages consulted as secondary support. Actual local coverage includes PRGs, polynomial stretch, hybrids and the hard-core/OWP introduction, overlapping the earlier lesson-6 topic mapping. Preserve numbering and continue lesson 6 only after the student's requested review. [The Joy of Cryptography, §4.3.1](https://joyofcryptography.com/comp/) accessed on 11 Nov solely to check the marked quantifier detail in polynomial-length hybrid arguments; no current course/exam information established. A supplementary IACR PDF retrieval failed with 403; not imported. This supersedes lesson 5's earlier linked-only status, without changing CR-S2's last remote inventory date.
+
 ## 5. Notes status and authorship
 
 
@@ -123,11 +125,15 @@ The earlier report of no written notes is reconciled with the existing [lecture-
 
 **Lesson-4 editorial cleanup, 2026-11-10:** [existing draft](<../../CRYPTOGRAPHY/CR LESSON 4.md>) revised under the workspace Study Notes skill for English, connected prose, restrained headings and Obsidian math. Source-supported corrections distinguish efficient verification in NP from solving, and an attack-to-factoring reduction from a proof of insecurity. OWF notation now explicitly includes parameterized domains/functions, uniform inputs, any valid preimage, the adversary's parameter input and negligible success for every PPT adversary. The qualification about known public-key constructions is retained without claiming stronger assumptions are proved necessary. The existing collision-probability proof is integrated at the end of [lesson 3](<../../CRYPTOGRAPHY/CR LESSON 3.md>), preserving Cauchy–Schwarz and squared-deviation steps and citing lecture-4 provenance; lesson 4 links to it. Three requested SVG redrawings (limitations table, OWF direction and inversion game) and one converted reduction diagram saved in `Assets/CRPIC` as `CR_L4_*.svg`, with white backgrounds; all four rendered/visually checked. Original screenshot retained as a file, removed from the reading path as requested. Independent read-only review checked the textual/proof changes; this evaluates the notes, not the student's unaided performance. Prior authorship/AI assistance remain unconfirmed; Codex editorial/illustration assistance recorded. No study time, whole-lesson completion or exercise outcome inferred.
 
+**Lesson-5 editorial cleanup, 2026-11-11:** [existing note](<../../CRYPTOGRAPHY/CR LESSON 5.md>) corrected for English, connected prose, repeated proof scaffolding, heading levels and Obsidian math. The explicitly requested reduction-strategy passage is compacted; counting attack, concrete three-step hybrids, reductions and final hard-core examples retained. Ensemble indexing, output-bit conventions and shared-input hard-core notation clarified. A marked formal-review callout flags the uniform bound needed for polynomially many hybrids; no missing full proof added. Three requested SVG redrawings and two converted inline diagrams saved as `Assets/CRPIC/CR_L5_*.svg`, rendered and visually checked; replaced screenshot files retained. Student's final-part review warning is visible in the note. Prior authorship/study assistance unknown; Codex editorial/figure assistance recorded. No independent assessment or exercise outcome inferred.
+
 ## 6. Understanding and independent verification
 
 
 
 - Self-reported study: lectures 1 and 2 confirmed finished on 2026-11-05; lesson 2 ran 15:17–17:22. The hashing/pairwise-independence difficulty flagged on 5 Nov was revisited on 6 Nov for about 30 active minutes; the student now reports understanding it. On 10 Nov, the student supplied a lesson-3 draft for correction and said the study duration is unknown. This establishes lesson-3 written work, while explicit whole-lesson completion, per-topic understanding and a tutor report remain unconfirmed. No per-topic independent assessment supplied.
+
+- **User-reported, 2026-11-11:** lesson-5 study finished in approximately 2 hours; final part still needs better study before lesson 6. The note's final section concerns hard-core predicates, OWP-based PRGs and the non-universal-predicate example. This maps the review request to written coverage, rather than diagnosing which exact step is difficult. No tutor report, unaided proof or exercise result supplied; no completion of lessons 3–4 inferred from progression to lesson 5.
 
 - Independently verified understanding, proof reconstruction and exercise proficiency: **not verified**; no evidence recorded here.
 
@@ -177,11 +183,13 @@ Foundation recovery is needed, user-reported; precise weaknesses in probability,
 
 
 
+**2026-11-11 review need:** student explicitly wants to revisit lesson 5's final part before starting lesson 6. Use the hard-core section and its local sources; establish which step remains unclear through the student's explanation. Also retain the separate marked hybrid-proof quantifier detail as a document-review point, not an assessed misconception.
+
 ## 10. Next study actions and review priorities
 
 
 
-1. **Lesson 3: draft reviewed on 10 Nov.** Use the corrected note and already-local sources; whole-lesson study completion and any tutor assessment remain unconfirmed. Next useful check: reconstruct the affine-family argument or the LHL collision-probability split without copying, and review the marked seed-reuse limitation. Do not infer that lesson 4 is ready or that the planned Tuesday blocks were executed merely from editorial completion. Known current-year material extends through 11, with no study report for 4–11. Keep the pending lesson-1 check and independent MAC exercises as practice needs, without requiring a repeat of all of lesson 2.
+1. **Review lesson 5's final part before lesson 6**, as explicitly requested by the student. Reconstruct the hard-core definition and explain why the simple PRG construction uses a permutation; revisit the fixed-predicate counterexample as needed. Keep the marked hybrid-proof detail available for tutor review. The lesson-3 draft and lesson-4 review remain available, with whole-lesson completion/assessment unconfirmed; do not require a wholesale repeat or infer their study times. Retain the pending lesson-1 check, independent MAC practice and lesson-3 seed-reuse review as separate needs. Known current-year material extends through 11; lesson-6–11 study is unreported.
 2. Have the student reconstruct a definition and a short argument, then attempt a related exercise. Record real effort, assistance and gaps; adjust workload to observed pace rather than enforce weekly quotas.
 
 3. Locate a transcript only if needed for a specific gap; its previously observed file is absent from the latest inventory. Reassess readiness to resume attendance from actual ability to follow prerequisites and identify manageable gaps, not complete backlog recovery.
@@ -220,7 +228,15 @@ Update only this memory after meaningful confirmed changes. Link to work instead
 | --- | --- | --- | --- | --- | --- |
 | Lesson-3 theory/proofs and existing draft; requested editorial cleanup | Tuesday agenda reserves 120 min for beginning/continuing the lesson; this is not a whole-lesson estimate or evidence of execution | Unknown — student explicitly does not know; do not infer or request the same time again | Existing draft covers affine hashing, one-time MAC security and reuse attack, min-entropy, deterministic-extraction impossibility, seeded extraction and the LHL proof. Editorial cleanup complete; whole-lesson study completion and independent performance unconfirmed. | Codex editorial help; earlier authorship/tutor assistance unknown. No tutor report or exercise result supplied. Seed reuse marked for review; this is a document-scope issue, not a diagnosed misconception. | Brief unaided reconstruction/tutor feedback and marked review point; retain the unknown duration without using it to calibrate pace. |
 
+### Lesson-5 study and cleanup — 11 November 2026
+
+| Activity | Original estimate | Actual active minutes | Work/result and evidence | Assistance / difficulties | Next action |
+| --- | --- | --- | --- | --- | --- |
+| Lesson-5 theory/proofs, existing note and requested cleanup | No whole-lesson estimate recorded; do not reuse a lesson-3 agenda estimate | About 120 min, rough student estimate (“I think”); start/end and breaks not supplied | Student explicitly reports finishing lesson 5; [note](<../../CRYPTOGRAPHY/CR LESSON 5.md>) reviewed and corrected. Completion is self-reported; no independent proof/exercise result or tutor report supplied. | Study assistance unknown; Codex editorial/figure assistance. Student reports needing to study the final part better; precise difficult step not yet identified. No interruptions reported. | Review the final hard-core section before lesson 6. This single uncertain theory/proof observation is not a proof/exercise pace average. |
+
 ## 11. Last update and source-verification history
+
+- **2026-11-11, lesson-5 completion report and requested cleanup:** approximate duration, unresolved final-part review and document/source status recorded above. Local sources already present; no material downloaded or fresh course inventory/exam verification. Global agenda records an additional reported activity with unknown clock times; earlier reserved blocks remain unconfirmed.
 
 - **2026-11-10, requested lesson-3 cleanup:** local note, existing PDF and transcript inspected within the scope recorded in §§4–5. Local availability and document-review status updated; no download, fresh remote verification, independent assessment or timing estimate. Global agenda and attendance unchanged because the request does not establish slot execution or a scheduling change.
 
