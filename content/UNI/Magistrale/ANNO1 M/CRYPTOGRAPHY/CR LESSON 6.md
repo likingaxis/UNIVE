@@ -26,7 +26,40 @@ For example, if $f(x) = 10110$ and $h(x) = 1$, then $f_{\mathrm{bad}}(x) = 10110
 Two properties must hold for $f_{\mathrm{bad}}$ to refute a universal predicate:
 
 1. **$h$ is not hard-core for $f_{\mathrm{bad}}$.** Given $f_{\mathrm{bad}}(x) = f(x) \parallel h(x)$, an efficient predictor simply reads the last bit of the output and obtains $h(x)$ with probability $1$, which exceeds $1/2 + \operatorname{negl}(n)$.
+Recall the hard-core security requirement:
+
+\[ \Pr[\mathcal A(f(x))=h(x)] \leq \frac12+\operatorname{negl}(n) \]
+
+This says that an efficient adversary shouldn't predict \(h(x)\) significantly better than random guessing.
+
+But for our constructed function, the adversary can simply read the last bit:
+
+\[ \boxed{ \Pr[\mathcal A(f_{\mathrm{bad}}(x))=h(x)]=1 } \]
 2. **$f_{\mathrm{bad}}$ is still a one-way function.** Revealing one efficiently computable bit $h(x)$ alongside $f(x)$ does not let an efficient adversary recover a full preimage $x'$, as proved below.
+
+>[!info]- negligible parenthesis for better understanding of the next theorem
+> 
+> For a one-way function \(f\), we require that every PPT adversary \(\mathcal A\) has a negligible probability of successfully inverting \(f\).
+> 
+> We can write:
+> 
+> \[ \boxed{\Pr[\mathcal A\text{ wins}]\leq\operatorname{negl}(n)} \]
+> 
+> A negligible function eventually becomes smaller than \(1/p(n)\) for every positive polynomial \(p(n)\).
+> 
+> Now, if we assume that \(f_{\mathrm{bad}}\) is not one-way, we're saying that some PPT adversary \(\mathcal A\) has a non-negligible success probability.
+> 
+> That means:
+> 
+> \[ \boxed{\Pr[\mathcal A\text{ wins}]=\varepsilon(n)} \]
+> 
+> with
+> 
+> \[ \boxed{\varepsilon(n)\geq\frac{1}{p(n)}} \]
+> 
+> for some polynomial \(p(n)\), for infinitely many \(n\).
+> 
+> Notice the direction of the inequality!
 
 ### Theorem — $f_{\mathrm{bad}}$ remains one-way
 
@@ -53,7 +86,7 @@ Given a challenge $y = f(x)$ from the OWF challenger $\mathcal C$ (where $x \get
 To analyze $\mathcal B$'s success probability, consider the event $\tilde b = h(x)$. Since $\tilde b$ is a fair coin flip independent of $x$, we have $\Pr[\tilde b = h(x)] = 1/2$. Conditioned on $\tilde b = h(x)$:
 
 - $x$ is still uniformly distributed on $\{0,1\}^n$, and
-- $\mathcal A$'s input is $y \parallel \tilde b = f(x) \parallel h(x) = f_{\mathrm{bad}}(x)$, which has the **exact** distribution of a real $\operatorname{Game}^{\mathrm{OWF}}_{f_{\mathrm{bad}}}$ challenge.
+- $\mathcal A$'s input is $(y \parallel \tilde b )= (f(x) \parallel h(x)) = (f_{\mathrm{bad}}(x))$, which has the **exact** distribution of a real $\operatorname{Game}^{\mathrm{OWF}}_{f_{\mathrm{bad}}}$ challenge.
 
 Therefore, conditioned on $\tilde b = h(x)$, $\mathcal A$ returns a valid preimage $x'$ satisfying $f_{\mathrm{bad}}(x') = y \parallel \tilde b$ with probability $\varepsilon(n)$. Whenever this happens,
 
@@ -61,7 +94,7 @@ $$
 f(x') \parallel h(x') = y \parallel \tilde b,
 $$
 
-so comparing the first $n$ bits guarantees $f(x') = y$, meaning $x'$ is also a valid preimage of $y$ under $f$. (We make no claim about what $\mathcal A$ outputs when $\tilde b \neq h(x)$, so we simply lower-bound $\mathcal B$'s probability by keeping only the good case $\tilde b = h(x)$.) Thus,
+so comparing the first $n$ bits guarantees $f(x') = y$, meaning $x'$ is also a valid preimage of $y$ under $f$. (We make no claim about what $\mathcal A$ outputs when $\tilde b \neq h(x)$ (the case 2), so we simply lower-bound $\mathcal B$'s probability by keeping only the good case $\tilde b = h(x)$.) Thus,
 
 $$
 \begin{aligned}
@@ -75,7 +108,17 @@ $$
 Because $\varepsilon(n)$ is non-negligible, $\frac{1}{2}\varepsilon(n)$ is also non-negligible. Moreover, $\mathcal B$ runs in polynomial time because it only flips one coin and runs the PPT adversary $\mathcal A$ once. This contradicts the one-wayness of $f$. Hence $f_{\mathrm{bad}}$ is one-way, while $h$ is not hard-core for it. **End of proof.**
 
 This rules out a universal hard-core predicate that works for every unmodified OWF. Notice that $f_{\mathrm{bad}}$ expands the output length by one bit relative to $f$; the general takeaway is that a hard-core predicate must be tailored to the function—or obtained by transforming the function first.
+Two incompatible conclusions about the same adversary \(\mathcal B\)
 
+Because \(f\) is one-way:
+
+\[ \Pr[\mathcal B\text{ inverts }f] \leq\operatorname{negl}(n) \]
+
+Because we assumed \(f_{\mathrm{bad}}\) is not one-way:
+
+\[ \Pr[\mathcal B\text{ inverts }f] \geq\frac12\varepsilon(n) \]
+
+A success probability cannot simultaneously be negligible and non-negligible.
 ## The Goldreich–Levin theorem
 
 Since a single predicate cannot work for every unmodified OWF $f$, the next best thing is to transform any OWF $f$ into a related OWF $g$ that *does* have a known, explicit hard-core predicate $h$. That is precisely what the Goldreich–Levin theorem provides.
@@ -102,7 +145,8 @@ Here $x = (x_1,\dots,x_n)$ and $r = (r_1,\dots,r_n)$ are $n$-bit strings, and $\
 
 Intuitively, each bit $r_i = 1$ selects the bit $x_i$ to include in the XOR sum, while bits with $r_i = 0$ are ignored. Thus, for a uniformly random $r$, $f(x)$ may leak partial information about $x$, yet it still hides the parity (XOR) of a random subset of the bits of $x$.
 
-> [!example]- Computing the Goldreich–Levin predicate
+
+> [!example]- Example: Computing the Goldreich–Levin predicate
 > Let $n = 4$, $x = 1011$, and $r = 1101$. Then
 > $$
 > g(x,r) = f(1011) \parallel 1101,
@@ -119,11 +163,11 @@ Intuitively, each bit $r_i = 1$ selects the bit $x_i$ to include in the XOR sum,
 
 **Proof of property 1 begins here.** Suppose, for contradiction, that there exists a PPT adversary $\mathcal A$ that inverts $g$ with non-negligible probability $\varepsilon(n)$. We construct a PPT reduction $\mathcal B$ that uses $\mathcal A$ to invert $f$.
 
-| | Adversary $\mathcal A$ | Reduction $\mathcal B$ |
-| --- | --- | --- |
-| Goal | Invert $g(x,r) = f(x) \parallel r$ | Invert $f(x)$ |
-| Input received | $y \parallel r$ | $y = f(x)$ for unknown $x \gets U_n$ |
-| Output returned | Candidate $(x', r') \in \{0,1\}^{2n}$ | Candidate $x' \in \{0,1\}^n$ |
+|                 | Adversary $\mathcal A$                | Reduction $\mathcal B$               |
+| --------------- | ------------------------------------- | ------------------------------------ |
+| Goal            | Invert $g(x,r) = f(x) \parallel r$    | Invert $f(x)$                        |
+| Input received  | $y \parallel r$                       | $y = f(x)$ for unknown $x \gets U_n$ |
+| Output returned | Candidate $(x', r') \in \{0,1\}^{2n}$ | Candidate $x' \in \{0,1\}^n$         |
 
 ![[CR_L6_gl_one_wayness_reduction.svg|760]]
 
@@ -136,7 +180,15 @@ Given a challenge $y = f(x)$ from the OWF challenger $\mathcal C$ (where $x \get
 Why is this simulation exact? In the real one-wayness game for $g$, the challenger samples $(x,r) \gets U_{2n}$, which is equivalent to sampling $x \gets U_n$ and $r \gets U_n$ independently, and hands $g(x,r) = f(x) \parallel r$ to $\mathcal A$. Because $\mathcal B$ receives $y = f(x)$ for $x \gets U_n$ and samples $r \gets U_n$ independently, the string $y \parallel r$ given to $\mathcal A$ has the **exact** distribution of a real $g$-challenge.
 
 Contrast this with the $f_{\mathrm{bad}}$ reduction: there, the appended bit $h(x)$ depended on the hidden input $x$, forcing $\mathcal B$ to guess $\tilde b$ and lose a factor of $1/2$. Here, $r$ is completely independent of $x$, so $\mathcal B$ does not need to guess anything—there is **no factor of $1/2$ or $2^{-n}$ loss**.
+Constructing a genuine challenge
 
+Since \(r\) is sampled independently and uniformly, the string \(y\parallel r\) has exactly the same distribution as a genuine \(g(x,r)\) challenge.
+
+Therefore:
+
+\[ \boxed{\Pr[\text{correct simulation}]=1} \]
+
+Unlike the \(f_{\mathrm{bad}}\) proof, we don't need to guess a specific unknown bit.
 Whenever $\mathcal A$ returns a valid preimage $(x', r')$ for $y \parallel r$, we have
 
 $$
