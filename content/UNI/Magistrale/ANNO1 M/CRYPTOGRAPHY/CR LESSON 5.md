@@ -1,8 +1,10 @@
 # Lesson 5 — Pseudorandom Generators and Hard-Core Bits
 
-## PSEUDORANDOMNESS
+## Pseudorandomness
 
-**Pseudorandomness** means that an efficient adversary cannot distinguish a pseudorandom output from a uniform random string except with negligible advantage. Imagine an adversary $\mathcal A$ that receives a string $z$ generated in one of two worlds:
+The goal is to turn a short uniform seed into a longer string that looks random to an efficient adversary. A deterministic generator expands the number of output bits; it does not create additional genuine randomness. **Pseudorandomness** describes the computational guarantee: an efficient adversary cannot distinguish the generated output from a uniform string of the same length except with negligible advantage.
+
+Consider an adversary $\mathcal A$ that receives a string $z$ generated in one of two worlds:
 
 - **World 0:** $z=G(s)$, where $s\gets U_\lambda$ is a uniformly random seed.
 - **World 1:** $z\gets U_{\lambda+\ell}$, a uniform random string of the same length as $G(s)$.
@@ -26,7 +28,7 @@ X=\{X_\lambda\}_{\lambda\in\mathbb N},
 \qquad Y=\{Y_\lambda\}_{\lambda\in\mathbb N}.
 $$
 
-The ensembles are **indexed by** the security parameter $\lambda$: for each parameter value, $X_\lambda$ and $Y_\lambda$ describe the distributions being compared. This is what the parameter notation means; it does not say that their sampled values are numerically bounded by $\lambda$.
+The ensembles are **indexed by** the security parameter $\lambda$: for each parameter value, $X_\lambda$ and $Y_\lambda$ describe the distributions being compared. The index does not numerically bound the sampled values. Samples must have compatible representations; in our PRG experiment they have the same length, since a difference in length alone would reveal the world.
 
 We say that $X$ and $Y$ are computationally indistinguishable, written $X\approx_c Y$, if, for every PPT adversary $\mathcal A$,
 
@@ -37,6 +39,8 @@ $$
 $$
 
 The negligible bound may depend on the adversary, and the condition holds for sufficiently large $\lambda$. In $\Pr[\mathcal A(X_\lambda)=1]$, we sample a string according to $X_\lambda$, give it to $\mathcal A$, and measure the probability that $\mathcal A$ outputs $1$. The probability includes the randomness of the sample and of the adversary.
+
+Computational indistinguishability does not require the distributions to be statistically close. They can be far apart while every efficient test has negligible advantage. The definition also applies beyond PRGs: the professor gives encryptions of $0$ and $1$ as another pair of distributions one might want an efficient adversary to be unable to distinguish.
 
 > [!example]- Example of distinguishability
 > If $\Pr[\mathcal A(X_\lambda)=1]=0.80$ and $\Pr[\mathcal A(Y_\lambda)=1]=0.30$, the distinguishing advantage is $|0.80-0.30|=0.50$. These numbers illustrate advantage at a fixed parameter value.
@@ -50,7 +54,7 @@ The negligible bound may depend on the adversary, and the condition holds for su
 
 For a guessing interpretation, let $b=0$ denote the $X_\lambda$ world and $b=1$ the $Y_\lambda$ world. The adversary wins when $b'=b$. Thus, outputting $1$ means guessing World 1; it does not necessarily mean winning.
 
-### Claryfing 1 in advantages
+### Clarifying the output bit in the advantage
 
 The definition measures how differently the adversary behaves in the two worlds, rather than directly measuring its probability of guessing correctly. If the adversary always outputs $1$, then
 
@@ -61,7 +65,7 @@ $$
 
 so its distinguishing advantage is $|1-1|=0$. With equally likely worlds, this strategy guesses correctly half the time but learns nothing from its sample.
 
-## Formal definition of a PRG(Pseudorandom Generators)
+## Formal definition of a PRG
 
 A pseudorandom generator is a deterministic, polynomial-time computable function
 
@@ -86,9 +90,9 @@ $$
 \leq\operatorname{negl}(\lambda).
 $$
 
-## Exercise to understand better this concept
-No pseudorandom generator is secure against computationally unbounded adversaries, not even if it stretches the input by only one bit.
-Consider:
+## Exercise: why an unbounded adversary can distinguish
+
+**Claim:** no PRG with positive stretch is secure against computationally unbounded adversaries. To see why, consider even a one-bit stretch:
 
 $$
 G:\{0,1\}^{\lambda}\rightarrow\{0,1\}^{\lambda+1}
@@ -100,24 +104,17 @@ We have two possible worlds:
 
 - World 1: $z\gets U_{\lambda+1}$.
 
-Notice that $G$ takes a $\lambda$-bit seed and generates a $(\lambda+1)$-bit output.
-How many possible inputs and outputs are there?
-The number of possible output strings is twice the number of possible seeds.
+There are $2^\lambda$ possible seeds and $2^{\lambda+1}$ possible output strings. Thus, the output space is twice as large as the seed space, and $G$ can reach at most half of it.
 
 ![[CR_L5_seed_output_spaces.svg|750]]
 
-Consequently, there must be some strings of length $\lambda+1$ that $G$ can never generate.
-
-This observation is fundamental to the professor's proof.
+Some strings of length $\lambda+1$ can therefore never be generated. The attack tests whether its challenge belongs to the image of $G$.
 
 Given $z\in\{0,1\}^{\lambda+1}$, the adversary performs the following:
 
 1. Enumerate all $2^\lambda$ possible seeds.
-
 2. Compute $G(s)$ for each seed.
-
 3. If any $G(s)=z$, output $1$.
-
 4. Otherwise, output $0$.
 
 Mathematically:
@@ -126,21 +123,13 @@ $$
 \mathcal A(z)= \begin{cases} 1 & \text{if }\exists s:G(s)=z\\ 0 & \text{otherwise} \end{cases}
 $$
 
-World 0: $z=G(s)$, where $s\gets U_\lambda$.
-
-Since $z$ was generated by $G$, the adversary is guaranteed to find at least one matching seed.
-
-Therefore:
+**Generated world:** if $z=G(s)$ for $s\gets U_\lambda$, the search must find at least one matching seed. Therefore,
 
 $$
 \boxed{\Pr[\mathcal A(G(U_\lambda))=1]=1}
 $$
 
-World 1: $z\gets U_{\lambda+1}$.
-
-There are $2^{\lambda+1}$ possible strings, but $G$ can produce at most $2^\lambda$ distinct outputs.
-
-Therefore:
+**Uniform world:** if $z\gets U_{\lambda+1}$, at most $2^\lambda$ of the $2^{\lambda+1}$ possible strings pass the test. Therefore,
 
 $$
 \boxed{\Pr[\mathcal A(U_{\lambda+1})=1]\leq\frac12}
@@ -159,9 +148,8 @@ $$
 An advantage of at least $1/2$ is non-negligible. However, this attack enumerates all $2^\lambda$ seeds, so it does not run in polynomial time. It rules out security against computationally unbounded adversaries while remaining compatible with security against PPT adversaries. The same counting argument applies to any positive stretch.
 
 ## How to construct a PRG
-Remember the concept of a One-Way Function (OWF) from the previous lessons.
 
-A one-way function $f$ has two fundamental properties:
+The counting attack explains why security must be computational. The next question is how to construct a generator that satisfies it. We return to a **one-way function (OWF)** $f$, which has two properties:
 
 1. Easy to compute: Given $x$, we can compute $f(x)$ in polynomial time.
 
@@ -169,7 +157,7 @@ A one-way function $f$ has two fundamental properties:
 
 The professor introduces the following theorem.
 
-Theorem — OWFs imply PRGs
+### Theorem 1 — OWFs imply PRGs
 
 If one-way functions exist, then secure pseudorandom generators with polynomial stretch also exist.
 
@@ -177,17 +165,13 @@ $$
 \boxed{\text{OWFs exist}\implies\text{PRGs exist}}
 $$
 
-More precisely, for any polynomially bounded stretch $\ell(\lambda)$, we can construct a secure PRG:
+More precisely, for any positive, efficiently computable, polynomially bounded stretch $\ell(\lambda)$, we can construct a secure PRG:
 
 $$
 G:\{0,1\}^{\lambda}\rightarrow \{0,1\}^{\lambda+\ell(\lambda)}
 $$
 
-Being difficult to invert does not automatically mean a function's output looks random.
-
-A one-way function might produce outputs with recognizable patterns, but still be computationally difficult to invert.
-
-For example, if $f$ is a one-way function, consider:
+One-wayness alone does not make a function's output look random: a function may be hard to invert while revealing an easily recognizable pattern. For example, if $f$ is one-way, consider
 
 $$
 f'(x)=0\parallel f(x)
@@ -195,29 +179,35 @@ $$
 
 This function remains one-way, but its output always starts with $0$, whereas a uniform string starts with $0$ only half the time. This gives an efficient distinguishing test.
 
-The professor's theorem is not saying:
+The theorem therefore promises a construction starting from any OWF; it does not identify every OWF itself as a PRG.
 
-> Every one-way function is already a secure PRG.
+### Scope of the proof
 
-Instead, it says:
+**Proof status: the full proof of Theorem 1 is not given in this lecture.** The professor develops two ingredients instead. First, we assume a secure one-bit-stretch PRG and prove that its stretch can be amplified (Theorem 2). Then we construct a one-bit-stretch PRG under the stronger assumption of a one-way permutation with a hard-core predicate (Theorem 3). These results do not constitute the full proof for arbitrary OWFs.
 
-> Starting from any one-way function, it is theoretically possible to construct a secure PRG.
-
-### Theorem proof
-
-The full proof is beyond this lecture. We focus on two ingredients: stretch amplification and hard-core bits.
-
-### Ingredient 1 Stretch amplification
+### Ingredient 1: stretch amplification
 
 > If we already have a secure PRG that generates only one additional bit, can we use it to generate polynomially many additional bits?
 
-Assume we already have a secure PRG:
+#### Theorem 2 — Statement and assumption
+
+Assume we already have a deterministic, polynomial-time computable secure PRG:
 
 $$
 G:\{0,1\}^{\lambda}\rightarrow\{0,1\}^{\lambda+1}
 $$
 
-It receives a $\lambda$-bit seed and produces $\lambda+1$ bits.
+Its security means $G(U_\lambda)\approx_c U_{\lambda+1}$. **This is an assumption of Theorem 2; we do not prove it in the stretch-amplification argument.**
+
+**Conclusion to prove:** for any positive, efficiently computable, polynomially bounded stretch $\ell(\lambda)$, the iterative construction below defines a secure PRG $G^\ell$, satisfying
+
+$$
+\boxed{G^\ell(U_\lambda)\approx_c U_{\lambda+\ell}}.
+$$
+
+#### Construction of the amplified generator
+
+The original generator $G$ receives a $\lambda$-bit seed and produces $\lambda+1$ bits.
 
 We divide its output into two parts:
 
@@ -225,12 +215,7 @@ $$
 \boxed{G(s_0)=(s_1,b_1)}
 $$
 
-where:
-
-- $s_1$ contains $\lambda$ bits.
-- $b_1$ contains just $1$ bit.
-
-We reuse $s_1$ as the input to $G$ in the next iteration.
+Here $s_1$ is a $\lambda$-bit state and $b_1$ is one output bit. We reuse $s_1$ as the input to the next evaluation of $G$.
 
 ![[CR_L5_stretch_amplification.svg|700]]
 
@@ -257,61 +242,74 @@ This defines a new generator:
 $$
 \boxed{ G^\ell:\{0,1\}^{\lambda}\rightarrow \{0,1\}^{\lambda+\ell} }
 $$
-Since our goal is to produce $\lambda+\ell$ bits, we only need one state of length $\lambda$ and the $\ell$ additional bits generated during the iterations.
+The output contains the $\ell$ generated bits and only the final $\lambda$-bit state:
 
 $$
 \underbrace{(b_1,b_2,\ldots,b_\ell)}_{\ell\text{ bits}} \parallel \underbrace{s_\ell}_{\lambda\text{ bits}}
 $$
 
-Therefore:
+Therefore,
 
 $$
-\boxed{|G^\ell(s_0)|=\lambda+\ell}
-$$
-We reveal only the final state, not all intermediate states.
-
-Remember:
-
-$$
-G(s_i)=(s_{i+1},b_{i+1})
+\boxed{|G^\ell(s_0)|=\lambda+\ell}.
 $$
 
-If an adversary receives $s_i$, $s_{i+1}$, and $b_{i+1}$, it can simply compute $G(s_i)$ and check whether the relationship holds.
+Intermediate states are not included in this output. If an adversary received $s_i$ together with $(s_{i+1},b_{i+1})$, it could evaluate $G(s_i)$ and check the deterministic relation $G(s_i)=(s_{i+1},b_{i+1})$.
+
+The professor also points out a state-compromise limitation: knowing an internal state $s_i$ lets an adversary compute the subsequent states and output bits by continuing to evaluate $G$. The theorem below concerns the specified finite output $(b_1,\ldots,b_\ell,s_\ell)$; it does not promise unpredictability of a future continuation after the final state has been revealed.
 
 ### is it secure?
 
-We have constructed $G^\ell$ by repeatedly applying $G$, but expansion alone does not prove security. We must show
+**Proof of Theorem 2 begins here.** We assume that the original one-bit-stretch generator is secure,
 
 $$
-G^\ell(U_\lambda)\approx_c U_{\lambda+\ell}
+G(U_\lambda)\approx_c U_{\lambda+1},
 $$
 
-using the assumption $G(U_\lambda)\approx_c U_{\lambda+1}$.
+and want to prove security of the amplified construction:
+
+$$
+\boxed{G^\ell(U_\lambda)\approx_c U_{\lambda+\ell}}.
+$$
+
+Here $\ell=\ell(\lambda)>0$ is efficiently computable and polynomially bounded. The security parameter and the construction are public. The proof follows this route: assume an adversary against $G^\ell$, define hybrids, construct an adversary against $G$, calculate its advantage, and derive a contradiction.
 
 #### 1. Proof strategy: Reduction and contradiction
 
-Suppose a PPT adversary $\mathcal A$ distinguishes $G^\ell(U_\lambda)$ from $U_{\lambda+\ell}$ with non-negligible advantage. We must construct a PPT adversary $\mathcal B$ that uses $\mathcal A$ to distinguish $G(U_\lambda)$ from $U_{\lambda+1}$. Such a construction would contradict the assumed security of $G$.
+Suppose, for contradiction, that $G^\ell$ is insecure. There is then a PPT adversary $\mathcal A$ whose distinguishing advantage
 
-We assume $\mathcal A$ exists for the contradiction; we must explicitly construct $\mathcal B$ and prove that it works.
+$$
+\varepsilon(\lambda)=
+\left|
+\Pr[\mathcal A(G^\ell(U_\lambda))=1]
+-\Pr[\mathcal A(U_{\lambda+\ell})=1]
+\right|
+$$
+
+is non-negligible. This does not mean that $\mathcal A$ always identifies the correct world. It means that its probabilities of outputting $1$ differ by a non-negligible amount between the two worlds.
+
+We will explicitly construct a PPT adversary $\mathcal B$ that uses this same $\mathcal A$ to distinguish $G(U_\lambda)$ from $U_{\lambda+1}$. If $\mathcal B$ also has non-negligible advantage, it contradicts our assumption that $G$ is secure.
 
 #### 2. Understanding the two adversaries
 
 | | Adversary $\mathcal A$ | Adversary $\mathcal B$ |
 | --- | --- | --- |
-| Goal | Break $G^\ell$ | Break $G$ |
+| Goal | Break the amplified generator $G^\ell$ | Break the original generator $G$ |
 | Input length | $\lambda+\ell$ bits | $\lambda+1$ bits |
-| Distinguishes | $G^\ell(U_\lambda)$ vs. $U_{\lambda+\ell}$ | $G(U_\lambda)$ vs. $U_{\lambda+1}$ |
-| Role | Assumed to exist | Must be constructed using $\mathcal A$ |
+| Challenge distributions | $G^\ell(U_\lambda)$ or $U_{\lambda+\ell}$ | $G(U_\lambda)$ or $U_{\lambda+1}$ |
+| Role in the proof | Assumed to exist for the contradiction | Constructed using $\mathcal A$ |
+
+The existence of $\mathcal A$ alone does not yet establish an attack against $G$: we must show how $\mathcal B$ can use it.
 
 #### 3. The problem with the direct reduction
 
-The challenger gives $\mathcal B$ a single string $z$, sampled either from $G(U_\lambda)$ or from $U_{\lambda+1}$. For $\ell>1$, this string is shorter than the input expected by $\mathcal A$. As the professor puts it, the adversaries “speak different languages.”
+The challenger gives $\mathcal B$ one string $z\in\{0,1\}^{\lambda+1}$, sampled either from $G(U_\lambda)$ or from $U_{\lambda+1}$. $\mathcal B$ does not know which distribution produced it. For $\ell>1$, this challenge is shorter than the input expected by $\mathcal A$; as the professor puts it, they “speak different languages.”
 
-Appending arbitrary bits would fix the length but would not ensure that the resulting sample follows a distribution $\mathcal A$ can distinguish. Moreover, $G^\ell$ invokes $G$ several times, whereas $\mathcal B$ receives only one challenge involving $G$.
+Appending arbitrary bits would fix the length but would not ensure the required input distributions. We need an efficient transformation whose output distribution retains the distinction between the two possible origins of $z$.
 
 #### 4. How will we solve this?
 
-The **hybrid argument** introduces distributions $H_0,\ldots,H_\ell$, where $H_0\equiv G^\ell(U_\lambda)$ and $H_\ell\equiv U_{\lambda+\ell}$. Each transition replaces one invocation of $G$ with uniform randomness. This lets the reduction embed its single challenge in one transition, then combine the transitions to compare the endpoints.
+We introduce hybrids $H_0,\ldots,H_\ell$ that gradually replace applications of $G$ with uniform sampling. Adjacent hybrids differ in exactly one place: a pair consisting of a state and an output bit is either generated by $G$ or sampled uniformly. This is where $\mathcal B$ can insert its challenge.
 
 ![[Pasted image 20261111115528.png]]
 
@@ -319,402 +317,249 @@ The **hybrid argument** introduces distributions $H_0,\ldots,H_\ell$, where $H_0
 
 #### 1. Goal and intuition
 
-Here, $\equiv$ denotes identical distributions. To connect the endpoint hybrids, we prove
+The endpoints will satisfy
 
 $$
-H_0\approx_c H_1\approx_c\cdots\approx_c H_\ell.
+H_0\equiv G^\ell(U_\lambda),
+\qquad H_\ell\equiv U_{\lambda+\ell}.
 $$
 
-**Why does this work?** By the triangle inequality, for any PPT adversary $\mathcal A$, defining $p_i=\Pr[\mathcal A(H_i)=1]$:
+Here $\equiv$ means identical distributions. Each $H_i$ denotes a distribution of complete output strings, not a pre-existing string whose bits $\mathcal B$ can reuse.
+
+Our assumption concerns $\mathcal A$ distinguishing these endpoints. **We do not assume that it distinguishes every adjacent pair.** The triangle inequality motivates looking at transitions: if $p_i=\Pr[\mathcal A(H_i)=1]$, then
 
 $$
-|p_0-p_\ell|  
-\leq  
-\sum_{i=0}^{\ell-1}|p_i-p_{i+1}|  
+|p_0-p_\ell|\leq\sum_{i=0}^{\ell-1}|p_i-p_{i+1}|.
 $$
 
-For this construction, the reductions must give a negligible bound that applies across the polynomially many transitions. The triangle inequality then makes the endpoint advantage negligible.
-
-> [!warning] Formal detail to review
-> A separate negligible bound for each fixed index is not by itself enough when $\ell=\ell(\lambda)$ grows. The argument needs a bound that holds uniformly over the transitions, or a reduction choosing the transition at random. The lecture presents the adjacent-hybrid reduction; revisit this quantifier detail when reconstructing the proof.
-
-Therefore:
-
-$$
-\boxed{H_0\approx_c H_\ell}  
-$$
+A difference between the endpoints must therefore be reflected in at least some transitions. To handle the polynomially many transitions with one PPT algorithm, we will let $\mathcal B$ choose its transition uniformly at random. Its advantage will be calculated explicitly below.
 
 #### 2. Constructing the hybrids
 
-Consider $\ell=3$.
-
-Our original construction starts with $s_0\gets U_\lambda$ and repeatedly computes:
+Take $\ell=4$. The original experiment $H_0$ begins with a uniform seed and performs all four calls to $G$:
 
 $$
-\begin{aligned}  
-G(s_0)&=(s_1,b_1)\\
-G(s_1)&=(s_2,b_2)\\
-G(s_2)&=(s_3,b_3)
-\end{aligned}  
+\begin{aligned}
+s_0&\gets U_\lambda,\\
+(s_1,b_1)&=G(s_0),\\
+(s_2,b_2)&=G(s_1),\\
+(s_3,b_3)&=G(s_2),\\
+(s_4,b_4)&=G(s_3).
+\end{aligned}
 $$
 
-The output is $(b_1,b_2,b_3,s_3)$.
+It outputs $(b_1,b_2,b_3,b_4,s_4)$. Only $s_0$ is sampled uniformly; the later states and bits are computed deterministically using $G$.
 
-The professor's idea is to **gradually replace each invocation of $G$ with uniform randomness**.
+The other hybrids produce an output of the same form, but generate its components differently:
 
-![[Pasted image 20261111121314.png]]
+| Hybrid | Uniform values sampled independently | Remaining computation |
+| --- | --- | --- |
+| $H_0$ | $s_0\gets U_\lambda$ | Four calls to $G$, starting from $s_0$ |
+| $H_1$ | $(s_1,b_1)\gets U_{\lambda+1}$ | Three calls, starting from $s_1$ |
+| $H_2$ | $b_1,b_2\gets U_1$ and $s_2\gets U_\lambda$ | Two calls, starting from $s_2$ |
+| $H_3$ | $b_1,b_2,b_3\gets U_1$ and $s_3\gets U_\lambda$ | One call, starting from $s_3$ |
+| $H_4$ | $b_1,b_2,b_3,b_4\gets U_1$ and $s_4\gets U_\lambda$ | No calls to $G$ |
 
-|Hybrid|Construction|
-|---|---|
-|$H_0$|Sample $s_0$ uniformly and apply $G$ three times|
-|$H_1$|Sample $(s_1,b_1)$ uniformly, then apply $G$ twice|
-|$H_2$|Sample $b_1,b_2,s_2$ uniformly and independently, then apply $G$ once|
-|$H_3$|Sample $b_1,b_2,b_3,s_3$ uniformly and independently|
+In $H_2$, for example, we sample two uniform output bits and one uniform state; we do not sample two seeds. There is no need to reconstruct earlier states $s_0,s_1$, because the experiment continues directly from the freshly sampled $s_2$.
 
-Every hybrid outputs $(b_1,b_2,b_3,s_3)$, but generates these values differently.
+The notation $U_n$ means a uniform distribution on $n$-bit strings. Thus, $b_j\gets U_1$ samples one bit, while $s_i\gets U_\lambda$ samples a $\lambda$-bit state. Sampling $b_1,b_2$ independently from $U_1$ is equivalent to sampling $(b_1,b_2)\gets U_2$; each pair $00,01,10,11$ has probability $1/4$. Independent fair coin flips describe exactly this sampling.
 
-Thus:
-
-$$
-H_0\equiv G^3(U_\lambda)  
-\qquad  
-H_3\equiv U_{\lambda+3}  
-$$
-
-**Why can we skip previous states?**
-
-For example, in $H_2$, we sample $s_2$ directly from $U_\lambda$. Therefore, we no longer need to compute $s_0$ or $s_1$. We simply continue the construction from $s_2$.
-
-This is how we gradually eliminate the invocations of $G$ until the entire output is uniform.
+> [!example]- Earlier illustration with three iterations
+> The same replacement pattern for $\ell=3$ is shown below. Its final output has $\lambda+3$ bits; the four-iteration example above has $\lambda+4$ bits.
+>
+> ![[Pasted image 20261111121314.png]]
 
 #### 3. General definition of $H_i$
 
-For any $0\leq i\leq\ell$, we define $H_i$ as follows.
+For any $0\leq i\leq\ell$, generate a sample from $H_i$ as follows:
 
-1. Sample $b_1,\ldots,b_i$ independently and uniformly from $\{0,1\}$.
-
+1. Sample $b_1,\ldots,b_i$ independently from $U_1$.
 2. Sample $s_i\gets U_\lambda$, independently of those bits.
+3. For $j=i+1,\ldots,\ell$, compute $(s_j,b_j)=G(s_{j-1})$.
+4. Output $(b_1,\ldots,b_\ell,s_\ell)$.
 
-3. Starting from $s_i$, apply $G$ another $\ell-i$ times:
+When $i=0$, the prefix is empty and every pair is generated using $G$, reproducing $G^\ell(U_\lambda)$. When $i=\ell$, no calls to $G$ remain. The output consists of $\ell$ independent uniform bits and an independent uniform $\lambda$-bit state, so it is exactly uniform on $\lambda+\ell$ bits. Consequently,
 
-    $$
-    (b_{i+1},\ldots,b_\ell,s_\ell)=G^{\ell-i}(s_i)  
-    $$
-
-    When $i=\ell$, there are no further calls to $G$; $G^0(s_\ell)=s_\ell$.
-
-4. Output:
-
-    $$
-    \boxed{H_i=(b_1,\ldots,b_\ell,s_\ell)}  
-    $$
-
-Every hybrid produces exactly $\lambda+\ell$ output bits.
+$$
+\boxed{H_0\equiv G^\ell(U_\lambda),\qquad H_\ell\equiv U_{\lambda+\ell}}.
+$$
 
 #### 4. Why are consecutive hybrids indistinguishable?
 
-Consider $H_i$ and $H_{i+1}$.
-
-The important difference is how we obtain $(s_{i+1},b_{i+1})$.
-
-**In $H_i$:**
+Fix a transition index $i\in\{0,\ldots,\ell-1\}$. The first $i$ output bits are uniform in both $H_i$ and $H_{i+1}$. The difference is the next pair:
 
 $$
-(s_{i+1},b_{i+1})=G(s_i),  
-\qquad s_i\gets U_\lambda  
+\begin{array}{c|c}
+H_i & (s_{i+1},b_{i+1})=G(s_i),\quad s_i\gets U_\lambda\\
+H_{i+1} & (s_{i+1},b_{i+1})\gets U_{\lambda+1}.
+\end{array}
 $$
 
-**In $H_{i+1}$:**
-
-$$
-(s_{i+1},b_{i+1})\gets U_{\lambda+1}  
-$$
-
-In both experiments, the first $i$ output bits are uniform, and the remaining steps are computed using the same procedure.
-
-The only change is therefore replacing:
-
-$$
-\boxed{G(U_\lambda)\quad\text{with}\quad U_{\lambda+1}}  
-$$
-
-This is exactly the security property we assumed for the original generator:
-
-$$
-G(U_\lambda)\approx_c U_{\lambda+1}  
-$$
-
-**Important:** This assumption does not mean the two distributions are identical. It means that no PPT adversary can distinguish them with non-negligible advantage.
-
-We will formally show, through a reduction, that this implies:
-
-$$
-H_i\approx_c H_{i+1}  
-$$
-
-for every consecutive pair.
-
-Once this is proved, the triangle inequality gives:
-
-$$
-\boxed{G^\ell(U_\lambda)\approx_c U_{\lambda+\ell}}  
-$$
+After this pair, both experiments continue by applying $G$ from $s_{i+1}$. Thus, each transition replaces $G(U_\lambda)$ with $U_{\lambda+1}$ and otherwise uses the same efficient procedure. An efficient adversary distinguishing the resulting adjacent hybrids could therefore distinguish the original challenge distributions. The next section constructs that reduction and then combines all transitions.
 
 ### Proving the Hybrid Argument
 
-We first prove $H_0\approx_c H_1$ by constructing an explicit reduction.
+#### Constructing $\mathcal B$ from $\mathcal A$
 
-For simplicity, let's use $\ell=3$.
+The challenger gives $\mathcal B$ a single string $z$ sampled from $G(U_\lambda)$ or $U_{\lambda+1}$. Using the same endpoint adversary $\mathcal A$ assumed above, $\mathcal B$ does the following:
 
-In $H_0$:
+1. Choose an index $I$ uniformly from $\{0,\ldots,\ell-1\}$, independently of $z$. Write $i$ for its selected value.
+2. Sample fresh prefix bits $b_1,\ldots,b_i$ independently from $U_1$, also independently of $z$.
+3. Split the received string as $z=(s_{i+1},b_{i+1})$, with a $\lambda$-bit state and a one-bit output. This step labels parts of $z$; it generates no new randomness.
+4. For $j=i+2,\ldots,\ell$, compute $(s_j,b_j)=G(s_{j-1})$.
+5. Form $z'=(b_1,\ldots,b_\ell,s_\ell)$, give this complete string to $\mathcal A$, and return its output: $\mathcal B(z)=\mathcal A(z')$.
 
-$$
-\begin{aligned} s_0&\gets U_\lambda\\ (s_1,b_1)&=G(s_0)\\ (s_2,b_2)&=G(s_1)\\ (s_3,b_3)&=G(s_2) \end{aligned}
-$$
+The prefix bits are newly generated by $\mathcal B$; they are not taken from $z$ or from a previously existing hybrid sample. They are called a prefix because they occupy the beginning of $z'$. The final string has $\lambda+\ell$ bits: $\ell$ output bits and one final $\lambda$-bit state.
 
-In $H_1$:
-
-$$
-\begin{aligned} (s_1,b_1)&\gets U_{\lambda+1}\\ (s_2,b_2)&=G(s_1)\\ (s_3,b_3)&=G(s_2) \end{aligned}
-$$
-
-Both output:
-
-$$
-(b_1,b_2,b_3,s_3)
-$$
-
-The difference is how the pair $(s_1,b_1)$ is generated.
-
-Suppose that there exists a PPT adversary $\mathcal A$ such that:
-
-$$
-\boxed{ \left| \Pr[\mathcal A(H_0)=1] - \Pr[\mathcal A(H_1)=1] \right| }
-$$
-
-is non-negligible.
-This means $\mathcal A$ can distinguish $H_0$ from $H_1$.
-Our hypothetical adversary $\mathcal A$ now distinguishes two consecutive hybrids. It is not necessarily the same adversary we initially imagined distinguishing $H_0$ from $H_\ell$.
-Our goal is to show that the existence of this $\mathcal A$ would contradict the security of the original generator $G$.
-**Constructing adversary $\mathcal B$.**
-
-We want to build a PPT adversary $\mathcal B$ that breaks $G$ using $\mathcal A$.
-
-Remember that $\mathcal B$ receives a challenge:
-
-$$
-z\in\{0,1\}^{\lambda+1}
-$$
-
-It comes from one of two possible distributions:
-
-$$
-z\gets G(U_\lambda)
-$$
-
-or:
-
-$$
-z\gets U_{\lambda+1}
-$$
-
-$\mathcal B$ doesn't know which one.
-
-Why don't we use $z$ to generate the first state and output bit of our hybrid construction?
-
-![[CR_L5_first_hybrid_reduction.svg|700]]
-
-$\mathcal B$ receives $z$ from the challenger.
-
-It divides $z$ into:
-
-$$
-\boxed{z=(s_1,b_1)}
-$$
-
-where $s_1$ contains $\lambda$ bits and $b_1$ contains one bit.
-Now $\mathcal B$ has $s_1$.
-
-It can simply run $G$ twice:
-
-$$
-\begin{aligned} (s_2,b_2)&=G(s_1)\\ (s_3,b_3)&=G(s_2) \end{aligned}
-$$
-
-$\mathcal B$ does not need to recover the original seed $s_0$: it only evaluates the efficient function $G$ on $s_1$ and then $s_2$. It constructs
-
-$$
-z'=(b_1,b_2,b_3,s_3)
-$$
-
-This string contains $\lambda+3$ bits, exactly what $\mathcal A$ expects.
-
-Then:
-
-$$
-\boxed{\mathcal B(z)=\mathcal A(z')}
-$$
-In other words, $\mathcal B$ simply returns whatever bit $\mathcal A$ outputs.
-**Why does this construction work?**
-
-There are two possibilities for the challenge $z$.
-
-Case 1 — The challenger gives B an output of G
-
-$$
-z\gets G(U_\lambda)
-$$
-
-This means that $(s_1,b_1)$ was obtained by applying $G$ to a uniformly random seed.
-
-Then $\mathcal B$ continues applying $G$ to obtain the remaining bits.
-
-This reproduces exactly the distribution $H_0$.
-
-$z\sim G(U_\lambda)\implies z'\sim H_0$
-
-Case 2 — The challenger gives B a uniform string
-
-$$
-z\gets U_{\lambda+1}
-$$
-
-Now $(s_1,b_1)$ is uniformly random.
-
-Then $\mathcal B$ applies $G$ to $s_1$ to generate the remaining bits.
-
-This reproduces exactly the distribution $H_1$.
-
-$z\sim U_{\lambda+1}\implies z'\sim H_1$
-The same algorithm $\mathcal B$ generates an input distributed exactly as $H_0$ or $H_1$, depending on its challenge, without knowing which world the challenger selected. This perfect simulation gives
-
-$$
-\Pr[\mathcal B(G(U_\lambda))=1] = \Pr[\mathcal A(H_0)=1]
-$$
-
-and:
-
-$$
-\Pr[\mathcal B(U_{\lambda+1})=1] = \Pr[\mathcal A(H_1)=1]
-$$
-
-Therefore:
-
-$$
-\boxed{ \operatorname{Adv}_{\mathcal B}^{G}(\lambda) = \operatorname{Adv}_{\mathcal A}^{H_0,H_1}(\lambda) }
-$$
-
-$\mathcal B$ inherits the non-negligible advantage of $\mathcal A$. It is also PPT because it runs $\mathcal A$ and performs only polynomially many additional computations. This contradicts the assumed security of $G$.
-
-Therefore:
-
-$$
-\boxed{H_0\approx_c H_1}
-$$
-The same reduction applies to every consecutive pair. Recall that $H_i$ samples $b_1,\ldots,b_i$ and $s_i$ uniformly and independently, runs $G$ another $\ell-i$ times, and outputs $(b_1,\ldots,b_\ell,s_\ell)$.
-
-We want to prove:
-
-$$
-\boxed{H_i\approx_c H_{i+1}}
-$$
-
-As before, we use a proof by contradiction.
-
-Assume there exists a PPT adversary $\mathcal A$ capable of distinguishing $H_i$ from $H_{i+1}$ with non-negligible advantage.
-
-We will construct an adversary $\mathcal B$ that breaks the original generator $G$.
-$\mathcal B$ receives a challenge:
-
-$$
-z\in\{0,1\}^{\lambda+1}
-$$
-
-The challenge is sampled either from $G(U_\lambda)$ or from $U_{\lambda+1}$.
-
-Here's the procedure:
+The general procedure for a selected transition is also shown in the existing illustration:
 
 ![[Pasted image 20261111124422.png]]
 
-As in the previous proof, consider the two possible worlds.
+#### Concrete simulation: $\ell=4$ and $i=2$
 
-Case 1 — The challenger gives $z\gets G(U_\lambda)$
-
-Then $(s_{i+1},b_{i+1})$ is generated by applying $G$ to a uniformly random seed.
-
-This matches the construction of $H_i$.
-
-Therefore:
+Suppose $\mathcal B$ chooses $i=2$. It samples $b_1,b_2$ independently, interprets its challenge as $z=(s_3,b_3)$, and computes $(s_4,b_4)=G(s_3)$. It gives $\mathcal A$
 
 $$
-z'\sim H_i
+z'=\left(
+\underbrace{b_1,b_2}_{\text{fresh uniform bits}},
+\underbrace{b_3}_{\text{from the challenge}},
+\underbrace{b_4,s_4}_{\text{computed using }G}
+\right).
 $$
 
-Case 2 — The challenger gives $z\gets U_{\lambda+1}$
+For instance, if the prefix sampling yields $(b_1,b_2)=(0,1)$, the actual input is $(0,1,b_3,b_4,s_4)$. The prefix remains independent of the challenge whether sampled before or after the remaining computation.
 
-Now $(s_{i+1},b_{i+1})$ is sampled uniformly.
+If $z\gets G(U_\lambda)$, the pair $(s_3,b_3)$ is generated by $G$ on a hidden uniform state $s_2$. Together with the fresh prefix and the final call to $G$, this is exactly $H_2$. $\mathcal B$ does not need to recover $s_2$.
 
-This matches the construction of $H_{i+1}$.
+If $z\gets U_{\lambda+1}$, splitting it yields a uniform $s_3$ and an independent uniform $b_3$. Together with $b_1,b_2$ and the final call to $G$, this is exactly $H_3$. A “uniform state” means that each of the $2^\lambda$ possible state strings has probability $2^{-\lambda}$; we make that claim here only in the uniform-challenge case.
 
-Therefore:
+The same boundary reasoning handles $i=0$: a generated challenge has already performed the first call $G(s_0)$ on a hidden uniform seed and leads to $H_0$, whereas a uniform challenge replaces the first pair and leads to $H_1$. For $i=\ell-1$, no further call to $G$ is needed; a uniform challenge gives $H_\ell$.
 
-$$
-z'\sim H_{i+1}
-$$
+> [!example]- Earlier first-transition illustration with $\ell=3$
+> For $i=0$, the prefix is empty. Split $z=(s_1,b_1)$, compute $(s_2,b_2)=G(s_1)$ and $(s_3,b_3)=G(s_2)$, and pass $(b_1,b_2,b_3,s_3)$ to $\mathcal A$. Generated and uniform challenges produce $H_0$ and $H_1$, respectively.
+>
+> ![[CR_L5_first_hybrid_reduction.svg|700]]
 
-In both cases, $\mathcal B$ perfectly simulates the distribution that $\mathcal A$ expects.
-$$
-\boxed{ \operatorname{Adv}_{\mathcal B}^{G} = \operatorname{Adv}_{\mathcal A}^{H_i,H_{i+1}} }
-$$
-If $\mathcal A$ had non-negligible distinguishing advantage, then $\mathcal B$ would too.
+#### Why the output probabilities match
 
-But $G$ is assumed secure, so this is a contradiction.
-
-Thus, the consecutive hybrids are computationally indistinguishable.
-$\mathcal B$ delegates the distinguishing decision to $\mathcal A$; its role is to construct the correct input distribution. We have established:
+For every selected index $i$, the simulation is exact:
 
 $$
-H_0\approx_c H_1\approx_c\cdots\approx_c H_\ell
+\boxed{
+\begin{aligned}
+z\gets G(U_\lambda)&\implies z'\text{ is distributed as }H_i,\\
+z\gets U_{\lambda+1}&\implies z'\text{ is distributed as }H_{i+1}.
+\end{aligned}}
 $$
 
-By the hybrid argument and the triangle inequality, because $\ell(\lambda)$ is polynomially bounded, the total distinguishing advantage remains negligible.
+$\mathcal B$ knows which index it selected, but does not know which challenge world it is in. It uses the same procedure in both worlds. The enlargement preserves the effect of the challenge's origin: an algorithm distinguishing the resulting long samples would also distinguish the original short challenges by returning the same bit.
 
-Therefore:
+Define $p_i=p_i(\lambda)=\Pr[\mathcal A(H_i)=1]$. The notation “$=1$” inside the probability specifies the event that $\mathcal A$ outputs the bit $1$; it does not say that the probability itself is $1$. All probabilities include the sample randomness and the adversary's random coins.
 
-$$
-H_0\approx_c H_\ell
-$$
-
-Substituting the definitions:
+Conditioned on $I=i$, exact simulation and $\mathcal B$ returning $\mathcal A$'s bit give
 
 $$
-\boxed{ G^\ell(U_\lambda)\approx_c U_{\lambda+\ell} }
+\begin{aligned}
+\Pr[\mathcal B(G(U_\lambda))=1\mid I=i]&=p_i,\\
+\Pr[\mathcal B(U_{\lambda+1})=1\mid I=i]&=p_{i+1}.
+\end{aligned}
 $$
 
-Thus, stretch amplification preserves pseudorandomness.
+For example, if $\mathcal A$ outputs $1$ with probability $0.3$ on $H_i$, then $\mathcal B$ outputs $1$ with probability $0.3$ in the generated-challenge world for that selected index. The probabilities are equal because the input distribution is identical and the output bit is passed on unchanged. No assumption that $\mathcal A$ always guesses correctly is needed.
 
-This completes the first main ingredient of the professor's theorem on slide 4.
+#### Averaging over the chosen transition
+
+With $\ell=4$, there are four possible transitions. $\mathcal B$ chooses one row of the following table, each with probability $1/4$, and sends exactly one string to $\mathcal A$:
+
+| Selected index | If $z\gets G(U_\lambda)$ | If $z\gets U_{\lambda+1}$ |
+| --- | --- | --- |
+| $i=0$ | An $H_0$ sample | An $H_1$ sample |
+| $i=1$ | An $H_1$ sample | An $H_2$ sample |
+| $i=2$ | An $H_2$ sample | An $H_3$ sample |
+| $i=3$ | An $H_3$ sample | An $H_4$ sample |
+
+The factor $1/4$ describes the choice of row, not $\mathcal A$'s success probability. Averaging the conditional output probabilities gives
+
+$$
+\begin{aligned}
+\Pr[\mathcal B(G(U_\lambda))=1]
+&=\frac{p_0+p_1+p_2+p_3}{4},\\
+\Pr[\mathcal B(U_{\lambda+1})=1]
+&=\frac{p_1+p_2+p_3+p_4}{4}.
+\end{aligned}
+$$
+
+For instance, the term $p_2/4$ in the first expression comes from choosing row $i=2$ with probability $1/4$ and then obtaining output $1$ with conditional probability $p_2$. Taking the absolute difference of the two averages gives
+
+$$
+\begin{aligned}
+\operatorname{Adv}_{\mathcal B}^{G}(\lambda)
+&=\left|\frac{p_0+p_1+p_2+p_3}{4}
+-\frac{p_1+p_2+p_3+p_4}{4}\right|\\
+&=\frac{|p_0-p_4|}{4}.
+\end{aligned}
+$$
+
+The intermediate terms cancel, leaving only the endpoint difference. For general $\ell=\ell(\lambda)$, the same calculation is
+
+$$
+\begin{aligned}
+\operatorname{Adv}_{\mathcal B}^{G}(\lambda)
+&=\left|\frac1\ell\sum_{i=0}^{\ell-1}p_i
+-\frac1\ell\sum_{i=0}^{\ell-1}p_{i+1}\right|\\
+&=\frac1\ell\left|\sum_{i=0}^{\ell-1}(p_i-p_{i+1})\right|\\
+&=\frac{|p_0-p_\ell|}{\ell}.
+\end{aligned}
+$$
+
+The denominator comes from the uniform choice among $\ell$ transitions: each conditional probability is weighted by $1/\ell$. The notation $\ell(\lambda)$ records that the number of iterations, and hence transitions, can depend on the security parameter, for example $\ell(\lambda)=\lambda^2$.
+
+By our contradiction assumption and the definitions of the endpoints,
+
+$$
+|p_0-p_\ell|
+=\left|\Pr[\mathcal A(G^\ell(U_\lambda))=1]
+-\Pr[\mathcal A(U_{\lambda+\ell})=1]\right|
+=\varepsilon(\lambda).
+$$
+
+Substituting this name for the endpoint difference yields
+
+$$
+\boxed{\operatorname{Adv}_{\mathcal B}^{G}(\lambda)
+=\frac{\varepsilon(\lambda)}{\ell(\lambda)}}.
+$$
+
+This calculation keeps the sign of each difference until after summing, which is why the terms telescope. It does not assume that $\mathcal A$ distinguishes every adjacent pair or that all transition differences have the same sign. Choosing the index inside one algorithm also handles the polynomial-length hybrid issue directly, rather than relying on a separate asymptotic claim for each fixed index.
+
+#### Contradiction and conclusion
+
+$\mathcal B$ is PPT: it samples at most $\ell-1$ prefix bits, performs at most $\ell-1$ evaluations of the efficient generator $G$, and runs the PPT adversary $\mathcal A$. These operations take polynomial time because $\ell(\lambda)$ is polynomially bounded.
+
+By assumption, $\varepsilon(\lambda)$ is non-negligible. Dividing it by the positive polynomially bounded $\ell(\lambda)$ still gives a non-negligible function. Therefore, $\mathcal B$ would distinguish $G(U_\lambda)$ from $U_{\lambda+1}$ with non-negligible advantage, contradicting the security assumption on $G$.
+
+Our temporary assumption that $G^\ell$ is insecure must be false. Hence
+
+$$
+\boxed{G^\ell(U_\lambda)\approx_c U_{\lambda+\ell}}.
+$$
+
+**End of the proof of Theorem 2.** Security of the original one-bit-stretch $G$ was assumed; security of the constructed $G^\ell$ has been proved. This establishes stretch amplification, the first ingredient of the general OWF-to-PRG result stated on PDF p. 4. The adjacent-hybrid simulation follows PDF pp. 7–11; the random-index averaging above makes its endpoint-advantage calculation explicit.
 
 ## Hard-Core Bits
 
 > [!warning] Review before lesson 6
 > I need to study this final part more carefully before starting lesson 6.
 
-To construct the original one-bit-stretch PRG, we return to one-way functions.
+### Motivation: one-wayness does not hide every input bit
 
-Suppose:
+Theorem 2 assumed a secure one-bit-stretch generator. We now ask how to obtain that starting generator. Let
 
 $$
 f:\{0,1\}^{n}\rightarrow\{0,1\}^{n}
 $$
 
-is a one-way function.
-
-This means:
-
-- Given $x$, computing $f(x)$ is easy.
-
-- Given $f(x)$, recovering a valid preimage is computationally hard.
+be a one-way function: evaluating $f(x)$ is efficient, while finding a valid preimage of $f(x)$ for uniform $x$ is computationally hard. Here $n$ plays the role of the security parameter $\lambda$ used earlier.
 
 The professor asks whether the hardness of finding a valid preimage also means that each input bit is hard to predict. Not necessarily: imagine an input consisting of two parts,
 
@@ -732,83 +577,71 @@ $$
 
 ![[Pasted image 20261111125011.png]]
 
-Even though $f$ is still one-way when $g$ is one-way, an adversary receiving $f(x)$ can easily recover $b$: it's simply the first bit of the output.
+The first output bit reveals $b$ immediately. However, finding a valid preimage still requires inverting $g$, so $f$ remains one-way. This separates two tasks: learning one input bit can be easy even when finding a complete valid preimage is hard.
 
-Finding a valid preimage of $g(t)$ remains hard, but the adversary does not need to invert the function to learn $b$.
+### Definition of a hard-core predicate
 
-A function can therefore be hard to invert while revealing some information about its input. To identify a bit that remains hidden, the professor introduces a function
+A hard-core predicate for $f$ is an efficiently computable function
 
 $$
 \boxed{h:\{0,1\}^{n}\rightarrow\{0,1\}}
 $$
 
-This function takes an entire input $x$ and outputs a single bit $h(x)$.
+with the following property: **given $f(x)$, no PPT adversary can predict the bit $h(x)$ with probability non-negligibly better than $1/2$, when $x$ is sampled uniformly.**
 
-We call $h$ a hard-core predicate for $f$ when:
+The adversary knows the functions $f$ and $h$, but does not receive $x$. The function $h$ is public, not a secret key. Knowing how to compute $h$ from an input does not necessarily allow the adversary to compute $h(x)$ from $f(x)$.
 
-- Computing $h(x)$ from $x$ is efficient.
-
-- Given only $f(x)$, no PPT adversary can predict $h(x)$ with probability significantly better than $1/2$, when $x$ is sampled uniformly.
-
-Formally, for every PPT adversary $\mathcal A$:
+A random guess of one bit already succeeds with probability $1/2$. The requirement is therefore not that prediction must always fail, but that no PPT adversary gains a non-negligible improvement over that baseline. Formally, for every PPT adversary $\mathcal A$,
 
 $$
-\boxed{ \Pr_{x\gets U_n} [\mathcal A(f(x))=h(x)] \leq \frac12+\operatorname{negl}(n) }
+\boxed{\Pr_{x\gets U_n}[\mathcal A(f(x))=h(x)]
+\leq\frac12+\operatorname{negl}(n)}.
 $$
 
-We use $n$ here as the security parameter, following the professor's notation. The professor gives an equivalent distributional formulation: the left-hand pair uses one shared sample $x\gets U_n$, while the comparison bit $u\gets U_1$ on the right is independent of $x$:
+The probability includes the uniform choice of $x$ and the adversary's random coins. The negligible bound may depend on $\mathcal A$.
+
+This requirement is **one-directional**: the adversary receives $f(x)$ and tries to predict $h(x)$. It places no reverse requirement on predicting $f(x)$ from $h(x)$. The two security properties concern different tasks:
+
+- **One-wayness of $f$:** given $f(x)$, finding a valid preimage is hard.
+- **Hard-core property of $h$ for $f$:** given $f(x)$, predicting $h(x)$ better than chance by a non-negligible amount is hard.
+
+When $x$ is known, both $f(x)$ and $h(x)$ can be computed efficiently. Thus, an example that reveals $h(x)$ can violate the hard-core property while $f$ remains one-way.
+
+The professor gives an equivalent distributional formulation: the left-hand pair uses one shared sample $x\gets U_n$, while the comparison bit $u\gets U_1$ on the right is independent of $x$:
 
 $$
 \boxed{ (f(x),h(x))_{x\gets U_n} \approx_c (f(x),u)_{x\gets U_n,\,u\gets U_1} }
 $$
 
-This means that an adversary receiving $f(x)$ alongside another bit cannot efficiently determine whether that bit is:
+Thus, even when given $f(x)$, an efficient adversary cannot distinguish the real bit $h(x)$ from an independent uniform bit with non-negligible advantage. This is the form we will use to prove pseudorandomness of the new generator.
 
-- The real hard-core bit $h(x)$.
+### Preliminary fact: a permutation preserves uniformity
 
-- An independent uniformly random bit.
-
-Notice the connection with the PRGs we studied earlier: we're again comparing two distributions using computational indistinguishability.
-
-We'll use this property shortly to construct a one-bit-stretch PRG from a one-way permutation.
-A one-way permutation (OWP) is a one-way function that is also a bijection over its domain.
-
-Consider:
+The hard-core property will supply one pseudorandom bit. We also need the other $n$ output bits to look uniform. For the simple construction in this lecture, we assume a **one-way permutation (OWP)**: a one-way function that is also a bijection. Consider
 
 $$
 f:\{0,1\}^{n}\rightarrow\{0,1\}^{n}
 $$
 
-Being a permutation means that every $n$-bit output has exactly one corresponding $n$-bit input.
-
-Consequently, if we uniformly sample $s$:
+Every $n$-bit output has exactly one corresponding input. A permutation therefore rearranges the uniform distribution without changing it:
 
 $$
-s\gets U_n
+\boxed{f(U_n)\equiv U_n}.
 $$
 
-then:
+The output distribution is exactly uniform even though finding the corresponding input remains computationally hard.
 
-$$
-\boxed{f(U_n)\equiv U_n}
-$$
+### Theorem 3 — A one-bit-stretch PRG from an OWP
 
-A permutation simply rearranges the elements of a set. Therefore, applying a permutation to a uniformly random input produces a uniformly random output.
+**Assumptions:** $f$ is a one-way permutation, and $h$ is a hard-core predicate for this $f$.
 
-Notice that $f$ can still be computationally hard to invert, even though its output distribution is uniform.
-Now assume that:
-
-- $f$ is a one-way permutation.
-
-- $h$ is a hard-core predicate for $f$.
-
-The professor defines:
+**Construction:** the professor defines
 
 $$
 \boxed{G(s)=f(s)\parallel h(s)}
 $$
 
-where $s\gets U_n$.
+For a uniform seed $s\gets U_n$, the two functions use the same $s$. The function $h$ produces one bit; it is not a second independent seed.
 
 ![[Pasted image 20261111125200.png]]
 
@@ -818,29 +651,23 @@ $$
 G:\{0,1\}^{n}\rightarrow\{0,1\}^{n+1}
 $$
 
-**Why is $G$ secure?** The reasoning on PDF p. 13 uses the hard-core property followed by the permutation property.
+**Conclusion to prove:** $G(U_n)\approx_c U_{n+1}$. Here $n$ plays the same role as $\lambda$ in the earlier sections.
 
-Remember the definition of a hard-core bit:
+#### Proof of Theorem 3
 
-$$
-(f(x),h(x))_{x\gets U_n} \approx_c (f(x),u)_{x\gets U_n,\,u\gets U_1}
-$$
-
-The rightmost bit can be replaced by an independent uniform bit without any PPT adversary noticing a non-negligible difference.
-
-Now, because $f$ is a permutation:
+The proof on PDF p. 13 has two steps. **First, use the hard-core property:** the bit $h(s)$ can be replaced by an independent uniform bit $u$ without an efficient adversary gaining non-negligible distinguishing advantage:
 
 $$
-f(U_n)\equiv U_n
+(f(s),h(s))_{s\gets U_n} \approx_c (f(s),u)_{s\gets U_n,\,u\gets U_1}
 $$
 
-Therefore:
+**Second, use the permutation property:** $f(U_n)\equiv U_n$. Since $u$ was sampled independently of $s$, it is also independent of $f(s)$. Therefore,
 
 $$
-(f(x),u)_{x\gets U_n,\,u\gets U_1}\equiv(U_n,U_1)
+(f(s),u)_{s\gets U_n,\,u\gets U_1}\equiv(U_n,U_1)
 $$
 
-And since the two uniform values are independent:
+The two components on the right are independent and uniform, so their concatenation is a uniform $(n+1)$-bit string:
 
 $$
 (U_n,U_1)\equiv U_{n+1}
@@ -849,7 +676,7 @@ $$
 Putting these statements together:
 
 $$
-\boxed{ \underbrace{(f(x),h(x))_{x\gets U_n}}_{G(U_n)} \approx_c \underbrace{(f(x),u)_{x\gets U_n,\,u\gets U_1}}_{\text{Hard-core property}} \equiv \underbrace{U_{n+1}}_{\text{Uniform}} }
+\boxed{ \underbrace{(f(s),h(s))_{s\gets U_n}}_{G(U_n)} \approx_c \underbrace{(f(s),u)_{s\gets U_n,\,u\gets U_1}}_{\text{Hard-core property}} \equiv \underbrace{U_{n+1}}_{\text{Uniform}} }
 $$
 
 Hence:
@@ -860,17 +687,17 @@ $$
 
 This gives a secure one-bit-stretch PRG.
 
-**What if $f$ is only a one-way function?**
+**End of the proof of Theorem 3.** This supplies the kind of starting generator assumed in Theorem 2, under the OWP and hard-core assumptions above.
 
-If $f$ is a one-way function but not a permutation, we cannot necessarily write:
+### Limitation: replacing the OWP with an arbitrary OWF
+
+The second step of this proof is the reason for assuming a permutation. For an arbitrary OWF, we cannot necessarily write
 
 $$
 f(U_n)\equiv U_n
 $$
 
-For example, some outputs might occur more frequently than others, or some outputs might never occur.
-
-Therefore, the simple construction
+Some outputs may occur more frequently than others or never occur at all. Therefore, the simple construction
 
 $$
 G(s)=f(s)\parallel h(s)
@@ -878,15 +705,15 @@ $$
 
 does not necessarily produce pseudorandom output.
 
-The professor emphasizes that the general result still holds:
+The general OWF-to-PRG result stated earlier still holds, but handling this non-uniformity requires additional techniques. The simple proof above establishes the OWP case; it does not supply the full construction from an arbitrary OWF.
 
-The existence of any one-way function is sufficient to construct a secure PRG.
+PDF p. 14 also announces an existence result for hard-core bits in the general OWF setting, without developing the construction. The precise role of function transformations and auxiliary randomness is outside the proof supplied here.
 
-However, the general construction requires additional techniques, and the complete proof is not developed in this lecture.
+### A separate question: can one predicate work for every OWF?
 
-The professor then asks whether we can choose one fixed efficient predicate $h$ that is hard-core for every OWF. The following examples explain why the answer is no.
+The professor then asks whether we can choose one fixed efficient predicate $h$ that is hard-core for every OWF. The following examples explain why the answer is no. This discussion follows the proof of Theorem 3; it is not another step in that proof.
 
-**Why can’t $h$ be universal?** Suppose we propose:
+**Example: the first input bit.** Suppose we propose
 
 $$
 h(x)=x_1
@@ -894,9 +721,7 @@ $$
 
 where $x_1$ is the first bit of $x$.
 
-We would like $h$ to be hard-core for every OWF.
-
-However, recall our earlier example:
+To test whether this choice works for every OWF, recall the example
 
 $$
 f(b,t)=(b,g(t))
@@ -904,9 +729,7 @@ $$
 
 where $g$ is a one-way function.
 
-The function $f$ is still one-way because finding a valid preimage requires inverting $g$, but it explicitly reveals $b$.
-
-Therefore, if:
+The function remains one-way, but it explicitly reveals $b$. Hence, for
 
 $$
 h(b,t)=b
@@ -918,15 +741,11 @@ $$
 \Pr[\mathcal A(f(x))=h(x)]=1
 $$
 
-So $h$ is not hard-core for this particular OWF.
+The adversary succeeds at predicting $h(b,t)$, without inverting $f$. Thus, this $h$ is not hard-core for this particular OWF, although $f$ remains one-way. This does not rule out the predicate being hard-core for another function; it rules out treating it as a universal choice.
 
-You might now ask: what if we choose a different $h$?
+The professor's broader idea is to take a proposed fixed predicate and build a one-way function that reveals its value.
 
-The professor's point is that whatever fixed efficient predicate we choose, we can construct a one-way function that reveals its value.
-
-**The general idea.** Suppose we have a candidate predicate $h$ and an arbitrary one-way function $g$.
-
-Consider the following illustrative construction:
+**Supplementary illustration of the idea.** For a candidate efficient predicate $h$ and an OWF $g$, consider
 
 $$
 \boxed{f_{\mathrm{bad}}(x)=(g(x),h(x))}
@@ -936,7 +755,7 @@ $$
 
 This function remains one-way if $g$ is one-way and $h$ is an efficiently computable single-bit predicate.
 
-Why? Because an inverter for $f_{\mathrm{bad}}$ could be used to invert $g$: given $g(x)$, we could guess the missing bit $h(x)$ with probability $1/2$ and run that inverter.
+To see why, suppose an efficient inverter for $f_{\mathrm{bad}}$ succeeded with non-negligible probability. Given $g(x)$, an inverter for $g$ could guess a uniform bit $c$, run that inverter on $(g(x),c)$, and check the returned preimage. With probability $1/2$, $c=h(x)$, so this preserves at least half of the inverter's success probability. It would contradict one-wayness of $g$.
 
 But an adversary trying to predict $h(x)$ from $f_{\mathrm{bad}}(x)$ has a trivial strategy: read the last bit.
 
@@ -948,19 +767,18 @@ $$
 
 So $h$ is not hard-core for $f_{\mathrm{bad}}$.
 
-This is an illustrative construction explaining the professor's argument; its output is one bit longer than that of $g$. The lecture doesn't develop the full length-preserving construction.
+This supplementary example has output one bit longer than $g$'s. It illustrates the prediction-versus-inversion distinction, but is not the complete length-preserving construction suggested on PDF p. 14. The supplied slide gives the idea and an auxiliary-OWF premise; the transcript ends during the discussion, so its remaining steps cannot be reconstructed reliably from these materials.
 
-It tells us that the choice of a hard-core predicate generally needs to depend on the one-way function being considered.
+The question is therefore about a fixed predicate working for every unchanged OWF. Transforming a function to obtain a hard-core predicate is a different construction.
 
-The professor also mentions a deeper theoretical result: arbitrary one-way functions can be transformed into constructions with hard-core predicates, using additional techniques.
-
-One famous result is the Goldreich–Levin theorem, which constructs a hard-core predicate using an additional random string. The professor doesn't prove it in this lecture, so we won't go into that proof.
-
-The important distinction is that the existence of such constructions doesn't imply that one fixed predicate works for every OWF.
+> [!info]- Supplementary preview: Goldreich–Levin
+> Goldreich–Levin provides a hard-core predicate for a transformed function using an additional random string. This name and construction are supplementary context, not a theorem stated or proved in the supplied lesson-5 material. See the [Stanford notes, Goldreich–Levin method](https://crypto.stanford.edu/pbc/notes/crypto/hardcore.html) for that preview; its proof is outside this note.
 
 ## Sources
 
 - [Lecture-5 slides, 2026/27](Assets/SLIDES/crypto_lecture05_2627.pdf): PDF pp. 1–3, indistinguishability/PRGs and the unbounded attack; pp. 4–11, stretch amplification and hybrids; pp. 12–14, hard-core bits and one-way permutations.
-- [Lecture-5 transcript](<Assets/TRANSCRIPTION/CR LESSON 5 Transcripted.md>): secondary support for the reduction explanation and lecture boundary; contains transcription errors.
-- [The Joy of Cryptography, §4.3.1](https://joyofcryptography.com/comp/): supplementary reference for the marked quantifier detail in polynomial-length hybrid arguments; this is separate from the professor's lecture.
+- [Lecture-5 transcript](<Assets/TRANSCRIPTION/CR LESSON 5 Transcripted.md>): secondary support for the explanations; heavily duplicated and sometimes garbled. It ends mid-discussion of the universal-predicate question, so it does not independently establish the complete classroom stopping point.
+- [The Joy of Cryptography, §4.3.1](https://joyofcryptography.com/comp/): supplementary reference for handling polynomially many hybrid transitions; the proof of Theorem 2 above makes the random-index reduction explicit. This formalization is separate from the professor's adjacent-hybrid presentation.
 - The game, PRG-world and counting diagrams redraw the supplied illustrations; the stretch and first-hybrid diagrams are converted from the supplied inline SVGs. Original screenshot files are retained.
+
+The theorem numbers in this note organize the results for study; they are not numbering printed on the professor's slides. The explicit random-index reduction and the two clearly labeled supplementary discussions are explanatory additions rather than a verbatim transcript.
