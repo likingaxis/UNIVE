@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 445" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Reduction showing g(x, r) = f(x) || r is one-way</title>
+  <desc id="desc">The OWF challenger samples x uniformly and sends y = f(x) to reduction B. B samples an independent uniform string r from U_n and sends y concatenated with r to adversary A. Because r is independent of x, this simulation is exact without any guessing loss. If A returns (x prime, r prime) inverting g, then f(x prime) = y and B forwards x prime to win with probability at least epsilon(n).</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="445" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="430" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Goldreich–Levin property 1: <tspan font-family="Georgia, serif" font-style="italic">g</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">r</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">f</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>) ∥ <tspan font-family="Georgia, serif" font-style="italic">r</tspan> is one-way</text>
+  <text x="430" y="57" text-anchor="middle" font-size="14.5" fill="#64748b">Reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan> samples an independent random string <tspan font-family="Georgia, serif" font-style="italic">r</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan>, giving an exact simulation with zero loss</text>
+
+  <!-- Lifelines -->
+  <line x1="145" y1="136" x2="145" y2="378" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="430" y1="136" x2="430" y2="378" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="715" y1="136" x2="715" y2="378" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="6 5"/>
+
+  <!-- Actor headers -->
+  <rect x="45" y="76" width="200" height="60" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="145" y="102" text-anchor="middle" font-size="17.5" font-weight="700" fill="#0f172a">Challenger <tspan font-family="Georgia, serif" font-style="italic">C</tspan></text>
+  <text x="145" y="123" text-anchor="middle" font-size="13" fill="#475569">OWF game for <tspan font-family="Georgia, serif" font-style="italic">f</tspan></text>
+
+  <rect x="325" y="76" width="210" height="60" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="430" y="102" text-anchor="middle" font-size="17.5" font-weight="700" fill="#1d4ed8">Reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan></text>
+  <text x="430" y="123" text-anchor="middle" font-size="13" fill="#1e40af">PPT inverter for <tspan font-family="Georgia, serif" font-style="italic">f</tspan></text>
+
+  <rect x="615" y="76" width="200" height="60" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="715" y="102" text-anchor="middle" font-size="17.5" font-weight="700" fill="#6d28d9">Adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
+  <text x="715" y="123" text-anchor="middle" font-size="13" fill="#5b21b6">Assumed inverter for <tspan font-family="Georgia, serif" font-style="italic">g</tspan></text>
+
+  <!-- Step 1: Challenger samples x -->
+  <rect x="55" y="152" width="180" height="32" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="145" y="173" text-anchor="middle" font-size="14" font-weight="600" fill="#334155">Sample <tspan font-family="Georgia, serif" font-style="italic">x</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan></text>
+
+  <!-- Arrow 1: C -> B: y = f(x) -->
+  <path d="M145 204 H422" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
+  <rect x="234" y="182" width="106" height="24" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="287" y="199" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a"><tspan font-family="Georgia, serif" font-style="italic">y</tspan> = <tspan font-family="Georgia, serif" font-style="italic">f</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>)</text>
+
+  <!-- Step 2: B samples r independently -->
+  <rect x="315" y="216" width="230" height="44" rx="9" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="430" y="236" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">Sample <tspan font-family="Georgia, serif" font-style="italic">r</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan></text>
+  <text x="430" y="253" text-anchor="middle" font-size="12" fill="#047857">Independent of <tspan font-family="Georgia, serif" font-style="italic">x</tspan> (no guessing!)</text>
+
+  <!-- Arrow 2: B -> A: y || r -->
+  <path d="M430 278 H707" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <rect x="526" y="255" width="94" height="24" rx="12" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="573" y="272" text-anchor="middle" font-size="15" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">y</tspan> ∥ <tspan font-family="Georgia, serif" font-style="italic">r</tspan></text>
+
+  <!-- Arrow 3: A -> B: (x', r') -->
+  <path d="M715 318 H438" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
+  <rect x="512" y="295" width="122" height="24" rx="12" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="573" y="312" text-anchor="middle" font-size="14.5" font-weight="600" fill="#5b21b6">(<tspan font-family="Georgia, serif" font-style="italic">x′</tspan>, <tspan font-family="Georgia, serif" font-style="italic">r′</tspan>)</text>
+
+  <!-- Arrow 4: B -> C: x' -->
+  <path d="M430 356 H153" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
+  <rect x="228" y="333" width="118" height="24" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="287" y="350" text-anchor="middle" font-size="14" font-weight="600" fill="#0f172a">output <tspan font-family="Georgia, serif" font-style="italic">x′</tspan></text>
+
+  <!-- Footer -->
+  <rect x="45" y="390" width="770" height="40" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.5"/>
+  <text x="430" y="415" text-anchor="middle" font-size="14.5" fill="#065f46">
+    When <tspan font-family="Georgia, serif" font-style="italic">f</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x′</tspan>) ∥ <tspan font-family="Georgia, serif" font-style="italic">r′</tspan> = <tspan font-family="Georgia, serif" font-style="italic">y</tspan> ∥ <tspan font-family="Georgia, serif" font-style="italic">r</tspan>, we have <tspan font-weight="700"><tspan font-family="Georgia, serif" font-style="italic">f</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x′</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">y</tspan></tspan>  ⇒  Exact simulation: Pr[<tspan font-family="Georgia, serif" font-style="italic">B</tspan> wins] ≥ <tspan font-family="Georgia, serif" font-style="italic">ε</tspan>(<tspan font-family="Georgia, serif" font-style="italic">n</tspan>)
+  </text>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 390" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Real and hybrid encryption games</title>
+  <desc id="desc">For a fixed message index b in {0, 1}, the real game G_b samples an n-bit key k and masks m_b with the PRG pad G(k), while the hybrid game H_b samples a truly uniform 2n-bit pad z and masks m_b with z. By OTP perfect secrecy, H_0 and H_1 are identically distributed.</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="390" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="430" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Step 1: replace the pseudorandom pad <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>) with a uniform pad <tspan font-family="Georgia, serif" font-style="italic">z</tspan></text>
+  <text x="430" y="57" text-anchor="middle" font-size="14.5" fill="#64748b">Fix <tspan font-family="Georgia, serif" font-style="italic">b</tspan> ∈ {0, 1}; the adversary's interface stays unchanged while the pad switches from <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan>) to <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5">2<tspan font-family="Georgia, serif" font-style="italic">n</tspan></tspan></text>
+
+  <!-- Left card: Real G_b -->
+  <rect x="34" y="80" width="326" height="236" rx="14" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.8"/>
+  <rect x="52" y="95" width="90" height="24" rx="12" fill="#1d4ed8"/>
+  <text x="97" y="112" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Real game</text>
+  <text x="228" y="114" text-anchor="middle" font-size="21" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="14" font-family="Georgia, serif" font-style="italic">b</tspan></text>
+
+  <rect x="52" y="132" width="290" height="50" rx="9" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.4"/>
+  <text x="197" y="163" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="12.5" font-family="Georgia, serif" font-style="italic">n</tspan>   (<tspan font-family="Georgia, serif" font-style="italic">n</tspan>-bit key)
+  </text>
+
+  <rect x="52" y="191" width="290" height="54" rx="9" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="197" y="216" text-anchor="middle" font-size="18.5" font-weight="700" fill="#1e3a8a">
+    pad = <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+  <text x="197" y="236" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1d4ed8">pseudorandom 2<tspan font-family="Georgia, serif" font-style="italic">n</tspan>-bit pad</text>
+
+  <rect x="52" y="254" width="290" height="46" rx="9" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.4"/>
+  <text x="197" y="283" text-anchor="middle" font-size="18.5" font-weight="600" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan> = <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>) ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">b</tspan>
+  </text>
+
+  <!-- Center bridge -->
+  <path d="M368 218 H484" fill="none" stroke="#475569" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#arrow-slate)"/>
+  <rect x="373" y="180" width="114" height="28" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="430" y="199" text-anchor="middle" font-size="13.5" font-weight="700" fill="#334155"><tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">n</tspan>) ≈<tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">c</tspan> <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5">2<tspan font-family="Georgia, serif" font-style="italic">n</tspan></tspan></text>
+  <text x="430" y="238" text-anchor="middle" font-size="12" font-weight="600" fill="#64748b">replace pad</text>
+
+  <!-- Right card: Hybrid H_b -->
+  <rect x="500" y="80" width="326" height="236" rx="14" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.8"/>
+  <rect x="518" y="95" width="100" height="24" rx="12" fill="#047857"/>
+  <text x="568" y="112" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Hybrid game</text>
+  <text x="698" y="114" text-anchor="middle" font-size="21" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="14" font-family="Georgia, serif" font-style="italic">b</tspan></text>
+
+  <rect x="518" y="132" width="290" height="50" rx="9" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.4"/>
+  <text x="663" y="163" text-anchor="middle" font-size="18" font-weight="600" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="12.5">2<tspan font-family="Georgia, serif" font-style="italic">n</tspan></tspan>   (2<tspan font-family="Georgia, serif" font-style="italic">n</tspan>-bit string)
+  </text>
+
+  <rect x="518" y="191" width="290" height="54" rx="9" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="663" y="216" text-anchor="middle" font-size="18.5" font-weight="700" fill="#065f46">
+    pad = <tspan font-family="Georgia, serif" font-style="italic">z</tspan>
+  </text>
+  <text x="663" y="236" text-anchor="middle" font-size="12.5" font-weight="600" fill="#047857">truly uniform 2<tspan font-family="Georgia, serif" font-style="italic">n</tspan>-bit pad (OTP!)</text>
+
+  <rect x="518" y="254" width="290" height="46" rx="9" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.4"/>
+  <text x="663" y="283" text-anchor="middle" font-size="18.5" font-weight="600" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan> = <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">b</tspan>
+  </text>
+
+  <!-- Footer -->
+  <rect x="34" y="332" width="792" height="42" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.5"/>
+  <text x="430" y="358" text-anchor="middle" font-size="14.5" fill="#065f46">
+    Because <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">b</tspan> is the standard One-Time Pad, <tspan font-weight="700"><tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="10.5">0</tspan> ≡ <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan></tspan> (identical distributions — zero gap).
+  </text>
+</svg>

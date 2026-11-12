@@ -66,3 +66,12 @@ Materiali già presenti localmente, osservati l'11 novembre 2026; acquisizione e
 - [Slide della lezione 5, 2026/27](Assets/SLIDES/crypto_lecture05_2627.pdf): 14 pagine; PRG e indistinguibilità, attacco non limitato, stretch polinomiale e prova per ibridi, introduzione ai predicati hard-core e alle permutazioni one-way.
 - [Trascrizione della lezione 5](<Assets/TRANSCRIPTION/CR LESSON 5 Transcripted.md>): supporto secondario, con errori di trascrizione.
 - [Appunti della lezione 5](<CR LESSON 5.md>): studio riferito come concluso l'11 novembre in circa due ore, stima approssimativa. Correzione editoriale e figure richieste completate; resta da studiare meglio l'ultima parte prima della lezione 6. Comprensione autonoma ed esercizi non verificati.
+
+## Materiale per lo studio — lezione 6
+
+Materiali già presenti localmente, osservati e consultati il 12 novembre 2026; acquisizione e integrità del download non registrate. Nessun nuovo download durante la revisione.
+
+- [Slide della lezione 6, 2026/27](Assets/SLIDES/crypto_lecture06_2627.pdf): 8 pagine; controesempio al predicato hard-core universale, Goldreich–Levin, PRG-OTP, sicurezza computazionale one-time e prova per game hopping. La prova completa del predicato hard-core non viene svolta.
+- [Trascrizione della lezione 6](<Assets/TRANSCRIPTION/CR LESSON 6 Transcripted.md>): supporto secondario con errori di trascrizione; termina dopo la prova di sicurezza one-time. PRF e cifratura con chiave riutilizzabile sono annunciate per la lezione successiva.
+- [Appunti di Davide — lezione 6](<Assets/APPUNTI_DAVIDE/lez. 6.md>): supporto secondario già presente, con aggiunte `#gemini`; anno accademico e acquisizione non verificati.
+- [Appunti della lezione 6](<CR LESSON 6.md>): studio riferito come concluso il 12 novembre in circa 120 minuti attivi, stima approssimativa. Revisione editoriale, fusione delle due spiegazioni della prima proprietà e sei allegati SVG completati; immagini originali conservate. Comprensione autonoma ed esercizi non verificati.

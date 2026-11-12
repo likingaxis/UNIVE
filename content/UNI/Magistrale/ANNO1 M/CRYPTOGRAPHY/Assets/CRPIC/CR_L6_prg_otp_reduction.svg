@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 465" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Perfect reduction proving G_b is computationally indistinguishable from H_b</title>
+  <desc id="desc">For a fixed bit b in {0, 1}, the PRG challenger samples z either as G(k) or uniformly from U_{2n} and sends z to reduction B. B starts adversary A, receives (m_0, m_1), returns ciphertext c = m_b XOR z, and forwards A's output bit b prime to the challenger. If z = G(k) then A is in G_b; if z is uniform then A is in H_b.</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="465" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="430" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Step 2: perfect reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan> proving <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="14" font-family="Georgia, serif" font-style="italic">b</tspan> ≈<tspan baseline-shift="sub" font-size="14" font-family="Georgia, serif" font-style="italic">c</tspan> <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="14" font-family="Georgia, serif" font-style="italic">b</tspan> (fixed <tspan font-family="Georgia, serif" font-style="italic">b</tspan> ∈ {0, 1})</text>
+  <text x="430" y="57" text-anchor="middle" font-size="14.5" fill="#64748b"><tspan font-family="Georgia, serif" font-style="italic">B</tspan> embeds its PRG challenge <tspan font-family="Georgia, serif" font-style="italic">z</tspan> directly as the one-time pad for <tspan font-family="Georgia, serif" font-style="italic">A</tspan>, with zero advantage loss</text>
+
+  <!-- Lifelines -->
+  <line x1="145" y1="136" x2="145" y2="394" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="430" y1="136" x2="430" y2="394" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="715" y1="136" x2="715" y2="394" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="6 5"/>
+
+  <!-- Actor headers -->
+  <rect x="40" y="76" width="210" height="60" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="145" y="101" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">PRG Challenger <tspan font-family="Georgia, serif" font-style="italic">C</tspan></text>
+  <text x="145" y="122" text-anchor="middle" font-size="12.5" fill="#475569"><tspan font-family="Georgia, serif" font-style="italic">z</tspan> = <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)  or  <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5">2<tspan font-family="Georgia, serif" font-style="italic">n</tspan></tspan></text>
+
+  <rect x="325" y="76" width="210" height="60" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="430" y="101" text-anchor="middle" font-size="17" font-weight="700" fill="#1d4ed8">Reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan></text>
+  <text x="430" y="122" text-anchor="middle" font-size="12.5" fill="#1e40af">PPT distinguisher for <tspan font-family="Georgia, serif" font-style="italic">G</tspan></text>
+
+  <rect x="615" y="76" width="205" height="60" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="717" y="101" text-anchor="middle" font-size="17" font-weight="700" fill="#6d28d9">Adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
+  <text x="717" y="122" text-anchor="middle" font-size="12.5" fill="#5b21b6">Distinguishes <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">b</tspan> vs. <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">b</tspan></text>
+
+  <!-- Arrow 1: C -> B: z -->
+  <path d="M145 174 H422" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
+  <rect x="220" y="151" width="134" height="24" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="287" y="168" text-anchor="middle" font-size="14" font-weight="600" fill="#0f172a">challenge <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ∈ {0,1}<tspan baseline-shift="super" font-size="10">2<tspan font-family="Georgia, serif" font-style="italic">n</tspan></tspan></text>
+
+  <!-- Arrow 2: B -> A: "START" -->
+  <path d="M430 214 H707" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <rect x="530" y="191" width="86" height="24" rx="12" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="573" y="208" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e40af">"START"</text>
+
+  <!-- Arrow 3: A -> B: m_0, m_1 -->
+  <path d="M715 256 H438" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
+  <rect x="528" y="233" width="90" height="24" rx="12" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="573" y="250" text-anchor="middle" font-size="14.5" font-weight="600" fill="#5b21b6"><tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">0</tspan>, <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan></text>
+
+  <!-- Arrow 4: B -> A: c = z XOR m_b -->
+  <path d="M430 298 H707" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <rect x="506" y="275" width="134" height="24" rx="12" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="573" y="292" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">c</tspan> = <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">b</tspan></text>
+
+  <!-- Arrow 5: A -> B: b' -->
+  <path d="M715 340 H438" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
+  <rect x="538" y="317" width="70" height="24" rx="12" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="573" y="334" text-anchor="middle" font-size="14.5" font-weight="600" fill="#5b21b6"><tspan font-family="Georgia, serif" font-style="italic">b′</tspan></text>
+
+  <!-- Arrow 6: B -> C: b' -->
+  <path d="M430 378 H153" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
+  <rect x="235" y="355" width="104" height="24" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="287" y="372" text-anchor="middle" font-size="14" font-weight="600" fill="#0f172a">output <tspan font-family="Georgia, serif" font-style="italic">b′</tspan></text>
+
+  <!-- Bottom outcome cards -->
+  <rect x="40" y="404" width="382" height="46" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="231" y="432" text-anchor="middle" font-size="14.5" font-weight="600" fill="#1e40af">
+    If <tspan font-family="Georgia, serif" font-style="italic">z</tspan> = <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)   ⇒   <tspan font-family="Georgia, serif" font-style="italic">A</tspan> sees exact <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">b</tspan>
+  </text>
+
+  <rect x="438" y="404" width="382" height="46" rx="10" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="629" y="432" text-anchor="middle" font-size="14.5" font-weight="600" fill="#065f46">
+    If <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5">2<tspan font-family="Georgia, serif" font-style="italic">n</tspan></tspan>   ⇒   <tspan font-family="Georgia, serif" font-style="italic">A</tspan> sees exact <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">b</tspan>
+  </text>
+</svg>

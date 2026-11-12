@@ -10,7 +10,7 @@
 
 - **Objective:** recover essential backlog while sustaining useful attendance, independent practice and winter-exam preparation; follow [STUDY_PLAN.md](STUDY_PLAN.md) and [AGENTS.md](../AGENTS.md).
 
-- **Last actual state update:** 2026-11-11 (Europe/Rome): Crypto lesson 5 reported finished in roughly 120 minutes; review its final part before lesson 6. No clock times or execution of earlier reserved blocks inferred. Prior DS lesson-8/9 reports remain recorded below. Pilot baseline remains 5–11 November with an experimental 14-hour budget; no new study windows booked. Detailed evidence stays in course memories.
+- **Last actual state update:** 2026-11-12 (Europe/Rome): Crypto lesson 6 reported finished in roughly 120 active minutes; retain independent recall/practice. No clock times or execution of earlier reserved blocks inferred. Prior DS/Network reports remain recorded below. Pilot baseline remains 5–11 November with an experimental 14-hour budget; no new study windows booked. Detailed evidence stays in course memories.
 - **Semester-end target:** 2026-12-22, provisional internal planning target; official calendar not verified. No learning achievement is inferred from implementing this state.
 
 
@@ -22,7 +22,7 @@
 | Course / detailed memory | Latest recorded situation | Active priority | Next meaningful action |
 | --- | --- | --- | --- |
 | [Distributed Systems](<MEMORIES/DISTRIBUTED_SYSTEMS.md>) | Attending; lessons 8–9 completed by report; independent exercise evidence pending. | Brief lesson-8/9 recall and independent broadcast practice, then remaining broadcast coverage. | Classify a fresh crash execution and trace Lazy RB without hints; continue All-Ack correctness afterward. Earlier reserved-slot execution remains unreported. |
-| [Cryptography](<MEMORIES/CRYPTOGRAPHY.md>) | Temporarily not attending; lessons 1–2 studied/revised and lesson 5 finished by report. Lesson-3/4 drafts reviewed, with explicit completion/assessment unconfirmed. Independent checks remain pending. | Review lesson 5’s final part before lesson 6, per student request. | Revisit the hard-core section using the corrected note and local sources; identify the remaining difficult step before advancing. |
+| [Cryptography](<MEMORIES/CRYPTOGRAPHY.md>) | Temporarily not attending; lessons 1–2 studied/revised and lessons 5–6 finished by report. Lesson-3/4 completion remains unconfirmed; independent checks pending. | Brief lesson-6 recall and independent reduction/proof practice; retain targeted earlier reviews. | Reconstruct one lesson-6 reduction without hints, then choose the next study block. Detailed gaps and earlier lesson-5 review needs remain in course memory. |
 | [Network Infrastructures](<MEMORIES/NETWORK.md>) | Attending; lesson 8 studied/understood by report on 6 Nov (60 active min); lesson 9 study completed by report on 7 Nov (time undefined). Latest lab needs recovery by 8 Nov clarification; assignment number/topic still unidentified. | Retain brief recall and preserve the practical recovery need. | Brief lesson-8/9 recall; requested note review when supplied; identify the outstanding lab for practical work. |
 
 
@@ -75,6 +75,7 @@ User-agreed rolling seven-day pilot, **Europe/Rome**; not a permanent Monday–S
 | Tue 10 Nov | 12:00–13:30 | DS homework: independently attempt a relevant professor-provided task; select after source/prerequisite check. | Reasoning, assistance and obstacles assessed. | 90 min | Planned | Not reported |
 | Tue 10 Nov | 14:00–15:00 | Crypto proof/exercise and review: choose a task supported by demonstrated prerequisites. | Independent attempt and targeted review. | 60 min | Planned | Not reported |
 | Wed 11 Nov, completion reported | Start/end not supplied | Crypto theory/proofs: lesson 5, additional student-reported activity. | Lesson-5 study completed by report; final-part review before lesson 6 remains pending. | Not separately estimated | Completed — reported study; final-part review and independent checks pending | About 120 min, rough student estimate; breaks not supplied |
+| Thu 12 Nov, completion reported | Start/end not supplied | Crypto theory/proofs: lesson 6, additional student-reported activity after the pilot. | Lesson-6 study completed by report; independent recall/practice remains pending. | Not separately estimated | Completed — reported study; no unaided proof/exercise outcome supplied | About 120 active min, rough student estimate |
 
 
 
