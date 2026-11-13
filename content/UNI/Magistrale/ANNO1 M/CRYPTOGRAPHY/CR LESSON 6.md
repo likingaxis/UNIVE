@@ -240,7 +240,7 @@ $$
 \boxed{\operatorname{Dec}(k, c) = G(k) \oplus c}.
 $$
 
-**Correctness** follows immediately because XOR cancels the regenerated pad:
+**Correctness** follows immediately because XOR cancels the regenerated pad(recovering message):
 
 $$
 \operatorname{Dec}(k, \operatorname{Enc}(k,m)) = G(k) \oplus (G(k) \oplus m) = m.
@@ -267,14 +267,16 @@ $$
 
 An eavesdropper immediately learns $m_1 \oplus m_2$, just as in standard OTP key reuse. Thus PRG-OTP solves the key-length problem, not the key-reuse problem; it is a warm-up toward multi-message security in the next lecture.
 
-| Property | Standard OTP | PRG-OTP |
-| --- | --- | --- |
-| Pad used | Truly uniform $k \gets U_{2n}$ | Pseudorandom $G(k)$ with $k \gets U_n$ |
-| Key length vs. message | $|k| \geq |m|$ ($2n$ bits) | $|k| < |m|$ ($n$ bits vs. $2n$ bits) |
-| Key reuse | Insecure (leaks $m_1 \oplus m_2$) | Insecure (leaks $m_1 \oplus m_2$) |
-| Security achieved | Perfect secrecy (unbounded $\mathcal A$) | One-time computational security (PPT $\mathcal A$) |
+(this table is not written well is strange)
 
-## One-time computational security for SKE
+| Property               | Standard OTP                             | PRG-OTP                                            |      |     |               |     |     |     |     |                            |
+| ---------------------- | ---------------------------------------- | -------------------------------------------------- | ---- | --- | ------------- | --- | --- | --- | --- | -------------------------- |
+| Pad used               | Truly uniform $k \gets U_{2n}$           | Pseudorandom $G(k)$ with $k \gets U_n$             |      |     |               |     |     |     |     |                            |
+| Key length vs. message | $                                        | k                                                  | \geq | m   | $ ($2n$ bits) | $   | k   | <   | m   | $ ($n$ bits vs. $2n$ bits) |
+| Key reuse              | Insecure (leaks $m_1 \oplus m_2$)        | Insecure (leaks $m_1 \oplus m_2$)                  |      |     |               |     |     |     |     |                            |
+| Security achieved      | Perfect secrecy (unbounded $\mathcal A$) | One-time computational security (PPT $\mathcal A$) |      |     |               |     |     |     |     |                            |
+
+## One-time computational security for SKE(Symmetric-Key Encryption)
 
 To prove that PRG-OTP is secure, we first need a formal definition of security against PPT adversaries. Recall from lesson 2 that **perfect secrecy** can be expressed as an equivalence of distributions: for every pair of equal-length messages $m_0, m_1 \in \mathcal M$,
 
