@@ -1,0 +1,866 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TutorAI — The AI Learning Harness</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e6e6e9; --ink:#141416; --ink2:#4b4b52; --mute:#8a8a92; --faint:#a1a1aa; --line:#e2e2e6; --soft:#f6f6f7; --chip:#ececee;
+  --blue:#3b6fd9; --blueS:#eef4ff; --red:#d9534f; --redS:#fceceb; --green:#2e9e6a; --greenS:#eef6f0; --greenI:#25603c;
+  --amber:#cf9a12; --amberS:#fdf6e2; --amberI:#9a6b00;
+  --f:Inter,system-ui,-apple-system,"Segoe UI",sans-serif; --m:"JetBrains Mono",Consolas,monospace;
+  --sh:0 10px 28px rgba(20,20,25,.08); --shs:0 2px 8px rgba(20,20,25,.05); --shp:0 18px 44px rgba(20,20,25,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#cfcfd4;font-family:var(--f);color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;top:50%;left:50%;width:1600px;height:900px;transform-origin:center}
+.slide{position:absolute;inset:0;padding:46px 72px 62px;overflow:hidden;
+  background:radial-gradient(circle at 1px 1px,rgba(20,20,22,.05) 1px,transparent 0) 0 0/26px 26px,var(--bg);
+  opacity:0;pointer-events:none;transition:opacity .45s ease;display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:auto}
+body.noanim *{transition:none!important;animation:none!important}
+
+/* ---------- shared header & typography ---------- */
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.kick{display:inline-flex;align-items:center;gap:10px;height:36px;padding:0 16px 0 13px;border-radius:18px;background:var(--ink);color:#fff;font-size:14px;font-weight:600;box-shadow:var(--shs)}
+.kick svg{width:14px;height:14px;fill:#fff}
+h1{font-size:47px;line-height:1.08;font-weight:800;letter-spacing:-.035em;margin-top:14px}
+.blue{color:var(--blue)} .red{color:var(--red)} .green{color:var(--green)}
+.sub{font-size:18.5px;color:var(--mute);font-weight:500;margin-top:7px;max-width:1180px;line-height:1.4}
+.foot{position:absolute;left:72px;right:240px;bottom:22px;display:flex;align-items:center;gap:14px;font-size:13px;color:var(--mute);font-weight:600}
+.foot .br{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:700}
+.foot .br svg{width:13px;height:13px;fill:var(--blue)}
+.foot .sep{color:var(--faint)}
+
+/* ---------- surfaces & chips ---------- */
+.panel{background:var(--soft);border-radius:26px;box-shadow:var(--sh);padding:22px;position:relative}
+.sheet{background:#fff;border-radius:20px;box-shadow:var(--shs);position:relative}
+.chip{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px;border-radius:15px;font-size:13px;font-weight:600;white-space:nowrap}
+.chip .d{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.chip.w{background:#fff;box-shadow:var(--shs);color:var(--ink)}
+.chip.k{background:var(--ink);color:#fff}
+.chip.g{background:var(--greenS);color:var(--greenI)}
+.chip.r{background:var(--redS);color:var(--red)}
+.chip.a{background:var(--amberS);color:var(--amberI)}
+.chip.b{background:var(--blueS);color:var(--blue)}
+.chip.n{background:var(--chip);color:var(--ink2);font-weight:500}
+.num{width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px;flex:none}
+.num.bl{background:var(--blue)}
+.num.rd{background:var(--red)}
+.num.gr{background:var(--green)}
+.steph{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.steph b{display:block;font-size:18px;font-weight:700;letter-spacing:-.01em}
+.steph span{display:block;font-size:13px;color:var(--mute);font-weight:500;margin-top:1px}
+.mono{font-family:var(--m)}
+.caret{display:inline-block;width:2px;height:1.15em;background:var(--blue);vertical-align:-.2em;margin-left:2px;border-radius:1px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.arrowc{width:32px;height:32px;border-radius:50%;background:var(--ink);display:grid;place-items:center;box-shadow:var(--shs);flex:none}
+.arrowc svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- automatic cumulative animations per slide ---------- */
+.cu{opacity:0;transform:translateY(14px)}
+.cu.pop{transform:scale(.96) translateY(8px);transform-origin:20% 0}
+.slide.active .cu{animation:cuIn .55s cubic-bezier(.2,.8,.2,1) var(--d,0s) forwards}
+@keyframes cuIn{to{opacity:1;transform:none}}
+
+.draw{stroke-dasharray:1;stroke-dashoffset:1}
+.slide.active .draw{animation:draw 1.2s cubic-bezier(.6,0,.3,1) var(--d,.25s) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+.growbar{transform-origin:left;transform:scaleX(0)}
+.slide.active .growbar{animation:growX .8s cubic-bezier(.3,0,.2,1) var(--d,.3s) forwards}
+@keyframes growX{to{transform:scaleX(1)}}
+
+/* ================= SLIDE 1 · INTRO / COVER ================= */
+.intro-wrap{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;margin-top:-8px}
+.logo-stage{position:relative;width:188px;height:188px;margin-bottom:24px;display:grid;place-items:center}
+.logo-stage svg{width:188px;height:188px;overflow:visible;filter:drop-shadow(0 20px 38px rgba(20,20,28,.16))}
+.orbit{transform-origin:94px 94px;animation:spinSlow 26s linear infinite}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+.intro-title{font-size:88px;font-weight:900;letter-spacing:-.045em;line-height:1;color:var(--ink)}
+.intro-title span{background:linear-gradient(135deg,#3b6fd9 0%,#2e9e6a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.intro-tag{margin-top:14px;font-size:24px;font-weight:600;color:var(--ink2);letter-spacing:-.015em}
+.intro-sub{margin-top:8px;font-size:17.5px;color:var(--mute);font-weight:500;max-width:760px;line-height:1.5}
+.intro-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;width:100%;max-width:1240px;margin-top:40px;text-align:left}
+.icard{background:#fff;border-radius:22px;padding:22px 24px;box-shadow:var(--sh);display:flex;gap:16px;align-items:flex-start;border:1px solid rgba(20,20,22,.04)}
+.icard .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:none}
+.icard .ic svg{width:22px;height:22px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icard b{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.icard p{font-size:14px;color:var(--mute);font-weight:500;line-height:1.45;margin-top:4px}
+
+/* ================= SLIDE 2 · PARADOX ================= */
+.s1{display:grid;grid-template-columns:1.42fr 1fr;gap:26px;margin-top:22px;height:510px}
+.s1 .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.s1 .hrow em{font-style:normal;font-size:13.5px;color:var(--mute);font-weight:600}
+.s1 .chart{padding:16px;height:422px;display:flex;align-items:center}
+.s1 svg text{font-family:var(--f)}
+.flow{display:flex;flex-direction:column;align-items:center;gap:10px}
+.fcard{width:100%;border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:15px;min-height:88px}
+.fcard b{display:block;font-size:17px;font-weight:700}
+.fcard small{display:block;font-size:13px;margin-top:3px;font-weight:500}
+.fcard.c1{background:#fff;box-shadow:var(--shs)} .fcard.c1 small{color:var(--mute)}
+.fcard.c2{background:var(--ink);color:#fff;box-shadow:var(--shp)} .fcard.c2 small{color:var(--faint)}
+.fcard.c3{border:2px dashed #cfcfd6;background:rgba(255,255,255,.45)} .fcard.c3 b{color:var(--ink2)} .fcard.c3 small{color:var(--red)}
+.tile{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;flex:none}
+.tile svg{width:26px;height:26px}
+.docsk{margin-left:auto;width:84px;display:flex;flex-direction:column;gap:6px}
+.docsk i{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.28)}
+.bottom-bar{margin-top:18px;height:62px;padding:0 28px;border-radius:31px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shp);font-size:19px;font-weight:700}
+.bottom-bar .lft{display:flex;align-items:center;gap:12px}
+.bottom-bar svg{width:18px;height:18px;fill:#fff;flex:none}
+.bottom-bar .g{color:#7fd6a9} .bottom-bar .r{color:#ff8f8a}
+.bottom-bar .rgt{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--faint)}
+
+/* ================= SLIDE 3 · IMPROVED COGNITIVE METHOD & FOCUS ================= */
+.s3-grid{display:grid;grid-template-columns:430px 1fr;gap:24px;margin-top:20px;height:462px}
+.trap-card{background:var(--soft);border-radius:26px;box-shadow:var(--sh);padding:20px 22px;display:flex;flex-direction:column;border:1px solid rgba(217,83,79,.15)}
+.trap-flow{background:#fff;border-radius:18px;padding:14px 16px;box-shadow:var(--shs);flex:1;display:flex;flex-direction:column;gap:10px}
+.bub{border-radius:12px;padding:8px 13px;font-size:13px;font-weight:600}
+.bub.u{background:var(--ink);color:#fff;margin-left:auto;width:max-content;border-bottom-right-radius:3px}
+.bub.a{background:var(--soft);border-bottom-left-radius:3px;display:flex;flex-direction:column;gap:6px;padding:12px}
+.bub.a .tag{font-size:11px;color:var(--mute);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
+.wl{height:6px;border-radius:3px;background:#d4d4dc}
+.trap-vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.trap-box{border-radius:14px;padding:11px 12px;display:flex;align-items:center;gap:10px}
+.trap-box.bad{background:var(--redS)}
+.trap-box.statbox{background:var(--soft);border:1px solid var(--line)}
+.trap-box .ic{width:34px;height:34px;border-radius:10px;background:#fff;display:grid;place-items:center;flex:none;box-shadow:var(--shs)}
+.trap-box .ic svg{width:18px;height:18px;stroke:var(--red);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.trap-box b{display:block;font-size:13px;color:var(--red);line-height:1.2}
+.trap-box small{display:block;font-size:11.5px;color:var(--ink2);font-weight:500;margin-top:2px}
+.stat-num{font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+
+.engine-card{background:var(--soft);border-radius:26px;box-shadow:var(--sh);padding:20px 24px;display:flex;flex-direction:column;gap:14px}
+.eng-top{display:grid;grid-template-columns:1.12fr 1fr;gap:16px;flex:1}
+.eng-box{background:#fff;border-radius:20px;padding:16px 18px;box-shadow:var(--shs);display:flex;flex-direction:column}
+.eng-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.eng-head .l{display:flex;align-items:center;gap:9px;font-size:15.5px;font-weight:700}
+.eng-head .sci{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--blueS);color:var(--blue)}
+.paths-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.pcard{border-radius:15px;padding:13px 14px;display:flex;flex-direction:column;gap:5px}
+.pcard.l{background:var(--soft);border:1px solid var(--line)}
+.pcard.r{background:var(--ink);color:#fff}
+.pcard .top{display:flex;align-items:center;justify-content:space-between}
+.pcard .top b{font-size:14.5px;font-weight:700}
+.pcard p{font-size:12px;line-height:1.4;font-weight:500;color:var(--mute)}
+.pcard.r p{color:var(--faint)}
+.pcard .pill-mini{margin-top:auto;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;width:max-content}
+.pcard.l .pill-mini{background:var(--blueS);color:var(--blue)}
+.pcard.r .pill-mini{background:rgba(255,255,255,.14);color:#7fd6a9}
+.unit-strip{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.unit-strip span{font-size:12px;font-weight:600;color:var(--ink2);white-space:nowrap}
+.bks{display:flex;gap:5px;flex:1}
+.bk{height:25px;padding:0 8px;border-radius:7px;display:grid;place-items:center;font-size:11.5px;font-weight:700;background:var(--soft);color:var(--faint);border:1px solid var(--line);flex:1}
+.bk.done{background:var(--greenS);color:var(--greenI);border-color:transparent}
+.bk.cur{background:var(--blue);color:#fff;border-color:transparent}
+
+.fade-list{display:flex;flex-direction:column;gap:11px;flex:1;justify-content:center}
+.lv{display:grid;grid-template-columns:1fr;gap:4px}
+.lv .top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700}
+.lv .top em{font-style:normal;font-size:11.5px;color:var(--blue);font-weight:700;font-family:var(--m)}
+.lv .tr{height:8px;border-radius:4px;background:var(--chip);overflow:hidden}
+.lv .tr i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--blue),#2e9e6a)}
+.lv small{font-size:12px;color:var(--mute);font-weight:500}
+
+/* Bottom psychology + active role loop bar */
+.loop-bar{margin-top:16px;height:78px;background:#fff;border-radius:39px;box-shadow:var(--sh);display:flex;align-items:center;padding:0 16px;gap:6px}
+.jn{display:flex;align-items:center;gap:10px;padding:7px 14px 7px 9px;border-radius:30px}
+.jn .ic{width:40px;height:40px;border-radius:50%;background:var(--soft);display:grid;place-items:center;flex:none}
+.jn .ic svg{width:18px;height:18px;stroke:var(--ink2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.jn b{display:block;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute);font-weight:700}
+.jn span{display:block;font-size:14.5px;font-weight:700;margin-top:1px;white-space:nowrap}
+.jn.on{background:var(--ink);color:#fff}
+.jn.on .ic{background:rgba(255,255,255,.14)} .jn.on .ic svg{stroke:#fff} .jn.on b{color:#8fb2ff}
+.jl{flex:1;height:2px;background:repeating-linear-gradient(90deg,#cfcfd6 0 6px,transparent 6px 12px);min-width:10px}
+
+/* ================= SLIDE 4 · DUAL-PANE APP ================= */
+.app{display:grid;grid-template-columns:72px 1fr 1fr;gap:14px;margin-top:18px;height:626px;position:relative}
+.rail{background:#161618;border-radius:26px;box-shadow:var(--sh);display:flex;flex-direction:column;align-items:center;padding:16px 0 18px;gap:6px}
+.grip{display:grid;grid-template-columns:4px 4px;gap:4px;margin-bottom:8px}.grip i{width:3px;height:3px;border-radius:50%;background:#76767f}
+.rail .logo{width:22px;height:22px;fill:#fff;margin-bottom:12px}
+.rb{width:56px;height:54px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--faint);font-size:10.5px;font-weight:500}
+.rb svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.rb.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:var(--shs)}
+.rail .pg{margin-top:auto;text-align:center;color:#fff;font-weight:700;font-size:14px;line-height:1.2}
+.rail .pg small{display:block;color:var(--faint);font-size:10px;font-weight:500}
+.rail .tg{width:38px;height:56px;border-radius:19px;background:rgba(255,255,255,.08);display:flex;justify-content:center;padding-top:5px;margin-top:10px}
+.rail .tg i{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.rail .tg i::after{content:"";width:8px;height:8px;border-radius:50%;border:1.7px solid var(--ink)}
+.lpane{background:var(--soft);border-radius:26px;box-shadow:var(--sh);padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.lpane .pills{display:flex;gap:8px;align-items:center}
+.lpane .sheet{flex:1;padding:22px 26px;display:flex;flex-direction:column}
+.ai h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.ai p{font-size:14.5px;line-height:1.58;color:var(--ink2)}
+.ai .cite{font-family:var(--m);font-size:11px;font-weight:600;color:var(--blue);background:var(--blueS);border-radius:6px;padding:2px 6px;margin-left:4px;vertical-align:1px}
+.schema{margin:12px 0;border-radius:14px;background:var(--soft);border:1px solid var(--line);padding:6px 10px}
+.schema text{font-family:var(--m)}
+.sel{font-size:15px;font-weight:600;line-height:1.5;color:var(--ink);padding:6px 8px;margin:0 -8px;border-radius:8px;
+  background:linear-gradient(rgba(59,111,217,.15),rgba(59,111,217,.15)) no-repeat 0 0/0% 100%;
+  border-bottom:2px solid transparent}
+.slide.active .sel{animation:selHl .7s cubic-bezier(.6,0,.3,1) .45s forwards}
+@keyframes selHl{to{background-size:100% 100%;border-bottom-color:var(--blue)}}
+.popup{position:relative;margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shp)}
+.popup::before{content:"";position:absolute;top:-8px;left:72px;width:13px;height:13px;background:#fff;border-left:1px solid var(--line);border-top:1px solid var(--line);transform:rotate(45deg)}
+.popup .tl{font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--mute);margin-bottom:8px}
+.popup .chips{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap}
+.popup .chips .chip{height:29px;font-size:12.5px;padding:0 12px}
+.popup .in{background:var(--soft);border-radius:10px;padding:9px 12px;font-size:13.5px;color:var(--ink2);font-weight:500}
+.popup .ft{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:12.5px;color:var(--mute);font-weight:500}
+.btnk{height:28px;padding:0 14px;border-radius:14px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.rpane{background:#fff;border-radius:26px;box-shadow:var(--sh);padding:18px 30px 22px;display:flex;flex-direction:column}
+.obar{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1.5px solid var(--chip)}
+.obar .p{font-family:var(--m);font-size:12.5px;color:var(--mute)}
+.obar .chip{background:var(--soft);color:var(--ink2);height:28px;font-size:12px}
+.obar .chip .d{color:var(--green)}
+.obs{padding-top:18px;flex:1}
+.obs .h1{font-size:27px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.obs .h2{font-size:17.5px;font-weight:700;margin:12px 0 4px;display:flex;align-items:center;gap:8px}
+.obs .h2 i{font-family:var(--m);font-style:normal;font-size:13px;color:var(--mute);font-weight:600}
+.obs .li{font-size:15px;line-height:1.9;color:var(--ink2);padding-left:4px}
+.obs .li.me{color:var(--ink);font-weight:600}
+.obs .ph{font-size:14px;font-style:italic;color:var(--faint);margin-top:14px}
+.guard{display:flex;gap:8px;margin-bottom:12px}
+.donebar{height:54px;border-radius:27px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15.5px;font-weight:600;box-shadow:var(--shs);position:relative}
+.donebar .go{position:absolute;right:10px;width:36px;height:36px;border-radius:50%;background:var(--green);display:grid;place-items:center}
+.donebar .go svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ================= SLIDE 5 · SOCRATIC REVIEW & MERGE ================= */
+.s4{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:20px;height:598px;position:relative}
+.s4 .panel{display:flex;flex-direction:column}
+.s4 .sheet{flex:1;padding:18px 26px;overflow:hidden}
+.s4 .mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3}
+.note .li{font-size:14.5px;line-height:1.8;color:var(--ink2)}
+.note .h1{font-size:23px;font-weight:700;letter-spacing:-.02em;margin:12px 0 4px}
+.note .h2{font-size:16px;font-weight:700;margin-top:8px;display:flex;gap:8px;align-items:center}
+.note .h2 i{font-family:var(--m);font-style:normal;font-size:12.5px;color:var(--mute)}
+.mk{display:flex;align-items:center;gap:8px;margin:6px 0 0;padding:6px 10px;border-radius:8px;font-size:14.5px;font-weight:600;color:var(--ink);
+  background:rgba(207,154,18,.18);border-bottom:2px dashed var(--amber)}
+.mk .bdg{width:20px;height:20px;border-radius:50%;background:var(--amber);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;flex:none}
+.dpop{position:relative;margin-top:12px;background:var(--ink);border-radius:18px;padding:16px 18px;box-shadow:var(--shp);color:#fff}
+.dpop::before{content:"";position:absolute;top:-7px;left:64px;width:13px;height:13px;background:var(--ink);transform:rotate(45deg)}
+.dpop .tl{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.05em;color:#f0c24d}
+.dpop .tl i{width:7px;height:7px;border-radius:50%;background:var(--amber)}
+.dpop .qq{font-size:15px;font-weight:500;line-height:1.48;margin-top:7px}
+.dpop .qq span{color:var(--faint)}
+.dpop .rep{margin-top:12px;background:#26262b;border-radius:12px;padding:10px 13px;font-size:14px;color:#ececef;display:flex;align-items:center;gap:10px;min-height:44px}
+.dpop .rep .t{flex:1}
+.dpop .send{height:26px;padding:0 13px;border-radius:13px;background:var(--green);font-size:12px;font-weight:700;display:grid;place-items:center;flex:none}
+.inv{font-size:13px;color:var(--faint);font-weight:500;display:flex;align-items:center;gap:8px;margin-top:6px}
+.inv i{font-style:normal;font-family:var(--m);font-size:11px;background:var(--soft);border-radius:6px;padding:2px 7px;color:var(--mute)}
+.del{margin-top:8px;background:var(--redS);border-radius:8px;padding:6px 10px;font-size:14px;color:var(--red);text-decoration:line-through;font-weight:500}
+.add{margin-top:8px;background:var(--greenS);border:1.5px solid var(--green);border-radius:12px;padding:10px 14px;font-size:14px;line-height:1.52;color:var(--ink)}
+.add b{display:block;color:var(--greenI);font-size:13px;margin-bottom:2px}
+.add .cite{font-family:var(--m);font-size:11px;font-weight:600;color:var(--blue);background:#fff;border-radius:6px;padding:2px 6px;margin-left:4px}
+.mbtns{display:flex;gap:8px;margin-top:14px;align-items:center}
+.mbtns .btnk{height:36px;padding:0 18px;font-size:13.5px;border-radius:18px}
+.mbtns .btnr{height:36px;padding:0 16px;border-radius:18px;background:var(--redS);color:var(--red);font-size:13.5px;font-weight:600;display:inline-flex;align-items:center}
+.mbtns .btng{height:36px;padding:0 16px;border-radius:18px;background:var(--chip);color:var(--ink2);font-size:13.5px;font-weight:600;display:inline-flex;align-items:center}
+.lacuna{margin-top:12px}
+
+/* ================= SLIDE 6 · RECALL & MASTERY ================= */
+.s5{display:grid;grid-template-columns:1fr 1.12fr;gap:24px;margin-top:20px;height:496px}
+.s5 .quiz{padding:20px 24px;flex:1;display:flex;flex-direction:column}
+.s5 .qtext{font-size:19px;font-weight:700;line-height:1.42;letter-spacing:-.01em;margin:14px 0 4px}
+.s5 .qtext span{display:block;font-size:15px;font-weight:500;color:var(--ink2);line-height:1.55;margin-bottom:2px}
+.qopt{border-radius:13px;background:var(--soft);padding:12px 15px;font-size:15px;color:var(--ink2);font-weight:500;margin-top:9px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;border:1.5px solid transparent}
+.qopt:hover{background:#efeff2}
+.qopt .l{width:25px;height:25px;border-radius:7px;background:#fff;display:grid;place-items:center;font-family:var(--m);font-size:12px;font-weight:700;color:var(--mute);box-shadow:var(--shs);flex:none}
+.qopt.right{background:var(--greenS);border-color:var(--green);color:var(--greenI);font-weight:700}
+.qopt.right .l{background:var(--green);color:#fff}
+.qopt.wrong{background:var(--redS);border-color:var(--red);color:var(--red)}
+.qopt.wrong .l{background:var(--red);color:#fff}
+.fb{margin-top:10px;font-size:13.5px;font-weight:500;color:var(--mute);min-height:20px}
+.fb b{color:var(--greenI)}
+.nextq{margin-top:auto;padding-top:12px;border-top:1.5px solid var(--chip);font-size:13px;color:var(--mute);font-weight:500;display:flex;align-items:center;gap:8px}
+.rcol{display:flex;flex-direction:column;gap:16px}
+.rcol .panel{padding:16px 20px}
+.rcol .ttl{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.rcol .ttl b{font-size:16.5px;font-weight:700}
+.chart5 text{font-family:var(--f)}
+.mrow{display:grid;grid-template-columns:190px 1fr 176px;gap:14px;align-items:center;padding:5px 0;font-size:14.5px;font-weight:600}
+.mrow + .mrow{border-top:1px solid var(--chip)}
+.trk{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.trk i{height:8px;border-radius:4px;background:var(--chip)}
+.trk i.on{background:var(--c)}
+.mrow .chip{justify-content:center;height:27px;font-size:12px}
+.closing{margin-top:18px;height:74px;border-radius:37px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;box-shadow:var(--shp);font-size:24px;font-weight:700;letter-spacing:-.015em}
+.closing svg{width:20px;height:20px;fill:#fff;flex:none}
+.closing .s{color:var(--faint);font-weight:500}
+.closing .hl{background:linear-gradient(90deg,#8fb2ff,#7fd6a9);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- nav, notes & timer ---------- */
+#tm{font-family:var(--m);font-size:12px;display:none;background:#fff;border-radius:9px;padding:6px 10px;box-shadow:var(--shs);color:var(--ink)}
+#tm.show{display:inline-block}
+#tm.over{color:var(--red)}
+#nav{position:fixed;bottom:14px;right:20px;display:flex;gap:8px;align-items:center;z-index:50;font:600 12px var(--f);color:#6b6b73;opacity:.55;transition:opacity .2s}
+#nav:hover{opacity:1}
+#nav button{background:#fff;border:0;box-shadow:var(--shs);color:var(--ink);border-radius:9px;width:32px;height:28px;cursor:pointer;font-size:15px}
+#notes{position:fixed;left:0;right:0;bottom:0;background:rgba(20,20,22,.96);color:#ececef;padding:18px 28px 48px;font:500 17px/1.55 var(--f);display:none;z-index:40;max-height:42vh;overflow:auto}
+#notes.show{display:block}
+#notes b{display:block;color:#8fb2ff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+#notes em{color:#f0c24d;font-style:normal;font-weight:700}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--blue);z-index:50;transition:width .4s}
+
+@media print{
+  #tm,#nav,#notes,#bar{display:none!important}
+  html,body{overflow:visible;background:var(--bg)}
+  #stage{position:static;transform:none!important}
+  .slide{position:relative;opacity:1!important;page-break-after:always;height:900px}
+  .cu{opacity:1!important;transform:none!important;animation:none!important}
+  .draw{stroke-dashoffset:0!important;animation:none!important}
+  .growbar{transform:scaleX(1)!important;animation:none!important}
+  .sel{background-size:100% 100%!important;border-bottom-color:var(--blue)!important}
+  @page{size:1600px 900px;margin:0}
+}
+</style>
+</head>
+<body class="noanim">
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 2c.6 5.5 4.5 9.4 10 10-5.5.6-9.4 4.5-10 10-.6-5.5-4.5-9.4-10-10 5.5-.6 9.4-4.5 10-10z"/></symbol>
+  <symbol id="arr" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <marker id="ahb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3b6fd9"/></marker>
+</svg>
+
+<div id="bar"></div>
+<div id="stage">
+
+<!-- ======================================================= SLIDE 1 · INTRO / COVER -->
+<section class="slide" data-notes="Hi everyone, we are presenting <em>TutorAI</em> — an AI Learning Harness designed for university STEM students. Instead of generating passive summaries or bolting a chatbot onto a PDF, TutorAI is an active dual-pane study workspace built on cognitive psychology that guides you from the first lecture to independent exam mastery.">
+  <div class="toprow">
+    <span class="kick"><svg><use href="#star"/></svg>01 · Introduction</span>
+    <span class="chip w"><span class="d" style="color:var(--green)"></span>AI Learning Harness · University STEM</span>
+  </div>
+
+  <div class="intro-wrap">
+    <!-- Custom SVG Logo of TutorAI -->
+    <div class="logo-stage cu" style="--d:.05s">
+      <svg viewBox="0 0 188 188" role="img" aria-label="TutorAI Logo">
+        <defs>
+          <linearGradient id="lg-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1e2028"/>
+            <stop offset="100%" stop-color="#101115"/>
+          </linearGradient>
+          <linearGradient id="lg-blue" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4f83ed"/>
+            <stop offset="100%" stop-color="#3b6fd9"/>
+          </linearGradient>
+          <linearGradient id="lg-spark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#cfe0ff"/>
+          </linearGradient>
+        </defs>
+        <circle class="orbit" cx="94" cy="94" r="89" fill="none" stroke="#3b6fd9" stroke-opacity=".28" stroke-width="1.5" stroke-dasharray="6 8"/>
+        <rect x="16" y="16" width="156" height="156" rx="42" fill="url(#lg-bg)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+        <!-- Left Pane (AI Explanation) -->
+        <rect x="34" y="42" width="54" height="104" rx="14" fill="url(#lg-blue)"/>
+        <rect x="43" y="56" width="28" height="5" rx="2.5" fill="#fff" opacity=".9"/>
+        <rect x="43" y="66" width="36" height="4" rx="2" fill="#fff" opacity=".55"/>
+        <rect x="43" y="74" width="32" height="4" rx="2" fill="#fff" opacity=".55"/>
+        <rect x="41" y="86" width="38" height="14" rx="5" fill="#141416" opacity=".32"/>
+        <rect x="45" y="91" width="26" height="4" rx="2" fill="#fff"/>
+        <circle cx="52" cy="122" r="5" fill="#fff"/>
+        <path d="M59 122h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="77" cy="122" r="5" fill="#7fd6a9"/>
+        <!-- Right Pane (Student Obsidian Blank Page) -->
+        <rect x="100" y="42" width="54" height="104" rx="14" fill="#ffffff"/>
+        <rect x="109" y="56" width="24" height="5" rx="2.5" fill="#141416"/>
+        <rect x="109" y="68" width="34" height="4" rx="2" fill="#8a8a92"/>
+        <rect x="109" y="76" width="30" height="4" rx="2" fill="#8a8a92"/>
+        <rect x="109" y="90" width="26" height="4" rx="2" fill="#3b6fd9"/>
+        <rect x="138" y="87" width="2.2" height="10" rx="1" fill="#3b6fd9"/>
+        <rect x="109" y="114" width="36" height="16" rx="8" fill="#eef6f0" stroke="#2e9e6a" stroke-width="1.5"/>
+        <path d="M122 122l3.2 3.2 6.5-6.5" fill="none" stroke="#2e9e6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Center AI Spark Badge -->
+        <circle cx="94" cy="94" r="19" fill="#141416" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <path d="M94 80c.7 6.4 5.2 10.9 11.6 11.6-6.4.7-10.9 5.2-11.6 11.6-.7-6.4-5.2-10.9-11.6-11.6 6.4-.7 10.9-5.2 11.6-11.6z" fill="url(#lg-spark)"/>
+      </svg>
+    </div>
+
+    <div class="intro-title cu" style="--d:.18s">Tutor<span>AI</span></div>
+    <div class="intro-tag cu" style="--d:.28s">Don't let AI study for you. Learn to master it yourself.</div>
+    <p class="intro-sub cu" style="--d:.36s">A cognitive study environment where the AI grounds explanations on the left, you construct your own notes on the right, and your misconceptions drive spaced recall until the exam.</p>
+
+    <div class="intro-cards">
+      <div class="icard cu" style="--d:.48s">
+        <div class="ic" style="background:var(--blueS)"><svg viewBox="0 0 24 24" stroke="#3b6fd9"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M12 4v16"/></svg></div>
+        <div><b>Dual-Pane Workspace</b><p>Source-grounded AI explanation on the left, Obsidian-style blank page on the right — no bolted-on chat slop.</p></div>
+      </div>
+      <div class="icard cu" style="--d:.62s">
+        <div class="ic" style="background:var(--amberS)"><svg viewBox="0 0 24 24" stroke="#cf9a12"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-4.8-1.5L3 20l1.6-4.2A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
+        <div><b>Socratic Review &amp; Merge</b><p>Targeted questions anchored directly to your lines, followed by an inspectable diff that preserves your voice.</p></div>
+      </div>
+      <div class="icard cu" style="--d:.76s">
+        <div class="ic" style="background:var(--greenS)"><svg viewBox="0 0 24 24" stroke="#2e9e6a"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
+        <div><b>Multi-Day Active Recall</b><p>Polished notes ≠ mastery. Every gap enters your Student Model to schedule unassisted checks over the following days.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span class="br"><svg><use href="#star"/></svg>TutorAI</span><span class="sep">·</span><span>01 · Introduction</span></div>
+</section>
+
+<!-- ======================================================= SLIDE 2 · PARADOX -->
+<section class="slide" data-notes="We started from a paradox demonstrated by a 2025 study: students using ChatGPT score <em>48% higher</em> on exercises done with AI, but drop <em>17% lower</em> when they face the exam alone. Why? Because today you upload 50 pages of slides and get a ready-made summary in one click… but the AI did all the cognitive work while the student read passively. Traditional AI helps you answer, not learn — TutorAI flips this by optimizing what the student can understand, remember, and apply independently.">
+  <div class="toprow">
+    <span class="kick"><svg><use href="#star"/></svg>02 · The Problem</span>
+    <span class="chip w"><span class="d" style="color:var(--blue)"></span>North Star: Understand, remember &amp; apply alone</span>
+  </div>
+  <h1>The AI paradox: <span class="blue">answering ≠ learning</span></h1>
+  <p class="sub">When AI generates ready-made notes, students experience an illusion of competence without building mental models.</p>
+
+  <div class="s1">
+    <div class="panel cu" style="--d:.1s">
+      <div class="hrow"><span class="chip w"><span class="d" style="color:var(--red)"></span>ChatGPT / General-purpose AI</span><em>Bastani et al., 2025</em></div>
+      <div class="sheet chart">
+        <svg viewBox="0 0 840 370" width="100%" style="display:block">
+          <g stroke="#ececee" stroke-width="1">
+            <line x1="40" y1="80" x2="800" y2="80"/><line x1="40" y1="155" x2="800" y2="155"/><line x1="40" y1="305" x2="800" y2="305"/>
+          </g>
+          <polygon class="cu" style="--d:.55s" points="210,78 518,230 210,230" fill="#2e9e6a" fill-opacity=".13"/>
+          <polygon class="cu" style="--d:.85s" points="518,230 635,288 635,230" fill="#d9534f" fill-opacity=".16"/>
+          <line x1="40" y1="230" x2="800" y2="230" stroke="#8a8a92" stroke-width="2" stroke-dasharray="7 6"/>
+          <text x="800" y="220" text-anchor="end" font-size="13.5" font-weight="600" fill="#8a8a92">Baseline (no AI) = 0%</text>
+          <path class="draw" style="--d:.2s" pathLength="1" d="M210 78 L635 288" stroke="#141416" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <circle class="cu" style="--d:.2s" cx="210" cy="78" r="11" fill="#2e9e6a" stroke="#fff" stroke-width="4"/>
+          <circle class="cu" style="--d:.95s" cx="635" cy="288" r="11" fill="#d9534f" stroke="#fff" stroke-width="4"/>
+          <g class="cu" style="--d:.25s">
+            <text x="234" y="28" font-size="15.5" font-weight="600" fill="#8a8a92">During exercises, assisted by AI</text>
+            <text x="232" y="74" font-size="58" font-weight="800" letter-spacing="-2" fill="#2e9e6a">+48%</text>
+          </g>
+          <text class="cu" style="--d:.65s" x="230" y="216" font-size="14.5" font-weight="600" font-style="italic" fill="#25603c">Illusion of competence</text>
+          <g class="cu" style="--d:1s">
+            <text x="610" y="346" text-anchor="end" font-size="58" font-weight="800" letter-spacing="-2" fill="#d9534f">−17%</text>
+            <text x="610" y="368" text-anchor="end" font-size="15.5" font-weight="600" fill="#8a8a92">At the exam, unassisted</text>
+            <text x="654" y="274" font-size="14.5" font-weight="600" font-style="italic" fill="#d9534f">Cognitive offloading</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="panel cu" style="--d:.3s">
+      <div class="steph"><div class="num">?</div><div><b>Who really did the cognitive work?</b><span>Why standard chatbots induce passive study</span></div></div>
+      <div class="flow">
+        <div class="fcard c1 cu" style="--d:.45s">
+          <div class="tile" style="background:var(--redS)"><svg viewBox="0 0 24 24" fill="none" stroke="#d9534f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+          <div><b>1. Upload course slides</b><small>Lecture_05.pdf · 48 pages</small></div>
+        </div>
+        <div class="arrowc cu" style="--d:.58s"><svg style="transform:rotate(90deg)"><use href="#arr"/></svg></div>
+        <div class="fcard c2 cu" style="--d:.68s">
+          <div class="tile" style="background:rgba(255,255,255,.12)"><svg viewBox="0 0 24 24" fill="#fff"><use href="#star"/></svg></div>
+          <div><b>2. The AI does the thinking</b><small>Instant summary &amp; polished notes in 1 click</small></div>
+          <div class="docsk"><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+        </div>
+        <div class="arrowc cu" style="--d:.82s"><svg style="transform:rotate(90deg)"><use href="#arr"/></svg></div>
+        <div class="fcard c3 cu" style="--d:.92s">
+          <div class="tile" style="background:var(--chip)"><svg viewBox="0 0 24 24" fill="none" stroke="#8a8a92" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div>
+          <div><b>3. Passive student</b><small>Reads fluently · zero generative effort</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar cu" style="--d:1.15s">
+    <div class="lft"><svg><use href="#star"/></svg><span>Traditional AI helps you <span class="g">answer</span>, not <span class="r">learn</span>.</span></div>
+    <div class="rgt">TutorAI optimizes what you can <span class="chip k" style="background:rgba(255,255,255,.12);height:28px;font-size:12.5px">understand · retain · apply alone</span></div>
+  </div>
+  <div class="foot"><span class="br"><svg><use href="#star"/></svg>TutorAI</span><span class="sep">·</span><span>02 · The AI Paradox</span></div>
+</section>
+
+<!-- ======================================================= SLIDE 3 · COGNITIVE METHOD & ANTI-DOOMSCROLLING (IMPROVED) -->
+<section class="slide" data-notes="There is also a second problem: when you ask a chatbot for a long explanation, while it streams a wall of text your attention drops, <em>you grab your phone and start doomscrolling</em>. TutorAI replaces passive waiting with a method grounded in cognitive psychology: short conceptual units across two pathways — <em>Lecture by Lecture</em> and <em>Exam Preparation</em> — adaptive <em>Guidance Fading</em> as your mastery grows, and continuous role-switching that keeps your mind active.">
+  <div class="toprow">
+    <span class="kick"><svg><use href="#star"/></svg>03 · Psychological Method &amp; Focus</span>
+    <div style="display:flex;gap:8px">
+      <span class="chip w"><span class="d" style="color:var(--blue)"></span>Cognitive Load Theory</span>
+      <span class="chip w"><span class="d" style="color:var(--amber)"></span>Self-Explanation (ICAP)</span>
+      <span class="chip w"><span class="d" style="color:var(--green)"></span>Guidance Fading (Sweller)</span>
+      <span class="chip w"><span class="d" style="color:var(--red)"></span>Step Tutoring (d = 0.76)</span>
+    </div>
+  </div>
+  <h1>Built on <span class="blue">cognitive science</span>, designed against doomscrolling</h1>
+  <p class="sub">Replacing passive walls of text with short conceptual units, adaptive scaffolding, and continuous cognitive stimuli.</p>
+
+  <div class="s3-grid">
+    <!-- LEFT: THE ATTENTION TRAP -->
+    <div class="trap-card cu" style="--d:.12s">
+      <div class="steph"><div class="num rd">✕</div><div><b>The Chatbot Attention Trap</b><span>Why long AI generations lead to doomscrolling</span></div></div>
+      <div class="trap-flow">
+        <div class="bub u">“Explain Lamport clocks &amp; happens-before”</div>
+        <div class="bub a">
+          <div class="tag">AI streams a 600-word wall of text…</div>
+          <i class="wl growbar" style="width:96%;--d:.25s"></i>
+          <i class="wl growbar" style="width:88%;--d:.35s"></i>
+          <i class="wl growbar" style="width:93%;--d:.45s"></i>
+          <i class="wl growbar" style="width:74%;--d:.55s"></i>
+          <i class="wl growbar" style="width:91%;--d:.65s"></i>
+        </div>
+        <div class="trap-vs cu" style="--d:.75s">
+          <div class="trap-box bad">
+            <div class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+            <div><b>Phone grab</b><small>Idle wait → doomscrolling</small></div>
+          </div>
+          <div class="trap-box statbox">
+            <div>
+              <div class="stat-num">47 s</div>
+              <small>avg focus before task-switching (Mark, UCI)</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: TUTORAI COGNITIVE ENGINE -->
+    <div class="engine-card cu" style="--d:.32s">
+      <div class="steph" style="margin-bottom:2px"><div class="num bl">✓</div><div><b>The TutorAI Cognitive Engine</b><span>Two tailored entry pathways + expertise-adaptive scaffolding</span></div></div>
+      <div class="eng-top">
+        <!-- Box 1: Two Pathways & Micro-Units -->
+        <div class="eng-box cu" style="--d:.48s">
+          <div class="eng-head">
+            <span class="l"><span class="num" style="width:24px;height:24px;font-size:12px">1</span>Two Entry Pathways</span>
+            <span class="sci">Chunking · 1 concept/unit</span>
+          </div>
+          <div class="paths-2">
+            <div class="pcard l">
+              <div class="top"><b>Lecture by Lecture</b></div>
+              <p>Fast start: upload slides and jump straight into Unit 1 to build notes from scratch.</p>
+              <span class="pill-mini">● Instant setup</span>
+            </div>
+            <div class="pcard r">
+              <div class="top"><b>Exam Preparation</b></div>
+              <p>Deep start: runs a gap diagnostic first and builds a deadline-driven study plan.</p>
+              <span class="pill-mini">● Gap diagnosis + plan</span>
+            </div>
+          </div>
+          <div class="unit-strip">
+            <span>Lesson 5 → 6 bite-sized units</span>
+            <div class="bks"><span class="bk done">1 ✓</span><span class="bk cur">Unit 2</span><span class="bk">3</span><span class="bk">4</span><span class="bk">5</span><span class="bk">6</span></div>
+          </div>
+        </div>
+
+        <!-- Box 2: Guidance Fading -->
+        <div class="eng-box cu" style="--d:.68s">
+          <div class="eng-head">
+            <span class="l"><span class="num" style="width:24px;height:24px;font-size:12px">2</span>Guidance Fading</span>
+            <span class="sci">Sweller · Scaffolding</span>
+          </div>
+          <div class="fade-list">
+            <div class="lv">
+              <div class="top">Unfamiliar concept<em>100% support</em></div>
+              <div class="tr"><i class="growbar" style="width:100%;--d:.8s"></i></div>
+              <small>Explicit explanation + step-by-step worked example</small>
+            </div>
+            <div class="lv">
+              <div class="top">Partially known<em>60% support</em></div>
+              <div class="tr"><i class="growbar" style="width:60%;--d:.92s"></i></div>
+              <small>Guided prompts: you complete intermediate reasoning</small>
+            </div>
+            <div class="lv">
+              <div class="top">Verified concept<em>20% support</em></div>
+              <div class="tr"><i class="growbar" style="width:22%;--d:1.04s"></i></div>
+              <small>Open problems &amp; unassisted exam-level verification</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM: CONTINUOUS ROLE-SWITCHING LOOP -->
+  <div class="loop-bar cu" style="--d:.95s">
+    <span class="chip k" style="height:36px;padding:0 15px">3 · Active Role Switching</span>
+    <div class="jn"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M12 5v14"/></svg></div><div><b>1. Explain</b><span>Read &amp; highlight left</span></div></div>
+    <div class="jl"></div>
+    <div class="jn on"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div><div><b>2. Elaborate</b><span>Write notes right</span></div></div>
+    <div class="jl"></div>
+    <div class="jn"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg></div><div><b>3. Review</b><span>1 Socratic check</span></div></div>
+    <div class="jl"></div>
+    <div class="jn"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3v12M18 9v12M6 15a6 6 0 0 0 6-6h6"/><circle cx="6" cy="18" r="3"/></svg></div><div><b>4. Merge</b><span>Approve diff</span></div></div>
+    <div class="jl"></div>
+    <span class="chip a" style="height:34px"><span class="d"></span>Optional break at unit boundary</span>
+  </div>
+
+  <div class="foot"><span class="br"><svg><use href="#star"/></svg>TutorAI</span><span class="sep">·</span><span>03 · Cognitive Method &amp; Anti-Doomscrolling</span></div>
+</section>
+
+<!-- ======================================================= SLIDE 4 · DUAL-PANE INTERFACE -->
+<section class="slide" data-notes="This method shapes our interface. We eliminated the usual <em>'AI slop' with a PDF on the left and a bolted-on chatbot on the right</em>. In TutorAI, the two panes collaborate: On the left is the source-grounded explanation. Highlight any sentence to open a contextual pop-up right in place — <em>Go deeper, Explain differently, Give example, or Show source</em> — without switching to a chat. On the right is an Obsidian-style blank page where <em>you</em> write your own notes, with zero AI autocomplete or one-click summaries.">
+  <div class="toprow">
+    <span class="kick"><svg><use href="#star"/></svg>04 · Symmetrical Dual-Pane UI</span>
+    <span class="chip r"><span class="d"></span>✕ Not a PDF viewer + bolted-on right-hand chat</span>
+  </div>
+  <h1>Left: <span class="blue">the AI explains</span>. Right: <span class="blue">you write</span>.</h1>
+
+  <div class="app cu" style="--d:.1s">
+    <div class="rail">
+      <div class="grip"><i></i><i></i><i></i><i></i></div>
+      <svg class="logo"><use href="#star"/></svg>
+      <div class="rb"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>Course</div>
+      <div class="rb on"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M12 5v14"/></svg>Study</div>
+      <div class="rb"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9 12l2 2 4-4"/></svg>Recall</div>
+      <div class="pg">2 / 6<small>units</small></div>
+      <div class="tg"><i></i></div>
+    </div>
+
+    <!-- LEFT PANE -->
+    <div class="lpane">
+      <div class="pills">
+        <span class="chip w"><span class="d" style="color:var(--blue)"></span>1 · AI Explanation</span>
+        <span class="chip g">✓ Prerequisites verified</span>
+        <span class="chip n" style="margin-left:auto">Slides p. 12–14</span>
+      </div>
+      <div class="sheet ai">
+        <h3>Lamport Logical Clocks</h3>
+        <p>Without a global physical clock, each process Pᵢ maintains a local counter Cᵢ, increments it on every event, and piggybacks it on messages. Upon receipt, Pⱼ updates Cⱼ = max(Cⱼ, C_msg) + 1.<span class="cite">Slide 12</span></p>
+        <div class="schema">
+          <svg viewBox="0 0 560 112" width="100%" style="display:block">
+            <text x="14" y="36" font-size="13" font-weight="700" fill="#141416">P1</text>
+            <text x="14" y="88" font-size="13" font-weight="700" fill="#141416">P2</text>
+            <line x1="50" y1="32" x2="540" y2="32" stroke="#c4c4cc" stroke-width="2"/>
+            <line x1="50" y1="84" x2="540" y2="84" stroke="#c4c4cc" stroke-width="2"/>
+            <path class="draw" style="--d:.3s" pathLength="1" d="M210 32 L352 80" stroke="#3b6fd9" stroke-width="2.2" fill="none" marker-end="url(#ahb)"/>
+            <text x="262" y="48" font-size="11.5" font-weight="700" fill="#3b6fd9">msg (C=2)</text>
+            <g font-size="11.5" font-weight="700" text-anchor="middle">
+              <circle cx="110" cy="32" r="7.5" fill="#fff" stroke="#141416" stroke-width="2"/><text x="110" y="17" fill="#4b4b52">C=1</text>
+              <circle cx="210" cy="32" r="7.5" fill="#141416"/><text x="210" y="17" fill="#141416">C=2</text>
+              <circle cx="150" cy="84" r="7.5" fill="#fff" stroke="#141416" stroke-width="2"/><text x="150" y="106" fill="#4b4b52">C=1</text>
+              <circle cx="360" cy="84" r="8.5" fill="#3b6fd9"/><text x="360" y="106" fill="#3b6fd9">C = max(1,2)+1 = 3</text>
+              <circle cx="470" cy="84" r="7.5" fill="#fff" stroke="#141416" stroke-width="2"/><text x="470" y="106" fill="#4b4b52">C=4</text>
+            </g>
+          </svg>
+        </div>
+        <div class="sel">If A → B then C(A) &lt; C(B), but the converse implication does not necessarily hold.</div>
+        <div class="popup cu pop" style="--d:.75s">
+          <div class="tl">SELECTED PASSAGE · CONTEXTUAL ACTION (NO CHAT SWITCHING)</div>
+          <div class="chips">
+            <span class="chip k"><span class="d" style="color:var(--blue)"></span>Go deeper</span>
+            <span class="chip r"><span class="d"></span>Unclear · Explain differently</span>
+            <span class="chip n">Give example</span>
+            <span class="chip n">Show source</span>
+          </div>
+          <div class="in">“Why doesn't C(A) &lt; C(B) imply that A happened before B?”</div>
+          <div class="ft"><span>Clarification stays anchored to this passage</span><span class="btnk">Ask ↵</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANE -->
+    <div class="rpane">
+      <div class="obar">
+        <span class="p">Distributed Systems / 02-Logical-Clocks.md</span>
+        <span class="chip"><span class="d"></span>2 · Your Notes (Obsidian-style)</span>
+      </div>
+      <div class="obs">
+        <div class="h1">Logical Clocks</div>
+        <div class="h2"><i>##</i>Core idea</div>
+        <div class="li">• In distributed systems there is no single physical clock.</div>
+        <div class="li">• Each process keeps a local counter C(i).</div>
+        <div class="li">• When sending a message, it attaches its current C value.</div>
+        <div class="h2"><i>##</i>Happened-Before relation (→)</div>
+        <div class="li">• Same process: if A occurs before B, then A → B.</div>
+        <div class="li">• Message: if A is send(m) and B is receive(m), then A → B.</div>
+        <div class="li me cu" style="--d:1.05s">• <span class="type" data-delay="1150" data-text="So if C(A) < C(B), it means A caused B"></span><span class="caret"></span></div>
+        <div class="ph">Compose your own structured explanation before checking…</div>
+      </div>
+      <div class="guard cu" style="--d:1.25s">
+        <span class="chip r">✕ No AI autocomplete</span>
+        <span class="chip r">✕ No one-click summary</span>
+      </div>
+      <div class="donebar">Unit completed · Check my notes<span class="go"><svg><use href="#arr"/></svg></span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="br"><svg><use href="#star"/></svg>TutorAI</span><span class="sep">·</span><span>04 · Dual-Pane Study Workspace</span></div>
+</section>
+
+<!-- ======================================================= SLIDE 5 · SOCRATIC REVIEW & MERGE -->
+<section class="slide" data-notes="While you write, TutorAI never interrupts your train of thought. Once you click <em>'Check my notes'</em>, the roles flip: the AI analyzes your draft and anchors a targeted Socratic question directly to the line with a misconception. After you reason through the answer, TutorAI proposes an inspectable, source-linked diff/merge that fixes the error while keeping your structure and voice intact.">
+  <div class="toprow">
+    <span class="kick"><svg><use href="#star"/></svg>05 · End-of-Unit Review &amp; Merge</span>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="chip n">Study: AI explains → You write</span>
+      <span class="chip k">Review: You wrote → AI questions your notes</span>
+    </div>
+  </div>
+  <h1>The roles flip: <span class="blue">Socratic check</span>, then <span class="blue">inspectable merge</span></h1>
+
+  <div class="s4">
+    <!-- STEP 1: REVIEW -->
+    <div class="panel cu" style="--d:.1s">
+      <div class="steph"><div class="num">1</div><div><b>Targeted Socratic pop-up</b><span>Anchored directly to the imprecise line in your draft</span></div></div>
+      <div class="sheet note">
+        <div class="obar"><span class="p">02-Logical-Clocks.md</span><span class="chip a"><span class="d"></span>1 misconception detected</span></div>
+        <div class="h1">Logical Clocks</div>
+        <div class="h2"><i>##</i>Core idea</div>
+        <div class="li">• Each process keeps a local counter C(i).</div>
+        <div class="h2"><i>##</i>Happened-Before relation (→)</div>
+        <div class="li">• If A is send(m) and B is receive(m), then A → B.</div>
+        <div class="mk"><span class="bdg">1</span><span>• So if C(A) &lt; C(B), it means A caused B</span></div>
+        <div class="dpop cu pop" style="--d:.38s">
+          <div class="tl"><i></i>SOCRATIC QUESTION ON THIS LINE</div>
+          <div class="qq">What if events A and B happen on two processes that never exchange messages? <span>Does C(A) &lt; C(B) still guarantee that A caused B?</span></div>
+          <div class="rep"><span class="t">“<span class="type" data-delay="650" data-text="Wait — no! If they never communicate, they are concurrent (A ∥ B)."></span>”</span><span class="send">Reply</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mid arrowc cu" style="width:42px;height:42px;--d:.85s"><svg><use href="#arr"/></svg></div>
+
+    <!-- STEP 2: MERGE -->
+    <div class="panel cu" style="--d:.85s">
+      <div class="steph"><div class="num">2</div><div><b>Source-linked Diff &amp; Merge</b><span>Updates your note while preserving your structure and words</span></div></div>
+      <div class="sheet note">
+        <div class="obar"><span class="p">02-Logical-Clocks.md</span><span class="chip g"><span class="d"></span>Diff ready for review</span></div>
+        <div class="h1">Logical Clocks</div>
+        <div class="inv"><i>## Core idea</i>unchanged · your original text</div>
+        <div class="h2"><i>##</i>Happened-Before relation (→)</div>
+        <div class="li">• If A is send(m) and B is receive(m), then A → B.</div>
+        <div class="del cu" style="--d:1.05s">− • So if C(A) &lt; C(B), it means A caused B</div>
+        <div class="add cu" style="--d:1.22s"><b>+ ✓ Merged correction (from your answer)</b>• A → B implies C(A) &lt; C(B), but <u>not the converse</u>: if A ∥ B (concurrent), timestamps alone do not establish causality.<span class="cite">Slide 14</span></div>
+        <div class="mbtns cu" style="--d:1.38s"><span class="btnk">✓ Accept merge</span><span class="btnr">✕ Reject</span><span class="btng">Edit manually</span></div>
+        <div class="lacuna cu" style="--d:1.52s"><span class="chip a"><span class="d"></span>“Concurrency vs causality” logged in Student Model → schedules Recall</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="br"><svg><use href="#star"/></svg>TutorAI</span><span class="sep">·</span><span>05 · Socratic Feedback &amp; Inspectable Merge</span></div>
+</section>
+
+<!-- ======================================================= SLIDE 6 · MULTI-DAY RECALL & MASTERY -->
+<section class="slide" data-notes="A fundamental rule in TutorAI is that <em>polished notes are not mastery</em>. Every misconception surfaced during review is logged in your <em>Student Model</em>. Over the following days, TutorAI schedules active recall, interleaved problems across chapters, and unassisted exam checks — adapting your weekly plan if you miss a session. We don't want an AI that studies for you; we want an AI that teaches you how to really study.">
+  <div class="toprow">
+    <span class="kick"><svg><use href="#star"/></svg>06 · Multi-Day Recall &amp; Mastery</span>
+    <span class="chip w"><span class="d" style="color:var(--amber)"></span>Rule: Knowledge Artifact ≠ Learning State</span>
+  </div>
+  <h1>Polished notes <span class="blue">≠</span> mastered concept</h1>
+  <p class="sub">Gaps discovered in your notes drive spaced retrieval and unassisted verification over the following days.</p>
+
+  <div class="s5">
+    <div class="panel cu" style="display:flex;flex-direction:column;--d:.12s">
+      <div class="steph"><div class="num bl">1</div><div><b>Unassisted recall check</b><span>Generated from your logged gap · click an option to test</span></div></div>
+      <div class="sheet quiz">
+        <div style="display:flex;gap:8px"><span class="chip a"><span class="d"></span>Target gap: Concurrency</span><span class="chip r">Hints locked (Unassisted)</span></div>
+        <div class="qtext"><span>P1 has event A with C(A) = 3; P2 has event B with C(B) = 5. No messages pass between P1 and P2.</span>Which event happened first?</div>
+        <div class="qopt" data-ok="0"><span class="l">A</span>Event A, because C(A) &lt; C(B)</div>
+        <div class="qopt" data-ok="1"><span class="l">B</span>Neither — A and B are concurrent (A ∥ B)</div>
+        <div class="qopt" data-ok="0"><span class="l">C</span>Event B, because P2's clock is ahead</div>
+        <div class="fb" id="fb"></div>
+        <div class="nextq">↻ Up next: interleaved problem combining <b style="color:var(--ink2)">Vector Clocks + Mutual Exclusion</b></div>
+      </div>
+    </div>
+
+    <div class="rcol">
+      <div class="panel cu" style="--d:.35s">
+        <div class="ttl"><b>2 · Spaced recall across the following days</b><span class="chip b" style="height:25px;font-size:11.5px">↻ Rebalances plan without review debt</span></div>
+        <div class="sheet" style="padding:10px 12px">
+          <svg class="chart5" id="chart5" viewBox="0 0 640 214" width="100%" height="174" style="display:block"></svg>
+        </div>
+      </div>
+      <div class="panel cu" style="--d:.62s">
+        <div class="ttl"><b>3 · Evidence-backed Student Model</b><span style="font-size:12.5px;color:var(--mute);font-weight:600">Status requires unassisted proof</span></div>
+        <div class="mrow"><span>Happened-before</span><div class="trk" style="--c:var(--green)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><span class="chip g">Demonstrated alone</span></div>
+        <div class="mrow"><span>Lamport clocks</span><div class="trk" style="--c:var(--blue)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><span class="chip b">Studied · unverified</span></div>
+        <div class="mrow"><span>Concurrency (A ∥ B) <span style="color:var(--amber)">⚑</span></span><div class="trk" style="--c:var(--amber)"><i class="on"></i><i class="on"></i><i></i><i></i></div><span class="chip a">Needs review</span></div>
+        <div class="mrow"><span style="color:var(--mute)">Vector clocks</span><div class="trk" style="--c:var(--faint)"><i class="on"></i><i></i><i></i><i></i></div><span class="chip n">Not studied</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing cu" style="--d:.9s"><svg><use href="#star"/></svg><span><span class="s">We don't want an AI that studies for you.</span> We want an AI that <span class="hl">teaches you how to really study.</span></span></div>
+  <div class="foot"><span class="br"><svg><use href="#star"/></svg>TutorAI</span><span class="sep">·</span><span>06 · Spaced Recall &amp; Evidence-Based Mastery</span></div>
+</section>
+
+</div>
+
+<div id="notes"><b>Speaker notes</b><span id="nt"></span></div>
+<div id="nav"><span id="tm"></span><span>N notes · F fullscreen · T timer</span><button id="pv">‹</button><span id="ct"></span><button id="nx">›</button></div>
+
+<script>
+/* ---------- retention curve (Slide 6) ---------- */
+(function(){
+  const svg=document.getElementById('chart5'),X=d=>40+d*26.2,Y=r=>18+(1-r)*160;
+  const reviews=[[0,4.5],[3,13],[9,38],[16,90]];let d='';
+  reviews.forEach(([t0,S],k)=>{const t1=k<reviews.length-1?reviews[k+1][0]:21;for(let t=t0;t<=t1+1e-9;t+=0.25){const r=Math.exp(-(t-t0)/S);d+=(d?' L':'M')+X(t).toFixed(1)+' '+Y(r).toFixed(1)}});
+  let dn='';for(let t=0;t<=21;t+=0.25){dn+=(dn?' L':'M')+X(t).toFixed(1)+' '+Y(Math.exp(-t/4.5)).toFixed(1)}
+  const marks=[[3,'+3d · Active recall'],[9,'+9d · Mixed practice'],[16,'+16d · Exam simulation']];
+  let h=`<g stroke="#ececee"><line x1="40" y1="18" x2="600" y2="18"/><line x1="40" y1="98" x2="600" y2="98"/></g>
+  <line x1="40" y1="178" x2="606" y2="178" stroke="#c4c4cc" stroke-width="1.5"/>
+  <text x="34" y="22" text-anchor="end" font-size="11" fill="#a1a1aa">100%</text><text x="34" y="182" text-anchor="end" font-size="11" fill="#a1a1aa">0</text>`;
+  marks.forEach(([t,l])=>{h+=`<line x1="${X(t)}" y1="18" x2="${X(t)}" y2="178" stroke="#e2e2e6" stroke-dasharray="3 4"/>
+    <text x="${X(t)}" y="200" text-anchor="middle" font-size="12" font-weight="600" fill="#4b4b52">${l}</text>`});
+  h+=`<path class="draw" style="--d:.45s" pathLength="1" d="${dn}" fill="none" stroke="#a1a1aa" stroke-width="2" stroke-dasharray="1"/>
+  <path d="${dn}" fill="none" stroke="#f6f6f7" stroke-width="2.5" stroke-dasharray="2 6"/>
+  <path class="draw" style="--d:.55s" pathLength="1" d="${d}" fill="none" stroke="#3b6fd9" stroke-width="3.2" stroke-linejoin="round"/>
+  <text x="${X(5.2)}" y="150" font-size="12" font-weight="600" font-style="italic" fill="#8a8a92">without recall</text>
+  <text x="${X(18.5)}" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#3b6fd9">with TutorAI recall</text>
+  <text x="${X(0)}" y="200" font-size="12" font-weight="600" fill="#8a8a92">Day 0</text>`;
+  marks.forEach(([t])=>{h+=`<circle cx="${X(t)}" cy="${Y(1)}" r="5.5" fill="#3b6fd9" stroke="#fff" stroke-width="2.5"/>`});
+  h+=`<g transform="translate(${X(21)},18)"><line x1="0" y1="0" x2="0" y2="160" stroke="#d9534f" stroke-width="2"/>
+  <path d="M0 0h24l-5 7 5 7H0z" fill="#d9534f"/><text x="-6" y="200" text-anchor="end" font-size="12" font-weight="700" fill="#d9534f">Exam · AI off</text></g>`;
+  svg.innerHTML=h;
+})();
+
+/* ---------- interactive quiz ---------- */
+document.querySelectorAll('.qopt').forEach(o=>o.addEventListener('click',e=>{
+  e.stopPropagation();
+  document.querySelectorAll('.qopt').forEach(x=>x.classList.remove('right','wrong'));
+  const ok=o.dataset.ok==='1';o.classList.add(ok?'right':'wrong');
+  document.getElementById('fb').innerHTML=ok?'<b>✓ Correct.</b> Without message exchange there is no causal relation: C(A) &lt; C(B) is not enough.':'✕ That is the exact misconception from your notes: timestamps alone do not imply causality.';
+  if(!ok)document.querySelector('.qopt[data-ok="1"]').classList.add('right');
+}));
+
+/* ---------- deck engine (1 arrow press = 1 slide, cumulative auto-animations) ---------- */
+const slides=[...document.querySelectorAll('.slide')],stage=document.getElementById('stage');
+let cur=0;
+function typeIt(el,instant){
+  clearInterval(el._t);clearTimeout(el._to);
+  const t=el.dataset.text||'';
+  if(instant){el.textContent=t;return}
+  el.textContent='';let i=0;
+  const delay=parseInt(el.dataset.delay)||350;
+  el._to=setTimeout(()=>{
+    el._t=setInterval(()=>{el.textContent=t.slice(0,++i);if(i>=t.length)clearInterval(el._t)},24);
+  },delay);
+}
+function resetType(el){clearInterval(el._t);clearTimeout(el._to);el.textContent=''}
+function render(instant){
+  slides.forEach((s,k)=>{
+    const on=k===cur;
+    s.classList.toggle('active',on);
+    s.querySelectorAll('.type').forEach(t=>on?typeIt(t,instant):resetType(t));
+  });
+  document.getElementById('ct').textContent=(cur+1)+' / '+slides.length;
+  document.getElementById('bar').style.width=((cur+1)/slides.length*100)+'%';
+  document.getElementById('nt').innerHTML=slides[cur].dataset.notes||'';
+  history.replaceState(null,'','#'+(cur+1));
+}
+function next(){if(cur<slides.length-1){cur++;render()}}
+function prev(){if(cur>0){cur--;render()}}
+function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);stage.style.transform=`translate(-50%,-50%) scale(${s})`}
+addEventListener('resize',fit);
+addEventListener('keydown',e=>{const k=e.key;
+  if(['ArrowRight','PageDown',' ','Enter','ArrowDown'].includes(k)){e.preventDefault();next()}
+  else if(['ArrowLeft','PageUp','Backspace','ArrowUp'].includes(k)){e.preventDefault();prev()}
+  else if(k==='Home'){cur=0;render()} else if(k==='End'){cur=slides.length-1;render()}
+  else if(k.toLowerCase()==='n')document.getElementById('notes').classList.toggle('show');
+  else if(k.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+});
+stage.addEventListener('click',e=>{if(e.target.closest('.qopt'))return;next()});
+document.getElementById('nx').onclick=next;document.getElementById('pv').onclick=prev;
+addEventListener('beforeprint',()=>document.querySelectorAll('.type').forEach(t=>typeIt(t,true)));
+
+/* ---------- rehearsal timer (3:00 total across 6 slides) ---------- */
+const TGT=[20,35,40,35,30,20];let t0=Date.now(),ts=Date.now(),lastCur=-1;const tmEl=document.getElementById('tm');
+const fmt=x=>Math.floor(x/60)+':'+String(Math.floor(x%60)).padStart(2,'0');
+setInterval(()=>{if(cur!==lastCur){lastCur=cur;ts=Date.now()}if(!tmEl.classList.contains('show'))return;
+  const a=(Date.now()-ts)/1000,b=(Date.now()-t0)/1000,g=TGT[cur]||30;
+  tmEl.textContent='⏱ '+fmt(a)+' / '+fmt(g)+'  ·  tot '+fmt(b)+' / 3:00';tmEl.classList.toggle('over',a>g)},250);
+addEventListener('keydown',e=>{const k=e.key.toLowerCase();if(k==='t')tmEl.classList.toggle('show');if(k==='r'){t0=Date.now();ts=Date.now()}});
+fit();
+cur=Math.min(slides.length-1,Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
+render(true);
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.remove('noanim')));
+</script>
+</body>
+</html>
