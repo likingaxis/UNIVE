@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" width="880" height="300"
+     role="img" aria-labelledby="groom-title groom-desc"
+     style="font-family:'Segoe UI',Arial,Helvetica,sans-serif">
+  <title id="groom-title">Traffic grooming and muxponder architecture</title>
+  <desc id="groom-desc">K low-bit-rate client flows enter a TDM multiplexer in the electrical domain, combine into a higher-rate electrical stream, and share a single transponder transmitting one optical wavelength. Together, TDM Mux and Transponder form a Muxponder.</desc>
+
+  <defs>
+    <marker id="arr-blk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L10 5L0 9Z" fill="#334155"/>
+    </marker>
+    <marker id="arr-red2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L10 5L0 9Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="300" rx="12" fill="#ffffff"/>
+  <text x="440" y="34" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">Traffic grooming: sharing one transponder across multiple low-rate customers</text>
+
+  <!-- Muxponder outer dashed container -->
+  <rect x="275" y="54" width="445" height="202" rx="12" fill="#fdf4ff" stroke="#c026d3" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="497" y="79" font-size="15" font-weight="700" fill="#a21caf" text-anchor="middle">Muxponder (electrical TDM + optical transponder)</text>
+
+  <!-- K low bit rate client nodes -->
+  <rect x="44" y="88" width="128" height="34" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="108" y="110" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Customer f₁</text>
+
+  <rect x="44" y="138" width="128" height="34" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="108" y="160" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Customer f₂</text>
+
+  <text x="108" y="191" font-size="16" font-weight="700" fill="#64748b" text-anchor="middle">⋮</text>
+
+  <rect x="44" y="204" width="128" height="34" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="108" y="226" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Customer fₖ</text>
+
+  <!-- Arrows from clients into TDM Mux -->
+  <line x1="172" y1="105" x2="306" y2="105" stroke="#334155" stroke-width="2.2" marker-end="url(#arr-blk)"/>
+  <line x1="172" y1="155" x2="306" y2="155" stroke="#334155" stroke-width="2.2" marker-end="url(#arr-blk)"/>
+  <line x1="172" y1="221" x2="306" y2="221" stroke="#334155" stroke-width="2.2" marker-end="url(#arr-blk)"/>
+
+  <text x="224" y="96" font-size="11.5" font-weight="600" fill="#475569" text-anchor="middle">Low bit rate</text>
+
+  <!-- TDM Mux trapezoid -->
+  <polygon points="310,92 405,120 405,204 310,232" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+  <text x="357" y="157" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle">TDM</text>
+  <text x="357" y="175" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle">Mux</text>
+
+  <!-- High bit rate electrical link -->
+  <line x1="405" y1="162" x2="536" y2="162" stroke="#334155" stroke-width="3" marker-end="url(#arr-blk)"/>
+  <text x="470" y="146" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">High bit rate</text>
+  <text x="470" y="182" font-size="11.5" fill="#475569" text-anchor="middle">(electrical domain)</text>
+
+  <!-- Transponder box -->
+  <rect x="540" y="126" width="150" height="72" rx="8" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="615" y="158" font-size="15" font-weight="700" fill="#1e3a5f" text-anchor="middle">Transponder</text>
+  <text x="615" y="178" font-size="12" fill="#334155" text-anchor="middle">(1 shared device)</text>
+
+  <!-- Output wavelength -->
+  <line x1="690" y1="162" x2="842" y2="162" stroke="#dc2626" stroke-width="3.2" marker-end="url(#arr-red2)"/>
+  <text x="782" y="148" font-size="13.5" font-weight="700" fill="#b91c1c" text-anchor="middle">Single λ</text>
+  <text x="782" y="182" font-size="11.5" fill="#475569" text-anchor="middle">Carries f₁…fₖ</text>
+
+  <!-- Bottom note -->
+  <text x="440" y="282" font-size="12.5" fill="#334155" text-anchor="middle">At the receiver, O/E conversion and TDM demultiplexing recover each individual flow fᵢ.</text>
+</svg>

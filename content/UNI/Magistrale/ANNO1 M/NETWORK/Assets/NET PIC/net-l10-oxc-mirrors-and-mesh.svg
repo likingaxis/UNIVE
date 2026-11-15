@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 510" width="920" height="510"
+     role="img" aria-labelledby="oxc-title oxc-desc"
+     style="font-family:'Segoe UI',Arial,Helvetica,sans-serif">
+  <title id="oxc-title">Optical Cross-Connect (OXC) switching with movable mirrors and mesh provisioning</title>
+  <desc id="oxc-desc">Top panel shows an OXC redirecting a red wavelength from an upper input fiber to a lower output fiber using movable mirrors, while a green wavelength passes straight through. Bottom panel shows an end-to-end red lightpath routed across a mesh of OXCs with mirrors configured along the path.</desc>
+
+  <defs>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L10 5L0 9Z" fill="#dc2626"/>
+    </marker>
+    <marker id="arr-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L10 5L0 9Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arr-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L10 5L0 9Z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="510" rx="12" fill="#ffffff"/>
+
+  <!-- TOP PANEL: Movable Mirrors inside OXC -->
+  <rect x="20" y="16" width="880" height="238" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="40" y="46" font-size="18" font-weight="700" fill="#0f172a">1. Switching wavelengths across multiple fibers (MEMS movable mirrors)</text>
+
+  <!-- Input / Output fiber bands -->
+  <line x1="65" y1="108" x2="295" y2="108" stroke="#94a3b8" stroke-width="26" stroke-opacity="0.22"/>
+  <line x1="65" y1="192" x2="295" y2="192" stroke="#94a3b8" stroke-width="26" stroke-opacity="0.22"/>
+  <line x1="625" y1="108" x2="855" y2="108" stroke="#94a3b8" stroke-width="26" stroke-opacity="0.22"/>
+  <line x1="625" y1="192" x2="855" y2="192" stroke="#94a3b8" stroke-width="26" stroke-opacity="0.22"/>
+
+  <!-- OXC central box -->
+  <rect x="335" y="70" width="250" height="160" rx="10" fill="#eef4fb" stroke="#568cc3" stroke-width="2.2"/>
+  <text x="460" y="158" font-size="22" font-weight="700" fill="#1e3a5f" text-anchor="middle" opacity="0.28">OXC</text>
+
+  <!-- Demux / Mux trapezoids at OXC edges -->
+  <polygon points="295,94 335,78 335,138 295,122" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
+  <polygon points="295,178 335,162 335,222 295,206" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
+  <polygon points="585,78 625,94 625,122 585,138" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
+  <polygon points="585,162 625,178 625,206 585,222" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
+  <text x="315" y="69" font-size="11" font-weight="700" fill="#475569" text-anchor="middle">Demux</text>
+  <text x="605" y="69" font-size="11" font-weight="700" fill="#475569" text-anchor="middle">Mux</text>
+
+  <!-- Wavelength paths -->
+  <!-- Top input green passes straight to top output -->
+  <path d="M72 114 H848" fill="none" stroke="#16a34a" stroke-width="2.6" marker-end="url(#arr-g)"/>
+  <!-- Bottom input dark gray passes straight to bottom output -->
+  <path d="M72 198 H848" fill="none" stroke="#334155" stroke-width="2.4" marker-end="url(#arr-b)"/>
+  <!-- Top input red reflects off mirror 1 down to mirror 2 and out bottom output -->
+  <path d="M72 101 H395 L525 186 H848" fill="none" stroke="#dc2626" stroke-width="2.8" marker-end="url(#arr-r)"/>
+
+  <!-- Movable mirrors (blue angled bars) -->
+  <line x1="382" y1="88" x2="408" y2="114" stroke="#0284c7" stroke-width="6" stroke-linecap="round"/>
+  <line x1="512" y1="173" x2="538" y2="199" stroke="#0284c7" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Mirror callout -->
+  <text x="470" y="92" font-size="12.5" font-weight="700" fill="#0369a1" text-anchor="start">Movable mirrors</text>
+  <line x1="464" y1="88" x2="413" y2="98" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="3 2"/>
+
+  <!-- Fiber labels -->
+  <text x="175" y="88" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Input fiber 1</text>
+  <text x="175" y="172" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Input fiber 2</text>
+  <text x="745" y="88" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Output fiber 1</text>
+  <text x="745" y="172" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Output fiber 2</text>
+
+  <!-- BOTTOM PANEL: Meshed Network Lightpath Provisioning -->
+  <rect x="20" y="270" width="880" height="226" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="40" y="298" font-size="18" font-weight="700" fill="#0f172a">2. Meshed backbone: configuring mirrors end-to-end at lightpath setup</text>
+  <text x="460" y="322" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="middle">Constant-λ lightpath (mirrors configured at each traversed OXC)</text>
+
+  <!-- Mesh links (drawn behind nodes) -->
+  <line x1="120" y1="406" x2="225" y2="406" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="225" y1="406" x2="365" y2="358" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="225" y1="406" x2="365" y2="454" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="365" y1="358" x2="365" y2="454" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="365" y1="358" x2="555" y2="358" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="365" y1="454" x2="555" y2="454" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="555" y1="358" x2="555" y2="454" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="555" y1="358" x2="695" y2="406" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="555" y1="454" x2="695" y2="406" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="695" y1="406" x2="800" y2="406" stroke="#94a3b8" stroke-width="2.5"/>
+
+  <!-- Highlighted red lightpath along top branch -->
+  <path d="M126 396 L222 396 L362 348 L558 348 L698 396 L792 396" fill="none" stroke="#dc2626" stroke-width="3.2" marker-end="url(#arr-r)"/>
+
+  <!-- Client edge routers -->
+  <rect x="64" y="384" width="60" height="44" rx="7" fill="#334155" stroke="#0f172a" stroke-width="1.8"/>
+  <text x="94" y="411" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">Client A</text>
+  <rect x="796" y="384" width="60" height="44" rx="7" fill="#334155" stroke="#0f172a" stroke-width="1.8"/>
+  <text x="826" y="411" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">Client B</text>
+
+  <!-- 6 OXCs -->
+  <circle cx="225" cy="406" r="20" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="225" y="410" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">OXC</text>
+
+  <circle cx="365" cy="358" r="20" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="365" y="362" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">OXC</text>
+
+  <circle cx="365" cy="454" r="20" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="365" y="458" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">OXC</text>
+
+  <circle cx="555" cy="358" r="20" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="555" y="362" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">OXC</text>
+
+  <circle cx="555" cy="454" r="20" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="555" y="458" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">OXC</text>
+
+  <circle cx="695" cy="406" r="20" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="695" y="410" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">OXC</text>
+
+  <!-- Mirror-setting badges next to traversed OXCs -->
+  <line x1="218" y1="378" x2="232" y2="386" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="358" y1="330" x2="372" y2="338" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="548" y1="330" x2="562" y2="338" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="688" y1="378" x2="702" y2="386" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round"/>
+
+  <text x="460" y="486" font-size="12.5" fill="#334155" text-anchor="middle">Unlike IP routers, OXCs do not read packet headers per packet; mirrors stay fixed for the lightpath lifetime.</text>
+</svg>
