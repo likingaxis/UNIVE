@@ -265,7 +265,7 @@ c_1 \oplus c_2 &= (G(k) \oplus m_1) \oplus (G(k) \oplus m_2) = m_1 \oplus m_2.
 \end{aligned}
 $$
 
-An eavesdropper immediately learns $m_1 \oplus m_2$, just as in standard OTP key reuse. Thus PRG-OTP solves the key-length problem, not the key-reuse problem; it is a warm-up toward multi-message security in the next lecture.
+An eavesdropper(origliatore) immediately learns $m_1 \oplus m_2$, just as in standard OTP key reuse. Thus PRG-OTP solves the key-length problem, not the key-reuse problem; it is a warm-up toward multi-message security in the next lecture.
 
 (this table is not written well is strange)
 
@@ -291,6 +291,7 @@ In the computational setting, we make two natural changes: we restrict the adver
 ### Formal definition
 
 Let $\Pi = (\operatorname{Enc}, \operatorname{Dec})$ be a symmetric-key encryption scheme with key space $\mathcal K$ (with uniform key sampling $k \gets \mathcal K$) and message space $\mathcal M$. For each fixed challenge bit $b \in \{0,1\}$, define the experiment $\operatorname{Game}^{\mathrm{one\text{-}time}}_{\Pi,\mathcal A}(\lambda, b)$:
+where lambda is the security parameter
 
 1. The PPT adversary $\mathcal A$ chooses two equal-length messages $m_0, m_1 \in \mathcal M$ and sends them to the challenger $\mathcal C$.
 2. The challenger samples a fresh key $k \gets \mathcal K$, computes the ciphertext $c = \operatorname{Enc}(k, m_b)$, and sends $c$ to $\mathcal A$.
@@ -307,6 +308,7 @@ $$
 \operatorname{Game}^{\mathrm{one\text{-}time}}_{\Pi,\mathcal A}(\lambda, 1)
 },
 $$
+no PPT adversary should be able to distinguish which experiment it is participating in with non-negligible advantage
 
 that is,
 

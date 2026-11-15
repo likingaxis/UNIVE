@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 500" width="920" height="500"
+     role="img" aria-labelledby="abc-title abc-desc"
+     style="font-family:'Segoe UI',Arial,Helvetica,sans-serif">
+  <title id="abc-title">Three-node logical network mapped onto a linear physical substrate</title>
+  <desc id="abc-desc">Top panel shows logical optical channel demands among sites A, B, and C: 1 channel A-B, 1 channel B-C, and 3 channels A-C. Bottom panel shows the linear physical fiber path A to B to C, where each span carries 4 wavelengths (1 local + 3 transit).</desc>
+
+  <defs>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L10 5L0 9Z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L10 5L0 9Z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="500" rx="12" fill="#ffffff"/>
+
+  <!-- TOP PANEL: Logical Network -->
+  <rect x="20" y="16" width="880" height="205" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="40" y="46" font-size="18" font-weight="700" fill="#0f172a">1. Logical network (required optical channels between sites)</text>
+
+  <!-- Logical connectors (drawn behind nodes) -->
+  <line x1="215" y1="158" x2="420" y2="85" stroke="#dc2626" stroke-width="3" marker-start="url(#arrow-red)" marker-end="url(#arrow-red)"/>
+  <line x1="500" y1="85" x2="705" y2="158" stroke="#dc2626" stroke-width="3" marker-start="url(#arrow-red)" marker-end="url(#arrow-red)"/>
+  <line x1="215" y1="172" x2="705" y2="172" stroke="#2563eb" stroke-width="3.2" marker-start="url(#arrow-blue)" marker-end="url(#arrow-blue)"/>
+
+  <!-- Logical labels placed cleanly off the diagonal lines -->
+  <rect x="234" y="74" width="102" height="24" rx="5" fill="#ffffff" stroke="#fecaca"/>
+  <text x="285" y="91" font-size="13" font-weight="700" fill="#b91c1c" text-anchor="middle">1 channel</text>
+
+  <rect x="584" y="74" width="102" height="24" rx="5" fill="#ffffff" stroke="#fecaca"/>
+  <text x="635" y="91" font-size="13" font-weight="700" fill="#b91c1c" text-anchor="middle">1 channel</text>
+
+  <rect x="378" y="159" width="164" height="26" rx="5" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="460" y="177" font-size="13" font-weight="700" fill="#1d4ed8" text-anchor="middle">3 channels (A ↔ C)</text>
+
+  <!-- Logical nodes A, B, C -->
+  <rect x="135" y="140" width="80" height="52" rx="8" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="175" y="173" font-size="20" font-weight="700" fill="#0f172a" text-anchor="middle">A</text>
+
+  <rect x="420" y="54" width="80" height="52" rx="8" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="460" y="87" font-size="20" font-weight="700" fill="#0f172a" text-anchor="middle">B</text>
+
+  <rect x="705" y="140" width="80" height="52" rx="8" fill="#ddebf7" stroke="#568cc3" stroke-width="2"/>
+  <text x="745" y="173" font-size="20" font-weight="700" fill="#0f172a" text-anchor="middle">C</text>
+
+  <!-- BOTTOM PANEL: Physical Substrate -->
+  <rect x="20" y="236" width="880" height="248" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="40" y="266" font-size="18" font-weight="700" fill="#0f172a">2. Physical substrate A — B — C (each fiber span carries 1 + 3 = 4 wavelengths)</text>
+
+  <!-- Node A box -->
+  <rect x="42" y="294" width="186" height="148" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="1.8"/>
+  <text x="135" y="315" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Node A (1 OLT)</text>
+
+  <!-- Node B box -->
+  <rect x="352" y="294" width="216" height="148" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="1.8"/>
+  <text x="460" y="315" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Node B (intermediate)</text>
+
+  <!-- Node C box -->
+  <rect x="692" y="294" width="186" height="148" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="1.8"/>
+  <text x="785" y="315" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Node C (1 OLT)</text>
+
+  <!-- Wavelength lines from A transponders to mux -->
+  <line x1="94" y1="336" x2="174" y2="336" stroke="#dc2626" stroke-width="2.5"/>
+  <line x1="94" y1="364" x2="174" y2="364" stroke="#2563eb" stroke-width="2.5"/>
+  <line x1="94" y1="392" x2="174" y2="392" stroke="#0d9488" stroke-width="2.5"/>
+  <line x1="94" y1="420" x2="174" y2="420" stroke="#7c3aed" stroke-width="2.5"/>
+
+  <!-- 4 Transponders at A -->
+  <rect x="58" y="326" width="38" height="20" rx="3" fill="#64748b" stroke="#334155"/>
+  <text x="77" y="340" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TP</text>
+  <rect x="58" y="354" width="38" height="20" rx="3" fill="#64748b" stroke="#334155"/>
+  <text x="77" y="368" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TP</text>
+  <rect x="58" y="382" width="38" height="20" rx="3" fill="#64748b" stroke="#334155"/>
+  <text x="77" y="396" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TP</text>
+  <rect x="58" y="410" width="38" height="20" rx="3" fill="#64748b" stroke="#334155"/>
+  <text x="77" y="424" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TP</text>
+
+  <!-- Mux A -->
+  <polygon points="174,326 214,348 214,408 174,430" fill="#ffffff" stroke="#334155" stroke-width="1.8"/>
+  <text x="193" y="382" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">Mux</text>
+
+  <!-- Fiber A-B -->
+  <line x1="214" y1="378" x2="366" y2="378" stroke="#0f172a" stroke-width="3.2"/>
+  <text x="290" y="366" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">4 λ on fiber A–B</text>
+  <text x="290" y="398" font-size="12" fill="#475569" text-anchor="middle">1 (A–B) + 3 (A–C)</text>
+
+  <!-- Node B internal pass/drop visual -->
+  <polygon points="366,352 412,326 412,430 366,404" fill="#ffffff" stroke="#334155" stroke-width="1.8"/>
+  <text x="392" y="382" font-size="9.5" font-weight="700" fill="#334155" text-anchor="middle">Demux</text>
+
+  <polygon points="508,326 554,352 554,404 508,430" fill="#ffffff" stroke="#334155" stroke-width="1.8"/>
+  <text x="528" y="382" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">Mux</text>
+
+  <!-- 3 transit lines in B + 1 local drop/add -->
+  <line x1="412" y1="364" x2="508" y2="364" stroke="#2563eb" stroke-width="2.5"/>
+  <line x1="412" y1="392" x2="508" y2="392" stroke="#0d9488" stroke-width="2.5"/>
+  <line x1="412" y1="420" x2="508" y2="420" stroke="#7c3aed" stroke-width="2.5"/>
+
+  <path d="M412 336 H440 V350" fill="none" stroke="#dc2626" stroke-width="2.2"/>
+  <path d="M480 350 V336 H508" fill="none" stroke="#dc2626" stroke-width="2.2"/>
+  <rect x="422" y="344" width="76" height="22" rx="4" fill="#fee2e2" stroke="#f87171"/>
+  <text x="460" y="359" font-size="10.5" font-weight="700" fill="#991b1b" text-anchor="middle">λ₁ Drop / Add</text>
+
+  <rect x="421" y="372" width="78" height="38" rx="4" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="460" y="388" font-size="10.5" font-weight="700" fill="#1e40af" text-anchor="middle">3 transit λ</text>
+  <text x="460" y="402" font-size="10" fill="#1e40af" text-anchor="middle">(A ↔ C)</text>
+
+  <!-- Fiber B-C -->
+  <line x1="554" y1="378" x2="706" y2="378" stroke="#0f172a" stroke-width="3.2"/>
+  <text x="630" y="366" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">4 λ on fiber B–C</text>
+  <text x="630" y="398" font-size="12" fill="#475569" text-anchor="middle">1 (B–C) + 3 (A–C)</text>
+
+  <!-- Demux C + 4 Transponders at C -->
+  <polygon points="706,352 752,326 752,430 706,404" fill="#ffffff" stroke="#334155" stroke-width="1.8"/>
+  <text x="732" y="382" font-size="9.5" font-weight="700" fill="#334155" text-anchor="middle">Demux</text>
+
+  <line x1="752" y1="336" x2="824" y2="336" stroke="#dc2626" stroke-width="2.5"/>
+  <line x1="752" y1="364" x2="824" y2="364" stroke="#2563eb" stroke-width="2.5"/>
+  <line x1="752" y1="392" x2="824" y2="392" stroke="#0d9488" stroke-width="2.5"/>
+  <line x1="752" y1="420" x2="824" y2="420" stroke="#7c3aed" stroke-width="2.5"/>
+
+  <rect x="824" y="326" width="38" height="20" rx="3" fill="#64748b" stroke="#334155"/>
+  <text x="843" y="340" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TP</text>
+  <rect x="824" y="354" width="38" height="20" rx="3" fill="#64748b" stroke="#334155"/>
+  <text x="843" y="368" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TP</text>
+  <rect x="824" y="382" width="38" height="20" rx="3" fill="#64748b" stroke="#334155"/>
+  <text x="843" y="396" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TP</text>
+  <rect x="824" y="410" width="38" height="20" rx="3" fill="#64748b" stroke="#334155"/>
+  <text x="843" y="424" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TP</text>
+
+  <!-- Bottom note -->
+  <text x="460" y="468" font-size="13" fill="#334155" text-anchor="middle">Each dark-gray box (TP) is one transponder per wavelength—not a separate network node.</text>
+</svg>

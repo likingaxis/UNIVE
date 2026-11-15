@@ -1,98 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 455" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 325" role="img" aria-labelledby="title desc">
   <title id="title">First-transition reduction for ell = 3 (i = 0)</title>
-  <desc id="desc">Adversary B receives a (lambda + 1)-bit challenge z from the challenger, splits it into (s_1, b_1) with an empty prefix since i = 0, computes (s_2, b_2) = G(s_1) and (s_3, b_3) = G(s_2), and sends z prime = (b_1, b_2, b_3, s_3) to adversary A, returning A's output bit. A generated challenge induces H_0, whereas a uniform challenge induces H_1.</desc>
+  <desc id="desc">The challenger sends B a (lambda+1)-bit string z, either G(U_lambda) or U_(lambda+1). B splits z = (s_1, b_1), computes (s_2, b_2) = G(s_1) and (s_3, b_3) = G(s_2), runs A on z' = (b_1, b_2, b_3, s_3) and outputs A's bit. A generated z gives z' distributed as H_0; a uniform z gives H_1.</desc>
+  <style>
+    svg { font-size: 18px; }
+    text { font-family: 'Segoe UI', Arial, sans-serif; fill: #1e293b; }
+    .m { font-family: 'Times New Roman', Times, serif; font-style: italic; }
+    tspan.m { font-size: 1.12em; }
+    tspan[baseline-shift] { font-size: 0.72em; }
+    .n { font-style: normal; }
+    .small { font-size: 13.5px; fill: #475569; }
+    .ln { fill: none; stroke: #475569; stroke-width: 1.7; }
+    .num { fill: #3b5998; font-size: 15px; font-weight: 600; }
+  </style>
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M0 1L9 5L0 9Z" fill="#475569"/>
     </marker>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
-      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
-    </marker>
-    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
-      <path d="M0 1L9 5L0 9Z" fill="#7c3aed"/>
-    </marker>
   </defs>
+  <rect width="860" height="325" rx="12" fill="#ffffff"/>
 
-  <rect width="860" height="455" fill="#ffffff"/>
+  <!-- Challenger (pastel sand/cream) -->
+  <rect x="20" y="88" width="170" height="88" rx="8" fill="#fef9ec" stroke="#d9a441" stroke-width="1.6"/>
+  <text class="small" x="105" y="110" text-anchor="middle" fill="#854d0e">Challenger</text>
+  <text x="105" y="137" text-anchor="middle"><tspan class="m">z</tspan> ← <tspan class="m">G</tspan>(<tspan class="m">U</tspan><tspan class="m" baseline-shift="-0.35em">λ</tspan>)</text>
+  <text x="105" y="163" text-anchor="middle"><tspan class="small">or </tspan><tspan class="m">z</tspan> ← <tspan class="m">U</tspan><tspan baseline-shift="-0.35em"><tspan class="m">λ</tspan>+1</tspan></text>
 
-  <!-- Header -->
-  <text x="430" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">First-transition reduction for <tspan font-family="Georgia, serif" font-style="italic">ℓ</tspan> = 3 (selected index <tspan font-family="Georgia, serif" font-style="italic">i</tspan> = 0)</text>
-  <text x="430" y="57" text-anchor="middle" font-size="14.5" fill="#64748b">Reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan> embeds its (<tspan font-family="Georgia, serif" font-style="italic">λ</tspan> + 1)-bit challenge <tspan font-family="Georgia, serif" font-style="italic">z</tspan> into a (<tspan font-family="Georgia, serif" font-style="italic">λ</tspan> + 3)-bit input <tspan font-family="Georgia, serif" font-style="italic">z′</tspan> for <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
+  <path class="ln" d="M190 132H248" marker-end="url(#ar)"/>
+  <text class="m" x="219" y="122" text-anchor="middle">z</text>
+  <text class="small" x="219" y="151" text-anchor="middle"><tspan class="m">λ</tspan>+1</text>
 
-  <!-- Challenger box -->
-  <rect x="235" y="74" width="390" height="62" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
-  <text x="430" y="99" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">Challenger</text>
-  <text x="430" y="123" text-anchor="middle" font-size="15.5" fill="#334155">
-    Samples <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">λ</tspan>)   or   <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">λ+1</tspan>
-  </text>
+  <!-- Reduction B (pastel blue-slate container) -->
+  <rect x="250" y="18" width="520" height="232" rx="10" fill="#eef6ff" stroke="#7da9e8" stroke-width="1.7"/>
+  <text x="270" y="46" font-weight="600" fill="#1e3a8a">Reduction <tspan class="m">B</tspan></text>
+  <text class="small" x="270" y="68" fill="#3b5998"><tspan class="m">i</tspan> = 0: no prefix bits</text>
 
-  <!-- Arrow Challenger -> B -->
-  <path d="M430 136 V168" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow)"/>
-  <rect x="444" y="139" width="110" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-  <text x="499" y="154" text-anchor="middle" font-size="12.5" font-weight="600" fill="#334155"><tspan font-family="Georgia, serif" font-style="italic">z</tspan> (<tspan font-family="Georgia, serif" font-style="italic">λ</tspan> + 1 bits)</text>
+  <!-- White inner steps card -->
+  <rect x="268" y="80" width="248" height="152" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.4"/>
+  <text class="num" x="282" y="108">1.</text>
+  <text x="306" y="108"><tspan class="m">z</tspan> = (<tspan class="m">s</tspan><tspan baseline-shift="-0.35em">1</tspan>, <tspan class="m">b</tspan><tspan baseline-shift="-0.35em">1</tspan>)</text>
+  <text class="num" x="282" y="140">2.</text>
+  <text x="306" y="140">(<tspan class="m">s</tspan><tspan baseline-shift="-0.35em">2</tspan>, <tspan class="m">b</tspan><tspan baseline-shift="-0.35em">2</tspan>) = <tspan class="m">G</tspan>(<tspan class="m">s</tspan><tspan baseline-shift="-0.35em">1</tspan>)</text>
+  <text class="num" x="282" y="172">3.</text>
+  <text x="306" y="172">(<tspan class="m">s</tspan><tspan baseline-shift="-0.35em">3</tspan>, <tspan class="m">b</tspan><tspan baseline-shift="-0.35em">3</tspan>) = <tspan class="m">G</tspan>(<tspan class="m">s</tspan><tspan baseline-shift="-0.35em">2</tspan>)</text>
+  <text class="num" x="282" y="204">4.</text>
+  <text x="306" y="204"><tspan class="m">z′</tspan> = (<tspan class="m">b</tspan><tspan baseline-shift="-0.35em">1</tspan>, <tspan class="m">b</tspan><tspan baseline-shift="-0.35em">2</tspan>, <tspan class="m">b</tspan><tspan baseline-shift="-0.35em">3</tspan>, <tspan class="m">s</tspan><tspan baseline-shift="-0.35em">3</tspan>)</text>
 
-  <!-- Adversary B container -->
-  <rect x="36" y="172" width="788" height="162" rx="16" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
-  <text x="58" y="198" font-size="17" font-weight="700" fill="#1d4ed8">PPT Adversary <tspan font-family="Georgia, serif" font-style="italic">B</tspan></text>
-  <rect x="218" y="180" width="232" height="24" rx="12" fill="#dbeafe"/>
-  <text x="334" y="196" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e40af">For <tspan font-family="Georgia, serif" font-style="italic">i</tspan> = 0, prefix is empty</text>
+  <path class="ln" d="M516 198H598" marker-end="url(#ar)"/>
+  <text class="m" x="557" y="188" text-anchor="middle">z′</text>
+  <text class="small" x="557" y="218" text-anchor="middle"><tspan class="m">λ</tspan>+3 bits</text>
 
-  <!-- Step 1 -->
-  <rect x="56" y="214" width="212" height="102" rx="11" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.6"/>
-  <circle cx="78" cy="235" r="11" fill="#1d4ed8"/>
-  <text x="78" y="239" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">1</text>
-  <text x="98" y="240" font-size="14.5" font-weight="700" fill="#1e40af">Split challenge</text>
-  <text x="162" y="272" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">
-    <tspan font-family="Georgia, serif" font-style="italic">z</tspan> = (<tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="13">1</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="13">1</tspan>)
-  </text>
-  <text x="162" y="298" text-anchor="middle" font-size="13" fill="#64748b"><tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>: <tspan font-family="Georgia, serif" font-style="italic">λ</tspan> bits,   <tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>: 1 bit</text>
+  <!-- Adversary A (pastel lavender) -->
+  <rect x="600" y="163" width="96" height="70" rx="8" fill="#f3effb" stroke="#a78bfa" stroke-width="1.6"/>
+  <text class="small" x="648" y="188" text-anchor="middle" fill="#5b21b6">Adversary</text>
+  <text class="m" x="648" y="217" text-anchor="middle" font-size="22" fill="#3b0764">A</text>
 
-  <path d="M268 265 H304" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <path class="ln" d="M696 198H838" marker-end="url(#ar)"/>
+  <text x="733" y="188" text-anchor="middle"><tspan class="m">A</tspan>(<tspan class="m">z′</tspan>)</text>
+  <text class="small" x="812" y="224" text-anchor="middle">output of <tspan class="m">B</tspan></text>
 
-  <!-- Step 2 -->
-  <rect x="308" y="214" width="232" height="102" rx="11" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.6"/>
-  <circle cx="330" cy="235" r="11" fill="#1d4ed8"/>
-  <text x="330" y="239" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">2</text>
-  <text x="350" y="240" font-size="14.5" font-weight="700" fill="#1e40af">Run <tspan font-family="Georgia, serif" font-style="italic">G</tspan> twice from <tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan></text>
-  <text x="424" y="270" text-anchor="middle" font-size="17" font-weight="600" fill="#0f172a">
-    (<tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="12">2</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="12">2</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="12">1</tspan>)
-  </text>
-  <text x="424" y="297" text-anchor="middle" font-size="17" font-weight="600" fill="#0f172a">
-    (<tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="12">3</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="12">3</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="12">2</tspan>)
-  </text>
+  <!-- Outcome pills (pastel blue for H_0, pastel mint for H_1) -->
+  <rect x="45" y="268" width="370" height="38" rx="8" fill="#eef6ff" stroke="#93c5fd" stroke-width="1.4"/>
+  <text x="230" y="293" text-anchor="middle" font-size="16" fill="#1e3a8a">if <tspan class="m">z</tspan> ← <tspan class="m">G</tspan>(<tspan class="m">U</tspan><tspan class="m" baseline-shift="-0.35em">λ</tspan>):  <tspan class="m">z′</tspan> is distributed as <tspan class="m">H</tspan><tspan baseline-shift="-0.35em">0</tspan></text>
 
-  <path d="M540 265 H576" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-
-  <!-- Step 3 -->
-  <rect x="580" y="214" width="224" height="102" rx="11" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.6"/>
-  <circle cx="602" cy="235" r="11" fill="#1d4ed8"/>
-  <text x="602" y="239" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">3</text>
-  <text x="622" y="240" font-size="14.5" font-weight="700" fill="#1e40af">Form sample <tspan font-family="Georgia, serif" font-style="italic">z′</tspan></text>
-  <text x="692" y="272" text-anchor="middle" font-size="18.5" font-weight="700" fill="#0f172a">
-    (<tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="12.5">1</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="12.5">2</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="12.5">3</tspan>, <tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="12.5">3</tspan>)
-  </text>
-  <text x="692" y="298" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">λ</tspan> + 3 bits sent to <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
-
-  <!-- Call / return arrows between B and A -->
-  <path d="M165 334 V366" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow)"/>
-  <text x="155" y="354" text-anchor="end" font-size="13" font-weight="600" fill="#334155">pass <tspan font-family="Georgia, serif" font-style="italic">z′</tspan></text>
-
-  <path d="M275 370 V338" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
-  <text x="285" y="354" text-anchor="start" font-size="13" font-weight="600" fill="#6d28d9"><tspan font-family="Georgia, serif" font-style="italic">B</tspan> returns <tspan font-family="Georgia, serif" font-style="italic">A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">z′</tspan>)</text>
-
-  <!-- Adversary A box (bottom left) -->
-  <rect x="36" y="370" width="368" height="72" rx="14" fill="#f5f3ff" stroke="#a78bfa" stroke-width="2"/>
-  <text x="220" y="399" text-anchor="middle" font-size="18.5" font-weight="700" fill="#6d28d9">PPT Adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
-  <text x="220" y="425" text-anchor="middle" font-size="14.5" fill="#334155">Receives <tspan font-family="Georgia, serif" font-style="italic">z′</tspan> and outputs bit <tspan font-family="Georgia, serif" font-style="italic">A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">z′</tspan>) ∈ {0, 1}</text>
-
-  <!-- Outcome equivalence card (bottom right) -->
-  <rect x="424" y="370" width="400" height="72" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.6"/>
-  <circle cx="446" cy="395" r="5" fill="#2563eb"/>
-  <text x="460" y="400" font-size="14.5" fill="#1e293b">
-    If <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">λ</tspan>)   ⇒   <tspan font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">z′</tspan> is distributed as <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="10.5">0</tspan></tspan>
-  </text>
-  <circle cx="446" cy="422" r="5" fill="#059669"/>
-  <text x="460" y="427" font-size="14.5" fill="#1e293b">
-    If <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">λ+1</tspan>   ⇒   <tspan font-weight="700" fill="#047857"><tspan font-family="Georgia, serif" font-style="italic">z′</tspan> is distributed as <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan></tspan>
-  </text>
+  <rect x="445" y="268" width="370" height="38" rx="8" fill="#edfbf3" stroke="#74c69d" stroke-width="1.4"/>
+  <text x="630" y="293" text-anchor="middle" font-size="16" fill="#14532d">if <tspan class="m">z</tspan> ← <tspan class="m">U</tspan><tspan baseline-shift="-0.35em"><tspan class="m">λ</tspan>+1</tspan>:  <tspan class="m">z′</tspan> is distributed as <tspan class="m">H</tspan><tspan baseline-shift="-0.35em">1</tspan></text>
 </svg>

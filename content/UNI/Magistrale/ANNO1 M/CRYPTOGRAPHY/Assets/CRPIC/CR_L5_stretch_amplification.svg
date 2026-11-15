@@ -1,121 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 390" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 280" role="img" aria-labelledby="title desc">
   <title id="title">Stretch amplification construction G^ell</title>
-  <desc id="desc">Starting from a uniform lambda-bit seed s_0, the 1-bit-stretch generator G is applied iteratively ell times. Each step G(s_{i-1}) = (s_i, b_i) outputs one bit b_i and passes the lambda-bit state s_i to the next call. The final output is (b_1, b_2, ..., b_ell, s_ell) of length lambda plus ell bits, while intermediate states remain internal.</desc>
+  <desc id="desc">Starting from a uniform seed s_0, G is applied ell times. Each call G(s_{i-1}) = (s_i, b_i) passes the state s_i to the next call and emits the bit b_i. The output is (b_1, ..., b_ell, s_ell): ell bits followed by the final lambda-bit state. Intermediate states are not output.</desc>
+  <style>
+    svg { font-size: 18px; }
+    text { font-family: 'Segoe UI', Arial, sans-serif; fill: #1e293b; }
+    .m { font-family: 'Times New Roman', Times, serif; font-style: italic; }
+    tspan.m { font-size: 1.12em; }
+    tspan[baseline-shift] { font-size: 0.72em; }
+    .n { font-style: normal; }
+    .small { font-size: 14px; fill: #475569; }
+    .seed { fill: #eef6ff; stroke: #60a5fa; stroke-width: 1.6; }
+    .fn { fill: #e0e7ff; stroke: #6366f1; stroke-width: 1.6; }
+    .bit { fill: #edfbf3; stroke: #52b788; stroke-width: 1.6; }
+    .ln-st { fill: none; stroke: #3b6fd8; stroke-width: 1.7; }
+    .ln-bit { fill: none; stroke: #2d8a61; stroke-width: 1.7; }
+    .st { fill: #1e3a8a; }
+  </style>
   <defs>
-    <marker id="arrow-state" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
-      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    <marker id="ar-st" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#3b6fd8"/>
     </marker>
-    <marker id="arrow-bit" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
-      <path d="M0 1L9 5L0 9Z" fill="#059669"/>
+    <marker id="ar-bit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2d8a61"/>
     </marker>
   </defs>
+  <rect width="780" height="280" rx="12" fill="#ffffff"/>
 
-  <rect width="880" height="390" fill="#ffffff"/>
+  <text class="small" x="390" y="28" text-anchor="middle" fill="#3b5998">intermediate states <tspan class="m">s</tspan><tspan baseline-shift="-0.35em">1</tspan>, …, <tspan class="m">s</tspan><tspan class="m" baseline-shift="-0.35em">ℓ</tspan><tspan baseline-shift="-0.35em">−1</tspan> stay internal</text>
 
-  <!-- Header -->
-  <text x="440" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Stretch amplification: iterating a 1-bit-stretch PRG <tspan font-family="Georgia, serif" font-style="italic">ℓ</tspan> times</text>
-  <text x="440" y="58" text-anchor="middle" font-size="14.5" fill="#64748b">Each step computes <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">i−1</tspan>) = (<tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">i</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">i</tspan>), emitting 1 bit and forwarding a <tspan font-family="Georgia, serif" font-style="italic">λ</tspan>-bit state</text>
+  <!-- Chain -->
+  <rect class="seed" x="20" y="50" width="120" height="50" rx="7"/>
+  <text x="80" y="82" text-anchor="middle" font-size="20" fill="#1e3a8a"><tspan class="m">s</tspan><tspan baseline-shift="-0.35em">0</tspan> ← <tspan class="m">U</tspan><tspan class="m" baseline-shift="-0.35em">λ</tspan></text>
+  <path class="ln-st" d="M140 75H178" marker-end="url(#ar-st)"/>
 
-  <!-- Band label -->
-  <text x="34" y="88" font-size="12" font-weight="700" letter-spacing="0.6" fill="#1d4ed8">INTERNAL STATE CHAIN (λ BITS EACH)</text>
+  <rect class="fn" x="180" y="50" width="60" height="50" rx="7"/>
+  <text class="m" x="210" y="83" text-anchor="middle" font-size="22" fill="#312e81">G</text>
+  <path class="ln-st" d="M240 75H298" marker-end="url(#ar-st)"/>
+  <text class="m st" x="269" y="63" text-anchor="middle">s<tspan class="n" baseline-shift="-0.35em">1</tspan></text>
 
-  <!-- Seed s_0 -->
-  <rect x="34" y="102" width="110" height="58" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
-  <text x="89" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a8a">
-    <tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="13">0</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">λ</tspan>
-  </text>
-  <text x="89" y="149" text-anchor="middle" font-size="12.5" fill="#475569">uniform seed</text>
+  <rect class="fn" x="300" y="50" width="60" height="50" rx="7"/>
+  <text class="m" x="330" y="83" text-anchor="middle" font-size="22" fill="#312e81">G</text>
+  <path class="ln-st" d="M360 75H404" marker-end="url(#ar-st)"/>
+  <text class="m st" x="382" y="63" text-anchor="middle">s<tspan class="n" baseline-shift="-0.35em">2</tspan></text>
 
-  <!-- Arrow s_0 -> G1 -->
-  <path d="M144 131 H182" fill="none" stroke="#2563eb" stroke-width="2.3" marker-end="url(#arrow-state)"/>
+  <text x="430" y="81" text-anchor="middle" font-size="22" fill="#64748b">⋯</text>
+  <path class="ln-st" d="M456 75H518" marker-end="url(#ar-st)"/>
+  <text class="m st" x="487" y="63" text-anchor="middle">s<tspan baseline-shift="-0.35em">ℓ<tspan class="n">−1</tspan></tspan></text>
 
-  <!-- G box 1 -->
-  <rect x="186" y="100" width="84" height="62" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-  <text x="228" y="131" text-anchor="middle" font-size="22" font-weight="700" fill="#1e40af" font-family="Georgia, serif" font-style="italic">G</text>
-  <text x="228" y="150" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1d4ed8">step 1</text>
+  <rect class="fn" x="520" y="50" width="60" height="50" rx="7"/>
+  <text class="m" x="550" y="83" text-anchor="middle" font-size="22" fill="#312e81">G</text>
 
-  <!-- Arrow s_1: G1 -> G2 -->
-  <path d="M270 131 H328" fill="none" stroke="#2563eb" stroke-width="2.3" marker-end="url(#arrow-state)"/>
-  <text x="299" y="120" text-anchor="middle" font-size="16" font-weight="600" fill="#1e3a8a"><tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="11.5">1</tspan></text>
+  <!-- final state goes to output (pastel blue) -->
+  <path class="ln-st" d="M580 75H680V168" marker-end="url(#ar-st)"/>
+  <text class="m st" x="635" y="63" text-anchor="middle">s<tspan baseline-shift="-0.35em">ℓ</tspan></text>
 
-  <!-- G box 2 -->
-  <rect x="332" y="100" width="84" height="62" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-  <text x="374" y="131" text-anchor="middle" font-size="22" font-weight="700" fill="#1e40af" font-family="Georgia, serif" font-style="italic">G</text>
-  <text x="374" y="150" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1d4ed8">step 2</text>
+  <!-- bits go to output (pastel mint) -->
+  <path class="ln-bit" d="M210 100V168" marker-end="url(#ar-bit)"/>
+  <path class="ln-bit" d="M330 100V168" marker-end="url(#ar-bit)"/>
+  <path class="ln-bit" d="M550 100V168" marker-end="url(#ar-bit)"/>
 
-  <!-- Arrow s_2 -> ellipsis -> s_{ell-1} -> G_ell -->
-  <path d="M416 131 H464" fill="none" stroke="#2563eb" stroke-width="2.3" marker-end="url(#arrow-state)"/>
-  <text x="440" y="120" text-anchor="middle" font-size="16" font-weight="600" fill="#1e3a8a"><tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="11.5">2</tspan></text>
-  <text x="494" y="136" text-anchor="middle" font-size="24" font-weight="700" fill="#64748b">⋯</text>
-  <path d="M522 131 H578" fill="none" stroke="#2563eb" stroke-width="2.3" marker-end="url(#arrow-state)"/>
-  <text x="550" y="120" text-anchor="middle" font-size="16" font-weight="600" fill="#1e3a8a"><tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="11.5" font-family="Georgia, serif" font-style="italic">ℓ−1</tspan></text>
+  <!-- Output tuple -->
+  <text x="164" y="199" font-size="20" text-anchor="end"><tspan class="m">G</tspan><tspan class="m" baseline-shift="0.6em">ℓ</tspan>(<tspan class="m">s</tspan><tspan baseline-shift="-0.35em">0</tspan>) = (</text>
+  <rect class="bit" x="180" y="170" width="60" height="44" rx="6"/>
+  <text x="210" y="199" text-anchor="middle" font-size="20" fill="#14532d"><tspan class="m">b</tspan><tspan baseline-shift="-0.35em">1</tspan></text>
+  <text x="270" y="203" text-anchor="middle" font-size="20">,</text>
+  <rect class="bit" x="300" y="170" width="60" height="44" rx="6"/>
+  <text x="330" y="199" text-anchor="middle" font-size="20" fill="#14532d"><tspan class="m">b</tspan><tspan baseline-shift="-0.35em">2</tspan></text>
+  <text x="430" y="199" text-anchor="middle" font-size="20">, … ,</text>
+  <rect class="bit" x="520" y="170" width="60" height="44" rx="6"/>
+  <text x="550" y="199" text-anchor="middle" font-size="20" fill="#14532d"><tspan class="m">b</tspan><tspan class="m" baseline-shift="-0.35em">ℓ</tspan></text>
+  <text x="600" y="203" text-anchor="middle" font-size="20">,</text>
+  <rect class="seed" x="620" y="170" width="120" height="44" rx="6"/>
+  <text x="680" y="199" text-anchor="middle" font-size="20" fill="#1e3a8a"><tspan class="m">s</tspan><tspan class="m" baseline-shift="-0.35em">ℓ</tspan></text>
+  <text x="748" y="199" font-size="20">)</text>
 
-  <!-- G box ell -->
-  <rect x="582" y="100" width="84" height="62" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-  <text x="624" y="131" text-anchor="middle" font-size="22" font-weight="700" fill="#1e40af" font-family="Georgia, serif" font-style="italic">G</text>
-  <text x="624" y="150" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1d4ed8">step <tspan font-family="Georgia, serif" font-style="italic">ℓ</tspan></text>
-
-  <!-- Arrow G_ell -> final state s_ell -->
-  <path d="M666 131 H728" fill="none" stroke="#059669" stroke-width="2.3" marker-end="url(#arrow-bit)"/>
-
-  <!-- Final state s_ell -->
-  <rect x="732" y="102" width="114" height="58" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
-  <text x="789" y="128" text-anchor="middle" font-size="20" font-weight="700" fill="#065f46">
-    <tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="13.5" font-family="Georgia, serif" font-style="italic">ℓ</tspan>
-  </text>
-  <text x="789" y="149" text-anchor="middle" font-size="12.5" fill="#047857">final <tspan font-family="Georgia, serif" font-style="italic">λ</tspan>-bit state</text>
-
-  <!-- Output bit arrows straight down into Output bar -->
-  <path d="M228 162 V246" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-bit)"/>
-  <path d="M374 162 V246" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-bit)"/>
-  <path d="M624 162 V246" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-bit)"/>
-  <path d="M789 160 V246" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-bit)"/>
-
-  <!-- Small pills on vertical bit arrows -->
-  <rect x="206" y="191" width="44" height="24" rx="12" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.4"/>
-  <text x="228" y="208" text-anchor="middle" font-size="13" font-weight="600" fill="#047857">1 bit</text>
-
-  <rect x="352" y="191" width="44" height="24" rx="12" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.4"/>
-  <text x="374" y="208" text-anchor="middle" font-size="13" font-weight="600" fill="#047857">1 bit</text>
-
-  <text x="494" y="209" text-anchor="middle" font-size="22" font-weight="700" fill="#64748b">⋯</text>
-
-  <rect x="602" y="191" width="44" height="24" rx="12" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.4"/>
-  <text x="624" y="208" text-anchor="middle" font-size="13" font-weight="600" fill="#047857">1 bit</text>
-
-  <rect x="762" y="191" width="54" height="24" rx="12" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.4"/>
-  <text x="789" y="208" text-anchor="middle" font-size="13" font-weight="600" fill="#047857"><tspan font-family="Georgia, serif" font-style="italic">λ</tspan> bits</text>
-
-  <!-- Output collector bar -->
-  <rect x="34" y="250" width="812" height="80" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
-  <text x="48" y="285" font-size="17" font-weight="700" fill="#065f46">
-    Output <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="super" font-size="12" font-family="Georgia, serif" font-style="italic">ℓ</tspan>(<tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="12">0</tspan>) = (
-  </text>
-
-  <!-- Component slots aligned directly beneath each vertical arrow -->
-  <rect x="200" y="261" width="56" height="36" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.5"/>
-  <text x="228" y="285" text-anchor="middle" font-size="18.5" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="13">1</tspan></text>
-  <text x="301" y="286" text-anchor="middle" font-size="18.5" font-weight="700" fill="#065f46">,</text>
-
-  <rect x="346" y="261" width="56" height="36" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.5"/>
-  <text x="374" y="285" text-anchor="middle" font-size="18.5" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="13">2</tspan></text>
-  <text x="494" y="286" text-anchor="middle" font-size="20" font-weight="700" fill="#047857">,   …   ,</text>
-
-  <rect x="596" y="261" width="56" height="36" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.5"/>
-  <text x="624" y="285" text-anchor="middle" font-size="18.5" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">b</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">ℓ</tspan></text>
-  <text x="692" y="286" text-anchor="middle" font-size="18.5" font-weight="700" fill="#065f46">,</text>
-
-  <rect x="752" y="261" width="74" height="36" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.5"/>
-  <text x="789" y="285" text-anchor="middle" font-size="18.5" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">ℓ</tspan></text>
-  <text x="833" y="285" font-size="18.5" font-weight="700" fill="#065f46">)</text>
-
-  <text x="440" y="317" text-anchor="middle" font-size="14" font-weight="600" fill="#047857">
-    Total length: <tspan font-family="Georgia, serif" font-style="italic">λ</tspan> + <tspan font-family="Georgia, serif" font-style="italic">ℓ</tspan> bits  (<tspan font-family="Georgia, serif" font-style="italic">ℓ</tspan> output bits ‖ final <tspan font-family="Georgia, serif" font-style="italic">λ</tspan>-bit state)
-  </text>
-
-  <!-- Footer -->
-  <rect x="34" y="344" width="812" height="33" rx="9" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.4"/>
-  <text x="440" y="366" text-anchor="middle" font-size="14" fill="#475569">
-    Intermediate states <tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan>, …, <tspan font-family="Georgia, serif" font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">ℓ−1</tspan> remain internal and are <tspan font-weight="700" fill="#0f172a">not</tspan> revealed in the output.
-  </text>
+  <!-- length brackets -->
+  <path d="M180 226V234H580V226" fill="none" stroke="#52b788" stroke-width="1.5"/>
+  <text class="small" x="380" y="256" text-anchor="middle" fill="#14532d"><tspan class="m">ℓ</tspan> output bits</text>
+  <path d="M620 226V234H740V226" fill="none" stroke="#60a5fa" stroke-width="1.5"/>
+  <text class="small" x="680" y="256" text-anchor="middle" fill="#1e3a8a"><tspan class="m">λ</tspan> bits (final state)</text>
 </svg>

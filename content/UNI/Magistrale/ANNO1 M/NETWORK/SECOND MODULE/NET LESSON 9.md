@@ -1,78 +1,71 @@
 # Lesson 9 — Optical Networks
 
-## Connectionless and connection-oriented networks
+Optical transport networks form the high-capacity physical backbone underneath packet networks such as IP. Rather than forwarding data packet by packet, the optical layer typically establishes dedicated, long-lived connections across the network infrastructure.
 
-In a **connectionless network**, a sender can transmit data without first establishing an end-to-end network connection. When a laptop sends an IP packet, it does not need to negotiate a new end-to-end path before transmitting it.
+## Connectionless and connection-oriented services
 
-In a **connection-oriented service**, a connection must be established before information exchange begins. TCP, for example, uses a three-way handshake before exchanging application data. This is an example of connection establishment between endpoints; it does not mean that TCP reserves an optical path through the network.
+In a **connectionless service**, a sender transmits each unit of data independently without negotiating an end-to-end path beforehand. When a laptop sends an IP packet, for example, routers inspect its destination address hop by hop without reserving capacity in advance.
 
-## Why are optical networks connection-oriented?
+In a **connection-oriented service**, a connection must be established before information exchange begins. **TCP** provides a familiar example at the transport layer, using a three-way handshake before application data flows. That handshake, however, creates state only between the two endpoints over IP; it does not reserve a physical path or optical channel inside the network infrastructure. An optical transport network, by contrast, is connection-oriented inside the network itself, allocating optical resources across intermediate nodes before client traffic is sent.
 
-The professor asks us to compare a connection's lifetime with the time required to establish it. Imagine an IP backbone needing a logical link between Rome and Milan. The link may remain active for months or even years, so the initial optical-connection setup cost becomes small compared with the service's lifetime.
+## Why optical transport networks are connection-oriented
 
-![[Pasted image 20261106181232.png]]
+Whether connection establishment pays off depends on comparing **setup time** against **connection lifetime**. Configuring an optical path across intermediate switches takes far longer than forwarding an individual IP packet. Yet an optical link requested by an IP backbone—for instance, a logical link connecting core routers in Rome and Milan—typically remains active for months or even years. Spread over that service lifetime, the one-time setup cost becomes negligible.
 
-## How is an optical connection established?
+![[net-l09-setup-vs-lifetime.svg|540]]
 
-The professor describes four phases:
+*Setup happens once when provisioning the link, whereas traffic exchange spans a vastly longer active service lifetime.*
 
-![[net-l09-slide-10-connection-setup.png|1000]]
+## Optical connection lifecycle
+
+As summarized below, an optical connection follows four sequential phases:
+
+![[net-l09-slide-10-connection-setup.png|820]]
 
 *Source: NI02, slide 10 (PDF page 11).*
 
-### 1
-
-**Connection request.** The client asks the optical provider to establish connectivity between two endpoints, for example R1 in Rome and R2 in Milan.
-
-### 2
-
-**Connection setup.** The provider selects a route, reserves an available optical channel on each traversed link, and configures the intermediate devices.
-
-### 3
-
-**Traffic exchange.** Once the connection is established, the client can transmit information using the allocated optical resources. The slide calls this the active/maintenance phase.
-
-### 4
-
-**Connection teardown.** When the connection is no longer needed, its allocated resources are released for other clients.
+1. **Connection request.** A client asks the optical provider for connectivity between two endpoints—for example, router `R1` in Rome and router `R2` in Milan. At this stage, no network resources have been reserved yet.
+2. **Connection setup.** The provider selects an end-to-end route, reserves an available optical channel on each traversed link, and configures the switching state of intermediate devices along the path.
+3. **Traffic exchange (active and maintenance phase).** Once setup finishes, the client transmits data over the allocated resources while the network continuously monitors signal quality and faults to maintain the service.
+4. **Connection teardown.** When the connection is no longer needed, the provider removes the node configurations and releases the reserved resources for other clients.
 
 The resulting end-to-end optical connection is called a **lightpath**.
 
-## Multiplexing
+## Multiplexing: sharing an optical fiber
 
-An optical operator with an expensive physical link between two cities wants multiple connections to share that link. This requires **multiplexing**: combining multiple signals or traffic streams so that they share a common transmission resource.
+Because deploying long-distance fiber cables between cities is costly, operators must let multiple client connections share each physical fiber. Combining several signals onto one common transmission medium is **multiplexing**.
 
-The connection-oriented optical service considered here uses **static multiplexing**. A particular resource is allocated to a connection and remains reserved until the allocation is released. It might be a recurring time slot or a frequency channel.
+Unlike the **statistical multiplexing** covered in Lesson 8—where packet streams share link capacity dynamically based on instantaneous activity—the connection-oriented optical service considered here relies on **static multiplexing**. Each connection receives a dedicated transmission resource (such as a recurring time slot or a specific optical channel) that remains reserved exclusively until teardown.
 
-This differs from the **statistical multiplexing** discussed in Lesson 8, where traffic streams share capacity dynamically according to their transmission activity.
+### Time and frequency multiplexing (TDM and FDM)
 
-### Three techniques
+Two classical schemes illustrate the trade-off between sharing capacity in time and dividing it in spectrum.
 
-- **Time Division Multiplexing (TDM):** connections receive recurring time slots.
-- **Frequency Division Multiplexing (FDM):** connections receive different portions of the frequency spectrum.
-- **Wavelength Division Multiplexing (WDM):** optical channels at different wavelengths share the same physical fiber.
+**Time Division Multiplexing (TDM)** assigns each user a recurring time slot within each periodic frame. Below, users `A`, `B`, and `C` each receive one slot per frame:
 
-## Explaining WDM better
+![[net-l09-tdm.svg|500]]
 
-Optical fibers transmit information using light, an electromagnetic wave. We need to distinguish three quantities:
+Static TDM suffers from two limitations. First, an allocated slot remains idle whenever its owner has no data to send. Second, interleaving more tributary streams forces a single electronic circuit to serialize bits at a higher aggregate bit rate, which eventually creates an electronic bottleneck.
 
-- **Frequency, $f$:** the number of oscillations completed per second, measured in hertz (Hz).
-- **Wavelength, $\lambda$:** the physical distance occupied by one complete oscillation, measured in meters.
-- **Bit rate:** the amount of digital information transmitted per second, measured in bits per second (bit/s).
+**Frequency Division Multiplexing (FDM)** avoids interleaving bits in time by assigning each user a separate, non-overlapping frequency band so all streams transmit simultaneously:
 
-![[net-l09-frequency.svg|660]]
+![[net-l09-fdm.svg|500]]
 
-*Frequency describes cycles per unit time.*
+**Wavelength Division Multiplexing (WDM)** applies this same parallel-channel principle in the optical domain, where channels are conventionally identified by wavelength rather than frequency.
 
-![[net-l09-wavelength.svg|680]]
+### Optical carriers: frequency, wavelength, and fiber attenuation
 
-*Wavelength describes the distance occupied by one cycle in a spatial view of the wave.*
+Because optical fibers guide light—an electromagnetic wave—partitioning spectrum into WDM channels depends on three distinct physical and digital quantities:
 
-![[net-l09-frequency-wavelength.svg|680]]
+- **Frequency ($f$, in hertz, Hz):** the number of wave oscillations completed per second.
+- **Wavelength ($\lambda$, in meters, m, or nanometers, nm):** the physical length of one complete spatial cycle.
+- **Bit rate (in bits per second, bit/s):** the volume of digital information transmitted per second—a property of the encoded data stream, not the oscillation rate of the light carrier itself.
 
-*Conceptual illustration: frequency and wavelength are inversely related when propagation speed is fixed.*
+![[net-l09-wavelength.svg|460]]
 
-In vacuum:
+*Spatial view of a wave: the wavelength $\lambda$ spans one complete oscillation cycle.*
+
+In vacuum, electromagnetic waves travel at the constant speed of light $c \approx 3 \times 10^8\ \mathrm{m/s}$, linking frequency and wavelength inversely:
 
 $$
 c = \lambda f
@@ -80,164 +73,148 @@ c = \lambda f
 \boxed{\lambda = \frac{c}{f}}
 $$
 
-Here, $c \approx 3 \times 10^8\ \mathrm{m/s}$ is the speed of light in vacuum. Therefore, higher frequency corresponds to shorter wavelength, and lower frequency to longer wavelength. Frequency and wavelength are two ways of identifying an optical carrier; neither should be confused with its bit rate.
+Because $c$ is fixed, higher frequency gives a shorter wavelength and lower frequency gives a longer wavelength. For example, a carrier at $\lambda = 1550\ \mathrm{nm} = 1550 \times 10^{-9}\ \mathrm{m}$ corresponds to $f = \frac{3 \times 10^8}{1550 \times 10^{-9}} \simeq 193.5\ \mathrm{THz}$.
 
-In a physical fiber, propagation speed is lower than $c$. The formula above uses the **vacuum wavelength**, which is the conventional way optical carrier wavelengths are specified.
+![[net-l09-frequency-wavelength.svg|480]]
 
-Not all wavelengths propagate equally well through fiber. As light travels, its power decreases: this is **attenuation**, whose magnitude depends on wavelength. The figure shows the transmission windows, including the low-attenuation region around 1550 nm.
+*Inverse relationship at fixed propagation speed: faster oscillation yields a shorter wavelength.*
 
-![[net-l09-slide-06-attenuation.png|850]]
+Inside a physical fiber, light actually travels more slowly than $c$. Nevertheless, optical systems conventionally specify carrier channels using the **vacuum wavelength** computed from $c$ above.
+
+Not every wavelength propagates equally well through glass fiber. As light travels, its power decays due to **attenuation** (measured in $\mathrm{dB/km}$), whose magnitude varies sharply with wavelength:
+
+![[net-l09-slide-06-attenuation.png|760]]
 
 *Source: NI02, slide 6 (PDF page 7).*
 
-### Using multiplexing
+The shaded regions highlight three low-attenuation transmission windows around $0.85\ \mu\mathrm{m}$, $1.31\ \mu\mathrm{m}$, and $1.55\ \mu\mathrm{m}$ ($1550\ \mathrm{nm}$). Because attenuation reaches its minimum near **1550 nm**, long-haul WDM networks place their optical channels in that band.
 
-The techniques introduced above provide different ways for independent flows to share one transmission medium.
+### Wavelength Division Multiplexing (WDM) and channel spacing
 
-**TDM example.** Users A, B and C receive slots that recur in each frame:
+In **WDM**, independent lasers modulate separate client streams onto distinct carrier wavelengths ($\lambda_1, \lambda_2, \lambda_3, \dots$). An optical multiplexer combines those channels onto one physical fiber, where they propagate concurrently, and a demultiplexer separates them again at the destination:
 
-![[net-l09-tdm.svg|672]]
+![[net-l09-wdm.svg|500]]
 
-There are two limitations to consider:
+In class, the professor illustrates these wavelengths as "red, green, and blue." That analogy is only a visual simplification: the wavelengths used in long-distance fiber around $1550\ \mathrm{nm}$ lie in the infrared and are invisible to the human eye, so it is better to think of distinct **optical carrier wavelengths** than literal colors.
 
-- With a static allocation, A's slot remains reserved even when A has no data to send.
-- Combining more tributary flows into a single higher-rate stream requires faster electronic processing. At sufficiently high aggregate rates, this can become an electronic bottleneck.
+Because WDM transmits $N$ independent channels of rate $B$ in parallel—yielding aggregate fiber capacity $N B$ without combining them into a single faster electronic stream—it scales capacity while sidestepping TDM's single-stream electronic bottleneck.
 
-**FDM example.** The users transmit in separate frequency bands:
+Adjacent channels still need spectral separation to avoid overlapping. **Channel spacing** measures the frequency separation between adjacent carrier centers, whereas **signal bandwidth** is the narrower spectral width actually occupied by each modulated optical signal:
 
-![[net-l09-fdm.svg|672]]
-
-**WDM example.** The principle is similar to FDM, but optical channels are identified by their wavelengths. Imagine three lasers: A transmits at $\lambda_1$, B at $\lambda_2$ and C at $\lambda_3$.
-
-![[net-l09-wdm.svg|680]]
-
-An optical multiplexer combines the signals into a single physical fiber, where all three propagate simultaneously. At the destination, a demultiplexer separates the channels again.
-
-The professor's red, green and blue analogy is a simplification. The wavelengths commonly used in long-distance optical networks, especially around 1550 nm, are infrared and invisible to the human eye. It is better to think of different **optical carrier wavelengths** than literally visible colors.
-
-WDM increases the aggregate capacity of a fiber by transmitting several independent wavelength channels simultaneously. It does not require combining all channels into one faster electronic bit stream.
-
-### Optical channels and channel spacing
-
-**Channel spacing** is the separation between the center frequencies of adjacent optical carriers. The figure illustrates a spacing of **100 GHz**; the signal bandwidth is a different quantity, describing the spectral width occupied by the modulated signal.
-
-![[net-l09-slide-09-channel-spacing.png|900]]
+![[net-l09-slide-09-channel-spacing.png|546]]
 
 *Source: NI02, slide 9 (PDF page 10).*
 
-## Optical network first and second generation (exam question)
+In this grid, neighboring carriers are spaced by **100 GHz** around $193\ \mathrm{THz}$. Because $\lambda = c/f$ is nonlinear, uniform $100\ \mathrm{GHz}$ frequency steps correspond to slightly unequal wavelength intervals (roughly $0.8\ \mathrm{nm}$ per step near $1552\ \mathrm{nm}$).
 
-*Exam context: the professor presented the differences between first- and second-generation optical networks as an example open question in the Lesson 8 introduction. This is a preparation cue, not a guarantee that the question will recur.*
+## First- and second-generation optical networks (exam question)
 
-### Electrical domain vs Optical domain
+*Exam context: the professor mentioned the comparison between first- and second-generation optical networks as an example open exam question in the Lesson 8 introduction. This is a preparation cue, not a guarantee that the question will recur.*
 
-Before comparing the generations, we need to distinguish the electrical and optical domains. A conventional IP router recovers digital data from the received signal, buffers the packet, reads its destination address, looks it up in the forwarding table, selects an output interface and forwards the packet. Electronic circuits can perform these operations because the data is available in a digital representation.
+### Electrical domain vs. optical domain
 
-An incoming optical signal is an electromagnetic wave. A conventional CPU cannot directly inspect an IP destination address inside that waveform as though it were a binary string in RAM. Optical transmission and wavelength switching operate on optical signals rather than performing the same per-packet processing.
+Comparing the two network generations rests on the split between two functional domains inside a node:
 
-![[net-l09-electrical-optical-domains.svg|900]]
+- **Electrical domain (digital processing):** recovers digital bits from the received signal, buffers packets, inspects IP headers, performs forwarding-table lookups, and selects output ports.
+- **Optical domain (waveform handling):** carries light over fiber, multiplexes or demultiplexes wavelengths, and switches entire optical channels across links.
 
-The professor illustrates the distinction by dividing a network node into electrical and optical functional domains:
+Because an arriving optical signal is an electromagnetic wave rather than binary bits in RAM, a conventional processor cannot read an IP destination address directly off the waveform without converting the signal into electricity first.
 
-![[net-l09-node-domains.svg|900]]
+![[net-l09-electrical-optical-domains.svg|720]]
 
-### First generation
+To make this separation concrete, the professor models a network node as a cylinder with electronic processing above and optical transmission and wavelength handling below:
 
-In first-generation optical networks, fiber was mainly a high-capacity transmission medium. More complex functions, including multiplexing and switching, were largely performed electronically.
+![[net-l09-node-domains.svg|720]]
 
-At an intermediate electronic switching node, the signal undergoes **O/E/O**:
+### First generation: fiber as a transmission medium
 
-1. **Optical to electrical (O/E):** recover an electrical representation of the received optical signal.
-2. **Electronic processing:** perform the required multiplexing or switching.
-3. **Electrical to optical (E/O):** generate light for transmission over the next fiber.
+In **first-generation optical networks**, fiber acted essentially as a high-capacity point-to-point cable, while switching and multiplexing remained in electronics. At every intermediate switching node, signals undergo **O/E/O conversion**:
 
-![[net-l09-first-generation.svg|676]]
+1. **Optical-to-electrical (O/E):** convert the incoming light wave into a digital electrical signal.
+2. **Electronic processing:** inspect headers or channels and switch data to the chosen outgoing port.
+3. **Electrical-to-optical (E/O):** modulate a laser to send light onto the next fiber hop.
 
-As more signals are aggregated, the speed of electronic processing can become a bottleneck.
+![[net-l09-first-generation.svg|500]]
 
-### Second generation
+Because even transit traffic passing straight through a node must be converted to electronics and processed, rising link capacities eventually turn intermediate electronic switching into a bottleneck.
 
-Second-generation networks introduce an architectural change: optics is used for certain network functions as well as transmission. These are also called **wavelength-routed optical networks**.
+### Second generation: wavelength-routed optical networks
 
-The network establishes lightpaths and switches their wavelength channels through intermediate optical devices, avoiding unnecessary O/E/O conversions at those nodes.
+**Second-generation optical networks**—also called **wavelength-routed optical networks**—bring part of the switching intelligence directly into optics. Intermediate nodes follow pre-configured **lightpaths** and switch whole wavelength channels optically, avoiding unnecessary O/E/O conversions along transit hops:
 
-![[net-l09-second-generation.svg|676]]
+![[net-l09-second-generation.svg|500]]
 
-> [!example]- Optical switching example
-> Three incoming wavelengths can be configured to leave toward different destinations: $\lambda_1$ toward Milan, $\lambda_2$ toward Bologna and $\lambda_3$ toward Naples. The optical node follows the configured lightpaths without inspecting each IP packet's destination.
+> [!example]- Optical switching without per-packet inspection
+> A node can be configured so that incoming wavelength $\lambda_1$ switches toward Milan, $\lambda_2$ toward Bologna, and $\lambda_3$ toward Naples. The optical switch follows those lightpath configurations directly without examining individual IP packet headers.
 
-The main devices are:
+This architecture introduces three core optical devices:
 
-- **OLT — Optical Line Terminal:** terminates an optical transport link and provides functions such as signal adaptation and wavelength multiplexing/demultiplexing.
-- **OXC — Optical Cross-Connect:** connects incoming optical channels to outgoing links.
-- **OADM — Optical Add/Drop Multiplexer:** adds or removes selected wavelength channels while allowing the others to pass through.
+- **OLT (Optical Line Terminal):** terminates an optical transport link and handles client adaptation, wavelength multiplexing/demultiplexing, and optical amplification.
+- **OXC (Optical Cross-Connect):** switches optical wavelength channels from **incoming links** (fibers carrying signals into a node) onto **outgoing links** (fibers carrying signals away from it).
+- **OADM (Optical Add/Drop Multiplexer):** inserts ("adds") or extracts ("drops") selected wavelength channels locally while allowing pass-through wavelengths to continue optically.
 
-![[net-l09-slide-13-optical-network.png|900]]
+![[net-l09-slide-13-optical-network.png|760]]
 
 *Source: NI02, slide 13 (PDF page 14).*
 
-![[net-l09-oxc.svg|660]]
+At an intermediate OXC, wavelength channels are routed directly from an incoming fiber to an outgoing fiber:
 
-An **incoming link** carries a signal into a node; an **outgoing link** carries a signal away from it.
+![[net-l09-oxc.svg|480]]
 
-## Lightpath and wavelength
+## Lightpaths, wavelength continuity, and blocking
 
-Before communication begins, the provider selects a route, reserves an optical channel on each link and configures the intermediate optical devices. These are the setup operations; the resulting optical connection is the **lightpath**.
+As introduced in the connection lifecycle above, a **lightpath** is the end-to-end optical connection built across intermediate OXCs and OADMs (`A → B → C → D`):
 
-![[net-l09-lightpath.svg|680]]
+![[net-l09-lightpath.svg|500]]
 
-In the architecture considered here, **when intermediate nodes do not provide wavelength conversion**, the lightpath must use the same wavelength on every link along its route. This is the **wavelength-continuity constraint**. For example, a lightpath assigned $\lambda_1$ must use $\lambda_1$ on each traversed link.
+Whenever intermediate nodes **do not provide wavelength conversion**, a lightpath must occupy the exact same wavelength on every fiber link along its route—the **wavelength-continuity constraint**. For example, a lightpath assigned $\lambda_1$ on its first hop must use $\lambda_1$ on every subsequent hop:
 
-![[net-l09-wavelength-continuity.svg|680]]
+![[net-l09-wavelength-continuity.svg|500]]
 
 > [!note] Scope of wavelength continuity
-> The draft stated continuity as a general requirement. It applies to the case **without intermediate wavelength conversion**. If conversion is available, different portions of a lightpath may use different wavelengths. NI02 slide 12 and notebook §2.4.2 make this distinction explicit.
+> Wavelength continuity applies specifically when intermediate nodes lack wavelength conversion. If intermediate nodes can convert wavelengths (all-optically or via O/E/O regeneration), consecutive spans of a lightpath can use different wavelengths (see NI02, slide 12, and the study notebook, §2.4.2).
 
-### What happens if a wavelength is not available?
+### Wavelength contention and connection blocking
 
-Consider the route A → B → C, with two wavelengths on each link: $\lambda_1$ (red) and $\lambda_2$ (green). Existing connections already occupy some channels:
+Because continuity demands a common wavelength across all hops, free capacity on each individual link is not enough. Consider a route `A → B → C` with two available wavelengths per fiber, $\lambda_1$ and $\lambda_2$, where existing connections already occupy $\lambda_2$ on `A–B` and $\lambda_1$ on `B–C`:
 
-![[Pasted image 20261107095021.png]]
+![[net-l09-wavelength-blocking.svg|540]]
 
-On A–B, $\lambda_2$ is occupied, so only $\lambda_1$ is free. On B–C, $\lambda_1$ is occupied, so only $\lambda_2$ is free. Each link has a free channel, but there is **no common free wavelength** across the whole route. Without wavelength conversion, the requested A–C lightpath cannot be established along this route.
+Link `A–B` still has $\lambda_1$ free, and link `B–C` still has $\lambda_2$ free, yet **no single wavelength is free across the entire `A → B → C` path**. Without wavelength conversion at node `B`, the requested `A → C` lightpath cannot be established on this route.
 
-If the network offers other routes, it can try one of them. A connection request is **blocked** when no feasible route with suitable wavelength resources exists under the network's constraints.
+If alternative physical routes exist between `A` and `C`, the provider can evaluate them. A connection request is **blocked** when no feasible route with suitable wavelength resources exists under the network's constraints. Route selection alone is therefore insufficient: path computation must couple routing with channel availability—a combined problem formally called **Routing and Wavelength Assignment (RWA)** (useful formal terminology framing the professor's allocation example).
 
-Selecting a route is therefore not sufficient: the wavelength resources must also be available along it. The combined problem is called **Routing and Wavelength Assignment (RWA)**. This is additional terminology; the main point is the professor's wavelength-allocation example.
-
-## What happens inside optical devices
+## Inside optical transport devices: OLT, transponders, and OSC
 
 ### Optical Line Terminal (OLT)
 
-An OLT is located at the termination of an optical transport link. It provides the functions needed to transmit and receive signals over that link, with three main functional components:
+An **Optical Line Terminal (OLT)** terminates a WDM optical link, connecting client equipment (such as IP routers or SONET/SDH terminals) to the optical transport line. It combines three main functional blocks:
 
-- **Transponders:** adapt client signals to the optical transport network.
-- **Wavelength multiplexers/demultiplexers:** combine or separate optical channels.
-- **Optical amplifiers:** increase optical signal power.
+- **Transponders:** adapt non-compliant client optical signals to the operator's standardized WDM wavelengths.
+- **Wavelength multiplexers and demultiplexers:** merge outgoing WDM channels onto one fiber and separate incoming channels toward receivers.
+- **Optical amplifiers:** increase optical signal power to overcome attenuation along the fiber.
 
-![[net-l09-slide-16-olt.png|900]]
+![[net-l09-slide-16-olt.png|760]]
 
 *Source: NI02, slide 16 (PDF page 17).*
 
-### The transponder
+### Transponders and boundary adaptation
 
-Imagine an IP router sending traffic into the optical transport network. Its optical interface may already produce light, but its wavelength may not match a WDM channel assigned by the operator. For example, the router may transmit around **1310 nm**, while the provider requires a channel near **1550 nm**.
+If second-generation networks avoid intermediate O/E/O conversions, why does an OLT use O/E/O inside a transponder? The reason is placement: a transponder sits at the **boundary between the client and the optical transport network**, where client signals often need adaptation before sharing the WDM line.
 
-The transponder receives the client optical signal, converts it to the electrical domain, processes the digital information, and converts it back to an optical signal at the assigned wavelength:
+A client router's optical port, for instance, typically emits light around **1310 nm** (a short-reach, non-ITU wavelength), whereas long-haul WDM transport operates over standardized ITU channels in the low-loss window near **1550 nm**. The transponder converts the arriving client light to the electrical domain, processes the digital signal, and regenerates it as light at the assigned WDM channel wavelength:
 
-![[net-l09-transponder.svg|680]]
+![[net-l09-transponder.svg|500]]
 
-It can also monitor the **Bit Error Rate (BER)**, the proportion of received bits that are erroneous.
+Operating briefly in electronics also lets the transponder monitor the **Bit Error Rate (BER)**—the fraction of received bits in error—before the OLT multiplexes the wavelength onto the fiber. Conversely, as Slide 16 shows on its bottom port ($\text{ITU }\lambda_3$), a client interface already transmitting at a compliant ITU WDM wavelength can enter the multiplexer directly without a transponder.
 
-Earlier, we saw that second-generation networks avoid unnecessary O/E/O conversions at intermediate optical switching nodes. Why does a transponder use O/E/O? It operates at the **boundary between the client and the optical transport network**, where signal adaptation may be necessary. Once the transponders produce signals at their assigned wavelengths, the OLT multiplexes them onto the fiber.
+In class, the professor mentions an illustrative price of roughly **€20,000–€40,000 per transponder** for this class of WDM equipment. In a **96-channel** system, populating every channel from day one represents a substantial capital investment, which explains why operators often install transponders gradually as demand grows. *(These figures are lecture examples, not current equipment quotations.)*
 
-The professor gives an illustrative cost of approximately **€20,000–€40,000 per transponder** for the equipment discussed in class. If a WDM system supports **96 channels**, equipping every channel with a transponder represents a substantial investment. This helps explain why an operator may not install the maximum channel count immediately. These figures are lecture examples, not current equipment quotations.
+### Optical Supervisory Channel (OSC)
 
-## OSC Optical Supervisory Channel
+While data wavelengths carry customer traffic, operators also need continuous monitoring and management of the physical link. As depicted inside the OLT diagram ($\lambda_{\text{OSC}}$ Laser and Receiver), the **Optical Supervisory Channel (OSC)** uses a dedicated wavelength strictly for supervisory signaling.
 
-Most wavelengths carry customer traffic, but the operator also needs to monitor the infrastructure. The **Optical Supervisory Channel (OSC)** is a separate optical channel, using a dedicated wavelength, for monitoring and management.
-
-For example, loss of the supervisory signal can indicate damage or a fiber cut. **Data wavelengths carry client information; the OSC carries network-management information.**
+For example, losing the supervisory signal immediately alerts the operator to amplifier faults or a fiber cut. In short: **data wavelengths carry client information; the OSC carries network-management information.**
 
 ## Sources
 

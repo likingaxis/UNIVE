@@ -1,49 +1,10 @@
-Summary from the previous lesson till (12:50)
-#### SLA(Service Level Agreement)
-one of the requirement that can ask a client when asking for a service is the signal quality, with a BER under a certain trheshold
-##### Logical network
-Suppose we have 3 nodes A, B, C 
-look at the professor sketch
-the nodes are the grey boxes near the multiplexer and the professor call them transponder that for example communicate together with the same lightpath
-but the professor makes a lot of confusion
-i didnt understant if we have the dark grey box as the nodes because we have supposed to have 3 nodes but in the slide we have 4 dark grey box
-
-this use a lot of transponders, to solve this we use OADM
-(slide picture)
-
-#### Different architectures of OADM
-(slide picture 19)
-we can only study one type of them
-##### Optical Crossconnects
-internally composed by movable mirror
-
-Grooming
-i dont know if is related to optical crocconnects
-is a technique that allows the sharing of a single transponder by many customers
-we have more flows by more customers a tdm multiplexer and a single transponder
-##### All optical network concept
-transparency is the ability of optical networks to ...
+##### Review of optical networks
+we have a lightpath that estabilish a connnection between nodes and give physical information from nodes 
+![475](data:image/svg+xml;charset=utf-8,%3Csvg%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20%26quot%3BSegoe%20UI%26quot%3B%2C%20sans-serif%22%20font-weight%3D%22430%22%20data-d-component%3D%22svg%22%20fill%3D%22currentColor%22%20style%3D%22color%3Argb\(255%2C%20255%2C%20255\)%22%20viewBox%3D%220%200%20320%20142%22%20width%3D%22100%25%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20x%3D%2275%22%20y%3D%228%22%20width%3D%22170%22%20height%3D%22123%22%20rx%3D%2232%22%20fill%3D%22%233678BC%22%20fill-opacity%3D%220.09%22%20stroke%3D%22%233678BC%22%20stroke-opacity%3D%220.4%22%20stroke-dasharray%3D%224%204%22%2F%3E%3Cg%20stroke%3D%22currentColor%22%20stroke-opacity%3D%22.32%22%20stroke-width%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M%2022%2070%20L%2094%2070%20L%20127%2031%20L%20193%2031%20L%20227%2070%20L%20298%2070%22%2F%3E%3Cpath%20d%3D%22M%2094%2070%20L%20127%20109%20L%20193%20109%20L%20227%2070%22%2F%3E%3Cpath%20d%3D%22M%20127%2031%20L%20127%20109%20M%20193%2031%20L%20193%20109%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M%2022%2070%20L%2094%2070%20L%20127%2031%20L%20193%2031%20L%20227%2070%20L%20298%2070%22%20stroke%3D%22%23D15A3B%22%20stroke-width%3D%224%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Crect%20x%3D%2284%22%20y%3D%2260%22%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%233478BB%22%2F%3E%3Cpath%20d%3D%22M%2090%2066%20L%2098%2074%20M%2098%2066%20L%2090%2074%22%20stroke%3D%22%23FFF%22%20stroke-width%3D%221.7%22%2F%3E%3Crect%20x%3D%22117%22%20y%3D%2221%22%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%233478BB%22%2F%3E%3Cpath%20d%3D%22M%20123%2027%20L%20131%2035%20M%20131%2027%20L%20123%2035%22%20stroke%3D%22%23FFF%22%20stroke-width%3D%221.7%22%2F%3E%3Crect%20x%3D%22183%22%20y%3D%2221%22%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%233478BB%22%2F%3E%3Cpath%20d%3D%22M%20189%2027%20L%20197%2035%20M%20197%2027%20L%20189%2035%22%20stroke%3D%22%23FFF%22%20stroke-width%3D%221.7%22%2F%3E%3Crect%20x%3D%22217%22%20y%3D%2260%22%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%233478BB%22%2F%3E%3Cpath%20d%3D%22M%20223%2066%20L%20231%2074%20M%20231%2066%20L%20223%2074%22%20stroke%3D%22%23FFF%22%20stroke-width%3D%221.7%22%2F%3E%3Crect%20x%3D%22117%22%20y%3D%2299%22%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%233478BB%22%2F%3E%3Cpath%20d%3D%22M%20123%20105%20L%20131%20113%20M%20131%20105%20L%20123%20113%22%20stroke%3D%22%23FFF%22%20stroke-width%3D%221.7%22%2F%3E%3Crect%20x%3D%22183%22%20y%3D%2299%22%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%233478BB%22%2F%3E%3Cpath%20d%3D%22M%20189%20105%20L%20197%20113%20M%20197%20105%20L%20189%20113%22%20stroke%3D%22%23FFF%22%20stroke-width%3D%221.7%22%2F%3E%3Cg%20fill%3D%22%233478BB%22%3E%3Ccircle%20cx%3D%2222%22%20cy%3D%2270%22%20r%3D%229%22%2F%3E%3Ccircle%20cx%3D%22298%22%20cy%3D%2270%22%20r%3D%229%22%2F%3E%3C%2Fg%3E%3Cg%20font-size%3D%2211%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E%3Ctext%20x%3D%2222%22%20y%3D%2295%22%3ER1%3C%2Ftext%3E%3Ctext%20x%3D%22298%22%20y%3D%2295%22%3ER2%3C%2Ftext%3E%3Ctext%20x%3D%22160%22%20y%3D%2218%22%3EOptical%20network%3C%2Ftext%3E%3Ctext%20x%3D%22160%22%20y%3D%2255%22%20fill%3D%22%23D15A3B%22%20font-weight%3D%22600%22%3ELightpath%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fsvg%3E)
 
 
-different type of degradation of the optical signal
-- we have attenuation distortion and dispersion
-(pick professor notes)
-
-3 type of signal regenerators
-
-rectangular palls ⚽🏀
-
-
-reshaping is not trasparent
-while fixing we can occur in jitter, a shift of the signal due to dispersion
-
-we can have 3R that is a transponder
-#### Cromatic disp and distortion
-imagine an optical fiber
-I got lost(1:08:00)
-
-how can we reduce the number of paths?
-creare a thin pass while the negletting is still big
-
-##### Management framework
-slide 30 i didnt understand nothing
+##### SLA Monitoring (Service Level Agreement)
+before installing a lightpath a client, like an enterprise or an IP operator has to negotiate a Service Level Agreement (SLA) specifying constraints like maximum latency and minimum signal quality. 
+Signal quality can be checked at two levels:
+- Optical power(optical domain): a rough level physical measurement that checks whether enough light arrives, without inspecting the digital content
+- Bit Error Rate, BER (electrical domain): the fraction of received bits that are corrupted. measuring BER requires recovering of the actual binary stream doing an O/E conversion
