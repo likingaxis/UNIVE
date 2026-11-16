@@ -287,6 +287,14 @@ With sufficiently many queries, it can distinguish the keyed family from a unifo
 
 Therefore, PRF security relies on computational limitations.
 
+|PRG|PRF|
+|---|---|
+|\(G(k)\)|\(F_k(x)\)|
+|Expands a short seed into a longer pseudorandom string|Evaluates a keyed function on an input|
+|Deterministic|Deterministic|
+|Not itself encryption|Not itself encryption|
+
+Both are cryptographic building blocks, not complete encryption schemes.
 ---
 
 ## From PRFs to CPA security
@@ -323,9 +331,145 @@ This motivates the formal CPA security game introduced in slides 4–5.
 
 
 ##### CPA Security
-we have to define a new security definition
-the objective is different Alice and Bob should be able to encrypt multiple messages using the same short secret key, without revealing information about the plaintexts
-a CPA is a scenario where the adversary can
-- choose arbitrary plaintext messages
-- ask the challenger to encrypt them using a secret key
-- observe the resulting ciphertexts
+We have introduced a PRF, which can generate pseudorandom-looking outputs from a shared key and different inputs.
+
+But how can we use this tool to build secure encryption?
+
+Before constructing an encryption scheme, the professor needs to define what secure encryption for multiple messages actually means.
+
+This brings us to CPA security.
+CPA stands for Chosen Plaintext Attack
+The idea is that the adversary is more powerful than in the previous one-time encryption game it can request encryption of arbitrary messages using the same secret key
+then it tries to distinguish which of two chosen messages has been encrypted
+###### The CPA security game
+(make an svg of this and delete the image)
+![[Pasted image 20261116221423.png]]
+The encryption scheme is CPA-secure if the adversary cannot distinguish the two experiments with non-negligible advantage:
+
+\[ \boxed{ \operatorname{Game}^{cpa}_{\Pi,\mathcal A}(\lambda,0) \approx_c \operatorname{Game}^{cpa}_{\Pi,\mathcal A}(\lambda,1) } \]
+
+Suppose our encryption algorithm is deterministic:
+
+\[ \operatorname{Enc}_k(m)=c \]
+
+This means encrypting the same message twice with the same key always gives the same ciphertext.
+
+The adversary can exploit this.
+
+Example attack
+
+1. The adversary requests the encryption of \(m_0\), receiving \(c_0\).
+    
+2. It submits two different challenge messages \(m_0\) and \(m_1\).
+    
+3. The challenger returns the challenge ciphertext \(c^*\).
+    
+4. The adversary compares \(c^*\) with \(c_0\).
+    
+
+If they are equal, the challenge encrypted \(m_0\). Otherwise, it encrypted \(m_1\).
+
+For correct deterministic encryption, this attack succeeds with probability 1.
+
+The professor's solution is to introduce randomness:
+
+\[ \boxed{ c=\operatorname{Enc}_k(m;r) } \]
+
+Here \(r\) is fresh randomness sampled for each encryption.
+
+The encryption of the same message can now produce different ciphertexts.
+
+Importantly, randomized encryption isn't automatically CPA-secure. We still need to construct and prove a secure scheme.
+
+###### Use PRF but with fresh randomness
+\[ \boxed{ \operatorname{Enc}_k(m)=(r,F_k(r)\oplus m) } \]
+where \(r\gets U_n\) is freshly sampled for each encryption and \(m\) is an \(n\)-bit message.
+
+|Element|Purpose|
+|---|---|
+|\(k\)|Secret key shared between Alice and Bob|
+|\(r\)|Fresh random input for the PRF|
+|\(F_k(r)\)|Pseudorandom pad|
+|\(m\)|Message to encrypt|
+|\((r,F_k(r)\oplus m)\)|Complete ciphertext|
+
+Notice that \(r\) is public in this construction. It is included in the ciphertext so Bob can recompute the same pad using his secret key.
+
+Decryption is:
+
+\[ \operatorname{Dec}_k(r,c_2)=F_k(r)\oplus c_2 \]
+
+Because XORing twice with the same pad cancels it, Bob recovers \(m\).
+
+###### Theorem: Proving CPA Security 
+we want to prove that the CPA game works with the previous one algorithm
+
+Assuming \(\mathcal F\) is a secure PRF family, the encryption scheme \(\Pi=(\operatorname{Enc},\operatorname{Dec})\) defined above is CPA-secure (with a sufficiently large random-input space).
+we want to show:
+
+\[ \boxed{G(\lambda,0)\approx_c G(\lambda,1)} \]
+
+Here, \(G(\lambda,b)\) is our CPA game, where the challenge encrypts \(m_b^*\).
+
+The idea is replacing the PRF with a random function
+This is the central idea of the proof.
+
+We already know that a secure PRF is computationally indistinguishable from a truly random function.
+
+So the professor asks:
+
+What happens if we temporarily replace \(F_k\) with a truly random function \(R\)?
+We introduce two kinds of experiments.
+(make an svg of this two game one in the left explained and one in the right)
+Game G
+
+Original encryption
+
+\[ c=(r,F_k(r)\oplus m) \]
+
+Uses our PRF \(F_k\).
+
+Game H
+
+Hypothetical encryption
+
+\[ c=(r,R(r)\oplus m) \]
+
+Uses a truly random function \(R\).
+
+Notice that everything else remains the same.
+
+The adversary can still request encryptions before and after the challenge. The challenger still samples a fresh \(r\) for every encryption.
+
+The only difference is whether we compute \(F_k(r)\) or \(R(r)\).
+
+If \(r\) has never been used before, \(R(r)\) is a fresh uniformly random bit string, independent of previous outputs.
+
+Therefore:
+
+\[ c_2=R(r)\oplus m \]
+
+behaves exactly like a one-time pad with a fresh random pad.
+
+And we already know that a one-time pad provides perfect secrecy when the pad is uniformly random and used only once.
+
+The professor divides the proof into two lemmas.
+![[Pasted image 20261116231243.png]]
+This gives us:
+
+\[ \boxed{ G(\lambda,0) \approx_c H(\lambda,0) \approx_s H(\lambda,1) \approx_c G(\lambda,1) } \]
+
+Let's understand the two lemmas.
+
+Lemma 1 — Computational indistinguishability
+
+\[ G(\lambda,b)\approx_c H(\lambda,b) \]
+
+We use PRF security to prove that replacing \(F_k\) with \(R\) cannot be detected by an efficient adversary.
+
+Lemma 2 — Statistical indistinguishability
+
+\[ H(\lambda,0)\approx_s H(\lambda,1) \]
+
+We prove that the ideal experiments are statistically close because a fresh random pad hides the challenge message, except when a random-input collision occurs.
+Here, \(\approx_s\) means the games are statistically indistinguishable: even an adversary with unlimited computational power cannot distinguish them with more than negligible advantage, provided the number of encryption queries is polynomially bounded.
