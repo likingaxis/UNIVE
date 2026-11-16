@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 516" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">CPA security game for symmetric-key encryption</title>
+  <desc id="desc">Interactive chosen-plaintext attack security experiment Game^cpa_{Pi, A}(lambda, b). Challenger C samples a secret key k and keeps a fixed hidden bit b in {0, 1}. In Phase 1, PPT adversary A sends encryption queries m and receives c from Enc_k(m). In the challenge phase, A sends equal-length messages m0* and m1* and receives c* from Enc_k(m_b*). In Phase 2, A may issue more encryption queries under the same key k before outputting guess b prime.</desc>
+  <defs>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="516" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="440" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">
+    CPA security game: Game<tspan baseline-shift="super" font-size="13">cpa</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">Π, A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)
+  </text>
+  <text x="440" y="57" text-anchor="middle" font-size="14.5" fill="#64748b">
+    PPT adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan> obtains encryptions of chosen messages under the same secret key <tspan font-family="Georgia, serif" font-style="italic">k</tspan> before and after the challenge
+  </text>
+
+  <!-- Setup bar -->
+  <rect x="46" y="74" width="788" height="40" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="440" y="100" text-anchor="middle" font-size="15.5" font-weight="600" fill="#0f172a">
+    Setup:  <tspan font-family="Georgia, serif" font-style="italic">C</tspan> samples <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">K</tspan>   (secret from <tspan font-family="Georgia, serif" font-style="italic">A</tspan>;  challenge bit <tspan font-family="Georgia, serif" font-style="italic">b</tspan> ∈ {0, 1} is fixed outside <tspan font-family="Georgia, serif" font-style="italic">A</tspan>'s view)
+  </text>
+
+  <!-- Actor columns -->
+  <rect x="46" y="130" width="144" height="316" rx="13" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="118" y="276" text-anchor="middle" font-size="14.5" font-weight="600" fill="#5b21b6">PPT</text>
+  <text x="118" y="302" text-anchor="middle" font-size="22" font-weight="700" fill="#6d28d9">Adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
+
+  <rect x="690" y="130" width="144" height="316" rx="13" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="762" y="276" text-anchor="middle" font-size="14.5" font-weight="600" fill="#1d4ed8">Encryption oracle</text>
+  <text x="762" y="302" text-anchor="middle" font-size="22" font-weight="700" fill="#1e40af">Challenger <tspan font-family="Georgia, serif" font-style="italic">C</tspan></text>
+
+  <!-- Phase 1 box background -->
+  <rect x="206" y="132" width="468" height="96" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <rect x="218" y="139" width="160" height="20" rx="10" fill="#e2e8f0"/>
+  <text x="298" y="153" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155">PHASE 1 (repeat poly(λ))</text>
+
+  <path d="M190 176 H681" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <text x="440" y="168" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
+    chosen plaintext  <tspan font-family="Georgia, serif" font-style="italic">m</tspan> ∈ <tspan font-family="Georgia, serif" font-style="italic">M</tspan>
+  </text>
+
+  <path d="M690 212 H199" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <text x="440" y="204" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1e40af">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan> ← Enc<tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">m</tspan>)
+  </text>
+
+  <!-- Challenge band -->
+  <rect x="206" y="236" width="468" height="94" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4"/>
+  <rect x="218" y="243" width="144" height="20" rx="10" fill="#1d4ed8"/>
+  <text x="290" y="257" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff">CHALLENGE</text>
+
+  <path d="M190 280 H681" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
+  <text x="440" y="272" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">0</tspan>*, <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan>* ∈ <tspan font-family="Georgia, serif" font-style="italic">M</tspan>   (|<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">0</tspan>*| = |<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan>*|)
+  </text>
+
+  <path d="M690 316 H199" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <text x="440" y="308" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan>* ← Enc<tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">b</tspan>*)
+  </text>
+
+  <!-- Phase 2 box background -->
+  <rect x="206" y="336" width="468" height="78" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <rect x="218" y="342" width="160" height="20" rx="10" fill="#e2e8f0"/>
+  <text x="298" y="356" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155">PHASE 2 (repeat poly(λ))</text>
+
+  <path d="M190 376 H681" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <text x="440" y="369" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
+    more queries  <tspan font-family="Georgia, serif" font-style="italic">m</tspan> ∈ <tspan font-family="Georgia, serif" font-style="italic">M</tspan>
+  </text>
+
+  <path d="M690 404 H199" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <text x="440" y="397" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1e40af">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan> ← Enc<tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">m</tspan>)   (same key <tspan font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+
+  <!-- Final guess -->
+  <path d="M190 440 H681" fill="none" stroke="#475569" stroke-width="2.1" marker-end="url(#arrow-slate)"/>
+  <text x="440" y="432" text-anchor="middle" font-size="14.5" font-weight="600" fill="#334155">
+    output guess  <tspan font-family="Georgia, serif" font-style="italic">b′</tspan> ∈ {0, 1}
+  </text>
+
+  <!-- Footer -->
+  <rect x="46" y="462" width="788" height="38" rx="9" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.4"/>
+  <text x="440" y="486" text-anchor="middle" font-size="14" fill="#334155">
+    CPA security:  <tspan font-weight="700" fill="#0f172a">Game<tspan baseline-shift="super" font-size="10">cpa</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">Π, A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, 0) ≈<tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">c</tspan> Game<tspan baseline-shift="super" font-size="10">cpa</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">Π, A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, 1)</tspan>   for every PPT adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan>
+  </text>
+</svg>

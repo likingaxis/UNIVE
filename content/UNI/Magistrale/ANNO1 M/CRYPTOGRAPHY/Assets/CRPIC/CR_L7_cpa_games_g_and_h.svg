@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 456" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Real CPA game G(lambda, b) and ideal-function hybrid game H(lambda, b)</title>
+  <desc id="desc">Side-by-side comparison of G(lambda, b) on the left and H(lambda, b) on the right. In G(lambda, b), challenger C samples k from U_lambda and encrypts queries and the challenge using F_k(r). In H(lambda, b), C samples a uniformly random function R from R(n, n) and encrypts using R(r). The adversary A sees the exact same ciphertext structure (r, pad XOR m) in both games.</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="456" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="440" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">
+    Real game <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>) vs. hybrid game <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)
+  </text>
+  <text x="440" y="57" text-anchor="middle" font-size="14.5" fill="#64748b">
+    Fix <tspan font-family="Georgia, serif" font-style="italic">b</tspan> ∈ {0, 1}; every step of the CPA experiment is identical except replacing <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">k</tspan> with a truly random function <tspan font-family="Georgia, serif" font-style="italic">R</tspan>
+  </text>
+
+  <!-- Left card: G(lambda, b) -->
+  <rect x="28" y="76" width="380" height="316" rx="14" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.8"/>
+  <rect x="46" y="92" width="108" height="24" rx="12" fill="#1d4ed8"/>
+  <text x="100" y="109" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Real game</text>
+  <text x="276" y="110" text-anchor="middle" font-size="20" font-weight="700" fill="#1e40af">
+    <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)
+  </text>
+
+  <rect x="46" y="130" width="344" height="44" rx="9" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.4"/>
+  <text x="218" y="157" text-anchor="middle" font-size="15.5" font-weight="600" fill="#0f172a">
+    Setup: sample <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">λ</tspan>   (uses PRF <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+
+  <rect x="46" y="184" width="344" height="68" rx="9" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.4"/>
+  <text x="218" y="207" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1d4ed8">Phase 1 &amp; Phase 2 query <tspan font-family="Georgia, serif" font-style="italic">m</tspan></text>
+  <text x="218" y="232" text-anchor="middle" font-size="15.5" font-weight="600" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">r</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">n</tspan> ;   <tspan font-family="Georgia, serif" font-style="italic">c</tspan> = (<tspan font-family="Georgia, serif" font-style="italic">r</tspan>,  <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>) ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan>)
+  </text>
+
+  <rect x="46" y="262" width="344" height="72" rx="9" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.6"/>
+  <text x="218" y="286" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e3a8a">Challenge (<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>*, <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>*)</text>
+  <text x="218" y="313" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">r</tspan>* ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">n</tspan> ;   <tspan font-family="Georgia, serif" font-style="italic">c</tspan>* = (<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*,  <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*) ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">b</tspan>*)
+  </text>
+
+  <text x="218" y="366" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">
+    Equals Game<tspan baseline-shift="super" font-size="9.5">cpa</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">Π, A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>);  <tspan font-family="Georgia, serif" font-style="italic">A</tspan> outputs <tspan font-family="Georgia, serif" font-style="italic">b′</tspan>
+  </text>
+
+  <!-- Center bridge -->
+  <path d="M412 224 H462" fill="none" stroke="#475569" stroke-width="2.1" stroke-dasharray="4 3" marker-end="url(#arrow-slate)"/>
+  <rect x="415" y="186" width="50" height="24" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+  <text x="440" y="203" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">≈<tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">c</tspan></text>
+  <text x="440" y="244" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">PRF</text>
+
+  <!-- Right card: H(lambda, b) -->
+  <rect x="472" y="76" width="380" height="316" rx="14" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.8"/>
+  <rect x="490" y="92" width="114" height="24" rx="12" fill="#047857"/>
+  <text x="547" y="109" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Hybrid game</text>
+  <text x="726" y="110" text-anchor="middle" font-size="20" font-weight="700" fill="#065f46">
+    <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)
+  </text>
+
+  <rect x="490" y="130" width="344" height="44" rx="9" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.4"/>
+  <text x="662" y="157" text-anchor="middle" font-size="15.5" font-weight="600" fill="#0f172a">
+    Setup: sample <tspan font-family="Georgia, serif" font-style="italic">R</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">n</tspan>, <tspan font-family="Georgia, serif" font-style="italic">n</tspan>)   (truly random)
+  </text>
+
+  <rect x="490" y="184" width="344" height="68" rx="9" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.4"/>
+  <text x="662" y="207" text-anchor="middle" font-size="13.5" font-weight="700" fill="#047857">Phase 1 &amp; Phase 2 query <tspan font-family="Georgia, serif" font-style="italic">m</tspan></text>
+  <text x="662" y="232" text-anchor="middle" font-size="15.5" font-weight="600" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">r</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">n</tspan> ;   <tspan font-family="Georgia, serif" font-style="italic">c</tspan> = (<tspan font-family="Georgia, serif" font-style="italic">r</tspan>,  <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>) ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan>)
+  </text>
+
+  <rect x="490" y="262" width="344" height="72" rx="9" fill="#d1fae5" stroke="#10b981" stroke-width="1.6"/>
+  <text x="662" y="286" text-anchor="middle" font-size="13.5" font-weight="700" fill="#065f46">Challenge (<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>*, <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>*)</text>
+  <text x="662" y="313" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">r</tspan>* ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">n</tspan> ;   <tspan font-family="Georgia, serif" font-style="italic">c</tspan>* = (<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*,  <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*) ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">b</tspan>*)
+  </text>
+
+  <text x="662" y="366" text-anchor="middle" font-size="13" font-weight="600" fill="#065f46">
+    Fresh <tspan font-family="Georgia, serif" font-style="italic">r</tspan>* gives an independent OTP pad <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*)
+  </text>
+
+  <!-- Footer -->
+  <rect x="28" y="408" width="824" height="36" rx="9" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.4"/>
+  <text x="440" y="431" text-anchor="middle" font-size="14" fill="#334155">
+    Only the pad oracle changes (<tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">k</tspan> vs. <tspan font-family="Georgia, serif" font-style="italic">R</tspan>); the adversary's query interface and final guess <tspan font-family="Georgia, serif" font-style="italic">b′</tspan> stay identical.
+  </text>
+</svg>
