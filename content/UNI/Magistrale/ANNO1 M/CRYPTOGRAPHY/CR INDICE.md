@@ -75,3 +75,12 @@ Materiali già presenti localmente, osservati e consultati il 12 novembre 2026; 
 - [Trascrizione della lezione 6](<Assets/TRANSCRIPTION/CR LESSON 6 Transcripted.md>): supporto secondario con errori di trascrizione; termina dopo la prova di sicurezza one-time. PRF e cifratura con chiave riutilizzabile sono annunciate per la lezione successiva.
 - [Appunti di Davide — lezione 6](<Assets/APPUNTI_DAVIDE/lez. 6.md>): supporto secondario già presente, con aggiunte `#gemini`; anno accademico e acquisizione non verificati.
 - [Appunti della lezione 6](<CR LESSON 6.md>): studio riferito come concluso il 12 novembre in circa 120 minuti attivi, stima approssimativa. Revisione editoriale, fusione delle due spiegazioni della prima proprietà e sei allegati SVG completati; immagini originali conservate. Comprensione autonoma ed esercizi non verificati.
+
+## Materiale per lo studio — lezione 7
+
+Materiali locali osservati il 16–17 novembre 2026; data di acquisizione e verifica del download non registrate. Nessun nuovo download eseguito.
+
+- [Slide della lezione 7, 2026/27](Assets/SLIDES/crypto_lecture07_2627.pdf): 13 pagine; PRF, giochi Real/Ideal, *lazy sampling*, esercizio contro avversari illimitati, costruzioni in pratica/teoria, sicurezza CPA, cifratura randomizzata da PRF e dimostrazione tramite Lemma 1 e Lemma 2.
+- [Trascrizione della lezione 7](<Assets/TRANSCRIPTION/CR LESSON 7 Transcripted.md>): Parti 1 e 2, supporto secondario con errori di trascrizione.
+- [Appunti di Davide — lezione 7](<Assets/APPUNTI_DAVIDE/lez. 7.md>): supporto secondario già presente, con aggiunte `#gemini`; anno accademico e acquisizione non verificati.
+- [Appunti della lezione 7](<CR LESSON 7.md>): riscrittura completa e completamento fino alle dimostrazioni dei Lemmi 1 e 2 con otto allegati `CR_L7_*.svg` completati il 17 novembre; immagini originali conservate su disco. Durata dello studio, comprensione autonoma ed esercizi non verificati.

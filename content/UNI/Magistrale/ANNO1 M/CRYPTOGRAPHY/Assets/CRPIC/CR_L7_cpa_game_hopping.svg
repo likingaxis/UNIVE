@@ -21,6 +21,7 @@
 
   <!-- Hop 1: ≈_c -->
   <text x="224" y="148" text-anchor="middle" font-size="28" font-weight="700" fill="#2563eb">≈<tspan baseline-shift="sub" font-size="16" font-family="Georgia, serif" font-style="italic">c</tspan></text>
+  <line x1="224" y1="168" x2="224" y2="216" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="3 3"/>
   <rect x="178" y="218" width="92" height="40" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2"/>
   <text x="224" y="235" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">Lemma 1</text>
   <text x="224" y="251" text-anchor="middle" font-size="11.5" fill="#475569">PRF security</text>
@@ -34,6 +35,7 @@
 
   <!-- Hop 2: ≈_s -->
   <text x="450" y="148" text-anchor="middle" font-size="28" font-weight="700" fill="#059669">≈<tspan baseline-shift="sub" font-size="16" font-family="Georgia, serif" font-style="italic">s</tspan></text>
+  <line x1="450" y1="168" x2="450" y2="216" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="3 3"/>
   <rect x="404" y="218" width="92" height="40" rx="8" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.2"/>
   <text x="450" y="235" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">Lemma 2</text>
   <text x="450" y="251" text-anchor="middle" font-size="11.5" fill="#065f46">statistical</text>
@@ -47,6 +49,7 @@
 
   <!-- Hop 3: ≈_c -->
   <text x="676" y="148" text-anchor="middle" font-size="28" font-weight="700" fill="#2563eb">≈<tspan baseline-shift="sub" font-size="16" font-family="Georgia, serif" font-style="italic">c</tspan></text>
+  <line x1="676" y1="168" x2="676" y2="216" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="3 3"/>
   <rect x="630" y="218" width="92" height="40" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2"/>
   <text x="676" y="235" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">Lemma 1</text>
   <text x="676" y="251" text-anchor="middle" font-size="11.5" fill="#475569">PRF security</text>

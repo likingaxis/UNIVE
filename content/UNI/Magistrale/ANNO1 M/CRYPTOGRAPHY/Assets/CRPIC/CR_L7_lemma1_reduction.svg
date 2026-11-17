@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 546" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Lemma 1: perfect reduction B proving G(lambda, b) approx_c H(lambda, b)</title>
+  <desc id="desc">Three-party sequence diagram with CPA adversary A on the left, reduction B in the middle, and PRF challenger C on the right. B starts A, answers Phase 1 and Phase 2 encryption queries m by sampling uniform r, querying C on r to get z = O(r), and returning (r, z XOR m). On challenge (m0*, m1*), B samples r*, queries C on r* to get z*, and returns (r*, z* XOR m_b*). Finally B forwards A's bit b prime to C. When O = F_k, A sees G(lambda, b); when O = R, A sees H(lambda, b).</desc>
+  <defs>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="546" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="440" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">
+    Lemma 1: perfect reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan> proving <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>) ≈<tspan baseline-shift="sub" font-size="14" font-family="Georgia, serif" font-style="italic">c</tspan> <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)
+  </text>
+  <text x="440" y="57" text-anchor="middle" font-size="14.5" fill="#64748b">
+    <tspan font-family="Georgia, serif" font-style="italic">B</tspan> delegates every PRF evaluation on fresh <tspan font-family="Georgia, serif" font-style="italic">r</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan> to <tspan font-family="Georgia, serif" font-style="italic">C</tspan>, simulating both worlds with zero loss
+  </text>
+
+  <!-- Lifelines -->
+  <line x1="138" y1="138" x2="138" y2="466" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="440" y1="138" x2="440" y2="466" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="742" y1="138" x2="742" y2="466" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+
+  <!-- Subtle band backgrounds for Queries & Challenge -->
+  <rect x="34" y="182" width="812" height="114" rx="11" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <rect x="46" y="190" width="212" height="20" rx="10" fill="#e2e8f0"/>
+  <text x="152" y="204" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">QUERIES: Phase 1 &amp; 2 (repeat poly(λ))</text>
+
+  <rect x="34" y="306" width="812" height="114" rx="11" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.3"/>
+  <rect x="46" y="314" width="168" height="20" rx="10" fill="#1d4ed8"/>
+  <text x="130" y="328" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">CHALLENGE (fixed bit b)</text>
+
+  <!-- Actor headers -->
+  <rect x="34" y="76" width="208" height="62" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="138" y="102" text-anchor="middle" font-size="17" font-weight="700" fill="#6d28d9">Adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
+  <text x="138" y="124" text-anchor="middle" font-size="12.5" fill="#5b21b6">Distinguishes <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>) vs. <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)</text>
+
+  <rect x="336" y="76" width="208" height="62" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="440" y="102" text-anchor="middle" font-size="17" font-weight="700" fill="#1d4ed8">Reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan></text>
+  <text x="440" y="124" text-anchor="middle" font-size="12.5" fill="#1e40af">PPT PRF distinguisher</text>
+
+  <rect x="638" y="76" width="208" height="62" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="742" y="102" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">PRF Challenger <tspan font-family="Georgia, serif" font-style="italic">C</tspan></text>
+  <text x="742" y="124" text-anchor="middle" font-size="12.5" fill="#475569"><tspan font-family="Georgia, serif" font-style="italic">O</tspan> = <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">k</tspan>  or  <tspan font-family="Georgia, serif" font-style="italic">O</tspan> = <tspan font-family="Georgia, serif" font-style="italic">R</tspan></text>
+
+  <!-- Step 0: B -> A: "START" -->
+  <path d="M440 162 H147" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <rect x="246" y="146" width="86" height="22" rx="11" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="289" y="162" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e40af">"START"</text>
+
+  <!-- Query row 1: A -> B: m, B samples r, B -> C: r -->
+  <path d="M138 228 H431" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <rect x="255" y="209" width="68" height="22" rx="11" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="289" y="224" text-anchor="middle" font-size="13.5" font-weight="600" fill="#5b21b6"><tspan font-family="Georgia, serif" font-style="italic">m</tspan></text>
+
+  <rect x="392" y="216" width="96" height="24" rx="8" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.2"/>
+  <text x="440" y="232" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a"><tspan font-family="Georgia, serif" font-style="italic">r</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">n</tspan></text>
+
+  <path d="M488 228 H733" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <rect x="574" y="209" width="76" height="22" rx="11" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="612" y="224" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e40af">query <tspan font-family="Georgia, serif" font-style="italic">r</tspan></text>
+
+  <!-- Query row 2: C -> B: z, B -> A: c = (r, z XOR m) -->
+  <path d="M742 272 H449" fill="none" stroke="#475569" stroke-width="2.1" marker-end="url(#arrow-slate)"/>
+  <rect x="562" y="253" width="100" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="612" y="268" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0f172a"><tspan font-family="Georgia, serif" font-style="italic">z</tspan> = <tspan font-family="Georgia, serif" font-style="italic">O</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>)</text>
+
+  <path d="M440 272 H147" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <rect x="216" y="253" width="146" height="22" rx="11" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="289" y="268" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">c</tspan> = (<tspan font-family="Georgia, serif" font-style="italic">r</tspan>, <tspan font-family="Georgia, serif" font-style="italic">z</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan>)</text>
+
+  <!-- Challenge row 1: A -> B: m0*, m1*, B samples r*, B -> C: r* -->
+  <path d="M138 352 H431" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <rect x="242" y="333" width="94" height="22" rx="11" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="289" y="348" text-anchor="middle" font-size="13.5" font-weight="600" fill="#5b21b6"><tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9.5">0</tspan>*, <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>*</text>
+
+  <rect x="392" y="340" width="96" height="24" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.3"/>
+  <text x="440" y="356" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a"><tspan font-family="Georgia, serif" font-style="italic">r</tspan>* ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">n</tspan></text>
+
+  <path d="M488 352 H733" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <rect x="572" y="333" width="80" height="22" rx="11" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="612" y="348" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e40af">query <tspan font-family="Georgia, serif" font-style="italic">r</tspan>*</text>
+
+  <!-- Challenge row 2: C -> B: z*, B -> A: c* = (r*, z* XOR m_b*) -->
+  <path d="M742 396 H449" fill="none" stroke="#475569" stroke-width="2.1" marker-end="url(#arrow-slate)"/>
+  <rect x="558" y="377" width="108" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="612" y="392" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0f172a"><tspan font-family="Georgia, serif" font-style="italic">z</tspan>* = <tspan font-family="Georgia, serif" font-style="italic">O</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*)</text>
+
+  <path d="M440 396 H147" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <rect x="206" y="377" width="166" height="22" rx="11" fill="#ffffff" stroke="#93c5fd" stroke-width="1.3"/>
+  <text x="289" y="392" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e3a8a"><tspan font-family="Georgia, serif" font-style="italic">c</tspan>* = (<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*, <tspan font-family="Georgia, serif" font-style="italic">z</tspan>* ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">b</tspan>*)</text>
+
+  <!-- Final guess forwarding: A -> B -> C: b' -->
+  <path d="M138 450 H431" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <rect x="250" y="431" width="78" height="22" rx="11" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="289" y="446" text-anchor="middle" font-size="13.5" font-weight="600" fill="#5b21b6">guess <tspan font-family="Georgia, serif" font-style="italic">b′</tspan></text>
+
+  <path d="M440 450 H733" fill="none" stroke="#475569" stroke-width="2.1" marker-end="url(#arrow-slate)"/>
+  <rect x="562" y="431" width="100" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="612" y="446" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">output <tspan font-family="Georgia, serif" font-style="italic">b′</tspan></text>
+
+  <!-- Bottom two outcome cards -->
+  <rect x="34" y="480" width="398" height="50" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="233" y="502" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af">
+    Real PRF world:  <tspan font-family="Georgia, serif" font-style="italic">z</tspan> = <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>)
+  </text>
+  <text x="233" y="521" text-anchor="middle" font-size="13" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">A</tspan> experiences exact <tspan font-weight="700"><tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)</tspan>
+  </text>
+
+  <rect x="448" y="480" width="398" height="50" rx="10" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="647" y="502" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">
+    Ideal PRF world:  <tspan font-family="Georgia, serif" font-style="italic">z</tspan> = <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>)
+  </text>
+  <text x="647" y="521" text-anchor="middle" font-size="13" fill="#047857">
+    <tspan font-family="Georgia, serif" font-style="italic">A</tspan> experiences exact <tspan font-weight="700"><tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)</tspan>
+  </text>
+</svg>

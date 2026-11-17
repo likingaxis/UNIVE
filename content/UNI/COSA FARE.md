@@ -1,30 +1,9 @@
 ###### OGGI
-- continua con astra+ prompt swers
-##### IN GENERALE
-- [ ] crittografia 1
-- [ ] crittografia 2
-- [ ] crittografia 3
-- [ ] crittografia 4
-- [ ] crittografia 5
-- [ ] crittografia 6
-- [ ] network 1
-- [ ] network 2
-- [ ] network 3
-- [ ] network 4
-- [ ] network 5
-- [ ] newtwork 6
-- [ ] network 7
-- [ ] network 8
-- [x] distributed 1
-- [x] distributed 2
-- [x] distributed 3
-- [x] distributed 4
-- [x] distributed 5
-- [ ] distributed 6
-- [ ] distributed 7
-- [ ] distributed 8
-- [ ] distributed 9
-- [ ] distributed 10
-- [ ] distributed 11
-- [ ] distributed 12
+- [ ] critto lez 8
+- [ ] CV revision
+- [ ] NI 10+11
+
+
+
+
 - [ ] Esami a scelta approfondisci( senti anche i messaggi)

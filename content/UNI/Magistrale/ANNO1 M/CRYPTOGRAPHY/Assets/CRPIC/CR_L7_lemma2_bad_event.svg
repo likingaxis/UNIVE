@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 398" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Lemma 2: BAD collision event in H(lambda, b)</title>
+  <desc id="desc">Comparison of the no-collision event (BAD bar) and the collision event (BAD) among q total random inputs r_1 through r_q. When r* does not collide with any encryption query input, R(r*) is a fresh independent one-time pad so H(lambda, 0) and H(lambda, 1) are identically distributed. A collision occurs with probability at most C(q, 2) times 2^(-n), which is negligible.</desc>
+
+  <rect width="880" height="398" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="440" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">
+    Lemma 2: fresh challenge pad (<tspan style="text-decoration: overline">BAD</tspan>) vs. collision (<tspan>BAD</tspan>)
+  </text>
+  <text x="440" y="57" text-anchor="middle" font-size="14.5" fill="#64748b">
+    Among <tspan font-family="Georgia, serif" font-style="italic">q</tspan> = poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) uniform inputs <tspan font-family="Georgia, serif" font-style="italic">r</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan>, …, <tspan font-family="Georgia, serif" font-style="italic">r</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">q</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan>, <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*) acts as a true OTP unless <tspan font-family="Georgia, serif" font-style="italic">r</tspan>* repeats
+  </text>
+
+  <!-- Left card: No collision (BAD bar) -->
+  <rect x="28" y="78" width="400" height="252" rx="14" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.8"/>
+  <rect x="46" y="94" width="144" height="24" rx="12" fill="#047857"/>
+  <text x="118" y="111" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Good case (not BAD)</text>
+  <text x="304" y="112" text-anchor="middle" font-size="17" font-weight="700" fill="#065f46">No query hits <tspan font-family="Georgia, serif" font-style="italic">r</tspan>*</text>
+
+  <rect x="46" y="132" width="364" height="54" rx="9" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.4"/>
+  <text x="228" y="155" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
+    Challenge <tspan font-family="Georgia, serif" font-style="italic">r</tspan>* ≠ <tspan font-family="Georgia, serif" font-style="italic">r</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">i</tspan> for every query
+  </text>
+  <text x="228" y="176" text-anchor="middle" font-size="13" fill="#047857">
+    Table entry <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*) is queried only once
+  </text>
+
+  <rect x="46" y="198" width="364" height="62" rx="9" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="228" y="224" text-anchor="middle" font-size="15.5" font-weight="700" fill="#065f46">
+    Replace <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*) with fresh <tspan font-family="Georgia, serif" font-style="italic">z</tspan>* ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan>
+  </text>
+  <text x="228" y="246" text-anchor="middle" font-size="13.5" fill="#047857">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="10">2</tspan>* = <tspan font-family="Georgia, serif" font-style="italic">z</tspan>* ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">b</tspan>* is an exact One-Time Pad
+  </text>
+
+  <text x="228" y="298" text-anchor="middle" font-size="15" font-weight="700" fill="#065f46">
+    (<tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, 0) | <tspan style="text-decoration: overline">BAD</tspan>)  ≡  (<tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, 1) | <tspan style="text-decoration: overline">BAD</tspan>)
+  </text>
+
+  <!-- Right card: Collision (BAD) -->
+  <rect x="452" y="78" width="400" height="252" rx="14" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8"/>
+  <rect x="470" y="94" width="124" height="24" rx="12" fill="#b91c1c"/>
+  <text x="532" y="111" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Bad case (BAD)</text>
+  <text x="720" y="112" text-anchor="middle" font-size="17" font-weight="700" fill="#991b1b">Some query hits <tspan font-family="Georgia, serif" font-style="italic">r</tspan>*</text>
+
+  <rect x="470" y="132" width="364" height="54" rx="9" fill="#ffffff" stroke="#fecaca" stroke-width="1.4"/>
+  <text x="652" y="155" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
+    Example: query <tspan font-family="Georgia, serif" font-style="italic">m</tspan> = 0<tspan baseline-shift="super" font-size="10" font-family="Georgia, serif" font-style="italic">n</tspan> draws <tspan font-family="Georgia, serif" font-style="italic">r</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">i</tspan> = <tspan font-family="Georgia, serif" font-style="italic">r</tspan>*
+  </text>
+  <text x="652" y="176" text-anchor="middle" font-size="13" fill="#991b1b">
+    Query returns (<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*, <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">r</tspan>*)), revealing the pad!
+  </text>
+
+  <rect x="470" y="198" width="364" height="62" rx="9" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="652" y="224" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">
+    Union bound over all <tspan font-family="Georgia, serif" font-style="italic">q</tspan> sampled inputs:
+  </text>
+  <text x="652" y="246" text-anchor="middle" font-size="13.5" font-weight="600" fill="#7f1d1d">
+    Pr[BAD] ≤ Pr[∃ <tspan font-family="Georgia, serif" font-style="italic">i</tspan> ≠ <tspan font-family="Georgia, serif" font-style="italic">j</tspan> : <tspan font-family="Georgia, serif" font-style="italic">r</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">i</tspan> = <tspan font-family="Georgia, serif" font-style="italic">r</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">j</tspan>] ≤ [<tspan font-family="Georgia, serif" font-style="italic">q</tspan>(<tspan font-family="Georgia, serif" font-style="italic">q</tspan> − 1) / 2] · 2<tspan baseline-shift="super" font-size="10">−<tspan font-family="Georgia, serif" font-style="italic">n</tspan></tspan>
+  </text>
+
+  <text x="652" y="298" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">
+    poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) · 2<tspan baseline-shift="super" font-size="10.5">−<tspan font-family="Georgia, serif" font-style="italic">n</tspan></tspan> = negl(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)
+  </text>
+
+  <!-- Footer -->
+  <rect x="28" y="346" width="824" height="36" rx="9" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.4"/>
+  <text x="440" y="369" text-anchor="middle" font-size="14" fill="#334155">
+    Together:  <tspan font-weight="700" fill="#0f172a">SD(<tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, 0); <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, 1)) ≤ Pr[BAD] = negl(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)</tspan>   ⇒   <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, 0) ≈<tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">s</tspan> <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>, 1)
+  </text>
+</svg>

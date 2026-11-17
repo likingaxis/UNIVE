@@ -34,34 +34,34 @@
   </text>
 
   <!-- Actors left -->
-  <rect x="48" y="186" width="84" height="150" rx="11" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
-  <text x="90" y="253" text-anchor="middle" font-size="14" font-weight="600" fill="#5b21b6">PPT</text>
-  <text x="90" y="278" text-anchor="middle" font-size="22" font-weight="700" fill="#6d28d9" font-family="Georgia, serif" font-style="italic">A</text>
+  <rect x="48" y="184" width="84" height="142" rx="11" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="90" y="249" text-anchor="middle" font-size="14" font-weight="600" fill="#5b21b6">PPT</text>
+  <text x="90" y="274" text-anchor="middle" font-size="22" font-weight="700" fill="#6d28d9" font-family="Georgia, serif" font-style="italic">A</text>
 
-  <rect x="314" y="186" width="90" height="150" rx="11" fill="#ffffff" stroke="#3b82f6" stroke-width="1.8"/>
-  <text x="359" y="253" text-anchor="middle" font-size="21" font-weight="700" fill="#1e40af" font-family="Georgia, serif" font-style="italic">C</text>
-  <text x="359" y="276" text-anchor="middle" font-size="13" font-weight="600" fill="#1d4ed8">runs <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">k</tspan></text>
+  <rect x="314" y="184" width="90" height="142" rx="11" fill="#ffffff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="359" y="249" text-anchor="middle" font-size="21" font-weight="700" fill="#1e40af" font-family="Georgia, serif" font-style="italic">C</text>
+  <text x="359" y="272" text-anchor="middle" font-size="13" font-weight="600" fill="#1d4ed8">runs <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">k</tspan></text>
 
   <!-- Interaction arrows left -->
-  <path d="M132 214 H305" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-  <text x="223" y="205" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
+  <path d="M132 210 H305" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <text x="223" y="201" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
     <tspan font-family="Georgia, serif" font-style="italic">x</tspan> ∈ {0, 1}<tspan baseline-shift="super" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan>
   </text>
 
-  <path d="M314 252 H141" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-  <text x="223" y="243" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">
+  <path d="M314 246 H141" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <text x="223" y="237" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">
     <tspan font-family="Georgia, serif" font-style="italic">y</tspan> = <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="11" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>)
   </text>
 
-  <rect x="151" y="266" width="144" height="22" rx="11" fill="#ffffff" stroke="#93c5fd" stroke-width="1.3" stroke-dasharray="4 3"/>
-  <text x="223" y="281" text-anchor="middle" font-size="12" font-weight="600" fill="#1d4ed8">repeat poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) times</text>
+  <rect x="151" y="260" width="144" height="22" rx="11" fill="#ffffff" stroke="#93c5fd" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="223" y="275" text-anchor="middle" font-size="12" font-weight="600" fill="#1d4ed8">repeat poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) times</text>
 
-  <path d="M132 320 H305" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
-  <text x="223" y="311" text-anchor="middle" font-size="14.5" font-weight="600" fill="#334155">
+  <path d="M132 312 H305" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
+  <text x="223" y="303" text-anchor="middle" font-size="14.5" font-weight="600" fill="#334155">
     output <tspan font-family="Georgia, serif" font-style="italic">b′</tspan> ∈ {0, 1}
   </text>
 
-  <text x="226" y="366" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">Challenger runs in poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) time using short key <tspan font-family="Georgia, serif" font-style="italic">k</tspan></text>
+  <text x="226" y="362" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">Challenger runs in poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) time using short key <tspan font-family="Georgia, serif" font-style="italic">k</tspan></text>
 
   <!-- Center pill -->
   <rect x="422" y="216" width="36" height="28" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.4"/>
@@ -72,7 +72,7 @@
   <rect x="474" y="92" width="96" height="24" rx="12" fill="#047857"/>
   <text x="522" y="109" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Ideal game</text>
   <text x="706" y="110" text-anchor="middle" font-size="18.5" font-weight="700" fill="#065f46">
-    Game<tspan baseline-shift="super" font-size="11.5">ideal</tspan><tspan baseline-shift="sub" font-size="11.5" font-family="Georgia, serif" font-style="italic">F, A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)
+    Game<tspan baseline-shift="super" font-size="11.5">ideal</tspan><tspan baseline-shift="sub" font-size="11.5" font-family="Georgia, serif" font-style="italic">F,A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)
   </text>
 
   <!-- Setup box right -->
@@ -82,38 +82,38 @@
   </text>
 
   <!-- Actors right -->
-  <rect x="476" y="186" width="84" height="150" rx="11" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
-  <text x="518" y="253" text-anchor="middle" font-size="14" font-weight="600" fill="#5b21b6">PPT</text>
-  <text x="518" y="278" text-anchor="middle" font-size="22" font-weight="700" fill="#6d28d9" font-family="Georgia, serif" font-style="italic">A</text>
+  <rect x="476" y="184" width="84" height="142" rx="11" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="518" y="249" text-anchor="middle" font-size="14" font-weight="600" fill="#5b21b6">PPT</text>
+  <text x="518" y="274" text-anchor="middle" font-size="22" font-weight="700" fill="#6d28d9" font-family="Georgia, serif" font-style="italic">A</text>
 
-  <rect x="742" y="186" width="90" height="150" rx="11" fill="#ffffff" stroke="#10b981" stroke-width="1.8"/>
-  <text x="787" y="253" text-anchor="middle" font-size="21" font-weight="700" fill="#065f46" font-family="Georgia, serif" font-style="italic">C</text>
-  <text x="787" y="276" text-anchor="middle" font-size="13" font-weight="600" fill="#047857">uses <tspan font-family="Georgia, serif" font-style="italic">R</tspan></text>
+  <rect x="742" y="184" width="90" height="142" rx="11" fill="#ffffff" stroke="#10b981" stroke-width="1.8"/>
+  <text x="787" y="249" text-anchor="middle" font-size="21" font-weight="700" fill="#065f46" font-family="Georgia, serif" font-style="italic">C</text>
+  <text x="787" y="272" text-anchor="middle" font-size="13" font-weight="600" fill="#047857">uses <tspan font-family="Georgia, serif" font-style="italic">R</tspan></text>
 
   <!-- Interaction arrows right -->
-  <path d="M560 214 H733" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-green)"/>
-  <text x="651" y="205" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
+  <path d="M560 210 H733" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-green)"/>
+  <text x="651" y="201" text-anchor="middle" font-size="14.5" font-weight="600" fill="#0f172a">
     <tspan font-family="Georgia, serif" font-style="italic">x</tspan> ∈ {0, 1}<tspan baseline-shift="super" font-size="10.5" font-family="Georgia, serif" font-style="italic">n</tspan>
   </text>
 
-  <path d="M742 252 H569" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-green)"/>
-  <text x="651" y="243" text-anchor="middle" font-size="15" font-weight="700" fill="#065f46">
+  <path d="M742 246 H569" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-green)"/>
+  <text x="651" y="237" text-anchor="middle" font-size="15" font-weight="700" fill="#065f46">
     <tspan font-family="Georgia, serif" font-style="italic">y</tspan> = <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>)
   </text>
 
-  <rect x="579" y="266" width="144" height="22" rx="11" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.3" stroke-dasharray="4 3"/>
-  <text x="651" y="281" text-anchor="middle" font-size="12" font-weight="600" fill="#047857">repeat poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) times</text>
+  <rect x="579" y="260" width="144" height="22" rx="11" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="651" y="275" text-anchor="middle" font-size="12" font-weight="600" fill="#047857">repeat poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) times</text>
 
-  <path d="M560 320 H733" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
-  <text x="651" y="311" text-anchor="middle" font-size="14.5" font-weight="600" fill="#334155">
+  <path d="M560 312 H733" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
+  <text x="651" y="303" text-anchor="middle" font-size="14.5" font-weight="600" fill="#334155">
     output <tspan font-family="Georgia, serif" font-style="italic">b′</tspan> ∈ {0, 1}
   </text>
 
-  <text x="654" y="366" text-anchor="middle" font-size="13" font-weight="600" fill="#065f46">Naive <tspan font-family="Georgia, serif" font-style="italic">R</tspan> is deterministic, takes exp time (lazy-simulable)</text>
+  <text x="654" y="362" text-anchor="middle" font-size="13" font-weight="600" fill="#065f46">Naive <tspan font-family="Georgia, serif" font-style="italic">R</tspan> is deterministic, takes exp time (lazy-simulable)</text>
 
   <!-- Footer -->
   <rect x="28" y="400" width="824" height="36" rx="9" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.4"/>
   <text x="440" y="423" text-anchor="middle" font-size="14" fill="#334155">
-    PRF condition:  |<tspan font-weight="700" fill="#0f172a">Pr[Game<tspan baseline-shift="super" font-size="10">real</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">F, A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) = 1] − Pr[Game<tspan baseline-shift="super" font-size="10">ideal</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">F, A</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) = 1]</tspan>| ≤ negl(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)   (Game<tspan baseline-shift="super" font-size="10">real</tspan> ≈<tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">c</tspan> Game<tspan baseline-shift="super" font-size="10">ideal</tspan>)
+    PRF condition:  |<tspan font-weight="700" fill="#0f172a">Pr[<tspan font-family="Georgia, serif" font-style="italic">A</tspan><tspan baseline-shift="super" font-size="10" font-family="Georgia, serif" font-style="italic">F</tspan><tspan dy="-2" font-size="8" font-family="Georgia, serif" font-style="italic">k</tspan><tspan dy="2">(1</tspan><tspan baseline-shift="super" font-size="10" font-family="Georgia, serif" font-style="italic">λ</tspan>) = 1] − Pr[<tspan font-family="Georgia, serif" font-style="italic">A</tspan><tspan baseline-shift="super" font-size="10" font-family="Georgia, serif" font-style="italic">R</tspan>(1<tspan baseline-shift="super" font-size="10" font-family="Georgia, serif" font-style="italic">λ</tspan>) = 1]</tspan>| ≤ negl(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)   (Game<tspan baseline-shift="super" font-size="10">real</tspan> ≈<tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">c</tspan> Game<tspan baseline-shift="super" font-size="10">ideal</tspan>)
   </text>
 </svg>
