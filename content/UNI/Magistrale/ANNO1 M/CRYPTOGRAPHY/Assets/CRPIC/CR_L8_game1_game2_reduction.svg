@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 548" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Reduction 2: proving Game_1(lambda) approx_c Game_2(lambda) via the Multiple-PRG Lemma</title>
+  <desc id="desc">Sequence diagram with Adversary A on the left, Reduction B in the middle, and Multiple-PRG Challenger C on the right. C sends q strings z_1, ..., z_q of length 2lambda all at once to B, each split into halves (z_i^0, z_i^1). When A queries (x, y), B checks if prefix y appeared before: if y is new, B assigns the next unused z_i and returns z_i^x; if y repeated, B reuses the same z_i assigned earlier to y and returns z_i^x, preserving seed consistency.</desc>
+  <defs>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="548" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="440" y="32" text-anchor="middle" font-size="20.5" font-weight="700" fill="#0f172a">
+    Second reduction: proving <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="13">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) ≈<tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">c</tspan> <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="13">2</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) via the Multiple-PRG Lemma
+  </text>
+  <text x="440" y="54" text-anchor="middle" font-size="14" fill="#64748b">
+    Set <tspan font-family="Georgia, serif" font-style="italic">t</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">q</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) = poly(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) queries; <tspan font-family="Georgia, serif" font-style="italic">B</tspan> receives <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>, …, <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">q</tspan> upfront and maps each distinct <tspan font-family="Georgia, serif" font-style="italic">y</tspan> to one <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">i</tspan>
+  </text>
+
+  <!-- Lifelines -->
+  <line x1="138" y1="134" x2="138" y2="458" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="440" y1="134" x2="440" y2="458" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="742" y1="134" x2="742" y2="458" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+
+  <!-- Actor boxes -->
+  <rect x="34" y="72" width="208" height="60" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="138" y="98" text-anchor="middle" font-size="17" font-weight="700" fill="#6d28d9">Adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
+  <text x="138" y="119" text-anchor="middle" font-size="12.5" fill="#5b21b6">Makes <tspan font-family="Georgia, serif" font-style="italic">q</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) queries (<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">y</tspan>)</text>
+
+  <rect x="336" y="72" width="208" height="60" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="440" y="98" text-anchor="middle" font-size="17" font-weight="700" fill="#1d4ed8">Reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan></text>
+  <text x="440" y="119" text-anchor="middle" font-size="12.5" fill="#1e40af">Splits each <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan> = (<tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan><tspan baseline-shift="super" font-size="9.5">0</tspan>, <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan><tspan baseline-shift="super" font-size="9.5">1</tspan>)</text>
+
+  <rect x="638" y="72" width="208" height="60" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="742" y="98" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">Challenger <tspan font-family="Georgia, serif" font-style="italic">C</tspan></text>
+  <text x="742" y="119" text-anchor="middle" font-size="12.5" fill="#475569">Multiple-PRG Lemma (<tspan font-family="Georgia, serif" font-style="italic">t</tspan> = <tspan font-family="Georgia, serif" font-style="italic">q</tspan>)</text>
+
+  <!-- Step 1: C -> B upfront challenge tuple -->
+  <path d="M742 170 H449" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
+  <rect x="482" y="141" width="222" height="24" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+  <text x="593" y="158" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">
+    (<tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>, <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5">2</tspan>, …, <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">q</tspan>) ∈ ({0, 1}<tspan baseline-shift="super" font-size="9.5">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan>)<tspan baseline-shift="super" font-size="9.5" font-family="Georgia, serif" font-style="italic">q</tspan>
+  </text>
+
+  <!-- Query handling band -->
+  <rect x="34" y="186" width="812" height="222" rx="11" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.3"/>
+  <rect x="46" y="194" width="256" height="20" rx="10" fill="#e2e8f0"/>
+  <text x="174" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">SIMULATING QUERIES (x, y) WITH CONSISTENCY</text>
+
+  <!-- A -> B query -->
+  <path d="M138 240 H431" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <rect x="218" y="213" width="142" height="22" rx="11" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="289" y="229" text-anchor="middle" font-size="13.5" font-weight="600" fill="#5b21b6">
+    query (<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">y</tspan>)
+  </text>
+
+  <!-- Decision box on B's side (generous 242px width per column) -->
+  <rect x="352" y="252" width="482" height="104" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+  <line x1="593" y1="252" x2="593" y2="356" stroke="#cbd5e1" stroke-width="1.2"/>
+
+  <!-- Left branch: y is new -->
+  <text x="472" y="274" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">
+    Case 1: prefix <tspan font-family="Georgia, serif" font-style="italic">y</tspan> is new (<tspan font-family="Georgia, serif" font-style="italic">y</tspan><tspan baseline-shift="sub" font-size="9">2</tspan> ≠ <tspan font-family="Georgia, serif" font-style="italic">y</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>)
+  </text>
+  <text x="472" y="297" text-anchor="middle" font-size="12.5" fill="#334155">
+    Associate <tspan font-family="Georgia, serif" font-style="italic">y</tspan> with next unused <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan>
+  </text>
+  <text x="472" y="318" text-anchor="middle" font-size="12.5" fill="#334155">
+    (<tspan font-family="Georgia, serif" font-style="italic">y</tspan> fixes a fresh seed <tspan font-family="Georgia, serif" font-style="italic">R′</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>))
+  </text>
+  <text x="472" y="341" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1d4ed8">
+    Reply with half <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan><tspan baseline-shift="super" font-size="9.5" font-family="Georgia, serif" font-style="italic">x</tspan>
+  </text>
+
+  <!-- Right branch: y repeated -->
+  <text x="713" y="274" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">
+    Case 2: prefix <tspan font-family="Georgia, serif" font-style="italic">y</tspan> repeats (<tspan font-family="Georgia, serif" font-style="italic">y</tspan><tspan baseline-shift="sub" font-size="9">2</tspan> = <tspan font-family="Georgia, serif" font-style="italic">y</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>, <tspan font-family="Georgia, serif" font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="9">2</tspan> ≠ <tspan font-family="Georgia, serif" font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>)
+  </text>
+  <text x="713" y="297" text-anchor="middle" font-size="12.5" fill="#334155">
+    Reuse the <tspan font-weight="700">same</tspan> <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan> assigned to <tspan font-family="Georgia, serif" font-style="italic">y</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>
+  </text>
+  <text x="713" y="318" text-anchor="middle" font-size="12.5" fill="#334155">
+    (same seed <tspan font-family="Georgia, serif" font-style="italic">R′</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>) in <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>)
+  </text>
+  <text x="713" y="341" text-anchor="middle" font-size="13.5" font-weight="700" fill="#047857">
+    Reply with half <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan><tspan baseline-shift="super" font-size="9.5"><tspan font-family="Georgia, serif" font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="7.5">2</tspan></tspan>
+  </text>
+
+  <!-- B -> A reply -->
+  <path d="M440 390 H147" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <rect x="206" y="363" width="166" height="22" rx="11" fill="#ffffff" stroke="#93c5fd" stroke-width="1.3"/>
+  <text x="289" y="379" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e3a8a">
+    return <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan><tspan baseline-shift="super" font-size="9.5" font-family="Georgia, serif" font-style="italic">x</tspan> ∈ {0, 1}<tspan baseline-shift="super" font-size="9.5" font-family="Georgia, serif" font-style="italic">λ</tspan>
+  </text>
+
+  <!-- Final guess forwarding -->
+  <path d="M138 446 H431" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <rect x="242" y="419" width="94" height="22" rx="11" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="289" y="435" text-anchor="middle" font-size="13.5" font-weight="600" fill="#5b21b6">decision <tspan font-family="Georgia, serif" font-style="italic">b′</tspan></text>
+
+  <path d="M440 446 H733" fill="none" stroke="#475569" stroke-width="2.1" marker-end="url(#arrow-slate)"/>
+  <rect x="540" y="419" width="98" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="589" y="435" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">output <tspan font-family="Georgia, serif" font-style="italic">b′</tspan></text>
+
+  <!-- Bottom outcome cards -->
+  <rect x="34" y="476" width="398" height="54" rx="10" fill="#fefce8" stroke="#eab308" stroke-width="1.5"/>
+  <text x="233" y="498" text-anchor="middle" font-size="13.5" font-weight="700" fill="#a16207">
+    If <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan> = <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan>):  <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan><tspan baseline-shift="super" font-size="9.5" font-family="Georgia, serif" font-style="italic">x</tspan> = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">x</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan>) with fresh <tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan> ≡ <tspan font-family="Georgia, serif" font-style="italic">R′</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>)
+  </text>
+  <text x="233" y="518" text-anchor="middle" font-size="12.5" fill="#854d0e">
+    Exact simulation of <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>): <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">y</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">x</tspan>(<tspan font-family="Georgia, serif" font-style="italic">R′</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>))
+  </text>
+
+  <rect x="448" y="476" width="398" height="54" rx="10" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="647" y="498" text-anchor="middle" font-size="13.5" font-weight="700" fill="#065f46">
+    If <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan>:  both halves (<tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan><tspan baseline-shift="super" font-size="9.5">0</tspan>, <tspan font-family="Georgia, serif" font-style="italic">z</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan><tspan baseline-shift="super" font-size="9.5">1</tspan>) are independent <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">λ</tspan>
+  </text>
+  <text x="647" y="518" text-anchor="middle" font-size="12.5" fill="#047857">
+    Exact simulation of <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">2</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>): <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">y</tspan>) ← <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">n</tspan>, <tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)
+  </text>
+</svg>

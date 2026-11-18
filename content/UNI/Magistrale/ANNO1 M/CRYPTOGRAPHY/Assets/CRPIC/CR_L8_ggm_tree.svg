@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 390" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">GGM binary tree construction for 2-bit inputs with highlighted path F_k(01) = G_1(G_0(k))</title>
+  <desc id="desc">Binary tree of depth n = 2 rooted at the secret key k. At depth 1, left branch 0 applies G_0 to reach G_0(k) and right branch 1 applies G_1 to reach G_1(k). At depth 2, the four leaves are F_k(00) = G_0(G_0(k)), F_k(01) = G_1(G_0(k)), F_k(10) = G_0(G_1(k)), and F_k(11) = G_1(G_1(k)). The path for input x = 01 (first bit 0 left, second bit 1 right) is highlighted in green.</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="390" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="430" y="32" text-anchor="middle" font-size="20.5" font-weight="700" fill="#0f172a">
+    GGM binary tree (<tspan font-family="Georgia, serif" font-style="italic">n</tspan> = 2): evaluating <tspan fill="#047857"><tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">k</tspan>(01) = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="13">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="13">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>))</tspan>
+  </text>
+  <text x="430" y="54" text-anchor="middle" font-size="14" fill="#64748b">
+    Bit <tspan font-family="Georgia, serif" font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="10">1</tspan> = 0 takes the left branch (<tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>), then bit <tspan font-family="Georgia, serif" font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="10">2</tspan> = 1 takes the right branch (<tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>)
+  </text>
+
+  <!-- Edges (drawn behind nodes and pills) -->
+  <!-- Root to Level 1: Highlighted left edge (0), normal right edge (1) -->
+  <path d="M400 112 L258 164" fill="none" stroke="#059669" stroke-width="3.2" marker-end="url(#arrow-green)"/>
+  <path d="M460 112 L602 164" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- Level 1 Left to Leaves: normal left (0), highlighted right (1) -->
+  <path d="M210 218 L128 272" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-slate)"/>
+  <path d="M250 218 L322 272" fill="none" stroke="#059669" stroke-width="3.2" marker-end="url(#arrow-green)"/>
+
+  <!-- Level 1 Right to Leaves: normal left (0), normal right (1) -->
+  <path d="M610 218 L538 272" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-slate)"/>
+  <path d="M650 218 L732 272" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-slate)"/>
+
+  <!-- Edge Labels Level 1 (centered on segment midpoints x=329, y=138 and x=531, y=138) -->
+  <rect x="291" y="125" width="76" height="24" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="329" y="142" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">0 → <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9.5">0</tspan></text>
+
+  <rect x="493" y="125" width="76" height="24" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+  <text x="531" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">1 → <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan></text>
+
+  <!-- Edge Labels Level 2 (centered on segment midpoints x=169, 286, 574, 691 at y=243) -->
+  <rect x="136" y="232" width="66" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="169" y="247" text-anchor="middle" font-size="12.5" font-weight="600" fill="#475569">0 → <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9">0</tspan></text>
+
+  <rect x="253" y="232" width="66" height="22" rx="11" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="286" y="247" text-anchor="middle" font-size="12.5" font-weight="700" fill="#047857">1 → <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9">1</tspan></text>
+
+  <rect x="541" y="232" width="66" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="574" y="247" text-anchor="middle" font-size="12.5" font-weight="600" fill="#475569">0 → <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9">0</tspan></text>
+
+  <rect x="658" y="232" width="66" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="691" y="247" text-anchor="middle" font-size="12.5" font-weight="600" fill="#475569">1 → <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9">1</tspan></text>
+
+  <!-- Root Node: k -->
+  <rect x="370" y="68" width="120" height="46" rx="11" fill="#ecfdf5" stroke="#059669" stroke-width="2.2"/>
+  <text x="430" y="96" text-anchor="middle" font-size="16.5" font-weight="700" fill="#065f46">
+    Root key <tspan font-family="Georgia, serif" font-style="italic">k</tspan>
+  </text>
+
+  <!-- Level 1 Nodes -->
+  <rect x="166" y="168" width="128" height="50" rx="11" fill="#ecfdf5" stroke="#059669" stroke-width="2.2"/>
+  <text x="230" y="198" text-anchor="middle" font-size="17" font-weight="700" fill="#065f46">
+    <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="12">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+
+  <rect x="566" y="168" width="128" height="50" rx="11" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.7"/>
+  <text x="630" y="198" text-anchor="middle" font-size="17" font-weight="700" fill="#1e40af">
+    <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="12">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+
+  <!-- Level 2 Leaves -->
+  <!-- Leaf 00 -->
+  <rect x="34" y="276" width="176" height="62" rx="11" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.6"/>
+  <text x="122" y="302" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="11.5" font-family="Georgia, serif" font-style="italic">k</tspan>(00)
+  </text>
+  <text x="122" y="325" text-anchor="middle" font-size="13.5" fill="#475569">
+    = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>))
+  </text>
+
+  <!-- Leaf 01 (Highlighted!) -->
+  <rect x="236" y="276" width="176" height="62" rx="11" fill="#ecfdf5" stroke="#059669" stroke-width="2.4"/>
+  <text x="324" y="302" text-anchor="middle" font-size="16.5" font-weight="700" fill="#065f46">
+    <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="11.5" font-family="Georgia, serif" font-style="italic">k</tspan>(01)
+  </text>
+  <text x="324" y="325" text-anchor="middle" font-size="13.5" font-weight="700" fill="#047857">
+    = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>))
+  </text>
+
+  <!-- Leaf 10 -->
+  <rect x="448" y="276" width="176" height="62" rx="11" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.6"/>
+  <text x="536" y="302" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="11.5" font-family="Georgia, serif" font-style="italic">k</tspan>(10)
+  </text>
+  <text x="536" y="325" text-anchor="middle" font-size="13.5" fill="#475569">
+    = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>))
+  </text>
+
+  <!-- Leaf 11 -->
+  <rect x="650" y="276" width="176" height="62" rx="11" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.6"/>
+  <text x="738" y="302" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="11.5" font-family="Georgia, serif" font-style="italic">k</tspan>(11)
+  </text>
+  <text x="738" y="325" text-anchor="middle" font-size="13.5" fill="#475569">
+    = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>))
+  </text>
+
+  <!-- Footer -->
+  <rect x="34" y="350" width="792" height="28" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="430" y="369" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">
+    Every node holds a <tspan font-family="Georgia, serif" font-style="italic">λ</tspan>-bit string. Evaluating <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>) follows only one root-to-leaf path (<tspan font-family="Georgia, serif" font-style="italic">n</tspan> calls to <tspan font-family="Georgia, serif" font-style="italic">G</tspan>).
+  </text>
+</svg>

@@ -84,3 +84,12 @@ Materiali locali osservati il 16–17 novembre 2026; data di acquisizione e veri
 - [Trascrizione della lezione 7](<Assets/TRANSCRIPTION/CR LESSON 7 Transcripted.md>): Parti 1 e 2, supporto secondario con errori di trascrizione.
 - [Appunti di Davide — lezione 7](<Assets/APPUNTI_DAVIDE/lez. 7.md>): supporto secondario già presente, con aggiunte `#gemini`; anno accademico e acquisizione non verificati.
 - [Appunti della lezione 7](<CR LESSON 7.md>): riscrittura completa e completamento fino alle dimostrazioni dei Lemmi 1 e 2 con otto allegati `CR_L7_*.svg` completati il 17 novembre; immagini originali conservate su disco. Durata dello studio, comprensione autonoma ed esercizi non verificati.
+
+## Materiale per lo studio — lezione 8
+
+Materiali locali osservati il 18 novembre 2026; data di acquisizione e verifica del download non registrate. Nessun nuovo download eseguito.
+
+- [Slide della lezione 8, 2026/27](Assets/SLIDES/crypto_lecture08_2627.pdf): 12 pagine; costruzione GGM di una PRF da qualsiasi PRG che raddoppia la lunghezza, ostacolo del numero esponenziale di ibridi, lemma sui molteplici PRG con seed indipendenti e dimostrazione per induzione sulla lunghezza dell'input tramite tre giochi ($\mathrm{Game}_0, \mathrm{Game}_1, \mathrm{Game}_2$).
+- [Trascrizione della lezione 8](<Assets/TRANSCRIPTION/CR LESSON 8 Transcripted.md>): supporto secondario con errori di trascrizione automatica.
+- [Appunti di Davide — lezione 8](<Assets/APPUNTI_DAVIDE/lez. 8.md>): supporto secondario già presente, con aggiunte `#gemini`; anno accademico e acquisizione non verificati.
+- [Appunti della lezione 8](<CR LESSON 8.md>): revisione editoriale, riorganizzazione in prosa continua e otto allegati `CR_L8_*.svg` completati il 18 novembre; screenshot originale conservato su disco. Durata dello studio, comprensione autonoma ed esercizi non verificati.

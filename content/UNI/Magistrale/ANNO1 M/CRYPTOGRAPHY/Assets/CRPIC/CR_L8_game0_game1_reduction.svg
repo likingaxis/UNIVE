@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 518" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Inductive step games and Reduction 1: Game_0(lambda) approx_c Game_1(lambda)</title>
+  <desc id="desc">Top row shows the three games Game_0(lambda) returning F_k(x,y) = G_x(F'_k(y)), Game_1(lambda) returning H(x,y) = G_x(R'(y)), and Game_2(lambda) returning R(x,y). Bottom sequence diagram shows the reduction proving Game_0 approx_c Game_1: Adversary A queries (x, y), Reduction B forwards y to Challenger C, C returns w = F'_k(y) or R'(y), B computes and returns G_x(w) to A, and finally forwards A's decision b prime to C.</desc>
+  <defs>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="518" fill="#ffffff"/>
+
+  <!-- Top: Three Games Overview (Slides 8-9) -->
+  <text x="440" y="30" text-anchor="middle" font-size="20.5" font-weight="700" fill="#0f172a">
+    Inductive step: three games and first reduction (<tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="13">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) ≈<tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">c</tspan> <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="13">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>))
+  </text>
+
+  <!-- Game 0 card -->
+  <rect x="34" y="46" width="238" height="84" rx="11" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="153" y="69" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1e40af">
+    <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="11">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>): Blue (Real)
+  </text>
+  <text x="153" y="93" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">y</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">x</tspan>(<tspan font-family="Georgia, serif" font-style="italic">F′</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>))
+  </text>
+  <text x="153" y="115" text-anchor="middle" font-size="12.5" fill="#475569">
+    <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">λ</tspan>
+  </text>
+
+  <text x="296" y="94" text-anchor="middle" font-size="22" font-weight="700" fill="#2563eb">≈<tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">c</tspan></text>
+
+  <!-- Game 1 card -->
+  <rect x="321" y="46" width="238" height="84" rx="11" fill="#fefce8" stroke="#eab308" stroke-width="1.8"/>
+  <text x="440" y="69" text-anchor="middle" font-size="15.5" font-weight="700" fill="#a16207">
+    <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="11">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>): Yellow (Hybrid)
+  </text>
+  <text x="440" y="93" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">H</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">y</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10.5" font-family="Georgia, serif" font-style="italic">x</tspan>(<tspan font-family="Georgia, serif" font-style="italic">R′</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>))
+  </text>
+  <text x="440" y="115" text-anchor="middle" font-size="12.5" fill="#475569">
+    <tspan font-family="Georgia, serif" font-style="italic">R′</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">n</tspan>−1, <tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)
+  </text>
+
+  <text x="584" y="94" text-anchor="middle" font-size="22" font-weight="700" fill="#059669">≈<tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">c</tspan></text>
+
+  <!-- Game 2 card -->
+  <rect x="608" y="46" width="238" height="84" rx="11" fill="#ecfdf5" stroke="#10b981" stroke-width="1.8"/>
+  <text x="727" y="69" text-anchor="middle" font-size="15.5" font-weight="700" fill="#065f46">
+    <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="11">2</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>): Green (Ideal)
+  </text>
+  <text x="727" y="93" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">y</tspan>)
+  </text>
+  <text x="727" y="115" text-anchor="middle" font-size="12.5" fill="#475569">
+    <tspan font-family="Georgia, serif" font-style="italic">R</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">n</tspan>, <tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)
+  </text>
+
+  <!-- Lifelines -->
+  <line x1="142" y1="210" x2="142" y2="438" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="440" y1="210" x2="440" y2="438" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="738" y1="210" x2="738" y2="438" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+
+  <!-- Query loop band -->
+  <rect x="34" y="222" width="812" height="162" rx="11" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.3"/>
+  <rect x="46" y="230" width="244" height="20" rx="10" fill="#e2e8f0"/>
+  <text x="168" y="244" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">REPEAT FOR EVERY QUERY (x, y)</text>
+
+  <!-- Actor boxes -->
+  <rect x="34" y="148" width="216" height="60" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="142" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#6d28d9">Adversary <tspan font-family="Georgia, serif" font-style="italic">A</tspan></text>
+  <text x="142" y="195" text-anchor="middle" font-size="12.5" fill="#5b21b6">Distinguishes <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">0</tspan> vs. <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan></text>
+
+  <rect x="332" y="148" width="216" height="60" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="440" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#1d4ed8">Reduction <tspan font-family="Georgia, serif" font-style="italic">B</tspan></text>
+  <text x="440" y="195" text-anchor="middle" font-size="12.5" fill="#1e40af">Breaks (<tspan font-family="Georgia, serif" font-style="italic">n</tspan>−1)-bit PRF <tspan font-family="Georgia, serif" font-style="italic">F′</tspan></text>
+
+  <rect x="630" y="148" width="216" height="60" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="738" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">PRF Challenger <tspan font-family="Georgia, serif" font-style="italic">C</tspan></text>
+  <text x="738" y="195" text-anchor="middle" font-size="12.5" fill="#475569">
+    Oracle <tspan font-family="Georgia, serif" font-style="italic">F′</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">k</tspan>  or  <tspan font-family="Georgia, serif" font-style="italic">R′</tspan> ← <tspan font-family="Georgia, serif" font-style="italic">R</tspan>(<tspan font-family="Georgia, serif" font-style="italic">n</tspan>−1, <tspan font-family="Georgia, serif" font-style="italic">λ</tspan>)
+  </text>
+
+  <!-- Step 1: A -> B: query (x, y) -->
+  <path d="M142 280 H431" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <rect x="206" y="253" width="166" height="22" rx="11" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="289" y="269" text-anchor="middle" font-size="13.5" font-weight="600" fill="#5b21b6">
+    query (<tspan font-family="Georgia, serif" font-style="italic">x</tspan>, <tspan font-family="Georgia, serif" font-style="italic">y</tspan>) ∈ {0,1} × {0,1}<tspan baseline-shift="super" font-size="9.5"><tspan font-family="Georgia, serif" font-style="italic">n</tspan>−1</tspan>
+  </text>
+
+  <!-- Step 2: B -> C: forward y -->
+  <path d="M440 296 H729" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <rect x="526" y="269" width="126" height="22" rx="11" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="589" y="285" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e40af">
+    forward only <tspan font-family="Georgia, serif" font-style="italic">y</tspan>
+  </text>
+
+  <!-- Step 3: C -> B: return w -->
+  <path d="M738 342 H449" fill="none" stroke="#475569" stroke-width="2.1" marker-end="url(#arrow-slate)"/>
+  <rect x="500" y="315" width="178" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="589" y="331" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">w</tspan> = <tspan font-family="Georgia, serif" font-style="italic">F′</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>)  or  <tspan font-family="Georgia, serif" font-style="italic">R′</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>)
+  </text>
+
+  <!-- Step 4: B -> A: return G_x(w) -->
+  <path d="M440 366 H151" fill="none" stroke="#2563eb" stroke-width="2.1" marker-end="url(#arrow-blue)"/>
+  <rect x="218" y="339" width="142" height="22" rx="11" fill="#ffffff" stroke="#93c5fd" stroke-width="1.3"/>
+  <text x="289" y="355" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e3a8a">
+    return <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">x</tspan>(<tspan font-family="Georgia, serif" font-style="italic">w</tspan>)
+  </text>
+
+  <!-- Final guess forwarding -->
+  <path d="M142 424 H431" fill="none" stroke="#7c3aed" stroke-width="2.1" marker-end="url(#arrow-purple)"/>
+  <rect x="242" y="397" width="94" height="22" rx="11" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.2"/>
+  <text x="289" y="413" text-anchor="middle" font-size="13.5" font-weight="600" fill="#5b21b6">decision <tspan font-family="Georgia, serif" font-style="italic">b′</tspan></text>
+
+  <path d="M440 424 H729" fill="none" stroke="#475569" stroke-width="2.1" marker-end="url(#arrow-slate)"/>
+  <rect x="540" y="397" width="98" height="22" rx="11" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="589" y="413" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">output <tspan font-family="Georgia, serif" font-style="italic">b′</tspan></text>
+
+  <!-- Footer -->
+  <rect x="34" y="454" width="812" height="48" rx="9" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="440" y="475" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">
+    Perfect reduction: if <tspan font-family="Georgia, serif" font-style="italic">w</tspan> = <tspan font-family="Georgia, serif" font-style="italic">F′</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>), <tspan font-family="Georgia, serif" font-style="italic">A</tspan> receives <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">x</tspan>(<tspan font-family="Georgia, serif" font-style="italic">F′</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>)) ≡ <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>); if <tspan font-family="Georgia, serif" font-style="italic">w</tspan> = <tspan font-family="Georgia, serif" font-style="italic">R′</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>), <tspan font-family="Georgia, serif" font-style="italic">A</tspan> receives <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">x</tspan>(<tspan font-family="Georgia, serif" font-style="italic">R′</tspan>(<tspan font-family="Georgia, serif" font-style="italic">y</tspan>)) ≡ <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>).
+  </text>
+  <text x="440" y="493" text-anchor="middle" font-size="13" fill="#475569">
+    By the inductive hypothesis that <tspan font-family="Georgia, serif" font-style="italic">F′</tspan> is a secure PRF on (<tspan font-family="Georgia, serif" font-style="italic">n</tspan>−1)-bit inputs, <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>) ≈<tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">c</tspan> <tspan font-family="Georgia, serif" font-style="italic">Game</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">λ</tspan>).
+  </text>
+</svg>

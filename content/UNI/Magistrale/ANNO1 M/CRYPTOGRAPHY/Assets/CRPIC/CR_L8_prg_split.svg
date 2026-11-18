@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Splitting a length-doubling PRG output into two lambda-bit halves</title>
+  <desc id="desc">A length-doubling PRG G(k) of length 2 lambda (e.g. 256 bits for lambda = 128) is partitioned into two equal halves: G_0(k) containing the first lambda bits (128 bits) and G_1(k) containing the last lambda bits (128 bits). Both halves have the same length as k so they can be used as seeds for the next level.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <rect width="760" height="280" fill="#ffffff"/>
+
+  <text x="380" y="32" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">
+    Splitting the length-doubling PRG output: <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="13">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>) ∥ <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="13">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+
+  <!-- Top box: G(k) -->
+  <rect x="240" y="50" width="280" height="62" rx="11" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="380" y="77" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+  <text x="380" y="100" text-anchor="middle" font-size="13.5" font-weight="600" fill="#475569">
+    2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan> bits (e.g., 256 bits for <tspan font-family="Georgia, serif" font-style="italic">λ</tspan> = 128)
+  </text>
+
+  <!-- Branch connectors -->
+  <path d="M380 112 V134 H195 V152" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <path d="M380 112 V134 H565 V152" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
+
+  <!-- Left half: G_0(k) -->
+  <rect x="65" y="160" width="260" height="68" rx="11" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.8"/>
+  <text x="195" y="189" text-anchor="middle" font-size="18" font-weight="700" fill="#1e40af">
+    <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="13">0</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+  <text x="195" y="213" text-anchor="middle" font-size="13.5" font-weight="600" fill="#334155">
+    First <tspan font-family="Georgia, serif" font-style="italic">λ</tspan> bits (128 bits, left branch: bit 0)
+  </text>
+
+  <!-- Right half: G_1(k) -->
+  <rect x="435" y="160" width="260" height="68" rx="11" fill="#ecfdf5" stroke="#10b981" stroke-width="1.8"/>
+  <text x="565" y="189" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">
+    <tspan font-family="Georgia, serif" font-style="italic">G</tspan><tspan baseline-shift="sub" font-size="13">1</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>)
+  </text>
+  <text x="565" y="213" text-anchor="middle" font-size="13.5" font-weight="600" fill="#334155">
+    Last <tspan font-family="Georgia, serif" font-style="italic">λ</tspan> bits (128 bits, right branch: bit 1)
+  </text>
+
+  <!-- Footer -->
+  <rect x="65" y="240" width="630" height="30" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.3"/>
+  <text x="380" y="260" text-anchor="middle" font-size="13.5" font-weight="600" fill="#475569">
+    Both halves have the exact same length <tspan font-family="Georgia, serif" font-style="italic">λ</tspan> as the secret key <tspan font-family="Georgia, serif" font-style="italic">k</tspan>, so each half can act as the next PRG seed
+  </text>
+</svg>

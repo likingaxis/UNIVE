@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 500" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Comparison of a Pseudorandom Generator (PRG) and a Pseudorandom Function (PRF)</title>
+  <desc id="desc">Two stacked cards comparing a PRG and a PRF. Top card: Pseudorandom Generator G maps {0,1}^lambda to {0,1}^{2lambda}, expanding a 128-bit uniform seed s into a 256-bit output G(s). Bottom card: Pseudorandom Function F_k maps {0,1}^n to {0,1}^lambda, taking a fixed secret key k and a chosen input x to produce a lambda-bit output F_k(x) that looks like a truly random function across multiple queries.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#0d9488"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="500" fill="#ffffff"/>
+
+  <!-- Top Card: PRG -->
+  <rect x="28" y="20" width="804" height="214" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.6"/>
+  <text x="52" y="50" font-size="18.5" font-weight="700" fill="#0f172a">Pseudorandom Generator (PRG)</text>
+
+  <text x="430" y="78" text-anchor="middle" font-size="20" font-weight="600" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">G</tspan> : {0, 1}<tspan baseline-shift="super" font-size="13" font-family="Georgia, serif" font-style="italic">λ</tspan> → {0, 1}<tspan baseline-shift="super" font-size="13">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan>
+  </text>
+
+  <!-- Left box PRG -->
+  <rect x="52" y="96" width="332" height="72" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.6"/>
+  <text x="218" y="126" text-anchor="middle" font-size="17" font-weight="700" fill="#1e40af">
+    Seed <tspan font-family="Georgia, serif" font-style="italic">s</tspan>
+  </text>
+  <text x="218" y="151" text-anchor="middle" font-size="14" fill="#475569">128 bits (<tspan font-family="Georgia, serif" font-style="italic">λ</tspan> bits)</text>
+
+  <!-- Arrow PRG -->
+  <path d="M398 132 H454" fill="none" stroke="#2563eb" stroke-width="2.4" marker-end="url(#arrow-blue)"/>
+
+  <!-- Right box PRG -->
+  <rect x="476" y="96" width="332" height="72" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="642" y="126" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">s</tspan>)
+  </text>
+  <text x="642" y="151" text-anchor="middle" font-size="14" fill="#475569">256 bits (2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan> bits)</text>
+
+  <text x="52" y="196" font-size="14.5" fill="#334155">
+    A PRG takes a uniformly random seed and expands it into a longer string that looks uniformly random to an
+  </text>
+  <text x="52" y="216" font-size="14.5" fill="#334155">
+    efficient adversary.
+  </text>
+
+  <!-- Bottom Card: PRF -->
+  <rect x="28" y="256" width="804" height="224" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.6"/>
+  <text x="52" y="286" font-size="18.5" font-weight="700" fill="#0f172a">Pseudorandom Function (PRF)</text>
+
+  <text x="430" y="314" text-anchor="middle" font-size="20" font-weight="600" fill="#065f46">
+    <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">k</tspan> : {0, 1}<tspan baseline-shift="super" font-size="13" font-family="Georgia, serif" font-style="italic">n</tspan> → {0, 1}<tspan baseline-shift="super" font-size="13" font-family="Georgia, serif" font-style="italic">λ</tspan>
+  </text>
+
+  <!-- Left box PRF -->
+  <rect x="52" y="332" width="332" height="78" rx="10" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.6"/>
+  <text x="218" y="363" text-anchor="middle" font-size="16.5" font-weight="700" fill="#065f46">
+    Secret key <tspan font-family="Georgia, serif" font-style="italic">k</tspan>
+  </text>
+  <text x="218" y="391" text-anchor="middle" font-size="16.5" font-weight="700" fill="#0f766e">
+    Input <tspan font-family="Georgia, serif" font-style="italic">x</tspan>
+  </text>
+
+  <!-- Arrow PRF -->
+  <path d="M398 371 H454" fill="none" stroke="#0d9488" stroke-width="2.4" marker-end="url(#arrow-teal)"/>
+
+  <!-- Right box PRF -->
+  <rect x="476" y="332" width="332" height="78" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="1.8"/>
+  <text x="642" y="364" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">
+    <tspan font-family="Georgia, serif" font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="13" font-family="Georgia, serif" font-style="italic">k</tspan>(<tspan font-family="Georgia, serif" font-style="italic">x</tspan>)
+  </text>
+  <text x="642" y="391" text-anchor="middle" font-size="14" fill="#475569"><tspan font-family="Georgia, serif" font-style="italic">λ</tspan>-bit output</text>
+
+  <text x="52" y="438" font-size="14.5" fill="#334155">
+    A PRF behaves like a truly random function, even when an efficient adversary can choose multiple inputs and
+  </text>
+  <text x="52" y="458" font-size="14.5" fill="#334155">
+    observe their outputs.
+  </text>
+</svg>

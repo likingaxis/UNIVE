@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 356" role="img" aria-labelledby="title desc" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a">
+  <title id="title">Hybrid distributions H_0 through H_3 for the Multiple-PRG Lemma (t = 3)</title>
+  <desc id="desc">Four rows showing hybrids H_0, H_1, H_2, and H_3 for t = 3 independent seeds. H_0 has three PRG outputs G(k_1), G(k_2), G(k_3). H_1 replaces the first component with U_{2lambda}. H_2 replaces the first two components with independent U_{2lambda}. H_3 replaces all three components with independent U_{2lambda}.</desc>
+
+  <rect width="820" height="356" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="410" y="32" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">
+    Hybrid sequence for the Multiple-PRG Lemma (example with <tspan font-family="Georgia, serif" font-style="italic">t</tspan> = 3)
+  </text>
+  <text x="410" y="54" text-anchor="middle" font-size="14" fill="#64748b">
+    Consecutive hybrids <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">i−1</tspan> and <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="10" font-family="Georgia, serif" font-style="italic">i</tspan> differ only in position <tspan font-family="Georgia, serif" font-style="italic">i</tspan>
+  </text>
+
+  <!-- Row H_0 -->
+  <text x="58" y="102" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="12">0</tspan>
+  </text>
+  <rect x="96" y="74" width="154" height="44" rx="9" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.7"/>
+  <text x="173" y="102" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="11">1</tspan>)</text>
+
+  <rect x="266" y="74" width="154" height="44" rx="9" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.7"/>
+  <text x="343" y="102" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="11">2</tspan>)</text>
+
+  <rect x="436" y="74" width="154" height="44" rx="9" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.7"/>
+  <text x="513" y="102" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="11">3</tspan>)</text>
+
+  <text x="614" y="101" font-size="13.5" font-weight="600" fill="#475569">All pseudorandom</text>
+
+  <!-- Row H_1 -->
+  <text x="58" y="166" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="12">1</tspan>
+  </text>
+  <rect x="96" y="138" width="154" height="44" rx="9" fill="#ecfdf5" stroke="#059669" stroke-width="2.1"/>
+  <text x="173" y="166" text-anchor="middle" font-size="16" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan></text>
+
+  <rect x="266" y="138" width="154" height="44" rx="9" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.7"/>
+  <text x="343" y="166" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="11">2</tspan>)</text>
+
+  <rect x="436" y="138" width="154" height="44" rx="9" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.7"/>
+  <text x="513" y="166" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="11">3</tspan>)</text>
+
+  <text x="614" y="165" font-size="13.5" font-weight="600" fill="#047857">Replace 1st block</text>
+
+  <!-- Row H_2 -->
+  <text x="58" y="230" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">
+    <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="12">2</tspan>
+  </text>
+  <rect x="96" y="202" width="154" height="44" rx="9" fill="#ecfdf5" stroke="#10b981" stroke-width="1.7"/>
+  <text x="173" y="230" text-anchor="middle" font-size="16" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan></text>
+
+  <rect x="266" y="202" width="154" height="44" rx="9" fill="#ecfdf5" stroke="#059669" stroke-width="2.1"/>
+  <text x="343" y="230" text-anchor="middle" font-size="16" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan></text>
+
+  <rect x="436" y="202" width="154" height="44" rx="9" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.7"/>
+  <text x="513" y="230" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af"><tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="11">3</tspan>)</text>
+
+  <text x="614" y="229" font-size="13.5" font-weight="600" fill="#047857">Replace 2nd block</text>
+
+  <!-- Row H_3 -->
+  <text x="58" y="294" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">
+    <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="12">3</tspan>
+  </text>
+  <rect x="96" y="266" width="154" height="44" rx="9" fill="#ecfdf5" stroke="#10b981" stroke-width="1.7"/>
+  <text x="173" y="294" text-anchor="middle" font-size="16" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan></text>
+
+  <rect x="266" y="266" width="154" height="44" rx="9" fill="#ecfdf5" stroke="#10b981" stroke-width="1.7"/>
+  <text x="343" y="294" text-anchor="middle" font-size="16" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan></text>
+
+  <rect x="436" y="266" width="154" height="44" rx="9" fill="#ecfdf5" stroke="#059669" stroke-width="2.1"/>
+  <text x="513" y="294" text-anchor="middle" font-size="16" font-weight="700" fill="#065f46"><tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="11">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan></text>
+
+  <text x="614" y="293" font-size="13.5" font-weight="700" fill="#065f46">All uniform (target)</text>
+
+  <!-- Footer -->
+  <rect x="34" y="320" width="752" height="26" rx="7" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="410" y="338" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">
+    General hybrid: <tspan font-family="Georgia, serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">i</tspan> ≡ (<tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan>, …, <tspan font-family="Georgia, serif" font-style="italic">U</tspan><tspan baseline-shift="sub" font-size="9.5">2<tspan font-family="Georgia, serif" font-style="italic">λ</tspan></tspan> [<tspan font-family="Georgia, serif" font-style="italic">i</tspan> times], <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="9.5"><tspan font-family="Georgia, serif" font-style="italic">i</tspan>+1</tspan>), …, <tspan font-family="Georgia, serif" font-style="italic">G</tspan>(<tspan font-family="Georgia, serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="9.5" font-family="Georgia, serif" font-style="italic">t</tspan>))
+  </text>
+</svg>
