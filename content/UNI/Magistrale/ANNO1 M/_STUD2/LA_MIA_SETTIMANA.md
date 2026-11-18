@@ -22,7 +22,7 @@ La checklist personale del [calendario STUD2](STUDY_STATE.md), preparata il 5 no
 
 **Obiettivo:** iniziare la lezione 1: secret-key encryption e perfect secrecy, senza pretendere di finire tutta la lezione.
 
-- [ ] Apro la [bozza della lezione 1](<../CRYPTOGRAPHY/CR LESSON 1.md>) e il materiale 2026/27 indicato nella [memoria Crypto](MEMORIES/CRYPTOGRAPHY.md).
+- [ ] Apro la [bozza della lezione 1](<CR LESSON 1.md>) e il materiale 2026/27 indicato nella [memoria Crypto](MEMORIES/CRYPTOGRAPHY.md).
 - [ ] Studio un primo blocco con ChatGPT, poi provo a rispiegarlo con parole mie e scrivo la mia spiegazione.
 - [ ] Faccio un breve controllo senza copiare e segno i punti ancora poco chiari.
 
