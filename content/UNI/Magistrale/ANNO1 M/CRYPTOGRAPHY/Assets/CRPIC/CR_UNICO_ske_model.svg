@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img" aria-labelledby="ske-title ske-desc" font-family="Segoe UI, Arial, sans-serif">
+  <title id="ske-title">Symmetric-Key Encryption Model</title>
+  <desc id="ske-desc">Alice encrypts plaintext m with shared secret key k to produce ciphertext c and sends c to Bob, who decrypts it with k. Eve observes ciphertext c on the channel.</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="758" height="298" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Connectors drawn behind nodes -->
+  <path d="M228 150 H524" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow-slate)"/>
+  <path d="M380 72 V126" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-red)"/>
+  <path d="M270 253 H136 V198" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-green)"/>
+  <path d="M490 253 H624 V198" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-green)"/>
+
+  <!-- Eve (adversary) -->
+  <rect x="295" y="18" width="170" height="54" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.8"/>
+  <text x="380" y="41" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">Eve</text>
+  <text x="380" y="60" text-anchor="middle" font-size="13" fill="#b91c1c">observes <tspan font-family="Georgia, serif" font-style="italic">c</tspan></text>
+
+  <!-- Ciphertext badge on channel -->
+  <rect x="348" y="134" width="64" height="32" rx="16" fill="#334155"/>
+  <text x="380" y="155" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff" font-family="Georgia, serif" font-style="italic">c</text>
+
+  <!-- Alice -->
+  <rect x="44" y="108" width="184" height="84" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="136" y="140" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">Alice</text>
+  <text x="136" y="168" text-anchor="middle" font-size="14.5" font-weight="600" fill="#1d4ed8">Enc(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, serif" font-style="italic">m</tspan>)</text>
+
+  <!-- Bob -->
+  <rect x="532" y="108" width="184" height="84" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="624" y="140" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">Bob</text>
+  <text x="624" y="168" text-anchor="middle" font-size="14.5" font-weight="600" fill="#1d4ed8">Dec(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, serif" font-style="italic">c</tspan>)</text>
+
+  <!-- Shared secret key -->
+  <rect x="270" y="230" width="220" height="46" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.8"/>
+  <text x="380" y="258" text-anchor="middle" font-size="14.5" font-weight="600" fill="#065f46">Shared secret key <tspan font-family="Georgia, serif" font-style="italic" font-weight="700">k</tspan></text>
+</svg>

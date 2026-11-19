@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 270" role="img" aria-labelledby="otp-xor-title otp-xor-desc" font-family="Segoe UI, Arial, sans-serif">
+  <title id="otp-xor-title">One-Time Pad Encryption via Bitwise XOR</title>
+  <desc id="otp-xor-desc">Plaintext m in {0,1}^l and secret key k in {0,1}^l feed into a bitwise XOR operation to produce ciphertext c = k XOR m.</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="638" height="268" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Connectors -->
+  <path d="M169 94 V132 Q169 142 179 142 H290" fill="none" stroke="#3b82f6" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <path d="M471 94 V132 Q471 142 461 142 H350" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-green)"/>
+  <path d="M320 166 V198" fill="none" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow-slate)"/>
+
+  <!-- Plaintext box -->
+  <rect x="64" y="26" width="210" height="68" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="169" y="53" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Plaintext</text>
+  <text x="169" y="77" text-anchor="middle" font-size="13.5" font-weight="600" fill="#1d4ed8">
+    <tspan font-family="Georgia, serif" font-style="italic">m</tspan> ∈ {0, 1}<tspan baseline-shift="super" font-size="9.5">ℓ</tspan>
+  </text>
+
+  <!-- Secret key box -->
+  <rect x="366" y="26" width="210" height="68" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="471" y="53" text-anchor="middle" font-size="16" font-weight="700" fill="#065f46">Secret key</text>
+  <text x="471" y="77" text-anchor="middle" font-size="13.5" font-weight="600" fill="#047857">
+    <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ∈ {0, 1}<tspan baseline-shift="super" font-size="9.5">ℓ</tspan>
+  </text>
+
+  <!-- XOR circle -->
+  <circle cx="320" cy="142" r="24" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="320" y="150" text-anchor="middle" font-size="25" font-weight="700" fill="#0f172a">⊕</text>
+
+  <!-- Ciphertext box -->
+  <rect x="200" y="204" width="240" height="46" rx="10" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+  <text x="320" y="232" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f172a">
+    Ciphertext <tspan font-family="Georgia, serif" font-style="italic">c</tspan> = <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan>
+  </text>
+</svg>

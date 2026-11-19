@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260" role="img" aria-labelledby="otp-title otp-desc" font-family="Segoe UI, Arial, sans-serif">
+  <title id="otp-title">One-Time Pad Security vs. Key Reuse</title>
+  <desc id="otp-desc">Left panel: using a fresh uniform key k in {0,1}^l gives Pr[Enc(K,m)=c] = 2^-l for every message m, achieving perfect secrecy. Right panel: reusing the same key k for two messages m1 and m2 lets Eve compute c1 XOR c2 = m1 XOR m2, leaking plaintext information.</desc>
+
+  <rect x="1" y="1" width="798" height="258" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Left panel: Fresh key (Secure) -->
+  <rect x="20" y="18" width="368" height="224" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="44" y="30" width="320" height="32" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+  <text x="204" y="51" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">One-Time Pad (fresh key <tspan font-family="Georgia, serif" font-style="italic">k</tspan>)</text>
+
+  <rect x="44" y="74" width="320" height="44" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="204" y="101" text-anchor="middle" font-size="13.5" font-weight="600" fill="#1e3a8a">
+    Enc(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, serif" font-style="italic">m</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan>   |   Dec(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, serif" font-style="italic">c</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">c</tspan>
+  </text>
+
+  <rect x="44" y="128" width="320" height="52" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.4"/>
+  <text x="204" y="149" text-anchor="middle" font-size="12.5" fill="#334155">
+    Uniform <tspan font-family="Georgia, serif" font-style="italic">K</tspan> ∈ {0, 1}<tspan baseline-shift="super" font-size="9">ℓ</tspan>
+  </text>
+  <text x="204" y="169" text-anchor="middle" font-size="12.5" fill="#334155">
+    Pr[Enc(<tspan font-family="Georgia, serif" font-style="italic">K</tspan>, <tspan font-family="Georgia, serif" font-style="italic">m</tspan>) = <tspan font-family="Georgia, serif" font-style="italic">c</tspan>] = Pr[<tspan font-family="Georgia, serif" font-style="italic">K</tspan> = <tspan font-family="Georgia, serif" font-style="italic">c</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan>] = 2<tspan baseline-shift="super" font-size="9">−ℓ</tspan>
+  </text>
+
+  <rect x="44" y="192" width="320" height="36" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+  <text x="204" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">
+    Independent of <tspan font-family="Georgia, serif" font-style="italic">m</tspan>  ⇒  Perfect Secrecy
+  </text>
+
+  <!-- Right panel: Reused key (Broken) -->
+  <rect x="412" y="18" width="368" height="224" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="436" y="30" width="320" height="32" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="596" y="51" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Key Reused Twice (Broken)</text>
+
+  <rect x="436" y="74" width="320" height="44" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="596" y="101" text-anchor="middle" font-size="13.5" font-weight="600" fill="#1e3a8a">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan> = <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>     and     <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="9.5">2</tspan> = <tspan font-family="Georgia, serif" font-style="italic">k</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9.5">2</tspan>
+  </text>
+
+  <rect x="436" y="128" width="320" height="52" rx="8" fill="#ffffff" stroke="#fca5a5" stroke-width="1.4"/>
+  <text x="596" y="149" text-anchor="middle" font-size="12.5" fill="#7f1d1d" font-weight="600">Eve computes <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>:</text>
+  <text x="596" y="169" text-anchor="middle" font-size="12.5" fill="#334155">
+    (<tspan font-family="Georgia, serif" font-style="italic">k</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">k</tspan>) ⊕ (<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>) = 0<tspan baseline-shift="super" font-size="9">ℓ</tspan> ⊕ (<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>)
+  </text>
+
+  <rect x="436" y="192" width="320" height="36" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="596" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">
+    Key cancels  ⇒  Eve learns <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9.5">2</tspan>
+  </text>
+</svg>
