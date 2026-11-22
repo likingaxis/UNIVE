@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 285" role="img" aria-labelledby="ex-title ex-desc" font-family="Segoe UI, Arial, sans-serif">
+  <title id="ex-title">Uniform Ciphertexts vs. Perfect Secrecy</title>
+  <desc id="ex-desc">Left panel: uniform ciphertext distribution for every message distribution M implies perfect secrecy by testing point-mass distributions on m0 and m1 (true). Right panel: padded OTP Enc'(k,m) = (k XOR m) || 0 is perfectly secret because probabilities 2^-n and 0 are independent of m, yet not uniform over {0,1}^(n+1) because ciphertexts ending in 1 have probability 0 (false).</desc>
+
+  <rect x="1" y="1" width="798" height="283" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <text x="400" y="30" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f172a">
+    Uniform Ciphertexts (∀<tspan font-family="Georgia, serif" font-style="italic">M</tspan>) ⇔ Perfect Secrecy: Direction Comparison
+  </text>
+
+  <!-- Left panel: (<=) TRUE -->
+  <rect x="20" y="46" width="368" height="222" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="38" y="58" width="332" height="32" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+  <text x="204" y="79" text-anchor="middle" font-size="13.5" font-weight="700" fill="#065f46">
+    (⇐) Uniform ∀<tspan font-family="Georgia, serif" font-style="italic">M</tspan> ⇒ Perfect Secrecy (TRUE)
+  </text>
+
+  <rect x="38" y="102" width="332" height="44" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="204" y="121" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a8a">
+    Test point-mass distributions:
+  </text>
+  <text x="204" y="138" text-anchor="middle" font-size="12.5" fill="#1e40af">
+    Pr[<tspan font-family="Georgia, serif" font-style="italic">M</tspan> = <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">0</tspan>] = 1   and   Pr[<tspan font-family="Georgia, serif" font-style="italic">M</tspan> = <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>] = 1
+  </text>
+
+  <rect x="38" y="156" width="332" height="52" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.4"/>
+  <text x="204" y="177" text-anchor="middle" font-size="12" fill="#334155">
+    Uniformity forces for every <tspan font-family="Georgia, serif" font-style="italic">c</tspan> ∈ <tspan font-family="Georgia, serif" font-style="italic">C</tspan>:
+  </text>
+  <text x="204" y="197" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">
+    Pr[Enc(<tspan font-family="Georgia, serif" font-style="italic">K</tspan>, <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">0</tspan>)=<tspan font-family="Georgia, serif" font-style="italic">c</tspan>] = 1/|<tspan font-family="Georgia, serif" font-style="italic">C</tspan>| = Pr[Enc(<tspan font-family="Georgia, serif" font-style="italic">K</tspan>, <tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>)=<tspan font-family="Georgia, serif" font-style="italic">c</tspan>]
+  </text>
+
+  <rect x="38" y="220" width="332" height="36" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+  <text x="204" y="243" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">
+    Matches Theorem 1.1(iii) ⇒ Perfectly Secret
+  </text>
+
+  <!-- Right panel: (=>) FALSE -->
+  <rect x="412" y="46" width="368" height="222" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="430" y="58" width="332" height="32" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="596" y="79" text-anchor="middle" font-size="13.5" font-weight="700" fill="#991b1b">
+    (⇒) Perfect Secrecy ⇏ Uniform (FALSE)
+  </text>
+
+  <rect x="430" y="102" width="332" height="44" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="596" y="121" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a8a">
+    Counterexample (padded OTP over {0, 1}<tspan baseline-shift="super" font-size="9">n+1</tspan>):
+  </text>
+  <text x="596" y="138" text-anchor="middle" font-size="12.5" fill="#1e40af">
+    Enc'(<tspan font-family="Georgia, serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, serif" font-style="italic">m</tspan>) = (<tspan font-family="Georgia, serif" font-style="italic">k</tspan> ⊕ <tspan font-family="Georgia, serif" font-style="italic">m</tspan>) ∥ 0
+  </text>
+
+  <rect x="430" y="156" width="332" height="52" rx="8" fill="#ffffff" stroke="#fca5a5" stroke-width="1.4"/>
+  <text x="596" y="177" text-anchor="middle" font-size="12" fill="#334155">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="9">0</tspan> = <tspan font-family="Georgia, serif" font-style="italic">x</tspan> ∥ 0 : Pr[<tspan font-family="Georgia, serif" font-style="italic">C</tspan> = <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="9">0</tspan>] = 2<tspan baseline-shift="super" font-size="9">−n</tspan>  (same ∀<tspan font-family="Georgia, serif" font-style="italic">m</tspan> ⇒ PS)
+  </text>
+  <text x="596" y="197" text-anchor="middle" font-size="12" font-weight="600" fill="#991b1b">
+    <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> = <tspan font-family="Georgia, serif" font-style="italic">x</tspan> ∥ 1 : Pr[<tspan font-family="Georgia, serif" font-style="italic">C</tspan> = <tspan font-family="Georgia, serif" font-style="italic">c</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>] = 0   (unreachable in <tspan font-family="Georgia, serif" font-style="italic">C</tspan>')
+  </text>
+
+  <rect x="430" y="220" width="332" height="36" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="596" y="243" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">
+    2<tspan baseline-shift="super" font-size="9">−n</tspan> ≠ 0  ⇒  Not Uniform over <tspan font-family="Georgia, serif" font-style="italic">C</tspan>'
+  </text>
+</svg>
