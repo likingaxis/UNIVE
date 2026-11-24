@@ -1,1 +1,1 @@
-![[download.svg|640]]
+![[UNI/Magistrale/ANNO1 M/CRYPTOGRAPHY/Assets/CRPIC/download.svg|640]]

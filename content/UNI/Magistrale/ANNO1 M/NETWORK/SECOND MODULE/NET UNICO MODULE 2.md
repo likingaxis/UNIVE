@@ -1,8 +1,8 @@
 # Network Infrastructures — Module 2: Unified Study Compendium (Sapienza 2026/27)
 
 > **Purpose:** Self-contained single-file Markdown + LaTeX reference for interactive exam preparation with AI (Prof. Marco Polverini, Sapienza University of Rome, MSc Cybersecurity, A.Y. 2026/27).
-> - **Parts I–II (Lectures 8–11 — Transport Intro & Optical Networks):** Verified against **2026/27** slides (`NI01`, `NI02`), in-class whiteboards (`NI_L1–L4`), audio transcripts (`L8–L11`), Polverini's `NI_Notebook.pdf` (Ch. 1–2), and student notes (`NET LESSON 8–11`). Supersedes prior years where terminology or scope changed.
-> - **Part III (MPLS — Pending Classroom Lecture/Transcript):** Built from **2026/27** official slides (`NI03`, 45 PDF pages: Title + Slides 1–44) and `NI_Notebook.pdf` (Ch. 3, pp. 56–82), plus historical quiz clues; classroom emphasis weights, omitted slides, and live exam advisories remain pending the upcoming lecture/transcript.
+> - **Parts I–II (Lectures 8–12 — Transport Intro & Optical Networks Complete):** Verified against **2026/27** slides (`NI01`, `NI02`), in-class whiteboards (`NI_L1–L5`), audio transcripts (`L8–L12` recap), Polverini's `NI_Notebook.pdf` (Ch. 1–2), and student notes (`NET LESSON 8–11`, `NET LEZIONE 12`). Supersedes prior years where terminology or scope changed.
+> - **Part III (MPLS — `NI03` Slides 1–14 Verified in Lecture 12; Slides 15–44 Pending Lecture 13+):** Built from **2026/27** official slides (`NI03`, 45 PDF pages: Title + Slides 1–44) and `NI_Notebook.pdf` (Ch. 3, pp. 56–82), with **§3.1–§3.2 up through the 32-bit Shim Header (`NI03` Slides 1–14) verified against Lecture 12 (`L12` transcript + `NI_L5` pp. 2–5)** and Slides 15–44 awaiting the upcoming lecture/transcript.
 > - **Part IV (Inter-Domain Routing & BGP — Provisional):** Previewed on `NI01` Slide 24 (`BGP`, `Peering / Transit`, `RPKI`, `ROAs`, `Origin validation`, `BGP security`) and in Lecture 8 (`08:30`, `1:16:00`, including OSPF review and the Dec 14 NAMEX seminar); current notes are sourced provisionally from `Network Infrastructures Theory 24-25 2.5.pdf` (pp. 98–110) until 2026/27 slides, `NI_Notebook` Ch. 4, and transcripts are released.
 
 ---
@@ -16,6 +16,7 @@
 - **Module 2 Intermediate Quiz (Self-Assessment):** Scheduled **Friday 18 December 2026** (in person on Moodle, followed by lab), **10 MCQs in 15 minutes**, awards up to **+1 bonus point** (usable in the January/February winter sessions).
 - **Final Written Theory (`40` minutes shared freely across Access + Transport):** Module 2 receives **1 open question** (max **6 points**), recommended **20 minutes**, with a strict **1-page answer limit**. Polverini explicitly warns that 20 minutes is tight (`L8` `04:54`, `14:06`): allocate ~20 minutes per question cleanly, write concisely, and hit every requested guiding sub-point.
 - **Kathara Practical + New Lab Theory Quiz:** December Kathara homework (max `16` pts) or `1.5h` live Kathara exam, plus a new **4-point MCQ quiz** on theoretical concepts taught during the Kathara lab sessions (timing provisional, expected similar to `10` MCQs in `15` min). *Note (`L8` `09:22`, `15:04`): proposed Jan 14 / Feb 17 dates and lab-quiz rules remain subject to administrative confirmation; the `16` homework points and intermediate bonus points are **single-use** across winter attempts (failing or rejecting a grade in Jan forces the full `1.5h` live Kathara + written exam in Feb).*
+- **Schedule Shift Announced in Lecture 12 (`23/11/26`, `L12` line 255):** Polverini explicitly announced *"on Friday we will have theoretical classes again. No more practical lectures up to the end of the semester... from now on, all the Fridays we will have theoretical classes."*
 - **Literal Sample Questions Announced by Polverini (`L8` `04:54`):**
   1. **Open question:** *"What are the main differences between first- and second-generation optical networks?"* — expected rubric pillars explicitly named: **multiplexing, electronics, fiber type, light source, amplification**.
   2. **MCQ:** *"In an all-optical network, which function is not available?"* (4 options; tests what requires `O/E/O` vs. optical domain).
@@ -30,10 +31,10 @@
 | **`NI02` Slides 16, 19–20** | Detailed physics of prisms, thin-film filters, AWGs, MEMS fabrication, all-optical $\lambda$ conversion | **Intuition only (`L9` line 81, `L10` lines 6–8, `L11` line 7):** prism (*Dark Side of the Moon*) / thin-film *eclipse-glasses* analogies for Mux/Demux; movable mirrors for OXC; `O/E/O` transponder as the practical model for $\lambda$ conversion. |
 | **`NI02` Slide 28 & `L10`** | Optical fiber manufacturing for chromatic-dispersion compensation | **Conceptual only (`L10` line 18):** focus on *why* modal vs. chromatic dispersion occur and how `SMF`, `SLM` laser, $1550\ \mathrm{nm}$ window, and dispersion-engineered fiber address them. |
 | **`NI02` Slide 30** | NMS database schema & specific industry standard names | **High-level only (`L11`):** remember NMS modules (`Topology & resource view`, `Lightpath provisioning`, `Performance monitoring`, `Fault management`) and vendor lock-in / **ossification** motivating **EMS**. |
-| **`NI02` Slides 33–34** | **OPU** sublayer details & exact OTN frame byte layouts / FEC codes | **Explicitly skipped (`L11` line 129):** *"Let me skip the OPU... let's go directly on ODU."* Know only that `OPU` adapts diverse client formats into OTN before `ODU`/`OTU`. |
-| **`NI02` Slide 41** | Summary Overhead Table | **Deferred at end of `L11` (line 243)** to Lesson 12's opening recap (covered via `NI_Notebook` Table 2.1 + `L11` in §2.5 below). |
-| **`NI03` Slides 14, 22–24** *(Pending lecture)* | `TC` 3-bit QoS encoding; binary packet layouts of `LDP`/`RSVP-TE` | **Signaling binary formats explicitly out of scope (`Notebook §3.2.2`):** focus on `PATH`/`RESV` flow, `Router Alert`, soft state, and 32-bit shim layout (`20/3/1/8`, `0x8847`). `TC`/`Exp` QoS bits marked *"We don't care"* in `Theory 24-25` p. 81 *(confirm in 2026/27 MPLS lecture)*. |
-| **`NI03` Slide 9** *(Pending lecture)* | **SRv6** (Segment Routing over IPv6) | Shown **only** on the historical evolution diagram (`POS → MPLS over Ethernet → SRv6 over Ethernet`). *(Note: 2023 historical test had SR/IPv6 questions, which are **not** in `NI_Notebook.pdf` Ch. 3 or `NI03` for 2026/27.)* |
+| **`NI02` Slides 33–34** | **OPU** sublayer & exact OTN frame byte layouts / FEC codes | **Concept clarified in `L12` recap (`lines 7–21`, `NI_L5` p. 1) after being skipped in `L11` (`line 129`):** focus only on how **`OPU` adapts/grooms** low-rate clients (`10 Gbps` NIC) into a fixed transponder bitrate $C$ (`100 Gbps`, via `OPU1`/`OPU2`/`OPU4` container sizing). Exact G.709 byte layouts and FEC codes remain out of scope. |
+| **`NI02` Slide 41** | Summary Overhead Table | Deferred at end of `L11` (`line 243`) and **walked through in full in `L12` (`lines 65–89`)** (§2.5). |
+| **`NI03` Slide 14** *(Verified `L12`)* & **Slides 22–24** *(Pending `L13`)* | `TC` 3-bit QoS encoding; binary packet layouts of `LDP`/`RSVP-TE` | **`TC` explicitly excluded in `L12` (`line 241`):** *"TC okay we don't use it I mean in this course."* (`TTL` was not walked through in `L12`.) Binary `LDP`/`RSVP-TE` header formats are out of scope (`Notebook §3.2.2`): focus on `PATH`/`RESV`, `Router Alert`, soft state, and 32-bit shim layout (`20/3/1/8`, `0x8847`). |
+| **`NI03` Slide 9** | **SRv6** (Segment Routing over IPv6) | **Context only (`L12` lines 223–225):** *"beyond this stack with the advent of segment routing... [covered in] Programmable Networks, second semester."* *(Note: 2023 historical test had SR/IPv6 questions, which are **not** in `NI_Notebook.pdf` Ch. 3 or `NI03` for 2026/27.)* |
 
 ### C. High-Emphasis Core Topics, Worked Examples & Whiteboard Walkthroughs
 
@@ -43,7 +44,8 @@
 | **L9** | Connection-oriented optical lifecycle, TDM vs. WDM, `A–B–C` Triangle Blocking, OLT | Why setup vs. long lifetime justifies circuits (vs. endpoint-only TCP); static-mux idle waste vs. **TDM electronic $N\times B$ clock bottleneck**; $\lambda=c/f$ ($1550\ \mathrm{nm}\approx 193.5\ \mathrm{THz}$, $100\ \mathrm{GHz}$ channel spacing); **1st vs. 2nd gen + 3-cylinder router lookup model**; **`A–B–C` triangle** (spatial $\lambda$ reuse + continuity vs. capacity blocking); **OLT** double `O/E`+`E/O` transponder (€20k–€40k $\times$ 96 ch $\to$ cost causes real blocking), `FEC` vs. IP checksum, `OSC`. |
 | **L10** | **$A$–$B$–$C$ OADM savings**, OXC mirrors & limits, Grooming/Muxponder, `10110` 1R/2R/3R & Evolution | $N_{AB}=1, N_{BC}=1, N_{AC}=3 \implies 16 \to 10$ transponders ($37.5\%$, approaching $50\%$ network-wide); dropped $\lambda_1$ reuse; MEMS OXC vs. electrical grooming/$\lambda$-conversion; all-optical subnetworks (`Slide 21` recursive stacks + `Slide 22` SNR); threshold detection & `1R` noise amplification Q&A; **1R/2R (`jitter` & residual broadening)/3R (clock recovery fixes dispersion) trade-off**; 4-stage optical evolution spectra & fiber core/cladding. |
 | **L11** | 3 Planes, `Host/Sw/R` Encapsulation (`NI_L4` p. 2), OTN/Optical Stack (`OCC`), **FDI/BDI Staircase**, `OSC` vs. `Pilot Tone` | Data (ns, rigid) vs. Control (s/min, centralized NMS vs. decentralized OSPF) vs. Management (Docker CLI/automation, EMS for ossification); decapsulation rule + **L5 apps/IDS vs. L3 host/switch invisibility**; `ODU/OTU/OCh/OMS/OTS` visibility logic (transponder vs. amplifier visibility); **129 alarms & `OTS→OMS→OCh→ODU` FDI staircase**; `OSC` (per-span `OTS`) vs. guard-band `Pilot Tone` (optical tap at OADM/Amp) vs. `Rate-Preserving OTN`. |
-| **Part III** *(Pending L)* | IP Limits (`Slide 8`), Dual-Table `FIB/LFIB`, `PATH/RESV`, 2-Flow Stacking, 3-Move L3VPN, TE & `FRR/BFD` | **`[Anticipated from 2026/27 NI03 / Ch. 3 & 24/25 clues — classroom emphasis unconfirmed until lecture]`:** path-based vs. flow-based tables (`Slides 3,7,8`); `p0,0026->POP->IP` vs. `p1,0045->SWAP`; local label uniqueness; `LDP` vs. `RSVP-TE` (`PATH`/`RESV`/`Non-RSVP hop X`/soft state); 2-flow Trunk LSP (`Slide 25`); `PHP` double-lookup & L3VPN edge cases; **Checkmate L3VPN** (`/32` IGP + `MP-BGP` + `VRF` + 2-label trace); **$1.5\ \mathrm{Mbps}$ TE + ECMP**; `BFD` + multilayer `Slide 42` + double-PHP `FRR` (`19->29`, `35->45`) vs. Path Protection. |
+| **L12** | **Optical recap (`OPU`, `OCh` cascade, `Pilot Tone` power)** + **IP Limits vs. MPLS Core (`NI03` Slides 1–14, `NI_L5` pp. 1–5)** | `OPU1–4` (`10 Gbps` NIC inside `100 Gbps` transponder avoiding `90 Gbps` waste); lightpath as cascade of `OCh` $\lambda$s across subnets; why `Pilot Tone` stays low-power inside guard band (`avoid interfering with client signal`) vs. post-cut `OSC` carrying `DI`; **why ISP/IP backbone sits above `96`-$\lambda$ DWDM**; 4 IP keywords + restaurant-booking analogy + queuing curve $\bar{d}_q(\rho)$ + **Reverse Path Tree & subpath optimality**; **`H1–H2` dual-app (`BW` vs. `latency`) tunnels**; `(In Iface, In ID)` switching table; **`RSVP`** (*reservation*) + **32-bit shim (`TC` unused, nested-pipe `S=0/1`, `MP` over POS/Ethernet & IPv4/IPv6)**. |
+| **Part III (`Slides 15–44`)** *(Pending L13+)* | `PUSH/SWAP/POP`, Dual-Table `FIB/LFIB`, `PATH/RESV`, 2-Flow Stacking, 3-Move L3VPN, TE & `FRR/BFD` | **`[Anticipated from 2026/27 NI03 Slides 15–44 / Ch. 3 & 24/25 clues — classroom emphasis unconfirmed until Lecture 13+]`:** `p0,0026->POP->IP` vs. `p1,0045->SWAP`; local label uniqueness; `LDP` vs. `RSVP-TE` (`PATH`/`RESV`/`Non-RSVP hop X`/soft state); 2-flow Trunk LSP (`Slide 25`); `PHP` double-lookup & L3VPN edge cases; **Checkmate L3VPN** (`/32` IGP + `MP-BGP` + `VRF` + 2-label trace); **$1.5\ \mathrm{Mbps}$ TE + ECMP**; `BFD` + multilayer `Slide 42` + double-PHP `FRR` (`19->29`, `35->45`) vs. Path Protection. |
 
 ### D. Exam Calibration, Historical Quiz Traps & Resolved Student Doubts
 
@@ -51,25 +53,26 @@
 > 1. **Two All-Optical Subnetworks + Fiber Cut (`test-optical-network-2023.pdf` pp. 1, 9; `Theory 24-25` p. 112 Q6; `L11` lines 197–220):** If Subnetwork A and Subnetwork B are connected via an OXC with `O/E/O` transponders and a fiber is cut in A, **only `ODU-FDI`** propagates from A to B (`OTS-FDI`, `OMS-FDI`, `OCh-FDI`, and **`OTU-FDI`** all terminate inside A or at the `O/E/O` boundary because B's optical and OTU sections are healthy; only end-to-end electronic `ODU-FDI` crosses the transponder boundary!). *Source Warning:* `Tests.pdf` Q13 prints a conflicting key (`b) Only OTS-FDI`), which the graded Moodle feedback in `test-optical-network-2023.pdf` p. 9 explicitly marks incorrect (`correct: only ODU-FDI`).
 > 2. **Role of `FDI` (`test-optical-network-2023.pdf` p. 3):** `FDI` is sent **downstream by the node immediately downstream of the failure** (never upstream — that node sends **`BDI`** upstream), works in both optical (`OSC`) and electrical (`OTU`/`ODU`) domains, and exists **to suppress redundant alarms**.
 > 3. **All-Optical Network Limitation (`L8` `04:54`):** In a purely all-optical region, functions needing bit inspection, memory buffering, or clock recovery — **BER measurement, FEC, TDM grooming, 2R/3R regeneration, IP header lookup** — are **not** available without `O/E/O` (nor is practical wavelength conversion).
-> 4. **MPLS Label Uniqueness (`Theory 24-25` pp. 79, 112–113 Wooclap Q8 — `[Re-confirm after 2026/27 MPLS lecture]`):** Two packets traversing the **same link** (same node, same output port) **cannot** carry the same MPLS label (though two different ports on one router may reuse the same label value because labels have **local** link significance).
-> 5. **MPLS Data Plane & VPN Traps (`[Historical 2023 test — re-confirm after 2026/27 MPLS lecture]`):**
+> 4. **MPLS Label Uniqueness (`Theory 24-25` pp. 79, 112–113 Wooclap Q8 — `[Re-confirm after 2026/27 MPLS L13+]`):** Two packets traversing the **same link** (same node, same output port) **cannot** carry the same MPLS label (though two different ports on one router may reuse the same label value because labels have **local** link significance).
+> 5. **MPLS Data Plane & VPN Traps (`[Historical 2023 test — re-confirm after 2026/27 MPLS L13+]`):**
 >    - An **ingress LER always performs `PUSH`** (core LSRs inspect **only the top label**, never the whole stack; classification happens **only at ingress**, not every hop; MPLS does not exist to overcome IP router switching-rate limits).
 >    - In **BGP/MPLS L3VPN**: PEs maintain **one VRF per VPN** (NOT one shared VRF for all VPNs); different VPNs **can** use overlapping private prefixes (e.g., both `10.0.0.0/24`); **MPLS does NOT provide cryptographic confidentiality or authentication** (it isolates routing/forwarding, not encryption); the **inner label** tells the egress PE which customer `VRF` / outgoing interface gets the packet (even when `PHP` removes the outer label).
-> 6. **Resolved Student Doubts from `NET LESSON 10 DRAFT` & `NET LESSON 11.md`:**
+> 6. **Resolved Student Doubts from `NET LESSON 10 DRAFT`, `NET LESSON 11.md` & `NET LEZIONE 12.md`:**
 >    - *Why 4 boxes in `NI02` Slide 17 `(a)` if there are 3 cities (`A, B, C`)?* There are **4 light-grey OLT rectangles** (`Node B` needs **two** OLTs in `(a)`: one terminating `A–B`, one retransmitting `B–C`), containing **16 dark-grey transponder squares** (`4` per OLT).
->    - *Is grooming related to OXCs?* Yes: grooming happens both at the edge (**muxponder**) and inside core OXCs equipped with electrical TDM cards (§2.3).
+>    - *Is grooming related to OXCs?* Yes: grooming happens at the edge (**muxponder** / **`OPU` container sizing in `L12`**) and inside core OXCs equipped with electrical TDM cards (§2.3, §2.5).
 >    - *Core/cladding & dispersion confusion (`NET LESSON 10 DRAFT`):* Shrinking the glass **core** while keeping the **cladding** thick eliminates multiple ray paths (**modal dispersion**); note Polverini accidentally wrote `CROMATIC DISP` above the multimode sketch on `NI_L3` p. 5 before separating modal vs. chromatic dispersion (§2.4).
 >    - *Slide 30 two zones (`NET LESSON 11.md`):* In centralized optical networks, the `Control/Management Plane` and `Optical Data Plane` are **both logically distinct and physically separate** (NMS/EMS run on dedicated remote servers, unlike decentralized IP/OSPF routers).
 >    - *In `R1–Sw–R2`, does `R1` need `R2`'s MAC, and do routers work at L2 or L3?* **Yes**, `R1` resolves `R2`'s interface MAC (e.g., via ARP) because L2 addresses have per-link scope; `Sw` operates at **L2 only** (`DST_L2 != Sw`'s MAC), while `R2` terminates L2 when `DST_L2` matches its interface and routes at **L3** without touching L4/L5 (because `R2` is not `DST_IP`).
->    - *`NI_L4` p. 3 horizontal `Client/ODU/OTU` sketch:* Drawn and explained in §2.5 below.
+>    - *`NI_L4` p. 3 horizontal `Client/ODU/OTU` sketch:* Drawn and explained in §2.5 below (updated with `L12` `OPU` + `OCh` cascade clarifications).
+>    - *`NET LEZIONE 12.md` (`lines 1–16`) cutoff at `38:00`:* The first 29 minutes (`L12` optical recap) are integrated into §2.5 (`OPU`, `OCh` cascade, `Pilot Tone` power constraint, `NI_L5` p. 2), and the rest of Lecture 12 (`38:00` onward through `NI03` Slide 14 `Shim Header` & `POS/Ethernet`) is captured completely in §3.1–§3.2 below.
 
 ---
 
 ### Table of Contents & Quick Glossary
 
 - **Part I (L8 — Verified 2026/27):** §1 Transport Networks: Role, Aggregation, Topologies, `traceroute`, Logical/Physical Abstraction & Shared Layer-1
-- **Part II (L9–L11 — Verified 2026/27):** §2.1 Connection-Oriented WDM & Multiplexing | §2.2 1st vs. 2nd Gen (`A–B–C` Cylinder & Triangle Blocking) | §2.3 Devices (`OLT`, `OADM`, `OXC`, `Muxponder`, Recursive Layering) | §2.4 All-Optical Subnets, Impairments, `1R/2R/3R` & 4-Stage Evolution | §2.5 Planes, `NMS/EMS`, OTN/Optical Stack (`OCC`), `FDI/BDI` Staircase, `OSC` vs. `Pilot Tone` & Optical Self-Check
-- **Part III (Pending Lecture/Transcript — Official `NI03` + `NI_Notebook` Ch. 3):** §3.1 IP Limits & Architecture Evolution | §3.2 MPLS Architecture, Dual Tables (`FIB/LFIB`), `LDP` vs. `RSVP-TE` (`PATH/RESV`), 2-Flow Stacking & `PHP` | §3.3 MPLS Services (`L3VPN`, `TE`, `FRR/BFD` Protection & Past-Quiz Checkpoints)
+- **Part II (L9–L12 Optical Complete — Verified 2026/27):** §2.1 Connection-Oriented WDM & Multiplexing | §2.2 1st vs. 2nd Gen (`A–B–C` Cylinder & Triangle Blocking) | §2.3 Devices (`OLT`, `OADM`, `OXC`, `Muxponder`, Recursive Layering) | §2.4 All-Optical Subnets, Impairments, `1R/2R/3R` & 4-Stage Evolution | §2.5 Planes, `NMS/EMS`, OTN/Optical Stack (`OPU`–`OTS`, `OCC`), `FDI/BDI` Staircase, `OSC` vs. `Pilot Tone` & Optical Self-Check
+- **Part III (MPLS — `NI03` Slides 1–14 Verified `L12` | Slides 15–44 Pending `L13+`):** §3.1 ISP/DWDM Bridge, 4 IP Limits, Reverse Path Tree & Evolution (`L12`) | §3.2 Architecture, Shim Header (`L12`), Dual Tables (`FIB/LFIB`), `LDP` vs. `RSVP-TE`, 2-Flow Stacking & `PHP` (`Pending L13+`) | §3.3 MPLS Services (`L3VPN`, `TE`, `FRR/BFD` Protection & Past-Quiz Checkpoints)
 - **Part IV (Provisional — `2024/25` Notes + `NI01` Slide 24 / `L8` Preview):** §4 Inter-Domain Routing, Autonomous Systems, BGP & Security Outlook (`RPKI`, `ROAs`, Route Leaks)
 
 | Term / Symbol | Meaning |
@@ -356,11 +359,11 @@ In `NI02` Slide 30 (`Management and Control Architecture`), the **Control and Ma
 ```
 
 - **Electrical Layers (`OPU`, `ODU`, `OTU` — digital frames & headers):**
-  - **`OPU`:** adapts arbitrary client protocols/rates (`skipped in L11`).
+  - **`OPU` (`L12` lines 7–21, `NI_L5` p. 1):** adapts and grooms heterogeneous client traffic into a transponder's fixed electrical bitrate $C\ [\mathrm{bps}]$. **Concrete `L12` Example:** if a client IP router NIC operates at $10\ \mathrm{Gbps}$ while the optical transponder transmits at $C = 100\ \mathrm{Gbps}$, dedicating that transponder to one customer wastes **$90\ \mathrm{Gbps}$**. Using sized containers (`OPU1`, double-sized `OPU2`, ..., up to `OPU4`), `OPU` packs multiple small client tributaries into the `100 Gbps` transponder (TDM grooming) without exceeding hardware boundaries or wasting $\lambda$ capacity.
   - **`ODU`:** spans **end-to-end** across all optical subnetworks, tracking overall client SLA compliance (**tells you *that* the service degraded, not *where***, `L11` line 145).
-  - **`OTU`:** wraps `OH | ODU | FEC` (`Slide 34`) and terminates at every intermediate **`O/E/O` transponder/regenerator**, enabling **digital `BER` localization per all-optical subnetwork**.
+  - **`OTU`:** wraps `OH | ODU | FEC` (`Slide 34`) and terminates at every intermediate **`O/E/O` transponder/regenerator**, enabling **digital `BER` localization per all-optical subnetwork** (`L12`: also the boundary where a signal can jump from $\lambda_1$ to a different $\lambda_2$).
 - **Optical Layers (`OCh`, `OMS`, `OTS` — physical light abstractions, NOT binary packet headers!):** `Slide 34` marks **`OCC` (`Non associated overhead`)** bridging `OCh` to `OMS/OTS`, emphasizing that optical layers add physical supervision rather than binary frame headers (`NI_Notebook` p. 47):
-  - **`OCh`:** monitors an individual client $\lambda$ across one all-optical subnet. Why have *both* `OTU` and `OCh` if their span looks identical (`Slide 35`)? Because **`OCh` exposes the optical transponder/laser itself** (`L11` line 147), whereas `OTU` sees only bits.
+  - **`OCh`:** monitors an individual client $\lambda$ across one all-optical subnet. Crucially (`L12` lines 31–33, `NI_L5` p. 1 red/blue), one logical end-to-end lightpath (`ODU`) is physically a **cascade of distinct `OCh` channels** across subnetworks (`red λ1` in Subnet 1 $\to$ `O/E/O` at `OTU` $\to$ `blue λ2` in Subnet 2). Why have *both* `OTU` and `OCh` if their span looks identical (`Slide 35`)? Because **`OCh` exposes the optical transponder/laser itself** (`L11` line 147), whereas `OTU` sees only bits.
   - **`OMS`:** views the multiplexed WDM bundle $\{\lambda_1, \lambda_2, \lambda_3\}$ between mux/demux/OADM points (`Slide 32`, `L11` lines 155–159). Losing per-client control, `OMS` sees multiplexers/OADMs **but hides intermediate `1R` optical amplifiers**.
   - **`OTS`:** exposes each individual **fiber span between consecutive optical stages (`OLT`, `OADM`, or `1R Amplifier`)**, giving exact visibility of every fiber cable and amplifier.
 
@@ -393,17 +396,19 @@ In `NI02` Slide 30 (`Management and Control Architecture`), the **Control and Ma
    Physical Devices:     [OLT/Tpdr]----[OADM]----------[1R Amp]--------[O/E/O Tpdr / Regenerator]--------------------->[OLT/Tpdr]
 ```
 
-*(Slide 41 summary table walkthrough was deferred at `L11` line 243 to L12 recap; populated from `NI02` Slide 41 and `NI_Notebook` Table 2.1.)*
+*(Slide 41 table was walked through in full at `L12` lines 65–89, matching `NI02` Slide 41 and `NI_Notebook` Table 2.1.)*
 
 | Management Function | `OSC` (All-Optical Subnet) | `Pilot Tone` (All-Optical Subnet) | Rate-Preserving `OTN` (End-to-End / `O/E/O`) |
 | :--- | :--- | :--- | :--- |
-| **Mechanism & Span** | Separate $\lambda_{\mathrm{OSC}}$ (dedicated supervisory laser), inserted & extracted **hop-by-hop on every `OTS` span** (`OLT–OADM–Amp–OLT`) | Low-power tone injected by client transponder inside the **guard band** next to $\lambda_0$ (`NI_L4` p. 4); tapped optically at OADM/Amp, terminated at `O/E/O` | Digital overhead + `FEC` inside electronic `OTU`/`ODU` frames (*scales line rate slightly to carry overhead without shrinking client bit rate*) |
+| **Mechanism & Span** | Separate $\lambda_{\mathrm{OSC}}$ (dedicated supervisory laser), inserted & extracted **hop-by-hop on every `OTS` span** (`OLT–OADM–Amp–OLT`) | Low-power sub-modulated tone injected by client transponder inside the **guard band** next to $\lambda_0$ (`NI_L4` p. 4, `NI_L5` p. 1); tapped optically at OADM/Amp, terminated at `O/E/O` | Digital overhead + `FEC` inside electronic `OTU`/`ODU` frames (*scales line rate slightly to carry overhead without shrinking client bit rate*) |
 | **Trace (Identification)** | **`OTS`** (physical fiber section) | **`OCh`** (individual client $\lambda$) | **`OTU`**, **`ODU`** (connection) |
 | **Defect Indicators (`FDI/BDI`)** | **`OTS`**, **`OMS`**, **`OCh`** | **None** *(cut kills pilot tone along with client signal!)* | **`OTU`**, **`ODU`** |
 | **Performance Monitoring** | **None** for client signal *(separate transponder!)* | **Optical power** of that single $\lambda_0$ | **`BER`** (digital bit errors via parity/FEC) |
 | **Client Compatibility** | Any | Any | Any |
 
-**Key Trade-Off (`L11` lines 227–242):** Because `OSC` regenerates hop-by-hop using its own laser, a cut on `OTS 1` kills $\lambda_{\mathrm{OSC},1}$ and lets the downstream node inject `FDI` onto intact $\lambda_{\mathrm{OSC},2}$, **but cannot detect a faulty client transponder laser**. Conversely, the `pilot tone` shares the client laser and guard band — catching individual channel attenuation and transponder failures — **but cannot deliver `FDI` past a fiber cut**.
+**Key Trade-Offs (`L11` lines 227–242, `L12` lines 57–89, `NI_L5` pp. 1–2):**
+1. **Why `Pilot Tone` must stay low-power / low-capacity (`L12` line 61):** Increasing the pilot tone's bitrate requires higher optical power, which would **interfere directly with the client's main $\lambda_1$ signal** inside the narrow guard band (`NI_L5` p. 1 bottom).
+2. **Why `OSC` carries `DI` after a fiber cut while `Pilot Tone` cannot (`NI_L5` p. 2 top):** Because `OSC` regenerates hop-by-hop on every fiber span using its own laser, cutting span 1 kills $\lambda_{\mathrm{OSC},1}$ and lets the downstream node inject `FDI` (`DI`) onto **intact span 2's `OSC`** — whereas the **`OCh` and its `Pilot Tone` go completely dead downstream of the cut**. Conversely, `OSC` cannot catch a failing client transponder laser or monitor client $\lambda$ power (`L12` line 87).
 
 ### Solved Part-II Practice Checkpoints (`Theory 24-25` Wooclap + `2023` Moodle)
 - **Wooclap `Q1` (8-Step Optical Circuit Setup Order):** Client requests circuit $\to$ network computes path $\to$ network checks free sub-channel per link $\to$ switching rules installed in nodes $\to$ clients notified circuit is up $\to$ communication $\to$ monitoring $\to$ teardown (`Theory 24-25` p. 110).
@@ -413,44 +418,50 @@ In `NI02` Slide 30 (`Management and Control Architecture`), the **Control and Ma
 
 ---
 
-# Part III — Multiprotocol Label Switching (MPLS) `[2026/27 Slides & Notebook — Pending Lecture & Transcript]`
+# Part III — Multiprotocol Label Switching (MPLS) `[NI03 Slides 1–14 Verified L12 | Slides 15–44 Pending L13+]`
 
-> **Provenance Note:** Synthesized from Polverini's official **2026/27** slide deck (`NI03 - Multi Protocol Label Switching.pdf`, 45 PDF pages: Title + Slides 1–44) and **2026/27** `NI_Notebook.pdf` (Ch. 3, pp. 56–82), plus historical Wooclap/exam clues (`Theory 24-25` pp. 76–97 & 112–114; `test-optical-network-2023.pdf`). Classroom emphasis weights and any skipped slides remain unconfirmed until the live lecture/transcript.
+> **Provenance Split:**
+> - **§3.1–§3.2 (`NI03` Title + Slides 1–14 through 32-bit Shim Header):** **Verified against 2026/27 Lecture 12** (`network lesson 12 transcripted.md` lines 91–257, `NI_L5-2026-11-23.pdf` pp. 2–5, `NET LEZIONE 12.md`) plus `NI_Notebook.pdf` Ch. 3.
+> - **§3.2 (`Terminology / Dual-Table / PATH-RESV / Stacking`, Slides 15–25) & §3.3 (`L3VPN / TE / FRR`, Slides 26–44):** Sourced from official 2026/27 `NI03` + `NI_Notebook.pdf` Ch. 3 (`pp. 61–82`) + 2023/24–25 quizzes; classroom emphasis & omitted slides remain pending Lecture 13+.
 
-## 3.1 Why ISPs Needed Connection-Oriented Packet Switching ("Layer 2.5")
+## 3.1 Why ISPs Sit Above WDM & Why Plain IP Needs "Layer 2.5" (`[Verified — L12]`)
 
-Moving up from the optical underlay (`NI_Notebook` §3.1.1), small ISPs or enterprises cannot simply lease dedicated optical lightpaths from end to end: wavelengths are expensive and finite per fiber. Therefore, an ISP backbone aggregates huge numbers of customer flows into ingress-to-egress traffic demands carried over logical IP/optical links while trying to meet **SLAs**, support **convergence of voice and data services** cost-effectively (`NI03` Slide 2), and provide **VPNs, Traffic Engineering, and sub-50ms protection**.
+### 1. Why Not Wire Access Networks Directly to Optical Lightpaths? (`L12` lines 97–111, `NI_L5` p. 2)
 
-Conventional destination-based IP forwarding (`Slides 3–4`) fails these goals for three structural reasons:
-1. **Path-indexed sink-tree congestion (`Slide 3` vs. `Slide 4`):** Conventional IP routing tables match **destination prefixes**, meaning *"Entries in routing tables are NOT associated to flows, but to paths."* Flows arriving from different ingresses (`1110`, `1101`, `0110`) toward prefix `1011` coalesce along a single **Paths Tree** toward egress, overloading shared downstream links even when alternate routes exist.
-2. **Coarse routing-metric control & lack of path differentiation (`Slides 8, 37–38`):** Adjusting an OSPF link weight affects *all* destinations globally rather than shifting one congested demand; destination-based IP cannot split best-effort vs. low-latency real-time traffic between the same ingress–egress pair onto separate paths.
-3. **No private address isolation or fast recovery:** Plain IP cannot disambiguate overlapping `10.0.0.0/24` customer subnets, and OSPF reconvergence after failures takes **seconds to tens of seconds** (`Slide 41`).
+Polverini opened MPLS by asking why carriers deploy an electrical **IP backbone** atop optical lightpaths (`NI03` over `NI02`) instead of connecting access networks directly to WDM channels:
+1. **Scalability (`DWDM 96-λ` limit):** Dense WDM (`DWDM`) provides at most **`96` wavelengths per fiber**, whereas an operator serves **far more than `96` access networks**. Moving to the electrical domain lets an ISP statistically multiplex many access feeds at edge PoPs into a small number of massive **PoP-to-PoP aggregated traffic demands** large enough to exploit full optical channel bandwidth (`NI_L5` p. 2 bottom).
+2. **Rich electrical services:** Beyond raw end-to-end connectivity, enterprise/access clients require SLA guarantees (`QoS`, `VPNs`, `Traffic Engineering`, `<50 ms` recovery) plus cost-effective **convergence of voice and data services** (`NI03` Slide 2) — intelligence requiring electrical packet headers, buffers, and CPUs.
 
-**MPLS Solution (`Slides 6–11`, `NI_Notebook` §3.1.3 & p. 82):** MPLS does **not** exist because IP header lookup was too slow. Instead, MPLS adds **connection-oriented packet tunnels (LSPs)** between Layer 2 and Layer 3 (`IP → MPLS → Ethernet → Optical`), informally called **"Layer 2.5"** (not a formal OSI layer). Traffic remains packetized (**keeping statistical multiplexing**), **"Multiprotocol"** means any L2 (`Ethernet`, `PPP/SONET`, `ATM`, `Frame Relay`) and any L3 (though IP dominates), and forwarding table entries become **associated with flows (`Slide 7`)**. As `Slide 8` illustrates, two distinct flows entering the *same* ingress LER for the *same* egress LER (`red 26 -> 17` vs. `green 27 -> 34`) can be steered onto completely **disjoint physical paths** (**path differentiation**).
-- **Packet Transport Evolution (`Slides 5 & 9`):** Earlier backbones ran **Packet over SONET/SDH (`POS`: `IP / PPP / SONET-SDH / Optical`)**. Moving to **MPLS over Ethernet** allowed carriers to deploy far cheaper **Ethernet** switching hardware while retaining MPLS's VPN, TE, and `<50 ms` protection guarantees (`Slide 5`). `Slide 9` also notes **`SRv6 over Ethernet`** (`IP/SRv6 / Ethernet / Optical`) as the modern successor embedding path instructions inside IPv6 headers rather than an extra MPLS shim.
+### 2. Four Structural Limits of Conventional IP (`L12` lines 113–164, `NI_L5` pp. 3–4, `NI03` Slides 3–4)
 
-## 3.2 MPLS Architecture, Data Plane, Signaling & Stacking (`NI03` Slides 11–25)
+Conventional IP forwarding follows **four interconnected characteristics**:
+- **Connectionless & Statistical Multiplexing (Walk-In Restaurant Analogy):** Booking a restaurant table guarantees immediate service if available (or **blocking** if full = static optical mux). IP works like **walking in unannounced**: if free, packets transmit immediately; otherwise they wait in **router buffers**, maximizing resource reuse **at the cost of stochastic queuing delay $\bar{d}_q$ and packet drop when buffers overflow**. As link load ratio $\rho = \text{demand}/\text{capacity} \to 1$ (`NI_L5` p. 3 curve), $\bar{d}_q \to \infty$ rapidly (**congestion**).
+- **Best Effort:** Offers zero SLA guarantees on minimum bandwidth or maximum delay (e.g., `2–3 s` delay ruins real-time voice calls).
+- **Shortest Path + Destination-Based (`LPM`) $\implies$ `Reverse Path Tree` (`NI03` Slides 3–4, `NI_L5` pp. 3–4):** Router forwarding tables (`DST -> Next Hop`) match **paths (destination prefixes)** rather than flows (`"Entries in routing tables are NOT associated to flows, but to paths"`). The union of all least-cost paths toward destination `B`/`H3` forms a **Reverse Path Tree**. Whenever two converging demands (`Blue H1→H3` and `Red H2→H3`) meet at an intermediate node before `R3`, they **cannot split downstream** for two reasons: (1) **subpath optimality** (if `Rome→Milan` visits `Bologna`, then `Bologna→Milan` is itself shortest), and (2) both flows match the exact **same lookup key (`DST = H3`)** (`NI_L5` p. 4). Changing an OSPF weight shifts *every* destination crossing that link globally rather than moving one demand (`NI03` Slides 37–38).
 
-### IP/MPLS Router Coexistence & Dual-Table Lookup (`NI03` Slides 12–13, 18–19)
-
-An **IP/MPLS router** extends a conventional IP router in one integrated chassis (`Slides 12–13`), never as a separate box:
-- **Control Component:** Layer-3 routing (`OSPF`/`IS-IS`) + label allocation/distribution (`LDP` / `RSVP-TE`).
-- **Forwarding Component:** Keeps the **Traditional IP Routing Table** (`FIB`: `Destination -> Next Hop`) **alongside** the **MPLS Forwarding Table** (`LFIB`: `(In Port, In Label) -> (Action, Out Port, Out Label)`). Notice **`(In Port, In Label)` together form the lookup key** because labels only have local per-link significance!
+### 3. MPLS Idea, Same-Host Dual-App Tunneling & Stack Evolution (`L12` lines 171–225, `NI_L5` pp. 4–5)
 
 ```text
-  NI03 SLIDE 19 — DUAL-TABLE PACKET TRACE INSIDE AN IP/MPLS LSR:
-   Incoming Pkt 1 (p0, 0026): Match (p0, 0026) -> Action: POP, Out: IP
-      ==> strips label, hands bare IP (DST 161.80.5.4) UP to Traditional IP Routing Table
-      ==> matches 161.80.5.0 -> Next Hop B ==> exits as plain IP packet to Router B!
-
-   Incoming Pkt 2 (p1, 0045): Match (p1, 0045) -> Action: SWAP, Out Port: p3, Out Label: 0078
-      ==> stays BELOW dashed boundary (never touches IP routing table)
-      ==> exits Out Port p3 carrying label 0078 toward Router C!
+  NI_L5 p. 5 TOP — WHY TWO APPS BETWEEN THE SAME HOSTS (H1, H2) NEED FLOW-BASED TUNNELS:
+     Red App  (Needs High Bandwidth) --> [H1] ===(Red Tunnel: longer high-capacity path)====> [H2]
+     Blue App (Needs Low Latency)   --> [H1] ===(Blue Tunnel: shorter low-capacity path)====> [H2]
+     (Plain IP sees identical SRC_IP=H1, DST_IP=H2 and merges both! Switching table: (In Iface, In ID)->(Out Iface, Out ID))
 ```
 
-### 32-Bit MPLS Shim Header & Header Stack (`NI03` Slide 14)
+MPLS does **not** exist because IP header lookup was too slow (`NI_Notebook` p. 82). Instead, it adds **connection-oriented packet tunnels (LSPs)** between Layer 2 and Layer 3 (**"Layer 2.5"** — informal, not a formal OSI layer) while keeping traffic packetized (**retaining statistical multiplexing**, like reserving the restaurant table ahead of arrival via signaling). Because **tunneling means header encapsulation** (`L12` line 219), classifying traffic once at ingress maps flows into switching tables `(In Iface, In ID) -> (Out Iface, Out ID)` (**entries associated with flows**, `NI03` Slide 7, `NI_L5` p. 4 bottom). As `NI_L5` p. 5 and `NI03` Slide 8 (`red 26->17` vs. `green 27->34`) prove, two demands between the **same** ingress/egress pair (even two apps on the *same* hosts `H1, H2`) take disjoint paths (**path differentiation**).
+- **Packet Transport Evolution (`NI03` Slides 5 & 9; `L12` lines 177–179, 223–225, 249–254):** Legacy networks ran **Packet over SONET (`POS`: `IP / PPP / SONET-SDH / 1st-gen optical TDM`)**. Today's carrier transport stack runs **MPLS over Ethernet** (`IP / MPLS / Ethernet / WDM Optical Layer 0–1`), leveraging cheap Ethernet switching while keeping MPLS's VPN, TE, and fast protection guarantees (**`Multiprotocol`** means any L2 — legacy `PPP/SONET`, `Frame Relay`, `ATM`, `Ethernet` — and any L3, `IPv4` or `IPv6`). Emerging **`SRv6 over Ethernet`** (`Slide 9`) replaces MPLS headers with IPv6 extension routing (**context only here; studied in second-semester *Programmable Networks***, `L12` line 225).
 
-Between L2 (Ethernet EtherType **`0x8847`** for unicast; `0x8848` multicast for context) and L3 IP sits one or more 32-bit MPLS headers:
+## 3.2 MPLS Architecture, Control/Forwarding Components & Shim Header (`NI03` Slides 11–14 — Verified `L12`)
+
+### IP/MPLS Router Coexistence (`NI03` Slides 12–13, `L12` lines 227–238)
+
+An **IP/MPLS router** extends a standard IP router in one integrated node (`Slides 12–13`):
+- **Control Component:** Conventional Layer-3 IP routing (`OSPF`/`IS-IS`) alongside tunnel reservation/label distribution (`RSVP` / `LDP` — Polverini emphasizes **`RSVP`** *Reservation Protocol* in `Slide 12` & `L12` line 231 because setting up a tunnel requires signaling request + resource reservation ahead of time).
+- **Forwarding Component:** Keeps label-switching capability alongside conventional IP longest-prefix matching, identifying flows by **`(In Iface, In Label)`** (`NI_L5` p. 4) rather than destination IP address (`Slide 13`).
+
+### 32-Bit MPLS Shim Header & Nested-Tunnel Stack (`NI03` Slide 14 — Verified `L12`, `NI_L5` p. 5)
+
+Between Layer 2 (`EtherType 0x8847` for unicast Ethernet; `0x8848` multicast for context) and Layer-3 IP (`IPv4`/`IPv6`) sits a **32-bit (4-byte) MPLS Shim Header**:
 
 ```text
   [ Layer-2 Header | Outer MPLS (S=0) | ... | Inner MPLS (S=1) | IP Packet ]
@@ -464,12 +475,29 @@ Between L2 (Ethernet EtherType **`0x8847`** for unicast; `0x8848` multicast for 
 ```
 
 *(Diagram convention: text notation here writes headers outer-to-inner left-to-right as `[Outer (S=0) | Inner (S=1) | IP]`, whereas `NI03` packet arrows draw packets nose-right with the outer/leading header on the right edge.)*
-- **Label (`20` bits):** locally significant forwarding ID.
-- **TC (`3` bits, formerly `EXP`):** Traffic Class / QoS (`"We don't care"` in `Theory 24-25` p. 81).
-- **S (`1` bit — Bottom of Stack):** `S = 1` on the innermost label directly above IP; `S = 0` on all outer labels above it.
-- **TTL (`8` bits):** copied/decremented at every MPLS hop for loop prevention because **core LSRs never inspect the inner IP header's TTL**.
+- **Label (`20` bits):** purely a numeric locally significant forwarding ID (`L12` line 239).
+- **TC (`3` bits, formerly `EXP`):** Traffic Class / QoS marking — **explicitly excluded in 2026/27 (`L12` line 241: *"TC okay we don't use it I mean in this course"*)**.
+- **S (`1` bit — Bottom of Stack):** Just as one concentric pipe fits inside an outer pipe (`NI_L5` p. 5 bottom **`NESTED TUNNELS`** cylinder sketch), carrying an inner tunnel inside an outer tunnel stacks multiple MPLS shims. Every outer MPLS header carries **`S = 0`**, while **`S = 1` marks the innermost MPLS label**, signaling that the next header underneath is **IP** (`L12` lines 243–245).
+- **TTL (`8` bits):** copied/decremented at every MPLS hop for loop prevention because core LSRs never inspect the inner IP header's TTL (`Slide 14` field kept from `NI_Notebook`; not separately walked through at end of `L12`).
 
-### Terminology, `FEC` Classification, End-to-End Walkthrough & Label Locality (`NI03` Slides 15–21)
+---
+
+> **`[Remaining Part III below — NI03 Slides 15–44 & NI_Notebook §§3.2.1–3.6 — Pending Live Lecture 13+ / Transcript]`**
+
+### Terminology, `FEC`, Dual-Table Lookup & Label Locality (`NI03` Slides 15–21)
+
+An integrated IP/MPLS forwarding component keeps the **Traditional IP Routing Table** (`FIB`: `Destination -> Next Hop`) **alongside** the **MPLS Forwarding Table** (`LFIB`: `(In Port, In Label) -> (Action, Out Port, Out Label)` — `Slides 18–19`), where **`(In Port, In Label)` together form the lookup key**:
+
+```text
+  NI03 SLIDE 19 — DUAL-TABLE PACKET TRACE INSIDE AN IP/MPLS LSR:
+   Incoming Pkt 1 (p0, 0026): Match (p0, 0026) -> Action: POP, Out: IP
+      ==> strips label, hands bare IP (DST 161.80.5.4) UP to Traditional IP Routing Table
+      ==> matches 161.80.5.0 -> Next Hop B ==> exits as plain IP packet to Router B!
+
+   Incoming Pkt 2 (p1, 0045): Match (p1, 0045) -> Action: SWAP, Out Port: p3, Out Label: 0078
+      ==> stays BELOW dashed boundary (never touches IP routing table)
+      ==> exits Out Port p3 carrying label 0078 toward Router C!
+```
 
 - **Forwarding Equivalence Class (`FEC` — `Slide 15`):** formally *"a set of packets that are forwarded in the same way and receive the same treatment."* A FEC can be defined by destination IP prefix (`160.80.1.0/24`), 5-tuple, QoS/application class, or ingress VPN port. **Classification happens ONLY at the Ingress LER** (`Slides 20–21` contrast: best-effort IP travels `A–B–E–F` consulting routing tables at every router, whereas MPLS classifies `160.80.1.0/24` once at Ingress `A -> B – PUSH 12`, core LSRs only swap `12->35->06->67` via `A–B–C–D–F`, and Egress `F` pops `67 -> IP`).
 - **LER vs. LSR (`Slides 15–16`):** Ingress **LER** classifies and **`PUSH`es**; core **LSRs** **`SWAP`** labels (or execute **`POP` $\to$ `IP`** under **`PHP`**); Egress **LER** **`POP`s** (if not already popped by PHP) and forwards IP.

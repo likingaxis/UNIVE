@@ -4,48 +4,50 @@
 
 ## A. Overview
 
-
-
-- **Program / year:** MSc Cybersecurity, Sapienza, 2026/27. Active courses: Distributed Systems, Cryptography and Network Infrastructures. Statistics is excluded from this active plan by user instruction.
-
-- **Objective:** recover essential backlog while sustaining useful attendance, independent practice and winter-exam preparation; follow [STUDY_PLAN.md](STUDY_PLAN.md) and [AGENTS.md](../AGENTS.md).
-
-- **Last actual state update:** 2026-11-12 (Europe/Rome): Crypto lesson 6 reported finished in roughly 120 active minutes; retain independent recall/practice. No clock times or execution of earlier reserved blocks inferred. Prior DS/Network reports remain recorded below. Pilot baseline remains 5–11 November with an experimental 14-hour budget; no new study windows booked. Detailed evidence stays in course memories.
-- **Semester-end target:** 2026-12-22, provisional internal planning target; official calendar not verified. No learning achievement is inferred from implementing this state.
-
-
+**Updated 24 November 2026 (Europe/Rome).** Active courses are Distributed Systems, Cryptography and Network Infrastructures. Statistics remains outside this plan. The student supplied current roadmaps for Crypto and Network Module 2. Use [the global plan](STUDY_PLAN.md) for planning rules and the linked memories for evidence. The November pilot remains below as a historical record.
 
 ## B. Current course status
 
+| Course | Current priority | Next action |
+| --- | --- | --- |
+| [Distributed Systems](MEMORIES/DISTRIBUTED_SYSTEMS.md) | Lesson 8–9 recall, independent broadcast work and remaining correctness coverage. Lessons 8–9 are studied by report. | Classify a fresh crash execution and trace Lazy RB without hints, then continue All-Ack correctness. Use the imported professor homework for a suitable independent attempt. |
+| [Cryptography](MEMORIES/CRYPTOGRAPHY.md) | Fresh-start W1, starting from verified prerequisites. Use the [exam roadmap](../CRYPTOGRAPHY/Assets/Cryptography_Exam_Roadmap_Nov2026_Jan2027.md). | Confirm the stopping point from the latest attempt. If W0 evidence is missing, do a brief M0/M1 check before M2. Earlier lesson reports are retained in memory. |
+| [Network Infrastructures](MEMORIES/NETWORK.md) | Module 2 catch-up through L12, using the [current roadmap](../NETWORK/Assets/Network_Infrastructures_Module2_Study_Roadmap.md). L13+ goes into the incoming queue. Practical recovery retains a separate record. | Resume from the latest personal draft or handoff. In its absence, start S1 with transport and optical foundations and the five-pillar generations comparison. |
 
+**Attendance.** Use the [recorded recurring timetable](STUDY_PLAN.md#recurring-timetable) and current announcements before assigning times. The latest recorded attendance decisions are DS/Network attending and Crypto paused. L12 on 23 November announced theory for the remaining regular Fridays in Network. L8 also proposed adjusted teaching hours for Module 2. The exact times for upcoming meetings and for 18 December should be confirmed if needed.
 
-| Course / detailed memory | Latest recorded situation | Active priority | Next meaningful action |
-| --- | --- | --- | --- |
-| [Distributed Systems](<MEMORIES/DISTRIBUTED_SYSTEMS.md>) | Attending; lessons 8–9 completed by report; independent exercise evidence pending. | Brief lesson-8/9 recall and independent broadcast practice, then remaining broadcast coverage. | Classify a fresh crash execution and trace Lazy RB without hints; continue All-Ack correctness afterward. Earlier reserved-slot execution remains unreported. |
-| [Cryptography](<MEMORIES/CRYPTOGRAPHY.md>) | Temporarily not attending; lessons 1–2 studied/revised and lessons 5–6 finished by report. Lesson-3/4 completion remains unconfirmed; independent checks pending. | Brief lesson-6 recall and independent reduction/proof practice; retain targeted earlier reviews. | Reconstruct one lesson-6 reduction without hints, then choose the next study block. Detailed gaps and earlier lesson-5 review needs remain in course memory. |
-| [Network Infrastructures](<MEMORIES/NETWORK.md>) | Attending; lesson 8 studied/understood by report on 6 Nov (60 active min); lesson 9 study completed by report on 7 Nov (time undefined). Latest lab needs recovery by 8 Nov clarification; assignment number/topic still unidentified. | Retain brief recall and preserve the practical recovery need. | Brief lesson-8/9 recall; requested note review when supplied; identify the outstanding lab for practical work. |
+## C. Roadmap windows for 24–29 November
 
+Dates and durations come from the course roadmaps. Start and end times are pending for these windows.
 
+| Date / window | Course and task | Expected outcome | Estimated duration | Status |
+| --- | --- | --- | --- | --- |
+| Tue 24 Nov | Crypto W1 / M2, statistical MACs and pairwise-independent hashing | Security definition and an independent proof or attack attempt | 3 h | Roadmap target. Execution unreported. |
+| Thu 26 Nov | Crypto W1 / M2, min-entropy, extractors and LHL | Explain the seed, collision probability and bound using a proof outline | 4 h | Roadmap target. Clock times unconfirmed. |
+| Fri 27 Nov | Crypto W1 / M3, PPT, negligible functions and one-way functions | State the game, attempt a short reduction and choose the next repair or block | 2 h | Roadmap target. Clock times unconfirmed. |
+| 24–25 Nov | Network S1, A/B transport and optical foundations | Personal notes and the five-pillar comparison | 1.5–2 h | Suggested window. |
+| 25–26 Nov | Network S2, C optical architecture | Personal notes and a changed blocking or transponder scenario | 1.5–2 h | Suggested window. |
+| 26–28 Nov | Network S3, D optical management | Personal notes, layer visibility and an alarm propagation trace | 2–2.5 h | Suggested window. |
+| 28–29 Nov | Network S4, E MPLS through the shim header | Personal notes, a forwarding check and mixed recall of A–E | 1–1.5 h | Suggested window. |
 
-### Recurring timetable and attendance
+**Capacity to reconcile.** Crypto W1 and Network catch-up account for **15–17 hours** before DS, practical work, travel and breaks. There is no confirmed combined time allocation. The earlier 14-hour pilot is a historical reference. Use the roadmap estimates and the student's actual time windows before setting a timed agenda. Preserve any later dated study evidence when considering carry-over.
 
+## D. Assessment dates and milestones
 
+| Date / period | Course | Status |
+| --- | --- | --- |
+| 29 Nov 2026 | Network Module 2 catch-up through L12 | Internal target. Carry forward any unfinished block explicitly. |
+| 14–17 Dec 2026 | Network timed MCQs and written practice | Suggested practice window from the roadmap. |
+| 18 Dec 2026 | Network Module 2 quiz, 10 MCQs in 15 minutes, up to +1 | Announced in L8. Coordinate with Crypto's W4 Friday block after confirming hours. |
+| 7–8 Jan 2027 | Crypto simulation and final error review | Internal roadmap milestones. |
+| 11–13 Jan 2027 | Crypto exam | Provisional planning window. |
+| 14 Jan 2027 | Network exam | Proposed date, pending administrative confirmation. |
 
-Recurring slots and provenance are maintained in the [plan's recurring timetable](STUDY_PLAN.md#recurring-timetable). **Current attendance decisions, user-reported:** Distributed Systems and Network are attending; Cryptography is temporarily not attending while recovering foundations.
+See the course memories for format, provenance and remaining rules. Update this state for changes that affect cross-course priorities, deadlines or confirmed calendar blocks.
 
+## E. Archived pilot and capacity evidence
 
-
-No active-course time overlaps appear in that timetable. Separate lab slots and other commitments are unknown. Current decisions cover 10 scheduled hours/week of DS/Network; Crypto adds 5 if resumed. These are timetable totals, not proof of attendance or available study capacity. Statistics remains outside active scope; excluded or unattended slots are not automatically free study time.
-
-
-
-**Temporary exceptions:** Crypto attendance pause has no confirmed end date; no other dated exceptions are reported. Track future exceptions with affected dates and scheduling impact, without changing the recurring timetable by inference. Actual per-lecture attendance remains in course memory when confirmed.
-
-
-
-## C. Current weekly priorities
-
-
+The following records describe the **5–11 November pilot** and its immediate follow-up. Earlier windows, priorities and estimates are kept with their original status.
 
 ### Pilot agenda — 5–11 November 2026
 
@@ -115,7 +117,7 @@ Crypto Tuesday 08:00–10:00 remains scheduled but not attended. Preserve the re
 
 
 
-## D. Study capacity
+### Pilot capacity
 
 
 
@@ -131,7 +133,7 @@ Crypto Tuesday 08:00–10:00 remains scheduled but not attended. Preserve the re
 
 
 
-## E. Upcoming deadlines and events
+### Assessment information during the pilot
 
 
 
@@ -145,7 +147,7 @@ Crypto Tuesday 08:00–10:00 remains scheduled but not attended. Preserve the re
 
 
 
-## F. Cross-course dependencies and risks
+### Dependencies noted during the pilot
 
 
 
@@ -161,7 +163,7 @@ Crypto Tuesday 08:00–10:00 remains scheduled but not attended. Preserve the re
 
 
 
-## G. Next planning review and update rules
+### Planning review notes from the pilot
 
 
 

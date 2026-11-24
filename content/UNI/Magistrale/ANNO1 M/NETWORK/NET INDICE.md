@@ -6,7 +6,8 @@
 
 ## Second module — Transport networks
 
+- [Module 2 study method](Assets/Network_Infrastructures_Module2_Study_Method_Charter.md) and [study roadmap](Assets/Network_Infrastructures_Module2_Study_Roadmap.md), including the screened question bank and readiness tracker.
 - [[SECOND MODULE/NET LESSON 8|Lesson 8 — Introduction to Transport Networks]] — student-maintained notes, editorially cleaned on 6 November 2026, with local SVG diagrams, original slide figures and source links.
 - [[SECOND MODULE/NET LESSON 9|Lesson 9 — Optical Networks]] — student-maintained notes, editorially revised on 15 November 2026, with local SVG diagrams, original NI02 figures and source links.
-- [[SECOND MODULE/NET UNICO MODULE 2|Module 2 — Unified Study Context (`NET UNICO MODULE 2`)]] — AI-generated single-file English synthesis (created 22 November 2026 from `NI01`–`NI03`, `NI_L1`–`NI_L4`, `NI_Notebook.pdf`, L8–L11 transcripts, 24/25 BGP preview and past tests) calibrated by classroom emphasis (`NI03` MPLS pending lecture; BGP provisional); no study or verification inferred.
+- [[SECOND MODULE/NET UNICO MODULE 2|Module 2 — Unified Study Context (`NET UNICO MODULE 2`)]] — AI-assisted compendium. L8–L12 taught, with NI03 slides 1–14 covered in L12. Classroom scope for slides 15–44 is pending, and BGP technical coverage is provisional. Use this source alongside [NET UNICO](<NET UNICO.md>), the student's personal English theory draft.
 

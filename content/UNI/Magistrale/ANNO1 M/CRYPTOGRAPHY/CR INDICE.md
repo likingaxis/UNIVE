@@ -3,6 +3,13 @@ https://dventuri83.github.io/teaching/1_crypto/
 vecchie lezioni:
 https://github.com/dventuri83/dventuri83.github.io/tree/master/assets/pdf
 
+## Preparazione all'esame 2026/27
+
+- [Metodo di studio](Assets/Cryptography_Study_Method_Charter.md) e [roadmap verso l'esame](Assets/Cryptography_Exam_Roadmap_Nov2026_Jan2027.md).
+- [Compendio L1–L13](crittografia_L1_L13.md) per localizzare teoria, prove ed esercizi. I riferimenti per singola lezione raccolgono slide, trascrizioni e appunti già disponibili.
+
+- [CR UNICO](<CR UNICO.md>) raccoglie la sintesi personale, scritta a parole proprie, e gli schemi delle dimostrazioni da ricostruire.
+
 ## Materiale per lo studio — lezione 1
 
 I materiali vengono raccolti in `Assets` una lezione o un blocco alla volta.
@@ -32,7 +39,9 @@ Ordine della lezione:
 4. Pagina 7: tentativi autonomi sui tre esercizi del professore, senza anticipare le soluzioni.
 5. Pagina 8: definizione di famiglia pairwise independent e idea di usarla come MAC; costruzioni ulteriori solo se necessarie.
 
-### Messaggio da inviare al tutor
+### Messaggio storico per la sessione del 5 novembre
+
+Per avviare una nuova sessione, usa la roadmap e il charter collegati sopra.
 
 > Voglio studiare la lezione 2 di Cryptography usando le slide allegate come riferimento principale. Ho studiato la lezione 1 e scritto una prima bozza, ma la comprensione autonoma non è ancora verificata: inizia con 2–3 brevi domande su segretezza perfetta, probabilità condizionata e OTP, recuperando solo gli eventuali prerequisiti mancanti.
 >

@@ -4,7 +4,9 @@
 
 
 
-Last update: **2026-11-22**, Europe/Rome: verified local Lesson-11 sources (`NI_L4-2026-11-16.pdf`, `network lesson 11 transcripted.md`, `NI02` slides PDF pp. 30–42, `NI_Notebook.pdf` Ch. 2), observed `NI03 - Multi Protocol Label Switching.pdf` (45 PDF pages, Ch. 3 in `NI_Notebook.pdf`, lecture pending) and historical Module-2 tests, and created the standalone AI-assisted context file `NET UNICO MODULE 2.md`; Lesson 10–11, MPLS and BGP study and independent verification remain pending. Prior statuses retained: Lesson 9 study completed by student report (active time **undefined**), Lesson 8 retains 60 active minutes, and Lesson 8/9 cleanups are complete. Initialized with explicit authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md). Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities. Evidence labels: **Verified locally**, **Verified official**, **User-reported**, **Provisional**, **Unknown**, as defined in the plan.
+Latest workflow update: **2026-11-24 (Europe/Rome)**. Adopted the Module 2 charter and roadmap (§2).
+
+**2026-11-24 Lesson-12 source update:** inspected newly added Lesson-12 sources ([NI_L5-2026-11-23.pdf](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI_L5-2026-11-23.pdf>), [network lesson 12 transcripted.md](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 12 transcripted.md>), `NI02` Slide 41 recap, `NI03` Slides 1–14, and [NET LEZIONE 12.md](<../../NETWORK/SECOND MODULE/NET LEZIONE 12.md>)) and updated AI-assisted reference `NET UNICO MODULE 2.md` (`98,644` bytes, `622` lines); Lesson 10–12, MPLS (`Slides 15–44` pending L13+) and BGP study and independent verification remain pending. Attributed `L12` announcement (`23/11/26`): all remaining Fridays become theoretical lectures (no further labs). Prior statuses retained: Lesson 9 study completed by student report (active time **undefined**), Lesson 8 retains 60 active minutes, and Lesson 8/9 cleanups are complete. Initialized with explicit authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md) and [STUDY_PLAN.md](../STUDY_PLAN.md). Read [STUDY_STATE.md](../STUDY_STATE.md) for global priorities. Evidence labels: **Verified locally**, **Verified official**, **User-reported**, **Provisional**, **Unknown**, as defined in the plan.
 
 
 
@@ -34,20 +36,17 @@ Network Infrastructures (Network), MSc Cybersecurity, Sapienza, 2026/27. **User-
 
 
 
-- Connect protocols and architectures to network behavior; prioritize labs, configurations, troubleshooting, independent reproduction and actual practical deadlines.
+### Module 2 theory
 
+Use the student-supplied [Method Charter](../../NETWORK/Assets/Network_Infrastructures_Module2_Study_Method_Charter.md) and [Study Roadmap](../../NETWORK/Assets/Network_Infrastructures_Module2_Study_Roadmap.md), both v1.1 dated 24 November 2026, with [NET UNICO MODULE 2](<../../NETWORK/SECOND MODULE/NET UNICO MODULE 2.md>) as the AI-assisted working compendium. Use current slides and the professor's notebook for terminology, and transcripts and whiteboards for classroom emphasis, examples and exclusions.
 
-- Preserve rough notes, professor examples and material references. Address unclear concepts selectively; do not polish or rewrite every lecture. Assemble the personal theoretical UNICO during exam preparation.
+- Work interactively in small blocks. Use a short recall prompt to set depth, then explain the problem, architecture, mechanism, constraints and trade-offs in English. Cover each confirmed concept and stop for the student to reconstruct it in their own words in [NET UNICO](<../../NETWORK/NET UNICO.md>), the personal English theory file.
+- When asked to review the draft, check accuracy and coverage before editing English, prose flow and formatting. For requested diagrams, inspect the matching in-class sketch or slide, match the professor's topology, labels, arrow directions and notation, and visually check the redrawn SVG at its display size. Cite the original and flag ambiguous details. Use one to three diagnostic questions when needed, with emphasis on causal explanation or a new topology. For practice, prioritize the current-year samples and the screened roadmap §7 question bank. Use historical student answers as items to verify against current sources.
+- In the roadmap, track Theory, Architecture/Application, MCQ and Written separately. A block is complete after appropriate coverage, reviewed personal notes, an independent core explanation and representative independent P1 application, with critical misconceptions resolved. Record important errors and a later changed example or timed recall.
 
+### Module 1, Kathara and lab theory
 
-- For labs preserve commands, configurations, observations, errors and the reasoning behind corrections. First attempt tasks independently, then use progressive hints; verify actual behavior rather than equating a finished document with practical success.
-
-
-- ChatGPT is primary tutor; the student supplies substantive explanations and attempts. Codex manages materials, evidence and planning; Gemini is optional editorial review. Detailed global methodology remains in the plan.
-
-
-
-
+Use §7–9 for practical preparation, known deadlines and remaining gaps. Preserve the student's commands, observations and troubleshooting reasoning. Check actual behavior and record assistance. These activities have their own objectives and evidence.
 
 ## 3. Official sources and local materials
 
@@ -55,7 +54,7 @@ Network Infrastructures (Network), MSc Cybersecurity, Sapienza, 2026/27. **User-
 
 
 
-No centralized professor website or current official examination source is identified. Do not invent a URL. Request the relevant original slide deck, assignment or announcement when a concrete objective needs it.
+Use NI-L8 and NI-L12 for attributed assessment and scheduling announcements. A centralized professor exam page or an official booking notice is still unrecorded. Request the specific slide, assignment or announcement when needed.
 
 
 
@@ -74,7 +73,8 @@ No centralized professor website or current official examination source is ident
 | NI-L9 | [NI02 — Optical Networks](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI02 - optical networks.pdf>), [lesson-9 transcript](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 9 transcripted.md>) and NI-L8 instructor notebook, chapter 2 | First locally inspected 2026-11-07; original publication/import dates unknown. NI02 has 42 PDF pages, identifies Marco Polverini and A.Y. 2026/27; relevant introductory/device text and figures through printed slide 16 inspected. Lesson-9 transcript read as a secondary account, with authorship/transcription accuracy unverified. Relevant notebook material in §§2.1–2.4 and §2.6.1 inspected; the notebook declares AI assistance and instructor review. Source agreement supports note navigation and editorial clarification, not student proficiency or current exam guarantees. |
 | NI-L10 | [Lesson-10 whiteboard](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI_L3-2026-11-09.pdf>), [lesson-10 transcript](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 10 transcripted.md>), NI-L9 (`NI02` slides through PDF p. 31) and NI-L8 instructor notebook (§§ 2.6–2.9) | Inspected 2026-11-15 after user added `NI_L3-2026-11-09.pdf` (6 handwritten sketch pages covering A–B–C logical network, OADM, OXC, grooming/muxponder, all-optical subnetworks, signal impairments, pulse encoding/LED spectrum, multimode vs. single-mode and wavelength-speed differences). Transcript (~51 KB) read from Lesson-9 recap through Management Framework (NMS/EMS) and Friday lab announcement; secondary account, uncompacted, authorship/accuracy unverified. `NI02` slide headings (all 42 PDF pages) and `NI_Notebook.pdf` TOC (§§ 2.6–2.9, printed pp. 24–44) inspected for Lesson-10 alignment. Organizational check only; no study or proficiency inferred. |
 | NI-L11 | [Lesson-11 whiteboard](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI_L4-2026-11-16.pdf>), [lesson-11 transcript](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 11 transcripted.md>), NI-L9 (`NI02` PDF pp. 30–42) and NI-L8 instructor notebook (Ch. 2) | Inspected **2026-11-22** (**Verified locally**): `NI_L4-2026-11-16.pdf` (4 handwritten sketch pages) and `network lesson 11 transcripted.md` (52,208 bytes; matches `Net_Lezione_11` clean transcript, 182 segments, 5359.152/5367.1695 s, `total_uncertain: 0`; secondary account). Covers Management Framework switch-vs-router example, horizontal `ODU/OTU/OCh/OMS/OTS` span diagram, 129 alarms across 4 total nodes, staircase `FDI/BDI` fault propagation, `OSC` vs Pilot Tone, Rate-Preserving OTN and deferral of Slide 41 (`Optical Layer 1+1/1+R`) to Lesson 12. Organizational check only; no study or proficiency inferred. |
-| NI-MPLS | [NI03 slides](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI03 - Multi Protocol Label Switching.pdf>) and NI-L8 instructor notebook (`NI_Notebook.pdf` Ch. 3) | Inspected **2026-11-22** (**Verified locally** as source deck; classroom emphasis **Provisional** pending lecture/transcript): 45 PDF pages (Title + Slides 1–44) covering label stack, LER/LSR/PHP, LDP vs RSVP-TE, TE trunks, L3VPNs (MP-BGP + VRF + two-label stack), ECMP and Fast Reroute (`1` link tunnel vs `N` Backup LSPs). Note: BGP coverage relies provisionally on `Theory 24-25` pp. 98–110 and Lesson-8 preview pending 2026/27 slides/lecture. |
+| NI-L12 | [Lesson-12 whiteboard](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI_L5-2026-11-23.pdf>), [lesson-12 transcript](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 12 transcripted.md>), NI-L9 (`NI02` Slide 41), `NI03` Slides 1–14 and NI-L8 instructor notebook (`Ch. 2–3`) | Inspected **2026-11-24** (**Verified locally**): `NI_L5-2026-11-23.pdf` (5 handwritten sketch pages, dated `23/11/26`) and `network lesson 12 transcripted.md` (49,923 bytes; secondary account). Covers optical recap (`OPU1–4` `10G` NIC into `100G` transponder adaptation, cascade of `OCh` across subnets, low-power `Pilot Tone` interference reason, `OSC` carrying `DI` downstream of fiber cut, `NI02` Slide 41 summary table) and MPLS start through `NI03` Slide 14 (`96-λ` DWDM scalability motivating ISP IP layer, 4 IP limits + walk-in restaurant analogy + $\bar{d}_q(\rho)$ curve + Reverse Path Tree & subpath optimality, `H1–H2` dual-app tunnels, `(In Iface, In ID)` switching table, `RSVP` reservation, 32-bit shim with `TC` explicitly excluded, nested-pipe `S=0/1`, `MP` over POS/Ethernet & IPv4/IPv6). Attributed schedule announcement (`L12` line 255): all remaining Fridays are theoretical lectures, no further practical labs. Organizational check only; no study or proficiency inferred. |
+| NI-MPLS | [NI03 slides](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI03 - Multi Protocol Label Switching.pdf>) and NI-L8 instructor notebook (`NI_Notebook.pdf` Ch. 3) | Inspected **2026-11-22** and partially aligned **2026-11-24**: **Title + Slides 1–14 now verified via NI-L12** (`TC` 3-bit QoS field explicitly excluded; `SRv6` Slide 9 deferred context-only to *Programmable Networks*). **Slides 15–44** (`Terminology`, `Dual-Table FIB/LFIB`, `PATH/RESV`, 2-flow `Slide 25` stacking, `L3VPN`, `TE`, `FRR/BFD`) remain **Provisional** from deck + `NI_Notebook.pdf` Ch. 3 pending Lecture 13+. BGP coverage relies provisionally on `Theory 24-25` pp. 98–110 + `NI01` Slide 24 / `L8` preview pending 2026/27 slides/lecture. |
 
 **Module-2 source roles, user-confirmed 2026-11-06:** `NI_Notebook.pdf` is the professor's study notebook written with ChatGPT; `NI01 - intro to transport networks.pdf` is the slide deck; `NI_L1-2026-11-02.pdf` is the notebook containing sketches drawn by the professor while explaining in class. These are separate supporting sources, not student-authored notes. For lesson 8, use the slides for structure, the in-class sketches and transcript for the professor's reasoning/examples, and notebook chapter 1 for connected explanations; keep any disagreements explicit.
 
@@ -106,7 +106,8 @@ Observed note topics below are navigation aids from inspected text, not an offic
 | [Lesson 10](<NET LESSON 10 DRAFT DURING LECTURE.md>) | Rough student draft (49 lines): Lesson-9 recap, SLA/BER, 3-node A–B–C logical network, OADM and architectures, OXC (mirrors), grooming, all-optical transparency, attenuation/distortion/dispersion, 1R/2R/3R regenerators, jitter, chromatic dispersion/distortion, Management Framework (slide 30). Mapped to NI-L10 on 2026-11-15; study and assessment pending. |
 | [Lesson 10 notes (`NET LESSON 10` / `gemini`)](<../../NETWORK/SECOND MODULE/NET LESSON 10.md>) | Observed existing files in `SECOND MODULE/` (`NET LESSON 10.md`, `NET LESSON 10 gemini.md`), read during compendium synthesis; authorship mixed/unknown, study and independent assessment pending. |
 | [Lesson 11 notes](<../../NETWORK/SECOND MODULE/NET LESSON 11.md>) | Observed existing note in `SECOND MODULE/`, read during compendium synthesis (captures student Lesson-11 questions/doubts on `R1–Sw–R2`, `NI_L4` p. 3 span diagram, OTN `FDI/BDI` and alarm scaling); authorship unknown, study and independent assessment pending. |
-| [Module 2 AI Context (`NET UNICO MODULE 2`)](<../../NETWORK/SECOND MODULE/NET UNICO MODULE 2.md>) | Standalone AI-generated single-file synthesis (92,155 bytes, 594 lines, created and quality-audited 2026-11-22) calibrated by classroom emphasis across Parts I–IV (verified L8–L11 optical transport & management, unlectured `NI03` MPLS, provisional 24/25 BGP preview + `NI01` Slide 24 `RPKI/ROAs`, MCQ/open-question traps & Wooclap checkpoints; no prompt header, ASCII/Markdown/Obsidian LaTeX). AI-generated reference only; confers zero study completion or independent verification. |
+| [Lesson 12 notes](<../../NETWORK/SECOND MODULE/NET LEZIONE 12.md>) | Student rough draft (16 lines): notes optical recap until `29:00` for refining `NET UNICO MODULE 2`, then MPLS intro through `from PPP to MPLS` / `MPLS Architecture` heading (`lost until 38:00`). Mapped to `NI-L12` on 2026-11-24; study and independent assessment pending. |
+| [Module 2 AI Context (`NET UNICO MODULE 2`)](<../../NETWORK/SECOND MODULE/NET UNICO MODULE 2.md>) | Standalone AI-generated single-file synthesis (98,644 bytes, 622 lines, updated 2026-11-24 through Lesson 12) calibrated by classroom emphasis across Parts I–IV (verified L8–L12 optical complete & `NI03` Slides 1–14, pending L13+ for `NI03` Slides 15–44, provisional 24/25 BGP preview + `NI01` Slide 24 `RPKI/ROAs`, MCQ/open-question traps & Wooclap checkpoints; no prompt header, ASCII/Markdown/Obsidian LaTeX). AI-generated reference only; confers zero study completion or independent verification. |
 
 **Unresolved discrepancy:** user originally reported notes 1–2 and 4–8; separate files 3 and 5 are absent. Inspected openings and internal lesson references do not establish whether their topics are merged elsewhere. Lesson 8 refers to a recap of previous lessons, but does not prove complete coverage of 3/5. Obtain relevant topic/date or slide mapping when needed before deciding whether recovery or a new note is necessary. Missing numbering is not proof of missing learning.
 
@@ -150,7 +151,7 @@ Official publication inventory, dates and current endpoint are unknown. Local ma
 
 **Lesson-9 style and visualization revision, 2026-11-15:** revised [Lesson 9](<../../NETWORK/SECOND MODULE/NET LESSON 9.md>) prose, heading hierarchy and figure presentation per explicit user request. Replaced the standalone numeric `### 1`–`### 4` headings with an ordered lifecycle list under NI02 slide 10, reordered the inverted `Multiplexing` / `Explaining WDM better` / `Using multiplexing` sequence into a single progressive flow (static/statistical mux and TDM/FDM $\rightarrow$ optical carriers, $1550\ \mathrm{nm} \simeq 193.5\ \mathrm{THz}$ from NI02 slide 5 and attenuation $\rightarrow$ WDM and $100\ \mathrm{GHz}$ / $\sim 0.8\ \mathrm{nm}$ channel spacing from slide 9), removed duplicated lightpath setup prose, normalized SVG and slide embed widths (eliminating upscaling on slides 9, 13 and 16 and keeping small-viewBox SVGs proportional to text), replaced the setup-lifetime and blocking dark-mode screenshots in place with two rendered and visually inspected light SVGs (`net-l09-setup-vs-lifetime.svg` and `net-l09-wavelength-blocking.svg`, keeping original PNGs on disk), and omitted the redundant `net-l09-frequency.svg` embed. No change to Lesson-9 active study time (`undefined`) or assessment status.
 
-**Module-2 unified AI-context synthesis (`NET UNICO MODULE 2.md`), 2026-11-22:** created and quality-audited [NET UNICO MODULE 2.md](<../../NETWORK/SECOND MODULE/NET UNICO MODULE 2.md>) (92,155 bytes, 594 lines) per explicit user request as a standalone single-file AI-tutor context modeled after `crittografia unico.md` (no AI prompt header, zero `![[...]]` image embeds or `data:image/` URIs, ASCII diagrams, Markdown tables and Obsidian `$...$`/`$$...$$` math). **Authorship: AI-generated** synthesis built from verified Module-2 sources (`NI01`, `NI02`, `NI_Notebook.pdf` Ch. 1–3, whiteboards `NI_L1`–`NI_L4`, L8–L11 transcripts, past tests `Risposte QUIZ II Parte.pdf`, `test-optical-network-2023.pdf`, `Tests.pdf`, `secondIntermediateTest.md`, and student notes/drafts) plus unlectured `NI03` (45 PDF pages, classroom emphasis pending lecture) and provisional 24/25 `Theory 24-25` pp. 98–114 BGP/Wooclap content. Self-audit against all 4 whiteboards (`NI_L1`–`NI_L4`), transcripts and slides added `NI_L2` p. 6 triangle spatial reuse & dual blocking modes, `NI_L2` p. 5 three-cylinder lookup contrast, `NI02` Slide 21 recursive layering, `NI_L4` p. 2 L5-vs-L3 IDS/switch-monitoring Q&A, `NI02` Slide 34 `OCC` & Slide 40 overhead span diagram, expanded Part III (`NI03` Slide 8/18–19/22/25/33–35/36–44 + double-PHP `FRR`), explicit `NI01` Slide 24 `RPKI/ROAs`, and solved Wooclap checkpoints, while fixing `Channel Spacing` vs. `Signal Bandwidth` (`NI02` Slide 9) and static-WDM idle-waste framing. Resolves recorded student doubts (Slide 17 OLT/transponder scope, OXC grooming, core/cladding vs `NI_L3` p. 5 chromatic-dispersion slip, Slide 30 physical/logical plane split, `R1–Sw–R2` ARP/L2 vs router L2+L3, `NI_L4` p. 3 horizontal span diagram, and Slide 39 staircase `FDI/BDI` vs `Tests.pdf` Q13). Validated post-write formatting/LaTeX parity; confers no completed study, active time or independently demonstrated mastery.
+**Module-2 unified AI-context synthesis (`NET UNICO MODULE 2.md`), 2026-11-22 (updated 2026-11-24 with Lesson 12):** created and quality-audited [NET UNICO MODULE 2.md](<../../NETWORK/SECOND MODULE/NET UNICO MODULE 2.md>) (updated 2026-11-24 to **98,644 bytes, 622 lines**) per explicit user request as a standalone single-file AI-tutor context modeled after `crittografia unico.md` (no AI prompt header, zero `![[...]]` image embeds or `data:image/` URIs, ASCII diagrams, Markdown tables and Obsidian `$...$`/`$$...$$` math). **Authorship: AI-generated** synthesis built from verified Module-2 sources (`NI01`, `NI02`, `NI03` Slides 1–14, `NI_Notebook.pdf` Ch. 1–3, whiteboards `NI_L1`–`NI_L5`, L8–L12 transcripts, past tests `Risposte QUIZ II Parte.pdf`, `test-optical-network-2023.pdf`, `Tests.pdf`, `secondIntermediateTest.md`, and student notes/drafts) plus `NI03` Slides 15–44 (pending Lesson 13+) and provisional 24/25 `Theory 24-25` pp. 98–114 BGP/Wooclap content. On 2026-11-24 integrated `NI-L12` (`NI_L5-2026-11-23.pdf`, `network lesson 12 transcripted.md`, `NET LEZIONE 12.md`): added `OPU1–4` `10G -> 100G` adaptation example, cascade of `OCh` across subnets, low-power `Pilot Tone` interference constraint vs. post-cut `OSC` carrying `DI`, `96-λ DWDM` IP scalability reason, 4 IP limits + walk-in restaurant analogy + queuing curve $\bar{d}_q(\rho)$ + Reverse Path Tree & subpath optimality, `H1–H2` dual-app tunnels, verified `TC` 3-bit exclusion and nested-pipe `S=0/1` shim intuition, and Friday theoretical-schedule update. Preserves `NET LEZIONE 12.md` untouched; validated post-edit formatting/LaTeX parity; confers no completed study, active time or independently demonstrated mastery.
 
 ## 6. Understanding and independent verification
 
@@ -206,7 +207,7 @@ Never equate lab notes, AI solutions or copied commands with proficiency. Future
 
 
 
-Preserve the aggregate user report of several completed labs and at least one recent outstanding lab, without assigning those statuses to filenames. Lab 3 is the highest local number, not automatically the latest or outstanding assignment. Submission/grading status and active homework/intermediate assessments are unknown. A note question or exercise reference is not an attempt record.
+Preserve the aggregate user report of several completed labs and at least one recent outstanding lab, without assigning those statuses to filenames. Lab 3 is the highest local number, not automatically the latest or outstanding assignment. Individual submission and grading status are unknown. See §8 for the announced assessment arrangements. A note question or exercise reference is not an attempt record.
 
 
 
@@ -218,29 +219,21 @@ Preserve the aggregate user report of several completed labs and at least one re
 
 
 
-**2026/27 exam format: not yet verified.** Components, grading, duration, permitted resources, practical requirements, dates and deadlines are unknown. On 2026-11-05 the user reported an upcoming test and supplied historical examples (NI-L7); no current date or complete scope was supplied. On 2026-11-08, the student explicitly says they do not know the exam date; scope remains unspecified, and the relationship between this exam reference and the previously reported test is not clarified. Do not infer a scheduled date or urgency. These supersede the initial absence of identified samples, not the unknown status of current requirements. The older theory PDF has not been assessed for examination information.
+### Module 2 assessment for 2026/27
 
+[The roadmap §2](../../NETWORK/Assets/Network_Infrastructures_Module2_Study_Roadmap.md#2-exam-calibration) and [compendium §A](<../../NETWORK/SECOND MODULE/NET UNICO MODULE 2.md>) summarize [Polverini's L8 announcement](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 8 transcripted.md>), checked against the local transcript on 24 November.
 
+| Component | Reported format and status |
+| --- | --- |
+| Module 2 intermediate quiz | Announced for **18 December 2026**, in person on Moodle, **10 MCQs in 15 minutes**, up to **+1 bonus point**. Verify exact arrangements if needed. L8 mentioned a lab afterward. L12 later announced theory in place of regular Friday labs through semester end, so the post-quiz activity needs confirmation. |
+| Final Module 2 theory | **One open question**, **one page**, up to **6 points**, about **20 minutes recommended** of the **40 minutes shared** with Module 1. Train coverage of all guiding subpoints with concise reasoning and a diagram or example where useful. |
+| Winter dates | **14 January 2027** is the provisional January target. L8 also reports **17 February 2027** as proposed, pending administrative confirmation. |
 
+Use the two L8 sample questions and the roadmap §7 question bank for practice. The roadmap identifies the two local PDFs as student compilations, with duplicate questions and uncertain dates. See [Q-A](<../../NETWORK/Assets/TESTEXAMSECC/Raccolta Domande Network Infrastructures_261124_113126.pdf>) and [Q-B](<../../NETWORK/Assets/TESTEXAMSECC/Exam_-_questions-1 (1)_261124_113057.pdf>). Use real current-year scope to choose questions and check answers. For the historical FDI conflict, `Tests.pdf` Q13 gives OTS-FDI while `test-optical-network-2023.pdf` p. 9 reports grading feedback of ODU-FDI in that scenario.
 
+### Practical and lab-theory assessment
 
-**Historical evidence only:** NI-L7 contains multiple-choice questions on PON scheduling/cost/WDM, multipath, wireless interference, hidden terminals and latency, alongside earlier access and other course topics. Use the sample style to practise conceptual distinctions, without guaranteeing question recurrence. Keys can conflict: `Tests.pdf` Q13 gives OTS-FDI, while `test-optical-network-2023.pdf` p. 9 shows assessment feedback giving ODU-FDI. Figure-dependent reconstructed questions also need their original diagrams. The new review covers decks 03/04, not the whole sample folder.
-
-
-
-
-
-Provisional preparation emphasis: practical assessments, lab requirements, configuration/troubleshooting and theory questions. These are investigation priorities, not confirmed exam components.
-
-
-
-
-
-When substantial study/exam planning needs alignment, check identified official current instructions and available representative assignments/papers. If missing, ask for a specific Network example or professor announcement and explain its immediate use. Analyze competencies, difficulty and patterns across samples; separate historical inferences from current official requirements. Propose refinements to §2 and record sources/year, evidence and uncertainties here. Old papers do not guarantee current format; do not request all courses' exam materials at once.
-
-
-
-
+L8 reports a December Kathara homework worth up to 16 points in the semester arrangement, or a 90-minute in-person Kathara practical in the full-exam arrangement. Both arrangements include the written theory and a separate lab-theory MCQ worth up to 4 points. Exact homework dates, lab-quiz timing and administrative application of the single-use homework/bonus rule require confirmation. L8 reports that the semester points can be used once. Keep these details available for practical planning.
 
 ## 9. Current learning gaps and difficulties
 
@@ -269,40 +262,16 @@ When substantial study/exam planning needs alignment, check identified official 
 
 
 
-**Current theory status (2026-11-07):** lessons 8 and 9 are studied by student report; lesson 8 has 60 reported active minutes, lesson 9 has **undefined** study time. Lesson-8 and requested lesson-9 editorial cleanup are complete; no independent lesson-9 assessment is established. Next useful Network action is a brief unaided recall and, when supplied, the tutor report or requested note review. Preserve the established ChatGPT study → student notes → requested Codex cleanup/progress workflow. DS remains the next main cross-course study priority in the global agenda; the outstanding Network lab is still unidentified. No new study times are booked.
+1. **Catch-up through L12, 24–29 November.** Resume from the latest evidenced personal draft or handoff. If none is available, begin S1 with short recall, then Blocks A/B (transport and optical foundations) and the professor's five-pillar generations question. Use S2–S4 for optical architecture, management and MPLS foundations. Total estimate 6–8 active hours, with course-specific checkpoints in roadmap §4. Lessons 8–9 retain their previously reported study status. Independent performance and current catch-up progress require session evidence.
+2. **Incoming material.** Keep L13+ in the incoming queue while completing A–E. NI03 slides 1–14 were taught by L12. Slides 15–44 are official material awaiting classroom confirmation. BGP was previewed, and its technical depth remains provisional. When new material arrives, record changed scope, exclusions and examples, then update the affected roadmap block and personal draft when authorized.
+3. **Quiz and written practice.** Use S8 around 14–17 December where availability permits. Practise the timed MCQ set and the one-page open answer using confirmed scope. Log the result, errors and the next delayed recall.
+4. **Separate practical follow-up.** When requested, identify the outstanding lab and check its task and actual deadline. Retain the unresolved Module 1 lecture mapping and practical requirements in §7–9.
 
-
-
-
-
-1. Maintain attendance and current rough notes. At the next practical session, identify the outstanding lab and check its actual task/deadline; request only the relevant assignment or announcement if absent.
-
-
-2. Recover that task through a student attempt, observation of network behavior and explanation of configuration choices. Record errors/corrections and distinguish completion from independent reproducibility.
-
-
-3. Reconcile lectures 3/5 against topic/date or slide information before creating or duplicating notes. Repair only relevant theoretical doubts; postpone broad polishing to UNICO preparation.
-
-
-4. Use short recall/troubleshooting checks and later unaided reproduction. Provisional spacing after study: 1–2 days, about one week and 2–3 weeks, adjusted to outcomes. No reviews/reminders are scheduled.
-
-
-
-
-
-For the reported upcoming test, the original deck-03/04 sources remain available. The AI review file recorded on 5 Nov is absent from the latest local inventory; its present location/status is unknown. Next useful preparation is a student explanation/attempt using its recall prompts or relevant historical questions; obtain current scope/date when needed for scheduling. No changes to the agreed weekly agenda were made without those constraints.
-
-
-
-
-
-Use actual effort to adjust workload; weekly hours are experimental, not a quota. After meaningful confirmed work, update only this memory with concise state/gaps/evidence and links. Global state needs updates only for cross-course scheduling or priorities. Prefer updating existing topic/exercise records over appending repetitive session summaries. Keep meaningful assessment evidence and decision history, references, provenance and unresolved gaps; do not discard useful historical evidence merely to shorten the file.
-
-
-
-
+Link the latest study evidence and next action here. Use the roadmap tracker for A–H readiness and errors, and global state for cross-course priorities and dated commitments.
 
 ## 11. Last update and source-verification history
+
+- **2026-11-24, workflow alignment:** copied the two supplied v1.1 Module 2 documents into Assets and read them alongside the current compendium and the assessment/scheduling excerpts from L8 and L12. Confirmed both question-bank filenames locally and retained the screening provenance in the roadmap. No additional question-bank audit, official booking check or learning assessment.
 
 
 
@@ -327,6 +296,7 @@ Use actual effort to adjust workload; weekly hours are experimental, not a quota
 - **2026-11-15, lesson-10 source inventory check:** inspected [NET LESSON 10.md](<NET LESSON 10 DRAFT DURING LECTURE.md>), [lesson-10 transcript](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 10 transcripted.md>), `NI02` slide titles, `NI_Notebook.pdf` TOC and the newly added [NI_L3-2026-11-09.pdf](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI_L3-2026-11-09.pdf>) (6 sketch pages). Recorded `NI-L10` and Lesson-10 inventory mapping without changing study, proficiency or global schedule statuses. (Also observed `LAB 5.md` and `LAB 4 Transcription.md` in local directories during listing; contents not inspected.)
 - **2026-11-15, requested lesson-9 style and visualization revision:** fixed standalone numbered headings (`### 1`–`### 4`), restructured the inverted multiplexing/WDM/physics flow, normalized embed widths, and replaced two dark-mode screenshots inline with two inspected local SVGs while keeping originals on disk and updating `NET INDICE.md`. Study time (`undefined`), proficiency status and global planning files remain unchanged.
 - **2026-11-22, Lesson-11 / NI03 inventory check and `NET UNICO MODULE 2.md` creation & audit:** inspected Lesson-11 sources ([NI_L4-2026-11-16.pdf](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI_L4-2026-11-16.pdf>), [network lesson 11 transcripted.md](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 11 transcripted.md>), `NI02` PDF pp. 30–42), observed [NI03 - Multi Protocol Label Switching.pdf](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI03 - Multi Protocol Label Switching.pdf>) (45 PDF pages, Ch. 3 in `NI_Notebook.pdf`, pending lecture) and existing `SECOND MODULE/` notes (`NET LESSON 10.md`, `NET LESSON 10 gemini.md`, `NET LESSON 11.md`), created standalone AI-assisted synthesis [NET UNICO MODULE 2.md](<../../NETWORK/SECOND MODULE/NET UNICO MODULE 2.md>) linked from [NET INDICE.md](<../../NETWORK/NET INDICE.md>), and completed a full adversarial self-audit against `NI_L1`–`NI_L4`, `NI01`–`NI03`, `L8`–`L11` transcripts and `crittografia unico.md` (closing Part I–III causal/diagram gaps, fixing Slide 9 / static-WDM framing, and expanding Part III & Wooclap checkpoints). Formatting, standalone constraints and LaTeX parity validated (`92,155` bytes, `594` lines, zero errors); study time, proficiency statuses and global planning (`STUDY_STATE.md`) remain unchanged.
+- **2026-11-24, Lesson-12 source inventory & `NET UNICO MODULE 2.md` update:** inspected newly supplied [NI_L5-2026-11-23.pdf](<../../NETWORK/Assets/SLIDES/SECOND MODULE/NI_L5-2026-11-23.pdf>) (5 sketch pages), [network lesson 12 transcripted.md](<../../NETWORK/Assets/TRANSCRIPTION NETWORK/network lesson 12 transcripted.md>) (49,923 bytes), [NET LEZIONE 12.md](<../../NETWORK/SECOND MODULE/NET LEZIONE 12.md>) (16-line partial student draft), `NI02` Slide 41 and `NI03` Slides 1–14. Recorded `NI-L12`, updated `NI-MPLS` (`Slides 1–14` verified, `15–44` pending L13+), noted attributed Friday theoretical-lecture schedule shift (`L12` line 255), and updated [NET UNICO MODULE 2.md](<../../NETWORK/SECOND MODULE/NET UNICO MODULE 2.md>) (`98,644` bytes, `622` lines; Markdown/LaTeX/standalone validated). Preserved `NET LEZIONE 12.md` untouched; active study time, proficiency statuses and `STUDY_STATE.md` remain unchanged.
 
 - When explicitly asked to update, inspect accessible identified official sources and relevant local materials, compare inventories, and record newly observed lectures, labs, exercises or deadlines with dates/provenance. Keep publication distinct from import and organizational changes distinct from learning. Report priority impacts, preserve failed checks separately, and request missing sources just in time. **No continuous monitoring is configured.**
 

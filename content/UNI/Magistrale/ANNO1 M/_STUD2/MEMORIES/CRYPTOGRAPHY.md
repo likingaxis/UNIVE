@@ -2,16 +2,20 @@
 
 
 
-Last update: **2026-11-18**, Europe/Rome: requested editorial cleanup, prose restructuring (avoiding bullet fragments and em-dashes for continuous study reading) and SVG pass on [CR LESSON 8.md](<CR LESSON 8.md>) verified against all 12 local slide pages and the full transcript; all eight `CR_L8_*.svg` diagrams checked and embedded. Study duration, independent verification and exercise/proof performance without hints remain unconfirmed/pending. Earlier 2026-11-17 lesson-7 rewrite, 2026-11-12 lesson-6 completion (~120 active min) and CR-S2's 8 Nov inventory (PDFs 1–11) remain unchanged. Initialized with authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md), [STUDY_PLAN.md](../STUDY_PLAN.md) and [STUDY_STATE.md](../STUDY_STATE.md).
+Latest workflow update: **2026-11-24 (Europe/Rome)**. Adopted the course charter and exam roadmap (§2).
+
+**2026-11-18 source and editorial update:** requested editorial cleanup, prose restructuring (avoiding bullet fragments and em-dashes for continuous study reading) and SVG pass on [CR LESSON 8.md](<CR LESSON 8.md>) verified against all 12 local slide pages and the full transcript; all eight `CR_L8_*.svg` diagrams checked and embedded. Study duration, independent verification and exercise/proof performance without hints remain unconfirmed/pending. Earlier 2026-11-17 lesson-7 rewrite, 2026-11-12 lesson-6 completion (~120 active min) and CR-S2's 8 Nov inventory (PDFs 1–11) remain unchanged. Initialized with authorization on 2026-11-04. Follow [AGENTS.md](../../AGENTS.md), [STUDY_PLAN.md](../STUDY_PLAN.md) and [STUDY_STATE.md](../STUDY_STATE.md).
 
 
 ## 1. Course identity and current status
 
-**Current handoff, 2026-11-12:** the student now reports lesson-6 study finished, superseding the earlier intention to start it in another chat. Active study time is approximately 120 minutes by student estimate. The supplied draft and requested cleanup establish written work; authorship/tutor contribution before cleanup and independent performance remain unconfirmed. Keep earlier lesson-5 recall needs separate rather than inferring that every marked point was resolved.
+**Fresh-start handoff, 2026-11-24.** The roadmap schedules W1 on 24–27 November. No W0 or W1 attempt, readiness result or actual time is recorded in this memory. Start from the latest student handoff if available. Otherwise briefly check the prerequisites from M0/M1 before starting M2. Existing study reports remain evidence of the work reported at the time.
+
+**Earlier handoff, 2026-11-12:** the student now reports lesson-6 study finished, superseding the earlier intention to start it in another chat. Active study time is approximately 120 minutes by student estimate. The supplied draft and requested cleanup establish written work; authorship/tutor contribution before cleanup and independent performance remain unconfirmed. Keep earlier lesson-5 recall needs separate rather than inferring that every marked point was resolved.
 
 
 
-Cryptography (Crypto), MSc Cybersecurity, Sapienza, 2026/27. **User-reported, 2026-11-05:** lecture-1 study and first draft are confirmed complete by the student, with an approximate 10:00–12:00 session window (very rough recollection). Student reports completing lesson-2 study at 17:22 after starting at 15:17 (Europe/Rome): 125 elapsed minutes, roughly 20 minutes distracted and about 105 estimated active minutes. The earlier statement of proceeding was an intention, not evidence of an earlier start. At that point, hashing/pairwise independence was not well understood and exercises had not been independently attempted. **User-reported, 2026-11-06:** lesson 2's second part has now been revisited for approximately 30 active minutes and is reported understood; the student chooses lesson 3 as the next Crypto activity. No fresh unaided explanation, exercise result or tutor report was supplied with this update. Understanding and exercise performance are not independently verified. Current attendance remains paused per the 2026-11-04 report. Recover foundations before resuming when attendance becomes educationally useful; completing the entire backlog is not required. Preserve the student's draft.
+Cryptography (Crypto), MSc Cybersecurity, Sapienza, 2026/27. **User-reported, 2026-11-05:** lecture-1 study and first draft are confirmed complete by the student, with an approximate 10:00–12:00 session window (very rough recollection). Student reports completing lesson-2 study at 17:22 after starting at 15:17 (Europe/Rome): 125 elapsed minutes, roughly 20 minutes distracted and about 105 estimated active minutes. The earlier statement of proceeding was an intention, not evidence of an earlier start. At that point, hashing/pairwise independence was not well understood and exercises had not been independently attempted. **User-reported, 2026-11-06:** lesson 2's second part has now been revisited for approximately 30 active minutes and is reported understood; the student chooses lesson 3 as the next Crypto activity. No fresh unaided explanation, exercise result or tutor report was supplied with this update. Understanding and exercise performance are not independently verified. The most recent recorded attendance decision is the 2026-11-04 pause. Preserve the student's draft.
 
 
 
@@ -19,15 +23,13 @@ Cryptography (Crypto), MSc Cybersecurity, Sapienza, 2026/27. **User-reported, 20
 
 
 
-- Develop intuition, then precise probability reasoning, formal definitions, theorem assumptions, constructions, proof reconstruction and security reductions. Introduce independent exercises early.
+Use the [Cryptography Study Method Charter](../../CRYPTOGRAPHY/Assets/Cryptography_Study_Method_Charter.md) v1.0 and [Exam Roadmap](../../CRYPTOGRAPHY/Assets/Cryptography_Exam_Roadmap_Nov2026_Jan2027.md) v1.0, both dated 18 November 2026 and supplied by the student. The charter sets the teaching method. Use the roadmap for the current week, sequence, depth of proofs and exercise selection. Its §2 makes [the L1–L13 compendium](../../CRYPTOGRAPHY/crittografia_L1_L13.md) the working map for those lectures and [the Bianco dispensa](../../CRYPTOGRAPHY/Assets/MATERIALE_STUDENTI/Cryptography.pdf) a secondary explanation. Use current slides and transcripts for the professor's treatment. The [Post-L13 synthesis](../../CRYPTOGRAPHY/crittografia_post_L13.md) remains provisional until aligned with 2026/27 material.
 
-- Recover missed material in conceptual blocks using official slides and available transcripts with ChatGPT as primary tutor. The student reconstructs the explanation and writes the first substantive Markdown; ChatGPT reviews accuracy, completeness and English. Codex organizes sources, progress and planning; Gemini is optional editorial support.
+- Start with a short diagnostic of the prerequisites needed for this block. Explain in English from intuition to definition or security game, then proof strategy and an active student attempt. Preserve the professor's notation and justify probability, simulation and advantage steps. Use Italian for organization.
+- Practice theory, proofs and authentic professor questions in the same week. Let the student attempt first. Escalate from a guiding question to a hint, a proof outline and a full correction after an authentic attempt. Use new variants to diagnose specific gaps or check unaided transfer.
+- The student writes [CR UNICO](<../../CRYPTOGRAPHY/CR UNICO.md>) in their own words, using selected definitions, explanations and short proof skeletons. Use the compendium for detailed reference and keep a compact error log for practice. On request, edit the student's draft for English, readability and Obsidian/LaTeX formatting, preserving assumptions, notation and proof steps. Flag substantive gaps separately. Distinguish proofs shown, sketched, assigned and omitted. Record Theory/Proof/Exam readiness from actual evidence, then use the Friday checkpoint to proceed, repair a prerequisite or carry forward a specific gap. The roadmap's tracker is the working record when a session update is authorized.
 
-- Respect prerequisites without requiring perfect mastery of every proof before advancing. Move from secrecy/authentication and probability foundations toward computational security, OWFs, PRGs, PRFs and security constructions as understanding permits.
-
-- Attempt definitions, proofs and exercises independently before progressive hints. Record assistance; retry assisted work later unaided. Do not generate complete notes to replace reasoning. Use brief distributed recall; detailed methodology stays in the plan.
-
-### Writing and correcting Crypto lectures — agreed 12 November 2026
+### Writing and correcting existing Crypto notes — agreed 12 November 2026
 
 Use [the reviewed lesson 5](<CR LESSON 5.md>) as the style reference, together with [Study Notes](../../study-notes/SKILL.md) and its [writing-quality guide](../../study-notes/references/writing-quality.md).
 
@@ -193,23 +195,15 @@ No separate exercise/homework or past-paper files were found locally. Lecture 10
 
 
 
-**2026/27 exam format: not yet verified.** Components, duration, grading, permitted materials, dates and deadlines are unknown. The draft mentions three parts, each with an exercise and theory question: preserve this as an **unverified local note**, not a current rule. CR-S1 is the official starting point; no specific current exam instruction or representative past paper has been inspected.
+**Working format for 2026/27.** The student-supplied charter §2 and roadmap §1 report a **3-hour written exam with 3 exercises and 3 open questions, without books, notes or devices**. Use it to practise written definitions, constructions, proofs, reductions and explicit refutations. These requirements are attributed to the supplied study documents. The earlier lesson-1 draft's description is historical, and the record has no independent official confirmation of the current administrative arrangements.
 
-
-
-Provisional preparation emphasis: definitions, formal proofs, mathematical exercises and security reasoning. These are learning priorities, not confirmed question types.
-
-
-
-At substantial study/exam preparation, check available official current instructions and relevant exercises/past papers. If needed, request a specific representative Crypto paper or professor instruction to calibrate reasoning and assessment demands. Analyze sample competencies, difficulty and patterns; distinguish historical inferences from confirmed current requirements. Propose adjustments to §2 and record sources, year, dates and uncertainty here. Old papers never guarantee the current format; do not request every course's materials upfront.
-
-
+**Date and open rules.** The roadmap plans for **11–13 January 2027**, exact date pending confirmation. Booking, grading details and exact Post-L13 depth remain open. Use authentic past questions to calibrate difficulty and technique. Check non-official solutions mathematically after the student has attempted the exercise, and retain their provenance.
 
 ## 9. Current learning gaps and difficulties
 
 
 
-Foundation recovery is needed, user-reported; precise weaknesses in probability, notation, definitions or proofs remain **unknown pending diagnosis**. The previously observed transcript is absent from the latest inventory; current exam requirements remain unresolved. Do not treat rough wording in the draft as a verified misconception without checking the student's reasoning.
+Foundation recovery is needed, user-reported; precise weaknesses in probability, notation, definitions or proofs remain **unknown pending diagnosis**. Use §8 for the working exam format and unresolved rules. Do not treat rough wording in the draft as a verified misconception without checking the student's reasoning.
 
 
 
@@ -229,16 +223,11 @@ Foundation recovery is needed, user-reported; precise weaknesses in probability,
 
 
 
-1. **Lesson 6 is studied by report.** Next useful check: independently reconstruct one of its reductions and distinguish the Goldreich–Levin intuition from the full theorem. Use the corrected note and sources as references afterward; select the next lesson incrementally when the student chooses to proceed. No next study window is booked and no independent proficiency is inferred.
-2. Apply the writing/correction method in §2: outline the flow, work through one conceptual block at a time, let the student reconstruct it, and correct requested notes with explicit assumptions, constructions and proof boundaries. The lesson-5 Theorem-2 proof and hard-core definition are reference examples, not a requirement to reproduce that lesson's hybrid structure in every later proof.
-3. Retain separate review needs: an unaided reconstruction of stretch amplification on another iteration count; the hard-core/OWP connection and fixed-predicate example as needed; earlier lesson-1 checks, MAC exercises and lesson-3 seed-reuse review. The guided discussion and source audit do not establish independent mastery. Do not infer whole-lesson completion or study times for lessons 3–4.
-4. Request only a specific missing resource needed for the next block, after inspecting what exists. Acquire incrementally; do not bulk-download later material. Continue to record reported active time and assistance separately from outcomes, and reassess attendance readiness from actual prerequisites. No new schedule, attendance change or reminder is configured by this handoff.
+1. Resume at the latest evidenced roadmap block. For 24–27 November the planned sequence is M2 statistical MAC/pairwise independence, M2 extraction/LHL and M3 computational foundations. If W0 evidence is missing, check perfect secrecy, OTP and the relevant probability prerequisites briefly, then repair specific gaps.
+2. Use roadmap §§6–8 for original questions, proof depth and checkpoints. Keep earlier review points on stretch amplification, hard-core predicates, the L6 reductions and seed reuse as targeted checks when they are prerequisites. Earlier notes and guided work retain their recorded status.
+3. During Friday review, record T/P/E with the task, result and assistance. Select the next small task and delayed recall from the evidence. Use later current-year sources as available and preserve the distinction between planned and actual work.
 
-
-
-Update only this memory after meaningful confirmed changes. Link to work instead of copying explanations; global state changes only for cross-course priorities/scheduling. Prefer updating existing topic/exercise records over appending repetitive session summaries. Keep meaningful assessment evidence and decision history, references, provenance and unresolved gaps; do not discard useful historical evidence merely to shorten the file.
-
-
+Keep the latest handoff and evidence links here. Update global state only for consequences that affect other courses, dates or scheduling.
 
 ### Initial activity record — 5 November 2026
 
@@ -285,6 +274,8 @@ Update only this memory after meaningful confirmed changes. Link to work instead
 | Crypto theory/proofs: lesson 6 and existing draft; requested editorial/SVG cleanup | Not separately estimated | About 120 min, rough student estimate (“I think”); start/end not supplied | Student explicitly reports finishing lesson 6; note covers the universal-predicate counterexample, Goldreich–Levin and one-time PRG-OTP game hopping. Editorial cleanup and source/figure checks completed. No unaided proof/exercise outcome supplied. | Study/tutor assistance and prior draft authorship unconfirmed; Codex editorial/illustration assistance recorded separately. Draft requests merged proof versions and a compacted example, without establishing a diagnosed misconception. No interruptions reported. | Brief independent reduction reconstruction and targeted earlier recall; choose the next block from its actual sources. This single mixed theory/proof estimate is not an independent-exercise pace estimate. |
 
 ## 11. Last update and source-verification history
+
+- **2026-11-24, workflow alignment:** matched the existing roadmap in Assets to the supplied Desktop copy and added the unmodified charter. Read both, checked the working compendium's L13 boundary, and recorded the reported exam format and provisional dates. No fresh official-calendar verification or study attempt recorded.
 
 - **2026-11-18, ChatGPT study compendium (`crittografia unico.md` + split `L1–13` / `post-L13`) and updated local inventory:** at the student's explicit request, created [crittografia unico.md](<../../CRYPTOGRAPHY/crittografia unico.md>) (~296.8k chars, 40.9k words) plus the two split files [crittografia_L1_L13.md](<../../CRYPTOGRAPHY/crittografia_L1_L13.md>) (208.6k chars, verified L1–13) and [crittografia_post_L13.md](<../../CRYPTOGRAPHY/crittografia_post_L13.md>) (88.6k chars, provisional Bianco 2025/26 post-L13) as AI-assembled standalone Markdown + LaTeX references for ChatGPT (NOT student-authored `UNICO` syntheses and establishing no learning/mastery beyond §5–§9), highlighting verbatim exam-calibration, omitted-proof, homework, and proof-strategy cues from transcripts `3–10, 12–13` and `L11` slides (no local transcript for L1–L2, L11). Synthesizes Lectures 1–13 from [PRE SWERS](<../../CRYPTOGRAPHY/PRE SWERS>) (`CR LESSON 1–8.md`), local 2026/27 slide PDFs `01–09, 11–12` (plus `13` rendered slide pages), local transcripts `3–10, 12–13` (no transcript for L1–L2, L11; no slide PDF for L10), Simone Bianco's `Cryptography.pdf`, Davide's `APPUNTI_DAVIDE/`, and Laurenti's notes, fixing identified Bianco errors/omissions and solving L10 homework Exercises 2b and 4; Part V adapts Bianco §4.7 end, §4.8, and Ch. 5–9 with audited fixes and explicit provisional provenance (unverified against future 2026/27 lectures). Also observed locally that `CR LESSON 1–8.md` were moved into `CRYPTOGRAPHY/PRE SWERS/` and an empty `Pianificazione.md` exists; no remote source check, study duration, or independent assessment recorded.
 
