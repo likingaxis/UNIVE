@@ -130,21 +130,26 @@ For a fixed message length $\ell$, the OTP uses:
 $$\mathcal{K} = \mathcal{M} = \mathcal{C} = \{0,1\}^{\ell}$$
 We want to prove that:
 $$\boxed{\forall k\in\mathcal K,\ \forall m\in\mathcal M: \operatorname{Dec}(k,\operatorname{Enc}(k,m))=m}$$
-We know that $\operatorname{Enc}(k,m)=k\oplus m$ and $\operatorname{Dec}(k,c)=k\oplus c$, so substituting gives $\operatorname{Dec}(k,\operatorname{Enc}(k,m)) = k\oplus(k\oplus m)$.
+We know that $\operatorname{Enc}(k,m)=k\oplus m$ and $\operatorname{Dec}(k,c)=k\oplus c$, so substituting gives:
+$$\operatorname{Dec}(k,\operatorname{Enc}(k,m)) = k\oplus(k\oplus m)$$
 
 > [!tip]- XOR properties
 > ![[CR_UNICO_xor_properties.svg|540]]
 
-Let $\Pi=(\operatorname{Enc},\operatorname{Dec})$ be the One-Time Pad scheme over $\{0,1\}^{\ell}$. For every $k,m\in\{0,1\}^{\ell}$, we have:
+Let $\Pi=(\operatorname{Enc},\operatorname{Dec})$ be the One-Time Pad scheme over $\{0,1\}^{\ell}$.
+For every $k,m\in\{0,1\}^{\ell}$, we have:
 $$\begin{aligned} \operatorname{Dec}(k,\operatorname{Enc}(k,m)) &= k\oplus(k\oplus m)\\ &= (k\oplus k)\oplus m\\ &= 0^\ell\oplus m\\ &= m \end{aligned}$$
-The second equality follows from associativity, the third from the self-inverse property, and the fourth from the identity property of XOR. Since the equality holds for arbitrary $k$ and $m$, the One-Time Pad satisfies correctness. $\square$
+The second equality follows from associativity, the third from the self-inverse property, and the fourth from the identity property of XOR.
+Since the equality holds for arbitrary $k$ and $m$, the One-Time Pad satisfies correctness. $\square$
 
 #### OTP perfect secrecy proof strategy
 Because we know that perfect secrecy can also be demonstrated using statement **(iii)** of Theorem 1.1:
 $$\forall m_0,m_1\in\mathcal M,\ \forall c\in\mathcal C: \qquad \Pr_K[\operatorname{Enc}(K,m_0)=c] = \Pr_K[\operatorname{Enc}(K,m_1)=c]$$
 in the One-Time Pad we have $C = K \oplus M$, where $K$ is chosen uniformly at random from $\{0,1\}^{\ell}$, independently of $M$.
 
-Let $m_0,m_1\in\{0,1\}^{\ell}$ be arbitrary plaintexts and let $c\in\{0,1\}^{\ell}$ be an arbitrary ciphertext. For each plaintext $m_i$, the equation $K\oplus m_i=c$ holds exactly when $K=c\oplus m_i$. Since $K$ is uniformly distributed over $\{0,1\}^{\ell}$, we obtain:
+Let $m_0,m_1\in\{0,1\}^{\ell}$ be arbitrary plaintexts and let $c\in\{0,1\}^{\ell}$ be an arbitrary ciphertext.
+For each plaintext $m_i$, the equation $K\oplus m_i=c$ holds exactly when $K=c\oplus m_i$.
+Since $K$ is uniformly distributed over $\{0,1\}^{\ell}$, we obtain:
 $$\begin{aligned} \Pr_K[\operatorname{Enc}(K,m_0)=c] &= \Pr_K[K=c\oplus m_0]\\ &= 2^{-\ell} \end{aligned}$$
 Similarly:
 $$\begin{aligned} \Pr_K[\operatorname{Enc}(K,m_1)=c] &= \Pr_K[K=c\oplus m_1]\\ &= 2^{-\ell} \end{aligned}$$
@@ -261,3 +266,132 @@ $$\operatorname{Adv}_{\mathcal{A}} = \left| \Pr_K[\operatorname{Enc}(K, m_1) = c
 This contradicts game-based perfect secrecy, which requires $\operatorname{Adv}_{\mathcal{A}} = 0$ for every adversary.
 Therefore, game-based perfect secrecy implies Theorem 1.1(iii), and hence Shannon perfect secrecy. $\blacksquare$
 
+## Message Authentication Codes (MACs)
+We have already seen the One-Time Pad and perfect secrecy.
+Neither of them ensures **integrity** (protection against modifications by Eve); they only provide **confidentiality** (Eve cannot decipher the message).
+To achieve integrity, we need a **Message Authentication Code (MAC)**.
+The MAC construction we study here is deterministic.
+
+A MAC works using a tag computed from a secret key shared between Alice and Bob.
+Notice that both the message $m$ and the tag $\tau$ are sent **in the clear** (publicly), because here we care only about integrity, not confidentiality.
+Formally, a MAC is defined by a tagging algorithm:
+$$\boxed{\operatorname{Tag}: \mathcal{K} \times \mathcal{M} \rightarrow \mathcal{T}}$$
+Alice computes $\tau = \operatorname{Tag}(k, m)$ and sends $(m, \tau)$.
+Bob receives $(m', \tau')$, recomputes $\operatorname{Tag}(k, m')$, and accepts if and only if $\operatorname{Tag}(k, m') = \tau'$.
+They carry primes ($'$) because Eve may have altered them on the channel.
+
+![[CR_UNICO_mac_model.svg|640]]
+
+### Forgery attack on an OTP-based MAC
+Suppose we try to build a MAC using the One-Time Pad operation:
+$$\operatorname{Tag}(k, m) = k \oplus m$$
+Then an adversary $\mathcal{A}$ can forge a valid tag after seeing a single message-tag pair $(m, \tau)$:
+1. $\mathcal{A}$ obtains a valid pair $(m, \tau)$, where $\tau = k \oplus m$, and recovers the secret key:
+$$k = \tau \oplus m$$
+2. $\mathcal{A}$ chooses any new message $m' \neq m$ and computes its valid tag:
+$$\tau' = k \oplus m'$$
+Thus $\mathcal{A}$ produces a valid forgery $(m', \tau')$ with $\Pr[\mathcal{A} \text{ wins}] = 1$.
+Does this mean MACs in general are insecure?
+No: it only means the One-Time Pad is not a valid construction for a MAC.
+
+### One-time $\varepsilon$-statistical MAC security
+Regarding forgery, no deterministic MAC can be completely unforgeable ($\varepsilon = 0$).
+There is always at least a small probability that Eve guesses a valid tag $\tau'$ such that $\tau' = \operatorname{Tag}(k, m')$.
+Therefore, we cannot require $\varepsilon = 0$; instead, we use a small error parameter $\varepsilon$ to define **one-time $\varepsilon$-statistical security**.
+
+Formally, consider a deterministic MAC $\operatorname{Tag}: \mathcal{K} \times \mathcal{M} \rightarrow \mathcal{T}$ where $K$ is uniformly distributed over $\mathcal{K}$.
+The MAC is **one-time $\varepsilon$-statistically secure** if, for every pair of distinct messages $m, m' \in \mathcal{M}$ ($m \neq m'$) and every pair of tags $\tau, \tau' \in \mathcal{T}$ for which the conditioning event has positive probability:
+$$\boxed{\Pr_K\left[ \underbrace{\operatorname{Tag}(K,m')=\tau'}_{\text{successful forgery}} \;\middle|\; \underbrace{\operatorname{Tag}(K,m)=\tau}_{\text{known information}} \right]\leq\varepsilon}$$
+This conditional probability asks: given that Eve already knows $\operatorname{Tag}(K, m) = \tau$, what is the probability that $\tau'$ is a valid tag for $m'$?
+Eve attempts to produce a valid tag $\tau'$ for a new message $m' \neq m$.
+She does not necessarily try to recover the secret key; however, because she does not know which secret key $K$ was sampled by the challenger, her success probability depends on the remaining uncertainty about $K$.
+
+### Expressing MAC security as a game
+![[CR_UNICO_mac_game.svg|640]]
+
+Equivalently, a MAC construction is **one-time $\varepsilon$-statistically secure** if, for **every computationally unbounded** adversary $\mathcal{A}$:
+$$\boxed{\Pr[\mathcal{A}\text{ wins}]\leq\varepsilon}$$
+where $\mathcal{A}$ wins if it outputs $(m', \tau')$ such that $m' \neq m$ and $\operatorname{Tag}(k, m') = \tau'$.
+
+### Pairwise-independent hash families
+After defining MAC security formally, we want to construct a MAC that achieves the optimal security bound:
+$$\varepsilon=\frac{1}{|\mathcal T|}$$
+
+Let $\mathcal{H} = \{h_k : \mathcal{M} \rightarrow \mathcal{T}\}_{k\in\mathcal{K}}$ be a family of deterministic hash functions indexed by a key $k \in \mathcal{K}$.
+We say that $\mathcal{H}$ is **pairwise independent** if, for every pair of distinct messages $m, m' \in \mathcal{M}$ ($m \neq m'$) and every pair of tags $\tau, \tau' \in \mathcal{T}$:
+$$\boxed{\Pr_{K\gets\mathcal K}\big[h_K(m)=\tau \land h_K(m')=\tau'\big] = \frac{1}{|\mathcal T|^2}}$$
+where $K$ is sampled uniformly at random over $\mathcal{K}$ and each $h_k$ is deterministic.
+This suggests defining the MAC simply as $\operatorname{Tag}(k, m) = h_k(m)$.
+
+#### Theorem 2.3: Pairwise independence $\implies$ one-time MAC security
+Define $\operatorname{Tag}(k, m) = h_k(m)$, where $\mathcal{H} = \{h_k : \mathcal{M} \rightarrow \mathcal{T}\}_{k\in\mathcal{K}}$ is pairwise independent:
+$$\Pr_K\big[h_K(m)=\tau \land h_K(m')=\tau'\big] = \frac{1}{|\mathcal T|^2}$$
+We want to prove the conditional forgery bound for every distinct $m, m' \in \mathcal{M}$ and every $\tau, \tau' \in \mathcal{T}$:
+$$\Pr_K\big[h_K(m')=\tau' \mid h_K(m)=\tau\big] \le \frac{1}{|\mathcal T|}$$
+
+**Proof.**
+Apply the definition of conditional probability:
+$$\Pr_K\big[h_K(m')=\tau' \mid h_K(m)=\tau\big] = \frac{\Pr_K\big[h_K(m')=\tau' \land h_K(m)=\tau\big]}{\Pr_K\big[h_K(m)=\tau\big]}$$
+For the numerator, pairwise independence directly gives:
+$$\Pr_K\big[h_K(m')=\tau' \land h_K(m)=\tau\big] = \frac{1}{|\mathcal T|^2}$$
+For the denominator, fix $m$ and $\tau$ and marginalize (sum) over all possible outputs $\tau' \in \mathcal{T}$ of $h_K(m')$ on the distinct message $m' \neq m$:
+$$\Pr_K\big[h_K(m)=\tau\big] = \sum_{\tau'\in\mathcal T} \Pr_K\big[h_K(m)=\tau \land h_K(m')=\tau'\big] = \sum_{\tau'\in\mathcal T} \frac{1}{|\mathcal T|^2} = |\mathcal T|\cdot\frac{1}{|\mathcal T|^2} = \frac{1}{|\mathcal T|}$$
+Since $\frac{1}{|\mathcal{T}|} > 0$, the conditioning event has positive probability.
+Substituting numerator and denominator yields:
+$$\begin{aligned} \Pr_K\big[h_K(m')=\tau'\mid h_K(m)=\tau\big] &= \frac{\Pr_K\big[h_K(m')=\tau'\land h_K(m)=\tau\big]}{\Pr_K\big[h_K(m)=\tau\big]}\\[6pt] &= \frac{1/|\mathcal T|^2}{1/|\mathcal T|}\\[6pt] &= \frac{1}{|\mathcal T|} \end{aligned}$$
+Therefore, a pairwise-independent hash family defines a one-time statistically secure MAC with the optimal bound:
+$$\boxed{\varepsilon=\frac{1}{|\mathcal T|}}\qquad\square$$
+
+### Affine hashing
+We have not yet defined a concrete hash family.
+An example is **affine hashing** over $\mathbb{Z}_p$, where $p$ is a public prime number:
+$$\begin{aligned} \mathcal M &= \mathbb Z_p\\ \mathcal T &= \mathbb Z_p\\ \mathcal K &= \mathbb Z_p^2 \end{aligned}$$
+The secret key belongs to $\mathbb{Z}_p^2$ because it is a pair:
+$$k = (a, b)$$
+and the hash function is defined as:
+$$\boxed{h_{a,b}(m) = (am + b) \bmod p}$$
+where $a$ and $b$ are sampled independently and uniformly from $\mathbb{Z}_p$.
+
+> [!example]- Concrete intuition: key uncertainty after observing one tag ($p=5$)
+> Knowing one message-tag pair $(m,\tau)$ gives $am + b \equiv \tau \pmod p$, i.e. $b \equiv \tau - am \pmod p$, so every choice of $a$ fixes a unique $b$.
+> For $p=5$, $m=2$, and $\tau=3$, Eve knows $2a+b\equiv 3\pmod 5$:
+>
+> | Possible $a$ | Corresponding $b$ | Candidate key $(a,b)$ |
+> | --- | --- | --- |
+> | $0$ | $3$ | $(0,3)$ |
+> | $1$ | $1$ | $(1,1)$ |
+> | $2$ | $4$ | $(2,4)$ |
+> | $3$ | $2$ | $(3,2)$ |
+> | $4$ | $0$ | $(4,0)$ |
+>
+> Out of $p^2=25$ keys, one observed tag leaves $p=5$ equally likely candidates (matching our conditional-probability analysis of uncertainty about the key).
+
+#### Lemma 2.1: Affine hashing is pairwise independent
+We want to prove that the affine hash family is pairwise independent.
+Assume:
+$$h_{a,b}(m) = (am + b) \bmod p$$
+where $p$ is prime and $(a,b)$ is sampled uniformly from $\mathbb{Z}_p^2$.
+We must prove that for every pair of distinct messages $m \neq m'$ in $\mathbb{Z}_p$ and every pair of tags $\tau, \tau' \in \mathbb{Z}_p$:
+$$\Pr_{a,b}\big[h_{a,b}(m)=\tau \land h_{a,b}(m')=\tau'\big] = \frac{1}{|\mathcal T|^2}$$
+
+**Proof.**
+We start by considering both equations simultaneously:
+$$\begin{cases} am + b \equiv \tau \pmod p\\ am' + b \equiv \tau' \pmod p \end{cases}$$
+To isolate $a$, subtract the second equation from the first:
+$$(am + b) - (am' + b) \equiv \tau - \tau' \pmod p$$
+Simplifying gives:
+$$\boxed{a(m - m') \equiv \tau - \tau' \pmod p}$$
+Since $m \neq m'$ in $\mathbb{Z}_p$, we have $m - m' \not\equiv 0 \pmod p$.
+Because $p$ is prime, every nonzero element in $\mathbb{Z}_p$ has a unique multiplicative inverse modulo $p$, so we can solve uniquely for $a$:
+$$\boxed{a \equiv (\tau - \tau')(m - m')^{-1} \pmod p}$$
+Substituting $a$ into the first equation uniquely fixes $b$ as well:
+$$\boxed{b \equiv \tau - am \pmod p}$$
+Thus, for any fixed distinct messages $m, m'$ and tags $\tau, \tau'$, the system has **exactly one** solution $(a,b) \in \mathbb{Z}_p^2$.
+Since the key space is $\mathcal{K} = \mathbb{Z}_p^2$, its size is:
+$$|\mathcal K| = p^2$$
+All keys are equally likely, so:
+$$\begin{aligned} \Pr_{a,b}\big[h_{a,b}(m)=\tau \land h_{a,b}(m')=\tau'\big] &= \frac{\text{Number of satisfying keys}}{\text{Total number of keys}}\\[6pt] &= \frac{1}{p^2}\\[6pt] &= \frac{1}{|\mathcal T|^2} \end{aligned}$$
+Therefore, the affine hash family is pairwise independent. $\square$
+
+To conclude that the resulting MAC $\operatorname{Tag}((a,b), m) = h_{a,b}(m)$ is one-time statistically secure, we apply **Theorem 2.3**, giving the optimal bound:
+$$\boxed{\varepsilon = \frac{1}{|\mathcal T|} = \frac{1}{p}}\qquad\blacksquare$$

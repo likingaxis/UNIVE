@@ -26,7 +26,7 @@ The customer–provider relationship is recursive because the same entity can ac
 ###### Horizontal relationship
 We have access providers operating in different geographical areas, such as Rome and Milan. To establish communication between their users, they can rely on a transport network managed by another provider, purchasing connectivity services from it.
 The relationship is **horizontal** because it occurs between different network domains, and **recursive** because the same entity can act as both a customer and a provider.
-![[download.svg]]
+![[download 1.svg]]
 ###### Vertical relationship
 In a vertical relationship, we focus on different network layers rather than different geographical or administrative domains.
 For example, an IP network (L3) can request a logical point-to-point connection between two routers from an underlying optical network (L1), which provides the physical connectivity.
