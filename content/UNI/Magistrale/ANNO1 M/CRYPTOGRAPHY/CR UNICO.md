@@ -323,6 +323,9 @@ $$\boxed{\Pr_{K\gets\mathcal K}\big[h_K(m)=\tau \land h_K(m')=\tau'\big] = \frac
 where $K$ is sampled uniformly at random over $\mathcal{K}$ and each $h_k$ is deterministic.
 This suggests defining the MAC simply as $\operatorname{Tag}(k, m) = h_k(m)$.
 
+> [!info]- Another way to view pairwise independence with conditional probability
+> $$\Pr_K[h_K(m')=\tau'\mid h_K(m)=\tau] = \Pr_K[h_K(m')=\tau'] = \frac{1}{|\mathcal T|}$$
+
 #### Theorem 2.3: Pairwise independence $\implies$ one-time MAC security
 Define $\operatorname{Tag}(k, m) = h_k(m)$, where $\mathcal{H} = \{h_k : \mathcal{M} \rightarrow \mathcal{T}\}_{k\in\mathcal{K}}$ is pairwise independent:
 $$\Pr_K\big[h_K(m)=\tau \land h_K(m')=\tau'\big] = \frac{1}{|\mathcal T|^2}$$
@@ -366,6 +369,22 @@ where $a$ and $b$ are sampled independently and uniformly from $\mathbb{Z}_p$.
 >
 > Out of $p^2=25$ keys, one observed tag leaves $p=5$ equally likely candidates (matching our conditional-probability analysis of uncertainty about the key).
 
+> [!info]- Key uncertainty vs. tag uncertainty after observing one tag ($25 \to 5$ vs. $5 \to 5$)
+> Although observing $(m, \tau)$ rules out $20$ of the $25$ keys in $\mathbb{Z}_5^2$, the remaining $5$ candidate keys still map bijectively onto all $5$ possible tags in $\mathcal{T} = \mathbb{Z}_5$ for any fresh message $m' \neq m$.
+> Therefore, Eve's probability of guessing the **key** rises from $1/25$ to $1/5$, while her probability of guessing the **new tag** remains unchanged at $1/5$:
+>
+> | Quantity ($p=5$) | Before observing $\tau$ | After observing $\tau$ |
+> | --- | --- | --- |
+> | Possible keys | $25$ | $5$ |
+> | Possible tags for $m'$ | $5$ | $5$ |
+> | Probability of guessing the key | $1/25$ | $1/5$ |
+> | Probability of guessing the tag | $1/5$ | $1/5$ |
+>
+> ![[CR_UNICO_key_vs_tag_uncertainty.svg|640]]
+>
+> In terms of pairwise independence, observing $\tau = h_K(m)$ does not change the conditional distribution of $h_K(m')$:
+> $$\underbrace{\Pr_K[h_K(m')=\tau'\mid h_K(m)=\tau]}_{\text{After observing }(m,\tau)} = \underbrace{\Pr_K[h_K(m')=\tau']}_{\text{Before observing }(m,\tau)} = \frac{1}{|\mathcal T|}$$
+
 #### Lemma 2.1: Affine hashing is pairwise independent
 We want to prove that the affine hash family is pairwise independent.
 Assume:
@@ -395,3 +414,70 @@ Therefore, the affine hash family is pairwise independent. $\square$
 
 To conclude that the resulting MAC $\operatorname{Tag}((a,b), m) = h_{a,b}(m)$ is one-time statistically secure, we apply **Theorem 2.3**, giving the optimal bound:
 $$\boxed{\varepsilon = \frac{1}{|\mathcal T|} = \frac{1}{p}}\qquad\blacksquare$$
+
+#### Failure of two-time security of affine hashing
+Suppose an adversary $\mathcal{A}$ observes two valid message-tag pairs $(m_1,\tau_1)$ and $(m_2,\tau_2)$ under the same key $(a,b)$, where $m_1 \neq m_2$.
+Using the same reasoning as in the proof of Lemma 2.1, $\mathcal{A}$ subtracts the second equation from the first to eliminate $b$:
+$$a(m_1 - m_2) \equiv \tau_1 - \tau_2 \pmod p$$
+Since $p$ is prime and $m_1 - m_2 \not\equiv 0 \pmod p$, the multiplicative inverse of $m_1 - m_2$ modulo $p$ exists.
+Therefore, $\mathcal{A}$ recovers $a$:
+$$a \equiv (\tau_1 - \tau_2)(m_1 - m_2)^{-1} \pmod p$$
+Substituting $a$ back into the first equation lets $\mathcal{A}$ recover $b$:
+$$b \equiv \tau_1 - am_1 \pmod p$$
+$\mathcal{A}$ now knows the entire secret key $(a,b)$, chooses any fresh message $m_3 \notin \{m_1, m_2\}$, and computes a valid forgery tag:
+$$\tau_3 = (am_3 + b) \bmod p$$
+Since the forged tag is always valid:
+$$\boxed{\Pr[\mathcal A\text{ wins}] = 1}$$
+Therefore, affine hashing is **not** two-time $\varepsilon$-statistically secure for any $\varepsilon < 1$. $\square$
+
+![[CR_UNICO_affine_1_vs_2_tags.svg|640]]
+
+### Two-time statistically secure MAC: quadratic hashing
+To prevent Eve from recovering the secret key after observing two tags, we increase the number of secret key components from $2$ to $3$.
+Moving from $2$ to $3$ coefficients changes the evaluation from a linear polynomial to a **quadratic polynomial**.
+
+![[CR_UNICO_affine_vs_quadratic.svg|640]]
+
+Let $p$ be a public prime number with $p \ge 3$, and define:
+$$\begin{aligned} \mathcal M &= \mathbb Z_p\\ \mathcal T &= \mathbb Z_p\\ \mathcal K &= \mathbb Z_p^3 \end{aligned}$$
+The secret key is a triple sampled uniformly from $\mathbb{Z}_p^3$:
+$$k = (a, b, c)$$
+and the quadratic hash / tagging function is:
+$$\boxed{h_{a,b,c}(m) = (am^2 + bm + c) \bmod p}$$
+
+![[CR_UNICO_two_time_mac_game.svg|640]]
+
+#### Theorem 2.4: Quadratic hashing is two-time $1/p$-statistically secure
+We prove two-time $\frac{1}{p}$-statistical security of $\operatorname{Tag}((a,b,c), m) = h_{a,b,c}(m)$ in two steps: first showing **3-wise independence**, then bounding the conditional forgery probability after two queries.
+
+**Step 1 — Prove 3-wise independence.**
+Fix any three pairwise distinct messages $m_1, m_2, m_3 \in \mathbb{Z}_p$ and any three tags $\tau_1, \tau_2, \tau_3 \in \mathbb{Z}_p$.
+The conditions $h_{a,b,c}(m_i) \equiv \tau_i \pmod p$ for $i \in \{1,2,3\}$ form a linear system in the unknowns $(a, b, c)$ over $\mathbb{Z}_p$:
+$$\begin{pmatrix} m_1^2 & m_1 & 1 \\ m_2^2 & m_2 & 1 \\ m_3^2 & m_3 & 1 \end{pmatrix} \begin{pmatrix} a \\ b \\ c \end{pmatrix} \equiv \begin{pmatrix} \tau_1 \\ \tau_2 \\ \tau_3 \end{pmatrix} \pmod p$$
+This is a $3 \times 3$ Vandermonde matrix whose determinant is:
+$$\det = (m_1 - m_2)(m_1 - m_3)(m_2 - m_3)$$
+Because $m_1, m_2, m_3$ are pairwise distinct and $p$ is prime, each factor is nonzero modulo $p$, so $\det \not\equiv 0 \pmod p$ is invertible in $\mathbb{Z}_p$.
+Therefore, there exists **exactly one** key $(a,b,c) \in \mathbb{Z}_p^3$ satisfying all three equations.
+Since $|\mathcal{K}| = p^3$ and all keys are equally likely:
+$$\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2 \land h_{a,b,c}(m_3)=\tau_3\big] = \frac{1}{p^3} = \frac{1}{|\mathcal T|^3}$$
+
+**Step 2 — Deduce two-time $1/p$-statistical security.**
+Let $m_1, m_2 \in \mathbb{Z}_p$ be the two distinct queried messages ($m_1 \neq m_2$) with observed tags $\tau_1, \tau_2 \in \mathbb{Z}_p$, and let $m_3 \notin \{m_1, m_2\}$ be any fresh message (which exists because $p \ge 3$) with candidate forgery tag $\tau_3 \in \mathbb{Z}_p$.
+To find the denominator probability of the two observed tags, marginalize over all $|\mathcal{T}| = p$ possible values of $\tau_3$ at $m_3$:
+$$\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big] = \sum_{\tau_3\in\mathcal T} \Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2 \land h_{a,b,c}(m_3)=\tau_3\big] = p \cdot \frac{1}{p^3} = \frac{1}{p^2}$$
+Applying conditional probability:
+$$\begin{aligned} \Pr_{a,b,c}\big[h_{a,b,c}(m_3)=\tau_3 \mid h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big] &= \frac{\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2 \land h_{a,b,c}(m_3)=\tau_3\big]}{\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big]}\\[6pt] &= \frac{1/p^3}{1/p^2}\\[6pt] &= \frac{1}{p} \end{aligned}$$
+Thus quadratic hashing achieves two-time statistical security with:
+$$\boxed{\varepsilon = \frac{1}{p}}\qquad\blacksquare$$
+
+### $t$-wise independence and $t$-time MACs
+We can generalize the same idea from $t=1$ (affine) and $t=2$ (quadratic) to any integer $t \ge 1$.
+Let $p$ be a prime number with $p > t$.
+Define the key space as:
+$$\mathcal K = \mathbb Z_p^{t+1}$$
+and sample the secret key uniformly:
+$$k = (a_0, a_1, \ldots, a_t)$$
+The tagging algorithm evaluates a degree-$t$ polynomial modulo $p$:
+$$\boxed{\operatorname{Tag}(k,m) = \left(\sum_{i=0}^{t} a_i m^i\right)\bmod p}$$
+Because any $t+1$ distinct inputs and tags uniquely fix a polynomial of degree at most $t$ over $\mathbb{Z}_p$, this family is **$(t+1)$-wise independent** and achieves $t$-time $\frac{1}{p}$-statistical security.
+The downside is that the key length grows linearly with $t$ (matching the lower bound of at least $(t+1)\lambda$ bits for $t$-time $2^{-\lambda}$-statistical security), so unconditional security cannot support an unbounded number of messages with one short fixed key.

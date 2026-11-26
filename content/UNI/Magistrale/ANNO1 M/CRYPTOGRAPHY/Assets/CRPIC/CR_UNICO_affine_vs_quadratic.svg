@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 285" role="img" aria-labelledby="aq-title aq-desc" font-family="Segoe UI, Arial, sans-serif">
+  <title id="aq-title">Affine Hashing vs. Quadratic Hashing Geometric Intuition</title>
+  <desc id="aq-desc">Left panel: affine polynomial am + b has 2 secret coefficients, so 2 distinct points determine the line uniquely. Right panel: quadratic polynomial am^2 + bm + c has 3 secret coefficients, so 3 distinct points are needed to determine the parabola uniquely. Geometric intuition over R; actual construction operates over finite field Z_p.</desc>
+
+  <rect x="1" y="1" width="798" height="283" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Left panel: Affine -->
+  <rect x="20" y="18" width="368" height="222" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="38" y="28" width="332" height="28" rx="7" fill="#fef2f2" stroke="#dc2626" stroke-width="1.4"/>
+  <text x="204" y="47" text-anchor="middle" font-size="13.5" font-weight="700" fill="#991b1b">
+    Affine hashing: <tspan font-family="Georgia, serif" font-style="italic">am</tspan> + <tspan font-family="Georgia, serif" font-style="italic">b</tspan> (2 coefficients)
+  </text>
+
+  <!-- Axes left -->
+  <line x1="74" y1="112" x2="334" y2="112" stroke="#94a3b8" stroke-width="1.4"/>
+  <line x1="204" y1="66" x2="204" y2="158" stroke="#94a3b8" stroke-width="1.4"/>
+  <!-- Line and 2 points -->
+  <line x1="94" y1="150" x2="314" y2="74" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="149" cy="131" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"/>
+  <circle cx="259" cy="93" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"/>
+
+  <rect x="38" y="170" width="332" height="58" rx="8" fill="#ffffff" stroke="#fca5a5" stroke-width="1.3"/>
+  <text x="204" y="193" text-anchor="middle" font-size="12.5" font-weight="600" fill="#7f1d1d">
+    Two distinct points determine a unique line.
+  </text>
+  <text x="204" y="214" text-anchor="middle" font-size="12" fill="#475569">
+    2 observed tags fix (<tspan font-family="Georgia, serif" font-style="italic">a</tspan>, <tspan font-family="Georgia, serif" font-style="italic">b</tspan>)  ⇒  2-time attack breaks it.
+  </text>
+
+  <!-- Right panel: Quadratic -->
+  <rect x="412" y="18" width="368" height="222" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="430" y="28" width="332" height="28" rx="7" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+  <text x="596" y="47" text-anchor="middle" font-size="13.5" font-weight="700" fill="#065f46">
+    Quadratic hashing: <tspan font-family="Georgia, serif" font-style="italic">am</tspan><tspan baseline-shift="super" font-size="9">2</tspan> + <tspan font-family="Georgia, serif" font-style="italic">bm</tspan> + <tspan font-family="Georgia, serif" font-style="italic">c</tspan> (3 coefficients)
+  </text>
+
+  <!-- Axes right -->
+  <line x1="466" y1="112" x2="726" y2="112" stroke="#94a3b8" stroke-width="1.4"/>
+  <line x1="596" y1="66" x2="596" y2="158" stroke="#94a3b8" stroke-width="1.4"/>
+  <!-- Parabola y = 140 - 0.008*(x-596)^2 (wait: SVG y increases down, so upward parabola has vertex at y=140, ends at x=496,y=72 and x=696,y=72 -> Q 596 208 696 72!) -->
+  <path d="M496 72 Q596 208 696 72" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
+  <!-- Points on quadratic Bezier M496 72 Q596 208 696 72: at t=0.25 (x=546, y=106?), wait: t=0.5 gives x=596, y=0.25*72 + 0.5*208 + 0.25*72 = 36 + 104 = 140! At t=0.25: x=546, y=0.5625*72 + 0.375*208 + 0.0625*72 = 40.5 + 78 + 4.5 = 123! At t=0.75: x=646, y=123! -->
+  <circle cx="546" cy="123" r="6" fill="#059669" stroke="#ffffff" stroke-width="1.5"/>
+  <circle cx="596" cy="140" r="6" fill="#059669" stroke="#ffffff" stroke-width="1.5"/>
+  <circle cx="646" cy="123" r="6" fill="#059669" stroke="#ffffff" stroke-width="1.5"/>
+
+  <rect x="430" y="170" width="332" height="58" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.3"/>
+  <text x="596" y="193" text-anchor="middle" font-size="12.5" font-weight="600" fill="#065f46">
+    Three distinct points fix a polynomial of degree ≤ 2.
+  </text>
+  <text x="596" y="214" text-anchor="middle" font-size="12" fill="#475569">
+    2 observed tags still leave <tspan font-family="Georgia, serif" font-style="italic">p</tspan> curves  ⇒  2-time 1/<tspan font-family="Georgia, serif" font-style="italic">p</tspan>-secure.
+  </text>
+
+  <!-- Bottom note -->
+  <text x="400" y="266" text-anchor="middle" font-size="12" fill="#475569">
+    Geometric intuition over ℝ only; the actual MAC evaluates the polynomial over the finite field ℤ<tspan baseline-shift="sub" font-size="9">p</tspan> (<tspan font-family="Georgia, serif" font-style="italic">p</tspan> ≥ 3 prime).
+  </text>
+</svg>
