@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-labelledby="rp2-title rp2-desc" font-family="Segoe UI, Arial, sans-serif">
+  <title id="rp2-title">Randomness pipeline: many weak bits, then few strong bits, then many pseudorandom bits</title>
+  <desc id="rp2-desc">Left to right. A physical source X (e.g. thermal noise) emits many weak bits that are biased, correlated and partially predictable. Step 1, Extract (this lecture, information-theoretic, e.g. the Von Neumann extractor), narrows them like a funnel into a short, nearly uniform seed. Step 2, Expand with a PRG (later lectures, computational), widens the seed into a long pseudorandom stream that only looks uniform to bounded adversaries. Step 3, Refresh (omitted in this course), is a dashed loop that periodically mixes fresh entropy from the source into the PRG state.</desc>
+  <defs>
+    <marker id="rp2-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0 1L9 5L0 9Z" fill="#8a847b"/></marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="398" rx="14" fill="#fcfbf8" stroke="#e7e2d9" stroke-width="1.5"/>
+  <text x="32" y="38" font-size="10.5" font-weight="700" letter-spacing="1.6" fill="#4338ca">RANDOMNESS EXTRACTION</text>
+  <text x="32" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="21" fill="#1f1d1a">From physical noise to uniform keys</text>
+  <text x="32" y="88" font-size="13" fill="#57534e">many weak bits → few strong bits → many pseudorandom bits</text>
+  <path d="M32 104 H768" stroke="#e7e2d9" stroke-width="1.2"/>
+
+  <!-- phase brackets -->
+  <path d="M32 136 V127 H444 V136" fill="none" stroke="#4338ca" stroke-width="1.4"/>
+  <rect x="104" y="119" width="268" height="16" fill="#fcfbf8"/>
+  <text x="238" y="131" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1.2" fill="#4338ca">THIS LECTURE · INFORMATION-THEORETIC</text>
+  <path d="M456 136 V127 H768 V136" fill="none" stroke="#8a847b" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <rect x="510" y="119" width="204" height="16" fill="#fcfbf8"/>
+  <text x="612" y="131" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1.2" fill="#8a847b">LATER · COMPUTATIONAL</text>
+
+  <!-- step 3 refresh loop (behind) -->
+  <path d="M134 294 V346 H489 V270" fill="none" stroke="#8a847b" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#rp2-arrow)"/>
+
+  <!-- step 1 funnel: Extract -->
+  <path d="M228 156 L330 196 L330 246 L228 286 Z" fill="#eef0fb" stroke="#4338ca" stroke-width="1.6" stroke-linejoin="round"/>
+  <circle cx="280" cy="198" r="11" fill="#4338ca"/>
+  <text x="280" y="202.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">1</text>
+  <text x="280" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#312e81">Extract</text>
+  <text x="280" y="246" text-anchor="middle" font-size="11.5" fill="#4338ca">removes bias</text>
+  <text x="280" y="310" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="12" font-style="italic" fill="#4338ca">e.g. Von Neumann</text>
+
+  <!-- step 2 expander: PRG -->
+  <path d="M438 196 L540 156 L540 286 L438 246 Z" fill="#f1efe9" stroke="#8a847b" stroke-width="1.4" stroke-dasharray="5 4" stroke-linejoin="round"/>
+  <circle cx="489" cy="198" r="11" fill="#8a847b"/>
+  <text x="489" y="202.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">2</text>
+  <text x="489" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#57534e">Expand</text>
+  <text x="489" y="246" text-anchor="middle" font-size="11.5" fill="#8a847b">PRG</text>
+
+  <!-- box A: physical source -->
+  <rect x="32" y="148" width="204" height="146" rx="10" fill="#ffffff" stroke="#d6d0c4" stroke-width="1.3"/>
+  <text x="134" y="172" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1f1d1a">Physical source <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan></text>
+  <text x="134" y="190" text-anchor="middle" font-size="11.5" fill="#8a847b">e.g. thermal noise</text>
+  <g fill="#fdf3dc" stroke="#e6c77a" stroke-width="1"><rect x="45.5" y="200" width="15" height="18" rx="3"/><rect x="63.5" y="200" width="15" height="18" rx="3"/><rect x="81.5" y="200" width="15" height="18" rx="3"/><rect x="99.5" y="200" width="15" height="18" rx="3"/><rect x="117.5" y="200" width="15" height="18" rx="3"/><rect x="135.5" y="200" width="15" height="18" rx="3"/><rect x="153.5" y="200" width="15" height="18" rx="3"/><rect x="171.5" y="200" width="15" height="18" rx="3"/><rect x="189.5" y="200" width="15" height="18" rx="3"/><rect x="207.5" y="200" width="15" height="18" rx="3"/></g>
+  <g font-size="11" font-weight="700" fill="#92600a" text-anchor="middle"><text x="53" y="213.0">0</text><text x="71" y="213.0">0</text><text x="89" y="213.0">1</text><text x="107" y="213.0">0</text><text x="125" y="213.0">0</text><text x="143" y="213.0">0</text><text x="161" y="213.0">1</text><text x="179" y="213.0">0</text><text x="197" y="213.0">0</text><text x="215" y="213.0">0</text></g>
+  <g font-size="11" font-weight="600" fill="#9f1239">
+    <circle cx="44" cy="240" r="3" fill="#e05a6d"/><text x="50" y="244">biased</text>
+    <circle cx="93" cy="240" r="3" fill="#e05a6d"/><text x="99" y="244">correlated</text>
+    <circle cx="162" cy="240" r="3" fill="#e05a6d"/><text x="168" y="244">predictable</text>
+  </g>
+  <text x="134" y="279" text-anchor="middle" font-size="12.5" font-weight="700" fill="#92600a">many weak bits</text>
+
+  <!-- box B: short seed -->
+  <rect x="324" y="168" width="120" height="106" rx="10" fill="#ffffff" stroke="#4338ca" stroke-width="1.6"/>
+  <text x="384" y="191" text-anchor="middle" font-size="14" font-weight="700" fill="#312e81">Short seed</text>
+  <text x="384" y="208" text-anchor="middle" font-size="11.5" fill="#4338ca">nearly uniform</text>
+  <g fill="#4338ca" stroke="#4338ca" stroke-width="1"><rect x="340.5" y="217" width="18" height="20" rx="3"/><rect x="363.5" y="217" width="18" height="20" rx="3"/><rect x="386.5" y="217" width="18" height="20" rx="3"/><rect x="409.5" y="217" width="18" height="20" rx="3"/></g>
+  <g font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle"><text x="349.5" y="231.1">1</text><text x="372.5" y="231.1">0</text><text x="395.5" y="231.1">1</text><text x="418.5" y="231.1">1</text></g>
+  <text x="384" y="261" text-anchor="middle" font-size="12.5" font-weight="700" fill="#312e81">few strong bits</text>
+
+  <!-- box C: long pseudorandom stream -->
+  <rect x="536" y="148" width="232" height="146" rx="10" fill="#ffffff" stroke="#8a847b" stroke-width="1.3" stroke-dasharray="6 4"/>
+  <text x="652" y="172" text-anchor="middle" font-size="14.5" font-weight="700" fill="#57534e">Long pseudorandom stream</text>
+  <text x="652" y="190" text-anchor="middle" font-size="11.5" fill="#8a847b">looks uniform to bounded adversaries</text>
+  <g fill="#fcfbf8" stroke="#d6d0c4" stroke-width="1"><rect x="545.5" y="200" width="15" height="16" rx="3"/><rect x="563.5" y="200" width="15" height="16" rx="3"/><rect x="581.5" y="200" width="15" height="16" rx="3"/><rect x="599.5" y="200" width="15" height="16" rx="3"/><rect x="617.5" y="200" width="15" height="16" rx="3"/><rect x="635.5" y="200" width="15" height="16" rx="3"/><rect x="653.5" y="200" width="15" height="16" rx="3"/><rect x="671.5" y="200" width="15" height="16" rx="3"/><rect x="689.5" y="200" width="15" height="16" rx="3"/><rect x="707.5" y="200" width="15" height="16" rx="3"/><rect x="725.5" y="200" width="15" height="16" rx="3"/><rect x="743.5" y="200" width="15" height="16" rx="3"/></g>
+  <g font-size="10.5" font-weight="700" fill="#8a847b" text-anchor="middle"><text x="553" y="211.8">1</text><text x="571" y="211.8">0</text><text x="589" y="211.8">1</text><text x="607" y="211.8">1</text><text x="625" y="211.8">0</text><text x="643" y="211.8">0</text><text x="661" y="211.8">1</text><text x="679" y="211.8">0</text><text x="697" y="211.8">1</text><text x="715" y="211.8">1</text><text x="733" y="211.8">0</text><text x="751" y="211.8">1</text></g>
+  <g fill="#fcfbf8" stroke="#d6d0c4" stroke-width="1"><rect x="545.5" y="221" width="15" height="16" rx="3"/><rect x="563.5" y="221" width="15" height="16" rx="3"/><rect x="581.5" y="221" width="15" height="16" rx="3"/><rect x="599.5" y="221" width="15" height="16" rx="3"/><rect x="617.5" y="221" width="15" height="16" rx="3"/><rect x="635.5" y="221" width="15" height="16" rx="3"/><rect x="653.5" y="221" width="15" height="16" rx="3"/><rect x="671.5" y="221" width="15" height="16" rx="3"/><rect x="689.5" y="221" width="15" height="16" rx="3"/><rect x="707.5" y="221" width="15" height="16" rx="3"/><rect x="725.5" y="221" width="15" height="16" rx="3"/><rect x="743.5" y="221" width="15" height="16" rx="3"/></g>
+  <g font-size="10.5" font-weight="700" fill="#8a847b" text-anchor="middle"><text x="553" y="232.8">0</text><text x="571" y="232.8">1</text><text x="589" y="232.8">0</text><text x="607" y="232.8">0</text><text x="625" y="232.8">1</text><text x="643" y="232.8">1</text><text x="661" y="232.8">0</text><text x="679" y="232.8">1</text><text x="697" y="232.8">0</text><text x="715" y="232.8">1</text><text x="733" y="232.8">1</text><text x="751" y="232.8">0</text></g>
+  <text x="652" y="257" text-anchor="middle" font-size="16" font-weight="700" fill="#d6d0c4">· · ·</text>
+  <text x="652" y="279" text-anchor="middle" font-size="12.5" font-weight="700" fill="#57534e">many pseudorandom bits</text>
+
+  <!-- step 3 label -->
+  <rect x="252" y="335" width="120" height="22" rx="11" fill="#fcfbf8" stroke="#8a847b" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="312" y="350.5" text-anchor="middle" font-size="12" font-weight="700" fill="#57534e">3 · Refresh</text>
+  <text x="312" y="378" text-anchor="middle" font-size="11.5" fill="#8a847b">periodically mix fresh entropy into the PRG state · omitted in this course</text>
+</svg>

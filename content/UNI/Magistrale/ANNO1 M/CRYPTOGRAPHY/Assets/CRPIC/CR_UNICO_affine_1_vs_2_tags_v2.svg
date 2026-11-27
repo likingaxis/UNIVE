@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 492" role="img" aria-labelledby="af12-title af12-desc" font-family="Segoe UI, Arial, sans-serif">
+  <title id="af12-title">Affine MAC over Z_5: each observed tag shrinks the key space from 25 to 5 to 1 key</title>
+  <desc id="af12-desc">Three 5 by 5 grids of keys (a, b) in Z_5^2, rows a and columns b. No tag seen: all 25 keys are possible and forging is a blind guess, probability 1/5. One tag (m1, tau1) = (2, 3): only the 5 keys on 2a + b = 3 mod 5 survive, one per column, so a new message m' still has 5 possible tags and Pr[forge] is at most 1/5. Two tags, adding (m2, tau2) = (1, 1): the keys on a + b = 1 mod 5 meet the first set only in (a, b) = (2, 4), so the adversary computes tau3 = (2 m3 + 4) mod 5 and forges with probability 1.</desc>
+  <rect x="1" y="1" width="798" height="490" rx="14" fill="#fcfbf8" stroke="#e7e2d9" stroke-width="1.5"/>
+  <text x="32" y="38" font-size="10.5" font-weight="700" letter-spacing="1.6" fill="#4338ca">AFFINE MAC  ·  p = 5</text>
+  <text x="32" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="21" fill="#1f1d1a">Each observed tag is one more equation on the key</text>
+  <text x="32" y="88" font-size="13" fill="#57534e">key <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan> = (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan>, <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan>) uniform in <tspan font-family="Georgia, 'Times New Roman', serif" font-weight="700">Z</tspan><tspan baseline-shift="sub" font-size="9">5</tspan><tspan dx="-5" baseline-shift="super" font-size="9">2</tspan> · tag τ = (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan>·<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan> + <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan>) mod 5 · rows <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan>, columns <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan></text>
+  <path d="M32 104 H768" stroke="#e7e2d9" stroke-width="1.2"/>
+
+  <!-- separators + "+1 tag" markers -->
+  <path d="M273 124 V470" stroke="#e7e2d9" stroke-width="1.2"/>
+  <path d="M527 124 V470" stroke="#e7e2d9" stroke-width="1.2"/>
+  <rect x="253" y="244" width="40" height="48" fill="#fcfbf8"/>
+  <circle cx="273" cy="260" r="15" fill="#eef0fb" stroke="#4338ca" stroke-width="1.4"/>
+  <text x="273" y="264.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4338ca">+1</text>
+  <text x="273" y="289" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1" fill="#4338ca">TAG</text>
+  <rect x="507" y="244" width="40" height="48" fill="#fcfbf8"/>
+  <circle cx="527" cy="260" r="15" fill="#eef0fb" stroke="#4338ca" stroke-width="1.4"/>
+  <text x="527" y="264.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4338ca">+1</text>
+  <text x="527" y="289" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1" fill="#4338ca">TAG</text>
+
+  <!-- ===== column 1: No tag seen ===== -->
+  <text x="146" y="138" text-anchor="middle" font-size="15" font-weight="700" fill="#1f1d1a">No tag seen</text>
+  <text x="146" y="159" text-anchor="middle" font-size="12.5" fill="#57534e">the forger knows nothing yet</text>
+  <path d="M57 175 L75 191" stroke="#d6d0c4" stroke-width="1"/>
+  <text x="73" y="182" text-anchor="middle" font-size="11.5" fill="#57534e"><tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan></text>
+  <text x="60" y="194" text-anchor="middle" font-size="11.5" fill="#57534e"><tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan></text>
+  <g font-size="11.5" fill="#8a847b" text-anchor="middle">
+    <text x="92" y="188">0</text><text x="124" y="188">1</text><text x="156" y="188">2</text><text x="188" y="188">3</text><text x="220" y="188">4</text>
+    <text x="66" y="212">0</text><text x="66" y="242">1</text><text x="66" y="272">2</text><text x="66" y="302">3</text><text x="66" y="332">4</text>
+  </g>
+  <!-- a = 0 --><circle cx="92" cy="208" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="124" cy="208" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="156" cy="208" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="188" cy="208" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="220" cy="208" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/>
+  <!-- a = 1 --><circle cx="92" cy="238" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="124" cy="238" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="156" cy="238" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="188" cy="238" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="220" cy="238" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/>
+  <!-- a = 2 --><circle cx="92" cy="268" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="124" cy="268" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="156" cy="268" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="188" cy="268" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="220" cy="268" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/>
+  <!-- a = 3 --><circle cx="92" cy="298" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="124" cy="298" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="156" cy="298" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="188" cy="298" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="220" cy="298" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/>
+  <!-- a = 4 --><circle cx="92" cy="328" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="124" cy="328" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="156" cy="328" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="188" cy="328" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/><circle cx="220" cy="328" r="9" fill="#ece8df" stroke="#8a847b" stroke-width="1.2"/>
+
+  <!-- ===== column 2: One tag seen ===== -->
+  <text x="400" y="138" text-anchor="middle" font-size="15" font-weight="700" fill="#115e59">One tag seen</text>
+  <text x="400" y="159" text-anchor="middle" font-size="12.5" fill="#57534e">(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>, τ<tspan baseline-shift="sub" font-size="9">1</tspan>) = (2, 3)</text>
+  <path d="M311 175 L329 191" stroke="#d6d0c4" stroke-width="1"/>
+  <text x="327" y="182" text-anchor="middle" font-size="11.5" fill="#57534e"><tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan></text>
+  <text x="314" y="194" text-anchor="middle" font-size="11.5" fill="#57534e"><tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan></text>
+  <g font-size="11.5" fill="#8a847b" text-anchor="middle">
+    <text x="346" y="188">0</text><text x="378" y="188">1</text><text x="410" y="188">2</text><text x="442" y="188">3</text><text x="474" y="188">4</text>
+    <text x="320" y="212">0</text><text x="320" y="242">1</text><text x="320" y="272">2</text><text x="320" y="302">3</text><text x="320" y="332">4</text>
+  </g>
+  <!-- a = 0 --><circle cx="346" cy="208" r="3.5" fill="#d6d0c4"/><circle cx="378" cy="208" r="3.5" fill="#d6d0c4"/><circle cx="410" cy="208" r="3.5" fill="#d6d0c4"/><circle cx="442" cy="208" r="9" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.3"/><circle cx="474" cy="208" r="3.5" fill="#d6d0c4"/>
+  <!-- a = 1 --><circle cx="346" cy="238" r="3.5" fill="#d6d0c4"/><circle cx="378" cy="238" r="9" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.3"/><circle cx="410" cy="238" r="3.5" fill="#d6d0c4"/><circle cx="442" cy="238" r="3.5" fill="#d6d0c4"/><circle cx="474" cy="238" r="3.5" fill="#d6d0c4"/>
+  <!-- a = 2 --><circle cx="346" cy="268" r="3.5" fill="#d6d0c4"/><circle cx="378" cy="268" r="3.5" fill="#d6d0c4"/><circle cx="410" cy="268" r="3.5" fill="#d6d0c4"/><circle cx="442" cy="268" r="3.5" fill="#d6d0c4"/><circle cx="474" cy="268" r="9" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.3"/>
+  <!-- a = 3 --><circle cx="346" cy="298" r="3.5" fill="#d6d0c4"/><circle cx="378" cy="298" r="3.5" fill="#d6d0c4"/><circle cx="410" cy="298" r="9" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.3"/><circle cx="442" cy="298" r="3.5" fill="#d6d0c4"/><circle cx="474" cy="298" r="3.5" fill="#d6d0c4"/>
+  <!-- a = 4 --><circle cx="346" cy="328" r="9" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.3"/><circle cx="378" cy="328" r="3.5" fill="#d6d0c4"/><circle cx="410" cy="328" r="3.5" fill="#d6d0c4"/><circle cx="442" cy="328" r="3.5" fill="#d6d0c4"/><circle cx="474" cy="328" r="3.5" fill="#d6d0c4"/>
+
+  <!-- ===== column 3: Two tags seen ===== -->
+  <text x="654" y="138" text-anchor="middle" font-size="15" font-weight="700" fill="#9f1239">Two tags seen</text>
+  <text x="654" y="159" text-anchor="middle" font-size="12.5" fill="#57534e">(2, 3)  and  (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>, τ<tspan baseline-shift="sub" font-size="9">2</tspan>) = (1, 1)</text>
+  <path d="M565 175 L583 191" stroke="#d6d0c4" stroke-width="1"/>
+  <text x="581" y="182" text-anchor="middle" font-size="11.5" fill="#57534e"><tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan></text>
+  <text x="568" y="194" text-anchor="middle" font-size="11.5" fill="#57534e"><tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan></text>
+  <g font-size="11.5" fill="#8a847b" text-anchor="middle">
+    <text x="600" y="188">0</text><text x="632" y="188">1</text><text x="664" y="188">2</text><text x="696" y="188">3</text><text x="728" y="188">4</text>
+    <text x="574" y="212">0</text><text x="574" y="242">1</text><text x="574" y="272">2</text><text x="574" y="302">3</text><text x="574" y="332">4</text>
+  </g>
+  <!-- a = 0 --><circle cx="600" cy="208" r="3.5" fill="#d6d0c4"/><circle cx="632" cy="208" r="8" fill="#fcfbf8" stroke="#c98a0b" stroke-width="2.2" stroke-dasharray="3.6 2.4"/><circle cx="664" cy="208" r="3.5" fill="#d6d0c4"/><circle cx="696" cy="208" r="8" fill="#fcfbf8" stroke="#2a9d8f" stroke-width="2.2"/><circle cx="728" cy="208" r="3.5" fill="#d6d0c4"/>
+  <!-- a = 1 --><circle cx="600" cy="238" r="8" fill="#fcfbf8" stroke="#c98a0b" stroke-width="2.2" stroke-dasharray="3.6 2.4"/><circle cx="632" cy="238" r="8" fill="#fcfbf8" stroke="#2a9d8f" stroke-width="2.2"/><circle cx="664" cy="238" r="3.5" fill="#d6d0c4"/><circle cx="696" cy="238" r="3.5" fill="#d6d0c4"/><circle cx="728" cy="238" r="3.5" fill="#d6d0c4"/>
+  <!-- a = 2 --><circle cx="600" cy="268" r="3.5" fill="#d6d0c4"/><circle cx="632" cy="268" r="3.5" fill="#d6d0c4"/><circle cx="664" cy="268" r="3.5" fill="#d6d0c4"/><circle cx="696" cy="268" r="3.5" fill="#d6d0c4"/><circle cx="728" cy="268" r="15.5" fill="none" stroke="#e05a6d" stroke-width="1.4" stroke-opacity="0.45"/><circle cx="728" cy="268" r="10.5" fill="#e05a6d" stroke="#9f1239" stroke-width="1.8"/>
+  <!-- a = 3 --><circle cx="600" cy="298" r="3.5" fill="#d6d0c4"/><circle cx="632" cy="298" r="3.5" fill="#d6d0c4"/><circle cx="664" cy="298" r="8" fill="#fcfbf8" stroke="#2a9d8f" stroke-width="2.2"/><circle cx="696" cy="298" r="8" fill="#fcfbf8" stroke="#c98a0b" stroke-width="2.2" stroke-dasharray="3.6 2.4"/><circle cx="728" cy="298" r="3.5" fill="#d6d0c4"/>
+  <!-- a = 4 --><circle cx="600" cy="328" r="8" fill="#fcfbf8" stroke="#2a9d8f" stroke-width="2.2"/><circle cx="632" cy="328" r="3.5" fill="#d6d0c4"/><circle cx="664" cy="328" r="8" fill="#fcfbf8" stroke="#c98a0b" stroke-width="2.2" stroke-dasharray="3.6 2.4"/><circle cx="696" cy="328" r="3.5" fill="#d6d0c4"/><circle cx="728" cy="328" r="3.5" fill="#d6d0c4"/>
+
+  <!-- equations under the grids -->
+  <text x="146" y="367" text-anchor="middle" font-size="13" fill="#57534e">every (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan>, <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan>) is still possible</text>
+  <circle cx="336" cy="363" r="6" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.2"/>
+  <text x="348" y="367" font-size="13.5" font-weight="700" fill="#115e59">2<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan> + <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan> ≡ 3 (mod 5)</text>
+  <circle cx="608" cy="356" r="6" fill="#fcfbf8" stroke="#2a9d8f" stroke-width="2"/>
+  <text x="620" y="360.5" font-size="13.5" font-weight="700" fill="#115e59">2<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan> + <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan> ≡ 3</text>
+  <circle cx="608" cy="377" r="6" fill="#fcfbf8" stroke="#c98a0b" stroke-width="2" stroke-dasharray="3 2"/>
+  <text x="620" y="381.5" font-size="13.5" font-weight="700" fill="#92600a"><tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan> + <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan> ≡ 1</text>
+
+  <!-- key counts -->
+  <text x="146" y="420" text-anchor="middle" fill="#1f1d1a"><tspan font-family="Georgia, 'Times New Roman', serif" font-size="30">25</tspan><tspan font-size="13.5" font-weight="600" dx="6">possible keys</tspan></text>
+  <text x="400" y="420" text-anchor="middle" fill="#115e59"><tspan font-family="Georgia, 'Times New Roman', serif" font-size="30">5</tspan><tspan font-size="13.5" font-weight="600" dx="6">keys left</tspan></text>
+  <text x="654" y="420" text-anchor="middle" fill="#9f1239"><tspan font-family="Georgia, 'Times New Roman', serif" font-size="30">1</tspan><tspan font-size="13.5" font-weight="600" dx="6">key left: (2, 4)</tspan></text>
+
+  <!-- verdict callouts -->
+  <rect x="36" y="434" width="220" height="44" rx="6" fill="#f1efe9"/>
+  <rect x="36" y="434" width="3.5" height="44" rx="1.75" fill="#8a847b"/>
+  <text x="148" y="452" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1f1d1a">Pr[forge] = 1/5</text>
+  <text x="148" y="469" text-anchor="middle" font-size="11.5" fill="#57534e">blind guess of the tag</text>
+  <rect x="290" y="434" width="220" height="44" rx="6" fill="#e6f4f1"/>
+  <rect x="290" y="434" width="3.5" height="44" rx="1.75" fill="#2a9d8f"/>
+  <text x="402" y="452" text-anchor="middle" font-size="13.5" font-weight="700" fill="#115e59">Pr[forge] ≤ 1/5  ✓</text>
+  <text x="402" y="469" text-anchor="middle" font-size="11.5" fill="#1f6f66">a new <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan>′ still has 5 possible tags</text>
+  <rect x="544" y="434" width="220" height="44" rx="6" fill="#fbecee"/>
+  <rect x="544" y="434" width="3.5" height="44" rx="1.75" fill="#e05a6d"/>
+  <text x="656" y="452" text-anchor="middle" font-size="13.5" font-weight="700" fill="#9f1239">Pr[forge] = 1  ✗</text>
+  <text x="656" y="469" text-anchor="middle" font-size="11.5" fill="#9f1239">forge τ<tspan baseline-shift="sub" font-size="9">3</tspan> = (2·<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">3</tspan> + 4) mod 5</text>
+</svg>

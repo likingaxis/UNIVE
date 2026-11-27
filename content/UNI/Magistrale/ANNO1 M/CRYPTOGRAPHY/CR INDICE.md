@@ -9,6 +9,7 @@ https://github.com/dventuri83/dventuri83.github.io/tree/master/assets/pdf
 - [Compendio L1–L13](crittografia_L1_L13.md) per localizzare teoria, prove ed esercizi. I riferimenti per singola lezione raccolgono slide, trascrizioni e appunti già disponibili.
 
 - [CR UNICO](<CR UNICO.md>) raccoglie la sintesi personale, scritta a parole proprie, e gli schemi delle dimostrazioni da ricostruire.
+- [CR Exercises](<CR Exercises.md>) raccoglie esercizi risolti e controesempi scritti con lo stesso stile personale di sintesi.
 
 ## Materiale per lo studio — lezione 1
 

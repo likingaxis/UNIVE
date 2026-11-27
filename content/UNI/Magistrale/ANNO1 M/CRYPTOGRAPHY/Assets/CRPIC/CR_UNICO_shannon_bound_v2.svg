@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" role="img" aria-labelledby="sb2-title sb2-desc" font-family="'Segoe UI', Arial, sans-serif">
+  <title id="sb2-title">Shannon Key-Length Lower Bound Contradiction</title>
+  <desc id="sb2-desc">Assuming |K| is strictly smaller than |M|, fixing a valid ciphertext c with Pr[C=c] &gt; 0 and decrypting under every key in K yields a reachable subset M_c of size at most |K|, leaving at least one message m* in M \ M_c unreachable. Under uniform M, Pr[M=m* | C=c] = 0 contradicts Pr[M=m*] = 1/|M| &gt; 0.</desc>
+  <defs>
+    <marker id="sb2-arrow-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#2a9d8f"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="798" height="298" rx="14" fill="#fcfbf8" stroke="#e7e2d9" stroke-width="1.5"/>
+
+  <!-- Mapping arrows (behind label pill) -->
+  <path d="M224 98 H370" fill="none" stroke="#2a9d8f" stroke-width="2" marker-end="url(#sb2-arrow-teal)"/>
+  <path d="M224 136 H370" fill="none" stroke="#2a9d8f" stroke-width="2" marker-end="url(#sb2-arrow-teal)"/>
+  <rect x="245" y="105" width="110" height="24" rx="12" fill="#fcfbf8" stroke="#2a9d8f" stroke-width="1.4"/>
+  <text x="300" y="121" text-anchor="middle" font-size="12" font-weight="700" fill="#115e59">
+    Dec(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">c</tspan>)
+  </text>
+
+  <!-- Fixed ciphertext badge -->
+  <rect x="234" y="32" width="132" height="38" rx="8" fill="#f1efe9" stroke="#d6d0c4" stroke-width="1.2"/>
+  <text x="300" y="48" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1f1d1a">
+    fix <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">c</tspan> ∈ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">C</tspan>
+  </text>
+  <text x="300" y="63" text-anchor="middle" font-size="10.5" fill="#57534e">
+    Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">C</tspan> = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">c</tspan>] &gt; 0
+  </text>
+  <text x="300" y="160" text-anchor="middle" font-size="10.8" fill="#57534e">at most 1 message</text>
+  <text x="300" y="174" text-anchor="middle" font-size="10.8" fill="#57534e">per key <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan> ∈ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan></text>
+
+  <!-- Left card: Key space K -->
+  <rect x="28" y="24" width="196" height="202" rx="11" fill="#ffffff" stroke="#d6d0c4" stroke-width="1.5"/>
+  <text x="126" y="45" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.2" fill="#4338ca">
+    ASSUME |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan>| &lt; |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan>|
+  </text>
+  <text x="126" y="67" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1f1d1a">
+    Key space <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan>
+  </text>
+  <rect x="52" y="83" width="148" height="30" rx="7" fill="#eef0fb" stroke="#4338ca" stroke-width="1.2"/>
+  <text x="126" y="103" text-anchor="middle" font-size="13.5" font-weight="600" fill="#312e81">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>
+  </text>
+  <rect x="52" y="121" width="148" height="30" rx="7" fill="#eef0fb" stroke="#4338ca" stroke-width="1.2"/>
+  <text x="126" y="141" text-anchor="middle" font-size="13.5" font-weight="600" fill="#312e81">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="9.5">2</tspan>
+  </text>
+  <text x="126" y="173" text-anchor="middle" font-size="15" font-weight="700" fill="#4338ca">⋮</text>
+  <rect x="52" y="184" width="148" height="28" rx="7" fill="#f1efe9"/>
+  <text x="126" y="202" text-anchor="middle" font-size="11.5" font-weight="600" fill="#57534e">
+    |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan>| possible keys
+  </text>
+
+  <!-- Right card: Message space M -->
+  <rect x="376" y="24" width="396" height="202" rx="11" fill="#ffffff" stroke="#d6d0c4" stroke-width="1.5"/>
+  <text x="574" y="48" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1f1d1a">
+    Message space <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan>
+  </text>
+
+  <!-- Subset M_c -->
+  <rect x="394" y="64" width="184" height="146" rx="9" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.5"/>
+  <text x="486" y="88" text-anchor="middle" font-size="14" font-weight="700" fill="#115e59">
+    Reachable <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan><tspan baseline-shift="sub" font-size="9.5" font-style="italic">c</tspan>
+  </text>
+  <text x="486" y="109" text-anchor="middle" font-size="11.5" fill="#1f6f66">
+    {Dec(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">c</tspan>) | <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan> ∈ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan>}
+  </text>
+  <rect x="408" y="124" width="156" height="32" rx="6" fill="#ffffff" stroke="#2a9d8f" stroke-width="1.1"/>
+  <text x="486" y="144" text-anchor="middle" font-size="12" font-weight="700" fill="#115e59">
+    |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan><tspan baseline-shift="sub" font-size="9" font-style="italic">c</tspan>| ≤ |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan>| &lt; |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan>|
+  </text>
+  <text x="486" y="179" text-anchor="middle" font-size="11" fill="#1f6f66">at most |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan>| plaintexts</text>
+  <text x="486" y="195" text-anchor="middle" font-size="11" fill="#1f6f66">can decrypt from <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">c</tspan></text>
+
+  <!-- Unreachable M \ M_c -->
+  <rect x="592" y="64" width="162" height="146" rx="9" fill="#fbecee" stroke="#e05a6d" stroke-width="1.6"/>
+  <text x="673" y="85" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#9f1239">
+    UNREACHABLE
+  </text>
+  <text x="673" y="108" text-anchor="middle" font-size="14.5" font-weight="700" fill="#9f1239">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan>* ∈ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan> \ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan><tspan baseline-shift="sub" font-size="9.5" font-style="italic">c</tspan>
+  </text>
+  <rect x="606" y="124" width="134" height="32" rx="6" fill="#ffffff" stroke="#e05a6d" stroke-width="1.1"/>
+  <text x="673" y="144" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9f1239">
+    ∀<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan>: Dec(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">c</tspan>) ≠ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan>*
+  </text>
+  <text x="673" y="179" text-anchor="middle" font-size="11.2" font-weight="700" fill="#9f1239">
+    ⇒ ∀<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan>: Enc(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">k</tspan>, <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan>*) ≠ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">c</tspan>
+  </text>
+  <text x="673" y="195" text-anchor="middle" font-size="10.5" fill="#9f1239">(by correctness)</text>
+
+  <!-- Bottom contradiction bar -->
+  <rect x="28" y="238" width="744" height="46" rx="7" fill="#fbecee"/>
+  <rect x="28" y="238" width="4" height="46" rx="2" fill="#e05a6d"/>
+  <text x="400" y="257" text-anchor="middle" font-size="12.8" font-weight="700" fill="#9f1239">
+    Contradiction:   Under uniform <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan>,   Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan> = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan>* | <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">C</tspan> = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">c</tspan>] = 0   ≠   Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan> = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan>*] = 1/|<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan>| &gt; 0
+  </text>
+  <text x="400" y="275" text-anchor="middle" font-size="11.2" fill="#9f1239">
+    Perfect secrecy is impossible when |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan>| &lt; |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan>|   ⇒   necessarily |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">K</tspan>| ≥ |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">M</tspan>|
+  </text>
+</svg>

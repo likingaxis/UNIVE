@@ -344,6 +344,8 @@ Substituting numerator and denominator yields:
 $$\begin{aligned} \Pr_K\big[h_K(m')=\tau'\mid h_K(m)=\tau\big] &= \frac{\Pr_K\big[h_K(m')=\tau'\land h_K(m)=\tau\big]}{\Pr_K\big[h_K(m)=\tau\big]}\\[6pt] &= \frac{1/|\mathcal T|^2}{1/|\mathcal T|}\\[6pt] &= \frac{1}{|\mathcal T|} \end{aligned}$$
 Therefore, a pairwise-independent hash family defines a one-time statistically secure MAC with the optimal bound:
 $$\boxed{\varepsilon=\frac{1}{|\mathcal T|}}\qquad\square$$
+Visually, in the joint distribution table over all pairs $(\tau,\tau') \in \mathcal T^2$, conditioning fixes a single row $\tau$ (whose sum equals the marginal $1/|\mathcal T|$) and selects one cell $1/|\mathcal T|^2$ inside it:
+![[CR_UNICO_marginalization_grid.svg|640]]
 
 ### Affine hashing
 We have not yet defined a concrete hash family.
@@ -408,7 +410,7 @@ $$\boxed{b \equiv \tau - am \pmod p}$$
 Thus, for any fixed distinct messages $m, m'$ and tags $\tau, \tau'$, the system has **exactly one** solution $(a,b) \in \mathbb{Z}_p^2$.
 Since the key space is $\mathcal{K} = \mathbb{Z}_p^2$, its size is:
 $$|\mathcal K| = p^2$$
-All keys are equally likely, so:
+All keys are ***equally likely*** (uniformly distributed), so:
 $$\begin{aligned} \Pr_{a,b}\big[h_{a,b}(m)=\tau \land h_{a,b}(m')=\tau'\big] &= \frac{\text{Number of satisfying keys}}{\text{Total number of keys}}\\[6pt] &= \frac{1}{p^2}\\[6pt] &= \frac{1}{|\mathcal T|^2} \end{aligned}$$
 Therefore, the affine hash family is pairwise independent. $\square$
 
@@ -447,27 +449,30 @@ $$\boxed{h_{a,b,c}(m) = (am^2 + bm + c) \bmod p}$$
 
 ![[CR_UNICO_two_time_mac_game.svg|640]]
 
-#### Theorem 2.4: Quadratic hashing is two-time $1/p$-statistically secure
-We prove two-time $\frac{1}{p}$-statistical security of $\operatorname{Tag}((a,b,c), m) = h_{a,b,c}(m)$ in two steps: first showing **3-wise independence**, then bounding the conditional forgery probability after two queries.
+#### Quadratic hashing is two-time $1/p$-statistically secure
+We prove two-time $\frac{1}{p}$-statistical security of $\operatorname{Tag}((a,b,c), m) = h_{a,b,c}(m)$ in two steps:
+- first showing **3-wise independence**,
+- then bounding the conditional forgery probability after two queries.
 
-**Step 1 — Prove 3-wise independence.**
-Fix any three pairwise distinct messages $m_1, m_2, m_3 \in \mathbb{Z}_p$ and any three tags $\tau_1, \tau_2, \tau_3 \in \mathbb{Z}_p$.
-The conditions $h_{a,b,c}(m_i) \equiv \tau_i \pmod p$ for $i \in \{1,2,3\}$ form a linear system in the unknowns $(a, b, c)$ over $\mathbb{Z}_p$:
+**Step 1 — 3-wise independence.**
+For any pairwise distinct $m_1, m_2, m_3 \in \mathbb{Z}_p$ and any $\tau_1, \tau_2, \tau_3 \in \mathbb{Z}_p$, the equations $h_{a,b,c}(m_i) \equiv \tau_i \pmod p$ form a linear system in $(a, b, c) \in \mathbb{Z}_p^3$:
 $$\begin{pmatrix} m_1^2 & m_1 & 1 \\ m_2^2 & m_2 & 1 \\ m_3^2 & m_3 & 1 \end{pmatrix} \begin{pmatrix} a \\ b \\ c \end{pmatrix} \equiv \begin{pmatrix} \tau_1 \\ \tau_2 \\ \tau_3 \end{pmatrix} \pmod p$$
-This is a $3 \times 3$ Vandermonde matrix whose determinant is:
-$$\det = (m_1 - m_2)(m_1 - m_3)(m_2 - m_3)$$
-Because $m_1, m_2, m_3$ are pairwise distinct and $p$ is prime, each factor is nonzero modulo $p$, so $\det \not\equiv 0 \pmod p$ is invertible in $\mathbb{Z}_p$.
-Therefore, there exists **exactly one** key $(a,b,c) \in \mathbb{Z}_p^3$ satisfying all three equations.
-Since $|\mathcal{K}| = p^3$ and all keys are equally likely:
+Its matrix is Vandermonde (with decreasing columns $m_i^2, m_i, 1$, swapping columns $1$ and $3$ of the standard $1, m_i, m_i^2$ form and flipping only the sign):
+$$\det = (m_1 - m_2)(m_1 - m_3)(m_2 - m_3) \not\equiv 0 \pmod p$$
+Because $m_1, m_2, m_3$ are distinct and $p$ is prime, $\det$ is invertible in $\mathbb{Z}_p$, so **exactly one** key $(a,b,c) \in \mathbb{Z}_p^3$ solves the system.
+Since $|\mathcal{K}| = p^3$ and all keys are ***equally likely***:
 $$\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2 \land h_{a,b,c}(m_3)=\tau_3\big] = \frac{1}{p^3} = \frac{1}{|\mathcal T|^3}$$
 
-**Step 2 — Deduce two-time $1/p$-statistical security.**
-Let $m_1, m_2 \in \mathbb{Z}_p$ be the two distinct queried messages ($m_1 \neq m_2$) with observed tags $\tau_1, \tau_2 \in \mathbb{Z}_p$, and let $m_3 \notin \{m_1, m_2\}$ be any fresh message (which exists because $p \ge 3$) with candidate forgery tag $\tau_3 \in \mathbb{Z}_p$.
-To find the denominator probability of the two observed tags, marginalize over all $|\mathcal{T}| = p$ possible values of $\tau_3$ at $m_3$:
+**Step 2 — Conditional forgery bound.**
+Let $m_1 \neq m_2$ be the queried messages with tags $\tau_1, \tau_2 \in \mathbb{Z}_p$, and let $m_3 \notin \{m_1, m_2\}$ (which exists since $p \ge 3$) have candidate tag $\tau_3 \in \mathbb{Z}_p$.
+By definition of conditional probability:
+$$\Pr_{a,b,c}\big[h_{a,b,c}(m_3)=\tau_3 \mid h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big] = \frac{\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2 \land h_{a,b,c}(m_3)=\tau_3\big]}{\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big]}$$
+From Step 1, the numerator is $\frac{1}{p^3}$.
+We find the denominator by marginalizing over all $|\mathcal{T}| = p$ tags $\tau_3$ at $m_3$:
 $$\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big] = \sum_{\tau_3\in\mathcal T} \Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2 \land h_{a,b,c}(m_3)=\tau_3\big] = p \cdot \frac{1}{p^3} = \frac{1}{p^2}$$
-Applying conditional probability:
-$$\begin{aligned} \Pr_{a,b,c}\big[h_{a,b,c}(m_3)=\tau_3 \mid h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big] &= \frac{\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2 \land h_{a,b,c}(m_3)=\tau_3\big]}{\Pr_{a,b,c}\big[h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big]}\\[6pt] &= \frac{1/p^3}{1/p^2}\\[6pt] &= \frac{1}{p} \end{aligned}$$
-Thus quadratic hashing achieves two-time statistical security with:
+Since $\frac{1}{p^2} > 0$, substituting both back yields:
+$$\Pr_{a,b,c}\big[h_{a,b,c}(m_3)=\tau_3 \mid h_{a,b,c}(m_1)=\tau_1 \land h_{a,b,c}(m_2)=\tau_2\big] = \frac{1/p^3}{1/p^2} = \frac{1}{p}$$
+Thus quadratic hashing achieves two-time statistical security:
 $$\boxed{\varepsilon = \frac{1}{p}}\qquad\blacksquare$$
 
 ### $t$-wise independence and $t$-time MACs
@@ -480,4 +485,112 @@ $$k = (a_0, a_1, \ldots, a_t)$$
 The tagging algorithm evaluates a degree-$t$ polynomial modulo $p$:
 $$\boxed{\operatorname{Tag}(k,m) = \left(\sum_{i=0}^{t} a_i m^i\right)\bmod p}$$
 Because any $t+1$ distinct inputs and tags uniquely fix a polynomial of degree at most $t$ over $\mathbb{Z}_p$, this family is **$(t+1)$-wise independent** and achieves $t$-time $\frac{1}{p}$-statistical security.
-The downside is that the key length grows linearly with $t$ (matching the lower bound of at least $(t+1)\lambda$ bits for $t$-time $2^{-\lambda}$-statistical security), so unconditional security cannot support an unbounded number of messages with one short fixed key.
+
+#### Theorem 2.4: $t$-Time Statistical MAC Key-Length Bound
+The ***downside*** is that key length grows linearly with $t$, so unconditional security cannot support an unbounded number of messages with one short fixed key.
+For any $t$-time $2^{-\lambda}$-statistically secure MAC (with integer $\lambda \ge 1$) over a message space with at least $t+1$ distinct messages:
+$$\boxed{\log_2|\mathcal K| \ge (t+1)\lambda}$$
+Our degree-$t$ polynomial MAC matches this scaling, since $|\mathcal K| = p^{t+1}$ gives:
+$$\log_2|\mathcal K| = (t+1)\log_2 p$$
+
+## Randomness Extraction
+So far, we have always assumed that secret keys are sampled uniformly at random, such as $K \gets U_n$ (the uniform distribution over $\{0,1\}^n$) in an $n$-bit One-Time Pad.
+How does a computer actually obtain this randomness?
+Because a computer is deterministic, it must harvest randomness from physical sources such as thermal noise.
+The problem is that these physical sources are imperfect and may produce bits that are:
+- **Biased:** some values are more likely than others.
+- **Correlated:** the value of one bit may depend on another.
+- **Partially predictable:** some information may be known to an adversary.
+
+In practice, randomness generation follows a multi-stage pipeline:
+1. **Extract (current focus):** convert an imperfect physical source $X$ into short, nearly uniform random bits using information-theoretic techniques.
+2. **Expand (later lectures, via PRGs):** stretch that short seed deterministically into a long pseudorandom stream under computational assumptions.
+3. **Refresh (omitted in this course):** periodically mix fresh physical entropy into the state so future outputs stay unpredictable.
+
+![[CR_UNICO_randomness_pipeline.svg|640]]
+
+> [!example]- Why a biased key breaks OTP perfect secrecy
+> Consider the $1$-bit One-Time Pad $\operatorname{Enc}(k, m) = k \oplus m$ over $\mathcal{K} = \mathcal{M} = \mathcal{C} = \{0,1\}$, where $K$ is biased:
+> $$\Pr[K=0] = 0.8, \qquad \Pr[K=1] = 0.2$$
+> By Theorem 1.1(iii), perfect secrecy requires $\Pr_K[\operatorname{Enc}(K, m_0) = c] = \Pr_K[\operatorname{Enc}(K, m_1) = c]$ for all $m_0, m_1 \in \mathcal{M}$ and $c \in \mathcal{C}$.
+> Choosing $m_0 = 0$, $m_1 = 1$, and $c = 0$ gives:
+> $$\begin{aligned} \Pr_K[\operatorname{Enc}(K,0)=0] &= \Pr[K=0] = 0.8\\ \Pr_K[\operatorname{Enc}(K,1)=0] &= \Pr[K=1] = 0.2 \end{aligned}$$
+> Since $0.8 \neq 0.2$, ciphertext $0$ leaks information about which plaintext was encrypted, so perfect secrecy fails. $\square$
+
+### Von Neumann Extractor
+The Von Neumann extractor transforms independent outputs from a biased source into uniformly random bits.
+Suppose we have a biased coin $B \in \{0,1\}$ such that:
+$$\Pr[B=0]=p, \qquad \Pr[B=1]=1-p$$
+where the bias $p$ is unknown, with $0 < p < 1$.
+We sample pairs of **independent, identically distributed** tosses $(B_1, B_2)$ from $B$:
+- discard $(0,0)$ and $(1,1)$ (and draw a fresh pair until a bit is produced),
+- output $Y = 1$ on $(0,1)$,
+- output $Y = 0$ on $(1,0)$.
+
+![[CR_UNICO_von_neumann_extractor.svg|640]]
+
+#### Why the output is uniform
+Because $B_1$ and $B_2$ are independent, the probability of a pair factors into the product of the individual toss probabilities:
+$$\begin{aligned} \Pr[(B_1,B_2)=(0,1)] &= p(1-p)\\ \Pr[(B_1,B_2)=(1,0)] &= (1-p)p \end{aligned}$$
+Let $E$ be the event that a pair is accepted:
+$$E = \{B_1 \neq B_2\}$$
+Since $(0,1)$ and $(1,0)$ are disjoint and $0 < p < 1$:
+$$\Pr[E] = 2p(1-p) > 0$$
+Using conditional probability, the accepted output bit $Y$ is uniform:
+$$\Pr[Y=1 \mid E] = \frac{\Pr[(B_1,B_2)=(0,1)]}{\Pr[E]} = \frac{p(1-p)}{2p(1-p)} = \frac{1}{2}$$
+Similarly:
+$$\Pr[Y=0 \mid E] = \frac{\Pr[(B_1,B_2)=(1,0)]}{\Pr[E]} = \frac{(1-p)p}{2p(1-p)} = \frac{1}{2}$$
+
+**Why independence is essential.**
+Independence is what allows us to multiply the individual toss probabilities.
+Without independence, we cannot generally guarantee that:
+$$\Pr[B_1=0, B_2=1] = p(1-p)$$
+or that $(0,1)$ and $(1,0)$ remain equally likely, so the Von Neumann extractor cannot handle correlated sources.
+
+
+#### Min-Entropy
+Is useful tu measures how unpredictable a source actually is
+Let X be a discrete random variable. 
+its min-entropy is defined as:
+\[ \boxed{ H_\infty(X)=-\log_2\left(\max_x\Pr[X=x]\right) } \]
+we have an equivalent version using bounds that is
+\[ H_\infty(X)\geq k \iff \max_x\Pr[X=x]\leq 2^{-k}. \]
+we consider the most probable outcome
+the probability that an adversary trying to guess a random variable X in a single attempt to choose its most probable value is:
+ $$p_{\text{guess}}=2^{-H_\infty(X)}$$
+
+to achieve pguess if already knowing max probability we should do the reverse of the logarithm
+\[ \boxed{\max_x\Pr[X=x]=2^{-H_\infty(X)}} \]
+
+>[!important]- having min entropy that is a certain value for example 2^-32 does not mean that 32 individual bits are chosen randomly instead the other one are deterministically fixed  given a string long 128 bits
+>32 is not the probability to not guess only 32 bits, is the probability to not guess all the string
+>but this does not mean that you know the rest of 96 bits, you for example here need to know all of this 32 bits
+>![[Pasted image 20261127163942.png]]
+
+##### Theorem 3.1 Impossibility of Universal deterministic extractors
+We have an imperfect source X that has a considerable amount of randomness, infact his min-entropy got a bound that is
+\[ H_\infty(X)\geq n-1. \]
+
+>[!hint] (this means having an unpredictable amount of bit >=n-1)
+
+we want to demonstrate that doenst exit a deterministic function defined like this
+\[$$ \operatorname{Ext}:\{0,1\}^n\rightarrow\{0,1\}$$ \]
+that extracts just **one perfectly uniform bit**
+
+Proof
+we start by a correct random variable X, for example this one with n=3
+this one has A0=Ext^-1(0) and A1=Ext^-1(1) has preimage
+their sum is \[ |A_0|+|A_1|=2^n. \]
+
+By the pigeonhole principle, there exists a bit \(b\in\{0,1\}\) such that:
+\[ |A_b|\geq 2^{n-1}. \]
+we have a set of the two that have this cardinality
+![517](data:image/svg+xml;charset=utf-8,%3Csvg%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20%26quot%3BSegoe%20UI%26quot%3B%2C%20sans-serif%22%20font-weight%3D%22430%22%20data-d-component%3D%22svg%22%20fill%3D%22currentColor%22%20style%3D%22color%3Argb\(255%2C%20255%2C%20255\)%22%20viewBox%3D%220%200%20340%20240%22%20width%3D%22100%25%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20x%3D%2210%22%20y%3D%225%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%2221%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E000%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%2017%20C%20170%2017%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2234%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%2250%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E001%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%2046%20C%20170%2046%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2263%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%2279%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E010%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%2075%20C%20170%2075%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2292%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22108%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E011%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20104%20C%20170%20104%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22121%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22137%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E100%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20133%20C%20170%20133%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22150%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22166%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E101%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20162%20C%20170%20162%2C180%20190%2C250%20190%22%20stroke%3D%22%2364748b%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22179%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22195%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E110%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20191%20C%20170%20191%2C180%20190%2C250%20190%22%20stroke%3D%22%2364748b%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22208%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22224%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E111%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20220%20C%20170%20220%2C180%20190%2C250%20190%22%20stroke%3D%22%2364748b%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22250%22%20y%3D%2246%22%20width%3D%2274%22%20height%3D%2248%22%20rx%3D%226%22%20fill%3D%22%230d9488%22%20fill-opacity%3D%22.12%22%20stroke%3D%22%230d9488%22%2F%3E%3Crect%20x%3D%22250%22%20y%3D%22166%22%20width%3D%2274%22%20height%3D%2248%22%20rx%3D%226%22%20fill%3D%22%2364748b%22%20fill-opacity%3D%22.12%22%20stroke%3D%22%2364748b%22%2F%3E%3Ctext%20x%3D%22287%22%20y%3D%2277%22%20text-anchor%3D%22middle%22%20font-size%3D%2222%22%20fill%3D%22currentColor%22%3E0%3C%2Ftext%3E%3Ctext%20x%3D%22287%22%20y%3D%22197%22%20text-anchor%3D%22middle%22%20font-size%3D%2222%22%20fill%3D%22currentColor%22%3E1%3C%2Ftext%3E%3Ctext%20x%3D%22287%22%20y%3D%22110%22%20text-anchor%3D%22middle%22%20font-size%3D%2212%22%20fill%3D%22currentColor%22%3E%7CA%E2%82%80%7C%20%3D%205%3C%2Ftext%3E%3Ctext%20x%3D%22287%22%20y%3D%22230%22%20text-anchor%3D%22middle%22%20font-size%3D%2212%22%20fill%3D%22currentColor%22%3E%7CA%E2%82%81%7C%20%3D%203%3C%2Ftext%3E%3C%2Fsvg%3E)
+
+we want to construct X_bad a random variable that satisfy two properties
+- high input min entropy \(H_\infty(X_{\text{bad}})\geq n-1\).
+- completely predictable extractor output \(\operatorname{Ext}(X_{\text{bad}})=b\) with probability 1
+
+we want that the output of the extractor is predictable we take the larger equal set and we create a X_bad starting from it so it will be uniformly distributed over Ab
+
+![[Pasted image 20261127170128.png]]

@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 344" role="img" aria-labelledby="rp-title rp-desc" font-family="'Segoe UI', Arial, sans-serif">
+  <title id="rp-title">Randomness Extraction Pipeline</title>
+  <desc id="rp-desc">Left active section (This Lecture, Information-Theoretic): a Physical source X (such as thermal noise producing biased, correlated, partially predictable bits) passes through Step 1 Extract (such as Von Neumann) to distill a Short seed of few strong nearly uniform bits. Right dashed section (Later, Computational): Step 2 Expand (PRG) stretches the seed into a Long pseudorandom stream that looks uniform to bounded adversaries, while Step 3 Refresh (omitted in this course) periodically mixes fresh entropy into the PRG state.</desc>
+  <defs>
+    <marker id="arrow-stone" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#78716c"/>
+    </marker>
+  </defs>
+
+  <!-- Warm editorial canvas -->
+  <rect x="1.5" y="1.5" width="857" height="341" rx="14" fill="#fbfaf6" stroke="#dedad0" stroke-width="1.5"/>
+
+  <!-- Scope brackets -->
+  <path d="M34 42 V28 H108" fill="none" stroke="#3730a3" stroke-width="1.5"/>
+  <path d="M422 28 H494 V42" fill="none" stroke="#3730a3" stroke-width="1.5"/>
+  <text x="265" y="32" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1.1" fill="#3730a3">
+    THIS LECTURE · INFORMATION-THEORETIC
+  </text>
+
+  <path d="M506 42 V28 H578" fill="none" stroke="#78716c" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <path d="M756 28 H826 V42" fill="none" stroke="#78716c" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="667" y="32" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1.1" fill="#78716c">
+    LATER · COMPUTATIONAL
+  </text>
+
+  <!-- Funnels drawn cleanly between boxes -->
+  <!-- Step 1 Extract funnel (converging) -->
+  <polygon points="266,62 368,86 368,190 266,214" fill="#eef0ff"/>
+  <line x1="266" y1="62" x2="368" y2="86" stroke="#3730a3" stroke-width="1.5"/>
+  <line x1="266" y1="214" x2="368" y2="190" stroke="#3730a3" stroke-width="1.5"/>
+
+  <!-- Step 2 Expand funnel (diverging) -->
+  <polygon points="498,86 598,62 598,214 498,190" fill="#efede6"/>
+  <line x1="498" y1="86" x2="598" y2="62" stroke="#78716c" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line x1="498" y1="190" x2="598" y2="214" stroke="#78716c" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+  <!-- Refresh feedback connector (behind pill) -->
+  <path d="M150 224 V274 H548 V207" fill="none" stroke="#78716c" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow-stone)"/>
+
+  <!-- ==================== BOX 1: PHYSICAL SOURCE X ==================== -->
+  <rect x="34" y="52" width="232" height="172" rx="11" fill="#ffffff" stroke="#d4cfc2" stroke-width="1.6"/>
+  <text x="150" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#1c1917">
+    Physical source <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan>
+  </text>
+  <text x="150" y="97" text-anchor="middle" font-size="11.5" fill="#78716c">
+    e.g. thermal noise
+  </text>
+
+  <!-- 10 warm amber weak bit pills (17x22, step 20, start x=51.5) -->
+  <g fill="#fef3c7" stroke="#e5a93b" stroke-width="1.1">
+    <rect x="51.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="71.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="91.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="111.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="131.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="151.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="171.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="191.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="211.5" y="112" width="17" height="22" rx="4"/>
+    <rect x="231.5" y="112" width="17" height="22" rx="4"/>
+  </g>
+  <g font-size="11.5" font-weight="700" fill="#92400e" text-anchor="middle">
+    <text x="60" y="127">0</text><text x="80" y="127">0</text><text x="100" y="127">1</text><text x="120" y="127">0</text><text x="140" y="127">0</text>
+    <text x="160" y="127">0</text><text x="180" y="127">1</text><text x="200" y="127">0</text><text x="220" y="127">1</text><text x="240" y="127">0</text>
+  </g>
+
+  <text x="150" y="155" text-anchor="middle" font-size="11" font-weight="600" fill="#be123c">
+    • biased    • correlated
+  </text>
+  <text x="150" y="171" text-anchor="middle" font-size="11" font-weight="600" fill="#be123c">
+    • partially predictable
+  </text>
+  <text x="150" y="202" text-anchor="middle" font-size="12.5" font-weight="700" fill="#92400e">
+    many weak bits
+  </text>
+
+  <!-- ==================== FUNNEL 1: EXTRACT ==================== -->
+  <circle cx="317" cy="112" r="12" fill="#3730a3"/>
+  <text x="317" y="116.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">1</text>
+  <text x="317" y="141" text-anchor="middle" font-size="14" font-weight="700" fill="#1e1b4b">Extract</text>
+  <text x="317" y="158" text-anchor="middle" font-size="10.5" fill="#3730a3">distills weak bits</text>
+  <text x="317" y="238" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="12" fill="#3730a3">
+    e.g. Von Neumann
+  </text>
+
+  <!-- ==================== BOX 2: SHORT SEED ==================== -->
+  <rect x="368" y="78" width="130" height="120" rx="10" fill="#ffffff" stroke="#3730a3" stroke-width="1.8"/>
+  <text x="433" y="101" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1e1b4b">
+    Short seed
+  </text>
+  <text x="433" y="118" text-anchor="middle" font-size="11" fill="#3730a3">
+    nearly uniform
+  </text>
+
+  <!-- 4 solid indigo strong bit pills (22x24, gap=5, start x=381.5) -->
+  <g fill="#3730a3">
+    <rect x="381.5" y="129" width="22" height="24" rx="4"/>
+    <rect x="408.5" y="129" width="22" height="24" rx="4"/>
+    <rect x="435.5" y="129" width="22" height="24" rx="4"/>
+    <rect x="462.5" y="129" width="22" height="24" rx="4"/>
+  </g>
+  <g font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <text x="392.5" y="146">1</text>
+    <text x="419.5" y="146">0</text>
+    <text x="446.5" y="146">0</text>
+    <text x="473.5" y="146">1</text>
+  </g>
+  <text x="433" y="180" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e1b4b">
+    few strong bits
+  </text>
+
+  <!-- ==================== FUNNEL 2: EXPAND (PRG) ==================== -->
+  <circle cx="548" cy="112" r="12" fill="#78716c"/>
+  <text x="548" y="116.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">2</text>
+  <text x="548" y="141" text-anchor="middle" font-size="14" font-weight="700" fill="#44403c">Expand</text>
+  <text x="548" y="158" text-anchor="middle" font-size="11" fill="#78716c">PRG · later</text>
+
+  <!-- ==================== BOX 3: LONG PSEUDORANDOM STREAM ==================== -->
+  <rect x="598" y="52" width="228" height="172" rx="11" fill="#ffffff" stroke="#78716c" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="712" y="78" text-anchor="middle" font-size="13.8" font-weight="700" fill="#292524">
+    Long pseudorandom stream
+  </text>
+  <text x="712" y="96" text-anchor="middle" font-size="10.6" fill="#78716c">
+    looks uniform to bounded adversaries
+  </text>
+
+  <!-- 2 rows of 10 stone bit pills (17x19, step 20, start x=613.5) -->
+  <g fill="#f5f4ef" stroke="#cbc6b8" stroke-width="1">
+    <rect x="613.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="633.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="653.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="673.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="693.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="713.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="733.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="753.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="773.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="793.5" y="108" width="17" height="19" rx="3.5"/>
+    <rect x="613.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="633.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="653.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="673.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="693.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="713.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="733.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="753.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="773.5" y="132" width="17" height="19" rx="3.5"/>
+    <rect x="793.5" y="132" width="17" height="19" rx="3.5"/>
+  </g>
+  <g font-size="10.5" font-weight="600" fill="#57534e" text-anchor="middle">
+    <text x="622" y="121.5">1</text><text x="642" y="121.5">0</text><text x="662" y="121.5">1</text><text x="682" y="121.5">1</text><text x="702" y="121.5">0</text>
+    <text x="722" y="121.5">0</text><text x="742" y="121.5">1</text><text x="762" y="121.5">0</text><text x="782" y="121.5">1</text><text x="802" y="121.5">1</text>
+    <text x="622" y="145.5">0</text><text x="642" y="145.5">1</text><text x="662" y="145.5">0</text><text x="682" y="145.5">0</text><text x="702" y="145.5">1</text>
+    <text x="722" y="145.5">1</text><text x="742" y="145.5">0</text><text x="762" y="145.5">1</text><text x="782" y="145.5">0</text><text x="802" y="145.5">1</text>
+  </g>
+
+  <text x="712" y="170" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="4" fill="#a8a29e">···</text>
+  <text x="712" y="202" text-anchor="middle" font-size="12.5" font-weight="700" fill="#44403c">
+    many pseudorandom bits
+  </text>
+
+  <!-- ==================== STEP 3: REFRESH ==================== -->
+  <rect x="284" y="260" width="130" height="28" rx="14" fill="#fbfaf6" stroke="#78716c" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="349" y="278.5" text-anchor="middle" font-size="12" font-weight="700" fill="#44403c">
+    3 · Refresh
+  </text>
+  <text x="349" y="315" text-anchor="middle" font-size="11.2" fill="#78716c">
+    periodically mix fresh entropy into the PRG state  ·  omitted in this course
+  </text>
+</svg>
