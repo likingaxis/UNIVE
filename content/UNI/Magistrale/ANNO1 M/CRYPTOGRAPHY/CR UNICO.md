@@ -547,50 +547,78 @@ Without independence, we cannot generally guarantee that:
 $$\Pr[B_1=0, B_2=1] = p(1-p)$$
 or that $(0,1)$ and $(1,0)$ remain equally likely, so the Von Neumann extractor cannot handle correlated sources.
 
+### Min-Entropy
+Min-entropy measures how unpredictable a discrete source $X$ is in the worst case.
+Let $X$ be a discrete random variable; its **min-entropy** is defined in general as:
+$$\boxed{H_\infty(X) = -\log_2\left(\max_x \Pr[X=x]\right)}$$
+Equivalently, in lower-bound form:
+$$H_\infty(X) \ge k \iff \max_x \Pr[X=x] \le 2^{-k}$$
+Intuitively, we track the single most probable outcome.
+The probability $p_{\text{guess}}$ that an adversary guesses $X$ in one attempt (by choosing its most probable value) satisfies:
+$$p_{\text{guess}} = \max_x \Pr[X=x]$$
+Inverting $-\log_2$ gives this guessing probability directly in terms of min-entropy:
+$$\boxed{\max_x \Pr[X=x] = p_{\text{guess}} = 2^{-H_\infty(X)}}$$
 
-#### Min-Entropy
-Is useful tu measures how unpredictable a source actually is
-Let X be a discrete random variable. 
-its min-entropy is defined as:
-\[ \boxed{ H_\infty(X)=-\log_2\left(\max_x\Pr[X=x]\right) } \]
-we have an equivalent version using bounds that is
-\[ H_\infty(X)\geq k \iff \max_x\Pr[X=x]\leq 2^{-k}. \]
-we consider the most probable outcome
-the probability that an adversary trying to guess a random variable X in a single attempt to choose its most probable value is:
- $$p_{\text{guess}}=2^{-H_\infty(X)}$$
+> [!important]- Concrete example ($128$-bit string): $H_\infty(X) = 32$ does not mean $32$ random bits and $96$ fixed bits
+> Having min-entropy $H_\infty(X) = 32$ bits (guessing probability $p_{\text{guess}} = 2^{-32}$) on a $128$-bit string does **not** mean that $32$ individual bits are chosen uniformly while the remaining $96$ bits are deterministically fixed constants.
+> The value $2^{-32}$ is the probability of guessing the **entire** $128$-bit string in one attempt, not the probability of guessing only $32$ bit positions.
+> For example, if $R \gets \{0,1\}^{32}$ is repeated four times ($X = R \parallel R \parallel R \parallel R$), guessing all $128$ bits requires guessing only $R$ ($p_{\text{guess}} = 2^{-32}$), yet no single bit position is fixed to a constant.
+> ![[CR_UNICO_min_entropy_spread.svg|580]]
 
-to achieve pguess if already knowing max probability we should do the reverse of the logarithm
-\[ \boxed{\max_x\Pr[X=x]=2^{-H_\infty(X)}} \]
+#### Theorem 3.1: Impossibility of universal deterministic extractors
+**General statement (arbitrary $n \ge 1$).**
+Suppose an imperfect source $X \in \{0,1\}^n$ has min-entropy satisfying:
+$$H_\infty(X) \ge n - 1$$
 
->[!important]- having min entropy that is a certain value for example 2^-32 does not mean that 32 individual bits are chosen randomly instead the other one are deterministically fixed  given a string long 128 bits
->32 is not the probability to not guess only 32 bits, is the probability to not guess all the string
->but this does not mean that you know the rest of 96 bits, you for example here need to know all of this 32 bits
->![[Pasted image 20261127163942.png]]
+> [!hint]- Intuition: at least $n-1$ bits of worst-case unpredictability
+> Even though $X$ is an $n$-bit string retaining at least $n-1$ bits of min-entropy, no fixed deterministic rule can guarantee one uniform output bit for every such source.
 
-##### Theorem 3.1 Impossibility of Universal deterministic extractors
-We have an imperfect source X that has a considerable amount of randomness, infact his min-entropy got a bound that is
-\[ H_\infty(X)\geq n-1. \]
+We want to prove that there does **not** exist a universal deterministic function:
+$$\operatorname{Ext} : \{0,1\}^n \rightarrow \{0,1\}$$
+that outputs **one perfectly uniform bit** for every source $X$ with $H_\infty(X) \ge n - 1$.
 
->[!hint] (this means having an unpredictable amount of bit >=n-1)
+**General proof (arbitrary $n \ge 1$).**
+Fix an arbitrary deterministic function $\operatorname{Ext} : \{0,1\}^n \to \{0,1\}$.
+Let $A_0 = \operatorname{Ext}^{-1}(0)$ and $A_1 = \operatorname{Ext}^{-1}(1)$ be the preimages of $0$ and $1$.
+Because $A_0$ and $A_1$ partition $\{0,1\}^n$:
+$$|A_0| + |A_1| = 2^n$$
+Applying the **pigeonhole principle** ensures that for some bit $b \in \{0,1\}$, the **larger** preimage $A_b$ contains at least half of all $n$-bit strings:
+$$|A_b| \ge \frac{2^n}{2} = 2^{n-1}$$
+This pigeonhole lower bound $|A_b| \ge 2^{n-1}$ is specifically why we can guarantee $H_\infty(X_{\text{bad}}) \ge n - 1$ when we construct our counterexample on $A_b$ below.
 
-we want to demonstrate that doenst exit a deterministic function defined like this
-\[$$ \operatorname{Ext}:\{0,1\}^n\rightarrow\{0,1\}$$ \]
-that extracts just **one perfectly uniform bit**
+> [!question]- Why we cannot choose the smaller preimage instead
+> The pigeonhole principle only guarantees $|A_b| \ge 2^{n-1}$ for the **larger** preimage $A_b$; whenever $|A_0| \neq |A_1|$, the smaller preimage has size $|A_{1-b}| < 2^{n-1}$, so a uniform source over it violates the hypothesis $H_\infty(X_{\text{bad}}) \ge n - 1$.
+> For example, when $n = 3$ (where Theorem 3.1 requires $H_\infty(X_{\text{bad}}) \ge 3 - 1 = 2$), the smaller preimage $A_1$ has size $|A_1| = 3$.
+> Making $X_{\text{bad}}$ uniform on $A_1$ gives probability $\frac{1}{3}$ on each string in $A_1$ and min-entropy:
+> $$H_\infty(X_{\text{bad}}) = -\log_2\left(\frac{1}{3}\right) = \log_2 3 < 2$$
+> so it fails Property 1 and is not a valid counterexample source.
 
-Proof
-we start by a correct random variable X, for example this one with n=3
-this one has A0=Ext^-1(0) and A1=Ext^-1(1) has preimage
-their sum is \[ |A_0|+|A_1|=2^n. \]
+> [!example] Concrete example ($n = 3$): preimage partition
+> Any $\operatorname{Ext} : \{0,1\}^3 \to \{0,1\}$ splits the $8$ input strings into $A_0$ and $A_1$; here $b = 0$ gives the larger preimage ($|A_0| = 5 \ge 2^{3-1} = 4$), while $|A_1| = 3$:
+> ![[CR_UNICO_ext_preimage_partition.svg|520]]
 
-By the pigeonhole principle, there exists a bit \(b\in\{0,1\}\) such that:
-\[ |A_b|\geq 2^{n-1}. \]
-we have a set of the two that have this cardinality
-![517](data:image/svg+xml;charset=utf-8,%3Csvg%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20%26quot%3BSegoe%20UI%26quot%3B%2C%20sans-serif%22%20font-weight%3D%22430%22%20data-d-component%3D%22svg%22%20fill%3D%22currentColor%22%20style%3D%22color%3Argb\(255%2C%20255%2C%20255\)%22%20viewBox%3D%220%200%20340%20240%22%20width%3D%22100%25%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20x%3D%2210%22%20y%3D%225%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%2221%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E000%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%2017%20C%20170%2017%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2234%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%2250%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E001%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%2046%20C%20170%2046%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2263%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%2279%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E010%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%2075%20C%20170%2075%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2292%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22108%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E011%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20104%20C%20170%20104%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22121%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22137%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E100%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20133%20C%20170%20133%2C180%2070%2C250%2070%22%20stroke%3D%22%230d9488%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22150%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22166%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E101%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20162%20C%20170%20162%2C180%20190%2C250%20190%22%20stroke%3D%22%2364748b%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22179%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22195%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E110%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20191%20C%20170%20191%2C180%20190%2C250%20190%22%20stroke%3D%22%2364748b%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22208%22%20width%3D%2265%22%20height%3D%2224%22%20rx%3D%224%22%20fill%3D%22%2394a3b8%22%20fill-opacity%3D%22.15%22%20stroke%3D%22%2394a3b8%22%2F%3E%3Ctext%20x%3D%2242%22%20y%3D%22224%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22currentColor%22%3E111%3C%2Ftext%3E%3Cpath%20d%3D%22M%2075%20220%20C%20170%20220%2C180%20190%2C250%20190%22%20stroke%3D%22%2364748b%22%20opacity%3D%22.6%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22250%22%20y%3D%2246%22%20width%3D%2274%22%20height%3D%2248%22%20rx%3D%226%22%20fill%3D%22%230d9488%22%20fill-opacity%3D%22.12%22%20stroke%3D%22%230d9488%22%2F%3E%3Crect%20x%3D%22250%22%20y%3D%22166%22%20width%3D%2274%22%20height%3D%2248%22%20rx%3D%226%22%20fill%3D%22%2364748b%22%20fill-opacity%3D%22.12%22%20stroke%3D%22%2364748b%22%2F%3E%3Ctext%20x%3D%22287%22%20y%3D%2277%22%20text-anchor%3D%22middle%22%20font-size%3D%2222%22%20fill%3D%22currentColor%22%3E0%3C%2Ftext%3E%3Ctext%20x%3D%22287%22%20y%3D%22197%22%20text-anchor%3D%22middle%22%20font-size%3D%2222%22%20fill%3D%22currentColor%22%3E1%3C%2Ftext%3E%3Ctext%20x%3D%22287%22%20y%3D%22110%22%20text-anchor%3D%22middle%22%20font-size%3D%2212%22%20fill%3D%22currentColor%22%3E%7CA%E2%82%80%7C%20%3D%205%3C%2Ftext%3E%3Ctext%20x%3D%22287%22%20y%3D%22230%22%20text-anchor%3D%22middle%22%20font-size%3D%2212%22%20fill%3D%22currentColor%22%3E%7CA%E2%82%81%7C%20%3D%203%3C%2Ftext%3E%3C%2Fsvg%3E)
+To show that $\operatorname{Ext}$ fails on at least one valid source, we construct a tailored source $X_{\text{bad}}$ satisfying two properties:
+- **Property 1 (high input min-entropy):** $H_\infty(X_{\text{bad}}) \ge n - 1$,
+- **Property 2 (completely predictable output):** $\operatorname{Ext}(X_{\text{bad}}) = b$ with probability $1$.
 
-we want to construct X_bad a random variable that satisfy two properties
-- high input min entropy \(H_\infty(X_{\text{bad}})\geq n-1\).
-- completely predictable extractor output \(\operatorname{Ext}(X_{\text{bad}})=b\) with probability 1
+To force $\operatorname{Ext}$ to always output $b$, define $X_{\text{bad}}$ to be uniformly distributed over the larger preimage $A_b$:
+$$\Pr[X_{\text{bad}}=x] = \begin{cases} \frac{1}{|A_b|} & x \in A_b \\[4pt] 0 & x \notin A_b \end{cases}$$
 
-we want that the output of the extractor is predictable we take the larger equal set and we create a X_bad starting from it so it will be uniformly distributed over Ab
+> [!example] Concrete example ($n = 3$): $X_{\text{bad}} \sim U(A_0)$
+> Putting all probability mass uniformly on $A_0$ ($\frac{1}{5}$ on each string in $A_0$, $0$ on $A_1$) forces $\operatorname{Ext}(X_{\text{bad}}) = 0$ with probability $1$:
+> ![[CR_UNICO_ext_xbad_distribution.svg|540]]
 
-![[Pasted image 20261127170128.png]]
+**1. Verify Property 1 (min-entropy bound, general $n$).**
+Computing $H_\infty(X_{\text{bad}})$ using $|A_b| \ge 2^{n-1}$ gives:
+$$\begin{aligned} H_\infty(X_{\text{bad}}) &= -\log_2\left(\max_x \Pr[X_{\text{bad}}=x]\right) \\ &= -\log_2\left(\frac{1}{|A_b|}\right) \\ &= \log_2|A_b| \\ &\ge \log_2(2^{n-1}) = n - 1 \end{aligned}$$
+Thus $X_{\text{bad}}$ satisfies Property 1 ($H_\infty(X_{\text{bad}}) \ge n - 1$).
+
+**2. Verify Property 2 (output probability contradiction, general $n$).**
+By definition of $A_b = \operatorname{Ext}^{-1}(b)$:
+$$\forall x \in A_b:\ \operatorname{Ext}(x) = b$$
+Because $X_{\text{bad}}$ takes values exclusively in $A_b$:
+$$\Pr[\operatorname{Ext}(X_{\text{bad}}) = b] = 1$$
+However, extracting a perfectly uniform bit requires:
+$$\Pr[\operatorname{Ext}(X_{\text{bad}}) = b] = \frac{1}{2}$$
+Since $1 \neq \frac{1}{2}$, the candidate deterministic extractor fails on $X_{\text{bad}}$ even though $H_\infty(X_{\text{bad}}) \ge n - 1$. $\blacksquare$
+

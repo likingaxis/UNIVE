@@ -1,86 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" role="img" aria-labelledby="vn-title vn-desc" font-family="Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" role="img" aria-labelledby="vn-title vn-desc" font-family="'Segoe UI', Arial, sans-serif">
   <title id="vn-title">Von Neumann Extractor on Independent Coin Toss Pairs</title>
   <desc id="vn-desc">Four outcomes for two independent tosses (B1, B2) of a biased coin with Pr[B=0]=p and Pr[B=1]=1-p: (0,0) with probability p^2 is discarded; (0,1) with probability p(1-p) outputs Y=1; (1,0) with probability (1-p)p outputs Y=0; (1,1) with probability (1-p)^2 is discarded. Conditioned on acceptance E={B1 != B2}, Y is uniform with probability 1/2.</desc>
   <defs>
     <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0 1L9 5L0 9Z" fill="#64748b"/>
+      <path d="M0 1L9 5L0 9Z" fill="#78716c"/>
     </marker>
     <marker id="arrow-green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0 1L9 5L0 9Z" fill="#059669"/>
+      <path d="M0 1L9 5L0 9Z" fill="#2a9d8f"/>
     </marker>
   </defs>
 
-  <rect x="1" y="1" width="778" height="368" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="1" y="1" width="778" height="368" rx="14" fill="#fcfbf8" stroke="#e7e2d9" stroke-width="1.5"/>
 
-  <text x="390" y="28" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f172a">
-    Von Neumann Extractor: Reading Independent Pairs (<tspan font-family="Georgia, serif" font-style="italic">B</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>, <tspan font-family="Georgia, serif" font-style="italic">B</tspan><tspan baseline-shift="sub" font-size="10">2</tspan>)
+  <text x="390" y="28" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1f1d1a">
+    Von Neumann Extractor: Reading Independent Pairs (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">B</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>, <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">B</tspan><tspan baseline-shift="sub" font-size="10">2</tspan>)
   </text>
-  <text x="390" y="48" text-anchor="middle" font-size="12" fill="#475569">
-    Unknown coin bias: Pr[<tspan font-family="Georgia, serif" font-style="italic">B</tspan> = 0] = <tspan font-family="Georgia, serif" font-style="italic">p</tspan> ∈ (0, 1),   Pr[<tspan font-family="Georgia, serif" font-style="italic">B</tspan> = 1] = 1 − <tspan font-family="Georgia, serif" font-style="italic">p</tspan>
+  <text x="390" y="48" text-anchor="middle" font-size="12" fill="#57534e">
+    Unknown coin bias: Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">B</tspan> = 0] = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan> ∈ (0, 1),   Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">B</tspan> = 1] = 1 − <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>
   </text>
 
   <!-- ==================== CARD (0,0) - TOP LEFT (Discard) ==================== -->
-  <rect x="24" y="62" width="352" height="112" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <circle cx="181" cy="85" r="13" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/>
-  <circle cx="219" cy="85" r="13" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="181" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="#334155">0</text>
-  <text x="219" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="#334155">0</text>
-  <text x="200" y="116" text-anchor="middle" font-size="12" fill="#64748b">
-    Pr[(0, 0)] = <tspan font-family="Georgia, serif" font-style="italic">p</tspan><tspan baseline-shift="super" font-size="9">2</tspan>
+  <rect x="24" y="62" width="352" height="112" rx="10" fill="#f5f4ef" stroke="#d6d0c4" stroke-width="1.5"/>
+  <circle cx="181" cy="85" r="13" fill="#e7e2d9" stroke="#8a847b" stroke-width="1.2"/>
+  <circle cx="219" cy="85" r="13" fill="#e7e2d9" stroke="#8a847b" stroke-width="1.2"/>
+  <text x="181" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="#57534e">0</text>
+  <text x="219" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="#57534e">0</text>
+  <text x="200" y="116" text-anchor="middle" font-size="12" fill="#78716c">
+    Pr[(0, 0)] = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan><tspan baseline-shift="super" font-size="9">2</tspan>
   </text>
-  <path d="M200 123 V135" fill="none" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow-slate)"/>
-  <rect x="136" y="139" width="128" height="26" rx="7" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="200" y="156" text-anchor="middle" font-size="12.5" font-weight="700" fill="#475569">Discard</text>
+  <path d="M200 123 V135" fill="none" stroke="#78716c" stroke-width="1.8" marker-end="url(#arrow-slate)"/>
+  <rect x="136" y="139" width="128" height="26" rx="7" fill="#f1efe9" stroke="#8a847b" stroke-width="1.2"/>
+  <text x="200" y="156" text-anchor="middle" font-size="12.5" font-weight="700" fill="#57534e">Discard</text>
 
   <!-- ==================== CARD (0,1) - TOP RIGHT (Output 1) ==================== -->
-  <rect x="404" y="62" width="352" height="112" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.8"/>
-  <circle cx="561" cy="85" r="13" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
-  <circle cx="599" cy="85" r="13" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
-  <text x="561" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="#065f46">0</text>
-  <text x="599" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="#065f46">1</text>
-  <text x="580" y="116" text-anchor="middle" font-size="12" font-weight="600" fill="#047857">
-    Pr[(0, 1)] = <tspan font-family="Georgia, serif" font-style="italic">p</tspan>(1 − <tspan font-family="Georgia, serif" font-style="italic">p</tspan>)
+  <rect x="404" y="62" width="352" height="112" rx="10" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.8"/>
+  <circle cx="561" cy="85" r="13" fill="#ffffff" stroke="#2a9d8f" stroke-width="1.5"/>
+  <circle cx="599" cy="85" r="13" fill="#ffffff" stroke="#2a9d8f" stroke-width="1.5"/>
+  <text x="561" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="#115e59">0</text>
+  <text x="599" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="#115e59">1</text>
+  <text x="580" y="116" text-anchor="middle" font-size="12" font-weight="600" fill="#1f6f66">
+    Pr[(0, 1)] = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>(1 − <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>)
   </text>
-  <path d="M580 123 V135" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-green)"/>
-  <rect x="516" y="139" width="128" height="26" rx="7" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
-  <text x="580" y="156" text-anchor="middle" font-size="12.5" font-weight="700" fill="#065f46">
-    Output <tspan font-family="Georgia, serif" font-style="italic">Y</tspan> = 1
+  <path d="M580 123 V135" fill="none" stroke="#2a9d8f" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+  <rect x="516" y="139" width="128" height="26" rx="7" fill="#d0ebe5" stroke="#2a9d8f" stroke-width="1.4"/>
+  <text x="580" y="156" text-anchor="middle" font-size="12.5" font-weight="700" fill="#115e59">
+    Output <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">Y</tspan> = 1
   </text>
 
   <!-- ==================== CARD (1,0) - BOTTOM LEFT (Output 0) ==================== -->
-  <rect x="24" y="186" width="352" height="112" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.8"/>
-  <circle cx="181" cy="209" r="13" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
-  <circle cx="219" cy="209" r="13" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
-  <text x="181" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#065f46">1</text>
-  <text x="219" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#065f46">0</text>
-  <text x="200" y="240" text-anchor="middle" font-size="12" font-weight="600" fill="#047857">
-    Pr[(1, 0)] = (1 − <tspan font-family="Georgia, serif" font-style="italic">p</tspan>)<tspan font-family="Georgia, serif" font-style="italic">p</tspan>
+  <rect x="24" y="186" width="352" height="112" rx="10" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.8"/>
+  <circle cx="181" cy="209" r="13" fill="#ffffff" stroke="#2a9d8f" stroke-width="1.5"/>
+  <circle cx="219" cy="209" r="13" fill="#ffffff" stroke="#2a9d8f" stroke-width="1.5"/>
+  <text x="181" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#115e59">1</text>
+  <text x="219" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#115e59">0</text>
+  <text x="200" y="240" text-anchor="middle" font-size="12" font-weight="600" fill="#1f6f66">
+    Pr[(1, 0)] = (1 − <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>)<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>
   </text>
-  <path d="M200 247 V259" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-green)"/>
-  <rect x="136" y="263" width="128" height="26" rx="7" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
-  <text x="200" y="280" text-anchor="middle" font-size="12.5" font-weight="700" fill="#065f46">
-    Output <tspan font-family="Georgia, serif" font-style="italic">Y</tspan> = 0
+  <path d="M200 247 V259" fill="none" stroke="#2a9d8f" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+  <rect x="136" y="263" width="128" height="26" rx="7" fill="#d0ebe5" stroke="#2a9d8f" stroke-width="1.4"/>
+  <text x="200" y="280" text-anchor="middle" font-size="12.5" font-weight="700" fill="#115e59">
+    Output <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">Y</tspan> = 0
   </text>
 
   <!-- ==================== CARD (1,1) - BOTTOM RIGHT (Discard) ==================== -->
-  <rect x="404" y="186" width="352" height="112" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <circle cx="561" cy="209" r="13" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/>
-  <circle cx="599" cy="209" r="13" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="561" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#334155">1</text>
-  <text x="599" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#334155">1</text>
-  <text x="580" y="240" text-anchor="middle" font-size="12" fill="#64748b">
-    Pr[(1, 1)] = (1 − <tspan font-family="Georgia, serif" font-style="italic">p</tspan>)<tspan baseline-shift="super" font-size="9">2</tspan>
+  <rect x="404" y="186" width="352" height="112" rx="10" fill="#f5f4ef" stroke="#d6d0c4" stroke-width="1.5"/>
+  <circle cx="561" cy="209" r="13" fill="#e7e2d9" stroke="#8a847b" stroke-width="1.2"/>
+  <circle cx="599" cy="209" r="13" fill="#e7e2d9" stroke="#8a847b" stroke-width="1.2"/>
+  <text x="561" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#57534e">1</text>
+  <text x="599" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#57534e">1</text>
+  <text x="580" y="240" text-anchor="middle" font-size="12" fill="#78716c">
+    Pr[(1, 1)] = (1 − <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>)<tspan baseline-shift="super" font-size="9">2</tspan>
   </text>
-  <path d="M580 247 V259" fill="none" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow-slate)"/>
-  <rect x="516" y="263" width="128" height="26" rx="7" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="580" y="280" text-anchor="middle" font-size="12.5" font-weight="700" fill="#475569">Discard</text>
+  <path d="M580 247 V259" fill="none" stroke="#78716c" stroke-width="1.8" marker-end="url(#arrow-slate)"/>
+  <rect x="516" y="263" width="128" height="26" rx="7" fill="#f1efe9" stroke="#8a847b" stroke-width="1.2"/>
+  <text x="580" y="280" text-anchor="middle" font-size="12.5" font-weight="700" fill="#57534e">Discard</text>
 
   <!-- ==================== BOTTOM SUMMARY ==================== -->
-  <rect x="24" y="312" width="732" height="44" rx="9" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="390" y="331" text-anchor="middle" font-size="12.2" font-weight="700" fill="#1e3a8a">
-    Accepted event <tspan font-family="Georgia, serif" font-style="italic">E</tspan> = {<tspan font-family="Georgia, serif" font-style="italic">B</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> ≠ <tspan font-family="Georgia, serif" font-style="italic">B</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>}:   Pr[(0,1)] = Pr[(1,0)] = <tspan font-family="Georgia, serif" font-style="italic">p</tspan>(1 − <tspan font-family="Georgia, serif" font-style="italic">p</tspan>)  ⇒  Pr[<tspan font-family="Georgia, serif" font-style="italic">Y</tspan> = 1 | <tspan font-family="Georgia, serif" font-style="italic">E</tspan>] = Pr[<tspan font-family="Georgia, serif" font-style="italic">Y</tspan> = 0 | <tspan font-family="Georgia, serif" font-style="italic">E</tspan>] = 1/2
+  <rect x="24" y="312" width="732" height="44" rx="9" fill="#eef0fb" stroke="#4338ca" stroke-width="1.5"/>
+  <text x="390" y="331" text-anchor="middle" font-size="12.2" font-weight="700" fill="#312e81">
+    Accepted event <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">E</tspan> = {<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">B</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> ≠ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">B</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>}:   Pr[(0,1)] = Pr[(1,0)] = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>(1 − <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>)  ⇒  Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">Y</tspan> = 1 | <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">E</tspan>] = Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">Y</tspan> = 0 | <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">E</tspan>] = 1/2
   </text>
-  <text x="390" y="348" text-anchor="middle" font-size="11.2" fill="#475569">
+  <text x="390" y="348" text-anchor="middle" font-size="11.2" fill="#57534e">
     If a pair is discarded, sample another independent pair until a bit is produced.
   </text>
 </svg>

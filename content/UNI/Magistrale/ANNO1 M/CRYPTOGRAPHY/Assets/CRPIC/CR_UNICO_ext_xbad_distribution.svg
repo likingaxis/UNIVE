@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 318" role="img" aria-labelledby="xbad-title xbad-desc" font-family="'Segoe UI', Arial, sans-serif">
+  <title id="xbad-title">Counterexample Source X_bad Uniform Over A_0</title>
+  <desc id="xbad-desc">Continuing the n = 3 example with larger preimage A_0 of size 5, X_bad places probability 1/5 on each string in A_0 (000 through 100) and probability 0 on A_1 (101, 110, 111). As a result, H_infinity(X_bad) = log2(5) >= 2, yet Ext(X_bad) outputs 0 with probability 1 and 1 with probability 0, contradicting uniformity (1/2).</desc>
+  <defs>
+    <marker id="xbad-arrow-red" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#e05a6d"/>
+    </marker>
+    <marker id="xbad-arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#78716c"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="578" height="316" rx="14" fill="#fcfbf8" stroke="#e7e2d9" stroke-width="1.5"/>
+
+  <text x="290" y="27" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1f1d1a">
+    Step 2: Tailored Source <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="10">bad</tspan> ~ U(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>) Forces Constant Output
+  </text>
+
+  <!-- A0 probability card -->
+  <rect x="26" y="44" width="248" height="166" rx="10" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.8"/>
+  <text x="150" y="67" text-anchor="middle" font-size="13.5" font-weight="700" fill="#115e59">
+    Inside <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="9.5">0</tspan>  (Pr = 1/|<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="9.5">0</tspan>|)
+  </text>
+  <g font-size="13" font-weight="600" fill="#1f6f66">
+    <text x="58" y="90">000</text><text x="242" y="90" text-anchor="end">1/5</text>
+    <text x="58" y="110">001</text><text x="242" y="110" text-anchor="end">1/5</text>
+    <text x="58" y="130">010</text><text x="242" y="130" text-anchor="end">1/5</text>
+    <text x="58" y="150">011</text><text x="242" y="150" text-anchor="end">1/5</text>
+    <text x="58" y="170">100</text><text x="242" y="170" text-anchor="end">1/5</text>
+  </g>
+  <line x1="42" y1="181" x2="258" y2="181" stroke="#99d5cc" stroke-width="1.2"/>
+  <text x="150" y="200" text-anchor="middle" font-size="12.5" font-weight="700" fill="#115e59">
+    Sum = 1,  <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="9">∞</tspan> = log<tspan baseline-shift="sub" font-size="9">2</tspan> 5 ≥ 2
+  </text>
+
+  <!-- A1 probability card -->
+  <rect x="306" y="44" width="248" height="166" rx="10" fill="#f5f4ef" stroke="#d6d0c4" stroke-width="1.5"/>
+  <text x="430" y="67" text-anchor="middle" font-size="13.5" font-weight="700" fill="#57534e">
+    Outside <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="9.5">0</tspan>  (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="9.5">1</tspan>)
+  </text>
+  <g font-size="13" fill="#78716c">
+    <text x="338" y="90">101</text><text x="522" y="90" text-anchor="end">0</text>
+    <text x="338" y="110">110</text><text x="522" y="110" text-anchor="end">0</text>
+    <text x="338" y="130">111</text><text x="522" y="130" text-anchor="end">0</text>
+  </g>
+  <line x1="322" y1="181" x2="538" y2="181" stroke="#e7e2d9" stroke-width="1.2"/>
+  <text x="430" y="200" text-anchor="middle" font-size="12.5" font-weight="600" fill="#57534e">
+    Total probability = 0
+  </text>
+
+  <!-- Arrows -->
+  <path d="M150 210 V243" fill="none" stroke="#e05a6d" stroke-width="2.2" marker-end="url(#xbad-arrow-red)"/>
+  <text x="166" y="232" font-size="13" font-weight="700" fill="#9f1239">Ext</text>
+
+  <path d="M430 210 V243" fill="none" stroke="#78716c" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#xbad-arrow-slate)"/>
+  <text x="446" y="232" font-size="13" font-weight="600" fill="#57534e">Ext</text>
+
+  <!-- Output probability boxes -->
+  <rect x="26" y="248" width="248" height="52" rx="9" fill="#fbecee" stroke="#e05a6d" stroke-width="1.8"/>
+  <text x="150" y="270" text-anchor="middle" font-size="14" font-weight="700" fill="#9f1239">
+    Ext(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="9.5">bad</tspan>) = 0
+  </text>
+  <text x="150" y="290" text-anchor="middle" font-size="12.5" font-weight="700" fill="#9f1239">
+    Pr = 1  (100% ≠ 1/2!)
+  </text>
+
+  <rect x="306" y="248" width="248" height="52" rx="9" fill="#f5f4ef" stroke="#d6d0c4" stroke-width="1.5"/>
+  <text x="430" y="270" text-anchor="middle" font-size="14" font-weight="700" fill="#57534e">
+    Ext(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="9.5">bad</tspan>) = 1
+  </text>
+  <text x="430" y="290" text-anchor="middle" font-size="12.5" fill="#78716c">
+    Pr = 0  (0%)
+  </text>
+</svg>

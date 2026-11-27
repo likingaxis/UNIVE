@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 356" role="img" aria-labelledby="dei-title dei-desc" font-family="'Segoe UI', Arial, sans-serif">
+  <title id="dei-title">Impossibility of Universal Deterministic Extractors (n = 3 Example)</title>
+  <desc id="dei-desc">Left panel: any deterministic extractor Ext from {0,1}^3 to {0,1} partitions the 8 inputs into A0 (5 strings mapping to 0) and A1 (3 strings mapping to 1), so by pigeonhole the larger preimage A0 has size at least 2^(3-1) = 4. Right panel: setting X_bad uniform over A0 (probability 1/5 each, 0 on A1) yields min-entropy log2(5) &gt;= 2, yet Ext(X_bad) equals 0 with probability 1 instead of 1/2.</desc>
+  <defs>
+    <marker id="dei-arrow-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#e05a6d"/>
+    </marker>
+    <marker id="dei-arrow-stone" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L9 5L0 9Z" fill="#8a847b"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="818" height="354" rx="14" fill="#fcfbf8" stroke="#e7e2d9" stroke-width="1.5"/>
+
+  <!-- Scope brackets -->
+  <path d="M28 42 V28 H76" fill="none" stroke="#4338ca" stroke-width="1.5"/>
+  <path d="M348 28 H396 V42" fill="none" stroke="#4338ca" stroke-width="1.5"/>
+  <text x="212" y="32" text-anchor="middle" font-size="10.2" font-weight="700" letter-spacing="1" fill="#4338ca">
+    1. PARTITION BY PREIMAGE (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">n</tspan> = 3)
+  </text>
+
+  <path d="M424 42 V28 H472" fill="none" stroke="#e05a6d" stroke-width="1.5"/>
+  <path d="M744 28 H792 V42" fill="none" stroke="#e05a6d" stroke-width="1.5"/>
+  <text x="608" y="32" text-anchor="middle" font-size="10.2" font-weight="700" letter-spacing="1" fill="#9f1239">
+    2. CONSTRUCT <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="8">bad</tspan> UNIFORM ON <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="8">0</tspan>
+  </text>
+
+  <!-- Vertical divider -->
+  <line x1="410" y1="48" x2="410" y2="282" stroke="#e7e2d9" stroke-width="1.2"/>
+
+  <!-- ==================== LEFT PANEL: PARTITION ==================== -->
+  <!-- Bezier connectors behind nodes -->
+  <path d="M92 67 C168 67, 184 116, 248 116" fill="none" stroke="#2a9d8f" stroke-width="1.6" stroke-opacity="0.75"/>
+  <path d="M92 93 C168 93, 184 116, 248 116" fill="none" stroke="#2a9d8f" stroke-width="1.6" stroke-opacity="0.75"/>
+  <path d="M92 119 C168 119, 184 116, 248 116" fill="none" stroke="#2a9d8f" stroke-width="1.6" stroke-opacity="0.75"/>
+  <path d="M92 145 C168 145, 184 116, 248 116" fill="none" stroke="#2a9d8f" stroke-width="1.6" stroke-opacity="0.75"/>
+  <path d="M92 171 C168 171, 184 116, 248 116" fill="none" stroke="#2a9d8f" stroke-width="1.6" stroke-opacity="0.75"/>
+
+  <path d="M92 197 C168 197, 184 222, 248 222" fill="none" stroke="#8a847b" stroke-width="1.5" stroke-opacity="0.7"/>
+  <path d="M92 223 C168 223, 184 222, 248 222" fill="none" stroke="#8a847b" stroke-width="1.5" stroke-opacity="0.7"/>
+  <path d="M92 249 C168 249, 184 222, 248 222" fill="none" stroke="#8a847b" stroke-width="1.5" stroke-opacity="0.7"/>
+
+  <text x="174" y="66" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">
+    Ext(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">x</tspan>)
+  </text>
+
+  <!-- 8 input strings -->
+  <g fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.2">
+    <rect x="34" y="56" width="58" height="22" rx="5"/>
+    <rect x="34" y="82" width="58" height="22" rx="5"/>
+    <rect x="34" y="108" width="58" height="22" rx="5"/>
+    <rect x="34" y="134" width="58" height="22" rx="5"/>
+    <rect x="34" y="160" width="58" height="22" rx="5"/>
+  </g>
+  <g fill="#f1efe9" stroke="#d6d0c4" stroke-width="1.2">
+    <rect x="34" y="186" width="58" height="22" rx="5"/>
+    <rect x="34" y="212" width="58" height="22" rx="5"/>
+    <rect x="34" y="238" width="58" height="22" rx="5"/>
+  </g>
+  <g font-size="11.5" font-weight="700" text-anchor="middle">
+    <text x="63" y="71" fill="#115e59">000</text>
+    <text x="63" y="97" fill="#115e59">001</text>
+    <text x="63" y="123" fill="#115e59">010</text>
+    <text x="63" y="149" fill="#115e59">011</text>
+    <text x="63" y="175" fill="#115e59">100</text>
+    <text x="63" y="201" fill="#57534e">101</text>
+    <text x="63" y="227" fill="#57534e">110</text>
+    <text x="63" y="253" fill="#57534e">111</text>
+  </g>
+
+  <!-- Output 0 box -->
+  <rect x="248" y="74" width="140" height="84" rx="10" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.6"/>
+  <text x="318" y="106" text-anchor="middle" font-size="22" font-weight="700" fill="#115e59">0</text>
+  <text x="318" y="131" text-anchor="middle" font-size="11.5" font-weight="700" fill="#115e59">
+    |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="8.5">0</tspan>| = 5 ≥ 2<tspan baseline-shift="super" font-size="8.5">3−1</tspan> = 4
+  </text>
+  <text x="318" y="148" text-anchor="middle" font-size="10.5" fill="#1f6f66">larger preimage (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan> = 0)</text>
+
+  <!-- Output 1 box -->
+  <rect x="248" y="188" width="140" height="68" rx="10" fill="#ffffff" stroke="#d6d0c4" stroke-width="1.4"/>
+  <text x="318" y="219" text-anchor="middle" font-size="22" font-weight="700" fill="#57534e">1</text>
+  <text x="318" y="241" text-anchor="middle" font-size="11.5" font-weight="600" fill="#78716c">
+    |<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan>| = 3
+  </text>
+
+  <!-- ==================== RIGHT PANEL: X_BAD COUNTEREXAMPLE ==================== -->
+  <!-- A0 probability card -->
+  <rect x="432" y="56" width="170" height="148" rx="10" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.6"/>
+  <text x="517" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="#115e59">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="8.5">bad</tspan> ~ U(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="8.5">0</tspan>)
+  </text>
+  <g font-size="11.5" font-weight="600" fill="#115e59">
+    <text x="454" y="97">000</text><text x="580" y="97" text-anchor="end">1/5</text>
+    <text x="454" y="114">001</text><text x="580" y="114" text-anchor="end">1/5</text>
+    <text x="454" y="131">010</text><text x="580" y="131" text-anchor="end">1/5</text>
+    <text x="454" y="148">011</text><text x="580" y="148" text-anchor="end">1/5</text>
+    <text x="454" y="165">100</text><text x="580" y="165" text-anchor="end">1/5</text>
+  </g>
+  <line x1="446" y1="175" x2="588" y2="175" stroke="#99d5cc" stroke-width="1"/>
+  <text x="517" y="192" text-anchor="middle" font-size="10.8" font-weight="700" fill="#115e59">
+    Sum = 1   |   <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="8">∞</tspan> = log<tspan baseline-shift="sub" font-size="8">2</tspan> 5 ≥ 2
+  </text>
+
+  <!-- A1 probability card -->
+  <rect x="616" y="56" width="170" height="148" rx="10" fill="#ffffff" stroke="#d6d0c4" stroke-width="1.4"/>
+  <text x="701" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="#57534e">
+    Outside <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="8.5">0</tspan> (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan>)
+  </text>
+  <g font-size="11.5" fill="#78716c">
+    <text x="638" y="97">101</text><text x="764" y="97" text-anchor="end">0</text>
+    <text x="638" y="114">110</text><text x="764" y="114" text-anchor="end">0</text>
+    <text x="638" y="131">111</text><text x="764" y="131" text-anchor="end">0</text>
+  </g>
+  <line x1="630" y1="175" x2="772" y2="175" stroke="#e7e2d9" stroke-width="1"/>
+  <text x="701" y="192" text-anchor="middle" font-size="10.8" font-weight="600" fill="#78716c">
+    Total probability = 0
+  </text>
+
+  <!-- Arrows down to output probabilities -->
+  <path d="M517 204 V228" fill="none" stroke="#e05a6d" stroke-width="2" marker-end="url(#dei-arrow-rose)"/>
+  <text x="536" y="220" font-size="11" font-weight="700" fill="#9f1239">Ext</text>
+
+  <path d="M701 204 V228" fill="none" stroke="#8a847b" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#dei-arrow-stone)"/>
+  <text x="720" y="220" font-size="11" font-weight="600" fill="#78716c">Ext</text>
+
+  <!-- Final output probability boxes -->
+  <rect x="432" y="232" width="170" height="44" rx="8" fill="#fbecee" stroke="#e05a6d" stroke-width="1.6"/>
+  <text x="517" y="251" text-anchor="middle" font-size="12.5" font-weight="700" fill="#9f1239">
+    Ext(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="8.5">bad</tspan>) = 0
+  </text>
+  <text x="517" y="267" text-anchor="middle" font-size="11" font-weight="600" fill="#9f1239">
+    Pr = 1  (100% constant)
+  </text>
+
+  <rect x="616" y="232" width="170" height="44" rx="8" fill="#f1efe9" stroke="#d6d0c4" stroke-width="1.3"/>
+  <text x="701" y="251" text-anchor="middle" font-size="12.5" font-weight="700" fill="#57534e">
+    Ext(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="8.5">bad</tspan>) = 1
+  </text>
+  <text x="701" y="267" text-anchor="middle" font-size="11" fill="#78716c">
+    Pr = 0
+  </text>
+
+  <!-- ==================== BOTTOM CONTRADICTION BAR ==================== -->
+  <rect x="28" y="294" width="764" height="46" rx="7" fill="#fbecee"/>
+  <rect x="28" y="294" width="4" height="46" rx="2" fill="#e05a6d"/>
+  <text x="410" y="313" text-anchor="middle" font-size="12.5" font-weight="700" fill="#9f1239">
+    Contradiction:  <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">H</tspan><tspan baseline-shift="sub" font-size="8.5">∞</tspan>(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="8.5">bad</tspan>) = log<tspan baseline-shift="sub" font-size="8.5">2</tspan>|<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan><tspan baseline-shift="sub" font-size="8.5" font-style="italic">b</tspan>| ≥ <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">n</tspan> − 1,  yet  Pr[Ext(<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="8.5">bad</tspan>) = <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan>] = 1 ≠ 1/2
+  </text>
+  <text x="410" y="331" text-anchor="middle" font-size="11.2" fill="#9f1239">
+    Every deterministic function <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">Ext</tspan> fails on its tailored source <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">X</tspan><tspan baseline-shift="sub" font-size="8.5">bad</tspan>  ⇒  no universal deterministic extractor exists.
+  </text>
+</svg>

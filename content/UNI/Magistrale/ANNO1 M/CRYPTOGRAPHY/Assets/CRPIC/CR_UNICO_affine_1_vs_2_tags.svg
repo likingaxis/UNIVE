@@ -1,82 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 325" role="img" aria-labelledby="af12-title af12-desc" font-family="Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 325" role="img" aria-labelledby="af12-title af12-desc" font-family="'Segoe UI', Arial, sans-serif">
   <title id="af12-title">Affine Hashing Key Recovery: 1 Observed Tag vs. 2 Observed Tags</title>
   <desc id="af12-desc">5 by 5 grid of keys (a, b) in Z_5^2. Left panel: after 1 observed tag (2, 3), 5 green keys remain along 2a + b = 3 mod 5, keeping Pr[A wins] &lt;= 1/p. Right panel: after 2 observed tags, the two lines intersect at 1 red key (2, 4), raising Pr[A wins] to 1 and breaking epsilon-statistical security.</desc>
 
-  <rect x="1" y="1" width="798" height="323" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="1" y="1" width="798" height="323" rx="14" fill="#fcfbf8" stroke="#e7e2d9" stroke-width="1.5"/>
 
-  <text x="400" y="29" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f172a">
-    Affine Hashing Key Space (<tspan font-family="Georgia, serif" font-style="italic">p</tspan> = 5): 1 Observed Tag vs. 2 Observed Tags
+  <text x="400" y="29" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1f1d1a">
+    Affine Hashing Key Space (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan> = 5): 1 Observed Tag vs. 2 Observed Tags
   </text>
 
   <!-- LEFT PANEL -->
-  <rect x="20" y="46" width="368" height="262" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <rect x="38" y="56" width="332" height="28" rx="7" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
-  <text x="204" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">
-    One observed tag: (<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>, τ<tspan baseline-shift="sub" font-size="9">1</tspan>)
+  <rect x="20" y="46" width="368" height="262" rx="10" fill="#f5f4ef" stroke="#d6d0c4" stroke-width="1.5"/>
+  <rect x="38" y="56" width="332" height="28" rx="7" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.4"/>
+  <text x="204" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#115e59">
+    One observed tag: (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>, τ<tspan baseline-shift="sub" font-size="9">1</tspan>)
   </text>
 
   <!-- Axis labels left -->
-  <text x="214" y="99" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">
-    <tspan font-family="Georgia, serif" font-style="italic">b</tspan> ∈ {0, 1, 2, 3, 4}
+  <text x="214" y="99" text-anchor="middle" font-size="11" font-weight="600" fill="#57534e">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan> ∈ {0, 1, 2, 3, 4}
   </text>
-  <text x="74" y="183" text-anchor="middle" font-size="11.5" font-weight="600" fill="#475569">
-    <tspan font-family="Georgia, serif" font-style="italic">a</tspan>
+  <text x="74" y="183" text-anchor="middle" font-size="11.5" font-weight="600" fill="#57534e">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan>
   </text>
 
   <!-- Column headers b=0..4 -->
-  <g font-size="10.5" fill="#64748b" text-anchor="middle">
+  <g font-size="10.5" fill="#78716c" text-anchor="middle">
     <text x="130" y="114">0</text><text x="172" y="114">1</text><text x="214" y="114">2</text><text x="256" y="114">3</text><text x="298" y="114">4</text>
     <text x="102" y="136">0</text><text x="102" y="166">1</text><text x="102" y="196">2</text><text x="102" y="226">3</text><text x="102" y="256">4</text>
   </g>
 
   <!-- 5x5 grid left: green at (0,3), (1,1), (2,4), (3,2), (4,0) -->
   <!-- Row a=0 (y=132) -->
-  <circle cx="130" cy="132" r="10" fill="#e2e8f0"/><circle cx="172" cy="132" r="10" fill="#e2e8f0"/><circle cx="214" cy="132" r="10" fill="#e2e8f0"/><circle cx="256" cy="132" r="10" fill="#10b981" stroke="#047857" stroke-width="1.5"/><circle cx="298" cy="132" r="10" fill="#e2e8f0"/>
+  <circle cx="130" cy="132" r="10" fill="#e7e2d9"/><circle cx="172" cy="132" r="10" fill="#e7e2d9"/><circle cx="214" cy="132" r="10" fill="#e7e2d9"/><circle cx="256" cy="132" r="10" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.5"/><circle cx="298" cy="132" r="10" fill="#e7e2d9"/>
   <!-- Row a=1 (y=162) -->
-  <circle cx="130" cy="162" r="10" fill="#e2e8f0"/><circle cx="172" cy="162" r="10" fill="#10b981" stroke="#047857" stroke-width="1.5"/><circle cx="214" cy="162" r="10" fill="#e2e8f0"/><circle cx="256" cy="162" r="10" fill="#e2e8f0"/><circle cx="298" cy="162" r="10" fill="#e2e8f0"/>
+  <circle cx="130" cy="162" r="10" fill="#e7e2d9"/><circle cx="172" cy="162" r="10" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.5"/><circle cx="214" cy="162" r="10" fill="#e7e2d9"/><circle cx="256" cy="162" r="10" fill="#e7e2d9"/><circle cx="298" cy="162" r="10" fill="#e7e2d9"/>
   <!-- Row a=2 (y=192) -->
-  <circle cx="130" cy="192" r="10" fill="#e2e8f0"/><circle cx="172" cy="192" r="10" fill="#e2e8f0"/><circle cx="214" cy="192" r="10" fill="#e2e8f0"/><circle cx="256" cy="192" r="10" fill="#e2e8f0"/><circle cx="298" cy="192" r="10" fill="#10b981" stroke="#047857" stroke-width="1.5"/>
+  <circle cx="130" cy="192" r="10" fill="#e7e2d9"/><circle cx="172" cy="192" r="10" fill="#e7e2d9"/><circle cx="214" cy="192" r="10" fill="#e7e2d9"/><circle cx="256" cy="192" r="10" fill="#e7e2d9"/><circle cx="298" cy="192" r="10" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.5"/>
   <!-- Row a=3 (y=222) -->
-  <circle cx="130" cy="222" r="10" fill="#e2e8f0"/><circle cx="172" cy="222" r="10" fill="#e2e8f0"/><circle cx="214" cy="222" r="10" fill="#10b981" stroke="#047857" stroke-width="1.5"/><circle cx="256" cy="222" r="10" fill="#e2e8f0"/><circle cx="298" cy="222" r="10" fill="#e2e8f0"/>
+  <circle cx="130" cy="222" r="10" fill="#e7e2d9"/><circle cx="172" cy="222" r="10" fill="#e7e2d9"/><circle cx="214" cy="222" r="10" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.5"/><circle cx="256" cy="222" r="10" fill="#e7e2d9"/><circle cx="298" cy="222" r="10" fill="#e7e2d9"/>
   <!-- Row a=4 (y=252) -->
-  <circle cx="130" cy="252" r="10" fill="#10b981" stroke="#047857" stroke-width="1.5"/><circle cx="172" cy="252" r="10" fill="#e2e8f0"/><circle cx="214" cy="252" r="10" fill="#e2e8f0"/><circle cx="256" cy="252" r="10" fill="#e2e8f0"/><circle cx="298" cy="252" r="10" fill="#e2e8f0"/>
+  <circle cx="130" cy="252" r="10" fill="#2a9d8f" stroke="#1f6f66" stroke-width="1.5"/><circle cx="172" cy="252" r="10" fill="#e7e2d9"/><circle cx="214" cy="252" r="10" fill="#e7e2d9"/><circle cx="256" cy="252" r="10" fill="#e7e2d9"/><circle cx="298" cy="252" r="10" fill="#e7e2d9"/>
 
   <!-- Left footer -->
-  <rect x="38" y="268" width="332" height="30" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
-  <text x="204" y="288" text-anchor="middle" font-size="12.5" font-weight="700" fill="#065f46">
-    <tspan font-family="Georgia, serif" font-style="italic">p</tspan> = 5 keys remain  ⇒  Pr[<tspan font-family="Georgia, serif" font-style="italic">A</tspan> wins] ≤ 1/<tspan font-family="Georgia, serif" font-style="italic">p</tspan>
+  <rect x="38" y="268" width="332" height="30" rx="8" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.4"/>
+  <text x="204" y="288" text-anchor="middle" font-size="12.5" font-weight="700" fill="#115e59">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan> = 5 keys remain  ⇒  Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan> wins] ≤ 1/<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">p</tspan>
   </text>
 
   <!-- RIGHT PANEL -->
-  <rect x="412" y="46" width="368" height="262" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <rect x="430" y="56" width="332" height="28" rx="7" fill="#fef2f2" stroke="#dc2626" stroke-width="1.4"/>
-  <text x="596" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">
-    Two observed tags: (<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>, τ<tspan baseline-shift="sub" font-size="9">1</tspan>), (<tspan font-family="Georgia, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>, τ<tspan baseline-shift="sub" font-size="9">2</tspan>)
+  <rect x="412" y="46" width="368" height="262" rx="10" fill="#f5f4ef" stroke="#d6d0c4" stroke-width="1.5"/>
+  <rect x="430" y="56" width="332" height="28" rx="7" fill="#fbecee" stroke="#e05a6d" stroke-width="1.4"/>
+  <text x="596" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#9f1239">
+    Two observed tags: (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan>, τ<tspan baseline-shift="sub" font-size="9">1</tspan>), (<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>, τ<tspan baseline-shift="sub" font-size="9">2</tspan>)
   </text>
 
   <!-- Axis labels right -->
-  <text x="606" y="99" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">
-    <tspan font-family="Georgia, serif" font-style="italic">b</tspan> ∈ {0, 1, 2, 3, 4}
+  <text x="606" y="99" text-anchor="middle" font-size="11" font-weight="600" fill="#57534e">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">b</tspan> ∈ {0, 1, 2, 3, 4}
   </text>
-  <text x="466" y="183" text-anchor="middle" font-size="11.5" font-weight="600" fill="#475569">
-    <tspan font-family="Georgia, serif" font-style="italic">a</tspan>
+  <text x="466" y="183" text-anchor="middle" font-size="11.5" font-weight="600" fill="#57534e">
+    <tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">a</tspan>
   </text>
 
-  <g font-size="10.5" fill="#64748b" text-anchor="middle">
+  <g font-size="10.5" fill="#78716c" text-anchor="middle">
     <text x="522" y="114">0</text><text x="564" y="114">1</text><text x="606" y="114">2</text><text x="648" y="114">3</text><text x="690" y="114">4</text>
     <text x="494" y="136">0</text><text x="494" y="166">1</text><text x="494" y="196">2</text><text x="494" y="226">3</text><text x="494" y="256">4</text>
   </g>
 
   <!-- 5x5 grid right: single red key at (2,4) -->
-  <circle cx="522" cy="132" r="10" fill="#e2e8f0"/><circle cx="564" cy="132" r="10" fill="#e2e8f0"/><circle cx="606" cy="132" r="10" fill="#e2e8f0"/><circle cx="648" cy="132" r="10" fill="#e2e8f0"/><circle cx="690" cy="132" r="10" fill="#e2e8f0"/>
-  <circle cx="522" cy="162" r="10" fill="#e2e8f0"/><circle cx="564" cy="162" r="10" fill="#e2e8f0"/><circle cx="606" cy="162" r="10" fill="#e2e8f0"/><circle cx="648" cy="162" r="10" fill="#e2e8f0"/><circle cx="690" cy="162" r="10" fill="#e2e8f0"/>
-  <circle cx="522" cy="192" r="10" fill="#e2e8f0"/><circle cx="564" cy="192" r="10" fill="#e2e8f0"/><circle cx="606" cy="192" r="10" fill="#e2e8f0"/><circle cx="648" cy="192" r="10" fill="#e2e8f0"/><circle cx="690" cy="192" r="10" fill="#ef4444" stroke="#991b1b" stroke-width="1.8"/>
-  <circle cx="522" cy="222" r="10" fill="#e2e8f0"/><circle cx="564" cy="222" r="10" fill="#e2e8f0"/><circle cx="606" cy="222" r="10" fill="#e2e8f0"/><circle cx="648" cy="222" r="10" fill="#e2e8f0"/><circle cx="690" cy="222" r="10" fill="#e2e8f0"/>
-  <circle cx="522" cy="252" r="10" fill="#e2e8f0"/><circle cx="564" cy="252" r="10" fill="#e2e8f0"/><circle cx="606" cy="252" r="10" fill="#e2e8f0"/><circle cx="648" cy="252" r="10" fill="#e2e8f0"/><circle cx="690" cy="252" r="10" fill="#e2e8f0"/>
+  <circle cx="522" cy="132" r="10" fill="#e7e2d9"/><circle cx="564" cy="132" r="10" fill="#e7e2d9"/><circle cx="606" cy="132" r="10" fill="#e7e2d9"/><circle cx="648" cy="132" r="10" fill="#e7e2d9"/><circle cx="690" cy="132" r="10" fill="#e7e2d9"/>
+  <circle cx="522" cy="162" r="10" fill="#e7e2d9"/><circle cx="564" cy="162" r="10" fill="#e7e2d9"/><circle cx="606" cy="162" r="10" fill="#e7e2d9"/><circle cx="648" cy="162" r="10" fill="#e7e2d9"/><circle cx="690" cy="162" r="10" fill="#e7e2d9"/>
+  <circle cx="522" cy="192" r="10" fill="#e7e2d9"/><circle cx="564" cy="192" r="10" fill="#e7e2d9"/><circle cx="606" cy="192" r="10" fill="#e7e2d9"/><circle cx="648" cy="192" r="10" fill="#e7e2d9"/><circle cx="690" cy="192" r="10" fill="#e05a6d" stroke="#9f1239" stroke-width="1.8"/>
+  <circle cx="522" cy="222" r="10" fill="#e7e2d9"/><circle cx="564" cy="222" r="10" fill="#e7e2d9"/><circle cx="606" cy="222" r="10" fill="#e7e2d9"/><circle cx="648" cy="222" r="10" fill="#e7e2d9"/><circle cx="690" cy="222" r="10" fill="#e7e2d9"/>
+  <circle cx="522" cy="252" r="10" fill="#e7e2d9"/><circle cx="564" cy="252" r="10" fill="#e7e2d9"/><circle cx="606" cy="252" r="10" fill="#e7e2d9"/><circle cx="648" cy="252" r="10" fill="#e7e2d9"/><circle cx="690" cy="252" r="10" fill="#e7e2d9"/>
 
   <!-- Right footer -->
-  <rect x="430" y="268" width="332" height="30" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.4"/>
-  <text x="596" y="288" text-anchor="middle" font-size="12.5" font-weight="700" fill="#991b1b">
-    1 unique key  ⇒  Pr[<tspan font-family="Georgia, serif" font-style="italic">A</tspan> wins] = 1 (breaks ≤ ε)
+  <rect x="430" y="268" width="332" height="30" rx="8" fill="#f6d8dd" stroke="#e05a6d" stroke-width="1.4"/>
+  <text x="596" y="288" text-anchor="middle" font-size="12.5" font-weight="700" fill="#9f1239">
+    1 unique key  ⇒  Pr[<tspan font-family="Georgia, 'Times New Roman', serif" font-style="italic">A</tspan> wins] = 1 (breaks ≤ ε)
   </text>
 </svg>
