@@ -1,0 +1,2 @@
+- riutilizzare elementi svg tra diverse note
+	- (es: una volta creata icona di un pc non deve rifarla ogni volta)
